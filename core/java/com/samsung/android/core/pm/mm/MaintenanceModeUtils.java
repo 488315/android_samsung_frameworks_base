@@ -532,7 +532,6 @@ public class MaintenanceModeUtils {
         return introDescription;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     static String getStatusOfBackupInProgress(Context context) {
         char c;
         String cloudBackupStatus = getCloudBackupStatus(context);

@@ -309,26 +309,6 @@ public class OomAdjuster {
     
         if (com.android.server.chimera.heimdall.HeimdallAlwaysRunningMonitor.isAlwaysRunningAdj(r11) == false) goto L197;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:100:0x0331  */
-    /* JADX WARN: Removed duplicated region for block: B:137:0x03ff  */
-    /* JADX WARN: Removed duplicated region for block: B:140:0x0407  */
-    /* JADX WARN: Removed duplicated region for block: B:153:0x0542  */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x0554  */
-    /* JADX WARN: Removed duplicated region for block: B:164:0x0566  */
-    /* JADX WARN: Removed duplicated region for block: B:169:0x0581 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x019b  */
-    /* JADX WARN: Removed duplicated region for block: B:282:0x0548  */
-    /* JADX WARN: Removed duplicated region for block: B:285:0x043f  */
-    /* JADX WARN: Removed duplicated region for block: B:352:0x03e8  */
-    /* JADX WARN: Removed duplicated region for block: B:360:0x031f  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x01e9  */
-    /* JADX WARN: Type inference failed for: r0v23 */
-    /* JADX WARN: Type inference failed for: r0v24 */
-    /* JADX WARN: Type inference failed for: r0v58 */
-    /* JADX WARN: Type inference failed for: r15v10 */
-    /* JADX WARN: Type inference failed for: r15v2, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r15v4 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -516,10 +496,6 @@ public class OomAdjuster {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r7v17 */
-    /* JADX WARN: Type inference failed for: r7v5, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v7 */
     public final boolean collectReachableProcessesLocked(ArraySet arraySet, ArrayList arrayList, ActiveUids activeUids) {
         boolean z;
         ProcessStateRecord processStateRecord;
@@ -635,61 +611,6 @@ public class OomAdjuster {
     
         if (r54 < (r9.lastActivity + r0.mConstants.MAX_SERVICE_INACTIVITY)) goto L500;
      */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x04f0  */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x053c  */
-    /* JADX WARN: Removed duplicated region for block: B:117:0x0547 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x05a1  */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x05e4  */
-    /* JADX WARN: Removed duplicated region for block: B:135:0x0603  */
-    /* JADX WARN: Removed duplicated region for block: B:146:0x0633  */
-    /* JADX WARN: Removed duplicated region for block: B:150:0x0653  */
-    /* JADX WARN: Removed duplicated region for block: B:157:0x0667  */
-    /* JADX WARN: Removed duplicated region for block: B:159:0x066c  */
-    /* JADX WARN: Removed duplicated region for block: B:173:0x0693  */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x06c5  */
-    /* JADX WARN: Removed duplicated region for block: B:192:0x06e4  */
-    /* JADX WARN: Removed duplicated region for block: B:195:0x06eb  */
-    /* JADX WARN: Removed duplicated region for block: B:208:0x0746  */
-    /* JADX WARN: Removed duplicated region for block: B:211:0x0780  */
-    /* JADX WARN: Removed duplicated region for block: B:215:0x078b  */
-    /* JADX WARN: Removed duplicated region for block: B:224:0x079f  */
-    /* JADX WARN: Removed duplicated region for block: B:231:0x07c3 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:239:0x0a64  */
-    /* JADX WARN: Removed duplicated region for block: B:283:0x0b88  */
-    /* JADX WARN: Removed duplicated region for block: B:297:0x0bc3  */
-    /* JADX WARN: Removed duplicated region for block: B:302:0x0be4  */
-    /* JADX WARN: Removed duplicated region for block: B:336:0x0c5a  */
-    /* JADX WARN: Removed duplicated region for block: B:339:0x0c64  */
-    /* JADX WARN: Removed duplicated region for block: B:342:0x0c6a  */
-    /* JADX WARN: Removed duplicated region for block: B:344:0x0c75  */
-    /* JADX WARN: Removed duplicated region for block: B:362:0x0c9c  */
-    /* JADX WARN: Removed duplicated region for block: B:372:0x0cd0  */
-    /* JADX WARN: Removed duplicated region for block: B:378:0x0cdf  */
-    /* JADX WARN: Removed duplicated region for block: B:391:0x0bdf  */
-    /* JADX WARN: Removed duplicated region for block: B:393:0x0bbf  */
-    /* JADX WARN: Removed duplicated region for block: B:395:0x0b71 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:399:0x07ec  */
-    /* JADX WARN: Removed duplicated region for block: B:424:0x086a  */
-    /* JADX WARN: Removed duplicated region for block: B:443:0x08b0  */
-    /* JADX WARN: Removed duplicated region for block: B:446:0x08cf  */
-    /* JADX WARN: Removed duplicated region for block: B:508:0x06e6  */
-    /* JADX WARN: Removed duplicated region for block: B:510:0x06df  */
-    /* JADX WARN: Removed duplicated region for block: B:512:0x0669  */
-    /* JADX WARN: Removed duplicated region for block: B:517:0x0644  */
-    /* JADX WARN: Removed duplicated region for block: B:530:0x054e A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:533:0x0574  */
-    /* JADX WARN: Removed duplicated region for block: B:537:0x059c  */
-    /* JADX WARN: Removed duplicated region for block: B:539:0x055b  */
-    /* JADX WARN: Removed duplicated region for block: B:541:0x0563  */
-    /* JADX WARN: Removed duplicated region for block: B:562:0x0540  */
-    /* JADX WARN: Removed duplicated region for block: B:583:0x0486  */
-    /* JADX WARN: Removed duplicated region for block: B:681:0x029a  */
-    /* JADX WARN: Removed duplicated region for block: B:683:0x02a7  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x02db  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x04c4  */
-    /* JADX WARN: Type inference failed for: r8v17 */
-    /* JADX WARN: Type inference failed for: r8v2 */
-    /* JADX WARN: Type inference failed for: r8v3, types: [boolean, int] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -702,12 +623,6 @@ public class OomAdjuster {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.OomAdjuster.computeOomAdjLSP(com.android.server.am.ProcessRecord, int, com.android.server.am.ProcessRecord, boolean, long, boolean, boolean, int, boolean):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:101:0x01d6  */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x01dc  */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x01e5  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x01be  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x01bb  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x01c4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -732,22 +647,6 @@ public class OomAdjuster {
     
         if (r3 > 100) goto L153;
      */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x0283  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x0296  */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x02f6 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x030c A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:123:0x0315  */
-    /* JADX WARN: Removed duplicated region for block: B:133:0x0327  */
-    /* JADX WARN: Removed duplicated region for block: B:138:0x0337 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:172:0x0430  */
-    /* JADX WARN: Removed duplicated region for block: B:183:0x044a A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:184:0x044b  */
-    /* JADX WARN: Removed duplicated region for block: B:208:0x02c0  */
-    /* JADX WARN: Removed duplicated region for block: B:218:0x02db  */
-    /* JADX WARN: Removed duplicated region for block: B:234:0x025b  */
-    /* JADX WARN: Removed duplicated region for block: B:239:0x0267  */
-    /* JADX WARN: Removed duplicated region for block: B:240:0x026e  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x019d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1283,20 +1182,6 @@ public class OomAdjuster {
     
         if (r10.AMSExceptionFlag == r7.getValue()) goto L70;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:131:0x059e  */
-    /* JADX WARN: Removed duplicated region for block: B:136:0x05c6  */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x0611  */
-    /* JADX WARN: Removed duplicated region for block: B:148:0x05e9  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x01db  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x01e9 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x01f2  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x01f8  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x01fd  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0200  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x0205  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x021a  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x021e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1487,9 +1372,6 @@ public class OomAdjuster {
         updateOomAdjPendingTargetsLocked(23);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:117:0x0293  */
-    /* JADX WARN: Removed duplicated region for block: B:157:0x032c  */
-    /* JADX WARN: Removed duplicated region for block: B:160:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -8,14 +8,12 @@ import java.util.Objects;
 public final class CellInfoLte extends CellInfo implements Parcelable {
     public static final Parcelable.Creator<CellInfoLte> CREATOR =
             new Parcelable.Creator<CellInfoLte>() { // from class: android.telephony.CellInfoLte.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellInfoLte createFromParcel(Parcel in) {
                     in.readInt();
                     return CellInfoLte.createFromParcelBody(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellInfoLte[] newArray(int size) {
                     return new CellInfoLte[size];

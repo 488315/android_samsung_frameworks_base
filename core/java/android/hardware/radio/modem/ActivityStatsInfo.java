@@ -11,7 +11,6 @@ public class ActivityStatsInfo implements Parcelable {
     public static final Parcelable.Creator<ActivityStatsInfo> CREATOR =
             new Parcelable.Creator<ActivityStatsInfo>() { // from class:
                 // android.hardware.radio.modem.ActivityStatsInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityStatsInfo createFromParcel(Parcel _aidl_source) {
                     ActivityStatsInfo _aidl_out = new ActivityStatsInfo();
@@ -19,7 +18,6 @@ public class ActivityStatsInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityStatsInfo[] newArray(int _aidl_size) {
                     return new ActivityStatsInfo[_aidl_size];

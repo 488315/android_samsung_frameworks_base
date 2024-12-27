@@ -32,11 +32,9 @@ public class FontFamily {
     @CriticalNative
     private static native long nCreateFamily(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native long nGetBuilderReleaseFunc();
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native long nGetFamilyReleaseFunc();
 

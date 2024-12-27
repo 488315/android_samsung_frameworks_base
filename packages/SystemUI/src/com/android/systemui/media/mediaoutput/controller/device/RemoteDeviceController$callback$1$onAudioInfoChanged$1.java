@@ -12,7 +12,6 @@ final class RemoteDeviceController$callback$1$onAudioInfoChanged$1 extends Suspe
     int label;
     final /* synthetic */ RemoteDeviceController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RemoteDeviceController$callback$1$onAudioInfoChanged$1(RemoteDeviceController remoteDeviceController, Continuation continuation) {
         super(2, continuation);
         this.this$0 = remoteDeviceController;

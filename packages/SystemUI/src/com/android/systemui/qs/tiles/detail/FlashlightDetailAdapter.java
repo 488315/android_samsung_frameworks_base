@@ -93,7 +93,6 @@ public final class FlashlightDetailAdapter implements DetailAdapter {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.qs.tiles.detail.FlashlightDetailAdapter$3] */
     public FlashlightDetailAdapter(FlashlightTile flashlightTile, FlashlightController flashlightController, SecFlashlightControllerImpl secFlashlightControllerImpl, Context context, QSTile.BooleanState booleanState, SettingsHelper settingsHelper, boolean z, Handler handler) {
         this.mIsLowBattery = false;
         this.mFlashlightTile = flashlightTile;

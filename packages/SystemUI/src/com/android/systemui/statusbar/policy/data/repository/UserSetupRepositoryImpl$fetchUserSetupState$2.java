@@ -13,7 +13,6 @@ final class UserSetupRepositoryImpl$fetchUserSetupState$2 extends SuspendLambda 
     int label;
     final /* synthetic */ UserSetupRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSetupRepositoryImpl$fetchUserSetupState$2(UserSetupRepositoryImpl userSetupRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userSetupRepositoryImpl;

@@ -246,10 +246,6 @@ public final class SystemGesturesPointerEventListener
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:108:0x01bf  */
-    /* JADX WARN: Removed duplicated region for block: B:154:0x0196  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0194  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x019b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -12,13 +12,11 @@ public final class SystemSelectionSpecifier implements Parcelable {
             new Parcelable.Creator<
                     SystemSelectionSpecifier>() { // from class:
                                                   // android.telephony.satellite.SystemSelectionSpecifier.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SystemSelectionSpecifier createFromParcel(Parcel in) {
                     return new SystemSelectionSpecifier(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SystemSelectionSpecifier[] newArray(int size) {
                     return new SystemSelectionSpecifier[size];

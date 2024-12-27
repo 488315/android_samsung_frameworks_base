@@ -13,7 +13,6 @@ import java.util.function.Function;
 public final class SetupWizardProperties {
     private SetupWizardProperties() {}
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static Boolean tryParseBoolean(String str) {
         char c;
         if (str == null) {
@@ -98,7 +97,6 @@ public final class SetupWizardProperties {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String tryParseString(String str) {
         if ("".equals(str)) {
             return null;

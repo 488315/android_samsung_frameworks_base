@@ -18,7 +18,6 @@ public final class CommunalInteractor$special$$inlined$flatMapLatest$2 extends S
     int label;
     final /* synthetic */ CommunalInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalInteractor$special$$inlined$flatMapLatest$2(Continuation continuation, CommunalInteractor communalInteractor) {
         super(3, continuation);
         this.this$0 = communalInteractor;

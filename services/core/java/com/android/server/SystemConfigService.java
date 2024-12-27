@@ -21,7 +21,6 @@ public final class SystemConfigService extends SystemService {
     public final Context mContext;
     public final AnonymousClass1 mInterface;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.SystemConfigService$1] */
     public SystemConfigService(Context context) {
         super(context);
         this.mInterface =

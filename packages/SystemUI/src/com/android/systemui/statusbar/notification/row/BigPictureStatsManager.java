@@ -34,7 +34,6 @@ public final class BigPictureStatsManager implements Dumpable {
         return ((Number) CollectionsKt___CollectionsKt.sorted(list).get(MathKt__MathJVMKt.roundToInt((d / 100.0d) * list.size()) - 1)).intValue();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
         synchronized (this.lock) {

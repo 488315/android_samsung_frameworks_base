@@ -45,10 +45,8 @@ public final class QSBackupRestoreManager {
     enum ERR_CODE {
         SUCCESS(0),
         UNKNOWN_ERROR(1),
-        /* JADX INFO: Fake field, exist only in values array */
         STORAGE_FULL(2),
         INVALID_DATA(3),
-        /* JADX INFO: Fake field, exist only in values array */
         PARTIAL_SUCCESS(7);
 
         private int value;
@@ -175,17 +173,6 @@ public final class QSBackupRestoreManager {
     
         if (r3 != null) goto L52;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v11 */
-    /* JADX WARN: Type inference failed for: r2v14 */
-    /* JADX WARN: Type inference failed for: r2v19, types: [java.io.FileOutputStream, java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [java.io.File] */
-    /* JADX WARN: Type inference failed for: r2v3 */
-    /* JADX WARN: Type inference failed for: r2v6, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r3v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r3v1 */
-    /* JADX WARN: Type inference failed for: r3v14, types: [java.io.FileInputStream, java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r3v4, types: [java.io.InputStream] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -230,37 +217,6 @@ public final class QSBackupRestoreManager {
     
         if (r1 != 0) goto L50;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [java.io.File] */
-    /* JADX WARN: Type inference failed for: r1v1 */
-    /* JADX WARN: Type inference failed for: r1v10 */
-    /* JADX WARN: Type inference failed for: r1v13 */
-    /* JADX WARN: Type inference failed for: r1v16 */
-    /* JADX WARN: Type inference failed for: r1v2 */
-    /* JADX WARN: Type inference failed for: r1v20 */
-    /* JADX WARN: Type inference failed for: r1v21 */
-    /* JADX WARN: Type inference failed for: r1v3 */
-    /* JADX WARN: Type inference failed for: r1v4 */
-    /* JADX WARN: Type inference failed for: r1v5, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r1v6 */
-    /* JADX WARN: Type inference failed for: r1v7 */
-    /* JADX WARN: Type inference failed for: r1v8, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r1v9 */
-    /* JADX WARN: Type inference failed for: r8v0, types: [int] */
-    /* JADX WARN: Type inference failed for: r8v1 */
-    /* JADX WARN: Type inference failed for: r8v12 */
-    /* JADX WARN: Type inference failed for: r8v15 */
-    /* JADX WARN: Type inference failed for: r8v19 */
-    /* JADX WARN: Type inference failed for: r8v2 */
-    /* JADX WARN: Type inference failed for: r8v26 */
-    /* JADX WARN: Type inference failed for: r8v27 */
-    /* JADX WARN: Type inference failed for: r8v3 */
-    /* JADX WARN: Type inference failed for: r8v4 */
-    /* JADX WARN: Type inference failed for: r8v5, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r8v6, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r8v7 */
-    /* JADX WARN: Type inference failed for: r8v8 */
-    /* JADX WARN: Type inference failed for: r8v9, types: [java.io.OutputStream] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -338,9 +294,6 @@ public final class QSBackupRestoreManager {
         this.mQSBnRMap.put(str, callback);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:43:0x016f  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x01a1  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0176  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

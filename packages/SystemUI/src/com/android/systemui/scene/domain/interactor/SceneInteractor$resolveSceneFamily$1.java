@@ -20,7 +20,6 @@ final class SceneInteractor$resolveSceneFamily$1 extends SuspendLambda implement
     int label;
     final /* synthetic */ SceneInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SceneInteractor$resolveSceneFamily$1(SceneInteractor sceneInteractor, SceneKey sceneKey, Continuation continuation) {
         super(2, continuation);
         this.this$0 = sceneInteractor;

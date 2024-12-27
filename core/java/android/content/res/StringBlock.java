@@ -201,9 +201,6 @@ public final class StringBlock implements Closeable {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v0 */
-    /* JADX WARN: Type inference failed for: r3v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r3v11 */
     private CharSequence applyStyles(String str, int[] style, StyleIDs ids, boolean hasCustomizedString) {
         String str2;
         boolean z;

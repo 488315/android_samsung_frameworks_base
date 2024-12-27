@@ -176,7 +176,6 @@ public class SystemVibratorManager extends VibratorManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class OnVibratorStateChangedListenerDelegate extends IVibratorStateListener.Stub {
         private final Executor mExecutor;
         private final Vibrator.OnVibratorStateChangedListener mListener;
@@ -187,7 +186,6 @@ public class SystemVibratorManager extends VibratorManager {
             this.mListener = listener;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVibrating$0(boolean isVibrating) {
             this.mListener.onVibratorStateChanged(isVibrating);
         }

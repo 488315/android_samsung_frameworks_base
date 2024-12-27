@@ -44,9 +44,6 @@ public final class NavBarCommandDispatcher implements PlankCommandDispatcher {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x015e A[Catch: Exception -> 0x0086, TRY_LEAVE, TryCatch #0 {Exception -> 0x0086, blocks: (B:3:0x0012, B:8:0x003c, B:11:0x004d, B:15:0x0059, B:18:0x0060, B:19:0x0089, B:21:0x0099, B:25:0x00a5, B:28:0x00ac, B:29:0x00c9, B:31:0x00d9, B:34:0x00e3, B:36:0x00f1, B:39:0x015e, B:42:0x00fc, B:43:0x0112, B:47:0x011d, B:50:0x0124, B:52:0x0130, B:53:0x0148), top: B:2:0x0012 }] */
     @Override // com.android.systemui.plank.command.PlankCommandDispatcher
     /*
         Code decompiled incorrectly, please refer to instructions dump.

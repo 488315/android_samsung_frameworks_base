@@ -571,7 +571,6 @@ public final class CameraCharacteristics extends CameraMetadata<Key<?>> {
             return this.mKey;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         private Key(CameraMetadataNative.Key<?> key) {
             this.mKey = key;
         }
@@ -600,7 +599,6 @@ public final class CameraCharacteristics extends CameraMetadata<Key<?>> {
         return this.mFoldStateListener;
     }
 
-    /* JADX WARN: Type inference failed for: r2v5, types: [T, java.lang.Integer] */
     private <T> T overrideProperty(Key<T> key) {
         if (SENSOR_ORIENTATION.equals(key) && this.mFoldStateListener != null && this.mProperties.get(INFO_DEVICE_STATE_ORIENTATIONS) != null) {
             DeviceStateSensorOrientationMap deviceStateSensorOrientationMap = (DeviceStateSensorOrientationMap) this.mProperties.get(INFO_DEVICE_STATE_SENSOR_ORIENTATION_MAP);
@@ -621,7 +619,6 @@ public final class CameraCharacteristics extends CameraMetadata<Key<?>> {
         return t != null ? t : (T) this.mProperties.get(key);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.hardware.camera2.CameraMetadata
     public <T> T getProtected(Key<?> key) {
         return (T) this.mProperties.get(key);

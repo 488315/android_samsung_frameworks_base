@@ -12,7 +12,6 @@ public class AudioHalProductStrategy implements Parcelable {
     public static final Parcelable.Creator<AudioHalProductStrategy> CREATOR =
             new Parcelable.Creator<AudioHalProductStrategy>() { // from class:
                 // android.media.audio.common.AudioHalProductStrategy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioHalProductStrategy createFromParcel(Parcel _aidl_source) {
                     AudioHalProductStrategy _aidl_out = new AudioHalProductStrategy();
@@ -20,7 +19,6 @@ public class AudioHalProductStrategy implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioHalProductStrategy[] newArray(int _aidl_size) {
                     return new AudioHalProductStrategy[_aidl_size];
@@ -107,7 +105,6 @@ public class AudioHalProductStrategy implements Parcelable {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
         return Arrays.deepHashCode(
                 Arrays.asList(Integer.valueOf(this.id), this.attributesGroups).toArray());

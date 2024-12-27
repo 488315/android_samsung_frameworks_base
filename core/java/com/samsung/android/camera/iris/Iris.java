@@ -6,13 +6,11 @@ import android.os.Parcelable;
 public final class Iris implements Parcelable {
     public static final Parcelable.Creator<Iris> CREATOR =
             new Parcelable.Creator<Iris>() { // from class: com.samsung.android.camera.iris.Iris.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Iris createFromParcel(Parcel in) {
                     return new Iris(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Iris[] newArray(int size) {
                     return new Iris[size];

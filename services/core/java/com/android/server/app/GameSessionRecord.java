@@ -13,8 +13,6 @@ public final class GameSessionRecord {
     public final SurfaceControlViewHost.SurfacePackage mSurfacePackage;
     public final int mTaskId;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class State {
         public static final /* synthetic */ State[] $VALUES;
         public static final State GAME_SESSION_ATTACHED;

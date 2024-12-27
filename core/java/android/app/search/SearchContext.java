@@ -12,13 +12,11 @@ public final class SearchContext implements Parcelable {
     public static final Parcelable.Creator<SearchContext> CREATOR =
             new Parcelable.Creator<
                     SearchContext>() { // from class: android.app.search.SearchContext.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SearchContext createFromParcel(Parcel parcel) {
                     return new SearchContext(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SearchContext[] newArray(int size) {
                     return new SearchContext[size];

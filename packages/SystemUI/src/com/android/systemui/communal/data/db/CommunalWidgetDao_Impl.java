@@ -8,7 +8,6 @@ public final class CommunalWidgetDao_Impl implements CommunalWidgetDao {
     public final AnonymousClass1 __deleteAdapterOfCommunalWidgetItem = new EntityDeleteOrUpdateAdapter(this) { // from class: com.android.systemui.communal.data.db.CommunalWidgetDao_Impl.1
     };
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.communal.data.db.CommunalWidgetDao_Impl$1] */
     public CommunalWidgetDao_Impl(RoomDatabase roomDatabase) {
         this.__db = roomDatabase;
     }

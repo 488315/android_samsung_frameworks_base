@@ -20,7 +20,6 @@ public class CursorLoader extends AsyncTaskLoader<Cursor> {
     String mSortOrder;
     Uri mUri;
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.content.AsyncTaskLoader
     public Cursor loadInBackground() {
         synchronized (this) {

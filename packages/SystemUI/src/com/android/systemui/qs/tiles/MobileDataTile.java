@@ -182,12 +182,6 @@ public final class MobileDataTile extends SQSTileImpl implements SignalCallback 
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.systemui.qs.tiles.MobileDataTile$1] */
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.qs.tiles.MobileDataTile$4] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.systemui.qs.tiles.MobileDataTile$5] */
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.systemui.qs.tiles.MobileDataTile$6] */
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.systemui.qs.tiles.MobileDataTile$2] */
-    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.systemui.qs.tiles.MobileDataTile$3] */
     public MobileDataTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, NetworkController networkController, SettingsHelper settingsHelper, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, BroadcastDispatcher broadcastDispatcher, PanelInteractor panelInteractor, SatelliteModeObserverHelper satelliteModeObserverHelper, UserTracker userTracker, DisplayLifecycle displayLifecycle, SubscreenUtil subscreenUtil) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mSatelliteModeCallback = new SatelliteModeObserver$SatelliteModeCallback() { // from class: com.android.systemui.qs.tiles.MobileDataTile.1

@@ -19,7 +19,6 @@ final class KeyguardRepositoryImpl$statusBarState$1 extends SuspendLambda implem
     int label;
     final /* synthetic */ KeyguardRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardRepositoryImpl$statusBarState$1(StatusBarStateController statusBarStateController, KeyguardRepositoryImpl keyguardRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.$statusBarStateController = statusBarStateController;
@@ -38,8 +37,6 @@ final class KeyguardRepositoryImpl$statusBarState$1 extends SuspendLambda implem
         return ((KeyguardRepositoryImpl$statusBarState$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$statusBarState$1$callback$1, com.android.systemui.plugins.statusbar.StatusBarStateController$StateListener] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -62,7 +59,6 @@ final class KeyguardRepositoryImpl$statusBarState$1 extends SuspendLambda implem
             this.$statusBarStateController.addCallback(r1);
             final StatusBarStateController statusBarStateController = this.$statusBarStateController;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$statusBarState$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

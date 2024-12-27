@@ -469,14 +469,12 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         public final /* synthetic */ int $r8$classId;
         public final Object mCallbacks;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public Callbacks(Looper looper) {
             super(looper);
             this.$r8$classId = 0;
             this.mCallbacks = new RemoteCallbackList();
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ Callbacks(StorageManagerService storageManagerService, Looper looper, int i) {
             super(looper);
             this.$r8$classId = i;
@@ -649,8 +647,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.StorageManagerService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? storageManagerService = new StorageManagerService(getContext());
@@ -1503,10 +1499,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         return AmFmBandRange$$ExternalSyntheticOutline0.m((int) ((System.currentTimeMillis() - findRecordForPath.createdMillis) / 604800000), new StringBuilder("ext:"), "w");
     }
 
-    /* JADX WARN: Type inference failed for: r3v12, types: [com.android.server.StorageManagerService$1] */
-    /* JADX WARN: Type inference failed for: r3v13, types: [com.android.server.StorageManagerService$1] */
-    /* JADX WARN: Type inference failed for: r3v14, types: [com.android.server.StorageManagerService$4] */
-    /* JADX WARN: Type inference failed for: r3v15, types: [com.android.server.StorageManagerService$1] */
     public StorageManagerService(Context context) {
         WatchedUnlockedUsers watchedUnlockedUsers = new WatchedUnlockedUsers();
         int[] iArr = EmptyArray.INT;
@@ -1550,7 +1542,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
                 this.this$0 = this;
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:45:0x00e1 A[Catch: IllegalArgumentException -> 0x00d6, TryCatch #3 {IllegalArgumentException -> 0x00d6, blocks: (B:29:0x00bb, B:32:0x00c1, B:38:0x00d1, B:42:0x00d9, B:45:0x00e1, B:48:0x00e6), top: B:28:0x00bb, inners: #4 }] */
             @Override // android.content.BroadcastReceiver
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -1582,8 +1573,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
             }
         };
         this.mListener = new IVoldListener.Stub() { // from class: com.android.server.StorageManagerService.4
-            /* JADX WARN: Removed duplicated region for block: B:11:0x0037  */
-            /* JADX WARN: Removed duplicated region for block: B:19:0x003d A[Catch: all -> 0x0027, TryCatch #0 {all -> 0x0027, blocks: (B:4:0x0005, B:13:0x003f, B:14:0x004b, B:18:0x003a, B:19:0x003d, B:20:0x001c, B:23:0x0029), top: B:3:0x0005 }] */
             @Override // android.os.IVoldListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -3264,13 +3253,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
     
         if (r8.isVisibleForWrite(77) == false) goto L85;
      */
-    /* JADX WARN: Removed duplicated region for block: B:100:0x01bf  */
-    /* JADX WARN: Removed duplicated region for block: B:162:0x00ef A[Catch: all -> 0x0353, TryCatch #0 {all -> 0x0353, blocks: (B:43:0x00d4, B:45:0x00ea, B:47:0x00f7, B:162:0x00ef), top: B:42:0x00d4 }] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00ea A[Catch: all -> 0x0353, TryCatch #0 {all -> 0x0353, blocks: (B:43:0x00d4, B:45:0x00ea, B:47:0x00f7, B:162:0x00ef), top: B:42:0x00d4 }] */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x0112  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x01bb  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0238 A[Catch: all -> 0x0157, TryCatch #2 {all -> 0x0157, blocks: (B:52:0x0119, B:54:0x0121, B:62:0x026d, B:63:0x0147, B:67:0x0150, B:70:0x015a, B:75:0x0167, B:78:0x016f, B:80:0x0175, B:86:0x0232, B:88:0x0238, B:90:0x023e, B:91:0x0244, B:93:0x0250, B:95:0x0256, B:96:0x0264, B:98:0x025f, B:101:0x01c1, B:103:0x01e0, B:106:0x01eb, B:109:0x0214, B:110:0x0180, B:112:0x0186, B:114:0x018e, B:117:0x0196, B:119:0x019c, B:121:0x01a2, B:124:0x01aa, B:130:0x027f, B:131:0x0288, B:133:0x0290, B:137:0x02bd, B:138:0x02a1, B:142:0x02ad, B:147:0x02c0), top: B:51:0x0119 }] */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0250 A[Catch: all -> 0x0157, TryCatch #2 {all -> 0x0157, blocks: (B:52:0x0119, B:54:0x0121, B:62:0x026d, B:63:0x0147, B:67:0x0150, B:70:0x015a, B:75:0x0167, B:78:0x016f, B:80:0x0175, B:86:0x0232, B:88:0x0238, B:90:0x023e, B:91:0x0244, B:93:0x0250, B:95:0x0256, B:96:0x0264, B:98:0x025f, B:101:0x01c1, B:103:0x01e0, B:106:0x01eb, B:109:0x0214, B:110:0x0180, B:112:0x0186, B:114:0x018e, B:117:0x0196, B:119:0x019c, B:121:0x01a2, B:124:0x01aa, B:130:0x027f, B:131:0x0288, B:133:0x0290, B:137:0x02bd, B:138:0x02a1, B:142:0x02ad, B:147:0x02c0), top: B:51:0x0119 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3354,7 +3336,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final boolean hasSecRestriction(String str, String str2, String str3, String[] strArr) {
         Cursor query = this.mContext.getContentResolver().query(Uri.parse(str2), null, str3, strArr, null);
         try {
@@ -4398,7 +4379,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* JADX WARN: Type inference failed for: r6v1, types: [com.android.server.HeimdAllFsService$1, java.lang.Thread] */
     public final void runIdleMaint(Runnable runnable) {
         enforcePermission$1("android.permission.MOUNT_FORMAT_FILESYSTEMS");
         try {

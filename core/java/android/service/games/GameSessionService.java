@@ -78,7 +78,6 @@ public abstract class GameSessionService extends Service {
         return this.mInterface.asBinder();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doCreate(
             IGameSessionController gameSessionController,
             CreateGameSessionRequest createGameSessionRequest,

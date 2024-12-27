@@ -79,8 +79,6 @@ public final class KshPresenter {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.statusbar.KshPresenter$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.statusbar.KshPresenter$2] */
     public KshPresenter(Context context) {
         this.mContext = context;
         Configuration configuration = new Configuration();

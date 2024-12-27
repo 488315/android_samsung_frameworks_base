@@ -31,7 +31,6 @@ public final class CredentialViewModel {
     public final CredentialViewModel$special$$inlined$map$2 stealthMode;
     public final ReadonlySharedFlow validatedAttestation;
 
-    /* JADX WARN: Type inference failed for: r6v2, types: [com.android.systemui.biometrics.ui.viewmodel.CredentialViewModel$special$$inlined$map$1] */
     public CredentialViewModel(Context context, PromptCredentialInteractor promptCredentialInteractor) {
         this.applicationContext = context;
         this.credentialInteractor = promptCredentialInteractor;
@@ -65,8 +64,6 @@ public final class CredentialViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -154,8 +151,6 @@ public final class CredentialViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -236,9 +231,6 @@ public final class CredentialViewModel {
         this.remainingAttempts = FlowKt.asStateFlow(MutableStateFlow2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0090  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0050  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -353,9 +345,6 @@ public final class CredentialViewModel {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.ui.viewmodel.CredentialViewModel.checkCredential(com.android.systemui.biometrics.domain.interactor.CredentialStatus, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0060 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -428,9 +417,6 @@ public final class CredentialViewModel {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.ui.viewmodel.CredentialViewModel.checkCredential(java.lang.CharSequence, com.android.systemui.biometrics.ui.viewmodel.CredentialHeaderViewModel, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0060 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

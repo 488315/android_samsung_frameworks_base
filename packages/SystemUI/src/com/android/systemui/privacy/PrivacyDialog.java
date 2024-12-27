@@ -174,7 +174,6 @@ public final class PrivacyDialog extends SystemUIDialog {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.privacy.PrivacyDialog$clickListener$1] */
     public PrivacyDialog(Context context, List<PrivacyElement> list, final Function4 function4) {
         super(context, R.style.SecPrivacyDialog);
         this.list = list;

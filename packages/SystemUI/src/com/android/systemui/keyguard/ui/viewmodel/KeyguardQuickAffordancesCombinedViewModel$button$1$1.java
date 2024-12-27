@@ -26,7 +26,6 @@ final class KeyguardQuickAffordancesCombinedViewModel$button$1$1 extends Suspend
     int label;
     final /* synthetic */ KeyguardQuickAffordancesCombinedViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordancesCombinedViewModel$button$1$1(KeyguardQuickAffordancePosition keyguardQuickAffordancePosition, KeyguardQuickAffordancesCombinedViewModel keyguardQuickAffordancesCombinedViewModel, KeyguardQuickAffordancesCombinedViewModel.PreviewMode previewMode, Continuation continuation) {
         super(6, continuation);
         this.$position = keyguardQuickAffordancePosition;

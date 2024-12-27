@@ -8,7 +8,6 @@ final class PromptCredentialInteractor$verifyCredential$1 extends ContinuationIm
     /* synthetic */ Object result;
     final /* synthetic */ PromptCredentialInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptCredentialInteractor$verifyCredential$1(PromptCredentialInteractor promptCredentialInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = promptCredentialInteractor;

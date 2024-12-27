@@ -8,7 +8,6 @@ public class TimeStampToken implements Parcelable {
     public static final Parcelable.Creator<TimeStampToken> CREATOR =
             new Parcelable.Creator<TimeStampToken>() { // from class:
                 // android.hardware.security.secureclock.TimeStampToken.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeStampToken createFromParcel(Parcel _aidl_source) {
                     TimeStampToken _aidl_out = new TimeStampToken();
@@ -16,7 +15,6 @@ public class TimeStampToken implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeStampToken[] newArray(int _aidl_size) {
                     return new TimeStampToken[_aidl_size];

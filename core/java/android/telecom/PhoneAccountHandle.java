@@ -19,13 +19,11 @@ public final class PhoneAccountHandle implements Parcelable {
     public static final Parcelable.Creator<PhoneAccountHandle> CREATOR =
             new Parcelable.Creator<
                     PhoneAccountHandle>() { // from class: android.telecom.PhoneAccountHandle.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhoneAccountHandle createFromParcel(Parcel in) {
                     return new PhoneAccountHandle(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhoneAccountHandle[] newArray(int size) {
                     return new PhoneAccountHandle[size];

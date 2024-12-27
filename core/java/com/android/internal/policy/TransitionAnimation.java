@@ -116,7 +116,6 @@ public class TransitionAnimation {
         windowStyle.recycle();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ float lambda$new$0(float input) {
         if (input >= 0.5f) {
             float t = (input - 0.5f) / 0.5f;
@@ -125,7 +124,6 @@ public class TransitionAnimation {
         return 0.0f;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ float lambda$new$1(float input) {
         if (input < 0.5f) {
             float t = input / 0.5f;

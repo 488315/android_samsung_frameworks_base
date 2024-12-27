@@ -51,7 +51,6 @@ public final class ThumbnailGenerator {
         this.mWallMgr = WallpaperManager.getInstance(context);
     }
 
-    /* JADX WARN: Type inference failed for: r1v16, types: [com.android.systemui.wallpaper.provider.VideoThumbnailGenerator$$ExternalSyntheticLambda0] */
     public final Bitmap generateThumbnail(final GetThumbnail$Params getThumbnail$Params) {
         Bitmap bitmap;
         int i;

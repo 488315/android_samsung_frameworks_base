@@ -18,7 +18,6 @@ final class DeviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1 exten
     int label;
     final /* synthetic */ DeviceBasedSatelliteInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1(DeviceBasedSatelliteInteractor deviceBasedSatelliteInteractor, Continuation continuation) {
         super(3, continuation);
         this.this$0 = deviceBasedSatelliteInteractor;

@@ -143,7 +143,6 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
                 this.mWriteOutHandler);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onAlarm() {
         int i;
         ActiveBuffer[] activeCopy;
@@ -372,7 +371,6 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
         return new File(this.mGraphicsStatsDir, subPath);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void saveBuffer(HistoricalBuffer buffer) {
         if (Trace.isTagEnabled(524288L)) {
             Trace.traceBegin(524288L, "saving graphicsstats for " + buffer.mInfo.mPackageName);
@@ -407,7 +405,6 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void deleteOldBuffers() {
         Trace.traceBegin(524288L, "deleting old graphicsstats buffers");
         synchronized (this.mFileAccessLock) {
@@ -444,7 +441,6 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
         buffer.closeAllBuffers();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void processDied(ActiveBuffer buffer) {
         synchronized (this.mLock) {
             this.mActive.remove(buffer);

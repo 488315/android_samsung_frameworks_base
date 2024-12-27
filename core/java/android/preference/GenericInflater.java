@@ -112,7 +112,6 @@ abstract class GenericInflater<T, P extends Parent> {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public T inflate(XmlPullParser xmlPullParser, P p, boolean z) {
         int next;
         T t;

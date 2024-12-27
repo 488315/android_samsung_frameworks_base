@@ -1479,8 +1479,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         universalCredentialManagerService.updateUcmCryptoProp();
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.enterprise.ucm.UniversalCredentialManagerService$2] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.server.enterprise.ucm.UniversalCredentialManagerService$2] */
     public UniversalCredentialManagerService(Context context) {
         this.mContext = null;
         this.mEdmStorageProvider = null;
@@ -2399,10 +2397,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0128 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0130 A[Catch: Exception -> 0x013c, TryCatch #0 {Exception -> 0x013c, blocks: (B:21:0x012a, B:23:0x0130, B:25:0x0136, B:27:0x0141), top: B:20:0x012a }] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0170  */
-    /* JADX WARN: Removed duplicated region for block: B:39:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2783,9 +2777,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return z4;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0052 A[Catch: all -> 0x006c, Exception -> 0x006f, TryCatch #0 {Exception -> 0x006f, blocks: (B:14:0x004e, B:16:0x0052, B:17:0x0071, B:19:0x0075, B:24:0x0083, B:26:0x0089, B:29:0x0096, B:32:0x00a3, B:35:0x00b0, B:37:0x00b6, B:41:0x00c9), top: B:13:0x004e, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0089 A[Catch: all -> 0x006c, Exception -> 0x006f, TRY_LEAVE, TryCatch #0 {Exception -> 0x006f, blocks: (B:14:0x004e, B:16:0x0052, B:17:0x0071, B:19:0x0075, B:24:0x0083, B:26:0x0089, B:29:0x0096, B:32:0x00a3, B:35:0x00b0, B:37:0x00b6, B:41:0x00c9), top: B:13:0x004e, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0096 A[Catch: all -> 0x006c, Exception -> 0x006f, TRY_ENTER, TryCatch #0 {Exception -> 0x006f, blocks: (B:14:0x004e, B:16:0x0052, B:17:0x0071, B:19:0x0075, B:24:0x0083, B:26:0x0089, B:29:0x0096, B:32:0x00a3, B:35:0x00b0, B:37:0x00b6, B:41:0x00c9), top: B:13:0x004e, outer: #2 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3323,8 +3314,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
 
        r7 = r12;
     */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0104 A[Catch: Exception -> 0x0122, TRY_ENTER, TryCatch #2 {Exception -> 0x0122, blocks: (B:37:0x00f6, B:40:0x0104, B:43:0x010c, B:45:0x0112, B:47:0x011c, B:50:0x0124, B:52:0x012e, B:56:0x0134, B:58:0x013e, B:60:0x0148), top: B:36:0x00f6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0134 A[Catch: Exception -> 0x0122, TryCatch #2 {Exception -> 0x0122, blocks: (B:37:0x00f6, B:40:0x0104, B:43:0x010c, B:45:0x0112, B:47:0x011c, B:50:0x0124, B:52:0x012e, B:56:0x0134, B:58:0x013e, B:60:0x0148), top: B:36:0x00f6 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4154,7 +4143,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         this.mEDM.enforceActiveAdminPermissionByContext(contextInfo, arrayList);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(13:(18:90|91|(1:93)|(1:9)|10|11|(2:13|(2:19|(2:21|22))(1:17))|23|24|25|(1:27)|28|(2:30|(3:(1:33)|34|35)(2:36|(2:38|(3:(1:41)|42|43)(1:(1:45)))(3:(1:63)|64|65)))(1:(2:67|(2:69|(3:(1:72)|73|74)))(3:(1:76)|77|78))|46|47|(2:57|(1:61))(1:(1:51)(2:54|(1:56)))|52|53)|24|25|(0)|28|(0)(0)|46|47|(0)|57|(1:61)|52|53) */
     /* JADX WARN: Code restructure failed: missing block: B:83:0x00a1, code lost:
 
        r11 = move-exception;
@@ -4163,10 +4151,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
 
        android.util.Log.i(com.android.server.enterprise.ucm.UniversalCredentialManagerService.TAG, "The exception occurs " + r11.getMessage());
     */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x005e  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0084 A[Catch: all -> 0x009e, Exception -> 0x00a1, TryCatch #2 {Exception -> 0x00a1, blocks: (B:25:0x0080, B:27:0x0084, B:28:0x00a4, B:30:0x00aa, B:33:0x00b6, B:36:0x00c4, B:38:0x00ce, B:41:0x00f1, B:45:0x00ff, B:46:0x0134, B:51:0x0145, B:54:0x0161, B:56:0x0167, B:61:0x0175, B:63:0x0108, B:67:0x0116, B:69:0x011c, B:72:0x0128, B:76:0x0196), top: B:24:0x0080, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00aa A[Catch: all -> 0x009e, Exception -> 0x00a1, TryCatch #2 {Exception -> 0x00a1, blocks: (B:25:0x0080, B:27:0x0084, B:28:0x00a4, B:30:0x00aa, B:33:0x00b6, B:36:0x00c4, B:38:0x00ce, B:41:0x00f1, B:45:0x00ff, B:46:0x0134, B:51:0x0145, B:54:0x0161, B:56:0x0167, B:61:0x0175, B:63:0x0108, B:67:0x0116, B:69:0x011c, B:72:0x0128, B:76:0x0196), top: B:24:0x0080, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0114  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4638,9 +4622,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return getAvailableCredentialStorages(contextInfo, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00dd  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00ea  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01c2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4675,7 +4656,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0188  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5654,7 +5634,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:70:0x01e0 A[Catch: all -> 0x008a, TRY_LEAVE, TryCatch #3 {all -> 0x008a, blocks: (B:11:0x006c, B:75:0x0070, B:13:0x0090, B:15:0x0094, B:20:0x00a0, B:22:0x00a6, B:25:0x00b1, B:29:0x00bf, B:32:0x00cb, B:35:0x00da, B:40:0x00ea, B:43:0x0109, B:46:0x0113, B:49:0x0132, B:53:0x0148, B:55:0x0187, B:57:0x019f, B:58:0x01a3, B:60:0x01a9, B:68:0x01dc, B:70:0x01e0, B:71:0x01d1), top: B:10:0x006c }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6357,7 +6336,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return z4;
     }
 
-    /* JADX WARN: Unreachable blocks removed: 2, instructions: 2 */
     public final int insertOrUpdateExemptPackages(
             CredentialStorage credentialStorage, List list, int i, int i2, int i3) {
         int i4;
@@ -6503,17 +6481,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return i4;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x02d9  */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x032d  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x02c6  */
-    /* JADX WARN: Removed duplicated region for block: B:132:0x02d3  */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x01f8 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:146:0x01e5  */
-    /* JADX WARN: Removed duplicated region for block: B:151:0x01b7  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x01b5  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x01dc  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0200  */
-    /* JADX WARN: Unreachable blocks removed: 2, instructions: 2 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7459,7 +7426,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0043 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7513,10 +7479,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.isSystemStorage(java.lang.String):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0181 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0193 A[Catch: Exception -> 0x003d, LOOP:2: B:59:0x018e->B:61:0x0193, LOOP_END, TryCatch #2 {Exception -> 0x003d, blocks: (B:3:0x0013, B:5:0x0017, B:6:0x0040, B:8:0x004a, B:10:0x006b, B:12:0x0074, B:15:0x0086, B:17:0x008c, B:19:0x009a, B:21:0x009f, B:23:0x00b7, B:25:0x00ba, B:27:0x00be, B:29:0x00c8, B:31:0x00d0, B:33:0x00da, B:35:0x00e0, B:37:0x00e4, B:39:0x00ea, B:41:0x0107, B:42:0x011e, B:44:0x012a, B:45:0x0130, B:51:0x017d, B:54:0x0183, B:56:0x0187, B:58:0x018a, B:59:0x018e, B:61:0x0193, B:63:0x019e, B:66:0x01bf, B:69:0x01c7, B:80:0x01d2, B:88:0x0148, B:85:0x0164, B:95:0x01db), top: B:2:0x0013 }] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x019e A[EDGE_INSN: B:62:0x019e->B:63:0x019e BREAK  A[LOOP:2: B:59:0x018e->B:61:0x0193], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x01bd A[ADDED_TO_REGION] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8285,8 +8247,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         this.mIsSystemReceiverRegistered = true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00d7  */
-    /* JADX WARN: Removed duplicated region for block: B:32:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8573,9 +8533,6 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x005e A[Catch: all -> 0x0078, Exception -> 0x007b, TryCatch #1 {Exception -> 0x007b, blocks: (B:19:0x005a, B:21:0x005e, B:22:0x007d, B:24:0x0081, B:28:0x008f, B:30:0x0095, B:33:0x00a2, B:36:0x00af, B:39:0x00bd, B:41:0x00c3, B:45:0x00d7), top: B:18:0x005a, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0095 A[Catch: all -> 0x0078, Exception -> 0x007b, TRY_LEAVE, TryCatch #1 {Exception -> 0x007b, blocks: (B:19:0x005a, B:21:0x005e, B:22:0x007d, B:24:0x0081, B:28:0x008f, B:30:0x0095, B:33:0x00a2, B:36:0x00af, B:39:0x00bd, B:41:0x00c3, B:45:0x00d7), top: B:18:0x005a, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00a2 A[Catch: all -> 0x0078, Exception -> 0x007b, TRY_ENTER, TryCatch #1 {Exception -> 0x007b, blocks: (B:19:0x005a, B:21:0x005e, B:22:0x007d, B:24:0x0081, B:28:0x008f, B:30:0x0095, B:33:0x00a2, B:36:0x00af, B:39:0x00bd, B:41:0x00c3, B:45:0x00d7), top: B:18:0x005a, outer: #2 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

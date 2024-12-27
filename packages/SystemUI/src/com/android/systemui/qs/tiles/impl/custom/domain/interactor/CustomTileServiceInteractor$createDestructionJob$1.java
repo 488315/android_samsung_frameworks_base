@@ -29,7 +29,6 @@ final class CustomTileServiceInteractor$createDestructionJob$1 extends SuspendLa
         int label;
         final /* synthetic */ CustomTileServiceInteractor this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(CustomTileServiceInteractor customTileServiceInteractor, Continuation continuation) {
             super(2, continuation);
             this.this$0 = customTileServiceInteractor;
@@ -83,7 +82,6 @@ final class CustomTileServiceInteractor$createDestructionJob$1 extends SuspendLa
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTileServiceInteractor$createDestructionJob$1(CustomTileServiceInteractor customTileServiceInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = customTileServiceInteractor;

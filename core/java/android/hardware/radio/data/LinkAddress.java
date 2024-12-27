@@ -13,7 +13,6 @@ public class LinkAddress implements Parcelable {
     public static final Parcelable.Creator<LinkAddress> CREATOR =
             new Parcelable.Creator<
                     LinkAddress>() { // from class: android.hardware.radio.data.LinkAddress.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LinkAddress createFromParcel(Parcel _aidl_source) {
                     LinkAddress _aidl_out = new LinkAddress();
@@ -21,7 +20,6 @@ public class LinkAddress implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LinkAddress[] newArray(int _aidl_size) {
                     return new LinkAddress[_aidl_size];

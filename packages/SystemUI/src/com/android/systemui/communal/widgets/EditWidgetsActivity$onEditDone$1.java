@@ -57,7 +57,6 @@ final class EditWidgetsActivity$onEditDone$1 extends SuspendLambda implements Fu
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public EditWidgetsActivity$onEditDone$1(EditWidgetsActivity editWidgetsActivity, Continuation continuation) {
         super(2, continuation);
         this.this$0 = editWidgetsActivity;

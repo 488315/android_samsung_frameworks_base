@@ -2608,7 +2608,6 @@ public final class TvInputManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void sendInputEventAndReportResultOnMainLooper(PendingEvent p) {
             synchronized (this.mHandler) {
                 int result = sendInputEventOnMainLooperLocked(p);
@@ -2702,7 +2701,6 @@ public final class TvInputManager {
             return p;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void recyclePendingEventLocked(PendingEvent p) {
             p.recycle();
             this.mPendingEventPool.release(p);
@@ -2712,7 +2710,6 @@ public final class TvInputManager {
             return this.mToken;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void releaseInternal() {
             this.mToken = null;
             synchronized (this.mHandler) {
@@ -2869,7 +2866,6 @@ public final class TvInputManager {
             this.mInterface = hardwareInterface;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public ITvInputHardware getInterface() {
             return this.mInterface;
         }

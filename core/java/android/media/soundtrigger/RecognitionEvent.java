@@ -13,7 +13,6 @@ public class RecognitionEvent implements Parcelable {
     public static final Parcelable.Creator<RecognitionEvent> CREATOR =
             new Parcelable.Creator<RecognitionEvent>() { // from class:
                 // android.media.soundtrigger.RecognitionEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecognitionEvent createFromParcel(Parcel _aidl_source) {
                     RecognitionEvent _aidl_out = new RecognitionEvent();
@@ -21,7 +20,6 @@ public class RecognitionEvent implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecognitionEvent[] newArray(int _aidl_size) {
                     return new RecognitionEvent[_aidl_size];

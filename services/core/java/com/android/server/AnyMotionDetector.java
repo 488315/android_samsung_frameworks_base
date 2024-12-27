@@ -143,9 +143,6 @@ public final class AnyMotionDetector {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x01dd  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x01e5  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0205  */
     /* renamed from: -$$Nest$mstopOrientationMeasurementLocked, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -162,10 +159,6 @@ public final class AnyMotionDetector {
                     + " com.android.server.AnyMotionDetector.m38$$Nest$mstopOrientationMeasurementLocked(com.android.server.AnyMotionDetector):int");
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.AnyMotionDetector$1] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.AnyMotionDetector$2] */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.AnyMotionDetector$2] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.server.AnyMotionDetector$2] */
     public AnyMotionDetector(
             PowerManager powerManager,
             Handler handler,

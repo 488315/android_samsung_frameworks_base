@@ -20,7 +20,6 @@ final class BiometricStatusInteractorImpl$sfpsAuthenticationReason$1 extends Sus
     int label;
     final /* synthetic */ BiometricStatusInteractorImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BiometricStatusInteractorImpl$sfpsAuthenticationReason$1(BiometricStatusInteractorImpl biometricStatusInteractorImpl, Continuation continuation) {
         super(3, continuation);
         this.this$0 = biometricStatusInteractorImpl;

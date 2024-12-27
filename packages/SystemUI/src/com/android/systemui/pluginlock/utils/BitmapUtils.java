@@ -58,18 +58,6 @@ public class BitmapUtils {
         return createScaledBitmap;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00bb A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:4:0x00e7  */
-    /* JADX WARN: Removed duplicated region for block: B:7:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r6v0, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r6v1 */
-    /* JADX WARN: Type inference failed for: r6v11 */
-    /* JADX WARN: Type inference failed for: r6v12 */
-    /* JADX WARN: Type inference failed for: r6v13 */
-    /* JADX WARN: Type inference failed for: r6v2, types: [java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r6v5 */
-    /* JADX WARN: Type inference failed for: r6v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -82,8 +70,6 @@ public class BitmapUtils {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.pluginlock.utils.BitmapUtils.getBitmapFromPath(android.content.Context, java.lang.String, boolean, boolean):android.graphics.Bitmap");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:8:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

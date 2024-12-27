@@ -65,7 +65,6 @@ public final class WindowManagerShellCommand extends ShellCommand {
         return 0;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:73:0x0239, code lost:
 
        if (r11.equals("true") == false) goto L143;
@@ -615,7 +614,6 @@ public final class WindowManagerShellCommand extends ShellCommand {
         return 0;
     }
 
-    /* JADX WARN: Finally extract failed */
     public final int runDisplayFoldedArea(PrintWriter printWriter) {
         Rect rect;
         String nextArg = getNextArg();
@@ -721,9 +719,6 @@ public final class WindowManagerShellCommand extends ShellCommand {
         return 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0093 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0062  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0055  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1222,7 +1217,6 @@ public final class WindowManagerShellCommand extends ShellCommand {
                 new StringBuilder("Reset all settings for displayId="), displayId, printWriter);
     }
 
-    /* JADX WARN: Failed to find 'out' block for switch in B:10:0x0022. Please report as an issue. */
     public final int runResetLetterboxStyle() {
         char c;
         if (peekNextArg() == null) {
@@ -1682,7 +1676,6 @@ public final class WindowManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runSetBlurDisabled(PrintWriter printWriter) {
         char c;
         int i = 1;
@@ -1804,7 +1797,6 @@ public final class WindowManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runSetIgnoreOrientationRequest() {
         int i;
         char c;
@@ -2062,9 +2054,6 @@ public final class WindowManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0058 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x004f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2150,9 +2139,6 @@ public final class WindowManagerShellCommand extends ShellCommand {
                     + " com.android.server.wm.WindowManagerShellCommand.runSetLetterboxDefaultPositionForHorizontalReachability():void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0058 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x004f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2238,10 +2224,6 @@ public final class WindowManagerShellCommand extends ShellCommand {
                     + " com.android.server.wm.WindowManagerShellCommand.runSetLetterboxDefaultPositionForVerticalReachability():void");
     }
 
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x0319  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x0335 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:136:0x032c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2355,9 +2337,6 @@ public final class WindowManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0058 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x004f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2444,7 +2423,6 @@ public final class WindowManagerShellCommand extends ShellCommand {
                     + " com.android.server.wm.WindowManagerShellCommand.runSetPersistentLetterboxPositionForVerticalReachability():void");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runWmShellCommand(PrintWriter printWriter) {
         char c;
         String nextArg = getNextArg();

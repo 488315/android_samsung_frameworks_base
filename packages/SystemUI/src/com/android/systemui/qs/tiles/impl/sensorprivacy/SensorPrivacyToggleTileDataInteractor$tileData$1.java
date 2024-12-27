@@ -19,7 +19,6 @@ final class SensorPrivacyToggleTileDataInteractor$tileData$1 extends SuspendLamb
     int label;
     final /* synthetic */ SensorPrivacyToggleTileDataInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SensorPrivacyToggleTileDataInteractor$tileData$1(SensorPrivacyToggleTileDataInteractor sensorPrivacyToggleTileDataInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = sensorPrivacyToggleTileDataInteractor;
@@ -56,7 +55,6 @@ final class SensorPrivacyToggleTileDataInteractor$tileData$1 extends SuspendLamb
             ((IndividualSensorPrivacyControllerImpl) this.this$0.privacyController).addCallback(callback);
             final SensorPrivacyToggleTileDataInteractor sensorPrivacyToggleTileDataInteractor2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.tiles.impl.sensorprivacy.SensorPrivacyToggleTileDataInteractor$tileData$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

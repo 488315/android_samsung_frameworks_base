@@ -13,13 +13,11 @@ public class LessThan<T extends Comparable<T>> extends GenericEvaluator<T> {
             new Parcelable.Creator<
                     LessThan<
                             ?>>() { // from class: com.samsung.android.sume.core.evaluate.LessThan.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LessThan<?> createFromParcel(Parcel in) {
                     return new LessThan<>(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LessThan<?>[] newArray(int size) {
                     return new LessThan[size];

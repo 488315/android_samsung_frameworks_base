@@ -10,7 +10,6 @@ import java.util.StringJoiner;
 public class Carrier implements Parcelable {
     public static final Parcelable.Creator<Carrier> CREATOR =
             new Parcelable.Creator<Carrier>() { // from class: android.hardware.radio.sim.Carrier.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Carrier createFromParcel(Parcel _aidl_source) {
                     Carrier _aidl_out = new Carrier();
@@ -18,7 +17,6 @@ public class Carrier implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Carrier[] newArray(int _aidl_size) {
                     return new Carrier[_aidl_size];

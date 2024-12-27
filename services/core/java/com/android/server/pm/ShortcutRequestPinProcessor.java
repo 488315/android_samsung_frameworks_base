@@ -130,14 +130,6 @@ public final class ShortcutRequestPinProcessor {
             return this.shortcutForLauncher;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v7, types: [com.android.server.pm.ShortcutService] */
-        /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.pm.ShortcutLauncher, com.android.server.pm.ShortcutPackageItem] */
-        /* JADX WARN: Type inference failed for: r4v0, types: [int] */
-        /* JADX WARN: Type inference failed for: r4v1 */
-        /* JADX WARN: Type inference failed for: r4v2 */
-        /* JADX WARN: Type inference failed for: r6v2, types: [com.android.server.pm.ShortcutService] */
-        /* JADX WARN: Type inference failed for: r8v0, types: [com.android.server.pm.ShortcutService] */
         @Override // com.android.server.pm.ShortcutRequestPinProcessor.PinItemRequestInner
         public final boolean tryAccept() {
             boolean z;

@@ -144,7 +144,6 @@ public final class MediaCodec {
 
     private final native MediaCodecInfo getOwnCodecInfo();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void native_closeMediaImage(long j);
 
     private final native void native_configure(
@@ -183,7 +182,6 @@ public final class MediaCodec {
 
     private static native Image native_mapHardwareBuffer(HardwareBuffer hardwareBuffer);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native void native_queueHardwareBuffer(
             int i,
             HardwareBuffer hardwareBuffer,
@@ -198,7 +196,6 @@ public final class MediaCodec {
     private final native void native_queueInputBuffers(int i, Object[] objArr)
             throws CryptoException, CodecException;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native void native_queueLinearBlock(
             int i,
             LinearBlock linearBlock,
@@ -215,7 +212,6 @@ public final class MediaCodec {
 
     private final native void native_release();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final native void native_releasePersistentInputSurface(Surface surface);
 
     private final native void native_reset();
@@ -326,7 +322,6 @@ public final class MediaCodec {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         private void handleCallback(Message msg) {
             if (MediaCodec.this.mCallback == null) {
                 return;
@@ -1508,7 +1503,6 @@ public final class MediaCodec {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void validateInputByteBufferLocked(ByteBuffer[] buffers, int index) {
         ByteBuffer buffer;
         if (buffers == null) {
@@ -1535,7 +1529,6 @@ public final class MediaCodec {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void validateOutputByteBuffersLocked(
             ByteBuffer[] buffers, int index, ArrayDeque<BufferInfo> infoDeque) {
         ByteBuffer buffer;
@@ -1584,7 +1577,6 @@ public final class MediaCodec {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void validateOutputByteBufferLocked(ByteBuffer[] buffers, int index, BufferInfo info) {
         ByteBuffer buffer;
         if (buffers == null) {
@@ -2011,22 +2003,18 @@ public final class MediaCodec {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setCallback$5() {
         this.mCallbackHandler.removeMessages(2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setCallback$6() {
         this.mCallbackHandler.removeMessages(1);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setCallback$7() {
         this.mCallbackHandler.removeMessages(2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setCallback$8() {
         this.mCallbackHandler.removeMessages(1);
     }

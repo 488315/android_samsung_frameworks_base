@@ -19,13 +19,11 @@ public final class SipDelegateConfiguration implements Parcelable {
             new Parcelable.Creator<
                     SipDelegateConfiguration>() { // from class:
                                                   // android.telephony.ims.SipDelegateConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SipDelegateConfiguration createFromParcel(Parcel source) {
                     return new SipDelegateConfiguration(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SipDelegateConfiguration[] newArray(int size) {
                     return new SipDelegateConfiguration[size];

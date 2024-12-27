@@ -104,11 +104,6 @@ public final class PreconditionObserver {
                         : "com.osp.app.signin";
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.samsung.android.server.continuity.AbstractPreconditionObserver$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.android.server.continuity.AbstractPreconditionObserver$2] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.samsung.android.server.continuity.AbstractPreconditionObserver$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.samsung.android.server.continuity.AbstractPreconditionObserver$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r4v10, types: [com.samsung.android.server.continuity.PreconditionObserver$1] */
     public PreconditionObserver(Context context) {
         final Handler handler = new Handler(Looper.getMainLooper());
         this.mSettingObserver =

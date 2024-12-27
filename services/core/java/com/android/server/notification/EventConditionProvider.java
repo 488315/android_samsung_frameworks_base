@@ -220,7 +220,6 @@ public final class EventConditionProvider extends SystemConditionProviderService
         public AnonymousClass2() {}
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.notification.EventConditionProvider$4] */
     public EventConditionProvider() {
         if (DEBUG) {
             DeviceIdleController$$ExternalSyntheticOutline0.m(

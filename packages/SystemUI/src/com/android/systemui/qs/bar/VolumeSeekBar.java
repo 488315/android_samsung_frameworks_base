@@ -121,8 +121,6 @@ public final class VolumeSeekBar implements SecQSExpansionStateListener {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v11, types: [com.android.systemui.qs.bar.VolumeSeekBar$onUnhandledKeyEventListener$1] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.qs.bar.VolumeSeekBar$handler$1] */
     public VolumeSeekBar(Context context, VolumeManager volumeManager, BluetoothDeviceManager bluetoothDeviceManager, SecQSExpansionStateInteractor secQSExpansionStateInteractor, VolumeDependency volumeDependency, Lazy lazy, Lazy lazy2) {
         this.context = context;
         this.volumeManager = volumeManager;

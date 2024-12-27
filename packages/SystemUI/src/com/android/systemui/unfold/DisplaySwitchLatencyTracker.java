@@ -252,11 +252,6 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
         return 3;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0082  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x008a A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:47:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0055  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0026  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -269,8 +264,6 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.unfold.DisplaySwitchLatencyTracker.access$waitForDisplaySwitch(com.android.systemui.unfold.DisplaySwitchLatencyTracker, int, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x003e  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -356,8 +349,6 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.unfold.DisplaySwitchLatencyTracker.access$waitForGoToSleepWithScreenOff(com.android.systemui.unfold.DisplaySwitchLatencyTracker, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x003e  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

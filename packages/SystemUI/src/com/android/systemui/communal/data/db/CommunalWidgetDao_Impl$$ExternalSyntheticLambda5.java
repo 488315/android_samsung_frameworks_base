@@ -16,7 +16,6 @@ public final /* synthetic */ class CommunalWidgetDao_Impl$$ExternalSyntheticLamb
         this.f$0 = i;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlin.jvm.functions.Function1
     public final Object invoke(Object obj) {
         SQLiteStatement prepare;

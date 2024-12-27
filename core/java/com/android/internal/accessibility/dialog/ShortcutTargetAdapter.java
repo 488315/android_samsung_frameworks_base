@@ -40,7 +40,6 @@ class ShortcutTargetAdapter extends TargetAdapter {
         return position;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.widget.Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
         TargetAdapter.ViewHolder holder;

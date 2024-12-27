@@ -17,7 +17,6 @@ final class MobileIconInteractorImpl$networkTypeIconGroup$1 extends SuspendLambd
     int label;
     final /* synthetic */ MobileIconInteractorImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileIconInteractorImpl$networkTypeIconGroup$1(MobileIconInteractorImpl mobileIconInteractorImpl, Continuation continuation) {
         super(3, continuation);
         this.this$0 = mobileIconInteractorImpl;

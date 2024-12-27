@@ -299,7 +299,6 @@ public final class LocalProxyManager {
         return proxyProperties;
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.enterprise.proxy.LocalProxyManager$4] */
     public static LocalProxyManager getInstance(Context context) {
         LocalProxyManager localProxyManager = sInstance;
         if (localProxyManager == null) {

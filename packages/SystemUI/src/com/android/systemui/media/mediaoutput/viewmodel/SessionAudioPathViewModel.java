@@ -307,7 +307,6 @@ public final class SessionAudioPathViewModel extends ViewModel implements AudioP
                     public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                         final Flow[] flowArr2 = flowArr;
                         Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.media.mediaoutput.viewmodel.SessionAudioPathViewModel$4$invokeSuspend$$inlined$combine$1.2
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(0);
                             }
@@ -348,8 +347,6 @@ public final class SessionAudioPathViewModel extends ViewModel implements AudioP
                             this.$this_unsafeFlow = flowCollector;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
@@ -471,15 +468,6 @@ public final class SessionAudioPathViewModel extends ViewModel implements AudioP
                             this.$$this$launch$inlined = coroutineScope;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
-                        /* JADX WARN: Removed duplicated region for block: B:306:0x0b51  */
-                        /* JADX WARN: Removed duplicated region for block: B:308:0x0b54  */
-                        /* JADX WARN: Removed duplicated region for block: B:311:0x0b5d  */
-                        /* JADX WARN: Removed duplicated region for block: B:322:0x0be2 A[RETURN] */
-                        /* JADX WARN: Removed duplicated region for block: B:327:0x0b95  */
-                        /* JADX WARN: Removed duplicated region for block: B:331:0x0bb7  */
-                        /* JADX WARN: Removed duplicated region for block: B:679:0x032c  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
@@ -528,8 +516,6 @@ public final class SessionAudioPathViewModel extends ViewModel implements AudioP
                             this.$this_unsafeFlow = flowCollector;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.

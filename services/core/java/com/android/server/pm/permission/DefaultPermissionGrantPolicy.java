@@ -581,7 +581,6 @@ public final class DefaultPermissionGrantPolicy {
         arraySet16.add("android.permission.POST_NOTIFICATIONS");
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.pm.permission.DefaultPermissionGrantPolicy$2] */
     public DefaultPermissionGrantPolicy(Context context) {
         this.mContext = context;
     }
@@ -1677,8 +1676,6 @@ public final class DefaultPermissionGrantPolicy {
 
        if (((java.lang.Boolean) ((java.util.HashMap) r20.mNotiBlockableDataByUid).get(java.lang.Integer.valueOf(r22.applicationInfo.uid))).booleanValue() != false) goto L107;
     */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00dd  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x00fd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1724,7 +1721,6 @@ public final class DefaultPermissionGrantPolicy {
         grantRuntimePermissions(delayingPackageManagerCache, packageInfo, arraySet, true, false, i);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void parse(
             PackageManagerWrapper packageManagerWrapper,
             TypedXmlPullParser typedXmlPullParser,

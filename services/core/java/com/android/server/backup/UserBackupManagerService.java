@@ -2581,17 +2581,6 @@ public final class UserBackupManagerService {
         return z;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0194  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0191  */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0158  */
-    /* JADX WARN: Type inference failed for: r10v2 */
-    /* JADX WARN: Type inference failed for: r10v3 */
-    /* JADX WARN: Type inference failed for: r10v4 */
-    /* JADX WARN: Type inference failed for: r11v11 */
-    /* JADX WARN: Type inference failed for: r11v12 */
-    /* JADX WARN: Type inference failed for: r11v13 */
-    /* JADX WARN: Type inference failed for: r11v14 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2622,8 +2611,6 @@ public final class UserBackupManagerService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r8v5, types: [com.android.server.backup.transport.TransportConnectionManager] */
     public final void reportDelayedRestoreResult(String str, List list) {
         String str2 = this.mTransportManager.mCurrentTransportName;
         if (str2 == null) {

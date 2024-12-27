@@ -510,7 +510,6 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final boolean deleteRootTask(WindowContainerToken windowContainerToken) {
         boolean z;
         ActivityTaskManagerService.enforceTaskPermission("deleteRootTask()");
@@ -674,7 +673,6 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final List getChildTasks(WindowContainerToken windowContainerToken, int[] iArr) {
         ActivityTaskManagerService.enforceTaskPermission("getChildTasks()");
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -733,7 +731,6 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final float getFreeformTaskOpacity(int i) {
         ActivityTaskManagerService.enforceTaskPermission("getFreeformTaskOpacity()");
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -765,7 +762,6 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final WindowContainerToken getImeTarget(int i) {
         WindowContainerToken windowContainerToken;
         ActivityTaskManagerService.enforceTaskPermission("getImeTarget()");
@@ -1098,7 +1094,6 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final void restartTaskTopActivityProcessIfVisible(
             WindowContainerToken windowContainerToken) {
         ActivityTaskManagerService.enforceTaskPermission("restartTopActivityProcessIfVisible()");

@@ -39,7 +39,6 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
         public boolean qsExpansionTransitioning = false;
         public float distanceToViewEnd = -1.0f;
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.systemui.statusbar.notification.stack.ViewState
         public final void applyToView(View view) {
             AnimationProperties animationProperties;
@@ -79,9 +78,6 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.statusbar.notification.stack.AnimationProperties, com.android.systemui.statusbar.phone.StatusIconContainer$1] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.statusbar.notification.stack.AnimationProperties, com.android.systemui.statusbar.phone.StatusIconContainer$2] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.statusbar.notification.stack.AnimationProperties, com.android.systemui.statusbar.phone.StatusIconContainer$3] */
     static {
         ?? r0 = new AnimationProperties() { // from class: com.android.systemui.statusbar.phone.StatusIconContainer.1
             public final AnimationFilter mAnimationFilter;
@@ -174,7 +170,6 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
         super.onFinishInflate();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.widget.LinearLayout, android.view.ViewGroup, android.view.View
     public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
         IndicatorCutoutUtil indicatorCutoutUtil;
@@ -257,7 +252,6 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
     
         if (r10 <= r14) goto L33;
      */
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.widget.LinearLayout, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.

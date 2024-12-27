@@ -104,8 +104,6 @@ public final class IconsContentProvider extends ContentProvider {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x009d A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // android.content.ContentProvider
     /*
         Code decompiled incorrectly, please refer to instructions dump.

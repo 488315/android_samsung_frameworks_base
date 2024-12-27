@@ -159,7 +159,6 @@ public class AccessibilityDirectAccessController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$performAccessibilityDirectAccess$0(
             int userId, ContentResolver cr) {
         this.mAlertDialog = createShortcutWarningDialog(userId);
@@ -220,7 +219,6 @@ public class AccessibilityDirectAccessController {
         return alertDialog;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createShortcutWarningDialog$1(
             int userId, DialogInterface d, int which) {
         Settings.Secure.putStringForUser(
@@ -235,7 +233,6 @@ public class AccessibilityDirectAccessController {
                 userId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createShortcutWarningDialog$2(
             int userId, DialogInterface d) {
         Settings.Secure.putIntForUser(
@@ -345,7 +342,6 @@ public class AccessibilityDirectAccessController {
         return this.mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void playNotificationTone() {
         int audioAttributesUsage;
         if (hasFeatureLeanback()) {
@@ -396,7 +392,6 @@ public class AccessibilityDirectAccessController {
         return ComponentName.unflattenFromString(shortcutTargets.get(0));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class TtsPrompt implements TextToSpeech.OnInitListener {
         private static final int RETRY_MILLIS = 1000;
         private boolean mDismiss;
@@ -445,7 +440,6 @@ public class AccessibilityDirectAccessController {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void play() {
             if (this.mDismiss) {
                 return;
@@ -457,7 +451,6 @@ public class AccessibilityDirectAccessController {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void waitForTtsReady() {
             if (this.mDismiss) {
                 return;

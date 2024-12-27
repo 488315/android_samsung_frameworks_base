@@ -13,13 +13,11 @@ public final class Vr2dDisplayProperties implements Parcelable {
     public static final Parcelable.Creator<Vr2dDisplayProperties> CREATOR =
             new Parcelable.Creator<
                     Vr2dDisplayProperties>() { // from class: android.app.Vr2dDisplayProperties.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Vr2dDisplayProperties createFromParcel(Parcel source) {
                     return new Vr2dDisplayProperties(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Vr2dDisplayProperties[] newArray(int size) {
                     return new Vr2dDisplayProperties[size];

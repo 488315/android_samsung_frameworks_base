@@ -43,7 +43,6 @@ public abstract class KeyboardMetricsCollector {
     }
 
     public enum KeyboardLogEvent {
-        /* JADX INFO: Fake field, exist only in values array */
         EF0("UNSPECIFIED", "INVALID_KEYBOARD_EVENT"),
         HOME("HOME", "HOME"),
         RECENT_APPS("RECENT_APPS", "RECENT_APPS"),
@@ -53,7 +52,6 @@ public abstract class KeyboardMetricsCollector {
         LAUNCH_VOICE_ASSISTANT("LAUNCH_VOICE_ASSISTANT", "LAUNCH_VOICE_ASSISTANT"),
         LAUNCH_SYSTEM_SETTINGS("LAUNCH_SYSTEM_SETTINGS", "LAUNCH_SYSTEM_SETTINGS"),
         TOGGLE_NOTIFICATION_PANEL("TOGGLE_NOTIFICATION_PANEL", "TOGGLE_NOTIFICATION_PANEL"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF9("TOGGLE_TASKBAR", "TOGGLE_TASKBAR"),
         TAKE_SCREENSHOT("TAKE_SCREENSHOT", "TAKE_SCREENSHOT"),
         OPEN_SHORTCUT_HELPER("OPEN_SHORTCUT_HELPER", "OPEN_SHORTCUT_HELPER"),
@@ -113,22 +111,6 @@ public abstract class KeyboardMetricsCollector {
             this.mName = str2;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Removed duplicated region for block: B:49:0x00c6  */
-        /* JADX WARN: Removed duplicated region for block: B:52:0x00ed A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:55:? A[LOOP:0: B:8:0x001b->B:55:?, LOOP_END, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:56:0x00c8  */
-        /* JADX WARN: Removed duplicated region for block: B:58:0x00cb  */
-        /* JADX WARN: Removed duplicated region for block: B:60:0x00ce  */
-        /* JADX WARN: Removed duplicated region for block: B:62:0x00d1  */
-        /* JADX WARN: Removed duplicated region for block: B:64:0x00d4  */
-        /* JADX WARN: Removed duplicated region for block: B:66:0x00d7  */
-        /* JADX WARN: Removed duplicated region for block: B:68:0x00da  */
-        /* JADX WARN: Removed duplicated region for block: B:70:0x00dd  */
-        /* JADX WARN: Removed duplicated region for block: B:72:0x00e0  */
-        /* JADX WARN: Removed duplicated region for block: B:74:0x00e2  */
-        /* JADX WARN: Removed duplicated region for block: B:76:0x00e5  */
-        /* JADX WARN: Removed duplicated region for block: B:78:0x00e7  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

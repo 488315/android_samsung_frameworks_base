@@ -78,7 +78,6 @@ public final class JobPackageTracker {
             protoOutputStream.end(start);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void addTo(DataSet dataSet, long j) {
             boolean z;
             dataSet.mSummedTime = getTotalTime(j) + dataSet.mSummedTime;

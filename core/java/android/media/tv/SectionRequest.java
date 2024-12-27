@@ -7,14 +7,12 @@ public final class SectionRequest extends BroadcastInfoRequest implements Parcel
     public static final Parcelable.Creator<SectionRequest> CREATOR =
             new Parcelable.Creator<
                     SectionRequest>() { // from class: android.media.tv.SectionRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SectionRequest createFromParcel(Parcel source) {
                     source.readInt();
                     return SectionRequest.createFromParcelBody(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SectionRequest[] newArray(int size) {
                     return new SectionRequest[size];

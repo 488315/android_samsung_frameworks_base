@@ -13,7 +13,6 @@ final class CustomTileRepositoryImpl$updateTile$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ CustomTileRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTileRepositoryImpl$updateTile$1(CustomTileRepositoryImpl customTileRepositoryImpl, Continuation continuation) {
         super(continuation);
         this.this$0 = customTileRepositoryImpl;

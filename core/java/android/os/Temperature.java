@@ -8,7 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 public final class Temperature implements Parcelable {
     public static final Parcelable.Creator<Temperature> CREATOR =
             new Parcelable.Creator<Temperature>() { // from class: android.os.Temperature.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Temperature createFromParcel(Parcel p) {
                     float value = p.readFloat();
@@ -18,7 +17,6 @@ public final class Temperature implements Parcelable {
                     return new Temperature(value, type, name, status);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Temperature[] newArray(int size) {
                     return new Temperature[size];

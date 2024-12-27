@@ -7,7 +7,6 @@ public final class InputMethodDeviceConfigs {
     public final InputMethodDeviceConfigs$$ExternalSyntheticLambda0 mDeviceConfigChangedListener;
     public boolean mHideImeWhenNoEditorFocus;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [android.provider.DeviceConfig$OnPropertiesChangedListener, com.android.server.inputmethod.InputMethodDeviceConfigs$$ExternalSyntheticLambda0] */
     public InputMethodDeviceConfigs() {
         ?? r0 = new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.server.inputmethod.InputMethodDeviceConfigs$$ExternalSyntheticLambda0
             public final void onPropertiesChanged(DeviceConfig.Properties properties) {

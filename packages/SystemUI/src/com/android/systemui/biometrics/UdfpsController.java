@@ -182,12 +182,6 @@ public final class UdfpsController implements DozeReceiver, Dumpable {
         void onFingerUp();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0510  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x052f  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0531 A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x03f1  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x0454  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x03f6  */
     /* renamed from: -$$Nest$monTouch, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -500,8 +494,6 @@ public final class UdfpsController implements DozeReceiver, Dumpable {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v7, types: [android.view.accessibility.AccessibilityManager$TouchExplorationStateChangeListener, com.android.systemui.biometrics.UdfpsControllerOverlay$show$3$1] */
     public final void showUdfpsOverlay(final UdfpsControllerOverlay udfpsControllerOverlay) {
         this.mExecution.assertIsMainThread();
         this.mOverlay = udfpsControllerOverlay;

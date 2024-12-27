@@ -12,7 +12,6 @@ public class AudioHalEngineConfig implements Parcelable {
     public static final Parcelable.Creator<AudioHalEngineConfig> CREATOR =
             new Parcelable.Creator<AudioHalEngineConfig>() { // from class:
                 // android.media.audio.common.AudioHalEngineConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioHalEngineConfig createFromParcel(Parcel _aidl_source) {
                     AudioHalEngineConfig _aidl_out = new AudioHalEngineConfig();
@@ -20,7 +19,6 @@ public class AudioHalEngineConfig implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioHalEngineConfig[] newArray(int _aidl_size) {
                     return new AudioHalEngineConfig[_aidl_size];
@@ -174,7 +172,6 @@ public class AudioHalEngineConfig implements Parcelable {
         public static final Parcelable.Creator<CapSpecificConfig> CREATOR =
                 new Parcelable.Creator<CapSpecificConfig>() { // from class:
                     // android.media.audio.common.AudioHalEngineConfig.CapSpecificConfig.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CapSpecificConfig createFromParcel(Parcel _aidl_source) {
                         CapSpecificConfig _aidl_out = new CapSpecificConfig();
@@ -182,7 +179,6 @@ public class AudioHalEngineConfig implements Parcelable {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CapSpecificConfig[] newArray(int _aidl_size) {
                         return new CapSpecificConfig[_aidl_size];

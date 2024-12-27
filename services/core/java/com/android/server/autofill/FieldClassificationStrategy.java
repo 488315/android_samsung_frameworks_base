@@ -36,7 +36,6 @@ public final class FieldClassificationStrategy {
         this.mUserId = i;
     }
 
-    /* JADX WARN: Type inference failed for: r2v7, types: [com.android.server.autofill.FieldClassificationStrategy$1] */
     public final void calculateScores(
             RemoteCallback remoteCallback,
             List list,

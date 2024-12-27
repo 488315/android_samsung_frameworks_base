@@ -181,12 +181,10 @@ public final class CompanionDeviceManagerService extends SystemService {
                     bArr, i);
         }
 
-        /* JADX WARN: Can't wrap try/catch for region: R(8:35|36|37|(2:40|(4:42|43|44|(1:46)))|51|43|44|(0)) */
         /* JADX WARN: Code restructure failed: missing block: B:49:0x0179, code lost:
 
            com.android.server.BootReceiver$$ExternalSyntheticOutline0.m58m("NameNotFoundException ", r21, " or com.samsung.accessory.wmanager", "CDM_AssociationRequestsProcessor");
         */
-        /* JADX WARN: Removed duplicated region for block: B:46:0x0183  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -717,7 +715,6 @@ public final class CompanionDeviceManagerService extends SystemService {
                     .getPermissionSyncRequest(i);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final int handleShellCommand(
                 ParcelFileDescriptor parcelFileDescriptor,
                 ParcelFileDescriptor parcelFileDescriptor2,
@@ -1312,8 +1309,6 @@ public final class CompanionDeviceManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.companion.CompanionDeviceManagerService$1] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.companion.CompanionDeviceManagerService$2] */
     public CompanionDeviceManagerService(Context context) {
         super(context);
         this.mAssociationStoreChangeListener =

@@ -169,7 +169,6 @@ public abstract class VerityBuilder {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void fillUpLastOutputChunk() {
             int lastBlockSize = this.mOutput.position() % 4096;
             if (lastBlockSize == 0) {

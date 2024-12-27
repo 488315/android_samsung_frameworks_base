@@ -134,7 +134,6 @@ public class AppBlockDialogActivity extends AlertActivity implements AutoCloseab
         sendResult(AppJumpBlockTool.BlockDialogReceiver.RESULT_CANCEL);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void sendAllowResult() {
         AppJumpBlockTool.addAlwaysAllowList(
                 this, this.sourceAppInfo.packageName, this.alwaysAllowPackageNameList);

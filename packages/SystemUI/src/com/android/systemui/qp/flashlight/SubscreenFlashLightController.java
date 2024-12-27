@@ -23,7 +23,6 @@ public final class SubscreenFlashLightController implements SubscreenQSControlle
     public final WakefulnessLifecycle mWakefulnessLifeCycle;
     public final AnonymousClass2 mWakefulnessObserver;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.qp.flashlight.SubscreenFlashLightController$2] */
     private SubscreenFlashLightController(Context context) {
         DisplayLifecycle.Observer observer = new DisplayLifecycle.Observer() { // from class: com.android.systemui.qp.flashlight.SubscreenFlashLightController.1
             @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer

@@ -39,13 +39,11 @@ public class ColorStateList extends ComplexColor implements Parcelable {
     public static final Parcelable.Creator<ColorStateList> CREATOR =
             new Parcelable.Creator<
                     ColorStateList>() { // from class: android.content.res.ColorStateList.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ColorStateList[] newArray(int size) {
                     return new ColorStateList[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ColorStateList createFromParcel(Parcel source) {
                     int N = source.readInt();

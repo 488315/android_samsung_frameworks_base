@@ -12,13 +12,11 @@ public class ConfigurationChangeItem extends ClientTransactionItem {
     public static final Parcelable.Creator<ConfigurationChangeItem> CREATOR =
             new Parcelable.Creator<ConfigurationChangeItem>() { // from class:
                 // android.app.servertransaction.ConfigurationChangeItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConfigurationChangeItem createFromParcel(Parcel in) {
                     return new ConfigurationChangeItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConfigurationChangeItem[] newArray(int size) {
                     return new ConfigurationChangeItem[size];

@@ -8,13 +8,11 @@ public final class RadioAccessSpecifierBands implements Parcelable {
     public static final Parcelable.Creator<RadioAccessSpecifierBands> CREATOR =
             new Parcelable.Creator<RadioAccessSpecifierBands>() { // from class:
                 // android.hardware.radio.network.RadioAccessSpecifierBands.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RadioAccessSpecifierBands createFromParcel(Parcel _aidl_source) {
                     return new RadioAccessSpecifierBands(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RadioAccessSpecifierBands[] newArray(int _aidl_size) {
                     return new RadioAccessSpecifierBands[_aidl_size];

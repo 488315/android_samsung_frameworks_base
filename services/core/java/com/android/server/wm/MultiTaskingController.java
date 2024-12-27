@@ -485,8 +485,6 @@ public final class MultiTaskingController implements IController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.server.wm.MultiTaskingController$1] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.wm.MultiTaskingController$1] */
     public MultiTaskingController(ActivityTaskManagerService activityTaskManagerService) {
         final int i = 0;
         this.mMinimizeAllReceiver =
@@ -767,7 +765,6 @@ public final class MultiTaskingController implements IController {
         printWriter.println();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final boolean exitMultiWindow(IBinder iBinder) {
         boolean z;
         Task task;
@@ -850,14 +847,6 @@ public final class MultiTaskingController implements IController {
 
        if (r3 > r13) goto L52;
     */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0053  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x005d  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0079  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00b4  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0062  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0044  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0042  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -955,8 +944,6 @@ public final class MultiTaskingController implements IController {
         this.mSettingsObserver = new SettingsObserver(this.mH);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00d8  */
-    /* JADX WARN: Removed duplicated region for block: B:52:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -973,9 +960,6 @@ public final class MultiTaskingController implements IController {
                     + " android.app.ActivityOptions):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0140 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:15:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x003a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

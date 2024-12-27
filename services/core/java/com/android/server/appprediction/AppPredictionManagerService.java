@@ -73,7 +73,6 @@ public final class AppPredictionManagerService extends AbstractMasterSystemServi
                             appPredictionSessionId, 0));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,

@@ -204,13 +204,6 @@ public final class HighBrightnessModeController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00d6 A[Catch: all -> 0x00bf, TryCatch #3 {all -> 0x00bf, blocks: (B:6:0x00b3, B:9:0x00ba, B:11:0x00d6, B:13:0x00de, B:39:0x00c3, B:36:0x00c7, B:34:0x00cd), top: B:5:0x00b3, inners: #3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00f8  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00fd  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0108  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0129  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x013c  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x010c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -508,7 +501,6 @@ public final class HighBrightnessModeController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x003e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

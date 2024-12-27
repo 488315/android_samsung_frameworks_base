@@ -191,7 +191,6 @@ public class VirtualDeviceInternal {
         final /* synthetic */ Executor val$executor;
         final /* synthetic */ IntConsumer val$listener;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass3(Handler handler, Executor executor, IntConsumer intConsumer) {
             super(handler);
             this.val$executor = executor;
@@ -376,7 +375,6 @@ public class VirtualDeviceInternal {
         return this.mVirtualAudioDevice;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createVirtualAudioDevice$0() {
         this.mVirtualAudioDevice = null;
     }
@@ -476,7 +474,6 @@ public class VirtualDeviceInternal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ActivityListenerDelegate {
         private final VirtualDeviceManager.ActivityListener mActivityListener;
         private final Executor mExecutor;
@@ -487,7 +484,6 @@ public class VirtualDeviceInternal {
             this.mExecutor = executor;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onTopActivityChanged$0(
                 int displayId, ComponentName topActivity) {
             this.mActivityListener.onTopActivityChanged(displayId, topActivity);
@@ -518,13 +514,11 @@ public class VirtualDeviceInternal {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onTopActivityChanged$1(
                 int displayId, ComponentName topActivity, int userId) {
             this.mActivityListener.onTopActivityChanged(displayId, topActivity, userId);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDisplayEmpty$2(int displayId) {
             this.mActivityListener.onDisplayEmpty(displayId);
         }
@@ -542,7 +536,6 @@ public class VirtualDeviceInternal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class IntentInterceptorDelegate extends IVirtualDeviceIntentInterceptor.Stub {
         private final Executor mExecutor;
         private final VirtualDeviceManager.IntentInterceptorCallback mIntentInterceptorCallback;
@@ -572,13 +565,11 @@ public class VirtualDeviceInternal {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onIntentIntercepted$0(Intent intent) {
             this.mIntentInterceptorCallback.onIntentIntercepted(intent);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class SoundEffectListenerDelegate {
         private final Executor mExecutor;
         private final VirtualDeviceManager.SoundEffectListener mSoundEffectListener;
@@ -589,7 +580,6 @@ public class VirtualDeviceInternal {
             this.mExecutor = executor;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onPlaySoundEffect$0(int effectType) {
             this.mSoundEffectListener.onPlaySoundEffect(effectType);
         }

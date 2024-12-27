@@ -40,7 +40,6 @@ public final class ScreenOnAffordanceViewController extends ViewAnimationControl
         int label;
         final /* synthetic */ ScreenOnAffordanceViewController this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(PowerInteractor powerInteractor, ScreenOnAffordanceViewController screenOnAffordanceViewController, KeyguardTouchAnimator keyguardTouchAnimator, DozeParameters dozeParameters, Continuation continuation) {
             super(2, continuation);
             this.$powerInteractor = powerInteractor;

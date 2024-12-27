@@ -49,8 +49,6 @@ public final class RealTimeTokenService extends IRealTimeTokenService.Stub {
                         this.this$0 = this;
                     }
 
-                    /* JADX WARN: Type inference failed for: r8v13, types: [com.android.server.RealTimeTokenService$1] */
-                    /* JADX WARN: Type inference failed for: r8v4, types: [com.android.server.RealTimeTokenService$1] */
                     @Override // android.content.BroadcastReceiver
                     public final void onReceive(Context context2, Intent intent) {
                         switch (i) {
@@ -208,8 +206,6 @@ public final class RealTimeTokenService extends IRealTimeTokenService.Stub {
                         this.this$0 = this;
                     }
 
-                    /* JADX WARN: Type inference failed for: r8v13, types: [com.android.server.RealTimeTokenService$1] */
-                    /* JADX WARN: Type inference failed for: r8v4, types: [com.android.server.RealTimeTokenService$1] */
                     @Override // android.content.BroadcastReceiver
                     public final void onReceive(Context context2, Intent intent) {
                         switch (i2) {
@@ -367,8 +363,6 @@ public final class RealTimeTokenService extends IRealTimeTokenService.Stub {
                         this.this$0 = this;
                     }
 
-                    /* JADX WARN: Type inference failed for: r8v13, types: [com.android.server.RealTimeTokenService$1] */
-                    /* JADX WARN: Type inference failed for: r8v4, types: [com.android.server.RealTimeTokenService$1] */
                     @Override // android.content.BroadcastReceiver
                     public final void onReceive(Context context2, Intent intent) {
                         switch (i3) {

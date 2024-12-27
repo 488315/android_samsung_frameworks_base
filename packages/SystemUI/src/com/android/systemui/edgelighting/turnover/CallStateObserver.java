@@ -30,9 +30,6 @@ public final class CallStateObserver {
         }
     };
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.edgelighting.turnover.CallStateObserver$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [android.telephony.PhoneStateListener, com.android.systemui.edgelighting.turnover.CallStateObserver$2] */
     public CallStateObserver(Context context) {
         ?? r0 = new PhoneStateListener() { // from class: com.android.systemui.edgelighting.turnover.CallStateObserver.2
             @Override // android.telephony.PhoneStateListener

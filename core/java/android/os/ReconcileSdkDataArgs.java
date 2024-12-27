@@ -6,7 +6,6 @@ public class ReconcileSdkDataArgs implements Parcelable {
     public static final Parcelable.Creator<ReconcileSdkDataArgs> CREATOR =
             new Parcelable.Creator<
                     ReconcileSdkDataArgs>() { // from class: android.os.ReconcileSdkDataArgs.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ReconcileSdkDataArgs createFromParcel(Parcel _aidl_source) {
                     ReconcileSdkDataArgs _aidl_out = new ReconcileSdkDataArgs();
@@ -14,7 +13,6 @@ public class ReconcileSdkDataArgs implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ReconcileSdkDataArgs[] newArray(int _aidl_size) {
                     return new ReconcileSdkDataArgs[_aidl_size];

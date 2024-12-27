@@ -99,8 +99,6 @@ public final class MobileRadioPowerCalculator extends PowerCalculator {
         return Double.NaN;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:103:0x0289  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x02bd  */
     @Override // com.android.server.power.stats.PowerCalculator
     /*
         Code decompiled incorrectly, please refer to instructions dump.

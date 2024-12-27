@@ -1347,7 +1347,6 @@ public class DownloadManager {
             return super.getLong(columnIndex);
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         @Override // android.database.CursorWrapper, android.database.Cursor
         public String getString(int columnIndex) {
             char c;

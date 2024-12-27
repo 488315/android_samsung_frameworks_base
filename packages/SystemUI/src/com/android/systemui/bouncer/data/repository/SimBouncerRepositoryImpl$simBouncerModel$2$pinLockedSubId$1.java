@@ -13,7 +13,6 @@ final class SimBouncerRepositoryImpl$simBouncerModel$2$pinLockedSubId$1 extends 
     final /* synthetic */ KeyguardUpdateMonitor $keyguardUpdateMonitor;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SimBouncerRepositoryImpl$simBouncerModel$2$pinLockedSubId$1(KeyguardUpdateMonitor keyguardUpdateMonitor, Continuation continuation) {
         super(2, continuation);
         this.$keyguardUpdateMonitor = keyguardUpdateMonitor;

@@ -5,7 +5,6 @@ import libcore.util.NativeAllocationRegistry;
 public class ColorFilter {
     private long mNativeInstance;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeGetFinalizer();
 
     private static class NoImagePreloadHolder {

@@ -29,7 +29,6 @@ public class SubroomSoundSettingsView extends LinearLayout {
     public ImageView mSoundButton;
     public int mSoundProfile;
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.qp.SubroomSoundSettingsView$1] */
     public SubroomSoundSettingsView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mReceiver = new BroadcastReceiver() { // from class: com.android.systemui.qp.SubroomSoundSettingsView.1
@@ -67,7 +66,6 @@ public class SubroomSoundSettingsView extends LinearLayout {
         this.mSoundButton = (ImageView) findViewById(R.id.sound_image_view);
         this.mSoundBackground = (LinearLayout) findViewById(R.id.sound_background);
         this.mSoundButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qp.SubroomSoundSettingsView$$ExternalSyntheticLambda0
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 SubroomSoundSettingsView subroomSoundSettingsView = SubroomSoundSettingsView.this;

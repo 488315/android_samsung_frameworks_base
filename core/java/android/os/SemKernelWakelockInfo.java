@@ -6,13 +6,11 @@ public class SemKernelWakelockInfo
     public static final Parcelable.Creator<SemKernelWakelockInfo> CREATOR =
             new Parcelable.Creator<
                     SemKernelWakelockInfo>() { // from class: android.os.SemKernelWakelockInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemKernelWakelockInfo createFromParcel(Parcel in) {
                     return new SemKernelWakelockInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemKernelWakelockInfo[] newArray(int size) {
                     return new SemKernelWakelockInfo[size];

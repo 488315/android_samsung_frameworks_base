@@ -456,7 +456,6 @@ public abstract class ContentCaptureService extends Service {
         Slog.i(TAG, "unbinding from " + getClass().getName());
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.app.Service
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
         pw.print("Debug: ");
@@ -476,21 +475,18 @@ public abstract class ContentCaptureService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnConnected(IBinder callback) {
         this.mContentCaptureServiceCallback =
                 IContentCaptureServiceCallback.Stub.asInterface(callback);
         onConnected();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnDisconnected() {
         onDisconnected();
         this.mContentCaptureServiceCallback = null;
         this.mContentProtectionAllowlistCallback = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnCreateSession(
             ContentCaptureContext context,
             int sessionId,
@@ -516,7 +512,6 @@ public abstract class ContentCaptureService extends Service {
         setClientState(clientReceiver, stateFlags, this.mContentCaptureClientInterface.asBinder());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleSendEvents(
             int uid,
             ParceledListSlice<ContentCaptureEvent> parceledEvents,
@@ -582,7 +577,6 @@ public abstract class ContentCaptureService extends Service {
         writeFlushMetrics(lastSessionId, activityComponent, metrics, options, reason);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnLoginDetected(
             int uid, ParceledListSlice<ContentCaptureEvent> parceledEvents) {
         if (uid != 1000) {
@@ -608,7 +602,6 @@ public abstract class ContentCaptureService extends Service {
         lambda$handleOnLoginDetected$0(sessionId, endEvent);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnUpdateAllowlistRequest(int uid, IBinder callback) {
         if (uid != 1000) {
             Log.e(TAG, "handleOnUpdateAllowlistRequest() not allowed for uid: " + uid);
@@ -619,23 +612,19 @@ public abstract class ContentCaptureService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnActivitySnapshot(int sessionId, SnapshotData snapshotData) {
         onActivitySnapshot(new ContentCaptureSessionId(sessionId), snapshotData);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleFinishSession(int sessionId) {
         this.mSessionUids.delete(sessionId);
         onDestroyContentCaptureSession(new ContentCaptureSessionId(sessionId));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnDataRemovalRequest(DataRemovalRequest request) {
         onDataRemovalRequest(request);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnDataShared(DataShareRequest request, final IDataShareCallback callback) {
         onDataShareRequest(
                 request,
@@ -669,7 +658,6 @@ public abstract class ContentCaptureService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnActivityEvent(ActivityEvent event) {
         onActivityEvent(event);
     }
@@ -756,7 +744,6 @@ public abstract class ContentCaptureService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class DataShareReadAdapterDelegate extends IDataShareReadAdapter.Stub {
         private final Object mLock = new Object();
         private final WeakReference<LocalDataShareAdapterResourceManager> mResourceManagerReference;

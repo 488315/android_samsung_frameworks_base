@@ -129,13 +129,11 @@ public final class SurfaceControl implements Parcelable {
                     nativeGetNativeSurfaceControlFinalizer());
     public static final Parcelable.Creator<SurfaceControl> CREATOR =
             new Parcelable.Creator<SurfaceControl>() { // from class: android.view.SurfaceControl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SurfaceControl createFromParcel(Parcel in) {
                     return new SurfaceControl(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SurfaceControl[] newArray(int size) {
                     return new SurfaceControl[size];
@@ -179,23 +177,18 @@ public final class SurfaceControl implements Parcelable {
         void onTransactionCommitted();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long getNativeTrustedPresentationCallbackFinalizer();
 
     private static native void nativeAddJankDataListener(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeAddTransactionCommittedListener(
             long j, TransactionCommittedListener transactionCommittedListener);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeAddTransactionCompletedListener(
             long j, Consumer<TransactionStats> consumer);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeAddWindowInfosReportedListener(long j, Runnable runnable);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeApplyTransaction(long j, boolean z, boolean z2);
 
     private static native boolean nativeBootFinished();
@@ -206,10 +199,8 @@ public final class SurfaceControl implements Parcelable {
 
     private static native boolean nativeClearContentFrameStats(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeClearTransaction(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeClearTrustedPresentationCallback(long j, long j2);
 
     private static native long nativeCopyFromSurfaceControl(long j);
@@ -225,15 +216,12 @@ public final class SurfaceControl implements Parcelable {
             Parcel parcel)
             throws Surface.OutOfResourcesException;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeCreateJankDataListenerWrapper(
             OnJankDataListener onJankDataListener);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeCreateTpc(
             TrustedPresentationCallback trustedPresentationCallback);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeCreateTransaction();
 
     private static native void nativeDisconnect(long j);
@@ -248,7 +236,6 @@ public final class SurfaceControl implements Parcelable {
     private static native boolean nativeGetContentFrameStats(
             long j, WindowContentFrameStats windowContentFrameStats);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native IBinder nativeGetDefaultApplyToken();
 
     private static native DesiredDisplayModeSpecs nativeGetDesiredDisplayModeSpecs(IBinder iBinder);
@@ -278,7 +265,6 @@ public final class SurfaceControl implements Parcelable {
 
     private static native long nativeGetNativeSurfaceControlFinalizer();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeGetNativeTransactionFinalizer();
 
     private static native OverlayProperties nativeGetOverlaySupport();
@@ -293,12 +279,10 @@ public final class SurfaceControl implements Parcelable {
 
     private static native StaticDisplayInfo nativeGetStaticDisplayInfo(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeGetTransactionId(long j);
 
     private static native int nativeGetTransformHint(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeMergeTransaction(long j, long j2);
 
     private static native long nativeMirrorSurface(long j);
@@ -309,107 +293,80 @@ public final class SurfaceControl implements Parcelable {
 
     private static native long nativeReadFromParcel(Parcel parcel);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeReadTransactionFromParcel(Parcel parcel);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeRemoveCurrentInputFocus(long j, int i);
 
     private static native void nativeRemoveJankDataListener(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeReparent(long j, long j2, long j3);
 
     private static native void nativeRestrictHighRefreshRate(boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSanitize(long j, int i, int i2);
 
     private static native boolean nativeSetActiveColorMode(IBinder iBinder, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetAlpha(long j, long j2, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetAnimationTransaction(long j);
 
     private static native void nativeSetAutoLowLatencyMode(IBinder iBinder, boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetBackgroundBlurColorCurve(long j, long j2, float[] fArr);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetBackgroundBlurRadius(long j, long j2, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetBlurRegions(long j, long j2, float[][] fArr, int i);
 
     private static native void nativeSetBootDisplayMode(IBinder iBinder, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetBuffer(
             long j, long j2, HardwareBuffer hardwareBuffer, long j3, Consumer<SyncFence> consumer);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetBufferTransform(long j, long j2, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetCachingHint(long j, long j2, int i);
 
     private static native void nativeSetCanOccludePresentation(long j, long j2, boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetColor(long j, long j2, float[] fArr);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetColorSpaceAgnostic(long j, long j2, boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetColorTransform(long j, long j2, float[] fArr, float[] fArr2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetCornerRadius(long j, long j2, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDamageRegion(long j, long j2, Region region);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDataSpace(long j, long j2, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDefaultApplyToken(IBinder iBinder);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDefaultFrameRateCompatibility(long j, long j2, int i);
 
     private static native boolean nativeSetDesiredDisplayModeSpecs(
             IBinder iBinder, DesiredDisplayModeSpecs desiredDisplayModeSpecs);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDesiredHdrHeadroom(long j, long j2, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDesiredPresentTimeNanos(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDestinationFrame(
             long j, long j2, int i, int i2, int i3, int i4);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDimmingEnabled(long j, long j2, boolean z);
 
     private static native boolean nativeSetDisplayBrightness(
             IBinder iBinder, float f, float f2, float f3, float f4);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDisplayFlags(long j, IBinder iBinder, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDisplayLayerStack(long j, IBinder iBinder, int i);
 
     private static native void nativeSetDisplayPowerMode(IBinder iBinder, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDisplayProjection(
             long j,
             IBinder iBinder,
@@ -423,95 +380,69 @@ public final class SurfaceControl implements Parcelable {
             int i8,
             int i9);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDisplayReluminoEffect(
             long j, IBinder iBinder, float f, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDisplaySize(long j, IBinder iBinder, int i, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDisplaySurface(long j, IBinder iBinder, long j2);
 
     private static native boolean nativeSetDisplayedContentSamplingEnabled(
             IBinder iBinder, boolean z, int i, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetDropInputMode(long j, long j2, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetEarlyWakeupEnd(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetEarlyWakeupStart(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetExtendedRangeBrightness(long j, long j2, float f, float f2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetFixedTransformHint(long j, long j2, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetFlags(long j, long j2, int i, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetFocusedWindow(long j, IBinder iBinder, String str, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetFrameRate(long j, long j2, float f, int i, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetFrameRateCategory(long j, long j2, int i, boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetFrameRateSelectionPriority(long j, long j2, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetFrameRateSelectionStrategy(long j, long j2, int i);
 
     private static native void nativeSetFrameTimeline(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetFrameTimelineVsync(long j, long j2);
 
     private static native void nativeSetGameContentType(IBinder iBinder, boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetGeometry(long j, long j2, Rect rect, Rect rect2, long j3);
 
     private static native void nativeSetGlobalShadowSettings(
             float[] fArr, float[] fArr2, float f, float f2, float f3);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetInputWindowInfo(
             long j, long j2, InputWindowHandle inputWindowHandle);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetLayer(long j, long j2, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetLayerStack(long j, long j2, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetMatrix(
             long j, long j2, float f, float f2, float f3, float f4);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetMetadata(long j, long j2, int i, Parcel parcel);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetPosition(long j, long j2, float f, float f2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetRelativeLayer(long j, long j2, long j3, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetScale(long j, long j2, float f, float f2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetShadowRadius(long j, long j2, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetStretchEffect(
             long j,
             long j2,
@@ -528,36 +459,27 @@ public final class SurfaceControl implements Parcelable {
 
     private static native void nativeSetTransformHint(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetTransparentRegionHint(long j, long j2, Region region);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetTrustedOverlay(long j, long j2, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetTrustedPresentationCallback(
             long j, long j2, long j3, TrustedPresentationThresholds trustedPresentationThresholds);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetWindowCrop(long j, long j2, int i, int i2, int i3, int i4);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeStartChangeResolution(long j, IBinder iBinder, boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeStartSurfaceAnimation(long j, long j2, String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSurfaceFlushJankData(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeUnsetBuffer(long j, long j2);
 
     private static native void nativeUpdateDefaultBufferSize(long j, int i, int i2);
 
     private static native void nativeWriteToParcel(long j, Parcel parcel);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeWriteTransactionToParcel(long j, Parcel parcel);
 
     public static int rotationToBufferTransform(int rotation) {
@@ -1069,7 +991,6 @@ public final class SurfaceControl implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkNotReleased() {
         if (this.mNativeObject == 0) {
             if (this.mReleaseStack != null) {
@@ -1378,13 +1299,11 @@ public final class SurfaceControl implements Parcelable {
                 new Parcelable.Creator<
                         RefreshRateRange>() { // from class:
                                               // android.view.SurfaceControl.RefreshRateRange.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RefreshRateRange createFromParcel(Parcel in) {
                         return new RefreshRateRange(in.readFloat(), in.readFloat());
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RefreshRateRange[] newArray(int size) {
                         return new RefreshRateRange[size];
@@ -1912,13 +1831,11 @@ public final class SurfaceControl implements Parcelable {
         public static final Parcelable.Creator<Transaction> CREATOR =
                 new Parcelable.Creator<
                         Transaction>() { // from class: android.view.SurfaceControl.Transaction.2
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Transaction createFromParcel(Parcel in) {
                         return new Transaction(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Transaction[] newArray(int size) {
                         return new Transaction[size];
@@ -3043,7 +2960,6 @@ public final class SurfaceControl implements Parcelable {
             final /* synthetic */ Executor val$executor;
             final /* synthetic */ Consumer val$listener;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             AnonymousClass1(Executor executor, Consumer consumer) {
                 super();
                 this.val$executor = executor;

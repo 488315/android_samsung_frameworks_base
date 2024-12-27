@@ -47,7 +47,6 @@ public final class MobileIconViewModel implements MobileIconViewModelCommon {
         this.iconInteractor = mobileIconInteractor;
         this.desktopManager = desktopManager;
         Lazy lazy = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModel$cellProvider$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -60,7 +59,6 @@ public final class MobileIconViewModel implements MobileIconViewModelCommon {
         });
         this.cellProvider$delegate = lazy;
         Lazy lazy2 = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModel$satelliteProvider$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

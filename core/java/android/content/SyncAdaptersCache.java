@@ -38,7 +38,6 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
         this.mAuthorityToSyncAdapters = new SparseArray<>();
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.content.pm.RegisteredServicesCache
     public SyncAdapterType parseServiceAttributes(
             Resources res, String packageName, AttributeSet attrs) {
@@ -123,7 +122,6 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
             out.attribute(null, "accountType", item.accountType);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.content.pm.XmlSerializerAndParser
         public SyncAdapterType createFromXml(TypedXmlPullParser parser)
                 throws IOException, XmlPullParserException {

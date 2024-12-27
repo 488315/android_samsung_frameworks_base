@@ -353,7 +353,6 @@ public final class CocktailBarManagerServiceImpl {
                                         "SEC_FLOATING_FEATURE_COMMON_SUPPORT_BATTERY_CONVERSING");
     }
 
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.server.cocktailbar.CocktailBarManagerServiceImpl$1] */
     public CocktailBarManagerServiceImpl(
             Context context,
             Handler handler,
@@ -1003,8 +1002,6 @@ public final class CocktailBarManagerServiceImpl {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:80:0x0175  */
-    /* JADX WARN: Removed duplicated region for block: B:82:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1316,27 +1313,6 @@ public final class CocktailBarManagerServiceImpl {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x038f A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:113:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:141:0x01db A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:148:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:180:0x03ef A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:187:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:220:0x02af A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:227:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00c2 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:290:0x0171 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:297:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00f8 A[Catch: all -> 0x003f, Exception -> 0x0043, IndexOutOfBoundsException -> 0x0047, IOException -> 0x004b, XmlPullParserException -> 0x004f, NullPointerException -> 0x0053, NumberFormatException -> 0x0057, TRY_LEAVE, TryCatch #13 {NumberFormatException -> 0x0057, blocks: (B:4:0x000f, B:5:0x001f, B:7:0x0026, B:9:0x0033, B:14:0x005b, B:16:0x0064, B:37:0x0078, B:23:0x00ad, B:26:0x00c4, B:28:0x00cc, B:30:0x00f8, B:18:0x008e, B:21:0x0097, B:35:0x009c), top: B:3:0x000f, outer: #14 }] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00fe  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0107 A[LOOP:0: B:5:0x001f->B:42:0x0107, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x038c A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0319 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:78:? A[SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r7v10 */
-    /* JADX WARN: Type inference failed for: r7v63 */
-    /* JADX WARN: Type inference failed for: r7v9, types: [java.io.BufferedReader] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

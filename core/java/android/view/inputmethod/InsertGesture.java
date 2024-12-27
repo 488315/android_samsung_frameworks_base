@@ -10,13 +10,11 @@ public final class InsertGesture extends HandwritingGesture implements Parcelabl
     public static final Parcelable.Creator<InsertGesture> CREATOR =
             new Parcelable.Creator<
                     InsertGesture>() { // from class: android.view.inputmethod.InsertGesture.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InsertGesture createFromParcel(Parcel source) {
                     return new InsertGesture(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InsertGesture[] newArray(int size) {
                     return new InsertGesture[size];

@@ -8,7 +8,6 @@ public class WorkDuration implements Parcelable {
     public static final Parcelable.Creator<WorkDuration> CREATOR =
             new Parcelable.Creator<
                     WorkDuration>() { // from class: android.hardware.power.WorkDuration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WorkDuration createFromParcel(Parcel _aidl_source) {
                     WorkDuration _aidl_out = new WorkDuration();
@@ -16,7 +15,6 @@ public class WorkDuration implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WorkDuration[] newArray(int _aidl_size) {
                     return new WorkDuration[_aidl_size];

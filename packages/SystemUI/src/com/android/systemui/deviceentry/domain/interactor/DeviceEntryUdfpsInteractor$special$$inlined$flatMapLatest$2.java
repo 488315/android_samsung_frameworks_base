@@ -18,7 +18,6 @@ public final class DeviceEntryUdfpsInteractor$special$$inlined$flatMapLatest$2 e
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryUdfpsInteractor$special$$inlined$flatMapLatest$2(Continuation continuation, FingerprintPropertyInteractor fingerprintPropertyInteractor) {
         super(3, continuation);
         this.$fingerprintPropertyInteractor$inlined = fingerprintPropertyInteractor;

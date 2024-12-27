@@ -7,13 +7,11 @@ import android.os.Parcelable;
 public final class Face extends BiometricAuthenticator.Identifier {
     public static final Parcelable.Creator<Face> CREATOR =
             new Parcelable.Creator<Face>() { // from class: android.hardware.face.Face.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Face createFromParcel(Parcel in) {
                     return new Face(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Face[] newArray(int size) {
                     return new Face[size];

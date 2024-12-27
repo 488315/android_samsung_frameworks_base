@@ -220,7 +220,6 @@ public final class NotificationHistoryManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0045 A[Catch: all -> 0x0023, TryCatch #0 {all -> 0x0023, blocks: (B:4:0x0005, B:6:0x000b, B:7:0x0021, B:11:0x0027, B:14:0x002e, B:15:0x0037, B:16:0x003f, B:18:0x0045, B:21:0x0051, B:26:0x007a, B:28:0x0033), top: B:3:0x0005 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

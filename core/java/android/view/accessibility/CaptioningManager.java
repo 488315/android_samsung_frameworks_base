@@ -184,7 +184,6 @@ public class CaptioningManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyEnabledChanged() {
         boolean enabled = isEnabled();
         synchronized (this.mListeners) {
@@ -196,7 +195,6 @@ public class CaptioningManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyUserStyleChanged() {
         CaptionStyle userStyle = getUserStyle();
         synchronized (this.mListeners) {
@@ -208,7 +206,6 @@ public class CaptioningManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyLocaleChanged() {
         Locale locale = getLocale();
         synchronized (this.mListeners) {
@@ -220,7 +217,6 @@ public class CaptioningManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyFontScaleChanged() {
         float fontScale = getFontScale();
         synchronized (this.mListeners) {
@@ -232,7 +228,6 @@ public class CaptioningManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifySystemAudioCaptionChanged() {
         boolean enabled = isSystemAudioCaptioningEnabled();
         synchronized (this.mListeners) {
@@ -244,7 +239,6 @@ public class CaptioningManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifySystemAudioCaptionUiChanged() {
         boolean enabled = isSystemAudioCaptioningUiEnabled();
         synchronized (this.mListeners) {

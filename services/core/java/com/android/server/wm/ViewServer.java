@@ -30,35 +30,6 @@ public final class ViewServer implements Runnable {
             this.mClient = socket;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r2v0 */
-        /* JADX WARN: Type inference failed for: r2v1 */
-        /* JADX WARN: Type inference failed for: r2v10 */
-        /* JADX WARN: Type inference failed for: r2v11, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r2v12 */
-        /* JADX WARN: Type inference failed for: r2v13 */
-        /* JADX WARN: Type inference failed for: r2v14 */
-        /* JADX WARN: Type inference failed for: r2v15 */
-        /* JADX WARN: Type inference failed for: r2v16 */
-        /* JADX WARN: Type inference failed for: r2v2, types: [java.io.BufferedReader] */
-        /* JADX WARN: Type inference failed for: r2v3 */
-        /* JADX WARN: Type inference failed for: r2v4, types: [java.io.BufferedReader] */
-        /* JADX WARN: Type inference failed for: r2v5 */
-        /* JADX WARN: Type inference failed for: r2v6 */
-        /* JADX WARN: Type inference failed for: r2v7 */
-        /* JADX WARN: Type inference failed for: r2v8 */
-        /* JADX WARN: Type inference failed for: r4v11, types: [java.lang.StringBuilder] */
-        /* JADX WARN: Type inference failed for: r5v17, types: [com.android.server.wm.WindowManagerService] */
-        /* JADX WARN: Type inference failed for: r7v0, types: [com.android.server.wm.ViewServer$ViewServerWorker] */
-        /* JADX WARN: Type inference failed for: r7v1 */
-        /* JADX WARN: Type inference failed for: r7v10 */
-        /* JADX WARN: Type inference failed for: r7v11 */
-        /* JADX WARN: Type inference failed for: r7v2, types: [com.android.server.wm.ViewServer$ViewServerWorker] */
-        /* JADX WARN: Type inference failed for: r7v5, types: [java.io.IOException] */
-        /* JADX WARN: Type inference failed for: r7v6, types: [java.net.Socket] */
-        /* JADX WARN: Type inference failed for: r7v7 */
-        /* JADX WARN: Type inference failed for: r7v8 */
-        /* JADX WARN: Type inference failed for: r7v9, types: [java.net.Socket] */
         @Override // java.lang.Runnable
         public final void run() {
             String substring;

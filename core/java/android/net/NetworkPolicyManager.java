@@ -330,7 +330,6 @@ public class NetworkPolicyManager {
                 return it.hasNext();
             }
 
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // java.util.Iterator
             public Pair<ZonedDateTime, ZonedDateTime> next() {
                 if (hasNext()) {
@@ -518,7 +517,6 @@ public class NetworkPolicyManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void dispatchOnUidBlockedReasonChanged(
             Executor executor, NetworkPolicyCallback callback, int uid, int blockedReasons) {
         if (executor == null) {

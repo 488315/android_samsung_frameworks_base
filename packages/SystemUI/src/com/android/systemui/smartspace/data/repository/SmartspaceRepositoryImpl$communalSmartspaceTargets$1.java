@@ -19,7 +19,6 @@ final class SmartspaceRepositoryImpl$communalSmartspaceTargets$1 extends Suspend
     int label;
     final /* synthetic */ SmartspaceRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SmartspaceRepositoryImpl$communalSmartspaceTargets$1(SmartspaceRepositoryImpl smartspaceRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = smartspaceRepositoryImpl;

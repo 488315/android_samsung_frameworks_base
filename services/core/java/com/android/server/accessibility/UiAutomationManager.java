@@ -159,7 +159,6 @@ public final class UiAutomationManager {
         public final void takeScreenshot(int i, RemoteCallback remoteCallback) {}
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.accessibility.UiAutomationManager$1] */
     public UiAutomationManager(Object obj) {
         this.mLock = obj;
     }

@@ -183,7 +183,6 @@ public class SECAVPlayer extends AVPlayer
             this.currentState = SECAVPlayerState.UNKNOWN;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setNewPlayState(long pos) {
             this.mLastPos = 0L;
             this.mMediaInfo = null;
@@ -193,54 +192,44 @@ public class SECAVPlayer extends AVPlayer
             this.currentState = SECAVPlayerState.UNKNOWN;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setPlayRequested(boolean flag) {
             this.mPlayRequested = flag;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isPlayRequested() {
             return this.mPlayRequested;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setNearlyFinished(boolean flag) {
             this.mNearlyFinished.set(flag);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean compareAndSetNearlyFinished(boolean expected, boolean updated) {
             return this.mNearlyFinished.compareAndSet(expected, updated);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setMediaInfo(MediaInfo info) {
             this.mMediaInfo = info;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setLastPos(long pos) {
             if (pos > 0) {
                 this.mLastPos = pos;
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public long getLastPos() {
             return this.mLastPos;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public MediaInfo getMediaInfo() {
             return this.mMediaInfo;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setItemDuration(long duration) {
             this.mItemDuration = duration;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public long getItemDuration() {
             return this.mItemDuration;
         }
@@ -659,7 +648,6 @@ public class SECAVPlayer extends AVPlayer
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setVolumeDelta(int currentVolume) {
         int setVolume = this.mVolumeDelta + currentVolume;
         this.mVolumeDelta = 0;

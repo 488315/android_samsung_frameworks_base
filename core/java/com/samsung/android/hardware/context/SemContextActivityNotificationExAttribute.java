@@ -12,13 +12,11 @@ public class SemContextActivityNotificationExAttribute extends SemContextAttribu
             new Parcelable.Creator<
                     SemContextActivityNotificationExAttribute>() { // from class:
                                                                    // com.samsung.android.hardware.context.SemContextActivityNotificationExAttribute.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextActivityNotificationExAttribute createFromParcel(Parcel in) {
                     return new SemContextActivityNotificationExAttribute(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextActivityNotificationExAttribute[] newArray(int size) {
                     return new SemContextActivityNotificationExAttribute[size];

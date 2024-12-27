@@ -18,7 +18,6 @@ final class DisplaySwitchLatencyTracker$start$1$2$1$displaySwitchTimeMs$1$1 exte
     int label;
     final /* synthetic */ DisplaySwitchLatencyTracker this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisplaySwitchLatencyTracker$start$1$2$1$displaySwitchTimeMs$1$1(DisplaySwitchLatencyTracker displaySwitchLatencyTracker, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = displaySwitchLatencyTracker;

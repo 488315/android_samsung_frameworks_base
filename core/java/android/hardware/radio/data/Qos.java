@@ -9,13 +9,11 @@ import java.util.Objects;
 public final class Qos implements Parcelable {
     public static final Parcelable.Creator<Qos> CREATOR =
             new Parcelable.Creator<Qos>() { // from class: android.hardware.radio.data.Qos.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Qos createFromParcel(Parcel _aidl_source) {
                     return new Qos(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Qos[] newArray(int _aidl_size) {
                     return new Qos[_aidl_size];

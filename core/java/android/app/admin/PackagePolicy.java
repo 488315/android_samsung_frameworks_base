@@ -14,13 +14,11 @@ public final class PackagePolicy implements Parcelable {
     public static final Parcelable.Creator<PackagePolicy> CREATOR =
             new Parcelable.Creator<
                     PackagePolicy>() { // from class: android.app.admin.PackagePolicy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackagePolicy createFromParcel(Parcel in) {
                     return new PackagePolicy(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackagePolicy[] newArray(int size) {
                     return new PackagePolicy[size];

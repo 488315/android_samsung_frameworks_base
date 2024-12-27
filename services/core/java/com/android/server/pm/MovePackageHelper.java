@@ -212,7 +212,6 @@ public final class MovePackageHelper {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r29v0, types: [com.android.server.pm.MovePackageHelper$1] */
     public final void movePackageInternal(final int i, int i2, UserHandle userHandle, final String str, String str2) {
         File dataAppDirectory;
         int i3;
@@ -441,8 +440,6 @@ public final class MovePackageHelper {
                                     this.f$0 = this;
                                 }
 
-                                /* JADX WARN: Can't wrap try/catch for region: R(5:30|(4:32|(1:34)(1:38)|35|36)(2:39|40)|37|27|28) */
-                                /* JADX WARN: Can't wrap try/catch for region: R(6:7|(1:9)(1:20)|(4:11|(1:13)(1:17)|14|15)(2:18|19)|16|4|5) */
                                 @Override // java.lang.Runnable
                                 /*
                                     Code decompiled incorrectly, please refer to instructions dump.

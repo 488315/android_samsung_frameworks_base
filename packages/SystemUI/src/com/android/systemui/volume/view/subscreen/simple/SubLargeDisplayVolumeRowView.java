@@ -104,8 +104,6 @@ public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeO
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.volume.view.subscreen.simple.SubLargeDisplayVolumeRowView$$ExternalSyntheticLambda8] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.volume.view.subscreen.simple.SubLargeDisplayVolumeRowView$$ExternalSyntheticLambda8] */
     public SubLargeDisplayVolumeRowView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mStream = -1;

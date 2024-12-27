@@ -86,7 +86,6 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
 
         public DepthAnimation() {
             SpringAnimation springAnimation = new SpringAnimation(this, new FloatPropertyCompat() { // from class: com.android.systemui.statusbar.NotificationShadeDepthController$DepthAnimation$springAnimation$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super("blurRadius");
                 }

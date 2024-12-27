@@ -223,7 +223,6 @@ public class CropView extends View {
         return this.mExploreByTouchHelper.dispatchHoverEvent(motionEvent) || super.dispatchHoverEvent(motionEvent);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.view.View
     public final boolean dispatchKeyEvent(KeyEvent keyEvent) {
         boolean z;
@@ -307,7 +306,6 @@ public class CropView extends View {
         return (int) ((f * ((getHeight() - this.mExtraTopPadding) - this.mExtraBottomPadding)) + this.mExtraTopPadding);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0052  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

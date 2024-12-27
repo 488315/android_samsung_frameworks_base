@@ -12,13 +12,11 @@ public final class CompatibilityChangeConfig implements Parcelable {
             new Parcelable.Creator<
                     CompatibilityChangeConfig>() { // from class:
                                                    // com.android.internal.compat.CompatibilityChangeConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompatibilityChangeConfig createFromParcel(Parcel in) {
                     return new CompatibilityChangeConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompatibilityChangeConfig[] newArray(int size) {
                     return new CompatibilityChangeConfig[size];

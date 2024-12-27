@@ -67,13 +67,11 @@ public final class UpdatableDriverProto {
             return this.versionCode_;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setVersionCode(long value) {
             this.bitField0_ |= 1;
             this.versionCode_ = value;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void clearVersionCode() {
             this.bitField0_ &= -2;
             this.versionCode_ = 0L;
@@ -106,32 +104,27 @@ public final class UpdatableDriverProto {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setPackageNames(int index, String value) {
             value.getClass();
             ensurePackageNamesIsMutable();
             this.packageNames_.set(index, value);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addPackageNames(String value) {
             value.getClass();
             ensurePackageNamesIsMutable();
             this.packageNames_.add(value);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addAllPackageNames(Iterable<String> values) {
             ensurePackageNamesIsMutable();
             AbstractMessageLite.addAll((Iterable) values, (List) this.packageNames_);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void clearPackageNames() {
             this.packageNames_ = GeneratedMessageLite.emptyProtobufList();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addPackageNamesBytes(ByteString value) {
             ensurePackageNamesIsMutable();
             this.packageNames_.add(value.toStringUtf8());
@@ -378,39 +371,33 @@ public final class UpdatableDriverProto {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setDenylists(int index, Denylist value) {
             value.getClass();
             ensureDenylistsIsMutable();
             this.denylists_.set(index, value);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addDenylists(Denylist value) {
             value.getClass();
             ensureDenylistsIsMutable();
             this.denylists_.add(value);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addDenylists(int index, Denylist value) {
             value.getClass();
             ensureDenylistsIsMutable();
             this.denylists_.add(index, value);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addAllDenylists(Iterable<? extends Denylist> values) {
             ensureDenylistsIsMutable();
             AbstractMessageLite.addAll((Iterable) values, (List) this.denylists_);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void clearDenylists() {
             this.denylists_ = emptyProtobufList();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void removeDenylists(int index) {
             ensureDenylistsIsMutable();
             this.denylists_.remove(index);

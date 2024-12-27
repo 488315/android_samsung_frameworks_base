@@ -13,13 +13,11 @@ public class SemDesktopModeState implements Parcelable {
             new Parcelable.Creator<
                     SemDesktopModeState>() { // from class:
                                              // com.samsung.android.desktopmode.SemDesktopModeState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemDesktopModeState createFromParcel(Parcel parcel) {
                     return new SemDesktopModeState(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemDesktopModeState[] newArray(int size) {
                     return new SemDesktopModeState[size];

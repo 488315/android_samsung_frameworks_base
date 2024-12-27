@@ -41,7 +41,6 @@ public class Session {
         public static final Parcelable.Creator<Info> CREATOR =
                 new Parcelable.Creator<
                         Info>() { // from class: android.telecom.Logging.Session.Info.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Info createFromParcel(Parcel source) {
                         String id = source.readString();
@@ -50,7 +49,6 @@ public class Session {
                         return new Info(id, methodName, ownerInfo);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Info[] newArray(int size) {
                         return new Info[size];
@@ -216,7 +214,6 @@ public class Session {
         return String.valueOf(i);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String getFullSessionId() {
         return getFullSessionId(0);
     }
@@ -324,7 +321,6 @@ public class Session {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isSessionExternal() {
         return getRootSession("isSessionExternal").isExternal();
     }

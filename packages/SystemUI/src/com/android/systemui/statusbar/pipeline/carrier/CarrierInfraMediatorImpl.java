@@ -311,7 +311,6 @@ public final class CarrierInfraMediatorImpl implements CarrierInfraMediator, Dum
         }
     }
 
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     @Override // com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator
     public final boolean isEnabled(CarrierInfraMediator.Conditions conditions, int i, Object... objArr) {
         String string;

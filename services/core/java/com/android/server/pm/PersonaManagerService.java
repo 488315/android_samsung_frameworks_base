@@ -232,7 +232,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
             this.this$0 = personaManagerService;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, final Intent intent) {
             String str;
@@ -1289,7 +1288,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
             PersonaManagerService.this.checkCallerPermissionFor("PersonaHandler");
         }
 
-        /* JADX WARN: Can't wrap try/catch for region: R(14:269|(6:271|(1:273)|274|(2:276|(1:278)(0))|281|(6:329|330|331|(1:335)|337|(4:339|340|(3:342|(2:344|(1:348))|351)(1:352)|349))(2:285|(6:289|290|291|(4:294|(3:296|297|298)(1:300)|299|292)|301|(1:303)(6:304|(2:306|(1:308)(1:309))(5:318|(1:320)(1:325)|321|(1:323)|324)|310|311|(1:317)|315))))|358|(1:360)|274|(0)|281|(1:283)|329|330|331|(2:333|335)|337|(0)) */
         /* JADX WARN: Code restructure failed: missing block: B:279:0x070a, code lost:
 
            if (r0.isKeyguardLocked() == false) goto L235;
@@ -1302,8 +1300,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
 
            r0.printStackTrace();
         */
-        /* JADX WARN: Removed duplicated region for block: B:276:0x0702 A[Catch: Exception -> 0x06ed, TryCatch #2 {Exception -> 0x06ed, blocks: (B:242:0x0685, B:244:0x068d, B:247:0x0697, B:250:0x06a6, B:266:0x06d3, B:269:0x06dc, B:271:0x06e4, B:274:0x06fc, B:276:0x0702, B:278:0x0706, B:358:0x06ef, B:363:0x06d0, B:253:0x06b0, B:254:0x06ba, B:256:0x06c0, B:259:0x06c8), top: B:241:0x0685, inners: #1 }] */
-        /* JADX WARN: Removed duplicated region for block: B:339:0x0830 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1343,7 +1339,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(3:(3:118|119|(7:120|121|(4:123|124|125|(7:173|174|175|176|177|178|142)(8:127|128|(1:130)(1:172)|(1:138)|143|(8:146|(4:151|152|153|154)|155|(3:159|(2:161|162)(2:163|(2:165|166))|154)|152|153|154|144)|167|168))(2:189|190)|139|140|141|142))|115|116) */
     /* JADX WARN: Code restructure failed: missing block: B:231:0x049b, code lost:
 
        r0 = e;
@@ -1381,15 +1376,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
        r0 = r22;
        r35 = "com.samsung.android.appseparation";
     */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x05cb  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x05f4  */
-    /* JADX WARN: Removed duplicated region for block: B:57:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x05ed  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x067a  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x06a7  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0714  */
-    /* JADX WARN: Removed duplicated region for block: B:90:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x069e  */
     /* renamed from: -$$Nest$menforceAppSeparationAllowListUpdateInternal, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1725,8 +1711,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
                         new File(Environment.getDataDirectory(), "user")));
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.pm.PersonaManagerService$7] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.server.pm.PersonaManagerService$1] */
     public PersonaManagerService(Injector injector) {
         File file;
         Object obj = new Object();
@@ -2035,8 +2019,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:5:0x002b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2400,15 +2382,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:114:0x0a26  */
-    /* JADX WARN: Removed duplicated region for block: B:116:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x0990  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x085a  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x089d  */
-    /* JADX WARN: Removed duplicated region for block: B:69:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0896  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x0954  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x0997  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2786,9 +2759,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
         return i;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v3, types: [com.android.server.pm.PersonaManagerService$Injector] */
-    /* JADX WARN: Type inference failed for: r4v7, types: [com.android.server.pm.PersonaManagerService$Injector] */
     public final int getFocusedUser() {
         int i;
         KeyguardManager keyguardManager = this.mKeyguardManager;
@@ -2890,8 +2860,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
         return KnoxForesightService.getInstance(this.mContext);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x0026 A[Catch: all -> 0x0021, TRY_LEAVE, TryCatch #0 {all -> 0x0021, blocks: (B:18:0x000d, B:20:0x0015, B:5:0x0026, B:9:0x0033, B:14:0x0048), top: B:17:0x000d }] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0033 A[Catch: all -> 0x0021, TRY_ENTER, TRY_LEAVE, TryCatch #0 {all -> 0x0021, blocks: (B:18:0x000d, B:20:0x0015, B:5:0x0026, B:9:0x0033, B:14:0x0048), top: B:17:0x000d }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3005,8 +2973,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
         return arraySet;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0155  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3260,8 +3226,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
                     + " com.android.server.pm.PersonaManagerService.getScreenOffTimeoutLocked(int):int");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0041 A[Catch: Exception -> 0x0024, TRY_LEAVE, TryCatch #0 {Exception -> 0x0024, blocks: (B:2:0x0000, B:5:0x0012, B:8:0x0019, B:9:0x003b, B:11:0x0041, B:16:0x0026), top: B:1:0x0000 }] */
-    /* JADX WARN: Removed duplicated region for block: B:15:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3658,8 +3622,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
                         .notifyTaskStackChanged();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x014c  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0168 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4453,22 +4415,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
 
        if (r2 == 0) goto L57;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v1 */
-    /* JADX WARN: Type inference failed for: r2v10 */
-    /* JADX WARN: Type inference failed for: r2v11 */
-    /* JADX WARN: Type inference failed for: r2v13, types: [int] */
-    /* JADX WARN: Type inference failed for: r2v2 */
-    /* JADX WARN: Type inference failed for: r2v20 */
-    /* JADX WARN: Type inference failed for: r2v21 */
-    /* JADX WARN: Type inference failed for: r2v22 */
-    /* JADX WARN: Type inference failed for: r2v23 */
-    /* JADX WARN: Type inference failed for: r2v3, types: [java.io.FileInputStream] */
-    /* JADX WARN: Type inference failed for: r2v4 */
-    /* JADX WARN: Type inference failed for: r2v6 */
-    /* JADX WARN: Type inference failed for: r2v7 */
-    /* JADX WARN: Type inference failed for: r2v8 */
-    /* JADX WARN: Type inference failed for: r2v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4762,8 +4708,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0080 A[Catch: Exception -> 0x0086, TryCatch #3 {Exception -> 0x0086, blocks: (B:10:0x0072, B:12:0x0080, B:24:0x0088), top: B:9:0x0072 }] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0088 A[Catch: Exception -> 0x0086, TRY_LEAVE, TryCatch #3 {Exception -> 0x0086, blocks: (B:10:0x0072, B:12:0x0080, B:24:0x0088), top: B:9:0x0072 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5028,9 +4972,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00bc  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0107  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5101,9 +5042,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v3, types: [com.android.server.pm.PersonaManagerService] */
-    /* JADX WARN: Type inference failed for: r4v6, types: [com.android.server.pm.PersonaManagerService$Injector] */
     public final void startCountrySelectionActivity(boolean z) {
         Injector injector;
         this.mInjector.getClass();
@@ -5142,9 +5080,6 @@ public final class PersonaManagerService extends ISemPersonaManager.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.server.pm.PersonaManagerService$Injector] */
-    /* JADX WARN: Type inference failed for: r4v5, types: [com.android.server.pm.PersonaManagerService$Injector] */
     public final void startTermsActivity() {
         this.mInjector.getClass();
         long clearCallingIdentity = Binder.clearCallingIdentity();

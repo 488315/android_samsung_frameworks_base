@@ -18,7 +18,6 @@ final class SuspendKt$race$2 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SuspendKt$race$2(Function1[] function1Arr, Continuation continuation) {
         super(2, continuation);
         this.$blocks = function1Arr;

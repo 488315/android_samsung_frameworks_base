@@ -32,8 +32,6 @@ final class AudioVolumeComponentViewModel$sliderViewModels$1 extends SuspendLamb
         int label;
         final /* synthetic */ AudioVolumeComponentViewModel this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        /* JADX WARN: Multi-variable type inference failed */
         public AnonymousClass1(List<? extends SliderType> list, FlowCollector flowCollector, AudioVolumeComponentViewModel audioVolumeComponentViewModel, Continuation continuation) {
             super(2, continuation);
             this.$sliderTypes = list;
@@ -92,7 +90,6 @@ final class AudioVolumeComponentViewModel$sliderViewModels$1 extends SuspendLamb
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AudioVolumeComponentViewModel$sliderViewModels$1(AudioVolumeComponentViewModel audioVolumeComponentViewModel, Continuation continuation) {
         super(3, continuation);
         this.this$0 = audioVolumeComponentViewModel;

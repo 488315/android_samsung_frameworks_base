@@ -193,8 +193,6 @@ public final class SystemServiceManager implements Dumpable {
         onUser(TimingsTraceAndSlog.newAsyncLog(), str, null, targetUser, null);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Can't wrap try/catch for region: R(7:(3:22|(2:24|26)(2:119|26)|(6:28|(1:30)|31|32|33|34))|121|(0)|31|32|33|34) */
     /* JADX WARN: Code restructure failed: missing block: B:116:0x025c, code lost:
 
        r0 = e;
@@ -223,25 +221,6 @@ public final class SystemServiceManager implements Dumpable {
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
      */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x014c A[Catch: Exception -> 0x0112, TRY_LEAVE, TryCatch #8 {Exception -> 0x0112, blocks: (B:109:0x010a, B:35:0x0126, B:92:0x012e, B:95:0x0138, B:98:0x0142, B:101:0x014c), top: B:108:0x010a }] */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x0156 A[Catch: Exception -> 0x025c, TRY_ENTER, TRY_LEAVE, TryCatch #2 {Exception -> 0x025c, blocks: (B:33:0x0102, B:104:0x0156), top: B:32:0x0102 }] */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x0160  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x010a A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00eb  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0126 A[Catch: Exception -> 0x0112, TryCatch #8 {Exception -> 0x0112, blocks: (B:109:0x010a, B:35:0x0126, B:92:0x012e, B:95:0x0138, B:98:0x0142, B:101:0x014c), top: B:108:0x010a }] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x018e  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x0275  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x028b  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01cf A[Catch: Exception -> 0x01b8, TryCatch #7 {Exception -> 0x01b8, blocks: (B:44:0x01ad, B:58:0x01cf, B:59:0x01e2, B:60:0x01f5, B:61:0x0208), top: B:43:0x01ad }] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x01e2 A[Catch: Exception -> 0x01b8, TryCatch #7 {Exception -> 0x01b8, blocks: (B:44:0x01ad, B:58:0x01cf, B:59:0x01e2, B:60:0x01f5, B:61:0x0208), top: B:43:0x01ad }] */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x01f5 A[Catch: Exception -> 0x01b8, TryCatch #7 {Exception -> 0x01b8, blocks: (B:44:0x01ad, B:58:0x01cf, B:59:0x01e2, B:60:0x01f5, B:61:0x0208), top: B:43:0x01ad }] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0208 A[Catch: Exception -> 0x01b8, TRY_LEAVE, TryCatch #7 {Exception -> 0x01b8, blocks: (B:44:0x01ad, B:58:0x01cf, B:59:0x01e2, B:60:0x01f5, B:61:0x0208), top: B:43:0x01ad }] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x021b  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0246 A[Catch: Exception -> 0x0238, TRY_LEAVE, TryCatch #6 {Exception -> 0x0238, blocks: (B:69:0x0231, B:64:0x023f, B:76:0x0246), top: B:68:0x0231 }] */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0164 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x012e A[Catch: Exception -> 0x0112, TryCatch #8 {Exception -> 0x0112, blocks: (B:109:0x010a, B:35:0x0126, B:92:0x012e, B:95:0x0138, B:98:0x0142, B:101:0x014c), top: B:108:0x010a }] */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x0138 A[Catch: Exception -> 0x0112, TryCatch #8 {Exception -> 0x0112, blocks: (B:109:0x010a, B:35:0x0126, B:92:0x012e, B:95:0x0138, B:98:0x0142, B:101:0x014c), top: B:108:0x010a }] */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x0142 A[Catch: Exception -> 0x0112, TryCatch #8 {Exception -> 0x0112, blocks: (B:109:0x010a, B:35:0x0126, B:92:0x012e, B:95:0x0138, B:98:0x0142, B:101:0x014c), top: B:108:0x010a }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

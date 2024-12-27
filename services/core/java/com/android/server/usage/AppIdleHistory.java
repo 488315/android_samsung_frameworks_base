@@ -504,9 +504,6 @@ public final class AppIdleHistory {
         return getPackageHistory(getUserHistory(i), str, true).currentBucket >= 40;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:30:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

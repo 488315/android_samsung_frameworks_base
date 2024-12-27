@@ -49,10 +49,6 @@ public final class MediaProjectionManagerRepository implements MediaProjectionRe
         this.mediaProjectionState = FlowKt.stateIn(conflatedCallbackFlow, coroutineScope, SharingStarted.Companion.Lazily, MediaProjectionState.NotProjecting.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0072  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0036  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -9,7 +9,6 @@ final class FromAodTransitionInteractor$listenForAodToOccluded$1$2$emit$1 extend
     /* synthetic */ Object result;
     final /* synthetic */ FromAodTransitionInteractor$listenForAodToOccluded$1$2 this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromAodTransitionInteractor$listenForAodToOccluded$1$2$emit$1(FromAodTransitionInteractor$listenForAodToOccluded$1$2 fromAodTransitionInteractor$listenForAodToOccluded$1$2, Continuation continuation) {
         super(continuation);
         this.this$0 = fromAodTransitionInteractor$listenForAodToOccluded$1$2;

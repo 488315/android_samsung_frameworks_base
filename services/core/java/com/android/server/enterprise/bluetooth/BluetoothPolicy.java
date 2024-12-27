@@ -161,8 +161,6 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub
             this.this$0 = bluetoothPolicy;
         }
 
-        /* JADX INFO: Infinite loop detected, blocks: 17, insns: 0 */
-        /* JADX WARN: Failed to find 'out' block for switch in B:2:0x0002. Please report as an issue. */
         @Override // java.lang.Thread, java.lang.Runnable
         public final void run() {
             BluetoothAdapter defaultAdapter;
@@ -226,7 +224,6 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub
             this.mTable = str;
         }
 
-        /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
         public BluetoothDevicePolicy(BluetoothPolicy bluetoothPolicy, Context context, int i) {
             this(context, "BLUETOOTH_DEVICE_BWLIST");
             this.$r8$classId = i;

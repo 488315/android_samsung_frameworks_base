@@ -13,13 +13,11 @@ public final class CarouselTemplateData extends BaseTemplateData {
     public static final Parcelable.Creator<CarouselTemplateData> CREATOR =
             new Parcelable.Creator<CarouselTemplateData>() { // from class:
                 // android.app.smartspace.uitemplatedata.CarouselTemplateData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarouselTemplateData createFromParcel(Parcel in) {
                     return new CarouselTemplateData(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarouselTemplateData[] newArray(int size) {
                     return new CarouselTemplateData[size];
@@ -142,13 +140,11 @@ public final class CarouselTemplateData extends BaseTemplateData {
         public static final Parcelable.Creator<CarouselItem> CREATOR =
                 new Parcelable.Creator<CarouselItem>() { // from class:
                     // android.app.smartspace.uitemplatedata.CarouselTemplateData.CarouselItem.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CarouselItem createFromParcel(Parcel in) {
                         return new CarouselItem(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CarouselItem[] newArray(int size) {
                         return new CarouselItem[size];

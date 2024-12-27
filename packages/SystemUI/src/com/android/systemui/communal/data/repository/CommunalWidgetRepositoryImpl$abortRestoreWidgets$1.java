@@ -15,7 +15,6 @@ final class CommunalWidgetRepositoryImpl$abortRestoreWidgets$1 extends SuspendLa
     int label;
     final /* synthetic */ CommunalWidgetRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalWidgetRepositoryImpl$abortRestoreWidgets$1(CommunalWidgetRepositoryImpl communalWidgetRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalWidgetRepositoryImpl;

@@ -25,7 +25,6 @@ public final class MtpDevice {
 
     private native boolean native_delete_object(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native void native_discard_event_request(int i);
 
     private native MtpDeviceInfo native_get_device_info();

@@ -141,7 +141,6 @@ public final class BackgroundBlurDrawable extends Drawable {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$positionChanged$1(
                 final boolean showDebug,
                 final long frameNumber,
@@ -170,7 +169,6 @@ public final class BackgroundBlurDrawable extends Drawable {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$positionChanged$0(boolean showDebug, long frameNumber) {
             if (BackgroundBlurDrawable.DEBUG || showDebug) {
                 Log.i(
@@ -213,7 +211,6 @@ public final class BackgroundBlurDrawable extends Drawable {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$positionLost$3(
                 final boolean showDebug, final long frameNumber) {
             if (BackgroundBlurDrawable.DEBUG || showDebug) {
@@ -237,7 +234,6 @@ public final class BackgroundBlurDrawable extends Drawable {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$positionLost$2(boolean showDebug, long frameNumber) {
             if (BackgroundBlurDrawable.DEBUG || showDebug) {
                 Log.i(
@@ -671,7 +667,6 @@ public final class BackgroundBlurDrawable extends Drawable {
                     .addOnPreDrawListener(this.mOnPreDrawListener);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ boolean lambda$registerPreDrawListener$1(boolean debug) {
             final boolean hasUiUpdates = hasUpdates();
             if (hasUiUpdates || hasRegions()) {
@@ -703,7 +698,6 @@ public final class BackgroundBlurDrawable extends Drawable {
             return true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$registerPreDrawListener$0(
                 BlurRegion[] blurRegionsForNextFrame, boolean hasUiUpdates, long frame) {
             synchronized (this.mRtLock) {

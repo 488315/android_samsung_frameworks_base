@@ -512,11 +512,6 @@ abstract class MapCollections<K, V> {
         return result;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v9, types: [java.lang.Object[]] */
-    /* JADX WARN: Type inference failed for: r4v3 */
-    /* JADX WARN: Type inference failed for: r4v5 */
-    /* JADX WARN: Type inference failed for: r4v6 */
     public <T> T[] toArrayHelper(T[] tArr, int i) {
         int colGetSize = colGetSize();
         if (tArr.length < colGetSize) {

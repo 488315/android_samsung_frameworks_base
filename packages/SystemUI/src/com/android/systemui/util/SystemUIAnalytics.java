@@ -568,12 +568,10 @@ public final class SystemUIAnalytics {
         return str.contains("A11Y");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$prepareIdMap$0(Field field) {
         return field.getType() == String.class && (field.getName().startsWith("SID_") || field.getName().startsWith("EID_") || field.getName().startsWith("OAID_"));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$prepareIdMap$1(Field field) {
         String str = null;
         try {

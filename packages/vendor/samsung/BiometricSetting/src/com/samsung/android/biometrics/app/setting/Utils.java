@@ -448,9 +448,6 @@ public abstract class Utils {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v10, types: [byte[]] */
-    /* JADX WARN: Type inference failed for: r5v4 */
     public static byte[] readFile(File file) {
         Exception e;
         byte[] bArr;

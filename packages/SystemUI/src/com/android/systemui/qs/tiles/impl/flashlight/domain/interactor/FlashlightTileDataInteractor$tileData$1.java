@@ -19,7 +19,6 @@ final class FlashlightTileDataInteractor$tileData$1 extends SuspendLambda implem
     int label;
     final /* synthetic */ FlashlightTileDataInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FlashlightTileDataInteractor$tileData$1(FlashlightTileDataInteractor flashlightTileDataInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = flashlightTileDataInteractor;
@@ -37,8 +36,6 @@ final class FlashlightTileDataInteractor$tileData$1 extends SuspendLambda implem
         return ((FlashlightTileDataInteractor$tileData$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.qs.tiles.impl.flashlight.domain.interactor.FlashlightTileDataInteractor$tileData$1$callback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -66,7 +63,6 @@ final class FlashlightTileDataInteractor$tileData$1 extends SuspendLambda implem
             ((FlashlightControllerImpl) this.this$0.flashlightController).addCallback(r1);
             final FlashlightTileDataInteractor flashlightTileDataInteractor2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.tiles.impl.flashlight.domain.interactor.FlashlightTileDataInteractor$tileData$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

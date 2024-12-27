@@ -35,7 +35,6 @@ final class PointerInputScopeExtKt$detectLongPressGesture$2 extends SuspendLambd
             private /* synthetic */ Object L$0;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C00761(PointerEventPass pointerEventPass, Continuation continuation) {
                 super(2, continuation);
                 this.$pass = pointerEventPass;
@@ -76,7 +75,6 @@ final class PointerInputScopeExtKt$detectLongPressGesture$2 extends SuspendLambd
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(PointerEventPass pointerEventPass, Function1 function1, Continuation continuation) {
             super(2, continuation);
             this.$pass = pointerEventPass;
@@ -95,16 +93,10 @@ final class PointerInputScopeExtKt$detectLongPressGesture$2 extends SuspendLambd
             return ((AnonymousClass1) create((AwaitPointerEventScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
         }
 
-        /* JADX WARN: Can't wrap try/catch for region: R(10:0|1|(1:(3:(1:(1:6)(2:10|11))(3:12|13|14)|7|8)(1:20))(2:28|(1:30))|21|22|23|(1:25)|7|8|(1:(0))) */
         /* JADX WARN: Code restructure failed: missing block: B:27:0x0066, code lost:
         
             r1 = r10;
          */
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0080 A[RETURN] */
-        /* JADX WARN: Type inference failed for: r2v2, types: [androidx.compose.ui.input.pointer.SuspendingPointerInputModifierNodeImpl$PointerEventHandlerCoroutine, java.lang.Object] */
-        /* JADX WARN: Type inference failed for: r2v3, types: [androidx.compose.ui.input.pointer.AwaitPointerEventScope] */
-        /* JADX WARN: Type inference failed for: r2v5, types: [androidx.compose.ui.input.pointer.AwaitPointerEventScope] */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -190,7 +182,6 @@ final class PointerInputScopeExtKt$detectLongPressGesture$2 extends SuspendLambd
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PointerInputScopeExtKt$detectLongPressGesture$2(PointerInputScope pointerInputScope, PointerEventPass pointerEventPass, Function1 function1, Continuation continuation) {
         super(2, continuation);
         this.$this_detectLongPressGesture = pointerInputScope;

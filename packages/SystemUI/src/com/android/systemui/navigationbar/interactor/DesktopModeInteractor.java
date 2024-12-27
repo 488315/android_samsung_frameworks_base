@@ -35,7 +35,6 @@ public final class DesktopModeInteractor {
         intentFilter.addAction("android.intent.action.USER_UNLOCKED");
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [android.content.BroadcastReceiver, com.android.systemui.navigationbar.interactor.DesktopModeInteractor$addCallback$2] */
     public final void addCallback(final NavBarStoreImpl$prepareHandleEvent$2 navBarStoreImpl$prepareHandleEvent$2) {
         DesktopModeInteractor$addCallback$2 desktopModeInteractor$addCallback$2 = this.broadcastReceiver;
         if (desktopModeInteractor$addCallback$2 != null) {

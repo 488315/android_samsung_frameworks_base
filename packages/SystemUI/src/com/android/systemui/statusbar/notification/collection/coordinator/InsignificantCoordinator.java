@@ -472,7 +472,6 @@ public class InsignificantCoordinator implements Coordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void resetInsignificant() {
         this.mSettingEnabled = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnableInsignificant();
         int intForUser = Settings.System.getIntForUser(this.mContext.getContentResolver(), SettingsHelper.INDEX_NOTI_SETTINGS_INSIGNIFICANT, 1, -2);
@@ -501,7 +500,6 @@ public class InsignificantCoordinator implements Coordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateInsignificantSummary(boolean z) {
         Collection<NotificationEntry> allNotifs = z ? (Collection) this.mNotifLiveDataStoreImpl.activeNotifList.atomicValue.get() : ((NotifPipeline) ((CommonNotifCollection) this.mCommonNotifCollectionLazy.get())).getAllNotifs();
         ArrayList arrayList = new ArrayList();

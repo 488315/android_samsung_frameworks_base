@@ -95,7 +95,6 @@ public class Binder implements IBinder {
 
     private static native long getNativeBBinderHolder();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long getNativeFinalizer();
 
     @CriticalNative
@@ -210,7 +209,6 @@ public class Binder implements IBinder {
     private static class IdentitySupplier implements Supplier<SomeArgs> {
         private IdentitySupplier() {}
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // java.util.function.Supplier
         public SomeArgs get() {
             SomeArgs args = SomeArgs.obtain();

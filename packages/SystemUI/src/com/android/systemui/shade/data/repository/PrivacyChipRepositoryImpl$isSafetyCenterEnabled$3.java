@@ -13,7 +13,6 @@ final class PrivacyChipRepositoryImpl$isSafetyCenterEnabled$3 extends SuspendLam
     int label;
     final /* synthetic */ PrivacyChipRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PrivacyChipRepositoryImpl$isSafetyCenterEnabled$3(PrivacyChipRepositoryImpl privacyChipRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = privacyChipRepositoryImpl;

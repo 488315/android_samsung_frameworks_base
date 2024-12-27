@@ -162,7 +162,6 @@ public class FunctionalUtils {
         return remoteExceptionIgnoringConsumer;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$handleExceptions$0(
             ThrowingRunnable throwingRunnable, Consumer consumer) {
         try {

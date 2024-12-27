@@ -5,7 +5,6 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import java.util.concurrent.Executor;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public class ThreadFactoryImpl implements ThreadFactory {
     @Override // com.android.systemui.util.concurrency.ThreadFactory
     public DelayableExecutor buildDelayableExecutorOnHandler(Handler handler) {

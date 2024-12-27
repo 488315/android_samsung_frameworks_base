@@ -291,7 +291,6 @@ public class IntentForwarderActivity extends Activity {
                         getApplicationContext().getMainExecutor());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ ResolveInfo lambda$buildAndExecute$0(
             int callingUserId,
             int targetUserId,
@@ -314,7 +313,6 @@ public class IntentForwarderActivity extends Activity {
         return targetResolveInfo;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$buildAndExecute$1(
             String className,
             Intent intentReceived,
@@ -361,7 +359,6 @@ public class IntentForwarderActivity extends Activity {
                 getApplicationContext().getMainExecutor());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$buildAndExecuteForPrivateProfile$2(
             Intent intentReceived,
             String className,
@@ -516,12 +513,10 @@ public class IntentForwarderActivity extends Activity {
         contentView.animate().alpha(1.0f).translationY(contentView.getHeight()).setListener(null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$buildMiniResolver$3(View v) {
         finish();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$buildMiniResolver$4(
             Intent launchIntent, int targetUserId, View v) {
         startActivityAsCaller(
@@ -620,17 +615,14 @@ public class IntentForwarderActivity extends Activity {
                         targetLabel);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getOpenInWorkMessage$5() {
         return getString(R.string.miniresolver_call_in_work);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getOpenInWorkMessage$6() {
         return getString(R.string.miniresolver_switch_to_work);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getOpenInWorkMessage$7(CharSequence targetLabel) {
         return getString(R.string.miniresolver_open_work, targetLabel);
     }
@@ -673,12 +665,10 @@ public class IntentForwarderActivity extends Activity {
         return "";
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getWorkTelephonyInfoSectionMessage$8() {
         return getString(R.string.miniresolver_call_information);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getWorkTelephonyInfoSectionMessage$9() {
         return getString(R.string.miniresolver_sms_information);
     }
@@ -706,7 +696,6 @@ public class IntentForwarderActivity extends Activity {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getForwardToPersonalMessage$10() {
         return getString(R.string.forward_intent_to_owner);
     }
@@ -729,7 +718,6 @@ public class IntentForwarderActivity extends Activity {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getForwardToWorkMessage$11() {
         return getString(R.string.forward_intent_to_work);
     }
@@ -1075,7 +1063,6 @@ public class IntentForwarderActivity extends Activity {
         return new InjectorImpl();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class InjectorImpl implements Injector {
         private InjectorImpl() {}
 
@@ -1111,7 +1098,6 @@ public class IntentForwarderActivity extends Activity {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ ResolveInfo lambda$resolveActivityAsUser$0(
                 Intent intent, int flags, int userId) {
             return getPackageManager().resolveActivityAsUser(intent, flags, userId);

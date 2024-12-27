@@ -20,8 +20,6 @@ public abstract class AnimationPlayer implements PlayerInterface {
     public boolean hasSubResources = false;
     public final ResourceManager resourceManager = new ResourceManager(this);
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class DisplayMode {
         public static final /* synthetic */ DisplayMode[] $VALUES;
         public static final DisplayMode MAIN_MAIN;
@@ -29,7 +27,6 @@ public abstract class AnimationPlayer implements PlayerInterface {
         public static final DisplayMode SUB_MAIN;
         public static final DisplayMode SUB_SUB;
 
-        /* JADX INFO: Fake field, exist only in values array */
         DisplayMode EF0;
 
         static {

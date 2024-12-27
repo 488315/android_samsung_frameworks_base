@@ -9,13 +9,11 @@ public class SContextGyroTemperature extends SContextEventContext {
     public static final Parcelable.Creator<SContextGyroTemperature> CREATOR =
             new Parcelable.Creator<SContextGyroTemperature>() { // from class:
                 // android.hardware.scontext.SContextGyroTemperature.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextGyroTemperature createFromParcel(Parcel in) {
                     return new SContextGyroTemperature(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextGyroTemperature[] newArray(int size) {
                     return new SContextGyroTemperature[size];

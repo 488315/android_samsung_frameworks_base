@@ -42,7 +42,6 @@ final class DeviceBasedSatelliteIconBinder$bind$2 extends SuspendLambda implemen
             final /* synthetic */ DeviceBasedSatelliteViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02381(DeviceBasedSatelliteViewModel deviceBasedSatelliteViewModel, SingleBindableStatusBarIconView singleBindableStatusBarIconView, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = deviceBasedSatelliteViewModel;
@@ -102,7 +101,6 @@ final class DeviceBasedSatelliteIconBinder$bind$2 extends SuspendLambda implemen
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(LifecycleOwner lifecycleOwner, DeviceBasedSatelliteViewModel deviceBasedSatelliteViewModel, SingleBindableStatusBarIconView singleBindableStatusBarIconView, Continuation continuation) {
             super(2, continuation);
             this.$$this$withDefaultBinding = lifecycleOwner;
@@ -143,7 +141,6 @@ final class DeviceBasedSatelliteIconBinder$bind$2 extends SuspendLambda implemen
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteIconBinder$bind$2(DeviceBasedSatelliteViewModel deviceBasedSatelliteViewModel, SingleBindableStatusBarIconView singleBindableStatusBarIconView, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = deviceBasedSatelliteViewModel;

@@ -284,8 +284,6 @@ public abstract class Pageboost {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:47:0x0110  */
-        /* JADX WARN: Removed duplicated region for block: B:54:0x0136  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -380,12 +378,6 @@ public abstract class Pageboost {
 
            r7 = 1;
         */
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:153:0x028b  */
-        /* JADX WARN: Removed duplicated region for block: B:156:0x026e A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:57:0x0211  */
-        /* JADX WARN: Removed duplicated region for block: B:74:0x02d0  */
-        /* JADX WARN: Removed duplicated region for block: B:82:0x0316  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -501,7 +493,6 @@ public abstract class Pageboost {
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ PageboostAppDBHelper(
                 Context context,
                 String str,
@@ -877,8 +868,6 @@ public abstract class Pageboost {
 
            if (r10.mName.equals(r2.split("[^\\p{Alnum}\\.]+", 2)[0]) != false) goto L67;
         */
-        /* JADX WARN: Removed duplicated region for block: B:28:0x0053  */
-        /* JADX WARN: Removed duplicated region for block: B:39:? A[RETURN, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1734,8 +1723,6 @@ public abstract class Pageboost {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:15:0x0068 A[ORIG_RETURN, RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:17:? A[RETURN, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2148,10 +2135,6 @@ public abstract class Pageboost {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00f4  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00f5  */
-    /* JADX WARN: Type inference failed for: r1v12, types: [com.android.server.am.Pageboost$1] */
-    /* JADX WARN: Type inference failed for: r1v13, types: [com.android.server.am.Pageboost$1] */
     static {
         /*
             Method dump skipped, instructions count: 292

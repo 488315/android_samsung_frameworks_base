@@ -66,8 +66,6 @@ public final class SystemPerformancePointerEventListener
         }
     }
 
-    /* JADX WARN: Type inference failed for: r5v5, types: [com.android.server.wm.SystemPerformancePointerEventListener$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r5v6, types: [com.android.server.wm.SystemPerformancePointerEventListener$$ExternalSyntheticLambda0] */
     public SystemPerformancePointerEventListener(Context context) {
         this.mContext = context;
         Handler handler = new Handler(context.getMainLooper());

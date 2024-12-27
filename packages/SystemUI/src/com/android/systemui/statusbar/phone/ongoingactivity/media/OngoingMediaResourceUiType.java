@@ -5,8 +5,6 @@ import com.android.systemui.R;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public abstract class OngoingMediaResourceUiType {
     public static final /* synthetic */ OngoingMediaResourceUiType[] $VALUES;
     public static final OngoingMediaResourceUiType DARK;

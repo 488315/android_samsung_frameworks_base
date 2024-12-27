@@ -779,7 +779,6 @@ public final class AppStartInfoTracker {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0062 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

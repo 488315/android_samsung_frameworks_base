@@ -87,7 +87,6 @@ public abstract class RotationResolverService extends Service {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void resolveRotation(
             IRotationResolverCallback callback,
             RotationResolutionRequest request,
@@ -105,7 +104,6 @@ public abstract class RotationResolverService extends Service {
         onResolveRotation(request, this.mCancellationSignal, this.mPendingCallback);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendRotationResult(IRotationResolverCallback internalCallback, int result) {
         if (this.mPendingCallback != null && this.mPendingCallback.mCallback == internalCallback) {
             this.mPendingCallback = null;
@@ -117,7 +115,6 @@ public abstract class RotationResolverService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendFailureResult(IRotationResolverCallback internalCallback, int error) {
         if (this.mPendingCallback != null && internalCallback == this.mPendingCallback.mCallback) {
             reportFailures(internalCallback, error);

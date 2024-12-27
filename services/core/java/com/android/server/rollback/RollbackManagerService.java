@@ -32,8 +32,6 @@ public final class RollbackManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.rollback.RollbackManagerServiceImpl] */
     @Override // com.android.server.SystemService
     public final void onStart() {
         ?? rollbackManagerServiceImpl = new RollbackManagerServiceImpl(getContext());

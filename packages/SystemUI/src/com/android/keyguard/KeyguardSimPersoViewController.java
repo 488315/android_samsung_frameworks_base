@@ -47,7 +47,6 @@ public final class KeyguardSimPersoViewController extends KeyguardSecPinBasedInp
         public final /* synthetic */ KeyguardSecurityCallback val$keyguardSecurityCallback;
         public final /* synthetic */ int val$subId;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(String str, int i, KeyguardSecurityCallback keyguardSecurityCallback) {
             super(str);
             this.val$subId = i;
@@ -190,7 +189,6 @@ public final class KeyguardSimPersoViewController extends KeyguardSecPinBasedInp
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.keyguard.KeyguardSimPersoViewController$1] */
     public KeyguardSimPersoViewController(KeyguardSimPersoView keyguardSimPersoView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, LiftToActivateListener liftToActivateListener, EmergencyButtonController emergencyButtonController, FalsingCollector falsingCollector, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, KeyguardKeyboardInteractor keyguardKeyboardInteractor) {
         super(keyguardSimPersoView, configurationController, vibrationUtil, accessibilityManager, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, liftToActivateListener, emergencyButtonController, falsingCollector, featureFlags, selectedUserInteractor, keyguardKeyboardInteractor);
         this.mSimCheckInProgress = false;

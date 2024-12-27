@@ -19,7 +19,6 @@ final class PromptViewModel$hasOnlyOneLineTitle$1 extends SuspendLambda implemen
     int label;
     final /* synthetic */ PromptViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptViewModel$hasOnlyOneLineTitle$1(PromptViewModel promptViewModel, Continuation continuation) {
         super(5, continuation);
         this.this$0 = promptViewModel;

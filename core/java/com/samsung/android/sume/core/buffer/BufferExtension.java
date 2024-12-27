@@ -45,7 +45,6 @@ public class BufferExtension {
     private final List<Integer> wrappedTransformList = new ArrayList();
     private final Map<Long, Consumer<?>> internalBufferHandlerMap = new ConcurrentHashMap();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static BufferExtension getInstance() {
         if (sInstance == null) {
             synchronized (BufferExtension.class) {
@@ -418,12 +417,10 @@ public class BufferExtension {
         return UniExifInterface.of(srcBuffer);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public <T> String getUnaryKey(Class<T> clazz) {
         return clazz.getName();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public <T, R> String getBinaryKey(Class<T> from, Class<R> to) {
         return from.getName() + "->" + to.getName();
     }
@@ -435,7 +432,6 @@ public class BufferExtension {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public BufferExtension registerDescribe(
             Map<Class<?>, Function<?, MutableMediaFormat>> describeMap) {
         Map<String, Function<?, MutableMediaFormat>> map =
@@ -462,7 +458,6 @@ public class BufferExtension {
         return getUnaryKey((Class) it.getKey());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public BufferExtension unRegisterDescribe(final List<String> deallocList) {
         this.describeMap
                 .entrySet()
@@ -494,7 +489,6 @@ public class BufferExtension {
         return this;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public BufferExtension registerAlloc(Map<Class<?>, Function<MediaFormat, ?>> allocMap) {
         Map<String, Function<MediaFormat, ?>> map =
                 (Map)
@@ -520,7 +514,6 @@ public class BufferExtension {
         return getUnaryKey((Class) it.getKey());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public BufferExtension unRegisterAlloc(final List<String> allocList) {
         this.allocMap
                 .entrySet()
@@ -552,7 +545,6 @@ public class BufferExtension {
         return this;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public BufferExtension registerDealloc(Map<Class<?>, Consumer<?>> deallocMap) {
         Map<String, Consumer<?>> map =
                 (Map)
@@ -585,7 +577,6 @@ public class BufferExtension {
         return getUnaryKey((Class) it.getKey());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public BufferExtension unRegisterDealloc(final List<String> deallocList) {
         this.deallocMap
                 .entrySet()
@@ -617,7 +608,6 @@ public class BufferExtension {
         return this;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public BufferExtension registerTransform(
             Map<Pair<Class<?>, Class<?>>, BiFunction<MediaFormat, ?, ?>> transforms) {
         Map<String, TransformFunction> map =
@@ -646,7 +636,6 @@ public class BufferExtension {
         return this;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     /* renamed from: lambda$registerTransform$21$com-samsung-android-sume-core-buffer-BufferExtension, reason: not valid java name */
     /* synthetic */ String m9106x297a7a37(Map.Entry it) {
         Class<?> from = (Class) ((Pair) it.getKey()).first;
@@ -661,13 +650,11 @@ public class BufferExtension {
                 (BiFunction<MediaFormat, ?, ?>[]) new BiFunction[] {(BiFunction) it.getValue()});
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public BufferExtension registerWrappedTransform(List<Integer> wrappedTransforms) {
         this.wrappedTransformList.addAll(wrappedTransforms);
         return this;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public BufferExtension unRegisterTransform(final List<String> transforms) {
         this.transformMap
                 .entrySet()
@@ -699,7 +686,6 @@ public class BufferExtension {
         return this;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public BufferExtension registerStringfy(Map<Class<?>, Function<?, String>> stringfy) {
         Map<String, Function<?, String>> map =
                 (Map)
@@ -725,7 +711,6 @@ public class BufferExtension {
         return getUnaryKey((Class) it.getKey());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public BufferExtension unRegisterStringfy(final List<String> stringfy) {
         this.stringfyMap
                 .entrySet()
@@ -932,7 +917,6 @@ public class BufferExtension {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     /* renamed from: lambda$findAvailableBinaryKey$33$com-samsung-android-sume-core-buffer-BufferExtension, reason: not valid java name */
     /* synthetic */ TransformFunction m9099x9e867835(Pair it1, String key, Map registry, Pair it2) {
         String first = getBinaryKey((Class) it1.first, (Class) it1.second);
@@ -1018,7 +1002,6 @@ public class BufferExtension {
                                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class TransformFunction {
         private final List<BiFunction<MediaFormat, ?, ?>> functionList;
 

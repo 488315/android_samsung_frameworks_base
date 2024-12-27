@@ -13,7 +13,6 @@ public final class DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLat
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLatest$1(Continuation continuation, LogBuffer logBuffer) {
         super(3, continuation);
         this.$logBuffer$inlined = logBuffer;
@@ -27,7 +26,6 @@ public final class DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLat
         return deviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLatest$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0077 A[RETURN] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

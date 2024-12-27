@@ -76,9 +76,6 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
             super(looper);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:20:0x0047 A[Catch: all -> 0x0055, TryCatch #1 {all -> 0x0055, blocks: (B:12:0x0033, B:14:0x0037, B:18:0x003f, B:20:0x0047, B:21:0x004b, B:26:0x005b, B:27:0x008e, B:84:0x0054, B:23:0x004c, B:24:0x004e), top: B:11:0x0033, inners: #0 }] */
-        /* JADX WARN: Removed duplicated region for block: B:85:0x0058  */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -99,7 +96,6 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.power.batterysaver.BatterySaverController$1] */
     public BatterySaverController(
             Object obj,
             Context context,

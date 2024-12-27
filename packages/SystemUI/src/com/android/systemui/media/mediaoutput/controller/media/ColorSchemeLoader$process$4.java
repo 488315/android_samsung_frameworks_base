@@ -24,7 +24,6 @@ final class ColorSchemeLoader$process$4 extends SuspendLambda implements Functio
     Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ColorSchemeLoader$process$4(Drawable drawable, Function2 function2, Continuation continuation) {
         super(2, continuation);
         this.$drawable = drawable;

@@ -8,7 +8,6 @@ import kotlin.jvm.internal.Lambda;
 final class KeyguardCoordinator$pickOutTopUnseenNotifs$3 extends Lambda implements Function1 {
     final /* synthetic */ KeyguardCoordinator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardCoordinator$pickOutTopUnseenNotifs$3(KeyguardCoordinator keyguardCoordinator) {
         super(1);
         this.this$0 = keyguardCoordinator;

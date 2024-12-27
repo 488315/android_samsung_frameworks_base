@@ -404,7 +404,6 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.navigationbar.buttons.KeyButtonView$1] */
     public KeyButtonView(Context context, AttributeSet attributeSet, int i, InputManagerGlobal inputManagerGlobal, UiEventLogger uiEventLogger) {
         super(context, attributeSet);
         this.mMetricsLogger = (MetricsLogger) Dependency.sDependency.getDependencyInner(MetricsLogger.class);

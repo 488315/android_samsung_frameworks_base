@@ -17,7 +17,6 @@ public final class CallAttributes implements Parcelable {
     public static final Parcelable.Creator<CallAttributes> CREATOR =
             new Parcelable.Creator<
                     CallAttributes>() { // from class: android.telecom.CallAttributes.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallAttributes createFromParcel(Parcel source) {
                     return new CallAttributes(
@@ -31,7 +30,6 @@ public final class CallAttributes implements Parcelable {
                             source.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallAttributes[] newArray(int size) {
                     return new CallAttributes[size];

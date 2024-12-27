@@ -49,7 +49,6 @@ public final class DetectorStatusTypes {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static int detectorStatusFromString(String detectorStatusString) {
         char c;
         if (TextUtils.isEmpty(detectorStatusString)) {
@@ -125,7 +124,6 @@ public final class DetectorStatusTypes {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static int detectionAlgorithmStatusFromString(String detectorAlgorithmStatusString) {
         char c;
         if (TextUtils.isEmpty(detectorAlgorithmStatusString)) {

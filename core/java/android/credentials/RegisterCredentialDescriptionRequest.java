@@ -18,13 +18,11 @@ public final class RegisterCredentialDescriptionRequest implements Parcelable {
     public static final Parcelable.Creator<RegisterCredentialDescriptionRequest> CREATOR =
             new Parcelable.Creator<RegisterCredentialDescriptionRequest>() { // from class:
                 // android.credentials.RegisterCredentialDescriptionRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RegisterCredentialDescriptionRequest createFromParcel(Parcel in) {
                     return new RegisterCredentialDescriptionRequest(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RegisterCredentialDescriptionRequest[] newArray(int size) {
                     return new RegisterCredentialDescriptionRequest[size];

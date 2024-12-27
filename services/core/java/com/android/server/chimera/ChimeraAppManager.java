@@ -41,17 +41,6 @@ public final class ChimeraAppManager {
                         : usageStatsManager.getAppStandbyBuckets();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x016b  */
-    /* JADX WARN: Removed duplicated region for block: B:208:0x0514  */
-    /* JADX WARN: Removed duplicated region for block: B:211:0x0525  */
-    /* JADX WARN: Removed duplicated region for block: B:214:0x0532  */
-    /* JADX WARN: Removed duplicated region for block: B:218:0x054a  */
-    /* JADX WARN: Removed duplicated region for block: B:225:0x055c  */
-    /* JADX WARN: Removed duplicated region for block: B:248:0x05b9  */
-    /* JADX WARN: Removed duplicated region for block: B:269:0x0605 A[LOOP:8: B:267:0x05ff->B:269:0x0605, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:272:0x05f6  */
-    /* JADX WARN: Removed duplicated region for block: B:275:0x0556 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x0162 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

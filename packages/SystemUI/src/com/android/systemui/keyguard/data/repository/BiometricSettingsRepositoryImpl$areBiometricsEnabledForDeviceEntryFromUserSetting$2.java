@@ -13,7 +13,6 @@ final class BiometricSettingsRepositoryImpl$areBiometricsEnabledForDeviceEntryFr
     int label;
     final /* synthetic */ BiometricSettingsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BiometricSettingsRepositoryImpl$areBiometricsEnabledForDeviceEntryFromUserSetting$2(BiometricSettingsRepositoryImpl biometricSettingsRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = biometricSettingsRepositoryImpl;

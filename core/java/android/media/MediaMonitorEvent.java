@@ -7,13 +7,11 @@ public class MediaMonitorEvent implements Parcelable {
     public static final Parcelable.Creator<MediaMonitorEvent> CREATOR =
             new Parcelable.Creator<
                     MediaMonitorEvent>() { // from class: android.media.MediaMonitorEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaMonitorEvent createFromParcel(Parcel in) {
                     return new MediaMonitorEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaMonitorEvent[] newArray(int size) {
                     return new MediaMonitorEvent[size];

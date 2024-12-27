@@ -6,13 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 public final class PowerMonitor implements Parcelable {
     public static final Parcelable.Creator<PowerMonitor> CREATOR =
             new Parcelable.Creator<PowerMonitor>() { // from class: android.os.PowerMonitor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PowerMonitor createFromParcel(Parcel in) {
                     return new PowerMonitor(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PowerMonitor[] newArray(int size) {
                     return new PowerMonitor[size];

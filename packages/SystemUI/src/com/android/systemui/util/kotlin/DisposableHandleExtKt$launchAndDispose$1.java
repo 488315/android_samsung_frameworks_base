@@ -14,7 +14,6 @@ public final class DisposableHandleExtKt$launchAndDispose$1 extends SuspendLambd
     final /* synthetic */ Function0 $onLaunch;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisposableHandleExtKt$launchAndDispose$1(Function0 function0, Continuation continuation) {
         super(2, continuation);
         this.$onLaunch = function0;

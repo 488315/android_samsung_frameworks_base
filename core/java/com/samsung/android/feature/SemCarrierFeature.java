@@ -25,7 +25,6 @@ public class SemCarrierFeature {
 
         private SemCarrierFeatureHolder() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void createInstance() {
             INSTANCE = new SemCarrierFeature();
         }

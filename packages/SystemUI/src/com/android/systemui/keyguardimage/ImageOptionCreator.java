@@ -50,7 +50,6 @@ public final class ImageOptionCreator {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static ImageOption createImageOption(Context context, Uri uri, boolean z) {
         int i;
         int i2;

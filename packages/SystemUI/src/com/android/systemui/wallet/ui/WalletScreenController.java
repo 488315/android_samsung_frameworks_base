@@ -73,7 +73,6 @@ public final class WalletScreenController implements WalletCardCarousel.OnSelect
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.wallet.ui.WalletScreenController$$ExternalSyntheticLambda0] */
     public WalletScreenController(Context context, WalletView walletView, QuickAccessWalletClient quickAccessWalletClient, ActivityStarter activityStarter, Executor executor, Handler handler, UserTracker userTracker, FalsingManager falsingManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, UiEventLogger uiEventLogger) {
         this.mContext = context;
         this.mWalletClient = quickAccessWalletClient;
@@ -211,8 +210,6 @@ public final class WalletScreenController implements WalletCardCarousel.OnSelect
         this.mHandler.postDelayed(this.mSelectionRunnable, SELECTION_DELAY_MILLIS);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v0, types: [com.android.systemui.wallet.ui.WalletScreenController$$ExternalSyntheticLambda4] */
     public final void showEmptyStateView() {
         Drawable logo = this.mWalletClient.getLogo();
         CharSequence serviceLabel = this.mWalletClient.getServiceLabel();

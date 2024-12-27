@@ -11,13 +11,11 @@ import java.io.PrintWriter;
 public final class LocusId implements Parcelable {
     public static final Parcelable.Creator<LocusId> CREATOR =
             new Parcelable.Creator<LocusId>() { // from class: android.content.LocusId.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LocusId createFromParcel(Parcel parcel) {
                     return new LocusId(parcel.readString());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LocusId[] newArray(int size) {
                     return new LocusId[size];

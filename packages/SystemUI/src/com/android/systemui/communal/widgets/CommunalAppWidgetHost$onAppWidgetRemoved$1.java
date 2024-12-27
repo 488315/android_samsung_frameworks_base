@@ -19,7 +19,6 @@ final class CommunalAppWidgetHost$onAppWidgetRemoved$1 extends SuspendLambda imp
     int label;
     final /* synthetic */ CommunalAppWidgetHost this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalAppWidgetHost$onAppWidgetRemoved$1(CommunalAppWidgetHost communalAppWidgetHost, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalAppWidgetHost;

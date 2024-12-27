@@ -174,13 +174,6 @@ public final class IntelligentBatterySaverService extends IIntelligentBatterySav
             super(looper);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:42:0x010f A[Catch: all -> 0x0142, Exception -> 0x0144, TRY_ENTER, TryCatch #6 {Exception -> 0x0144, blocks: (B:42:0x010f, B:48:0x0146), top: B:40:0x010d, outer: #1 }] */
-        /* JADX WARN: Removed duplicated region for block: B:44:0x016e A[Catch: IOException -> 0x0172, TRY_ENTER, TRY_LEAVE, TryCatch #4 {IOException -> 0x0172, blocks: (B:44:0x016e, B:64:0x0182), top: B:40:0x010d }] */
-        /* JADX WARN: Removed duplicated region for block: B:48:0x0146 A[Catch: all -> 0x0142, Exception -> 0x0144, TRY_LEAVE, TryCatch #6 {Exception -> 0x0144, blocks: (B:42:0x010f, B:48:0x0146), top: B:40:0x010d, outer: #1 }] */
-        /* JADX WARN: Removed duplicated region for block: B:76:0x01a5  */
-        /* JADX WARN: Removed duplicated region for block: B:79:0x01d5  */
-        /* JADX WARN: Removed duplicated region for block: B:81:0x01e0  */
-        /* JADX WARN: Removed duplicated region for block: B:83:0x01b3  */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -197,7 +190,6 @@ public final class IntelligentBatterySaverService extends IIntelligentBatterySav
         }
     }
 
-    /* JADX WARN: Type inference failed for: r12v0, types: [com.android.server.ibs.IntelligentBatterySaverSettingsObserver$$ExternalSyntheticLambda0] */
     public IntelligentBatterySaverService(Context context) {
         IntelligentBatterySaverLogger intelligentBatterySaverLogger;
         this.mContext = context;

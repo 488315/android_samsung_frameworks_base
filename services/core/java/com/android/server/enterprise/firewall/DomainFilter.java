@@ -839,8 +839,6 @@ public final class DomainFilter {
             super(looper);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:11:0x0053  */
-        /* JADX WARN: Removed duplicated region for block: B:14:0x005d  */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -876,7 +874,6 @@ public final class DomainFilter {
         return null;
     }
 
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.server.enterprise.firewall.DomainFilter$5] */
     public DomainFilter(Context context, FirewallRulesApplier firewallRulesApplier) {
         Injector injector = new Injector();
         this.mUserIdMapLock = new Object();
@@ -916,7 +913,6 @@ public final class DomainFilter {
                                 new Thread(
                                                 new Runnable() { // from class:
                                                     // com.android.server.enterprise.firewall.DomainFilter.6
-                                                    /* JADX WARN: Multi-variable type inference failed */
                                                     @Override // java.lang.Runnable
                                                     public final void run() {
                                                         URL url;
@@ -1167,7 +1163,6 @@ public final class DomainFilter {
         domainFilterRule.setDenyDomains(denyDomains);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static void setDomainFilterRulesProperties(
             DomainFilterRule domainFilterRule, JSONArray jSONArray) {
         int i;
@@ -3175,8 +3170,6 @@ public final class DomainFilter {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x005a A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x005b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3192,10 +3185,6 @@ public final class DomainFilter {
                     + " java.lang.String):int");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0068  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:41:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

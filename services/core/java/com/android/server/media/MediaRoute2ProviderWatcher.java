@@ -174,7 +174,6 @@ public final class MediaRoute2ProviderWatcher {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.media.MediaRoute2ProviderWatcher$1] */
     public MediaRoute2ProviderWatcher(Context context, Callback callback, Handler handler, int i) {
         this.mContext = context;
         this.mCallback = callback;

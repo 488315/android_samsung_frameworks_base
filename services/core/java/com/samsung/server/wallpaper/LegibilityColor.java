@@ -81,7 +81,6 @@ public final class LegibilityColor {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.server.wallpaper.LegibilityColor$1] */
     public LegibilityColor(Context context, WallpaperManagerService.SemCallback semCallback, SemWallpaperManagerService semWallpaperManagerService) {
         Log.d("LegibilityColor", "LegibilityColor");
         this.mContext = context;
@@ -149,7 +148,6 @@ public final class LegibilityColor {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.samsung.server.wallpaper.LegibilityColor$2, java.lang.Object] */
     public final synchronized AnonymousClass2 getColorExtractor(final int i, final boolean z) {
         ?? r1;
         try {

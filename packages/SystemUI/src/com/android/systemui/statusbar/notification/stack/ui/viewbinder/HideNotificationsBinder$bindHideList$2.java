@@ -17,7 +17,6 @@ final class HideNotificationsBinder$bindHideList$2 extends SuspendLambda impleme
     final /* synthetic */ NotificationStackScrollLayoutController $viewController;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HideNotificationsBinder$bindHideList$2(SharedFlow sharedFlow, NotificationStackScrollLayoutController notificationStackScrollLayoutController, Continuation continuation) {
         super(2, continuation);
         this.$hideListFlow = sharedFlow;

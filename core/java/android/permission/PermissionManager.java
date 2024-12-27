@@ -749,7 +749,6 @@ public final class PermissionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int checkPermissionUncached(String permission, int pid, int uid, int deviceId) {
         IActivityManager am = ActivityManager.getService();
         if (am == null) {
@@ -890,7 +889,6 @@ public final class PermissionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int checkPackageNamePermissionUncached(
             String permName, String pkgName, String persistentDeviceId, int userId) {
         try {
@@ -999,13 +997,11 @@ public final class PermissionManager {
                 new Parcelable.Creator<
                         PermissionState>() { // from class:
                                              // android.permission.PermissionManager.PermissionState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PermissionState createFromParcel(Parcel source) {
                         return new PermissionState(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PermissionState[] newArray(int size) {
                         return new PermissionState[size];

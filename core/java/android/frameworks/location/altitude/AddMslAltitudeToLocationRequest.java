@@ -9,7 +9,6 @@ public class AddMslAltitudeToLocationRequest implements Parcelable {
     public static final Parcelable.Creator<AddMslAltitudeToLocationRequest> CREATOR =
             new Parcelable.Creator<AddMslAltitudeToLocationRequest>() { // from class:
                 // android.frameworks.location.altitude.AddMslAltitudeToLocationRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AddMslAltitudeToLocationRequest createFromParcel(Parcel _aidl_source) {
                     AddMslAltitudeToLocationRequest _aidl_out =
@@ -18,7 +17,6 @@ public class AddMslAltitudeToLocationRequest implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AddMslAltitudeToLocationRequest[] newArray(int _aidl_size) {
                     return new AddMslAltitudeToLocationRequest[_aidl_size];

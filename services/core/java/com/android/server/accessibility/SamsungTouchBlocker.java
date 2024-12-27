@@ -52,7 +52,6 @@ public final class SamsungTouchBlocker extends BaseEventStreamTransformation {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [android.os.Handler, com.android.server.accessibility.SamsungTouchBlocker$1] */
     public SamsungTouchBlocker(Context context, int i) {
         ?? r0 = new Handler() { // from class: com.android.server.accessibility.SamsungTouchBlocker.1
             @Override // android.os.Handler

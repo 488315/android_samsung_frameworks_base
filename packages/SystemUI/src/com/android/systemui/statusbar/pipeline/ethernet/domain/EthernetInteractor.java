@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 public final class EthernetInteractor {
     public final EthernetInteractor$special$$inlined$map$1 icon;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.statusbar.pipeline.ethernet.domain.EthernetInteractor$special$$inlined$map$1] */
     public EthernetInteractor(ConnectivityRepository connectivityRepository) {
         final ReadonlyStateFlow readonlyStateFlow = ((ConnectivityRepositoryImpl) connectivityRepository).defaultConnections;
         this.icon = new Flow() { // from class: com.android.systemui.statusbar.pipeline.ethernet.domain.EthernetInteractor$special$$inlined$map$1
@@ -44,8 +43,6 @@ public final class EthernetInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

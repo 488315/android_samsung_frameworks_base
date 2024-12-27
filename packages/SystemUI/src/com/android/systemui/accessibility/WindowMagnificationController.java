@@ -306,8 +306,6 @@ public final class WindowMagnificationController implements View.OnTouchListener
         HORIZONTAL_LOCK_BASE = Math.tan(Math.toRadians(50.0d));
     }
 
-    /* JADX WARN: Type inference failed for: r5v3, types: [com.android.systemui.accessibility.WindowMagnificationController$$ExternalSyntheticLambda4] */
-    /* JADX WARN: Type inference failed for: r5v4, types: [com.android.systemui.accessibility.WindowMagnificationController$$ExternalSyntheticLambda4] */
     public WindowMagnificationController(Context context, Handler handler, WindowMagnificationAnimationController windowMagnificationAnimationController, MirrorWindowControl mirrorWindowControl, SurfaceControl.Transaction transaction, WindowMagnifierCallback windowMagnifierCallback, SysUiState sysUiState, SecureSettings secureSettings, Supplier<SurfaceControlViewHost> supplier, SfVsyncFrameCallbackProvider sfVsyncFrameCallbackProvider, Supplier<IWindowSession> supplier2) {
         Size parseSize;
         SparseArray sparseArray = new SparseArray();

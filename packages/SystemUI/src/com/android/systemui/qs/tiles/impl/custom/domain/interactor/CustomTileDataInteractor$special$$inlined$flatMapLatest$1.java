@@ -19,7 +19,6 @@ public final class CustomTileDataInteractor$special$$inlined$flatMapLatest$1 ext
     int label;
     final /* synthetic */ CustomTileDataInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTileDataInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, CustomTileDataInteractor customTileDataInteractor) {
         super(3, continuation);
         this.this$0 = customTileDataInteractor;

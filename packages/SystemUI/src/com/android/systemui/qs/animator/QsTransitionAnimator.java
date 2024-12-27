@@ -157,8 +157,6 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
         void showDetailAnimEnd();
     }
 
-    /* JADX WARN: Type inference failed for: r4v10, types: [com.android.systemui.qs.animator.QsTransitionAnimator$1] */
-    /* JADX WARN: Type inference failed for: r4v11, types: [com.android.systemui.qs.animator.QsTransitionAnimator$2] */
     public QsTransitionAnimator(Lazy lazy, SecQSPanelController secQSPanelController, NotificationStackScrollLayoutController notificationStackScrollLayoutController, QSCMainViewController qSCMainViewController, ShadeHeaderController shadeHeaderController, SecQSDetailController secQSDetailController) {
         this.mQSPanelController = secQSPanelController;
         this.mNotificationStackScrollLayoutController = notificationStackScrollLayoutController;

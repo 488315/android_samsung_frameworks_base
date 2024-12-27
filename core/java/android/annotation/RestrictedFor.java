@@ -21,8 +21,6 @@ public @interface RestrictedFor {
 
     int from();
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public static class Environment {
         public static final Environment SDK_SANDBOX = new AnonymousClass1("SDK_SANDBOX", 0);
         private static final /* synthetic */ Environment[] $VALUES = $values();

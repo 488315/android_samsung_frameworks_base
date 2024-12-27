@@ -38,11 +38,8 @@ public final class MARsFreezeStateRecord {
 
     public enum FreezeReasonType {
         FREEZE_TOTAL("FREEZE_TOTAL", "Total"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF27("FREEZE_REASON_LCDON", "Bg"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF41("FREEZE_REASON_LCDOFF", "LEV"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF55("FREEZE_REASON_OLAF", "OLAF");
 
         private final String freezeType;
@@ -62,47 +59,26 @@ public final class MARsFreezeStateRecord {
         UNFREEZE_TOTAL("UNFREEZE_TOTAL", "Total"),
         UNFREEZE_REASON_ALARM("UNFREEZE_REASON_ALARM", "Alarm"),
         UNFREEZE_REASON_PACKET("UNFREEZE_REASON_PACKET", "Packet"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF3("UNFREEZE_REASON_WAKELOCK", "Wakelock"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF4("UNFREEZE_REASON_BINDER_1", "Binder(1)"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF5("UNFREEZE_REASON_BINDER_0", "Binder(0)"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF6("UNFREEZE_REASON_DEVICE_IDLE_OFF", "DeviceIdleOFF"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF7("UNFREEZE_REASON_START_PROCESS", "StartProcessP"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF8("UNFREEZE_REASON_LAUNCHING_PROVIDER", "LaunchingProvider"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF9("UNFREEZE_REASON_RECEIVING_INTENT", "ReceivingIntent"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF10("UNFREEZE_REASON_EXECUITNG_SERVICE", "ExecutingService"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF11("UNFREEZE_REASON_UIDACTIVE", "UidActive"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF12("UNFREEZE_REASON_STARTSERVICE", "startService"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF13("UNFREEZE_REASON_BINDSERVICE", "bindService"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF14("UNFREEZE_REASON_ACTIVITY", "activity"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF15("UNFREEZE_REASON_BROADCAST", INetd.IF_FLAG_BROADCAST),
-        /* JADX INFO: Fake field, exist only in values array */
         EF14("UNFREEZE_REASON_PROVIDER", "provider"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF15("UNFREEZE_REASON_UNBINDSERVICE", "unbindService"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF14("UNFREEZE_REASON_STARTPROCESS", "startProcess"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF15("UNFREEZE_REASON_SERVICEANR", "ServiceANR"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF14("UNFREEZE_REASON_SIGNAL", "Signal"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF15("UNFREEZE_REASON_CFB", "Cfb"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF14("UNFREEZE_REASON_PROC_STATE", "procstate"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF15("UNFREEZE_REASON_OLAF", "OLAF:"),
         UNFREEZE_REASON_NONE("UNFREEZE_REASON_NONE", KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG);
 

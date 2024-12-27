@@ -230,7 +230,6 @@ public final class DozeTriggers implements DozeMachine.Part {
         boolean z = DozeService.DEBUG;
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.doze.DozeTriggers$2] */
     public DozeTriggers(Context context, DozeHost dozeHost, AmbientDisplayConfiguration ambientDisplayConfiguration, DozeParameters dozeParameters, AsyncSensorManager asyncSensorManager, WakeLock wakeLock, DockManager dockManager, ProximitySensor proximitySensor, ProximityCheck proximityCheck, DozeLog dozeLog, BroadcastDispatcher broadcastDispatcher, SecureSettings secureSettings, AuthController authController, UiEventLogger uiEventLogger, SessionTracker sessionTracker, KeyguardStateController keyguardStateController, DevicePostureController devicePostureController, UserTracker userTracker, SelectedUserInteractor selectedUserInteractor) {
         int i = 0;
         this.mBroadcastReceiver = new TriggerReceiver(this, i);
@@ -559,7 +558,6 @@ public final class DozeTriggers implements DozeMachine.Part {
         }
         final long uptimeMillis = SystemClock.uptimeMillis();
         this.mProxCheck.check(500L, new Consumer() { // from class: com.android.systemui.doze.DozeTriggers$$ExternalSyntheticLambda8
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 DozeTriggers dozeTriggers = DozeTriggers.this;

@@ -47,7 +47,6 @@ public class BitmapHelper {
         return saveBitmapAsFile(bitmap, dirPath + File.separator + fileName);
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:12:0x0034 -> B:6:0x0044). Please report as a decompilation issue!!! */
     public static boolean saveBitmapAsFile(Bitmap bitmap, String fileName) {
         boolean bResult = false;
         FileOutputStream out = null;

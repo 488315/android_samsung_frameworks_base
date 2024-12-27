@@ -24,8 +24,6 @@ public final class CustomTileMapper implements QSTileDataToStateMapper {
         this.uriGrantsManager = iUriGrantsManager;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0039  */
-    /* JADX WARN: Removed duplicated region for block: B:5:0x0032  */
     @Override // com.android.systemui.qs.tiles.base.interactor.QSTileDataToStateMapper
     /*
         Code decompiled incorrectly, please refer to instructions dump.

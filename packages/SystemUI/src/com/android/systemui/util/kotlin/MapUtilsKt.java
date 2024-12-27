@@ -20,7 +20,6 @@ public final class MapUtilsKt {
         return mapBuilder.build();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static final <K, V, R, M extends Map<? super K, ? super R>> M mapValuesNotNullTo(Map<? extends K, ? extends V> map, M m, Function1 function1) {
         for (Map.Entry<? extends K, ? extends V> entry : map.entrySet()) {
             Object invoke = function1.invoke(entry);

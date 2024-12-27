@@ -264,7 +264,6 @@ public final class ShadeCarrierGroupController {
         this.mBgHandler.post(new ShadeCarrierGroupController$$ExternalSyntheticLambda0(this, 0));
     }
 
-    /* JADX WARN: Type inference failed for: r10v2, types: [com.android.systemui.shade.carrier.ShadeCarrierGroupController$1] */
     private ShadeCarrierGroupController(ShadeCarrierGroup shadeCarrierGroup, ActivityStarter activityStarter, Handler handler, Looper looper, ShadeCarrierGroupControllerLogger shadeCarrierGroupControllerLogger, NetworkController networkController, CarrierTextManager.Builder builder, Context context, CarrierConfigTracker carrierConfigTracker, SlotIndexResolver slotIndexResolver, MobileUiAdapter mobileUiAdapter, MobileContextProvider mobileContextProvider, StatusBarPipelineFlags statusBarPipelineFlags, LatinNetworkNameProvider latinNetworkNameProvider, SlimIndicatorViewMediator slimIndicatorViewMediator) {
         this.mInfos = new CellSignalState[3];
         this.mCarrierDividers = new View[]{shadeCarrierGroup.findViewById(R.id.shade_carrier_divider1), shadeCarrierGroup.findViewById(R.id.shade_carrier_divider2)};

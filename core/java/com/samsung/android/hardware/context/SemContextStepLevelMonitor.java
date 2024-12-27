@@ -22,13 +22,11 @@ public class SemContextStepLevelMonitor extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextStepLevelMonitor>() { // from class:
                                                     // com.samsung.android.hardware.context.SemContextStepLevelMonitor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextStepLevelMonitor createFromParcel(Parcel in) {
                     return new SemContextStepLevelMonitor(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextStepLevelMonitor[] newArray(int size) {
                     return new SemContextStepLevelMonitor[size];

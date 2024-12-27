@@ -123,7 +123,6 @@ public final class DialogTransitionAnimator {
         return dialogTransitionAnimator.createActivityTransitionController(animatedDialog, null);
     }
 
-    /* JADX WARN: Type inference failed for: r6v1, types: [com.android.systemui.animation.DialogTransitionAnimator$createActivityTransitionController$1] */
     public final DialogTransitionAnimator$createActivityTransitionController$1 createActivityTransitionController(final AnimatedDialog animatedDialog, Integer num) {
         final GhostedViewTransitionAnimatorController fromView$default;
         animatedDialog.exitAnimationDisabled = true;
@@ -265,9 +264,6 @@ public final class DialogTransitionAnimator {
         dialog.dismiss();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00c9  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0195  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0077  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -26,7 +26,6 @@ public abstract class BiometricPromptRequest {
         public final String negativeButtonText;
         public final String opPackageName;
 
-        /* JADX WARN: Illegal instructions before constructor call */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -130,7 +129,6 @@ public abstract class BiometricPromptRequest {
             this(promptInfo, biometricUserInfo, biometricOperationInfo);
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

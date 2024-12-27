@@ -17,7 +17,6 @@ public final class LatestConflatedKt$flatMapLatestConflated$$inlined$flatMapLate
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LatestConflatedKt$flatMapLatestConflated$$inlined$flatMapLatest$1(Function2 function2, Continuation continuation) {
         super(3, continuation);
         this.$transform = function2;

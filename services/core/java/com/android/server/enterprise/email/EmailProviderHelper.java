@@ -159,7 +159,6 @@ public abstract class EmailProviderHelper {
 
        if (r9.isClosed() == false) goto L21;
     */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0065  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -266,12 +265,6 @@ public abstract class EmailProviderHelper {
 
        if (r9.isClosed() == false) goto L21;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0060  */
-    /* JADX WARN: Type inference failed for: r1v0 */
-    /* JADX WARN: Type inference failed for: r1v1 */
-    /* JADX WARN: Type inference failed for: r1v10 */
-    /* JADX WARN: Type inference failed for: r1v2, types: [android.database.Cursor] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -387,13 +380,6 @@ public abstract class EmailProviderHelper {
 
        if (r11.isClosed() == false) goto L25;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0099  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x007d  */
-    /* JADX WARN: Type inference failed for: r2v0 */
-    /* JADX WARN: Type inference failed for: r2v1 */
-    /* JADX WARN: Type inference failed for: r2v2, types: [android.database.Cursor] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -521,13 +507,6 @@ public abstract class EmailProviderHelper {
 
        if (r11.isClosed() == false) goto L25;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0099  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x007d  */
-    /* JADX WARN: Type inference failed for: r2v0 */
-    /* JADX WARN: Type inference failed for: r2v1 */
-    /* JADX WARN: Type inference failed for: r2v2, types: [android.database.Cursor] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -658,13 +637,6 @@ public abstract class EmailProviderHelper {
 
        if (r10 == false) goto L22;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x006e  */
-    /* JADX WARN: Type inference failed for: r9v0, types: [long] */
-    /* JADX WARN: Type inference failed for: r9v12 */
-    /* JADX WARN: Type inference failed for: r9v3 */
-    /* JADX WARN: Type inference failed for: r9v5 */
-    /* JADX WARN: Type inference failed for: r9v6, types: [android.database.Cursor] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

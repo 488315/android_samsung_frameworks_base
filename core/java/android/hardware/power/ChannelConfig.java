@@ -9,7 +9,6 @@ public class ChannelConfig implements Parcelable {
     public static final Parcelable.Creator<ChannelConfig> CREATOR =
             new Parcelable.Creator<
                     ChannelConfig>() { // from class: android.hardware.power.ChannelConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ChannelConfig createFromParcel(Parcel _aidl_source) {
                     ChannelConfig _aidl_out = new ChannelConfig();
@@ -17,7 +16,6 @@ public class ChannelConfig implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ChannelConfig[] newArray(int _aidl_size) {
                     return new ChannelConfig[_aidl_size];

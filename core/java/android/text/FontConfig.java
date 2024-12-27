@@ -22,7 +22,6 @@ import java.util.Objects;
 public final class FontConfig implements Parcelable {
     public static final Parcelable.Creator<FontConfig> CREATOR =
             new Parcelable.Creator<FontConfig>() { // from class: android.text.FontConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FontConfig createFromParcel(Parcel source) {
                     ArrayList arrayList = new ArrayList();
@@ -42,7 +41,6 @@ public final class FontConfig implements Parcelable {
                             configVersion);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FontConfig[] newArray(int size) {
                     return new FontConfig[size];
@@ -167,7 +165,6 @@ public final class FontConfig implements Parcelable {
     public static final class Font implements Parcelable {
         public static final Parcelable.Creator<Font> CREATOR =
                 new Parcelable.Creator<Font>() { // from class: android.text.FontConfig.Font.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Font createFromParcel(Parcel source) {
                         File path = new File(source.readString8());
@@ -192,7 +189,6 @@ public final class FontConfig implements Parcelable {
                                 varTypeAxes);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Font[] newArray(int size) {
                         return new Font[size];
@@ -354,7 +350,6 @@ public final class FontConfig implements Parcelable {
     public static final class Alias implements Parcelable {
         public static final Parcelable.Creator<Alias> CREATOR =
                 new Parcelable.Creator<Alias>() { // from class: android.text.FontConfig.Alias.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Alias createFromParcel(Parcel source) {
                         String alias = source.readString8();
@@ -363,7 +358,6 @@ public final class FontConfig implements Parcelable {
                         return new Alias(alias, referName, weight);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Alias[] newArray(int size) {
                         return new Alias[size];
@@ -440,7 +434,6 @@ public final class FontConfig implements Parcelable {
         public static final Parcelable.Creator<FontFamily> CREATOR =
                 new Parcelable.Creator<
                         FontFamily>() { // from class: android.text.FontConfig.FontFamily.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FontFamily createFromParcel(Parcel source) {
                         ArrayList arrayList = new ArrayList();
@@ -451,7 +444,6 @@ public final class FontConfig implements Parcelable {
                                 arrayList, LocaleList.forLanguageTags(langTags), variant);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FontFamily[] newArray(int size) {
                         return new FontFamily[size];
@@ -548,7 +540,6 @@ public final class FontConfig implements Parcelable {
                 new Parcelable.Creator<
                         NamedFamilyList>() { // from class:
                                              // android.text.FontConfig.NamedFamilyList.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public NamedFamilyList createFromParcel(Parcel source) {
                         ArrayList arrayList = new ArrayList();
@@ -557,7 +548,6 @@ public final class FontConfig implements Parcelable {
                         return new NamedFamilyList(arrayList, name);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public NamedFamilyList[] newArray(int size) {
                         return new NamedFamilyList[size];

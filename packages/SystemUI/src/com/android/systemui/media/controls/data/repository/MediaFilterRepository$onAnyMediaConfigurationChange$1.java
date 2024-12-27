@@ -21,7 +21,6 @@ final class MediaFilterRepository$onAnyMediaConfigurationChange$1 extends Suspen
     int label;
     final /* synthetic */ MediaFilterRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaFilterRepository$onAnyMediaConfigurationChange$1(MediaFilterRepository mediaFilterRepository, Context context, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaFilterRepository;
@@ -40,8 +39,6 @@ final class MediaFilterRepository$onAnyMediaConfigurationChange$1 extends Suspen
         return ((MediaFilterRepository$onAnyMediaConfigurationChange$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.media.controls.data.repository.MediaFilterRepository$onAnyMediaConfigurationChange$1$callback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -81,7 +78,6 @@ final class MediaFilterRepository$onAnyMediaConfigurationChange$1 extends Suspen
             ((ChannelCoroutine) producerScope).mo2552trySendJP2dKIU(Unit.INSTANCE);
             final MediaFilterRepository mediaFilterRepository2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.media.controls.data.repository.MediaFilterRepository$onAnyMediaConfigurationChange$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -22,8 +22,6 @@ final class BluetoothRepositoryImpl$fetchConnectionStatusInBackground$1 extends 
     int label;
     final /* synthetic */ BluetoothRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Multi-variable type inference failed */
     public BluetoothRepositoryImpl$fetchConnectionStatusInBackground$1(BluetoothRepositoryImpl bluetoothRepositoryImpl, Collection<? extends CachedBluetoothDevice> collection, ConnectionStatusFetchedCallback connectionStatusFetchedCallback, Continuation continuation) {
         super(2, continuation);
         this.this$0 = bluetoothRepositoryImpl;

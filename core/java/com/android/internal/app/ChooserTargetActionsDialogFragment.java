@@ -134,7 +134,6 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment
         return v;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Pair lambda$onCreateView$1(DisplayResolveInfo dri) {
         return new Pair(getItemIcon(dri), getItemLabel(dri));
     }
@@ -146,7 +145,6 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment
             this.mItems = items;
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // com.android.internal.widget.RecyclerView.Adapter
         public VH onCreateViewHolder(ViewGroup parent, int viewType) {
             return ChooserTargetActionsDialogFragment.this
@@ -196,7 +194,6 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$bind$0(int position, View v) {
             ChooserTargetActionsDialogFragment.this.onClick(
                     ChooserTargetActionsDialogFragment.this.getDialog(), position);

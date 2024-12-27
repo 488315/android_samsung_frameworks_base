@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.Settings;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public class GlobalSettingsImpl implements GlobalSettings {
     private final ContentResolver mContentResolver;
 

@@ -8,13 +8,11 @@ public final class Fingerprint extends BiometricAuthenticator.Identifier {
     public static final Parcelable.Creator<Fingerprint> CREATOR =
             new Parcelable.Creator<
                     Fingerprint>() { // from class: android.hardware.fingerprint.Fingerprint.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Fingerprint createFromParcel(Parcel in) {
                     return new Fingerprint(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Fingerprint[] newArray(int size) {
                     return new Fingerprint[size];

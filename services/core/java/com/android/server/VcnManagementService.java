@@ -325,8 +325,6 @@ public final class VcnManagementService extends IVcnManagementService.Stub {
             implements TelephonySubscriptionTracker.TelephonySubscriptionTrackerCallback {
         public VcnSubscriptionTrackerCallback() {}
 
-        /* JADX WARN: Removed duplicated region for block: B:38:0x0119  */
-        /* JADX WARN: Removed duplicated region for block: B:42:0x011c A[Catch: all -> 0x0074, TryCatch #0 {all -> 0x0074, blocks: (B:4:0x0008, B:5:0x002f, B:7:0x0035, B:10:0x0051, B:13:0x005c, B:15:0x0068, B:16:0x0077, B:22:0x0087, B:23:0x0097, B:25:0x009e, B:27:0x00c7, B:31:0x00d7, B:44:0x00e4, B:36:0x0111, B:39:0x011e, B:42:0x011c, B:50:0x012c, B:52:0x0142, B:54:0x014a, B:55:0x014f), top: B:3:0x0008 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

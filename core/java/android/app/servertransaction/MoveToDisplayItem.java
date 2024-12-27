@@ -16,13 +16,11 @@ public class MoveToDisplayItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<MoveToDisplayItem> CREATOR =
             new Parcelable.Creator<MoveToDisplayItem>() { // from class:
                 // android.app.servertransaction.MoveToDisplayItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MoveToDisplayItem createFromParcel(Parcel in) {
                     return new MoveToDisplayItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MoveToDisplayItem[] newArray(int size) {
                     return new MoveToDisplayItem[size];

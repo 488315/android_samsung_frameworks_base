@@ -15,7 +15,6 @@ import java.util.function.Function;
 public final class PackageTagsList implements Parcelable {
     public static final Parcelable.Creator<PackageTagsList> CREATOR =
             new Parcelable.Creator<PackageTagsList>() { // from class: android.os.PackageTagsList.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackageTagsList createFromParcel(Parcel in) {
                     int count = in.readInt();
@@ -32,7 +31,6 @@ public final class PackageTagsList implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackageTagsList[] newArray(int size) {
                     return new PackageTagsList[size];

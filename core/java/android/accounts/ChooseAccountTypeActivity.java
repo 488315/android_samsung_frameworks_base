@@ -97,7 +97,6 @@ public class ChooseAccountTypeActivity extends Activity {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setResultAndFinish(String type) {
         Bundle bundle = new Bundle();
         bundle.putString("accountType", type);

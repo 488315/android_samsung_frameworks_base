@@ -57,7 +57,6 @@ public class Path {
     @CriticalNative
     private static native int nGetFillType(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nGetFinalizer();
 
     @CriticalNative

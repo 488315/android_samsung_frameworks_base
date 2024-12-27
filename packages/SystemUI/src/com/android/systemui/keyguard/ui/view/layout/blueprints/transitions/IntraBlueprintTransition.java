@@ -16,8 +16,6 @@ import kotlin.jvm.internal.Intrinsics;
 
 public final class IntraBlueprintTransition extends TransitionSet {
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Type {
         public static final /* synthetic */ Type[] $VALUES;
         public static final Type ClockSize = null;

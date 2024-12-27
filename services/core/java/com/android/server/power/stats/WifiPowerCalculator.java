@@ -55,13 +55,6 @@ public final class WifiPowerCalculator extends PowerCalculator {
                 + ((j + j2) * this.mWifiPowerPerPacket);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0188  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x01a3  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x01ba  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0193  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0140  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x017e  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0172  */
     @Override // com.android.server.power.stats.PowerCalculator
     /*
         Code decompiled incorrectly, please refer to instructions dump.

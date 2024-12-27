@@ -58,13 +58,11 @@ public final class UserHandle implements Parcelable {
         }
         CREATOR =
                 new Parcelable.Creator<UserHandle>() { // from class: android.os.UserHandle.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public UserHandle createFromParcel(Parcel in) {
                         return UserHandle.of(in.readInt());
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public UserHandle[] newArray(int size) {
                         return new UserHandle[size];

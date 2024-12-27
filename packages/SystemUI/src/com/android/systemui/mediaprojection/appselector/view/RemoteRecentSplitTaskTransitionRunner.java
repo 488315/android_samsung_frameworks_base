@@ -42,10 +42,6 @@ public final class RemoteRecentSplitTaskTransitionRunner extends RemoteTransitio
         Log.w("MediaProjectionAppSelectorActivity", "unexpected consumption of app selector transition: aborted=" + z);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v1 */
-    /* JADX WARN: Type inference failed for: r0v7, types: [java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r12v14, types: [T, android.window.TransitionInfo$Change] */
     public final void startAnimation(IBinder iBinder, TransitionInfo transitionInfo, final SurfaceControl.Transaction transaction, final IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback) {
         T t;
         ActivityManager.RunningTaskInfo taskInfo;

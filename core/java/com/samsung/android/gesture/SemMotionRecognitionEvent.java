@@ -19,13 +19,11 @@ public class SemMotionRecognitionEvent implements Parcelable {
             new Parcelable.Creator<
                     SemMotionRecognitionEvent>() { // from class:
                                                    // com.samsung.android.gesture.SemMotionRecognitionEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemMotionRecognitionEvent createFromParcel(Parcel in) {
                     return new SemMotionRecognitionEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemMotionRecognitionEvent[] newArray(int size) {
                     return new SemMotionRecognitionEvent[size];

@@ -423,7 +423,6 @@ public final class LsLogFile {
                 "Method not decompiled: com.samsung.android.lock.LsLogFile.showLegacy():void");
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.samsung.android.lock.LsLogFile$1] */
     public static void show() {
         new Thread() { // from class: com.samsung.android.lock.LsLogFile.1
             @Override // java.lang.Thread, java.lang.Runnable
@@ -439,7 +438,6 @@ public final class LsLogFile {
         }.start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Code restructure failed: missing block: B:15:0x0067, code lost:
 
        if (r5 != null) goto L30;
@@ -699,7 +697,6 @@ public final class LsLogFile {
         return true;
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.samsung.android.lock.LsLogFile$2] */
     public static void upload(final LsLogType type) {
         Log.i(TAG, "Request upload for " + type);
         new Thread() { // from class: com.samsung.android.lock.LsLogFile.2
@@ -722,7 +719,6 @@ public final class LsLogFile {
         }.start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String getZipFile() {
         String zipFile = "/data/log/LockSettingsLog.zip";
         if (!fileLock()) {

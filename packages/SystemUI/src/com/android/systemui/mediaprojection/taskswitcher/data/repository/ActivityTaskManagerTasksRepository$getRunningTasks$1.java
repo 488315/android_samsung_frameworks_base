@@ -8,7 +8,6 @@ final class ActivityTaskManagerTasksRepository$getRunningTasks$1 extends Continu
     /* synthetic */ Object result;
     final /* synthetic */ ActivityTaskManagerTasksRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ActivityTaskManagerTasksRepository$getRunningTasks$1(ActivityTaskManagerTasksRepository activityTaskManagerTasksRepository, Continuation continuation) {
         super(continuation);
         this.this$0 = activityTaskManagerTasksRepository;

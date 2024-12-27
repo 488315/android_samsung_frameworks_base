@@ -111,7 +111,6 @@ public abstract class ListsKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ListsKt$EmptyListItem$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -126,7 +125,6 @@ public abstract class ListsKt {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.systemui.media.mediaoutput.compose.widget.ListsKt$ListItemContainer$1, kotlin.jvm.internal.Lambda] */
     public static final void ListItemContainer(final Function3 function3, Composer composer, final int i) {
         int i2;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -175,7 +173,6 @@ public abstract class ListsKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ListsKt$ListItemContainer$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -210,13 +207,6 @@ public abstract class ListsKt {
     
         if (r8 == androidx.compose.runtime.Composer.Companion.Empty) goto L52;
      */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0076  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0098  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00a1  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00ed  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x014d  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0078  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -233,16 +223,6 @@ public abstract class ListsKt {
     
         if (r8 == androidx.compose.runtime.Composer.Companion.Empty) goto L63;
      */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0068  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0092  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00b4  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00bd  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x010b  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x01ab  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00b6  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0094  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x006c  */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.systemui.media.mediaoutput.compose.widget.ListsKt$SecRadioListItem$2$1, kotlin.jvm.internal.Lambda] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -312,7 +292,6 @@ public abstract class ListsKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ListsKt$SecSubHeader$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -339,17 +318,6 @@ public abstract class ListsKt {
     
         if (r0 == androidx.compose.runtime.Composer.Companion.Empty) goto L103;
      */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0092  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00b6  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00bd  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00cc  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0116  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0221  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x00c0  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x00b8  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0095  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x006d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -362,15 +330,6 @@ public abstract class ListsKt {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.compose.widget.ListsKt.SecSwitchListItem(kotlin.jvm.functions.Function1, java.lang.String, java.lang.String, java.lang.Boolean, androidx.compose.runtime.Composer, int, int):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x004a  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0078  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0085  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00b3  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x01d3  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0087  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0050  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

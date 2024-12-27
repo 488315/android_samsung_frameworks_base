@@ -19,7 +19,6 @@ final class DeviceEntryFingerprintAuthRepositoryImpl$shouldUpdateIndicatorVisibi
     int label;
     final /* synthetic */ DeviceEntryFingerprintAuthRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryFingerprintAuthRepositoryImpl$shouldUpdateIndicatorVisibility$1(DeviceEntryFingerprintAuthRepositoryImpl deviceEntryFingerprintAuthRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceEntryFingerprintAuthRepositoryImpl;
@@ -37,8 +36,6 @@ final class DeviceEntryFingerprintAuthRepositoryImpl$shouldUpdateIndicatorVisibi
         return ((DeviceEntryFingerprintAuthRepositoryImpl$shouldUpdateIndicatorVisibility$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.keyguard.KeyguardUpdateMonitorCallback, com.android.systemui.keyguard.data.repository.DeviceEntryFingerprintAuthRepositoryImpl$shouldUpdateIndicatorVisibility$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -76,7 +73,6 @@ final class DeviceEntryFingerprintAuthRepositoryImpl$shouldUpdateIndicatorVisibi
             this.this$0.keyguardUpdateMonitor.registerCallback(r3);
             final DeviceEntryFingerprintAuthRepositoryImpl deviceEntryFingerprintAuthRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.DeviceEntryFingerprintAuthRepositoryImpl$shouldUpdateIndicatorVisibility$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

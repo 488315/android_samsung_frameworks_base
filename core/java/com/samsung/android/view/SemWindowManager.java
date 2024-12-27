@@ -355,13 +355,11 @@ public class SemWindowManager {
                 new Parcelable.Creator<
                         VisibleWindowInfo>() { // from class:
                                                // com.samsung.android.view.SemWindowManager.VisibleWindowInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public VisibleWindowInfo createFromParcel(Parcel source) {
                         return new VisibleWindowInfo(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public VisibleWindowInfo[] newArray(int size) {
                         return new VisibleWindowInfo[size];
@@ -509,13 +507,11 @@ public class SemWindowManager {
                 new Parcelable.Creator<
                         KeyCustomizationInfo>() { // from class:
                                                   // com.samsung.android.view.SemWindowManager.KeyCustomizationInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public KeyCustomizationInfo createFromParcel(Parcel source) {
                         return new KeyCustomizationInfo(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public KeyCustomizationInfo[] newArray(int size) {
                         return new KeyCustomizationInfo[size];

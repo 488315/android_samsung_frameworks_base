@@ -397,12 +397,6 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         postDelayed(new KeyguardSecAffordanceView$$ExternalSyntheticLambda5(this, 1), 700L);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x022c  */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x0232  */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x022f  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0168  */
-    /* JADX WARN: Type inference failed for: r7v3, types: [boolean] */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1119,10 +1113,6 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         setRectangleBounds(f);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0072  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x008c A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x007e  */
-    /* JADX WARN: Type inference failed for: r0v0, types: [boolean] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1375,18 +1365,6 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         this(context, attributeSet, i, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r5v11, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$6] */
-    /* JADX WARN: Type inference failed for: r5v12, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$7] */
-    /* JADX WARN: Type inference failed for: r5v13, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$8] */
-    /* JADX WARN: Type inference failed for: r5v14, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$9] */
-    /* JADX WARN: Type inference failed for: r5v15, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$10] */
-    /* JADX WARN: Type inference failed for: r5v16, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$11] */
-    /* JADX WARN: Type inference failed for: r5v17, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$12] */
-    /* JADX WARN: Type inference failed for: r5v18, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$13] */
-    /* JADX WARN: Type inference failed for: r5v5, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r5v6, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$1] */
-    /* JADX WARN: Type inference failed for: r5v8, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$3] */
-    /* JADX WARN: Type inference failed for: r5v9, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$4] */
     public KeyguardSecAffordanceView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mRectangleIconBounds = new Rect();

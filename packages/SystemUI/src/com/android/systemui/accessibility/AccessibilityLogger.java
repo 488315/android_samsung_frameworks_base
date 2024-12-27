@@ -10,8 +10,6 @@ public final class AccessibilityLogger {
     public long lastTimeThrottledMs;
     public final UiEventLogger uiEventLogger;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class MagnificationSettingsEvent implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ MagnificationSettingsEvent[] $VALUES;
         public static final MagnificationSettingsEvent MAGNIFICATION_SETTINGS_PANEL_CLOSED;

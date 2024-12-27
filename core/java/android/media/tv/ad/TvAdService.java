@@ -374,7 +374,6 @@ public abstract class TvAdService extends Service {
             return 0;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void initialize(ITvAdSessionCallback callback) {
             synchronized (this.mLock) {
                 this.mSessionCallback = callback;
@@ -521,7 +520,6 @@ public abstract class TvAdService extends Service {
     private static final class MediaViewCleanUpTask extends AsyncTask<View, Void, Void> {
         private MediaViewCleanUpTask() {}
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public Void doInBackground(View... views) {
             View mediaViewParent = views[0];

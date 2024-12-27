@@ -211,9 +211,6 @@ public final class IQIServiceBrokerExt {
         iQIManager.submitMetric(ss2s);
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.samsung.iqi.IQIServiceBrokerExt$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.iqi.IQIServiceBrokerExt$2] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.samsung.iqi.IQIServiceBrokerExt$3] */
     public IQIServiceBrokerExt(Context context) {
         this.mContext = context;
         this.mContentResolver = context.getContentResolver();

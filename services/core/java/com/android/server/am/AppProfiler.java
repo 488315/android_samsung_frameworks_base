@@ -208,8 +208,6 @@ public final class AppProfiler {
 
         public CachedAppsWatermarkData() {}
 
-        /* JADX WARN: Removed duplicated region for block: B:11:0x004d A[Catch: all -> 0x0027, TryCatch #0 {all -> 0x0027, blocks: (B:4:0x0008, B:6:0x0023, B:9:0x003a, B:11:0x004d, B:12:0x0072, B:14:0x007a, B:16:0x0080, B:18:0x0092, B:20:0x009b, B:23:0x009e, B:24:0x00c2, B:29:0x002a), top: B:3:0x0008 }] */
-        /* JADX WARN: Removed duplicated region for block: B:14:0x007a A[Catch: all -> 0x0027, TryCatch #0 {all -> 0x0027, blocks: (B:4:0x0008, B:6:0x0023, B:9:0x003a, B:11:0x004d, B:12:0x0072, B:14:0x007a, B:16:0x0080, B:18:0x0092, B:20:0x009b, B:23:0x009e, B:24:0x00c2, B:29:0x002a), top: B:3:0x0008 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -367,7 +365,6 @@ public final class AppProfiler {
                     }
                 };
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.am.AppProfiler$CpuBinder$1] */
         public CpuBinder() {}
 
         @Override // android.os.Binder
@@ -553,10 +550,6 @@ public final class AppProfiler {
 
        if (r15 == false) goto L80;
     */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0177  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x0212  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x025c A[SYNTHETIC] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:119:? -> B:115:0x01de). Please report as a decompilation issue!!! */
     /* renamed from: -$$Nest$mcollectPssInBackground, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -576,8 +569,6 @@ public final class AppProfiler {
 
        if (r14 == false) goto L80;
     */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0171  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:111:? -> B:107:0x01b5). Please report as a decompilation issue!!! */
     /* renamed from: -$$Nest$mcollectRssInBackground, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -593,7 +584,6 @@ public final class AppProfiler {
                     + " com.android.server.am.AppProfiler.m178$$Nest$mcollectRssInBackground(com.android.server.am.AppProfiler):void");
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.am.AppProfiler$1] */
     public AppProfiler(
             ActivityManagerService activityManagerService,
             Looper looper,
@@ -1055,8 +1045,6 @@ public final class AppProfiler {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00eb  */
-    /* JADX WARN: Removed duplicated region for block: B:32:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1081,8 +1069,6 @@ public final class AppProfiler {
                     + " int, long, long, long, long, int, long, long):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00e1  */
-    /* JADX WARN: Removed duplicated region for block: B:32:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1214,7 +1200,6 @@ public final class AppProfiler {
         ActivityManagerService.resetPriorityAfterProcLockedSection();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0044  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1279,8 +1264,6 @@ public final class AppProfiler {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00d0  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x015e A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

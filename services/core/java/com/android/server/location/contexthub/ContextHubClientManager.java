@@ -127,8 +127,6 @@ public final class ContextHubClientManager {
         return (byte) 2;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r15v0, types: [android.os.IBinder, android.os.IBinder$DeathRecipient, com.android.server.location.contexthub.ContextHubClientBroker, java.lang.Object] */
     public final IContextHubClient registerClient(ContextHubInfo contextHubInfo, IContextHubClientCallback iContextHubClientCallback, String str, ContextHubTransactionManager contextHubTransactionManager, String str2) {
         ?? contextHubClientBroker;
         synchronized (this) {

@@ -15,7 +15,6 @@ final class DeviceEntryBackgroundViewModel$color$1$2 extends SuspendLambda imple
     int label;
     final /* synthetic */ DeviceEntryBackgroundViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryBackgroundViewModel$color$1$2(DeviceEntryBackgroundViewModel deviceEntryBackgroundViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceEntryBackgroundViewModel;

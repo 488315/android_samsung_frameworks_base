@@ -130,7 +130,6 @@ public final class NotificationPlayer implements MediaPlayer.OnCompletionListene
         
             if (android.media.RingtoneManager.getActualDefaultRingtoneUri(r4.context, r5) != null) goto L57;
          */
-        /* JADX WARN: Removed duplicated region for block: B:46:0x014a  */
         @Override // java.lang.Thread, java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -151,7 +150,6 @@ public final class NotificationPlayer implements MediaPlayer.OnCompletionListene
         return (command.uri.toString().contains("ChargingStarted") || command.uri.toString().contains("LowBattery") || command.uri.toString().contains("Water_Protection") || command.uri.toString().contains("ChargingStarted_Fast")) ? false : true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:73:0x00db A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* renamed from: -$$Nest$mplayFallbackRingtone, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.

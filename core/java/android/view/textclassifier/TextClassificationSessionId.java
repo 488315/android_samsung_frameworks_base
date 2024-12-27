@@ -14,14 +14,12 @@ public final class TextClassificationSessionId implements Parcelable {
             new Parcelable.Creator<
                     TextClassificationSessionId>() { // from class:
                                                      // android.view.textclassifier.TextClassificationSessionId.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextClassificationSessionId createFromParcel(Parcel parcel) {
                     return new TextClassificationSessionId(
                             parcel.readString(), parcel.readStrongBinder());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextClassificationSessionId[] newArray(int size) {
                     return new TextClassificationSessionId[size];

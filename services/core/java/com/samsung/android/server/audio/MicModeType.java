@@ -15,8 +15,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public abstract class MicModeType {
     public static final /* synthetic */ MicModeType[] $VALUES;
     public static final List AVAILABLE_DEVICE_TYPES;

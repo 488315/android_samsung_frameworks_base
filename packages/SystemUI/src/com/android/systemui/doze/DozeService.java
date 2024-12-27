@@ -73,7 +73,6 @@ public class DozeService extends DreamService implements DozeMachine.Service, Do
     public final PluginManager mPluginManager;
     public WakefulnessLifecycle mWakefulnessLifecycle;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.doze.DozeService$$ExternalSyntheticLambda0] */
     public DozeService(DozeComponent.Builder builder, PluginManager pluginManager) {
         this.mDozeComponentBuilder = builder;
         setDebug(DEBUG);

@@ -120,7 +120,6 @@ public class CustomizerTileViewPager extends ViewPager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.qs.customize.CustomizerTileViewPager$2] */
     public CustomizerTileViewPager(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mIsMultiTouch = false;

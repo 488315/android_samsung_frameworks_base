@@ -1072,7 +1072,6 @@ public interface IGnss extends IInterface {
         public static final Parcelable.Creator<PositionModeOptions> CREATOR =
                 new Parcelable.Creator<PositionModeOptions>() { // from class:
                     // android.hardware.gnss.IGnss.PositionModeOptions.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PositionModeOptions createFromParcel(Parcel _aidl_source) {
                         PositionModeOptions _aidl_out = new PositionModeOptions();
@@ -1080,7 +1079,6 @@ public interface IGnss extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PositionModeOptions[] newArray(int _aidl_size) {
                         return new PositionModeOptions[_aidl_size];

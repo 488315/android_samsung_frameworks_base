@@ -44,13 +44,11 @@ public abstract class AtomicFormula extends IntegrityFormula {
         public static final Parcelable.Creator<LongAtomicFormula> CREATOR =
                 new Parcelable.Creator<LongAtomicFormula>() { // from class:
                     // android.content.integrity.AtomicFormula.LongAtomicFormula.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public LongAtomicFormula createFromParcel(Parcel in) {
                         return new LongAtomicFormula(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public LongAtomicFormula[] newArray(int size) {
                         return new LongAtomicFormula[size];
@@ -194,13 +192,11 @@ public abstract class AtomicFormula extends IntegrityFormula {
         public static final Parcelable.Creator<StringAtomicFormula> CREATOR =
                 new Parcelable.Creator<StringAtomicFormula>() { // from class:
                     // android.content.integrity.AtomicFormula.StringAtomicFormula.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public StringAtomicFormula createFromParcel(Parcel in) {
                         return new StringAtomicFormula(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public StringAtomicFormula[] newArray(int size) {
                         return new StringAtomicFormula[size];
@@ -378,13 +374,11 @@ public abstract class AtomicFormula extends IntegrityFormula {
         public static final Parcelable.Creator<BooleanAtomicFormula> CREATOR =
                 new Parcelable.Creator<BooleanAtomicFormula>() { // from class:
                     // android.content.integrity.AtomicFormula.BooleanAtomicFormula.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BooleanAtomicFormula createFromParcel(Parcel in) {
                         return new BooleanAtomicFormula(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BooleanAtomicFormula[] newArray(int size) {
                         return new BooleanAtomicFormula[size];

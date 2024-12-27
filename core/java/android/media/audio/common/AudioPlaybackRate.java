@@ -12,7 +12,6 @@ public class AudioPlaybackRate implements Parcelable {
     public static final Parcelable.Creator<AudioPlaybackRate> CREATOR =
             new Parcelable.Creator<AudioPlaybackRate>() { // from class:
                 // android.media.audio.common.AudioPlaybackRate.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPlaybackRate createFromParcel(Parcel _aidl_source) {
                     AudioPlaybackRate _aidl_out = new AudioPlaybackRate();
@@ -20,7 +19,6 @@ public class AudioPlaybackRate implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPlaybackRate[] newArray(int _aidl_size) {
                     return new AudioPlaybackRate[_aidl_size];

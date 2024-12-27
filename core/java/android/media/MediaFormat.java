@@ -405,7 +405,6 @@ public final class MediaFormat {
         this.mMap.remove(KEY_FEATURE_ + name);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     abstract class FilteredMappedKeySet extends AbstractSet<String> {
         private Set<String> mKeys;
 
@@ -441,7 +440,6 @@ public final class MediaFormat {
             return false;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         class KeyIterator implements Iterator<String> {
             Iterator<String> mIterator;
             String mLast;
@@ -470,7 +468,6 @@ public final class MediaFormat {
                                 .iterator();
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ boolean lambda$new$0(String k) {
                 return FilteredMappedKeySet.this.keepKey(k);
             }

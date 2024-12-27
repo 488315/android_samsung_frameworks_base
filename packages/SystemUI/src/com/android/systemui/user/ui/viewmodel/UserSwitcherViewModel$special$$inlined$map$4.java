@@ -39,9 +39,6 @@ public final class UserSwitcherViewModel$special$$inlined$map$4 implements Flow 
             this.this$0 = userSwitcherViewModel;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
         @Override // kotlinx.coroutines.flow.FlowCollector
         /*
             Code decompiled incorrectly, please refer to instructions dump.

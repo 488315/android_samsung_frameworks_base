@@ -74,7 +74,6 @@ public final class SubscreenQsPanelController implements QsResetSettingsManager.
         return SubscreenAirplaneController.getInstance(context);
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.qp.SubscreenQSControllerContract$BaseViewController, com.android.systemui.util.ViewController] */
     public final void init() {
         SubroomQuickSettingsBaseViewFactory subroomQuickSettingsBaseViewFactory = this.mBaseViewFactory;
         subroomQuickSettingsBaseViewFactory.getClass();

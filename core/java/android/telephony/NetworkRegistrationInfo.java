@@ -23,13 +23,11 @@ public final class NetworkRegistrationInfo implements Parcelable {
             new Parcelable.Creator<
                     NetworkRegistrationInfo>() { // from class:
                                                  // android.telephony.NetworkRegistrationInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkRegistrationInfo createFromParcel(Parcel source) {
                     return new NetworkRegistrationInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkRegistrationInfo[] newArray(int size) {
                     return new NetworkRegistrationInfo[size];

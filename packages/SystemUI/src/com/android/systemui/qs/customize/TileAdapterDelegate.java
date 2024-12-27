@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class TileAdapterDelegate extends AccessibilityDelegateCompat {
-    /* JADX WARN: Removed duplicated region for block: B:14:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00b8  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00d6  */
-    /* JADX WARN: Removed duplicated region for block: B:23:? A[RETURN, SYNTHETIC] */
     @Override // androidx.core.view.AccessibilityDelegateCompat
     /*
         Code decompiled incorrectly, please refer to instructions dump.

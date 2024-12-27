@@ -13,13 +13,11 @@ public final class SipDialogState implements Parcelable {
     public static final Parcelable.Creator<SipDialogState> CREATOR =
             new Parcelable.Creator<
                     SipDialogState>() { // from class: android.telephony.ims.SipDialogState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SipDialogState createFromParcel(Parcel in) {
                     return new SipDialogState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SipDialogState[] newArray(int size) {
                     return new SipDialogState[size];

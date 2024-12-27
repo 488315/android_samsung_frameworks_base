@@ -25,8 +25,6 @@ public final class ControlsComponent {
     public final Optional secControlsUiController;
     public final UserTracker userTracker;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Visibility {
         public static final /* synthetic */ Visibility[] $VALUES;
         public static final Visibility AVAILABLE;

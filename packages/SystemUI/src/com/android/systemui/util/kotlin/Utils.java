@@ -25,52 +25,42 @@ public final class Utils {
         private Companion() {
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static final /* synthetic */ Object sample$lambda$3(Object obj, Object obj2, Continuation continuation) {
             return new Pair(obj, obj2);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static final /* synthetic */ Object sample$lambda$4(Object obj, Object obj2, Object obj3, Continuation continuation) {
             return new Triple(obj, obj2, obj3);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static final /* synthetic */ Object sample$lambda$5(Object obj, Object obj2, Object obj3, Object obj4, Continuation continuation) {
             return new Quad(obj, obj2, obj3, obj4);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static final /* synthetic */ Object sample$lambda$6(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Continuation continuation) {
             return new Quint(obj, obj2, obj3, obj4, obj5);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static final /* synthetic */ Object sample$toQuad(Companion companion, Object obj, Triple triple, Continuation continuation) {
             return companion.toQuad((Companion) obj, triple);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static final /* synthetic */ Object sample$toQuint(Companion companion, Object obj, Quad quad, Continuation continuation) {
             return companion.toQuint(obj, quad);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static final /* synthetic */ Object sample$toSeptuple(Companion companion, Object obj, Sextuple sextuple, Continuation continuation) {
             return companion.toSeptuple(obj, sextuple);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static final /* synthetic */ Object sample$toSextuple(Companion companion, Object obj, Quint quint, Continuation continuation) {
             return companion.toSextuple(obj, quint);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static final /* synthetic */ Object sample$toTriple(Companion companion, Object obj, Pair pair, Continuation continuation) {
             return companion.toTriple((Companion) obj, pair);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static final /* synthetic */ Object sampleFilter$lambda$0(Object obj, Object obj2, Continuation continuation) {
             return new Pair(obj, obj2);
         }
@@ -112,8 +102,6 @@ public final class Utils {
                         this.$predicate$inlined$1 = function1;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -207,8 +195,6 @@ public final class Utils {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -371,7 +357,6 @@ public final class Utils {
                 public Object collect(FlowCollector flowCollector, Continuation continuation) {
                     final Flow[] flowArr2 = flowArr;
                     Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.util.kotlin.Utils$Companion$sample$$inlined$combine$1.2
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(0);
                         }

@@ -18,13 +18,11 @@ public class WifiKey implements Parcelable {
             Pattern.compile("([\\p{XDigit}]{2}:){5}[\\p{XDigit}]{2}");
     public static final Parcelable.Creator<WifiKey> CREATOR =
             new Parcelable.Creator<WifiKey>() { // from class: android.net.WifiKey.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiKey createFromParcel(Parcel in) {
                     return new WifiKey(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiKey[] newArray(int size) {
                     return new WifiKey[size];

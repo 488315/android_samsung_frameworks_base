@@ -16,7 +16,6 @@ public final class Quad<A, B, C, D> {
         this.fourth = d;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static /* synthetic */ Quad copy$default(Quad quad, Object obj, Object obj2, Object obj3, Object obj4, int i, Object obj5) {
         if ((i & 1) != 0) {
             obj = quad.first;

@@ -14,7 +14,6 @@ public class IccLogicalChannelRequest implements Parcelable {
             new Parcelable.Creator<
                     IccLogicalChannelRequest>() { // from class:
                                                   // com.android.internal.telephony.IccLogicalChannelRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IccLogicalChannelRequest createFromParcel(Parcel _aidl_source) {
                     IccLogicalChannelRequest _aidl_out = new IccLogicalChannelRequest();
@@ -22,7 +21,6 @@ public class IccLogicalChannelRequest implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IccLogicalChannelRequest[] newArray(int _aidl_size) {
                     return new IccLogicalChannelRequest[_aidl_size];

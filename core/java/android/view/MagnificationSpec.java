@@ -7,13 +7,11 @@ public class MagnificationSpec implements Parcelable {
     public static final Parcelable.Creator<MagnificationSpec> CREATOR =
             new Parcelable.Creator<
                     MagnificationSpec>() { // from class: android.view.MagnificationSpec.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MagnificationSpec[] newArray(int size) {
                     return new MagnificationSpec[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MagnificationSpec createFromParcel(Parcel parcel) {
                     MagnificationSpec spec = new MagnificationSpec();
@@ -90,7 +88,6 @@ public class MagnificationSpec implements Parcelable {
                 + ">";
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void initFromParcel(Parcel parcel) {
         this.scale = parcel.readFloat();
         this.offsetX = parcel.readFloat();

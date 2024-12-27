@@ -124,7 +124,6 @@ public interface WakeLock {
         return ((PowerManager) context.getSystemService(PowerManager.class)).newWakeLock(i, str);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static /* synthetic */ void lambda$wrapImpl$0(Runnable runnable, WakeLock wakeLock) {
         try {
             runnable.run();

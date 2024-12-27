@@ -32,7 +32,6 @@ public final class IndicatorMarqueeGardener {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.phone.IndicatorMarqueeGardener$wakefulnessLifecycleObserver$1] */
     public IndicatorMarqueeGardener(Context context, WakefulnessLifecycle wakefulnessLifecycle) {
         this.context = context;
         this.wakefulnessLifecycle = wakefulnessLifecycle;

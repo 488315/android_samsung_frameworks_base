@@ -287,9 +287,6 @@ public final class SubFullLayoutVolumeIcon extends FrameLayout implements Volume
         this.isAnimatableIcon = isAnimatableIcon;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0159  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0173  */
-    /* JADX WARN: Removed duplicated region for block: B:60:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

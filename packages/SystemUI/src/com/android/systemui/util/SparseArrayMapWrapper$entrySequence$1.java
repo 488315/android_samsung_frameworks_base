@@ -13,7 +13,6 @@ final class SparseArrayMapWrapper$entrySequence$1 extends RestrictedSuspendLambd
     int label;
     final /* synthetic */ SparseArrayMapWrapper<Object> this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SparseArrayMapWrapper$entrySequence$1(SparseArrayMapWrapper<Object> sparseArrayMapWrapper, Continuation continuation) {
         super(2, continuation);
         this.this$0 = sparseArrayMapWrapper;
@@ -26,9 +25,6 @@ final class SparseArrayMapWrapper$entrySequence$1 extends RestrictedSuspendLambd
         return sparseArrayMapWrapper$entrySequence$1;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x005f  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0035  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:8:0x005a -> B:5:0x005d). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

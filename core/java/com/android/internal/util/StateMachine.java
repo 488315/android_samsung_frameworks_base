@@ -192,7 +192,6 @@ public class StateMachine {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class SmHandler extends Handler {
         private static final Object mSmHandlerObj = new Object();
         private boolean mDbg;
@@ -213,7 +212,6 @@ public class StateMachine {
         private int mTempStateStackCount;
         private boolean mTransitionInProgress;
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class StateInfo {
             boolean active = false;
             final StateInfo parentStateInfo;
@@ -357,7 +355,6 @@ public class StateMachine {
             this.mHasQuit = true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final void completeConstruction() {
             if (this.mDbg) {
                 this.mSm.log("completeConstruction: E");
@@ -519,17 +516,14 @@ public class StateMachine {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final Message getCurrentMessage() {
             return this.mMsg;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final IState getCurrentState() {
             return this.mStateStack[this.mStateStackTopIndex].state;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final StateInfo addState(State state, State parent) {
             if (this.mDbg) {
                 this.mSm.log(
@@ -560,7 +554,6 @@ public class StateMachine {
             return stateInfo;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void removeState(State state) {
             final StateInfo stateInfo = this.mStateInfo.get(state);
             if (stateInfo == null || stateInfo.active) {
@@ -604,7 +597,6 @@ public class StateMachine {
             addState(this.mQuittingState, null);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final void setInitialState(State initialState) {
             if (this.mDbg) {
                 this.mSm.log("setInitialState: initialState=" + initialState.getName());
@@ -612,7 +604,6 @@ public class StateMachine {
             this.mInitialState = initialState;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final void transitionTo(IState destState) {
             if (this.mTransitionInProgress) {
                 Log.wtf(
@@ -628,7 +619,6 @@ public class StateMachine {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final void deferMessage(Message msg) {
             if (this.mDbg) {
                 this.mSm.log("deferMessage: msg=" + msg.what);
@@ -638,7 +628,6 @@ public class StateMachine {
             this.mDeferredMessages.add(newMsg);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final void quit() {
             if (this.mDbg) {
                 this.mSm.log("quit:");
@@ -646,7 +635,6 @@ public class StateMachine {
             sendMessage(obtainMessage(-1, mSmHandlerObj));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final void quitNow() {
             if (this.mDbg) {
                 this.mSm.log("quitNow:");
@@ -654,17 +642,14 @@ public class StateMachine {
             sendMessageAtFrontOfQueue(obtainMessage(-1, mSmHandlerObj));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final boolean isQuit(Message msg) {
             return msg.what == -1 && msg.obj == mSmHandlerObj;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final boolean isDbg() {
             return this.mDbg;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final void setDbg(boolean dbg) {
             this.mDbg = dbg;
         }

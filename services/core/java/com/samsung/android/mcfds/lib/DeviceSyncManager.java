@@ -77,7 +77,6 @@ public final class DeviceSyncManager {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.android.mcfds.lib.AbstractDeviceSyncManager$3] */
     public DeviceSyncManager(Context context) {
         this.mContext = context;
     }

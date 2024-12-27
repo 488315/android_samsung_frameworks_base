@@ -169,8 +169,6 @@ public final class WMShell implements CoreStartable, CommandQueue.Callbacks {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.wmshell.WMShell$1] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.wmshell.WMShell$2] */
     public WMShell(Context context, ShellInterface shellInterface, Optional<Pip> optional, Optional<SplitScreen> optional2, Optional<OneHanded> optional3, Optional<DesktopMode> optional4, Optional<RecentTasks> optional5, CommandQueue commandQueue, ConfigurationController configurationController, KeyguardStateController keyguardStateController, KeyguardUpdateMonitor keyguardUpdateMonitor, ScreenLifecycle screenLifecycle, SysUiState sysUiState, WakefulnessLifecycle wakefulnessLifecycle, UserTracker userTracker, DisplayTracker displayTracker, NoteTaskInitializer noteTaskInitializer, CommunalTransitionViewModel communalTransitionViewModel, JavaAdapter javaAdapter, Executor executor, Optional<EnterSplitGestureHandler> optional6) {
         this.mContext = context;
         this.mShell = shellInterface;
@@ -293,7 +291,6 @@ public final class WMShell implements CoreStartable, CommandQueue.Callbacks {
         this.mSysUiState.addCallback(new WMShell$$ExternalSyntheticLambda0(this, pip, 0));
     }
 
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.systemui.wmshell.WMShell$$ExternalSyntheticLambda1] */
     public void initRecentTasks(final RecentTasks recentTasks) {
         final Executor executor = this.mSysUiMainExecutor;
         final CommandQueue commandQueue = this.mCommandQueue;

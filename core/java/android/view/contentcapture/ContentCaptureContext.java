@@ -21,7 +21,6 @@ public final class ContentCaptureContext implements Parcelable {
             new Parcelable.Creator<
                     ContentCaptureContext>() { // from class:
                                                // android.view.contentcapture.ContentCaptureContext.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentCaptureContext createFromParcel(Parcel parcel) {
                     ContentCaptureContext clientContext;
@@ -55,7 +54,6 @@ public final class ContentCaptureContext implements Parcelable {
                             flags);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentCaptureContext[] newArray(int size) {
                     return new ContentCaptureContext[size];

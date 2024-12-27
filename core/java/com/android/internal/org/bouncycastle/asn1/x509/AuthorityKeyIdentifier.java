@@ -93,7 +93,6 @@ public class AuthorityKeyIdentifier extends ASN1Object {
         this.certserno = serialNumber != null ? new ASN1Integer(serialNumber) : null;
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     public AuthorityKeyIdentifier(GeneralNames name, BigInteger serialNumber) {
         this((byte[]) null, name, serialNumber);
     }

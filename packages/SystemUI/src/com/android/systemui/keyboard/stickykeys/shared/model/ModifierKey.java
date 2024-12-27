@@ -2,8 +2,6 @@ package com.android.systemui.keyboard.stickykeys.shared.model;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class ModifierKey {
     public static final /* synthetic */ ModifierKey[] $VALUES;
     public static final ModifierKey ALT;

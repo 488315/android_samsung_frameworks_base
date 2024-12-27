@@ -28,7 +28,6 @@ final class SmartMirroringClient$registerClient$1 extends SuspendLambda implemen
     int label;
     final /* synthetic */ SmartMirroringClient this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SmartMirroringClient$registerClient$1(SmartMirroringClient smartMirroringClient, Continuation continuation) {
         super(2, continuation);
         this.this$0 = smartMirroringClient;
@@ -134,7 +133,6 @@ final class SmartMirroringClient$registerClient$1 extends SuspendLambda implemen
             }
             final SmartMirroringClient smartMirroringClient = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.device.SmartMirroringClient$registerClient$1.3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

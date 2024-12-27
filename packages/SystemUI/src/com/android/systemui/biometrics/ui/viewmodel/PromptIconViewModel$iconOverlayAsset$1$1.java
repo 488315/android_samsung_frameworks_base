@@ -35,7 +35,6 @@ final class PromptIconViewModel$iconOverlayAsset$1$1 extends SuspendLambda imple
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptIconViewModel$iconOverlayAsset$1$1(PromptIconViewModel promptIconViewModel, Continuation continuation) {
         super(6, continuation);
         this.this$0 = promptIconViewModel;

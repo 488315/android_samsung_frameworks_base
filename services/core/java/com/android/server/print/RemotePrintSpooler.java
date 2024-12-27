@@ -288,7 +288,6 @@ public final class RemotePrintSpooler {
                             boolean z, int i) {}
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public SetPrintJobTagCaller(int i) {
             super(5000L);
             switch (i) {
@@ -597,7 +596,6 @@ public final class RemotePrintSpooler {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void pruneApprovedPrintServices(List list) {
         Object obj;
         throwIfCalledOnMainThread();
@@ -632,7 +630,6 @@ public final class RemotePrintSpooler {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void setPrintJobCancelling(PrintJobId printJobId) {
         Object obj;
         throwIfCalledOnMainThread();
@@ -733,7 +730,6 @@ public final class RemotePrintSpooler {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void setProgress(PrintJobId printJobId, float f) {
         Object obj;
         throwIfCalledOnMainThread();
@@ -768,7 +764,6 @@ public final class RemotePrintSpooler {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void setStatus(PrintJobId printJobId, int i, CharSequence charSequence) {
         Object obj;
         throwIfCalledOnMainThread();
@@ -803,7 +798,6 @@ public final class RemotePrintSpooler {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void setStatus(PrintJobId printJobId, CharSequence charSequence) {
         Object obj;
         throwIfCalledOnMainThread();

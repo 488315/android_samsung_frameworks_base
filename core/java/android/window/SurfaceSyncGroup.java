@@ -120,7 +120,6 @@ public final class SurfaceSyncGroup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$1(
             Consumer transactionReadyConsumer, SurfaceControl.Transaction transaction) {
         if (Trace.isTagEnabled(8L)) {
@@ -136,7 +135,6 @@ public final class SurfaceSyncGroup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void invokeSyncCompleteCallbacks() {
         this.mSyncCompleteCallbacks.forEach(
                 new Consumer() { // from class:
@@ -322,7 +320,6 @@ public final class SurfaceSyncGroup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean addSyncToWm(
             IBinder token,
             boolean parentSyncGroupMerge,
@@ -442,7 +439,6 @@ public final class SurfaceSyncGroup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setTransactionCallbackFromParent$5(
             ITransactionReadyCallback transactionReadyCallback,
             Consumer lastCallback,
@@ -469,7 +465,6 @@ public final class SurfaceSyncGroup {
         return this.mName;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkIfSyncIsComplete() {
         if (this.mTimeoutOccurred) {
             Log.i(TAG, "checkIfSyncIsComplete: Callers=" + Debug.getCallers(5));
@@ -640,7 +635,6 @@ public final class SurfaceSyncGroup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$addTimeout$6() {
         Log.e(
                 TAG,

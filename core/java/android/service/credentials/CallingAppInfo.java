@@ -12,13 +12,11 @@ public final class CallingAppInfo implements Parcelable {
     public static final Parcelable.Creator<CallingAppInfo> CREATOR =
             new Parcelable.Creator<
                     CallingAppInfo>() { // from class: android.service.credentials.CallingAppInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallingAppInfo createFromParcel(Parcel in) {
                     return new CallingAppInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallingAppInfo[] newArray(int size) {
                     return new CallingAppInfo[size];

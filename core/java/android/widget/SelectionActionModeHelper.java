@@ -85,7 +85,6 @@ public class SelectionActionModeHelper {
         this.mSmartSelectSprite = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int[] sortSelectionIndices(int selectionStart, int selectionEnd) {
         if (selectionStart < selectionEnd) {
             return new int[] {selectionStart, selectionEnd};
@@ -93,15 +92,12 @@ public class SelectionActionModeHelper {
         return new int[] {selectionEnd, selectionStart};
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int[] sortSelectionIndicesFromTextView(TextView textView) {
         int selectionStart = textView.getSelectionStart();
         int selectionEnd = textView.getSelectionEnd();
         return sortSelectionIndices(selectionStart, selectionEnd);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v3, types: [android.widget.SelectionActionModeHelper$$ExternalSyntheticLambda2] */
     public void startSelectionActionModeAsync(boolean adjustSelection) {
         SelectionActionModeHelper$$ExternalSyntheticLambda3
                 selectionActionModeHelper$$ExternalSyntheticLambda3;
@@ -333,12 +329,10 @@ public class SelectionActionModeHelper {
         return noOpTextClassifier || noSelection || password;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startLinkActionMode(SelectionResult result) {
         startActionMode(2, result);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startSelectionActionMode(SelectionResult result) {
         startActionMode(0, result);
     }
@@ -384,7 +378,6 @@ public class SelectionActionModeHelper {
         this.mTextClassificationAsyncTask = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startSelectionActionModeWithSmartSelectAnimation(final SelectionResult result) {
         Runnable onAnimationEndCallback =
                 new Runnable() { // from class:
@@ -419,7 +412,6 @@ public class SelectionActionModeHelper {
                 animationStartPoint, selectionRectangles, onAnimationEndCallback);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startSelectionActionModeWithSmartSelectAnimation$0(
             SelectionResult result) {
         SelectionResult startSelectionResult;
@@ -546,7 +538,6 @@ public class SelectionActionModeHelper {
         return new PointF(bestX, bestY);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void invalidateActionMode(SelectionResult result) {
         cancelSmartSelectAnimation();
         this.mTextClassification = result != null ? result.mClassification : null;
@@ -985,7 +976,6 @@ public class SelectionActionModeHelper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class TextClassificationAsyncTask extends AsyncTask<Void, Void, SelectionResult> {
         private final String mOriginalText;
         private final Consumer<SelectionResult> mSelectionResultCallback;
@@ -1011,7 +1001,6 @@ public class SelectionActionModeHelper {
             this.mOriginalText = SelectionActionModeHelper.getText(this.mTextView).toString();
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public SelectionResult doInBackground(Void... params) {
             Runnable onTimeOut =
@@ -1033,7 +1022,6 @@ public class SelectionActionModeHelper {
             return result;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onPostExecute(SelectionResult result) {
             this.mSelectionResultCallback.accept(
@@ -1044,7 +1032,6 @@ public class SelectionActionModeHelper {
                             : null);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onTimeOut() {
             Log.d(SelectionActionModeHelper.LOG_TAG, "Timeout in TextClassificationAsyncTask");
             if (getStatus() == AsyncTask.Status.RUNNING) {
@@ -1054,7 +1041,6 @@ public class SelectionActionModeHelper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class TextClassificationHelper {
         private static final int TRIM_DELTA_UPPER_BOUND = 240;
         private final Context mContext;
@@ -1219,7 +1205,6 @@ public class SelectionActionModeHelper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class SelectionResult {
         private final TextClassification mClassification;
         private final int mEnd;
@@ -1256,7 +1241,6 @@ public class SelectionActionModeHelper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static CharSequence getText(TextView textView) {
         CharSequence text = textView.getText();
         if (text != null) {

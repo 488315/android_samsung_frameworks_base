@@ -9,7 +9,6 @@ public class PerUidReadTimeouts implements Parcelable {
             new Parcelable.Creator<
                     PerUidReadTimeouts>() { // from class:
                                             // android.os.incremental.PerUidReadTimeouts.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PerUidReadTimeouts createFromParcel(Parcel _aidl_source) {
                     PerUidReadTimeouts _aidl_out = new PerUidReadTimeouts();
@@ -17,7 +16,6 @@ public class PerUidReadTimeouts implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PerUidReadTimeouts[] newArray(int _aidl_size) {
                     return new PerUidReadTimeouts[_aidl_size];

@@ -8,14 +8,12 @@ public final class SelectWalletCardRequest implements Parcelable {
             new Parcelable.Creator<
                     SelectWalletCardRequest>() { // from class:
                                                  // android.service.quickaccesswallet.SelectWalletCardRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SelectWalletCardRequest createFromParcel(Parcel source) {
                     String cardId = source.readString();
                     return new SelectWalletCardRequest(cardId);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SelectWalletCardRequest[] newArray(int size) {
                     return new SelectWalletCardRequest[size];

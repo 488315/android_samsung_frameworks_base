@@ -21,7 +21,6 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
     private Map<K, V> overflowEntries;
     private Map<K, V> overflowEntriesDescending;
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // java.util.AbstractMap, java.util.Map
     public /* bridge */ /* synthetic */ Object put(Object obj, Object obj2) {
         return put((SmallSortedMap<K, V>) obj, (Comparable) obj2);
@@ -121,14 +120,12 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
         return this.entryList.size() + this.overflowEntries.size();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // java.util.AbstractMap, java.util.Map
     public boolean containsKey(Object o) {
         Comparable comparable = (Comparable) o;
         return binarySearchInArray(comparable) >= 0 || this.overflowEntries.containsKey(comparable);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // java.util.AbstractMap, java.util.Map
     public V get(Object o) {
         Comparable comparable = (Comparable) o;
@@ -169,7 +166,6 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // java.util.AbstractMap, java.util.Map
     public V remove(Object obj) {
         checkMutable();
@@ -184,7 +180,6 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
         return this.overflowEntries.remove(comparable);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public V removeArrayEntryAt(int index) {
         checkMutable();
         V removed = this.entryList.remove(index).getValue();
@@ -237,7 +232,6 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
         return this.lazyDescendingEntrySet;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkMutable() {
         if (this.isImmutable) {
             throw new UnsupportedOperationException();

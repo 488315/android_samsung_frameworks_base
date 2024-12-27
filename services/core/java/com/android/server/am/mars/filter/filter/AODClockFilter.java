@@ -84,8 +84,6 @@ public final class AODClockFilter implements IFilter {
         this.isAodTypeCalendar = i == 50001;
     }
 
-    /* JADX WARN: Type inference failed for: r4v8, types: [com.android.server.am.mars.filter.filter.AODClockFilter$1] */
-    /* JADX WARN: Type inference failed for: r4v9, types: [com.android.server.am.mars.filter.filter.AODClockFilter$1] */
     @Override // com.android.server.am.mars.filter.IFilter
     public final void init(Context context) {
         this.mContext = context;

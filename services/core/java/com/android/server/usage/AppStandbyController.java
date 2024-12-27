@@ -1113,7 +1113,6 @@ public class AppStandbyController
         }
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:25:? -> B:20:0x0068). Please report as a decompilation issue!!! */
     /* renamed from: -$$Nest$mreportContentProviderUsage, reason: not valid java name */
     public static void m1006$$Nest$mreportContentProviderUsage(
             AppStandbyController appStandbyController, String str, String str2, int i) {
@@ -1192,7 +1191,6 @@ public class AppStandbyController
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v14, types: [com.android.server.usage.AppStandbyController$2] */
     public AppStandbyController(Context context) {
         Injector injector = new Injector(context, AppSchedulingModuleThread.get().getLooper());
         Lock lock = new Lock();
@@ -1353,13 +1351,6 @@ public class AppStandbyController
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00ef  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x0106 A[Catch: all -> 0x0080, TryCatch #0 {all -> 0x0080, blocks: (B:32:0x0068, B:34:0x007e, B:36:0x0083, B:38:0x0089, B:40:0x008b, B:42:0x0097, B:52:0x00e0, B:55:0x00f1, B:60:0x0100, B:62:0x0106, B:64:0x010c, B:66:0x0115, B:74:0x0152, B:75:0x012a, B:77:0x00fb, B:80:0x00c1, B:86:0x00cf, B:89:0x00da), top: B:31:0x0068 }] */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x011e  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0122 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x011f  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x00fe  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x00cf A[Catch: all -> 0x0080, TryCatch #0 {all -> 0x0080, blocks: (B:32:0x0068, B:34:0x007e, B:36:0x0083, B:38:0x0089, B:40:0x008b, B:42:0x0097, B:52:0x00e0, B:55:0x00f1, B:60:0x0100, B:62:0x0106, B:64:0x010c, B:66:0x0115, B:74:0x0152, B:75:0x012a, B:77:0x00fb, B:80:0x00c1, B:86:0x00cf, B:89:0x00da), top: B:31:0x0068 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1929,8 +1920,6 @@ public class AppStandbyController
         return this.mBroadcastSessionsWithResponseDurationMs;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0051 A[ORIG_RETURN, RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2044,8 +2033,6 @@ public class AppStandbyController
         return j;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0084  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2915,7 +2902,6 @@ public class AppStandbyController
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(17:51|(1:53)(1:123)|54|(1:(1:(2:60|61))(2:62|(2:70|71)))|122|(12:81|(4:83|(2:88|89)|107|89)(2:108|(1:113))|90|91|92|(1:94)(1:104)|95|(1:97)(1:103)|(1:99)|100|101|102)|114|90|91|92|(0)(0)|95|(0)(0)|(0)|100|101|102) */
     /* JADX WARN: Code restructure failed: missing block: B:106:0x01ce, code lost:
 
        r8 = 50;
@@ -2970,11 +2956,6 @@ public class AppStandbyController
 
        android.widget.Toast.makeText(r20.mContext, r20.mHandler.getLooper(), r20.mContext.getResources().getString(android.R.string.config_chooseTypeAndAccountActivity, r26), 0).show();
     */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x01f5  */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x01dc  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x01da  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x01f3  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x01f9 A[Catch: all -> 0x0033, TryCatch #0 {all -> 0x0033, blocks: (B:8:0x0018, B:10:0x0020, B:11:0x0031, B:13:0x0036, B:16:0x0048, B:18:0x004e, B:23:0x005a, B:30:0x006e, B:39:0x0083, B:40:0x0096, B:43:0x00a8, B:47:0x00be, B:48:0x00c1, B:60:0x00d8, B:64:0x00de, B:70:0x00e9, B:73:0x00ed, B:75:0x0102, B:77:0x0106, B:79:0x010b, B:81:0x0185, B:85:0x019f, B:91:0x01bf, B:92:0x01d0, B:95:0x01dd, B:99:0x01f9, B:100:0x01fc, B:107:0x01a9, B:110:0x01b0, B:115:0x012d, B:116:0x0145, B:118:0x0154, B:119:0x017d, B:127:0x0058), top: B:7:0x0018 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

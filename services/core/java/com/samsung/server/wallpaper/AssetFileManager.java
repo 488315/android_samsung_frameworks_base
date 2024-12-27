@@ -29,7 +29,6 @@ public final class AssetFileManager {
         Log.w("AssetFileManager", "moveAssetFiles fail. " + baseAssetDir.getAbsolutePath() + " to " + baseAssetDir2.getAbsolutePath());
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [int] */
     public static void printDir(File file, PrintWriter printWriter) {
         IOException e;
         FileInputStream fileInputStream;

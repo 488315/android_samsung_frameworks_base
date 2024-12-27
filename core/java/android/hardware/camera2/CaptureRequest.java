@@ -62,7 +62,6 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
     public static final Parcelable.Creator<CaptureRequest> CREATOR =
             new Parcelable.Creator<
                     CaptureRequest>() { // from class: android.hardware.camera2.CaptureRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CaptureRequest createFromParcel(Parcel in) {
                     CaptureRequest request = new CaptureRequest();
@@ -70,7 +69,6 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
                     return request;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CaptureRequest[] newArray(int size) {
                     return new CaptureRequest[size];
@@ -425,7 +423,6 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
             return this.mKey;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         Key(CameraMetadataNative.Key<?> key) {
             this.mKey = key;
         }
@@ -535,7 +532,6 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
         return (T) this.mLogicalCameraSettings.get(key);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.hardware.camera2.CameraMetadata
     public <T> T getProtected(Key<?> key) {
         return (T) this.mLogicalCameraSettings.get(key);
@@ -596,7 +592,6 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
                 this.mPhysicalCameraSettings, this.mSurfaceSet, this.mUserTag);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void readFromParcel(Parcel in) {
         int physicalCameraCount = in.readInt();
         if (physicalCameraCount <= 0) {

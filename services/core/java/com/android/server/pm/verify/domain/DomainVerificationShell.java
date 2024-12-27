@@ -15,24 +15,10 @@ public final class DomainVerificationShell {
                 Binder.getCallingPid(), Binder.getCallingUid(), i, true, true, str, "pm command");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:218:0x0331, code lost:
 
        if (r10.equals("STATE_NO_RESPONSE") == false) goto L183;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:199:0x0398 A[LOOP:9: B:197:0x0392->B:199:0x0398, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:200:0x039c A[SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r12v36, types: [com.android.server.pm.verify.domain.DomainVerificationService] */
-    /* JADX WARN: Type inference failed for: r14v10 */
-    /* JADX WARN: Type inference failed for: r14v12 */
-    /* JADX WARN: Type inference failed for: r14v14 */
-    /* JADX WARN: Type inference failed for: r14v15 */
-    /* JADX WARN: Type inference failed for: r14v2 */
-    /* JADX WARN: Type inference failed for: r14v4 */
-    /* JADX WARN: Type inference failed for: r14v6 */
-    /* JADX WARN: Type inference failed for: r14v78 */
-    /* JADX WARN: Type inference failed for: r14v8 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

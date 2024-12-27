@@ -22,7 +22,6 @@ class RemoteAccessibilityController {
         this.mHostView = v;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void runOnUiThread(Runnable runnable) {
         Handler h = this.mHostView.getHandler();
         if (h != null && h.getLooper() != Looper.myLooper()) {
@@ -62,7 +61,6 @@ class RemoteAccessibilityController {
         return this.mConnectionWrapper.getLeashToken();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class RemoteAccessibilityEmbeddedConnection implements IBinder.DeathRecipient {
         private final IAccessibilityEmbeddedConnection mConnection;
         private final WeakReference<RemoteAccessibilityController> mController;
@@ -111,7 +109,6 @@ class RemoteAccessibilityController {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$binderDied$0(RemoteAccessibilityController controller) {
             if (controller.mConnectionWrapper == this) {
                 controller.mConnectionWrapper = null;

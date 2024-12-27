@@ -263,8 +263,6 @@ public final class SpenThemeManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.smartclip.SpenThemeManager$1] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.smartclip.SpenThemeManager$2] */
     public SpenThemeManager(Context context) {
         int next;
         FileDescriptor fileDescriptor;

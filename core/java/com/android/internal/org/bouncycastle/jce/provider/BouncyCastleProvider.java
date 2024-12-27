@@ -75,7 +75,6 @@ public final class BouncyCastleProvider extends Provider implements Configurable
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setup() {
         loadAlgorithms(DIGEST_PACKAGE, DIGESTS);
         loadAlgorithms(SYMMETRIC_PACKAGE, SYMMETRIC_GENERIC);

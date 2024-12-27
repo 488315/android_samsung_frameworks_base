@@ -8,7 +8,6 @@ import android.os.Parcelable;
 public class GnssData implements Parcelable {
     public static final Parcelable.Creator<GnssData> CREATOR =
             new Parcelable.Creator<GnssData>() { // from class: android.hardware.gnss.GnssData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GnssData createFromParcel(Parcel _aidl_source) {
                     GnssData _aidl_out = new GnssData();
@@ -16,7 +15,6 @@ public class GnssData implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GnssData[] newArray(int _aidl_size) {
                     return new GnssData[_aidl_size];
@@ -130,7 +128,6 @@ public class GnssData implements Parcelable {
         public static final Parcelable.Creator<GnssAgc> CREATOR =
                 new Parcelable.Creator<
                         GnssAgc>() { // from class: android.hardware.gnss.GnssData.GnssAgc.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GnssAgc createFromParcel(Parcel _aidl_source) {
                         GnssAgc _aidl_out = new GnssAgc();
@@ -138,7 +135,6 @@ public class GnssData implements Parcelable {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GnssAgc[] newArray(int _aidl_size) {
                         return new GnssAgc[_aidl_size];

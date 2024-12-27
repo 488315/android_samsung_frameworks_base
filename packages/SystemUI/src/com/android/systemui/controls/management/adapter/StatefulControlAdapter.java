@@ -148,9 +148,6 @@ public final class StatefulControlAdapter extends RecyclerView.Adapter {
         controlViewHolders = new LinkedHashMap();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:8:0x009a  */
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.controls.management.adapter.StatefulControlAdapter$spanSizeLookup$1] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.systemui.controls.management.adapter.StatefulControlAdapter$itemTouchHelperCallback$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

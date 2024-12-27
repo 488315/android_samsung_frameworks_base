@@ -64,7 +64,6 @@ public class AnimationSet extends Animation {
         init();
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.animation.Animation
     /* renamed from: clone */
     public AnimationSet mo5909clone() throws CloneNotSupportedException {

@@ -8,7 +8,6 @@ public class OperationContext implements Parcelable {
     public static final Parcelable.Creator<OperationContext> CREATOR =
             new Parcelable.Creator<OperationContext>() { // from class:
                 // android.hardware.biometrics.common.OperationContext.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OperationContext createFromParcel(Parcel _aidl_source) {
                     OperationContext _aidl_out = new OperationContext();
@@ -16,7 +15,6 @@ public class OperationContext implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OperationContext[] newArray(int _aidl_size) {
                     return new OperationContext[_aidl_size];

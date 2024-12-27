@@ -25,7 +25,6 @@ public final class RequestThrottle {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r4v4, types: [com.android.server.pm.utils.RequestThrottle$$ExternalSyntheticLambda0] */
     public RequestThrottle(
             Handler handler,
             PackageInstallerService$$ExternalSyntheticLambda7

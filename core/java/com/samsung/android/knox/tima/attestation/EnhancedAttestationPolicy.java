@@ -206,7 +206,6 @@ public class EnhancedAttestationPolicy {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handlePendingRequest() {
         HashMap<String, RequestInfo> trackOpsHash;
         if (getTrackMapSize() < 1) {

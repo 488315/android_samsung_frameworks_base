@@ -17,7 +17,6 @@ final class LooperSlowLogControllerImpl$enable$1$3 extends SuspendLambda impleme
     int label;
     final /* synthetic */ LooperSlowLogControllerImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LooperSlowLogControllerImpl$enable$1$3(long j, LooperSlowLogControllerImpl looperSlowLogControllerImpl, int i, Continuation continuation) {
         super(2, continuation);
         this.$durMs = j;

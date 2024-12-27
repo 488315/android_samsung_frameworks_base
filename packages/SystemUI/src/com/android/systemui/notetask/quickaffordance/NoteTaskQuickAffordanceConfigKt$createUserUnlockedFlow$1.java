@@ -20,7 +20,6 @@ final class NoteTaskQuickAffordanceConfigKt$createUserUnlockedFlow$1 extends Sus
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NoteTaskQuickAffordanceConfigKt$createUserUnlockedFlow$1(UserManager userManager, KeyguardUpdateMonitor keyguardUpdateMonitor, Continuation continuation) {
         super(2, continuation);
         this.$this_createUserUnlockedFlow = userManager;
@@ -39,8 +38,6 @@ final class NoteTaskQuickAffordanceConfigKt$createUserUnlockedFlow$1 extends Sus
         return ((NoteTaskQuickAffordanceConfigKt$createUserUnlockedFlow$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.keyguard.KeyguardUpdateMonitorCallback, com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfigKt$createUserUnlockedFlow$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -59,7 +56,6 @@ final class NoteTaskQuickAffordanceConfigKt$createUserUnlockedFlow$1 extends Sus
             this.$monitor.registerCallback(r1);
             final KeyguardUpdateMonitor keyguardUpdateMonitor = this.$monitor;
             Function0 function0 = new Function0() { // from class: com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfigKt$createUserUnlockedFlow$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

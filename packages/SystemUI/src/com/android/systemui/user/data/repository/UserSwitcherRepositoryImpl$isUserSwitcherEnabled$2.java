@@ -12,7 +12,6 @@ final class UserSwitcherRepositoryImpl$isUserSwitcherEnabled$2 extends SuspendLa
     int label;
     final /* synthetic */ UserSwitcherRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherRepositoryImpl$isUserSwitcherEnabled$2(UserSwitcherRepositoryImpl userSwitcherRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userSwitcherRepositoryImpl;

@@ -67,7 +67,6 @@ public final class RippleAnimationSession {
         return this;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onAnimationEnd(Animator anim) {
         notifyUpdate();
     }
@@ -127,7 +126,6 @@ public final class RippleAnimationSession {
         this.mCurrentAnimation = expand;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$exitSoftware$0(
             ValueAnimator expand, ValueAnimator updatedAnimation) {
         notifyUpdate();
@@ -242,14 +240,12 @@ public final class RippleAnimationSession {
         this.mCurrentAnimation = expand;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$enterSoftware$1(
             ValueAnimator expand, ValueAnimator updatedAnimation) {
         notifyUpdate();
         this.mProperties.getShader().setProgress(((Float) expand.getAnimatedValue()).floatValue());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$enterSoftware$2(
             ValueAnimator loop, ValueAnimator updatedAnimation) {
         notifyUpdate();

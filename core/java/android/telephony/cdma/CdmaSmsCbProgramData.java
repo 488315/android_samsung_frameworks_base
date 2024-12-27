@@ -31,13 +31,11 @@ public final class CdmaSmsCbProgramData implements Parcelable {
             new Parcelable.Creator<
                     CdmaSmsCbProgramData>() { // from class:
                                               // android.telephony.cdma.CdmaSmsCbProgramData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CdmaSmsCbProgramData createFromParcel(Parcel in) {
                     return new CdmaSmsCbProgramData(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CdmaSmsCbProgramData[] newArray(int size) {
                     return new CdmaSmsCbProgramData[size];

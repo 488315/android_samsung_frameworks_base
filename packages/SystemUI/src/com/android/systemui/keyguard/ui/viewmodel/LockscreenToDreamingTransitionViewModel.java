@@ -84,7 +84,6 @@ public final class LockscreenToDreamingTransitionViewModel implements DeviceEntr
         long duration = DurationKt.toDuration(500, DurationUnit.MILLISECONDS);
         Interpolator interpolator = Interpolators.EMPHASIZED_ACCELERATE;
         Function1 function1 = new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToDreamingTransitionViewModel$lockscreenTranslationY$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

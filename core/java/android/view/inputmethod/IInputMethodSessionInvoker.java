@@ -59,7 +59,6 @@ final class IInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void finishInputInternal() {
         try {
             this.mSession.finishInput();
@@ -84,7 +83,6 @@ final class IInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: updateCursorAnchorInfoInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$updateCursorAnchorInfo$0(CursorAnchorInfo cursorAnchorInfo) {
         try {
@@ -110,7 +108,6 @@ final class IInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     /* renamed from: displayCompletionsInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$displayCompletions$1(CompletionInfo[] completions) {
         try {
@@ -140,7 +137,6 @@ final class IInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: updateExtractedTextInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$updateExtractedText$2(int token, ExtractedText text) {
         try {
@@ -166,7 +162,6 @@ final class IInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: appPrivateCommandInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$appPrivateCommand$3(String action, Bundle data) {
         try {
@@ -191,7 +186,6 @@ final class IInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: viewClickedInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$viewClicked$4(boolean focusChanged) {
         try {
@@ -216,7 +210,6 @@ final class IInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: updateCursorInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$updateCursor$5(Rect newCursor) {
         try {
@@ -254,7 +247,6 @@ final class IInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: updateSelectionInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$updateSelection$6(
             int oldSelStart,
@@ -290,7 +282,6 @@ final class IInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: invalidateInputInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$invalidateInput$7(
             EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId) {

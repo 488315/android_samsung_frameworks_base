@@ -13,8 +13,6 @@ import java.util.function.Function;
 public final class TelephonyProperties {
     private TelephonyProperties() {}
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static Boolean tryParseBoolean(String str) {
         char c;
         if (str == null) {
@@ -59,7 +57,6 @@ public final class TelephonyProperties {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Integer tryParseInteger(String str) {
         try {
             return Integer.valueOf(str);
@@ -100,7 +97,6 @@ public final class TelephonyProperties {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String tryParseString(String str) {
         if ("".equals(str)) {
             return null;

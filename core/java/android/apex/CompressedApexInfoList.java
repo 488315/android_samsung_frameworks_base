@@ -8,7 +8,6 @@ public class CompressedApexInfoList implements Parcelable {
     public static final Parcelable.Creator<CompressedApexInfoList> CREATOR =
             new Parcelable.Creator<
                     CompressedApexInfoList>() { // from class: android.apex.CompressedApexInfoList.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompressedApexInfoList createFromParcel(Parcel _aidl_source) {
                     CompressedApexInfoList _aidl_out = new CompressedApexInfoList();
@@ -16,7 +15,6 @@ public class CompressedApexInfoList implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompressedApexInfoList[] newArray(int _aidl_size) {
                     return new CompressedApexInfoList[_aidl_size];

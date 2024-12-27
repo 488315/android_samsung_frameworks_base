@@ -111,7 +111,6 @@ public class RadioGroup extends LinearLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setCheckedId(int id) {
         AutofillManager afm;
         boolean changed = id != this.mCheckedId;
@@ -126,7 +125,6 @@ public class RadioGroup extends LinearLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setCheckedStateForView(int viewId, boolean checked) {
         View checkedView = findViewById(viewId);
         if (checkedView != null && (checkedView instanceof RadioButton)) {
@@ -156,7 +154,6 @@ public class RadioGroup extends LinearLayout {
         return p instanceof LayoutParams;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.LinearLayout, android.view.ViewGroup
     public LinearLayout.LayoutParams generateDefaultLayoutParams() {
         return new LayoutParams(-2, -2);

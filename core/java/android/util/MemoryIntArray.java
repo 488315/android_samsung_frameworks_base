@@ -13,7 +13,6 @@ import java.util.UUID;
 public final class MemoryIntArray implements Parcelable, Closeable {
     public static final Parcelable.Creator<MemoryIntArray> CREATOR =
             new Parcelable.Creator<MemoryIntArray>() { // from class: android.util.MemoryIntArray.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MemoryIntArray createFromParcel(Parcel parcel) {
                     try {
@@ -23,7 +22,6 @@ public final class MemoryIntArray implements Parcelable, Closeable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MemoryIntArray[] newArray(int size) {
                     return new MemoryIntArray[size];

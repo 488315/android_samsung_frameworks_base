@@ -12,7 +12,6 @@ public class AudioHalVolumeGroup implements Parcelable {
     public static final Parcelable.Creator<AudioHalVolumeGroup> CREATOR =
             new Parcelable.Creator<AudioHalVolumeGroup>() { // from class:
                 // android.media.audio.common.AudioHalVolumeGroup.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioHalVolumeGroup createFromParcel(Parcel _aidl_source) {
                     AudioHalVolumeGroup _aidl_out = new AudioHalVolumeGroup();
@@ -20,7 +19,6 @@ public class AudioHalVolumeGroup implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioHalVolumeGroup[] newArray(int _aidl_size) {
                     return new AudioHalVolumeGroup[_aidl_size];
@@ -133,7 +131,6 @@ public class AudioHalVolumeGroup implements Parcelable {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
         return Arrays.deepHashCode(
                 Arrays.asList(

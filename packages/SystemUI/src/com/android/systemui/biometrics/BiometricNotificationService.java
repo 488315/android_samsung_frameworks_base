@@ -134,9 +134,6 @@ public final class BiometricNotificationService implements CoreStartable {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.biometrics.BiometricNotificationService$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.biometrics.BiometricNotificationService$3] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.biometrics.BiometricNotificationService$4] */
     public BiometricNotificationService(Context context, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, Handler handler, NotificationManager notificationManager, BiometricNotificationBroadcastReceiver biometricNotificationBroadcastReceiver, Optional<FingerprintReEnrollNotificationImpl> optional, FingerprintManager fingerprintManager, FaceManager faceManager) {
         this.mContext = context;
         this.mKeyguardUpdateMonitor = keyguardUpdateMonitor;

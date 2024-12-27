@@ -10,7 +10,6 @@ final class TransitionInteractor$listenForTransitionToCamera$1$1$emit$1 extends 
     /* synthetic */ Object result;
     final /* synthetic */ TransitionInteractor$listenForTransitionToCamera$1.AnonymousClass1 this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TransitionInteractor$listenForTransitionToCamera$1$1$emit$1(TransitionInteractor$listenForTransitionToCamera$1.AnonymousClass1 anonymousClass1, Continuation continuation) {
         super(continuation);
         this.this$0 = anonymousClass1;

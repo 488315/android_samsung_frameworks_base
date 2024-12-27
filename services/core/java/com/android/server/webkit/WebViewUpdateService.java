@@ -161,7 +161,6 @@ public final class WebViewUpdateService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,
@@ -218,7 +217,6 @@ public final class WebViewUpdateService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.webkit.WebViewUpdateService$1] */
     @Override // com.android.server.SystemService
     public final void onStart() {
         this.mWebViewUpdatedReceiver =

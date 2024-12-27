@@ -21,7 +21,6 @@ final class DeviceEntryFaceAuthRepositoryImpl$authenticate$2 extends SuspendLamb
     int label;
     final /* synthetic */ DeviceEntryFaceAuthRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryFaceAuthRepositoryImpl$authenticate$2(DeviceEntryFaceAuthRepositoryImpl deviceEntryFaceAuthRepositoryImpl, FaceAuthUiEvent faceAuthUiEvent, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceEntryFaceAuthRepositoryImpl;

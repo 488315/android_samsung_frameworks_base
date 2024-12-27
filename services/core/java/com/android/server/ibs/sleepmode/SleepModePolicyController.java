@@ -158,14 +158,6 @@ public final class SleepModePolicyController {
         public final AnonymousClass1 psmCallBack;
         public final AnonymousClass2 wifiCallBack;
 
-        /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.ibs.sleepmode.SleepModePolicyController$SleepModeAction$1] */
-        /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.ibs.sleepmode.SleepModePolicyController$SleepModeAction$2] */
-        /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.ibs.sleepmode.SleepModePolicyController$SleepModeAction$2] */
-        /* JADX WARN: Type inference failed for: r2v4, types: [com.android.server.ibs.sleepmode.SleepModePolicyController$SleepModeAction$1] */
-        /* JADX WARN: Type inference failed for: r2v5, types: [com.android.server.ibs.sleepmode.SleepModePolicyController$SleepModeAction$1] */
-        /* JADX WARN: Type inference failed for: r2v6, types: [com.android.server.ibs.sleepmode.SleepModePolicyController$SleepModeAction$1] */
-        /* JADX WARN: Type inference failed for: r2v7, types: [com.android.server.ibs.sleepmode.SleepModePolicyController$SleepModeAction$1] */
-        /* JADX WARN: Type inference failed for: r2v8, types: [com.android.server.ibs.sleepmode.SleepModePolicyController$SleepModeAction$1] */
         public SleepModeAction(final Context context) {
             this.mContext = context;
             final int i = 0;
@@ -2745,7 +2737,6 @@ public final class SleepModePolicyController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.ibs.sleepmode.SleepModePolicyController$$ExternalSyntheticLambda0] */
     public SleepModePolicyController(
             Context context, HandlerThread handlerThread, SleepModeLogger sleepModeLogger) {
         this.mContext = context;

@@ -33,8 +33,6 @@ public final class AUIFacadeImpl implements AUIFacade {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class SoundId {
         public static final /* synthetic */ SoundId[] $VALUES;
         public static final SoundId AutomationError;

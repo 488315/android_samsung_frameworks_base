@@ -13,13 +13,11 @@ public final class SmartspaceTargetEvent implements Parcelable {
     public static final Parcelable.Creator<SmartspaceTargetEvent> CREATOR =
             new Parcelable.Creator<SmartspaceTargetEvent>() { // from class:
                 // android.app.smartspace.SmartspaceTargetEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmartspaceTargetEvent createFromParcel(Parcel parcel) {
                     return new SmartspaceTargetEvent(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmartspaceTargetEvent[] newArray(int size) {
                     return new SmartspaceTargetEvent[size];

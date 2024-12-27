@@ -67,8 +67,6 @@ public abstract class BaseAppStateTimeSlotEventsTracker extends BaseAppStateEven
             printWriter.println(this.mTimeSlotSize);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:11:0x0023 A[Catch: all -> 0x001e, DONT_GENERATE, TryCatch #0 {all -> 0x001e, blocks: (B:4:0x0003, B:6:0x000f, B:11:0x0023, B:15:0x0027, B:17:0x0029), top: B:3:0x0003 }] */
-        /* JADX WARN: Removed duplicated region for block: B:14:0x0025  */
         @Override // com.android.server.am.BaseAppStatePolicy
         /*
             Code decompiled incorrectly, please refer to instructions dump.

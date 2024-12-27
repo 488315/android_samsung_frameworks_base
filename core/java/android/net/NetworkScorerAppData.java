@@ -10,13 +10,11 @@ public final class NetworkScorerAppData implements Parcelable {
     public static final Parcelable.Creator<NetworkScorerAppData> CREATOR =
             new Parcelable.Creator<
                     NetworkScorerAppData>() { // from class: android.net.NetworkScorerAppData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkScorerAppData createFromParcel(Parcel in) {
                     return new NetworkScorerAppData(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkScorerAppData[] newArray(int size) {
                     return new NetworkScorerAppData[size];

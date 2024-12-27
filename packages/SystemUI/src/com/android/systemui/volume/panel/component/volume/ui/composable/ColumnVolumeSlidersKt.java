@@ -9,7 +9,6 @@ public abstract class ColumnVolumeSlidersKt {
     
         if (r3 == androidx.compose.runtime.Composer.Companion.Empty) goto L55;
      */
-    /* JADX WARN: Type inference failed for: r3v24, types: [com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ColumnVolumeSliders$1$3, kotlin.jvm.internal.Lambda] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -22,13 +21,6 @@ public abstract class ColumnVolumeSlidersKt {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt.ColumnVolumeSliders(java.util.List, boolean, kotlin.jvm.functions.Function1, com.android.compose.PlatformSliderColors, boolean, androidx.compose.ui.Modifier, androidx.compose.runtime.Composer, int, int):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0137  */
-    /* JADX WARN: Removed duplicated region for block: B:27:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00a9  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00b2  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00c3  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00ac  */
-    /* JADX WARN: Type inference failed for: r7v2, types: [com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ExpandButton$1, kotlin.jvm.internal.Lambda] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

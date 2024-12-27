@@ -8,13 +8,11 @@ public final class FrontendStatus implements Parcelable {
     public static final Parcelable.Creator<FrontendStatus> CREATOR =
             new Parcelable.Creator<
                     FrontendStatus>() { // from class: android.hardware.tv.tuner.FrontendStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendStatus createFromParcel(Parcel _aidl_source) {
                     return new FrontendStatus(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendStatus[] newArray(int _aidl_size) {
                     return new FrontendStatus[_aidl_size];

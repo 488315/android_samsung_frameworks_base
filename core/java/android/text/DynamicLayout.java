@@ -117,7 +117,6 @@ public class DynamicLayout extends Layout {
             return b;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void recycle(Builder b) {
             b.mBase = null;
             b.mDisplay = null;

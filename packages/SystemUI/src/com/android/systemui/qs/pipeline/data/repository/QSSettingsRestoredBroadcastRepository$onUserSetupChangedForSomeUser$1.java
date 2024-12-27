@@ -18,7 +18,6 @@ final class QSSettingsRestoredBroadcastRepository$onUserSetupChangedForSomeUser$
     int label;
     final /* synthetic */ QSSettingsRestoredBroadcastRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QSSettingsRestoredBroadcastRepository$onUserSetupChangedForSomeUser$1(QSSettingsRestoredBroadcastRepository qSSettingsRestoredBroadcastRepository, Continuation continuation) {
         super(2, continuation);
         this.this$0 = qSSettingsRestoredBroadcastRepository;
@@ -36,8 +35,6 @@ final class QSSettingsRestoredBroadcastRepository$onUserSetupChangedForSomeUser$
         return ((QSSettingsRestoredBroadcastRepository$onUserSetupChangedForSomeUser$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.qs.pipeline.data.repository.QSSettingsRestoredBroadcastRepository$onUserSetupChangedForSomeUser$1$callback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -54,7 +51,6 @@ final class QSSettingsRestoredBroadcastRepository$onUserSetupChangedForSomeUser$
             ((DeviceProvisionedControllerImpl) this.this$0.deviceProvisionedController).addCallback(r1);
             final QSSettingsRestoredBroadcastRepository qSSettingsRestoredBroadcastRepository = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.pipeline.data.repository.QSSettingsRestoredBroadcastRepository$onUserSetupChangedForSomeUser$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

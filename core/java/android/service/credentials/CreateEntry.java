@@ -11,13 +11,11 @@ public final class CreateEntry implements Parcelable {
     public static final Parcelable.Creator<CreateEntry> CREATOR =
             new Parcelable.Creator<
                     CreateEntry>() { // from class: android.service.credentials.CreateEntry.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CreateEntry createFromParcel(Parcel in) {
                     return new CreateEntry(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CreateEntry[] newArray(int size) {
                     return new CreateEntry[size];

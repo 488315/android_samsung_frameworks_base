@@ -148,10 +148,6 @@ public final class WallpaperWindowToken extends WindowToken {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.server.wm.WallpaperWindowToken, com.android.server.wm.WindowContainer] */
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.server.wm.WindowContainer] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.server.wm.WindowContainer] */
     @Override // com.android.server.wm.WindowContainer
     public final boolean needRemoteWallpaperAnim() {
         if (this.mTransitionController.isCollecting()

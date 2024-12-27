@@ -18,7 +18,6 @@ final class Spaghetti$onAuthenticationSucceeded$1 extends SuspendLambda implemen
     int label;
     final /* synthetic */ Spaghetti this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public Spaghetti$onAuthenticationSucceeded$1(int i, Spaghetti spaghetti, Continuation continuation) {
         super(2, continuation);
         this.$modality = i;

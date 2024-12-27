@@ -14,13 +14,11 @@ public class CarrierIdentifier implements Parcelable {
             new Parcelable.Creator<
                     CarrierIdentifier>() { // from class:
                                            // android.service.carrier.CarrierIdentifier.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarrierIdentifier createFromParcel(Parcel parcel) {
                     return new CarrierIdentifier(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarrierIdentifier[] newArray(int i) {
                     return new CarrierIdentifier[i];

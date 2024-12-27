@@ -548,7 +548,6 @@ public class AnalogClock extends View {
         onTimeChanged(now.atZone(this.mClock.getZone()).toLocalTime(), now.toEpochMilli());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onTimeChanged(LocalTime localTime, long nowMillis) {
         float round;
         float previousHour = this.mHour;
@@ -569,7 +568,6 @@ public class AnalogClock extends View {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void createClock() {
         ZoneId zoneId = this.mTimeZone;
         if (zoneId == null) {

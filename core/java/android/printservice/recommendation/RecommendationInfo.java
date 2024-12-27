@@ -18,13 +18,11 @@ public final class RecommendationInfo implements Parcelable {
             new Parcelable.Creator<
                     RecommendationInfo>() { // from class:
                                             // android.printservice.recommendation.RecommendationInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecommendationInfo createFromParcel(Parcel in) {
                     return new RecommendationInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecommendationInfo[] newArray(int size) {
                     return new RecommendationInfo[size];

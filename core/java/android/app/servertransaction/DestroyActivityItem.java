@@ -11,13 +11,11 @@ public class DestroyActivityItem extends ActivityLifecycleItem {
     public static final Parcelable.Creator<DestroyActivityItem> CREATOR =
             new Parcelable.Creator<DestroyActivityItem>() { // from class:
                 // android.app.servertransaction.DestroyActivityItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DestroyActivityItem createFromParcel(Parcel in) {
                     return new DestroyActivityItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DestroyActivityItem[] newArray(int size) {
                     return new DestroyActivityItem[size];

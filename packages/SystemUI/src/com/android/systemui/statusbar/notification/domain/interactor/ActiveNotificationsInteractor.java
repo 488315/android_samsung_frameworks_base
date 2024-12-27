@@ -17,8 +17,6 @@ public final class ActiveNotificationsInteractor {
     public final Flow hasClearableNotifications;
     public final Flow topLevelRepresentativeNotifications;
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.notification.domain.interactor.ActiveNotificationsInteractor$special$$inlined$map$2] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.statusbar.notification.domain.interactor.ActiveNotificationsInteractor$special$$inlined$map$5] */
     public ActiveNotificationsInteractor(ActiveNotificationListRepository activeNotificationListRepository, CoroutineDispatcher coroutineDispatcher) {
         final StateFlowImpl stateFlowImpl = activeNotificationListRepository.activeNotifications;
         this.topLevelRepresentativeNotifications = FlowKt.flowOn(new Flow() { // from class: com.android.systemui.statusbar.notification.domain.interactor.ActiveNotificationsInteractor$special$$inlined$map$1
@@ -49,8 +47,6 @@ public final class ActiveNotificationsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -203,8 +199,6 @@ public final class ActiveNotificationsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -292,8 +286,6 @@ public final class ActiveNotificationsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -384,8 +376,6 @@ public final class ActiveNotificationsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -477,8 +467,6 @@ public final class ActiveNotificationsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -567,8 +555,6 @@ public final class ActiveNotificationsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -667,8 +653,6 @@ public final class ActiveNotificationsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -757,8 +741,6 @@ public final class ActiveNotificationsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

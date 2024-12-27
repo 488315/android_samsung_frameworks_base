@@ -582,8 +582,6 @@ public final class PackageHandler extends Handler {
 
        if (r7 == r0) goto L285;
     */
-    /* JADX WARN: Removed duplicated region for block: B:262:0x07b4  */
-    /* JADX WARN: Removed duplicated region for block: B:267:0x07cb A[EDGE_INSN: B:267:0x07cb->B:274:0x07cb BREAK  A[LOOP:3: B:261:0x07b2->B:264:0x07bf], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

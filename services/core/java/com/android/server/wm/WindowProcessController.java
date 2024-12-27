@@ -107,7 +107,6 @@ public final class WindowProcessController extends ConfigurationContainer
     public volatile int mActivityStateFlags = GnssNative.GNSS_AIDING_TYPE_ALL;
     public String mReason = null;
 
-    /* JADX WARN: Type inference failed for: r10v1, types: [com.android.server.wm.WindowProcessController$$ExternalSyntheticLambda4] */
     public WindowProcessController(
             final ActivityTaskManagerService activityTaskManagerService,
             ApplicationInfo applicationInfo,
@@ -161,9 +160,6 @@ public final class WindowProcessController extends ConfigurationContainer
 
        if (com.android.server.grammaticalinflection.GrammaticalInflectionUtils.checkSystemGrammaticalGenderPermission(r2.mPermissionManager, r7) != false) goto L11;
     */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x002b  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0040 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0041  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

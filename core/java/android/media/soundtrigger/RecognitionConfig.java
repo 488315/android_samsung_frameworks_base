@@ -12,7 +12,6 @@ public class RecognitionConfig implements Parcelable {
     public static final Parcelable.Creator<RecognitionConfig> CREATOR =
             new Parcelable.Creator<RecognitionConfig>() { // from class:
                 // android.media.soundtrigger.RecognitionConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecognitionConfig createFromParcel(Parcel _aidl_source) {
                     RecognitionConfig _aidl_out = new RecognitionConfig();
@@ -20,7 +19,6 @@ public class RecognitionConfig implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecognitionConfig[] newArray(int _aidl_size) {
                     return new RecognitionConfig[_aidl_size];
@@ -134,7 +132,6 @@ public class RecognitionConfig implements Parcelable {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
         return Arrays.deepHashCode(
                 Arrays.asList(

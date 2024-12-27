@@ -84,7 +84,6 @@ public final class AppMediaSessionTracker extends BaseAppStateDurationsTracker {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r9v1, types: [com.android.server.am.AppMediaSessionTracker$$ExternalSyntheticLambda0] */
     public AppMediaSessionTracker(
             Context context, AppRestrictionController appRestrictionController) {
         super(context, appRestrictionController);

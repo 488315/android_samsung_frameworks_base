@@ -21,7 +21,6 @@ public final class TimeZoneProviderStatus implements Parcelable {
             new Parcelable.Creator<
                     TimeZoneProviderStatus>() { // from class:
                                                 // android.service.timezone.TimeZoneProviderStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneProviderStatus createFromParcel(Parcel in) {
                     int locationDetectionStatus = in.readInt();
@@ -31,7 +30,6 @@ public final class TimeZoneProviderStatus implements Parcelable {
                             locationDetectionStatus, connectivityStatus, timeZoneResolutionStatus);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneProviderStatus[] newArray(int size) {
                     return new TimeZoneProviderStatus[size];
@@ -197,7 +195,6 @@ public final class TimeZoneProviderStatus implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int requireValidOperationStatus(int operationStatus) {
         if (operationStatus < 0 || operationStatus > 3) {
             throw new IllegalArgumentException(Integer.toString(operationStatus));
@@ -220,7 +217,6 @@ public final class TimeZoneProviderStatus implements Parcelable {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static int operationStatusFromString(String operationStatusString) {
         char c;
         if (TextUtils.isEmpty(operationStatusString)) {
@@ -273,7 +269,6 @@ public final class TimeZoneProviderStatus implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int requireValidDependencyStatus(int dependencyStatus) {
         if (dependencyStatus < 0 || dependencyStatus > 6) {
             throw new IllegalArgumentException(Integer.toString(dependencyStatus));
@@ -302,7 +297,6 @@ public final class TimeZoneProviderStatus implements Parcelable {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static int dependencyStatusFromString(String dependencyStatusString) {
         char c;
         if (TextUtils.isEmpty(dependencyStatusString)) {

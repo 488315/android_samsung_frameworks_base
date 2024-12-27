@@ -21,13 +21,11 @@ public class UiccSlotInfo implements Parcelable {
     public static final int CARD_STATE_INFO_RESTRICTED = 4;
     public static final Parcelable.Creator<UiccSlotInfo> CREATOR =
             new Parcelable.Creator<UiccSlotInfo>() { // from class: android.telephony.UiccSlotInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UiccSlotInfo createFromParcel(Parcel in) {
                     return new UiccSlotInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UiccSlotInfo[] newArray(int size) {
                     return new UiccSlotInfo[size];

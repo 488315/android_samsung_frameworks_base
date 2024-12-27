@@ -8,7 +8,6 @@ public class SmartClipRemoteRequestInfo implements Parcelable {
             new Parcelable.Creator<
                     SmartClipRemoteRequestInfo>() { // from class:
                                                     // com.samsung.android.content.smartclip.SmartClipRemoteRequestInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmartClipRemoteRequestInfo createFromParcel(Parcel in) {
                     SmartClipRemoteRequestInfo data = new SmartClipRemoteRequestInfo();
@@ -16,7 +15,6 @@ public class SmartClipRemoteRequestInfo implements Parcelable {
                     return data;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmartClipRemoteRequestInfo[] newArray(int size) {
                     return new SmartClipRemoteRequestInfo[size];

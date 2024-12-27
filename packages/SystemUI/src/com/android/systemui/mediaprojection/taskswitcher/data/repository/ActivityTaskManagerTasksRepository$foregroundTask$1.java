@@ -20,7 +20,6 @@ final class ActivityTaskManagerTasksRepository$foregroundTask$1 extends SuspendL
     int label;
     final /* synthetic */ ActivityTaskManagerTasksRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ActivityTaskManagerTasksRepository$foregroundTask$1(ActivityTaskManagerTasksRepository activityTaskManagerTasksRepository, Continuation continuation) {
         super(2, continuation);
         this.this$0 = activityTaskManagerTasksRepository;
@@ -54,7 +53,6 @@ final class ActivityTaskManagerTasksRepository$foregroundTask$1 extends SuspendL
             this.this$0.activityTaskManager.registerTaskStackListener(iTaskStackListener);
             final ActivityTaskManagerTasksRepository activityTaskManagerTasksRepository = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.mediaprojection.taskswitcher.data.repository.ActivityTaskManagerTasksRepository$foregroundTask$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

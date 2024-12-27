@@ -113,7 +113,6 @@ public final class ProcessStateRecord {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final boolean getCachedCompatChange(int i) {
         int i2;
         int[] iArr = this.mCachedCompatChanges;

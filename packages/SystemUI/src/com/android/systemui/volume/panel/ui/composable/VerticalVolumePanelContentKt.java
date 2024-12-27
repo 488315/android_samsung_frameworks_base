@@ -42,9 +42,6 @@ import kotlin.jvm.functions.Function4;
 import kotlin.jvm.internal.Intrinsics;
 
 public abstract class VerticalVolumePanelContentKt {
-    /* JADX WARN: Type inference failed for: r4v7, types: [com.android.systemui.volume.panel.ui.composable.VerticalVolumePanelContentKt$VerticalVolumePanelContent$1$3, kotlin.jvm.internal.Lambda] */
-    /* JADX WARN: Type inference failed for: r5v10, types: [com.android.systemui.volume.panel.ui.composable.VerticalVolumePanelContentKt$VerticalVolumePanelContent$1$1, kotlin.jvm.internal.Lambda] */
-    /* JADX WARN: Type inference failed for: r5v8, types: [com.android.systemui.volume.panel.ui.composable.VerticalVolumePanelContentKt$VerticalVolumePanelContent$1$2, kotlin.jvm.internal.Lambda] */
     public static final void VerticalVolumePanelContent(final VolumePanelComposeScope volumePanelComposeScope, final ComponentsLayout componentsLayout, Modifier modifier, Composer composer, final int i, final int i2) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(2034105147);
@@ -83,7 +80,6 @@ public abstract class VerticalVolumePanelContentKt {
         composerImpl.startReplaceGroup(-2000220919);
         for (final ComponentState componentState : componentsLayout.headerComponents) {
             AnimatedVisibilityKt.AnimatedVisibility(columnScopeInstance, componentState.isVisible, (Modifier) null, (EnterTransition) null, (ExitTransition) null, (String) null, ComposableLambdaKt.rememberComposableLambda(-1606794357, composerImpl, new Function3() { // from class: com.android.systemui.volume.panel.ui.composable.VerticalVolumePanelContentKt$VerticalVolumePanelContent$1$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(3);
                 }
@@ -101,7 +97,6 @@ public abstract class VerticalVolumePanelContentKt {
         composerImpl.startReplaceGroup(-2000220691);
         for (final ComponentState componentState2 : componentsLayout.contentComponents) {
             AnimatedVisibilityKt.AnimatedVisibility(columnScopeInstance, componentState2.isVisible, (Modifier) null, (EnterTransition) null, (ExitTransition) null, (String) null, ComposableLambdaKt.rememberComposableLambda(-904598156, composerImpl, new Function3() { // from class: com.android.systemui.volume.panel.ui.composable.VerticalVolumePanelContentKt$VerticalVolumePanelContent$1$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(3);
                 }
@@ -195,7 +190,6 @@ public abstract class VerticalVolumePanelContentKt {
         if (endRestartGroup != null) {
             final Modifier modifier3 = modifier2;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.ui.composable.VerticalVolumePanelContentKt$VerticalVolumePanelContent$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

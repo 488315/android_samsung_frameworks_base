@@ -18,13 +18,11 @@ public final class SharedLibraryInfo implements Parcelable {
     public static final Parcelable.Creator<SharedLibraryInfo> CREATOR =
             new Parcelable.Creator<
                     SharedLibraryInfo>() { // from class: android.content.pm.SharedLibraryInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SharedLibraryInfo createFromParcel(Parcel source) {
                     return new SharedLibraryInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SharedLibraryInfo[] newArray(int size) {
                     return new SharedLibraryInfo[size];

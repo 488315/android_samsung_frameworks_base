@@ -243,8 +243,6 @@ public final class PeopleSpaceWidgetManager implements Dumpable {
         return augmentTileFromNotifications(peopleSpaceTile, new PeopleTileKey(peopleSpaceTile), peopleSpaceTile.getContactUri() != null ? peopleSpaceTile.getContactUri().toString() : null, groupConversationNotifications(((NotifPipeline) this.mNotifCollection).getAllNotifs()), optional);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v16, types: [java.util.List] */
     public final PeopleSpaceTile augmentTileFromNotifications(PeopleSpaceTile peopleSpaceTile, PeopleTileKey peopleTileKey, final String str, Map map, Optional optional) {
         Person senderPerson;
         List<Notification.MessagingStyle.Message> messagingStyleMessages;
@@ -424,8 +422,6 @@ public final class PeopleSpaceWidgetManager implements Dumpable {
         return new HashSet();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0032  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0041  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -492,8 +488,6 @@ public final class PeopleSpaceWidgetManager implements Dumpable {
         return z;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0039  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0038 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -598,7 +592,6 @@ public final class PeopleSpaceWidgetManager implements Dumpable {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final PeopleSpaceTile getTileWithCurrentState(PeopleSpaceTile peopleSpaceTile, String str) {
         char c;
         PeopleSpaceTile.Builder builder = peopleSpaceTile.toBuilder();

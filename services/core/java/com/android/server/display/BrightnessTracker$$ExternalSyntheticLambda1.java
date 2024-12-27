@@ -3,7 +3,6 @@ package com.android.server.display;
 public final /* synthetic */ class BrightnessTracker$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ BrightnessTracker f$0;
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0074 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -332,13 +332,11 @@ public abstract class PlayerBase {
         public static final Parcelable.Creator<PlayerIdCard> CREATOR =
                 new Parcelable.Creator<
                         PlayerIdCard>() { // from class: android.media.PlayerBase.PlayerIdCard.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PlayerIdCard createFromParcel(Parcel p) {
                         return new PlayerIdCard(p);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PlayerIdCard[] newArray(int size) {
                         return new PlayerIdCard[size];

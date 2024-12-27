@@ -483,7 +483,6 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter>
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x0082, code lost:
 
        return r1;
@@ -662,13 +661,11 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter>
                 new Parcelable.Creator<
                         SavedState>() { // from class:
                                         // android.widget.AdapterViewAnimator.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];

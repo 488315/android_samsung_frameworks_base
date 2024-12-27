@@ -113,7 +113,6 @@ public final class StylusUsiPowerUI {
         USI_NOTIFICATION_ID = R.string.stylus_battery_low_percentage;
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.stylus.StylusUsiPowerUI$receiver$1] */
     public StylusUsiPowerUI(Context context, NotificationManagerCompat notificationManagerCompat, InputManager inputManager, Handler handler, UiEventLogger uiEventLogger) {
         this.context = context;
         this.notificationManager = notificationManagerCompat;

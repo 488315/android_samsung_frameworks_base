@@ -10,7 +10,6 @@ final class MobileConnectionsRepositoryImpl$isInEcmMode$1 extends ContinuationIm
     /* synthetic */ Object result;
     final /* synthetic */ MobileConnectionsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileConnectionsRepositoryImpl$isInEcmMode$1(MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl, Continuation continuation) {
         super(continuation);
         this.this$0 = mobileConnectionsRepositoryImpl;

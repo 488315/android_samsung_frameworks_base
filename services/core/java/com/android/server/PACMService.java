@@ -174,8 +174,6 @@ public final class PACMService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.PACMService$1] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.PACMService$2] */
     public PACMService(Context context) {
         super(context);
         this.mLock = new Object();

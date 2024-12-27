@@ -15,7 +15,6 @@ public final class LocationTimeZoneProviderControllerEnvironmentImpl {
     public final Object mSharedLock;
     public final HandlerThreadingDomain mThreadingDomain;
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.timezonedetector.location.LocationTimeZoneProviderControllerEnvironmentImpl$$ExternalSyntheticLambda0, java.lang.Object] */
     public LocationTimeZoneProviderControllerEnvironmentImpl(HandlerThreadingDomain handlerThreadingDomain, ServiceConfigAccessor serviceConfigAccessor, final LocationTimeZoneProviderController locationTimeZoneProviderController) {
         Objects.requireNonNull(handlerThreadingDomain);
         this.mThreadingDomain = handlerThreadingDomain;

@@ -9,13 +9,11 @@ public class SemContextGyroTemperature extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextGyroTemperature>() { // from class:
                                                    // com.samsung.android.hardware.context.SemContextGyroTemperature.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextGyroTemperature createFromParcel(Parcel in) {
                     return new SemContextGyroTemperature(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextGyroTemperature[] newArray(int size) {
                     return new SemContextGyroTemperature[size];

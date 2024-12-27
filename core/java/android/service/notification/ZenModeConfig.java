@@ -211,13 +211,11 @@ public class ZenModeConfig implements Parcelable {
     public static final Object ZenConfigLock = new Object();
     private static final Pattern ITEM_SPLITTER_REGEX = Pattern.compile("(?<!\\\\),");
     public static final Parcelable.Creator<ZenModeConfig> CREATOR = new Parcelable.Creator<ZenModeConfig>() { // from class: android.service.notification.ZenModeConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ZenModeConfig createFromParcel(Parcel source) {
             return new ZenModeConfig(source);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ZenModeConfig[] newArray(int size) {
             return new ZenModeConfig[size];
@@ -782,7 +780,6 @@ public class ZenModeConfig implements Parcelable {
         return Objects.hash(Boolean.valueOf(this.allowAlarms), Boolean.valueOf(this.allowMedia), Boolean.valueOf(this.allowSystem), Boolean.valueOf(this.allowCalls), Boolean.valueOf(this.allowRepeatCallers), Boolean.valueOf(this.allowMessages), Integer.valueOf(this.allowCallsFrom), Integer.valueOf(this.allowMessagesFrom), Boolean.valueOf(this.allowReminders), Boolean.valueOf(this.allowEvents), Integer.valueOf(this.user), this.automaticRules, this.manualRule, Integer.valueOf(this.suppressedVisualEffects), Boolean.valueOf(this.areChannelsBypassingDnd), Boolean.valueOf(this.allowConversations), Integer.valueOf(this.allowConversationsFrom), Integer.valueOf(this.exceptionContactsFlag), exceptionContactsString, Integer.valueOf(this.appBypassDndFlag), appBypassDndListString);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String toDayList(int[] days) {
         if (days == null || days.length == 0) {
             return "";
@@ -1590,10 +1587,6 @@ public class ZenModeConfig implements Parcelable {
         return (suppressedVisualEffects & visualEffect) == 0;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r12v1, types: [int] */
-    /* JADX WARN: Type inference failed for: r5v3, types: [int] */
-    /* JADX WARN: Type inference failed for: r5v5, types: [int] */
     public NotificationManager.Policy toNotificationPolicy() {
         int i;
         int sourceToPrioritySenders;
@@ -2150,13 +2143,11 @@ public class ZenModeConfig implements Parcelable {
 
     public static class ZenRule implements Parcelable {
         public static final Parcelable.Creator<ZenRule> CREATOR = new Parcelable.Creator<ZenRule>() { // from class: android.service.notification.ZenModeConfig.ZenRule.1
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public ZenRule createFromParcel(Parcel source) {
                 return new ZenRule(source);
             }
 
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public ZenRule[] newArray(int size) {
                 return new ZenRule[size];

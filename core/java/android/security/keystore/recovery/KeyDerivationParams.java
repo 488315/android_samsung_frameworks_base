@@ -16,13 +16,11 @@ public final class KeyDerivationParams implements Parcelable {
             new Parcelable.Creator<
                     KeyDerivationParams>() { // from class:
                                              // android.security.keystore.recovery.KeyDerivationParams.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyDerivationParams createFromParcel(Parcel in) {
                     return new KeyDerivationParams(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyDerivationParams[] newArray(int length) {
                     return new KeyDerivationParams[length];

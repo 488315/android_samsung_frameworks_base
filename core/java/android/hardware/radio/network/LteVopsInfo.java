@@ -10,7 +10,6 @@ public class LteVopsInfo implements Parcelable {
     public static final Parcelable.Creator<LteVopsInfo> CREATOR =
             new Parcelable.Creator<
                     LteVopsInfo>() { // from class: android.hardware.radio.network.LteVopsInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LteVopsInfo createFromParcel(Parcel _aidl_source) {
                     LteVopsInfo _aidl_out = new LteVopsInfo();
@@ -18,7 +17,6 @@ public class LteVopsInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LteVopsInfo[] newArray(int _aidl_size) {
                     return new LteVopsInfo[_aidl_size];

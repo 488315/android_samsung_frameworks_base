@@ -14,7 +14,6 @@ final class ShadeSceneViewModel$destinationScenes$1 extends SuspendLambda implem
     int label;
     final /* synthetic */ ShadeSceneViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ShadeSceneViewModel$destinationScenes$1(ShadeSceneViewModel shadeSceneViewModel, Continuation continuation) {
         super(3, continuation);
         this.this$0 = shadeSceneViewModel;

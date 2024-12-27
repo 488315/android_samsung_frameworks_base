@@ -344,13 +344,11 @@ public class ShortcutManager {
         public static final Parcelable.Creator<ShareShortcutInfo> CREATOR =
                 new Parcelable.Creator<ShareShortcutInfo>() { // from class:
                     // android.content.pm.ShortcutManager.ShareShortcutInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ShareShortcutInfo createFromParcel(Parcel in) {
                         return new ShareShortcutInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ShareShortcutInfo[] newArray(int size) {
                         return new ShareShortcutInfo[size];

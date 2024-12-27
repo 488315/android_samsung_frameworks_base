@@ -79,7 +79,6 @@ public class TransitionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ArrayMap<ViewGroup, ArrayList<Transition>> getRunningTransitions() {
         ArrayMap<ViewGroup, ArrayList<Transition>> transitions;
         WeakReference<ArrayMap<ViewGroup, ArrayList<Transition>>> runningTransitions =

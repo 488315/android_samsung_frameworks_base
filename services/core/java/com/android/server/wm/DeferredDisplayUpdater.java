@@ -142,7 +142,6 @@ public final class DeferredDisplayUpdater implements DisplayUpdater {
         transition.setAllReady();
     }
 
-    /* JADX WARN: Type inference failed for: r2v7, types: [com.android.server.wm.DeferredDisplayUpdater$$ExternalSyntheticLambda1] */
     @Override // com.android.server.wm.DisplayUpdater
     public final void updateDisplayInfo(final Runnable runnable) {
         DisplayContent displayContent = this.mDisplayContent;

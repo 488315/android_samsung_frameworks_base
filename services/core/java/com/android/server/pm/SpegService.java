@@ -208,8 +208,6 @@ public final class SpegService extends ProfileService {
         return ServiceManager.getService("speg_helper");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x009f A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00bc A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

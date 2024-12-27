@@ -56,7 +56,6 @@ public abstract class BottomComponentButtonSurfaceKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.button.ui.composable.BottomComponentButtonSurfaceKt$BottomComponentButtonSurface$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

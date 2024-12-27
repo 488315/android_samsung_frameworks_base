@@ -40,7 +40,6 @@ public final class KeyguardBlueprintViewModel {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel$transitionListener$1] */
     public KeyguardBlueprintViewModel(Handler handler, KeyguardBlueprintInteractor keyguardBlueprintInteractor) {
         this.handler = handler;
         this.blueprint = keyguardBlueprintInteractor.blueprint;
@@ -53,7 +52,6 @@ public final class KeyguardBlueprintViewModel {
             @Override // android.transition.Transition.TransitionListener
             public final void onTransitionCancel(final Transition transition) {
                 KeyguardBlueprintViewModel.this.updateTransitions(null, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel$transitionListener$1$onTransitionCancel$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -69,7 +67,6 @@ public final class KeyguardBlueprintViewModel {
             @Override // android.transition.Transition.TransitionListener
             public final void onTransitionEnd(final Transition transition) {
                 KeyguardBlueprintViewModel.this.updateTransitions(null, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel$transitionListener$1$onTransitionEnd$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -85,7 +82,6 @@ public final class KeyguardBlueprintViewModel {
             @Override // android.transition.Transition.TransitionListener
             public final void onTransitionPause(final Transition transition) {
                 KeyguardBlueprintViewModel.this.updateTransitions(null, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel$transitionListener$1$onTransitionPause$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -101,7 +97,6 @@ public final class KeyguardBlueprintViewModel {
             @Override // android.transition.Transition.TransitionListener
             public final void onTransitionResume(final Transition transition) {
                 KeyguardBlueprintViewModel.this.updateTransitions(null, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel$transitionListener$1$onTransitionResume$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -117,7 +112,6 @@ public final class KeyguardBlueprintViewModel {
             @Override // android.transition.Transition.TransitionListener
             public final void onTransitionStart(final Transition transition) {
                 KeyguardBlueprintViewModel.this.updateTransitions(null, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel$transitionListener$1$onTransitionStart$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -140,7 +134,6 @@ public final class KeyguardBlueprintViewModel {
             return;
         }
         updateTransitions(new TransitionData(config, 0L, 2, null), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel$runTransition$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -169,7 +162,6 @@ public final class KeyguardBlueprintViewModel {
                         KeyguardBlueprintViewModel keyguardBlueprintViewModel2 = KeyguardBlueprintViewModel.this;
                         final Transition transition3 = transition2;
                         keyguardBlueprintViewModel2.updateTransitions(null, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel.runTransition.2.1.1
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(1);
                             }

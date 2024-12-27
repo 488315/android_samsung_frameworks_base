@@ -10,7 +10,6 @@ public class ConnectionFailureInfo implements Parcelable {
     public static final Parcelable.Creator<ConnectionFailureInfo> CREATOR =
             new Parcelable.Creator<ConnectionFailureInfo>() { // from class:
                 // android.hardware.radio.ims.ConnectionFailureInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConnectionFailureInfo createFromParcel(Parcel _aidl_source) {
                     ConnectionFailureInfo _aidl_out = new ConnectionFailureInfo();
@@ -18,7 +17,6 @@ public class ConnectionFailureInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConnectionFailureInfo[] newArray(int _aidl_size) {
                     return new ConnectionFailureInfo[_aidl_size];

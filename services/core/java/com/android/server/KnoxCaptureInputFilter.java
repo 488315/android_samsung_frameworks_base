@@ -35,10 +35,6 @@ public final class KnoxCaptureInputFilter extends InputFilter {
             this.unicodeCodepoint = new StringBuilder();
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:76:0x02a1  */
-        /* JADX WARN: Removed duplicated region for block: B:79:0x02f6  */
-        /* JADX WARN: Removed duplicated region for block: B:82:0x02ae  */
-        /* JADX WARN: Removed duplicated region for block: B:85:0x02bb  */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.

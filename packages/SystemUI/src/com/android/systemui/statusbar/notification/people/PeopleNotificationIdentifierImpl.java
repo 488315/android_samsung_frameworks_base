@@ -23,10 +23,6 @@ public final class PeopleNotificationIdentifierImpl implements PeopleNotificatio
         this.groupManager = groupMembershipManager;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v4 */
-    /* JADX WARN: Type inference failed for: r0v5, types: [int] */
-    /* JADX WARN: Type inference failed for: r0v8 */
     public final int getPeopleNotificationType(NotificationEntry notificationEntry) {
         int i;
         List children;

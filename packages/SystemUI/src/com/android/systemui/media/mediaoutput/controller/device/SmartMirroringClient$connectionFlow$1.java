@@ -26,7 +26,6 @@ final class SmartMirroringClient$connectionFlow$1 extends SuspendLambda implemen
     int label;
     final /* synthetic */ SmartMirroringClient this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SmartMirroringClient$connectionFlow$1(SmartMirroringClient smartMirroringClient, Continuation continuation) {
         super(2, continuation);
         this.this$0 = smartMirroringClient;
@@ -44,7 +43,6 @@ final class SmartMirroringClient$connectionFlow$1 extends SuspendLambda implemen
         return ((SmartMirroringClient$connectionFlow$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Type inference failed for: r4v0, types: [T, com.android.systemui.media.mediaoutput.controller.device.SmartMirroringClient$connectionFlow$1$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -103,7 +101,6 @@ final class SmartMirroringClient$connectionFlow$1 extends SuspendLambda implemen
             context.bindService(intent, t == 0 ? null : (ServiceConnection) t, 1);
             final SmartMirroringClient smartMirroringClient2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.device.SmartMirroringClient$connectionFlow$1.4
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -13,7 +13,6 @@ import java.util.List;
 public final class DnsEvent extends NetworkEvent implements Parcelable {
     public static final Parcelable.Creator<DnsEvent> CREATOR =
             new Parcelable.Creator<DnsEvent>() { // from class: android.app.admin.DnsEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DnsEvent createFromParcel(Parcel in) {
                     if (in.readInt() != 1) {
@@ -22,7 +21,6 @@ public final class DnsEvent extends NetworkEvent implements Parcelable {
                     return new DnsEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DnsEvent[] newArray(int size) {
                     return new DnsEvent[size];

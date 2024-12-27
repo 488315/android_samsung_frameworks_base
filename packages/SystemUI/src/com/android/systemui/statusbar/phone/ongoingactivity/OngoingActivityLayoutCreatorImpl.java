@@ -142,7 +142,6 @@ public final class OngoingActivityLayoutCreatorImpl {
         return remoteViews;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:113:0x03b3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

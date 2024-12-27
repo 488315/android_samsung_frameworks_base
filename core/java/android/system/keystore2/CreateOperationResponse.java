@@ -9,7 +9,6 @@ public class CreateOperationResponse implements Parcelable {
             new Parcelable.Creator<
                     CreateOperationResponse>() { // from class:
                                                  // android.system.keystore2.CreateOperationResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CreateOperationResponse createFromParcel(Parcel _aidl_source) {
                     CreateOperationResponse _aidl_out = new CreateOperationResponse();
@@ -17,7 +16,6 @@ public class CreateOperationResponse implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CreateOperationResponse[] newArray(int _aidl_size) {
                     return new CreateOperationResponse[_aidl_size];

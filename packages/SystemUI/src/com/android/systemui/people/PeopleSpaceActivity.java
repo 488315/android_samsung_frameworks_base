@@ -49,12 +49,10 @@ public final class PeopleSpaceActivity extends ComponentActivity {
         peopleViewModel.onWidgetIdChanged.invoke(Integer.valueOf(getIntent().getIntExtra("appWidgetId", 0)));
         BuildersKt.launch$default(LifecycleKt.getCoroutineScope(getLifecycle()), null, null, new PeopleSpaceActivity$onCreate$1(this, peopleViewModel, null), 3);
         ComponentActivityKt.setContent$default(this, new ComposableLambdaImpl(1140881722, true, new Function2() { // from class: com.android.systemui.people.PeopleSpaceActivity$onCreate$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
             }
 
-            /* JADX WARN: Type inference failed for: r4v5, types: [com.android.systemui.people.PeopleSpaceActivity$onCreate$2$1, kotlin.jvm.internal.Lambda] */
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 Composer composer = (Composer) obj;
@@ -69,7 +67,6 @@ public final class PeopleSpaceActivity extends ComponentActivity {
                 final PeopleViewModel peopleViewModel2 = PeopleViewModel.this;
                 final PeopleSpaceActivity peopleSpaceActivity = this;
                 PlatformThemeKt.PlatformTheme(false, ComposableLambdaKt.rememberComposableLambda(-566938192, composer, new Function2() { // from class: com.android.systemui.people.PeopleSpaceActivity$onCreate$2.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(2);
                     }

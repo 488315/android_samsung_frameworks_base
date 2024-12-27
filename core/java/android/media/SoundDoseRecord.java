@@ -10,7 +10,6 @@ public class SoundDoseRecord implements Parcelable {
     public static final Parcelable.Creator<SoundDoseRecord> CREATOR =
             new Parcelable.Creator<
                     SoundDoseRecord>() { // from class: android.media.SoundDoseRecord.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SoundDoseRecord createFromParcel(Parcel _aidl_source) {
                     SoundDoseRecord _aidl_out = new SoundDoseRecord();
@@ -18,7 +17,6 @@ public class SoundDoseRecord implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SoundDoseRecord[] newArray(int _aidl_size) {
                     return new SoundDoseRecord[_aidl_size];

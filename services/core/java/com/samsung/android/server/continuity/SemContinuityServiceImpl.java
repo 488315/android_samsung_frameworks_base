@@ -15,8 +15,6 @@ public final class SemContinuityServiceImpl extends AbstractSemContinuityService
     public final AnonymousClass1 mBrReceiver;
     public UserHandle mCurrentUserHandle;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [android.content.BroadcastReceiver, com.samsung.android.server.continuity.SemContinuityServiceImpl$1] */
     public SemContinuityServiceImpl(Context context, McfDeviceSyncManager mcfDeviceSyncManager) {
         super(context, mcfDeviceSyncManager);
         ?? r1 = new BroadcastReceiver() { // from class: com.samsung.android.server.continuity.SemContinuityServiceImpl.1

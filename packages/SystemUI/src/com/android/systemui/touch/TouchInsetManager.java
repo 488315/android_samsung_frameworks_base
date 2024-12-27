@@ -36,8 +36,6 @@ public final class TouchInsetManager {
         };
         public final HashSet mTrackedViews = new HashSet();
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.touch.TouchInsetManager$TouchInsetSession$$ExternalSyntheticLambda0] */
-        /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.touch.TouchInsetManager$TouchInsetSession$1] */
         public TouchInsetSession(TouchInsetManager touchInsetManager, Executor executor) {
             this.mManager = touchInsetManager;
             this.mExecutor = executor;

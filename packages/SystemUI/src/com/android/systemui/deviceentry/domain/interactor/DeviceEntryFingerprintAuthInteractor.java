@@ -29,11 +29,6 @@ public final class DeviceEntryFingerprintAuthInteractor {
     public final Flow isRunning;
     public final DeviceEntryFingerprintAuthInteractor$special$$inlined$map$2 isSensorUnderDisplay;
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.deviceentry.domain.interactor.DeviceEntryFingerprintAuthInteractor$special$$inlined$filterIsInstance$4] */
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.systemui.deviceentry.domain.interactor.DeviceEntryFingerprintAuthInteractor$special$$inlined$filterIsInstance$1] */
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.deviceentry.domain.interactor.DeviceEntryFingerprintAuthInteractor$special$$inlined$filterIsInstance$2] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.deviceentry.domain.interactor.DeviceEntryFingerprintAuthInteractor$special$$inlined$filterIsInstance$3] */
-    /* JADX WARN: Type inference failed for: r4v4, types: [com.android.systemui.deviceentry.domain.interactor.DeviceEntryFingerprintAuthInteractor$special$$inlined$map$1] */
     public DeviceEntryFingerprintAuthInteractor(DeviceEntryFingerprintAuthRepository deviceEntryFingerprintAuthRepository, DeviceEntryBiometricSettingsInteractor deviceEntryBiometricSettingsInteractor, FingerprintPropertyRepository fingerprintPropertyRepository) {
         DeviceEntryFingerprintAuthRepositoryImpl deviceEntryFingerprintAuthRepositoryImpl = (DeviceEntryFingerprintAuthRepositoryImpl) deviceEntryFingerprintAuthRepository;
         this.isRunning = deviceEntryFingerprintAuthRepositoryImpl.isRunning();
@@ -71,8 +66,6 @@ public final class DeviceEntryFingerprintAuthInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -162,8 +155,6 @@ public final class DeviceEntryFingerprintAuthInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -253,8 +244,6 @@ public final class DeviceEntryFingerprintAuthInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -344,8 +333,6 @@ public final class DeviceEntryFingerprintAuthInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -434,8 +421,6 @@ public final class DeviceEntryFingerprintAuthInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -537,8 +522,6 @@ public final class DeviceEntryFingerprintAuthInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

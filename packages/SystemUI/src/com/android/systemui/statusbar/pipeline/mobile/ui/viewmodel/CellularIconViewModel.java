@@ -152,7 +152,6 @@ public final class CellularIconViewModel implements MobileIconViewModelCommon {
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
                 Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModel$special$$inlined$combine$1.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -199,8 +198,6 @@ public final class CellularIconViewModel implements MobileIconViewModelCommon {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -304,8 +301,6 @@ public final class CellularIconViewModel implements MobileIconViewModelCommon {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -393,8 +388,6 @@ public final class CellularIconViewModel implements MobileIconViewModelCommon {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

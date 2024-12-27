@@ -49,12 +49,6 @@ public final class TakeScreenshotExecutorImpl implements TakeScreenshotExecutor 
         new LinkedHashMap();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:120:0x0053  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00b5  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00bb  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00be  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0027  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -67,14 +61,6 @@ public final class TakeScreenshotExecutorImpl implements TakeScreenshotExecutor 
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.screenshot.TakeScreenshotExecutorImpl.dispatchToController(com.android.systemui.screenshot.ScreenshotController, com.android.systemui.screenshot.ScreenshotData, kotlin.jvm.functions.Function1, com.android.systemui.screenshot.TakeScreenshotService$RequestCallback, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0090  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00a6  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00e7 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00b0  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0083  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0051  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0028  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -87,10 +73,6 @@ public final class TakeScreenshotExecutorImpl implements TakeScreenshotExecutor 
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.screenshot.TakeScreenshotExecutorImpl.executeScreenshots(com.android.internal.util.ScreenshotRequest, kotlin.jvm.functions.Function1, com.android.systemui.screenshot.TakeScreenshotService$RequestCallback, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x006e  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

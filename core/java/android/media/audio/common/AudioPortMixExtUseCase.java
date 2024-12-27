@@ -12,13 +12,11 @@ public final class AudioPortMixExtUseCase implements Parcelable {
     public static final Parcelable.Creator<AudioPortMixExtUseCase> CREATOR =
             new Parcelable.Creator<AudioPortMixExtUseCase>() { // from class:
                 // android.media.audio.common.AudioPortMixExtUseCase.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPortMixExtUseCase createFromParcel(Parcel _aidl_source) {
                     return new AudioPortMixExtUseCase(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPortMixExtUseCase[] newArray(int _aidl_size) {
                     return new AudioPortMixExtUseCase[_aidl_size];

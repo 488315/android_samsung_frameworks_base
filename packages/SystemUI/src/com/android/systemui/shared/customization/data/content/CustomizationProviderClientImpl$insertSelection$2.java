@@ -18,7 +18,6 @@ final class CustomizationProviderClientImpl$insertSelection$2 extends SuspendLam
     int label;
     final /* synthetic */ CustomizationProviderClientImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomizationProviderClientImpl$insertSelection$2(CustomizationProviderClientImpl customizationProviderClientImpl, String str, String str2, Continuation continuation) {
         super(2, continuation);
         this.this$0 = customizationProviderClientImpl;

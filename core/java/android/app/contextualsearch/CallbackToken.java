@@ -26,13 +26,11 @@ public final class CallbackToken implements Parcelable {
     public static final Parcelable.Creator<CallbackToken> CREATOR =
             new Parcelable.Creator<
                     CallbackToken>() { // from class: android.app.contextualsearch.CallbackToken.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallbackToken createFromParcel(Parcel in) {
                     return new CallbackToken(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallbackToken[] newArray(int size) {
                     return new CallbackToken[size];
@@ -97,7 +95,6 @@ public final class CallbackToken implements Parcelable {
         dest.writeStrongBinder(this.mToken);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class CallbackWrapper extends IContextualSearchCallback.Stub {
         private final OutcomeReceiver<ContextualSearchState, Throwable> mCallback;
         private final Executor mExecutor;
@@ -121,7 +118,6 @@ public final class CallbackToken implements Parcelable {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onResult$1(final ContextualSearchState state)
                 throws Exception {
             Log.d(CallbackToken.TAG, "onResult state:" + state);
@@ -135,7 +131,6 @@ public final class CallbackToken implements Parcelable {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onResult$0(ContextualSearchState state) {
             this.mCallback.onResult(state);
         }
@@ -152,7 +147,6 @@ public final class CallbackToken implements Parcelable {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onError$3(final ParcelableException error)
                 throws Exception {
             Log.w(CallbackToken.TAG, "onError", error);
@@ -166,7 +160,6 @@ public final class CallbackToken implements Parcelable {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onError$2(ParcelableException error) {
             this.mCallback.onError(error);
         }

@@ -9,7 +9,6 @@ public class DemuxFilterMediaEvent implements Parcelable {
     public static final Parcelable.Creator<DemuxFilterMediaEvent> CREATOR =
             new Parcelable.Creator<DemuxFilterMediaEvent>() { // from class:
                 // android.hardware.tv.tuner.DemuxFilterMediaEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterMediaEvent createFromParcel(Parcel _aidl_source) {
                     DemuxFilterMediaEvent _aidl_out = new DemuxFilterMediaEvent();
@@ -17,7 +16,6 @@ public class DemuxFilterMediaEvent implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterMediaEvent[] newArray(int _aidl_size) {
                     return new DemuxFilterMediaEvent[_aidl_size];

@@ -60,7 +60,6 @@ public class UdfpsPrivilegedAuthClient extends UdfpsAuthClient {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r8v0, types: [com.samsung.android.biometrics.app.setting.fingerprint.UdfpsPrivilegedAuthClient$$ExternalSyntheticLambda0] */
     @Override // com.samsung.android.biometrics.app.setting.SysUiClient
     public void prepareWindows() {
         UdfpsPrivilegedAuthSensorWindow udfpsPrivilegedAuthSensorWindow =

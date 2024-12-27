@@ -305,8 +305,6 @@ public final class PowerStatsStore {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v3, types: [java.util.concurrent.locks.ReentrantLock] */
     public final void unlockStoreDirectory() {
         try {
             try {

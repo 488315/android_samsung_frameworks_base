@@ -10,13 +10,11 @@ import java.lang.annotation.RetentionPolicy;
 public final class Light implements Parcelable {
     public static final Parcelable.Creator<Light> CREATOR =
             new Parcelable.Creator<Light>() { // from class: android.hardware.lights.Light.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Light createFromParcel(Parcel in) {
                     return new Light(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Light[] newArray(int size) {
                     return new Light[size];

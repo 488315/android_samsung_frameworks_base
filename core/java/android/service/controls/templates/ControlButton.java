@@ -10,13 +10,11 @@ public final class ControlButton implements Parcelable {
             new Parcelable.Creator<
                     ControlButton>() { // from class:
                                        // android.service.controls.templates.ControlButton.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ControlButton createFromParcel(Parcel source) {
                     return new ControlButton(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ControlButton[] newArray(int size) {
                     return new ControlButton[size];

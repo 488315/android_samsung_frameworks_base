@@ -96,8 +96,6 @@ public final class SpeechRecognitionManagerServiceImpl extends AbstractPerUserSy
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r7v1, types: [android.os.IBinder$DeathRecipient, com.android.server.speech.SpeechRecognitionManagerServiceImpl$$ExternalSyntheticLambda0] */
     public final void createSessionLocked(final ComponentName componentName, final IBinder iBinder, boolean z, final IRecognitionServiceManagerCallback iRecognitionServiceManagerCallback) {
         final RemoteSpeechRecognitionService remoteSpeechRecognitionService;
         if (((SpeechRecognitionManagerService) this.mMaster).debug) {

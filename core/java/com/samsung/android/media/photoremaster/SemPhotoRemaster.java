@@ -138,7 +138,6 @@ public class SemPhotoRemaster {
             this.mInputPathName = pathName;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void updateInputPath(Context context) {
             if (this.mInputUri == null) {
                 return;
@@ -226,7 +225,6 @@ public class SemPhotoRemaster {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     enum ResultParam {
         PATH_INPUT(1002, ParamDataType.STRING, false),
         PATH_RESULT(1003, ParamDataType.STRING, false),
@@ -246,7 +244,6 @@ public class SemPhotoRemaster {
         public final int ID;
         private final boolean ONDEMAND;
 
-        /* JADX INFO: Access modifiers changed from: private */
         enum ParamDataType {
             STRING,
             LONG,
@@ -295,7 +292,6 @@ public class SemPhotoRemaster {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setParameter(int id, String val) {
             try {
                 this.mResultJson.put(String.valueOf(id), val);
@@ -395,7 +391,6 @@ public class SemPhotoRemaster {
         return !param.ONDEMAND;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getParameters$2(Result result, ResultParam param) {
         String paramData = this.mServiceClient.getStringParam(param.ID);
         LogUtil.d(TAG, "getStringParam(" + param.ID + ") : " + paramData);
@@ -410,7 +405,6 @@ public class SemPhotoRemaster {
         return !param.ONDEMAND;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getParameters$5(Result result, ResultParam param) {
         String paramData = String.valueOf(this.mServiceClient.getLongParam(param.ID));
         LogUtil.d(TAG, "getLongParam(" + param.ID + ") : " + paramData);

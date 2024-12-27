@@ -438,7 +438,6 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final void close() {
         int size;
         VirtualDisplayWrapper[] virtualDisplayWrapperArr;
@@ -793,7 +792,6 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub
         }
     }
 
-    /* JADX WARN: Type inference failed for: r13v0, types: [com.android.server.companion.virtual.VirtualDeviceImpl$1] */
     public final GenericWindowPolicyController createWindowPolicyControllerLocked(Set set) {
         boolean z =
                 !android.companion.virtual.flags.Flags.dynamicPolicy()

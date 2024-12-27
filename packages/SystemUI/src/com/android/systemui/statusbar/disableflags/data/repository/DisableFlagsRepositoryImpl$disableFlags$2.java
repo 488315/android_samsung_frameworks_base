@@ -13,7 +13,6 @@ final class DisableFlagsRepositoryImpl$disableFlags$2 extends SuspendLambda impl
     int label;
     final /* synthetic */ DisableFlagsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisableFlagsRepositoryImpl$disableFlags$2(DisableFlagsRepositoryImpl disableFlagsRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = disableFlagsRepositoryImpl;

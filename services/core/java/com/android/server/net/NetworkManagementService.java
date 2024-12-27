@@ -1877,7 +1877,6 @@ public final class NetworkManagementService extends INetworkManagementService.St
         }
     }
 
-    /* JADX WARN: Not initialized variable reg: 5, insn: 0x00b7: INVOKE (r5 I:long) STATIC call: android.os.Trace.traceEnd(long):void A[Catch: all -> 0x0032, MD:(long):void (s)], block:B:46:0x00b7 */
     public final boolean setDataSaverModeEnabled(boolean z) {
         long traceEnd;
         setDataSaverModeEnabled_enforcePermission();

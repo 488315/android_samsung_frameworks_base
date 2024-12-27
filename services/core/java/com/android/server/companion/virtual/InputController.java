@@ -154,7 +154,6 @@ class InputController {
         public int mInputDeviceId = -2;
         public final AnonymousClass1 mListener;
 
-        /* JADX WARN: Type inference failed for: r0v2, types: [android.hardware.input.InputManager$InputDeviceListener, com.android.server.companion.virtual.InputController$WaitForDevice$1] */
         public WaitForDevice(InputController inputController, final String str, final int i, final int i2, final int i3) {
             ?? r0 = new InputManager.InputDeviceListener() { // from class: com.android.server.companion.virtual.InputController.WaitForDevice.1
                 @Override // android.hardware.input.InputManager.InputDeviceListener
@@ -262,7 +261,6 @@ class InputController {
         return TextUtils.formatSimple("virtual%s:%d", new Object[]{str, Long.valueOf(sNextPhysId.getAndIncrement())});
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeCloseUinput(long j);
 
     private static native long nativeOpenUinputDpad(String str, int i, int i2, String str2);
@@ -281,18 +279,14 @@ class InputController {
 
     private static native boolean nativeWriteKeyEvent(long j, int i, int i2, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native boolean nativeWriteRelativeEvent(long j, float f, float f2, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native boolean nativeWriteScrollEvent(long j, float f, float f2, long j2);
 
     private static native boolean nativeWriteStylusButtonEvent(long j, int i, int i2, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native boolean nativeWriteStylusMotionEvent(long j, int i, int i2, int i3, int i4, int i5, int i6, int i7, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native boolean nativeWriteTouchEvent(long j, int i, int i2, int i3, float f, float f2, float f3, float f4, long j2);
 
     public void addDeviceForTesting(IBinder iBinder, long j, int i, int i2, String str, String str2, int i3) {
@@ -337,9 +331,6 @@ class InputController {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v2, types: [int] */
-    /* JADX WARN: Type inference failed for: r6v3 */
     public final void createDeviceInternal(int i, String str, int i2, int i3, IBinder iBinder, int i4, String str2, Supplier supplier) {
         String str3;
         String str4;

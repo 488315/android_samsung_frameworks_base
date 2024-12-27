@@ -10,13 +10,11 @@ public final class EnterPipRequestedItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<EnterPipRequestedItem> CREATOR =
             new Parcelable.Creator<EnterPipRequestedItem>() { // from class:
                 // android.app.servertransaction.EnterPipRequestedItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EnterPipRequestedItem createFromParcel(Parcel in) {
                     return new EnterPipRequestedItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EnterPipRequestedItem[] newArray(int size) {
                     return new EnterPipRequestedItem[size];

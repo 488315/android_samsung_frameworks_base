@@ -6,8 +6,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 public final class Protocol {
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Command {
         public static final /* synthetic */ Command[] $VALUES;
         public static final Command check_api;

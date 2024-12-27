@@ -188,7 +188,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
     private final View.OnAttachStateChangeListener mOnAnchorRootDetachedListener =
             new FloatingOnAttachStateChangeListener(this);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(ViewTreeObserver.InternalInsetsInfo info) {
         info.contentInsets.setEmpty();
         info.visibleInsets.setEmpty();
@@ -322,7 +321,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         this.mPopupWindow.setTouchInterceptor(
                 new View.OnTouchListener() { // from class:
                     // com.android.internal.widget.floatingtoolbar.LocalFloatingToolbarPopup.5
-                    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                     /* JADX WARN: Code restructure failed: missing block: B:18:0x0152, code lost:
 
                        return false;
@@ -917,7 +915,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
                 .start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setPanelsStatesAtRestingPosition() {
         int x;
         int x2;
@@ -1148,7 +1145,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         this.mTouchableRegion.setEmpty();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setContentAreaAsTouchableSurface() {
         int width;
         int height;
@@ -1179,7 +1175,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         viewTreeObserver.addOnComputeInternalInsetsListener(this.mInsetsComputer);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isInRTLMode() {
         return this.mContext.getApplicationInfo().hasRtlSupport()
                 && this.mContext.getResources().getConfiguration().getLayoutDirection() == 1;
@@ -1189,7 +1184,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         return this.mOverflowPanelSize != null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public List<MenuItem> layoutMainPanelItems(List<MenuItem> menuItems, int toolbarWidth) {
         int i;
         View previousButton;
@@ -1403,7 +1397,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         this.mContentContainer.removeAllViews();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void positionContentYCoordinatesIfOpeningOverflowUpwards() {
         if (this.mOpenOverflowUpwards) {
             this.mMainPanel.setY(
@@ -1517,7 +1510,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         return overflowButton;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createOverflowButton$1(ImageButton overflowButton, View v) {
         if (sIsDiscardTouch) {
             return;
@@ -1574,7 +1566,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         return overflowPanel;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createOverflowPanel$2(
             OverflowPanel overflowPanel, AdapterView parent, View view, int position, long id) {
         view.setAccessibilityDelegate(getAccessibilityDelegate());
@@ -1584,7 +1575,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isOverflowAnimating() {
         boolean overflowOpening =
                 this.mOpenOverflowAnimation.hasStarted() && !this.mOpenOverflowAnimation.hasEnded();
@@ -1618,7 +1608,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAnimationEnd$0() {
             LocalFloatingToolbarPopup.this.setPanelsStatesAtRestingPosition();
             LocalFloatingToolbarPopup.this.setContentAreaAsTouchableSurface();
@@ -1653,19 +1642,16 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         setSize(view, size.getWidth(), size.getHeight());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void setWidth(View view, int width) {
         ViewGroup.LayoutParams params = view.getLayoutParams();
         setSize(view, width, params.height);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void setHeight(View view, int height) {
         ViewGroup.LayoutParams params = view.getLayoutParams();
         setSize(view, params.width, height);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class OverflowPanel extends ListView {
         private final LocalFloatingToolbarPopup mPopup;
 
@@ -1698,7 +1684,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
             return super.dispatchTouchEvent(ev);
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.view.View
         public boolean awakenScrollBars() {
             return super.awakenScrollBars();
@@ -1837,7 +1822,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         return viewPortVisibleHeight;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isInsideOfViewPortRect(float x, float y) {
         refreshViewPort();
         return ((float) this.mViewPortOnScreen.left) <= x
@@ -1846,7 +1830,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
                 && ((float) this.mViewPortOnScreen.bottom) >= y;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void calculateCoords(int x, int y) {
         this.mParent.getRootView().getLocationOnScreen(this.mTmpCoords);
         int rootViewLeftOnScreen = this.mTmpCoords[0];
@@ -2056,7 +2039,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void recalCoordsOnWindowX() {
         DisplayCutout displayCutout = getDisplayCutout();
         if (displayCutout != null) {
@@ -2091,7 +2073,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static View createMenuItemButton(
             Context context, MenuItem menuItem, int iconTextSpacing, boolean showIcon) {
         int res =
@@ -2106,7 +2087,6 @@ public final class LocalFloatingToolbarPopup implements FloatingToolbarPopup {
         return menuItemButton;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void updateMenuItemButton(
             View menuItemButton, MenuItem menuItem, int iconTextSpacing, boolean showIcon) {
         TextView buttonText =

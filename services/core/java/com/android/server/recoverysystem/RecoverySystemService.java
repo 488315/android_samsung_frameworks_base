@@ -116,13 +116,6 @@ public final class RecoverySystemService extends IRecoverySystem.Stub implements
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0087  */
-        /* JADX WARN: Removed duplicated region for block: B:32:0x0089  */
-        /* JADX WARN: Type inference failed for: r5v1, types: [android.hardware.boot.V1_1.IBootControl$Proxy, java.lang.Object] */
-        /* JADX WARN: Type inference failed for: r5v2, types: [android.hardware.boot.V1_1.IBootControl] */
-        /* JADX WARN: Type inference failed for: r5v3, types: [android.hardware.boot.V1_1.IBootControl] */
-        /* JADX WARN: Type inference failed for: r5v5 */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -246,8 +239,6 @@ public final class RecoverySystemService extends IRecoverySystem.Stub implements
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.recoverysystem.RecoverySystemService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? recoverySystemService = new RecoverySystemService(new Injector(getContext()));
@@ -350,8 +341,6 @@ public final class RecoverySystemService extends IRecoverySystem.Stub implements
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v5, types: [android.hardware.security.secretkeeper.ISecretkeeper] */
     public static ISecretkeeper getSecretKeeper() {
         ISecretkeeper$Stub$Proxy iSecretkeeper$Stub$Proxy;
         try {
@@ -546,7 +535,6 @@ public final class RecoverySystemService extends IRecoverySystem.Stub implements
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         int callingUid = Binder.getCallingUid();
         if (callingUid != 2000 && callingUid != 0) {
@@ -631,7 +619,6 @@ public final class RecoverySystemService extends IRecoverySystem.Stub implements
         return rebootWithLskfImpl(str, str2, true);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final int rebootWithLskfImpl(String str, String str2, boolean z) {
         RebootPreparationError rebootPreparationError;
         IBootControl bootControl;

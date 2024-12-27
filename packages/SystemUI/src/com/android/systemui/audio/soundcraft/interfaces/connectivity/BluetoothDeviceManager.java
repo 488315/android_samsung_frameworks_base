@@ -74,7 +74,6 @@ public final class BluetoothDeviceManager {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r7v4, types: [com.android.systemui.audio.soundcraft.interfaces.connectivity.BluetoothDeviceManager$bluetoothMetadataBroadcastReceiver$1] */
     public BluetoothDeviceManager(Context context) {
         this.context = context;
     }

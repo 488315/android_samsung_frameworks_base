@@ -22,13 +22,11 @@ public class PeopleSpaceTile implements Parcelable {
     public static final Parcelable.Creator<PeopleSpaceTile> CREATOR =
             new Parcelable.Creator<
                     PeopleSpaceTile>() { // from class: android.app.people.PeopleSpaceTile.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PeopleSpaceTile createFromParcel(Parcel source) {
                     return new PeopleSpaceTile(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PeopleSpaceTile[] newArray(int size) {
                     return new PeopleSpaceTile[size];

@@ -35,19 +35,6 @@ public final class MotionPhotoVideoUtils {
         xmpPosition = 0L;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x009c A[Catch: Exception -> 0x00a5, TryCatch #5 {Exception -> 0x00a5, blocks: (B:3:0x0008, B:5:0x0010, B:14:0x0070, B:34:0x009c, B:36:0x00a1, B:37:0x00a4, B:23:0x008c, B:25:0x0091), top: B:2:0x0008 }] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00a1 A[Catch: Exception -> 0x00a5, TryCatch #5 {Exception -> 0x00a5, blocks: (B:3:0x0008, B:5:0x0010, B:14:0x0070, B:34:0x009c, B:36:0x00a1, B:37:0x00a4, B:23:0x008c, B:25:0x0091), top: B:2:0x0008 }] */
-    /* JADX WARN: Type inference failed for: r0v1 */
-    /* JADX WARN: Type inference failed for: r0v2 */
-    /* JADX WARN: Type inference failed for: r0v3, types: [java.io.FileOutputStream] */
-    /* JADX WARN: Type inference failed for: r0v4 */
-    /* JADX WARN: Type inference failed for: r0v5 */
-    /* JADX WARN: Type inference failed for: r0v6, types: [java.io.FileOutputStream] */
-    /* JADX WARN: Type inference failed for: r0v7 */
-    /* JADX WARN: Type inference failed for: r13v1 */
-    /* JADX WARN: Type inference failed for: r13v2, types: [java.io.FileOutputStream] */
-    /* JADX WARN: Type inference failed for: r13v3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -290,7 +277,6 @@ public final class MotionPhotoVideoUtils {
         xmpPosition = var1;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private final long seekToXmpStartPosition(FileDescriptor fd) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(fd);
         long j = 0;

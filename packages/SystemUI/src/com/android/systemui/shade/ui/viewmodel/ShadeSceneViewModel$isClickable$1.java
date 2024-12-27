@@ -14,7 +14,6 @@ final class ShadeSceneViewModel$isClickable$1 extends SuspendLambda implements F
     int label;
     final /* synthetic */ ShadeSceneViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ShadeSceneViewModel$isClickable$1(ShadeSceneViewModel shadeSceneViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = shadeSceneViewModel;

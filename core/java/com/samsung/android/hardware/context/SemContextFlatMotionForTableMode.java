@@ -9,13 +9,11 @@ public class SemContextFlatMotionForTableMode extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextFlatMotionForTableMode>() { // from class:
                                                           // com.samsung.android.hardware.context.SemContextFlatMotionForTableMode.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextFlatMotionForTableMode createFromParcel(Parcel in) {
                     return new SemContextFlatMotionForTableMode(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextFlatMotionForTableMode[] newArray(int size) {
                     return new SemContextFlatMotionForTableMode[size];

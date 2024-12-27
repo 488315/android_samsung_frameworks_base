@@ -14,13 +14,11 @@ public final class WifiSsidPolicy implements Parcelable {
     public static final Parcelable.Creator<WifiSsidPolicy> CREATOR =
             new Parcelable.Creator<
                     WifiSsidPolicy>() { // from class: android.app.admin.WifiSsidPolicy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiSsidPolicy createFromParcel(Parcel source) {
                     return new WifiSsidPolicy(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiSsidPolicy[] newArray(int size) {
                     return new WifiSsidPolicy[size];

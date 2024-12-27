@@ -17,7 +17,6 @@ public final class CustomizationProvider$insert$$inlined$runBlocking$1 extends S
     int label;
     final /* synthetic */ CustomizationProvider this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomizationProvider$insert$$inlined$runBlocking$1(String str, Continuation continuation, CustomizationProvider customizationProvider, ContentValues contentValues) {
         super(2, continuation);
         this.$spanName = str;
@@ -37,8 +36,6 @@ public final class CustomizationProvider$insert$$inlined$runBlocking$1 extends S
         return ((CustomizationProvider$insert$$inlined$runBlocking$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0085  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

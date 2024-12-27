@@ -258,39 +258,6 @@ public final class MediaCarouselInteractor implements MediaDataManager, CoreStar
                 }
                 final boolean z2 = z;
                 mediaDataProcessor.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaDataProcessor$loadMediaData$1
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Removed duplicated region for block: B:117:0x0558  */
-                    /* JADX WARN: Removed duplicated region for block: B:120:0x0571  */
-                    /* JADX WARN: Removed duplicated region for block: B:127:0x05a7  */
-                    /* JADX WARN: Removed duplicated region for block: B:129:0x05af  */
-                    /* JADX WARN: Removed duplicated region for block: B:132:0x05d4  */
-                    /* JADX WARN: Removed duplicated region for block: B:136:0x05be  */
-                    /* JADX WARN: Removed duplicated region for block: B:140:0x05ab  */
-                    /* JADX WARN: Removed duplicated region for block: B:142:0x055a  */
-                    /* JADX WARN: Removed duplicated region for block: B:151:0x04e9  */
-                    /* JADX WARN: Removed duplicated region for block: B:83:0x03d6  */
-                    /* JADX WARN: Type inference failed for: r0v121, types: [T, com.android.systemui.media.controls.shared.model.MediaDeviceData] */
-                    /* JADX WARN: Type inference failed for: r0v145 */
-                    /* JADX WARN: Type inference failed for: r0v146 */
-                    /* JADX WARN: Type inference failed for: r0v147 */
-                    /* JADX WARN: Type inference failed for: r0v18 */
-                    /* JADX WARN: Type inference failed for: r0v19, types: [T, java.lang.CharSequence] */
-                    /* JADX WARN: Type inference failed for: r0v20 */
-                    /* JADX WARN: Type inference failed for: r0v21, types: [T] */
-                    /* JADX WARN: Type inference failed for: r0v26, types: [T, java.lang.CharSequence] */
-                    /* JADX WARN: Type inference failed for: r0v30, types: [T, java.lang.String] */
-                    /* JADX WARN: Type inference failed for: r0v37 */
-                    /* JADX WARN: Type inference failed for: r0v38, types: [T, java.lang.CharSequence] */
-                    /* JADX WARN: Type inference failed for: r0v39, types: [T, java.lang.CharSequence] */
-                    /* JADX WARN: Type inference failed for: r0v43, types: [T, kotlin.collections.EmptyList] */
-                    /* JADX WARN: Type inference failed for: r0v46, types: [T, java.lang.Object] */
-                    /* JADX WARN: Type inference failed for: r0v47, types: [T, java.lang.Object] */
-                    /* JADX WARN: Type inference failed for: r0v68, types: [T, java.lang.Object] */
-                    /* JADX WARN: Type inference failed for: r1v19, types: [T, java.lang.Object] */
-                    /* JADX WARN: Type inference failed for: r30v0, types: [android.graphics.drawable.Drawable] */
-                    /* JADX WARN: Type inference failed for: r42v0 */
-                    /* JADX WARN: Type inference failed for: r42v1, types: [java.lang.Runnable] */
-                    /* JADX WARN: Type inference failed for: r42v2 */
                     @Override // java.lang.Runnable
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

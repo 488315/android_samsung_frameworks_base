@@ -43,7 +43,6 @@ public final class FlashlightControllerImpl implements FlashlightController {
     public boolean mTorchAvailable;
     public final AnonymousClass1 mTorchCallback;
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.policy.FlashlightControllerImpl$1] */
     public FlashlightControllerImpl(Context context, SettingsHelper settingsHelper, DumpManager dumpManager, CameraManager cameraManager, Executor executor, SecureSettings secureSettings, BroadcastSender broadcastSender, PackageManager packageManager) {
         AtomicBoolean atomicBoolean = new AtomicBoolean(false);
         this.mFlashLightDebugLogs = new ArrayList();

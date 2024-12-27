@@ -33,7 +33,6 @@ final class FooterActionsViewModelKt$FooterActionsViewModel$foregroundServices$1
         final /* synthetic */ FalsingManager $falsingManager;
         final /* synthetic */ FooterActionsInteractor $footerActionsInteractor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(FalsingManager falsingManager, ActivityStarter activityStarter, FooterActionsInteractor footerActionsInteractor) {
             super(1, Intrinsics.Kotlin.class, "onForegroundServiceButtonClicked", "FooterActionsViewModel$onForegroundServiceButtonClicked(Lcom/android/systemui/plugins/FalsingManager;Lcom/android/systemui/plugins/ActivityStarter;Lcom/android/systemui/qs/footer/domain/interactor/FooterActionsInteractor;Lcom/android/systemui/animation/Expandable;)V", 0);
             this.$falsingManager = falsingManager;
@@ -60,7 +59,6 @@ final class FooterActionsViewModelKt$FooterActionsViewModel$foregroundServices$1
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FooterActionsViewModelKt$FooterActionsViewModel$foregroundServices$1(ContextThemeWrapper contextThemeWrapper, FalsingManager falsingManager, ActivityStarter activityStarter, FooterActionsInteractor footerActionsInteractor, Continuation continuation) {
         super(4, continuation);
         this.$qsThemedContext = contextThemeWrapper;

@@ -15,7 +15,6 @@ final class CaptioningViewModel$setIsSystemAudioCaptioningEnabled$1 extends Susp
     int label;
     final /* synthetic */ CaptioningViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CaptioningViewModel$setIsSystemAudioCaptioningEnabled$1(CaptioningViewModel captioningViewModel, boolean z, Continuation continuation) {
         super(2, continuation);
         this.this$0 = captioningViewModel;

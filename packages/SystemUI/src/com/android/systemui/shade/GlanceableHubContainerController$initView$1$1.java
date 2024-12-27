@@ -46,7 +46,6 @@ final class GlanceableHubContainerController$initView$1$1 extends SuspendLambda 
             int label;
             final /* synthetic */ GlanceableHubContainerController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C01791(ComposeView composeView, LifecycleOwner lifecycleOwner, GlanceableHubContainerController glanceableHubContainerController, Continuation continuation) {
                 super(2, continuation);
                 this.$this_apply = composeView;
@@ -100,7 +99,6 @@ final class GlanceableHubContainerController$initView$1$1 extends SuspendLambda 
                         super(2);
                     }
 
-                    /* JADX WARN: Type inference failed for: r4v5, types: [com.android.systemui.shade.GlanceableHubContainerController$initView$1$1$1$1$2$1, kotlin.jvm.internal.Lambda] */
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj2, Object obj3) {
                         Composer composer = (Composer) obj2;
@@ -141,7 +139,6 @@ final class GlanceableHubContainerController$initView$1$1 extends SuspendLambda 
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(LifecycleOwner lifecycleOwner, ComposeView composeView, GlanceableHubContainerController glanceableHubContainerController, Continuation continuation) {
             super(2, continuation);
             this.$$this$repeatWhenAttached = lifecycleOwner;
@@ -182,7 +179,6 @@ final class GlanceableHubContainerController$initView$1$1 extends SuspendLambda 
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GlanceableHubContainerController$initView$1$1(ComposeView composeView, GlanceableHubContainerController glanceableHubContainerController, Continuation continuation) {
         super(3, continuation);
         this.$this_apply = composeView;

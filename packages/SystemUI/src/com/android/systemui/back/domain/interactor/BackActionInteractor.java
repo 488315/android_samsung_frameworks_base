@@ -33,7 +33,6 @@ public final class BackActionInteractor implements CoreStartable {
     public final SysuiStatusBarStateController statusBarStateController;
     public final WindowRootViewVisibilityInteractor windowRootViewVisibilityInteractor;
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.back.domain.interactor.BackActionInteractor$callback$2] */
     public BackActionInteractor(CoroutineScope coroutineScope, SysuiStatusBarStateController sysuiStatusBarStateController, StatusBarKeyguardViewManager statusBarKeyguardViewManager, ShadeController shadeController, NotificationShadeWindowController notificationShadeWindowController, WindowRootViewVisibilityInteractor windowRootViewVisibilityInteractor, NotificationPanelViewController notificationPanelViewController) {
         this.scope = coroutineScope;
         this.statusBarStateController = sysuiStatusBarStateController;
@@ -51,7 +50,6 @@ public final class BackActionInteractor implements CoreStartable {
         };
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final boolean onBackRequested() {
         StatusBarKeyguardViewManager statusBarKeyguardViewManager = this.statusBarKeyguardViewManager;
         boolean canHandleBackPressed = statusBarKeyguardViewManager.canHandleBackPressed();

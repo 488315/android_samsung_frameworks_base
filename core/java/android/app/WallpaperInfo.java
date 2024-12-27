@@ -28,13 +28,11 @@ import java.io.IOException;
 public final class WallpaperInfo implements Parcelable {
     public static final Parcelable.Creator<WallpaperInfo> CREATOR =
             new Parcelable.Creator<WallpaperInfo>() { // from class: android.app.WallpaperInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WallpaperInfo createFromParcel(Parcel source) {
                     return new WallpaperInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WallpaperInfo[] newArray(int size) {
                     return new WallpaperInfo[size];

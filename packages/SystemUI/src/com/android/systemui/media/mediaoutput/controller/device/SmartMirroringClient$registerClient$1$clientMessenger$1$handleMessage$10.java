@@ -19,7 +19,6 @@ final class SmartMirroringClient$registerClient$1$clientMessenger$1$handleMessag
     final /* synthetic */ Map<String, DeviceInfo> $deviceInfoMap;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SmartMirroringClient$registerClient$1$clientMessenger$1$handleMessage$10(ProducerScope producerScope, Map<String, DeviceInfo> map, Continuation continuation) {
         super(2, continuation);
         this.$$this$callbackFlow = producerScope;

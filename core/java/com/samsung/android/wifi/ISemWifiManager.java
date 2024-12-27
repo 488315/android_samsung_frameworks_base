@@ -5017,7 +5017,6 @@ public interface ISemWifiManager extends IInterface {
             reply.writeTypedObject(v, 1);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements ISemWifiManager {
             private IBinder mRemote;
 

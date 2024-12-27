@@ -121,7 +121,6 @@ public final class RemoteDisplayChangeController {
         void onContinueRemoteDisplayChange(WindowContainerTransaction windowContainerTransaction);
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.wm.RemoteDisplayChangeController$$ExternalSyntheticLambda0] */
     public RemoteDisplayChangeController(DisplayContent displayContent) {
         this.mService = displayContent.mWmService;
         this.mDisplayContent = displayContent;

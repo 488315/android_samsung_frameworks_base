@@ -13,7 +13,6 @@ public final class WatchedArrayList extends WatchableImpl implements Snappable {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedArrayList$1] */
     public WatchedArrayList(int i) {
         this.mStorage = new ArrayList(i);
     }

@@ -11,7 +11,6 @@ final class GuestUserInteractor$onDeviceBootCompleted$1 extends SuspendLambda im
     int label;
     final /* synthetic */ GuestUserInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GuestUserInteractor$onDeviceBootCompleted$1(GuestUserInteractor guestUserInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = guestUserInteractor;
@@ -27,7 +26,6 @@ final class GuestUserInteractor$onDeviceBootCompleted$1 extends SuspendLambda im
         return ((GuestUserInteractor$onDeviceBootCompleted$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0071  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

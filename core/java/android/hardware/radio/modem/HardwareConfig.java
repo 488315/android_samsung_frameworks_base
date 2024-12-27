@@ -12,7 +12,6 @@ public class HardwareConfig implements Parcelable {
     public static final Parcelable.Creator<HardwareConfig> CREATOR =
             new Parcelable.Creator<
                     HardwareConfig>() { // from class: android.hardware.radio.modem.HardwareConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HardwareConfig createFromParcel(Parcel _aidl_source) {
                     HardwareConfig _aidl_out = new HardwareConfig();
@@ -20,7 +19,6 @@ public class HardwareConfig implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HardwareConfig[] newArray(int _aidl_size) {
                     return new HardwareConfig[_aidl_size];

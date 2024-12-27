@@ -95,8 +95,6 @@ public final class KeyguardLongPressInteractor {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class LogEvents implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ LogEvents[] $VALUES;
         public static final LogEvents LOCK_SCREEN_LONG_PRESS_POPUP_CLICKED;
@@ -170,8 +168,6 @@ public final class KeyguardLongPressInteractor {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

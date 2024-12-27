@@ -27,13 +27,11 @@ public final class AttributionSource implements Parcelable {
     public static final Parcelable.Creator<AttributionSource> CREATOR =
             new Parcelable.Creator<
                     AttributionSource>() { // from class: android.content.AttributionSource.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AttributionSource[] newArray(int size) {
                     return new AttributionSource[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AttributionSource createFromParcel(Parcel in) {
                     return new AttributionSource(in);

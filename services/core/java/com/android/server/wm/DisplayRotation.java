@@ -108,9 +108,6 @@ public final class DisplayRotation {
         public boolean mInHalfFoldTransition = false;
         public final Set mTabletopRotations = new ArraySet();
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r1v11, types: [com.android.server.wm.DisplayRotation$FoldController$1] */
-        /* JADX WARN: Type inference failed for: r2v10, types: [android.hardware.SensorEventListener, com.android.server.wm.DisplayRotation$FoldController$2] */
         public FoldController() {
             Sensor defaultSensor;
             this.mAllowHalfFoldAutoRotationOverride = DisplayRotation.this.mContext.getResources().getBoolean(R.bool.kg_sim_puk_account_full_screen);
@@ -255,10 +252,6 @@ public final class DisplayRotation {
         
             if (r11 == r0.mPortraitRotation) goto L103;
          */
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:106:0x00e4 A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:33:0x00ed  */
-        /* JADX WARN: Removed duplicated region for block: B:66:0x0143  */
         @Override // com.android.server.wm.WindowOrientationListener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -960,8 +953,6 @@ public final class DisplayRotation {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0047  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0051  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1116,9 +1107,6 @@ public final class DisplayRotation {
     
         if (r18.mShowRotationSuggestions == 1) goto L58;
      */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0111  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0134  */
-    /* JADX WARN: Removed duplicated region for block: B:41:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1139,12 +1127,6 @@ public final class DisplayRotation {
         return updateRotationUnchecked;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:150:0x0329  */
-    /* JADX WARN: Removed duplicated region for block: B:167:0x038d  */
-    /* JADX WARN: Removed duplicated region for block: B:173:0x02d4  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00ac  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x00ff  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

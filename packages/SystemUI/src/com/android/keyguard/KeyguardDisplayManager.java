@@ -84,8 +84,6 @@ public final class KeyguardDisplayManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.keyguard.KeyguardDisplayManager$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.keyguard.KeyguardDisplayManager$3] */
     public KeyguardDisplayManager(KeyguardFoldController keyguardFoldController, KeyguardVisibilityMonitor keyguardVisibilityMonitor, KeyguardPresentationDisabler keyguardPresentationDisabler, Context context, Lazy lazy, DisplayTracker displayTracker, Executor executor, Executor executor2, DeviceStateHelper deviceStateHelper, KeyguardStateController keyguardStateController, ConnectedDisplayKeyguardPresentation.Factory factory) {
         DisplayTracker.Callback callback = new DisplayTracker.Callback() { // from class: com.android.keyguard.KeyguardDisplayManager.1
             @Override // com.android.systemui.settings.DisplayTracker.Callback
@@ -216,8 +214,6 @@ public final class KeyguardDisplayManager {
         this.mShowing = true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:0x00a1 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x00a2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -8,7 +8,6 @@ public class RemoteLockInfo implements Parcelable {
     public static final Parcelable.Creator<RemoteLockInfo> CREATOR =
             new Parcelable.Creator<
                     RemoteLockInfo>() { // from class: com.android.internal.widget.RemoteLockInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteLockInfo createFromParcel(Parcel in) {
                     int lockType = in.readInt();
@@ -44,7 +43,6 @@ public class RemoteLockInfo implements Parcelable {
                             bundle);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteLockInfo[] newArray(int size) {
                     return new RemoteLockInfo[size];

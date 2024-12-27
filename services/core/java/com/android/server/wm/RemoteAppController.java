@@ -38,7 +38,6 @@ public final class RemoteAppController implements IController {
     @Override // com.android.server.wm.IController
     public final void initialize() {}
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0078  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -83,7 +82,6 @@ public final class RemoteAppController implements IController {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0045 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

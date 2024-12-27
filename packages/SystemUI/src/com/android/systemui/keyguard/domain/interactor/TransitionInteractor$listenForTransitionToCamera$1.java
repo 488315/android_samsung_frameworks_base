@@ -28,10 +28,6 @@ final class TransitionInteractor$listenForTransitionToCamera$1 extends SuspendLa
             return emit$1(continuation);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:20:0x006b  */
-        /* JADX WARN: Removed duplicated region for block: B:23:0x0085  */
-        /* JADX WARN: Removed duplicated region for block: B:25:0x003c  */
-        /* JADX WARN: Removed duplicated region for block: B:9:0x0024  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -124,7 +120,6 @@ final class TransitionInteractor$listenForTransitionToCamera$1 extends SuspendLa
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TransitionInteractor$listenForTransitionToCamera$1(TransitionInteractor transitionInteractor, KeyguardInteractor keyguardInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = transitionInteractor;

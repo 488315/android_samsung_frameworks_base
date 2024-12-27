@@ -575,8 +575,6 @@ public final class UsbDirectMidiDevice implements Closeable {
         Log.d("UsbDirectMidiDevice", sb.toString());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:58:0x012c  */
-    /* JADX WARN: Type inference failed for: r4v3, types: [com.android.server.usb.UsbDirectMidiDevice$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

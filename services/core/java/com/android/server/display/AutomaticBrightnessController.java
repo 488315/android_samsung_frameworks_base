@@ -544,8 +544,6 @@ public final class AutomaticBrightnessController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r12v3, types: [com.android.server.display.AutomaticBrightnessController$4] */
-    /* JADX WARN: Type inference failed for: r12v4, types: [com.android.server.display.AutomaticBrightnessController$4] */
     public AutomaticBrightnessController(
             Injector injector,
             Callbacks callbacks,
@@ -1686,7 +1684,6 @@ public final class AutomaticBrightnessController {
 
        if (r3 == false) goto L113;
     */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x0215  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

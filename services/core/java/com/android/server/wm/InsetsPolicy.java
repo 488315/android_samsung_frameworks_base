@@ -54,8 +54,6 @@ public final class InsetsPolicy {
         public final int mId;
         public int mState = 0;
 
-        /* JADX WARN: Removed duplicated region for block: B:20:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
         /* renamed from: -$$Nest$mupdateVisibility, reason: not valid java name */
         /*
             Code decompiled incorrectly, please refer to instructions dump.

@@ -8,7 +8,6 @@ public class EnrollmentFrame implements Parcelable {
     public static final Parcelable.Creator<EnrollmentFrame> CREATOR =
             new Parcelable.Creator<EnrollmentFrame>() { // from class:
                 // android.hardware.biometrics.face.EnrollmentFrame.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EnrollmentFrame createFromParcel(Parcel _aidl_source) {
                     EnrollmentFrame _aidl_out = new EnrollmentFrame();
@@ -16,7 +15,6 @@ public class EnrollmentFrame implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EnrollmentFrame[] newArray(int _aidl_size) {
                     return new EnrollmentFrame[_aidl_size];

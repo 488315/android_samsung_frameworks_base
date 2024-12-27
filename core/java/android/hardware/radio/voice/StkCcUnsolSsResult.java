@@ -12,7 +12,6 @@ public class StkCcUnsolSsResult implements Parcelable {
     public static final Parcelable.Creator<StkCcUnsolSsResult> CREATOR =
             new Parcelable.Creator<StkCcUnsolSsResult>() { // from class:
                 // android.hardware.radio.voice.StkCcUnsolSsResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StkCcUnsolSsResult createFromParcel(Parcel _aidl_source) {
                     StkCcUnsolSsResult _aidl_out = new StkCcUnsolSsResult();
@@ -20,7 +19,6 @@ public class StkCcUnsolSsResult implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StkCcUnsolSsResult[] newArray(int _aidl_size) {
                     return new StkCcUnsolSsResult[_aidl_size];

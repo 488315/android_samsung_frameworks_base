@@ -594,7 +594,6 @@ public final class EndpointMonitorImpl {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0025  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -714,7 +713,6 @@ public final class EndpointMonitorImpl {
         return stopTracing;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0025  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

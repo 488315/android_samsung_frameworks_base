@@ -213,13 +213,11 @@ public class ParsedProcessImpl implements ParsedProcess, Parcelable {
                 new Parcelable.Creator<
                         ParsedProcessImpl>() { // from class:
                                                // com.android.internal.pm.pkg.component.ParsedProcessImpl.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ParsedProcessImpl[] newArray(int size) {
                         return new ParsedProcessImpl[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ParsedProcessImpl createFromParcel(Parcel in) {
                         return new ParsedProcessImpl(in);

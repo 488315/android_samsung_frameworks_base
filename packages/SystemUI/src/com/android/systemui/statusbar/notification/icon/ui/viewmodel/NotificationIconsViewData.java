@@ -21,8 +21,6 @@ public final class NotificationIconsViewData {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class LimitType {
         public static final /* synthetic */ LimitType[] $VALUES;
         public static final LimitType MaximumAmount;
@@ -83,7 +81,6 @@ public final class NotificationIconsViewData {
         this.limitType = limitType;
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

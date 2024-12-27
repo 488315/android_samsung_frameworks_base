@@ -57,7 +57,6 @@ public abstract class GWStubServiceRequester {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.audio.soundcraft.interfaces.wearable.stub.GWStubServiceRequester$serviceConnection$1] */
     public GWStubServiceRequester(Context context) {
         this.context = context;
     }

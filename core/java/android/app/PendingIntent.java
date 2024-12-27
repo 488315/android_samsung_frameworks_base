@@ -54,7 +54,6 @@ public final class PendingIntent implements Parcelable {
             ThreadLocal.withInitial(new PendingIntent$$ExternalSyntheticLambda2());
     public static final Parcelable.Creator<PendingIntent> CREATOR =
             new Parcelable.Creator<PendingIntent>() { // from class: android.app.PendingIntent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PendingIntent createFromParcel(Parcel in) {
                     IBinder target = in.readStrongBinder();
@@ -64,7 +63,6 @@ public final class PendingIntent implements Parcelable {
                     return null;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PendingIntent[] newArray(int size) {
                     return new PendingIntent[size];
@@ -640,7 +638,6 @@ public final class PendingIntent implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyCancelListeners() {
         ArraySet<Pair<Executor, CancelListener>> cancelListeners;
         synchronized (this.mTarget) {
@@ -664,7 +661,6 @@ public final class PendingIntent implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$notifyCancelListeners$0(Pair pair) {
         ((CancelListener) pair.second).onCanceled(this);
     }

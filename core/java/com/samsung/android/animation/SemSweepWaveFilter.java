@@ -91,7 +91,6 @@ public class SemSweepWaveFilter extends SemAbsSweepAnimationFilter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doDrawWaveEffect(View viewForeground, float deltaX, int position) {
         float sweepProgress = deltaX / viewForeground.getWidth();
         Canvas canvas = drawWaveToBitmapCanvas(viewForeground, sweepProgress);

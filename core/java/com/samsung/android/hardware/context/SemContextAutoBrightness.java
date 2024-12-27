@@ -10,13 +10,11 @@ public class SemContextAutoBrightness extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextAutoBrightness>() { // from class:
                                                   // com.samsung.android.hardware.context.SemContextAutoBrightness.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextAutoBrightness createFromParcel(Parcel in) {
                     return new SemContextAutoBrightness(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextAutoBrightness[] newArray(int size) {
                     return new SemContextAutoBrightness[size];

@@ -29,7 +29,6 @@ public final class MARsBigData {
     public abstract class MARsBigDataHolder {
         public static final MARsBigData INSTANCE;
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.am.mars.MARsBigData$1] */
         static {
             final MARsBigData mARsBigData = new MARsBigData();
             mARsBigData.mHQM = null;

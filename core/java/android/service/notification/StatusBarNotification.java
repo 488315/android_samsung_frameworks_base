@@ -23,13 +23,11 @@ public class StatusBarNotification implements Parcelable {
             new Parcelable.Creator<
                     StatusBarNotification>() { // from class:
                                                // android.service.notification.StatusBarNotification.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StatusBarNotification createFromParcel(Parcel parcel) {
                     return new StatusBarNotification(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StatusBarNotification[] newArray(int size) {
                     return new StatusBarNotification[size];

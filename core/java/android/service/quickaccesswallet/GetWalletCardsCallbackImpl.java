@@ -57,7 +57,6 @@ final class GetWalletCardsCallbackImpl implements GetWalletCardsCallback {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onSuccess$1() {
         lambda$onFailure$2(new GetWalletCardsError(null, null));
     }
@@ -74,7 +73,6 @@ final class GetWalletCardsCallbackImpl implements GetWalletCardsCallback {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: onSuccessInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$onSuccess$0(GetWalletCardsResponse response) {
         if (this.mCalled) {
@@ -89,7 +87,6 @@ final class GetWalletCardsCallbackImpl implements GetWalletCardsCallback {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: onFailureInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$onFailure$2(GetWalletCardsError error) {
         if (this.mCalled) {

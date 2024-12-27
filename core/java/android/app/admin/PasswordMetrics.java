@@ -18,7 +18,6 @@ public final class PasswordMetrics implements Parcelable {
     private static final int CHAR_SYMBOL = 3;
     private static final int CHAR_UPPER_CASE = 1;
     public static final Parcelable.Creator<PasswordMetrics> CREATOR = new Parcelable.Creator<PasswordMetrics>() { // from class: android.app.admin.PasswordMetrics.1
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public PasswordMetrics createFromParcel(Parcel in) {
             int credType = in.readInt();
@@ -34,7 +33,6 @@ public final class PasswordMetrics implements Parcelable {
             return new PasswordMetrics(credType, length, letters, upperCase, lowerCase, numeric, symbols, nonLetter, nonNumeric, seqLength);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public PasswordMetrics[] newArray(int size) {
             return new PasswordMetrics[size];
@@ -275,8 +273,6 @@ public final class PasswordMetrics implements Parcelable {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     private static abstract class ComplexityBucket {
         public static final ComplexityBucket BUCKET_HIGH;
         public static final ComplexityBucket BUCKET_NONE;

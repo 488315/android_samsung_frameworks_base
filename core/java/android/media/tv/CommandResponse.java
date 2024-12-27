@@ -7,14 +7,12 @@ public final class CommandResponse extends BroadcastInfoResponse implements Parc
     public static final Parcelable.Creator<CommandResponse> CREATOR =
             new Parcelable.Creator<
                     CommandResponse>() { // from class: android.media.tv.CommandResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CommandResponse createFromParcel(Parcel source) {
                     source.readInt();
                     return CommandResponse.createFromParcelBody(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CommandResponse[] newArray(int size) {
                     return new CommandResponse[size];

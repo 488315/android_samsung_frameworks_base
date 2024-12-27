@@ -44,7 +44,6 @@ public class AuthCredentialWindow extends FocusableWindow {
         this.mBaseView.requestFocus();
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.android.biometrics.app.setting.prompt.credential.AuthCredentialWindow$1] */
     @Override // com.samsung.android.biometrics.app.setting.FocusableWindow,
               // com.samsung.android.biometrics.app.setting.SysUiWindow
     public final void addView() {
@@ -164,9 +163,6 @@ public class AuthCredentialWindow extends FocusableWindow {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0067 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0070 A[Catch: Exception -> 0x002b, TRY_LEAVE, TryCatch #0 {Exception -> 0x002b, blocks: (B:3:0x0009, B:9:0x0019, B:10:0x002a, B:12:0x002d, B:14:0x004b, B:18:0x0069, B:20:0x0070, B:23:0x0035, B:25:0x003d), top: B:2:0x0009 }] */
-    /* JADX WARN: Removed duplicated region for block: B:22:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

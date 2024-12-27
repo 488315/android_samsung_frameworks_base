@@ -68,7 +68,6 @@ public final class DevicePresenceProcessor implements AssociationStore.OnChangeL
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ DevicePresenceProcessor this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public BleDeviceDisappearedScheduler(
                 DevicePresenceProcessor devicePresenceProcessor, int i) {
             super(Looper.getMainLooper());

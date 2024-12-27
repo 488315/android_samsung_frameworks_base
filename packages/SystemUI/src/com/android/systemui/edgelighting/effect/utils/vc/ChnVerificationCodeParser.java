@@ -13,8 +13,6 @@ public final class ChnVerificationCodeParser extends VerificationCodeParserBase 
         this.mContext = context;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x010e A[Catch: IndexOutOfBoundsException -> 0x014e, TryCatch #1 {IndexOutOfBoundsException -> 0x014e, blocks: (B:21:0x00fd, B:23:0x010e, B:25:0x0115), top: B:20:0x00fd }] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x015b  */
     @Override // com.android.systemui.edgelighting.effect.utils.vc.VerificationCodeParser
     /*
         Code decompiled incorrectly, please refer to instructions dump.

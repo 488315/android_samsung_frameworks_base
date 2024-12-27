@@ -178,7 +178,6 @@ public final class OverlayConfigParser {
         return parsingContext.mOrderedConfigurations;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static void readConfigFile(
             File configFile,
             OverlayScanner scanner,

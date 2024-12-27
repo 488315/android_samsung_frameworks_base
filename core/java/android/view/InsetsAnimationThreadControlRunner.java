@@ -60,7 +60,6 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyFinished$0(boolean shown) {
             InsetsAnimationThreadControlRunner.this.mOuterCallbacks.notifyFinished(
                     InsetsAnimationThreadControlRunner.this, shown);
@@ -89,7 +88,6 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
             sc.release();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$reportPerceptible$1(int types, boolean perceptible) {
             InsetsAnimationThreadControlRunner.this.mOuterCallbacks.reportPerceptible(
                     types, perceptible);
@@ -151,7 +149,6 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(
             int types, WindowInsetsAnimationControlListener listener) {
         if (this.mControl.isCancelled()) {
@@ -234,7 +231,6 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updateLayoutInsetsDuringAnimation$1(
             int layoutInsetsDuringAnimation) {
         this.mControl.updateLayoutInsetsDuringAnimation(layoutInsetsDuringAnimation);

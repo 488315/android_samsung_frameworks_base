@@ -161,8 +161,6 @@ public final class RotationButtonController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.shared.rotation.RotationButtonController$1] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.systemui.shared.rotation.RotationButtonController$$ExternalSyntheticLambda3] */
     public RotationButtonController(Context context, int i, int i2, int i3, int i4, int i5, int i6, Supplier<Integer> supplier) {
         this.mContext = context;
         this.mLightIconColor = i;

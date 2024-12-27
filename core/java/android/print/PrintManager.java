@@ -619,7 +619,6 @@ public final class PrintManager {
             return this.mActivity == null;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void destroyLocked() {
             this.mActivity.getApplication().unregisterActivityLifecycleCallbacks(this);
             this.mActivity = null;

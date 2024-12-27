@@ -238,7 +238,6 @@ public class SemPathRenderingDrawable extends Drawable implements Animatable {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(8:103|104|(4:(3:129|130|(8:135|136|108|109|110|111|112|113))|111|112|113)|106|107|108|109|110) */
     /* JADX WARN: Code restructure failed: missing block: B:126:0x0137, code lost:
 
        r0 = th;
@@ -922,7 +921,6 @@ public class SemPathRenderingDrawable extends Drawable implements Animatable {
                 + this.mDocument.getTotalAttributeCount();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int getDeviceDensityDpi(Resources res) {
         if (res == null) {
             return Resources.getSystem().getDisplayMetrics().densityDpi;
@@ -1095,7 +1093,6 @@ public class SemPathRenderingDrawable extends Drawable implements Animatable {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void createNinePatchRenderer() {
             if (this.mNinePatchRenderer == null && this.mDocument != null) {
                 int width = getIntrinsicWidth();

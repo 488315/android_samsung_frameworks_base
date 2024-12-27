@@ -8,7 +8,6 @@ public class LatencyRange implements Parcelable {
     public static final Parcelable.Creator<LatencyRange> CREATOR =
             new Parcelable.Creator<LatencyRange>() { // from class:
                 // android.hardware.camera2.extension.LatencyRange.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LatencyRange createFromParcel(Parcel _aidl_source) {
                     LatencyRange _aidl_out = new LatencyRange();
@@ -16,7 +15,6 @@ public class LatencyRange implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LatencyRange[] newArray(int _aidl_size) {
                     return new LatencyRange[_aidl_size];

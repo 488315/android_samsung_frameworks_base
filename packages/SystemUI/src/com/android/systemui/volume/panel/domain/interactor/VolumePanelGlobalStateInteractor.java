@@ -15,7 +15,6 @@ public final class VolumePanelGlobalStateInteractor {
     public final void setVisible(final boolean z) {
         Object value;
         Function1 function1 = new Function1() { // from class: com.android.systemui.volume.panel.domain.interactor.VolumePanelGlobalStateInteractor$setVisible$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

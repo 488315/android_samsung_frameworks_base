@@ -475,7 +475,6 @@ public class AnimatedImageDrawable extends Drawable implements Animatable2 {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$postOnAnimationStart$1() {
         Iterator<Animatable2.AnimationCallback> it = this.mAnimationCallbacks.iterator();
         while (it.hasNext()) {
@@ -499,7 +498,6 @@ public class AnimatedImageDrawable extends Drawable implements Animatable2 {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$postOnAnimationEnd$2() {
         Iterator<Animatable2.AnimationCallback> it = this.mAnimationCallbacks.iterator();
         while (it.hasNext()) {

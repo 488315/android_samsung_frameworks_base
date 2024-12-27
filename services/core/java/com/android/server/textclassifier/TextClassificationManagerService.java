@@ -189,8 +189,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
             this.mManagerService = new TextClassificationManagerService(context);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.textclassifier.TextClassificationManagerService, java.lang.Object] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             final ?? r0 = this.mManagerService;
@@ -549,8 +547,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
             }
         };
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.textclassifier.TextClassificationManagerService$SessionCache$1] */
-        /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.textclassifier.TextClassificationManagerService$SessionCache$2] */
         public SessionCache(Object obj) {
             this.mLock = obj;
         }
@@ -796,7 +792,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
         return userState2;
     }
 
-    /* JADX WARN: Type inference failed for: r4v6, types: [com.android.server.textclassifier.TextClassificationManagerService$$ExternalSyntheticLambda11] */
     public final void handleRequest(SystemTextClassifierMetadata systemTextClassifierMetadata, boolean z, boolean z2, FunctionalUtils.ThrowingConsumer throwingConsumer, String str, final ITextClassifierCallback iTextClassifierCallback) {
         boolean z3;
         Objects.requireNonNull(iTextClassifierCallback);

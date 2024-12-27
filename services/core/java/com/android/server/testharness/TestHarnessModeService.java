@@ -243,7 +243,6 @@ public final class TestHarnessModeService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.testharness.TestHarnessModeService$1] */
     public TestHarnessModeService(Context context) {
         super(context);
         this.mEnableKeepMemtagMode = false;

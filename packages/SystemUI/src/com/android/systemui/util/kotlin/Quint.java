@@ -18,7 +18,6 @@ public final class Quint<A, B, C, D, E> {
         this.fifth = e;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static /* synthetic */ Quint copy$default(Quint quint, Object obj, Object obj2, Object obj3, Object obj4, Object obj5, int i, Object obj6) {
         A a = obj;
         if ((i & 1) != 0) {

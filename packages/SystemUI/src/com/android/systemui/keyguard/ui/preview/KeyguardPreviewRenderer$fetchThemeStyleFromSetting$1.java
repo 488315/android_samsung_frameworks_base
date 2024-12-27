@@ -8,7 +8,6 @@ final class KeyguardPreviewRenderer$fetchThemeStyleFromSetting$1 extends Continu
     /* synthetic */ Object result;
     final /* synthetic */ KeyguardPreviewRenderer this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardPreviewRenderer$fetchThemeStyleFromSetting$1(KeyguardPreviewRenderer keyguardPreviewRenderer, Continuation continuation) {
         super(continuation);
         this.this$0 = keyguardPreviewRenderer;

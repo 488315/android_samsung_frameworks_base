@@ -22,7 +22,6 @@ public final class WirelessChargerConnectivity extends Connectivity {
     public int msgState;
     public final IntentFilter readTriggerIntentFilter;
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.samsung.accessory.manager.connectivity.WirelessChargerConnectivity$1] */
     public WirelessChargerConnectivity(Context context) {
         super(context);
         this.msgState = -1;

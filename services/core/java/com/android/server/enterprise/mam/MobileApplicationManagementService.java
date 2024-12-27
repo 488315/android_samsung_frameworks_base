@@ -29,8 +29,6 @@ public final class MobileApplicationManagementService extends MobileApplicationM
     public static final Object mAppPermissionLock = new Object();
     public static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r8v7, types: [android.content.BroadcastReceiver, com.android.server.enterprise.mam.MobileApplicationManagementService$1] */
     public MobileApplicationManagementService(Context context) {
         this.mContext = context;
         EdmStorageProvider edmStorageProvider = new EdmStorageProvider(context);
@@ -49,7 +47,6 @@ public final class MobileApplicationManagementService extends MobileApplicationM
                     intentFilter.addDataSchemeSpecificPart(str, 0);
                 }
                 ?? r8 = new BroadcastReceiver() { // from class: com.android.server.enterprise.mam.MobileApplicationManagementService.1
-                    /* JADX WARN: Removed duplicated region for block: B:14:0x00f0  */
                     @Override // android.content.BroadcastReceiver
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

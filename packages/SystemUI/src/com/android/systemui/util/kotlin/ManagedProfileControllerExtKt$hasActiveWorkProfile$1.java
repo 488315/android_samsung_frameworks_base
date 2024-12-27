@@ -18,7 +18,6 @@ final class ManagedProfileControllerExtKt$hasActiveWorkProfile$1 extends Suspend
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ManagedProfileControllerExtKt$hasActiveWorkProfile$1(ManagedProfileController managedProfileController, Continuation continuation) {
         super(2, continuation);
         this.$this_hasActiveWorkProfile = managedProfileController;
@@ -31,8 +30,6 @@ final class ManagedProfileControllerExtKt$hasActiveWorkProfile$1 extends Suspend
         return managedProfileControllerExtKt$hasActiveWorkProfile$1;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.util.kotlin.ManagedProfileControllerExtKt$hasActiveWorkProfile$1$callback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -54,7 +51,6 @@ final class ManagedProfileControllerExtKt$hasActiveWorkProfile$1 extends Suspend
             ((ManagedProfileControllerImpl) this.$this_hasActiveWorkProfile).addCallback(r1);
             final ManagedProfileController managedProfileController2 = this.$this_hasActiveWorkProfile;
             Function0 function0 = new Function0() { // from class: com.android.systemui.util.kotlin.ManagedProfileControllerExtKt$hasActiveWorkProfile$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

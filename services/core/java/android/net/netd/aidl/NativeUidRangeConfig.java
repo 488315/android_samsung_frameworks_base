@@ -79,7 +79,6 @@ public class NativeUidRangeConfig implements Parcelable {
         return i;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static NativeUidRangeConfig internalCreateFromParcel(Parcel parcel) {
         Builder builder = new Builder();
         int dataPosition = parcel.dataPosition();
@@ -151,7 +150,6 @@ public class NativeUidRangeConfig implements Parcelable {
                         Integer.valueOf(nativeUidRangeConfig.subPriority));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
         return Arrays.deepHashCode(
                 Arrays.asList(

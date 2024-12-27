@@ -50,7 +50,6 @@ public final class PmicMonitor {
         ScheduledExecutorService scheduledExecutorService = this.mExecutor;
         Runnable runnable = new Runnable() { // from class:
                     // com.android.server.display.brightness.clamper.PmicMonitor$$ExternalSyntheticLambda0
-                    /* JADX WARN: Removed duplicated region for block: B:24:0x0062  */
                     @Override // java.lang.Runnable
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

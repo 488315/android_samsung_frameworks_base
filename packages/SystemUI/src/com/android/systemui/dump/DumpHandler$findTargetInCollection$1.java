@@ -16,7 +16,6 @@ final class DumpHandler$findTargetInCollection$1 extends RestrictedSuspendLambda
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DumpHandler$findTargetInCollection$1(Collection<DumpsysEntry.DumpableEntry> collection, String str, Collection<DumpsysEntry.LogBufferEntry> collection2, Collection<DumpsysEntry.TableLogBufferEntry> collection3, Continuation continuation) {
         super(2, continuation);
         this.$dumpables = collection;
@@ -37,7 +36,6 @@ final class DumpHandler$findTargetInCollection$1 extends RestrictedSuspendLambda
         return ((DumpHandler$findTargetInCollection$1) create((SequenceScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x006d  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

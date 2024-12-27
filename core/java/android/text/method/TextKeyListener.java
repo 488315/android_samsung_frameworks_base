@@ -219,7 +219,6 @@ public class TextKeyListener extends BaseKeyListener implements SpanWatcher {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updatePrefs(ContentResolver resolver) {
         boolean cap = Settings.System.getInt(resolver, Settings.System.TEXT_AUTO_CAPS, 1) > 0;
         boolean text = Settings.System.getInt(resolver, Settings.System.TEXT_AUTO_REPLACE, 1) > 0;

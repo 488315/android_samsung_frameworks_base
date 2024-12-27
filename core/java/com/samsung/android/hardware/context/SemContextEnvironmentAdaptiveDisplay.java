@@ -10,13 +10,11 @@ public class SemContextEnvironmentAdaptiveDisplay extends SemContextEventContext
             new Parcelable.Creator<
                     SemContextEnvironmentAdaptiveDisplay>() { // from class:
                                                               // com.samsung.android.hardware.context.SemContextEnvironmentAdaptiveDisplay.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextEnvironmentAdaptiveDisplay createFromParcel(Parcel in) {
                     return new SemContextEnvironmentAdaptiveDisplay(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextEnvironmentAdaptiveDisplay[] newArray(int size) {
                     return new SemContextEnvironmentAdaptiveDisplay[size];

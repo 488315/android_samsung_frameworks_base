@@ -26,7 +26,6 @@ public final class KeyguardBouncerContainer extends FrameLayout {
     public final AnonymousClass2 mOnBackInvokedCallback;
     public final SysUIKeyEventHandler mSysUIKeyEventHandler;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.keyguard.KeyguardBouncerContainer$2] */
     public KeyguardBouncerContainer(Context context, SysUIKeyEventHandler sysUIKeyEventHandler, KeyguardSysDumpTrigger keyguardSysDumpTrigger) {
         super(context);
         View.OnAttachStateChangeListener onAttachStateChangeListener = new View.OnAttachStateChangeListener() { // from class: com.android.keyguard.KeyguardBouncerContainer.1

@@ -183,10 +183,6 @@ public final class MultiStateStats {
 
        return r7;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r14v0 */
-    /* JADX WARN: Type inference failed for: r14v1, types: [int] */
-    /* JADX WARN: Type inference failed for: r14v3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

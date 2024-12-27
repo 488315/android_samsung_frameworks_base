@@ -37,7 +37,6 @@ public final class SehTestHal extends ISehBiometricsFace.Stub {
     public final SemTestHalHelper mTestHalHelper;
     public int mUserId;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.os.Handler, com.android.server.biometrics.sensors.face.hidl.SehTestHal$1] */
     public SehTestHal(Context context, int i) {
         this.mContext = context;
         this.mSensorId = i;

@@ -295,8 +295,6 @@ public final class InputMethodBindingController {
     public final AutofillSuggestionsController mAutofillController =
             new AutofillSuggestionsController(this);
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.inputmethod.InputMethodBindingController$1] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.inputmethod.InputMethodBindingController$2] */
     public InputMethodBindingController(
             int i, InputMethodManagerService inputMethodManagerService) {
         this.mUserId = i;

@@ -18,10 +18,6 @@ public final class RUFSPolicy {
     public final String mPackageName;
     public final int mPolicyVersion;
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x004a A[Catch: NumberFormatException -> 0x003a, JSONException -> 0x003d, SecurityException -> 0x0040, TryCatch #2 {NumberFormatException -> 0x003a, SecurityException -> 0x0040, JSONException -> 0x003d, blocks: (B:3:0x000d, B:6:0x0020, B:8:0x002f, B:10:0x0034, B:11:0x0044, B:13:0x004a, B:15:0x0059, B:17:0x005e, B:21:0x0068, B:28:0x0073, B:30:0x007d, B:31:0x0083, B:32:0x0089, B:33:0x008f, B:36:0x00a2), top: B:2:0x000d }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0070  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00a0  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00a1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -146,21 +142,6 @@ public final class RUFSPolicy {
                     + " com.android.server.enterprise.threatdefense.RUFSPolicy.<init>(java.lang.String):void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r7v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r7v1 */
-    /* JADX WARN: Type inference failed for: r7v10 */
-    /* JADX WARN: Type inference failed for: r7v11, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r7v13 */
-    /* JADX WARN: Type inference failed for: r7v14 */
-    /* JADX WARN: Type inference failed for: r7v15 */
-    /* JADX WARN: Type inference failed for: r7v3 */
-    /* JADX WARN: Type inference failed for: r7v4 */
-    /* JADX WARN: Type inference failed for: r7v5, types: [java.io.IOException, java.lang.Throwable] */
-    /* JADX WARN: Type inference failed for: r7v6, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r7v7, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r7v8 */
-    /* JADX WARN: Type inference failed for: r7v9 */
     public static String readData(String e) {
         FileInputStream fileInputStream;
         BufferedReader bufferedReader = null;

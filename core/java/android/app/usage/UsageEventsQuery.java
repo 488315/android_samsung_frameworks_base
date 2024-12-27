@@ -16,13 +16,11 @@ public final class UsageEventsQuery implements Parcelable {
     public static final Parcelable.Creator<UsageEventsQuery> CREATOR =
             new Parcelable.Creator<
                     UsageEventsQuery>() { // from class: android.app.usage.UsageEventsQuery.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsageEventsQuery createFromParcel(Parcel in) {
                     return new UsageEventsQuery(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsageEventsQuery[] newArray(int size) {
                     return new UsageEventsQuery[size];

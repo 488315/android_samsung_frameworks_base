@@ -173,8 +173,6 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
         public String taskName;
     }
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.statusbar.KeyguardShortcutManager$intentReceiver$1] */
-    /* JADX WARN: Type inference failed for: r4v17, types: [com.android.systemui.statusbar.KeyguardShortcutManager$updateShortcutsRunnable$1] */
     public KeyguardShortcutManager(Context context, BroadcastDispatcher broadcastDispatcher, Executor executor, Handler handler, UserTracker userTracker, SelectedUserInteractor selectedUserInteractor, KeyguardUpdateMonitor keyguardUpdateMonitor, SettingsHelper settingsHelper, PackageManager packageManager, KeyguardStateController keyguardStateController, Set<KeyguardQuickAffordanceConfig> set, DumpManager dumpManager, QSTileHost qSTileHost, UserSwitcherController userSwitcherController) {
         String[] stringArray;
         String[] stringArray2;
@@ -205,9 +203,6 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
         this.themeShortcutHashMap = new HashMap();
         this.isReduceTransparencyEnabled = settingsHelper.isReduceTransparencyEnabled();
         this.intentReceiver = new BroadcastReceiver() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$intentReceiver$1
-            /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
-            /* JADX WARN: Removed duplicated region for block: B:15:0x0134  */
-            /* JADX WARN: Removed duplicated region for block: B:37:0x017a  */
             @Override // android.content.BroadcastReceiver
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -273,7 +268,6 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
     
         if (r5 != null) goto L41;
      */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x006a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -286,7 +280,6 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.KeyguardShortcutManager.access$getShortcutIcon(com.android.systemui.statusbar.KeyguardShortcutManager, android.content.pm.ActivityInfo, boolean, int):android.graphics.drawable.Drawable");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0169  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -769,7 +762,6 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
     
         if (isAllowNonPlatformKeyApp(r5.context, r6, "9e92121f90ad13d9f1085b06ea9e7c72ca6d5b603cdfd6adaff7b3071792d71f") == false) goto L24;
      */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x004b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -180,8 +180,6 @@ public final class ThreatDefenseService extends IThreatDefenseService.Stub imple
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.threatdefense.ThreatDefenseService.<init>(android.content.Context):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x008c A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0097 A[ADDED_TO_REGION, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -478,33 +476,6 @@ public final class ThreatDefenseService extends IThreatDefenseService.Stub imple
     public final void onPreAdminRemoval(int i) {
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.server.enterprise.threatdefense.KnoxAnalyticsThread] */
-    /* JADX WARN: Type inference failed for: r6v0, types: [com.android.server.enterprise.threatdefense.ThreatDefenseService] */
-    /* JADX WARN: Type inference failed for: r6v10, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r6v11, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r6v12 */
-    /* JADX WARN: Type inference failed for: r6v13 */
-    /* JADX WARN: Type inference failed for: r6v14, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r6v16 */
-    /* JADX WARN: Type inference failed for: r6v17 */
-    /* JADX WARN: Type inference failed for: r6v18 */
-    /* JADX WARN: Type inference failed for: r6v3, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r6v4, types: [java.io.IOException, java.lang.Throwable] */
-    /* JADX WARN: Type inference failed for: r6v5 */
-    /* JADX WARN: Type inference failed for: r6v7 */
-    /* JADX WARN: Type inference failed for: r6v8 */
-    /* JADX WARN: Type inference failed for: r6v9 */
-    /* JADX WARN: Type inference failed for: r7v10, types: [java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r7v11, types: [java.io.FileInputStream, java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r7v2, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r7v3 */
-    /* JADX WARN: Type inference failed for: r7v4, types: [java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r7v5 */
-    /* JADX WARN: Type inference failed for: r7v6 */
-    /* JADX WARN: Type inference failed for: r7v7 */
-    /* JADX WARN: Type inference failed for: r7v8 */
-    /* JADX WARN: Type inference failed for: r7v9, types: [java.io.InputStream] */
     public final String procReader(ContextInfo contextInfo, String str) {
         String str2 = null;
         r2 = null;
@@ -606,21 +577,6 @@ public final class ThreatDefenseService extends IThreatDefenseService.Stub imple
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r11v0, types: [java.lang.Object, java.lang.String] */
-    /* JADX WARN: Type inference failed for: r11v1 */
-    /* JADX WARN: Type inference failed for: r11v10 */
-    /* JADX WARN: Type inference failed for: r11v11 */
-    /* JADX WARN: Type inference failed for: r11v12 */
-    /* JADX WARN: Type inference failed for: r11v13 */
-    /* JADX WARN: Type inference failed for: r11v2, types: [java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r11v3 */
-    /* JADX WARN: Type inference failed for: r11v4 */
-    /* JADX WARN: Type inference failed for: r11v5 */
-    /* JADX WARN: Type inference failed for: r11v6 */
-    /* JADX WARN: Type inference failed for: r11v7, types: [java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r11v8, types: [java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r11v9, types: [java.io.FileInputStream, java.io.InputStream] */
     public final String processProcReader(ContextInfo contextInfo, String str, int i) {
         BufferedReader bufferedReader;
         BufferedReader bufferedReader2 = null;

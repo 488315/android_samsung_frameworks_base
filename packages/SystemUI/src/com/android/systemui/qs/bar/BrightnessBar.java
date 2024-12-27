@@ -136,10 +136,6 @@ public final class BrightnessBar extends BarItemImpl implements TunerService.Tun
                 return sb.toString();
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r0v1 */
-            /* JADX WARN: Type inference failed for: r0v2, types: [boolean, int] */
-            /* JADX WARN: Type inference failed for: r0v3 */
             @Override // com.android.systemui.qs.QSBackupRestoreManager.Callback
             public final void onRestore(String str) {
                 BrightnessBar brightnessBar = BrightnessBar.this;

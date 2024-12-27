@@ -11,13 +11,11 @@ public final class RadioChainInfo implements Parcelable {
     public static final Parcelable.Creator<RadioChainInfo> CREATOR =
             new Parcelable.Creator<
                     RadioChainInfo>() { // from class: android.net.wifi.nl80211.RadioChainInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RadioChainInfo createFromParcel(Parcel in) {
                     return new RadioChainInfo(in.readInt(), in.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RadioChainInfo[] newArray(int size) {
                     return new RadioChainInfo[size];

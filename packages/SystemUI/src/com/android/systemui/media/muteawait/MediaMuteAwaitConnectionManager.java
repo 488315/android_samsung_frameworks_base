@@ -113,7 +113,6 @@ public final class MediaMuteAwaitConnectionManager {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.media.muteawait.MediaMuteAwaitConnectionManager$muteAwaitConnectionChangeListener$1] */
     public MediaMuteAwaitConnectionManager(Executor executor, LocalMediaManager localMediaManager, Context context, DeviceIconUtil deviceIconUtil, MediaMuteAwaitLogger mediaMuteAwaitLogger) {
         this.mainExecutor = executor;
         this.localMediaManager = localMediaManager;

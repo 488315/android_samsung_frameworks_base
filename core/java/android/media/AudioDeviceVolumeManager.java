@@ -254,7 +254,6 @@ public class AudioDeviceVolumeManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CallbackUtil.DispatcherStub
             lambda$addOnDeviceVolumeBehaviorChangedListener$1() {
         return new DeviceVolumeBehaviorDispatcherStub();
@@ -304,7 +303,6 @@ public class AudioDeviceVolumeManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class DeviceVolumeBehaviorDispatcherStub extends IDeviceVolumeBehaviorDispatcher.Stub
             implements CallbackUtil.DispatcherStub {
         private DeviceVolumeBehaviorDispatcherStub() {}
@@ -335,7 +333,6 @@ public class AudioDeviceVolumeManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static IAudioService getService() {
         if (sService != null) {
             return sService;

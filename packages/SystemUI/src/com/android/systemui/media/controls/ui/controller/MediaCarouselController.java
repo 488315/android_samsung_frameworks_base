@@ -245,7 +245,6 @@ public final class MediaCarouselController implements Dumpable {
             int label;
             final /* synthetic */ MediaCarouselController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass1(MediaCarouselController mediaCarouselController, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = mediaCarouselController;
@@ -323,12 +322,6 @@ public final class MediaCarouselController implements Dumpable {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r11v0, types: [com.android.keyguard.KeyguardUpdateMonitorCallback, com.android.systemui.media.controls.ui.controller.MediaCarouselController$keyguardUpdateMonitorCallback$1] */
-    /* JADX WARN: Type inference failed for: r14v4 */
-    /* JADX WARN: Type inference failed for: r14v5, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r14v6 */
-    /* JADX WARN: Type inference failed for: r5v15, types: [com.android.systemui.media.controls.ui.controller.MediaCarouselController$animationScaleObserver$1] */
     public MediaCarouselController(Context context, Provider provider, VisualStabilityProvider visualStabilityProvider, MediaHostStatesManager mediaHostStatesManager, ActivityStarter activityStarter, SystemClock systemClock, CoroutineDispatcher coroutineDispatcher, final DelayableExecutor delayableExecutor, Executor executor, CoroutineDispatcher coroutineDispatcher2, MediaDataManager mediaDataManager, ConfigurationController configurationController, FalsingManager falsingManager, DumpManager dumpManager, MediaUiEventLogger mediaUiEventLogger, MediaCarouselControllerLogger mediaCarouselControllerLogger, MediaFlags mediaFlags, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardTransitionInteractor keyguardTransitionInteractor, GlobalSettings globalSettings, SecureSettings secureSettings, MediaCarouselViewModel mediaCarouselViewModel, Provider provider2, SceneInteractor sceneInteractor) {
         int i;
         this.context = context;
@@ -364,10 +357,6 @@ public final class MediaCarouselController implements Dumpable {
             }
         };
         ConfigurationController.ConfigurationListener configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.media.controls.ui.controller.MediaCarouselController$configListener$1
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r1v0 */
-            /* JADX WARN: Type inference failed for: r1v1, types: [boolean, int] */
-            /* JADX WARN: Type inference failed for: r1v2 */
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onConfigChanged(Configuration configuration) {
                 if (configuration == null) {
@@ -1180,10 +1169,6 @@ public final class MediaCarouselController implements Dumpable {
         pageIndicator.setTranslationY((this.mediaCarousel.getMeasuredHeight() - pageIndicator.getHeight()) - ((ViewGroup.MarginLayoutParams) pageIndicator.getLayoutParams()).bottomMargin);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v0 */
-    /* JADX WARN: Type inference failed for: r5v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r5v5 */
     public final void updatePlayers(boolean z) {
         boolean isEnabled;
         MediaFlags mediaFlags;

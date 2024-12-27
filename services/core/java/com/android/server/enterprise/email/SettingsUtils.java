@@ -57,10 +57,6 @@ public abstract class SettingsUtils {
         return currentTimeMillis;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:60:0x02f2  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x02f7  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0303  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0308  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -282,17 +278,6 @@ public abstract class SettingsUtils {
 
        if (r6 != null) goto L34;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x018f  */
-    /* JADX WARN: Type inference failed for: r6v1 */
-    /* JADX WARN: Type inference failed for: r6v11 */
-    /* JADX WARN: Type inference failed for: r6v12 */
-    /* JADX WARN: Type inference failed for: r6v13 */
-    /* JADX WARN: Type inference failed for: r6v14 */
-    /* JADX WARN: Type inference failed for: r6v15 */
-    /* JADX WARN: Type inference failed for: r6v16 */
-    /* JADX WARN: Type inference failed for: r6v3 */
-    /* JADX WARN: Type inference failed for: r6v7, types: [android.database.Cursor] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -379,11 +364,6 @@ public abstract class SettingsUtils {
 
        if (r1 == null) goto L43;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00fc A[Catch: all -> 0x0021, TryCatch #1 {all -> 0x0021, blocks: (B:4:0x000f, B:7:0x0027, B:16:0x00de, B:18:0x00e3, B:41:0x00f7, B:43:0x00fc, B:44:0x00ff, B:34:0x00ef), top: B:3:0x000f }] */
-    /* JADX WARN: Type inference failed for: r9v1 */
-    /* JADX WARN: Type inference failed for: r9v2, types: [android.database.Cursor] */
-    /* JADX WARN: Type inference failed for: r9v3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

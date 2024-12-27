@@ -16,7 +16,6 @@ final class KeyguardRootViewModel$areNotifsFullyHiddenAnimated$1 extends Suspend
     int label;
     final /* synthetic */ KeyguardRootViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardRootViewModel$areNotifsFullyHiddenAnimated$1(KeyguardRootViewModel keyguardRootViewModel, Continuation continuation) {
         super(3, continuation);
         this.this$0 = keyguardRootViewModel;

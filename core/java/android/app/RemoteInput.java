@@ -18,13 +18,11 @@ import java.util.Set;
 public final class RemoteInput implements Parcelable {
     public static final Parcelable.Creator<RemoteInput> CREATOR =
             new Parcelable.Creator<RemoteInput>() { // from class: android.app.RemoteInput.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteInput createFromParcel(Parcel in) {
                     return new RemoteInput(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteInput[] newArray(int size) {
                     return new RemoteInput[size];

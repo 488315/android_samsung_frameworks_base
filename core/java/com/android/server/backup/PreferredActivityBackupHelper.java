@@ -26,7 +26,6 @@ public class PreferredActivityBackupHelper extends BlobBackupHelper {
         this.mUserId = userId;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.app.backup.BlobBackupHelper
     protected byte[] getBackupPayload(String key) {
         char c;
@@ -83,7 +82,6 @@ public class PreferredActivityBackupHelper extends BlobBackupHelper {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.app.backup.BlobBackupHelper
     protected void applyRestoredPayload(String key, byte[] payload) {
         char c;

@@ -16,13 +16,11 @@ public final class TaskFragmentAnimationParams implements Parcelable {
             new Parcelable.Creator<
                     TaskFragmentAnimationParams>() { // from class:
                                                      // android.window.TaskFragmentAnimationParams.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TaskFragmentAnimationParams createFromParcel(Parcel in) {
                     return new TaskFragmentAnimationParams(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TaskFragmentAnimationParams[] newArray(int size) {
                     return new TaskFragmentAnimationParams[size];

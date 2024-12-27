@@ -59,9 +59,6 @@ public final class BleAdvertiserServiceManager {
         public final void onServiceDisconnected(ComponentName componentName) {}
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.desktopmode.BleAdvertiserServiceManager$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.desktopmode.BleAdvertiserServiceManager$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.server.desktopmode.BleAdvertiserServiceManager$$ExternalSyntheticLambda2] */
     public BleAdvertiserServiceManager(
             Context context, ServiceThread serviceThread, IStateManager iStateManager) {
         final int i = 0;

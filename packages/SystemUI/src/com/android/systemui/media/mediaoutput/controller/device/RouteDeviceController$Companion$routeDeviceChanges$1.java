@@ -25,7 +25,6 @@ final class RouteDeviceController$Companion$routeDeviceChanges$1 extends Suspend
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RouteDeviceController$Companion$routeDeviceChanges$1(MediaRouter2Manager mediaRouter2Manager, Continuation continuation) {
         super(2, continuation);
         this.$this_routeDeviceChanges = mediaRouter2Manager;
@@ -47,7 +46,6 @@ final class RouteDeviceController$Companion$routeDeviceChanges$1 extends Suspend
         return ((RouteDeviceController$Companion$routeDeviceChanges$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.media.MediaRouter2Manager$Callback, com.android.systemui.media.mediaoutput.controller.device.RouteDeviceController$Companion$routeDeviceChanges$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -101,7 +99,6 @@ final class RouteDeviceController$Companion$routeDeviceChanges$1 extends Suspend
             this.$this_routeDeviceChanges.registerScanRequest();
             final MediaRouter2Manager mediaRouter2Manager2 = this.$this_routeDeviceChanges;
             Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.device.RouteDeviceController$Companion$routeDeviceChanges$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

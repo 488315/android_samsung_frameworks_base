@@ -20,16 +20,11 @@ final class SecurityRepositoryImpl$security$1 extends SuspendLambda implements F
     int label;
     final /* synthetic */ SecurityRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SecurityRepositoryImpl$security$1(SecurityRepositoryImpl securityRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = securityRepositoryImpl;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0037  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
-    /* JADX WARN: Type inference failed for: r6v5, types: [kotlinx.coroutines.channels.SendChannel] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -124,7 +119,6 @@ final class SecurityRepositoryImpl$security$1 extends SuspendLambda implements F
                     int label;
                     final /* synthetic */ SecurityRepositoryImpl this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     public AnonymousClass1(ProducerScope producerScope, SecurityRepositoryImpl securityRepositoryImpl, Continuation continuation) {
                         super(2, continuation);
                         this.$$this$conflatedCallbackFlow = producerScope;
@@ -192,7 +186,6 @@ final class SecurityRepositoryImpl$security$1 extends SuspendLambda implements F
         }
         final SecurityRepositoryImpl securityRepositoryImpl3 = this.this$0;
         Function0 function0 = new Function0() { // from class: com.android.systemui.security.data.repository.SecurityRepositoryImpl$security$1.1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

@@ -14,7 +14,6 @@ final class FromDreamingTransitionInteractor$startToLockscreenTransition$1 exten
     int label;
     final /* synthetic */ FromDreamingTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromDreamingTransitionInteractor$startToLockscreenTransition$1(FromDreamingTransitionInteractor fromDreamingTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromDreamingTransitionInteractor;

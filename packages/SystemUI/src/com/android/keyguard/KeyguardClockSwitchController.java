@@ -73,10 +73,6 @@ public final class KeyguardClockSwitchController extends ViewController implemen
     public final DelayableExecutor mUiExecutor;
     public View mWeatherView;
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.keyguard.KeyguardClockSwitchController$4] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.keyguard.KeyguardClockSwitchController$1] */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.keyguard.KeyguardClockSwitchController$2] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.keyguard.KeyguardClockSwitchController$3] */
     public KeyguardClockSwitchController(KeyguardClockSwitch keyguardClockSwitch, StatusBarStateController statusBarStateController, ClockRegistry clockRegistry, KeyguardSliceViewController keyguardSliceViewController, NotificationIconAreaController notificationIconAreaController, LockscreenSmartspaceController lockscreenSmartspaceController, NotificationIconContainerAlwaysOnDisplayViewBinder notificationIconContainerAlwaysOnDisplayViewBinder, KeyguardUnlockAnimationController keyguardUnlockAnimationController, SecureSettings secureSettings, DelayableExecutor delayableExecutor, Executor executor, DumpManager dumpManager, ClockEventController clockEventController, LogBuffer logBuffer, KeyguardInteractor keyguardInteractor, KeyguardClockInteractor keyguardClockInteractor, FeatureFlagsClassic featureFlagsClassic, InWindowLauncherUnlockAnimationManager inWindowLauncherUnlockAnimationManager) {
         super(keyguardClockSwitch);
         this.mCurrentClockSize = 1;

@@ -244,8 +244,6 @@ public final class AppOpsUidStateTrackerImpl implements AppOpsUidStateTracker {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x007c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -371,8 +369,6 @@ public final class AppOpsUidStateTrackerImpl implements AppOpsUidStateTracker {
         commitUidPendingState(i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x005f  */
-    /* JADX WARN: Removed duplicated region for block: B:39:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

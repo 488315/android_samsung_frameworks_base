@@ -187,7 +187,6 @@ public class WindowDecorActionBar extends ActionBar
         a.recycle();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private DecorToolbar getDecorToolbar(View view) {
         if (view instanceof DecorToolbar) {
             return (DecorToolbar) view;
@@ -693,7 +692,6 @@ public class WindowDecorActionBar extends ActionBar
         this.mOverlayLayout.setActionBarHideOffset(offset);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean checkShowingFlags(
             boolean hiddenByApp, boolean hiddenBySystem, boolean showingForMode) {
         if (showingForMode) {

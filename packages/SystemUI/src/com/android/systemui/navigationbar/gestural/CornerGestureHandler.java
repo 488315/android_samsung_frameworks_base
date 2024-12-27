@@ -104,10 +104,6 @@ public final class CornerGestureHandler {
         obtain.recycle();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x001f  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0028  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:29:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

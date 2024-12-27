@@ -591,7 +591,6 @@ public class SemEmergencyManager {
         return result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void triggerEmergencyMode(
             boolean enabled, int flag, boolean skipdialog, Intent forwardedIntent) {
         ensureServiceConnected();

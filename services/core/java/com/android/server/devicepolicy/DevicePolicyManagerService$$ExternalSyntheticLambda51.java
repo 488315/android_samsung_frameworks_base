@@ -49,7 +49,6 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
         this.f$2 = obj3;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void runOrThrow() {
         final NonAbUpdateInstaller nonAbUpdateInstaller;
         switch (this.$r8$classId) {

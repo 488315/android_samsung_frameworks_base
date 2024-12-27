@@ -4,8 +4,6 @@ import com.android.internal.logging.UiEventLogger;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class VolumePanelUiEvent implements UiEventLogger.UiEventEnum {
     public static final /* synthetic */ VolumePanelUiEvent[] $VALUES;
     public static final VolumePanelUiEvent VOLUME_PANEL_ALARM_SLIDER_TOUCHED;

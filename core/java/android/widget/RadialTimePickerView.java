@@ -152,7 +152,6 @@ public class RadialTimePickerView extends View {
         return SNAP_PREFER_30S_MAP[degrees];
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int snapOnly30s(int degrees, int forceHigherOrLower) {
         int floor = (degrees / 30) * 30;
         int ceiling = floor + 30;
@@ -362,7 +361,6 @@ public class RadialTimePickerView extends View {
         return getHourForDegrees(this.mSelectionDegrees[0], this.mIsOnInnerCircle);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getHourForDegrees(int degrees, boolean innerCircle) {
         int hour = (degrees / 30) % 12;
         if (this.mIs24HourMode) {
@@ -380,7 +378,6 @@ public class RadialTimePickerView extends View {
         return hour;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getDegreesForHour(int hour) {
         if (this.mIs24HourMode) {
             if (hour >= 12) {
@@ -392,7 +389,6 @@ public class RadialTimePickerView extends View {
         return hour * 30;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean getInnerCircleForHour(int hour) {
         return this.mIs24HourMode && (hour == 0 || hour > 12);
     }
@@ -413,12 +409,10 @@ public class RadialTimePickerView extends View {
         return getMinuteForDegrees(this.mSelectionDegrees[1]);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getMinuteForDegrees(int degrees) {
         return degrees / 6;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getDegreesForMinute(int minute) {
         return minute * 6;
     }
@@ -747,7 +741,6 @@ public class RadialTimePickerView extends View {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getDegreesFromXY(float f, float f2, boolean z) {
         int i;
         int i2;
@@ -775,7 +768,6 @@ public class RadialTimePickerView extends View {
         return degrees;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean getInnerCircleFromXY(float x, float y) {
         if (!this.mIs24HourMode || !this.mShowHours) {
             return false;

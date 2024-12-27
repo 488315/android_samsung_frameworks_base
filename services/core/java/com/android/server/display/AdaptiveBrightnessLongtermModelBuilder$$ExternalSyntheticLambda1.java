@@ -4,7 +4,6 @@ public final /* synthetic */ class AdaptiveBrightnessLongtermModelBuilder$$Exter
         implements Runnable {
     public final /* synthetic */ AdaptiveBrightnessLongtermModelBuilder f$0;
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0060 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

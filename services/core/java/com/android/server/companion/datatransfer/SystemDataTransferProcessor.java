@@ -69,7 +69,6 @@ public final class SystemDataTransferProcessor {
     public final SystemDataTransferRequestStore mSystemDataTransferRequestStore;
     public final CompanionTransportManager mTransportManager;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.companion.datatransfer.SystemDataTransferProcessor$2] */
     public SystemDataTransferProcessor(
             CompanionDeviceManagerService companionDeviceManagerService,
             PackageManagerInternal packageManagerInternal,

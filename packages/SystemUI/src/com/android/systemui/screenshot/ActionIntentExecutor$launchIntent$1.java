@@ -14,7 +14,6 @@ final class ActionIntentExecutor$launchIntent$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ ActionIntentExecutor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ActionIntentExecutor$launchIntent$1(ActionIntentExecutor actionIntentExecutor, Continuation continuation) {
         super(continuation);
         this.this$0 = actionIntentExecutor;

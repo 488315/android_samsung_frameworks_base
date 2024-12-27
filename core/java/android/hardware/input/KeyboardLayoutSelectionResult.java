@@ -21,13 +21,11 @@ public final class KeyboardLayoutSelectionResult implements Parcelable {
     public static final Parcelable.Creator<KeyboardLayoutSelectionResult> CREATOR =
             new Parcelable.Creator<KeyboardLayoutSelectionResult>() { // from class:
                 // android.hardware.input.KeyboardLayoutSelectionResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyboardLayoutSelectionResult[] newArray(int size) {
                     return new KeyboardLayoutSelectionResult[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyboardLayoutSelectionResult createFromParcel(Parcel in) {
                     return new KeyboardLayoutSelectionResult(in);

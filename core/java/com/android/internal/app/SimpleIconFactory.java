@@ -317,13 +317,11 @@ public class SimpleIconFactory {
         return bitmap;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createIconBitmap$0(Rect childRect, Drawable drawable) {
         drawable.setBounds(childRect);
         drawable.draw(this.mCanvas);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createIconBitmap$1(Rect childRect, Drawable drawable) {
         drawable.setBounds(childRect);
         drawable.draw(this.mCanvas);
@@ -360,16 +358,6 @@ public class SimpleIconFactory {
 
        r6 = r3;
     */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00dc A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00f6 A[Catch: all -> 0x01af, TryCatch #0 {, blocks: (B:4:0x0007, B:6:0x000c, B:9:0x0014, B:10:0x0019, B:14:0x001d, B:18:0x002a, B:20:0x002e, B:22:0x0059, B:27:0x0092, B:34:0x00a4, B:37:0x00ad, B:42:0x00c1, B:44:0x00cc, B:53:0x00e6, B:55:0x00f6, B:59:0x010c, B:60:0x0101, B:63:0x010f, B:66:0x012f, B:68:0x0141, B:69:0x0175, B:71:0x017e, B:72:0x018b, B:74:0x0193, B:76:0x019a, B:81:0x0124, B:83:0x0032, B:85:0x0043, B:91:0x004f, B:96:0x0056, B:97:0x004a), top: B:3:0x0007 }] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0120  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0141 A[Catch: all -> 0x01af, TryCatch #0 {, blocks: (B:4:0x0007, B:6:0x000c, B:9:0x0014, B:10:0x0019, B:14:0x001d, B:18:0x002a, B:20:0x002e, B:22:0x0059, B:27:0x0092, B:34:0x00a4, B:37:0x00ad, B:42:0x00c1, B:44:0x00cc, B:53:0x00e6, B:55:0x00f6, B:59:0x010c, B:60:0x0101, B:63:0x010f, B:66:0x012f, B:68:0x0141, B:69:0x0175, B:71:0x017e, B:72:0x018b, B:74:0x0193, B:76:0x019a, B:81:0x0124, B:83:0x0032, B:85:0x0043, B:91:0x004f, B:96:0x0056, B:97:0x004a), top: B:3:0x0007 }] */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x017e A[Catch: all -> 0x01af, TryCatch #0 {, blocks: (B:4:0x0007, B:6:0x000c, B:9:0x0014, B:10:0x0019, B:14:0x001d, B:18:0x002a, B:20:0x002e, B:22:0x0059, B:27:0x0092, B:34:0x00a4, B:37:0x00ad, B:42:0x00c1, B:44:0x00cc, B:53:0x00e6, B:55:0x00f6, B:59:0x010c, B:60:0x0101, B:63:0x010f, B:66:0x012f, B:68:0x0141, B:69:0x0175, B:71:0x017e, B:72:0x018b, B:74:0x0193, B:76:0x019a, B:81:0x0124, B:83:0x0032, B:85:0x0043, B:91:0x004f, B:96:0x0056, B:97:0x004a), top: B:3:0x0007 }] */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0189  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x016f  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x0124 A[Catch: all -> 0x01af, TryCatch #0 {, blocks: (B:4:0x0007, B:6:0x000c, B:9:0x0014, B:10:0x0019, B:14:0x001d, B:18:0x002a, B:20:0x002e, B:22:0x0059, B:27:0x0092, B:34:0x00a4, B:37:0x00ad, B:42:0x00c1, B:44:0x00cc, B:53:0x00e6, B:55:0x00f6, B:59:0x010c, B:60:0x0101, B:63:0x010f, B:66:0x012f, B:68:0x0141, B:69:0x0175, B:71:0x017e, B:72:0x018b, B:74:0x0193, B:76:0x019a, B:81:0x0124, B:83:0x0032, B:85:0x0043, B:91:0x004f, B:96:0x0056, B:97:0x004a), top: B:3:0x0007 }] */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x01a5 A[ADDED_TO_REGION] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

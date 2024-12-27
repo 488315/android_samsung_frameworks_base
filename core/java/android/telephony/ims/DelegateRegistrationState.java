@@ -16,13 +16,11 @@ public final class DelegateRegistrationState implements Parcelable {
             new Parcelable.Creator<
                     DelegateRegistrationState>() { // from class:
                                                    // android.telephony.ims.DelegateRegistrationState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DelegateRegistrationState createFromParcel(Parcel source) {
                     return new DelegateRegistrationState(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DelegateRegistrationState[] newArray(int size) {
                     return new DelegateRegistrationState[size];

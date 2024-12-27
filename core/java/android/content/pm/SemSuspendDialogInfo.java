@@ -10,13 +10,11 @@ public final class SemSuspendDialogInfo implements Parcelable {
     public static final Parcelable.Creator<SemSuspendDialogInfo> CREATOR =
             new Parcelable.Creator<SemSuspendDialogInfo>() { // from class:
                 // android.content.pm.SemSuspendDialogInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSuspendDialogInfo createFromParcel(Parcel source) {
                     return new SemSuspendDialogInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSuspendDialogInfo[] newArray(int size) {
                     return new SemSuspendDialogInfo[size];

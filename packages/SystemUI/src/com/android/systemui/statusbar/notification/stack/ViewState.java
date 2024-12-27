@@ -189,7 +189,6 @@ public class ViewState implements Dumpable {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public void applyToView(View view) {
         if (this.gone) {
             return;

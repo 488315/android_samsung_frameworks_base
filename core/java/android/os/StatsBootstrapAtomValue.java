@@ -5,13 +5,11 @@ public final class StatsBootstrapAtomValue implements Parcelable {
     public static final Parcelable.Creator<StatsBootstrapAtomValue> CREATOR =
             new Parcelable.Creator<
                     StatsBootstrapAtomValue>() { // from class: android.os.StatsBootstrapAtomValue.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StatsBootstrapAtomValue createFromParcel(Parcel _aidl_source) {
                     return new StatsBootstrapAtomValue(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StatsBootstrapAtomValue[] newArray(int _aidl_size) {
                     return new StatsBootstrapAtomValue[_aidl_size];

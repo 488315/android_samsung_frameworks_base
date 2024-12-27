@@ -86,9 +86,6 @@ public final class SecPanelExpansionStateInteractor {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.systemui.shade.domain.interactor.SecPanelExpansionStateInteractor$stateListener$1] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.systemui.shade.domain.interactor.SecPanelExpansionStateInteractor$observer$1] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.shade.domain.interactor.SecPanelExpansionStateInteractor$shadeExpansionListener$1] */
     public SecPanelExpansionStateInteractor(final CoroutineScope coroutineScope, Context context, ShadeExpansionStateManager shadeExpansionStateManager, StatusBarStateController statusBarStateController, WakefulnessLifecycle wakefulnessLifecycle) {
         this.context = context;
         this.shadeExpansionStateManager = shadeExpansionStateManager;
@@ -187,7 +184,6 @@ public final class SecPanelExpansionStateInteractor {
                 }
             }
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

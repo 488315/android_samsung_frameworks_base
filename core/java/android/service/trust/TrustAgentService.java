@@ -185,7 +185,6 @@ public class TrustAgentService extends Service {
 
     public void onEscrowTokenRemoved(long handle, boolean successful) {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onError(String msg) {
         Slog.v(this.TAG, "Remote exception while " + msg);
     }
@@ -244,7 +243,6 @@ public class TrustAgentService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$grantTrust$1(
             final Consumer resultCallback, final GrantTrustResult result) {
         if (resultCallback != null) {

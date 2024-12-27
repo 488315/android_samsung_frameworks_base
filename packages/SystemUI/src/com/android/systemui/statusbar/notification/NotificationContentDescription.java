@@ -7,12 +7,6 @@ import android.text.TextUtils;
 import com.android.systemui.R;
 
 public abstract class NotificationContentDescription {
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v6, types: [java.lang.CharSequence] */
-    /* JADX WARN: Type inference failed for: r3v0 */
-    /* JADX WARN: Type inference failed for: r3v1 */
-    /* JADX WARN: Type inference failed for: r3v4, types: [java.lang.CharSequence] */
-    /* JADX WARN: Type inference failed for: r6v1, types: [java.lang.CharSequence] */
     public static final CharSequence contentDescForNotification(Context context, Notification notification2) {
         String loadHeaderAppName = notification2.loadHeaderAppName(context);
         String str = "";

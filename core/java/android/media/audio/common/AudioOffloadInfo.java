@@ -12,7 +12,6 @@ public class AudioOffloadInfo implements Parcelable {
     public static final Parcelable.Creator<AudioOffloadInfo> CREATOR =
             new Parcelable.Creator<AudioOffloadInfo>() { // from class:
                 // android.media.audio.common.AudioOffloadInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioOffloadInfo createFromParcel(Parcel _aidl_source) {
                     AudioOffloadInfo _aidl_out = new AudioOffloadInfo();
@@ -20,7 +19,6 @@ public class AudioOffloadInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioOffloadInfo[] newArray(int _aidl_size) {
                     return new AudioOffloadInfo[_aidl_size];

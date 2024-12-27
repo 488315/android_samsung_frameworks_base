@@ -17,8 +17,6 @@ public final class FakeFeatures implements Features {
     public final LogWrapper mLogWrapper;
     public final AnonymousClass1 mReceiver;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v1, types: [android.content.BroadcastReceiver, com.android.systemui.globalactions.presentation.features.FakeFeatures$1] */
     public FakeFeatures(Context context, Features features, LogWrapper logWrapper) {
         this.mDefaultFeatures = features;
         this.mLogWrapper = logWrapper;

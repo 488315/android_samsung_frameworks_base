@@ -464,7 +464,6 @@ public final class SQLiteConnectionPool implements Closeable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean closeAvailableConnectionLocked(int connectionId) {
         int count = this.mAvailableNonPrimaryConnections.size();
         for (int i = count - 1; i >= 0; i--) {
@@ -593,9 +592,6 @@ public final class SQLiteConnectionPool implements Closeable {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:68:0x00d2  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x00ea  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:62:? -> B:58:0x00e2). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -613,7 +609,6 @@ public final class SQLiteConnectionPool implements Closeable {
                     + " android.os.CancellationSignal):android.database.sqlite.SQLiteConnection");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelConnectionWaiterLocked(ConnectionWaiter waiter) {
         if (waiter.mAssignedConnection != null || waiter.mException != null) {
             return;
@@ -1019,7 +1014,6 @@ public final class SQLiteConnectionPool implements Closeable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean releaseAvailableConnectionMemoryLocked(int connectionId) {
         int count = this.mAvailableNonPrimaryConnections.size();
         for (int i = count - 1; i >= 0; i--) {

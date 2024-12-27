@@ -629,7 +629,6 @@ public class LightsService extends SystemService {
         return DualAppManagerService$$ExternalSyntheticOutline0.m(Binder.getCallingUid(), Binder.getCallingPid(), " (uid: ", " pid: ", ") ");
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -653,10 +652,6 @@ public class LightsService extends SystemService {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.lights.LightsService.<init>(android.content.Context):void");
     }
 
-    /* JADX WARN: Type inference failed for: r10v1, types: [android.os.HandlerThread, com.android.server.lights.LightsService$1] */
-    /* JADX WARN: Type inference failed for: r5v1, types: [com.android.server.lights.LightsService$2] */
-    /* JADX WARN: Type inference failed for: r5v2, types: [com.android.server.lights.LightsService$3] */
-    /* JADX WARN: Type inference failed for: r5v3, types: [com.android.server.lights.LightsService$4] */
     public LightsService(Context context, Supplier supplier, Looper looper, Supplier supplier2) {
         super(context);
         this.mInitCompleteForSvcLED = false;

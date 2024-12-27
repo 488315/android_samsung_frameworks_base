@@ -681,7 +681,6 @@ public final class AssociationState {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ int lambda$static$0(Pair o1, Pair o2) {
         int diff;
         if (((SourceDumpContainer) o1.second).mActiveTime
@@ -816,11 +815,6 @@ public final class AssociationState {
                 dumpAll);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0155  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0174  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x01a9  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x01d9 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0161  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

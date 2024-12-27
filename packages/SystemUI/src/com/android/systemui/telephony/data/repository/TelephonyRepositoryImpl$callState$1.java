@@ -19,7 +19,6 @@ final class TelephonyRepositoryImpl$callState$1 extends SuspendLambda implements
     int label;
     final /* synthetic */ TelephonyRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TelephonyRepositoryImpl$callState$1(TelephonyRepositoryImpl telephonyRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = telephonyRepositoryImpl;
@@ -56,7 +55,6 @@ final class TelephonyRepositoryImpl$callState$1 extends SuspendLambda implements
             telephonyListenerManager.updateListening();
             final TelephonyRepositoryImpl telephonyRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl$callState$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -7,13 +7,11 @@ import android.os.Parcelable;
 public final class UriPermission implements Parcelable {
     public static final Parcelable.Creator<UriPermission> CREATOR =
             new Parcelable.Creator<UriPermission>() { // from class: android.content.UriPermission.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UriPermission createFromParcel(Parcel source) {
                     return new UriPermission(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UriPermission[] newArray(int size) {
                     return new UriPermission[size];

@@ -301,7 +301,6 @@ public final class EventIndex {
         this(new Injector());
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     public EventIndex(Injector injector) {
         this(injector, new long[] {0, 0, 0, 0}, System.currentTimeMillis());
         injector.getClass();
@@ -401,7 +400,6 @@ public final class EventIndex {
         return new EventIndex(new Injector(), jArr, j);
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [java.time.ZonedDateTime] */
     public static long toEpochMilli(LocalDateTime localDateTime) {
         return localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
     }

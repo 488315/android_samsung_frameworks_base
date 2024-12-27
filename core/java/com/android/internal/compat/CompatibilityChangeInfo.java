@@ -9,13 +9,11 @@ public class CompatibilityChangeInfo implements Parcelable {
             new Parcelable.Creator<
                     CompatibilityChangeInfo>() { // from class:
                                                  // com.android.internal.compat.CompatibilityChangeInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompatibilityChangeInfo createFromParcel(Parcel in) {
                     return new CompatibilityChangeInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompatibilityChangeInfo[] newArray(int size) {
                     return new CompatibilityChangeInfo[size];

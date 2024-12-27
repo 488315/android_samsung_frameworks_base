@@ -14,13 +14,11 @@ public final class CallEndpointException extends RuntimeException implements Par
             new Parcelable.Creator<
                     CallEndpointException>() { // from class:
                                                // android.telecom.CallEndpointException.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallEndpointException createFromParcel(Parcel source) {
                     return new CallEndpointException(source.readString8(), source.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallEndpointException[] newArray(int size) {
                     return new CallEndpointException[size];

@@ -10,13 +10,11 @@ public class LabeledIntent extends Intent {
     public static final Parcelable.Creator<LabeledIntent> CREATOR =
             new Parcelable.Creator<
                     LabeledIntent>() { // from class: android.content.pm.LabeledIntent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LabeledIntent createFromParcel(Parcel source) {
                     return new LabeledIntent(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LabeledIntent[] newArray(int size) {
                     return new LabeledIntent[size];

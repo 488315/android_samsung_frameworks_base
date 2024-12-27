@@ -623,12 +623,10 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         this.mScrollStateChangedRunnable.doScrollStateChange(view, scrollState);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onScroll(
             AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         int month;
@@ -682,7 +680,6 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
         this.mPreviousScrollState = this.mCurrentScrollState;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setMonthDisplayed(Calendar calendar) {
         this.mCurrentMonthDisplayed = calendar.get(2);
         this.mAdapter.setFocusMonth(this.mCurrentMonthDisplayed);
@@ -692,7 +689,6 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
         this.mMonthName.invalidate();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getWeeksSinceMinDate(Calendar date) {
         if (date.before(this.mMinDate)) {
             throw new IllegalArgumentException(
@@ -760,7 +756,6 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
             init();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void init() {
             this.mSelectedWeek =
                     CalendarViewLegacyDelegate.this.getWeeksSinceMinDate(this.mSelectedDate);

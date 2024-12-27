@@ -42,7 +42,6 @@ public abstract class FreeformContainerServiceBinder {
             };
     public final String TAG = getClass().getSimpleName();
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.wm.FreeformContainerServiceBinder$1] */
     public FreeformContainerServiceBinder(ActivityTaskManagerService activityTaskManagerService) {
         this.mAtm = activityTaskManagerService;
     }

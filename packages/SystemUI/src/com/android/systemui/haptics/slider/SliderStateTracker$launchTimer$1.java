@@ -15,7 +15,6 @@ final class SliderStateTracker$launchTimer$1 extends SuspendLambda implements Fu
     int label;
     final /* synthetic */ SliderStateTracker this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SliderStateTracker$launchTimer$1(SliderStateTracker sliderStateTracker, Continuation continuation) {
         super(2, continuation);
         this.this$0 = sliderStateTracker;

@@ -30,8 +30,6 @@ public final class PerformInitializeTask implements Runnable {
         this.mBaseStateDir = file;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:63:0x01a5 A[LOOP:2: B:61:0x019f->B:63:0x01a5, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x01b5 A[Catch: RemoteException -> 0x01b9, TRY_LEAVE, TryCatch #7 {RemoteException -> 0x01b9, blocks: (B:65:0x01b1, B:67:0x01b5), top: B:64:0x01b1 }] */
     @Override // java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

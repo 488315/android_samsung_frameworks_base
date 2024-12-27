@@ -182,10 +182,6 @@ public class NumberPicker extends LinearLayout {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v25 */
-    /* JADX WARN: Type inference failed for: r0v26, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r0v27 */
     public NumberPicker(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         boolean z;
@@ -432,7 +428,6 @@ public class NumberPicker extends LinearLayout {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x00d6, code lost:
     
         return true;
@@ -821,7 +816,6 @@ public class NumberPicker extends LinearLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void hideSoftInput() {
         InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(InputMethodManager.class);
         if (inputMethodManager != null) {
@@ -1153,7 +1147,6 @@ public class NumberPicker extends LinearLayout {
         invalidate();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void changeValueByOne(boolean increment) {
         if (!this.mHasSelectorWheel) {
             if (increment) {
@@ -1226,7 +1219,6 @@ public class NumberPicker extends LinearLayout {
         invalidate();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getWrappedSelectorIndex(int selectorIndex) {
         if (selectorIndex > this.mMaxValue) {
             return (this.mMinValue + ((selectorIndex - this.mMaxValue) % (this.mMaxValue - this.mMinValue))) - 1;
@@ -1281,12 +1273,10 @@ public class NumberPicker extends LinearLayout {
         cache.put(selectorIndex, scrollSelectorValue);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String formatNumber(int value) {
         return this.mFormatter != null ? this.mFormatter.format(value) : formatNumberWithLocale(value);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void validateInputTextView(View v) {
         String str = String.valueOf(((TextView) v).getText());
         if (TextUtils.isEmpty(str)) {
@@ -1327,7 +1317,6 @@ public class NumberPicker extends LinearLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postChangeCurrentByOneFromLongPress(boolean increment, long delayMillis) {
         if (this.mChangeCurrentByOneFromLongPressCommand == null) {
             this.mChangeCurrentByOneFromLongPressCommand = new ChangeCurrentByOneFromLongPressCommand();
@@ -1372,7 +1361,6 @@ public class NumberPicker extends LinearLayout {
         this.mPressedStateHelper.cancel();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getSelectedPos(String value) {
         if (this.mDisplayedValues == null) {
             try {
@@ -1395,7 +1383,6 @@ public class NumberPicker extends LinearLayout {
         return this.mMinValue;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postSetSelectionCommand(int selectionStart, int selectionEnd) {
         if (this.mSetSelectionCommand == null) {
             this.mSetSelectionCommand = new SetSelectionCommand(this.mInputText);
@@ -1583,7 +1570,6 @@ public class NumberPicker extends LinearLayout {
         ChangeCurrentByOneFromLongPressCommand() {
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setStep(boolean increment) {
             this.mIncrement = increment;
         }

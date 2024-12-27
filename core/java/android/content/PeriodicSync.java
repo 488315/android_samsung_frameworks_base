@@ -10,13 +10,11 @@ import java.util.Objects;
 public class PeriodicSync implements Parcelable {
     public static final Parcelable.Creator<PeriodicSync> CREATOR =
             new Parcelable.Creator<PeriodicSync>() { // from class: android.content.PeriodicSync.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PeriodicSync createFromParcel(Parcel source) {
                     return new PeriodicSync(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PeriodicSync[] newArray(int size) {
                     return new PeriodicSync[size];

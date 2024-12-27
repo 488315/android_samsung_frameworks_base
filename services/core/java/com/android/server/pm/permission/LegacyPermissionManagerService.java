@@ -1001,8 +1001,6 @@ public final class LegacyPermissionManagerService extends ILegacyPermissionManag
                 new LegacyPermissionManagerService$$ExternalSyntheticLambda0(this, strArr, i, 2));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0059 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x005a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

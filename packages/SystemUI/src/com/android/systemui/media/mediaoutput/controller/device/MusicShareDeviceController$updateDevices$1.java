@@ -9,7 +9,6 @@ final class MusicShareDeviceController$updateDevices$1 extends ContinuationImpl 
     /* synthetic */ Object result;
     final /* synthetic */ MusicShareDeviceController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MusicShareDeviceController$updateDevices$1(MusicShareDeviceController musicShareDeviceController, Continuation continuation) {
         super(continuation);
         this.this$0 = musicShareDeviceController;

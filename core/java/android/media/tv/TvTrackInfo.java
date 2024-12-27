@@ -14,13 +14,11 @@ import java.util.Objects;
 public final class TvTrackInfo implements Parcelable {
     public static final Parcelable.Creator<TvTrackInfo> CREATOR =
             new Parcelable.Creator<TvTrackInfo>() { // from class: android.media.tv.TvTrackInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvTrackInfo createFromParcel(Parcel in) {
                     return new TvTrackInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvTrackInfo[] newArray(int size) {
                     return new TvTrackInfo[size];

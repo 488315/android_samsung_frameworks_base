@@ -31,8 +31,6 @@ public final class ViewHierarchyAnimator {
     public static final Companion Companion = new Companion(null);
     public static final Interpolator DEFAULT_INTERPOLATOR = Interpolators.STANDARD;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     abstract class Bound {
         public static final /* synthetic */ Bound[] $VALUES;
         public static final BOTTOM BOTTOM;
@@ -336,19 +334,10 @@ public final class ViewHierarchyAnimator {
             ofPropertyValuesHolder.start();
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Removed duplicated region for block: B:56:0x0417  */
         /* JADX WARN: Removed duplicated region for block: B:57:0x0419 A[PHI: r18
           0x0419: PHI (r18v11 int) = (r18v8 int), (r18v10 int) binds: [B:55:0x040e, B:58:0x041c] A[DONT_GENERATE, DONT_INLINE]] */
-        /* JADX WARN: Removed duplicated region for block: B:58:0x041c  */
         /* JADX WARN: Removed duplicated region for block: B:59:0x0420 A[PHI: r13
           0x0420: PHI (r13v4 int) = (r13v3 int), (r13v7 int), (r13v8 int) binds: [B:55:0x040e, B:57:0x0419, B:56:0x0417] A[DONT_GENERATE, DONT_INLINE]] */
-        /* JADX WARN: Removed duplicated region for block: B:61:0x0461  */
-        /* JADX WARN: Removed duplicated region for block: B:64:0x0474  */
-        /* JADX WARN: Removed duplicated region for block: B:67:0x0487  */
-        /* JADX WARN: Removed duplicated region for block: B:70:0x049a  */
-        /* JADX WARN: Removed duplicated region for block: B:73:0x049d A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:74:0x0411 A[SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -406,8 +395,6 @@ public final class ViewHierarchyAnimator {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Hotspot {
         public static final /* synthetic */ Hotspot[] $VALUES;
         public static final Hotspot BOTTOM;

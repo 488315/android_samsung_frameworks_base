@@ -273,7 +273,6 @@ public final class OneTimePermissionUserManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.pm.permission.OneTimePermissionUserManager$1] */
     public OneTimePermissionUserManager(Context context) {
         this.mContext = context;
         this.mAlarmManager = (AlarmManager) context.getSystemService(AlarmManager.class);

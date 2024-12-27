@@ -9,13 +9,11 @@ public final class SuggestionRangeSpan extends CharacterStyle implements Parcela
     public static final Parcelable.Creator<SuggestionRangeSpan> CREATOR =
             new Parcelable.Creator<
                     SuggestionRangeSpan>() { // from class: android.text.style.SuggestionRangeSpan.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SuggestionRangeSpan createFromParcel(Parcel source) {
                     return new SuggestionRangeSpan(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SuggestionRangeSpan[] newArray(int size) {
                     return new SuggestionRangeSpan[size];

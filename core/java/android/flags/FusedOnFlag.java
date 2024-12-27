@@ -35,7 +35,6 @@ public final class FusedOnFlag extends BooleanFlagBase {
         super(namespace, name);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.flags.BooleanFlagBase, android.flags.Flag
     public Boolean getDefault() {
         return true;

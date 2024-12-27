@@ -58,7 +58,6 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 .getString(stringID, Integer.valueOf(resInt));
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModelFactory
     public ActionViewModel createActionViewModel(SamsungGlobalActions globalActions, String type) {
         char c;

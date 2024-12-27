@@ -38,8 +38,6 @@ public final class TableChange {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class DataType {
         public static final /* synthetic */ DataType[] $VALUES;
         public static final DataType BOOLEAN;

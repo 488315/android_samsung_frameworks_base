@@ -15,13 +15,11 @@ public final class ImsFeatureContainer implements Parcelable {
     public static final Parcelable.Creator<ImsFeatureContainer> CREATOR =
             new Parcelable.Creator<
                     ImsFeatureContainer>() { // from class: com.android.ims.ImsFeatureContainer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsFeatureContainer createFromParcel(Parcel source) {
                     return new ImsFeatureContainer(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsFeatureContainer[] newArray(int size) {
                     return new ImsFeatureContainer[size];

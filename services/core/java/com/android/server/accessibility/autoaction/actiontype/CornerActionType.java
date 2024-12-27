@@ -57,7 +57,6 @@ public abstract class CornerActionType {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:105:0x0396, code lost:
 
        if (r25.equals("recents") == false) goto L251;
@@ -66,7 +65,6 @@ public abstract class CornerActionType {
 
        if (r25.equals("swipe_right") == false) goto L165;
     */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

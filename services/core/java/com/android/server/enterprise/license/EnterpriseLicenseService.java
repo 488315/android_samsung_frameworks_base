@@ -266,15 +266,10 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub
         map.remove(str);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(16:3|4|5|(1:6)|(3:39|40|(2:42|(4:44|45|46|(7:48|49|50|51|52|53|54)(7:67|58|(2:60|61)|62|63|64|65))(3:71|10|(7:21|22|23|24|(2:26|(3:30|(1:32)|33))(1:36)|34|35)(6:14|15|16|17|18|19))))|8|9|10|(1:12)|21|22|23|24|(0)(0)|34|35) */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0143, code lost:
 
        r0 = e;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0160 A[Catch: all -> 0x0098, TRY_ENTER, TryCatch #3 {, blocks: (B:4:0x000b, B:52:0x0093, B:63:0x00d9, B:23:0x014e, B:26:0x0160, B:28:0x016c, B:30:0x016f, B:32:0x0174, B:36:0x018c, B:17:0x013e, B:75:0x019f, B:76:0x01a2, B:40:0x0032, B:42:0x0040, B:44:0x0050, B:46:0x0069, B:48:0x007c, B:51:0x0090, B:57:0x00aa, B:58:0x00af, B:60:0x00b4, B:38:0x0153, B:12:0x00e9, B:14:0x00f3, B:16:0x0127, B:22:0x0147), top: B:3:0x000b, inners: #4 }] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x018c A[Catch: all -> 0x0098, TRY_LEAVE, TryCatch #3 {, blocks: (B:4:0x000b, B:52:0x0093, B:63:0x00d9, B:23:0x014e, B:26:0x0160, B:28:0x016c, B:30:0x016f, B:32:0x0174, B:36:0x018c, B:17:0x013e, B:75:0x019f, B:76:0x01a2, B:40:0x0032, B:42:0x0040, B:44:0x0050, B:46:0x0069, B:48:0x007c, B:51:0x0090, B:57:0x00aa, B:58:0x00af, B:60:0x00b4, B:38:0x0153, B:12:0x00e9, B:14:0x00f3, B:16:0x0127, B:22:0x0147), top: B:3:0x000b, inners: #4 }] */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x00b4 A[Catch: all -> 0x009b, Exception -> 0x00d4, TRY_LEAVE, TryCatch #4 {all -> 0x009b, blocks: (B:40:0x0032, B:42:0x0040, B:44:0x0050, B:46:0x0069, B:48:0x007c, B:51:0x0090, B:57:0x00aa, B:58:0x00af, B:60:0x00b4, B:38:0x0153, B:12:0x00e9, B:14:0x00f3, B:16:0x0127, B:22:0x0147), top: B:39:0x0032, outer: #3 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -300,10 +295,6 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub
         activateKnoxLicense(contextInfo, str, str2, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0161 A[Catch: all -> 0x0091, TRY_ENTER, TryCatch #1 {, blocks: (B:4:0x000b, B:54:0x008c, B:66:0x00c4, B:30:0x0144, B:10:0x0150, B:12:0x0161, B:14:0x016d, B:16:0x0170, B:18:0x0175, B:23:0x0188, B:77:0x0198, B:78:0x019b, B:41:0x0034, B:44:0x0040, B:46:0x0050, B:48:0x0069, B:50:0x007a, B:53:0x0089, B:59:0x009e, B:60:0x00a1, B:62:0x00a6, B:25:0x00cf, B:29:0x00f5, B:33:0x00de, B:35:0x00ef, B:9:0x0149, B:39:0x0154), top: B:3:0x000b, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0188 A[Catch: all -> 0x0091, TRY_LEAVE, TryCatch #1 {, blocks: (B:4:0x000b, B:54:0x008c, B:66:0x00c4, B:30:0x0144, B:10:0x0150, B:12:0x0161, B:14:0x016d, B:16:0x0170, B:18:0x0175, B:23:0x0188, B:77:0x0198, B:78:0x019b, B:41:0x0034, B:44:0x0040, B:46:0x0050, B:48:0x0069, B:50:0x007a, B:53:0x0089, B:59:0x009e, B:60:0x00a1, B:62:0x00a6, B:25:0x00cf, B:29:0x00f5, B:33:0x00de, B:35:0x00ef, B:9:0x0149, B:39:0x0154), top: B:3:0x000b, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00cf A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x00a6 A[Catch: all -> 0x0094, Exception -> 0x00bf, TRY_LEAVE, TryCatch #0 {Exception -> 0x00bf, blocks: (B:41:0x0034, B:44:0x0040, B:46:0x0050, B:59:0x009e, B:60:0x00a1, B:62:0x00a6), top: B:40:0x0034 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -395,15 +386,10 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(16:3|4|5|6|(3:39|40|(2:42|(2:44|(4:46|47|48|(7:50|51|52|53|54|55|56)(7:69|60|(2:62|63)|64|65|66|67))(3:73|10|(7:21|22|23|24|(2:26|(3:30|(1:32)|33))(1:36)|34|35)(6:14|15|16|17|18|19)))(3:74|75|76)))|8|9|10|(1:12)|21|22|23|24|(0)(0)|34|35) */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0150, code lost:
 
        r0 = e;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x016e A[Catch: all -> 0x009c, TRY_ENTER, TryCatch #3 {, blocks: (B:4:0x000c, B:54:0x0097, B:65:0x00dd, B:23:0x015b, B:26:0x016e, B:28:0x017a, B:30:0x017d, B:32:0x0182, B:36:0x019a, B:17:0x014b, B:80:0x01ad, B:81:0x01b0, B:40:0x0034, B:42:0x0042, B:44:0x004e, B:46:0x0054, B:48:0x006d, B:50:0x0080, B:53:0x0094, B:59:0x00ae, B:60:0x00b3, B:62:0x00b8, B:38:0x0160, B:12:0x00f6, B:14:0x0100, B:16:0x0134, B:22:0x0154, B:75:0x00ec, B:76:0x00f1), top: B:3:0x000c, inners: #6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x019a A[Catch: all -> 0x009c, TRY_LEAVE, TryCatch #3 {, blocks: (B:4:0x000c, B:54:0x0097, B:65:0x00dd, B:23:0x015b, B:26:0x016e, B:28:0x017a, B:30:0x017d, B:32:0x0182, B:36:0x019a, B:17:0x014b, B:80:0x01ad, B:81:0x01b0, B:40:0x0034, B:42:0x0042, B:44:0x004e, B:46:0x0054, B:48:0x006d, B:50:0x0080, B:53:0x0094, B:59:0x00ae, B:60:0x00b3, B:62:0x00b8, B:38:0x0160, B:12:0x00f6, B:14:0x0100, B:16:0x0134, B:22:0x0154, B:75:0x00ec, B:76:0x00f1), top: B:3:0x000c, inners: #6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x00b8 A[Catch: all -> 0x009f, Exception -> 0x00d8, TRY_LEAVE, TryCatch #1 {Exception -> 0x00d8, blocks: (B:59:0x00ae, B:60:0x00b3, B:62:0x00b8, B:12:0x00f6, B:14:0x0100, B:75:0x00ec, B:76:0x00f1), top: B:6:0x0032 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1242,37 +1228,10 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(16:(1:33)(2:117|(2:120|121)(16:119|35|36|(5:102|103|104|105|106)|38|(1:(1:41)(13:60|61|62|63|64|(1:66)|68|(3:70|(1:72)|73)(1:83)|(2:75|(1:77)(1:78))|79|80|81|82))|100|64|(0)|68|(0)(0)|(0)|79|80|81|82))|35|36|(0)|38|(0)|100|64|(0)|68|(0)(0)|(0)|79|80|81|82) */
     /* JADX WARN: Code restructure failed: missing block: B:116:0x01a6, code lost:
 
        r0 = e;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:102:0x017f A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0059 A[Catch: all -> 0x004c, TryCatch #8 {all -> 0x004c, blocks: (B:4:0x0029, B:6:0x003a, B:9:0x0041, B:12:0x004f, B:15:0x0059, B:17:0x0064, B:19:0x006c, B:21:0x0076, B:22:0x0085, B:23:0x009e, B:46:0x0338, B:48:0x033f, B:50:0x0345, B:53:0x0355, B:55:0x035f, B:56:0x036e, B:57:0x0387, B:58:0x03d1, B:87:0x029d, B:89:0x02a4, B:91:0x02aa, B:94:0x02bd, B:96:0x02c7, B:97:0x02d6, B:98:0x02ef, B:80:0x0283, B:68:0x01ee, B:70:0x01f5, B:72:0x01fb, B:75:0x020e, B:77:0x0218, B:78:0x0227, B:79:0x0240), top: B:3:0x0029 }] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00ea A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x01ae  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x033f A[Catch: all -> 0x004c, TryCatch #8 {all -> 0x004c, blocks: (B:4:0x0029, B:6:0x003a, B:9:0x0041, B:12:0x004f, B:15:0x0059, B:17:0x0064, B:19:0x006c, B:21:0x0076, B:22:0x0085, B:23:0x009e, B:46:0x0338, B:48:0x033f, B:50:0x0345, B:53:0x0355, B:55:0x035f, B:56:0x036e, B:57:0x0387, B:58:0x03d1, B:87:0x029d, B:89:0x02a4, B:91:0x02aa, B:94:0x02bd, B:96:0x02c7, B:97:0x02d6, B:98:0x02ef, B:80:0x0283, B:68:0x01ee, B:70:0x01f5, B:72:0x01fb, B:75:0x020e, B:77:0x0218, B:78:0x0227, B:79:0x0240), top: B:3:0x0029 }] */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0355 A[Catch: all -> 0x004c, TryCatch #8 {all -> 0x004c, blocks: (B:4:0x0029, B:6:0x003a, B:9:0x0041, B:12:0x004f, B:15:0x0059, B:17:0x0064, B:19:0x006c, B:21:0x0076, B:22:0x0085, B:23:0x009e, B:46:0x0338, B:48:0x033f, B:50:0x0345, B:53:0x0355, B:55:0x035f, B:56:0x036e, B:57:0x0387, B:58:0x03d1, B:87:0x029d, B:89:0x02a4, B:91:0x02aa, B:94:0x02bd, B:96:0x02c7, B:97:0x02d6, B:98:0x02ef, B:80:0x0283, B:68:0x01ee, B:70:0x01f5, B:72:0x01fb, B:75:0x020e, B:77:0x0218, B:78:0x0227, B:79:0x0240), top: B:3:0x0029 }] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x034d  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x01eb A[Catch: all -> 0x01c3, Exception -> 0x01c7, TRY_LEAVE, TryCatch #2 {all -> 0x01c3, blocks: (B:86:0x0292, B:63:0x01bf, B:64:0x01ce, B:66:0x01eb), top: B:13:0x0057 }] */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x01f5 A[Catch: all -> 0x004c, TryCatch #8 {all -> 0x004c, blocks: (B:4:0x0029, B:6:0x003a, B:9:0x0041, B:12:0x004f, B:15:0x0059, B:17:0x0064, B:19:0x006c, B:21:0x0076, B:22:0x0085, B:23:0x009e, B:46:0x0338, B:48:0x033f, B:50:0x0345, B:53:0x0355, B:55:0x035f, B:56:0x036e, B:57:0x0387, B:58:0x03d1, B:87:0x029d, B:89:0x02a4, B:91:0x02aa, B:94:0x02bd, B:96:0x02c7, B:97:0x02d6, B:98:0x02ef, B:80:0x0283, B:68:0x01ee, B:70:0x01f5, B:72:0x01fb, B:75:0x020e, B:77:0x0218, B:78:0x0227, B:79:0x0240), top: B:3:0x0029 }] */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x020e A[Catch: all -> 0x004c, TryCatch #8 {all -> 0x004c, blocks: (B:4:0x0029, B:6:0x003a, B:9:0x0041, B:12:0x004f, B:15:0x0059, B:17:0x0064, B:19:0x006c, B:21:0x0076, B:22:0x0085, B:23:0x009e, B:46:0x0338, B:48:0x033f, B:50:0x0345, B:53:0x0355, B:55:0x035f, B:56:0x036e, B:57:0x0387, B:58:0x03d1, B:87:0x029d, B:89:0x02a4, B:91:0x02aa, B:94:0x02bd, B:96:0x02c7, B:97:0x02d6, B:98:0x02ef, B:80:0x0283, B:68:0x01ee, B:70:0x01f5, B:72:0x01fb, B:75:0x020e, B:77:0x0218, B:78:0x0227, B:79:0x0240), top: B:3:0x0029 }] */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x0205  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x02a4 A[Catch: all -> 0x004c, TryCatch #8 {all -> 0x004c, blocks: (B:4:0x0029, B:6:0x003a, B:9:0x0041, B:12:0x004f, B:15:0x0059, B:17:0x0064, B:19:0x006c, B:21:0x0076, B:22:0x0085, B:23:0x009e, B:46:0x0338, B:48:0x033f, B:50:0x0345, B:53:0x0355, B:55:0x035f, B:56:0x036e, B:57:0x0387, B:58:0x03d1, B:87:0x029d, B:89:0x02a4, B:91:0x02aa, B:94:0x02bd, B:96:0x02c7, B:97:0x02d6, B:98:0x02ef, B:80:0x0283, B:68:0x01ee, B:70:0x01f5, B:72:0x01fb, B:75:0x020e, B:77:0x0218, B:78:0x0227, B:79:0x0240), top: B:3:0x0029 }] */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x02bd A[Catch: all -> 0x004c, TryCatch #8 {all -> 0x004c, blocks: (B:4:0x0029, B:6:0x003a, B:9:0x0041, B:12:0x004f, B:15:0x0059, B:17:0x0064, B:19:0x006c, B:21:0x0076, B:22:0x0085, B:23:0x009e, B:46:0x0338, B:48:0x033f, B:50:0x0345, B:53:0x0355, B:55:0x035f, B:56:0x036e, B:57:0x0387, B:58:0x03d1, B:87:0x029d, B:89:0x02a4, B:91:0x02aa, B:94:0x02bd, B:96:0x02c7, B:97:0x02d6, B:98:0x02ef, B:80:0x0283, B:68:0x01ee, B:70:0x01f5, B:72:0x01fb, B:75:0x020e, B:77:0x0218, B:78:0x0227, B:79:0x0240), top: B:3:0x0029 }] */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x02b4  */
-    /* JADX WARN: Type inference failed for: r15v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r15v1 */
-    /* JADX WARN: Type inference failed for: r15v12 */
-    /* JADX WARN: Type inference failed for: r15v16 */
-    /* JADX WARN: Type inference failed for: r15v17 */
-    /* JADX WARN: Type inference failed for: r15v18, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r15v19 */
-    /* JADX WARN: Type inference failed for: r9v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r9v1 */
-    /* JADX WARN: Type inference failed for: r9v14 */
-    /* JADX WARN: Type inference failed for: r9v15, types: [java.lang.StringBuilder] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1301,7 +1260,6 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub
                     + " int):boolean");
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:(10:(1:(1:41)(22:58|59|60|61|62|63|(9:67|68|69|70|71|(1:74)(0)|77|64|65)|144|145|(2:79|(2:81|(1:85)))|(1:87)|89|90|91|92|93|(2:(1:96)|97)(1:104)|98|99|(1:101)|102|103))|91|92|93|(0)(0)|98|99|(0)|102|103)|61|62|63|(2:64|65)|144|145|(0)|(0)|89|90) */
     /* JADX WARN: Code restructure failed: missing block: B:109:0x02d8, code lost:
 
        r0 = th;
@@ -1318,19 +1276,6 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub
 
        r2 = "com.samsung.android.knox.intent.extra.LICENSE_RESULT_TYPE";
     */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x0291  */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x027f  */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x037e  */
-    /* JADX WARN: Removed duplicated region for block: B:127:0x03a4  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x03b3  */
-    /* JADX WARN: Removed duplicated region for block: B:131:0x0396  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x03e9  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x040f  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0401  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0188 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0218 A[Catch: all -> 0x01d7, Exception -> 0x01e8, TryCatch #10 {Exception -> 0x01e8, blocks: (B:71:0x019a, B:74:0x01b0, B:77:0x01b7, B:79:0x0218, B:81:0x022c, B:83:0x0240, B:87:0x024a, B:90:0x024d, B:92:0x0255), top: B:70:0x019a }] */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x024a A[Catch: all -> 0x01d7, Exception -> 0x01e8, TRY_LEAVE, TryCatch #10 {Exception -> 0x01e8, blocks: (B:71:0x019a, B:74:0x01b0, B:77:0x01b7, B:79:0x0218, B:81:0x022c, B:83:0x0240, B:87:0x024a, B:90:0x024d, B:92:0x0255), top: B:70:0x019a }] */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x025f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1567,10 +1512,6 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub
                 licenseResultRecord);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x008a  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00c4  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00ce  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00e2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

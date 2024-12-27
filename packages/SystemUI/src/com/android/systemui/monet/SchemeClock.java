@@ -7,7 +7,6 @@ public final class SchemeClock extends DynamicScheme {
     
         if (r9 > 40.0d) goto L4;
      */
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

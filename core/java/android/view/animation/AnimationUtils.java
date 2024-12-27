@@ -26,8 +26,6 @@ public class AnimationUtils {
     private static ThreadLocal<AnimationState> sAnimationState =
             new ThreadLocal<
                     AnimationState>() { // from class: android.view.animation.AnimationUtils.1
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // java.lang.ThreadLocal
                 public AnimationState initialValue() {
                     return new AnimationState();

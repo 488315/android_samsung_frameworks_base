@@ -55,7 +55,6 @@ public abstract class SubscreenNotificationTemplate {
     };
     public final SubscreenDeviceModelParent mDeviceModel = ((SubscreenNotificationController) Dependency.sDependency.getDependencyInner(SubscreenNotificationController.class)).mDeviceModel;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.statusbar.notification.SubscreenNotificationTemplate$1] */
     public SubscreenNotificationTemplate(Context context) {
         this.mContext = context;
         FrameLayout frameLayout = new FrameLayout(context);

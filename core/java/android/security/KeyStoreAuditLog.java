@@ -221,7 +221,6 @@ public class KeyStoreAuditLog {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class LogMessage {
         public static final String KEEP = null;
         public static final String REMOVE = "";
@@ -352,7 +351,6 @@ public class KeyStoreAuditLog {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static byte[] convertCertificatesToPem(Certificate[] certificates) {
         if (certificates == null) {
             return null;
@@ -371,7 +369,6 @@ public class KeyStoreAuditLog {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static List<X509Certificate> mergeUserCertAndChain(byte[] userCert, byte[] chain) {
         X509Certificate leaf = toCertificate(userCert);
         if (leaf == null) {
@@ -439,7 +436,6 @@ public class KeyStoreAuditLog {
                 : "private key";
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int getUserId(int uid) {
         return UserHandle.getUserId(uid);
     }

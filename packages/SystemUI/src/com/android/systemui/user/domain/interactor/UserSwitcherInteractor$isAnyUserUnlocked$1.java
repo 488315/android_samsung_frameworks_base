@@ -10,7 +10,6 @@ final class UserSwitcherInteractor$isAnyUserUnlocked$1 extends ContinuationImpl 
     /* synthetic */ Object result;
     final /* synthetic */ UserSwitcherInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherInteractor$isAnyUserUnlocked$1(UserSwitcherInteractor userSwitcherInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = userSwitcherInteractor;

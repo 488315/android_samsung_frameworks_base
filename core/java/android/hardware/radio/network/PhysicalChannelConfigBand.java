@@ -8,13 +8,11 @@ public final class PhysicalChannelConfigBand implements Parcelable {
     public static final Parcelable.Creator<PhysicalChannelConfigBand> CREATOR =
             new Parcelable.Creator<PhysicalChannelConfigBand>() { // from class:
                 // android.hardware.radio.network.PhysicalChannelConfigBand.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhysicalChannelConfigBand createFromParcel(Parcel _aidl_source) {
                     return new PhysicalChannelConfigBand(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhysicalChannelConfigBand[] newArray(int _aidl_size) {
                     return new PhysicalChannelConfigBand[_aidl_size];

@@ -96,7 +96,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
                 final /* synthetic */ UserSwitcherViewModel $viewModel;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public C02691(UserSwitcherViewModel userSwitcherViewModel, Ref$ObjectRef<UserSwitcherPopupMenu> ref$ObjectRef, Function0 function0, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = userSwitcherViewModel;
@@ -150,8 +149,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
                                     this.$this_unsafeFlow = flowCollector;
                                 }
 
-                                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                                 @Override // kotlinx.coroutines.flow.FlowCollector
                                 /*
                                     Code decompiled incorrectly, please refer to instructions dump.
@@ -217,7 +214,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
                         final Function0 function0 = this.$onFinish;
                         final UserSwitcherViewModel userSwitcherViewModel = this.$viewModel;
                         FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.user.ui.binder.UserSwitcherViewBinder.bind.4.1.1.1.2
-                            /* JADX WARN: Multi-variable type inference failed */
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             public final Object emit(Object obj2, Continuation continuation) {
                                 ((Boolean) obj2).getClass();
@@ -249,7 +245,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
                 }
             }
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02681(UserSwitcherViewModel userSwitcherViewModel, Ref$ObjectRef<UserSwitcherPopupMenu> ref$ObjectRef, Function0 function0, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = userSwitcherViewModel;
@@ -281,7 +276,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(LifecycleOwner lifecycleOwner, UserSwitcherViewModel userSwitcherViewModel, Ref$ObjectRef<UserSwitcherPopupMenu> ref$ObjectRef, Function0 function0, Continuation continuation) {
             super(2, continuation);
             this.$$this$repeatWhenAttached = lifecycleOwner;
@@ -355,7 +349,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
                 final /* synthetic */ UserSwitcherViewModel $viewModel;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public C02701(UserSwitcherViewModel userSwitcherViewModel, View view, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = userSwitcherViewModel;
@@ -410,7 +403,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
                 final /* synthetic */ UserSwitcherViewModel $viewModel;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public C02722(UserSwitcherViewModel userSwitcherViewModel, Ref$ObjectRef<UserSwitcherPopupMenu> ref$ObjectRef, ViewGroup viewGroup, View view, UserSwitcherViewBinder.MenuAdapter menuAdapter, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = userSwitcherViewModel;
@@ -443,7 +435,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
                         final View view = this.$addButton;
                         final UserSwitcherViewBinder.MenuAdapter menuAdapter = this.$popupMenuAdapter;
                         FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.user.ui.binder.UserSwitcherViewBinder.bind.4.2.1.2.1
-                            /* JADX WARN: Multi-variable type inference failed */
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             public final Object emit(Object obj2, Continuation continuation) {
                                 UserSwitcherPopupMenu userSwitcherPopupMenu;
@@ -475,7 +466,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
                                             }
                                         }
 
-                                        /* JADX WARN: Type inference failed for: r6v2, types: [T, android.widget.ListPopupWindow, com.android.systemui.user.UserSwitcherPopupMenu] */
                                         @Override // java.lang.Runnable
                                         public final void run() {
                                             Ref$ObjectRef ref$ObjectRef4 = ref$ObjectRef3;
@@ -529,7 +519,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
                 final /* synthetic */ UserSwitcherViewModel $viewModel;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass3(UserSwitcherViewModel userSwitcherViewModel, UserSwitcherViewBinder.MenuAdapter menuAdapter, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = userSwitcherViewModel;
@@ -597,7 +586,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
                 final /* synthetic */ UserSwitcherViewModel $viewModel;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass4(UserSwitcherViewModel userSwitcherViewModel, Flow flow, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = userSwitcherViewModel;
@@ -655,7 +643,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
                 final /* synthetic */ UserSwitcherViewModel $viewModel;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass5(UserSwitcherViewModel userSwitcherViewModel, UserSwitcherRootView userSwitcherRootView, Flow flow, LayoutInflater layoutInflater, ViewGroup viewGroup, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = userSwitcherViewModel;
@@ -781,7 +768,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
                 }
             }
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass1(UserSwitcherViewModel userSwitcherViewModel, View view, Ref$ObjectRef<UserSwitcherPopupMenu> ref$ObjectRef, ViewGroup viewGroup, UserSwitcherViewBinder.MenuAdapter menuAdapter, Flow flow, UserSwitcherRootView userSwitcherRootView, LayoutInflater layoutInflater, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = userSwitcherViewModel;
@@ -823,7 +809,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(LifecycleOwner lifecycleOwner, UserSwitcherViewModel userSwitcherViewModel, View view, Ref$ObjectRef<UserSwitcherPopupMenu> ref$ObjectRef, ViewGroup viewGroup, UserSwitcherViewBinder.MenuAdapter menuAdapter, Flow flow, UserSwitcherRootView userSwitcherRootView, LayoutInflater layoutInflater, Continuation continuation) {
             super(2, continuation);
             this.$$this$repeatWhenAttached = lifecycleOwner;
@@ -870,7 +855,6 @@ final class UserSwitcherViewBinder$bind$4 extends SuspendLambda implements Funct
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherViewBinder$bind$4(UserSwitcherViewModel userSwitcherViewModel, Ref$ObjectRef<UserSwitcherPopupMenu> ref$ObjectRef, Function0 function0, View view, ViewGroup viewGroup, UserSwitcherViewBinder.MenuAdapter menuAdapter, Flow flow, UserSwitcherRootView userSwitcherRootView, LayoutInflater layoutInflater, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = userSwitcherViewModel;

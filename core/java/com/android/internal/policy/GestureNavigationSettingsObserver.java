@@ -54,7 +54,6 @@ public class GestureNavigationSettingsObserver extends ContentObserver {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$register$1() {
         ContentResolver r = this.mContext.getContentResolver();
         r.registerContentObserver(
@@ -93,7 +92,6 @@ public class GestureNavigationSettingsObserver extends ContentObserver {
                 this.mOnPropertiesChangedListener);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$register$0(Runnable runnable) {
         this.mMainHandler.post(runnable);
     }
@@ -109,7 +107,6 @@ public class GestureNavigationSettingsObserver extends ContentObserver {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$registerForCallingUser$3() {
         ContentResolver r = this.mContext.getContentResolver();
         r.registerContentObserver(
@@ -135,7 +132,6 @@ public class GestureNavigationSettingsObserver extends ContentObserver {
                 this.mOnPropertiesChangedListener);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$registerForCallingUser$2(Runnable runnable) {
         this.mMainHandler.post(runnable);
     }
@@ -151,7 +147,6 @@ public class GestureNavigationSettingsObserver extends ContentObserver {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$unregister$4() {
         this.mContext.getContentResolver().unregisterContentObserver(this);
         DeviceConfig.removeOnPropertiesChangedListener(this.mOnPropertiesChangedListener);

@@ -1976,7 +1976,6 @@ public class ApplicationPackageManager extends PackageManager {
                 : DevicePolicyResources.UNDEFINED;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: getDefaultUserIconBadge, reason: merged with bridge method [inline-methods] */
     public Drawable lambda$getUserBadgedIcon$0(UserHandle user) {
         return this.mContext.getDrawable(
@@ -2055,7 +2054,6 @@ public class ApplicationPackageManager extends PackageManager {
                 : DevicePolicyResources.UNDEFINED;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: getDefaultUserBadgeForDensity, reason: merged with bridge method [inline-methods] */
     public Drawable lambda$getUserBadgeForDensity$1(UserHandle user, int density) {
         return getDrawableForDensity(
@@ -2109,7 +2107,6 @@ public class ApplicationPackageManager extends PackageManager {
         return badge;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: getDefaultUserBadgeNoBackgroundForDensity, reason: merged with bridge method [inline-methods] */
     public Drawable lambda$getUserBadgeForDensityNoBackground$2(UserHandle user, int density) {
         return getDrawableForDensity(
@@ -4690,7 +4687,6 @@ public class ApplicationPackageManager extends PackageManager {
         return semGetDrawableForIconTray(icon, mode, null, 0);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.content.pm.PackageManager
     public Drawable semGetDrawableForIconTray(
             Drawable icon, int mode, String packageName, int density) {

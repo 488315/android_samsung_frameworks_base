@@ -80,7 +80,6 @@ public final class DeviceManagementResourcesProvider {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:25:0x0023, code lost:
 
            if (r10.equals("drawable-style-entry") == false) goto L7;

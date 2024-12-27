@@ -19,13 +19,11 @@ public class ScreenshotRequest implements Parcelable {
             new Parcelable.Creator<
                     ScreenshotRequest>() { // from class:
                                            // com.android.internal.util.ScreenshotRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ScreenshotRequest createFromParcel(Parcel source) {
                     return new ScreenshotRequest(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ScreenshotRequest[] newArray(int size) {
                     return new ScreenshotRequest[size];
@@ -198,7 +196,6 @@ public class ScreenshotRequest implements Parcelable {
 
         private HardwareBitmapBundler() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static Bundle hardwareBitmapToBundle(Bitmap bitmap) {
             ParcelableColorSpace colorSpace;
             if (bitmap == null) {
@@ -219,7 +216,6 @@ public class ScreenshotRequest implements Parcelable {
             return bundle;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static Bitmap bundleToHardwareBitmap(Bundle bundle) {
             if (bundle == null) {
                 return null;

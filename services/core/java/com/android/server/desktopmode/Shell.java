@@ -29,15 +29,10 @@ public final class Shell extends ShellCommand {
         outPrintWriter.println("       resolution supportAll [on|off]");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:42:0x00ae, code lost:
 
        if (r15.equals("clear") == false) goto L47;
     */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x02d0  */
-    /* JADX WARN: Removed duplicated region for block: B:134:0x02fc  */
-    /* JADX WARN: Removed duplicated region for block: B:137:0x0309 A[Catch: IllegalArgumentException -> 0x0355, TryCatch #1 {IllegalArgumentException -> 0x0355, blocks: (B:112:0x0287, B:114:0x0291, B:115:0x029d, B:117:0x02a3, B:118:0x02a8, B:126:0x02d2, B:127:0x02d7, B:135:0x02fe, B:136:0x0303, B:137:0x0309, B:138:0x02e9, B:141:0x02f1, B:144:0x030f, B:146:0x032d, B:147:0x0332, B:151:0x034c, B:152:0x02b7, B:155:0x02c2, B:149:0x0337), top: B:111:0x0287, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x030f A[Catch: IllegalArgumentException -> 0x0355, TryCatch #1 {IllegalArgumentException -> 0x0355, blocks: (B:112:0x0287, B:114:0x0291, B:115:0x029d, B:117:0x02a3, B:118:0x02a8, B:126:0x02d2, B:127:0x02d7, B:135:0x02fe, B:136:0x0303, B:137:0x0309, B:138:0x02e9, B:141:0x02f1, B:144:0x030f, B:146:0x032d, B:147:0x0332, B:151:0x034c, B:152:0x02b7, B:155:0x02c2, B:149:0x0337), top: B:111:0x0287, inners: #2 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

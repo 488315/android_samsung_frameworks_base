@@ -136,7 +136,6 @@ public class BinderInternal {
         sBinderProxyCountEventListenerDelegate.setListener(null, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class BinderProxyCountEventListenerDelegate {
         private BinderProxyCountEventListener mBinderProxyCountEventListener;
         private Handler mHandler;
@@ -166,7 +165,6 @@ public class BinderInternal {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyLimitReached$0(int uid) {
             this.mBinderProxyCountEventListener.onLimitReached(uid);
         }
@@ -187,7 +185,6 @@ public class BinderInternal {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyWarningReached$1(int uid) {
             this.mBinderProxyCountEventListener.onWarningThresholdReached(uid);
         }

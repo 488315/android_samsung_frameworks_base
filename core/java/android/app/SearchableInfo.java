@@ -27,13 +27,11 @@ import java.util.Iterator;
 public final class SearchableInfo implements Parcelable {
     public static final Parcelable.Creator<SearchableInfo> CREATOR =
             new Parcelable.Creator<SearchableInfo>() { // from class: android.app.SearchableInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SearchableInfo createFromParcel(Parcel in) {
                     return new SearchableInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SearchableInfo[] newArray(int size) {
                     return new SearchableInfo[size];
@@ -212,13 +210,11 @@ public final class SearchableInfo implements Parcelable {
         public static final Parcelable.Creator<ActionKeyInfo> CREATOR =
                 new Parcelable.Creator<
                         ActionKeyInfo>() { // from class: android.app.SearchableInfo.ActionKeyInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ActionKeyInfo createFromParcel(Parcel in) {
                         return new ActionKeyInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ActionKeyInfo[] newArray(int size) {
                         return new ActionKeyInfo[size];

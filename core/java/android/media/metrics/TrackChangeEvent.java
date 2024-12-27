@@ -12,13 +12,11 @@ public final class TrackChangeEvent extends Event implements Parcelable {
     public static final Parcelable.Creator<TrackChangeEvent> CREATOR =
             new Parcelable.Creator<
                     TrackChangeEvent>() { // from class: android.media.metrics.TrackChangeEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TrackChangeEvent[] newArray(int size) {
                     return new TrackChangeEvent[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TrackChangeEvent createFromParcel(Parcel in) {
                     return new TrackChangeEvent(in);

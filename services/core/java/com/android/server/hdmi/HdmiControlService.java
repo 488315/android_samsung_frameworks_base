@@ -816,8 +816,6 @@ public final class HdmiControlService extends SystemService {
             this.mSystemAudioDevice = hdmiDeviceInfo;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:16:0x0051  */
-        /* JADX WARN: Removed duplicated region for block: B:23:0x0062  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2178,7 +2176,6 @@ public final class HdmiControlService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,
@@ -2852,7 +2849,6 @@ public final class HdmiControlService extends SystemService {
             super(handler);
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:48:0x002c, code lost:
 
            if (r7.equals("mhl_input_switching_enabled") == false) goto L4;
@@ -3103,7 +3099,6 @@ public final class HdmiControlService extends SystemService {
         STREAM_MUSIC_ATTRIBUTES = new AudioAttributes.Builder().setLegacyStreamType(3).build();
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.hdmi.HdmiControlService$1] */
     public HdmiControlService(Context context) {
         super(context);
         this.mServiceThreadExecutor =
@@ -3150,7 +3145,6 @@ public final class HdmiControlService extends SystemService {
         this.mDeviceConfig = new DeviceConfigWrapper();
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.hdmi.HdmiControlService$1] */
     public HdmiControlService(
             Context context,
             List list,
@@ -3735,7 +3729,6 @@ public final class HdmiControlService extends SystemService {
         return true;
     }
 
-    /* JADX WARN: Type inference failed for: r2v9, types: [com.android.server.hdmi.HdmiCecLocalDevice$3] */
     public final void checkAndUpdateAbsoluteVolumeBehavior() {
         final HdmiCecLocalDevice playback;
         assertRunOnServiceThread();
@@ -4747,7 +4740,6 @@ public final class HdmiControlService extends SystemService {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(9:12|(2:14|(2:16|17))|18|19|21|22|23|17|10) */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0045, code lost:
 
        r3 = move-exception;
@@ -5511,8 +5503,6 @@ public final class HdmiControlService extends SystemService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v5, types: [com.android.server.hdmi.HdmiControlService$35] */
     public void setEarcEnabledInHal(final boolean z, boolean z2) {
         assertRunOnServiceThread();
         if (z2) {

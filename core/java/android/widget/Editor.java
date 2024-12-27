@@ -475,7 +475,6 @@ public class Editor {
         this.mFlagInsertionHandleGesturesEnabled = enabled;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public MagnifierMotionAnimator getMagnifierAnimator() {
         Magnifier.Builder builder;
         if (this.mMagnifierAnimator == null) {
@@ -892,7 +891,6 @@ public class Editor {
         hideInsertionPointCursorController();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateSpellCheckSpans(int start, int end, boolean createSpellChecker) {
         this.mTextView.removeAdjacentSuggestionSpans(start);
         this.mTextView.removeAdjacentSuggestionSpans(end);
@@ -928,14 +926,12 @@ public class Editor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void suspendBlink() {
         if (this.mBlink != null) {
             this.mBlink.cancel();
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void resumeBlink() {
         if (this.mBlink != null) {
             this.mBlink.uncancel();
@@ -996,7 +992,6 @@ public class Editor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getWordStart(int offset) {
         int retOffset;
         int retOffset2 = getWordIteratorWithText().prevBoundary(offset);
@@ -1011,7 +1006,6 @@ public class Editor {
         return retOffset;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getWordEnd(int offset) {
         int retOffset;
         int retOffset2 = getWordIteratorWithText().nextBoundary(offset);
@@ -1090,7 +1084,6 @@ public class Editor {
         return selectionEnd > selectionStart;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean selectCurrentParagraph() {
         if (!this.mTextView.canSelectText()) {
             return false;
@@ -1111,7 +1104,6 @@ public class Editor {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public long getParagraphsRange(int startOffset, int endOffset) {
         int startOffsetTransformed = this.mTextView.originalToTransformed(startOffset, 1);
         int endOffsetTransformed = this.mTextView.originalToTransformed(endOffset, 1);
@@ -1153,7 +1145,6 @@ public class Editor {
         return this.mWordIterator;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public WordIterator getWordIteratorWithText() {
         if (this.mWordIteratorWithText == null) {
             this.mWordIteratorWithText = new WordIterator(this.mTextView.getTextServicesLocale());
@@ -1167,7 +1158,6 @@ public class Editor {
         return this.mWordIteratorWithText;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getNextCursorOffset(int offset, boolean findAfterGivenOffset) {
         int nextCursor;
         Layout layout = this.mTextView.getLayout();
@@ -1216,7 +1206,6 @@ public class Editor {
         return minOffset >= selectionStart && maxOffset < selectionEnd;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public PositionListener getPositionListener() {
         if (this.mPositionListener == null) {
             this.mPositionListener = new PositionListener();
@@ -1224,7 +1213,6 @@ public class Editor {
         return this.mPositionListener;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isOffsetVisible(int offset) {
         Layout layout = this.mTextView.getLayout();
         if (layout == null) {
@@ -1239,7 +1227,6 @@ public class Editor {
                 this.mTextView.viewportToContentVerticalOffset() + lineBottom);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isPositionOnText(float x, float y) {
         Layout layout = this.mTextView.getLayout();
         if (layout == null) {
@@ -1254,7 +1241,6 @@ public class Editor {
         return x2 >= layout.getLineLeft(line) && x2 <= layout.getLineRight(line);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startDragAndDrop() {
         getSelectionActionModeHelper().onSelectionDrag();
         if (this.mTextView.isInExtractedMode()) {
@@ -1339,7 +1325,6 @@ public class Editor {
         return handled;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void toggleInsertionActionMode() {
         if (this.mTextActionMode != null) {
             lambda$startActionModeInternal$0();
@@ -1553,7 +1538,6 @@ public class Editor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateFloatingToolbarVisibility(MotionEvent event) {
         if (this.mTextActionMode != null) {
             switch (event.getActionMasked()) {
@@ -1583,7 +1567,6 @@ public class Editor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public InputMethodManager getInputMethodManager() {
         return (InputMethodManager)
                 this.mTextView.getContext().getSystemService(InputMethodManager.class);
@@ -1780,7 +1763,6 @@ public class Editor {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendUpdateSelection() {
         InputMethodManager imm;
         int candStart;
@@ -1805,9 +1787,6 @@ public class Editor {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00bc  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00c3  */
-    /* JADX WARN: Removed duplicated region for block: B:51:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2451,14 +2430,12 @@ public class Editor {
         getSelectionActionModeHelper().invalidateActionModeAsync();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void invalidateActionMode() {
         if (this.mTextActionMode != null) {
             this.mTextActionMode.invalidate();
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public SelectionActionModeHelper getSelectionActionModeHelper() {
         if (this.mSelectionActionModeHelper == null) {
             this.mSelectionActionModeHelper = new SelectionActionModeHelper(this);
@@ -2466,7 +2443,6 @@ public class Editor {
         return this.mSelectionActionModeHelper;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean selectCurrentWordAndStartDrag() {
         if (this.mInsertionActionModeRunnable != null) {
             this.mTextView.removeCallbacks(this.mInsertionActionModeRunnable);
@@ -2550,7 +2526,6 @@ public class Editor {
         return selectionStarted;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean extractedTextModeWillBeStarted() {
         InputMethodManager imm;
         return (this.mTextView.isInExtractedMode()
@@ -2613,7 +2588,6 @@ public class Editor {
                 && maxSpanEnd <= unionOfSpansCoveringSelectionStartEnd;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isCursorInsideEasyCorrectionSpan() {
         Spannable spannable = (Spannable) this.mTextView.getText();
         SuggestionSpan[] suggestionSpans =
@@ -2735,7 +2709,6 @@ public class Editor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     /* renamed from: stopTextActionMode, reason: merged with bridge method [inline-methods] */
     public void lambda$startActionModeInternal$0() {
         if (this.mTextActionMode != null) {
@@ -2810,7 +2783,6 @@ public class Editor {
                 this.mTempRect.bottom + scaledBottom);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int clampHorizontalPosition(Drawable drawable, float horizontal) {
         float horizontal2 = Math.max(0.5f, horizontal - 0.5f);
         if (this.mTempRect == null) {
@@ -2862,7 +2834,6 @@ public class Editor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean shouldBlink() {
         int start;
         int end;
@@ -3096,7 +3067,6 @@ public class Editor {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ boolean lambda$setAssistContextMenuItems$1(
             AssistantCallbackHelper helper, MenuItem item) {
         getSelectionActionModeHelper()
@@ -3274,7 +3244,6 @@ public class Editor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public SuggestionSpan findEquivalentSuggestionSpan(SuggestionSpanInfo suggestionSpanInfo) {
         Editable editable = (Editable) this.mTextView.getText();
         if (editable.getSpanStart(suggestionSpanInfo.mSuggestionSpan) >= 0) {
@@ -3299,7 +3268,6 @@ public class Editor {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void replaceWithSuggestion(SuggestionInfo suggestionInfo) {
         int spanStart;
         String originalText;
@@ -3471,7 +3439,6 @@ public class Editor {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void sendEasySpanNotification(int textChangedType, EasyEditSpan span) {
             try {
                 PendingIntent pendingIntent = span.getPendingIntent();
@@ -3529,7 +3496,6 @@ public class Editor {
             this.mEasyEditSpan = easyEditSpan;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setOnDeleteListener(EasyEditDeleteListener listener) {
             this.mOnDeleteListener = listener;
         }
@@ -4377,7 +4343,6 @@ public class Editor {
             return Math.min(positionY, displayMetrics.heightPixels - height);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void hideWithCleanUp() {
             for (SuggestionInfo info : this.mSuggestionInfos) {
                 info.clear();
@@ -5048,7 +5013,6 @@ public class Editor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class MagnifierMotionAnimator {
         private static final long DURATION = 100;
         private float mAnimationCurrentX;
@@ -5077,7 +5041,6 @@ public class Editor {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$new$0(ValueAnimator animation) {
             this.mAnimationCurrentX =
                     this.mAnimationStartX
@@ -5090,7 +5053,6 @@ public class Editor {
             this.mMagnifier.show(this.mAnimationCurrentX, this.mAnimationCurrentY);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void show(float x, float y) {
             boolean startNewAnimation = this.mMagnifierIsShowing && y != this.mLastY;
             if (startNewAnimation) {
@@ -5111,12 +5073,10 @@ public class Editor {
             this.mMagnifierIsShowing = true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void update() {
             this.mMagnifier.update();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void dismiss() {
             this.mMagnifier.dismiss();
             this.mAnimator.cancel();
@@ -5404,7 +5364,6 @@ public class Editor {
             return this.mContainer.isShowing();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean shouldShow() {
             if (this.mIsDragging) {
                 return true;
@@ -5607,8 +5566,6 @@ public class Editor {
             return true;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:26:0x00c5  */
-        /* JADX WARN: Removed duplicated region for block: B:29:0x00c7  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5751,7 +5708,6 @@ public class Editor {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:32:0x01df, code lost:
 
            return true;
@@ -5820,7 +5776,6 @@ public class Editor {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Rect getDrawableBounds(int width, int height) {
             int left = getHorizontalOffset() - this.mContentsViewOffset;
             if (this.mIsDragging || this.mIsRestoring) {
@@ -6252,14 +6207,12 @@ public class Editor {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean shouldMagnifierCursorAdjust() {
             return this.mShouldMagnifierCursorAdjust
                     && Editor.this.mMagnifierAnimator != null
                     && Editor.this.mMagnifierAnimator.mMagnifierIsShowing;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:36:0x00d3, code lost:
 
            return r0;
@@ -6640,7 +6593,6 @@ public class Editor {
                             : true;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:13:0x0039, code lost:
 
            return r0;
@@ -7054,7 +7006,6 @@ public class Editor {
             return this.mHandle;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void reloadHandleDrawable() {
             if (this.mHandle == null) {
                 return;
@@ -7124,7 +7075,6 @@ public class Editor {
             initHandles();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void initHandles() {
             if (this.mStartHandle == null) {
                 this.mStartHandle =
@@ -7149,7 +7099,6 @@ public class Editor {
             Editor.this.hideInsertionPointCursorController();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void reloadHandleDrawables() {
             if (this.mStartHandle == null) {
                 return;
@@ -7638,7 +7587,6 @@ public class Editor {
             return true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void invalidate(boolean delayed) {
             if (Editor.this.mTextView.getLayout() == null) {
                 return;
@@ -7753,7 +7701,6 @@ public class Editor {
         InputMethodState() {}
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isValidRange(CharSequence text, int start, int end) {
         return start >= 0 && start <= end && end <= text.length();
     }
@@ -7937,7 +7884,6 @@ public class Editor {
                         return new EditOperation(in, null);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.ClassLoaderCreator
                     public EditOperation createFromParcel(Parcel in, ClassLoader loader) {
                         return new EditOperation(in, loader);
@@ -8039,7 +7985,6 @@ public class Editor {
                     this.mNewCursorPos);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean mergeWith(EditOperation edit) {
             if (this.mFrozen) {
                 return false;
@@ -8385,7 +8330,6 @@ public class Editor {
             this.mTextView = (TextView) Objects.requireNonNull(textView);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addAction(RemoteAction action) {
             int actionId = this.mActions.size() + 268439552;
             this.mActions.put(
@@ -8396,7 +8340,6 @@ public class Editor {
                             action));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void reset() {
             this.mActions.clear();
         }
@@ -8583,7 +8526,6 @@ public class Editor {
         return result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dismissMagnifierForDrag() {
         if (this.mMagnifierAnimator != null) {
             this.mMagnifierAnimator.dismiss();
@@ -8626,7 +8568,6 @@ public class Editor {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateMagnifierForDrag(MotionEvent event) {
         if (getMagnifierAnimator() == null) {
             return;
@@ -8645,7 +8586,6 @@ public class Editor {
         dismissMagnifierForDrag();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isUniversalSwitchEnable() {
         return Settings.Secure.getInt(
                         this.mTextView.getContext().getContentResolver(), SWITCH_CONTROL_ENABLED, 0)
@@ -8678,7 +8618,6 @@ public class Editor {
         this.mUseCtxMenuInDesktopMode = isMouse;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Layout getActiveLayout() {
         Layout layout = this.mTextView.getLayout();
         Layout hintLayout = this.mTextView.getHintLayout();
@@ -8700,7 +8639,6 @@ public class Editor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateWritingToolkit() {
         InputMethodManager imm = getInputMethodManager();
         if (imm != null && imm.usingWritingToolkit()) {

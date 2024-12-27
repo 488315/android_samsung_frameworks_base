@@ -15,7 +15,6 @@ public class TransformAnimation extends Animation<Matrix4> {
         super(context, AnimationType.TRANSFORM, id, name);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.vekit.Animation.Animation
     public void rollback() {
         if (isEnableRollback()) {

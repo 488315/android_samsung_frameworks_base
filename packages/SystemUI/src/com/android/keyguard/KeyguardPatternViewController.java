@@ -49,9 +49,6 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
     public final DevicePostureController mPostureController;
     public LockscreenCredential mPrevCredential;
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.keyguard.KeyguardPatternViewController$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.keyguard.KeyguardPatternViewController$1] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.keyguard.KeyguardPatternViewController$2] */
     public KeyguardPatternViewController(KeyguardPatternView keyguardPatternView, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, LatencyTracker latencyTracker, FalsingCollector falsingCollector, EmergencyButtonController emergencyButtonController, KeyguardMessageAreaController.Factory factory, DevicePostureController devicePostureController, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor) {
         super(keyguardPatternView, securityMode, keyguardSecurityCallback, emergencyButtonController, factory, featureFlags, selectedUserInteractor);
         this.mPostureCallback = new DevicePostureController.Callback() { // from class: com.android.keyguard.KeyguardPatternViewController$$ExternalSyntheticLambda0

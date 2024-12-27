@@ -806,7 +806,6 @@ public final class FlexibilityController extends StateController {
             specialAppTracker.updatePowerAllowlistCache();
         }
 
-        /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.job.controllers.FlexibilityController$SpecialAppTracker$1] */
         public SpecialAppTracker() {
             this.mHasFeatureTelephonySubscription =
                     FlexibilityController.this
@@ -1602,7 +1601,6 @@ public final class FlexibilityController extends StateController {
         this.mFcConfig.mShouldReevaluateConstraints = false;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // com.android.server.job.controllers.StateController
     public final void processConstantLocked(DeviceConfig.Properties properties, String str) {
         char c;
@@ -1969,9 +1967,6 @@ public final class FlexibilityController extends StateController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0016 A[Catch: all -> 0x000f, TryCatch #0 {all -> 0x000f, blocks: (B:4:0x0003, B:6:0x0008, B:10:0x0012, B:12:0x0016, B:14:0x0021, B:15:0x002a, B:19:0x0019), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0021 A[Catch: all -> 0x000f, TryCatch #0 {all -> 0x000f, blocks: (B:4:0x0003, B:6:0x0008, B:10:0x0012, B:12:0x0016, B:14:0x0021, B:15:0x002a, B:19:0x0019), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0019 A[Catch: all -> 0x000f, TryCatch #0 {all -> 0x000f, blocks: (B:4:0x0003, B:6:0x0008, B:10:0x0012, B:12:0x0016, B:14:0x0021, B:15:0x002a, B:19:0x0019), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

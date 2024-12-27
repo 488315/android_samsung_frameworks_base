@@ -59,8 +59,6 @@ public class FlashlightTile extends SQSTileImpl implements FlashlightController.
     public final Context mSubscreenContext;
     public final SubscreenFlashLightController mSubscreenFlashlightController;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v4, types: [android.content.BroadcastReceiver, com.android.systemui.qs.tiles.FlashlightTile$1] */
     public FlashlightTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, FlashlightController flashlightController, SettingsHelper settingsHelper, BroadcastDispatcher broadcastDispatcher, DisplayLifecycle displayLifecycle) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         QSTileImpl.ResourceIcon.get(R.drawable.quick_panel_icon_flashlight);

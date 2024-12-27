@@ -239,8 +239,6 @@ public final class AnimatedDialog {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0073  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0088  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

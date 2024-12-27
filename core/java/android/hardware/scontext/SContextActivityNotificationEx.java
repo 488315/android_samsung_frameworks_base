@@ -9,13 +9,11 @@ public class SContextActivityNotificationEx extends SContextEventContext {
     public static final Parcelable.Creator<SContextActivityNotificationEx> CREATOR =
             new Parcelable.Creator<SContextActivityNotificationEx>() { // from class:
                 // android.hardware.scontext.SContextActivityNotificationEx.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextActivityNotificationEx createFromParcel(Parcel in) {
                     return new SContextActivityNotificationEx(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextActivityNotificationEx[] newArray(int size) {
                     return new SContextActivityNotificationEx[size];

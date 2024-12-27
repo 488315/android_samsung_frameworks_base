@@ -42,7 +42,6 @@ public class PackageObserver implements Observer {
         this.mPackageName = componentName.getPackageName();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$removeCallback$0(Observer.Callback callback, WeakReference weakReference) {
         return weakReference.get() == callback;
     }

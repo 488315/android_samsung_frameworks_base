@@ -8,7 +8,6 @@ import android.os.Parcelable;
 public final class SyncableFlag implements Parcelable {
     public static final Parcelable.Creator<SyncableFlag> CREATOR =
             new Parcelable.Creator<SyncableFlag>() { // from class: android.flags.SyncableFlag.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncableFlag createFromParcel(Parcel in) {
                     return new SyncableFlag(
@@ -19,7 +18,6 @@ public final class SyncableFlag implements Parcelable {
                             in.readBoolean());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncableFlag[] newArray(int size) {
                     return new SyncableFlag[size];

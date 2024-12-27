@@ -292,8 +292,6 @@ public final class PhoneStatusBarViewController extends ViewController implement
         return this.phoneStatusBarClockManager.getClockWidth();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0037  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x003c  */
     @Override // com.android.systemui.statusbar.phone.IndicatorGarden
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -606,8 +604,6 @@ public final class PhoneStatusBarViewController extends ViewController implement
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v25, types: [com.android.systemui.statusbar.phone.PhoneStatusBarViewController$configurationListener$1] */
-    /* JADX WARN: Type inference failed for: r1v32, types: [com.android.systemui.statusbar.phone.PhoneStatusBarViewController$gardener$1] */
     private PhoneStatusBarViewController(PhoneStatusBarView phoneStatusBarView, ScopedUnfoldTransitionProgressProvider scopedUnfoldTransitionProgressProvider, CentralSurfaces centralSurfaces, StatusBarWindowStateController statusBarWindowStateController, ShadeController shadeController, ShadeViewController shadeViewController, PanelExpansionInteractor panelExpansionInteractor, Provider provider, ShadeLogger shadeLogger, StatusBarMoveFromCenterAnimationController statusBarMoveFromCenterAnimationController, StatusBarUserChipViewModel statusBarUserChipViewModel, ViewUtil viewUtil, ConfigurationController configurationController, StatusOverlayHoverListenerFactory statusOverlayHoverListenerFactory, IndicatorGardenPresenter indicatorGardenPresenter, PrivacyDotViewController privacyDotViewController, DumpManager dumpManager, IndicatorGardenViewTreeLogHelper indicatorGardenViewTreeLogHelper, IndicatorMarqueeGardener indicatorMarqueeGardener, StatusIconContainerController statusIconContainerController, IndicatorCutoutUtil indicatorCutoutUtil, TwoPhoneModeIconController twoPhoneModeIconController, PhoneStatusBarClockManager phoneStatusBarClockManager, KnoxStatusBarControlViewModel knoxStatusBarControlViewModel, NetspeedViewController netspeedViewController, SamsungStatusBarGrayIconHelper samsungStatusBarGrayIconHelper) {
         super(phoneStatusBarView);
         this.progressProvider = scopedUnfoldTransitionProgressProvider;

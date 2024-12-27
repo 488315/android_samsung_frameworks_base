@@ -12,8 +12,6 @@ import com.android.systemui.dock.DockManager;
 import com.android.systemui.scrim.ScrimView;
 import com.android.systemui.util.SettingsHelper;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public class ScrimState {
     public static final /* synthetic */ ScrimState[] $VALUES;
     public static final ScrimState AOD;

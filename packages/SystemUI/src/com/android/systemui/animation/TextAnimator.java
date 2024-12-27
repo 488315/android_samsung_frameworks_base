@@ -119,8 +119,6 @@ public final class TextAnimator {
     
         r4.targetPaint.setColor(r17.intValue());
      */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00a0  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00c5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

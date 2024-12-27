@@ -14,13 +14,11 @@ public final class ThermalMitigationRequest implements Parcelable {
             new Parcelable.Creator<
                     ThermalMitigationRequest>() { // from class:
                                                   // android.telephony.ThermalMitigationRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ThermalMitigationRequest createFromParcel(Parcel in) {
                     return new ThermalMitigationRequest(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ThermalMitigationRequest[] newArray(int size) {
                     return new ThermalMitigationRequest[size];

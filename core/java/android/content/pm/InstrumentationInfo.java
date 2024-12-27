@@ -8,13 +8,11 @@ public class InstrumentationInfo extends PackageItemInfo implements Parcelable {
     public static final Parcelable.Creator<InstrumentationInfo> CREATOR =
             new Parcelable.Creator<
                     InstrumentationInfo>() { // from class: android.content.pm.InstrumentationInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InstrumentationInfo createFromParcel(Parcel source) {
                     return new InstrumentationInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InstrumentationInfo[] newArray(int size) {
                     return new InstrumentationInfo[size];

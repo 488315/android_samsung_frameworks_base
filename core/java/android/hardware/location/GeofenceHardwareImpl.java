@@ -383,7 +383,6 @@ public final class GeofenceHardwareImpl {
         this.mWakeLock.acquire();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void releaseWakeLock() {
         if (this.mWakeLock.isHeld()) {
             this.mWakeLock.release();
@@ -403,10 +402,6 @@ public final class GeofenceHardwareImpl {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0014 A[Catch: RemoteException -> 0x0025, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x0025, blocks: (B:3:0x0002, B:5:0x0007, B:9:0x0010, B:11:0x0014), top: B:2:0x0002 }] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0031  */
-    /* JADX WARN: Removed duplicated region for block: B:20:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0022  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -964,7 +959,6 @@ public final class GeofenceHardwareImpl {
                     : right != null && left.asBinder() == right.asBinder();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean unlinkToDeath() {
             if (this.mMonitorCallback != null) {
                 return this.mMonitorCallback.asBinder().unlinkToDeath(this, 0);

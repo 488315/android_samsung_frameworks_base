@@ -362,8 +362,6 @@ public final class ActivityRecord extends WindowToken {
         public int mExitAnim;
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class State {
         public static final /* synthetic */ State[] $VALUES;
         public static final State DESTROYED;
@@ -433,17 +431,6 @@ public final class ActivityRecord extends WindowToken {
 
        if (r1.getBoolean("com.samsung.android.disableSnapshot", false) == false) goto L308;
     */
-    /* JADX WARN: Removed duplicated region for block: B:206:0x071b  */
-    /* JADX WARN: Removed duplicated region for block: B:214:0x072e  */
-    /* JADX WARN: Removed duplicated region for block: B:217:0x0725  */
-    /* JADX WARN: Removed duplicated region for block: B:218:0x06e6 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x0228  */
-    /* JADX WARN: Type inference failed for: r5v10, types: [com.android.server.wm.ActivityRecord$1] */
-    /* JADX WARN: Type inference failed for: r5v11, types: [com.android.server.wm.ActivityRecord$1] */
-    /* JADX WARN: Type inference failed for: r5v12, types: [com.android.server.wm.ActivityRecord$1] */
-    /* JADX WARN: Type inference failed for: r5v13, types: [com.android.server.wm.ActivityRecord$1] */
-    /* JADX WARN: Type inference failed for: r5v8, types: [com.android.server.wm.ActivityRecord$1] */
-    /* JADX WARN: Type inference failed for: r5v9, types: [com.android.server.wm.ActivityRecord$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -872,33 +859,6 @@ public final class ActivityRecord extends WindowToken {
 
        if (r17.mDisplayContent.mDisplayRotation.rotationForOrientation(getOverrideOrientation(), r17.mDisplayContent.mDisplayRotation.mRotation) == r4.getRotation()) goto L31;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x01b1  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x01c0  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x01c4  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x01c8  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x01d2  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x01d6  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x01db  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x01e0  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x01f1  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x020d  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x028a  */
-    /* JADX WARN: Type inference failed for: r3v1 */
-    /* JADX WARN: Type inference failed for: r3v14 */
-    /* JADX WARN: Type inference failed for: r3v15 */
-    /* JADX WARN: Type inference failed for: r3v16 */
-    /* JADX WARN: Type inference failed for: r3v17 */
-    /* JADX WARN: Type inference failed for: r3v18 */
-    /* JADX WARN: Type inference failed for: r3v2 */
-    /* JADX WARN: Type inference failed for: r3v29 */
-    /* JADX WARN: Type inference failed for: r3v3 */
-    /* JADX WARN: Type inference failed for: r3v30 */
-    /* JADX WARN: Type inference failed for: r3v4 */
-    /* JADX WARN: Type inference failed for: r3v5 */
-    /* JADX WARN: Type inference failed for: r3v6 */
-    /* JADX WARN: Type inference failed for: r3v7 */
-    /* JADX WARN: Type inference failed for: r3v8 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2044,10 +2004,6 @@ public final class ActivityRecord extends WindowToken {
 
        if (r8.getDisplayState(getDisplayId()).mTopOccludesActivity == r6) goto L28;
     */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00b2  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00df  */
-    /* JADX WARN: Removed duplicated region for block: B:63:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x00d6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3579,19 +3535,6 @@ public final class ActivityRecord extends WindowToken {
         this.mHaveState = false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x0202  */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x02da A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:26:0x009c, B:28:0x00cd, B:30:0x00d8, B:31:0x00e1, B:33:0x00e6, B:35:0x00ec, B:36:0x00f2, B:38:0x00fb, B:43:0x0107, B:45:0x0115, B:47:0x011d, B:52:0x012b, B:53:0x0137, B:55:0x013b, B:57:0x0146, B:58:0x0159, B:60:0x015e, B:63:0x0164, B:65:0x016a, B:67:0x0170, B:69:0x0176, B:70:0x017b, B:72:0x017f, B:74:0x0183, B:76:0x0189, B:77:0x018e, B:79:0x0192, B:81:0x0198, B:83:0x01a1, B:85:0x01af, B:89:0x01b8, B:91:0x01be, B:93:0x01ca, B:95:0x01d0, B:97:0x01d6, B:99:0x01dc, B:101:0x01e0, B:104:0x01c7, B:107:0x01fb, B:110:0x0204, B:111:0x021c, B:113:0x022a, B:115:0x0230, B:116:0x024a, B:118:0x0252, B:120:0x025a, B:122:0x0260, B:123:0x0262, B:127:0x0291, B:129:0x029a, B:131:0x02a4, B:134:0x02aa, B:136:0x02b4, B:137:0x02b7, B:139:0x02bb, B:141:0x02bf, B:144:0x02c7, B:147:0x02d2, B:149:0x02d6, B:152:0x026b, B:154:0x026f, B:155:0x0285, B:156:0x02da, B:158:0x02e2, B:160:0x02e6, B:162:0x02ee, B:164:0x02f4, B:165:0x02fa, B:166:0x0306, B:170:0x0314, B:172:0x031c, B:173:0x0321, B:175:0x0328, B:179:0x033a, B:181:0x033e, B:182:0x014a, B:184:0x0152), top: B:25:0x009c }] */
-    /* JADX WARN: Removed duplicated region for block: B:182:0x014a A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:26:0x009c, B:28:0x00cd, B:30:0x00d8, B:31:0x00e1, B:33:0x00e6, B:35:0x00ec, B:36:0x00f2, B:38:0x00fb, B:43:0x0107, B:45:0x0115, B:47:0x011d, B:52:0x012b, B:53:0x0137, B:55:0x013b, B:57:0x0146, B:58:0x0159, B:60:0x015e, B:63:0x0164, B:65:0x016a, B:67:0x0170, B:69:0x0176, B:70:0x017b, B:72:0x017f, B:74:0x0183, B:76:0x0189, B:77:0x018e, B:79:0x0192, B:81:0x0198, B:83:0x01a1, B:85:0x01af, B:89:0x01b8, B:91:0x01be, B:93:0x01ca, B:95:0x01d0, B:97:0x01d6, B:99:0x01dc, B:101:0x01e0, B:104:0x01c7, B:107:0x01fb, B:110:0x0204, B:111:0x021c, B:113:0x022a, B:115:0x0230, B:116:0x024a, B:118:0x0252, B:120:0x025a, B:122:0x0260, B:123:0x0262, B:127:0x0291, B:129:0x029a, B:131:0x02a4, B:134:0x02aa, B:136:0x02b4, B:137:0x02b7, B:139:0x02bb, B:141:0x02bf, B:144:0x02c7, B:147:0x02d2, B:149:0x02d6, B:152:0x026b, B:154:0x026f, B:155:0x0285, B:156:0x02da, B:158:0x02e2, B:160:0x02e6, B:162:0x02ee, B:164:0x02f4, B:165:0x02fa, B:166:0x0306, B:170:0x0314, B:172:0x031c, B:173:0x0321, B:175:0x0328, B:179:0x033a, B:181:0x033e, B:182:0x014a, B:184:0x0152), top: B:25:0x009c }] */
-    /* JADX WARN: Removed duplicated region for block: B:186:0x0106  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0104  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x012b A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:26:0x009c, B:28:0x00cd, B:30:0x00d8, B:31:0x00e1, B:33:0x00e6, B:35:0x00ec, B:36:0x00f2, B:38:0x00fb, B:43:0x0107, B:45:0x0115, B:47:0x011d, B:52:0x012b, B:53:0x0137, B:55:0x013b, B:57:0x0146, B:58:0x0159, B:60:0x015e, B:63:0x0164, B:65:0x016a, B:67:0x0170, B:69:0x0176, B:70:0x017b, B:72:0x017f, B:74:0x0183, B:76:0x0189, B:77:0x018e, B:79:0x0192, B:81:0x0198, B:83:0x01a1, B:85:0x01af, B:89:0x01b8, B:91:0x01be, B:93:0x01ca, B:95:0x01d0, B:97:0x01d6, B:99:0x01dc, B:101:0x01e0, B:104:0x01c7, B:107:0x01fb, B:110:0x0204, B:111:0x021c, B:113:0x022a, B:115:0x0230, B:116:0x024a, B:118:0x0252, B:120:0x025a, B:122:0x0260, B:123:0x0262, B:127:0x0291, B:129:0x029a, B:131:0x02a4, B:134:0x02aa, B:136:0x02b4, B:137:0x02b7, B:139:0x02bb, B:141:0x02bf, B:144:0x02c7, B:147:0x02d2, B:149:0x02d6, B:152:0x026b, B:154:0x026f, B:155:0x0285, B:156:0x02da, B:158:0x02e2, B:160:0x02e6, B:162:0x02ee, B:164:0x02f4, B:165:0x02fa, B:166:0x0306, B:170:0x0314, B:172:0x031c, B:173:0x0321, B:175:0x0328, B:179:0x033a, B:181:0x033e, B:182:0x014a, B:184:0x0152), top: B:25:0x009c }] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x013b A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:26:0x009c, B:28:0x00cd, B:30:0x00d8, B:31:0x00e1, B:33:0x00e6, B:35:0x00ec, B:36:0x00f2, B:38:0x00fb, B:43:0x0107, B:45:0x0115, B:47:0x011d, B:52:0x012b, B:53:0x0137, B:55:0x013b, B:57:0x0146, B:58:0x0159, B:60:0x015e, B:63:0x0164, B:65:0x016a, B:67:0x0170, B:69:0x0176, B:70:0x017b, B:72:0x017f, B:74:0x0183, B:76:0x0189, B:77:0x018e, B:79:0x0192, B:81:0x0198, B:83:0x01a1, B:85:0x01af, B:89:0x01b8, B:91:0x01be, B:93:0x01ca, B:95:0x01d0, B:97:0x01d6, B:99:0x01dc, B:101:0x01e0, B:104:0x01c7, B:107:0x01fb, B:110:0x0204, B:111:0x021c, B:113:0x022a, B:115:0x0230, B:116:0x024a, B:118:0x0252, B:120:0x025a, B:122:0x0260, B:123:0x0262, B:127:0x0291, B:129:0x029a, B:131:0x02a4, B:134:0x02aa, B:136:0x02b4, B:137:0x02b7, B:139:0x02bb, B:141:0x02bf, B:144:0x02c7, B:147:0x02d2, B:149:0x02d6, B:152:0x026b, B:154:0x026f, B:155:0x0285, B:156:0x02da, B:158:0x02e2, B:160:0x02e6, B:162:0x02ee, B:164:0x02f4, B:165:0x02fa, B:166:0x0306, B:170:0x0314, B:172:0x031c, B:173:0x0321, B:175:0x0328, B:179:0x033a, B:181:0x033e, B:182:0x014a, B:184:0x0152), top: B:25:0x009c }] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0146 A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:26:0x009c, B:28:0x00cd, B:30:0x00d8, B:31:0x00e1, B:33:0x00e6, B:35:0x00ec, B:36:0x00f2, B:38:0x00fb, B:43:0x0107, B:45:0x0115, B:47:0x011d, B:52:0x012b, B:53:0x0137, B:55:0x013b, B:57:0x0146, B:58:0x0159, B:60:0x015e, B:63:0x0164, B:65:0x016a, B:67:0x0170, B:69:0x0176, B:70:0x017b, B:72:0x017f, B:74:0x0183, B:76:0x0189, B:77:0x018e, B:79:0x0192, B:81:0x0198, B:83:0x01a1, B:85:0x01af, B:89:0x01b8, B:91:0x01be, B:93:0x01ca, B:95:0x01d0, B:97:0x01d6, B:99:0x01dc, B:101:0x01e0, B:104:0x01c7, B:107:0x01fb, B:110:0x0204, B:111:0x021c, B:113:0x022a, B:115:0x0230, B:116:0x024a, B:118:0x0252, B:120:0x025a, B:122:0x0260, B:123:0x0262, B:127:0x0291, B:129:0x029a, B:131:0x02a4, B:134:0x02aa, B:136:0x02b4, B:137:0x02b7, B:139:0x02bb, B:141:0x02bf, B:144:0x02c7, B:147:0x02d2, B:149:0x02d6, B:152:0x026b, B:154:0x026f, B:155:0x0285, B:156:0x02da, B:158:0x02e2, B:160:0x02e6, B:162:0x02ee, B:164:0x02f4, B:165:0x02fa, B:166:0x0306, B:170:0x0314, B:172:0x031c, B:173:0x0321, B:175:0x0328, B:179:0x033a, B:181:0x033e, B:182:0x014a, B:184:0x0152), top: B:25:0x009c }] */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x015e A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:26:0x009c, B:28:0x00cd, B:30:0x00d8, B:31:0x00e1, B:33:0x00e6, B:35:0x00ec, B:36:0x00f2, B:38:0x00fb, B:43:0x0107, B:45:0x0115, B:47:0x011d, B:52:0x012b, B:53:0x0137, B:55:0x013b, B:57:0x0146, B:58:0x0159, B:60:0x015e, B:63:0x0164, B:65:0x016a, B:67:0x0170, B:69:0x0176, B:70:0x017b, B:72:0x017f, B:74:0x0183, B:76:0x0189, B:77:0x018e, B:79:0x0192, B:81:0x0198, B:83:0x01a1, B:85:0x01af, B:89:0x01b8, B:91:0x01be, B:93:0x01ca, B:95:0x01d0, B:97:0x01d6, B:99:0x01dc, B:101:0x01e0, B:104:0x01c7, B:107:0x01fb, B:110:0x0204, B:111:0x021c, B:113:0x022a, B:115:0x0230, B:116:0x024a, B:118:0x0252, B:120:0x025a, B:122:0x0260, B:123:0x0262, B:127:0x0291, B:129:0x029a, B:131:0x02a4, B:134:0x02aa, B:136:0x02b4, B:137:0x02b7, B:139:0x02bb, B:141:0x02bf, B:144:0x02c7, B:147:0x02d2, B:149:0x02d6, B:152:0x026b, B:154:0x026f, B:155:0x0285, B:156:0x02da, B:158:0x02e2, B:160:0x02e6, B:162:0x02ee, B:164:0x02f4, B:165:0x02fa, B:166:0x0306, B:170:0x0314, B:172:0x031c, B:173:0x0321, B:175:0x0328, B:179:0x033a, B:181:0x033e, B:182:0x014a, B:184:0x0152), top: B:25:0x009c }] */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x017f A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:26:0x009c, B:28:0x00cd, B:30:0x00d8, B:31:0x00e1, B:33:0x00e6, B:35:0x00ec, B:36:0x00f2, B:38:0x00fb, B:43:0x0107, B:45:0x0115, B:47:0x011d, B:52:0x012b, B:53:0x0137, B:55:0x013b, B:57:0x0146, B:58:0x0159, B:60:0x015e, B:63:0x0164, B:65:0x016a, B:67:0x0170, B:69:0x0176, B:70:0x017b, B:72:0x017f, B:74:0x0183, B:76:0x0189, B:77:0x018e, B:79:0x0192, B:81:0x0198, B:83:0x01a1, B:85:0x01af, B:89:0x01b8, B:91:0x01be, B:93:0x01ca, B:95:0x01d0, B:97:0x01d6, B:99:0x01dc, B:101:0x01e0, B:104:0x01c7, B:107:0x01fb, B:110:0x0204, B:111:0x021c, B:113:0x022a, B:115:0x0230, B:116:0x024a, B:118:0x0252, B:120:0x025a, B:122:0x0260, B:123:0x0262, B:127:0x0291, B:129:0x029a, B:131:0x02a4, B:134:0x02aa, B:136:0x02b4, B:137:0x02b7, B:139:0x02bb, B:141:0x02bf, B:144:0x02c7, B:147:0x02d2, B:149:0x02d6, B:152:0x026b, B:154:0x026f, B:155:0x0285, B:156:0x02da, B:158:0x02e2, B:160:0x02e6, B:162:0x02ee, B:164:0x02f4, B:165:0x02fa, B:166:0x0306, B:170:0x0314, B:172:0x031c, B:173:0x0321, B:175:0x0328, B:179:0x033a, B:181:0x033e, B:182:0x014a, B:184:0x0152), top: B:25:0x009c }] */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0192 A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:26:0x009c, B:28:0x00cd, B:30:0x00d8, B:31:0x00e1, B:33:0x00e6, B:35:0x00ec, B:36:0x00f2, B:38:0x00fb, B:43:0x0107, B:45:0x0115, B:47:0x011d, B:52:0x012b, B:53:0x0137, B:55:0x013b, B:57:0x0146, B:58:0x0159, B:60:0x015e, B:63:0x0164, B:65:0x016a, B:67:0x0170, B:69:0x0176, B:70:0x017b, B:72:0x017f, B:74:0x0183, B:76:0x0189, B:77:0x018e, B:79:0x0192, B:81:0x0198, B:83:0x01a1, B:85:0x01af, B:89:0x01b8, B:91:0x01be, B:93:0x01ca, B:95:0x01d0, B:97:0x01d6, B:99:0x01dc, B:101:0x01e0, B:104:0x01c7, B:107:0x01fb, B:110:0x0204, B:111:0x021c, B:113:0x022a, B:115:0x0230, B:116:0x024a, B:118:0x0252, B:120:0x025a, B:122:0x0260, B:123:0x0262, B:127:0x0291, B:129:0x029a, B:131:0x02a4, B:134:0x02aa, B:136:0x02b4, B:137:0x02b7, B:139:0x02bb, B:141:0x02bf, B:144:0x02c7, B:147:0x02d2, B:149:0x02d6, B:152:0x026b, B:154:0x026f, B:155:0x0285, B:156:0x02da, B:158:0x02e2, B:160:0x02e6, B:162:0x02ee, B:164:0x02f4, B:165:0x02fa, B:166:0x0306, B:170:0x0314, B:172:0x031c, B:173:0x0321, B:175:0x0328, B:179:0x033a, B:181:0x033e, B:182:0x014a, B:184:0x0152), top: B:25:0x009c }] */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x01b8 A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:26:0x009c, B:28:0x00cd, B:30:0x00d8, B:31:0x00e1, B:33:0x00e6, B:35:0x00ec, B:36:0x00f2, B:38:0x00fb, B:43:0x0107, B:45:0x0115, B:47:0x011d, B:52:0x012b, B:53:0x0137, B:55:0x013b, B:57:0x0146, B:58:0x0159, B:60:0x015e, B:63:0x0164, B:65:0x016a, B:67:0x0170, B:69:0x0176, B:70:0x017b, B:72:0x017f, B:74:0x0183, B:76:0x0189, B:77:0x018e, B:79:0x0192, B:81:0x0198, B:83:0x01a1, B:85:0x01af, B:89:0x01b8, B:91:0x01be, B:93:0x01ca, B:95:0x01d0, B:97:0x01d6, B:99:0x01dc, B:101:0x01e0, B:104:0x01c7, B:107:0x01fb, B:110:0x0204, B:111:0x021c, B:113:0x022a, B:115:0x0230, B:116:0x024a, B:118:0x0252, B:120:0x025a, B:122:0x0260, B:123:0x0262, B:127:0x0291, B:129:0x029a, B:131:0x02a4, B:134:0x02aa, B:136:0x02b4, B:137:0x02b7, B:139:0x02bb, B:141:0x02bf, B:144:0x02c7, B:147:0x02d2, B:149:0x02d6, B:152:0x026b, B:154:0x026f, B:155:0x0285, B:156:0x02da, B:158:0x02e2, B:160:0x02e6, B:162:0x02ee, B:164:0x02f4, B:165:0x02fa, B:166:0x0306, B:170:0x0314, B:172:0x031c, B:173:0x0321, B:175:0x0328, B:179:0x033a, B:181:0x033e, B:182:0x014a, B:184:0x0152), top: B:25:0x009c }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4088,8 +4031,6 @@ public final class ActivityRecord extends WindowToken {
         return 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x005d  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0066  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5093,9 +5034,6 @@ public final class ActivityRecord extends WindowToken {
         return this.mNeedsZBoost || super.needsZBoost();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0082  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x009c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5567,9 +5505,6 @@ public final class ActivityRecord extends WindowToken {
 
        if (r5 != false) goto L45;
     */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0054  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00b7  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00d4  */
     @Override // com.android.server.wm.WindowToken, com.android.server.wm.WindowContainer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -6065,8 +6000,6 @@ public final class ActivityRecord extends WindowToken {
         super.removeImmediately();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x002c  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0031 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6382,58 +6315,6 @@ public final class ActivityRecord extends WindowToken {
 
        if ((r1 != null ? r1.isTreatmentEnabledForActivity(true, r8) : false) != false) goto L342;
     */
-    /* JADX WARN: Removed duplicated region for block: B:219:0x05e7  */
-    /* JADX WARN: Removed duplicated region for block: B:222:0x05f9  */
-    /* JADX WARN: Removed duplicated region for block: B:229:0x0651  */
-    /* JADX WARN: Removed duplicated region for block: B:237:0x0673  */
-    /* JADX WARN: Removed duplicated region for block: B:241:0x0680  */
-    /* JADX WARN: Removed duplicated region for block: B:246:0x09b8  */
-    /* JADX WARN: Removed duplicated region for block: B:256:0x09de  */
-    /* JADX WARN: Removed duplicated region for block: B:259:0x09e3  */
-    /* JADX WARN: Removed duplicated region for block: B:265:0x09f6  */
-    /* JADX WARN: Removed duplicated region for block: B:270:0x0a05  */
-    /* JADX WARN: Removed duplicated region for block: B:278:0x0a32  */
-    /* JADX WARN: Removed duplicated region for block: B:281:0x0a46  */
-    /* JADX WARN: Removed duplicated region for block: B:284:0x0a5f  */
-    /* JADX WARN: Removed duplicated region for block: B:300:0x0a98  */
-    /* JADX WARN: Removed duplicated region for block: B:303:0x0aaf  */
-    /* JADX WARN: Removed duplicated region for block: B:309:0x0ac4  */
-    /* JADX WARN: Removed duplicated region for block: B:315:0x0ad9  */
-    /* JADX WARN: Removed duplicated region for block: B:321:0x0af1  */
-    /* JADX WARN: Removed duplicated region for block: B:327:0x0b0e  */
-    /* JADX WARN: Removed duplicated region for block: B:330:0x0b19  */
-    /* JADX WARN: Removed duplicated region for block: B:334:0x0b23  */
-    /* JADX WARN: Removed duplicated region for block: B:338:0x0b36  */
-    /* JADX WARN: Removed duplicated region for block: B:341:0x0b59  */
-    /* JADX WARN: Removed duplicated region for block: B:347:0x0b90  */
-    /* JADX WARN: Removed duplicated region for block: B:351:0x0b92  */
-    /* JADX WARN: Removed duplicated region for block: B:352:0x0a34  */
-    /* JADX WARN: Removed duplicated region for block: B:359:0x068c  */
-    /* JADX WARN: Removed duplicated region for block: B:403:0x076b  */
-    /* JADX WARN: Removed duplicated region for block: B:406:0x0772  */
-    /* JADX WARN: Removed duplicated region for block: B:408:0x0779  */
-    /* JADX WARN: Removed duplicated region for block: B:412:0x078b  */
-    /* JADX WARN: Removed duplicated region for block: B:415:0x0810  */
-    /* JADX WARN: Removed duplicated region for block: B:418:0x083c  */
-    /* JADX WARN: Removed duplicated region for block: B:436:0x08ac  */
-    /* JADX WARN: Removed duplicated region for block: B:443:0x08f0  */
-    /* JADX WARN: Removed duplicated region for block: B:446:0x08ff  */
-    /* JADX WARN: Removed duplicated region for block: B:448:0x0906  */
-    /* JADX WARN: Removed duplicated region for block: B:456:0x0931  */
-    /* JADX WARN: Removed duplicated region for block: B:474:0x0915  */
-    /* JADX WARN: Removed duplicated region for block: B:476:0x0909  */
-    /* JADX WARN: Removed duplicated region for block: B:477:0x0902  */
-    /* JADX WARN: Removed duplicated region for block: B:480:0x08c2  */
-    /* JADX WARN: Removed duplicated region for block: B:482:0x08cb  */
-    /* JADX WARN: Removed duplicated region for block: B:484:0x08d1  */
-    /* JADX WARN: Removed duplicated region for block: B:485:0x08ae  */
-    /* JADX WARN: Removed duplicated region for block: B:488:0x0795  */
-    /* JADX WARN: Removed duplicated region for block: B:513:0x077f  */
-    /* JADX WARN: Removed duplicated region for block: B:514:0x0775  */
-    /* JADX WARN: Removed duplicated region for block: B:515:0x076d  */
-    /* JADX WARN: Removed duplicated region for block: B:527:0x0990  */
-    /* JADX WARN: Removed duplicated region for block: B:538:0x0626  */
-    /* JADX WARN: Removed duplicated region for block: B:539:0x062a  */
     @Override // com.android.server.wm.WindowToken, com.android.server.wm.WindowContainer,
               // com.android.server.wm.ConfigurationContainer
     /*
@@ -6943,8 +6824,6 @@ public final class ActivityRecord extends WindowToken {
                 configuration, i, this.mAtmService.mGrammaticalManagerInternal, getUid());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0141  */
-    /* JADX WARN: Removed duplicated region for block: B:38:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7763,11 +7642,6 @@ public final class ActivityRecord extends WindowToken {
 
        if (r18 != false) goto L112;
     */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00bd  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0185  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0193 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x01aa A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x01b5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8217,16 +8091,6 @@ public final class ActivityRecord extends WindowToken {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:110:0x0243  */
-    /* JADX WARN: Removed duplicated region for block: B:123:0x026f  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x0274  */
-    /* JADX WARN: Removed duplicated region for block: B:241:0x04dd  */
-    /* JADX WARN: Removed duplicated region for block: B:246:0x0502  */
-    /* JADX WARN: Removed duplicated region for block: B:266:0x0525  */
-    /* JADX WARN: Removed duplicated region for block: B:277:0x0271  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0123  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x013c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

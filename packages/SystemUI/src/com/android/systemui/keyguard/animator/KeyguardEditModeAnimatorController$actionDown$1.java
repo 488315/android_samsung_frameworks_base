@@ -11,7 +11,6 @@ final class KeyguardEditModeAnimatorController$actionDown$1 extends SuspendLambd
     int label;
     final /* synthetic */ KeyguardEditModeAnimatorController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardEditModeAnimatorController$actionDown$1(KeyguardEditModeAnimatorController keyguardEditModeAnimatorController, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardEditModeAnimatorController;
@@ -29,8 +28,6 @@ final class KeyguardEditModeAnimatorController$actionDown$1 extends SuspendLambd
         return ((KeyguardEditModeAnimatorController$actionDown$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0061  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x009d  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

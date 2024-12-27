@@ -150,13 +150,11 @@ public final class AudioFormat implements Parcelable {
     public static final int SAMPLE_RATE_HZ_MAX = AudioSystem.SAMPLE_RATE_HZ_MAX;
     public static final Parcelable.Creator<AudioFormat> CREATOR =
             new Parcelable.Creator<AudioFormat>() { // from class: android.media.AudioFormat.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioFormat createFromParcel(Parcel p) {
                     return new AudioFormat(p);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioFormat[] newArray(int size) {
                     return new AudioFormat[size];

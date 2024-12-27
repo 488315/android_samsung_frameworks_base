@@ -9,8 +9,6 @@ public final class ZenData {
     private final String descriptionId;
     private final ZenMode zenMode;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class ZenMode {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ ZenMode[] $VALUES;

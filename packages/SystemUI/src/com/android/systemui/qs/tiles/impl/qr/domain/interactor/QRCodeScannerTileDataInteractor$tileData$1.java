@@ -19,7 +19,6 @@ final class QRCodeScannerTileDataInteractor$tileData$1 extends SuspendLambda imp
     int label;
     final /* synthetic */ QRCodeScannerTileDataInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QRCodeScannerTileDataInteractor$tileData$1(QRCodeScannerTileDataInteractor qRCodeScannerTileDataInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = qRCodeScannerTileDataInteractor;
@@ -37,8 +36,6 @@ final class QRCodeScannerTileDataInteractor$tileData$1 extends SuspendLambda imp
         return ((QRCodeScannerTileDataInteractor$tileData$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.qrcodescanner.controller.QRCodeScannerController$Callback, com.android.systemui.qs.tiles.impl.qr.domain.interactor.QRCodeScannerTileDataInteractor$tileData$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -59,7 +56,6 @@ final class QRCodeScannerTileDataInteractor$tileData$1 extends SuspendLambda imp
             this.this$0.qrController.addCallback((QRCodeScannerController.Callback) r1);
             final QRCodeScannerTileDataInteractor qRCodeScannerTileDataInteractor2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.tiles.impl.qr.domain.interactor.QRCodeScannerTileDataInteractor$tileData$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -9,13 +9,11 @@ public final class VirtualTouchscreenConfig extends VirtualTouchDeviceConfig imp
     public static final Parcelable.Creator<VirtualTouchscreenConfig> CREATOR =
             new Parcelable.Creator<VirtualTouchscreenConfig>() { // from class:
                 // android.hardware.input.VirtualTouchscreenConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualTouchscreenConfig createFromParcel(Parcel in) {
                     return new VirtualTouchscreenConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualTouchscreenConfig[] newArray(int size) {
                     return new VirtualTouchscreenConfig[size];

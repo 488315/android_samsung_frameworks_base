@@ -8,13 +8,11 @@ public class SemGeofence implements Parcelable {
     public static final Parcelable.Creator<SemGeofence> CREATOR =
             new Parcelable.Creator<
                     SemGeofence>() { // from class: com.samsung.android.location.SemGeofence.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemGeofence createFromParcel(Parcel in) {
                     return new SemGeofence(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemGeofence[] newArray(int size) {
                     return new SemGeofence[size];

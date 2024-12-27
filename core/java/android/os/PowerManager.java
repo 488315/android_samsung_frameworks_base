@@ -1810,7 +1810,6 @@ public final class PowerManager {
                 };
         private final IBinder mToken = new Binder();
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$new$0() {
             release(65536);
         }
@@ -2044,7 +2043,6 @@ public final class PowerManager {
             };
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$wrap$1(Runnable r) {
             try {
                 r.run();

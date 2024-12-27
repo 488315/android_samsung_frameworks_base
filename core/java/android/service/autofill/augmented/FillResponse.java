@@ -13,17 +13,14 @@ public final class FillResponse {
     private FillWindow mFillWindow;
     private List<Dataset> mInlineSuggestions;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static FillWindow defaultFillWindow() {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static List<Dataset> defaultInlineSuggestions() {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Bundle defaultClientState() {
         return null;
     }

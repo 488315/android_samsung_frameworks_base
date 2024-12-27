@@ -1078,39 +1078,22 @@ public final class KillPolicyManager {
     }
 
     public enum LmkdCount {
-        /* JADX INFO: Fake field, exist only in values array */
         EF7("CACHED_APP_MAX_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF17("CACHED_APP_MIN_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF27("SEEDBED_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF37("PICKED_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF47("ARCHIVED_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF57("SERVICE_B_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF67("PREVIOUS_APP_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF77("HOME_APP_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF88("SERVICE_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF99("HEAVY_WEIGHT_APP_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF110("BORA_APP_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF121("BACKUP_APP_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF132("PERCEPTIBLE_LOW_APP_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF145("PERCEPTIBLE_MEDIUM_APP_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF158("PERCEPTIBLE_APP_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF171("VISIBLE_APP_ADJ"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF183("FOREGROUND_APP_ADJ");
 
         private int mADJ;
@@ -1278,21 +1261,15 @@ public final class KillPolicyManager {
         LEVEL_3("LEVEL_3"),
         LEVEL_4("LEVEL_4"),
         LEVEL_5("LEVEL_5"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF6("LEVEL_6"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF7("LEVEL_7"),
         LEVEL_8("LEVEL_8"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF9("LEVEL_9"),
         LEVEL_10("LEVEL_10"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF11("LEVEL_11"),
         LEVEL_12("LEVEL_12"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF13("LEVEL_13"),
         LEVEL_14("LEVEL_14"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF157("LEVEL_15");
 
         private int mLevel;
@@ -1413,8 +1390,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class MemoryLoggingType {
         public static final /* synthetic */ MemoryLoggingType[] $VALUES;
         public static final MemoryLoggingType IdleDump;
@@ -1620,11 +1595,6 @@ public final class KillPolicyManager {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:23:0x011a  */
-        /* JADX WARN: Removed duplicated region for block: B:26:0x016c  */
-        /* JADX WARN: Removed duplicated region for block: B:34:0x019f  */
-        /* JADX WARN: Removed duplicated region for block: B:38:0x01e1  */
-        /* JADX WARN: Removed duplicated region for block: B:40:0x013a  */
         /* renamed from: -$$Nest$mgetProcessMemoryDumpInformation, reason: not valid java name */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1997,7 +1967,6 @@ public final class KillPolicyManager {
         public final class AnonymousClass1 extends Thread {
             public final /* synthetic */ KpmRaw val$lastCycle;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass1(KpmRaw kpmRaw) {
                 super("KPMProcessMemoryDumpThread");
                 this.val$lastCycle = kpmRaw;
@@ -2355,14 +2324,6 @@ public final class KillPolicyManager {
 
         public ProcessSamplingManager() {}
 
-        /* JADX WARN: Removed duplicated region for block: B:34:0x0125  */
-        /* JADX WARN: Removed duplicated region for block: B:36:0x012a  */
-        /* JADX WARN: Removed duplicated region for block: B:39:0x0135  */
-        /* JADX WARN: Removed duplicated region for block: B:44:0x013f  */
-        /* JADX WARN: Removed duplicated region for block: B:47:0x014a  */
-        /* JADX WARN: Removed duplicated region for block: B:49:0x0173  */
-        /* JADX WARN: Removed duplicated region for block: B:51:0x0141  */
-        /* JADX WARN: Removed duplicated region for block: B:52:0x012c  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2646,8 +2607,6 @@ public final class KillPolicyManager {
         Slog.i("ActivityManager_kpm", "reportResetState : ".concat(str));
     }
 
-    /* JADX WARN: Type inference failed for: r0v17, types: [com.android.server.am.KillPolicyManager$1] */
-    /* JADX WARN: Type inference failed for: r0v19, types: [com.android.server.am.KillPolicyManager$1] */
     public KillPolicyManager() {
         Uri.parse("content://com.samsung.android.sm.policy/policy_item/kpm");
         Uri.parse("content://com.samsung.android.sm.policy/policy_item/policy_list");
@@ -2693,28 +2652,10 @@ public final class KillPolicyManager {
                         this.this$0 = this;
                     }
 
-                    /* JADX WARN: Can't wrap try/catch for region: R(41:67|(4:69|70|71|(2:73|(9:75|(4:77|78|79|80)|195|196|(1:198)|84|(6:176|(4:178|(1:188)(2:182|(1:184)(1:187))|185|186)|189|190|(1:192)|193)(1:88)|89|(28:94|(1:96)|97|(1:99)|100|(1:102)|103|(2:105|(23:107|(6:110|(4:112|113|126|129)|134|135|129|108)|136|137|138|(1:140)(1:174)|141|(1:143)|144|(1:146)|147|148|149|(1:151)|152|(1:154)|155|(1:157)|158|159|(1:161)|162|(2:164|165)))|175|138|(0)(0)|141|(0)|144|(0)|147|148|149|(0)|152|(0)|155|(0)|158|159|(0)|162|(0)(0)))))|202|84|(1:86)|176|(0)|189|190|(0)|193|89|(1:91)|94|(0)|97|(0)|100|(0)|103|(0)|175|138|(0)(0)|141|(0)|144|(0)|147|148|149|(0)|152|(0)|155|(0)|158|159|(0)|162|(0)) */
                     /* JADX WARN: Code restructure failed: missing block: B:173:0x058d, code lost:
 
                        android.util.Slog.d(r6, "failed to create the KPUT");
                     */
-                    /* JADX WARN: Removed duplicated region for block: B:102:0x03e6  */
-                    /* JADX WARN: Removed duplicated region for block: B:105:0x03f8  */
-                    /* JADX WARN: Removed duplicated region for block: B:140:0x0495  */
-                    /* JADX WARN: Removed duplicated region for block: B:143:0x04aa  */
-                    /* JADX WARN: Removed duplicated region for block: B:146:0x04ba  */
-                    /* JADX WARN: Removed duplicated region for block: B:151:0x0549 A[Catch: JSONException -> 0x058d, TryCatch #3 {JSONException -> 0x058d, blocks: (B:149:0x04e6, B:151:0x0549, B:152:0x0554, B:154:0x055e, B:155:0x0569, B:157:0x0573, B:158:0x057e), top: B:148:0x04e6 }] */
-                    /* JADX WARN: Removed duplicated region for block: B:154:0x055e A[Catch: JSONException -> 0x058d, TryCatch #3 {JSONException -> 0x058d, blocks: (B:149:0x04e6, B:151:0x0549, B:152:0x0554, B:154:0x055e, B:155:0x0569, B:157:0x0573, B:158:0x057e), top: B:148:0x04e6 }] */
-                    /* JADX WARN: Removed duplicated region for block: B:157:0x0573 A[Catch: JSONException -> 0x058d, TryCatch #3 {JSONException -> 0x058d, blocks: (B:149:0x04e6, B:151:0x0549, B:152:0x0554, B:154:0x055e, B:155:0x0569, B:157:0x0573, B:158:0x057e), top: B:148:0x04e6 }] */
-                    /* JADX WARN: Removed duplicated region for block: B:161:0x0597  */
-                    /* JADX WARN: Removed duplicated region for block: B:164:0x05b6 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-                    /* JADX WARN: Removed duplicated region for block: B:174:0x04a4  */
-                    /* JADX WARN: Removed duplicated region for block: B:178:0x02ed  */
-                    /* JADX WARN: Removed duplicated region for block: B:192:0x0340  */
-                    /* JADX WARN: Removed duplicated region for block: B:86:0x02ac  */
-                    /* JADX WARN: Removed duplicated region for block: B:91:0x039f  */
-                    /* JADX WARN: Removed duplicated region for block: B:96:0x03be  */
-                    /* JADX WARN: Removed duplicated region for block: B:99:0x03d2  */
                     @Override // android.content.BroadcastReceiver
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -2874,9 +2815,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0078  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0089  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2977,12 +2915,6 @@ public final class KillPolicyManager {
                     + " com.android.server.am.KillPolicyManager.getPsiFile(com.android.server.am.KillPolicyManager$PsiFileType):com.android.server.am.KillPolicyManager$PsiFile");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00d3  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x013b  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x0154  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x0179 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x017a  */
-    /* JADX WARN: Type inference failed for: r7v11, types: [com.android.server.am.KillPolicyManager$ProcessMemoryHeavyInfo$1, java.lang.Thread] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -36,7 +36,6 @@ public abstract class ImsStateCallback {
         this.mCallback = new IImsStateCallbackStub(this, executor);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class IImsStateCallbackStub extends IImsStateCallback.Stub {
         private Executor mExecutor;
         private WeakReference<ImsStateCallback> mImsStateCallbackWeakRef;
@@ -68,7 +67,6 @@ public abstract class ImsStateCallback {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAvailable$1(final ImsStateCallback callback)
                 throws Exception {
             this.mExecutor.execute(
@@ -99,7 +97,6 @@ public abstract class ImsStateCallback {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onUnavailable$3(
                 final ImsStateCallback callback, final int reason) throws Exception {
             this.mExecutor.execute(

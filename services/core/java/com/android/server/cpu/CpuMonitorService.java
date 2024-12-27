@@ -88,7 +88,6 @@ public final class CpuMonitorService extends SystemService {
                     }
                 };
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.cpu.CpuMonitorService$CpuMonitorBinder$1] */
         public CpuMonitorBinder() {}
 
         @Override // android.os.Binder
@@ -458,7 +457,6 @@ public final class CpuMonitorService extends SystemService {
                 LATEST_AVAILABILITY_DURATION_MILLISECONDS);
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.cpu.CpuMonitorService$$ExternalSyntheticLambda0] */
     public CpuMonitorService(
             Context context,
             CpuInfoReader cpuInfoReader,

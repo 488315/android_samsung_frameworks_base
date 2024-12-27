@@ -2146,9 +2146,6 @@ public final class TvInputManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:21:0x006c  */
-        /* JADX WARN: Removed duplicated region for block: B:23:0x0071  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2651,8 +2648,6 @@ public final class TvInputManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:13:0x0073 A[Catch: all -> 0x0040, DONT_GENERATE, TRY_ENTER, TRY_LEAVE, TryCatch #0 {all -> 0x0040, blocks: (B:6:0x001a, B:8:0x0037, B:11:0x006d, B:13:0x0073, B:17:0x0078, B:19:0x007c, B:22:0x0081, B:23:0x00c2, B:27:0x0045, B:29:0x0052, B:31:0x0062, B:32:0x0067, B:39:0x00bb), top: B:5:0x001a, outer: #2, inners: #1 }] */
-        /* JADX WARN: Removed duplicated region for block: B:17:0x0078 A[Catch: all -> 0x0040, RemoteException | SessionNotFoundException -> 0x0043, RemoteException | SessionNotFoundException -> 0x0043, TRY_ENTER, TRY_LEAVE, TryCatch #1 {RemoteException | SessionNotFoundException -> 0x0043, blocks: (B:6:0x001a, B:8:0x0037, B:11:0x006d, B:17:0x0078, B:17:0x0078, B:22:0x0081, B:22:0x0081, B:27:0x0045, B:29:0x0052, B:31:0x0062, B:32:0x0067), top: B:5:0x001a, outer: #0 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4479,9 +4474,6 @@ public final class TvInputManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00c1 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00f9  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x0109 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* renamed from: -$$Nest$mupdateTvInputInfoLocked, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -5352,7 +5344,6 @@ public final class TvInputManagerService extends SystemService {
 
        if (r1 == null) goto L25;
     */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0059  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -276,24 +276,6 @@ public final class QSSecurityFooter extends ViewController implements View.OnCli
         qSSecurityFooter.mMainHandler.post(qSSecurityFooter.mUpdateDisplayState);
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v12, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v13, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v14, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v16, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v17, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v18, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v19, types: [com.android.systemui.qs.QSSecurityFooter$2] */
-    /* JADX WARN: Type inference failed for: r0v20, types: [com.android.systemui.qs.QSSecurityFooter$3] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.qs.QSSecurityFooter$1] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.systemui.qs.QSSecurityFooter$$ExternalSyntheticLambda0] */
     public QSSecurityFooter(View view, UserTracker userTracker, Handler handler, ActivityStarter activityStarter, SecurityController securityController, Looper looper, BroadcastDispatcher broadcastDispatcher) {
         super(view);
         int i = 0;

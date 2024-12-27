@@ -14,13 +14,11 @@ import java.util.function.BinaryOperator;
 public class BundleMerger implements Parcelable {
     public static final Parcelable.Creator<BundleMerger> CREATOR =
             new Parcelable.Creator<BundleMerger>() { // from class: android.os.BundleMerger.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BundleMerger createFromParcel(Parcel in) {
                     return new BundleMerger(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BundleMerger[] newArray(int size) {
                     return new BundleMerger[size];

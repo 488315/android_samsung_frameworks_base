@@ -8,7 +8,6 @@ public class SensorLocation implements Parcelable {
     public static final Parcelable.Creator<SensorLocation> CREATOR =
             new Parcelable.Creator<SensorLocation>() { // from class:
                 // android.hardware.biometrics.fingerprint.SensorLocation.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SensorLocation createFromParcel(Parcel _aidl_source) {
                     SensorLocation _aidl_out = new SensorLocation();
@@ -16,7 +15,6 @@ public class SensorLocation implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SensorLocation[] newArray(int _aidl_size) {
                     return new SensorLocation[_aidl_size];

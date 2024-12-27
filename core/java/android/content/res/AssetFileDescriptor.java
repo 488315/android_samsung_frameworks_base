@@ -25,13 +25,11 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
     public static final Parcelable.Creator<AssetFileDescriptor> CREATOR =
             new Parcelable.Creator<AssetFileDescriptor>() { // from class:
                 // android.content.res.AssetFileDescriptor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AssetFileDescriptor createFromParcel(Parcel in) {
                     return new AssetFileDescriptor(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AssetFileDescriptor[] newArray(int size) {
                     return new AssetFileDescriptor[size];

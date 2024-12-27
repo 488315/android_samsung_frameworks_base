@@ -57,8 +57,6 @@ public final class FaceEnrollClient extends EnrollClient {
     public final Surface mPreviewSurface;
     public final AnonymousClass1 mSemCancelDaemonCallback;
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.biometrics.sensors.face.aidl.FaceEnrollClient$1] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.biometrics.sensors.face.aidl.FaceEnrollClient$1] */
     public FaceEnrollClient(
             Context context,
             Supplier supplier,

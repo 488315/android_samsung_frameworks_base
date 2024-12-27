@@ -19,7 +19,6 @@ public final class FactoryResetProtectionPolicy implements Parcelable {
     public static final Parcelable.Creator<FactoryResetProtectionPolicy> CREATOR =
             new Parcelable.Creator<FactoryResetProtectionPolicy>() { // from class:
                 // android.app.admin.FactoryResetProtectionPolicy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FactoryResetProtectionPolicy createFromParcel(Parcel in) {
                     List<String> factoryResetProtectionAccounts = new ArrayList<>();
@@ -32,7 +31,6 @@ public final class FactoryResetProtectionPolicy implements Parcelable {
                             factoryResetProtectionAccounts, factoryResetProtectionEnabled);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FactoryResetProtectionPolicy[] newArray(int size) {
                     return new FactoryResetProtectionPolicy[size];

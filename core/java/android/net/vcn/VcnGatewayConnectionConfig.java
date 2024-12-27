@@ -202,14 +202,12 @@ public final class VcnGatewayConnectionConfig {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void checkValidCapability(int capability) {
         Preconditions.checkArgument(
                 ALLOWED_CAPABILITIES.contains(Integer.valueOf(capability)),
                 "NetworkCapability " + capability + "out of range");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void validateRetryInterval(long[] retryIntervalsMs) {
         Preconditions.checkArgument(
                 retryIntervalsMs != null
@@ -224,7 +222,6 @@ public final class VcnGatewayConnectionConfig {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void validateNetworkTemplateList(
             List<VcnUnderlyingNetworkTemplate> networkPriorityRules) {
         Objects.requireNonNull(networkPriorityRules, "networkPriorityRules is null");
@@ -237,7 +234,6 @@ public final class VcnGatewayConnectionConfig {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void validateGatewayOption(int option) {
         if (!ALLOWED_GATEWAY_OPTIONS.contains(Integer.valueOf(option))) {
             throw new IllegalArgumentException("Invalid vcn gateway option: " + option);

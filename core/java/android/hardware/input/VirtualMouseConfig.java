@@ -9,13 +9,11 @@ public final class VirtualMouseConfig extends VirtualInputDeviceConfig implement
     public static final Parcelable.Creator<VirtualMouseConfig> CREATOR =
             new Parcelable.Creator<VirtualMouseConfig>() { // from class:
                 // android.hardware.input.VirtualMouseConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualMouseConfig createFromParcel(Parcel in) {
                     return new VirtualMouseConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualMouseConfig[] newArray(int size) {
                     return new VirtualMouseConfig[size];

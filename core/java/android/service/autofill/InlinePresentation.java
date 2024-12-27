@@ -16,13 +16,11 @@ public final class InlinePresentation implements Parcelable {
             new Parcelable.Creator<
                     InlinePresentation>() { // from class:
                                             // android.service.autofill.InlinePresentation.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InlinePresentation[] newArray(int size) {
                     return new InlinePresentation[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InlinePresentation createFromParcel(Parcel in) {
                     return new InlinePresentation(in);

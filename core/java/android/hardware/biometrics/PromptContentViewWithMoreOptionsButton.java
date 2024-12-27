@@ -10,13 +10,11 @@ public final class PromptContentViewWithMoreOptionsButton implements PromptConte
     public static final Parcelable.Creator<PromptContentViewWithMoreOptionsButton> CREATOR =
             new Parcelable.Creator<PromptContentViewWithMoreOptionsButton>() { // from class:
                 // android.hardware.biometrics.PromptContentViewWithMoreOptionsButton.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PromptContentViewWithMoreOptionsButton createFromParcel(Parcel in) {
                     return new PromptContentViewWithMoreOptionsButton(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PromptContentViewWithMoreOptionsButton[] newArray(int size) {
                     return new PromptContentViewWithMoreOptionsButton[size];

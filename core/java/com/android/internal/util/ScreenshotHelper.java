@@ -186,7 +186,6 @@ public class ScreenshotHelper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$takeScreenshotInternal$0(Consumer completionConsumer) {
         synchronized (this.mScreenshotLock) {
             if (this.mScreenshotConnection != null) {
@@ -200,7 +199,6 @@ public class ScreenshotHelper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void resetConnection() {
         if (this.mScreenshotConnection != null) {
             this.mContext.unbindService(this.mScreenshotConnection);
@@ -214,7 +212,6 @@ public class ScreenshotHelper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyScreenshotError() {
         ComponentName errorComponent =
                 ComponentName.unflattenFromString(

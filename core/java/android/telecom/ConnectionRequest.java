@@ -16,13 +16,11 @@ public final class ConnectionRequest implements Parcelable {
     public static final Parcelable.Creator<ConnectionRequest> CREATOR =
             new Parcelable.Creator<
                     ConnectionRequest>() { // from class: android.telecom.ConnectionRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConnectionRequest createFromParcel(Parcel source) {
                     return new ConnectionRequest(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConnectionRequest[] newArray(int size) {
                     return new ConnectionRequest[size];
@@ -280,7 +278,6 @@ public final class ConnectionRequest implements Parcelable {
                 isAdhocConferenceCall() ? GnssSignalType.CODE_TYPE_Y : GnssSignalType.CODE_TYPE_N);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static String bundleToString(Bundle extras) {
         char c;
         if (extras == null) {

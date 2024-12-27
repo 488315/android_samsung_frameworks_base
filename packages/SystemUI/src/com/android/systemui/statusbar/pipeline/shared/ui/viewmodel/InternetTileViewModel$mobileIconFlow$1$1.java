@@ -25,7 +25,6 @@ final class InternetTileViewModel$mobileIconFlow$1$1 extends SuspendLambda imple
     int label;
     final /* synthetic */ InternetTileViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InternetTileViewModel$mobileIconFlow$1$1(InternetTileViewModel internetTileViewModel, Continuation continuation) {
         super(4, continuation);
         this.this$0 = internetTileViewModel;

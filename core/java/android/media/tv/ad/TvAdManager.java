@@ -474,7 +474,6 @@ public final class TvAdManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void releaseInternal() {
             this.mToken = null;
             synchronized (this.mHandler) {
@@ -701,7 +700,6 @@ public final class TvAdManager {
             msg.sendToTarget();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void sendInputEventAndReportResultOnMainLooper(PendingEvent p) {
             synchronized (this.mHandler) {
                 int result = sendInputEventOnMainLooperLocked(p);
@@ -758,7 +756,6 @@ public final class TvAdManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void recyclePendingEventLocked(PendingEvent p) {
             p.recycle();
             this.mPendingEventPool.release(p);

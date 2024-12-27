@@ -7,13 +7,11 @@ public class ExportResult implements Parcelable {
     public static final Parcelable.Creator<ExportResult> CREATOR =
             new Parcelable.Creator<
                     ExportResult>() { // from class: android.security.keymaster.ExportResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExportResult createFromParcel(Parcel in) {
                     return new ExportResult(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExportResult[] newArray(int length) {
                     return new ExportResult[length];

@@ -299,8 +299,6 @@ public class KeyguardBottomAreaViewBinder {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -374,7 +372,6 @@ public class KeyguardBottomAreaViewBinder {
         return new ConfigurationBasedDimensions(view.getResources().getDimensionPixelOffset(com.android.systemui.R.dimen.default_burn_in_prevention_offset), new Size(view.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.keyguard_affordance_fixed_width), view.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.keyguard_affordance_fixed_height)));
     }
 
-    /* JADX WARN: Type inference failed for: r6v1, types: [com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder$bind$4] */
     public final KeyguardBottomAreaViewBinder$bind$4 bind(final ViewGroup viewGroup, final KeyguardBottomAreaViewModel keyguardBottomAreaViewModel, FalsingManager falsingManager, VibratorHelper vibratorHelper, ActivityStarter activityStarter, Function1 function1) {
         View findViewById = viewGroup.findViewById(com.android.systemui.R.id.ambient_indication_container);
         ImageView imageView = (ImageView) viewGroup.requireViewById(com.android.systemui.R.id.start_button);

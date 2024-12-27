@@ -77,13 +77,11 @@ public class SoundTrigger {
         public static final Parcelable.Creator<ModuleProperties> CREATOR =
                 new Parcelable.Creator<ModuleProperties>() { // from class:
                     // android.hardware.soundtrigger.SoundTrigger.ModuleProperties.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ModuleProperties createFromParcel(Parcel in) {
                         return ModuleProperties.fromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ModuleProperties[] newArray(int size) {
                         return new ModuleProperties[size];
@@ -208,7 +206,6 @@ public class SoundTrigger {
             return this.mAudioCapabilities;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static ModuleProperties fromParcel(Parcel in) {
             int id = in.readInt();
             String implementor = in.readString();
@@ -474,13 +471,11 @@ public class SoundTrigger {
         public static final Parcelable.Creator<Keyphrase> CREATOR =
                 new Parcelable.Creator<Keyphrase>() { // from class:
                     // android.hardware.soundtrigger.SoundTrigger.Keyphrase.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Keyphrase createFromParcel(Parcel in) {
                         return Keyphrase.readFromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Keyphrase[] newArray(int size) {
                         return new Keyphrase[size];
@@ -619,13 +614,11 @@ public class SoundTrigger {
         public static final Parcelable.Creator<KeyphraseSoundModel> CREATOR =
                 new Parcelable.Creator<KeyphraseSoundModel>() { // from class:
                     // android.hardware.soundtrigger.SoundTrigger.KeyphraseSoundModel.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public KeyphraseSoundModel createFromParcel(Parcel in) {
                         return KeyphraseSoundModel.readFromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public KeyphraseSoundModel[] newArray(int size) {
                         return new KeyphraseSoundModel[size];
@@ -722,13 +715,11 @@ public class SoundTrigger {
         public static final Parcelable.Creator<GenericSoundModel> CREATOR =
                 new Parcelable.Creator<GenericSoundModel>() { // from class:
                     // android.hardware.soundtrigger.SoundTrigger.GenericSoundModel.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GenericSoundModel createFromParcel(Parcel in) {
                         return GenericSoundModel.fromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GenericSoundModel[] newArray(int size) {
                         return new GenericSoundModel[size];
@@ -748,7 +739,6 @@ public class SoundTrigger {
             return 0;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static GenericSoundModel fromParcel(Parcel in) {
             UUID uuid = UUID.fromString(in.readString());
             UUID vendorUuid = null;
@@ -793,13 +783,11 @@ public class SoundTrigger {
         public static final Parcelable.Creator<ModelParamRange> CREATOR =
                 new Parcelable.Creator<ModelParamRange>() { // from class:
                     // android.hardware.soundtrigger.SoundTrigger.ModelParamRange.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ModelParamRange createFromParcel(Parcel in) {
                         return new ModelParamRange(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ModelParamRange[] newArray(int size) {
                         return new ModelParamRange[size];
@@ -869,13 +857,11 @@ public class SoundTrigger {
         public static final Parcelable.Creator<RecognitionEvent> CREATOR =
                 new Parcelable.Creator<RecognitionEvent>() { // from class:
                     // android.hardware.soundtrigger.SoundTrigger.RecognitionEvent.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RecognitionEvent createFromParcel(Parcel in) {
                         return RecognitionEvent.fromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RecognitionEvent[] newArray(int size) {
                         return new RecognitionEvent[size];
@@ -1148,13 +1134,11 @@ public class SoundTrigger {
         public static final Parcelable.Creator<RecognitionConfig> CREATOR =
                 new Parcelable.Creator<RecognitionConfig>() { // from class:
                     // android.hardware.soundtrigger.SoundTrigger.RecognitionConfig.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RecognitionConfig createFromParcel(Parcel in) {
                         return RecognitionConfig.fromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RecognitionConfig[] newArray(int size) {
                         return new RecognitionConfig[size];
@@ -1187,7 +1171,6 @@ public class SoundTrigger {
             this(captureRequested, allowMultipleTriggers, keyphrases, data, 0);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static RecognitionConfig fromParcel(Parcel in) {
             boolean captureRequested = in.readByte() == 1;
             boolean allowMultipleTriggers = in.readByte() == 1;
@@ -1264,13 +1247,11 @@ public class SoundTrigger {
         public static final Parcelable.Creator<ConfidenceLevel> CREATOR =
                 new Parcelable.Creator<ConfidenceLevel>() { // from class:
                     // android.hardware.soundtrigger.SoundTrigger.ConfidenceLevel.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ConfidenceLevel createFromParcel(Parcel in) {
                         return ConfidenceLevel.fromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ConfidenceLevel[] newArray(int size) {
                         return new ConfidenceLevel[size];
@@ -1284,7 +1265,6 @@ public class SoundTrigger {
             this.confidenceLevel = confidenceLevel;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static ConfidenceLevel fromParcel(Parcel in) {
             int userId = in.readInt();
             int confidenceLevel = in.readInt();
@@ -1334,13 +1314,11 @@ public class SoundTrigger {
         public static final Parcelable.Creator<KeyphraseRecognitionExtra> CREATOR =
                 new Parcelable.Creator<KeyphraseRecognitionExtra>() { // from class:
                     // android.hardware.soundtrigger.SoundTrigger.KeyphraseRecognitionExtra.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public KeyphraseRecognitionExtra createFromParcel(Parcel in) {
                         return KeyphraseRecognitionExtra.fromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public KeyphraseRecognitionExtra[] newArray(int size) {
                         return new KeyphraseRecognitionExtra[size];
@@ -1383,7 +1361,6 @@ public class SoundTrigger {
             return Arrays.asList(this.confidenceLevels);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static KeyphraseRecognitionExtra fromParcel(Parcel in) {
             int id = in.readInt();
             int recognitionModes = in.readInt();
@@ -1447,13 +1424,11 @@ public class SoundTrigger {
         public static final Parcelable.Creator<KeyphraseRecognitionEvent> CREATOR =
                 new Parcelable.Creator<KeyphraseRecognitionEvent>() { // from class:
                     // android.hardware.soundtrigger.SoundTrigger.KeyphraseRecognitionEvent.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public KeyphraseRecognitionEvent createFromParcel(Parcel in) {
                         return KeyphraseRecognitionEvent.fromParcelForKeyphrase(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public KeyphraseRecognitionEvent[] newArray(int size) {
                         return new KeyphraseRecognitionEvent[size];
@@ -1521,7 +1496,6 @@ public class SoundTrigger {
                     keyphraseExtras != null ? keyphraseExtras : new KeyphraseRecognitionExtra[0];
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static KeyphraseRecognitionEvent fromParcelForKeyphrase(Parcel in) {
             AudioFormat captureFormat;
             int status = in.readInt();
@@ -1660,13 +1634,11 @@ public class SoundTrigger {
         public static final Parcelable.Creator<GenericRecognitionEvent> CREATOR =
                 new Parcelable.Creator<GenericRecognitionEvent>() { // from class:
                     // android.hardware.soundtrigger.SoundTrigger.GenericRecognitionEvent.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GenericRecognitionEvent createFromParcel(Parcel in) {
                         return GenericRecognitionEvent.fromParcelForGeneric(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GenericRecognitionEvent[] newArray(int size) {
                         return new GenericRecognitionEvent[size];
@@ -1728,7 +1700,6 @@ public class SoundTrigger {
                     token);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static GenericRecognitionEvent fromParcelForGeneric(Parcel in) {
             RecognitionEvent event = RecognitionEvent.fromParcel(in);
             return new GenericRecognitionEvent(

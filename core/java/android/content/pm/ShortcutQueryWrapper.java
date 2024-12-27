@@ -15,13 +15,11 @@ public final class ShortcutQueryWrapper extends LauncherApps.ShortcutQuery imple
     public static final Parcelable.Creator<ShortcutQueryWrapper> CREATOR =
             new Parcelable.Creator<ShortcutQueryWrapper>() { // from class:
                 // android.content.pm.ShortcutQueryWrapper.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ShortcutQueryWrapper[] newArray(int size) {
                     return new ShortcutQueryWrapper[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ShortcutQueryWrapper createFromParcel(Parcel in) {
                     return new ShortcutQueryWrapper(in);

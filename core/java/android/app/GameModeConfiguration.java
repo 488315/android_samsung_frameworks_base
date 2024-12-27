@@ -11,13 +11,11 @@ public final class GameModeConfiguration implements Parcelable {
     public static final Parcelable.Creator<GameModeConfiguration> CREATOR =
             new Parcelable.Creator<
                     GameModeConfiguration>() { // from class: android.app.GameModeConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GameModeConfiguration createFromParcel(Parcel in) {
                     return new GameModeConfiguration(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GameModeConfiguration[] newArray(int size) {
                     return new GameModeConfiguration[size];

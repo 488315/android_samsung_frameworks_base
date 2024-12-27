@@ -53,7 +53,6 @@ public class ReachabilityLossInfoParcelable implements Parcelable {
         this.reason = i;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ReachabilityLossInfoParcelable internalCreateFromParcel(Parcel parcel) {
         Builder builder = new Builder();
         int dataPosition = parcel.dataPosition();

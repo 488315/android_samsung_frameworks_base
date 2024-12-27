@@ -12,13 +12,11 @@ public final class PlaybackErrorEvent extends Event implements Parcelable {
     public static final Parcelable.Creator<PlaybackErrorEvent> CREATOR =
             new Parcelable.Creator<PlaybackErrorEvent>() { // from class:
                 // android.media.metrics.PlaybackErrorEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PlaybackErrorEvent[] newArray(int size) {
                     return new PlaybackErrorEvent[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PlaybackErrorEvent createFromParcel(Parcel in) {
                     return new PlaybackErrorEvent(in);

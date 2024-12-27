@@ -175,7 +175,6 @@ public class MarshalQueryableArray<T> implements MarshalQueryable<T> {
             return size;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         private <TElem> void marshalArrayElement(
                 Marshaler<TElem> marshaler, ByteBuffer buffer, Object array, int index) {
             marshaler.marshal(Array.get(array, index), buffer);
@@ -185,7 +184,6 @@ public class MarshalQueryableArray<T> implements MarshalQueryable<T> {
             return arrayList.toArray((Object[]) arrayDest);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         private <TElem> int calculateElementMarshalSize(
                 Marshaler<TElem> marshaler, Object array, int index) {
             Object elem = Array.get(array, index);

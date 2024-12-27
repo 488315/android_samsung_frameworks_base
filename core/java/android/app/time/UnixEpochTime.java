@@ -13,7 +13,6 @@ public final class UnixEpochTime implements Parcelable {
     public static final Parcelable.Creator<UnixEpochTime> CREATOR =
             new Parcelable.Creator<
                     UnixEpochTime>() { // from class: android.app.time.UnixEpochTime.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UnixEpochTime createFromParcel(Parcel source) {
                     long elapsedRealtimeMillis = source.readLong();
@@ -21,7 +20,6 @@ public final class UnixEpochTime implements Parcelable {
                     return new UnixEpochTime(elapsedRealtimeMillis, unixEpochTimeMillis);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UnixEpochTime[] newArray(int size) {
                     return new UnixEpochTime[size];
@@ -35,7 +33,6 @@ public final class UnixEpochTime implements Parcelable {
         this.mUnixEpochTimeMillis = unixEpochTimeMillis;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static UnixEpochTime parseCommandLineArgs(ShellCommand cmd) {
         char c;
         Long elapsedRealtimeMillis = null;

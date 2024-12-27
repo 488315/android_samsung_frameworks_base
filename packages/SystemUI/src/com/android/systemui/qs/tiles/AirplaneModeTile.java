@@ -73,9 +73,6 @@ public final class AirplaneModeTile extends SQSTileImpl {
     private final SettingsHelper mSettingsHelper;
     public final QSTile.BooleanState mStateBeforeClick;
 
-    /* JADX WARN: Type inference failed for: r1v16, types: [com.android.systemui.qs.tiles.AirplaneModeTile$2] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.qs.tiles.AirplaneModeTile$1] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.qs.tiles.AirplaneModeTile$4] */
     public AirplaneModeTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, BroadcastDispatcher broadcastDispatcher, Lazy lazy, GlobalSettings globalSettings, NetworkController networkController, SettingsHelper settingsHelper, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, UserTracker userTracker, SatelliteModeObserverHelper satelliteModeObserverHelper, DisplayLifecycle displayLifecycle) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mStateBeforeClick = new QSTile.BooleanState();
@@ -162,7 +159,6 @@ public final class AirplaneModeTile extends SQSTileImpl {
     
         if (android.provider.Settings.System.getInt(r8.mContext.getContentResolver(), "off_menu_setting", 0) == 1) goto L51;
      */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00d9  */
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

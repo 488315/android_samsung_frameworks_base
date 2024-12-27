@@ -137,7 +137,6 @@ public final class CastControllerImpl implements CastController {
         castControllerImpl.fireOnCastDevicesChanged();
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.statusbar.policy.CastControllerImpl$1] */
     public CastControllerImpl(Context context, DumpManager dumpManager) {
         MediaProjectionManager.Callback callback = new MediaProjectionManager.Callback() { // from class: com.android.systemui.statusbar.policy.CastControllerImpl.2
             public final void onStart(MediaProjectionInfo mediaProjectionInfo) {

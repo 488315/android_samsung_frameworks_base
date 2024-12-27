@@ -14,7 +14,6 @@ public final class SemContextEngineService extends SystemService {
     public final Context mContext;
     public final SemContextEngineServiceImpl mSceImpl;
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.samsung.android.server.contextengine.SemContextEngineService$1] */
     public SemContextEngineService(Context context) {
         super(context);
         this.isScreenOn = false;

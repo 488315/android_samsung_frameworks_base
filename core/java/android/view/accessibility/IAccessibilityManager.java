@@ -3051,7 +3051,6 @@ public interface IAccessibilityManager extends IInterface {
                 new Parcelable.Creator<
                         WindowTransformationSpec>() { // from class:
                                                       // android.view.accessibility.IAccessibilityManager.WindowTransformationSpec.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public WindowTransformationSpec createFromParcel(Parcel _aidl_source) {
                         WindowTransformationSpec _aidl_out = new WindowTransformationSpec();
@@ -3059,7 +3058,6 @@ public interface IAccessibilityManager extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public WindowTransformationSpec[] newArray(int _aidl_size) {
                         return new WindowTransformationSpec[_aidl_size];

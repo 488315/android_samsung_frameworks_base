@@ -330,7 +330,6 @@ public final class KeyguardWallpaperController extends IWallpaperManagerCallback
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v4, types: [com.android.systemui.wallpaper.KeyguardWallpaperController$3] */
     public KeyguardWallpaperController(Context context, WallpaperManager wallpaperManager, KeyguardUpdateMonitor keyguardUpdateMonitor, PluginWallpaperManager pluginWallpaperManager, PluginLockUtils pluginLockUtils, SettingsHelper settingsHelper, WakefulnessLifecycle wakefulnessLifecycle, WallpaperLogger wallpaperLogger, WallpaperEventNotifier wallpaperEventNotifier, SystemWallpaperColors systemWallpaperColors, ConfigurationController configurationController, KeyguardFoldController keyguardFoldController, KeyguardWallpaperEventHandler keyguardWallpaperEventHandler, SelectedUserInteractor selectedUserInteractor, WallpaperChangeNotifier wallpaperChangeNotifier) {
         boolean z;
         new Provider() { // from class: com.android.systemui.wallpaper.KeyguardWallpaperController.1

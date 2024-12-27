@@ -9,7 +9,6 @@ public class AddToSurfaceSyncGroupResult implements Parcelable {
             new Parcelable.Creator<
                     AddToSurfaceSyncGroupResult>() { // from class:
                                                      // android.window.AddToSurfaceSyncGroupResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AddToSurfaceSyncGroupResult createFromParcel(Parcel _aidl_source) {
                     AddToSurfaceSyncGroupResult _aidl_out = new AddToSurfaceSyncGroupResult();
@@ -17,7 +16,6 @@ public class AddToSurfaceSyncGroupResult implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AddToSurfaceSyncGroupResult[] newArray(int _aidl_size) {
                     return new AddToSurfaceSyncGroupResult[_aidl_size];

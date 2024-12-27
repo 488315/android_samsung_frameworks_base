@@ -22,7 +22,6 @@ final class KeyboardRepositoryImpl$keyboardsChange$1 extends SuspendLambda imple
     int label;
     final /* synthetic */ KeyboardRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyboardRepositoryImpl$keyboardsChange$1(KeyboardRepositoryImpl keyboardRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyboardRepositoryImpl;
@@ -40,9 +39,6 @@ final class KeyboardRepositoryImpl$keyboardsChange$1 extends SuspendLambda imple
         return ((KeyboardRepositoryImpl$keyboardsChange$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v3, types: [T, java.util.Set] */
-    /* JADX WARN: Type inference failed for: r3v4, types: [android.hardware.input.InputManager$InputDeviceListener, com.android.systemui.keyboard.data.repository.KeyboardRepositoryImpl$keyboardsChange$1$listener$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -54,7 +50,6 @@ final class KeyboardRepositoryImpl$keyboardsChange$1 extends SuspendLambda imple
             ref$ObjectRef.element = ArraysKt___ArraysKt.toSet(this.this$0.inputManager.getInputDeviceIds());
             final KeyboardRepositoryImpl keyboardRepositoryImpl = this.this$0;
             final ?? r3 = new InputManager.InputDeviceListener() { // from class: com.android.systemui.keyboard.data.repository.KeyboardRepositoryImpl$keyboardsChange$1$listener$1
-                /* JADX WARN: Type inference failed for: r1v2, types: [T, java.util.Set] */
                 @Override // android.hardware.input.InputManager.InputDeviceListener
                 public final void onInputDeviceAdded(int i2) {
                     Ref$ObjectRef ref$ObjectRef2 = ref$ObjectRef;
@@ -62,7 +57,6 @@ final class KeyboardRepositoryImpl$keyboardsChange$1 extends SuspendLambda imple
                     KeyboardRepositoryImpl.access$sendWithLogging(keyboardRepositoryImpl, producerScope, new Pair(ref$ObjectRef.element, new KeyboardRepositoryImpl.DeviceAdded(i2)));
                 }
 
-                /* JADX WARN: Type inference failed for: r4v2, types: [T, java.util.Set] */
                 @Override // android.hardware.input.InputManager.InputDeviceListener
                 public final void onInputDeviceRemoved(int i2) {
                     Ref$ObjectRef ref$ObjectRef2 = ref$ObjectRef;
@@ -78,7 +72,6 @@ final class KeyboardRepositoryImpl$keyboardsChange$1 extends SuspendLambda imple
             this.this$0.inputManager.registerInputDeviceListener(r3, null);
             final KeyboardRepositoryImpl keyboardRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyboard.data.repository.KeyboardRepositoryImpl$keyboardsChange$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

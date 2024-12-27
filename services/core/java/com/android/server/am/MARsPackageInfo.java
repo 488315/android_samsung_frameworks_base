@@ -29,7 +29,6 @@ public final class MARsPackageInfo {
     public final int uid;
     public final int userId;
 
-    /* JADX WARN: Can't wrap try/catch for region: R(26:0|1|(24:50|(1:52)(2:53|(1:55)(2:56|(1:58)(2:59|(1:61))))|4|5|6|(1:8)|9|(3:11|(1:13)(1:15)|14)|16|(1:18)|19|(1:21)|22|(1:24)|25|(2:27|(1:31))|32|(1:34)|35|(1:37)|38|(1:40)|42|43)|3|4|5|6|(0)|9|(0)|16|(0)|19|(0)|22|(0)|25|(0)|32|(0)|35|(0)|38|(0)|42|43) */
     /* JADX WARN: Code restructure failed: missing block: B:45:0x0089, code lost:
 
        r10 = move-exception;
@@ -38,15 +37,6 @@ public final class MARsPackageInfo {
 
        android.util.Log.e("MARsPackageInfo", "NumberFormatException !" + r10);
     */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x009a A[Catch: NumberFormatException -> 0x0089, TryCatch #0 {NumberFormatException -> 0x0089, blocks: (B:6:0x0078, B:8:0x007e, B:9:0x008c, B:11:0x009a, B:14:0x00a6, B:16:0x00a8, B:18:0x00ae, B:19:0x00b8, B:21:0x00be, B:22:0x00c8, B:24:0x00ce, B:25:0x00d8, B:27:0x00dc, B:29:0x00e6, B:31:0x00ea, B:32:0x00ed, B:34:0x00f3, B:35:0x00fd, B:37:0x0103, B:38:0x010d, B:40:0x0113), top: B:5:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00ae A[Catch: NumberFormatException -> 0x0089, TryCatch #0 {NumberFormatException -> 0x0089, blocks: (B:6:0x0078, B:8:0x007e, B:9:0x008c, B:11:0x009a, B:14:0x00a6, B:16:0x00a8, B:18:0x00ae, B:19:0x00b8, B:21:0x00be, B:22:0x00c8, B:24:0x00ce, B:25:0x00d8, B:27:0x00dc, B:29:0x00e6, B:31:0x00ea, B:32:0x00ed, B:34:0x00f3, B:35:0x00fd, B:37:0x0103, B:38:0x010d, B:40:0x0113), top: B:5:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00be A[Catch: NumberFormatException -> 0x0089, TryCatch #0 {NumberFormatException -> 0x0089, blocks: (B:6:0x0078, B:8:0x007e, B:9:0x008c, B:11:0x009a, B:14:0x00a6, B:16:0x00a8, B:18:0x00ae, B:19:0x00b8, B:21:0x00be, B:22:0x00c8, B:24:0x00ce, B:25:0x00d8, B:27:0x00dc, B:29:0x00e6, B:31:0x00ea, B:32:0x00ed, B:34:0x00f3, B:35:0x00fd, B:37:0x0103, B:38:0x010d, B:40:0x0113), top: B:5:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00ce A[Catch: NumberFormatException -> 0x0089, TryCatch #0 {NumberFormatException -> 0x0089, blocks: (B:6:0x0078, B:8:0x007e, B:9:0x008c, B:11:0x009a, B:14:0x00a6, B:16:0x00a8, B:18:0x00ae, B:19:0x00b8, B:21:0x00be, B:22:0x00c8, B:24:0x00ce, B:25:0x00d8, B:27:0x00dc, B:29:0x00e6, B:31:0x00ea, B:32:0x00ed, B:34:0x00f3, B:35:0x00fd, B:37:0x0103, B:38:0x010d, B:40:0x0113), top: B:5:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00dc A[Catch: NumberFormatException -> 0x0089, TryCatch #0 {NumberFormatException -> 0x0089, blocks: (B:6:0x0078, B:8:0x007e, B:9:0x008c, B:11:0x009a, B:14:0x00a6, B:16:0x00a8, B:18:0x00ae, B:19:0x00b8, B:21:0x00be, B:22:0x00c8, B:24:0x00ce, B:25:0x00d8, B:27:0x00dc, B:29:0x00e6, B:31:0x00ea, B:32:0x00ed, B:34:0x00f3, B:35:0x00fd, B:37:0x0103, B:38:0x010d, B:40:0x0113), top: B:5:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00f3 A[Catch: NumberFormatException -> 0x0089, TryCatch #0 {NumberFormatException -> 0x0089, blocks: (B:6:0x0078, B:8:0x007e, B:9:0x008c, B:11:0x009a, B:14:0x00a6, B:16:0x00a8, B:18:0x00ae, B:19:0x00b8, B:21:0x00be, B:22:0x00c8, B:24:0x00ce, B:25:0x00d8, B:27:0x00dc, B:29:0x00e6, B:31:0x00ea, B:32:0x00ed, B:34:0x00f3, B:35:0x00fd, B:37:0x0103, B:38:0x010d, B:40:0x0113), top: B:5:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0103 A[Catch: NumberFormatException -> 0x0089, TryCatch #0 {NumberFormatException -> 0x0089, blocks: (B:6:0x0078, B:8:0x007e, B:9:0x008c, B:11:0x009a, B:14:0x00a6, B:16:0x00a8, B:18:0x00ae, B:19:0x00b8, B:21:0x00be, B:22:0x00c8, B:24:0x00ce, B:25:0x00d8, B:27:0x00dc, B:29:0x00e6, B:31:0x00ea, B:32:0x00ed, B:34:0x00f3, B:35:0x00fd, B:37:0x0103, B:38:0x010d, B:40:0x0113), top: B:5:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0113 A[Catch: NumberFormatException -> 0x0089, TRY_LEAVE, TryCatch #0 {NumberFormatException -> 0x0089, blocks: (B:6:0x0078, B:8:0x007e, B:9:0x008c, B:11:0x009a, B:14:0x00a6, B:16:0x00a8, B:18:0x00ae, B:19:0x00b8, B:21:0x00be, B:22:0x00c8, B:24:0x00ce, B:25:0x00d8, B:27:0x00dc, B:29:0x00e6, B:31:0x00ea, B:32:0x00ed, B:34:0x00f3, B:35:0x00fd, B:37:0x0103, B:38:0x010d, B:40:0x0113), top: B:5:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x007e A[Catch: NumberFormatException -> 0x0089, TryCatch #0 {NumberFormatException -> 0x0089, blocks: (B:6:0x0078, B:8:0x007e, B:9:0x008c, B:11:0x009a, B:14:0x00a6, B:16:0x00a8, B:18:0x00ae, B:19:0x00b8, B:21:0x00be, B:22:0x00c8, B:24:0x00ce, B:25:0x00d8, B:27:0x00dc, B:29:0x00e6, B:31:0x00ea, B:32:0x00ed, B:34:0x00f3, B:35:0x00fd, B:37:0x0103, B:38:0x010d, B:40:0x0113), top: B:5:0x0078 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -61,8 +51,6 @@ public final class MARsPackageInfo {
                     + " com.android.server.am.MARsPackageInfo.<init>(com.android.server.am.mars.database.FASEntity):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x003d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

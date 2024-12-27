@@ -15,7 +15,6 @@ final class MediaOutputInteractor$activeMediaControllers$1$3 extends SuspendLamb
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaOutputInteractor$activeMediaControllers$1$3(List<MediaController> list, Continuation continuation) {
         super(2, continuation);
         this.$activeSessions = list;

@@ -142,7 +142,6 @@ public final class ProxyAgentWrapper {
         anonymousClass3.sendMessage(anonymousClass3.obtainMessage(1, proxyAgentWrapper.mInfo));
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.knox.dar.ddar.proxy.ProxyAgentWrapper$1] */
     public ProxyAgentWrapper(
             Context context, DualDARComnService dualDARComnService, ProxyAgentInfo proxyAgentInfo) {
         DDLog.d("KnoxService::ProxyAgentWrapper", "ProxyAgentWrapper()", new Object[0]);
@@ -255,8 +254,6 @@ public final class ProxyAgentWrapper {
         this.mIsStale = true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x004b  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0064 A[Catch: RemoteException -> 0x0039, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x0039, blocks: (B:3:0x000f, B:5:0x0013, B:14:0x004d, B:17:0x0054, B:20:0x0064, B:21:0x002f, B:24:0x003b), top: B:2:0x000f }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

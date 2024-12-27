@@ -456,7 +456,6 @@ public final class PeopleTileViewHelper {
         return (int) (context.getResources().getDimension(i) / this.mDensity);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:0|1|(3:192|(1:198)(1:196)|197)(2:7|(1:9)(2:62|(7:64|(2:(1:67)(1:77)|68)(1:78)|69|(1:71)(1:76)|72|(1:74)|75)(2:79|(17:81|(1:(1:84)(1:137))(1:138)|85|(3:87|88|89)(9:121|(1:123)(1:136)|124|(1:126)(1:135)|127|(1:129)(1:134)|130|(1:132)|133)|90|(6:(4:93|(1:95)(1:100)|(1:97)(1:99)|98)|101|(1:103)(3:108|(1:110)|111)|104|105|(1:107))|112|(1:114)(1:117)|115|116|11|12|13|(13:31|(2:33|(10:35|36|37|(1:39)(1:56)|(1:41)(1:55)|(1:43)(1:54)|44|(1:53)(1:48)|49|(1:51)(1:52)))(1:58)|57|36|37|(0)(0)|(0)(0)|(0)(0)|44|(1:46)|53|49|(0)(0))(1:15)|16|(4:20|21|(1:23)|24)|29)(5:139|(1:141)(1:191)|142|(1:144)(2:187|(1:189)(1:190))|(1:146)(2:147|(1:149)(11:150|(1:(1:153)(1:185))(1:186)|154|(1:156)|157|(1:159)|160|(1:162)(2:170|(4:172|(1:174)(2:175|(1:177)(2:178|(1:180)(2:181|(1:183)(1:184))))|164|(1:166)(2:167|(1:169))))|163|164|(0)(0)))))))|10|11|12|13|(0)(0)|16|(5:18|20|21|(0)|24)|29) */
     /* JADX WARN: Code restructure failed: missing block: B:59:0x0473, code lost:
     
         r0 = move-exception;
@@ -465,20 +464,6 @@ public final class PeopleTileViewHelper {
     
         com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0.m("Failed to set common fields: ", r0, "PeopleTileView");
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0434  */
-    /* JADX WARN: Removed duplicated region for block: B:166:0x03cf  */
-    /* JADX WARN: Removed duplicated region for block: B:167:0x03d8  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x054c A[Catch: Exception -> 0x0556, TryCatch #1 {Exception -> 0x0556, blocks: (B:21:0x051f, B:23:0x054c, B:24:0x0558), top: B:20:0x051f }] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0436 A[Catch: Exception -> 0x0473, TryCatch #2 {Exception -> 0x0473, blocks: (B:13:0x0430, B:31:0x0436, B:33:0x043f, B:35:0x0455, B:37:0x0488, B:44:0x049f, B:46:0x04b0, B:49:0x04c5, B:51:0x04f1, B:52:0x0508, B:57:0x0477), top: B:12:0x0430 }] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0492  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0497  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x049c  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x04f1 A[Catch: Exception -> 0x0473, TryCatch #2 {Exception -> 0x0473, blocks: (B:13:0x0430, B:31:0x0436, B:33:0x043f, B:35:0x0455, B:37:0x0488, B:44:0x049f, B:46:0x04b0, B:49:0x04c5, B:51:0x04f1, B:52:0x0508, B:57:0x0477), top: B:12:0x0430 }] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0508 A[Catch: Exception -> 0x0473, TRY_LEAVE, TryCatch #2 {Exception -> 0x0473, blocks: (B:13:0x0430, B:31:0x0436, B:33:0x043f, B:35:0x0455, B:37:0x0488, B:44:0x049f, B:46:0x04b0, B:49:0x04c5, B:51:0x04f1, B:52:0x0508, B:57:0x0477), top: B:12:0x0430 }] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x049e  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0499  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0494  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

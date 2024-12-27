@@ -25,7 +25,6 @@ final class CommunalHubKt$CommunalHub$2 extends SuspendLambda implements Functio
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalHubKt$CommunalHub$2(BaseCommunalViewModel baseCommunalViewModel, long j, LazyGridState lazyGridState, ContentListState contentListState, Continuation continuation) {
         super(2, continuation);
         this.$viewModel = baseCommunalViewModel;
@@ -61,7 +60,6 @@ final class CommunalHubKt$CommunalHub$2 extends SuspendLambda implements Functio
             final BaseCommunalViewModel baseCommunalViewModel = this.$viewModel;
             final ContentListState contentListState = this.$contentListState;
             Function1 function1 = new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$2.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }

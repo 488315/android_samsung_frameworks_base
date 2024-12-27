@@ -15,7 +15,6 @@ final class QSTileViewModelImpl$userInputFlow$2 extends SuspendLambda implements
     int label;
     final /* synthetic */ QSTileViewModelImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QSTileViewModelImpl$userInputFlow$2(QSTileViewModelImpl qSTileViewModelImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = qSTileViewModelImpl;

@@ -141,7 +141,6 @@ public class UnlaunchableAppActivity extends Activity
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getDialogTitle$0() {
         return getString(R.string.work_mode_off_title_alert, getWorkProfileName());
     }
@@ -179,7 +178,6 @@ public class UnlaunchableAppActivity extends Activity
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onClick$1(UserManager userManager) {
         userManager.requestQuietModeEnabled(false, UserHandle.of(this.mUserId), this.mTarget);
     }

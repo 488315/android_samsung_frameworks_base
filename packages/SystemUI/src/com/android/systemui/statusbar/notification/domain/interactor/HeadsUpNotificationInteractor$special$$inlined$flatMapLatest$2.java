@@ -114,7 +114,6 @@ public final class HeadsUpNotificationInteractor$special$$inlined$flatMapLatest$
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
                         final Flow[] flowArr2 = flowArr;
                         Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.notification.domain.interactor.HeadsUpNotificationInteractor$hasPinnedRows$lambda$9$$inlined$combine$1.2
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(0);
                             }

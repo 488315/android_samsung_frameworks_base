@@ -252,13 +252,11 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
     };
     private static final String[] PARCELABLE_SPAN_KEYS = {"TypefaceSpan", "TextAppearanceSpan", "UnderlineSpan", "StrikethroughSpan", "StyleSpan"};
     public static final Parcelable.Creator<RemoteViews> CREATOR = new Parcelable.Creator<RemoteViews>() { // from class: android.widget.RemoteViews.2
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public RemoteViews createFromParcel(Parcel parcel) {
             return new RemoteViews(parcel);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public RemoteViews[] newArray(int size) {
             return new RemoteViews[size];
@@ -390,7 +388,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static abstract class Action {
         public static final int MERGE_APPEND = 1;
         public static final int MERGE_IGNORE = 2;
@@ -609,7 +606,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void visitIconUri(Icon icon, Consumer<Uri> visitor) {
         if (icon != null) {
             if (icon.getType() == 4 || icon.getType() == 6) {
@@ -697,7 +693,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class SetPendingIntentTemplate extends Action {
         PendingIntent mPendingIntentTemplate;
 
@@ -740,7 +735,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             Log.e(RemoteViews.LOG_TAG, "Cannot setPendingIntentTemplate on a view which is notan AdapterView (id: " + this.mViewId + NavigationBarInflaterView.KEY_CODE_END);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$apply$0(ActionApplyParams params, AdapterView parent, View view, int position, long id) {
             RemoteResponse response = findRemoteResponseTag(view);
             if (response != null) {
@@ -776,7 +770,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ApplicationInfoCache {
         private final Map<Pair<String, Integer>, ApplicationInfo> mPackageUserToApplicationInfo = new ArrayMap();
 
@@ -936,7 +929,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return this.mCollectionCache.collectAllIntentsNoComplete(this);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class RemoteCollectionCache {
         private final SparseArray<String> mIdToUriMapping = new SparseArray<>();
         private final Map<String, RemoteCollectionItems> mUriToCollectionMapping = new HashMap();
@@ -1069,7 +1061,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             }));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$connectAllUniqueIntents$0(String currentIntentUri, RemoteCollectionItems items) {
             items.setHierarchyRootData(RemoteViews.this.getHierarchyRootData());
             this.mUriToCollectionMapping.put(currentIntentUri, items);
@@ -1216,7 +1207,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class SetOnClickResponse extends Action {
         final RemoteResponse mResponse;
 
@@ -1276,7 +1266,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$apply$0(ActionApplyParams params, View v) {
             this.mResponse.handleViewInteraction(v, params.handler);
         }
@@ -1293,7 +1282,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class SetOnStylusHandwritingResponse extends Action {
         final PendingIntent mPendingIntent;
 
@@ -1346,7 +1334,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class SetOnCheckedChangeResponse extends Action {
         private final RemoteResponse mResponse;
 
@@ -1406,7 +1393,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             button.setOnCheckedChangeListener(onCheckedChangeListener);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$apply$0(ActionApplyParams params, CompoundButton v, boolean isChecked) {
             this.mResponse.handleViewInteraction(v, params.handler);
         }
@@ -1435,7 +1421,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return rect;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Class<?> getParameterType(int type) {
         switch (type) {
             case 1:
@@ -1491,7 +1476,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static MethodHandle getMethod(View view, String methodName, Class<?> paramType, boolean async) {
         Method method;
         Class<?> cls = view.getClass();
@@ -2464,13 +2448,11 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         this.mIsRoot = false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean hasStableId(View view) {
         Object tag = view.getTag(R.id.remote_views_stable_id);
         return tag != null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int getStableId(View view) {
         Integer id = (Integer) view.getTag(R.id.remote_views_stable_id);
         if (id == null) {
@@ -2479,12 +2461,10 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return id.intValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void setStableId(View view, int stableId) {
         view.setTagInternal(R.id.remote_views_stable_id, Integer.valueOf(stableId));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int getNextRecyclableChild(ViewGroup vg) {
         Integer tag = (Integer) vg.getTag(R.id.remote_views_next_child);
         if (tag == null) {
@@ -2497,7 +2477,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return ((Integer) v.getTag(16908312)).intValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void setNextRecyclableChild(ViewGroup vg, int nextChild, int numChildren) {
         if (nextChild < 0 || nextChild >= numChildren) {
             vg.setTagInternal(R.id.remote_views_next_child, -1);
@@ -2506,7 +2485,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void finalizeViewRecycling(ViewGroup root) {
         int nextChild = getNextRecyclableChild(root);
         if (nextChild >= 0 && nextChild < root.getChildCount()) {
@@ -2577,7 +2555,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class ViewGroupActionAdd extends Action {
         static final int NO_ID = -1;
         private int mIndex;
@@ -2706,7 +2683,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
                             throw new ActionException(reapplyTask.mError);
                         }
                         return new RuntimeAction() { // from class: android.widget.RemoteViews.ViewGroupActionAdd.1
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super();
                             }
@@ -2737,7 +2713,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ boolean lambda$initActionAsync$0(View view) {
             return RemoteViews.getStableId(view) == this.mStableId;
         }
@@ -2762,7 +2737,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
                 RemoteViews.setNextRecyclableChild(targetVg, nextChild + 1, target.mChildren.size());
             }
             return new RuntimeAction() { // from class: android.widget.RemoteViews.ViewGroupActionAdd.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super();
                 }
@@ -2797,7 +2771,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ViewGroupActionRemove extends Action {
         private static final int REMOVE_ALL_VIEWS_ID = -2;
         private int mViewIdToKeep;
@@ -2872,7 +2845,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
                 }
             }
             return new RuntimeAction() { // from class: android.widget.RemoteViews.ViewGroupActionRemove.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super();
                 }
@@ -2896,12 +2868,10 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             return !RemoteViews.hasStableId(childTree.mRoot);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ boolean lambda$initActionAsync$1(ViewTree childTree) {
             return childTree.mRoot.getId() != this.mViewIdToKeep;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void removeAllViewsExceptIdToKeep(ViewGroup viewGroup) {
             for (int index = viewGroup.getChildCount() - 1; index >= 0; index--) {
                 if (viewGroup.getChildAt(index).getId() != this.mViewIdToKeep) {
@@ -2963,7 +2933,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             final ViewManager parentVg = (ViewManager) parent.mRoot;
             parent.mChildren.remove(target);
             return new RuntimeAction() { // from class: android.widget.RemoteViews.RemoveFromParentAction.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super();
                 }
@@ -3891,7 +3860,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class SetDrawInstructionAction extends Action {
         private final DrawInstructions mInstructions;
 
@@ -3943,7 +3911,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$apply$1(final RemoteComposePlayer player, final ActionApplyParams params, final int viewId, String metadata) {
             RemoteViews.this.mActions.forEach(new Consumer() { // from class: android.widget.RemoteViews$SetDrawInstructionAction$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
@@ -3997,17 +3964,14 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         this.mApplicationInfoCache.put(application);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean hasMultipleLayouts() {
         return hasLandscapeAndPortraitLayouts() || hasSizedRemoteViews();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean hasLandscapeAndPortraitLayouts() {
         return (this.mLandscape == null || this.mPortrait == null) ? false : true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean hasSizedRemoteViews() {
         return this.mSizedRemoteViews != null;
     }
@@ -4451,7 +4415,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return (!hasFlags(4) || this.mLightBackgroundLayoutId == 0) ? this.mLayoutId : this.mLightBackgroundLayoutId;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void configureAsChild(HierarchyRootData rootData) {
         this.mIsRoot = false;
         this.mBitmapCache = rootData.mBitmapCache;
@@ -4976,12 +4939,10 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean hasDrawInstructions() {
         return this.mHasDrawInstructions;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public RemoteViews getRemoteViewsToApply(Context context) {
         if (this.isProductDEV) {
             Log.d(LOG_TAG, "getRemoteViewsToApply() - mIsForcedOrientation=" + this.mIsForcedOrientation + "mIsPortrait=" + this.mIsPortrait + ", mLandscape=" + this.mLandscape + ", mPortrait=" + this.mPortrait);
@@ -5089,7 +5050,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return apply(context, parent, parent, size, params);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public View apply(Context context, ViewGroup directParent, ViewGroup rootParent, SizeF size, ActionApplyParams params) {
         RemoteViews rvToApply = getRemoteViewsToApply(context, size);
         View result = inflateView(context, rvToApply, directParent, params.applyThemeResId, params.colorResources);
@@ -5097,7 +5057,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public View inflateView(Context context, RemoteViews rv, ViewGroup parent, int applyThemeResId, ColorResources colorResources) {
         Context inflationContext;
         View v;
@@ -5174,7 +5133,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return new AsyncApplyTask(getRemoteViewsToApply(context, size), parent, context, listener, params, null, true).startTaskOnExecutor(executor);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public AsyncApplyTask getInternalAsyncApplyTask(Context context, ViewGroup parent, OnViewAppliedListener listener, ActionApplyParams params, SizeF size, View result) {
         return new AsyncApplyTask(getRemoteViewsToApply(context, size), parent, context, listener, params, result, false);
     }
@@ -5203,7 +5161,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mResult = result;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public ViewTree doInBackground(Void... params) {
             try {
@@ -5227,7 +5184,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onPostExecute(ViewTree viewTree) {
             this.mCancelSignal.setOnCancelListener(null);
@@ -5274,7 +5230,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             cancel(true);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public CancellationSignal startTaskOnExecutor(Executor executor) {
             this.mCancelSignal.setOnCancelListener(this);
             executeOnExecutor(executor == null ? AsyncTask.THREAD_POOL_EXECUTOR : executor, new Void[0]);
@@ -5298,7 +5253,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         reapply(context, v, (ViewGroup) v.getParent(), size, params, true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void reapplyNestedViews(Context context, View v, ViewGroup rootParent, ActionApplyParams params) {
         reapply(context, v, rootParent, null, params, false);
     }
@@ -5580,7 +5534,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         writeToParcel(dest, flags, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void writeToParcel(Parcel dest, int flags, SparseArray<Intent> intentsToIgnore) {
         boolean prevSquashingAllowed = dest.allowSquashing();
         if (!hasMultipleLayouts()) {
@@ -5670,7 +5623,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return this.mApplication == null || (this.mApplication.packageName.equals(info.packageName) && this.mApplication.uid == info.uid);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ViewTree {
         private static final int INSERT_AT_END_INDEX = -1;
         private ArrayList<ViewTree> mChildren;
@@ -5834,7 +5786,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             return response;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static RemoteResponse fromPendingIntentTemplateAndFillInIntent(PendingIntent pendingIntent, Intent intent) {
             RemoteResponse response = new RemoteResponse();
             response.mPendingIntent = pendingIntent;
@@ -5857,7 +5808,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             return this;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void writeToParcel(Parcel dest, int flags) {
             PendingIntent.writePendingIntentOrNullToParcel(this.mPendingIntent, dest);
             dest.writeBoolean(this.mFillIntent != null);
@@ -5869,7 +5819,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             dest.writeStringList(this.mElementNames);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void readFromParcel(Parcel parcel) {
             this.mPendingIntent = PendingIntent.readPendingIntentOrNullFromParcel(parcel);
             this.mFillIntent = parcel.readBoolean() ? (Intent) parcel.readTypedObject(Intent.CREATOR) : null;
@@ -5879,7 +5828,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mElementNames = parcel.createStringArrayList();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void handleViewInteraction(View v, InteractionHandler handler) {
             PendingIntent pi;
             if (this.mPendingIntent != null) {
@@ -6008,13 +5956,11 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
 
     public static final class RemoteCollectionItems implements Parcelable {
         public static final Parcelable.Creator<RemoteCollectionItems> CREATOR = new Parcelable.Creator<RemoteCollectionItems>() { // from class: android.widget.RemoteViews.RemoteCollectionItems.1
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public RemoteCollectionItems createFromParcel(Parcel source) {
                 return new RemoteCollectionItems(source, null);
             }
 
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public RemoteCollectionItems[] newArray(int size) {
                 return new RemoteCollectionItems[size];
@@ -6089,7 +6035,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             writeToParcel(dest, flags, false);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void writeToParcel(Parcel dest, int flags, boolean attached) {
             boolean prevAllowSquashing = dest.allowSquashing();
             dest.writeBoolean(this.mHasStableIds);
@@ -6170,7 +6115,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void visitUris(Consumer<Uri> visitor) {
             for (RemoteViews view : this.mViews) {
                 view.visitUris(visitor);
@@ -6196,7 +6140,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static DrawInstructions readFromParcel(Parcel in) {
             int size = in.readInt();
             if (size == -1) {
@@ -6210,7 +6153,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             return new DrawInstructions(instructions);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void writeToParcel(DrawInstructions drawInstructions, Parcel dest, int flags) {
             if (drawInstructions == null) {
                 dest.writeInt(-1);
@@ -6559,7 +6501,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return (viewId2 << 8) | childId;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Pair<String, Integer> getPackageUserKey(ApplicationInfo info) {
         if (info == null || info.packageName == null) {
             return null;
@@ -6567,7 +6508,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return Pair.create(info.packageName, Integer.valueOf(info.uid));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public HierarchyRootData getHierarchyRootData() {
         return new HierarchyRootData(this.mBitmapCache, this.mCollectionCache, this.mApplicationInfoCache, this.mClassCookies);
     }
@@ -6713,7 +6653,6 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             View target = root.findViewById(this.viewId);
             if (target != null && this.pendingIntent != null) {
                 View.OnTouchListener touchListener = new View.OnTouchListener() { // from class: android.widget.RemoteViews.SemSetOnTouchPendingIntent.1
-                    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                     @Override // android.view.View.OnTouchListener
                     public boolean onTouch(View v, MotionEvent event) {
                         float x = event.getX();

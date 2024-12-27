@@ -1062,7 +1062,6 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doNotifyVisibleActivityInfoChanged(
             VisibleActivityInfo visibleActivityInfo, int type) {
         if (this.mVisibleActivityCallbacks.isEmpty()) {}
@@ -1078,7 +1077,6 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doRegisterVisibleActivityCallback(
             Executor executor, final VisibleActivityCallback callback) {
         if (this.mVisibleActivityCallbacks.containsKey(callback)) {
@@ -1109,7 +1107,6 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doUnregisterVisibleActivityCallback(VisibleActivityCallback callback) {
         this.mVisibleActivityCallbacks.remove(callback);
         if (this.mVisibleActivityCallbacks.size() == 0) {
@@ -1787,7 +1784,6 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
         return listener;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Consumer<Bundle> removeSafeResultListener(SafeResultListener listener) {
         Consumer<Bundle> remove;
         synchronized (this) {

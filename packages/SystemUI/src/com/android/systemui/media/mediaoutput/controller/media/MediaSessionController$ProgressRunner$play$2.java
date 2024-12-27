@@ -12,7 +12,6 @@ final class MediaSessionController$ProgressRunner$play$2 extends SuspendLambda i
     int label;
     final /* synthetic */ MediaSessionController.ProgressRunner this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaSessionController$ProgressRunner$play$2(MediaSessionController.ProgressRunner progressRunner, Continuation continuation) {
         super(2, continuation);
         this.this$0 = progressRunner;
@@ -30,9 +29,6 @@ final class MediaSessionController$ProgressRunner$play$2 extends SuspendLambda i
         return ((MediaSessionController$ProgressRunner$play$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0027  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:11:0x0037 -> B:5:0x003a). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

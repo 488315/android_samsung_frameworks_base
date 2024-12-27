@@ -63,7 +63,6 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
                 callback);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$connect$0(
             BluetoothDevice bluetoothDevice, IAccessibilityServiceConnection serviceConnection)
             throws RemoteException {
@@ -98,7 +97,6 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
                 callback);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$connect$1(
             UsbDevice usbDevice, IAccessibilityServiceConnection serviceConnection)
             throws RemoteException {
@@ -187,7 +185,6 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class IBrailleDisplayControllerWrapper extends IBrailleDisplayController.Stub {
         private IBrailleDisplayControllerWrapper() {}
 
@@ -214,7 +211,6 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onConnected$0(byte[] hidDescriptor) {
             BrailleDisplayControllerImpl.this.mCallback.onConnected(hidDescriptor);
         }
@@ -241,7 +237,6 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onConnectionFailed$1(int errorCode) {
             BrailleDisplayControllerImpl.this.mCallback.onConnectionFailed(errorCode);
         }
@@ -270,7 +265,6 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onInput$2(byte[] input) {
             BrailleDisplayControllerImpl.this.mCallback.onInput(input);
         }
@@ -302,7 +296,6 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void clearConnectionLocked() {
         this.mBrailleDisplayConnection = null;
     }

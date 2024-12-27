@@ -1306,7 +1306,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         public SemCallback() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:38:0x00f3  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1366,8 +1365,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
             }
         }
 
-        /* JADX WARN: Finally extract failed */
-        /* JADX WARN: Removed duplicated region for block: B:37:0x00ef A[Catch: all -> 0x0106, TryCatch #0 {all -> 0x0106, blocks: (B:23:0x0097, B:35:0x00e3, B:37:0x00ef, B:38:0x0108, B:43:0x010a, B:44:0x010d, B:25:0x009b, B:27:0x00a6, B:30:0x00c8, B:31:0x00d0, B:33:0x00d4, B:34:0x00d7), top: B:22:0x0097, inners: #1 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1480,11 +1477,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:65:0x019e A[Catch: all -> 0x011a, TryCatch #1 {all -> 0x011a, blocks: (B:42:0x0105, B:46:0x0112, B:48:0x0116, B:49:0x011d, B:51:0x012c, B:53:0x0134, B:55:0x013c, B:56:0x0149, B:58:0x0157, B:59:0x0162, B:61:0x0170, B:63:0x018a, B:65:0x019e, B:67:0x01b8, B:68:0x01c6, B:69:0x0234, B:71:0x023f, B:72:0x0242, B:79:0x01d7, B:81:0x01e9, B:83:0x0211, B:84:0x0225, B:86:0x0256), top: B:41:0x0105 }] */
-        /* JADX WARN: Removed duplicated region for block: B:71:0x023f A[Catch: all -> 0x011a, TryCatch #1 {all -> 0x011a, blocks: (B:42:0x0105, B:46:0x0112, B:48:0x0116, B:49:0x011d, B:51:0x012c, B:53:0x0134, B:55:0x013c, B:56:0x0149, B:58:0x0157, B:59:0x0162, B:61:0x0170, B:63:0x018a, B:65:0x019e, B:67:0x01b8, B:68:0x01c6, B:69:0x0234, B:71:0x023f, B:72:0x0242, B:79:0x01d7, B:81:0x01e9, B:83:0x0211, B:84:0x0225, B:86:0x0256), top: B:41:0x0105 }] */
-        /* JADX WARN: Removed duplicated region for block: B:75:0x0249  */
-        /* JADX WARN: Removed duplicated region for block: B:77:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:78:0x01d5  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1511,9 +1503,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         public final WallpaperManagerService$WallpaperConnection$$ExternalSyntheticLambda0 mTryToRebindRunnable;
         public WallpaperData mWallpaper;
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.wallpaper.WallpaperManagerService$WallpaperConnection$$ExternalSyntheticLambda0] */
-        /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.wallpaper.WallpaperManagerService$WallpaperConnection$$ExternalSyntheticLambda0] */
-        /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.wallpaper.WallpaperManagerService$WallpaperConnection$$ExternalSyntheticLambda0] */
         public WallpaperConnection(WallpaperInfo wallpaperInfo, WallpaperData wallpaperData, int i) {
             SparseArray sparseArray = new SparseArray();
             this.mDisplayConnector = sparseArray;
@@ -1866,9 +1855,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:25:0x0065 A[Catch: all -> 0x0028, TryCatch #2 {, blocks: (B:4:0x0005, B:6:0x000b, B:8:0x0014, B:12:0x001c, B:15:0x002c, B:17:0x0033, B:19:0x0039, B:22:0x004f, B:23:0x005d, B:25:0x0065, B:29:0x008c, B:30:0x0070, B:35:0x007a, B:37:0x0080, B:40:0x008f, B:54:0x0095, B:42:0x00a3, B:49:0x00ac, B:45:0x00ba, B:52:0x00b3, B:57:0x009c, B:58:0x0042, B:62:0x0048, B:63:0x00bc, B:64:0x00c3), top: B:3:0x0005, inners: #0, #1, #3, #4 }] */
-        /* JADX WARN: Removed duplicated region for block: B:48:0x00ac A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:53:0x0095 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1999,8 +1985,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
             return this.mDisplayConnector.get(i) != null;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:11:0x003b A[Catch: all -> 0x0016, TryCatch #1 {all -> 0x0016, blocks: (B:4:0x0005, B:6:0x0009, B:9:0x0031, B:11:0x003b, B:13:0x0057, B:14:0x005f, B:16:0x006a, B:20:0x0080, B:21:0x008f, B:25:0x0095, B:26:0x0098, B:30:0x0099, B:32:0x0019, B:19:0x007b, B:29:0x0087), top: B:3:0x0005, inners: #0 }] */
-        /* JADX WARN: Removed duplicated region for block: B:16:0x006a A[Catch: all -> 0x0016, TRY_LEAVE, TryCatch #1 {all -> 0x0016, blocks: (B:4:0x0005, B:6:0x0009, B:9:0x0031, B:11:0x003b, B:13:0x0057, B:14:0x005f, B:16:0x006a, B:20:0x0080, B:21:0x008f, B:25:0x0095, B:26:0x0098, B:30:0x0099, B:32:0x0019, B:19:0x007b, B:29:0x0087), top: B:3:0x0005, inners: #0 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2152,8 +2136,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
             });
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:20:0x012a A[Catch: all -> 0x00b9, TRY_LEAVE, TryCatch #1 {all -> 0x00b9, blocks: (B:4:0x0021, B:6:0x002c, B:7:0x002e, B:9:0x0034, B:11:0x0087, B:15:0x00bd, B:18:0x00f9, B:20:0x012a, B:22:0x0131, B:24:0x0135, B:27:0x013f, B:29:0x0145, B:33:0x014f, B:34:0x00ec, B:35:0x008e, B:37:0x00ae, B:39:0x0152), top: B:3:0x0021, inners: #0 }] */
-        /* JADX WARN: Removed duplicated region for block: B:24:0x0135 A[Catch: all -> 0x00b9, RemoteException -> 0x0143, TryCatch #0 {RemoteException -> 0x0143, blocks: (B:22:0x0131, B:24:0x0135, B:27:0x013f, B:29:0x0145), top: B:21:0x0131, outer: #1 }] */
         @Override // android.content.ServiceConnection
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -2926,7 +2908,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         engine.addLocalColorsAreas(list);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(10:16|(3:97|98|(15:101|102|104|105|106|107|108|(2:115|116)(2:112|(1:114))|19|20|(1:25)|27|(1:29)(2:32|(2:34|(1:36)(2:37|38))(3:39|(1:(1:85)(1:86))(4:44|(1:46)|(1:50)|(2:52|(1:54)(2:55|56)))|(5:69|(1:71)(1:83)|72|73|(2:75|(1:77)(2:78|79))(3:80|81|82))(2:64|(1:66)(2:67|68))))|30|31)(1:100))|18|19|20|(2:23|25)|27|(0)(0)|30|31) */
     /* JADX WARN: Code restructure failed: missing block: B:95:0x00ef, code lost:
     
         r0 = move-exception;
@@ -2935,10 +2916,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
     
         android.util.Slog.e("WallpaperManagerService", "SAFEMODE Exception occurs! " + r0.getMessage());
      */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x010f A[Catch: all -> 0x00b9, RemoteException -> 0x00bc, TRY_LEAVE, TryCatch #3 {RemoteException -> 0x00bc, blocks: (B:98:0x0077, B:114:0x00a0, B:27:0x0103, B:29:0x010f, B:32:0x0128, B:34:0x0132, B:36:0x0140, B:37:0x0144, B:38:0x0149, B:39:0x014a, B:41:0x0153, B:44:0x015d, B:46:0x0163, B:48:0x0170, B:50:0x017a, B:52:0x0181, B:54:0x018f, B:55:0x0193, B:56:0x0198, B:58:0x01a1, B:60:0x01a7, B:62:0x01b5, B:64:0x01c0, B:66:0x01ce, B:67:0x01d3, B:68:0x01d8, B:69:0x01d9, B:73:0x0247, B:75:0x0260, B:77:0x026e, B:78:0x0273, B:79:0x0278, B:80:0x0279, B:96:0x00f0), top: B:97:0x0077 }] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0128 A[Catch: all -> 0x00b9, RemoteException -> 0x00bc, TRY_ENTER, TryCatch #3 {RemoteException -> 0x00bc, blocks: (B:98:0x0077, B:114:0x00a0, B:27:0x0103, B:29:0x010f, B:32:0x0128, B:34:0x0132, B:36:0x0140, B:37:0x0144, B:38:0x0149, B:39:0x014a, B:41:0x0153, B:44:0x015d, B:46:0x0163, B:48:0x0170, B:50:0x017a, B:52:0x0181, B:54:0x018f, B:55:0x0193, B:56:0x0198, B:58:0x01a1, B:60:0x01a7, B:62:0x01b5, B:64:0x01c0, B:66:0x01ce, B:67:0x01d3, B:68:0x01d8, B:69:0x01d9, B:73:0x0247, B:75:0x0260, B:77:0x026e, B:78:0x0273, B:79:0x0278, B:80:0x0279, B:96:0x00f0), top: B:97:0x0077 }] */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x02b8 A[Catch: all -> 0x00b9, TryCatch #5 {all -> 0x00b9, blocks: (B:98:0x0077, B:102:0x007f, B:105:0x0083, B:108:0x0087, B:110:0x0090, B:112:0x0098, B:114:0x00a0, B:20:0x00da, B:23:0x00e4, B:25:0x00ec, B:27:0x0103, B:29:0x010f, B:32:0x0128, B:34:0x0132, B:36:0x0140, B:37:0x0144, B:38:0x0149, B:39:0x014a, B:41:0x0153, B:44:0x015d, B:46:0x0163, B:48:0x0170, B:50:0x017a, B:52:0x0181, B:54:0x018f, B:55:0x0193, B:56:0x0198, B:58:0x01a1, B:60:0x01a7, B:62:0x01b5, B:64:0x01c0, B:66:0x01ce, B:67:0x01d3, B:68:0x01d8, B:69:0x01d9, B:73:0x0247, B:75:0x0260, B:77:0x026e, B:78:0x0273, B:79:0x0278, B:80:0x0279, B:96:0x00f0, B:115:0x00c4, B:90:0x02a0, B:92:0x02b8, B:93:0x02bd, B:94:0x02c2), top: B:97:0x0077 }] */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x02bd A[Catch: all -> 0x00b9, TryCatch #5 {all -> 0x00b9, blocks: (B:98:0x0077, B:102:0x007f, B:105:0x0083, B:108:0x0087, B:110:0x0090, B:112:0x0098, B:114:0x00a0, B:20:0x00da, B:23:0x00e4, B:25:0x00ec, B:27:0x0103, B:29:0x010f, B:32:0x0128, B:34:0x0132, B:36:0x0140, B:37:0x0144, B:38:0x0149, B:39:0x014a, B:41:0x0153, B:44:0x015d, B:46:0x0163, B:48:0x0170, B:50:0x017a, B:52:0x0181, B:54:0x018f, B:55:0x0193, B:56:0x0198, B:58:0x01a1, B:60:0x01a7, B:62:0x01b5, B:64:0x01c0, B:66:0x01ce, B:67:0x01d3, B:68:0x01d8, B:69:0x01d9, B:73:0x0247, B:75:0x0260, B:77:0x026e, B:78:0x0273, B:79:0x0278, B:80:0x0279, B:96:0x00f0, B:115:0x00c4, B:90:0x02a0, B:92:0x02b8, B:93:0x02bd, B:94:0x02c2), top: B:97:0x0077 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2999,8 +2976,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00cb A[Catch: all -> 0x00b9, TryCatch #0 {all -> 0x00b9, blocks: (B:13:0x0086, B:15:0x0098, B:17:0x00a0, B:19:0x00a8, B:21:0x00ae, B:24:0x00bb, B:25:0x00c4, B:27:0x00cb, B:28:0x00d3, B:31:0x00e0, B:34:0x00db, B:36:0x00c1), top: B:12:0x0086 }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00d2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3978,10 +3953,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         return WallpaperCropper.getTotalCrop(this.mWallpaperCropper.getDefaultCrops(4, getCropMap(list, iArr), point));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r12v5, types: [java.util.ArrayList, java.util.List] */
-    /* JADX WARN: Type inference failed for: r12v6, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r12v7, types: [java.util.List] */
     public final List getBitmapCrops(List list, int i, boolean z, int i2) {
         int handleIncomingUser = ActivityManager.handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i2, false, true, "getBitmapCrop", null);
         synchronized (this.mLock) {
@@ -4618,7 +4589,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         return null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x007f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5386,22 +5356,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(callingUid, "Invalid package or package does not belong to uid:"));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:117:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x0327  */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x02f4  */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x02df  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x02da  */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x02cd  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0188 A[LOOP:0: B:26:0x00ac->B:34:0x0188, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0183 A[EDGE_INSN: B:35:0x0183->B:36:0x0183 BREAK  A[LOOP:0: B:26:0x00ac->B:34:0x0188], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x02aa  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x02d1 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x02d8  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x02dd  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x02e3  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x02f9  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x032a  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0345  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5422,7 +5376,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         return z;
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:66:? -> B:61:0x01c0). Please report as a decompilation issue!!! */
     public final int makeSnapshot(int i, int i2, Bundle bundle) {
         int i3;
         boolean z;
@@ -5946,10 +5899,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0033 A[Catch: all -> 0x003f, TryCatch #4 {all -> 0x003f, blocks: (B:4:0x0006, B:6:0x0015, B:12:0x0023, B:14:0x0029, B:16:0x0033, B:17:0x0042, B:19:0x0046, B:21:0x004a, B:24:0x004f, B:27:0x0051, B:29:0x0055, B:31:0x0059, B:35:0x0063, B:36:0x007e), top: B:3:0x0006 }] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0087  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x0116 A[ORIG_RETURN, RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5962,7 +5911,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.wallpaper.WallpaperManagerService.notifyWallpaperColorsChangedOnDisplay(int, int, com.android.server.wallpaper.WallpaperData):void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         new WallpaperManagerShellCommand(this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
     }
@@ -7189,12 +7137,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0205 A[Catch: all -> 0x01ef, TryCatch #1 {all -> 0x01ef, blocks: (B:63:0x01d3, B:65:0x01db, B:67:0x01e7, B:70:0x01f5, B:74:0x0205, B:75:0x0210, B:76:0x021a, B:78:0x0225, B:79:0x022c, B:81:0x023d, B:82:0x0242, B:84:0x0248, B:86:0x0254, B:88:0x025a, B:89:0x025f, B:91:0x0264, B:92:0x0269, B:119:0x0312, B:120:0x0315, B:124:0x0317, B:125:0x031a, B:95:0x026f, B:97:0x0275, B:100:0x028d, B:102:0x029a, B:103:0x02bd, B:105:0x02cb, B:106:0x02ce, B:108:0x02e2, B:110:0x02ed, B:111:0x02f1, B:113:0x02f7, B:114:0x0301, B:118:0x0289), top: B:62:0x01d3, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x0210 A[Catch: all -> 0x01ef, TryCatch #1 {all -> 0x01ef, blocks: (B:63:0x01d3, B:65:0x01db, B:67:0x01e7, B:70:0x01f5, B:74:0x0205, B:75:0x0210, B:76:0x021a, B:78:0x0225, B:79:0x022c, B:81:0x023d, B:82:0x0242, B:84:0x0248, B:86:0x0254, B:88:0x025a, B:89:0x025f, B:91:0x0264, B:92:0x0269, B:119:0x0312, B:120:0x0315, B:124:0x0317, B:125:0x031a, B:95:0x026f, B:97:0x0275, B:100:0x028d, B:102:0x029a, B:103:0x02bd, B:105:0x02cb, B:106:0x02ce, B:108:0x02e2, B:110:0x02ed, B:111:0x02f1, B:113:0x02f7, B:114:0x0301, B:118:0x0289), top: B:62:0x01d3, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0225 A[Catch: all -> 0x01ef, TryCatch #1 {all -> 0x01ef, blocks: (B:63:0x01d3, B:65:0x01db, B:67:0x01e7, B:70:0x01f5, B:74:0x0205, B:75:0x0210, B:76:0x021a, B:78:0x0225, B:79:0x022c, B:81:0x023d, B:82:0x0242, B:84:0x0248, B:86:0x0254, B:88:0x025a, B:89:0x025f, B:91:0x0264, B:92:0x0269, B:119:0x0312, B:120:0x0315, B:124:0x0317, B:125:0x031a, B:95:0x026f, B:97:0x0275, B:100:0x028d, B:102:0x029a, B:103:0x02bd, B:105:0x02cb, B:106:0x02ce, B:108:0x02e2, B:110:0x02ed, B:111:0x02f1, B:113:0x02f7, B:114:0x0301, B:118:0x0289), top: B:62:0x01d3, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x023d A[Catch: all -> 0x01ef, TryCatch #1 {all -> 0x01ef, blocks: (B:63:0x01d3, B:65:0x01db, B:67:0x01e7, B:70:0x01f5, B:74:0x0205, B:75:0x0210, B:76:0x021a, B:78:0x0225, B:79:0x022c, B:81:0x023d, B:82:0x0242, B:84:0x0248, B:86:0x0254, B:88:0x025a, B:89:0x025f, B:91:0x0264, B:92:0x0269, B:119:0x0312, B:120:0x0315, B:124:0x0317, B:125:0x031a, B:95:0x026f, B:97:0x0275, B:100:0x028d, B:102:0x029a, B:103:0x02bd, B:105:0x02cb, B:106:0x02ce, B:108:0x02e2, B:110:0x02ed, B:111:0x02f1, B:113:0x02f7, B:114:0x0301, B:118:0x0289), top: B:62:0x01d3, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x0264 A[Catch: all -> 0x01ef, TryCatch #1 {all -> 0x01ef, blocks: (B:63:0x01d3, B:65:0x01db, B:67:0x01e7, B:70:0x01f5, B:74:0x0205, B:75:0x0210, B:76:0x021a, B:78:0x0225, B:79:0x022c, B:81:0x023d, B:82:0x0242, B:84:0x0248, B:86:0x0254, B:88:0x025a, B:89:0x025f, B:91:0x0264, B:92:0x0269, B:119:0x0312, B:120:0x0315, B:124:0x0317, B:125:0x031a, B:95:0x026f, B:97:0x0275, B:100:0x028d, B:102:0x029a, B:103:0x02bd, B:105:0x02cb, B:106:0x02ce, B:108:0x02e2, B:110:0x02ed, B:111:0x02f1, B:113:0x02f7, B:114:0x0301, B:118:0x0289), top: B:62:0x01d3, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x0275 A[Catch: all -> 0x02bb, TryCatch #0 {all -> 0x02bb, blocks: (B:95:0x026f, B:97:0x0275, B:100:0x028d, B:102:0x029a, B:103:0x02bd, B:105:0x02cb, B:106:0x02ce, B:108:0x02e2, B:110:0x02ed, B:111:0x02f1, B:113:0x02f7, B:114:0x0301, B:118:0x0289), top: B:94:0x026f, outer: #1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7221,20 +7163,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:106:0x0256 A[Catch: all -> 0x0217, TryCatch #2 {all -> 0x0217, blocks: (B:82:0x01f8, B:85:0x0200, B:89:0x0209, B:91:0x020d, B:92:0x021c, B:94:0x0226, B:95:0x0231, B:104:0x0250, B:106:0x0256, B:107:0x025d, B:109:0x0263, B:111:0x0270, B:114:0x0278, B:116:0x027d, B:118:0x0282, B:120:0x0290, B:121:0x029e, B:122:0x02a5, B:137:0x0269, B:141:0x021a, B:148:0x02da), top: B:61:0x018b }] */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x0276  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x02ab  */
-    /* JADX WARN: Removed duplicated region for block: B:127:0x02b2  */
-    /* JADX WARN: Removed duplicated region for block: B:133:0x02c5  */
-    /* JADX WARN: Removed duplicated region for block: B:134:0x02cf  */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x024e  */
-    /* JADX WARN: Removed duplicated region for block: B:140:0x0230  */
-    /* JADX WARN: Removed duplicated region for block: B:142:0x02a3  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x01dd A[Catch: all -> 0x01af, TryCatch #4 {all -> 0x01af, blocks: (B:64:0x018c, B:66:0x0194, B:68:0x0198, B:69:0x01b4, B:73:0x01c7, B:77:0x01d3, B:79:0x01da, B:80:0x01df, B:144:0x01dd), top: B:63:0x018c }] */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x01da A[Catch: all -> 0x01af, TryCatch #4 {all -> 0x01af, blocks: (B:64:0x018c, B:66:0x0194, B:68:0x0198, B:69:0x01b4, B:73:0x01c7, B:77:0x01d3, B:79:0x01da, B:80:0x01df, B:144:0x01dd), top: B:63:0x018c }] */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x01fe  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x0226 A[Catch: all -> 0x0217, TryCatch #2 {all -> 0x0217, blocks: (B:82:0x01f8, B:85:0x0200, B:89:0x0209, B:91:0x020d, B:92:0x021c, B:94:0x0226, B:95:0x0231, B:104:0x0250, B:106:0x0256, B:107:0x025d, B:109:0x0263, B:111:0x0270, B:114:0x0278, B:116:0x027d, B:118:0x0282, B:120:0x0290, B:121:0x029e, B:122:0x02a5, B:137:0x0269, B:141:0x021a, B:148:0x02da), top: B:61:0x018b }] */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x0240  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7506,7 +7434,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0071 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7694,9 +7621,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub implements I
         wallpaperConnection2.forEachDisplayConnector(new WallpaperManagerService$$ExternalSyntheticLambda4(0, this, wallpaperConnection2));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0167  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x018c A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:52:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

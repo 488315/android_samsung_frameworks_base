@@ -361,8 +361,6 @@ public final class PendingIntentRecord extends IIntentSender.Stub {
                 -1);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:141:0x05a3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

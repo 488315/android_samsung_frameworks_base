@@ -50,19 +50,6 @@ public final class SeekbarDefaults {
         return sliderColors;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x0070  */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x0057  */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x006d  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x008a  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00a1  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00c5  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x016c  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0268  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x00d9  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x00de  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x008e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -75,23 +62,6 @@ public final class SeekbarDefaults {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults.SliderContainer(androidx.compose.runtime.State, androidx.compose.ui.Modifier, androidx.compose.runtime.MutableState, kotlin.jvm.functions.Function1, com.android.systemui.media.mediaoutput.viewmodel.LabsViewModel, kotlin.jvm.functions.Function3, androidx.compose.runtime.Composer, int, int):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x004b  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0066  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00bc  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00d1  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x010a  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x013b  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01d4  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00e1  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x00e8  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x00ef  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x00a0  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x006b  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x0060  */
-    /* JADX WARN: Type inference failed for: r9v15, types: [com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$Thumb$1$1, kotlin.jvm.internal.Lambda] */
     /* renamed from: Thumb-FJfuzF0, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -105,19 +75,6 @@ public final class SeekbarDefaults {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults.m1980ThumbFJfuzF0(androidx.compose.runtime.State, androidx.compose.ui.Modifier, androidx.compose.material3.SliderColors, boolean, float, androidx.compose.runtime.Composer, int, int):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0061  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x007c  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00e3  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x0120  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x015c  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x017b  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x01da  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0286  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x00bf  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x00c7  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x00c2  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x0076  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

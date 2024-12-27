@@ -147,7 +147,6 @@ final class SharedNotificationContainerViewModel$isTransitioningToHiddenKeyguard
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SharedNotificationContainerViewModel$isTransitioningToHiddenKeyguard$1(SharedNotificationContainerViewModel sharedNotificationContainerViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = sharedNotificationContainerViewModel;
@@ -165,13 +164,6 @@ final class SharedNotificationContainerViewModel$isTransitioningToHiddenKeyguard
         return ((SharedNotificationContainerViewModel$isTransitioningToHiddenKeyguard$1) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x005a  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0090 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00ba A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00c7 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00ff A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0100  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:25:0x00fd -> B:9:0x0050). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

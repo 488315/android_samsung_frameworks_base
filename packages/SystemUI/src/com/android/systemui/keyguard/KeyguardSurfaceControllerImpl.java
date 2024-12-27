@@ -130,7 +130,6 @@ public final class KeyguardSurfaceControllerImpl {
                 }
             }
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.KeyguardSurfaceControllerImpl$setKeyguardSurfaceAppearAmount$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -195,7 +194,6 @@ public final class KeyguardSurfaceControllerImpl {
                 }
             }
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.KeyguardSurfaceControllerImpl$setKeyguardSurfaceVisible$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

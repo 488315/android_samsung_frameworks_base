@@ -62,8 +62,6 @@ public final class ResumeOnRebootServiceProvider {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r4v0, types: [android.content.ServiceConnection, com.android.server.locksettings.ResumeOnRebootServiceProvider$ResumeOnRebootServiceConnection$1] */
         public final void bindToService(long j) {
             IResumeOnRebootService iResumeOnRebootService = this.mBinder;
             if (iResumeOnRebootService == null || !iResumeOnRebootService.asBinder().isBinderAlive()) {

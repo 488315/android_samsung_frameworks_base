@@ -220,7 +220,6 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
             ((CentralSurfacesImpl) centralSurfaces).awakenDreams();
         }
         this.activityTransitionAnimator.startIntentWithAnimation(null, false, intent.getPackage(), z2, new Function1() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startActivity$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

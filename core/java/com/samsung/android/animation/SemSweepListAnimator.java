@@ -468,7 +468,6 @@ public class SemSweepListAnimator extends SemAbsSweepListAnimator {
         this.mListView.setPressed(false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void resetSweepInfo() {
         this.mSwiping = false;
         this.mSwipingPosition = -1;
@@ -477,7 +476,6 @@ public class SemSweepListAnimator extends SemAbsSweepListAnimator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void resetSweepAnimationFilter() {
         if (this.mSweepAnimationFilter != null) {
             this.mSweepAnimationFilter.doRefresh();

@@ -9,7 +9,6 @@ import kotlin.jvm.internal.StringCompanionObject;
 public final class LogMessageKt {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.US);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final void printLikeLogcat(PrintWriter printWriter, String str, String str2, String str3, String str4) {
         printWriter.print(str);
         printWriter.print(" ");
@@ -20,7 +19,6 @@ public final class LogMessageKt {
         printWriter.println(str4);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final void printLikeLogcat(PrintWriter printWriter, String str, String str2, String str3, String str4, long j, Character ch) {
         printWriter.print(str);
         printWriter.print(" ");

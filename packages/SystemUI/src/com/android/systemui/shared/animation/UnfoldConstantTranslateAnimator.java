@@ -25,8 +25,6 @@ public final class UnfoldConstantTranslateAnimator implements UnfoldTransitionPr
     public final Set viewsIdToTranslate;
     public List viewsToTranslate = EmptyList.INSTANCE;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Direction {
         public static final /* synthetic */ Direction[] $VALUES;
         public static final Direction END;
@@ -126,7 +124,6 @@ public final class UnfoldConstantTranslateAnimator implements UnfoldTransitionPr
                 return (Boolean) ((UnfoldConstantTranslateAnimator.ViewIdToTranslate) obj).shouldBeAnimated.invoke();
             }
         }), new Function1() { // from class: com.android.systemui.shared.animation.UnfoldConstantTranslateAnimator$registerViewsForAnimation$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

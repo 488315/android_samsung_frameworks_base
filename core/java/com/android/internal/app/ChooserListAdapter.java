@@ -348,7 +348,6 @@ public class ChooserListAdapter extends ResolverListAdapter {
                 List<
                         DisplayResolveInfo>>() { // from class:
                                                  // com.android.internal.app.ChooserListAdapter.2
-            /* JADX INFO: Access modifiers changed from: protected */
             @Override // android.os.AsyncTask
             public List<DisplayResolveInfo> doInBackground(Void... voids) {
                 List<DisplayResolveInfo> allTargets = new ArrayList<>();
@@ -393,7 +392,6 @@ public class ChooserListAdapter extends ResolverListAdapter {
                 return groupedTargets;
             }
 
-            /* JADX INFO: Access modifiers changed from: protected */
             @Override // android.os.AsyncTask
             public void onPostExecute(List<DisplayResolveInfo> newList) {
                 ChooserListAdapter.this.mSortedList = newList;
@@ -684,7 +682,6 @@ public class ChooserListAdapter extends ResolverListAdapter {
                         ResolverActivity
                                 .ResolvedComponentInfo>>() { // from class:
                                                              // com.android.internal.app.ChooserListAdapter.3
-            /* JADX INFO: Access modifiers changed from: protected */
             @Override // android.os.AsyncTask
             public List<ResolverActivity.ResolvedComponentInfo> doInBackground(
                     List<ResolverActivity.ResolvedComponentInfo>... params) {
@@ -696,7 +693,6 @@ public class ChooserListAdapter extends ResolverListAdapter {
                 return params[0];
             }
 
-            /* JADX INFO: Access modifiers changed from: protected */
             @Override // android.os.AsyncTask
             public void onPostExecute(
                     List<ResolverActivity.ResolvedComponentInfo> sortedComponents) {
@@ -738,13 +734,11 @@ public class ChooserListAdapter extends ResolverListAdapter {
             this.mTargetInfo = targetInfo;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public Boolean doInBackground(Void... voids) {
             return Boolean.valueOf(this.mTargetInfo.loadIcon());
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onPostExecute(Boolean isLoaded) {
             if (isLoaded.booleanValue()) {

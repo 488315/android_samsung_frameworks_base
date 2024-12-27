@@ -106,7 +106,6 @@ public abstract class MediaOutputBaseDialog extends SystemUIDialog implements Me
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.media.dialog.MediaOutputBaseDialog$$ExternalSyntheticLambda4] */
     public MediaOutputBaseDialog(Context context, BroadcastSender broadcastSender, MediaOutputController mediaOutputController, boolean z) {
         super(context, R.style.Theme_SystemUI_Dialog_Media);
         this.mMainThreadHandler = new Handler(Looper.getMainLooper());

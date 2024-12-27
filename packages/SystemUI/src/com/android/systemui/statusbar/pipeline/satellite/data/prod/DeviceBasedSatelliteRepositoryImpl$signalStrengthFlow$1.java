@@ -27,7 +27,6 @@ final class DeviceBasedSatelliteRepositoryImpl$signalStrengthFlow$1 extends Susp
     int label;
     final /* synthetic */ DeviceBasedSatelliteRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteRepositoryImpl$signalStrengthFlow$1(SatelliteManager satelliteManager, DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.$sm = satelliteManager;
@@ -59,7 +58,6 @@ final class DeviceBasedSatelliteRepositoryImpl$signalStrengthFlow$1 extends Susp
                     DeviceBasedSatelliteRepositoryImpl.Companion companion = DeviceBasedSatelliteRepositoryImpl.Companion;
                     LogBuffer logBuffer = DeviceBasedSatelliteRepositoryImpl.this.verboseLogBuffer;
                     Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$signalStrengthFlow$1$cb$1.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }
@@ -97,7 +95,6 @@ final class DeviceBasedSatelliteRepositoryImpl$signalStrengthFlow$1 extends Susp
             final SatelliteManager satelliteManager = this.$sm;
             final DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$signalStrengthFlow$1.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

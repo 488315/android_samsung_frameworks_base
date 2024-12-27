@@ -8,7 +8,6 @@ public class RkpErrorStats implements Parcelable {
     public static final Parcelable.Creator<RkpErrorStats> CREATOR =
             new Parcelable.Creator<
                     RkpErrorStats>() { // from class: android.security.metrics.RkpErrorStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RkpErrorStats createFromParcel(Parcel _aidl_source) {
                     RkpErrorStats _aidl_out = new RkpErrorStats();
@@ -16,7 +15,6 @@ public class RkpErrorStats implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RkpErrorStats[] newArray(int _aidl_size) {
                     return new RkpErrorStats[_aidl_size];

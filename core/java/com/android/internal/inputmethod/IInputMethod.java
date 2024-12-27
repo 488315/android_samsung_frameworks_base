@@ -738,7 +738,6 @@ public interface IInputMethod extends IInterface {
                 new Parcelable.Creator<
                         InitParams>() { // from class:
                                         // com.android.internal.inputmethod.IInputMethod.InitParams.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public InitParams createFromParcel(Parcel _aidl_source) {
                         InitParams _aidl_out = new InitParams();
@@ -746,7 +745,6 @@ public interface IInputMethod extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public InitParams[] newArray(int _aidl_size) {
                         return new InitParams[_aidl_size];
@@ -826,7 +824,6 @@ public interface IInputMethod extends IInterface {
                 new Parcelable.Creator<
                         StartInputParams>() { // from class:
                                               // com.android.internal.inputmethod.IInputMethod.StartInputParams.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public StartInputParams createFromParcel(Parcel _aidl_source) {
                         StartInputParams _aidl_out = new StartInputParams();
@@ -834,7 +831,6 @@ public interface IInputMethod extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public StartInputParams[] newArray(int _aidl_size) {
                         return new StartInputParams[_aidl_size];

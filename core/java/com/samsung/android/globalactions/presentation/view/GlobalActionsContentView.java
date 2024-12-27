@@ -219,7 +219,6 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$initLayouts$0(View view) {
         this.mPopupView.setVisibility(8);
     }
@@ -1140,7 +1139,6 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
                     .equals(DefaultActionNames.ACTION_SAFE_MODE);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$getDismissRunnable$0() {
             GlobalActionsContentView.this.mParentView.dismiss();
         }

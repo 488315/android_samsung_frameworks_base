@@ -519,7 +519,6 @@ public abstract class WNafUtil {
         return result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ECPoint[] resizeTable(ECPoint[] a, int length) {
         ECPoint[] result = new ECPoint[length];
         System.arraycopy(a, 0, result, 0, a.length);

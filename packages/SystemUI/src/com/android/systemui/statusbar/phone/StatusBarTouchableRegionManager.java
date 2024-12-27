@@ -50,7 +50,6 @@ public final class StatusBarTouchableRegionManager implements Dumpable {
     public boolean mForceCollapsedUntilLayout = false;
     public final Region mTouchableRegion = new Region();
 
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.systemui.statusbar.phone.StatusBarTouchableRegionManager$$ExternalSyntheticLambda2] */
     public StatusBarTouchableRegionManager(Context context, NotificationShadeWindowController notificationShadeWindowController, ConfigurationController configurationController, HeadsUpManager headsUpManager, ShadeInteractor shadeInteractor, Provider provider, JavaAdapter javaAdapter, UnlockedScreenOffAnimationController unlockedScreenOffAnimationController, PrimaryBouncerInteractor primaryBouncerInteractor, AlternateBouncerInteractor alternateBouncerInteractor) {
         this.mContext = context;
         initResources$1();

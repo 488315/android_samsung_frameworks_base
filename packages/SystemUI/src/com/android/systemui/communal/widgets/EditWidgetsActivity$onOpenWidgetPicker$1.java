@@ -16,7 +16,6 @@ final class EditWidgetsActivity$onOpenWidgetPicker$1 extends SuspendLambda imple
     int label;
     final /* synthetic */ EditWidgetsActivity this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public EditWidgetsActivity$onOpenWidgetPicker$1(EditWidgetsActivity editWidgetsActivity, Continuation continuation) {
         super(2, continuation);
         this.this$0 = editWidgetsActivity;

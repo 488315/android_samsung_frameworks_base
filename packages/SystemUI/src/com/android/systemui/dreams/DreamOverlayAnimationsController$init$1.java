@@ -37,7 +37,6 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
             int label;
             final /* synthetic */ DreamOverlayAnimationsController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C00821(DreamOverlayAnimationsController dreamOverlayAnimationsController, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = dreamOverlayAnimationsController;
@@ -94,7 +93,6 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
             int label;
             final /* synthetic */ DreamOverlayAnimationsController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(DreamOverlayAnimationsController dreamOverlayAnimationsController, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = dreamOverlayAnimationsController;
@@ -157,7 +155,6 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
             int label;
             final /* synthetic */ DreamOverlayAnimationsController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass3(DreamOverlayAnimationsController dreamOverlayAnimationsController, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = dreamOverlayAnimationsController;
@@ -214,7 +211,6 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
             int label;
             final /* synthetic */ DreamOverlayAnimationsController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass4(DreamOverlayAnimationsController dreamOverlayAnimationsController, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = dreamOverlayAnimationsController;
@@ -261,7 +257,6 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(DreamOverlayAnimationsController dreamOverlayAnimationsController, Continuation continuation) {
             super(2, continuation);
             this.this$0 = dreamOverlayAnimationsController;
@@ -295,7 +290,6 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DreamOverlayAnimationsController$init$1(DreamOverlayAnimationsController dreamOverlayAnimationsController, Continuation continuation) {
         super(3, continuation);
         this.this$0 = dreamOverlayAnimationsController;

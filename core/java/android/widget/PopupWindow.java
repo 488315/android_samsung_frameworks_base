@@ -131,7 +131,6 @@ public class PopupWindow {
         void onDismiss();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(
             View v,
             int left,
@@ -980,10 +979,6 @@ public class PopupWindow {
         return this.mAnimationStyle;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r29v4 */
-    /* JADX WARN: Type inference failed for: r29v5 */
-    /* JADX WARN: Type inference failed for: r29v8 */
     protected boolean findDropDownPosition(
             View view,
             WindowManager.LayoutParams layoutParams,
@@ -1429,7 +1424,6 @@ public class PopupWindow {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void unregisterBackCallback(OnBackInvokedDispatcher onBackInvokedDispatcher) {
         OnBackInvokedCallback backCallback = this.mBackCallback;
         this.mBackCallback = null;
@@ -1457,7 +1451,6 @@ public class PopupWindow {
         return bounds;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dismissImmediate(View decorView, ViewGroup contentHolder, View contentView) {
         if (decorView.getParent() != null) {
             this.mWindowManager.removeViewImmediate(decorView);
@@ -1723,7 +1716,6 @@ public class PopupWindow {
         alignToAnchor();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void alignToAnchor() {
         View anchor = this.mAnchor != null ? this.mAnchor.get() : null;
         if (anchor != null && anchor.isAttachedToWindow() && hasDecorView()) {
@@ -1906,7 +1898,6 @@ public class PopupWindow {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void startEnterTransition(Transition enterTransition) {
             int count = getChildCount();
             for (int i = 0; i < count; i++) {
@@ -1974,7 +1965,6 @@ public class PopupWindow {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$startExitTransition$0(
                 Transition.TransitionListener listener, Transition transition, View anchorRoot) {
             listener.onTransitionEnd(transition);

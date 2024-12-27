@@ -59,10 +59,6 @@ public final class VideoCameraQuickAffordanceConfig implements KeyguardQuickAffo
         return R.drawable.ic_videocam;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0050  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x005d  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
     @Override // com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -53,7 +53,6 @@ public class KeyguardMessageAreaController extends ViewController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.keyguard.KeyguardMessageAreaController$3] */
     public KeyguardMessageAreaController(KeyguardMessageArea keyguardMessageArea, KeyguardUpdateMonitor keyguardUpdateMonitor, ConfigurationController configurationController) {
         super(keyguardMessageArea);
         this.mMessageBiometricSource = null;

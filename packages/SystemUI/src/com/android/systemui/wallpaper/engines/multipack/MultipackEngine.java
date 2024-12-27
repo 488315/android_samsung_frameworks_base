@@ -362,8 +362,6 @@ public final class MultipackEngine extends WallpaperEngine {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00b4  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00bd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -419,7 +417,6 @@ public final class MultipackEngine extends WallpaperEngine {
     
         if ((r3.mNextSource instanceof com.android.systemui.wallpaper.engines.image.ImageSource) != false) goto L16;
      */
-    /* JADX WARN: Failed to find 'out' block for switch in B:12:0x0018. Please report as an issue. */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

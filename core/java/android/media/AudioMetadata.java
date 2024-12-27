@@ -44,7 +44,6 @@ public final class AudioMetadata {
             Map.of(
                     1,
                     new DataPackage<Integer>() { // from class: android.media.AudioMetadata.2
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.media.AudioMetadata.DataPackage
                         public Integer unpack(ByteBuffer buffer) {
                             return Integer.valueOf(buffer.getInt());
@@ -58,7 +57,6 @@ public final class AudioMetadata {
                     },
                     2,
                     new DataPackage<Long>() { // from class: android.media.AudioMetadata.3
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.media.AudioMetadata.DataPackage
                         public Long unpack(ByteBuffer buffer) {
                             return Long.valueOf(buffer.getLong());
@@ -72,7 +70,6 @@ public final class AudioMetadata {
                     },
                     3,
                     new DataPackage<Float>() { // from class: android.media.AudioMetadata.4
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.media.AudioMetadata.DataPackage
                         public Float unpack(ByteBuffer buffer) {
                             return Float.valueOf(buffer.getFloat());
@@ -86,7 +83,6 @@ public final class AudioMetadata {
                     },
                     4,
                     new DataPackage<Double>() { // from class: android.media.AudioMetadata.5
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.media.AudioMetadata.DataPackage
                         public Double unpack(ByteBuffer buffer) {
                             return Double.valueOf(buffer.getDouble());
@@ -382,7 +378,6 @@ public final class AudioMetadata {
     private static class ObjectPackage implements DataPackage<Pair<Class, Object>> {
         private ObjectPackage() {}
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.media.AudioMetadata.DataPackage
         public Pair<Class, Object> unpack(ByteBuffer buffer) {
             int dataType = buffer.getInt();
@@ -433,7 +428,6 @@ public final class AudioMetadata {
     private static class BaseMapPackage implements DataPackage<BaseMap> {
         private BaseMapPackage() {}
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.media.AudioMetadata.DataPackage
         public BaseMap unpack(ByteBuffer buffer) {
             BaseMap ret = new BaseMap();

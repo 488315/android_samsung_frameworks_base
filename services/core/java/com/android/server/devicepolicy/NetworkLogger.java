@@ -75,7 +75,6 @@ public final class NetworkLogger {
     public final PackageManagerInternal mPm;
     public final int mTargetUserId;
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.devicepolicy.NetworkLogger$1] */
     public NetworkLogger(
             DevicePolicyManagerService devicePolicyManagerService,
             PackageManagerInternal packageManagerInternal,
@@ -129,8 +128,6 @@ public final class NetworkLogger {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x002a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0030 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

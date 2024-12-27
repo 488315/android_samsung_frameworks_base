@@ -26,7 +26,6 @@ public abstract class PolicyUpdateReceiver extends BroadcastReceiver {
             "android.app.admin.extra.POLICY_UPDATE_RESULT_KEY";
     private static String TAG = "PolicyUpdateReceiver";
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.content.BroadcastReceiver
     public final void onReceive(Context context, Intent intent) {
         char c;

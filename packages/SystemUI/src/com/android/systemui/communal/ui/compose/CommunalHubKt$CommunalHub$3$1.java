@@ -23,7 +23,6 @@ final class CommunalHubKt$CommunalHub$3$1 extends SuspendLambda implements Funct
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalHubKt$CommunalHub$3$1(BaseCommunalViewModel baseCommunalViewModel, MutableState mutableState, long j, LazyGridState lazyGridState, State state, Continuation continuation) {
         super(2, continuation);
         this.$viewModel = baseCommunalViewModel;
@@ -58,7 +57,6 @@ final class CommunalHubKt$CommunalHub$3$1 extends SuspendLambda implements Funct
             final LazyGridState lazyGridState = this.$gridState;
             final State state = this.$communalContent$delegate;
             Function1 function1 = new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$3$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -67,8 +65,6 @@ final class CommunalHubKt$CommunalHub$3$1 extends SuspendLambda implements Funct
                 
                     if ((((java.util.List) r6.getValue()).get(r8.intValue()) instanceof com.android.systemui.communal.domain.model.CommunalContentModel.CtaTileInViewMode) == false) goto L24;
                  */
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0061  */
-                /* JADX WARN: Removed duplicated region for block: B:20:0x0095  */
                 @Override // kotlin.jvm.functions.Function1
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

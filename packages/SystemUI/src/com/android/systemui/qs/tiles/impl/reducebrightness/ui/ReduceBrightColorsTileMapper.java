@@ -30,7 +30,6 @@ public final class ReduceBrightColorsTileMapper implements QSTileDataToStateMapp
         Resources resources = this.resources;
         Resources.Theme theme = this.theme;
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.reducebrightness.ui.ReduceBrightColorsTileMapper$map$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -49,7 +48,6 @@ public final class ReduceBrightColorsTileMapper implements QSTileDataToStateMapp
                 }
                 final ReduceBrightColorsTileMapper reduceBrightColorsTileMapper = this;
                 builder.icon = new Function0() { // from class: com.android.systemui.qs.tiles.impl.reducebrightness.ui.ReduceBrightColorsTileMapper$map$1.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

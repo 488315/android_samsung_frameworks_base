@@ -17,7 +17,6 @@ final class FromAodTransitionInteractor$listenForAodToAwake$1$2$emit$1 extends C
     /* synthetic */ Object result;
     final /* synthetic */ FromAodTransitionInteractor$listenForAodToAwake$1$2 this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromAodTransitionInteractor$listenForAodToAwake$1$2$emit$1(FromAodTransitionInteractor$listenForAodToAwake$1$2 fromAodTransitionInteractor$listenForAodToAwake$1$2, Continuation continuation) {
         super(continuation);
         this.this$0 = fromAodTransitionInteractor$listenForAodToAwake$1$2;

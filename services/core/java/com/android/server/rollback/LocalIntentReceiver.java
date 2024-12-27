@@ -25,7 +25,6 @@ public final class LocalIntentReceiver {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.rollback.LocalIntentReceiver$1] */
     public LocalIntentReceiver(Consumer consumer) {
         this.mConsumer = consumer;
     }

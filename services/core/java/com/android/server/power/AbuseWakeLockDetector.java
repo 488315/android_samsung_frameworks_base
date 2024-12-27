@@ -88,7 +88,6 @@ public final class AbuseWakeLockDetector {
                                         .filter(
                                                 new Predicate() { // from class:
                                                     // com.android.server.power.AbuseWakeLockDetector$$ExternalSyntheticLambda2
-                                                    /* JADX WARN: Removed duplicated region for block: B:28:0x0088 A[ADDED_TO_REGION] */
                                                     @Override // java.util.function.Predicate
                                                     /*
                                                         Code decompiled incorrectly, please refer to instructions dump.

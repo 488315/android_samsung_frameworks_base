@@ -8,7 +8,6 @@ public class RecordSettings implements Parcelable {
     public static final Parcelable.Creator<RecordSettings> CREATOR =
             new Parcelable.Creator<
                     RecordSettings>() { // from class: android.hardware.tv.tuner.RecordSettings.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecordSettings createFromParcel(Parcel _aidl_source) {
                     RecordSettings _aidl_out = new RecordSettings();
@@ -16,7 +15,6 @@ public class RecordSettings implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecordSettings[] newArray(int _aidl_size) {
                     return new RecordSettings[_aidl_size];

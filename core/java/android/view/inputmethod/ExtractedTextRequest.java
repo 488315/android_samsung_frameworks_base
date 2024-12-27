@@ -8,7 +8,6 @@ public class ExtractedTextRequest implements Parcelable {
             new Parcelable.Creator<
                     ExtractedTextRequest>() { // from class:
                                               // android.view.inputmethod.ExtractedTextRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExtractedTextRequest createFromParcel(Parcel source) {
                     ExtractedTextRequest res = new ExtractedTextRequest();
@@ -19,7 +18,6 @@ public class ExtractedTextRequest implements Parcelable {
                     return res;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExtractedTextRequest[] newArray(int size) {
                     return new ExtractedTextRequest[size];

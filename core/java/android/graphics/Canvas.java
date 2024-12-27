@@ -62,7 +62,6 @@ public class Canvas extends BaseCanvas {
     @CriticalNative
     private static native void nGetMatrix(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nGetNativeFinalizer();
 
     @CriticalNative

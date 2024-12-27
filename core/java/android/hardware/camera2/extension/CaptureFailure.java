@@ -9,7 +9,6 @@ public class CaptureFailure implements Parcelable {
     public static final Parcelable.Creator<CaptureFailure> CREATOR =
             new Parcelable.Creator<CaptureFailure>() { // from class:
                 // android.hardware.camera2.extension.CaptureFailure.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CaptureFailure createFromParcel(Parcel _aidl_source) {
                     CaptureFailure _aidl_out = new CaptureFailure();
@@ -17,7 +16,6 @@ public class CaptureFailure implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CaptureFailure[] newArray(int _aidl_size) {
                     return new CaptureFailure[_aidl_size];

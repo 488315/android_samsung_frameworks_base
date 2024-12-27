@@ -8,13 +8,11 @@ import android.util.proto.ProtoOutputStream;
 public class FeatureInfo implements Parcelable {
     public static final Parcelable.Creator<FeatureInfo> CREATOR =
             new Parcelable.Creator<FeatureInfo>() { // from class: android.content.pm.FeatureInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FeatureInfo createFromParcel(Parcel source) {
                     return new FeatureInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FeatureInfo[] newArray(int size) {
                     return new FeatureInfo[size];

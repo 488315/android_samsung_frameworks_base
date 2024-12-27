@@ -324,12 +324,6 @@ public final class QSTileCustomizerController extends ViewControllerBase {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$1] */
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$2] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$5] */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$7] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$8] */
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$$ExternalSyntheticLambda0] */
     public QSTileCustomizerController(Context context, SecQSSettingEditResources secQSSettingEditResources) {
         super(secQSSettingEditResources.isCurrentTopEdit ? new QSTopTileCustomizer(context) : new QSFullTileCustomizer(context));
         View requireViewById;
@@ -411,7 +405,6 @@ public final class QSTileCustomizerController extends ViewControllerBase {
             }
         };
         this.mDragListener = new View.OnDragListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController.7
-            /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
             /* JADX WARN: Code restructure failed: missing block: B:51:0x0192, code lost:
             
                 return true;
@@ -1041,7 +1034,6 @@ public final class QSTileCustomizerController extends ViewControllerBase {
                 public final /* synthetic */ float val$pointX;
                 public final /* synthetic */ float val$pointY;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass1(QSTileCustomizerBase qSTileCustomizerBase2, View secCustomizeTileView2, float f3, float f22) {
                     super(secCustomizeTileView2);
                     this.val$pointX = f3;

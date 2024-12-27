@@ -416,112 +416,96 @@ public class CocktailHost {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateCocktail(int cocktailId, Cocktail cocktail, int userId) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onUpdateCocktail(cocktailId, cocktail, userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void partiallyUpdateCocktail(int cocktailId, RemoteViews contentView, int userId) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onPartiallyUpdateCocktail(cocktailId, contentView, userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void partiallyUpdateHelpView(int cocktailId, RemoteViews helpView, int userId) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onPartiallyUpdateHelpView(cocktailId, helpView, userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeCocktail(int cocktailId, int userId) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onRemoveCocktail(cocktailId, userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void showCocktail(int cocktailId, int userId) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onShowCocktail(cocktailId, userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void closeCocktail(int cocktailId, int category, int userId) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onCloseCocktail(cocktailId, category, userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void viewDataChanged(int cocktailId, int viewId, int userId) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onViewDataChanged(cocktailId, viewId, userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateToolLauncher(int userId) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onUpdateToolLauncher(userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyKeyguardState(int enable, int userId) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onNotifyKeyguardState(enable == 1, userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyWakeUpState(int bEnable, int keyCode, int reason) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onNotifyWakeUpModeState(bEnable == 1, keyCode, reason);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void switchDefaultCocktail(int userId) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onSwitchDefaultCocktail(userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendExtraDataToCocktailBar(int userId, Bundle extraData) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onSendExtraDataToCocktailBar(extraData, userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setDisableTickerView(int state, int userId) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onSetDisableTickerView(state, userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void changeVisibleEdgeService(int visible, int userId) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onChangeVisibleEdgeService(visible == 1, userId);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setPullToRefresh(int cocktailId, int viewId, PendingIntent pendingIntent) {
         if (this.mCallbackListener != null) {
             this.mCallbackListener.onSetPullToRefresh(cocktailId, viewId, pendingIntent);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void noteResumeComponent(ComponentName componentName) {
         try {
             if (this.mCallbackListener != null) {
@@ -532,7 +516,6 @@ public class CocktailHost {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notePauseComponent(ComponentName componentName) {
         try {
             if (this.mCallbackListener != null) {
@@ -543,7 +526,6 @@ public class CocktailHost {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void packageSuspendChanged(Cocktail cocktail) {
         try {
             if (this.mCallbackListener != null) {

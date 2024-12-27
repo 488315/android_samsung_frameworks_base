@@ -11,7 +11,6 @@ final class ProfileTypeRepositoryImpl$getProfileType$1 extends ContinuationImpl 
     /* synthetic */ Object result;
     final /* synthetic */ ProfileTypeRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ProfileTypeRepositoryImpl$getProfileType$1(ProfileTypeRepositoryImpl profileTypeRepositoryImpl, Continuation continuation) {
         super(continuation);
         this.this$0 = profileTypeRepositoryImpl;

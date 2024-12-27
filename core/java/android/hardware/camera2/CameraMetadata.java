@@ -359,7 +359,6 @@ public abstract class CameraMetadata<TKey> {
         return Collections.unmodifiableList(getKeys(getClass(), getKeyClass(), this, null, true));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     <TKey> ArrayList<TKey> getKeys(
             Class<?> cls,
             Class<TKey> cls2,
@@ -421,7 +420,6 @@ public abstract class CameraMetadata<TKey> {
         return anonymousClass1;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private static <TKey> boolean shouldKeyBeAdded(
             TKey tkey, Field field, int[] filterTags, boolean includeSynthetic) {
         CameraMetadataNative.Key nativeKey;

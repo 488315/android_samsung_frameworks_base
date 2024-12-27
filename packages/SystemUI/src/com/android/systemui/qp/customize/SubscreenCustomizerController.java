@@ -50,8 +50,6 @@ public final class SubscreenCustomizerController extends ViewController implemen
     public final ArrayList mSubscreenRecords;
     public final UiEventLogger mUiEventLogger;
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.qp.customize.SubscreenCustomizerController$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.qp.customize.SubscreenCustomizerController$1] */
     public SubscreenCustomizerController(SubscreenCustomizer subscreenCustomizer, QSTileHost qSTileHost) {
         super(subscreenCustomizer);
         this.mSubscreenRecords = new ArrayList();
@@ -270,7 +268,6 @@ public final class SubscreenCustomizerController extends ViewController implemen
                 public final /* synthetic */ float val$pointY;
                 public final /* synthetic */ View val$v;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass3(SubscreenCustomizer subscreenCustomizer2, View qSTileView2, View qSTileView22, float f3, float f22) {
                     super(qSTileView22);
                     this.val$v = qSTileView22;

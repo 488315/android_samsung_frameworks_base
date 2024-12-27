@@ -28,7 +28,6 @@ public final class AppCompatAspectRatioPolicy {
         this.mAppCompatAspectRatioState = appCompatAspectRatioState;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0078  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

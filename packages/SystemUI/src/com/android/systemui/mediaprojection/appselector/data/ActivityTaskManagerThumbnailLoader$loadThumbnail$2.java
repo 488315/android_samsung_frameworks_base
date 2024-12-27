@@ -19,7 +19,6 @@ final class ActivityTaskManagerThumbnailLoader$loadThumbnail$2 extends SuspendLa
     int label;
     final /* synthetic */ ActivityTaskManagerThumbnailLoader this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ActivityTaskManagerThumbnailLoader$loadThumbnail$2(ActivityTaskManagerThumbnailLoader activityTaskManagerThumbnailLoader, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = activityTaskManagerThumbnailLoader;

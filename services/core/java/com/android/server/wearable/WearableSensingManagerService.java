@@ -70,7 +70,6 @@ public final class WearableSensingManagerService extends AbstractMasterSystemSer
     public final class WearableSensingManagerInternal extends IWearableSensingManager.Stub {
         public WearableSensingManagerInternal() {}
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,

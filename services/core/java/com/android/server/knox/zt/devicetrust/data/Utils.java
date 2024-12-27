@@ -30,8 +30,6 @@ public final class Utils {
         return IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x000d A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:7:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

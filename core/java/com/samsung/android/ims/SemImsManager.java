@@ -176,7 +176,6 @@ public class SemImsManager {
         this.mPhoneId = phoneId;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public SemImsService getImsService() {
         return SemImsService.Stub.asInterface(getSystemService(SERVICE_NAME));
     }
@@ -204,7 +203,6 @@ public class SemImsManager {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void registerPreviousListeners(SemImsService imsService) {
         Log.d(
                 LOG_TAG,

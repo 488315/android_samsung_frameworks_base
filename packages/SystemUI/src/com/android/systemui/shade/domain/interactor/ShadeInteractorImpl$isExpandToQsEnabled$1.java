@@ -16,7 +16,6 @@ final class ShadeInteractorImpl$isExpandToQsEnabled$1 extends SuspendLambda impl
     /* synthetic */ boolean Z$3;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ShadeInteractorImpl$isExpandToQsEnabled$1(UserSwitcherInteractor userSwitcherInteractor, Continuation continuation) {
         super(6, continuation);
         this.$userSwitcherInteractor = userSwitcherInteractor;

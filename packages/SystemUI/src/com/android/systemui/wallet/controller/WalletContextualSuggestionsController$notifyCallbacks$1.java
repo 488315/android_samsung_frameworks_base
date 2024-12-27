@@ -18,7 +18,6 @@ final class WalletContextualSuggestionsController$notifyCallbacks$1 extends Susp
     int label;
     final /* synthetic */ WalletContextualSuggestionsController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WalletContextualSuggestionsController$notifyCallbacks$1(WalletContextualSuggestionsController walletContextualSuggestionsController, List<WalletCard> list, Continuation continuation) {
         super(2, continuation);
         this.this$0 = walletContextualSuggestionsController;

@@ -60,9 +60,6 @@ public final class CoverHideAnimator {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.sepunion.cover.CoverHideAnimator$2] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.sepunion.cover.CoverHideAnimator$3] */
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.server.sepunion.cover.CoverHideAnimator$1] */
     public CoverHideAnimator(Context context, Looper looper) {
         this.mContext = context;
         this.mWm = (WindowManager) context.getSystemService("window");

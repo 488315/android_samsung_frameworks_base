@@ -118,43 +118,6 @@ public final class SubscreenNotificationController implements NotifCollectionLis
         
             if (r2.mDeviceModel.isNotShwonNotificationState(r2.mSelectNotificationInfo.mRow.mEntry) == false) goto L92;
          */
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:54:0x01c6  */
-        /* JADX WARN: Removed duplicated region for block: B:57:0x01cf  */
-        /* JADX WARN: Type inference failed for: r10v24, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r10v25, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r10v3 */
-        /* JADX WARN: Type inference failed for: r10v4, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r10v6 */
-        /* JADX WARN: Type inference failed for: r10v7, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r11v0 */
-        /* JADX WARN: Type inference failed for: r11v1, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r11v13, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r11v14, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r11v2 */
-        /* JADX WARN: Type inference failed for: r11v3, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.notification.SubscreenDeviceModelParent] */
-        /* JADX WARN: Type inference failed for: r2v29 */
-        /* JADX WARN: Type inference failed for: r2v30, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r2v37, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r2v62 */
-        /* JADX WARN: Type inference failed for: r2v63, types: [java.lang.Boolean, java.lang.Object] */
-        /* JADX WARN: Type inference failed for: r2v68 */
-        /* JADX WARN: Type inference failed for: r2v69, types: [java.lang.Boolean, java.lang.Object] */
-        /* JADX WARN: Type inference failed for: r2v74, types: [java.lang.Boolean] */
-        /* JADX WARN: Type inference failed for: r2v76, types: [java.lang.Boolean] */
-        /* JADX WARN: Type inference failed for: r2v81 */
-        /* JADX WARN: Type inference failed for: r2v82, types: [java.lang.Object] */
-        /* JADX WARN: Type inference failed for: r2v84 */
-        /* JADX WARN: Type inference failed for: r2v85, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r2v88, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r7v2, types: [android.view.View] */
-        /* JADX WARN: Type inference failed for: r7v43 */
-        /* JADX WARN: Type inference failed for: r7v44 */
-        /* JADX WARN: Type inference failed for: r7v45 */
-        /* JADX WARN: Type inference failed for: r9v3 */
-        /* JADX WARN: Type inference failed for: r9v4, types: [com.android.systemui.statusbar.notification.SubscreenNotificationInfo] */
-        /* JADX WARN: Type inference failed for: r9v6, types: [com.android.systemui.statusbar.notification.SubscreenNotificationInfo] */
         @Override // com.android.systemui.statusbar.notification.collection.inflation.BindEventManager.Listener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -182,9 +145,6 @@ public final class SubscreenNotificationController implements NotifCollectionLis
         new Companion(null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x00f9  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0102  */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.notification.SubscreenNotificationController$mRemoteInputCancelListener$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

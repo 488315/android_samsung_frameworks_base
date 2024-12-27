@@ -10,13 +10,11 @@ public abstract class VerifiedInputEvent implements Parcelable {
     public static final Parcelable.Creator<VerifiedInputEvent> CREATOR =
             new Parcelable.Creator<
                     VerifiedInputEvent>() { // from class: android.view.VerifiedInputEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VerifiedInputEvent[] newArray(int size) {
                     return new VerifiedInputEvent[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VerifiedInputEvent createFromParcel(Parcel in) {
                     int type = VerifiedInputEvent.peekInt(in);
@@ -91,7 +89,6 @@ public abstract class VerifiedInputEvent implements Parcelable {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int peekInt(Parcel parcel) {
         int initialDataPosition = parcel.dataPosition();
         int data = parcel.readInt();

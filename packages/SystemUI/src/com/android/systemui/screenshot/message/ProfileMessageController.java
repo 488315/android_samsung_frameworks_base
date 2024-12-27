@@ -21,8 +21,6 @@ public final class ProfileMessageController {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class FirstRunProfile {
         public static final /* synthetic */ FirstRunProfile[] $VALUES;
         public static final FirstRunProfile PRIVATE;
@@ -118,16 +116,6 @@ public final class ProfileMessageController {
         this.profileTypes = profileTypeRepository;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x010e  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0113  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0073  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00a9 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00aa A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0079  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

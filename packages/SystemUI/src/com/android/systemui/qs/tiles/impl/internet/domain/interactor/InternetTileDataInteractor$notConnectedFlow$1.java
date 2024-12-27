@@ -17,7 +17,6 @@ final class InternetTileDataInteractor$notConnectedFlow$1 extends SuspendLambda 
     int label;
     final /* synthetic */ InternetTileDataInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InternetTileDataInteractor$notConnectedFlow$1(InternetTileDataInteractor internetTileDataInteractor, Continuation continuation) {
         super(3, continuation);
         this.this$0 = internetTileDataInteractor;

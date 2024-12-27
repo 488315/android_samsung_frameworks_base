@@ -35,9 +35,6 @@ public final class KeyRemapper implements InputManager.InputDeviceListener {
                         new Handler
                                 .Callback() { // from class:
                                               // com.android.server.input.KeyRemapper$$ExternalSyntheticLambda0
-                            /* JADX WARN: Multi-variable type inference failed */
-                            /* JADX WARN: Type inference failed for: r7v1, types: [com.android.server.input.KeyRemapper, java.lang.Object] */
-                            /* JADX WARN: Type inference failed for: r7v5, types: [com.android.server.input.PersistentDataStore] */
                             @Override // android.os.Handler.Callback
                             public final boolean handleMessage(Message message) {
                                 KeyRemapper keyRemapper = KeyRemapper.this;

@@ -185,7 +185,6 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         @Override // com.android.net.module.util.DnsSvcbRecord.SvcParam
         public short[] getValue() {
             return null;
@@ -213,7 +212,6 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         @Override // com.android.net.module.util.DnsSvcbRecord.SvcParam
         public List<String> getValue() {
             return Collections.unmodifiableList(this.mValue);
@@ -234,7 +232,6 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         @Override // com.android.net.module.util.DnsSvcbRecord.SvcParam
         public Void getValue() {
             return null;
@@ -257,8 +254,6 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
             this.mValue = Short.toUnsignedInt(buf.getShort());
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // com.android.net.module.util.DnsSvcbRecord.SvcParam
         public Integer getValue() {
             return Integer.valueOf(this.mValue);
@@ -284,7 +279,6 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         @Override // com.android.net.module.util.DnsSvcbRecord.SvcParam
         public List<InetAddress> getValue() {
             return Collections.unmodifiableList(this.mValue);
@@ -300,7 +294,6 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
     }
 
     private static class SvcParamIpv4Hint extends SvcParamIpHint {
-        /* JADX WARN: Illegal instructions before constructor call */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -344,7 +337,6 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
             this.mValue = new String(value, StandardCharsets.UTF_8);
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         @Override // com.android.net.module.util.DnsSvcbRecord.SvcParam
         public String getValue() {
             return this.mValue;
@@ -366,7 +358,6 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
             buf.get(this.mValue);
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         @Override // com.android.net.module.util.DnsSvcbRecord.SvcParam
         public byte[] getValue() {
             return null;
@@ -383,7 +374,6 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String toKeyName(int key) {
         switch (key) {
             case 0:
@@ -421,7 +411,6 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
     private static class SvcParamValueUtil {
         private SvcParamValueUtil() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static List<String> toStringList(ByteBuffer buf)
                 throws BufferUnderflowException, DnsPacket.ParseException {
             List<String> out = new ArrayList<>();
@@ -437,7 +426,6 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
             return out;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static short[] toShortArray(ByteBuffer buf)
                 throws BufferUnderflowException, DnsPacket.ParseException {
             if (buf.remaining() % 2 != 0) {
@@ -449,7 +437,6 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
             return out;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static List<InetAddress> toInetAddressList(ByteBuffer buf, int addrLen)
                 throws BufferUnderflowException, DnsPacket.ParseException {
             if (buf.remaining() % addrLen != 0) {

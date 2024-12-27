@@ -161,7 +161,6 @@ public class BrightnessDialog extends Activity {
         super.onResume();
     }
 
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.systemui.settings.brightness.SecBrightnessDialogController$createTimer$1] */
     @Override // android.app.Activity
     public final void onStart() {
         super.onStart();

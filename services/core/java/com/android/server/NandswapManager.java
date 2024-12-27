@@ -550,13 +550,10 @@ public final class NandswapManager extends JobService {
         public final ProcessingManager normalStat = new ProcessingManager();
         public final ProcessingManager pprStat = new ProcessingManager();
 
-        /* JADX WARN: Can't wrap try/catch for region: R(10:0|1|(2:2|3)|(7:8|9|10|11|(1:13)(1:17)|14|15)|20|10|11|(0)(0)|14|15) */
         /* JADX WARN: Code restructure failed: missing block: B:18:0x0081, code lost:
 
            android.util.Slog.e("NandswapManager", "Failed to read stats from /sys/block/zram0/bd_stat");
         */
-        /* JADX WARN: Removed duplicated region for block: B:13:0x007b A[Catch: IOException -> 0x0081, TryCatch #1 {IOException -> 0x0081, blocks: (B:11:0x005f, B:13:0x007b, B:17:0x007e), top: B:10:0x005f }] */
-        /* JADX WARN: Removed duplicated region for block: B:17:0x007e A[Catch: IOException -> 0x0081, TRY_LEAVE, TryCatch #1 {IOException -> 0x0081, blocks: (B:11:0x005f, B:13:0x007b, B:17:0x007e), top: B:10:0x005f }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

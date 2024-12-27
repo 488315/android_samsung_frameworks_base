@@ -27,7 +27,6 @@ public class DynamicCodeLoggingService extends JobService {
         public final JobParameters mParams;
         public final /* synthetic */ DynamicCodeLoggingService this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public IdleLoggingThread(
                 DynamicCodeLoggingService dynamicCodeLoggingService,
                 JobParameters jobParameters,
@@ -47,7 +46,6 @@ public class DynamicCodeLoggingService extends JobService {
             }
         }
 
-        /* JADX WARN: Can't wrap try/catch for region: R(16:124|125|(1:127)(2:191|(1:193)(3:194|165|166))|128|129|(1:131)(6:170|171|172|173|174|175)|132|(1:134)(1:169)|135|(1:168)(1:139)|140|(6:143|(1:145)(5:153|154|155|156|157)|146|(3:148|149|150)(1:152)|151|141)|163|164|165|166) */
         /* JADX WARN: Code restructure failed: missing block: B:189:0x0284, code lost:
 
            r0 = e;
@@ -61,12 +59,6 @@ public class DynamicCodeLoggingService extends JobService {
            r6 = r13;
            r2 = r14;
         */
-        /* JADX WARN: Removed duplicated region for block: B:134:0x02a9  */
-        /* JADX WARN: Removed duplicated region for block: B:143:0x02f8  */
-        /* JADX WARN: Removed duplicated region for block: B:148:0x031b A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:152:0x02f2 A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:169:0x02ac  */
-        /* JADX WARN: Removed duplicated region for block: B:205:0x0205  */
         @Override // java.lang.Thread, java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.

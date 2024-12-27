@@ -13,8 +13,6 @@ public final class CrossProfileAppsService extends SystemService {
         this.mServiceImpl = new CrossProfileAppsServiceImpl(context, new CrossProfileAppsServiceImpl.InjectorImpl(context));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [android.os.IBinder, com.android.server.pm.CrossProfileAppsServiceImpl] */
     @Override // com.android.server.SystemService
     public final void onStart() {
         ?? r1 = this.mServiceImpl;

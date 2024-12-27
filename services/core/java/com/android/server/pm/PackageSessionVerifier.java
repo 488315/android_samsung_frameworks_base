@@ -479,8 +479,6 @@ public final class PackageSessionVerifier {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.pm.PackageSessionVerifier$1] */
     public final void verifyAPK(
             final PackageInstallerSession packageInstallerSession,
             final PackageInstallerSession$$ExternalSyntheticLambda8

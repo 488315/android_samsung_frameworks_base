@@ -10,7 +10,6 @@ public class Cdma2000RegistrationInfo implements Parcelable {
     public static final Parcelable.Creator<Cdma2000RegistrationInfo> CREATOR =
             new Parcelable.Creator<Cdma2000RegistrationInfo>() { // from class:
                 // android.hardware.radio.network.Cdma2000RegistrationInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Cdma2000RegistrationInfo createFromParcel(Parcel _aidl_source) {
                     Cdma2000RegistrationInfo _aidl_out = new Cdma2000RegistrationInfo();
@@ -18,7 +17,6 @@ public class Cdma2000RegistrationInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Cdma2000RegistrationInfo[] newArray(int _aidl_size) {
                     return new Cdma2000RegistrationInfo[_aidl_size];

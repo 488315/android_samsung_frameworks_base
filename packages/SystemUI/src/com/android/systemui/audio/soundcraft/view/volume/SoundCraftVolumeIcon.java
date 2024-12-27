@@ -83,7 +83,6 @@ public final class SoundCraftVolumeIcon extends FrameLayout implements SoundCraf
         return (VolumeBarViewModel) this.viewModel$delegate.getValue();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void updateLayout$2(int i) {
         int i2;
         BluetoothDevice activeDevice;

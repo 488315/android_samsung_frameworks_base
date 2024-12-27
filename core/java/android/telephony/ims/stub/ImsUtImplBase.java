@@ -48,7 +48,6 @@ public class ImsUtImplBase {
 
         AnonymousClass1() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$close$0() {
             ImsUtImplBase.this.close();
         }
@@ -66,7 +65,6 @@ public class ImsUtImplBase {
                     "close");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$queryCallBarring$1(int cbType) {
             return Integer.valueOf(ImsUtImplBase.this.queryCallBarring(cbType));
         }
@@ -90,7 +88,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$queryCallForward$2(int condition, String number) {
             return Integer.valueOf(ImsUtImplBase.this.queryCallForward(condition, number));
         }
@@ -116,7 +113,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$queryCallWaiting$3() {
             return Integer.valueOf(ImsUtImplBase.this.queryCallWaiting());
         }
@@ -140,7 +136,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$queryCLIR$4() {
             return Integer.valueOf(ImsUtImplBase.this.queryCLIR());
         }
@@ -164,7 +159,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$queryCLIP$5() {
             return Integer.valueOf(ImsUtImplBase.this.queryCLIP());
         }
@@ -188,7 +182,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$queryCOLR$6() {
             return Integer.valueOf(ImsUtImplBase.this.queryCOLR());
         }
@@ -212,7 +205,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$queryCOLP$7() {
             return Integer.valueOf(ImsUtImplBase.this.queryCOLP());
         }
@@ -236,7 +228,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$transact$8(Bundle ssInfo) {
             return Integer.valueOf(ImsUtImplBase.this.transact(ssInfo));
         }
@@ -260,7 +251,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$updateCallBarring$9(
                 int cbType, int action, String[] barrList) {
             return Integer.valueOf(ImsUtImplBase.this.updateCallBarring(cbType, action, barrList));
@@ -287,7 +277,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$updateCallForward$10(
                 int action, int condition, String number, int serviceClass, int timeSeconds) {
             return Integer.valueOf(
@@ -325,7 +314,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$updateCallWaiting$11(
                 boolean enable, int serviceClass) {
             return Integer.valueOf(ImsUtImplBase.this.updateCallWaiting(enable, serviceClass));
@@ -352,7 +340,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$updateCLIR$12(int clirMode) {
             return Integer.valueOf(ImsUtImplBase.this.updateCLIR(clirMode));
         }
@@ -376,7 +363,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$updateCLIP$13(boolean enable) {
             return Integer.valueOf(ImsUtImplBase.this.updateCLIP(enable));
         }
@@ -400,7 +386,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$updateCOLR$14(int presentation) {
             return Integer.valueOf(ImsUtImplBase.this.updateCOLR(presentation));
         }
@@ -424,7 +409,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$updateCOLP$15(boolean enable) {
             return Integer.valueOf(ImsUtImplBase.this.updateCOLP(enable));
         }
@@ -461,7 +445,6 @@ public class ImsUtImplBase {
                     "setListener");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setListener$16(IImsUtListener listener) {
             if (this.mUtListener != null
                     && !this.mUtListener.getListenerInterface().asBinder().isBinderAlive()) {
@@ -488,7 +471,6 @@ public class ImsUtImplBase {
             ImsUtImplBase.this.setListener(this.mUtListener);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$queryCallBarringForServiceClass$17(
                 int cbType, int serviceClass) {
             return Integer.valueOf(
@@ -516,7 +498,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$updateCallBarringForServiceClass$18(
                 int cbType, int action, String[] barrList, int serviceClass) {
             return Integer.valueOf(
@@ -549,7 +530,6 @@ public class ImsUtImplBase {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$updateCallBarringWithPassword$19(
                 int cbType, int action, String[] barrList, int serviceClass, String password) {
             return Integer.valueOf(

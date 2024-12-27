@@ -23,7 +23,6 @@ final class ShadeLockscreenInteractorImpl$transitionToExpandedShade$1 extends Su
         int label;
         final /* synthetic */ ShadeLockscreenInteractorImpl this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(ShadeLockscreenInteractorImpl shadeLockscreenInteractorImpl, Continuation continuation) {
             super(2, continuation);
             this.this$0 = shadeLockscreenInteractorImpl;
@@ -53,7 +52,6 @@ final class ShadeLockscreenInteractorImpl$transitionToExpandedShade$1 extends Su
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ShadeLockscreenInteractorImpl$transitionToExpandedShade$1(long j, ShadeLockscreenInteractorImpl shadeLockscreenInteractorImpl, Continuation continuation) {
         super(2, continuation);
         this.$delay = j;

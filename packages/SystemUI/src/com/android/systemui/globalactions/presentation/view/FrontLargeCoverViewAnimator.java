@@ -54,7 +54,6 @@ public final class FrontLargeCoverViewAnimator implements GlobalActionsAnimator 
     public final ViewStateController mViewStateController;
     public FrontLargeCoverViewAnimator$$ExternalSyntheticLambda1 mViewTreeObserverListener;
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.globalactions.presentation.view.FrontLargeCoverViewAnimator$1] */
     public FrontLargeCoverViewAnimator(Context context, ConditionChecker conditionChecker, LogWrapper logWrapper, HandlerUtil handlerUtil, ResourceFactory resourceFactory, ViewStateController viewStateController) {
         this.mContext = context;
         this.mConditionChecker = conditionChecker;
@@ -226,7 +225,6 @@ public final class FrontLargeCoverViewAnimator implements GlobalActionsAnimator 
         this.mViewStateController.setState(ViewAnimationState.IDLE);
     }
 
-    /* JADX WARN: Type inference failed for: r0v28, types: [com.android.systemui.globalactions.presentation.view.FrontLargeCoverViewAnimator$$ExternalSyntheticLambda1] */
     public final void startShowConfirmAnimation() {
         FrontLargeCoverContentView frontLargeCoverContentView = FrontLargeCoverContentView.this;
         FrontLargeCoverContentItemView frontLargeCoverContentItemView = new FrontLargeCoverContentItemView(frontLargeCoverContentView.mDialog.getContext(), frontLargeCoverContentView.mSelectedViewModel, frontLargeCoverContentView.mConfirmView, frontLargeCoverContentView.mIsIconOnly, frontLargeCoverContentView.mIsWhiteTheme, frontLargeCoverContentView.mIsCameraViewCover, frontLargeCoverContentView.mResourceFactory);

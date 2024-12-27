@@ -96,7 +96,6 @@ public final class CommunalContent {
                 final IntRect intRect = new IntRect(mo528measureBRTryo0.get(BlueprintAlignmentLines$LockIcon.Left), mo528measureBRTryo0.get(BlueprintAlignmentLines$LockIcon.Top), mo528measureBRTryo0.get(BlueprintAlignmentLines$LockIcon.Right), mo528measureBRTryo0.get(BlueprintAlignmentLines$LockIcon.Bottom));
                 final Placeable mo528measureBRTryo02 = measurable.mo528measureBRTryo0(Constraints.m717copyZbe2FdA$default(m717copyZbe2FdA$default, 0, 0, 0, intRect.top, 7));
                 layout$1 = measureScope.layout$1(Constraints.m724getMaxWidthimpl(j), Constraints.m723getMaxHeightimpl(j), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalContent$Content$1.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -161,7 +160,6 @@ public final class CommunalContent {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalContent$Content$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

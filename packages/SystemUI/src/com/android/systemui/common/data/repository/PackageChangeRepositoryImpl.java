@@ -33,7 +33,6 @@ public final class PackageChangeRepositoryImpl implements PackageChangeRepositor
         this.packageInstallSessionsForPrimaryUser = packageInstallerMonitor.installSessionsForPrimaryUser;
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.common.data.repository.PackageChangeRepositoryImpl$packageChanged$$inlined$filter$1] */
     public final PackageChangeRepositoryImpl$packageChanged$$inlined$filter$1 packageChanged(final UserHandle userHandle) {
         PackageUpdateMonitor packageUpdateMonitor = (PackageUpdateMonitor) this.monitor$delegate.getValue();
         final FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(packageUpdateMonitor._packageChanged, new PackageUpdateMonitor$packageChanged$1(packageUpdateMonitor.logger));
@@ -68,8 +67,6 @@ public final class PackageChangeRepositoryImpl implements PackageChangeRepositor
                     this.$user$inlined = userHandle;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

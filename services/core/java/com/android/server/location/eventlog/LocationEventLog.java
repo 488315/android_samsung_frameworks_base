@@ -243,7 +243,6 @@ public final class LocationEventLog extends LocalEventLog {
         public final Object mIdentity;
         public final boolean mPermitted;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ ProviderClientPermittedEvent(
                 String str, boolean z, Object obj, int i) {
             super(str);

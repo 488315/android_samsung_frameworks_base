@@ -14,13 +14,11 @@ public final class SoundTriggerFailure implements Parcelable {
             new Parcelable.Creator<
                     SoundTriggerFailure>() { // from class:
                                              // android.service.voice.SoundTriggerFailure.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SoundTriggerFailure[] newArray(int size) {
                     return new SoundTriggerFailure[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SoundTriggerFailure createFromParcel(Parcel in) {
                     return new SoundTriggerFailure(in.readInt(), in.readString8());

@@ -7,13 +7,11 @@ public final class PromptContentItemPlainText implements PromptContentItemParcel
     public static final Parcelable.Creator<PromptContentItemPlainText> CREATOR =
             new Parcelable.Creator<PromptContentItemPlainText>() { // from class:
                 // android.hardware.biometrics.PromptContentItemPlainText.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PromptContentItemPlainText createFromParcel(Parcel in) {
                     return new PromptContentItemPlainText(in.readString());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PromptContentItemPlainText[] newArray(int size) {
                     return new PromptContentItemPlainText[size];

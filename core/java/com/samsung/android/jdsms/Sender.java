@@ -92,7 +92,6 @@ public final class Sender {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendMessage(DsmsMessage message) {
         Bundle bundle = new Bundle();
         bundle.putString("tracking_id", TRACKING_ID);

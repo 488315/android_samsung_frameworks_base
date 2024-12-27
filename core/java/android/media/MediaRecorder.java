@@ -131,7 +131,6 @@ public class MediaRecorder
 
     private static final native void native_init();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final native void native_releaseSemPersistentSurface(Surface surface);
 
     private native void native_reset();

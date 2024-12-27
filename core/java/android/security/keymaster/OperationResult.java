@@ -8,13 +8,11 @@ public class OperationResult implements Parcelable {
     public static final Parcelable.Creator<OperationResult> CREATOR =
             new Parcelable.Creator<
                     OperationResult>() { // from class: android.security.keymaster.OperationResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OperationResult createFromParcel(Parcel in) {
                     return new OperationResult(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OperationResult[] newArray(int length) {
                     return new OperationResult[length];

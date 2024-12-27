@@ -15,7 +15,6 @@ public final class FromLockscreenTransitionInteractor$listenForLockscreenToOcclu
     int label;
     final /* synthetic */ FromLockscreenTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromLockscreenTransitionInteractor$listenForLockscreenToOccludedOrDreaming$$inlined$launch$default$2(String str, Continuation continuation, FromLockscreenTransitionInteractor fromLockscreenTransitionInteractor) {
         super(2, continuation);
         this.$spanName = str;
@@ -34,8 +33,6 @@ public final class FromLockscreenTransitionInteractor$listenForLockscreenToOcclu
         return ((FromLockscreenTransitionInteractor$listenForLockscreenToOccludedOrDreaming$$inlined$launch$default$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x009f  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

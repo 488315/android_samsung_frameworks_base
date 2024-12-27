@@ -19,8 +19,6 @@ public final class CornerActionSelectPopup {
     public final AnonymousClass1 mReceiver;
     public final WindowManager mWindowManager;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.content.BroadcastReceiver, com.android.server.accessibility.autoaction.CornerActionSelectPopup$1] */
     public CornerActionSelectPopup(Context context, int i) {
         ?? r1 = new BroadcastReceiver() { // from class: com.android.server.accessibility.autoaction.CornerActionSelectPopup.1
             @Override // android.content.BroadcastReceiver

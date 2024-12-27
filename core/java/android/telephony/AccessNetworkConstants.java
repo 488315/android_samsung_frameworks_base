@@ -79,7 +79,6 @@ public final class AccessNetworkConstants {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public static int fromString(String str) {
             char c;
             String upperCase = str.toUpperCase(Locale.ROOT);

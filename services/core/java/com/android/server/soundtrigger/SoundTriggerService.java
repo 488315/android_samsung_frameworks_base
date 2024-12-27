@@ -757,7 +757,6 @@ public final class SoundTriggerService extends SystemService {
             public final ArraySet mRunningOpIds = new ArraySet();
             public final Handler mHandler = new Handler(Looper.getMainLooper());
 
-            /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.soundtrigger.SoundTriggerService$SoundTriggerSessionStub$RemoteSoundTriggerDetectionService$1] */
             public RemoteSoundTriggerDetectionService(
                     UUID uuid,
                     Bundle bundle,
@@ -983,7 +982,6 @@ public final class SoundTriggerService extends SystemService {
                                 null));
             }
 
-            /* JADX WARN: Type inference failed for: r3v0, types: [com.android.server.soundtrigger.SoundTriggerService$SoundTriggerSessionStub$RemoteSoundTriggerDetectionService$$ExternalSyntheticLambda2] */
             public final void onGenericSoundTriggerDetected(
                     final SoundTrigger.GenericRecognitionEvent genericRecognitionEvent) {
                 runOrAddOperation(
@@ -2192,7 +2190,6 @@ public final class SoundTriggerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r13v0, types: [com.android.server.soundtrigger.SoundTriggerService$$ExternalSyntheticLambda2] */
     public final SoundTriggerHelper newSoundTriggerHelper(
             SoundTrigger.ModuleProperties moduleProperties, EventLogger eventLogger, boolean z) {
         Identity identity = new Identity();

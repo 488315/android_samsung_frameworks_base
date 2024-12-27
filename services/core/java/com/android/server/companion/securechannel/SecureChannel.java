@@ -243,7 +243,6 @@ public final class SecureChannel {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void exchangeHandshake() {
         if (this.mConnectionContext != null) {
             Slog.d("CDM_SecureChannel", "Ukey2 handshake is already completed.");

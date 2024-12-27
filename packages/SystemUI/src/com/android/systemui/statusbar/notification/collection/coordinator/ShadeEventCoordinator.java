@@ -72,13 +72,11 @@ public final class ShadeEventCoordinator implements Coordinator, NotifShadeEvent
     private Runnable mNotifRemovedByUserCallback;
     private Runnable mShadeEmptiedCallback;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.notification.collection.coordinator.ShadeEventCoordinator$mNotifCollectionListener$1] */
     public ShadeEventCoordinator(Executor executor, ShadeEventCoordinatorLogger shadeEventCoordinatorLogger) {
         this.mMainExecutor = executor;
         this.mLogger = shadeEventCoordinatorLogger;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onBeforeRenderList(List<? extends ListEntry> list) {
         if (this.mEntryRemoved && list.isEmpty()) {
             this.mLogger.logShadeEmptied();

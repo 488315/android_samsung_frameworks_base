@@ -13,13 +13,11 @@ final class ItemImpl extends Item {
     public static final Parcelable.Creator<ItemImpl> CREATOR =
             new Parcelable.Creator<
                     ItemImpl>() { // from class: com.samsung.android.allshare.ItemImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ItemImpl createFromParcel(Parcel src) {
                     return new ItemImpl(src);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ItemImpl[] newArray(int size) {
                     return new ItemImpl[size];
@@ -235,13 +233,11 @@ final class ItemImpl extends Item {
                     new Parcelable.Creator<
                             ResourceImpl>() { // from class:
                                               // com.samsung.android.allshare.ItemImpl.ResourceImpl.1
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public ResourceImpl createFromParcel(Parcel source) {
                             return new ResourceImpl(source);
                         }
 
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public ResourceImpl[] newArray(int size) {
                             return new ResourceImpl[size];
@@ -341,13 +337,11 @@ final class ItemImpl extends Item {
                     new Parcelable.Creator<
                             ResourceImpl>() { // from class:
                                               // com.samsung.android.allshare.ItemImpl.ResourceImpl.1
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public ResourceImpl createFromParcel(Parcel source) {
                             return new ResourceImpl(source);
                         }
 
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public ResourceImpl[] newArray(int size) {
                             return new ResourceImpl[size];

@@ -16,7 +16,6 @@ public class RotateAnimation extends Animation<Vector3> {
         super(context, AnimationType.ROTATE, id, name);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.vekit.Animation.Animation
     public void rollback() {
         if (isEnableRollback()) {

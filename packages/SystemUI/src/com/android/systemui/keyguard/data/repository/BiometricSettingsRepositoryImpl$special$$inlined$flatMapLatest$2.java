@@ -19,7 +19,6 @@ public final class BiometricSettingsRepositoryImpl$special$$inlined$flatMapLates
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$2(Continuation continuation, AuthController authController) {
         super(3, continuation);
         this.$authController$inlined = authController;

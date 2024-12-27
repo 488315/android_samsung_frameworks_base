@@ -16,7 +16,6 @@ final class CommunalSceneRepositoryImpl$changeScene$1 extends SuspendLambda impl
     int label;
     final /* synthetic */ CommunalSceneRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalSceneRepositoryImpl$changeScene$1(CommunalSceneRepositoryImpl communalSceneRepositoryImpl, SceneKey sceneKey, TransitionKey transitionKey, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalSceneRepositoryImpl;

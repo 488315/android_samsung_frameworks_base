@@ -6,13 +6,11 @@ public class HqmStatsImpl implements Parcelable {
     public static final int CF_SERVER = 1;
     public static final Parcelable.Creator<HqmStatsImpl> CREATOR =
             new Parcelable.Creator<HqmStatsImpl>() { // from class: android.os.HqmStatsImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HqmStatsImpl createFromParcel(Parcel in) {
                     return new HqmStatsImpl(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HqmStatsImpl[] newArray(int size) {
                     return new HqmStatsImpl[size];

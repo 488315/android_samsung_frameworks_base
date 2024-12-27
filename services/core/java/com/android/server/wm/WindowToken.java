@@ -112,7 +112,6 @@ public class WindowToken extends WindowContainer {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.wm.WindowToken$$ExternalSyntheticLambda0] */
     public WindowToken(
             WindowManagerService windowManagerService,
             IBinder iBinder,

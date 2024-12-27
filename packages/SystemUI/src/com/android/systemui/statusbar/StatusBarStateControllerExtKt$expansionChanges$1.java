@@ -17,7 +17,6 @@ final class StatusBarStateControllerExtKt$expansionChanges$1 extends SuspendLamb
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public StatusBarStateControllerExtKt$expansionChanges$1(StatusBarStateController statusBarStateController, Continuation continuation) {
         super(2, continuation);
         this.$this_expansionChanges = statusBarStateController;
@@ -35,8 +34,6 @@ final class StatusBarStateControllerExtKt$expansionChanges$1 extends SuspendLamb
         return ((StatusBarStateControllerExtKt$expansionChanges$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.plugins.statusbar.StatusBarStateController$StateListener, com.android.systemui.statusbar.StatusBarStateControllerExtKt$expansionChanges$1$listener$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -54,7 +51,6 @@ final class StatusBarStateControllerExtKt$expansionChanges$1 extends SuspendLamb
             this.$this_expansionChanges.addCallback(r1);
             final StatusBarStateController statusBarStateController = this.$this_expansionChanges;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.StatusBarStateControllerExtKt$expansionChanges$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -26,13 +26,11 @@ public final class MutableMediaBuffer extends MediaBufferBase implements PlaceHo
             new Parcelable.Creator<
                     MutableMediaBuffer>() { // from class:
                                             // com.samsung.android.sume.core.buffer.MutableMediaBuffer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MutableMediaBuffer createFromParcel(Parcel in) {
                     return new MutableMediaBuffer(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MutableMediaBuffer[] newArray(int size) {
                     return new MutableMediaBuffer[size];
@@ -178,7 +176,6 @@ public final class MutableMediaBuffer extends MediaBufferBase implements PlaceHo
         this.buffer = instance;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.functional.PlaceHolder
     public MediaBuffer reset() {
         MediaBuffer ret = this.buffer;

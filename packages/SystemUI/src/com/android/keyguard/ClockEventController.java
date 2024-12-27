@@ -145,8 +145,6 @@ public final class ClockEventController {
             }
         }
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.keyguard.ClockEventController$TimeListener$predrawListener$1] */
-        /* JADX WARN: Type inference failed for: r1v2, types: [com.android.keyguard.ClockEventController$TimeListener$secondsRunnable$1] */
         public TimeListener(ClockFaceController clockFaceController, DelayableExecutor delayableExecutor) {
             this.clockFace = clockFaceController;
             this.executor = delayableExecutor;
@@ -186,10 +184,6 @@ public final class ClockEventController {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.keyguard.ClockEventController$keyguardUpdateMonitorCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.keyguard.ClockEventController$configListener$1] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.keyguard.ClockEventController$batteryCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.keyguard.ClockEventController$localeBroadcastReceiver$1] */
     public ClockEventController(KeyguardInteractor keyguardInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, BroadcastDispatcher broadcastDispatcher, BatteryController batteryController, KeyguardUpdateMonitor keyguardUpdateMonitor, ConfigurationController configurationController, Resources resources, Context context, DelayableExecutor delayableExecutor, Executor executor, ClockMessageBuffers clockMessageBuffers, FeatureFlagsClassic featureFlagsClassic, ZenModeController zenModeController) {
         this.keyguardInteractor = keyguardInteractor;
         this.keyguardTransitionInteractor = keyguardTransitionInteractor;
@@ -399,7 +393,6 @@ public final class ClockEventController {
         });
     }
 
-    /* JADX WARN: Type inference failed for: r0v12, types: [com.android.keyguard.ClockEventController$connectClock$10] */
     public final void setClock(final ClockController clockController) {
         ViewTreeObserver viewTreeObserver;
         ClockController clockController2 = this.clock;

@@ -181,13 +181,11 @@ public abstract class SmartspaceService extends Service {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doCreateSmartspaceSession(SmartspaceConfig config, SmartspaceSessionId sessionId) {
         this.mSessionCallbacks.put(sessionId, new ArrayList<>());
         onCreateSmartspaceSession(config, sessionId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doRegisterSmartspaceUpdates(
             SmartspaceSessionId sessionId, ISmartspaceCallback callback) {
         final ArrayList<CallbackWrapper> callbacks = this.mSessionCallbacks.get(sessionId);
@@ -211,7 +209,6 @@ public abstract class SmartspaceService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$doRegisterSmartspaceUpdates$1(
             final ArrayList callbacks, final CallbackWrapper callbackWrapper) {
         this.mHandler.post(
@@ -225,7 +222,6 @@ public abstract class SmartspaceService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doUnregisterSmartspaceUpdates(
             SmartspaceSessionId sessionId, ISmartspaceCallback callback) {
         ArrayList<CallbackWrapper> callbacks = this.mSessionCallbacks.get(sessionId);
@@ -237,7 +233,6 @@ public abstract class SmartspaceService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doRequestPredictionUpdate(SmartspaceSessionId sessionId) {
         ArrayList<CallbackWrapper> callbacks = this.mSessionCallbacks.get(sessionId);
         if (callbacks != null && !callbacks.isEmpty()) {
@@ -255,7 +250,6 @@ public abstract class SmartspaceService extends Service {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: removeCallbackWrapper, reason: merged with bridge method [inline-methods] */
     public void lambda$doRegisterSmartspaceUpdates$0(
             ArrayList<CallbackWrapper> callbacks, CallbackWrapper wrapper) {
@@ -266,7 +260,6 @@ public abstract class SmartspaceService extends Service {
         wrapper.destroy();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doDestroy(SmartspaceSessionId sessionId) {
         super.onDestroy();
         ArrayList<CallbackWrapper> callbacks = this.mSessionCallbacks.remove(sessionId);
@@ -293,7 +286,6 @@ public abstract class SmartspaceService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class CallbackWrapper
             implements Consumer<List<SmartspaceTarget>>, IBinder.DeathRecipient {
         private ISmartspaceCallback mCallback;

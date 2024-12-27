@@ -138,9 +138,6 @@ public abstract class PersistentConnection {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.am.PersistentConnection$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.am.PersistentConnection$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.am.PersistentConnection$$ExternalSyntheticLambda0] */
     public PersistentConnection(
             String str,
             Context context,

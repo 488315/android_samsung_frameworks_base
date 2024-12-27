@@ -18,13 +18,11 @@ import java.util.Arrays;
 public final class ApkChecksum implements Parcelable {
     public static final Parcelable.Creator<ApkChecksum> CREATOR =
             new Parcelable.Creator<ApkChecksum>() { // from class: android.content.pm.ApkChecksum.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApkChecksum[] newArray(int size) {
                     return new ApkChecksum[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApkChecksum createFromParcel(Parcel in) {
                     return new ApkChecksum(in);
@@ -35,7 +33,6 @@ public final class ApkChecksum implements Parcelable {
     private final String mInstallerPackageName;
     private final String mSplitName;
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     public ApkChecksum(String splitName, int type, byte[] value) {
         this(splitName, new Checksum(type, value), null, null);
     }

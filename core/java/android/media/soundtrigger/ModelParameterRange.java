@@ -12,7 +12,6 @@ public class ModelParameterRange implements Parcelable {
     public static final Parcelable.Creator<ModelParameterRange> CREATOR =
             new Parcelable.Creator<ModelParameterRange>() { // from class:
                 // android.media.soundtrigger.ModelParameterRange.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ModelParameterRange createFromParcel(Parcel _aidl_source) {
                     ModelParameterRange _aidl_out = new ModelParameterRange();
@@ -20,7 +19,6 @@ public class ModelParameterRange implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ModelParameterRange[] newArray(int _aidl_size) {
                     return new ModelParameterRange[_aidl_size];

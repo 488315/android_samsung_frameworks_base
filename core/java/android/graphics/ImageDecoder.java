@@ -103,11 +103,9 @@ public final class ImageDecoder implements AutoCloseable {
     private static native ImageDecoder nCreate(
             InputStream inputStream, byte[] bArr, boolean z, Source source) throws IOException;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native ImageDecoder nCreate(
             ByteBuffer byteBuffer, int i, int i2, boolean z, Source source) throws IOException;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native ImageDecoder nCreate(byte[] bArr, int i, int i2, boolean z, Source source)
             throws IOException;
 
@@ -257,7 +255,6 @@ public final class ImageDecoder implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ImageDecoder createFromFile(File file, boolean preferAnimation, Source source)
             throws IOException {
         FileInputStream stream = new FileInputStream(file);
@@ -281,7 +278,6 @@ public final class ImageDecoder implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ImageDecoder createFromStream(
             InputStream is, boolean closeInputStream, boolean preferAnimation, Source source)
             throws IOException {
@@ -303,7 +299,6 @@ public final class ImageDecoder implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ImageDecoder createFromAssetFileDescriptor(
             AssetFileDescriptor assetFd, boolean preferAnimation, Source source)
             throws IOException {
@@ -480,7 +475,6 @@ public final class ImageDecoder implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ImageDecoder createFromAsset(
             AssetManager.AssetInputStream ais, boolean preferAnimation, Source source)
             throws IOException {
@@ -664,7 +658,6 @@ public final class ImageDecoder implements AutoCloseable {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static boolean isMimeTypeSupported(String mimeType) {
         char c;
         Objects.requireNonNull(mimeType);
@@ -1435,7 +1428,6 @@ public final class ImageDecoder implements AutoCloseable {
         throw exception;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String describeDecoderForTrace(ImageDecoder decoder) {
         StringBuilder builder = new StringBuilder();
         builder.append("ID#w=");

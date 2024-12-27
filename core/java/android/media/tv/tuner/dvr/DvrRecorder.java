@@ -79,7 +79,6 @@ public class DvrRecorder implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onRecordStatusChanged$0(int status) {
         synchronized (this.mListenerLock) {
             if (this.mListener != null) {

@@ -34,9 +34,6 @@ public final class NightDisplayTileUserActionInteractor implements QSTileUserAct
         this.qsLogger = qSTileLogger;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0082 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
     @Override // com.android.systemui.qs.tiles.base.interactor.QSTileUserActionInteractor
     /*
         Code decompiled incorrectly, please refer to instructions dump.

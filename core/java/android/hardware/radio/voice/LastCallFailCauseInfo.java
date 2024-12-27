@@ -11,7 +11,6 @@ public class LastCallFailCauseInfo implements Parcelable {
     public static final Parcelable.Creator<LastCallFailCauseInfo> CREATOR =
             new Parcelable.Creator<LastCallFailCauseInfo>() { // from class:
                 // android.hardware.radio.voice.LastCallFailCauseInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LastCallFailCauseInfo createFromParcel(Parcel _aidl_source) {
                     LastCallFailCauseInfo _aidl_out = new LastCallFailCauseInfo();
@@ -19,7 +18,6 @@ public class LastCallFailCauseInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LastCallFailCauseInfo[] newArray(int _aidl_size) {
                     return new LastCallFailCauseInfo[_aidl_size];

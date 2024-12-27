@@ -8,14 +8,12 @@ public final class InputConnectionCommandHeader implements Parcelable {
             new Parcelable.Creator<
                     InputConnectionCommandHeader>() { // from class:
                                                       // com.android.internal.inputmethod.InputConnectionCommandHeader.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputConnectionCommandHeader createFromParcel(Parcel in) {
                     int sessionId = in.readInt();
                     return new InputConnectionCommandHeader(sessionId);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputConnectionCommandHeader[] newArray(int size) {
                     return new InputConnectionCommandHeader[size];

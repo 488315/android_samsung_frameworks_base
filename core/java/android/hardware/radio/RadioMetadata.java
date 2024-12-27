@@ -129,13 +129,11 @@ public final class RadioMetadata implements Parcelable {
         CREATOR =
                 new Parcelable.Creator<
                         RadioMetadata>() { // from class: android.hardware.radio.RadioMetadata.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RadioMetadata createFromParcel(Parcel in) {
                         return new RadioMetadata(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RadioMetadata[] newArray(int size) {
                         return new RadioMetadata[size];
@@ -148,13 +146,11 @@ public final class RadioMetadata implements Parcelable {
         public static final Parcelable.Creator<Clock> CREATOR =
                 new Parcelable.Creator<
                         Clock>() { // from class: android.hardware.radio.RadioMetadata.Clock.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Clock createFromParcel(Parcel in) {
                         return new Clock(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Clock[] newArray(int size) {
                         return new Clock[size];
@@ -285,7 +281,6 @@ public final class RadioMetadata implements Parcelable {
         return this.mBundle.getString(key);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void putInt(Bundle bundle, String key, int value) {
         int type = METADATA_KEYS_TYPE.getOrDefault(key, -1).intValue();
         if (type != 0 && type != 2) {

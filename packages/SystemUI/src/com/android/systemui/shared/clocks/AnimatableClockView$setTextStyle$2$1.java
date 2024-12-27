@@ -15,7 +15,6 @@ final class AnimatableClockView$setTextStyle$2$1 extends Lambda implements Funct
     final /* synthetic */ AnimatableClockView $this_run;
     final /* synthetic */ int $weight;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AnimatableClockView$setTextStyle$2$1(int i, Integer num, long j, TimeInterpolator timeInterpolator, long j2, Runnable runnable, AnimatableClockView animatableClockView) {
         super(1);
         this.$weight = i;

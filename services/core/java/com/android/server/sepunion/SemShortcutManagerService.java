@@ -76,7 +76,6 @@ public final class SemShortcutManagerService extends ISemExecuteManager.Stub
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.sepunion.SemShortcutManagerService$2] */
     public SemShortcutManagerService(Context context) {
         ShortcutServiceInternal.ShortcutChangeListener shortcutChangeListener =
                 new ShortcutServiceInternal

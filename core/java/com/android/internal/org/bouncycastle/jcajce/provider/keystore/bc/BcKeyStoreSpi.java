@@ -270,7 +270,6 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void encodeKey(Key key, DataOutputStream dOut) throws IOException {
         byte[] enc = key.getEncoded();
         if (key instanceof PrivateKey) {
@@ -286,7 +285,6 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
         dOut.write(enc);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Key decodeKey(DataInputStream dIn) throws IOException {
         KeySpec spec;
         int keyType = dIn.read();

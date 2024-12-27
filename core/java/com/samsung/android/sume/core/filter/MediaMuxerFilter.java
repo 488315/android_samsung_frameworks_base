@@ -76,7 +76,6 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
         return new int[] {4, 3, 6};
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:31:0x00fb -> B:27:0x0125). Please report as a decompilation issue!!! */
     @Override // com.samsung.android.sume.core.message.MessageConsumer
     public boolean onMessageReceived(Message message) throws UnsupportedOperationException {
         switch (message.getCode()) {
@@ -317,7 +316,6 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
         results.add(result);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     /* renamed from: lambda$run$1$com-samsung-android-sume-core-filter-MediaMuxerFilter, reason: not valid java name */
     /* synthetic */ Boolean m9142x6defe905(Pair data, MediaType mediaType) throws Exception {
         int i;

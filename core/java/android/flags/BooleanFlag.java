@@ -38,13 +38,11 @@ public class BooleanFlag extends BooleanFlagBase {
         this.mDefault = defaultValue;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.flags.BooleanFlagBase, android.flags.Flag
     public Boolean getDefault() {
         return Boolean.valueOf(this.mDefault);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.flags.BooleanFlagBase, android.flags.Flag
     /* renamed from: defineMetaData, reason: merged with bridge method [inline-methods] */
     public Flag<Boolean> defineMetaData2(String label, String description, String categoryName) {

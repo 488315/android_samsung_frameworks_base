@@ -173,7 +173,6 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: onScrollResult, reason: merged with bridge method [inline-methods] */
     public void lambda$onScrollCaptureImageRequest$0(
             final ScrollCaptureViewHelper.ScrollResult scrollResult,
@@ -202,7 +201,6 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: doCapture, reason: merged with bridge method [inline-methods] */
     public void lambda$onScrollResult$1(
             ScrollCaptureViewHelper.ScrollResult scrollResult,

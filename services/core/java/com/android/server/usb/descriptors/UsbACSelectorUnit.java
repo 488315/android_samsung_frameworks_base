@@ -4,7 +4,6 @@ public final class UsbACSelectorUnit extends UsbACInterface {
     public byte mNumPins;
     public byte[] mSourceIDs;
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.server.usb.descriptors.UsbDescriptor
     public final int parseRawDescriptors(ByteStream byteStream) {
         byteStream.getByte();

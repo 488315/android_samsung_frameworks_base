@@ -16,7 +16,6 @@ public class InterfaceConfiguration implements Parcelable {
     public static final Parcelable.Creator<InterfaceConfiguration> CREATOR =
             new Parcelable.Creator<
                     InterfaceConfiguration>() { // from class: android.net.InterfaceConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InterfaceConfiguration createFromParcel(Parcel in) {
                     InterfaceConfiguration info = new InterfaceConfiguration();
@@ -31,7 +30,6 @@ public class InterfaceConfiguration implements Parcelable {
                     return info;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InterfaceConfiguration[] newArray(int size) {
                     return new InterfaceConfiguration[size];

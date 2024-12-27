@@ -959,7 +959,6 @@ public class ScrollView extends FrameLayout {
         this.HOVERSCROLL_DELAY = hoverdelay;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.view.ViewGroup, android.view.View
     protected boolean dispatchHoverEvent(MotionEvent ev) {
         if (!isHoveringUIEnabled()) {
@@ -2388,7 +2387,6 @@ public class ScrollView extends FrameLayout {
         return n;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public void onRestoreInstanceState(Parcelable state) {
         if (this.mContext.getApplicationInfo().targetSdkVersion <= 18
@@ -2402,7 +2400,6 @@ public class ScrollView extends FrameLayout {
         requestLayout();
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public Parcelable onSaveInstanceState() {
         if (this.mContext.getApplicationInfo().targetSdkVersion <= 18) {
@@ -2424,13 +2421,11 @@ public class ScrollView extends FrameLayout {
         public static final Parcelable.Creator<SavedState> CREATOR =
                 new Parcelable.Creator<
                         SavedState>() { // from class: android.widget.ScrollView.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];
@@ -2479,7 +2474,6 @@ public class ScrollView extends FrameLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleMessage(Message msg) {
         int offset;
         switch (msg.what) {
@@ -2573,7 +2567,6 @@ public class ScrollView extends FrameLayout {
         semSetPointerIcon(ev.getToolType(0), pointerIcon);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void semSetupGoToTop(int where) {
         int overlappedW;
         int overlappedW2;
@@ -2646,7 +2639,6 @@ public class ScrollView extends FrameLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void semPlayGoToTopFadeOut() {
         if (this.mSemGoToTopFadeOutAnimator.isRunning()) {
             return;
@@ -2655,7 +2647,6 @@ public class ScrollView extends FrameLayout {
         this.mSemGoToTopFadeOutAnimator.start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void semPlayGoToTopFadeIn() {
         if (this.mSemGoToTopFadeInAnimator.isRunning()) {
             return;

@@ -20,7 +20,6 @@ final class CommunalEditModeViewModel$communalContent$1 extends SuspendLambda im
     int label;
     final /* synthetic */ CommunalEditModeViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalEditModeViewModel$communalContent$1(CommunalEditModeViewModel communalEditModeViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalEditModeViewModel;

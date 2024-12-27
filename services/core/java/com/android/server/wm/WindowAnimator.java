@@ -22,7 +22,6 @@ public final class WindowAnimator {
     public boolean mNotifyWhenNoAnimation = false;
     public final ArrayList mAfterPrepareSurfacesRunnables = new ArrayList();
 
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.server.wm.WindowAnimator$$ExternalSyntheticLambda1] */
     public WindowAnimator(WindowManagerService windowManagerService) {
         this.mService = windowManagerService;
         Context context = windowManagerService.mContext;
@@ -80,20 +79,6 @@ public final class WindowAnimator {
         this.mChoreographer.postFrameCallback(this.mAnimationFrameCallback);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x01c1  */
-    /* JADX WARN: Removed duplicated region for block: B:106:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x00fe  */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x0107  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x0114  */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x0102  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00d3  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x011d A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x012c  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0135  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0147  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x018a  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x01a6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

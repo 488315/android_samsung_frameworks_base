@@ -318,7 +318,6 @@ public class SemDualAppManager {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00ec A[Catch: Exception -> 0x012b, TryCatch #0 {Exception -> 0x012b, blocks: (B:3:0x0006, B:7:0x0012, B:10:0x0027, B:12:0x0040, B:14:0x0047, B:18:0x0055, B:26:0x0070, B:28:0x0074, B:30:0x008a, B:33:0x0093, B:35:0x00ec, B:36:0x00f5, B:49:0x00b5, B:47:0x00d1, B:50:0x009d), top: B:2:0x0006 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -407,9 +406,6 @@ public class SemDualAppManager {
         this.mDuplicateInitialIntents.clear();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0053  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x008d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

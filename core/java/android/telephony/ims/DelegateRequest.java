@@ -14,13 +14,11 @@ public final class DelegateRequest implements Parcelable {
     public static final Parcelable.Creator<DelegateRequest> CREATOR =
             new Parcelable.Creator<
                     DelegateRequest>() { // from class: android.telephony.ims.DelegateRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DelegateRequest createFromParcel(Parcel source) {
                     return new DelegateRequest(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DelegateRequest[] newArray(int size) {
                     return new DelegateRequest[size];

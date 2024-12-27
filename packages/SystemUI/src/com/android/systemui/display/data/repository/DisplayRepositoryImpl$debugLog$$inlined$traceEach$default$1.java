@@ -13,7 +13,6 @@ public final class DisplayRepositoryImpl$debugLog$$inlined$traceEach$default$1 e
     /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisplayRepositoryImpl$debugLog$$inlined$traceEach$default$1(TraceStateLogger traceStateLogger, Continuation continuation) {
         super(2, continuation);
         this.$stateLogger = traceStateLogger;

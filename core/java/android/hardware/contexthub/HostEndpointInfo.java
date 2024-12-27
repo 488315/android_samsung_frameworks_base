@@ -8,7 +8,6 @@ public class HostEndpointInfo implements Parcelable {
     public static final Parcelable.Creator<HostEndpointInfo> CREATOR =
             new Parcelable.Creator<HostEndpointInfo>() { // from class:
                 // android.hardware.contexthub.HostEndpointInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HostEndpointInfo createFromParcel(Parcel _aidl_source) {
                     HostEndpointInfo _aidl_out = new HostEndpointInfo();
@@ -16,7 +15,6 @@ public class HostEndpointInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HostEndpointInfo[] newArray(int _aidl_size) {
                     return new HostEndpointInfo[_aidl_size];

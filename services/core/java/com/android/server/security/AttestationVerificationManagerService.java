@@ -71,7 +71,6 @@ public final class AttestationVerificationManagerService extends SystemService {
                     + " android.os.Bundle, byte[], com.android.internal.infra.AndroidFuture):void");
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.security.AttestationVerificationManagerService$1] */
     public AttestationVerificationManagerService(Context context) throws Exception {
         super(context);
         DumpLogger dumpLogger = new DumpLogger();

@@ -708,7 +708,6 @@ public final class DocumentsContract {
         public static final Parcelable.Creator<Path> CREATOR =
                 new Parcelable.Creator<
                         Path>() { // from class: android.provider.DocumentsContract.Path.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Path createFromParcel(Parcel in) {
                         String rootId = in.readString();
@@ -716,7 +715,6 @@ public final class DocumentsContract {
                         return new Path(rootId, path);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Path[] newArray(int size) {
                         return new Path[size];

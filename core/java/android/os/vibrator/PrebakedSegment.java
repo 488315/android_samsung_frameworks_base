@@ -12,14 +12,12 @@ public final class PrebakedSegment extends VibrationEffectSegment {
     public static final Parcelable.Creator<PrebakedSegment> CREATOR =
             new Parcelable.Creator<
                     PrebakedSegment>() { // from class: android.os.vibrator.PrebakedSegment.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrebakedSegment createFromParcel(Parcel in) {
                     in.readInt();
                     return new PrebakedSegment(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrebakedSegment[] newArray(int size) {
                     return new PrebakedSegment[size];

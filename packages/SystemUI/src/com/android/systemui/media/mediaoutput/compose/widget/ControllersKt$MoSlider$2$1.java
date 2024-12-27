@@ -24,7 +24,6 @@ final class ControllersKt$MoSlider$2$1 extends SuspendLambda implements Function
     final /* synthetic */ Function0 $onValueChangeFinished;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ControllersKt$MoSlider$2$1(MutableInteractionSource mutableInteractionSource, MutableState mutableState, Function0 function0, Continuation continuation) {
         super(2, continuation);
         this.$interactionSource = mutableInteractionSource;

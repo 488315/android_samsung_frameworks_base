@@ -28,7 +28,6 @@ public abstract class UvdmSendExecutor {
         public ExecutorHandler() {}
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.samsung.android.lib.dexcontrol.uvdm.sender.UvdmSendExecutor$ExecutorHandler$1] */
     public UvdmSendExecutor(int i) {
         this.mUvdmFileHelper = null;
         this.mIsEnabled = true;

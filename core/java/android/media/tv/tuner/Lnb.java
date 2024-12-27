@@ -123,7 +123,6 @@ public class Lnb implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onEvent$0(LnbCallback callback, int eventType) {
         synchronized (this.mCallbackLock) {
             if (callback != null) {
@@ -150,7 +149,6 @@ public class Lnb implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onDiseqcMessage$1(
             LnbCallback callback, byte[] diseqcMessage) {
         synchronized (this.mCallbackLock) {

@@ -16,7 +16,6 @@ final class MobileIconInteractorImpl$contentDescription$1 extends SuspendLambda 
     int label;
     final /* synthetic */ MobileIconInteractorImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileIconInteractorImpl$contentDescription$1(MobileIconInteractorImpl mobileIconInteractorImpl, Continuation continuation) {
         super(3, continuation);
         this.this$0 = mobileIconInteractorImpl;

@@ -31,7 +31,6 @@ public class QsStatusEventLog {
         startTimer();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkWeeklyStatus() {
         long currentTimeMillis = System.currentTimeMillis();
         long j = currentTimeMillis - this.mContext.getSharedPreferences(PREFS, 0).getLong(BIG_DATA_WEEKLY_TIME_STORED_IN_MILLI_SECONDS, currentTimeMillis);
@@ -44,14 +43,12 @@ public class QsStatusEventLog {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$sendStatusEventLog$0(QSTile qSTile, String str) {
         if (qSTile instanceof SQSTile) {
             SystemUIAnalytics.sendEventCDLog(str, SystemUIAnalytics.EID_QQS_ACTIVE_BUTTONS_RATIO, SystemUIAnalytics.QPBSE_KEY_ACTIVE, ((SQSTile) qSTile).getTileMapKey());
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$sendStatusEventLog$1(QSTile qSTile, String str) {
         if (qSTile instanceof SQSTile) {
             SystemUIAnalytics.sendEventCDLog(str, SystemUIAnalytics.EID_QS_ACTIVE_BUTTONS_RATIO, SystemUIAnalytics.QPBSE_KEY_ACTIVE, ((SQSTile) qSTile).getTileMapKey());

@@ -16,13 +16,11 @@ public class Caption implements Parcelable {
     public static final Parcelable.Creator<Caption> CREATOR =
             new Parcelable.Creator<
                     Caption>() { // from class: com.samsung.android.allshare.Caption.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Caption[] newArray(int size) {
                     return new Caption[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Caption createFromParcel(Parcel source) {
                     return new Caption(source);

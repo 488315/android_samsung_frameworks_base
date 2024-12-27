@@ -586,7 +586,6 @@ public final class ContextHubManager {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void invokeOnMessageReceiptCallback(
             int hubId, int nanoAppId, ContextHubMessage message) {
         if (this.mCallback != null) {
@@ -619,7 +618,6 @@ public final class ContextHubManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onMessageReceipt$0(
                 int hubId, int nanoAppId, ContextHubMessage message) {
             ContextHubManager.this.invokeOnMessageReceiptCallback(hubId, nanoAppId, message);

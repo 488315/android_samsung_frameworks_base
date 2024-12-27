@@ -112,7 +112,6 @@ public class TraceBuffer<P, S extends P, T extends P> {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ boolean lambda$contains$0(byte[] other, Object p) {
         return Arrays.equals(this.mProtoProvider.getBytes(p), other);
     }

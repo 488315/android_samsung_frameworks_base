@@ -96,7 +96,6 @@ public class NoCrossProfileEmptyStateProvider
                             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ String lambda$getTitle$0() {
             return this.mContext.getString(this.mDefaultTitleResource);
         }
@@ -121,7 +120,6 @@ public class NoCrossProfileEmptyStateProvider
                             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ String lambda$getSubtitle$1() {
             return this.mContext.getString(this.mDefaultSubtitleResource);
         }

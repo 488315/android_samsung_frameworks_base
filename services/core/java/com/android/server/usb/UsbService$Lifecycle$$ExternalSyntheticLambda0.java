@@ -23,8 +23,6 @@ public final /* synthetic */ class UsbService$Lifecycle$$ExternalSyntheticLambda
         this.f$0 = lifecycle;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v1, types: [android.os.IBinder, com.android.server.usb.UsbService] */
     @Override // java.lang.Runnable
     public final void run() {
         int i = this.$r8$classId;

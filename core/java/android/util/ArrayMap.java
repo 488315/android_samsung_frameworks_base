@@ -208,7 +208,6 @@ public final class ArrayMap<K, V> implements Map<K, V> {
         this.mSize = 0;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public ArrayMap(ArrayMap<K, V> arrayMap) {
         this();
         if (arrayMap != 0) {

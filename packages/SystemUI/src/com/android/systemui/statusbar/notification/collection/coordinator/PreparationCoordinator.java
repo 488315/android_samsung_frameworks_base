@@ -99,7 +99,6 @@ public class PreparationCoordinator implements Coordinator {
         this(preparationCoordinatorLogger, notifInflater, notifInflationErrorManager, notifViewBarn, notifUiAdjustmentProvider, iStatusBarService, bindEventManagerImpl, 9, MAX_GROUP_INFLATION_DELAY);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void abortInflation(NotificationEntry notificationEntry, String str) {
         boolean abortInflation = ((NotifInflaterImpl) this.mNotifInflater).abortInflation(notificationEntry);
         boolean remove = this.mInflatingNotifs.remove(notificationEntry);
@@ -115,14 +114,12 @@ public class PreparationCoordinator implements Coordinator {
         this.mInflationStates.put(notificationEntry, 0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getInflationState(NotificationEntry notificationEntry) {
         Integer num = this.mInflationStates.get(notificationEntry);
         Objects.requireNonNull(num, "Asking state of a notification preparation coordinator doesn't know about");
         return num.intValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void inflateAllRequiredViews(List<ListEntry> list) {
         int size = list.size();
         for (int i = 0; i < size; i++) {
@@ -176,8 +173,6 @@ public class PreparationCoordinator implements Coordinator {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x009c  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00aa  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -194,18 +189,15 @@ public class PreparationCoordinator implements Coordinator {
         return j - groupEntry.mCreationTime > this.mMaxGroupInflationDelay;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isInflated(NotificationEntry notificationEntry) {
         int inflationState = getInflationState(notificationEntry);
         return inflationState == 1 || inflationState == 2;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$attach$1() {
         this.mNotifInflatingFilter.invalidateList("adjustmentProviderChanged");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(Uri uri) {
         this.mIsChanged = true;
     }
@@ -285,7 +277,6 @@ public class PreparationCoordinator implements Coordinator {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onInflationFinished(NotificationEntry notificationEntry, NotifViewController notifViewController) {
         this.mLogger.logNotifInflated(notificationEntry);
         this.mInflatingNotifs.remove(notificationEntry);
@@ -305,7 +296,6 @@ public class PreparationCoordinator implements Coordinator {
         ((NotifInflaterImpl) this.mNotifInflater).rebindViews(notificationEntry, inflaterParams, new PreparationCoordinator$$ExternalSyntheticLambda0(this));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean shouldWaitForGroupToInflate(GroupEntry groupEntry, long j) {
         if (groupEntry != GroupEntry.ROOT_ENTRY && groupEntry.getPreviousAttachState().parent == null) {
             if (isBeyondGroupInitializationWindow(groupEntry, j)) {

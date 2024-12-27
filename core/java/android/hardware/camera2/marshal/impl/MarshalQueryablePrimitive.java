@@ -28,7 +28,6 @@ public final class MarshalQueryablePrimitive<T> implements MarshalQueryable<T> {
             return MarshalHelpers.getPrimitiveTypeSize(this.mNativeType);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.hardware.camera2.marshal.Marshaler
         public void marshal(T t, ByteBuffer buffer) {
             if (t instanceof Integer) {

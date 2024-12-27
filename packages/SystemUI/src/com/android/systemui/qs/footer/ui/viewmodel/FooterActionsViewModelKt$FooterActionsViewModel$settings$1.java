@@ -17,7 +17,6 @@ final /* synthetic */ class FooterActionsViewModelKt$FooterActionsViewModel$sett
     final /* synthetic */ FalsingManager $falsingManager;
     final /* synthetic */ FooterActionsInteractor $footerActionsInteractor;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FooterActionsViewModelKt$FooterActionsViewModel$settings$1(FalsingManager falsingManager, FooterActionsInteractor footerActionsInteractor) {
         super(1, Intrinsics.Kotlin.class, "onSettingsButtonClicked", "FooterActionsViewModel$onSettingsButtonClicked(Lcom/android/systemui/plugins/FalsingManager;Lcom/android/systemui/qs/footer/domain/interactor/FooterActionsInteractor;Lcom/android/systemui/animation/Expandable;)V", 0);
         this.$falsingManager = falsingManager;

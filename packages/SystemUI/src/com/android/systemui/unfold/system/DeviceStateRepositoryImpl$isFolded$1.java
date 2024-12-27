@@ -17,7 +17,6 @@ final class DeviceStateRepositoryImpl$isFolded$1 extends SuspendLambda implement
     int label;
     final /* synthetic */ DeviceStateRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceStateRepositoryImpl$isFolded$1(DeviceStateRepositoryImpl deviceStateRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceStateRepositoryImpl;
@@ -52,7 +51,6 @@ final class DeviceStateRepositoryImpl$isFolded$1 extends SuspendLambda implement
             deviceStateRepositoryImpl.foldProvider.registerCallback(foldCallback, deviceStateRepositoryImpl.executor);
             final DeviceStateRepositoryImpl deviceStateRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.unfold.system.DeviceStateRepositoryImpl$isFolded$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

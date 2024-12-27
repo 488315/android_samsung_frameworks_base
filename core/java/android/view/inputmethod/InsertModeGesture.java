@@ -13,13 +13,11 @@ public final class InsertModeGesture extends CancellableHandwritingGesture imple
             new Parcelable.Creator<
                     InsertModeGesture>() { // from class:
                                            // android.view.inputmethod.InsertModeGesture.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InsertModeGesture createFromParcel(Parcel source) {
                     return new InsertModeGesture(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InsertModeGesture[] newArray(int size) {
                     return new InsertModeGesture[size];

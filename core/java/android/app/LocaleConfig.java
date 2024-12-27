@@ -29,13 +29,11 @@ import java.util.Set;
 public class LocaleConfig implements Parcelable {
     public static final Parcelable.Creator<LocaleConfig> CREATOR =
             new Parcelable.Creator<LocaleConfig>() { // from class: android.app.LocaleConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LocaleConfig createFromParcel(Parcel source) {
                     return new LocaleConfig(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LocaleConfig[] newArray(int size) {
                     return new LocaleConfig[size];

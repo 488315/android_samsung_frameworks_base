@@ -293,7 +293,6 @@ public class ImageReader implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void releaseImage(Image i) {
         if (!(i instanceof SurfaceImage)) {
             throw new IllegalArgumentException("This image was not produced by an ImageReader");
@@ -686,7 +685,6 @@ public class ImageReader implements AutoCloseable {
             return this.mIsDetached.get();
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         @Override // android.media.Image
         public ImageReader getOwner() {
             throwISEIfImageIsInvalid();
@@ -699,13 +697,11 @@ public class ImageReader implements AutoCloseable {
             return this.mNativeBuffer;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setDetached(boolean detached) {
             throwISEIfImageIsInvalid();
             this.mIsDetached.getAndSet(detached);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void clearSurfacePlanes() {
             if (this.mIsImageValid && this.mPlanes != null) {
                 for (int i = 0; i < this.mPlanes.length; i++) {
@@ -755,7 +751,6 @@ public class ImageReader implements AutoCloseable {
                 return this.mRowStride;
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public void clearBuffer() {
                 if (this.mBuffer == null) {
                     return;

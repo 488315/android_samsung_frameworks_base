@@ -17,7 +17,6 @@ public final class WindowManagerLockscreenVisibilityInteractor$special$$inlined$
     int label;
     final /* synthetic */ WindowManagerLockscreenVisibilityInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WindowManagerLockscreenVisibilityInteractor$special$$inlined$flatMapLatest$2(Continuation continuation, WindowManagerLockscreenVisibilityInteractor windowManagerLockscreenVisibilityInteractor) {
         super(3, continuation);
         this.this$0 = windowManagerLockscreenVisibilityInteractor;

@@ -42,7 +42,6 @@ public abstract class SemDisplayQualityAP {
             this();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onReceive$0(
                 String str, BroadcastReceiver.PendingResult pendingResult) {
             if ("android.intent.action.SCREEN_ON".equals(str)) {

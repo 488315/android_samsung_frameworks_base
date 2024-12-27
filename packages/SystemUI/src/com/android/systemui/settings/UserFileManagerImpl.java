@@ -53,7 +53,6 @@ public final class UserFileManagerImpl implements UserFileManager, CoreStartable
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.settings.UserFileManagerImpl$broadcastReceiver$1] */
     public UserFileManagerImpl(Context context, UserManager userManager, BroadcastDispatcher broadcastDispatcher, DelayableExecutor delayableExecutor) {
         this.context = context;
         this.userManager = userManager;

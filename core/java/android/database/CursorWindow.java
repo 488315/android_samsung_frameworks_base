@@ -21,13 +21,11 @@ public class CursorWindow extends SQLiteClosable implements Parcelable {
     private static int sCursorWindowSize = -1;
     public static final Parcelable.Creator<CursorWindow> CREATOR =
             new Parcelable.Creator<CursorWindow>() { // from class: android.database.CursorWindow.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CursorWindow createFromParcel(Parcel source) {
                     return new CursorWindow(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CursorWindow[] newArray(int size) {
                     return new CursorWindow[size];
@@ -106,7 +104,6 @@ public class CursorWindow extends SQLiteClosable implements Parcelable {
         this.mCloseGuard = createCloseGuard();
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     @Deprecated
     public CursorWindow(boolean localWindow) {
         this((String) null);

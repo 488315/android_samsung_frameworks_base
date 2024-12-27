@@ -1796,9 +1796,6 @@ public final class MdnieScenarioControlService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.samsung.android.displaysolution.MdnieScenarioControlService$3] */
-    /* JADX WARN: Type inference failed for: r6v18, types: [com.samsung.android.displaysolution.MdnieScenarioControlService$2] */
-    /* JADX WARN: Type inference failed for: r6v19, types: [com.samsung.android.displaysolution.MdnieScenarioControlService$4] */
     public MdnieScenarioControlService(Context context) {
         "eng".equals(Build.TYPE);
         this.mLock = new Object();
@@ -2202,16 +2199,6 @@ public final class MdnieScenarioControlService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0081 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:35:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x008b A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r1v1 */
-    /* JADX WARN: Type inference failed for: r1v2, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r1v6 */
-    /* JADX WARN: Type inference failed for: r1v8, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r2v1, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r6v4, types: [java.lang.String] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2328,7 +2315,6 @@ public final class MdnieScenarioControlService {
                     + " com.samsung.android.displaysolution.MdnieScenarioControlService.getStringFromFile(java.lang.String):java.lang.String");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0044  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2343,7 +2329,6 @@ public final class MdnieScenarioControlService {
                     + " com.samsung.android.displaysolution.MdnieScenarioControlService.browser_brightness_decrease_mode(boolean):void");
     }
 
-    /* JADX WARN: Finally extract failed */
     public final HashMap getAppListRegistState(List list) {
         HashMap hashMap = new HashMap();
         try {

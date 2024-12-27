@@ -24,7 +24,6 @@ import java.util.regex.Pattern;
 public final class Dataset implements Parcelable {
     public static final Parcelable.Creator<Dataset> CREATOR =
             new Parcelable.Creator<Dataset>() { // from class: android.service.autofill.Dataset.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Dataset createFromParcel(Parcel parcel) {
                     Presentations.Builder presentationsBuilder;
@@ -125,7 +124,6 @@ public final class Dataset implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Dataset[] newArray(int size) {
                     return new Dataset[size];
@@ -786,7 +784,6 @@ public final class Dataset implements Parcelable {
             return this.mFieldIds.size() - 1;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void createFromParcel(
                 AutofillId id,
                 String datatype,
@@ -878,7 +875,6 @@ public final class Dataset implements Parcelable {
                 new Parcelable.Creator<
                         DatasetFieldFilter>() { // from class:
                                                 // android.service.autofill.Dataset.DatasetFieldFilter.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DatasetFieldFilter createFromParcel(Parcel parcel) {
                         return new DatasetFieldFilter(
@@ -887,7 +883,6 @@ public final class Dataset implements Parcelable {
                                                 Pattern.class.getClassLoader(), Pattern.class));
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DatasetFieldFilter[] newArray(int size) {
                         return new DatasetFieldFilter[size];

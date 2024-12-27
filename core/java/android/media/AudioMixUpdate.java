@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public class AudioMixUpdate implements Parcelable {
     public static final Parcelable.Creator<AudioMixUpdate> CREATOR =
             new Parcelable.Creator<AudioMixUpdate>() { // from class: android.media.AudioMixUpdate.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioMixUpdate createFromParcel(Parcel _aidl_source) {
                     AudioMixUpdate _aidl_out = new AudioMixUpdate();
@@ -15,7 +14,6 @@ public class AudioMixUpdate implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioMixUpdate[] newArray(int _aidl_size) {
                     return new AudioMixUpdate[_aidl_size];

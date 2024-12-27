@@ -18,13 +18,11 @@ public final class Condition implements Parcelable {
     public static final Parcelable.Creator<Condition> CREATOR =
             new Parcelable.Creator<
                     Condition>() { // from class: android.service.notification.Condition.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Condition createFromParcel(Parcel source) {
                     return new Condition(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Condition[] newArray(int size) {
                     return new Condition[size];

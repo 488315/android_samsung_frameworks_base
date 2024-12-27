@@ -39,13 +39,11 @@ public final class CellSignalStrengthWcdma extends CellSignalStrength implements
             new Parcelable.Creator<
                     CellSignalStrengthWcdma>() { // from class:
                                                  // android.telephony.CellSignalStrengthWcdma.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellSignalStrengthWcdma createFromParcel(Parcel in) {
                     return new CellSignalStrengthWcdma(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellSignalStrengthWcdma[] newArray(int size) {
                     return new CellSignalStrengthWcdma[size];
@@ -98,7 +96,6 @@ public final class CellSignalStrengthWcdma extends CellSignalStrength implements
         return this.mLevel;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.telephony.CellSignalStrength
     public void updateLevel(PersistableBundle cc, ServiceState ss) {
         String calcMethod;

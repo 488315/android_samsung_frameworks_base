@@ -17,13 +17,11 @@ public final class CallException extends RuntimeException implements Parcelable 
     public static final int CODE_OPERATION_TIMED_OUT = 6;
     public static final Parcelable.Creator<CallException> CREATOR =
             new Parcelable.Creator<CallException>() { // from class: android.telecom.CallException.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallException createFromParcel(Parcel source) {
                     return new CallException(source.readString8(), source.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallException[] newArray(int size) {
                     return new CallException[size];

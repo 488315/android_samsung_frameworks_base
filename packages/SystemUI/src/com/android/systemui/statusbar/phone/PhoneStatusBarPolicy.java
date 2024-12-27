@@ -348,13 +348,6 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$1] */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$3] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$4] */
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$5] */
-    /* JADX WARN: Type inference failed for: r2v7, types: [com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$7] */
-    /* JADX WARN: Type inference failed for: r2v8, types: [com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$8] */
-    /* JADX WARN: Type inference failed for: r2v9, types: [com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$9] */
     public PhoneStatusBarPolicy(StatusBarIconController statusBarIconController, CommandQueue commandQueue, BroadcastDispatcher broadcastDispatcher, Executor executor, Executor executor2, Looper looper, Resources resources, CastController castController, HotspotController hotspotController, SBluetoothController sBluetoothController, NextAlarmController nextAlarmController, UserInfoController userInfoController, RotationLockController rotationLockController, DataSaverController dataSaverController, ZenModeController zenModeController, DeviceProvisionedController deviceProvisionedController, KeyguardStateController keyguardStateController, LocationController locationController, SensorPrivacyController sensorPrivacyController, AlarmManager alarmManager, UserManager userManager, UserTracker userTracker, DevicePolicyManager devicePolicyManager, RecordingController recordingController, TelecomManager telecomManager, int i, SharedPreferences sharedPreferences, DateFormatUtil dateFormatUtil, RingerModeTracker ringerModeTracker, PrivacyItemController privacyItemController, PrivacyLogger privacyLogger, ConnectedDisplayInteractor connectedDisplayInteractor, JavaAdapter javaAdapter, ConfigurationController configurationController, KnoxStateMonitor knoxStateMonitor, ActivityManager activityManager) {
         this.mIconController = statusBarIconController;
         this.mCommandQueue = commandQueue;
@@ -770,8 +763,6 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0076  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0085  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

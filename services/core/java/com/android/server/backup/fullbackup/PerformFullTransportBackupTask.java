@@ -224,8 +224,6 @@ public final class PerformFullTransportBackupTask extends FullBackupTask
         @Override // com.android.server.backup.BackupRestoreTask
         public final void operationComplete(long j) {}
 
-        /* JADX WARN: Removed duplicated region for block: B:29:0x00fb  */
-        /* JADX WARN: Removed duplicated region for block: B:38:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -440,33 +438,6 @@ public final class PerformFullTransportBackupTask extends FullBackupTask
     	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
     	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x06b1  */
-    /* JADX WARN: Removed duplicated region for block: B:228:0x04ca A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:241:0x04e9 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x06fe  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x071a  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0726 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0700  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x06af  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x06cb  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x06d7 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r11v15 */
-    /* JADX WARN: Type inference failed for: r11v18 */
-    /* JADX WARN: Type inference failed for: r11v7 */
-    /* JADX WARN: Type inference failed for: r5v31 */
-    /* JADX WARN: Type inference failed for: r5v32 */
-    /* JADX WARN: Type inference failed for: r5v33 */
-    /* JADX WARN: Type inference failed for: r5v34 */
-    /* JADX WARN: Type inference failed for: r5v35 */
-    /* JADX WARN: Type inference failed for: r5v36 */
-    /* JADX WARN: Type inference failed for: r5v37 */
-    /* JADX WARN: Type inference failed for: r6v30 */
-    /* JADX WARN: Type inference failed for: r6v50 */
-    /* JADX WARN: Type inference failed for: r6v9, types: [com.android.server.backup.transport.BackupTransportClient] */
-    /* JADX WARN: Type inference failed for: r7v10, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r7v15 */
-    /* JADX WARN: Type inference failed for: r7v9 */
     @Override // java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

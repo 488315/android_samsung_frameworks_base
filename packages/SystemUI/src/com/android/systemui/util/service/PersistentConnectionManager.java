@@ -71,14 +71,12 @@ public class PersistentConnectionManager<T> implements Dumpable {
         this.mMinConnectionDuration = i3;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: initiateConnectionAttempt, reason: merged with bridge method [inline-methods] */
     public void lambda$new$0() {
         this.mReconnectAttempts = 0;
         this.mConnection.bind();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void scheduleConnectionAttempt() {
         Runnable runnable = this.mCurrentReconnectCancelable;
         if (runnable != null) {

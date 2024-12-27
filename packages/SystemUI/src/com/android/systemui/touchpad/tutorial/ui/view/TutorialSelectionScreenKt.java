@@ -32,10 +32,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 
 public abstract class TutorialSelectionScreenKt {
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0090  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0100  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x005c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -48,16 +44,6 @@ public abstract class TutorialSelectionScreenKt {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.touchpad.tutorial.ui.view.TutorialSelectionScreenKt.DoneButton(kotlin.jvm.functions.Function0, androidx.compose.ui.Modifier, androidx.compose.runtime.Composer, int, int):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0047  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0062  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x007f  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00df  */
-    /* JADX WARN: Removed duplicated region for block: B:25:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x008d  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0090  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0067  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x004c  */
-    /* JADX WARN: Type inference failed for: r7v12, types: [com.android.systemui.touchpad.tutorial.ui.view.TutorialSelectionScreenKt$TutorialButton$1, kotlin.jvm.internal.Lambda] */
     /* renamed from: TutorialButton-cf5BqRc, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -71,10 +57,6 @@ public abstract class TutorialSelectionScreenKt {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.touchpad.tutorial.ui.view.TutorialSelectionScreenKt.m2260TutorialButtoncf5BqRc(java.lang.String, kotlin.jvm.functions.Function0, long, androidx.compose.ui.Modifier, androidx.compose.runtime.Composer, int, int):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0095  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00cd  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x018c  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0098  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -148,7 +130,6 @@ public abstract class TutorialSelectionScreenKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TutorialSelectionScreenKt$TutorialSelectionScreen$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

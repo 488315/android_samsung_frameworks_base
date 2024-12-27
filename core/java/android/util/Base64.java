@@ -93,9 +93,6 @@ public class Base64 {
             return ((len * 3) / 4) + 10;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:15:0x00e4 A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:18:0x00e7  */
-        /* JADX WARN: Removed duplicated region for block: B:20:0x00ee  */
         @Override // android.util.Base64.Coder
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -316,7 +313,6 @@ public class Base64 {
             return ((len * 8) / 5) + 10;
         }
 
-        /* JADX WARN: Incorrect condition in loop: B:19:0x009c */
         @Override // android.util.Base64.Coder
         /*
             Code decompiled incorrectly, please refer to instructions dump.

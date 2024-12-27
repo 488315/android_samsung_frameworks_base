@@ -720,7 +720,6 @@ public class MbmsDownloadSession implements AutoCloseable {
         return new File(tempFileLocation, downloadTokenFileName);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendErrorToApp(int errorCode, String message) {
         this.mInternalCallback.onError(errorCode, message);
     }

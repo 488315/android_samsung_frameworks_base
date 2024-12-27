@@ -12,7 +12,6 @@ public class FaceEnrollOptions implements Parcelable {
     public static final Parcelable.Creator<FaceEnrollOptions> CREATOR =
             new Parcelable.Creator<FaceEnrollOptions>() { // from class:
                 // android.hardware.biometrics.face.FaceEnrollOptions.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceEnrollOptions createFromParcel(Parcel _aidl_source) {
                     FaceEnrollOptions _aidl_out = new FaceEnrollOptions();
@@ -20,7 +19,6 @@ public class FaceEnrollOptions implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceEnrollOptions[] newArray(int _aidl_size) {
                     return new FaceEnrollOptions[_aidl_size];

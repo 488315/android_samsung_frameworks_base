@@ -16,7 +16,6 @@ final class MediaCardKt$TitleArea$2$1$2$1$1 extends SuspendLambda implements Fun
     final /* synthetic */ String $packageName;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaCardKt$TitleArea$2$1$2$1$1(String str, Continuation continuation) {
         super(2, continuation);
         this.$packageName = str;

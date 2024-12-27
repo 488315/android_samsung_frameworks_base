@@ -140,7 +140,6 @@ public final class BroadcastRadioServiceImpl {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.broadcastradio.aidl.BroadcastRadioServiceImpl$1] */
     public BroadcastRadioServiceImpl(ArrayList arrayList) {
         if (DEBUG) {
             Slogf.d(

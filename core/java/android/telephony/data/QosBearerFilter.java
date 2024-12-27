@@ -14,13 +14,11 @@ public final class QosBearerFilter implements Parcelable {
     public static final Parcelable.Creator<QosBearerFilter> CREATOR =
             new Parcelable.Creator<
                     QosBearerFilter>() { // from class: android.telephony.data.QosBearerFilter.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public QosBearerFilter createFromParcel(Parcel source) {
                     return new QosBearerFilter(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public QosBearerFilter[] newArray(int size) {
                     return new QosBearerFilter[size];
@@ -107,13 +105,11 @@ public final class QosBearerFilter implements Parcelable {
                 new Parcelable.Creator<
                         PortRange>() { // from class:
                                        // android.telephony.data.QosBearerFilter.PortRange.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PortRange createFromParcel(Parcel source) {
                         return new PortRange(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PortRange[] newArray(int size) {
                         return new PortRange[size];

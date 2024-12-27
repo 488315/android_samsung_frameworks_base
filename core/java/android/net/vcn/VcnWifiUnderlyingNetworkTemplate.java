@@ -40,7 +40,6 @@ public final class VcnWifiUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
         validateSsids(this.mSsids);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void validateSsids(Set<String> ssids) {
         Objects.requireNonNull(ssids, "ssids is null");
         for (String ssid : ssids) {

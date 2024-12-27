@@ -46,7 +46,6 @@ public final class SecPanelTouchProximityInteractor {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.shade.domain.interactor.SecPanelTouchProximityInteractor$broadcastReceiver$1] */
     public SecPanelTouchProximityInteractor(BroadcastDispatcher broadcastDispatcher, Context context, StatusBarStateController statusBarStateController, ShadeInteractor shadeInteractor) {
         this.broadcastDispatcher = broadcastDispatcher;
         this.context = context;

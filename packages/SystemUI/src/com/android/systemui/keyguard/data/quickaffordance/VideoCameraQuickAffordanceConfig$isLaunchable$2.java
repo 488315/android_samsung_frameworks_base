@@ -13,7 +13,6 @@ final class VideoCameraQuickAffordanceConfig$isLaunchable$2 extends SuspendLambd
     int label;
     final /* synthetic */ VideoCameraQuickAffordanceConfig this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public VideoCameraQuickAffordanceConfig$isLaunchable$2(VideoCameraQuickAffordanceConfig videoCameraQuickAffordanceConfig, Continuation continuation) {
         super(2, continuation);
         this.this$0 = videoCameraQuickAffordanceConfig;

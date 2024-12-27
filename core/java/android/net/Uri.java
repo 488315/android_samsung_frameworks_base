@@ -40,7 +40,6 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             new HierarchicalUri(null, Part.NULL, PathPart.EMPTY, Part.NULL, Part.NULL);
     public static final Parcelable.Creator<Uri> CREATOR =
             new Parcelable.Creator<Uri>() { // from class: android.net.Uri.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Uri createFromParcel(Parcel in) {
                     int type = in.readInt();
@@ -58,7 +57,6 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Uri[] newArray(int size) {
                     return new Uri[size];
@@ -280,7 +278,6 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             return parseScheme;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public String parseScheme() {
             int ssi = findSchemeSeparator();
             if (ssi == -1) {
@@ -289,7 +286,6 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             return this.uriString.substring(0, ssi);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Part getSsp() {
             if (this.ssp != null) {
                 return this.ssp;
@@ -318,7 +314,6 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             return this.uriString.substring(ssi + 1, fsi);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Part getAuthorityPart() {
             if (this.authority == null) {
                 String encodedAuthority = parseAuthority(this.uriString, findSchemeSeparator());
@@ -339,7 +334,6 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             return getAuthorityPart().getDecoded();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public PathPart getPathPart() {
             if (this.path == null) {
                 PathPart fromEncoded = PathPart.fromEncoded(parsePath());
@@ -376,7 +370,6 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             return parsePath(uriString, ssi);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Part getQueryPart() {
             if (this.query != null) {
                 return this.query;
@@ -411,7 +404,6 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             return getQueryPart().getDecoded();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Part getFragmentPart() {
             if (this.fragment != null) {
                 return this.fragment;

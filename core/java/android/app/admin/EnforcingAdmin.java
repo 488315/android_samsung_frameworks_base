@@ -13,13 +13,11 @@ public final class EnforcingAdmin implements Parcelable {
     public static final Parcelable.Creator<EnforcingAdmin> CREATOR =
             new Parcelable.Creator<
                     EnforcingAdmin>() { // from class: android.app.admin.EnforcingAdmin.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EnforcingAdmin createFromParcel(Parcel source) {
                     return new EnforcingAdmin(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EnforcingAdmin[] newArray(int size) {
                     return new EnforcingAdmin[size];

@@ -10,13 +10,11 @@ public final class EdgeLightingPolicyInfo implements Parcelable {
             new Parcelable.Creator<
                     EdgeLightingPolicyInfo>() { // from class:
                                                 // com.samsung.android.edge.EdgeLightingPolicyInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EdgeLightingPolicyInfo createFromParcel(Parcel source) {
                     return new EdgeLightingPolicyInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EdgeLightingPolicyInfo[] newArray(int size) {
                     return new EdgeLightingPolicyInfo[size];

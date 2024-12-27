@@ -212,7 +212,6 @@ public final class KeyCustomizationInfoXmlUtils {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void loadSettingsLocked(int i) {
         BufferedReader bufferedReader;
         Exception e;
@@ -383,7 +382,6 @@ public final class KeyCustomizationInfoXmlUtils {
         } while (!z);
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x0086 -> B:9:0x00ac). Please report as a decompilation issue!!! */
     public final void saveSettingsLocked(int i) {
         Slog.d(
                 "KeyCustomizationInfoXmlUtils",

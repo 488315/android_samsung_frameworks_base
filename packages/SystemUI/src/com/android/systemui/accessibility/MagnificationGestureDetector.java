@@ -48,7 +48,6 @@ public final class MagnificationGestureDetector {
         void onStart();
     }
 
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.systemui.accessibility.MagnificationGestureDetector$$ExternalSyntheticLambda0] */
     public MagnificationGestureDetector(Context context, Handler handler, OnGestureListener onGestureListener) {
         int scaledTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         this.mVibratorNoti = false;

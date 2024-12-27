@@ -64,13 +64,11 @@ public abstract class DomainSelectionService extends Service {
                 new Parcelable.Creator<
                         SelectionAttributes>() { // from class:
                                                  // android.telephony.DomainSelectionService.SelectionAttributes.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SelectionAttributes createFromParcel(Parcel in) {
                         return new SelectionAttributes(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SelectionAttributes[] newArray(int size) {
                         return new SelectionAttributes[size];
@@ -385,7 +383,6 @@ public abstract class DomainSelectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class TransportSelectorCallbackWrapper implements TransportSelectorCallback {
         private static final String TAG = "TransportSelectorCallbackWrapper";
         private final ITransportSelectorCallback mCallback;
@@ -451,7 +448,6 @@ public abstract class DomainSelectionService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         class ITransportSelectorResultCallbackAdapter
                 extends ITransportSelectorResultCallback.Stub {
             private final Consumer<WwanSelectorCallback> mConsumer;
@@ -486,14 +482,12 @@ public abstract class DomainSelectionService extends Service {
                         "onWwanSelectedAsync-Completed");
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onCompleted$0(WwanSelectorCallback callback) {
                 this.mConsumer.accept(callback);
             }
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class DomainSelectorWrapper {
         private static final String TAG = "DomainSelectorWrapper";
         private IDomainSelector mCallbackBinder;
@@ -502,7 +496,6 @@ public abstract class DomainSelectionService extends Service {
             this.mCallbackBinder = new IDomainSelectorAdapter(cb, executor);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         class IDomainSelectorAdapter extends IDomainSelector.Stub {
             private final WeakReference<DomainSelector> mDomainSelectorWeakRef;
             private final Executor mExecutor;
@@ -556,7 +549,6 @@ public abstract class DomainSelectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class WwanSelectorCallbackWrapper
             implements WwanSelectorCallback, CancellationSignal.OnCancelListener {
         private static final String TAG = "WwanSelectorCallbackWrapper";
@@ -613,7 +605,6 @@ public abstract class DomainSelectionService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         class IWwanSelectorResultCallbackAdapter extends IWwanSelectorResultCallback.Stub {
             private final Consumer<EmergencyRegistrationResult> mConsumer;
             private final Executor mExecutor;
@@ -644,7 +635,6 @@ public abstract class DomainSelectionService extends Service {
                         "onScanComplete");
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onComplete$0(EmergencyRegistrationResult result) {
                 this.mConsumer.accept(result);
             }
@@ -678,7 +668,6 @@ public abstract class DomainSelectionService extends Service {
                     "onDomainSelection");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$selectDomain$0(
                 SelectionAttributes attr, ITransportSelectorCallback callback) {
             DomainSelectionService.this.onDomainSelection(
@@ -705,7 +694,6 @@ public abstract class DomainSelectionService extends Service {
                     "onServiceStateUpdated");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$updateServiceState$1(
                 int slotIndex, int subscriptionId, ServiceState serviceState) {
             DomainSelectionService.this.onServiceStateUpdated(
@@ -729,14 +717,12 @@ public abstract class DomainSelectionService extends Service {
                     "onBarringInfoUpdated");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$updateBarringInfo$2(
                 int slotIndex, int subscriptionId, BarringInfo info) {
             DomainSelectionService.this.onBarringInfoUpdated(slotIndex, subscriptionId, info);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void executeMethodAsync(
             Executor executor, final Runnable r, String tag, String errorLogName)
             throws RemoteException {
@@ -758,7 +744,6 @@ public abstract class DomainSelectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void executeMethodAsyncNoException(
             Executor executor, final Runnable r, String tag, String errorLogName) {
         try {

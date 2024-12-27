@@ -340,7 +340,6 @@ public final class NavBarStoreImpl implements NavBarStore {
                             } else if (navBarStoreAction instanceof NavBarStoreAction.ResetHintVI) {
                                 final GestureHintAnimator gestureHintAnimator2 = (GestureHintAnimator) getModule(GestureHintAnimator.class, i);
                                 gestureHintAnimator2.handler.post(new Runnable() { // from class: com.android.systemui.navigationbar.gestural.GestureHintAnimator$reset$1
-                                    /* JADX WARN: Removed duplicated region for block: B:24:0x0075  */
                                     @Override // java.lang.Runnable
                                     /*
                                         Code decompiled incorrectly, please refer to instructions dump.
@@ -632,8 +631,6 @@ public final class NavBarStoreImpl implements NavBarStore {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00af  */
-    /* JADX WARN: Removed duplicated region for block: B:22:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -776,7 +773,6 @@ public final class NavBarStoreImpl implements NavBarStore {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r11v3, types: [com.android.systemui.navigationbar.interactor.LegacyDesktopModeInteractor$addCallback$2] */
     public final Object handleEvent(final Object obj, final EventTypeFactory.EventType eventType, final int i, Object obj2) {
         DesktopModeInteractor desktopModeInteractor;
         LegacyDesktopModeInteractor legacyDesktopModeInteractor;

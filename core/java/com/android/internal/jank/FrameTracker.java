@@ -206,7 +206,6 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener
                     500L);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$surfaceCreated$0() {
             if (FrameTracker.this.mSurfaceControl == null) {
                 FrameTracker.this.mSurfaceControl = FrameTracker.this.mViewRoot.getSurfaceControl();
@@ -232,7 +231,6 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener
                     50L);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$surfaceDestroyed$1() {
             if (!FrameTracker.this.mMetricsFinalized) {
                 FrameTracker.this.end(1);
@@ -267,7 +265,6 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener
         this.mChoreographer.mChoreographer.postCallback(0, action, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void beginInternal() {
         if (this.mCancelled || this.mEndVsyncId != -1) {
             return;
@@ -344,7 +341,6 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener
             FrameTracker.this.mHandler.postDelayed(FrameTracker.this.mWaitForFinishTimedOut, delay);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$run$0(String name) {
             Log.e(FrameTracker.TAG, "force finish cuj, time out: " + name);
             FrameTracker.this.finish();
@@ -400,7 +396,6 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onJankDataAvailable$0(SurfaceControl.JankData[] jankData) {
         if (this.mCancelled || this.mMetricsFinalized) {
             return;
@@ -448,7 +443,6 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onFrameMetricsAvailable$1() {
         if (this.mCancelled || this.mMetricsFinalized) {
             return;
@@ -507,7 +501,6 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener
         return info.hwuiCallbackFired && info.surfaceControlCallbackFired;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void finish() {
         int missedSfFramesCount;
         String name;

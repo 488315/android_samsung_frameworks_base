@@ -5,13 +5,11 @@ public class SemScreenWakeInfo implements Cloneable, Parcelable {
     public static final Parcelable.Creator<SemScreenWakeInfo> CREATOR =
             new Parcelable.Creator<
                     SemScreenWakeInfo>() { // from class: android.os.SemScreenWakeInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemScreenWakeInfo createFromParcel(Parcel in) {
                     return new SemScreenWakeInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemScreenWakeInfo[] newArray(int size) {
                     return new SemScreenWakeInfo[size];

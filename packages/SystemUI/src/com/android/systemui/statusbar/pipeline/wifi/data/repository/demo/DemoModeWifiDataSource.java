@@ -63,17 +63,10 @@ public final class DemoModeWifiDataSource {
                     this.this$0 = demoModeWifiDataSource;
                 }
 
-                /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                 /* JADX WARN: Code restructure failed: missing block: B:36:0x00ae, code lost:
                 
                     if (r13.equals(com.samsung.android.knox.zt.config.securelog.SignalSeverity.NONE) == false) goto L53;
                  */
-                /* JADX WARN: Multi-variable type inference failed */
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
-                /* JADX WARN: Type inference failed for: r13v2, types: [com.android.systemui.statusbar.pipeline.wifi.data.repository.demo.model.FakeWifiEventModel$WifiDisabled] */
-                /* JADX WARN: Type inference failed for: r13v9, types: [com.android.systemui.statusbar.pipeline.wifi.data.repository.demo.model.FakeWifiEventModel$Wifi] */
-                /* JADX WARN: Type inference failed for: r5v1, types: [com.android.systemui.statusbar.pipeline.wifi.data.repository.demo.model.FakeWifiEventModel$CarrierMerged] */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

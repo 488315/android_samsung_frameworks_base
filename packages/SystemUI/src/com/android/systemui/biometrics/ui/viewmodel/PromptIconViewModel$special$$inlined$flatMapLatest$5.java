@@ -15,7 +15,6 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$5 extends 
     int label;
     final /* synthetic */ PromptIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptIconViewModel$special$$inlined$flatMapLatest$5(Continuation continuation, PromptSelectorInteractor promptSelectorInteractor, PromptViewModel promptViewModel, PromptIconViewModel promptIconViewModel) {
         super(3, continuation);
         this.$promptSelectorInteractor$inlined = promptSelectorInteractor;
@@ -31,7 +30,6 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$5 extends 
         return promptIconViewModel$special$$inlined$flatMapLatest$5.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0061 A[RETURN] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

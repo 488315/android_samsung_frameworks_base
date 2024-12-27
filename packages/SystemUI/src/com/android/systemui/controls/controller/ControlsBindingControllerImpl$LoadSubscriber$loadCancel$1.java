@@ -10,7 +10,6 @@ public final class ControlsBindingControllerImpl$LoadSubscriber$loadCancel$1 imp
         this.this$0 = loadSubscriber;
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [kotlin.jvm.functions.Function0, kotlin.jvm.internal.Lambda] */
     @Override // java.lang.Runnable
     public final void run() {
         ?? r0 = this.this$0._loadCancelInternal;

@@ -19,14 +19,12 @@ public class SynchronousResultReceiver extends ResultReceiver {
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SynchronousResultReceiver() {
         super((Handler) null);
         this.mFuture = new CompletableFuture<>();
         this.mName = null;
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SynchronousResultReceiver(String name) {
         super((Handler) null);
         this.mFuture = new CompletableFuture<>();

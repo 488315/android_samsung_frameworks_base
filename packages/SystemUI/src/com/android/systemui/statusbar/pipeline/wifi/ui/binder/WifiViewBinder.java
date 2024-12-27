@@ -23,7 +23,6 @@ public final class WifiViewBinder {
     private WifiViewBinder() {
     }
 
-    /* JADX WARN: Type inference failed for: r6v2, types: [com.android.systemui.statusbar.pipeline.wifi.ui.binder.WifiViewBinder$bind$3] */
     public static final WifiViewBinder$bind$3 bind(ViewGroup viewGroup, final LocationBasedWifiViewModel locationBasedWifiViewModel) {
         final Ref$BooleanRef ref$BooleanRef;
         ViewGroup viewGroup2 = (ViewGroup) viewGroup.requireViewById(R.id.wifi_group);

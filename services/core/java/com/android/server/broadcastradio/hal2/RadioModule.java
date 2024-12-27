@@ -684,13 +684,6 @@ public final class RadioModule {
         this.mEventLogger = new RadioEventLogger("BcRadio2Srv.module");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x006d A[Catch: RemoteException -> 0x006b, TRY_LEAVE, TryCatch #1 {RemoteException -> 0x006b, blocks: (B:3:0x0007, B:7:0x0056, B:10:0x006d, B:15:0x00a4, B:19:0x00ba, B:20:0x00bd, B:21:0x0026, B:23:0x002c, B:25:0x0030, B:26:0x0033, B:12:0x008b), top: B:2:0x0007, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0056 A[Catch: RemoteException -> 0x006b, TRY_ENTER, TryCatch #1 {RemoteException -> 0x006b, blocks: (B:3:0x0007, B:7:0x0056, B:10:0x006d, B:15:0x00a4, B:19:0x00ba, B:20:0x00bd, B:21:0x0026, B:23:0x002c, B:25:0x0030, B:26:0x0033, B:12:0x008b), top: B:2:0x0007, inners: #0 }] */
-    /* JADX WARN: Type inference failed for: r4v2, types: [android.hardware.broadcastradio.V2_0.IBroadcastRadio$Proxy, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r4v3, types: [android.hardware.broadcastradio.V2_0.IBroadcastRadio] */
-    /* JADX WARN: Type inference failed for: r4v4, types: [android.hardware.broadcastradio.V2_0.IBroadcastRadio] */
-    /* JADX WARN: Type inference failed for: r4v5 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -802,7 +795,6 @@ public final class RadioModule {
                     + " java.lang.String):com.android.server.broadcastradio.hal2.RadioModule");
     }
 
-    /* JADX WARN: Type inference failed for: r6v7, types: [com.android.server.broadcastradio.hal2.RadioModule$3] */
     public final AnonymousClass3 addAnnouncementListener(
             int[] iArr, AnnouncementAggregator.ModuleWatcher moduleWatcher) {
         this.mEventLogger.logRadioEvent("Add AnnouncementListener", new Object[0]);

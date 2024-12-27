@@ -81,9 +81,6 @@ public final class Monitor {
             this.mSubscription = subscription;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:15:0x00bf  */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x00e7  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

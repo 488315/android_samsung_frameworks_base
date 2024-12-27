@@ -15,13 +15,11 @@ public final class TaskFragmentOperation implements Parcelable {
     public static final Parcelable.Creator<TaskFragmentOperation> CREATOR =
             new Parcelable.Creator<
                     TaskFragmentOperation>() { // from class: android.window.TaskFragmentOperation.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TaskFragmentOperation createFromParcel(Parcel in) {
                     return new TaskFragmentOperation(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TaskFragmentOperation[] newArray(int size) {
                     return new TaskFragmentOperation[size];

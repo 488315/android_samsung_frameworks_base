@@ -88,7 +88,6 @@ public class DvrPlayback implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onPlaybackStatusChanged$0(int status) {
         synchronized (this.mListenerLock) {
             if (this.mListener != null) {

@@ -8,7 +8,6 @@ public class FrontendIsdbtSettings implements Parcelable {
     public static final Parcelable.Creator<FrontendIsdbtSettings> CREATOR =
             new Parcelable.Creator<FrontendIsdbtSettings>() { // from class:
                 // android.hardware.tv.tuner.FrontendIsdbtSettings.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendIsdbtSettings createFromParcel(Parcel _aidl_source) {
                     FrontendIsdbtSettings _aidl_out = new FrontendIsdbtSettings();
@@ -16,7 +15,6 @@ public class FrontendIsdbtSettings implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendIsdbtSettings[] newArray(int _aidl_size) {
                     return new FrontendIsdbtSettings[_aidl_size];

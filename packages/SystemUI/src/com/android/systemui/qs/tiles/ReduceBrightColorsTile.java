@@ -43,7 +43,6 @@ public final class ReduceBrightColorsTile extends QSTileImpl implements ReduceBr
         hashSet.add("d2");
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.qs.tiles.ReduceBrightColorsTile$1] */
     public ReduceBrightColorsTile(boolean z, ReduceBrightColorsController reduceBrightColorsController, QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, UserTracker userTracker, SecureSettings secureSettings) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         reduceBrightColorsController.observe(this.mLifecycle, this);

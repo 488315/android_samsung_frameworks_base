@@ -134,7 +134,6 @@ public class InsetsResizeAnimationRunner
         this.mAnimator.start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onReady$0(ValueAnimator animation) {
         this.mAnimation.setFraction(animation.getAnimatedFraction());
         this.mController.scheduleApplyChangeInsets(this);
@@ -202,7 +201,6 @@ public class InsetsResizeAnimationRunner
         return this.mFinished;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public SyncRtSurfaceTransactionApplier.SurfaceParams getImeLeashSurfaceParam(
             InsetsSource fromImeSource, int offset) {
         SurfaceControl leash = this.mImeSourceControl.getLeash();

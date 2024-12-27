@@ -15,7 +15,6 @@ final class Feature$animateDismiss$1 extends SuspendLambda implements Function2 
     int label;
     final /* synthetic */ Feature this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public Feature$animateDismiss$1(Feature feature, Continuation continuation) {
         super(2, continuation);
         this.this$0 = feature;

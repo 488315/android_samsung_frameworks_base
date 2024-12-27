@@ -10,13 +10,11 @@ public final class ConnectivityMetricsEvent implements Parcelable {
             new Parcelable.Creator<
                     ConnectivityMetricsEvent>() { // from class:
                                                   // android.net.ConnectivityMetricsEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConnectivityMetricsEvent createFromParcel(Parcel source) {
                     return new ConnectivityMetricsEvent(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConnectivityMetricsEvent[] newArray(int size) {
                     return new ConnectivityMetricsEvent[size];

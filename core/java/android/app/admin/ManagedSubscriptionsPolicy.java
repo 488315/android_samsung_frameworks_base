@@ -17,7 +17,6 @@ public final class ManagedSubscriptionsPolicy implements Parcelable {
     public static final Parcelable.Creator<ManagedSubscriptionsPolicy> CREATOR =
             new Parcelable.Creator<ManagedSubscriptionsPolicy>() { // from class:
                 // android.app.admin.ManagedSubscriptionsPolicy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ManagedSubscriptionsPolicy createFromParcel(Parcel in) {
                     ManagedSubscriptionsPolicy policy =
@@ -25,7 +24,6 @@ public final class ManagedSubscriptionsPolicy implements Parcelable {
                     return policy;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ManagedSubscriptionsPolicy[] newArray(int size) {
                     return new ManagedSubscriptionsPolicy[size];

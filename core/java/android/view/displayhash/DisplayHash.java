@@ -12,13 +12,11 @@ public final class DisplayHash implements Parcelable {
     public static final Parcelable.Creator<DisplayHash> CREATOR =
             new Parcelable.Creator<
                     DisplayHash>() { // from class: android.view.displayhash.DisplayHash.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisplayHash[] newArray(int size) {
                     return new DisplayHash[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisplayHash createFromParcel(Parcel in) {
                     return new DisplayHash(in);

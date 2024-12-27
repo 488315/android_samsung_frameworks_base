@@ -14,7 +14,6 @@ public final class BluetoothVolumeController extends VolumeType {
 
     public BluetoothVolumeController(final Context context) {
         this.audioManagerWrapper$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.bixby2.controller.volume.BluetoothVolumeController$audioManagerWrapper$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

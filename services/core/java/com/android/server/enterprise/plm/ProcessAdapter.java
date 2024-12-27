@@ -12,8 +12,6 @@ public final class ProcessAdapter extends Handler {
     public final BindServiceImpl mKeepAliveImpl;
     public IStateDelegate mStateDelegate;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class TryReason {
         public static final /* synthetic */ TryReason[] $VALUES;
         public static final TryReason ALIVE;
@@ -74,7 +72,6 @@ public final class ProcessAdapter extends Handler {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:60|(1:62)(1:91)|(2:64|(8:66|67|68|69|(1:71)(1:86)|(1:75)|76|(1:78)))|90|67|68|69|(0)(0)|(2:73|75)|76|(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:88:0x0152, code lost:
 
        r11 = move-exception;
@@ -84,11 +81,6 @@ public final class ProcessAdapter extends Handler {
        android.util.Log.e("Utils", r11.toString());
        r14 = 0;
     */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00c6  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0121  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x015d  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0175 A[Catch: all -> 0x0193, TRY_LEAVE, TryCatch #2 {all -> 0x0193, blocks: (B:58:0x0128, B:60:0x012e, B:64:0x013b, B:66:0x0143, B:67:0x0147, B:73:0x0162, B:75:0x0166, B:76:0x0170, B:78:0x0175, B:89:0x0153, B:69:0x0149), top: B:57:0x0128, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x015f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

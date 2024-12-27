@@ -309,10 +309,6 @@ public final class WirelessDexManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.desktopmode.WirelessDexManager$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.desktopmode.WirelessDexManager$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.desktopmode.WirelessDexManager$2] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.desktopmode.WirelessDexManager$3] */
     public WirelessDexManager(
             Context context,
             IStateManager iStateManager,

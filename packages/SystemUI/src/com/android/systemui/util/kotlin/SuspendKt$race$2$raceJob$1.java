@@ -25,7 +25,6 @@ final class SuspendKt$race$2$raceJob$1 extends SuspendLambda implements Function
         Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(CompletableDeferred completableDeferred, Function1 function1, Continuation continuation) {
             super(2, continuation);
             this.$completion = completableDeferred;
@@ -71,7 +70,6 @@ final class SuspendKt$race$2$raceJob$1 extends SuspendLambda implements Function
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SuspendKt$race$2$raceJob$1(Function1[] function1Arr, CompletableDeferred completableDeferred, Continuation continuation) {
         super(2, continuation);
         this.$blocks = function1Arr;

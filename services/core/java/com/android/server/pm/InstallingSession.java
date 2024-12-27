@@ -202,14 +202,6 @@ public final class InstallingSession {
         this.mDexoptCompilerFilter = null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x0205  */
-    /* JADX WARN: Removed duplicated region for block: B:134:0x00ea A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:219:0x02ff  */
-    /* JADX WARN: Removed duplicated region for block: B:222:0x031b  */
-    /* JADX WARN: Removed duplicated region for block: B:244:0x0383  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0122 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x020b A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -224,13 +216,6 @@ public final class InstallingSession {
                     + " com.android.server.pm.InstallingSession.handleReturnCode(com.android.server.pm.InstallRequest):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x011c  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x0155  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x01ad  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x01d1  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x023f  */
-    /* JADX WARN: Removed duplicated region for block: B:75:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x01d7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

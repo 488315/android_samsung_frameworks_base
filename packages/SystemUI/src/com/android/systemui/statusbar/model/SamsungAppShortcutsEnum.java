@@ -6,12 +6,9 @@ import android.util.Pair;
 import android.view.KeyboardShortcutInfo;
 import com.android.systemui.R;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public abstract class SamsungAppShortcutsEnum {
     public static final /* synthetic */ SamsungAppShortcutsEnum[] $VALUES = {new AnonymousClass1(), new AnonymousClass2(), new AnonymousClass3(), new AnonymousClass4(), new AnonymousClass5(), new AnonymousClass6(), new AnonymousClass7(), new AnonymousClass8(), new AnonymousClass9(), new AnonymousClass10(), new AnonymousClass11(), new AnonymousClass12(), new AnonymousClass13(), new AnonymousClass14(), new AnonymousClass15(), new AnonymousClass16()};
 
-    /* JADX INFO: Fake field, exist only in values array */
     SamsungAppShortcutsEnum EF2;
 
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$1, reason: invalid class name */

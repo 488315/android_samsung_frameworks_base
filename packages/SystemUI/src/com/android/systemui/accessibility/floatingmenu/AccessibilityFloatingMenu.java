@@ -20,10 +20,6 @@ public final class AccessibilityFloatingMenu implements IAccessibilityFloatingMe
     public final AccessibilityFloatingMenuView mMenuView;
     public final AnonymousClass2 mSizeContentObserver;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenu$1] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenu$2] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenu$3] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenu$4] */
     public AccessibilityFloatingMenu(Context context, boolean z) {
         Handler handler = new Handler(Looper.getMainLooper());
         this.mContentObserver = new ContentObserver(handler) { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenu.1

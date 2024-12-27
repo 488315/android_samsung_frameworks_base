@@ -10,8 +10,6 @@ import android.util.Singleton;
 public class IsrbManager {
     private static final Singleton<IIsrbManager> IIsrbManagerSingleton =
             new Singleton<IIsrbManager>() { // from class: com.samsung.android.isrb.IsrbManager.1
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.util.Singleton
                 public IIsrbManager create() {
                     IBinder b = ServiceManager.getService(Context.ISRB_MANAGER_SERVICE);

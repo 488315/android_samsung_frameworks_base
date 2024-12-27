@@ -232,7 +232,6 @@ public class UnintentionalLcdOnView extends LinearLayout {
         this(context, attributeSet, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.power.UnintentionalLcdOnView$2] */
     public UnintentionalLcdOnView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.mCircleImage = null;

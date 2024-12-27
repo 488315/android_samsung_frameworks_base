@@ -8,13 +8,11 @@ public class CocktailBarStateInfo implements Parcelable, Cloneable {
             new Parcelable.Creator<
                     CocktailBarStateInfo>() { // from class:
                                               // com.samsung.android.cocktailbar.CocktailBarStateInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CocktailBarStateInfo createFromParcel(Parcel in) {
                     return new CocktailBarStateInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CocktailBarStateInfo[] newArray(int size) {
                     return new CocktailBarStateInfo[size];

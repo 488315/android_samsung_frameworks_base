@@ -213,7 +213,6 @@ public abstract class CommunalHubKt {
         Modifier wrapContentHeight$default = SizeKt.wrapContentHeight$default(SizeKt.fillMaxWidth(companion, 1.0f), false, 3);
         if (((Boolean) collectAsStateWithLifecycle.getValue()).booleanValue() && !baseCommunalViewModel.isEditMode()) {
             wrapContentHeight$default = wrapContentHeight$default.then(SemanticsModifierKt.semantics(FocusableKt.focusable$default(companion, ((Boolean) collectAsStateWithLifecycle.getValue()).booleanValue(), 2), false, new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$AccessibilityContainer$1$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -283,7 +282,6 @@ public abstract class CommunalHubKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$AccessibilityContainer$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -298,13 +296,6 @@ public abstract class CommunalHubKt {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r13v4 */
-    /* JADX WARN: Type inference failed for: r13v5, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r13v6 */
-    /* JADX WARN: Type inference failed for: r2v15, types: [com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$4$4, kotlin.jvm.internal.Lambda] */
-    /* JADX WARN: Type inference failed for: r6v4, types: [com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$4$1, kotlin.jvm.internal.Lambda] */
-    /* JADX WARN: Type inference failed for: r8v6, types: [com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$4$2, kotlin.jvm.internal.Lambda] */
     public static final void CommunalHub(Modifier modifier, final BaseCommunalViewModel baseCommunalViewModel, RemoteViews.InteractionHandler interactionHandler, SystemUIDialogFactory systemUIDialogFactory, WidgetConfigurator widgetConfigurator, Function0 function0, Function0 function02, Composer composer, final int i, final int i2) {
         PaddingValuesImpl m101PaddingValuesa9UjIt4$default;
         LazyGridState lazyGridState;
@@ -352,7 +343,6 @@ public abstract class CommunalHubKt {
         Object rememberedValue2 = composerImpl.rememberedValue();
         if (changed || rememberedValue2 == obj) {
             rememberedValue2 = new ContentListState(list, new Function3() { // from class: com.android.systemui.communal.ui.compose.ContentListStateKt$rememberContentListState$1$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(3);
                 }
@@ -377,7 +367,6 @@ public abstract class CommunalHubKt {
         Object rememberedValue3 = composerImpl.rememberedValue();
         if (rememberedValue3 == obj) {
             rememberedValue3 = SnapshotStateKt.derivedStateOf(new Function0() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$removeButtonEnabled$2$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -508,7 +497,6 @@ public abstract class CommunalHubKt {
         final Modifier modifier3 = modifier2;
         ComposerImpl composerImpl2 = composerImpl;
         AccessibilityContainer(baseCommunalViewModel, ComposableLambdaKt.rememberComposableLambda(273884332, composerImpl2, new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$4$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
             }
@@ -521,7 +509,6 @@ public abstract class CommunalHubKt {
             
                 if (r9 == androidx.compose.runtime.Composer.Companion.Empty) goto L22;
              */
-            /* JADX WARN: Type inference failed for: r2v15, types: [com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$4$1$3, kotlin.jvm.internal.Lambda] */
             @Override // kotlin.jvm.functions.Function2
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -553,7 +540,6 @@ public abstract class CommunalHubKt {
             final Function0 function06 = function03;
             final Function0 function07 = function04;
             AnimatedVisibilityKt.AnimatedVisibility(z, (Modifier) null, plus, plus2, (String) null, ComposableLambdaKt.rememberComposableLambda(-1595557414, composerImpl2, new Function3() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$4$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(3);
                 }
@@ -567,7 +553,6 @@ public abstract class CommunalHubKt {
                     final ContentListState contentListState2 = contentListState;
                     final BaseCommunalViewModel baseCommunalViewModel2 = baseCommunalViewModel;
                     Function0 function08 = new Function0() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$4$2.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(0);
                         }
@@ -659,7 +644,6 @@ public abstract class CommunalHubKt {
         Modifier.Companion companion3 = Modifier.Companion;
         companion3.getClass();
         AnimatedVisibilityKt.AnimatedVisibility(areEqual, fillElement, (EnterTransition) null, (ExitTransition) null, (String) null, ComposableLambdaKt.rememberComposableLambda(-1648433579, composerImpl2, new Function3() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$4$4
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(3);
             }
@@ -671,7 +655,6 @@ public abstract class CommunalHubKt {
                 final BaseCommunalViewModel baseCommunalViewModel2 = BaseCommunalViewModel.this;
                 final State state2 = collectAsStateWithLifecycle4;
                 Function0 function08 = new Function0() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$4$4.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -718,7 +701,6 @@ public abstract class CommunalHubKt {
             final Function0 function08 = function03;
             final Function0 function09 = function04;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$5
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -733,7 +715,6 @@ public abstract class CommunalHubKt {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.systemui.communal.ui.compose.CommunalHubKt$CtaTileInViewModeContent$1, kotlin.jvm.internal.Lambda] */
     public static final void CtaTileInViewModeContent(final BaseCommunalViewModel baseCommunalViewModel, final Modifier modifier, Composer composer, final int i, final int i2) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(-1975660102);
@@ -750,7 +731,6 @@ public abstract class CommunalHubKt {
         Dp.Companion companion = Dp.Companion;
         float f2 = 34;
         CardKt.Card(modifier, RoundedCornerShapeKt.m152RoundedCornerShapea9UjIt4(f, f2, f, f2), m211cardColorsro_MJ88, null, null, ComposableLambdaKt.rememberComposableLambda(-2139731156, composerImpl, new Function3() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CtaTileInViewModeContent$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(3);
             }
@@ -858,7 +838,6 @@ public abstract class CommunalHubKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CtaTileInViewModeContent$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -934,7 +913,6 @@ public abstract class CommunalHubKt {
         if (endRestartGroup != null) {
             final Modifier modifier3 = modifier2;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$DisabledWidgetPlaceholder$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -949,9 +927,6 @@ public abstract class CommunalHubKt {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0087  */
-    /* JADX WARN: Removed duplicated region for block: B:15:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0032  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1098,7 +1073,6 @@ public abstract class CommunalHubKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$PendingWidgetPlaceholder$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1135,7 +1109,6 @@ public abstract class CommunalHubKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$PopupOnDismissCtaTile$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1172,8 +1145,6 @@ public abstract class CommunalHubKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$ScrollOnUpdatedLiveContentEffect$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                /* JADX WARN: Multi-variable type inference failed */
                 {
                     super(2);
                 }
@@ -1197,7 +1168,6 @@ public abstract class CommunalHubKt {
         OpaqueKey opaqueKey = ComposerKt.invocation;
         Modifier modifier2 = modifier;
         AndroidView_androidKt.AndroidView(new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$SmartspaceContent$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -1223,7 +1193,6 @@ public abstract class CommunalHubKt {
         if (endRestartGroup != null) {
             final Modifier modifier3 = modifier;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$SmartspaceContent$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1238,16 +1207,6 @@ public abstract class CommunalHubKt {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0067  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0107  */
-    /* JADX WARN: Removed duplicated region for block: B:24:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0090  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0093  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x006a  */
-    /* JADX WARN: Type inference failed for: r6v2, types: [com.android.systemui.communal.ui.compose.CommunalHubKt$ToolbarButton$1, kotlin.jvm.internal.Lambda] */
-    /* JADX WARN: Type inference failed for: r7v8, types: [com.android.systemui.communal.ui.compose.CommunalHubKt$ToolbarButton$2, kotlin.jvm.internal.Lambda] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1285,7 +1244,6 @@ public abstract class CommunalHubKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$TutorialContent$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1335,7 +1293,6 @@ public abstract class CommunalHubKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$Umo$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1350,7 +1307,6 @@ public abstract class CommunalHubKt {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r5v1, types: [com.android.systemui.communal.ui.compose.CommunalHubKt$WidgetConfigureButton$1, kotlin.jvm.internal.Lambda] */
     public static final void WidgetConfigureButton(final boolean z, final CommunalContentModel.WidgetContent.Widget widget, Modifier modifier, final WidgetConfigurator widgetConfigurator, Composer composer, final int i, final int i2) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(2015050074);
@@ -1369,7 +1325,6 @@ public abstract class CommunalHubKt {
         ExitTransitionImpl fadeOut$default = EnterExitTransitionKt.fadeOut$default(null, 3);
         Dp.Companion companion = Dp.Companion;
         AnimatedVisibilityKt.AnimatedVisibility(z, PaddingKt.m102padding3ABfNKs(modifier, 16), fadeIn$default, fadeOut$default, (String) null, ComposableLambdaKt.rememberComposableLambda(-635566206, composerImpl, new Function3() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$WidgetConfigureButton$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(3);
             }
@@ -1397,7 +1352,6 @@ public abstract class CommunalHubKt {
                         final /* synthetic */ WidgetConfigurator $widgetConfigurator;
                         int label;
 
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         public C00751(WidgetConfigurator widgetConfigurator, CommunalContentModel.WidgetContent.Widget widget, Continuation continuation) {
                             super(2, continuation);
                             this.$widgetConfigurator = widgetConfigurator;
@@ -1436,7 +1390,6 @@ public abstract class CommunalHubKt {
                         }
                     }
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -1456,7 +1409,6 @@ public abstract class CommunalHubKt {
         if (endRestartGroup != null) {
             final Modifier modifier2 = modifier;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$WidgetConfigureButton$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1491,19 +1443,16 @@ public abstract class CommunalHubKt {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.communal.ui.compose.CommunalHubKt.WidgetContent(com.android.systemui.communal.ui.viewmodel.BaseCommunalViewModel, com.android.systemui.communal.domain.model.CommunalContentModel$WidgetContent$Widget, android.util.SizeF, boolean, com.android.systemui.communal.widgets.WidgetConfigurator, androidx.compose.ui.Modifier, int, com.android.systemui.communal.ui.compose.ContentListState, androidx.compose.runtime.Composer, int, int):void");
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.systemui.communal.ui.compose.CommunalHubKt$ButtonToEditWidgets$1, kotlin.jvm.internal.Lambda] */
     public static final void access$ButtonToEditWidgets(final AnimatedVisibilityScope animatedVisibilityScope, final Function0 function0, final Function0 function02, Composer composer, final int i) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(1807824709);
         OpaqueKey opaqueKey = ComposerKt.invocation;
         Alignment.Companion.getClass();
         AndroidPopup_androidKt.m780PopupK5zGePQ(Alignment.Companion.TopCenter, IntOffsetKt.IntOffset(0, 40), function02, null, ComposableLambdaKt.rememberComposableLambda(-1540089086, composerImpl, new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$ButtonToEditWidgets$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
             }
 
-            /* JADX WARN: Type inference failed for: r2v8, types: [com.android.systemui.communal.ui.compose.CommunalHubKt$ButtonToEditWidgets$1$2, kotlin.jvm.internal.Lambda] */
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 Composer composer2 = (Composer) obj;
@@ -1533,7 +1482,6 @@ public abstract class CommunalHubKt {
                 Function0 function03 = function0;
                 final AnimatedVisibilityScope animatedVisibilityScope3 = AnimatedVisibilityScope.this;
                 ButtonKt.Button(function03, m24backgroundbw27NRU, false, null, null, null, null, null, null, ComposableLambdaKt.rememberComposableLambda(2078090514, composerImpl3, new Function3() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$ButtonToEditWidgets$1.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(3);
                     }
@@ -1602,7 +1550,6 @@ public abstract class CommunalHubKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$ButtonToEditWidgets$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1617,8 +1564,6 @@ public abstract class CommunalHubKt {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x012f  */
-    /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1635,10 +1580,6 @@ public abstract class CommunalHubKt {
     
         if (r2 == androidx.compose.runtime.Composer.Companion.Empty) goto L14;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v8, types: [T, com.android.systemui.communal.ui.compose.GridDragDropState, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r2v22, types: [com.android.systemui.communal.ui.compose.DragAndDropTargetStateKt$dragAndDropTarget$2] */
-    /* JADX WARN: Type inference failed for: r9v4, types: [T, androidx.compose.runtime.snapshots.SnapshotStateList] */
     /* renamed from: access$CommunalHubLazyGrid-pnlYLlI, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1652,7 +1593,6 @@ public abstract class CommunalHubKt {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.communal.ui.compose.CommunalHubKt.m941access$CommunalHubLazyGridpnlYLlI(androidx.compose.foundation.layout.BoxScope, java.util.List, com.android.systemui.communal.ui.viewmodel.BaseCommunalViewModel, androidx.compose.foundation.layout.PaddingValues, androidx.compose.runtime.State, long, androidx.compose.foundation.lazy.grid.LazyGridState, com.android.systemui.communal.ui.compose.ContentListState, kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function1, com.android.systemui.communal.widgets.WidgetConfigurator, android.widget.RemoteViews$InteractionHandler, androidx.compose.runtime.Composer, int, int):void");
     }
 
-    /* JADX WARN: Type inference failed for: r0v12, types: [com.android.systemui.communal.ui.compose.CommunalHubKt$EmptyStateCta$1, kotlin.jvm.internal.Lambda] */
     public static final void access$EmptyStateCta(final PaddingValues paddingValues, final BaseCommunalViewModel baseCommunalViewModel, Composer composer, final int i) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(-1754062866);
@@ -1668,7 +1608,6 @@ public abstract class CommunalHubKt {
         CardColors m211cardColorsro_MJ88 = CardDefaults.m211cardColorsro_MJ88(j, 0L, composerImpl, 6, 14);
         Dp.Companion companion2 = Dp.Companion;
         CardKt.Card(padding, RoundedCornerShapeKt.m151RoundedCornerShape0680j_4(80), m211cardColorsro_MJ88, null, BorderStrokeKt.m27BorderStrokecXLIe8U(3, androidColorScheme.secondary), ComposableLambdaKt.rememberComposableLambda(-635955488, composerImpl, new Function3() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$EmptyStateCta$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(3);
             }
@@ -1779,7 +1718,6 @@ public abstract class CommunalHubKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$EmptyStateCta$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1798,7 +1736,6 @@ public abstract class CommunalHubKt {
     
         if (r3 == androidx.compose.runtime.Composer.Companion.Empty) goto L63;
      */
-    /* JADX WARN: Type inference failed for: r0v27, types: [com.android.systemui.communal.ui.compose.CommunalHubKt$Toolbar$2$1, kotlin.jvm.internal.Lambda] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

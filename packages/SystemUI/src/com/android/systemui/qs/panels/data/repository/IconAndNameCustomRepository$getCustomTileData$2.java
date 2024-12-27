@@ -29,7 +29,6 @@ final class IconAndNameCustomRepository$getCustomTileData$2 extends SuspendLambd
     int label;
     final /* synthetic */ IconAndNameCustomRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public IconAndNameCustomRepository$getCustomTileData$2(IconAndNameCustomRepository iconAndNameCustomRepository, Continuation continuation) {
         super(2, continuation);
         this.this$0 = iconAndNameCustomRepository;

@@ -9,7 +9,6 @@ public class SharedBuffer implements Parcelable {
     public static final Parcelable.Creator<SharedBuffer> CREATOR =
             new Parcelable.Creator<
                     SharedBuffer>() { // from class: android.hardware.cas.SharedBuffer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SharedBuffer createFromParcel(Parcel _aidl_source) {
                     SharedBuffer _aidl_out = new SharedBuffer();
@@ -17,7 +16,6 @@ public class SharedBuffer implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SharedBuffer[] newArray(int _aidl_size) {
                     return new SharedBuffer[_aidl_size];

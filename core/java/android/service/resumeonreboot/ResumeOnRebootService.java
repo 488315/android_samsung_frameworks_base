@@ -49,7 +49,6 @@ public abstract class ResumeOnRebootService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$wrapSecret$0(
                 byte[] unwrappedBlob, long lifeTimeInMillis, RemoteCallback resultCallback) {
             try {
@@ -80,7 +79,6 @@ public abstract class ResumeOnRebootService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$unwrap$1(
                 byte[] wrappedBlob, RemoteCallback resultCallback) {
             try {

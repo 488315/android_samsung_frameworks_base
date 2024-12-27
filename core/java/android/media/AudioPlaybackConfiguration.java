@@ -101,13 +101,11 @@ public final class AudioPlaybackConfiguration implements Parcelable {
     public static final Parcelable.Creator<AudioPlaybackConfiguration> CREATOR =
             new Parcelable.Creator<AudioPlaybackConfiguration>() { // from class:
                 // android.media.AudioPlaybackConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPlaybackConfiguration createFromParcel(Parcel p) {
                     return new AudioPlaybackConfiguration(p);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPlaybackConfiguration[] newArray(int size) {
                     return new AudioPlaybackConfiguration[size];
@@ -401,7 +399,6 @@ public final class AudioPlaybackConfiguration implements Parcelable {
         return changed;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void playerDied() {
         if (sPlayerDeathMonitor != null) {
             sPlayerDeathMonitor.playerDeath(this.mPlayerIId);
@@ -612,13 +609,11 @@ public final class AudioPlaybackConfiguration implements Parcelable {
         public static final Parcelable.Creator<FormatInfo> CREATOR =
                 new Parcelable.Creator<FormatInfo>() { // from class:
                     // android.media.AudioPlaybackConfiguration.FormatInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FormatInfo createFromParcel(Parcel p) {
                         return new FormatInfo(p);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FormatInfo[] newArray(int size) {
                         return new FormatInfo[size];

@@ -1899,7 +1899,6 @@ public abstract class ConnectionService extends Service {
 
     public void onBindClient(Intent intent) {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void createConference(
             PhoneAccountHandle callManagerAccount,
             String callId,
@@ -1968,7 +1967,6 @@ public abstract class ConnectionService extends Service {
         this.mAdapter.handleCreateConferenceComplete(callId, request, parcelableConference);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void createConnection(
             PhoneAccountHandle callManagerAccount,
             String callId,
@@ -2115,7 +2113,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void createConnectionFailed(
             PhoneAccountHandle callManagerAccount,
             String callId,
@@ -2129,7 +2126,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void createConferenceFailed(
             PhoneAccountHandle callManagerAccount,
             String callId,
@@ -2143,13 +2139,11 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handoverFailed(String callId, ConnectionRequest request, int reason) {
         Log.i(this, "handoverFailed %s", callId);
         onHandoverFailed(request, reason);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyCreateConnectionComplete(String callId) {
         Log.i(this, "notifyCreateConnectionComplete %s", callId);
         if (callId == null) {
@@ -2160,7 +2154,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyCreateConferenceComplete(String callId) {
         Log.i(this, "notifyCreateConferenceComplete %s", callId);
         if (callId == null) {
@@ -2171,13 +2164,11 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void abort(String callId) {
         Log.i(this, "abort %s", callId);
         findConnectionForAction(callId, "abort").onAbort();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void answerVideo(String callId, int videoState) {
         Log.i(this, "answerVideo %s", callId);
         if (this.mConnectionById.containsKey(callId)) {
@@ -2189,7 +2180,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void answer(String callId) {
         Log.i(this, "answer %s", callId);
         if (this.mConnectionById.containsKey(callId)) {
@@ -2199,13 +2189,11 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void deflect(String callId, Uri address) {
         Log.i(this, "deflect %s", callId);
         findConnectionForAction(callId, "deflect").onDeflect(address);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void reject(String callId) {
         Log.i(this, "reject %s", callId);
         if (this.mConnectionById.containsKey(callId)) {
@@ -2215,27 +2203,23 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void reject(String callId, String rejectWithMessage) {
         Log.i(this, "reject %s with message", callId);
         findConnectionForAction(callId, SemRILConstants.CmcCall.CMC_CALL_SD_REJECT)
                 .onReject(rejectWithMessage);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void reject(String callId, int rejectReason) {
         Log.i(this, "reject %s with reason %d", callId, Integer.valueOf(rejectReason));
         findConnectionForAction(callId, SemRILConstants.CmcCall.CMC_CALL_SD_REJECT)
                 .onReject(rejectReason);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void transfer(String callId, Uri number, boolean isConfirmationRequired) {
         Log.i(this, "transfer %s", callId);
         findConnectionForAction(callId, "transfer").onTransfer(number, isConfirmationRequired);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void consultativeTransfer(String callId, String otherCallId) {
         Log.i(this, "consultativeTransfer %s", callId);
         Connection connection1 = findConnectionForAction(callId, "consultativeTransfer");
@@ -2243,13 +2227,11 @@ public abstract class ConnectionService extends Service {
         connection1.onTransfer(connection2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void silence(String callId) {
         Log.i(this, "silence %s", callId);
         findConnectionForAction(callId, "silence").onSilence();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void disconnect(String callId) {
         Log.i(this, "disconnect %s", callId);
         if (this.mConnectionById.containsKey(callId)) {
@@ -2259,7 +2241,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void hold(String callId) {
         Log.i(this, "hold %s", callId);
         if (this.mConnectionById.containsKey(callId)) {
@@ -2269,7 +2250,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void unhold(String callId) {
         Log.i(this, "unhold %s", callId);
         if (this.mConnectionById.containsKey(callId)) {
@@ -2279,7 +2259,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onCallAudioStateChanged(String callId, CallAudioState callAudioState) {
         Log.i(this, "onAudioStateChanged %s %s", callId, callAudioState);
         if (this.mConnectionById.containsKey(callId)) {
@@ -2291,7 +2270,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onCallEndpointChanged(String callId, CallEndpoint callEndpoint) {
         Log.i(this, "onCallEndpointChanged %s %s", callId, callEndpoint);
         if (this.mConnectionById.containsKey(callId)) {
@@ -2301,7 +2279,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onAvailableCallEndpointsChanged(
             String callId, List<CallEndpoint> availableCallEndpoints) {
         Log.i(this, "onAvailableCallEndpointsChanged %s", callId);
@@ -2314,7 +2291,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onMuteStateChanged(String callId, boolean isMuted) {
         Log.i(this, "onMuteStateChanged %s %s", callId, Boolean.valueOf(isMuted));
         if (this.mConnectionById.containsKey(callId)) {
@@ -2324,7 +2300,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onUsingAlternativeUi(String callId, boolean isUsingAlternativeUi) {
         Log.i(this, "onUsingAlternativeUi %s %s", callId, Boolean.valueOf(isUsingAlternativeUi));
         if (this.mConnectionById.containsKey(callId)) {
@@ -2333,7 +2308,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onTrackedByNonUiService(String callId, boolean isTracked) {
         Log.i(this, "onTrackedByNonUiService %s %s", callId, Boolean.valueOf(isTracked));
         if (this.mConnectionById.containsKey(callId)) {
@@ -2342,7 +2316,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void playDtmfTone(String callId, char digit) {
         Log.i(this, "playDtmfTone %s %s", callId, Log.pii(Character.valueOf(digit)));
         if (this.mConnectionById.containsKey(callId)) {
@@ -2352,7 +2325,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void stopDtmfTone(String callId) {
         Log.i(this, "stopDtmfTone %s", callId);
         if (this.mConnectionById.containsKey(callId)) {
@@ -2362,7 +2334,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void conference(String callId1, String callId2) {
         Log.i(this, "conference %s, %s", callId1, callId2);
         Connection connection2 =
@@ -2405,7 +2376,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void splitFromConference(String callId) {
         Log.i(this, "splitFromConference(%s)", callId);
         Connection connection = findConnectionForAction(callId, "splitFromConference");
@@ -2419,7 +2389,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void mergeConference(String callId) {
         Log.i(this, "mergeConference(%s)", callId);
         Conference conference = findConferenceForAction(callId, "mergeConference");
@@ -2428,7 +2397,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void swapConference(String callId) {
         Log.i(this, "swapConference(%s)", callId);
         Conference conference = findConferenceForAction(callId, "swapConference");
@@ -2437,7 +2405,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addConferenceParticipants(String callId, List<Uri> participants) {
         Log.i(this, "addConferenceParticipants(%s)", callId);
         if (this.mConnectionById.containsKey(callId)) {
@@ -2449,7 +2416,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void pullExternalCall(String callId) {
         Log.i(this, "pullExternalCall(%s)", callId);
         Connection connection = findConnectionForAction(callId, "pullExternalCall");
@@ -2458,7 +2424,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendCallEvent(String callId, String event, Bundle extras) {
         Log.i(this, "sendCallEvent(%s, %s)", callId, event);
         Connection connection = findConnectionForAction(callId, "sendCallEvent");
@@ -2467,7 +2432,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onCallFilteringCompleted(
             String callId, Connection.CallFilteringCompletionInfo callFilteringCompletionInfo) {
         Log.i(this, "onCallFilteringCompleted(%s, %s)", callId, callFilteringCompletionInfo);
@@ -2477,7 +2441,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyHandoverComplete(String callId) {
         Log.i(this, "notifyHandoverComplete(%s)", callId);
         Connection connection = findConnectionForAction(callId, "notifyHandoverComplete");
@@ -2486,7 +2449,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleExtrasChanged(String callId, Bundle extras) {
         Log.i(this, "handleExtrasChanged(%s, %s)", callId, Log.maskPii(extras));
         if (this.mConnectionById.containsKey(callId)) {
@@ -2496,7 +2458,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startRtt(String callId, Connection.RttTextStream rttTextStream) {
         Log.i(this, "startRtt(%s)", callId);
         if (this.mConnectionById.containsKey(callId)) {
@@ -2506,7 +2467,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void stopRtt(String callId) {
         Log.i(this, "stopRtt(%s)", callId);
         if (this.mConnectionById.containsKey(callId)) {
@@ -2516,7 +2476,6 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleRttUpgradeResponse(String callId, Connection.RttTextStream rttTextStream) {
         Log.i(
                 this,
@@ -2531,13 +2490,11 @@ public abstract class ConnectionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onPostDialContinue(String callId, boolean proceed) {
         Log.i(this, "onPostDialContinue(%s)", callId);
         findConnectionForAction(callId, "stopDtmfTone").onPostDialContinue(proceed);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onAdapterAttached() {
         if (this.mAreAccountsInitialized) {
             return;
@@ -2819,7 +2776,6 @@ public abstract class ConnectionService extends Service {
         onRemoteExistingConnectionAdded(remoteConnection);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onAccountsInitialized() {
         this.mAreAccountsInitialized = true;
         for (Runnable r : this.mPreInitializationConnectionRequests) {
@@ -2894,7 +2850,6 @@ public abstract class ConnectionService extends Service {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeConference(Conference conference) {
         if (this.mIdByConference.containsKey(conference)) {
             conference.removeListener(this.mConferenceListener);
@@ -2935,7 +2890,6 @@ public abstract class ConnectionService extends Service {
         return getNullConference();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public List<String> createConnectionIdList(List<Connection> connections) {
         List<String> ids = new ArrayList<>();
         for (Connection c : connections) {
@@ -2947,7 +2901,6 @@ public abstract class ConnectionService extends Service {
         return ids;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public List<String> createIdList(List<Conferenceable> conferenceables) {
         List<String> ids = new ArrayList<>();
         for (Conferenceable c : conferenceables) {

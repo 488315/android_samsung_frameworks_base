@@ -17,7 +17,6 @@ public class FilterAnimation extends Animation<FilterInfo> {
         super(context, AnimationType.FILTER, id, name);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.vekit.Animation.Animation
     public void rollback() {
         if (isEnableRollback()) {

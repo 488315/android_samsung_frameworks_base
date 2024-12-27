@@ -11,7 +11,6 @@ public class SendSmsResult implements Parcelable {
     public static final Parcelable.Creator<SendSmsResult> CREATOR =
             new Parcelable.Creator<SendSmsResult>() { // from class:
                 // android.hardware.radio.messaging.SendSmsResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SendSmsResult createFromParcel(Parcel _aidl_source) {
                     SendSmsResult _aidl_out = new SendSmsResult();
@@ -19,7 +18,6 @@ public class SendSmsResult implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SendSmsResult[] newArray(int _aidl_size) {
                     return new SendSmsResult[_aidl_size];

@@ -9,8 +9,6 @@ public abstract class ScpmList {
     public PolicyType mType = null;
     public String[] mItemNames = null;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class PolicyType {
         public static final /* synthetic */ PolicyType[] $VALUES;
         public static final PolicyType CAMERA_3RD_PARTY;

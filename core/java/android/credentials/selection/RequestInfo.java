@@ -20,13 +20,11 @@ public final class RequestInfo implements Parcelable {
     public static final Parcelable.Creator<RequestInfo> CREATOR =
             new Parcelable.Creator<
                     RequestInfo>() { // from class: android.credentials.selection.RequestInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RequestInfo createFromParcel(Parcel in) {
                     return new RequestInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RequestInfo[] newArray(int size) {
                     return new RequestInfo[size];

@@ -9,13 +9,11 @@ public final class SemSimpleNetworkStats implements Parcelable {
     public static final Parcelable.Creator<SemSimpleNetworkStats> CREATOR =
             new Parcelable.Creator<
                     SemSimpleNetworkStats>() { // from class: android.os.SemSimpleNetworkStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSimpleNetworkStats createFromParcel(Parcel in) {
                     return new SemSimpleNetworkStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSimpleNetworkStats[] newArray(int size) {
                     return new SemSimpleNetworkStats[size];

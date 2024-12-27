@@ -92,7 +92,6 @@ public final class RotationResolverManagerPerUserService extends AbstractPerUser
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.rotationresolver.RotationResolverManagerPerUserService$1] */
     public void resolveRotationLocked(
             final RotationResolverInternal.RotationResolverCallbackInternal
                     rotationResolverCallbackInternal,

@@ -14,13 +14,11 @@ public final class SignalingDataResponse extends BroadcastInfoResponse implement
             new Parcelable.Creator<
                     SignalingDataResponse>() { // from class:
                                                // android.media.tv.SignalingDataResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignalingDataResponse[] newArray(int size) {
                     return new SignalingDataResponse[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignalingDataResponse createFromParcel(Parcel in) {
                     return new SignalingDataResponse(in);

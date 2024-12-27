@@ -13,7 +13,6 @@ final class FontScalingTileUserActionInteractor$handleInput$2$1 extends SuspendL
     int label;
     final /* synthetic */ FontScalingTileUserActionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FontScalingTileUserActionInteractor$handleInput$2$1(FontScalingTileUserActionInteractor fontScalingTileUserActionInteractor, Runnable runnable, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fontScalingTileUserActionInteractor;

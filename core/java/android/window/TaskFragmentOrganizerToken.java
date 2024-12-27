@@ -9,7 +9,6 @@ public final class TaskFragmentOrganizerToken implements Parcelable {
             new Parcelable.Creator<
                     TaskFragmentOrganizerToken>() { // from class:
                                                     // android.window.TaskFragmentOrganizerToken.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TaskFragmentOrganizerToken createFromParcel(Parcel in) {
                     ITaskFragmentOrganizer realToken =
@@ -20,7 +19,6 @@ public final class TaskFragmentOrganizerToken implements Parcelable {
                     return new TaskFragmentOrganizerToken(realToken);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TaskFragmentOrganizerToken[] newArray(int size) {
                     return new TaskFragmentOrganizerToken[size];

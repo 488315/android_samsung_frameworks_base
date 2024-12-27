@@ -551,7 +551,6 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x0098, code lost:
 
        if (r9.equals(android.net.INetd.IF_FLAG_BROADCAST) == false) goto L21;

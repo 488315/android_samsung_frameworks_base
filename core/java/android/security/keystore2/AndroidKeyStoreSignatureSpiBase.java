@@ -51,7 +51,6 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi
         engineInitSign(key, null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // java.security.SignatureSpi
     protected final void engineInitSign(PrivateKey privateKey, SecureRandom random)
             throws InvalidKeyException {

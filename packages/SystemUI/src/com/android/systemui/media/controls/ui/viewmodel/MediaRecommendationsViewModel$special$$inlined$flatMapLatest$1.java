@@ -17,7 +17,6 @@ public final class MediaRecommendationsViewModel$special$$inlined$flatMapLatest$
     int label;
     final /* synthetic */ MediaRecommendationsViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaRecommendationsViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, MediaRecommendationsViewModel mediaRecommendationsViewModel) {
         super(3, continuation);
         this.this$0 = mediaRecommendationsViewModel;
@@ -70,9 +69,6 @@ public final class MediaRecommendationsViewModel$special$$inlined$flatMapLatest$
                         this.this$0 = mediaRecommendationsViewModel;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:19:0x005c A[RETURN] */
-                    /* JADX WARN: Removed duplicated region for block: B:20:0x003a  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

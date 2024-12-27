@@ -339,8 +339,6 @@ public final class RadioModule {
         this.mLogger = new RadioEventLogger("BcRadioAidlSrv.module");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v5, types: [android.hardware.broadcastradio.IBroadcastRadio] */
     public static RadioModule tryLoadingModule(int i, IBinder iBinder, String str) {
         IBroadcastRadio.Stub.Proxy proxy;
         AmFmRegionConfig amFmRegionConfig;
@@ -392,7 +390,6 @@ public final class RadioModule {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r5v6, types: [com.android.server.broadcastradio.aidl.RadioModule$3] */
     public final AnonymousClass3 addAnnouncementListener(
             AnnouncementAggregator.ModuleWatcher moduleWatcher, int[] iArr) {
         this.mLogger.logRadioEvent("Add AnnouncementListener", new Object[0]);

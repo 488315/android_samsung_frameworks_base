@@ -16,7 +16,6 @@ final /* synthetic */ class PeopleViewModelKt$PeopleViewModel$4 extends Function
     final /* synthetic */ MutableStateFlow $result;
     final /* synthetic */ PeopleWidgetRepository $widgetRepository;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PeopleViewModelKt$PeopleViewModel$4(MutableStateFlow mutableStateFlow, PeopleWidgetRepository peopleWidgetRepository, MutableStateFlow mutableStateFlow2) {
         super(1, Intrinsics.Kotlin.class, "onTileClicked", "PeopleViewModel$onTileClicked(Lkotlinx/coroutines/flow/MutableStateFlow;Lcom/android/systemui/people/data/repository/PeopleWidgetRepository;Lkotlinx/coroutines/flow/MutableStateFlow;Lcom/android/systemui/people/ui/viewmodel/PeopleTileViewModel;)V", 0);
         this.$appWidgetId = mutableStateFlow;

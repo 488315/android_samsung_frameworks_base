@@ -21,8 +21,6 @@ import com.android.internal.policy.IKeyguardDismissCallback;
 public class ActivityClient {
     private static final Singleton<ActivityClient> sInstance =
             new Singleton<ActivityClient>() { // from class: android.app.ActivityClient.1
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.util.Singleton
                 public ActivityClient create() {
                     return new ActivityClient();
@@ -663,8 +661,6 @@ public class ActivityClient {
 
         private ActivityClientControllerSingleton() {}
 
-        /* JADX INFO: Access modifiers changed from: protected */
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.util.Singleton
         public IActivityClientController create() {
             try {

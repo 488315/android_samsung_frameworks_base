@@ -120,8 +120,6 @@ public final class AudioManagerController implements VolumeMiddleware {
         });
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0162  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0166  */
     @Override // com.samsung.systemui.splugins.volume.VolumeMiddleware
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -184,19 +184,6 @@ public class BootReceiver extends BroadcastReceiver {
 
            if (r0 != null) goto L118;
         */
-        /* JADX WARN: Removed duplicated region for block: B:133:0x0488 A[Catch: all -> 0x048e, IOException -> 0x0491, LOOP:8: B:130:0x047d->B:133:0x0488, LOOP_END, TRY_LEAVE, TryCatch #15 {IOException -> 0x0491, blocks: (B:131:0x047d, B:133:0x0488), top: B:130:0x047d }] */
-        /* JADX WARN: Removed duplicated region for block: B:134:0x0493 A[EDGE_INSN: B:134:0x0493->B:135:0x0493 BREAK  A[LOOP:8: B:130:0x047d->B:133:0x0488], EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:164:0x04e2 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:170:? A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:171:0x04dd A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:197:0x0445 A[Catch: IOException -> 0x0448, TRY_LEAVE, TryCatch #6 {IOException -> 0x0448, blocks: (B:195:0x0441, B:197:0x0445), top: B:194:0x0441 }] */
-        /* JADX WARN: Removed duplicated region for block: B:203:0x044f A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:207:0x044a A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:217:0x04ea A[Catch: IOException -> 0x04ed, TRY_LEAVE, TryCatch #4 {IOException -> 0x04ed, blocks: (B:215:0x04e6, B:217:0x04ea), top: B:214:0x04e6 }] */
-        /* JADX WARN: Removed duplicated region for block: B:221:0x04f4 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:228:0x04fb A[Catch: IOException -> 0x04fe, TRY_LEAVE, TryCatch #9 {IOException -> 0x04fe, blocks: (B:226:0x04f7, B:228:0x04fb), top: B:225:0x04f7 }] */
-        /* JADX WARN: Removed duplicated region for block: B:231:? A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:234:0x04ef A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -260,7 +247,6 @@ public class BootReceiver extends BroadcastReceiver {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:271:0x0351, code lost:
 
        if (r4 == null) goto L120;
@@ -273,30 +259,6 @@ public class BootReceiver extends BroadcastReceiver {
 
        if (r4 != null) goto L327;
     */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x05e2  */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x0600  */
-    /* JADX WARN: Removed duplicated region for block: B:117:0x06f6  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x0717  */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x078f  */
-    /* JADX WARN: Removed duplicated region for block: B:145:0x0792  */
-    /* JADX WARN: Removed duplicated region for block: B:166:0x07fa  */
-    /* JADX WARN: Removed duplicated region for block: B:169:0x0810  */
-    /* JADX WARN: Removed duplicated region for block: B:172:0x0803 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:177:0x07e9 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:182:0x07df  */
-    /* JADX WARN: Removed duplicated region for block: B:195:0x0604  */
-    /* JADX WARN: Removed duplicated region for block: B:234:0x0506 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:294:0x036e A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:303:0x04df A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:309:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:310:0x04da A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x03ae  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0418  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x043c  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x048c  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x04f6  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0510  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x057f  */
     /* renamed from: -$$Nest$mlogBootEvents, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -484,14 +446,6 @@ public class BootReceiver extends BroadcastReceiver {
 
        if (r14 != null) goto L176;
     */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x02fd  */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x0312 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:115:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x030d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x0308 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0294  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x02bb A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x02b6 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -506,18 +460,6 @@ public class BootReceiver extends BroadcastReceiver {
                     + " com.android.server.BootReceiver.GetRescuePartyLog():java.lang.String");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:115:0x056d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:146:0x01be A[LOOP:4: B:145:0x01bc->B:146:0x01be, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:151:0x01d2 A[LOOP:5: B:149:0x01cc->B:151:0x01d2, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x01fb  */
-    /* JADX WARN: Removed duplicated region for block: B:169:0x027c  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x034a  */
-    /* JADX WARN: Removed duplicated region for block: B:185:0x033a A[Catch: IOException -> 0x0336, TRY_LEAVE, TryCatch #2 {IOException -> 0x0336, blocks: (B:191:0x0332, B:185:0x033a), top: B:190:0x0332 }] */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x0332 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:194:0x0279 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0358  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x03a0  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x03cf  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1071,14 +1013,6 @@ public class BootReceiver extends BroadcastReceiver {
         final boolean equals =
                 "android.intent.action.LOCKED_BOOT_COMPLETED".equals(intent.getAction());
         new Thread() { // from class: com.android.server.BootReceiver.3
-            /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-            /* JADX WARN: Removed duplicated region for block: B:132:? A[RETURN, SYNTHETIC] */
-            /* JADX WARN: Removed duplicated region for block: B:197:0x01f8  */
-            /* JADX WARN: Removed duplicated region for block: B:22:0x00ac  */
-            /* JADX WARN: Removed duplicated region for block: B:25:0x00c7  */
-            /* JADX WARN: Removed duplicated region for block: B:31:0x031a  */
-            /* JADX WARN: Removed duplicated region for block: B:53:0x03fa  */
-            /* JADX WARN: Removed duplicated region for block: B:68:0x0624 A[Catch: IOException | IllegalStateException -> 0x062c, TryCatch #6 {IOException | IllegalStateException -> 0x062c, blocks: (B:66:0x061a, B:68:0x0624, B:69:0x062e), top: B:65:0x061a }] */
             @Override // java.lang.Thread, java.lang.Runnable
             /*
                 Code decompiled incorrectly, please refer to instructions dump.

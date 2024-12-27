@@ -30,7 +30,6 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
         ConnectedDisplayKeyguardPresentation create(Display display);
     }
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.keyguard.ConnectedDisplayKeyguardPresentation$layoutChangeListener$1] */
     public ConnectedDisplayKeyguardPresentation(Display display, Context context, KeyguardStatusViewComponent.Factory factory, ClockRegistry clockRegistry, ClockEventController clockEventController) {
         super(context, display, R.style.Theme_SystemUI_KeyguardPresentation, 2009);
         this.keyguardStatusViewComponentFactory = factory;

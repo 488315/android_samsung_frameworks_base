@@ -6,14 +6,12 @@ import android.os.Parcelable;
 public final class PesResponse extends BroadcastInfoResponse implements Parcelable {
     public static final Parcelable.Creator<PesResponse> CREATOR =
             new Parcelable.Creator<PesResponse>() { // from class: android.media.tv.PesResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PesResponse createFromParcel(Parcel source) {
                     source.readInt();
                     return PesResponse.createFromParcelBody(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PesResponse[] newArray(int size) {
                     return new PesResponse[size];

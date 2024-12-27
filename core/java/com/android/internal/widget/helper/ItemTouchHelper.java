@@ -1208,7 +1208,6 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration
             return this.mCachedMaxScrollSpeed;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public void onMoved(
                 RecyclerView recyclerView,
                 RecyclerView.ViewHolder viewHolder,

@@ -260,7 +260,6 @@ public class ServiceConnector {
         return ERROR.SUCCESS;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static void deleteServiceProvider(ServiceProvider serviceProvider) {
         if (serviceProvider == 0) {
             DLog.w_api(TAG_CONNECTOR, "deleteServiceProvider : ServiceProvider is null");
@@ -641,14 +640,12 @@ public class ServiceConnector {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onConnected() {
             DLog.d_api(TAG, "onConnected to " + this.mSubscriberTag);
             this.mConnecting = false;
             notifyAllShareEnable();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onDisconnected() {
             DLog.d_api(TAG, "onDisconnected from " + this.mSubscriberTag);
             this.mConnecting = false;

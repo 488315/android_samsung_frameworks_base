@@ -114,8 +114,6 @@ public final class BixbyService {
         return intent;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v3, types: [android.os.PowerManager$WakeLock] */
     public final void startService(Params params) {
         boolean z = params.showToast;
         PhoneWindowManagerExt phoneWindowManagerExt = this.mPolicyExt;

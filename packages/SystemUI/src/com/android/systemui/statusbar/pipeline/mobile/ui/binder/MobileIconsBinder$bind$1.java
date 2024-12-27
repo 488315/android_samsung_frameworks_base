@@ -33,7 +33,6 @@ final class MobileIconsBinder$bind$1 extends SuspendLambda implements Function3 
             final /* synthetic */ MobileIconsViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02341(MobileIconsViewModel mobileIconsViewModel, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = mobileIconsViewModel;
@@ -75,7 +74,6 @@ final class MobileIconsBinder$bind$1 extends SuspendLambda implements Function3 
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(MobileIconsViewModel mobileIconsViewModel, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = mobileIconsViewModel;
@@ -105,7 +103,6 @@ final class MobileIconsBinder$bind$1 extends SuspendLambda implements Function3 
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileIconsBinder$bind$1(MobileIconsViewModel mobileIconsViewModel, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = mobileIconsViewModel;

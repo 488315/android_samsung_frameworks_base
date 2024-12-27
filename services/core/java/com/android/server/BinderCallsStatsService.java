@@ -68,7 +68,6 @@ public final class BinderCallsStatsService extends Binder {
             return printWriter != null ? printWriter : super.getOutPrintWriter();
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public final int onCommand(String str) {
             char c;
             PrintWriter outPrintWriter = getOutPrintWriter();

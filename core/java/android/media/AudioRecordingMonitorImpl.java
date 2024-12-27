@@ -104,7 +104,6 @@ public class AudioRecordingMonitorImpl implements AudioRecordingMonitor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class AudioRecordingCallbackInfo {
         final AudioManager.AudioRecordingCallback mCb;
         final Executor mExecutor;

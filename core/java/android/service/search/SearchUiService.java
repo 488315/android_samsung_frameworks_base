@@ -203,7 +203,6 @@ public abstract class SearchUiService extends Service {
         this.mSessionEmptyQueryResultCallbacks.put(sessionId, new ArrayList<>());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doRegisterEmptyQueryResultUpdateCallback(
             SearchSessionId sessionId, ISearchCallback callback) {
         final ArrayList<CallbackWrapper> callbacks =
@@ -233,7 +232,6 @@ public abstract class SearchUiService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$doRegisterEmptyQueryResultUpdateCallback$1(
             final ArrayList callbacks, final CallbackWrapper callbackWrapper) {
         this.mHandler.post(
@@ -249,7 +247,6 @@ public abstract class SearchUiService extends Service {
 
     public void onStartUpdateEmptyQueryResult() {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doUnregisterEmptyQueryResultUpdateCallback(
             SearchSessionId sessionId, ISearchCallback callback) {
         ArrayList<CallbackWrapper> callbacks =
@@ -272,7 +269,6 @@ public abstract class SearchUiService extends Service {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: removeCallbackWrapper, reason: merged with bridge method [inline-methods] */
     public void lambda$doRegisterEmptyQueryResultUpdateCallback$0(
             ArrayList<CallbackWrapper> callbacks, CallbackWrapper wrapper) {
@@ -288,7 +284,6 @@ public abstract class SearchUiService extends Service {
 
     public void onStopUpdateEmptyQueryResult() {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doDestroy(SearchSessionId sessionId) {
         super.onDestroy();
         onDestroy(sessionId);
@@ -304,7 +299,6 @@ public abstract class SearchUiService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class CallbackWrapper
             implements Consumer<List<SearchTarget>>, IBinder.DeathRecipient {
         private ISearchCallback mCallback;

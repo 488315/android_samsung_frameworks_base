@@ -18,7 +18,6 @@ public final class MusicVolumeController extends VolumeType {
 
     public MusicVolumeController(final Context context) {
         this.mediaSessionManager$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.bixby2.controller.volume.MusicVolumeController$mediaSessionManager$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

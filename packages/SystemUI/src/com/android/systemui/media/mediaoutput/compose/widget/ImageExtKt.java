@@ -39,7 +39,6 @@ public abstract class ImageExtKt {
                 if (endRestartGroup != null) {
                     final Modifier modifier3 = modifier2;
                     endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ImageExtKt$ImageExt$1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(2);
                         }
@@ -70,7 +69,6 @@ public abstract class ImageExtKt {
         if (endRestartGroup2 != null) {
             final Modifier modifier4 = modifier2;
             endRestartGroup2.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ImageExtKt$ImageExt$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

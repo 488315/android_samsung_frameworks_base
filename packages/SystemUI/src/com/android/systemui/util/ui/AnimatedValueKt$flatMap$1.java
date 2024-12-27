@@ -9,7 +9,6 @@ public final class AnimatedValueKt$flatMap$1 extends Lambda implements Function0
     final /* synthetic */ AnimatedValue<Object> $inner;
     final /* synthetic */ AnimatedValue<Object> $this_flatMap;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AnimatedValueKt$flatMap$1(AnimatedValue<Object> animatedValue, AnimatedValue<Object> animatedValue2) {
         super(0);
         this.$this_flatMap = animatedValue;

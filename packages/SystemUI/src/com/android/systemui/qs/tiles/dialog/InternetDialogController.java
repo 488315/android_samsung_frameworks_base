@@ -428,7 +428,6 @@ public final class InternetDialogController implements AccessPointController.Acc
         internetDialogController.mDefaultDataSubId = defaultDataSubscriptionId;
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.qs.tiles.dialog.InternetDialogController$2] */
     public InternetDialogController(SettingsHelper settingsHelper, Context context, UiEventLogger uiEventLogger, ActivityStarter activityStarter, AccessPointController accessPointController, SubscriptionManager subscriptionManager, TelephonyManager telephonyManager, WifiManager wifiManager, ConnectivityManager connectivityManager, Handler handler, Executor executor, BroadcastDispatcher broadcastDispatcher, KeyguardUpdateMonitor keyguardUpdateMonitor, GlobalSettings globalSettings, KeyguardStateController keyguardStateController, WindowManager windowManager, ToastFactory toastFactory, Handler handler2, CarrierConfigTracker carrierConfigTracker, LocationController locationController, DialogTransitionAnimator dialogTransitionAnimator, WifiStateWorker wifiStateWorker, FeatureFlags featureFlags) {
         int i = 0;
         if (DEBUG) {

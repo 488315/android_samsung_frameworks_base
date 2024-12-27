@@ -57,8 +57,6 @@ public final class DeviceProvisionedControllerImpl implements DeviceProvisionedC
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r4v6, types: [com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl$observer$1] */
-    /* JADX WARN: Type inference failed for: r4v7, types: [com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl$userChangedCallback$1] */
     public DeviceProvisionedControllerImpl(SecureSettings secureSettings, GlobalSettings globalSettings, UserTracker userTracker, DumpManager dumpManager, final Handler handler, Executor executor) {
         this.secureSettings = secureSettings;
         this.globalSettings = globalSettings;

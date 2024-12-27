@@ -10,13 +10,11 @@ import java.lang.annotation.RetentionPolicy;
 public final class Rating implements Parcelable {
     public static final Parcelable.Creator<Rating> CREATOR =
             new Parcelable.Creator<Rating>() { // from class: android.media.Rating.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Rating createFromParcel(Parcel p) {
                     return new Rating(p.readInt(), p.readFloat());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Rating[] newArray(int size) {
                     return new Rating[size];

@@ -77,8 +77,6 @@ public final class TunerFragment extends PreferenceFragment {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.tuner.TunerFragment$$ExternalSyntheticLambda0] */
     @Override // android.app.Fragment
     public final boolean onOptionsItemSelected(MenuItem menuItem) {
         int itemId = menuItem.getItemId();

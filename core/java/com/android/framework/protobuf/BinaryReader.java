@@ -839,7 +839,6 @@ abstract class BinaryReader implements Reader {
             readMessageList(target, schema, extensionRegistry);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.framework.protobuf.Reader
         public <T> void readMessageList(
                 List<T> list, Schema<T> schema, ExtensionRegistryLite extensionRegistry)
@@ -870,7 +869,6 @@ abstract class BinaryReader implements Reader {
             readGroupList(target, schema, extensionRegistry);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.framework.protobuf.Reader
         @Deprecated
         public <T> void readGroupList(
@@ -1260,7 +1258,6 @@ abstract class BinaryReader implements Reader {
             this.pos = prevPos;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.framework.protobuf.Reader
         public <K, V> void readMap(
                 Map<K, V> map,

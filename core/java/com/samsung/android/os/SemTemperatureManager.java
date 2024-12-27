@@ -58,7 +58,6 @@ public class SemTemperatureManager {
 
     private SemTemperatureManager() {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static synchronized ISamsungDeviceHealthManager getService() {
         ISamsungDeviceHealthManager iSamsungDeviceHealthManager;
         IBinder b;

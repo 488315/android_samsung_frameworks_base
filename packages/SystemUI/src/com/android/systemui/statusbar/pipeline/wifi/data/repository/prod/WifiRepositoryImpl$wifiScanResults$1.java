@@ -29,7 +29,6 @@ final class WifiRepositoryImpl$wifiScanResults$1 extends SuspendLambda implement
     int label;
     final /* synthetic */ WifiRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiRepositoryImpl$wifiScanResults$1(WifiRepositoryImpl wifiRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = wifiRepositoryImpl;
@@ -47,8 +46,6 @@ final class WifiRepositoryImpl$wifiScanResults$1 extends SuspendLambda implement
         return ((WifiRepositoryImpl$wifiScanResults$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.net.wifi.WifiManager$ScanResultsCallback, com.android.systemui.statusbar.pipeline.wifi.data.repository.prod.WifiRepositoryImpl$wifiScanResults$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -89,7 +86,6 @@ final class WifiRepositoryImpl$wifiScanResults$1 extends SuspendLambda implement
             wifiRepositoryImpl2.wifiManager.registerScanResultsCallback(ExecutorsKt.asExecutor(wifiRepositoryImpl2.bgDispatcher), r1);
             final WifiRepositoryImpl wifiRepositoryImpl3 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.wifi.data.repository.prod.WifiRepositoryImpl$wifiScanResults$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -16,13 +16,11 @@ import java.lang.annotation.RetentionPolicy;
 public final class Checksum implements Parcelable {
     public static final Parcelable.Creator<Checksum> CREATOR =
             new Parcelable.Creator<Checksum>() { // from class: android.content.pm.Checksum.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Checksum[] newArray(int size) {
                     return new Checksum[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Checksum createFromParcel(Parcel in) {
                     return new Checksum(in);

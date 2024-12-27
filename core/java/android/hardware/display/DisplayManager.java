@@ -401,7 +401,6 @@ public final class DisplayManager {
         return (Display[]) tmpDisplays.toArray(new Display[tmpDisplays.size()]);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isPresentationDisplay(Display display) {
         if (display == null
                 || display.getDisplayId() == 0
@@ -415,7 +414,6 @@ public final class DisplayManager {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isRearDisplay(Display display) {
         return (display == null
                         || display.getDisplayId() == 0
@@ -425,7 +423,6 @@ public final class DisplayManager {
                 : true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isBuiltInDisplay(Display display) {
         return display != null && display.getType() == 1;
     }
@@ -434,7 +431,6 @@ public final class DisplayManager {
         return display != null && display.getDisplayId() == 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean checkNonNullIncludingBuiltIn(Display display) {
         if (display == null) {
             return false;
@@ -442,19 +438,16 @@ public final class DisplayManager {
         return isExtraDisplay(display) || checkNonNullAndOtherPolicy(display);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isViewCoverDisplay(Display display) {
         return (display == null || display.getType() != 5 || (display.getFlags() & 524288) == 0)
                 ? false
                 : true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isDexDisplay(Display display) {
         return display != null && display.getType() == 5 && display.getDisplayId() == 2;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isRemoteAppDisplay(Display display) {
         return (display == null || display.getType() != 5 || (display.getFlags() & 2097152) == 0)
                 ? false
@@ -469,14 +462,12 @@ public final class DisplayManager {
                 : true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isCarLifeDisplay(Display display) {
         return (display == null || display.getType() != 5 || (display.getFlags() & 1048576) == 0)
                 ? false
                 : true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean checkNonNullAndOtherPolicy(Display display) {
         if (display == null
                 || isExtraDisplay(display)
@@ -1168,8 +1159,6 @@ public final class DisplayManager {
         return new SemWifiDisplayStatus(this.mGlobal.getWifiDisplayStatus());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0122  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0181  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

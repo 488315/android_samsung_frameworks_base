@@ -13,7 +13,6 @@ final class MusicShareDeviceController$transfer$2$1 extends SuspendLambda implem
     int label;
     final /* synthetic */ MusicShareDeviceController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MusicShareDeviceController$transfer$2$1(MusicShareDeviceController musicShareDeviceController, Continuation continuation) {
         super(2, continuation);
         this.this$0 = musicShareDeviceController;

@@ -17,13 +17,11 @@ public final class AmbientContextDetectionServiceStatus implements Parcelable {
             new Parcelable.Creator<
                     AmbientContextDetectionServiceStatus>() { // from class:
                                                               // android.service.ambientcontext.AmbientContextDetectionServiceStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AmbientContextDetectionServiceStatus[] newArray(int size) {
                     return new AmbientContextDetectionServiceStatus[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AmbientContextDetectionServiceStatus createFromParcel(Parcel in) {
                     return new AmbientContextDetectionServiceStatus(in);

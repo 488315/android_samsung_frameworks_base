@@ -404,7 +404,6 @@ public final class EyeComfortSolutionService {
                 eyeComfortSolutionService.mLastTotalBlueLightFilterIndex);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.samsung.android.displaysolution.EyeComfortSolutionService$1] */
     public EyeComfortSolutionService(Context context) {
         "eng".equals(Build.TYPE);
         this.GET_SYSTEM_SERVICES_MILLIS = 4000;
@@ -1046,8 +1045,6 @@ public final class EyeComfortSolutionService {
 
        if (r7.getBoolean("isEnabledInSupportedApps") != false) goto L18;
     */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x00de  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x011c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

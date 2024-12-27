@@ -36,7 +36,6 @@ public final class PrivacyDialogControllerV2 {
         this(permissionManager, packageManager, locationManager, privacyItemController, userTracker, activityStarter, executor, executor2, privacyLogger, keyguardStateController, appOpsController, uiEventLogger, dialogTransitionAnimator, PrivacyDialogControllerV2Kt.defaultDialogProvider);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.privacy.PrivacyDialogControllerV2$onDialogDismissed$1] */
     public PrivacyDialogControllerV2(PermissionManager permissionManager, PackageManager packageManager, LocationManager locationManager, PrivacyItemController privacyItemController, UserTracker userTracker, ActivityStarter activityStarter, Executor executor, Executor executor2, PrivacyLogger privacyLogger, KeyguardStateController keyguardStateController, AppOpsController appOpsController, UiEventLogger uiEventLogger, DialogTransitionAnimator dialogTransitionAnimator, DialogProvider dialogProvider) {
         this.activityStarter = activityStarter;
         this.backgroundExecutor = executor;

@@ -238,7 +238,6 @@ public final class AppPredictor {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onResult$0(ParceledListSlice result) {
             this.mCallback.accept(result.getList());
         }
@@ -270,7 +269,6 @@ public final class AppPredictor {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$sendResult$0(Bundle result) {
             this.mCallback.accept(result);
         }

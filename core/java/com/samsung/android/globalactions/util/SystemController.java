@@ -54,7 +54,6 @@ public class SystemController {
                 500L);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$doBugReport$0(boolean fullBugReport) {
         try {
             if (fullBugReport) {

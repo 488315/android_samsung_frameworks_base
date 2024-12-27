@@ -488,7 +488,6 @@ public final class KeyguardSecBottomAreaView extends KeyguardBottomAreaView {
             }
         });
         this.mDisplay$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaView$mDisplay$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

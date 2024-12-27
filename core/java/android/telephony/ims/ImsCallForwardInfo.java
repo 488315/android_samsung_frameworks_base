@@ -22,13 +22,11 @@ public final class ImsCallForwardInfo implements Parcelable {
             new Parcelable.Creator<
                     ImsCallForwardInfo>() { // from class:
                                             // android.telephony.ims.ImsCallForwardInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsCallForwardInfo createFromParcel(Parcel in) {
                     return new ImsCallForwardInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsCallForwardInfo[] newArray(int size) {
                     return new ImsCallForwardInfo[size];

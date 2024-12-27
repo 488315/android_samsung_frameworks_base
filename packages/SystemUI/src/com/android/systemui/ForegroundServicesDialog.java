@@ -62,7 +62,6 @@ public final class ForegroundServicesDialog extends AlertActivity implements Ada
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.ForegroundServicesDialog$1] */
     public ForegroundServicesDialog(MetricsLogger metricsLogger) {
         this.mMetricsLogger = metricsLogger;
     }
@@ -72,7 +71,6 @@ public final class ForegroundServicesDialog extends AlertActivity implements Ada
         finish();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         this.mInflater = LayoutInflater.from(this);

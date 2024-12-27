@@ -11,14 +11,12 @@ public final class WalletServiceEvent implements Parcelable {
             new Parcelable.Creator<
                     WalletServiceEvent>() { // from class:
                                             // android.service.quickaccesswallet.WalletServiceEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WalletServiceEvent createFromParcel(Parcel source) {
                     int eventType = source.readInt();
                     return new WalletServiceEvent(eventType);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WalletServiceEvent[] newArray(int size) {
                     return new WalletServiceEvent[size];

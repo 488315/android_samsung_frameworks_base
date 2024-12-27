@@ -272,10 +272,6 @@ public final class RecentTasks {
     
         android.util.Slog.wtf("ActivityTaskManager", "Bad chain @" + r11 + ": middle task " + r15 + " @" + r11 + " has bad next affiliate " + r15.mNextAffiliate + " id " + r15.mNextAffiliateTaskId + ", expected " + r12);
      */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x01d4  */
-    /* JADX WARN: Removed duplicated region for block: B:134:0x01b2 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:153:0x02e5  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00d4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1293,7 +1289,6 @@ public final class RecentTasks {
         WindowManagerService.resetPriorityAfterLockedSection();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:175:0x0205 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

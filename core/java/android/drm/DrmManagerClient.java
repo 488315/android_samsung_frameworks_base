@@ -101,12 +101,10 @@ public class DrmManagerClient implements AutoCloseable {
 
     private native int _openConvertSession(int i, String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native DrmInfoStatus _processDrmInfo(int i, DrmInfo drmInfo);
 
     private native void _release(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native int _removeAllRights(int i);
 
     private native int _removeRights(int i, String str);
@@ -569,7 +567,6 @@ public class DrmManagerClient implements AutoCloseable {
         }
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:21:0x003a -> B:14:0x0062). Please report as a decompilation issue!!! */
     public boolean canHandle(String path, String mimeType) {
         if ((path == null || path.equals("")) && (mimeType == null || mimeType.equals(""))) {
             throw new IllegalArgumentException("Path or the mimetype should be non null");
@@ -626,8 +623,6 @@ public class DrmManagerClient implements AutoCloseable {
         return result;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0163  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x024c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -650,7 +645,6 @@ public class DrmManagerClient implements AutoCloseable {
         return processDrmInfo(drmInfo);
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:21:0x003a -> B:14:0x0062). Please report as a decompilation issue!!! */
     public int getDrmObjectType(String path, String mimeType) {
         if ((path == null || path.equals("")) && (mimeType == null || mimeType.equals(""))) {
             throw new IllegalArgumentException("Path or the mimetype should be non null");
@@ -799,7 +793,6 @@ public class DrmManagerClient implements AutoCloseable {
         return checkRightsStatus(convertUriToPath(uri), action);
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:23:0x0036 -> B:14:0x005e). Please report as a decompilation issue!!! */
     public int removeRights(String path) {
         if (path == null || path.equals("")) {
             throw new IllegalArgumentException("Given path should be non null");
@@ -871,7 +864,6 @@ public class DrmManagerClient implements AutoCloseable {
         return _closeConvertSession(this.mUniqueId, convertId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getEventType(int infoType) {
         switch (infoType) {
             case 1:
@@ -883,7 +875,6 @@ public class DrmManagerClient implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getErrorType(int infoType, DrmInfoStatus infoStatus) {
         switch (infoType) {
             case 1:

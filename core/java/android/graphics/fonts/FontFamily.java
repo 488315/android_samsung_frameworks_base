@@ -49,7 +49,6 @@ public final class FontFamily {
 
         private static native long nBuild(long j, String str, int i, boolean z, boolean z2, int i2);
 
-        /* JADX INFO: Access modifiers changed from: private */
         @CriticalNative
         public static native long nGetReleaseNativeFamily();
 

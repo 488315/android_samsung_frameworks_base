@@ -21,7 +21,6 @@ final class MusicShareDeviceController$Companion$castDeviceChanges$1$updateDevic
     final /* synthetic */ AudioManager $this_castDeviceChanges;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MusicShareDeviceController$Companion$castDeviceChanges$1$updateDevices$1(ProducerScope producerScope, AudioManager audioManager, Continuation continuation) {
         super(2, continuation);
         this.$$this$callbackFlow = producerScope;

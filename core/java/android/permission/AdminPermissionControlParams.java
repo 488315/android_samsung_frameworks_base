@@ -12,7 +12,6 @@ public final class AdminPermissionControlParams implements Parcelable {
             new Parcelable.Creator<
                     AdminPermissionControlParams>() { // from class:
                                                       // android.permission.AdminPermissionControlParams.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AdminPermissionControlParams createFromParcel(Parcel in) {
                     String granteePackageName = in.readString();
@@ -26,7 +25,6 @@ public final class AdminPermissionControlParams implements Parcelable {
                             mayAdminGrantSensorPermissions);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AdminPermissionControlParams[] newArray(int size) {
                     return new AdminPermissionControlParams[size];

@@ -169,8 +169,6 @@ public final class SecurityControllerImpl implements SecurityController {
                     final SecurityControllerImpl securityControllerImpl = SecurityControllerImpl.this;
                     final int sendingUserId = getSendingUserId();
                     securityControllerImpl.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.policy.SecurityControllerImpl$$ExternalSyntheticLambda0
-                        /* JADX WARN: Not initialized variable reg: 7, insn: 0x005f: MOVE (r4 I:??[OBJECT, ARRAY]) = (r7 I:??[OBJECT, ARRAY]) (LINE:96), block:B:37:0x005f */
-                        /* JADX WARN: Removed duplicated region for block: B:39:0x00a0  */
                         @Override // java.lang.Runnable
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.

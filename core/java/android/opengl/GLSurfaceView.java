@@ -671,9 +671,6 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:137:0x0263  */
-        /* JADX WARN: Removed duplicated region for block: B:219:0x029b A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Unreachable blocks removed: 2, instructions: 2 */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

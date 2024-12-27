@@ -67,8 +67,6 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
     }
 
     public final class UidBatteryStates extends BaseAppStateDurations {
-        /* JADX WARN: Removed duplicated region for block: B:46:0x0113  */
-        /* JADX WARN: Removed duplicated region for block: B:61:0x017a  */
         @Override // com.android.server.am.BaseAppStateDurations,
                   // com.android.server.am.BaseAppStateEvents
         /*

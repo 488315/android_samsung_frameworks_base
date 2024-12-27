@@ -210,9 +210,6 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0089 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x006f  */
     /* renamed from: -$$Nest$monProjectionStart, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -231,7 +228,6 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
                     + " android.media.projection.MediaProjectionInfo):void");
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.SensitiveContentProtectionManagerService$1] */
     public SensitiveContentProtectionManagerService(Context context) {
         super(context);
         this.mExemptedPackages = null;

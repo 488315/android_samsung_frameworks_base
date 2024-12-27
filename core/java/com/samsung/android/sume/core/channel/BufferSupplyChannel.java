@@ -29,7 +29,6 @@ public class BufferSupplyChannel implements BufferChannel, Supplier<MediaBuffer>
         this.channel.send(data);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.channel.Channel
     public MediaBuffer receive() {
         return this.channel.receive();
@@ -55,7 +54,6 @@ public class BufferSupplyChannel implements BufferChannel, Supplier<MediaBuffer>
         return this.channel.isClosedForReceive();
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // java.util.function.Supplier
     public MediaBuffer get() {
         return (MediaBuffer)

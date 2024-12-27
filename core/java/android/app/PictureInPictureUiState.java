@@ -9,13 +9,11 @@ public final class PictureInPictureUiState implements Parcelable {
     public static final Parcelable.Creator<PictureInPictureUiState> CREATOR =
             new Parcelable.Creator<PictureInPictureUiState>() { // from class:
                 // android.app.PictureInPictureUiState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PictureInPictureUiState createFromParcel(Parcel in) {
                     return new PictureInPictureUiState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PictureInPictureUiState[] newArray(int size) {
                     return new PictureInPictureUiState[size];

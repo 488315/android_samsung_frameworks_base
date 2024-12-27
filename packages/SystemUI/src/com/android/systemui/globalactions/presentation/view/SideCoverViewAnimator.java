@@ -146,7 +146,6 @@ public final class SideCoverViewAnimator implements GlobalActionsAnimator {
         this.mViewStateController.setState(ViewAnimationState.IDLE);
     }
 
-    /* JADX WARN: Type inference failed for: r0v23, types: [com.android.systemui.globalactions.presentation.view.SideCoverViewAnimator$$ExternalSyntheticLambda1] */
     public final void startShowConfirmAnimation() {
         SideCoverContentView sideCoverContentView = SideCoverContentView.this;
         SideCoverContentItemView sideCoverContentItemView = new SideCoverContentItemView(sideCoverContentView.mDialog.getContext(), sideCoverContentView.mSelectedViewModel, sideCoverContentView.mConfirmView, sideCoverContentView.mResourceFactory, false, false);

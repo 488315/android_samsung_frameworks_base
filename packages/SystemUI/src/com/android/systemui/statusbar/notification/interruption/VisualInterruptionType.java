@@ -2,8 +2,6 @@ package com.android.systemui.statusbar.notification.interruption;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class VisualInterruptionType {
     public static final /* synthetic */ VisualInterruptionType[] $VALUES;
     public static final VisualInterruptionType BUBBLE;

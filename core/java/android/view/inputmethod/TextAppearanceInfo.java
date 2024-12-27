@@ -17,13 +17,11 @@ public final class TextAppearanceInfo implements Parcelable {
             new Parcelable.Creator<
                     TextAppearanceInfo>() { // from class:
                                             // android.view.inputmethod.TextAppearanceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextAppearanceInfo createFromParcel(Parcel in) {
                     return new TextAppearanceInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextAppearanceInfo[] newArray(int size) {
                     return new TextAppearanceInfo[size];

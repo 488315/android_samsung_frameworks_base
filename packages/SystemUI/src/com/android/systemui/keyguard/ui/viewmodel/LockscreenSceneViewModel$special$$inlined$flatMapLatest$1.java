@@ -25,7 +25,6 @@ public final class LockscreenSceneViewModel$special$$inlined$flatMapLatest$1 ext
     int label;
     final /* synthetic */ LockscreenSceneViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LockscreenSceneViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, DeviceEntryInteractor deviceEntryInteractor, CommunalInteractor communalInteractor, ShadeInteractor shadeInteractor, LockscreenSceneViewModel lockscreenSceneViewModel) {
         super(3, continuation);
         this.$deviceEntryInteractor$inlined = deviceEntryInteractor;

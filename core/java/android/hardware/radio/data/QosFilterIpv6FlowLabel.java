@@ -8,13 +8,11 @@ public final class QosFilterIpv6FlowLabel implements Parcelable {
     public static final Parcelable.Creator<QosFilterIpv6FlowLabel> CREATOR =
             new Parcelable.Creator<QosFilterIpv6FlowLabel>() { // from class:
                 // android.hardware.radio.data.QosFilterIpv6FlowLabel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public QosFilterIpv6FlowLabel createFromParcel(Parcel _aidl_source) {
                     return new QosFilterIpv6FlowLabel(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public QosFilterIpv6FlowLabel[] newArray(int _aidl_size) {
                     return new QosFilterIpv6FlowLabel[_aidl_size];

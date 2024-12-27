@@ -8,13 +8,11 @@ public class RemoteInputHistoryItem implements Parcelable {
     public static final Parcelable.Creator<RemoteInputHistoryItem> CREATOR =
             new Parcelable.Creator<
                     RemoteInputHistoryItem>() { // from class: android.app.RemoteInputHistoryItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteInputHistoryItem createFromParcel(Parcel in) {
                     return new RemoteInputHistoryItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteInputHistoryItem[] newArray(int size) {
                     return new RemoteInputHistoryItem[size];

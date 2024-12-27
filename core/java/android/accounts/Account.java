@@ -22,13 +22,11 @@ public class Account implements Parcelable {
     private static final Set<Account> sAccessedAccounts = new ArraySet();
     public static final Parcelable.Creator<Account> CREATOR =
             new Parcelable.Creator<Account>() { // from class: android.accounts.Account.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Account createFromParcel(Parcel source) {
                     return new Account(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Account[] newArray(int size) {
                     return new Account[size];

@@ -13,7 +13,6 @@ final class SecurityModel$Companion$create$2 extends SuspendLambda implements Fu
     final /* synthetic */ SecurityController $securityController;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SecurityModel$Companion$create$2(SecurityController securityController, Continuation continuation) {
         super(2, continuation);
         this.$securityController = securityController;

@@ -187,10 +187,6 @@ public final class CrossProfileIntentResolverEngine {
         return userManagerService.isProfileUnchecked(i) && (userProperties = this.mUserManagerInternal.getUserProperties(i)) != null && userProperties.getCrossProfileIntentResolutionStrategy() == 1;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [java.util.Set] */
-    /* JADX WARN: Type inference failed for: r0v22, types: [java.util.HashSet] */
-    /* JADX WARN: Type inference failed for: r0v7 */
     public final List resolveIntentInternal(Computer computer, Intent intent, String str, int i, int i2, long j, String str2, boolean z, boolean z2, Function function, Set set) {
         int i3;
         int i4;

@@ -112,9 +112,6 @@ public final class TouchMonitor {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r7v4, types: [com.android.systemui.ambient.touch.TouchMonitor$1] */
-    /* JADX WARN: Type inference failed for: r7v6, types: [com.android.systemui.ambient.touch.TouchMonitor$3] */
-    /* JADX WARN: Type inference failed for: r7v7, types: [com.android.systemui.ambient.touch.TouchMonitor$4] */
     public TouchMonitor(Executor executor, Executor executor2, Lifecycle lifecycle, InputSessionComponent.Factory factory, DisplayHelper displayHelper, ConfigurationInteractor configurationInteractor, Set<TouchHandler> set, IWindowManager iWindowManager, int i) {
         new TouchMonitor$$ExternalSyntheticLambda2(this, 0);
         this.mLifecycleObserver = new DefaultLifecycleObserver() { // from class: com.android.systemui.ambient.touch.TouchMonitor.1

@@ -122,7 +122,6 @@ public abstract class PolicyHandler
             super(looper);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:12:0x0077  */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -139,8 +138,6 @@ public abstract class PolicyHandler
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class ProtectLevel {
         public static final /* synthetic */ ProtectLevel[] $VALUES;
         public static final ProtectLevel HEAVY;
@@ -163,13 +160,10 @@ public abstract class PolicyHandler
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class ProtectedReason {
         public static final /* synthetic */ ProtectedReason[] $VALUES;
         public static final ProtectedReason ACTIVITY_TIME;
 
-        /* JADX INFO: Fake field, exist only in values array */
         ProtectedReason EF0;
 
         static {
@@ -522,8 +516,6 @@ public abstract class PolicyHandler
 
        if (r3 == null) goto L154;
     */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x02b0 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x02b1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -541,8 +533,6 @@ public abstract class PolicyHandler
                     + " com.android.server.chimera.ChimeraCommonUtil$TriggerSource):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:40:0x017a  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x0154 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -718,9 +708,6 @@ public abstract class PolicyHandler
 
        if (r15.contains(r1.name) != false) goto L50;
     */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0175  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0196 A[LOOP:4: B:70:0x018f->B:72:0x0196, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x01e6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -798,11 +785,6 @@ public abstract class PolicyHandler
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:112:0x029e A[LOOP:9: B:110:0x0298->B:112:0x029e, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x0323  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x0331 A[EDGE_INSN: B:118:0x0331->B:119:0x0331 BREAK  A[LOOP:4: B:43:0x015f->B:50:0x0260], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x0285  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x01b3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

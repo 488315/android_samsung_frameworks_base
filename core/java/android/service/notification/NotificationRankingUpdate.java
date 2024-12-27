@@ -19,13 +19,11 @@ public class NotificationRankingUpdate implements Parcelable {
             new Parcelable.Creator<
                     NotificationRankingUpdate>() { // from class:
                                                    // android.service.notification.NotificationRankingUpdate.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotificationRankingUpdate createFromParcel(Parcel parcel) {
                     return new NotificationRankingUpdate(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotificationRankingUpdate[] newArray(int size) {
                     return new NotificationRankingUpdate[size];

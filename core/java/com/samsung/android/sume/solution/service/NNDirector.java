@@ -34,7 +34,6 @@ public class NNDirector {
     private final String MasteringNetPluginName =
             "com.samsung.android.masteringnet.MasteringNetPlugin";
 
-    /* JADX WARN: Multi-variable type inference failed */
     public NNDirector(ServiceProxySupplier serviceProxySupplier) {
         if (serviceProxySupplier instanceof PlaceHolder) {
             this.serviceProxySupplier =

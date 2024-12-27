@@ -32,7 +32,6 @@ public final class TapAffordanceViewController extends ViewAnimationController {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.keyguard.animator.TapAffordanceViewController$restoreSpringAnimRunnable$1] */
     public TapAffordanceViewController(KeyguardTouchAnimator keyguardTouchAnimator) {
         super(keyguardTouchAnimator);
         this.tapAffordanceViews = Collections.singletonList(6);

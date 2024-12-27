@@ -8,7 +8,6 @@ public class VerificationToken implements Parcelable {
     public static final Parcelable.Creator<VerificationToken> CREATOR =
             new Parcelable.Creator<VerificationToken>() { // from class:
                 // android.hardware.keymaster.VerificationToken.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VerificationToken createFromParcel(Parcel _aidl_source) {
                     VerificationToken _aidl_out = new VerificationToken();
@@ -16,7 +15,6 @@ public class VerificationToken implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VerificationToken[] newArray(int _aidl_size) {
                     return new VerificationToken[_aidl_size];

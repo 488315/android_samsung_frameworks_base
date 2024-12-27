@@ -139,9 +139,6 @@ public final class AmbientStatusBarViewController extends ViewController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.ambient.statusbar.ui.AmbientStatusBarViewController$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.ambient.statusbar.ui.AmbientStatusBarViewController$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.systemui.ambient.statusbar.ui.AmbientStatusBarViewController$2] */
     public AmbientStatusBarViewController(AmbientStatusBarView ambientStatusBarView, Resources resources, Executor executor, AlarmManager alarmManager, NextAlarmController nextAlarmController, DateFormatUtil dateFormatUtil, IndividualSensorPrivacyController individualSensorPrivacyController, Optional<DreamOverlayNotificationCountProvider> optional, ZenModeController zenModeController, StatusBarWindowStateController statusBarWindowStateController, DreamOverlayStatusBarItemsProvider dreamOverlayStatusBarItemsProvider, DreamOverlayStateController dreamOverlayStateController, UserTracker userTracker, WifiInteractor wifiInteractor, CommunalSceneInteractor communalSceneInteractor, LogBuffer logBuffer) {
         super(ambientStatusBarView);
         this.mExtraStatusBarItems = new ArrayList();

@@ -117,7 +117,6 @@ public final class Asn1Node {
         return new Builder(tag);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isConstructedTag(int tag) {
         byte[] tagBytes = IccUtils.unsignedIntToBytes(tag);
         return (tagBytes[0] & 32) != 0;

@@ -9,13 +9,11 @@ public class SemContextApproach extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextApproach>() { // from class:
                                             // com.samsung.android.hardware.context.SemContextApproach.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextApproach createFromParcel(Parcel in) {
                     return new SemContextApproach(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextApproach[] newArray(int size) {
                     return new SemContextApproach[size];

@@ -35,7 +35,6 @@ public final class QSMediaPlayerBar extends BarItemImpl implements StatusBarStat
     public final ShadeRepository mShadeRepository;
     public final Lazy mSoundCraftQpDetailAdapterLazy;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.qs.bar.QSMediaPlayerBar$$ExternalSyntheticLambda0] */
     public QSMediaPlayerBar(Context context, SecMediaHost secMediaHost, SecQSPanelResourcePicker secQSPanelResourcePicker, SecQSDetailController secQSDetailController, Lazy lazy, MediaOutputHelper mediaOutputHelper, ShadeRepository shadeRepository) {
         super(context);
         this.mMediaHost = secMediaHost;
@@ -248,7 +247,6 @@ public final class QSMediaPlayerBar extends BarItemImpl implements StatusBarStat
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0060  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -261,14 +259,6 @@ public final class QSMediaPlayerBar extends BarItemImpl implements StatusBarStat
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.bar.QSMediaPlayerBar.updateBar():void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0026  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x004d  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x006b  */
-    /* JADX WARN: Removed duplicated region for block: B:40:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x004f  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0037  */
-    /* JADX WARN: Type inference failed for: r0v6, types: [java.lang.CharSequence] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

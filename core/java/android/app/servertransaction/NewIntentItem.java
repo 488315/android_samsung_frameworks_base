@@ -17,13 +17,11 @@ public class NewIntentItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<NewIntentItem> CREATOR =
             new Parcelable.Creator<
                     NewIntentItem>() { // from class: android.app.servertransaction.NewIntentItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NewIntentItem createFromParcel(Parcel in) {
                     return new NewIntentItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NewIntentItem[] newArray(int size) {
                     return new NewIntentItem[size];

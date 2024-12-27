@@ -17,7 +17,6 @@ final class CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUs
     final /* synthetic */ Intent $intent;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUser$1$receiver$1$onReceive$1(ProducerScope producerScope, Intent intent, Continuation continuation) {
         super(2, continuation);
         this.$$this$conflatedCallbackFlow = producerScope;

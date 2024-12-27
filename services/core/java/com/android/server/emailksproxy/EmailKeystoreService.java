@@ -52,8 +52,6 @@ public final class EmailKeystoreService extends ISemKeyStoreService.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v0, types: [android.content.ServiceConnection, com.android.server.emailksproxy.EmailKeystoreService$1] */
     public static KeyChainConnection bind(Context context, int i) {
         if (context == 0) {
             throw new NullPointerException("context == null");

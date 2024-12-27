@@ -72,7 +72,6 @@ public final class AttentionManagerService extends SystemService {
         public boolean mIsDispatched;
         public boolean mIsFulfilled;
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.attention.AttentionManagerService$AttentionCheck$1] */
         public AttentionCheck(
                 final AttentionManagerInternal.AttentionCallbackInternal attentionCallbackInternal,
                 final AttentionManagerService attentionManagerService) {
@@ -678,7 +677,6 @@ public final class AttentionManagerService extends SystemService {
                 };
         public boolean mStartedUpdates;
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.attention.AttentionManagerService$ProximityUpdate$1] */
         public ProximityUpdate(
                 AttentionManagerInternal.ProximityUpdateCallbackInternal
                         proximityUpdateCallbackInternal) {

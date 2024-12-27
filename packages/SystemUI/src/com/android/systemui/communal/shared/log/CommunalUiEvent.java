@@ -3,8 +3,6 @@ package com.android.systemui.communal.shared.log;
 import com.android.internal.logging.UiEventLogger;
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class CommunalUiEvent implements UiEventLogger.UiEventEnum {
     public static final /* synthetic */ CommunalUiEvent[] $VALUES;
     public static final CommunalUiEvent COMMUNAL_HUB_EDIT_MODE_GONE;

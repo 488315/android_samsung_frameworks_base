@@ -786,13 +786,11 @@ public interface WindowManager extends ViewManager {
         public int y;
         private static boolean sToolkitSetFrameRateReadOnlyFlagValue = android.view.flags.Flags.toolkitSetFrameRateReadOnly();
         public static final Parcelable.Creator<LayoutParams> CREATOR = new Parcelable.Creator<LayoutParams>() { // from class: android.view.WindowManager.LayoutParams.1
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public LayoutParams createFromParcel(Parcel in) {
                 return new LayoutParams(in);
             }
 
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public LayoutParams[] newArray(int size) {
                 return new LayoutParams[size];

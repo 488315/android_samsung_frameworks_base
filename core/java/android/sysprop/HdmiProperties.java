@@ -13,7 +13,6 @@ import java.util.function.Function;
 public final class HdmiProperties {
     private HdmiProperties() {}
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static Boolean tryParseBoolean(String str) {
         char c;
         if (str == null) {
@@ -58,7 +57,6 @@ public final class HdmiProperties {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Integer tryParseInteger(String str) {
         try {
             return Integer.valueOf(str);

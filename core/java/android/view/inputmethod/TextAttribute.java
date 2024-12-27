@@ -12,13 +12,11 @@ public final class TextAttribute implements Parcelable {
     public static final Parcelable.Creator<TextAttribute> CREATOR =
             new Parcelable.Creator<
                     TextAttribute>() { // from class: android.view.inputmethod.TextAttribute.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextAttribute createFromParcel(Parcel source) {
                     return new TextAttribute(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextAttribute[] newArray(int size) {
                     return new TextAttribute[size];

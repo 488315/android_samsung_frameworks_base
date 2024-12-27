@@ -12,7 +12,6 @@ final class KeyguardTransitionInteractor$2$1$emit$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ KeyguardTransitionInteractor.AnonymousClass2.AnonymousClass1 this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardTransitionInteractor$2$1$emit$1(KeyguardTransitionInteractor.AnonymousClass2.AnonymousClass1 anonymousClass1, Continuation continuation) {
         super(continuation);
         this.this$0 = anonymousClass1;

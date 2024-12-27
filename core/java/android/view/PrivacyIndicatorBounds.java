@@ -14,13 +14,11 @@ public class PrivacyIndicatorBounds implements Parcelable {
     public static final Parcelable.Creator<PrivacyIndicatorBounds> CREATOR =
             new Parcelable.Creator<
                     PrivacyIndicatorBounds>() { // from class: android.view.PrivacyIndicatorBounds.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrivacyIndicatorBounds[] newArray(int size) {
                     return new PrivacyIndicatorBounds[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrivacyIndicatorBounds createFromParcel(Parcel in) {
                     return new PrivacyIndicatorBounds(in);

@@ -1273,7 +1273,6 @@ public final class Session
         sIdCounterForPcc = new AtomicInteger(2);
     }
 
-    /* JADX WARN: Type inference failed for: r2v6, types: [com.android.server.autofill.Session$1] */
     public Session(
             AutofillManagerServiceImpl autofillManagerServiceImpl,
             AutoFillUI autoFillUI,
@@ -2473,7 +2472,6 @@ public final class Session
         return z ? 1 : 2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:47:0x0147  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4107,7 +4105,6 @@ public final class Session
 
        if ((r0.mState & com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT) == 0) goto L66;
     */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00f4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4831,7 +4828,6 @@ public final class Session
         autoFill(requestIdFromAuthenticationId, datasetIdFromAuthenticationId, dataset2, false, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.autofill.Session$$ExternalSyntheticLambda3] */
     public final void setClientLocked(IBinder iBinder) {
         unlinkClientVultureLocked();
         IAutoFillManagerClient asInterface = IAutoFillManagerClient.Stub.asInterface(iBinder);
@@ -5040,7 +5036,6 @@ public final class Session
                 + "]";
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0196  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -81,7 +81,6 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
         BATTERY_BACKGROUND_ALPHA = 0.35f;
     }
 
-    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.systemui.battery.SamsungBatteryMeterDrawable$postInvalidateHandler$1] */
     public SamsungBatteryMeterDrawable(Context context) {
         TypedArray typedArray;
         int length;
@@ -215,11 +214,6 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:101:0x02c3  */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x02cc  */
-    /* JADX WARN: Removed duplicated region for block: B:137:0x02a2  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x0299  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x029e  */
     @Override // android.graphics.drawable.Drawable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

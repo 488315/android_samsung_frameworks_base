@@ -51,7 +51,6 @@ public class DisplayResolutionTracker {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateDisplay(int displayId) {
         DisplayInfo info = this.mManager.getDisplayInfo(displayId);
         if (info == null) {

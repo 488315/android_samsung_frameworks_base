@@ -5,13 +5,11 @@ import java.util.ArrayList;
 public class CpuTrackerInfo implements Parcelable {
     public static final Parcelable.Creator<CpuTrackerInfo> CREATOR =
             new Parcelable.Creator<CpuTrackerInfo>() { // from class: android.os.CpuTrackerInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CpuTrackerInfo createFromParcel(Parcel in) {
                     return new CpuTrackerInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CpuTrackerInfo[] newArray(int size) {
                     return new CpuTrackerInfo[size];

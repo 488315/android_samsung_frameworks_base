@@ -89,7 +89,6 @@ public final class MobileIconsInteractorImpl implements MobileIconsInteractor {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorImpl$special$$inlined$map$5] */
     public MobileIconsInteractorImpl(MobileConnectionsRepository mobileConnectionsRepository, CarrierConfigTracker carrierConfigTracker, TableLogBuffer tableLogBuffer, ConnectivityRepository connectivityRepository, UserSetupRepository userSetupRepository, WifiRepository wifiRepository, CoroutineScope coroutineScope, Context context, FeatureFlagsClassic featureFlagsClassic, MobileDataIconResource mobileDataIconResource, MobileSignalIconResource mobileSignalIconResource, MobileRoamingIconResource mobileRoamingIconResource, MobileDisabledDataIconResource mobileDisabledDataIconResource, MobileMappingsProxy mobileMappingsProxy, Handler handler, CarrierInfraMediator carrierInfraMediator, SubscriptionsOrder subscriptionsOrder, SettingsHelper settingsHelper) {
         this.mobileConnectionsRepo = mobileConnectionsRepository;
         this.carrierConfigTracker = carrierConfigTracker;
@@ -144,8 +143,6 @@ public final class MobileIconsInteractorImpl implements MobileIconsInteractor {
                     this.this$0 = mobileIconsInteractorImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -252,9 +249,6 @@ public final class MobileIconsInteractorImpl implements MobileIconsInteractor {
                     this.this$0 = mobileIconsInteractorImpl;
                 }
 
-                /* JADX WARN: Multi-variable type inference failed */
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -378,8 +372,6 @@ public final class MobileIconsInteractorImpl implements MobileIconsInteractor {
                     this.this$0 = mobileIconsInteractorImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -479,8 +471,6 @@ public final class MobileIconsInteractorImpl implements MobileIconsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -578,8 +568,6 @@ public final class MobileIconsInteractorImpl implements MobileIconsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -670,8 +658,6 @@ public final class MobileIconsInteractorImpl implements MobileIconsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

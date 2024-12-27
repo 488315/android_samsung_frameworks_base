@@ -12,7 +12,6 @@ public final class RuntimePermissionPresentationInfo implements Parcelable {
             new Parcelable.Creator<
                     RuntimePermissionPresentationInfo>() { // from class:
                                                            // android.permission.RuntimePermissionPresentationInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RuntimePermissionPresentationInfo createFromParcel(Parcel source) {
                     CharSequence label = source.readCharSequence();
@@ -21,7 +20,6 @@ public final class RuntimePermissionPresentationInfo implements Parcelable {
                             label, (flags & 1) != 0, (flags & 2) != 0);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RuntimePermissionPresentationInfo[] newArray(int size) {
                     return new RuntimePermissionPresentationInfo[size];

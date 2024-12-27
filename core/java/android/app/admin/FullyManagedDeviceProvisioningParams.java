@@ -16,7 +16,6 @@ public final class FullyManagedDeviceProvisioningParams implements Parcelable {
     public static final Parcelable.Creator<FullyManagedDeviceProvisioningParams> CREATOR =
             new Parcelable.Creator<FullyManagedDeviceProvisioningParams>() { // from class:
                 // android.app.admin.FullyManagedDeviceProvisioningParams.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FullyManagedDeviceProvisioningParams createFromParcel(Parcel in) {
                     ComponentName componentName =
@@ -41,7 +40,6 @@ public final class FullyManagedDeviceProvisioningParams implements Parcelable {
                             demoDevice);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FullyManagedDeviceProvisioningParams[] newArray(int size) {
                     return new FullyManagedDeviceProvisioningParams[size];

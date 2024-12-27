@@ -112,7 +112,6 @@ public final class BiometricStateCallback implements ClientMonitorCallback, IBin
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
     public final void onClientFinished(BaseClientMonitor baseClientMonitor, boolean z) {
         this.mBiometricState = 0;

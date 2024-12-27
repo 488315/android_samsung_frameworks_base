@@ -44,13 +44,11 @@ public class SemWifiApClientDetails implements Parcelable, Comparable<SemWifiApC
             new Parcelable.Creator<
                     SemWifiApClientDetails>() { // from class:
                                                 // com.samsung.android.wifi.SemWifiApClientDetails.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWifiApClientDetails createFromParcel(Parcel source) {
                     return new SemWifiApClientDetails(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWifiApClientDetails[] newArray(int size) {
                     return new SemWifiApClientDetails[size];

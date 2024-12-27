@@ -18,7 +18,6 @@ final class CommunalViewModel$_isMediaHostVisible$1 extends SuspendLambda implem
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalViewModel$_isMediaHostVisible$1(MediaHost mediaHost, Continuation continuation) {
         super(2, continuation);
         this.$mediaHost = mediaHost;
@@ -59,7 +58,6 @@ final class CommunalViewModel$_isMediaHostVisible$1 extends SuspendLambda implem
             this.$mediaHost.visibleChangedListeners.add(function1);
             final MediaHost mediaHost = this.$mediaHost;
             Function0 function0 = new Function0() { // from class: com.android.systemui.communal.ui.viewmodel.CommunalViewModel$_isMediaHostVisible$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

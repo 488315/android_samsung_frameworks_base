@@ -21,13 +21,11 @@ public final class HotwordRejectedResult implements Parcelable {
             new Parcelable.Creator<
                     HotwordRejectedResult>() { // from class:
                                                // android.service.voice.HotwordRejectedResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HotwordRejectedResult[] newArray(int size) {
                     return new HotwordRejectedResult[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HotwordRejectedResult createFromParcel(Parcel in) {
                     return new HotwordRejectedResult(in);
@@ -41,7 +39,6 @@ public final class HotwordRejectedResult implements Parcelable {
     @Retention(RetentionPolicy.SOURCE)
     @interface HotwordConfidenceLevelValue {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultConfidenceLevel() {
         return 0;
     }

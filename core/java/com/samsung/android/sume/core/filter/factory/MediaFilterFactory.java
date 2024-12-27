@@ -234,13 +234,11 @@ public final class MediaFilterFactory {
         this.pluginStore.clear();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public MediaFilter addAdditionalFilters(MediaFilter filter) {
         filter.getDescriptor();
         return filter;
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public MediaFilter newFilter(
             final Class<?> type, final MFDescriptor descriptor, final MediaFilter successor) {
         return (MediaFilter)

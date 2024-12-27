@@ -62,7 +62,6 @@ public final class OverlayDisplayWindow implements DumpUtils.Dump {
     public int mWindowX;
     public int mWindowY;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.display.OverlayDisplayWindow$1] */
     public OverlayDisplayWindow(
             Context context,
             String str,

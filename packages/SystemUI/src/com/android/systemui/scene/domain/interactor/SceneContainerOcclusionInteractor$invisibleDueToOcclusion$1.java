@@ -15,7 +15,6 @@ final class SceneContainerOcclusionInteractor$invisibleDueToOcclusion$1 extends 
     int label;
     final /* synthetic */ SceneContainerOcclusionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SceneContainerOcclusionInteractor$invisibleDueToOcclusion$1(SceneContainerOcclusionInteractor sceneContainerOcclusionInteractor, Continuation continuation) {
         super(4, continuation);
         this.this$0 = sceneContainerOcclusionInteractor;

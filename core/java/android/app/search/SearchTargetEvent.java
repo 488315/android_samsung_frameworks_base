@@ -24,13 +24,11 @@ public final class SearchTargetEvent implements Parcelable {
     public static final Parcelable.Creator<SearchTargetEvent> CREATOR =
             new Parcelable.Creator<
                     SearchTargetEvent>() { // from class: android.app.search.SearchTargetEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SearchTargetEvent createFromParcel(Parcel parcel) {
                     return new SearchTargetEvent(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SearchTargetEvent[] newArray(int size) {
                     return new SearchTargetEvent[size];

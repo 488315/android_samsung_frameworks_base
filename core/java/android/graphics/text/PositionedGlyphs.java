@@ -56,7 +56,6 @@ public final class PositionedGlyphs {
     @CriticalNative
     private static native float nGetY(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native long nReleaseFunc();
 

@@ -16,7 +16,6 @@ final class MediaProjectionAppSelectorController$refreshForegroundTaskThumbnails
     int label;
     final /* synthetic */ MediaProjectionAppSelectorController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaProjectionAppSelectorController$refreshForegroundTaskThumbnails$2$thumbnails$2$1(MediaProjectionAppSelectorController mediaProjectionAppSelectorController, RecentTask recentTask, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaProjectionAppSelectorController;

@@ -9,7 +9,6 @@ public class ReflectingPlane implements Parcelable {
     public static final Parcelable.Creator<ReflectingPlane> CREATOR =
             new Parcelable.Creator<ReflectingPlane>() { // from class:
                 // android.hardware.gnss.measurement_corrections.ReflectingPlane.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ReflectingPlane createFromParcel(Parcel _aidl_source) {
                     ReflectingPlane _aidl_out = new ReflectingPlane();
@@ -17,7 +16,6 @@ public class ReflectingPlane implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ReflectingPlane[] newArray(int _aidl_size) {
                     return new ReflectingPlane[_aidl_size];

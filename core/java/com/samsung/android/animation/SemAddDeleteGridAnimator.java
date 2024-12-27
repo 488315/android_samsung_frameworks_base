@@ -134,10 +134,6 @@ public class SemAddDeleteGridAnimator extends SemAbsAddDeleteAnimator {
         this.mDeleteRunnable =
                 new Runnable() { // from class:
                     // com.samsung.android.animation.SemAddDeleteGridAnimator.2
-                    /* JADX WARN: Removed duplicated region for block: B:44:0x01ed  */
-                    /* JADX WARN: Removed duplicated region for block: B:47:0x025b  */
-                    /* JADX WARN: Removed duplicated region for block: B:50:0x0263 A[SYNTHETIC] */
-                    /* JADX WARN: Removed duplicated region for block: B:51:0x022a  */
                     @Override // java.lang.Runnable
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -155,7 +151,6 @@ public class SemAddDeleteGridAnimator extends SemAbsAddDeleteAnimator {
                 };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getNextAppearingViewPosition(
             HashSet<Integer> deletedItems, int lastNewlyAppearingViewPosition) {
         int index = lastNewlyAppearingViewPosition + 1;

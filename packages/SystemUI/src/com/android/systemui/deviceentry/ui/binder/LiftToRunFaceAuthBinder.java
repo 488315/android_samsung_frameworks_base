@@ -44,7 +44,6 @@ public final class LiftToRunFaceAuthBinder implements CoreStartable {
     public final CoroutineScope scope;
     public final LiftToRunFaceAuthBinder$special$$inlined$map$1 stoppedListening;
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.deviceentry.ui.binder.LiftToRunFaceAuthBinder$listener$1] */
     public LiftToRunFaceAuthBinder(CoroutineScope coroutineScope, PackageManager packageManager, AsyncSensorManager asyncSensorManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardInteractor keyguardInteractor, PrimaryBouncerInteractor primaryBouncerInteractor, AlternateBouncerInteractor alternateBouncerInteractor, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor, PowerInteractor powerInteractor) {
         this.scope = coroutineScope;
         this.packageManager = packageManager;
@@ -82,8 +81,6 @@ public final class LiftToRunFaceAuthBinder implements CoreStartable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -173,8 +170,6 @@ public final class LiftToRunFaceAuthBinder implements CoreStartable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

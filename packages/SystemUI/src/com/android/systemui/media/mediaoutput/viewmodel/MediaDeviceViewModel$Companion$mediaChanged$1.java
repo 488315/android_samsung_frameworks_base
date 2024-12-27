@@ -18,7 +18,6 @@ final class MediaDeviceViewModel$Companion$mediaChanged$1 extends SuspendLambda 
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaDeviceViewModel$Companion$mediaChanged$1(SmartThingsMediaSdkManager smartThingsMediaSdkManager, Continuation continuation) {
         super(2, continuation);
         this.$this_mediaChanged = smartThingsMediaSdkManager;
@@ -36,7 +35,6 @@ final class MediaDeviceViewModel$Companion$mediaChanged$1 extends SuspendLambda 
         return ((MediaDeviceViewModel$Companion$mediaChanged$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         ProducerScope producerScope;
@@ -73,7 +71,6 @@ final class MediaDeviceViewModel$Companion$mediaChanged$1 extends SuspendLambda 
         this.$this_mediaChanged.mediaSdkOperationManager.deviceStatusOperationImpl.addDeviceStatusChangeCallback(mediaDeviceViewModel$Companion$mediaChanged$1$deviceStatusChangeCallback$1);
         final SmartThingsMediaSdkManager smartThingsMediaSdkManager = this.$this_mediaChanged;
         Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1.1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

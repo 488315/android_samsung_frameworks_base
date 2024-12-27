@@ -9,7 +9,6 @@ public class CaptureBundle implements Parcelable {
     public static final Parcelable.Creator<CaptureBundle> CREATOR =
             new Parcelable.Creator<CaptureBundle>() { // from class:
                 // android.hardware.camera2.extension.CaptureBundle.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CaptureBundle createFromParcel(Parcel _aidl_source) {
                     CaptureBundle _aidl_out = new CaptureBundle();
@@ -17,7 +16,6 @@ public class CaptureBundle implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CaptureBundle[] newArray(int _aidl_size) {
                     return new CaptureBundle[_aidl_size];

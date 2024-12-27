@@ -22,7 +22,6 @@ public class AudioMixingRule implements Parcelable {
     public static final Parcelable.Creator<AudioMixingRule> CREATOR =
             new Parcelable.Creator<
                     AudioMixingRule>() { // from class: android.media.audiopolicy.AudioMixingRule.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioMixingRule createFromParcel(Parcel source) {
                     Builder ruleBuilder = new Builder();
@@ -37,7 +36,6 @@ public class AudioMixingRule implements Parcelable {
                     return ruleBuilder.build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioMixingRule[] newArray(int size) {
                     return new AudioMixingRule[size];
@@ -81,13 +79,11 @@ public class AudioMixingRule implements Parcelable {
         public static final Parcelable.Creator<AudioMixMatchCriterion> CREATOR =
                 new Parcelable.Creator<AudioMixMatchCriterion>() { // from class:
                     // android.media.audiopolicy.AudioMixingRule.AudioMixMatchCriterion.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AudioMixMatchCriterion createFromParcel(Parcel p) {
                         return new AudioMixMatchCriterion(p);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AudioMixMatchCriterion[] newArray(int size) {
                         return new AudioMixMatchCriterion[size];
@@ -286,7 +282,6 @@ public class AudioMixingRule implements Parcelable {
                 Boolean.valueOf(this.mVoiceCommunicationCaptureAllowed));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isValidSystemApiRule(int rule) {
         switch (rule) {
             case 1:
@@ -300,7 +295,6 @@ public class AudioMixingRule implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isValidAttributesSystemApiRule(int rule) {
         switch (rule) {
             case 1:
@@ -311,7 +305,6 @@ public class AudioMixingRule implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isValidRule(int rule) {
         int match_rule = (-32769) & rule;
         switch (match_rule) {
@@ -326,7 +319,6 @@ public class AudioMixingRule implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isPlayerRule(int rule) {
         int match_rule = (-32769) & rule;
         switch (match_rule) {
@@ -338,7 +330,6 @@ public class AudioMixingRule implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isRecorderRule(int rule) {
         int match_rule = (-32769) & rule;
         switch (match_rule) {
@@ -349,7 +340,6 @@ public class AudioMixingRule implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isAudioAttributeRule(int match_rule) {
         switch (match_rule) {
             case 1:
@@ -474,7 +464,6 @@ public class AudioMixingRule implements Parcelable {
             return addRuleInternal(new AudioMixMatchCriterion((Integer) property, rule));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Builder addRuleInternal(AudioMixMatchCriterion criterion)
                 throws IllegalArgumentException {
             int rule = criterion.mRule;

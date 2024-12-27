@@ -316,8 +316,6 @@ public final class SmartMeetingObserverService extends ISmartMeetingObserverServ
         Log.w("SmartMeetingObserverService", "registerUsageStatsWatcher: fail");
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.sepunion.SmartMeetingObserverService$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.sepunion.SmartMeetingObserverService$3] */
     public SmartMeetingObserverService(Context context) {
         this.mContext = context;
     }

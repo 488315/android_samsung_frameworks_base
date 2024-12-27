@@ -43,8 +43,6 @@ public final class DexFanControlManager {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class FanModeEnum {
         public static final /* synthetic */ FanModeEnum[] $VALUES;
         public static final FanModeEnum FanHoldingMode;

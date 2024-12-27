@@ -843,17 +843,6 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
 
        r15 = false;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x06bb  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x070c  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x078a  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x07a1  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x07b6  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x07c8  */
-    /* JADX WARN: Removed duplicated region for block: B:36:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x078c  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0717  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x06d2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -937,8 +926,6 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         return arrayList;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0081 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0082  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1053,8 +1040,6 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                     + " com.android.server.autofill.AutofillManagerServiceImpl.getRemoteAugmentedAutofillServiceLocked():com.android.server.autofill.RemoteAugmentedAutofillService");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x008f  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0099  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1169,10 +1154,6 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                     + " com.android.server.autofill.AutofillManagerServiceImpl.getRemoteFieldClassificationServiceLocked():com.android.server.autofill.RemoteFieldClassificationService");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x005f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x005d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1782,12 +1763,6 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
 
        monitor-exit(r7);
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r7v10 */
-    /* JADX WARN: Type inference failed for: r7v16 */
-    /* JADX WARN: Type inference failed for: r7v17 */
-    /* JADX WARN: Type inference failed for: r7v4 */
-    /* JADX WARN: Type inference failed for: r7v5 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2039,14 +2014,6 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                 new PresentationStatsEventLogger$$ExternalSyntheticLambda4(1, autofillId));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00bb  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00eb  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0112  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x021a A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x021b  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x0107 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x00db  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

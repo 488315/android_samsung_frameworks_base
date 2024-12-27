@@ -12,13 +12,11 @@ import java.lang.annotation.Annotation;
 public final class Attribution implements Parcelable {
     public static final Parcelable.Creator<Attribution> CREATOR =
             new Parcelable.Creator<Attribution>() { // from class: android.content.pm.Attribution.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Attribution[] newArray(int size) {
                     return new Attribution[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Attribution createFromParcel(Parcel in) {
                     return new Attribution(in);

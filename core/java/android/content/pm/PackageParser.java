@@ -2351,8 +2351,6 @@ public class PackageParser {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0070  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x006a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2588,7 +2586,6 @@ public class PackageParser {
                     + " int, java.lang.String[]):boolean");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean parsePackageItemInfo(
             Package owner,
             PackageItemInfo outInfo,
@@ -2910,21 +2907,6 @@ public class PackageParser {
 
        return r12;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [android.content.res.TypedArray] */
-    /* JADX WARN: Type inference failed for: r1v1 */
-    /* JADX WARN: Type inference failed for: r1v14 */
-    /* JADX WARN: Type inference failed for: r1v21 */
-    /* JADX WARN: Type inference failed for: r1v23 */
-    /* JADX WARN: Type inference failed for: r1v24 */
-    /* JADX WARN: Type inference failed for: r1v25 */
-    /* JADX WARN: Type inference failed for: r1v5 */
-    /* JADX WARN: Type inference failed for: r1v6, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r1v7 */
-    /* JADX WARN: Type inference failed for: r1v9 */
-    /* JADX WARN: Type inference failed for: r4v1 */
-    /* JADX WARN: Type inference failed for: r4v2, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r4v28 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3286,7 +3268,6 @@ public class PackageParser {
 
        return r0;
     */
-    /* JADX WARN: Multi-variable type inference failed */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3548,7 +3529,6 @@ public class PackageParser {
         public static final Parcelable.Creator<SigningDetails> CREATOR =
                 new Parcelable.Creator<SigningDetails>() { // from class:
                     // android.content.pm.PackageParser.SigningDetails.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SigningDetails createFromParcel(Parcel source) {
                         if (source.readBoolean()) {
@@ -3557,7 +3537,6 @@ public class PackageParser {
                         return new SigningDetails(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SigningDetails[] newArray(int size) {
                         return new SigningDetails[size];
@@ -4036,13 +4015,11 @@ public class PackageParser {
         public static final Parcelable.Creator CREATOR =
                 new Parcelable.Creator<
                         Package>() { // from class: android.content.pm.PackageParser.Package.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Package createFromParcel(Parcel in) {
                         return new Package(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Package[] newArray(int size) {
                         return new Package[size];
@@ -4838,7 +4815,6 @@ public class PackageParser {
             this.owner = null;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(this.className);
             dest.writeBundle(this.metaData);
@@ -4904,13 +4880,11 @@ public class PackageParser {
         public static final Parcelable.Creator CREATOR =
                 new Parcelable.Creator<
                         Permission>() { // from class: android.content.pm.PackageParser.Permission.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Permission createFromParcel(Parcel in) {
                         return new Permission(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Permission[] newArray(int size) {
                         return new Permission[size];
@@ -4977,13 +4951,11 @@ public class PackageParser {
         public static final Parcelable.Creator CREATOR =
                 new Parcelable.Creator<PermissionGroup>() { // from class:
                     // android.content.pm.PackageParser.PermissionGroup.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PermissionGroup createFromParcel(Parcel in) {
                         return new PermissionGroup(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PermissionGroup[] newArray(int size) {
                         return new PermissionGroup[size];
@@ -5208,13 +5180,11 @@ public class PackageParser {
         public static final Parcelable.Creator CREATOR =
                 new Parcelable.Creator<
                         Activity>() { // from class: android.content.pm.PackageParser.Activity.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Activity createFromParcel(Parcel in) {
                         return new Activity(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Activity[] newArray(int size) {
                         return new Activity[size];
@@ -5224,12 +5194,10 @@ public class PackageParser {
         private boolean mHasMaxAspectRatio;
         private boolean mHasMinAspectRatio;
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean hasMaxAspectRatio() {
             return this.mHasMaxAspectRatio;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean hasMinAspectRatio() {
             return this.mHasMinAspectRatio;
         }
@@ -5252,7 +5220,6 @@ public class PackageParser {
             this.info.packageName = packageName;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setMaxAspectRatio(float maxAspectRatio) {
             if (this.info.resizeMode == 2 || this.info.resizeMode == 1) {
                 return;
@@ -5264,7 +5231,6 @@ public class PackageParser {
             this.mHasMaxAspectRatio = true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setMinAspectRatio(float minAspectRatio) {
             if (this.info.resizeMode == 2 || this.info.resizeMode == 1) {
                 return;
@@ -5359,13 +5325,11 @@ public class PackageParser {
         public static final Parcelable.Creator CREATOR =
                 new Parcelable.Creator<
                         Service>() { // from class: android.content.pm.PackageParser.Service.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Service createFromParcel(Parcel in) {
                         return new Service(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Service[] newArray(int size) {
                         return new Service[size];
@@ -5454,13 +5418,11 @@ public class PackageParser {
         public static final Parcelable.Creator CREATOR =
                 new Parcelable.Creator<
                         Provider>() { // from class: android.content.pm.PackageParser.Provider.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Provider createFromParcel(Parcel in) {
                         return new Provider(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Provider[] newArray(int size) {
                         return new Provider[size];
@@ -5568,13 +5530,11 @@ public class PackageParser {
         public static final Parcelable.Creator CREATOR =
                 new Parcelable.Creator<Instrumentation>() { // from class:
                     // android.content.pm.PackageParser.Instrumentation.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Instrumentation createFromParcel(Parcel in) {
                         return new Instrumentation(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Instrumentation[] newArray(int size) {
                         return new Instrumentation[size];
@@ -6223,10 +6183,6 @@ public class PackageParser {
                 state, isPackageEnabled, parsedComponent.isEnabled(), parsedComponent.name, flags);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0020 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0027 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0028  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

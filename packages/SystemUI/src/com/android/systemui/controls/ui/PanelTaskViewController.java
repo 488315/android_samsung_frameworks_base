@@ -27,7 +27,6 @@ public final class PanelTaskViewController {
     public final TaskView taskView;
     public final Executor uiExecutor;
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.controls.ui.PanelTaskViewController$stateCallback$1] */
     public PanelTaskViewController(Context context, Executor executor, PendingIntent pendingIntent, TaskView taskView, Function0 function0) {
         this.activityContext = context;
         this.uiExecutor = executor;

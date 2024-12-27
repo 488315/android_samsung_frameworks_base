@@ -9,7 +9,6 @@ final class ActivityTaskManagerTasksRepository$findRunningTaskFromWindowContaine
     /* synthetic */ Object result;
     final /* synthetic */ ActivityTaskManagerTasksRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ActivityTaskManagerTasksRepository$findRunningTaskFromWindowContainerToken$1(ActivityTaskManagerTasksRepository activityTaskManagerTasksRepository, Continuation continuation) {
         super(continuation);
         this.this$0 = activityTaskManagerTasksRepository;

@@ -360,7 +360,6 @@ public abstract class NtpTrustedTime implements TrustedTime {
         return uris;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static URI validateNtpServerUri(URI uri) throws URISyntaxException {
         if (!uri.isAbsolute()) {
             throw new URISyntaxException(uri.toString(), "Relative URI not supported");

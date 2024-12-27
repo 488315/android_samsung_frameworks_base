@@ -213,7 +213,6 @@ public interface IAppHibernationService extends IInterface {
             reply.writeTypedObject(v, 1);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements IAppHibernationService {
             private IBinder mRemote;
 

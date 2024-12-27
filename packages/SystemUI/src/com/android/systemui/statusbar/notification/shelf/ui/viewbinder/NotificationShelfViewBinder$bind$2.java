@@ -26,7 +26,6 @@ final class NotificationShelfViewBinder$bind$2 extends SuspendLambda implements 
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationShelfViewBinder$bind$2(NotificationShelfViewModel notificationShelfViewModel, NotificationShelf notificationShelf, FalsingManager falsingManager, NotificationIconAreaController notificationIconAreaController, NotificationIconContainerShelfViewBinder notificationIconContainerShelfViewBinder, Continuation continuation) {
         super(2, continuation);
         this.$viewModel = notificationShelfViewModel;

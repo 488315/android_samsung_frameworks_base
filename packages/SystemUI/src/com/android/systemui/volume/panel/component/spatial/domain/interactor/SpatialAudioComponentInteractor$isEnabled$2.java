@@ -13,7 +13,6 @@ final class SpatialAudioComponentInteractor$isEnabled$2 extends SuspendLambda im
     int label;
     final /* synthetic */ SpatialAudioComponentInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SpatialAudioComponentInteractor$isEnabled$2(SpatialAudioComponentInteractor spatialAudioComponentInteractor, Continuation continuation) {
         super(4, continuation);
         this.this$0 = spatialAudioComponentInteractor;
@@ -27,8 +26,6 @@ final class SpatialAudioComponentInteractor$isEnabled$2 extends SuspendLambda im
         return spatialAudioComponentInteractor$isEnabled$2.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x006e  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x006b  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -964,7 +964,6 @@ public class TelephonyRegistryManager {
                 false, false, subId, pkgName, attributionTag, callback, new int[0], notifyNow);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class CarrierPrivilegesCallbackWrapper extends ICarrierPrivilegesCallback.Stub
             implements ListenerExecutor {
         private final WeakReference<TelephonyManager.CarrierPrivilegesCallback> mCallback;
@@ -995,7 +994,6 @@ public class TelephonyRegistryManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCarrierPrivilegesChanged$1(
                 final Set privilegedPkgNamesSet, final Set privilegedUidsSet) throws Exception {
             Executor executor = this.mExecutor;
@@ -1032,7 +1030,6 @@ public class TelephonyRegistryManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCarrierServiceChanged$3(
                 final String packageName, final int uid) throws Exception {
             Executor executor = this.mExecutor;

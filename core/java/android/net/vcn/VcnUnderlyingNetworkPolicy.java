@@ -11,7 +11,6 @@ public final class VcnUnderlyingNetworkPolicy implements Parcelable {
             new Parcelable.Creator<
                     VcnUnderlyingNetworkPolicy>() { // from class:
                                                     // android.net.vcn.VcnUnderlyingNetworkPolicy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VcnUnderlyingNetworkPolicy createFromParcel(Parcel in) {
                     return new VcnUnderlyingNetworkPolicy(
@@ -19,7 +18,6 @@ public final class VcnUnderlyingNetworkPolicy implements Parcelable {
                                     in.readParcelable(null, VcnNetworkPolicyResult.class));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VcnUnderlyingNetworkPolicy[] newArray(int size) {
                     return new VcnUnderlyingNetworkPolicy[size];

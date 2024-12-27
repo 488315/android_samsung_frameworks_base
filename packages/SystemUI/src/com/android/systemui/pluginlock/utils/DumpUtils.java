@@ -112,8 +112,6 @@ public class DumpUtils {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0035 A[Catch: all -> 0x001c, TryCatch #0 {all -> 0x001c, blocks: (B:3:0x0005, B:5:0x0010, B:7:0x0019, B:8:0x001f, B:9:0x0025, B:12:0x002d, B:14:0x0035, B:19:0x0041), top: B:2:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x003f A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

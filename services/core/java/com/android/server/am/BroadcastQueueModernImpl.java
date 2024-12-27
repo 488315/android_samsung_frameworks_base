@@ -630,8 +630,6 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         BroadcastQueue.traceEnd(traceBegin);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:121:0x06d3 A[LOOP:7: B:116:0x0478->B:121:0x06d3, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x0541 A[EDGE_INSN: B:122:0x0541->B:123:0x0541 BREAK  A[LOOP:7: B:116:0x0478->B:121:0x06d3], SYNTHETIC] */
     @Override // com.android.server.am.BroadcastQueue
     @dalvik.annotation.optimization.NeverCompile
     /*
@@ -659,11 +657,6 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
 
        if (r2 == false) goto L125;
     */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x0237  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x023b  */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x0261  */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x027a  */
-    /* JADX WARN: Removed duplicated region for block: B:160:0x0397  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1416,10 +1409,6 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
 
        return true;
     */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x0333  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x033b A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x0369 A[LOOP:0: B:2:0x0015->B:95:0x0369, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x0372 A[EDGE_INSN: B:96:0x0372->B:97:0x0372 BREAK  A[LOOP:0: B:2:0x0015->B:95:0x0369], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1505,10 +1494,6 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
 
        if (r48 != 5) goto L16;
     */
-    /* JADX WARN: Removed duplicated region for block: B:160:0x00ff  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x008a  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0231  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0238  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1863,13 +1848,6 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         ActivityManagerService.resetPriorityAfterLockedSection();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x0183  */
-    /* JADX WARN: Removed duplicated region for block: B:152:0x014e  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x00f8  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x0142  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x014a  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x0170  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x02a7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

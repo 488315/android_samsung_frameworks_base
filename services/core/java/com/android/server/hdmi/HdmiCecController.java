@@ -1515,8 +1515,6 @@ public final class HdmiCecController {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r2v3, types: [android.hardware.tv.hdmi.cec.IHdmiCec] */
         public final boolean connectToHal() {
             IHdmiCec.Stub.Proxy proxy;
             StringBuilder sb = new StringBuilder();
@@ -1792,7 +1790,6 @@ public final class HdmiCecController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.hdmi.HdmiCecController$1] */
     public HdmiCecController(
             HdmiControlService hdmiControlService,
             NativeWrapper nativeWrapper,

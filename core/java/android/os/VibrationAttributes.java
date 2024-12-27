@@ -18,13 +18,11 @@ public final class VibrationAttributes implements Parcelable {
     public static final Parcelable.Creator<VibrationAttributes> CREATOR =
             new Parcelable.Creator<
                     VibrationAttributes>() { // from class: android.os.VibrationAttributes.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VibrationAttributes createFromParcel(Parcel p) {
                     return new VibrationAttributes(p);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VibrationAttributes[] newArray(int size) {
                     return new VibrationAttributes[size];

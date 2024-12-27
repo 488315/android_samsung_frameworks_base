@@ -420,7 +420,6 @@ class DatePickerSpinnerDelegate extends DatePicker.AbstractDatePickerDelegate {
                 : true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setDate(int year, int month, int dayOfMonth) {
         this.mCurrentDate.set(year, month, dayOfMonth);
         resetAutofilledValue();
@@ -431,7 +430,6 @@ class DatePickerSpinnerDelegate extends DatePicker.AbstractDatePickerDelegate {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateSpinners() {
         if (this.mCurrentDate.equals(this.mMinDate)) {
             this.mDaySpinner.setMinValue(this.mCurrentDate.get(5));
@@ -476,12 +474,10 @@ class DatePickerSpinnerDelegate extends DatePicker.AbstractDatePickerDelegate {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateCalendarView() {
         this.mCalendarView.setDate(this.mCurrentDate.getTimeInMillis(), false, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyDateChanged() {
         this.mDelegator.sendAccessibilityEvent(4);
         if (this.mOnDateChangedListener != null) {
@@ -527,7 +523,6 @@ class DatePickerSpinnerDelegate extends DatePicker.AbstractDatePickerDelegate {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateInputState() {
         InputMethodManager inputMethodManager =
                 (InputMethodManager) this.mContext.getSystemService(InputMethodManager.class);

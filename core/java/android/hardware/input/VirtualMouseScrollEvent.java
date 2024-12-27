@@ -11,13 +11,11 @@ public final class VirtualMouseScrollEvent implements Parcelable {
     public static final Parcelable.Creator<VirtualMouseScrollEvent> CREATOR =
             new Parcelable.Creator<VirtualMouseScrollEvent>() { // from class:
                 // android.hardware.input.VirtualMouseScrollEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualMouseScrollEvent createFromParcel(Parcel source) {
                     return new VirtualMouseScrollEvent(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualMouseScrollEvent[] newArray(int size) {
                     return new VirtualMouseScrollEvent[size];

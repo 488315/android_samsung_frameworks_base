@@ -82,50 +82,41 @@ public class InitialConfiguration {
         return ipPrefix.getAddress() instanceof Inet4Address;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isIPv4(LinkAddress linkAddress) {
         return linkAddress.getAddress() instanceof Inet4Address;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isIPv6DefaultRoute(IpPrefix ipPrefix) {
         return ipPrefix.getAddress().equals(INET6_ANY);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isIPv6GUA(LinkAddress linkAddress) {
         return linkAddress.isIpv6() && linkAddress.isGlobalPreferred();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isPrefixLengthCompliant(IpPrefix ipPrefix) {
         return isIPv4(ipPrefix) || isCompliantIPv6PrefixLength(ipPrefix.getPrefixLength());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isPrefixLengthCompliant(LinkAddress linkAddress) {
         return isIPv4(linkAddress) || isCompliantIPv6PrefixLength(linkAddress.getPrefixLength());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$isProvisionedBy$3(
             IpPrefix ipPrefix, RouteInfo routeInfo) {
         return isDirectlyConnectedRoute(routeInfo, ipPrefix);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$isValid$0(
             LinkAddress linkAddress, IpPrefix ipPrefix) {
         return ipPrefix.contains(linkAddress.getAddress());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$isValid$1(
             InetAddress inetAddress, IpPrefix ipPrefix) {
         return ipPrefix.contains(inetAddress);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$not$4(Predicate predicate, Object obj) {
         return !predicate.test(obj);
     }

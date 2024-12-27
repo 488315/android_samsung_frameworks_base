@@ -302,7 +302,6 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
                     + " com.android.modules.utils.BinaryXmlPullParser.consumeAdditionalText():void");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     static String resolveEntity(String entity) throws XmlPullParserException {
         char c;
         switch (entity.hashCode()) {

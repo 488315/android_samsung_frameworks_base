@@ -14,13 +14,11 @@ public final class MediaThreshold implements Parcelable {
     public static final Parcelable.Creator<MediaThreshold> CREATOR =
             new Parcelable.Creator<
                     MediaThreshold>() { // from class: android.telephony.ims.MediaThreshold.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaThreshold createFromParcel(Parcel in) {
                     return new MediaThreshold(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaThreshold[] newArray(int size) {
                     return new MediaThreshold[size];

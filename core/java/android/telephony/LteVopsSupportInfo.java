@@ -13,14 +13,12 @@ public final class LteVopsSupportInfo extends VopsSupportInfo {
     public static final Parcelable.Creator<LteVopsSupportInfo> CREATOR =
             new Parcelable.Creator<
                     LteVopsSupportInfo>() { // from class: android.telephony.LteVopsSupportInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LteVopsSupportInfo createFromParcel(Parcel in) {
                     in.readInt();
                     return new LteVopsSupportInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LteVopsSupportInfo[] newArray(int size) {
                     return new LteVopsSupportInfo[size];

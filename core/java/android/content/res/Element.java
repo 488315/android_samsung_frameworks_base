@@ -148,7 +148,6 @@ public class Element {
         sPool.get().release(this);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static int getCounterIdx(String tag) {
         char c;
         switch (tag.hashCode()) {
@@ -484,7 +483,6 @@ public class Element {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     static boolean shouldValidate(String tag) {
         char c;
         switch (tag.hashCode()) {
@@ -811,7 +809,6 @@ public class Element {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:59:0x0095, code lost:
 
        if (r17.equals("activity") != false) goto L42;
@@ -829,7 +826,6 @@ public class Element {
                 "Method not decompiled: android.content.res.Element.init(java.lang.String):void");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static int getAttrStrMaxLen(String attrName) {
         char c;
         switch (attrName.hashCode()) {
@@ -1150,7 +1146,6 @@ public class Element {
         return 32768;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private int getResStrMaxLen(int index) {
         char c;
         String str = this.mTag;
@@ -1677,7 +1672,6 @@ public class Element {
         this.mChildTagMask |= 1 << idx;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0082, code lost:
 
        if (r7.equals(android.content.res.Element.TAG_ATTR_ZYGOTE_PRELOAD_NAME) != false) goto L52;
@@ -1889,7 +1883,6 @@ public class Element {
                     + " android.content.res.Element.isComponentNameAttr(java.lang.String):boolean");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private boolean isComponentNameAttr(int index) {
         char c;
         String str = this.mTag;

@@ -26,8 +26,6 @@ final class WifiDisplayDeviceController$Companion$activeDeviceChanges$1 extends 
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Multi-variable type inference failed */
     public WifiDisplayDeviceController$Companion$activeDeviceChanges$1(Pair<? extends Context, ? extends AudioManager> pair, Continuation continuation) {
         super(2, continuation);
         this.$this_activeDeviceChanges = pair;
@@ -49,9 +47,6 @@ final class WifiDisplayDeviceController$Companion$activeDeviceChanges$1 extends 
         return ((WifiDisplayDeviceController$Companion$activeDeviceChanges$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.media.AudioDeviceCallback, com.android.systemui.media.mediaoutput.controller.device.WifiDisplayDeviceController$Companion$activeDeviceChanges$1$callback$1] */
-    /* JADX WARN: Type inference failed for: r3v3, types: [android.content.BroadcastReceiver, com.android.systemui.media.mediaoutput.controller.device.WifiDisplayDeviceController$Companion$activeDeviceChanges$1$receiver$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -105,8 +100,6 @@ final class WifiDisplayDeviceController$Companion$activeDeviceChanges$1 extends 
             context.registerReceiver(r3, intentFilter);
             final Pair<Context, AudioManager> pair = this.$this_activeDeviceChanges;
             Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.device.WifiDisplayDeviceController$Companion$activeDeviceChanges$1.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                /* JADX WARN: Multi-variable type inference failed */
                 {
                     super(0);
                 }

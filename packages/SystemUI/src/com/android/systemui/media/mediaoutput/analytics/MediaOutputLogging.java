@@ -15,8 +15,6 @@ import kotlin.enums.EnumEntriesKt;
 public final class MediaOutputLogging {
     public static final MediaOutputLogging INSTANCE = new MediaOutputLogging();
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class CustomKey {
         public static final /* synthetic */ CustomKey[] $VALUES;
         public static final CustomKey ACTION;
@@ -57,8 +55,6 @@ public final class MediaOutputLogging {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Details {
         public static final /* synthetic */ Details[] $VALUES;
         public static final Details LOCK;
@@ -104,8 +100,6 @@ public final class MediaOutputLogging {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Event {
         public static final /* synthetic */ Event[] $VALUES;
         public static final Event APP_ICON;
@@ -153,8 +147,6 @@ public final class MediaOutputLogging {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class ScreenId {
         public static final /* synthetic */ ScreenId[] $VALUES;
         public static final ScreenId MEDIA_OUTPUT;

@@ -465,7 +465,6 @@ public class UsbHostManager {
                 context.getPackageManager().hasSystemFeature("android.software.midi");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native void monitorUsbHostBus();
 
     private native ParcelFileDescriptor nativeOpenDevice(String str);

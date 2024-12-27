@@ -830,7 +830,6 @@ public final class KnoxVpnHelper {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00e5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -847,7 +846,6 @@ public final class KnoxVpnHelper {
                     + " java.lang.String, int):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00f0 A[Catch: Exception -> 0x0054, TryCatch #2 {Exception -> 0x0054, blocks: (B:3:0x001a, B:5:0x0039, B:7:0x0044, B:8:0x0059, B:10:0x0062, B:11:0x0071, B:13:0x007a, B:14:0x0089, B:25:0x00e4, B:27:0x00f0, B:28:0x00ff, B:29:0x011d), top: B:2:0x001a }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

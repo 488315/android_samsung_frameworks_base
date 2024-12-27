@@ -46,7 +46,6 @@ public final class FooterActionsInteractorImpl implements FooterActionsInteracto
     public final UserSwitcherInteractor userSwitcherInteractor;
     public final Flow userSwitcherStatus;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.qs.footer.domain.interactor.FooterActionsInteractorImpl$special$$inlined$map$1] */
     public FooterActionsInteractorImpl(ActivityStarter activityStarter, MetricsLogger metricsLogger, UiEventLogger uiEventLogger, DeviceProvisionedController deviceProvisionedController, QSSecurityFooterUtils qSSecurityFooterUtils, FgsManagerController fgsManagerController, UserSwitcherInteractor userSwitcherInteractor, SecurityRepository securityRepository, ForegroundServicesRepository foregroundServicesRepository, UserSwitcherRepository userSwitcherRepository, BroadcastDispatcher broadcastDispatcher, final CoroutineDispatcher coroutineDispatcher) {
         this.activityStarter = activityStarter;
         this.metricsLogger = metricsLogger;
@@ -87,9 +86,6 @@ public final class FooterActionsInteractorImpl implements FooterActionsInteracto
                     this.this$0 = footerActionsInteractorImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:19:0x0061 A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:20:0x003b  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

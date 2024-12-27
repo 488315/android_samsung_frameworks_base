@@ -374,7 +374,6 @@ public final class SystemServiceRegistry {
                 AccessibilityManager.class,
                 new CachedServiceFetcher<
                         AccessibilityManager>() { // from class: android.app.SystemServiceRegistry.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AccessibilityManager createService(ContextImpl ctx) {
                         return AccessibilityManager.getInstance(ctx);
@@ -385,7 +384,6 @@ public final class SystemServiceRegistry {
                 CaptioningManager.class,
                 new CachedServiceFetcher<
                         CaptioningManager>() { // from class: android.app.SystemServiceRegistry.2
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public CaptioningManager createService(ContextImpl ctx) {
                         return new CaptioningManager(ctx);
@@ -396,7 +394,6 @@ public final class SystemServiceRegistry {
                 AccountManager.class,
                 new CachedServiceFetcher<
                         AccountManager>() { // from class: android.app.SystemServiceRegistry.3
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AccountManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -410,7 +407,6 @@ public final class SystemServiceRegistry {
                 ActivityManager.class,
                 new CachedServiceFetcher<
                         ActivityManager>() { // from class: android.app.SystemServiceRegistry.4
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public ActivityManager createService(ContextImpl ctx) {
                         return new ActivityManager(
@@ -422,7 +418,6 @@ public final class SystemServiceRegistry {
                 ActivityTaskManager.class,
                 new CachedServiceFetcher<
                         ActivityTaskManager>() { // from class: android.app.SystemServiceRegistry.5
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public ActivityTaskManager createService(ContextImpl ctx) {
                         return ActivityTaskManager.getInstance();
@@ -433,7 +428,6 @@ public final class SystemServiceRegistry {
                 UriGrantsManager.class,
                 new CachedServiceFetcher<
                         UriGrantsManager>() { // from class: android.app.SystemServiceRegistry.6
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public UriGrantsManager createService(ContextImpl ctx) {
                         return new UriGrantsManager(
@@ -445,7 +439,6 @@ public final class SystemServiceRegistry {
                 AlarmManager.class,
                 new CachedServiceFetcher<
                         AlarmManager>() { // from class: android.app.SystemServiceRegistry.7
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AlarmManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -459,7 +452,6 @@ public final class SystemServiceRegistry {
                 AudioManager.class,
                 new CachedServiceFetcher<
                         AudioManager>() { // from class: android.app.SystemServiceRegistry.8
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AudioManager createService(ContextImpl ctx) {
                         return new AudioManager(ctx);
@@ -470,7 +462,6 @@ public final class SystemServiceRegistry {
                 AudioDeviceVolumeManager.class,
                 new CachedServiceFetcher<AudioDeviceVolumeManager>() { // from class:
                     // android.app.SystemServiceRegistry.9
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AudioDeviceVolumeManager createService(ContextImpl ctx) {
                         return new AudioDeviceVolumeManager(ctx);
@@ -481,7 +472,6 @@ public final class SystemServiceRegistry {
                 MediaRouter.class,
                 new CachedServiceFetcher<
                         MediaRouter>() { // from class: android.app.SystemServiceRegistry.10
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public MediaRouter createService(ContextImpl ctx) {
                         return new MediaRouter(ctx);
@@ -492,7 +482,6 @@ public final class SystemServiceRegistry {
                 CustomFrequencyManager.class,
                 new CachedServiceFetcher<CustomFrequencyManager>() { // from class:
                     // android.app.SystemServiceRegistry.11
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public CustomFrequencyManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -512,7 +501,6 @@ public final class SystemServiceRegistry {
                 IntegrityControlCheckCenter.class,
                 new CachedServiceFetcher<IntegrityControlCheckCenter>() { // from class:
                     // android.app.SystemServiceRegistry.12
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public IntegrityControlCheckCenter createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.ICCC_SERVICE);
@@ -525,7 +513,6 @@ public final class SystemServiceRegistry {
                 DisplayAiqeManager.class,
                 new CachedServiceFetcher<
                         DisplayAiqeManager>() { // from class: android.app.SystemServiceRegistry.14
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public DisplayAiqeManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -538,7 +525,6 @@ public final class SystemServiceRegistry {
                 HdmiControlManager.class,
                 new StaticServiceFetcher<
                         HdmiControlManager>() { // from class: android.app.SystemServiceRegistry.15
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.StaticServiceFetcher
                     public HdmiControlManager createService()
                             throws ServiceManager.ServiceNotFoundException {
@@ -551,7 +537,6 @@ public final class SystemServiceRegistry {
                 TextClassificationManager.class,
                 new CachedServiceFetcher<TextClassificationManager>() { // from class:
                     // android.app.SystemServiceRegistry.16
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public TextClassificationManager createService(ContextImpl ctx) {
                         return new TextClassificationManager(ctx);
@@ -562,7 +547,6 @@ public final class SystemServiceRegistry {
                 FontManager.class,
                 new CachedServiceFetcher<
                         FontManager>() { // from class: android.app.SystemServiceRegistry.17
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public FontManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -575,7 +559,6 @@ public final class SystemServiceRegistry {
                 ClipboardManager.class,
                 new CachedServiceFetcher<
                         ClipboardManager>() { // from class: android.app.SystemServiceRegistry.18
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public ClipboardManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -589,7 +572,6 @@ public final class SystemServiceRegistry {
                 SemClipboardManager.class,
                 new CachedServiceFetcher<
                         SemClipboardManager>() { // from class: android.app.SystemServiceRegistry.19
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemClipboardManager createService(ContextImpl ctx) {
                         return new SemClipboardManager(ctx.getOuterContext());
@@ -600,7 +582,6 @@ public final class SystemServiceRegistry {
                 PacProxyManager.class,
                 new CachedServiceFetcher<
                         PacProxyManager>() { // from class: android.app.SystemServiceRegistry.20
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public PacProxyManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -614,7 +595,6 @@ public final class SystemServiceRegistry {
                 IBinder.class,
                 new StaticServiceFetcher<
                         IBinder>() { // from class: android.app.SystemServiceRegistry.21
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.StaticServiceFetcher
                     public IBinder createService() throws ServiceManager.ServiceNotFoundException {
                         return ServiceManager.getServiceOrThrow(Context.NETD_SERVICE);
@@ -626,7 +606,6 @@ public final class SystemServiceRegistry {
                 VpnManager.class,
                 new CachedServiceFetcher<
                         VpnManager>() { // from class: android.app.SystemServiceRegistry.23
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public VpnManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -640,7 +619,6 @@ public final class SystemServiceRegistry {
                 VcnManager.class,
                 new CachedServiceFetcher<
                         VcnManager>() { // from class: android.app.SystemServiceRegistry.24
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public VcnManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -661,7 +639,6 @@ public final class SystemServiceRegistry {
                 CountryDetector.class,
                 new StaticServiceFetcher<
                         CountryDetector>() { // from class: android.app.SystemServiceRegistry.25
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.StaticServiceFetcher
                     public CountryDetector createService()
                             throws ServiceManager.ServiceNotFoundException {
@@ -674,7 +651,6 @@ public final class SystemServiceRegistry {
                 DevicePolicyManager.class,
                 new CachedServiceFetcher<
                         DevicePolicyManager>() { // from class: android.app.SystemServiceRegistry.26
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public DevicePolicyManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -688,7 +664,6 @@ public final class SystemServiceRegistry {
                 DownloadManager.class,
                 new CachedServiceFetcher<
                         DownloadManager>() { // from class: android.app.SystemServiceRegistry.27
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public DownloadManager createService(ContextImpl ctx) {
                         return new DownloadManager(ctx);
@@ -699,7 +674,6 @@ public final class SystemServiceRegistry {
                 SemHqmManager.class,
                 new CachedServiceFetcher<
                         SemHqmManager>() { // from class: android.app.SystemServiceRegistry.28
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemHqmManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.HQM_SERVICE);
@@ -721,7 +695,6 @@ public final class SystemServiceRegistry {
                     SemHcmManager.class,
                     new CachedServiceFetcher<
                             SemHcmManager>() { // from class: android.app.SystemServiceRegistry.29
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                         public SemHcmManager createService(ContextImpl ctx) {
                             IBinder b = ServiceManager.getService(Context.HCM_SERVICE);
@@ -741,7 +714,6 @@ public final class SystemServiceRegistry {
                 BatteryManager.class,
                 new CachedServiceFetcher<
                         BatteryManager>() { // from class: android.app.SystemServiceRegistry.30
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public BatteryManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -759,7 +731,6 @@ public final class SystemServiceRegistry {
                 DropBoxManager.class,
                 new CachedServiceFetcher<
                         DropBoxManager>() { // from class: android.app.SystemServiceRegistry.31
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public DropBoxManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -773,7 +744,6 @@ public final class SystemServiceRegistry {
                 BinaryTransparencyManager.class,
                 new CachedServiceFetcher<BinaryTransparencyManager>() { // from class:
                     // android.app.SystemServiceRegistry.32
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public BinaryTransparencyManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -788,7 +758,6 @@ public final class SystemServiceRegistry {
                 InputManager.class,
                 new CachedServiceFetcher<
                         InputManager>() { // from class: android.app.SystemServiceRegistry.33
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public InputManager createService(ContextImpl ctx) {
                         return new InputManager(ctx.getOuterContext());
@@ -799,7 +768,6 @@ public final class SystemServiceRegistry {
                 DisplayManager.class,
                 new CachedServiceFetcher<
                         DisplayManager>() { // from class: android.app.SystemServiceRegistry.34
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public DisplayManager createService(ContextImpl ctx) {
                         return new DisplayManager(ctx.getOuterContext());
@@ -810,7 +778,6 @@ public final class SystemServiceRegistry {
                 ColorDisplayManager.class,
                 new CachedServiceFetcher<
                         ColorDisplayManager>() { // from class: android.app.SystemServiceRegistry.35
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public ColorDisplayManager createService(ContextImpl ctx) {
                         return new ColorDisplayManager();
@@ -821,7 +788,6 @@ public final class SystemServiceRegistry {
                 InputMethodManager.class,
                 new ServiceFetcher<
                         InputMethodManager>() { // from class: android.app.SystemServiceRegistry.36
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.ServiceFetcher
                     public InputMethodManager getService(ContextImpl ctx) {
                         return InputMethodManager.forContext(ctx.getOuterContext());
@@ -832,7 +798,6 @@ public final class SystemServiceRegistry {
                 TextServicesManager.class,
                 new CachedServiceFetcher<
                         TextServicesManager>() { // from class: android.app.SystemServiceRegistry.37
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public TextServicesManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -844,7 +809,6 @@ public final class SystemServiceRegistry {
                 KeyguardManager.class,
                 new CachedServiceFetcher<
                         KeyguardManager>() { // from class: android.app.SystemServiceRegistry.38
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public KeyguardManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -856,7 +820,6 @@ public final class SystemServiceRegistry {
                 LayoutInflater.class,
                 new CachedServiceFetcher<
                         LayoutInflater>() { // from class: android.app.SystemServiceRegistry.39
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public LayoutInflater createService(ContextImpl ctx) {
                         return new PhoneLayoutInflater(ctx.getOuterContext());
@@ -867,7 +830,6 @@ public final class SystemServiceRegistry {
                 LocationManager.class,
                 new CachedServiceFetcher<
                         LocationManager>() { // from class: android.app.SystemServiceRegistry.40
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public LocationManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -880,7 +842,6 @@ public final class SystemServiceRegistry {
                 SemLocationManager.class,
                 new CachedServiceFetcher<
                         SemLocationManager>() { // from class: android.app.SystemServiceRegistry.41
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemLocationManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -894,7 +855,6 @@ public final class SystemServiceRegistry {
                 NetworkPolicyManager.class,
                 new CachedServiceFetcher<NetworkPolicyManager>() { // from class:
                     // android.app.SystemServiceRegistry.42
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public NetworkPolicyManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -910,7 +870,6 @@ public final class SystemServiceRegistry {
                 NotificationManager.class,
                 new CachedServiceFetcher<
                         NotificationManager>() { // from class: android.app.SystemServiceRegistry.43
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public NotificationManager createService(ContextImpl ctx) {
                         Context outerContext = ctx.getOuterContext();
@@ -932,7 +891,6 @@ public final class SystemServiceRegistry {
                 PeopleManager.class,
                 new CachedServiceFetcher<
                         PeopleManager>() { // from class: android.app.SystemServiceRegistry.44
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public PeopleManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -944,7 +902,6 @@ public final class SystemServiceRegistry {
                 PowerManager.class,
                 new CachedServiceFetcher<
                         PowerManager>() { // from class: android.app.SystemServiceRegistry.45
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public PowerManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -966,7 +923,6 @@ public final class SystemServiceRegistry {
                 PerformanceHintManager.class,
                 new CachedServiceFetcher<PerformanceHintManager>() { // from class:
                     // android.app.SystemServiceRegistry.47
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public PerformanceHintManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -978,7 +934,6 @@ public final class SystemServiceRegistry {
                 RecoverySystem.class,
                 new CachedServiceFetcher<
                         RecoverySystem>() { // from class: android.app.SystemServiceRegistry.48
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public RecoverySystem createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -992,7 +947,6 @@ public final class SystemServiceRegistry {
                 SearchManager.class,
                 new CachedServiceFetcher<
                         SearchManager>() { // from class: android.app.SystemServiceRegistry.49
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SearchManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1005,7 +959,6 @@ public final class SystemServiceRegistry {
                 SecurityStateManager.class,
                 new CachedServiceFetcher<SecurityStateManager>() { // from class:
                     // android.app.SystemServiceRegistry.50
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SecurityStateManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1020,7 +973,6 @@ public final class SystemServiceRegistry {
                 SensorManager.class,
                 new CachedServiceFetcher<
                         SensorManager>() { // from class: android.app.SystemServiceRegistry.51
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SensorManager createService(ContextImpl ctx) {
                         return new SystemSensorManager(
@@ -1032,7 +984,6 @@ public final class SystemServiceRegistry {
                 SensorPrivacyManager.class,
                 new CachedServiceFetcher<SensorPrivacyManager>() { // from class:
                     // android.app.SystemServiceRegistry.52
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SensorPrivacyManager createService(ContextImpl ctx) {
                         return SensorPrivacyManager.getInstance(ctx);
@@ -1043,7 +994,6 @@ public final class SystemServiceRegistry {
                 StatusBarManager.class,
                 new CachedServiceFetcher<
                         StatusBarManager>() { // from class: android.app.SystemServiceRegistry.53
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public StatusBarManager createService(ContextImpl ctx) {
                         return new StatusBarManager(ctx.getOuterContext());
@@ -1054,7 +1004,6 @@ public final class SystemServiceRegistry {
                 SemStatusBarManager.class,
                 new CachedServiceFetcher<
                         SemStatusBarManager>() { // from class: android.app.SystemServiceRegistry.54
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemStatusBarManager createService(ContextImpl ctx) {
                         return new SemStatusBarManager(ctx.getOuterContext());
@@ -1065,7 +1014,6 @@ public final class SystemServiceRegistry {
                 SemEdgeManager.class,
                 new CachedServiceFetcher<
                         SemEdgeManager>() { // from class: android.app.SystemServiceRegistry.55
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemEdgeManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService("notification");
@@ -1077,7 +1025,6 @@ public final class SystemServiceRegistry {
                 StorageManager.class,
                 new CachedServiceFetcher<
                         StorageManager>() { // from class: android.app.SystemServiceRegistry.56
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public StorageManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1089,7 +1036,6 @@ public final class SystemServiceRegistry {
                 StorageStatsManager.class,
                 new CachedServiceFetcher<
                         StorageStatsManager>() { // from class: android.app.SystemServiceRegistry.57
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public StorageStatsManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1105,7 +1051,6 @@ public final class SystemServiceRegistry {
                 SystemUpdateManager.class,
                 new CachedServiceFetcher<
                         SystemUpdateManager>() { // from class: android.app.SystemServiceRegistry.58
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SystemUpdateManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1119,7 +1064,6 @@ public final class SystemServiceRegistry {
                 SystemConfigManager.class,
                 new CachedServiceFetcher<
                         SystemConfigManager>() { // from class: android.app.SystemServiceRegistry.59
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SystemConfigManager createService(ContextImpl ctx) {
                         return new SystemConfigManager();
@@ -1130,7 +1074,6 @@ public final class SystemServiceRegistry {
                 TelephonyRegistryManager.class,
                 new CachedServiceFetcher<TelephonyRegistryManager>() { // from class:
                     // android.app.SystemServiceRegistry.60
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public TelephonyRegistryManager createService(ContextImpl ctx) {
                         return new TelephonyRegistryManager(ctx);
@@ -1141,7 +1084,6 @@ public final class SystemServiceRegistry {
                 TelecomManager.class,
                 new CachedServiceFetcher<
                         TelecomManager>() { // from class: android.app.SystemServiceRegistry.61
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public TelecomManager createService(ContextImpl ctx) {
                         return new TelecomManager(ctx.getOuterContext());
@@ -1153,7 +1095,6 @@ public final class SystemServiceRegistry {
                     SemTelecomManager.class,
                     new CachedServiceFetcher<SemTelecomManager>() { // from class:
                         // android.app.SystemServiceRegistry.62
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                         public SemTelecomManager createService(ContextImpl ctx) {
                             return new SemTelecomManager(ctx.getOuterContext());
@@ -1165,7 +1106,6 @@ public final class SystemServiceRegistry {
                 MmsManager.class,
                 new CachedServiceFetcher<
                         MmsManager>() { // from class: android.app.SystemServiceRegistry.63
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public MmsManager createService(ContextImpl ctx) {
                         return new MmsManager(ctx.getOuterContext());
@@ -1176,7 +1116,6 @@ public final class SystemServiceRegistry {
                 UiModeManager.class,
                 new CachedServiceFetcher<
                         UiModeManager>() { // from class: android.app.SystemServiceRegistry.64
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public UiModeManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1188,7 +1127,6 @@ public final class SystemServiceRegistry {
                 UsbManager.class,
                 new CachedServiceFetcher<
                         UsbManager>() { // from class: android.app.SystemServiceRegistry.65
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public UsbManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1201,7 +1139,6 @@ public final class SystemServiceRegistry {
                 AdbManager.class,
                 new CachedServiceFetcher<
                         AdbManager>() { // from class: android.app.SystemServiceRegistry.66
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AdbManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1214,7 +1151,6 @@ public final class SystemServiceRegistry {
                 SerialManager.class,
                 new CachedServiceFetcher<
                         SerialManager>() { // from class: android.app.SystemServiceRegistry.67
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SerialManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1227,7 +1163,6 @@ public final class SystemServiceRegistry {
                 VibratorManager.class,
                 new CachedServiceFetcher<
                         VibratorManager>() { // from class: android.app.SystemServiceRegistry.68
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public VibratorManager createService(ContextImpl ctx) {
                         return new SystemVibratorManager(ctx);
@@ -1238,7 +1173,6 @@ public final class SystemServiceRegistry {
                 Vibrator.class,
                 new CachedServiceFetcher<
                         Vibrator>() { // from class: android.app.SystemServiceRegistry.69
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public Vibrator createService(ContextImpl ctx) {
                         return new SystemVibrator(ctx);
@@ -1249,7 +1183,6 @@ public final class SystemServiceRegistry {
                 WallpaperManager.class,
                 new CachedServiceFetcher<
                         WallpaperManager>() { // from class: android.app.SystemServiceRegistry.70
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public WallpaperManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1277,7 +1210,6 @@ public final class SystemServiceRegistry {
                 WifiNl80211Manager.class,
                 new CachedServiceFetcher<
                         WifiNl80211Manager>() { // from class: android.app.SystemServiceRegistry.71
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public WifiNl80211Manager createService(ContextImpl ctx) {
                         return new WifiNl80211Manager(ctx.getOuterContext());
@@ -1288,7 +1220,6 @@ public final class SystemServiceRegistry {
                 CameraServiceWorkerManager.class,
                 new CachedServiceFetcher<CameraServiceWorkerManager>() { // from class:
                     // android.app.SystemServiceRegistry.72
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public CameraServiceWorkerManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1301,7 +1232,6 @@ public final class SystemServiceRegistry {
                 WindowManager.class,
                 new CachedServiceFetcher<
                         WindowManager>() { // from class: android.app.SystemServiceRegistry.73
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public WindowManager createService(ContextImpl ctx) {
                         return new WindowManagerImpl(ctx);
@@ -1312,7 +1242,6 @@ public final class SystemServiceRegistry {
                 UserManager.class,
                 new CachedServiceFetcher<
                         UserManager>() { // from class: android.app.SystemServiceRegistry.74
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public UserManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1326,7 +1255,6 @@ public final class SystemServiceRegistry {
                 AppOpsManager.class,
                 new CachedServiceFetcher<
                         AppOpsManager>() { // from class: android.app.SystemServiceRegistry.75
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AppOpsManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1340,7 +1268,6 @@ public final class SystemServiceRegistry {
                 CameraManager.class,
                 new CachedServiceFetcher<
                         CameraManager>() { // from class: android.app.SystemServiceRegistry.76
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public CameraManager createService(ContextImpl ctx) {
                         return new CameraManager(ctx);
@@ -1351,7 +1278,6 @@ public final class SystemServiceRegistry {
                 LauncherApps.class,
                 new CachedServiceFetcher<
                         LauncherApps>() { // from class: android.app.SystemServiceRegistry.77
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public LauncherApps createService(ContextImpl ctx) {
                         return new LauncherApps(ctx);
@@ -1362,7 +1288,6 @@ public final class SystemServiceRegistry {
                 RestrictionsManager.class,
                 new CachedServiceFetcher<
                         RestrictionsManager>() { // from class: android.app.SystemServiceRegistry.78
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public RestrictionsManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1376,7 +1301,6 @@ public final class SystemServiceRegistry {
                 PrintManager.class,
                 new CachedServiceFetcher<
                         PrintManager>() { // from class: android.app.SystemServiceRegistry.79
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public PrintManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1398,7 +1322,6 @@ public final class SystemServiceRegistry {
                 CompanionDeviceManager.class,
                 new CachedServiceFetcher<CompanionDeviceManager>() { // from class:
                     // android.app.SystemServiceRegistry.80
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public CompanionDeviceManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1423,7 +1346,6 @@ public final class SystemServiceRegistry {
                     AppFunctionManager.class,
                     new CachedServiceFetcher<AppFunctionManager>() { // from class:
                         // android.app.SystemServiceRegistry.81
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                         public AppFunctionManager createService(ContextImpl ctx)
                                 throws ServiceManager.ServiceNotFoundException {
@@ -1443,7 +1365,6 @@ public final class SystemServiceRegistry {
                 VirtualDeviceManager.class,
                 new CachedServiceFetcher<VirtualDeviceManager>() { // from class:
                     // android.app.SystemServiceRegistry.82
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public VirtualDeviceManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1463,7 +1384,6 @@ public final class SystemServiceRegistry {
                 ConsumerIrManager.class,
                 new CachedServiceFetcher<
                         ConsumerIrManager>() { // from class: android.app.SystemServiceRegistry.83
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public ConsumerIrManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1475,7 +1395,6 @@ public final class SystemServiceRegistry {
                 TrustManager.class,
                 new StaticServiceFetcher<
                         TrustManager>() { // from class: android.app.SystemServiceRegistry.84
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.StaticServiceFetcher
                     public TrustManager createService()
                             throws ServiceManager.ServiceNotFoundException {
@@ -1488,7 +1407,6 @@ public final class SystemServiceRegistry {
                 FingerprintManager.class,
                 new CachedServiceFetcher<
                         FingerprintManager>() { // from class: android.app.SystemServiceRegistry.85
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public FingerprintManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1507,7 +1425,6 @@ public final class SystemServiceRegistry {
                 FaceManager.class,
                 new CachedServiceFetcher<
                         FaceManager>() { // from class: android.app.SystemServiceRegistry.86
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public FaceManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1526,7 +1443,6 @@ public final class SystemServiceRegistry {
                 IrisManager.class,
                 new CachedServiceFetcher<
                         IrisManager>() { // from class: android.app.SystemServiceRegistry.87
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public IrisManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1540,7 +1456,6 @@ public final class SystemServiceRegistry {
                 BiometricManager.class,
                 new CachedServiceFetcher<
                         BiometricManager>() { // from class: android.app.SystemServiceRegistry.88
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public BiometricManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1554,7 +1469,6 @@ public final class SystemServiceRegistry {
                 TvInteractiveAppManager.class,
                 new CachedServiceFetcher<TvInteractiveAppManager>() { // from class:
                     // android.app.SystemServiceRegistry.89
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public TvInteractiveAppManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1571,7 +1485,6 @@ public final class SystemServiceRegistry {
                 TvAdManager.class,
                 new CachedServiceFetcher<
                         TvAdManager>() { // from class: android.app.SystemServiceRegistry.90
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public TvAdManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1585,7 +1498,6 @@ public final class SystemServiceRegistry {
                 TvInputManager.class,
                 new CachedServiceFetcher<
                         TvInputManager>() { // from class: android.app.SystemServiceRegistry.91
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public TvInputManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1600,7 +1512,6 @@ public final class SystemServiceRegistry {
                 TunerResourceManager.class,
                 new CachedServiceFetcher<TunerResourceManager>() { // from class:
                     // android.app.SystemServiceRegistry.92
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public TunerResourceManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1617,7 +1528,6 @@ public final class SystemServiceRegistry {
                 NetworkScoreManager.class,
                 new CachedServiceFetcher<
                         NetworkScoreManager>() { // from class: android.app.SystemServiceRegistry.93
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public NetworkScoreManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1629,7 +1539,6 @@ public final class SystemServiceRegistry {
                 UsageStatsManager.class,
                 new CachedServiceFetcher<
                         UsageStatsManager>() { // from class: android.app.SystemServiceRegistry.94
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public UsageStatsManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1644,7 +1553,6 @@ public final class SystemServiceRegistry {
                 PersistentDataBlockManager.class,
                 new StaticServiceFetcher<PersistentDataBlockManager>() { // from class:
                     // android.app.SystemServiceRegistry.95
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.StaticServiceFetcher
                     public PersistentDataBlockManager createService()
                             throws ServiceManager.ServiceNotFoundException {
@@ -1664,7 +1572,6 @@ public final class SystemServiceRegistry {
                 OemLockManager.class,
                 new StaticServiceFetcher<
                         OemLockManager>() { // from class: android.app.SystemServiceRegistry.96
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.StaticServiceFetcher
                     public OemLockManager createService()
                             throws ServiceManager.ServiceNotFoundException {
@@ -1681,7 +1588,6 @@ public final class SystemServiceRegistry {
                 MediaProjectionManager.class,
                 new CachedServiceFetcher<MediaProjectionManager>() { // from class:
                     // android.app.SystemServiceRegistry.97
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public MediaProjectionManager createService(ContextImpl ctx) {
                         return new MediaProjectionManager(ctx);
@@ -1692,7 +1598,6 @@ public final class SystemServiceRegistry {
                 AppWidgetManager.class,
                 new CachedServiceFetcher<
                         AppWidgetManager>() { // from class: android.app.SystemServiceRegistry.98
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AppWidgetManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.APPWIDGET_SERVICE);
@@ -1707,7 +1612,6 @@ public final class SystemServiceRegistry {
                 MidiManager.class,
                 new CachedServiceFetcher<
                         MidiManager>() { // from class: android.app.SystemServiceRegistry.99
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public MidiManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1720,7 +1624,6 @@ public final class SystemServiceRegistry {
                 RadioManager.class,
                 new CachedServiceFetcher<
                         RadioManager>() { // from class: android.app.SystemServiceRegistry.100
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public RadioManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1732,7 +1635,6 @@ public final class SystemServiceRegistry {
                 HardwarePropertiesManager.class,
                 new CachedServiceFetcher<HardwarePropertiesManager>() { // from class:
                     // android.app.SystemServiceRegistry.101
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public HardwarePropertiesManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1749,7 +1651,6 @@ public final class SystemServiceRegistry {
                 SoundTriggerManager.class,
                 new CachedServiceFetcher<SoundTriggerManager>() { // from class:
                     // android.app.SystemServiceRegistry.102
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SoundTriggerManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1763,7 +1664,6 @@ public final class SystemServiceRegistry {
                 ShortcutManager.class,
                 new CachedServiceFetcher<
                         ShortcutManager>() { // from class: android.app.SystemServiceRegistry.103
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public ShortcutManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1776,7 +1676,6 @@ public final class SystemServiceRegistry {
                 OverlayManager.class,
                 new CachedServiceFetcher<
                         OverlayManager>() { // from class: android.app.SystemServiceRegistry.104
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public OverlayManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1794,7 +1693,6 @@ public final class SystemServiceRegistry {
                 NetworkWatchlistManager.class,
                 new CachedServiceFetcher<NetworkWatchlistManager>() { // from class:
                     // android.app.SystemServiceRegistry.105
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public NetworkWatchlistManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1809,7 +1707,6 @@ public final class SystemServiceRegistry {
                 SystemHealthManager.class,
                 new CachedServiceFetcher<SystemHealthManager>() { // from class:
                     // android.app.SystemServiceRegistry.106
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SystemHealthManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1825,7 +1722,6 @@ public final class SystemServiceRegistry {
                 ContextHubManager.class,
                 new CachedServiceFetcher<
                         ContextHubManager>() { // from class: android.app.SystemServiceRegistry.107
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public ContextHubManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1843,7 +1739,6 @@ public final class SystemServiceRegistry {
                 IncidentManager.class,
                 new CachedServiceFetcher<
                         IncidentManager>() { // from class: android.app.SystemServiceRegistry.108
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public IncidentManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1855,7 +1750,6 @@ public final class SystemServiceRegistry {
                 BugreportManager.class,
                 new CachedServiceFetcher<
                         BugreportManager>() { // from class: android.app.SystemServiceRegistry.109
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public BugreportManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1869,7 +1763,6 @@ public final class SystemServiceRegistry {
                 AutofillManager.class,
                 new CachedServiceFetcher<
                         AutofillManager>() { // from class: android.app.SystemServiceRegistry.110
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AutofillManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1883,7 +1776,6 @@ public final class SystemServiceRegistry {
                 CredentialManager.class,
                 new CachedServiceFetcher<
                         CredentialManager>() { // from class: android.app.SystemServiceRegistry.111
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public CredentialManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1900,7 +1792,6 @@ public final class SystemServiceRegistry {
                 MusicRecognitionManager.class,
                 new CachedServiceFetcher<MusicRecognitionManager>() { // from class:
                     // android.app.SystemServiceRegistry.112
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public MusicRecognitionManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.MUSIC_RECOGNITION_SERVICE);
@@ -1913,7 +1804,6 @@ public final class SystemServiceRegistry {
                 ContentCaptureManager.class,
                 new CachedServiceFetcher<ContentCaptureManager>() { // from class:
                     // android.app.SystemServiceRegistry.113
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public ContentCaptureManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1941,7 +1831,6 @@ public final class SystemServiceRegistry {
                 TranslationManager.class,
                 new CachedServiceFetcher<
                         TranslationManager>() { // from class: android.app.SystemServiceRegistry.114
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public TranslationManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1958,7 +1847,6 @@ public final class SystemServiceRegistry {
                 UiTranslationManager.class,
                 new CachedServiceFetcher<UiTranslationManager>() { // from class:
                     // android.app.SystemServiceRegistry.115
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public UiTranslationManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1975,7 +1863,6 @@ public final class SystemServiceRegistry {
                 SearchUiManager.class,
                 new CachedServiceFetcher<
                         SearchUiManager>() { // from class: android.app.SystemServiceRegistry.116
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SearchUiManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -1991,7 +1878,6 @@ public final class SystemServiceRegistry {
                 SmartspaceManager.class,
                 new CachedServiceFetcher<
                         SmartspaceManager>() { // from class: android.app.SystemServiceRegistry.117
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SmartspaceManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2007,7 +1893,6 @@ public final class SystemServiceRegistry {
                 ContextualSearchManager.class,
                 new CachedServiceFetcher<ContextualSearchManager>() { // from class:
                     // android.app.SystemServiceRegistry.118
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public ContextualSearchManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2023,7 +1908,6 @@ public final class SystemServiceRegistry {
                 AppPredictionManager.class,
                 new CachedServiceFetcher<AppPredictionManager>() { // from class:
                     // android.app.SystemServiceRegistry.119
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AppPredictionManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2039,7 +1923,6 @@ public final class SystemServiceRegistry {
                 ContentSuggestionsManager.class,
                 new CachedServiceFetcher<ContentSuggestionsManager>() { // from class:
                     // android.app.SystemServiceRegistry.120
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public ContentSuggestionsManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.CONTENT_SUGGESTIONS_SERVICE);
@@ -2053,7 +1936,6 @@ public final class SystemServiceRegistry {
                 WallpaperEffectsGenerationManager.class,
                 new CachedServiceFetcher<WallpaperEffectsGenerationManager>() { // from class:
                     // android.app.SystemServiceRegistry.121
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public WallpaperEffectsGenerationManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2072,7 +1954,6 @@ public final class SystemServiceRegistry {
                 VrManager.class,
                 new CachedServiceFetcher<
                         VrManager>() { // from class: android.app.SystemServiceRegistry.122
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public VrManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2085,7 +1966,6 @@ public final class SystemServiceRegistry {
                 CrossProfileApps.class,
                 new CachedServiceFetcher<
                         CrossProfileApps>() { // from class: android.app.SystemServiceRegistry.123
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public CrossProfileApps createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2101,7 +1981,6 @@ public final class SystemServiceRegistry {
                 SliceManager.class,
                 new CachedServiceFetcher<
                         SliceManager>() { // from class: android.app.SystemServiceRegistry.124
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SliceManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2116,7 +1995,6 @@ public final class SystemServiceRegistry {
                     SemContinuityManager.class,
                     new CachedServiceFetcher<SemContinuityManager>() { // from class:
                         // android.app.SystemServiceRegistry.125
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                         public SemContinuityManager createService(ContextImpl ctx)
                                 throws ServiceManager.ServiceNotFoundException {
@@ -2140,7 +2018,6 @@ public final class SystemServiceRegistry {
                     SemContextEngineManager.class,
                     new CachedServiceFetcher<SemContextEngineManager>() { // from class:
                         // android.app.SystemServiceRegistry.126
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                         public SemContextEngineManager createService(ContextImpl ctx)
                                 throws ServiceManager.ServiceNotFoundException {
@@ -2162,7 +2039,6 @@ public final class SystemServiceRegistry {
                         SemHwrsManager.class,
                         new CachedServiceFetcher<SemHwrsManager>() { // from class:
                             // android.app.SystemServiceRegistry.127
-                            /* JADX WARN: Can't rename method to resolve collision */
                             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                             public SemHwrsManager createService(ContextImpl ctx)
                                     throws ServiceManager.ServiceNotFoundException {
@@ -2182,7 +2058,6 @@ public final class SystemServiceRegistry {
                 SemMotionRecognitionManager.class,
                 new CachedServiceFetcher<SemMotionRecognitionManager>() { // from class:
                     // android.app.SystemServiceRegistry.128
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemMotionRecognitionManager createService(ContextImpl ctx) {
                         return new SemMotionRecognitionManager(
@@ -2194,7 +2069,6 @@ public final class SystemServiceRegistry {
                 SContextManager.class,
                 new CachedServiceFetcher<
                         SContextManager>() { // from class: android.app.SystemServiceRegistry.129
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SContextManager createService(ContextImpl ctx) {
                         return new SContextManager(ctx, ctx.mMainThread.getHandler().getLooper());
@@ -2209,7 +2083,6 @@ public final class SystemServiceRegistry {
                     SemFmPlayer.class,
                     new CachedServiceFetcher<
                             SemFmPlayer>() { // from class: android.app.SystemServiceRegistry.130
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                         public SemFmPlayer createService(ContextImpl ctx) {
                             return new SemFmPlayer(ctx);
@@ -2221,7 +2094,6 @@ public final class SystemServiceRegistry {
                 SemMultiControlManager.class,
                 new CachedServiceFetcher<SemMultiControlManager>() { // from class:
                     // android.app.SystemServiceRegistry.131
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemMultiControlManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.SEM_MULTI_CONTROL_SERVICE);
@@ -2240,7 +2112,6 @@ public final class SystemServiceRegistry {
                 SemRemoteAppModeManager.class,
                 new CachedServiceFetcher<SemRemoteAppModeManager>() { // from class:
                     // android.app.SystemServiceRegistry.132
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemRemoteAppModeManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.SEM_REMOTE_APP_MODE_SERVICE);
@@ -2260,7 +2131,6 @@ public final class SystemServiceRegistry {
                     DynamicFeatureManager.class,
                     new CachedServiceFetcher<DynamicFeatureManager>() { // from class:
                         // android.app.SystemServiceRegistry.133
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                         public DynamicFeatureManager createService(ContextImpl ctx) {
                             IBinder b = ServiceManager.getService(SemDynamicFeature.SERVICE_NAME);
@@ -2281,7 +2151,6 @@ public final class SystemServiceRegistry {
                 TimeDetector.class,
                 new CachedServiceFetcher<
                         TimeDetector>() { // from class: android.app.SystemServiceRegistry.134
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public TimeDetector createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2293,7 +2162,6 @@ public final class SystemServiceRegistry {
                 TimeZoneDetector.class,
                 new CachedServiceFetcher<
                         TimeZoneDetector>() { // from class: android.app.SystemServiceRegistry.135
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public TimeZoneDetector createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2305,7 +2173,6 @@ public final class SystemServiceRegistry {
                 TimeManager.class,
                 new CachedServiceFetcher<
                         TimeManager>() { // from class: android.app.SystemServiceRegistry.136
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public TimeManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2317,7 +2184,6 @@ public final class SystemServiceRegistry {
                 PermissionManager.class,
                 new CachedServiceFetcher<
                         PermissionManager>() { // from class: android.app.SystemServiceRegistry.137
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public PermissionManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2329,7 +2195,6 @@ public final class SystemServiceRegistry {
                 LegacyPermissionManager.class,
                 new CachedServiceFetcher<LegacyPermissionManager>() { // from class:
                     // android.app.SystemServiceRegistry.138
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public LegacyPermissionManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2341,7 +2206,6 @@ public final class SystemServiceRegistry {
                 PermissionControllerManager.class,
                 new CachedServiceFetcher<PermissionControllerManager>() { // from class:
                     // android.app.SystemServiceRegistry.139
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public PermissionControllerManager createService(ContextImpl ctx) {
                         return new PermissionControllerManager(
@@ -2353,7 +2217,6 @@ public final class SystemServiceRegistry {
                 PermissionCheckerManager.class,
                 new CachedServiceFetcher<PermissionCheckerManager>() { // from class:
                     // android.app.SystemServiceRegistry.140
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public PermissionCheckerManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2365,7 +2228,6 @@ public final class SystemServiceRegistry {
                 PermissionEnforcer.class,
                 new CachedServiceFetcher<
                         PermissionEnforcer>() { // from class: android.app.SystemServiceRegistry.141
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public PermissionEnforcer createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2377,7 +2239,6 @@ public final class SystemServiceRegistry {
                 DynamicSystemManager.class,
                 new CachedServiceFetcher<DynamicSystemManager>() { // from class:
                     // android.app.SystemServiceRegistry.142
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public DynamicSystemManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2391,7 +2252,6 @@ public final class SystemServiceRegistry {
                 BatteryStatsManager.class,
                 new CachedServiceFetcher<BatteryStatsManager>() { // from class:
                     // android.app.SystemServiceRegistry.143
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public BatteryStatsManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2404,7 +2264,6 @@ public final class SystemServiceRegistry {
                 DataLoaderManager.class,
                 new CachedServiceFetcher<
                         DataLoaderManager>() { // from class: android.app.SystemServiceRegistry.144
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public DataLoaderManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2419,7 +2278,6 @@ public final class SystemServiceRegistry {
                 LightsManager.class,
                 new CachedServiceFetcher<
                         LightsManager>() { // from class: android.app.SystemServiceRegistry.145
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public LightsManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2431,7 +2289,6 @@ public final class SystemServiceRegistry {
                 LocaleManager.class,
                 new CachedServiceFetcher<
                         LocaleManager>() { // from class: android.app.SystemServiceRegistry.146
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public LocaleManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2446,7 +2303,6 @@ public final class SystemServiceRegistry {
                 IncrementalManager.class,
                 new CachedServiceFetcher<
                         IncrementalManager>() { // from class: android.app.SystemServiceRegistry.147
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public IncrementalManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.INCREMENTAL_SERVICE);
@@ -2461,7 +2317,6 @@ public final class SystemServiceRegistry {
                 FileIntegrityManager.class,
                 new CachedServiceFetcher<FileIntegrityManager>() { // from class:
                     // android.app.SystemServiceRegistry.148
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public FileIntegrityManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2476,7 +2331,6 @@ public final class SystemServiceRegistry {
                 AttestationVerificationManager.class,
                 new CachedServiceFetcher<AttestationVerificationManager>() { // from class:
                     // android.app.SystemServiceRegistry.149
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AttestationVerificationManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2493,7 +2347,6 @@ public final class SystemServiceRegistry {
                 AppIntegrityManager.class,
                 new CachedServiceFetcher<AppIntegrityManager>() { // from class:
                     // android.app.SystemServiceRegistry.150
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AppIntegrityManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2506,7 +2359,6 @@ public final class SystemServiceRegistry {
                 AppHibernationManager.class,
                 new CachedServiceFetcher<AppHibernationManager>() { // from class:
                     // android.app.SystemServiceRegistry.151
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AppHibernationManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.APP_HIBERNATION_SERVICE);
@@ -2521,7 +2373,6 @@ public final class SystemServiceRegistry {
                 DreamManager.class,
                 new CachedServiceFetcher<
                         DreamManager>() { // from class: android.app.SystemServiceRegistry.152
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public DreamManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2533,7 +2384,6 @@ public final class SystemServiceRegistry {
                 DeviceStateManager.class,
                 new CachedServiceFetcher<
                         DeviceStateManager>() { // from class: android.app.SystemServiceRegistry.153
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public DeviceStateManager createService(ContextImpl ctx) {
                         return new DeviceStateManager();
@@ -2544,7 +2394,6 @@ public final class SystemServiceRegistry {
                 CocktailBarManager.class,
                 new CachedServiceFetcher<
                         CocktailBarManager>() { // from class: android.app.SystemServiceRegistry.154
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public CocktailBarManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.COCKTAIL_BAR_SERVICE);
@@ -2556,7 +2405,6 @@ public final class SystemServiceRegistry {
                 MediaMetricsManager.class,
                 new CachedServiceFetcher<MediaMetricsManager>() { // from class:
                     // android.app.SystemServiceRegistry.155
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public MediaMetricsManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2572,7 +2420,6 @@ public final class SystemServiceRegistry {
                 GameManager.class,
                 new CachedServiceFetcher<
                         GameManager>() { // from class: android.app.SystemServiceRegistry.156
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public GameManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2584,7 +2431,6 @@ public final class SystemServiceRegistry {
                 DomainVerificationManager.class,
                 new CachedServiceFetcher<DomainVerificationManager>() { // from class:
                     // android.app.SystemServiceRegistry.157
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public DomainVerificationManager createService(ContextImpl context)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2601,7 +2447,6 @@ public final class SystemServiceRegistry {
                 DisplayHashManager.class,
                 new CachedServiceFetcher<
                         DisplayHashManager>() { // from class: android.app.SystemServiceRegistry.158
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public DisplayHashManager createService(ContextImpl ctx) {
                         return new DisplayHashManager();
@@ -2621,7 +2466,6 @@ public final class SystemServiceRegistry {
                     ExynosDisplaySolutionManager.class,
                     new CachedServiceFetcher<ExynosDisplaySolutionManager>() { // from class:
                         // android.app.SystemServiceRegistry.159
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                         public ExynosDisplaySolutionManager createService(ContextImpl ctx) {
                             IBinder b =
@@ -2644,7 +2488,6 @@ public final class SystemServiceRegistry {
                 AmbientContextManager.class,
                 new CachedServiceFetcher<AmbientContextManager>() { // from class:
                     // android.app.SystemServiceRegistry.160
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public AmbientContextManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2660,7 +2503,6 @@ public final class SystemServiceRegistry {
                 WearableSensingManager.class,
                 new CachedServiceFetcher<WearableSensingManager>() { // from class:
                     // android.app.SystemServiceRegistry.161
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public WearableSensingManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2676,7 +2518,6 @@ public final class SystemServiceRegistry {
                 OnDeviceIntelligenceManager.class,
                 new CachedServiceFetcher<OnDeviceIntelligenceManager>() { // from class:
                     // android.app.SystemServiceRegistry.162
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public OnDeviceIntelligenceManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2693,7 +2534,6 @@ public final class SystemServiceRegistry {
                 GrammaticalInflectionManager.class,
                 new CachedServiceFetcher<GrammaticalInflectionManager>() { // from class:
                     // android.app.SystemServiceRegistry.163
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public GrammaticalInflectionManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2709,7 +2549,6 @@ public final class SystemServiceRegistry {
                 SemMdnieManager.class,
                 new CachedServiceFetcher<
                         SemMdnieManager>() { // from class: android.app.SystemServiceRegistry.164
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemMdnieManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.SEM_MDNIE_SERVICE);
@@ -2722,7 +2561,6 @@ public final class SystemServiceRegistry {
                 SemDisplaySolutionManager.class,
                 new CachedServiceFetcher<SemDisplaySolutionManager>() { // from class:
                     // android.app.SystemServiceRegistry.165
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemDisplaySolutionManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.SEM_DISPLAY_SOLUTION_SERVICE);
@@ -2736,7 +2574,6 @@ public final class SystemServiceRegistry {
                 SemPersonaManager.class,
                 new CachedServiceFetcher<
                         SemPersonaManager>() { // from class: android.app.SystemServiceRegistry.166
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemPersonaManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService("persona");
@@ -2749,7 +2586,6 @@ public final class SystemServiceRegistry {
                 SemRemoteContentManager.class,
                 new CachedServiceFetcher<SemRemoteContentManager>() { // from class:
                     // android.app.SystemServiceRegistry.167
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemRemoteContentManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService("rcp");
@@ -2762,7 +2598,6 @@ public final class SystemServiceRegistry {
                 IsrbManager.class,
                 new CachedServiceFetcher<
                         IsrbManager>() { // from class: android.app.SystemServiceRegistry.168
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public IsrbManager createService(ContextImpl ctx) {
                         return new IsrbManager(ctx);
@@ -2773,7 +2608,6 @@ public final class SystemServiceRegistry {
                 SharedConnectivityManager.class,
                 new CachedServiceFetcher<SharedConnectivityManager>() { // from class:
                     // android.app.SystemServiceRegistry.169
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SharedConnectivityManager createService(ContextImpl ctx) {
                         return SharedConnectivityManager.create(ctx);
@@ -2784,7 +2618,6 @@ public final class SystemServiceRegistry {
                 KMTDManager.class,
                 new CachedServiceFetcher<
                         KMTDManager>() { // from class: android.app.SystemServiceRegistry.170
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public KMTDManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(KMTDManager.SERVICE_LABEL);
@@ -2801,7 +2634,6 @@ public final class SystemServiceRegistry {
                 E2eeContactKeysManager.class,
                 new CachedServiceFetcher<E2eeContactKeysManager>() { // from class:
                     // android.app.SystemServiceRegistry.171
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public E2eeContactKeysManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2819,7 +2651,6 @@ public final class SystemServiceRegistry {
                     BackgroundInstallControlManager.class,
                     new CachedServiceFetcher<BackgroundInstallControlManager>() { // from class:
                         // android.app.SystemServiceRegistry.172
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                         public BackgroundInstallControlManager createService(ContextImpl ctx) {
                             return new BackgroundInstallControlManager(ctx);
@@ -2831,7 +2662,6 @@ public final class SystemServiceRegistry {
                 SemMdContextManager.class,
                 new CachedServiceFetcher<SemMdContextManager>() { // from class:
                     // android.app.SystemServiceRegistry.173
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemMdContextManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2851,7 +2681,6 @@ public final class SystemServiceRegistry {
                 SemInputDeviceManager.class,
                 new CachedServiceFetcher<SemInputDeviceManager>() { // from class:
                     // android.app.SystemServiceRegistry.174
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemInputDeviceManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.SEM_INPUT_DEVICE_SERVICE);
@@ -2864,7 +2693,6 @@ public final class SystemServiceRegistry {
                 SemWifiManager.class,
                 new CachedServiceFetcher<
                         SemWifiManager>() { // from class: android.app.SystemServiceRegistry.175
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemWifiManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2882,7 +2710,6 @@ public final class SystemServiceRegistry {
                 SemWifiP2pManager.class,
                 new CachedServiceFetcher<
                         SemWifiP2pManager>() { // from class: android.app.SystemServiceRegistry.176
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemWifiP2pManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2898,7 +2725,6 @@ public final class SystemServiceRegistry {
                 SemWifiAwareManager.class,
                 new CachedServiceFetcher<SemWifiAwareManager>() { // from class:
                     // android.app.SystemServiceRegistry.177
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemWifiAwareManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2914,7 +2740,6 @@ public final class SystemServiceRegistry {
                 StandardPlusManager.class,
                 new CachedServiceFetcher<StandardPlusManager>() { // from class:
                     // android.app.SystemServiceRegistry.178
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public StandardPlusManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -2937,7 +2762,6 @@ public final class SystemServiceRegistry {
                     SemDisplayQualityManager.class,
                     new CachedServiceFetcher<SemDisplayQualityManager>() { // from class:
                         // android.app.SystemServiceRegistry.179
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                         public SemDisplayQualityManager createService(ContextImpl ctx) {
                             IBinder b =
@@ -2953,7 +2777,6 @@ public final class SystemServiceRegistry {
                 SemVideoTranscodingService.class,
                 new CachedServiceFetcher<SemVideoTranscodingService>() { // from class:
                     // android.app.SystemServiceRegistry.180
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemVideoTranscodingService createService(ContextImpl ctx) {
                         return new SemVideoTranscodingService();
@@ -2964,7 +2787,6 @@ public final class SystemServiceRegistry {
                 SemDesktopModeManager.class,
                 new CachedServiceFetcher<SemDesktopModeManager>() { // from class:
                     // android.app.SystemServiceRegistry.181
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemDesktopModeManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.SEM_DESKTOP_MODE_SERVICE);
@@ -2984,7 +2806,6 @@ public final class SystemServiceRegistry {
                     SemUnionManager.class,
                     new CachedServiceFetcher<SemUnionManager>() { // from class:
                         // android.app.SystemServiceRegistry.182
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                         public SemUnionManager createService(ContextImpl ctx) {
                             IBinder b = ServiceManager.getService(Context.SEP_UNION_SERVICE);
@@ -3007,7 +2828,6 @@ public final class SystemServiceRegistry {
                 ExtendedEthernetManager.class,
                 new CachedServiceFetcher<ExtendedEthernetManager>() { // from class:
                     // android.app.SystemServiceRegistry.184
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public ExtendedEthernetManager createService(ContextImpl ctx)
                             throws ServiceManager.ServiceNotFoundException {
@@ -3023,7 +2843,6 @@ public final class SystemServiceRegistry {
                 SpenGestureManager.class,
                 new CachedServiceFetcher<
                         SpenGestureManager>() { // from class: android.app.SystemServiceRegistry.185
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SpenGestureManager createService(ContextImpl ctx) {
                         return new SpenGestureManager(ctx);
@@ -3034,7 +2853,6 @@ public final class SystemServiceRegistry {
                 SemSsdidManager.class,
                 new CachedServiceFetcher<
                         SemSsdidManager>() { // from class: android.app.SystemServiceRegistry.186
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                     public SemSsdidManager createService(ContextImpl ctx) {
                         IBinder b = ServiceManager.getService(Context.SEM_SSDID_SERVICE);
@@ -3095,7 +2913,6 @@ public final class SystemServiceRegistry {
     class AnonymousClass22 extends CachedServiceFetcher<TetheringManager> {
         AnonymousClass22() {}
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
         public TetheringManager createService(ContextImpl ctx) {
             return new TetheringManager(
@@ -3145,7 +2962,6 @@ public final class SystemServiceRegistry {
         return manager.hasSystemFeature(featureName);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String getVcnFeatureDependency() {
         if (!Compatibility.isChangeEnabled(ENABLE_CHECKING_TELEPHONY_FEATURES_FOR_VCN)) {
             return null;
@@ -3159,7 +2975,6 @@ public final class SystemServiceRegistry {
         return PackageManager.FEATURE_TELEPHONY_SUBSCRIPTION;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static Object getSystemService(ContextImpl ctx, String name) {
         char c;
         ServiceFetcher<?> fetcher = getSystemServiceFetcher(name);
@@ -3458,9 +3273,6 @@ public final class SystemServiceRegistry {
 
            r3 = r5;
         */
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [java.lang.Object, java.lang.Object[]] */
-        /* JADX WARN: Type inference failed for: r5v2 */
         @Override // android.app.SystemServiceRegistry.ServiceFetcher
         /*
             Code decompiled incorrectly, please refer to instructions dump.

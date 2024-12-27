@@ -29,7 +29,6 @@ public final class AllVolumeController extends VolumeType {
 
     public AllVolumeController(final Context context) {
         this.audioManagerWrapper$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.bixby2.controller.volume.AllVolumeController$audioManagerWrapper$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -40,7 +39,6 @@ public final class AllVolumeController extends VolumeType {
             }
         });
         this.preferences$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.bixby2.controller.volume.AllVolumeController$preferences$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -62,12 +60,10 @@ public final class AllVolumeController extends VolumeType {
         return (SharedPreferences.Editor) this.editor$delegate.getValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final SharedPreferences getPreferences() {
         return (SharedPreferences) this.preferences$delegate.getValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences("VolumeController_preferences", 0);
     }

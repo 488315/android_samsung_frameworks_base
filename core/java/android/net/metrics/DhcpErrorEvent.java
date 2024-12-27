@@ -15,13 +15,11 @@ public final class DhcpErrorEvent implements IpConnectivityLog.Event {
     public static final Parcelable.Creator<DhcpErrorEvent> CREATOR =
             new Parcelable.Creator<
                     DhcpErrorEvent>() { // from class: android.net.metrics.DhcpErrorEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DhcpErrorEvent createFromParcel(Parcel in) {
                     return new DhcpErrorEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DhcpErrorEvent[] newArray(int size) {
                     return new DhcpErrorEvent[size];

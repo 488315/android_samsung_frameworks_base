@@ -164,19 +164,16 @@ public class ThresholdSensorImpl implements ThresholdSensor {
         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$alertListenersInternal$0(boolean z, long j, ThresholdSensor.Listener listener) {
         listener.onThresholdCrossed(new ThresholdSensorEvent(z, j));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void logDebug(String str) {
         if (DEBUG) {
             ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder(), this.mTag != null ? ComponentActivity$1$$ExternalSyntheticOutline0.m(new StringBuilder("["), this.mTag, "] ") : "", str, TAG);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onSensorEvent(boolean z, boolean z2, long j) {
         this.mExecution.assertIsMainThread();
         if (this.mRegistered) {

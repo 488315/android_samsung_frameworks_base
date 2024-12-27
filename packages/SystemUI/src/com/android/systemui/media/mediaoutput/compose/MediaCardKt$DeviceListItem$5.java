@@ -25,7 +25,6 @@ final class MediaCardKt$DeviceListItem$5 extends SuspendLambda implements Functi
     final /* synthetic */ AudioPathInteraction $viewModel;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaCardKt$DeviceListItem$5(SnackbarHostState snackbarHostState, String str, String str2, String str3, String str4, AudioPathInteraction audioPathInteraction, AudioDevice audioDevice, MutableState mutableState, Continuation continuation) {
         super(2, continuation);
         this.$snackbarHostState = snackbarHostState;

@@ -273,10 +273,6 @@ public final class KeyguardSecPatternViewController extends KeyguardPatternViewC
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.keyguard.KeyguardSecPatternViewController$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.keyguard.KeyguardSecPatternViewController$1] */
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.keyguard.KeyguardSecPatternViewController$4] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.keyguard.KeyguardSecPatternViewController$5] */
     public KeyguardSecPatternViewController(KeyguardSecPatternView keyguardSecPatternView, ConfigurationController configurationController, VibrationUtil vibrationUtil, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, LatencyTracker latencyTracker, FalsingCollector falsingCollector, EmergencyButtonController emergencyButtonController, KeyguardMessageAreaController.Factory factory, DevicePostureController devicePostureController, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor) {
         super(keyguardSecPatternView, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, latencyTracker, falsingCollector, emergencyButtonController, factory, devicePostureController, featureFlags, selectedUserInteractor);
         new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);

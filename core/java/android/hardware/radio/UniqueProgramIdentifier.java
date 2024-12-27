@@ -14,13 +14,11 @@ public final class UniqueProgramIdentifier implements Parcelable {
     public static final Parcelable.Creator<UniqueProgramIdentifier> CREATOR =
             new Parcelable.Creator<UniqueProgramIdentifier>() { // from class:
                 // android.hardware.radio.UniqueProgramIdentifier.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UniqueProgramIdentifier createFromParcel(Parcel in) {
                     return new UniqueProgramIdentifier(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UniqueProgramIdentifier[] newArray(int size) {
                     return new UniqueProgramIdentifier[size];
@@ -33,8 +31,6 @@ public final class UniqueProgramIdentifier implements Parcelable {
         return type == 14 || type == 5;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0060  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

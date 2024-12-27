@@ -9,13 +9,11 @@ public class SemContextActivityLocationLogging extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextActivityLocationLogging>() { // from class:
                                                            // com.samsung.android.hardware.context.SemContextActivityLocationLogging.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextActivityLocationLogging createFromParcel(Parcel in) {
                     return new SemContextActivityLocationLogging(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextActivityLocationLogging[] newArray(int size) {
                     return new SemContextActivityLocationLogging[size];

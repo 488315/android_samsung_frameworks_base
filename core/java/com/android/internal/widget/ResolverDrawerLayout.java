@@ -319,7 +319,6 @@ public class ResolverDrawerLayout extends ViewGroup {
         return vh == null || vh.itemView.getTop() < 0;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.view.View
     public boolean onTouchEvent(MotionEvent ev) {
         int action = ev.getActionMasked();
@@ -591,7 +590,6 @@ public class ResolverDrawerLayout extends ViewGroup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void smoothScrollTo(int yOffset, float velocity) {
         int duration;
         abortAnimation();
@@ -653,7 +651,6 @@ public class ResolverDrawerLayout extends ViewGroup {
         return listChild != null && isDescendantClipped(listChild);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isDescendantClipped(View child) {
         View v;
         this.mTempRect.set(0, 0, child.getWidth(), child.getHeight());
@@ -788,7 +785,6 @@ public class ResolverDrawerLayout extends ViewGroup {
         return true;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private boolean performAccessibilityActionCommon(int action) {
         switch (action) {
             case 4096:
@@ -1093,7 +1089,6 @@ public class ResolverDrawerLayout extends ViewGroup {
         return new LayoutParams(-1, -2);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public Parcelable onSaveInstanceState() {
         SavedState ss = new SavedState(super.onSaveInstanceState());
@@ -1102,7 +1097,6 @@ public class ResolverDrawerLayout extends ViewGroup {
         return ss;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public void onRestoreInstanceState(Parcelable state) {
         SavedState ss = (SavedState) state;
@@ -1167,13 +1161,11 @@ public class ResolverDrawerLayout extends ViewGroup {
                 new Parcelable.Creator<
                         SavedState>() { // from class:
                                         // com.android.internal.widget.ResolverDrawerLayout.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];

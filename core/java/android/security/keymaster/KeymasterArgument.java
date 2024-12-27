@@ -9,7 +9,6 @@ abstract class KeymasterArgument implements Parcelable {
             new Parcelable.Creator<
                     KeymasterArgument>() { // from class:
                                            // android.security.keymaster.KeymasterArgument.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeymasterArgument createFromParcel(Parcel in) {
                     int pos = in.dataPosition();
@@ -35,7 +34,6 @@ abstract class KeymasterArgument implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeymasterArgument[] newArray(int size) {
                     return new KeymasterArgument[size];

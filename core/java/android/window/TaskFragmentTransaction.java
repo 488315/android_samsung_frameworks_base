@@ -19,13 +19,11 @@ public final class TaskFragmentTransaction implements Parcelable {
             new Parcelable.Creator<
                     TaskFragmentTransaction>() { // from class:
                                                  // android.window.TaskFragmentTransaction.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TaskFragmentTransaction createFromParcel(Parcel in) {
                     return new TaskFragmentTransaction(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TaskFragmentTransaction[] newArray(int size) {
                     return new TaskFragmentTransaction[size];
@@ -102,13 +100,11 @@ public final class TaskFragmentTransaction implements Parcelable {
         public static final Parcelable.Creator<Change> CREATOR =
                 new Parcelable.Creator<
                         Change>() { // from class: android.window.TaskFragmentTransaction.Change.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Change createFromParcel(Parcel in) {
                         return new Change(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Change[] newArray(int size) {
                         return new Change[size];

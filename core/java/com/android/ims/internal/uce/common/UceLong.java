@@ -7,13 +7,11 @@ public class UceLong implements Parcelable {
     public static final Parcelable.Creator<UceLong> CREATOR =
             new Parcelable.Creator<
                     UceLong>() { // from class: com.android.ims.internal.uce.common.UceLong.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UceLong createFromParcel(Parcel source) {
                     return new UceLong(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UceLong[] newArray(int size) {
                     return new UceLong[size];

@@ -33,14 +33,12 @@ public final class CellIdentityLte extends CellIdentity {
     public static final Parcelable.Creator<CellIdentityLte> CREATOR =
             new Parcelable.Creator<
                     CellIdentityLte>() { // from class: android.telephony.CellIdentityLte.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentityLte createFromParcel(Parcel in) {
                     in.readInt();
                     return CellIdentityLte.createFromParcelBody(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentityLte[] newArray(int size) {
                     return new CellIdentityLte[size];

@@ -417,9 +417,7 @@ public final class KioskModeService extends IKioskMode.Stub
     }
 
     enum PenDetachmentOption {
-        /* JADX INFO: Fake field, exist only in values array */
         EF0("NONE"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF1("ACTION_MEMO"),
         AIR_COMMAND("AIR_COMMAND");
 
@@ -448,7 +446,6 @@ public final class KioskModeService extends IKioskMode.Stub
         SUPPORT_EDGE_MUM = Build.VERSION.SEM_PLATFORM_INT >= 140500;
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.enterprise.kioskmode.KioskModeService$1] */
     public KioskModeService(Context context) {
         AnonymousClass2 anonymousClass2 = new AnonymousClass2(this, 0);
         this.mEDM = null;
@@ -1718,33 +1715,6 @@ public final class KioskModeService extends IKioskMode.Stub
         return putInt;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x016d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:108:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x0162 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x015a A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x0127  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0137 A[Catch: IOException -> 0x00d2, TRY_ENTER, TRY_LEAVE, TryCatch #17 {IOException -> 0x00d2, blocks: (B:13:0x00cd, B:73:0x0137, B:88:0x0155), top: B:4:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x012c A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x0145  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0155 A[Catch: IOException -> 0x00d2, TRY_ENTER, TRY_LEAVE, TryCatch #17 {IOException -> 0x00d2, blocks: (B:13:0x00cd, B:73:0x0137, B:88:0x0155), top: B:4:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x014a A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x015d  */
-    /* JADX WARN: Type inference failed for: r2v10, types: [java.io.File] */
-    /* JADX WARN: Type inference failed for: r2v11, types: [java.lang.Throwable] */
-    /* JADX WARN: Type inference failed for: r2v12 */
-    /* JADX WARN: Type inference failed for: r2v13 */
-    /* JADX WARN: Type inference failed for: r2v14, types: [java.io.File] */
-    /* JADX WARN: Type inference failed for: r2v15, types: [java.lang.Throwable] */
-    /* JADX WARN: Type inference failed for: r2v16 */
-    /* JADX WARN: Type inference failed for: r2v18 */
-    /* JADX WARN: Type inference failed for: r2v19 */
-    /* JADX WARN: Type inference failed for: r2v27 */
-    /* JADX WARN: Type inference failed for: r2v28 */
-    /* JADX WARN: Type inference failed for: r2v30 */
-    /* JADX WARN: Type inference failed for: r2v31 */
-    /* JADX WARN: Type inference failed for: r2v4 */
-    /* JADX WARN: Type inference failed for: r2v6 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2181,7 +2151,6 @@ public final class KioskModeService extends IKioskMode.Stub
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(10:(2:23|24)|(7:26|27|(1:40)(1:30)|31|32|33|34)|41|27|(0)|40|31|32|33|34) */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0050, code lost:
 
        r0 = move-exception;

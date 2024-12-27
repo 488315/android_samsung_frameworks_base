@@ -283,7 +283,6 @@ public abstract class AbstractMessageLite<
             return mergeDelimitedFrom(input, ExtensionRegistryLite.getEmptyRegistry());
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.framework.protobuf.MessageLite.Builder
         public BuilderType mergeFrom(MessageLite messageLite) {
             if (!getDefaultInstanceForType().getClass().isInstance(messageLite)) {

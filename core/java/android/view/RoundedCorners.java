@@ -30,7 +30,6 @@ public class RoundedCorners implements Parcelable {
     private static final Object CACHE_LOCK = new Object();
     public static final Parcelable.Creator<RoundedCorners> CREATOR =
             new Parcelable.Creator<RoundedCorners>() { // from class: android.view.RoundedCorners.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RoundedCorners createFromParcel(Parcel in) {
                     int variant = in.readInt();
@@ -42,7 +41,6 @@ public class RoundedCorners implements Parcelable {
                     return new RoundedCorners(roundedCorners);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RoundedCorners[] newArray(int size) {
                     return new RoundedCorners[size];

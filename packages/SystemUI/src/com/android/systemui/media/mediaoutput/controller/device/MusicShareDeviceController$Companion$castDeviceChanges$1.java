@@ -26,7 +26,6 @@ final class MusicShareDeviceController$Companion$castDeviceChanges$1 extends Sus
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MusicShareDeviceController$Companion$castDeviceChanges$1(AudioManager audioManager, Context context, Continuation continuation) {
         super(2, continuation);
         this.$this_castDeviceChanges = audioManager;
@@ -49,9 +48,6 @@ final class MusicShareDeviceController$Companion$castDeviceChanges$1 extends Sus
         return ((MusicShareDeviceController$Companion$castDeviceChanges$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.media.AudioDeviceCallback, com.android.systemui.media.mediaoutput.controller.device.MusicShareDeviceController$Companion$castDeviceChanges$1$callback$1] */
-    /* JADX WARN: Type inference failed for: r3v1, types: [android.content.BroadcastReceiver, com.android.systemui.media.mediaoutput.controller.device.MusicShareDeviceController$Companion$castDeviceChanges$1$receiver$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -124,7 +120,6 @@ final class MusicShareDeviceController$Companion$castDeviceChanges$1 extends Sus
             final AudioManager audioManager3 = this.$this_castDeviceChanges;
             final Context context2 = this.$context;
             Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.device.MusicShareDeviceController$Companion$castDeviceChanges$1.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

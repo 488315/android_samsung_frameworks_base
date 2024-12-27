@@ -10,13 +10,11 @@ public final class SelectGesture extends PreviewableHandwritingGesture implement
     public static final Parcelable.Creator<SelectGesture> CREATOR =
             new Parcelable.Creator<
                     SelectGesture>() { // from class: android.view.inputmethod.SelectGesture.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SelectGesture createFromParcel(Parcel source) {
                     return new SelectGesture(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SelectGesture[] newArray(int size) {
                     return new SelectGesture[size];

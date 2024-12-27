@@ -15,7 +15,6 @@ final class MuteQuickAffordanceConfig$getLastNonSilentRingerMode$2 extends Suspe
     int label;
     final /* synthetic */ MuteQuickAffordanceConfig this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MuteQuickAffordanceConfig$getLastNonSilentRingerMode$2(MuteQuickAffordanceConfig muteQuickAffordanceConfig, Continuation continuation) {
         super(2, continuation);
         this.this$0 = muteQuickAffordanceConfig;

@@ -303,7 +303,6 @@ public class KeyguardViewMediator implements CoreStartable, Dumpable, StatusBarS
             super(looper, callback, z);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
             byte b;
@@ -519,9 +518,6 @@ public class KeyguardViewMediator implements CoreStartable, Dumpable, StatusBarS
         
             if (r2.mWallpaperSupportsAmbientMode != false) goto L16;
          */
-        /* JADX WARN: Removed duplicated region for block: B:10:0x004e  */
-        /* JADX WARN: Removed duplicated region for block: B:16:0x0069  */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x007e  */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1104,7 +1100,6 @@ public class KeyguardViewMediator implements CoreStartable, Dumpable, StatusBarS
         keyguardViewMediator.scheduleNonStrongBiometricIdleTimeout$1();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:8:0x004d A[Catch: all -> 0x0043, TryCatch #0 {all -> 0x0043, blocks: (B:38:0x003b, B:6:0x0047, B:8:0x004d, B:10:0x005e, B:13:0x0064, B:16:0x0077, B:17:0x007a, B:19:0x0094, B:21:0x009a, B:23:0x00a8, B:25:0x00a4, B:27:0x00ab, B:28:0x00c6), top: B:37:0x003b }] */
     /* renamed from: -$$Nest$mhandleSetOccluded, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1218,10 +1213,6 @@ public class KeyguardViewMediator implements CoreStartable, Dumpable, StatusBarS
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardViewMediator.m1952$$Nest$mhandleSetOccluded(com.android.systemui.keyguard.KeyguardViewMediator, boolean, boolean, int):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0082 A[Catch: all -> 0x0048, TryCatch #0 {all -> 0x0048, blocks: (B:11:0x003a, B:13:0x003e, B:14:0x0045, B:18:0x004b, B:20:0x0074, B:25:0x0082, B:26:0x00a8, B:28:0x00c9, B:30:0x00d1, B:32:0x00d5, B:34:0x00e2, B:35:0x0113, B:41:0x00db, B:42:0x00df), top: B:10:0x003a }] */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00c9 A[Catch: all -> 0x0048, TryCatch #0 {all -> 0x0048, blocks: (B:11:0x003a, B:13:0x003e, B:14:0x0045, B:18:0x004b, B:20:0x0074, B:25:0x0082, B:26:0x00a8, B:28:0x00c9, B:30:0x00d1, B:32:0x00d5, B:34:0x00e2, B:35:0x0113, B:41:0x00db, B:42:0x00df), top: B:10:0x003a }] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00df A[Catch: all -> 0x0048, TryCatch #0 {all -> 0x0048, blocks: (B:11:0x003a, B:13:0x003e, B:14:0x0045, B:18:0x004b, B:20:0x0074, B:25:0x0082, B:26:0x00a8, B:28:0x00c9, B:30:0x00d1, B:32:0x00d5, B:34:0x00e2, B:35:0x0113, B:41:0x00db, B:42:0x00df), top: B:10:0x003a }] */
     /* renamed from: -$$Nest$mhandleShow, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1235,10 +1226,6 @@ public class KeyguardViewMediator implements CoreStartable, Dumpable, StatusBarS
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardViewMediator.m1953$$Nest$mhandleShow(com.android.systemui.keyguard.KeyguardViewMediator, android.os.Bundle):void");
     }
 
-    /* JADX WARN: Type inference failed for: r11v0, types: [com.android.systemui.keyguard.KeyguardViewMediator$6] */
-    /* JADX WARN: Type inference failed for: r11v1, types: [com.android.systemui.keyguard.KeyguardViewMediator$7] */
-    /* JADX WARN: Type inference failed for: r11v3, types: [com.android.systemui.keyguard.KeyguardViewMediator$11] */
-    /* JADX WARN: Type inference failed for: r11v4, types: [com.android.systemui.keyguard.KeyguardViewMediator$12] */
     public KeyguardViewMediator(KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl, Context context, UiEventLogger uiEventLogger, SessionTracker sessionTracker, UserTracker userTracker, FalsingCollector falsingCollector, LockPatternUtils lockPatternUtils, BroadcastDispatcher broadcastDispatcher, Lazy lazy, DismissCallbackRegistry dismissCallbackRegistry, KeyguardUpdateMonitor keyguardUpdateMonitor, DumpManager dumpManager, Executor executor, PowerManager powerManager, TrustManager trustManager, UserSwitcherController userSwitcherController, DeviceConfigProxy deviceConfigProxy, NavigationModeController navigationModeController, KeyguardDisplayManager keyguardDisplayManager, DozeParameters dozeParameters, SysuiStatusBarStateController sysuiStatusBarStateController, KeyguardStateController keyguardStateController, Lazy lazy2, ScreenOffAnimationController screenOffAnimationController, Lazy lazy3, ScreenOnCoordinator screenOnCoordinator, KeyguardTransitions keyguardTransitions, InteractionJankMonitor interactionJankMonitor, DreamOverlayStateController dreamOverlayStateController, JavaAdapter javaAdapter, WallpaperRepository wallpaperRepository, Lazy lazy4, Lazy lazy5, Lazy lazy6, Lazy lazy7, IActivityTaskManager iActivityTaskManager, FeatureFlags featureFlags, SecureSettings secureSettings, SystemSettings systemSettings, SystemClock systemClock, CoroutineDispatcher coroutineDispatcher, Lazy lazy8, Lazy lazy9, SystemPropertiesHelper systemPropertiesHelper, Lazy lazy10, SelectedUserInteractor selectedUserInteractor, KeyguardInteractor keyguardInteractor, WindowManagerOcclusionManager windowManagerOcclusionManager) {
         final ArrayList arrayList = new ArrayList();
         this.mKeyguardStateCallbacks = arrayList;
@@ -5336,8 +5323,6 @@ public class KeyguardViewMediator implements CoreStartable, Dumpable, StatusBarS
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0139 A[Catch: RemoteException -> 0x015a, TryCatch #0 {RemoteException -> 0x015a, blocks: (B:51:0x0133, B:53:0x0139, B:56:0x0152, B:57:0x015c), top: B:50:0x0133 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5759,8 +5744,6 @@ public class KeyguardViewMediator implements CoreStartable, Dumpable, StatusBarS
         return this.mViewMediatorCallback;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0099 A[Catch: all -> 0x0054, TryCatch #0 {all -> 0x0054, blocks: (B:12:0x002f, B:14:0x0049, B:15:0x0052, B:18:0x0057, B:20:0x005c, B:22:0x0064, B:25:0x006f, B:27:0x0072, B:29:0x0076, B:31:0x007a, B:33:0x0085, B:38:0x0095, B:40:0x0099, B:41:0x00a0, B:42:0x00d5, B:44:0x00d9, B:46:0x00f0, B:49:0x00df, B:51:0x00e3, B:52:0x0091, B:54:0x00a8), top: B:11:0x002f }] */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00d9 A[Catch: all -> 0x0054, TryCatch #0 {all -> 0x0054, blocks: (B:12:0x002f, B:14:0x0049, B:15:0x0052, B:18:0x0057, B:20:0x005c, B:22:0x0064, B:25:0x006f, B:27:0x0072, B:29:0x0076, B:31:0x007a, B:33:0x0085, B:38:0x0095, B:40:0x0099, B:41:0x00a0, B:42:0x00d5, B:44:0x00d9, B:46:0x00f0, B:49:0x00df, B:51:0x00e3, B:52:0x0091, B:54:0x00a8), top: B:11:0x002f }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6037,8 +6020,6 @@ public class KeyguardViewMediator implements CoreStartable, Dumpable, StatusBarS
         this.mUpdateMonitor.mHandler.sendEmptyMessage(CustomDeviceManager.DESTINATION_ADDRESS);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v0, types: [com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda8] */
     public void onStartedGoingToSleep(int i) {
         boolean z;
         int i2;
@@ -6660,7 +6641,6 @@ public class KeyguardViewMediator implements CoreStartable, Dumpable, StatusBarS
         startKeyguardExitAnimation$1(0, j, j2, null, null, null, null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void startKeyguardExitAnimation$1(int i, long j, long j2, RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, RemoteAnimationTarget[] remoteAnimationTargetArr3, IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback) {
         Trace.beginSection("KeyguardViewMediator#startKeyguardExitAnimation");
         Message obtainMessage = this.mHandler.obtainMessage(VolteConstants.ErrorCode.CLIENT_ERROR_NOT_ALLOWED_URI, new StartKeyguardExitAnimParams(i, j, j2, remoteAnimationTargetArr, remoteAnimationTargetArr2, remoteAnimationTargetArr3, iRemoteAnimationFinishedCallback, 0));

@@ -519,7 +519,6 @@ public interface IGnssCallback extends IInterface {
         public static final Parcelable.Creator<GnssSvInfo> CREATOR =
                 new Parcelable.Creator<GnssSvInfo>() { // from class:
                     // android.hardware.gnss.IGnssCallback.GnssSvInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GnssSvInfo createFromParcel(Parcel _aidl_source) {
                         GnssSvInfo _aidl_out = new GnssSvInfo();
@@ -527,7 +526,6 @@ public interface IGnssCallback extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GnssSvInfo[] newArray(int _aidl_size) {
                         return new GnssSvInfo[_aidl_size];
@@ -659,7 +657,6 @@ public interface IGnssCallback extends IInterface {
         public static final Parcelable.Creator<GnssSystemInfo> CREATOR =
                 new Parcelable.Creator<GnssSystemInfo>() { // from class:
                     // android.hardware.gnss.IGnssCallback.GnssSystemInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GnssSystemInfo createFromParcel(Parcel _aidl_source) {
                         GnssSystemInfo _aidl_out = new GnssSystemInfo();
@@ -667,7 +664,6 @@ public interface IGnssCallback extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GnssSystemInfo[] newArray(int _aidl_size) {
                         return new GnssSystemInfo[_aidl_size];

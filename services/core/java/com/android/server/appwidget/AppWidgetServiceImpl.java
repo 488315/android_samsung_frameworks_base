@@ -190,8 +190,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
     public UsageStatsManagerInternal mUsageStatsManagerInternal;
     public UserManager mUserManager;
     public final AnonymousClass1 mBroadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.appwidget.AppWidgetServiceImpl.1
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             char c;
@@ -539,8 +537,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
             this.mReceiversCheckArray = zArr;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r5v3, types: [java.util.concurrent.CountDownLatch] */
         @Override // java.lang.Runnable
         public final void run() {
             try {
@@ -1956,7 +1952,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:75:0x0136, code lost:
     
         if (r1 == null) goto L87;
@@ -1969,16 +1964,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
     
         r1 = true;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0231 A[Catch: all -> 0x00d4, TryCatch #0 {all -> 0x00d4, all -> 0x0246, blocks: (B:22:0x00af, B:24:0x00b7, B:27:0x00bf, B:32:0x00ce, B:34:0x0231, B:35:0x023d, B:46:0x024b, B:47:0x024c, B:51:0x00d9, B:55:0x00e6, B:62:0x00f9, B:64:0x00fd, B:66:0x0103, B:68:0x012a, B:76:0x0138, B:79:0x0143, B:81:0x0148, B:83:0x0178, B:85:0x0180, B:87:0x0228, B:88:0x019f, B:90:0x01a3, B:91:0x01a9, B:93:0x01af, B:95:0x01b9, B:97:0x01bd, B:99:0x01c7, B:101:0x01d1, B:103:0x01de, B:105:0x01e6, B:106:0x01ee, B:112:0x0212, B:115:0x021d, B:117:0x0223, B:121:0x024e, B:37:0x023e, B:39:0x0242, B:40:0x0248), top: B:21:0x00af }] */
-    /* JADX WARN: Type inference failed for: r7v0 */
-    /* JADX WARN: Type inference failed for: r7v1, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r7v11 */
-    /* JADX WARN: Type inference failed for: r7v2 */
-    /* JADX WARN: Type inference failed for: r7v3 */
-    /* JADX WARN: Type inference failed for: r7v4 */
-    /* JADX WARN: Type inference failed for: r7v9 */
     /* renamed from: -$$Nest$monPackageBroadcastReceived, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2063,7 +2048,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         APPWIDGET_WIDGET_SUPPORTED_SIZES = new int[]{1, 2, 4, 8, 16, 32, 64};
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.appwidget.AppWidgetServiceImpl$1] */
     public AppWidgetServiceImpl(Context context) {
         this.mContext = context;
     }
@@ -2123,8 +2107,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         return iArr;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:57:0x01a2  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x01e0 A[Catch: all -> 0x0037, TRY_LEAVE, TryCatch #2 {all -> 0x0037, blocks: (B:6:0x0011, B:11:0x003a, B:12:0x003e, B:17:0x0049, B:19:0x0056, B:22:0x0078, B:25:0x0098, B:27:0x00a7, B:28:0x00ab, B:30:0x00b3, B:31:0x00b7, B:33:0x00c1, B:34:0x00c6, B:36:0x00d0, B:37:0x00d5, B:39:0x00df, B:40:0x00e3, B:42:0x00ed, B:43:0x00f1, B:45:0x0120, B:46:0x012d, B:49:0x016b, B:51:0x0173, B:52:0x0180, B:55:0x018f, B:58:0x01a3, B:60:0x01a9, B:62:0x01b3, B:66:0x01db, B:68:0x01bb, B:70:0x01c4, B:74:0x01cc, B:76:0x01d5, B:81:0x01e0, B:87:0x00d3, B:88:0x00c4, B:93:0x01e9, B:94:0x01ec, B:24:0x0087), top: B:4:0x000f, inners: #3 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2137,10 +2119,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.appwidget.AppWidgetServiceImpl.parseAppWidgetProviderInfo(android.content.Context, com.android.server.appwidget.AppWidgetServiceImpl$ProviderId, android.content.pm.ActivityInfo, java.lang.String):android.appwidget.AppWidgetProviderInfo");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0093  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00a2  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00b1  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00c0  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3589,13 +3567,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v12, types: [char, int] */
-    /* JADX WARN: Type inference failed for: r5v13, types: [java.util.Iterator] */
-    /* JADX WARN: Type inference failed for: r5v17 */
-    /* JADX WARN: Type inference failed for: r5v5 */
-    /* JADX WARN: Type inference failed for: r5v8, types: [int] */
-    /* JADX WARN: Type inference failed for: r5v9 */
     public final int getFdFromPackage(int i, String str) {
         StringBuilder sb;
         HashSet hashSet = (HashSet) this.mPackageToPidMap.get(str);
@@ -3703,8 +3674,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         return i2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00e1 A[Catch: all -> 0x0068, TryCatch #0 {all -> 0x0068, blocks: (B:11:0x003c, B:13:0x004c, B:14:0x0066, B:16:0x006b, B:18:0x0081, B:20:0x008b, B:22:0x0132, B:23:0x00ac, B:25:0x00b6, B:29:0x00c0, B:34:0x00c7, B:36:0x00e1, B:37:0x0100, B:41:0x0107, B:43:0x0111, B:45:0x0119, B:47:0x0121, B:49:0x012b, B:50:0x012f, B:58:0x0136, B:60:0x013d, B:62:0x0141, B:64:0x0147, B:65:0x0158, B:67:0x015a, B:69:0x0169, B:70:0x018f, B:71:0x019c), top: B:10:0x003c }] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x012b A[Catch: all -> 0x0068, TryCatch #0 {all -> 0x0068, blocks: (B:11:0x003c, B:13:0x004c, B:14:0x0066, B:16:0x006b, B:18:0x0081, B:20:0x008b, B:22:0x0132, B:23:0x00ac, B:25:0x00b6, B:29:0x00c0, B:34:0x00c7, B:36:0x00e1, B:37:0x0100, B:41:0x0107, B:43:0x0111, B:45:0x0119, B:47:0x0121, B:49:0x012b, B:50:0x012f, B:58:0x0136, B:60:0x013d, B:62:0x0141, B:64:0x0147, B:65:0x0158, B:67:0x015a, B:69:0x0169, B:70:0x018f, B:71:0x019c), top: B:10:0x003c }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4211,8 +4180,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         return null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00e4 A[Catch: all -> 0x004d, TryCatch #0 {all -> 0x004d, blocks: (B:13:0x003f, B:15:0x0045, B:18:0x00c8, B:20:0x00cc, B:21:0x00dc, B:23:0x00e4, B:26:0x00ef, B:32:0x00fc, B:34:0x0104, B:35:0x0137, B:38:0x012c, B:43:0x00d3, B:44:0x0050, B:46:0x0055, B:47:0x005b, B:49:0x005f, B:51:0x0080, B:53:0x008a, B:55:0x0091, B:56:0x00a6, B:58:0x00aa, B:60:0x00b2, B:61:0x00b8, B:63:0x00bc), top: B:12:0x003f }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00ef A[Catch: all -> 0x004d, TryCatch #0 {all -> 0x004d, blocks: (B:13:0x003f, B:15:0x0045, B:18:0x00c8, B:20:0x00cc, B:21:0x00dc, B:23:0x00e4, B:26:0x00ef, B:32:0x00fc, B:34:0x0104, B:35:0x0137, B:38:0x012c, B:43:0x00d3, B:44:0x0050, B:46:0x0055, B:47:0x005b, B:49:0x005f, B:51:0x0080, B:53:0x008a, B:55:0x0091, B:56:0x00a6, B:58:0x00aa, B:60:0x00b2, B:61:0x00b8, B:63:0x00bc), top: B:12:0x003f }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4407,8 +4374,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x024f A[LOOP:0: B:4:0x0013->B:10:0x024f, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x024e A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -15,7 +15,6 @@ public final class OverlayProperties implements Parcelable {
     public static final Parcelable.Creator<OverlayProperties> CREATOR =
             new Parcelable.Creator<
                     OverlayProperties>() { // from class: android.hardware.OverlayProperties.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OverlayProperties createFromParcel(Parcel in) {
                     if (in.readInt() != 0) {
@@ -25,7 +24,6 @@ public final class OverlayProperties implements Parcelable {
                     return null;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OverlayProperties[] newArray(int size) {
                     return new OverlayProperties[size];
@@ -38,7 +36,6 @@ public final class OverlayProperties implements Parcelable {
 
     private static native boolean nIsCombinationSupported(long j, int i, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nReadOverlayPropertiesFromParcel(Parcel parcel);
 
     private static native boolean nSupportMixedColorSpaces(long j);

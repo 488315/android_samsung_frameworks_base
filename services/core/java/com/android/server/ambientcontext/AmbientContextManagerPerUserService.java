@@ -20,8 +20,6 @@ import java.util.Arrays;
 
 public abstract class AmbientContextManagerPerUserService extends AbstractPerUserSystemService {
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class ServiceType {
         public static final /* synthetic */ ServiceType[] $VALUES;
         public static final ServiceType DEFAULT;

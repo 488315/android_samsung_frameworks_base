@@ -9,7 +9,6 @@ public final class HdmiHotplugEvent implements Parcelable {
     public static final Parcelable.Creator<HdmiHotplugEvent> CREATOR =
             new Parcelable.Creator<
                     HdmiHotplugEvent>() { // from class: android.hardware.hdmi.HdmiHotplugEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HdmiHotplugEvent createFromParcel(Parcel p) {
                     int port = p.readInt();
@@ -17,7 +16,6 @@ public final class HdmiHotplugEvent implements Parcelable {
                     return new HdmiHotplugEvent(port, connected);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HdmiHotplugEvent[] newArray(int size) {
                     return new HdmiHotplugEvent[size];

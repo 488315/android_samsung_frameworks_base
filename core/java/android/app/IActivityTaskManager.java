@@ -2957,7 +2957,6 @@ public interface IActivityTaskManager extends IInterface {
             _arg4.put(k, v);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements IActivityTaskManager {
             private IBinder mRemote;
 

@@ -77,10 +77,6 @@ public final class BackupHandler extends Handler {
         super.dispatchMessage(message);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v42 */
-    /* JADX WARN: Type inference failed for: r0v43, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r0v51 */
     @Override // android.os.Handler
     public final void handleMessage(Message message) {
         Throwable th;

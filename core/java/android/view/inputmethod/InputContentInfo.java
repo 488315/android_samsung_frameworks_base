@@ -17,13 +17,11 @@ public final class InputContentInfo implements Parcelable {
     public static final Parcelable.Creator<InputContentInfo> CREATOR =
             new Parcelable.Creator<
                     InputContentInfo>() { // from class: android.view.inputmethod.InputContentInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputContentInfo createFromParcel(Parcel source) {
                     return new InputContentInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputContentInfo[] newArray(int size) {
                     return new InputContentInfo[size];

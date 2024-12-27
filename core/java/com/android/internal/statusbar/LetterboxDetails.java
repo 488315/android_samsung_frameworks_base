@@ -16,13 +16,11 @@ public class LetterboxDetails implements Parcelable {
             new Parcelable.Creator<
                     LetterboxDetails>() { // from class:
                                           // com.android.internal.statusbar.LetterboxDetails.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LetterboxDetails[] newArray(int size) {
                     return new LetterboxDetails[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LetterboxDetails createFromParcel(Parcel in) {
                     return new LetterboxDetails(in);

@@ -140,7 +140,6 @@ public abstract class AutoScrollHelper implements View.OnTouchListener {
         return this;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.view.View.OnTouchListener
     public boolean onTouch(View v, MotionEvent event) {
         if (!this.mEnabled) {
@@ -184,7 +183,6 @@ public abstract class AutoScrollHelper implements View.OnTouchListener {
         return this.mExclusive && this.mAnimating;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean shouldAnimate() {
         ClampedScroller scroller = this.mScroller;
         int verticalDirection = scroller.getVerticalDirection();
@@ -250,7 +248,6 @@ public abstract class AutoScrollHelper implements View.OnTouchListener {
         return constrain(interpolated, -1.0f, 1.0f);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private float constrainEdgeValue(float current, float leading) {
         if (leading == 0.0f) {
             return 0.0f;
@@ -277,7 +274,6 @@ public abstract class AutoScrollHelper implements View.OnTouchListener {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int constrain(int value, int min, int max) {
         if (value > max) {
             return max;
@@ -288,7 +284,6 @@ public abstract class AutoScrollHelper implements View.OnTouchListener {
         return value;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float constrain(float value, float min, float max) {
         if (value > max) {
             return max;
@@ -299,7 +294,6 @@ public abstract class AutoScrollHelper implements View.OnTouchListener {
         return value;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelTargetTouch() {
         long eventTime = SystemClock.uptimeMillis();
         MotionEvent cancel = MotionEvent.obtain(eventTime, eventTime, 3, 0.0f, 0.0f, 0);

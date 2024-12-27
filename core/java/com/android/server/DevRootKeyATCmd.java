@@ -116,25 +116,6 @@ public class DevRootKeyATCmd implements IWorkOnAt {
 
        if (java.lang.Integer.parseInt(r6[0]) == 1) goto L16;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v0 */
-    /* JADX WARN: Type inference failed for: r4v1 */
-    /* JADX WARN: Type inference failed for: r4v15 */
-    /* JADX WARN: Type inference failed for: r4v2, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r4v3 */
-    /* JADX WARN: Type inference failed for: r4v4 */
-    /* JADX WARN: Type inference failed for: r4v73 */
-    /* JADX WARN: Type inference failed for: r7v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r7v21 */
-    /* JADX WARN: Type inference failed for: r7v3 */
-    /* JADX WARN: Type inference failed for: r7v86 */
-    /* JADX WARN: Type inference failed for: r7v87 */
-    /* JADX WARN: Type inference failed for: r7v88 */
-    /* JADX WARN: Type inference failed for: r7v89 */
-    /* JADX WARN: Type inference failed for: r7v90 */
-    /* JADX WARN: Type inference failed for: r7v91 */
-    /* JADX WARN: Type inference failed for: r7v92 */
-    /* JADX WARN: Type inference failed for: r7v93 */
     @Override // com.android.server.IWorkOnAt
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -417,10 +398,6 @@ public class DevRootKeyATCmd implements IWorkOnAt {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:107:0x00b6 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00d5 A[Catch: IOException | IllegalArgumentException | NullPointerException | InvalidAlgorithmParameterException | InvalidKeyException | KeyStoreException | NoSuchAlgorithmException | NoSuchProviderException | ProviderException | SignatureException | CertPathValidatorException | CertificateException -> 0x00e4, TryCatch #6 {IOException | IllegalArgumentException | NullPointerException | InvalidAlgorithmParameterException | InvalidKeyException | KeyStoreException | NoSuchAlgorithmException | NoSuchProviderException | ProviderException | SignatureException | CertPathValidatorException | CertificateException -> 0x00e4, blocks: (B:112:0x00bf, B:22:0x00d5, B:24:0x00db), top: B:111:0x00bf }] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00f8 A[Catch: IOException | IllegalArgumentException | NullPointerException | InvalidAlgorithmParameterException | InvalidKeyException | KeyStoreException | NoSuchAlgorithmException | NoSuchProviderException | ProviderException | SignatureException | CertPathValidatorException | CertificateException -> 0x0275, LOOP:0: B:34:0x00f3->B:38:0x00f8, LOOP_END, TryCatch #9 {IOException | IllegalArgumentException | NullPointerException | InvalidAlgorithmParameterException | InvalidKeyException | KeyStoreException | NoSuchAlgorithmException | NoSuchProviderException | ProviderException | SignatureException | CertPathValidatorException | CertificateException -> 0x0275, blocks: (B:36:0x00f5, B:38:0x00f8, B:40:0x0109, B:43:0x0130, B:44:0x0134), top: B:35:0x00f5 }] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0109 A[EDGE_INSN: B:39:0x0109->B:40:0x0109 BREAK  A[LOOP:0: B:34:0x00f3->B:38:0x00f8], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

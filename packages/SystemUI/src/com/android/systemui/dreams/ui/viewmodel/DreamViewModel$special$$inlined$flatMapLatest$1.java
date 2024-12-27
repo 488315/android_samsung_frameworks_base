@@ -16,7 +16,6 @@ public final class DreamViewModel$special$$inlined$flatMapLatest$1 extends Suspe
     int label;
     final /* synthetic */ DreamViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DreamViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, DreamViewModel dreamViewModel) {
         super(3, continuation);
         this.this$0 = dreamViewModel;

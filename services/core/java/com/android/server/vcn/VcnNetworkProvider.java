@@ -22,7 +22,6 @@ public final class VcnNetworkProvider extends NetworkProvider {
 
     public interface NetworkRequestListener {}
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public VcnNetworkProvider(Context context, Looper looper, Dependencies dependencies) {
         super(context, looper, "VcnNetworkProvider");
         Objects.requireNonNull(context, "Missing context");

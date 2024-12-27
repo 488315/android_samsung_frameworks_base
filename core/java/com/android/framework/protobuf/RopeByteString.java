@@ -164,7 +164,6 @@ final class RopeByteString extends ByteString {
                 this.pieces = new PieceIterator(RopeByteString.this);
             }
 
-            /* JADX WARN: Type inference failed for: r0v5, types: [com.android.framework.protobuf.ByteString$ByteIterator] */
             private ByteString.ByteIterator nextPiece() {
                 if (this.pieces.hasNext()) {
                     return this.pieces.next().iterator2();
@@ -420,7 +419,6 @@ final class RopeByteString extends ByteString {
             this.prefixesStack = new ArrayDeque<>();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public ByteString balance(ByteString left, ByteString right) {
             doBalance(left);
             doBalance(right);
@@ -526,7 +524,6 @@ final class RopeByteString extends ByteString {
             return this.next != null;
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // java.util.Iterator
         public ByteString.LeafByteString next() {
             if (this.next == null) {

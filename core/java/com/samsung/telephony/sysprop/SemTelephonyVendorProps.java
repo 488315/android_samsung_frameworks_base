@@ -13,7 +13,6 @@ import java.util.function.Function;
 public final class SemTelephonyVendorProps {
     private SemTelephonyVendorProps() {}
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static Boolean tryParseBoolean(String str) {
         char c;
         if (str == null) {

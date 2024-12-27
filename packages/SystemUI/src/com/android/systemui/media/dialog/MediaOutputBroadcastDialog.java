@@ -138,8 +138,6 @@ public final class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.media.dialog.MediaOutputBroadcastDialog$1] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.media.dialog.MediaOutputBroadcastDialog$2] */
     public MediaOutputBroadcastDialog(Context context, boolean z, BroadcastSender broadcastSender, MediaOutputController mediaOutputController) {
         super(context, broadcastSender, mediaOutputController, true);
         this.mIsPasswordHide = Boolean.TRUE;

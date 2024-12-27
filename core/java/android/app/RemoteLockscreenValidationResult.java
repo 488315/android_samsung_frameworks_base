@@ -12,13 +12,11 @@ public final class RemoteLockscreenValidationResult implements Parcelable {
     public static final Parcelable.Creator<RemoteLockscreenValidationResult> CREATOR =
             new Parcelable.Creator<RemoteLockscreenValidationResult>() { // from class:
                 // android.app.RemoteLockscreenValidationResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteLockscreenValidationResult createFromParcel(Parcel source) {
                     return new RemoteLockscreenValidationResult(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteLockscreenValidationResult[] newArray(int size) {
                     return new RemoteLockscreenValidationResult[size];

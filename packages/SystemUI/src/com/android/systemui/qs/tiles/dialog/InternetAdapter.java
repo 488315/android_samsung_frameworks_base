@@ -153,8 +153,6 @@ public final class InternetAdapter extends RecyclerView.Adapter {
         if (connectedState != 0) {
             final int i2 = 0;
             internetViewHolder.mWifiListLayout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.tiles.dialog.InternetAdapter$InternetViewHolder$$ExternalSyntheticLambda0
-                /* JADX WARN: Type inference failed for: r3v0, types: [com.android.systemui.qs.tiles.dialog.InternetAdapter$InternetViewHolder$$ExternalSyntheticLambda2] */
-                /* JADX WARN: Type inference failed for: r4v0, types: [com.android.systemui.qs.tiles.dialog.InternetAdapter$InternetViewHolder$$ExternalSyntheticLambda3] */
                 @Override // android.view.View.OnClickListener
                 public final void onClick(final View view) {
                     switch (i2) {
@@ -193,8 +191,6 @@ public final class InternetAdapter extends RecyclerView.Adapter {
         } else {
             final int i3 = 1;
             internetViewHolder.mWifiListLayout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.tiles.dialog.InternetAdapter$InternetViewHolder$$ExternalSyntheticLambda0
-                /* JADX WARN: Type inference failed for: r3v0, types: [com.android.systemui.qs.tiles.dialog.InternetAdapter$InternetViewHolder$$ExternalSyntheticLambda2] */
-                /* JADX WARN: Type inference failed for: r4v0, types: [com.android.systemui.qs.tiles.dialog.InternetAdapter$InternetViewHolder$$ExternalSyntheticLambda3] */
                 @Override // android.view.View.OnClickListener
                 public final void onClick(final View view) {
                     switch (i3) {

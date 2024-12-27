@@ -300,7 +300,6 @@ public class BinderCallsStats implements BinderInternal.Observer {
         noteCallsStatsDelayed();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void noteCallsStatsDelayed() {
         this.mCallStatsObserverHandler.removeCallbacks(this.mCallStatsObserverRunnable);
         if (this.mCallStatsObserver != null) {
@@ -2099,19 +2098,16 @@ public class BinderCallsStats implements BinderInternal.Observer {
         return result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int compareByActCpuDesc(ExportedCallStat a, ExportedCallStat b) {
         return Long.compare(
                 (b.cpuTimeMicros / b.recordedCallCount) * b.callCount,
                 (a.cpuTimeMicros / a.recordedCallCount) * a.callCount);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int compareByCpuDesc(ExportedCallStat a, ExportedCallStat b) {
         return Long.compare(b.cpuTimeMicros, a.cpuTimeMicros);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int compareByBinderClassAndCode(ExportedCallStat a, ExportedCallStat b) {
         int result = a.className.compareTo(b.className);
         if (result != 0) {

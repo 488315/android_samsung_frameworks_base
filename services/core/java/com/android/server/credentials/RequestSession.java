@@ -65,8 +65,6 @@ public abstract class RequestSession {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class RequestSessionStatus {
         public static final /* synthetic */ RequestSessionStatus[] $VALUES;
         public static final RequestSessionStatus COMPLETE;
@@ -228,8 +226,6 @@ public abstract class RequestSession {
         launchUiWithProviderData(providerDataForUi);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x005b  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0065  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -84,8 +84,6 @@ public final class AppWarnings {
             this.mDialog = null;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v3, types: [android.content.BroadcastReceiver, com.android.server.wm.AppWarnings$BaseDialog$1] */
         public final void show() {
             if (this.mDialog == null) {
                 return;

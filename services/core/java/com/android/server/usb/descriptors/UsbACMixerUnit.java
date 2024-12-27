@@ -6,7 +6,6 @@ public abstract class UsbACMixerUnit extends UsbACInterface {
     public byte mNumOutputs;
     public byte mUnitID;
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.server.usb.descriptors.UsbDescriptor
     public int parseRawDescriptors(ByteStream byteStream) {
         this.mUnitID = byteStream.getByte();

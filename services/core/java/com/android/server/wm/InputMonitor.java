@@ -66,7 +66,6 @@ public final class InputMonitor {
 
            if (r6.isActivityTypeHomeOrRecents() != false) goto L59;
         */
-        /* JADX WARN: Removed duplicated region for block: B:71:0x01f9  */
         /* renamed from: -$$Nest$mupdateInputWindows, reason: not valid java name */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -343,10 +342,6 @@ public final class InputMonitor {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x01cb  */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x01d8  */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x01e1  */
-    /* JADX WARN: Removed duplicated region for block: B:146:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

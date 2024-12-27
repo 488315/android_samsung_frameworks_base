@@ -24,7 +24,6 @@ final class KeyguardSurfaceBehindInteractor$viewParams$1 extends SuspendLambda i
     /* synthetic */ boolean Z$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardSurfaceBehindInteractor$viewParams$1(Lazy lazy, Context context, SwipeToDismissInteractor swipeToDismissInteractor, Continuation continuation) {
         super(4, continuation);
         this.$inWindowLauncherUnlockAnimationInteractor = lazy;

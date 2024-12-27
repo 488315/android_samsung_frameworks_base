@@ -21,7 +21,6 @@ public final class ProviderCallDispatcher extends LiveWallpaperProviderCallDispa
         return super.onGetScreenshot(context, getScreenshot$Params);
     }
 
-    /* JADX WARN: Type inference failed for: r7v8, types: [com.samsung.android.wallpaper.live.sdk.provider.call.GetThumbnail$Result] */
     @Override // com.samsung.android.wallpaper.live.sdk.provider.LiveWallpaperProviderCallDispatcher
     public final GetThumbnail$Result onGetThumbnail(Context context, GetThumbnail$Params getThumbnail$Params) {
         try {

@@ -24,13 +24,11 @@ public final class AudioHalVersionInfo implements Parcelable, Comparable<AudioHa
     public static final Parcelable.Creator<AudioHalVersionInfo> CREATOR =
             new Parcelable.Creator<
                     AudioHalVersionInfo>() { // from class: android.media.AudioHalVersionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioHalVersionInfo createFromParcel(Parcel in) {
                     return new AudioHalVersionInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioHalVersionInfo[] newArray(int size) {
                     return new AudioHalVersionInfo[size];

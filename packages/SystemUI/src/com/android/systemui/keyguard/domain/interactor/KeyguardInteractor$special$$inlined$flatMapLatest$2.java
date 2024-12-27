@@ -21,7 +21,6 @@ public final class KeyguardInteractor$special$$inlined$flatMapLatest$2 extends S
     int label;
     final /* synthetic */ KeyguardInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardInteractor$special$$inlined$flatMapLatest$2(Continuation continuation, ShadeRepository shadeRepository, KeyguardInteractor keyguardInteractor) {
         super(3, continuation);
         this.$shadeRepository$inlined = shadeRepository;

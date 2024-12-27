@@ -59,8 +59,6 @@ public final class CoverServiceManager {
     public int mBindHistoryIdx = 0;
     public boolean mRegisterBroadcast = false;
     public final AnonymousClass1 mBroadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.sepunion.cover.CoverServiceManager.1
-        /* JADX WARN: Removed duplicated region for block: B:49:0x011e  */
-        /* JADX WARN: Removed duplicated region for block: B:50:0x0128  */
         @Override // android.content.BroadcastReceiver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -119,8 +117,6 @@ public final class CoverServiceManager {
             super(looper, null, true);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r4v4, types: [com.android.server.sepunion.cover.CoverServiceManager$3, java.lang.Runnable] */
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
             int i = message.what;
@@ -281,7 +277,6 @@ public final class CoverServiceManager {
         IS_B6_DEVICE = TextUtils.equals("b6q", SemSystemProperties.get("ro.product.vendor.device", "NONE"));
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.sepunion.cover.CoverServiceManager$1] */
     public CoverServiceManager(Context context, Looper looper, OnCoverStateProvider onCoverStateProvider) {
         this.mContext = context;
         this.mCoverStateProvider = onCoverStateProvider;
@@ -766,9 +761,6 @@ public final class CoverServiceManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x005a  */
-    /* JADX WARN: Removed duplicated region for block: B:5:0x004d  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0052  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

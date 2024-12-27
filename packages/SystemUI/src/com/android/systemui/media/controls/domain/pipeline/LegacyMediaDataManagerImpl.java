@@ -607,7 +607,6 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, BcSmartspaceD
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final MediaButton createActionsFromState$1(final String str, final MediaController mediaController, UserHandle userHandle) {
         boolean z;
         MediaAction standardAction$1;
@@ -635,7 +634,6 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, BcSmartspaceD
                 MediaAction standardAction$12 = getStandardAction$1(mediaController, playbackState.getActions(), 16L);
                 MediaAction standardAction$13 = getStandardAction$1(mediaController, playbackState.getActions(), 32L);
                 TransformingSequence$iterator$1 transformingSequence$iterator$1 = new TransformingSequence$iterator$1(new TransformingSequence(SequencesKt___SequencesKt.filterNotNull(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(playbackState.getCustomActions())), new Function1() { // from class: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl$createActionsFromState$customActions$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -913,38 +911,6 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, BcSmartspaceD
                 }
                 final boolean z2 = z;
                 this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl$loadMediaData$1
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Removed duplicated region for block: B:111:0x038b  */
-                    /* JADX WARN: Removed duplicated region for block: B:114:0x03a3  */
-                    /* JADX WARN: Removed duplicated region for block: B:121:0x03d0  */
-                    /* JADX WARN: Removed duplicated region for block: B:123:0x03d9  */
-                    /* JADX WARN: Removed duplicated region for block: B:129:0x041c  */
-                    /* JADX WARN: Removed duplicated region for block: B:133:0x0421  */
-                    /* JADX WARN: Removed duplicated region for block: B:137:0x0406  */
-                    /* JADX WARN: Removed duplicated region for block: B:141:0x03d6  */
-                    /* JADX WARN: Removed duplicated region for block: B:143:0x03b2  */
-                    /* JADX WARN: Removed duplicated region for block: B:144:0x038d  */
-                    /* JADX WARN: Removed duplicated region for block: B:152:0x0365  */
-                    /* JADX WARN: Removed duplicated region for block: B:153:0x0223  */
-                    /* JADX WARN: Removed duplicated region for block: B:155:0x018c  */
-                    /* JADX WARN: Removed duplicated region for block: B:59:0x0185  */
-                    /* JADX WARN: Removed duplicated region for block: B:66:0x01b1  */
-                    /* JADX WARN: Removed duplicated region for block: B:77:0x0246  */
-                    /* JADX WARN: Type inference failed for: r0v10, types: [T, java.lang.Object] */
-                    /* JADX WARN: Type inference failed for: r0v27, types: [T, java.lang.Object] */
-                    /* JADX WARN: Type inference failed for: r12v0 */
-                    /* JADX WARN: Type inference failed for: r12v1, types: [T, java.lang.CharSequence] */
-                    /* JADX WARN: Type inference failed for: r12v25 */
-                    /* JADX WARN: Type inference failed for: r12v8, types: [T, java.lang.CharSequence] */
-                    /* JADX WARN: Type inference failed for: r1v1, types: [T, java.lang.Object] */
-                    /* JADX WARN: Type inference failed for: r1v10, types: [T, java.lang.Object] */
-                    /* JADX WARN: Type inference failed for: r6v2 */
-                    /* JADX WARN: Type inference failed for: r6v3, types: [T, java.lang.CharSequence] */
-                    /* JADX WARN: Type inference failed for: r6v30 */
-                    /* JADX WARN: Type inference failed for: r6v4, types: [T, java.lang.CharSequence] */
-                    /* JADX WARN: Type inference failed for: r8v14, types: [T, kotlin.collections.EmptyList] */
-                    /* JADX WARN: Type inference failed for: r8v23, types: [T, com.android.systemui.media.controls.shared.model.MediaDeviceData] */
-                    /* JADX WARN: Type inference failed for: r8v3, types: [T, java.lang.String] */
                     @Override // java.lang.Runnable
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

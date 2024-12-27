@@ -136,7 +136,6 @@ public class AppLocaleStore {
                                         }));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean matchLanguageInSet(Locale locale, HashSet<Locale> localesSet) {
         if (localesSet.contains(locale)) {
             return true;

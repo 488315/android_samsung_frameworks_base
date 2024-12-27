@@ -160,7 +160,6 @@ public class SystemPerformanceHinter {
         return session;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startSession(HighPerfSession session) {
         boolean isTraceEnabled = session.asyncTraceBegin();
         int oldGlobalFlags = calculateActiveHintFlags(5);
@@ -197,7 +196,6 @@ public class SystemPerformanceHinter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void endSession(HighPerfSession session) {
         boolean isTraceEnabled = session.asyncTraceEnd();
         int oldGlobalFlags = calculateActiveHintFlags(5);

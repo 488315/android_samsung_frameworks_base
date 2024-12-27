@@ -12,7 +12,6 @@ final class CommunalPrefsRepositoryImpl$isCtaDismissed$1 extends SuspendLambda i
     int label;
     final /* synthetic */ CommunalPrefsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalPrefsRepositoryImpl$isCtaDismissed$1(CommunalPrefsRepositoryImpl communalPrefsRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalPrefsRepositoryImpl;

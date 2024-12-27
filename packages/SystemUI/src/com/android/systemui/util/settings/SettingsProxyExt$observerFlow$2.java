@@ -18,7 +18,6 @@ final class SettingsProxyExt$observerFlow$2 extends SuspendLambda implements Fun
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SettingsProxyExt$observerFlow$2(String[] strArr, SettingsProxy settingsProxy, Continuation continuation) {
         super(2, continuation);
         this.$names = strArr;
@@ -32,8 +31,6 @@ final class SettingsProxyExt$observerFlow$2 extends SuspendLambda implements Fun
         return settingsProxyExt$observerFlow$2;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.database.ContentObserver, com.android.systemui.util.settings.SettingsProxyExt$observerFlow$2$observer$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -58,7 +55,6 @@ final class SettingsProxyExt$observerFlow$2 extends SuspendLambda implements Fun
             }
             final SettingsProxy settingsProxy2 = this.$this_observerFlow;
             Function0 function0 = new Function0() { // from class: com.android.systemui.util.settings.SettingsProxyExt$observerFlow$2.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

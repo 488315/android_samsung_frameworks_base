@@ -22,13 +22,11 @@ public final class RecognitionPart implements Parcelable {
     public static final Parcelable.Creator<RecognitionPart> CREATOR =
             new Parcelable.Creator<
                     RecognitionPart>() { // from class: android.speech.RecognitionPart.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecognitionPart[] newArray(int size) {
                     return new RecognitionPart[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecognitionPart createFromParcel(Parcel in) {
                     return new RecognitionPart(in);
@@ -42,17 +40,14 @@ public final class RecognitionPart implements Parcelable {
     @Retention(RetentionPolicy.SOURCE)
     public @interface ConfidenceLevel {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String defaultFormattedText() {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static long defaultTimestampMillis() {
         return 0L;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultConfidenceLevel() {
         return 0;
     }
@@ -281,7 +276,6 @@ public final class RecognitionPart implements Parcelable {
             return o;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 16) != 0) {
                 throw new IllegalStateException(

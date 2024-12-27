@@ -155,7 +155,6 @@ public final class AccessibilityGestureHandler implements MotionPauseListener {
                 
                     if ((-r0.floatValue()) > r11.inFlingVelocity) goto L124;
                  */
-                /* JADX WARN: Multi-variable type inference failed */
                 @Override // com.android.systemui.shared.system.InputChannelCompat$InputEventListener
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

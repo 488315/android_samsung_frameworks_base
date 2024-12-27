@@ -10,13 +10,11 @@ public class SemContextFlatMotionForTableModeAttribute extends SemContextAttribu
             new Parcelable.Creator<
                     SemContextFlatMotionForTableModeAttribute>() { // from class:
                                                                    // com.samsung.android.hardware.context.SemContextFlatMotionForTableModeAttribute.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextFlatMotionForTableModeAttribute createFromParcel(Parcel in) {
                     return new SemContextFlatMotionForTableModeAttribute(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextFlatMotionForTableModeAttribute[] newArray(int size) {
                     return new SemContextFlatMotionForTableModeAttribute[size];

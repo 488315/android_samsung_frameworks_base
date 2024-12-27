@@ -7,13 +7,11 @@ public final class InstallSourceInfo implements Parcelable {
     public static final Parcelable.Creator<InstallSourceInfo> CREATOR =
             new Parcelable.Creator<
                     InstallSourceInfo>() { // from class: android.content.pm.InstallSourceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InstallSourceInfo createFromParcel(Parcel source) {
                     return new InstallSourceInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InstallSourceInfo[] newArray(int size) {
                     return new InstallSourceInfo[size];

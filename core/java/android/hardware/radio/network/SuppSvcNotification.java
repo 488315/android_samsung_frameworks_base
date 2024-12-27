@@ -11,7 +11,6 @@ public class SuppSvcNotification implements Parcelable {
     public static final Parcelable.Creator<SuppSvcNotification> CREATOR =
             new Parcelable.Creator<SuppSvcNotification>() { // from class:
                 // android.hardware.radio.network.SuppSvcNotification.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SuppSvcNotification createFromParcel(Parcel _aidl_source) {
                     SuppSvcNotification _aidl_out = new SuppSvcNotification();
@@ -19,7 +18,6 @@ public class SuppSvcNotification implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SuppSvcNotification[] newArray(int _aidl_size) {
                     return new SuppSvcNotification[_aidl_size];

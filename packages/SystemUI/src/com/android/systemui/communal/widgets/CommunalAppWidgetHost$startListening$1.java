@@ -14,7 +14,6 @@ final class CommunalAppWidgetHost$startListening$1 extends SuspendLambda impleme
     int label;
     final /* synthetic */ CommunalAppWidgetHost this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalAppWidgetHost$startListening$1(CommunalAppWidgetHost communalAppWidgetHost, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalAppWidgetHost;

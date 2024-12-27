@@ -18,7 +18,6 @@ public final class VolumeNavigator$special$$inlined$flatMapLatest$1 extends Susp
     int label;
     final /* synthetic */ VolumeNavigator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public VolumeNavigator$special$$inlined$flatMapLatest$1(Continuation continuation, VolumeNavigator volumeNavigator) {
         super(3, continuation);
         this.this$0 = volumeNavigator;

@@ -389,7 +389,6 @@ public final class RollbackPackageHealthObserver implements PackageWatchdog.Pack
         }
     }
 
-    /* JADX WARN: Type inference failed for: r10v7, types: [com.android.server.rollback.RollbackPackageHealthObserver$$ExternalSyntheticLambda6] */
     public final void rollbackPackage(final RollbackInfo rollbackInfo, VersionedPackage versionedPackage, int i) {
         VersionedPackage versionedPackage2;
         assertInWorkerThread();

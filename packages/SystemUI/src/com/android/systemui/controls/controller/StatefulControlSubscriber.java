@@ -74,7 +74,6 @@ public final class StatefulControlSubscriber extends IControlsSubscriber.Stub {
 
     public final void onError(IBinder iBinder, final String str) {
         run(iBinder, new Function0() { // from class: com.android.systemui.controls.controller.StatefulControlSubscriber$onError$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -94,7 +93,6 @@ public final class StatefulControlSubscriber extends IControlsSubscriber.Stub {
 
     public final void onNext(final IBinder iBinder, final Control control) {
         run(iBinder, new Function0() { // from class: com.android.systemui.controls.controller.StatefulControlSubscriber$onNext$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -150,9 +148,6 @@ public final class StatefulControlSubscriber extends IControlsSubscriber.Stub {
                                     
                                         r5 = false;
                                      */
-                                    /* JADX WARN: Multi-variable type inference failed */
-                                    /* JADX WARN: Type inference failed for: r5v8, types: [java.lang.CharSequence] */
-                                    /* JADX WARN: Type inference failed for: r8v8, types: [java.lang.Object] */
                                     @Override // java.lang.Runnable
                                     /*
                                         Code decompiled incorrectly, please refer to instructions dump.
@@ -281,7 +276,6 @@ public final class StatefulControlSubscriber extends IControlsSubscriber.Stub {
     public final void onSubscribe(IBinder iBinder, final IControlsSubscription iControlsSubscription) {
         Log.d("StatefulControlSubscriber", "onSubscribe");
         run(iBinder, new Function0() { // from class: com.android.systemui.controls.controller.StatefulControlSubscriber$onSubscribe$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

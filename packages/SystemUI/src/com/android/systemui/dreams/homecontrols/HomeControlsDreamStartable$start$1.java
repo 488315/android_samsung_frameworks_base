@@ -17,7 +17,6 @@ final class HomeControlsDreamStartable$start$1 extends SuspendLambda implements 
     int label;
     final /* synthetic */ HomeControlsDreamStartable this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HomeControlsDreamStartable$start$1(HomeControlsDreamStartable homeControlsDreamStartable, Continuation continuation) {
         super(2, continuation);
         this.this$0 = homeControlsDreamStartable;

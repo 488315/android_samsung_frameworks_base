@@ -78,7 +78,6 @@ public class IsrbHooks {
         "com.android.server.voiceinteraction.VoiceInteractionManagerService"
     };
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int Clog_e(String tag, String msg, Throwable tr) {
         return Log.printlns(4, 6, tag, msg, tr);
     }
@@ -348,7 +347,6 @@ public class IsrbHooks {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean checkServiceState() {
         if (IsrbManager.getService() == null) {
             return false;
@@ -356,7 +354,6 @@ public class IsrbHooks {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean getEnterIdle() {
         try {
             boolean state = IsrbManager.getService().isBootCompleteState();

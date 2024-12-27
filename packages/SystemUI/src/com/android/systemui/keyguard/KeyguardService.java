@@ -255,7 +255,6 @@ public class KeyguardService extends Service {
         return (RemoteAnimationTarget[]) arrayList.toArray(new RemoteAnimationTarget[arrayList.size()]);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.keyguard.KeyguardService$3] */
     public KeyguardService(KeyguardViewMediator keyguardViewMediator, KeyguardLifecyclesDispatcher keyguardLifecyclesDispatcher, ScreenOnCoordinator screenOnCoordinator, ShellTransitions shellTransitions, DisplayTracker displayTracker, WindowManagerLockscreenVisibilityViewModel windowManagerLockscreenVisibilityViewModel, WindowManagerLockscreenVisibilityManager windowManagerLockscreenVisibilityManager, KeyguardSurfaceBehindViewModel keyguardSurfaceBehindViewModel, KeyguardSurfaceBehindParamsApplier keyguardSurfaceBehindParamsApplier, CoroutineScope coroutineScope, FeatureFlags featureFlags, PowerInteractor powerInteractor, WindowManagerOcclusionManager windowManagerOcclusionManager, Lazy lazy, Executor executor, KeyguardInteractor keyguardInteractor, KeyguardEnabledInteractor keyguardEnabledInteractor) {
         new Lazy(this) { // from class: com.android.systemui.keyguard.KeyguardService.2
             @Override // dagger.Lazy

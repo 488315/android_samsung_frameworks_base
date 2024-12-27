@@ -267,13 +267,11 @@ public class PackageImpl
             new Parcelable.Creator<
                     PackageImpl>() { // from class:
                                      // com.android.internal.pm.parsing.pkg.PackageImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackageImpl createFromParcel(Parcel source) {
                     return new PackageImpl(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackageImpl[] newArray(int size) {
                     return new PackageImpl[size];

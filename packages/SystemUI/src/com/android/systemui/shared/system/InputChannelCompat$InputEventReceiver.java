@@ -27,7 +27,6 @@ public final class InputChannelCompat$InputEventReceiver {
         KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0.m("Input event receiver for monitor (", str, ") disposed", "InputMonitorCompat");
     }
 
-    /* JADX WARN: Type inference failed for: r7v1, types: [com.android.systemui.shared.system.InputChannelCompat$InputEventReceiver$1] */
     public InputChannelCompat$InputEventReceiver(String str, InputChannel inputChannel, Looper looper, Choreographer choreographer, final InputChannelCompat$InputEventListener inputChannelCompat$InputEventListener) {
         this.mName = str;
         this.mReceiver = new BatchedInputEventReceiver(this, inputChannel, looper, choreographer) { // from class: com.android.systemui.shared.system.InputChannelCompat$InputEventReceiver.1

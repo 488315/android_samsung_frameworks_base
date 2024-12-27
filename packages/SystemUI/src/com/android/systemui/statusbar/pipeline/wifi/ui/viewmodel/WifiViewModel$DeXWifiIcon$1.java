@@ -21,7 +21,6 @@ final class WifiViewModel$DeXWifiIcon$1 extends SuspendLambda implements Functio
     int label;
     final /* synthetic */ WifiViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiViewModel$DeXWifiIcon$1(DesktopManager desktopManager, WifiViewModel wifiViewModel, Continuation continuation) {
         super(2, continuation);
         this.$desktopManager = desktopManager;
@@ -61,7 +60,6 @@ final class WifiViewModel$DeXWifiIcon$1 extends SuspendLambda implements Functio
             this.$desktopManager.setDesktopStatusBarIconCallback(desktopCallback);
             final DesktopManager desktopManager2 = this.$desktopManager;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.wifi.ui.viewmodel.WifiViewModel$DeXWifiIcon$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -21,7 +21,6 @@ final class FacePropertyRepositoryImpl$sensorLocation$1$1 extends SuspendLambda 
     int label;
     final /* synthetic */ FacePropertyRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FacePropertyRepositoryImpl$sensorLocation$1$1(FacePropertyRepositoryImpl facePropertyRepositoryImpl, Continuation continuation) {
         super(5, continuation);
         this.this$0 = facePropertyRepositoryImpl;

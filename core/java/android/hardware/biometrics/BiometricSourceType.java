@@ -11,13 +11,11 @@ public enum BiometricSourceType implements Parcelable {
     public static final Parcelable.Creator<BiometricSourceType> CREATOR =
             new Parcelable.Creator<BiometricSourceType>() { // from class:
                 // android.hardware.biometrics.BiometricSourceType.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BiometricSourceType createFromParcel(Parcel source) {
                     return BiometricSourceType.valueOf(source.readString());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BiometricSourceType[] newArray(int size) {
                     return new BiometricSourceType[size];

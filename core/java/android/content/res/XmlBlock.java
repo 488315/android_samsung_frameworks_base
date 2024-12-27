@@ -30,71 +30,55 @@ public final class XmlBlock implements AutoCloseable {
 
     private static final native void nativeDestroy(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final native void nativeDestroyParseState(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetAttributeCount(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetAttributeData(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetAttributeDataType(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native int nativeGetAttributeIndex(long j, String str, String str2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetAttributeName(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetAttributeNamespace(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetAttributeResource(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetAttributeStringValue(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetClassAttribute(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetIdAttribute(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetLineNumber(long j);
 
     @CriticalNative
     static final native int nativeGetName(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetNamespace(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetSourceResId(long j);
 
     private static final native long nativeGetStringBlock(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetStyleAttribute(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static final native int nativeGetText(long j);
 
@@ -127,7 +111,6 @@ public final class XmlBlock implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void decOpenCountLocked() {
         this.mOpenCount--;
         if (this.mOpenCount == 0) {

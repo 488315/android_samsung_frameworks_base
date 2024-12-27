@@ -19,7 +19,6 @@ final class MuteQuickAffordanceConfig$asFlow$1 extends SuspendLambda implements 
     Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MuteQuickAffordanceConfig$asFlow$1(LiveData liveData, Continuation continuation) {
         super(2, continuation);
         this.$this_asFlow = liveData;
@@ -37,7 +36,6 @@ final class MuteQuickAffordanceConfig$asFlow$1 extends SuspendLambda implements 
         return ((MuteQuickAffordanceConfig$asFlow$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         final Observer observer;
@@ -76,7 +74,6 @@ final class MuteQuickAffordanceConfig$asFlow$1 extends SuspendLambda implements 
         }
         final LiveData liveData = this.$this_asFlow;
         Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.quickaffordance.MuteQuickAffordanceConfig$asFlow$1.1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

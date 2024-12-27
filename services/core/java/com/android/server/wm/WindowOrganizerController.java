@@ -386,7 +386,6 @@ public final class WindowOrganizerController extends IWindowOrganizerController.
         return requestedOverrideWindowingMode != windowContainer.getWindowingMode() ? i | 2 : i;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:581:0x0b14, code lost:
 
        if (r5 != (-1)) goto L506;
@@ -395,11 +394,6 @@ public final class WindowOrganizerController extends IWindowOrganizerController.
 
        if (validateTaskFragment((com.android.server.wm.TaskFragment) r25.mLaunchTaskFragments.get(r4), r15, r32, r33) == false) goto L244;
     */
-    /* JADX WARN: Removed duplicated region for block: B:569:0x0b42  */
-    /* JADX WARN: Removed duplicated region for block: B:574:0x0b5b  */
-    /* JADX WARN: Removed duplicated region for block: B:577:0x0b78  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0cc4  */
-    /* JADX WARN: Removed duplicated region for block: B:68:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -428,7 +422,6 @@ public final class WindowOrganizerController extends IWindowOrganizerController.
                     + " com.android.server.wm.Transition, boolean):int");
     }
 
-    /* JADX WARN: Finally extract failed */
     public final int applySyncTransaction(
             final WindowContainerTransaction windowContainerTransaction,
             IWindowContainerTransactionCallback iWindowContainerTransactionCallback) {
@@ -741,38 +734,6 @@ public final class WindowOrganizerController extends IWindowOrganizerController.
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:131:0x02fc A[Catch: all -> 0x01ab, TryCatch #5 {all -> 0x01ab, blocks: (B:301:0x0132, B:302:0x013e, B:307:0x014a, B:310:0x0168, B:315:0x0177, B:317:0x0183, B:320:0x018a, B:322:0x0161, B:46:0x01ad, B:50:0x01c2, B:53:0x01ca, B:55:0x01dc, B:64:0x01e9, B:66:0x01ef, B:68:0x01ff, B:70:0x020b, B:72:0x0210, B:73:0x0214, B:90:0x0230, B:91:0x0232, B:93:0x0238, B:95:0x023e, B:99:0x024f, B:103:0x0277, B:104:0x0261, B:108:0x0270, B:113:0x028a, B:114:0x02a8, B:116:0x02b9, B:117:0x02c2, B:119:0x02c6, B:121:0x02ca, B:59:0x02d7, B:128:0x02f1, B:129:0x02f6, B:131:0x02fc, B:138:0x0304, B:141:0x030b, B:142:0x0317, B:148:0x033d, B:151:0x0345, B:153:0x034b, B:155:0x035a, B:157:0x0364, B:159:0x036e, B:161:0x0374, B:163:0x037a, B:173:0x0387, B:174:0x038f, B:176:0x0395, B:178:0x03c4, B:180:0x03c8, B:182:0x03ce, B:277:0x039b, B:279:0x03a1, B:281:0x03a7, B:283:0x03b1, B:285:0x03b9), top: B:300:0x0132 }] */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x0329  */
-    /* JADX WARN: Removed duplicated region for block: B:148:0x033d A[Catch: all -> 0x01ab, TRY_ENTER, TryCatch #5 {all -> 0x01ab, blocks: (B:301:0x0132, B:302:0x013e, B:307:0x014a, B:310:0x0168, B:315:0x0177, B:317:0x0183, B:320:0x018a, B:322:0x0161, B:46:0x01ad, B:50:0x01c2, B:53:0x01ca, B:55:0x01dc, B:64:0x01e9, B:66:0x01ef, B:68:0x01ff, B:70:0x020b, B:72:0x0210, B:73:0x0214, B:90:0x0230, B:91:0x0232, B:93:0x0238, B:95:0x023e, B:99:0x024f, B:103:0x0277, B:104:0x0261, B:108:0x0270, B:113:0x028a, B:114:0x02a8, B:116:0x02b9, B:117:0x02c2, B:119:0x02c6, B:121:0x02ca, B:59:0x02d7, B:128:0x02f1, B:129:0x02f6, B:131:0x02fc, B:138:0x0304, B:141:0x030b, B:142:0x0317, B:148:0x033d, B:151:0x0345, B:153:0x034b, B:155:0x035a, B:157:0x0364, B:159:0x036e, B:161:0x0374, B:163:0x037a, B:173:0x0387, B:174:0x038f, B:176:0x0395, B:178:0x03c4, B:180:0x03c8, B:182:0x03ce, B:277:0x039b, B:279:0x03a1, B:281:0x03a7, B:283:0x03b1, B:285:0x03b9), top: B:300:0x0132 }] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x007c A[Catch: all -> 0x0087, TryCatch #2 {all -> 0x0087, blocks: (B:12:0x0075, B:14:0x007c, B:17:0x008d, B:19:0x0093, B:21:0x00a7, B:22:0x00b4, B:24:0x00ba, B:26:0x00c7, B:28:0x00cc, B:30:0x00d2, B:32:0x00f6, B:34:0x00fc, B:35:0x00ff, B:37:0x0103, B:39:0x0109, B:40:0x0118, B:43:0x011e, B:44:0x0124, B:304:0x0144, B:309:0x0150, B:292:0x0322, B:145:0x032a, B:323:0x00c0), top: B:11:0x0075 }] */
-    /* JADX WARN: Removed duplicated region for block: B:176:0x0395 A[Catch: all -> 0x01ab, TryCatch #5 {all -> 0x01ab, blocks: (B:301:0x0132, B:302:0x013e, B:307:0x014a, B:310:0x0168, B:315:0x0177, B:317:0x0183, B:320:0x018a, B:322:0x0161, B:46:0x01ad, B:50:0x01c2, B:53:0x01ca, B:55:0x01dc, B:64:0x01e9, B:66:0x01ef, B:68:0x01ff, B:70:0x020b, B:72:0x0210, B:73:0x0214, B:90:0x0230, B:91:0x0232, B:93:0x0238, B:95:0x023e, B:99:0x024f, B:103:0x0277, B:104:0x0261, B:108:0x0270, B:113:0x028a, B:114:0x02a8, B:116:0x02b9, B:117:0x02c2, B:119:0x02c6, B:121:0x02ca, B:59:0x02d7, B:128:0x02f1, B:129:0x02f6, B:131:0x02fc, B:138:0x0304, B:141:0x030b, B:142:0x0317, B:148:0x033d, B:151:0x0345, B:153:0x034b, B:155:0x035a, B:157:0x0364, B:159:0x036e, B:161:0x0374, B:163:0x037a, B:173:0x0387, B:174:0x038f, B:176:0x0395, B:178:0x03c4, B:180:0x03c8, B:182:0x03ce, B:277:0x039b, B:279:0x03a1, B:281:0x03a7, B:283:0x03b1, B:285:0x03b9), top: B:300:0x0132 }] */
-    /* JADX WARN: Removed duplicated region for block: B:180:0x03c8 A[Catch: all -> 0x01ab, TryCatch #5 {all -> 0x01ab, blocks: (B:301:0x0132, B:302:0x013e, B:307:0x014a, B:310:0x0168, B:315:0x0177, B:317:0x0183, B:320:0x018a, B:322:0x0161, B:46:0x01ad, B:50:0x01c2, B:53:0x01ca, B:55:0x01dc, B:64:0x01e9, B:66:0x01ef, B:68:0x01ff, B:70:0x020b, B:72:0x0210, B:73:0x0214, B:90:0x0230, B:91:0x0232, B:93:0x0238, B:95:0x023e, B:99:0x024f, B:103:0x0277, B:104:0x0261, B:108:0x0270, B:113:0x028a, B:114:0x02a8, B:116:0x02b9, B:117:0x02c2, B:119:0x02c6, B:121:0x02ca, B:59:0x02d7, B:128:0x02f1, B:129:0x02f6, B:131:0x02fc, B:138:0x0304, B:141:0x030b, B:142:0x0317, B:148:0x033d, B:151:0x0345, B:153:0x034b, B:155:0x035a, B:157:0x0364, B:159:0x036e, B:161:0x0374, B:163:0x037a, B:173:0x0387, B:174:0x038f, B:176:0x0395, B:178:0x03c4, B:180:0x03c8, B:182:0x03ce, B:277:0x039b, B:279:0x03a1, B:281:0x03a7, B:283:0x03b1, B:285:0x03b9), top: B:300:0x0132 }] */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x045c A[Catch: all -> 0x043b, TryCatch #4 {all -> 0x043b, blocks: (B:270:0x041f, B:188:0x0445, B:190:0x045c, B:192:0x0466, B:193:0x0469, B:194:0x0475, B:196:0x047b, B:198:0x048d, B:206:0x0495, B:209:0x04a5, B:214:0x04ae, B:216:0x04b4, B:218:0x04ba, B:220:0x04c6, B:224:0x04cb, B:225:0x04e1, B:228:0x04e2, B:230:0x04f8, B:231:0x0507, B:233:0x04fc, B:202:0x050c, B:241:0x0524, B:243:0x0528, B:245:0x0575, B:250:0x053b, B:252:0x053f, B:254:0x0547, B:256:0x0555, B:258:0x0559, B:260:0x056e, B:261:0x0560), top: B:269:0x041f }] */
-    /* JADX WARN: Removed duplicated region for block: B:196:0x047b A[Catch: all -> 0x043b, TryCatch #4 {all -> 0x043b, blocks: (B:270:0x041f, B:188:0x0445, B:190:0x045c, B:192:0x0466, B:193:0x0469, B:194:0x0475, B:196:0x047b, B:198:0x048d, B:206:0x0495, B:209:0x04a5, B:214:0x04ae, B:216:0x04b4, B:218:0x04ba, B:220:0x04c6, B:224:0x04cb, B:225:0x04e1, B:228:0x04e2, B:230:0x04f8, B:231:0x0507, B:233:0x04fc, B:202:0x050c, B:241:0x0524, B:243:0x0528, B:245:0x0575, B:250:0x053b, B:252:0x053f, B:254:0x0547, B:256:0x0555, B:258:0x0559, B:260:0x056e, B:261:0x0560), top: B:269:0x041f }] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0093 A[Catch: all -> 0x0087, TryCatch #2 {all -> 0x0087, blocks: (B:12:0x0075, B:14:0x007c, B:17:0x008d, B:19:0x0093, B:21:0x00a7, B:22:0x00b4, B:24:0x00ba, B:26:0x00c7, B:28:0x00cc, B:30:0x00d2, B:32:0x00f6, B:34:0x00fc, B:35:0x00ff, B:37:0x0103, B:39:0x0109, B:40:0x0118, B:43:0x011e, B:44:0x0124, B:304:0x0144, B:309:0x0150, B:292:0x0322, B:145:0x032a, B:323:0x00c0), top: B:11:0x0075 }] */
-    /* JADX WARN: Removed duplicated region for block: B:243:0x0528 A[Catch: all -> 0x043b, TryCatch #4 {all -> 0x043b, blocks: (B:270:0x041f, B:188:0x0445, B:190:0x045c, B:192:0x0466, B:193:0x0469, B:194:0x0475, B:196:0x047b, B:198:0x048d, B:206:0x0495, B:209:0x04a5, B:214:0x04ae, B:216:0x04b4, B:218:0x04ba, B:220:0x04c6, B:224:0x04cb, B:225:0x04e1, B:228:0x04e2, B:230:0x04f8, B:231:0x0507, B:233:0x04fc, B:202:0x050c, B:241:0x0524, B:243:0x0528, B:245:0x0575, B:250:0x053b, B:252:0x053f, B:254:0x0547, B:256:0x0555, B:258:0x0559, B:260:0x056e, B:261:0x0560), top: B:269:0x041f }] */
-    /* JADX WARN: Removed duplicated region for block: B:245:0x0575 A[Catch: all -> 0x043b, TRY_LEAVE, TryCatch #4 {all -> 0x043b, blocks: (B:270:0x041f, B:188:0x0445, B:190:0x045c, B:192:0x0466, B:193:0x0469, B:194:0x0475, B:196:0x047b, B:198:0x048d, B:206:0x0495, B:209:0x04a5, B:214:0x04ae, B:216:0x04b4, B:218:0x04ba, B:220:0x04c6, B:224:0x04cb, B:225:0x04e1, B:228:0x04e2, B:230:0x04f8, B:231:0x0507, B:233:0x04fc, B:202:0x050c, B:241:0x0524, B:243:0x0528, B:245:0x0575, B:250:0x053b, B:252:0x053f, B:254:0x0547, B:256:0x0555, B:258:0x0559, B:260:0x056e, B:261:0x0560), top: B:269:0x041f }] */
-    /* JADX WARN: Removed duplicated region for block: B:247:0x0580  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00ba A[Catch: all -> 0x0087, TryCatch #2 {all -> 0x0087, blocks: (B:12:0x0075, B:14:0x007c, B:17:0x008d, B:19:0x0093, B:21:0x00a7, B:22:0x00b4, B:24:0x00ba, B:26:0x00c7, B:28:0x00cc, B:30:0x00d2, B:32:0x00f6, B:34:0x00fc, B:35:0x00ff, B:37:0x0103, B:39:0x0109, B:40:0x0118, B:43:0x011e, B:44:0x0124, B:304:0x0144, B:309:0x0150, B:292:0x0322, B:145:0x032a, B:323:0x00c0), top: B:11:0x0075 }] */
-    /* JADX WARN: Removed duplicated region for block: B:250:0x053b A[Catch: all -> 0x043b, TryCatch #4 {all -> 0x043b, blocks: (B:270:0x041f, B:188:0x0445, B:190:0x045c, B:192:0x0466, B:193:0x0469, B:194:0x0475, B:196:0x047b, B:198:0x048d, B:206:0x0495, B:209:0x04a5, B:214:0x04ae, B:216:0x04b4, B:218:0x04ba, B:220:0x04c6, B:224:0x04cb, B:225:0x04e1, B:228:0x04e2, B:230:0x04f8, B:231:0x0507, B:233:0x04fc, B:202:0x050c, B:241:0x0524, B:243:0x0528, B:245:0x0575, B:250:0x053b, B:252:0x053f, B:254:0x0547, B:256:0x0555, B:258:0x0559, B:260:0x056e, B:261:0x0560), top: B:269:0x041f }] */
-    /* JADX WARN: Removed duplicated region for block: B:264:0x03dd A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:283:0x03b1 A[Catch: all -> 0x01ab, TryCatch #5 {all -> 0x01ab, blocks: (B:301:0x0132, B:302:0x013e, B:307:0x014a, B:310:0x0168, B:315:0x0177, B:317:0x0183, B:320:0x018a, B:322:0x0161, B:46:0x01ad, B:50:0x01c2, B:53:0x01ca, B:55:0x01dc, B:64:0x01e9, B:66:0x01ef, B:68:0x01ff, B:70:0x020b, B:72:0x0210, B:73:0x0214, B:90:0x0230, B:91:0x0232, B:93:0x0238, B:95:0x023e, B:99:0x024f, B:103:0x0277, B:104:0x0261, B:108:0x0270, B:113:0x028a, B:114:0x02a8, B:116:0x02b9, B:117:0x02c2, B:119:0x02c6, B:121:0x02ca, B:59:0x02d7, B:128:0x02f1, B:129:0x02f6, B:131:0x02fc, B:138:0x0304, B:141:0x030b, B:142:0x0317, B:148:0x033d, B:151:0x0345, B:153:0x034b, B:155:0x035a, B:157:0x0364, B:159:0x036e, B:161:0x0374, B:163:0x037a, B:173:0x0387, B:174:0x038f, B:176:0x0395, B:178:0x03c4, B:180:0x03c8, B:182:0x03ce, B:277:0x039b, B:279:0x03a1, B:281:0x03a7, B:283:0x03b1, B:285:0x03b9), top: B:300:0x0132 }] */
-    /* JADX WARN: Removed duplicated region for block: B:285:0x03b9 A[Catch: all -> 0x01ab, TryCatch #5 {all -> 0x01ab, blocks: (B:301:0x0132, B:302:0x013e, B:307:0x014a, B:310:0x0168, B:315:0x0177, B:317:0x0183, B:320:0x018a, B:322:0x0161, B:46:0x01ad, B:50:0x01c2, B:53:0x01ca, B:55:0x01dc, B:64:0x01e9, B:66:0x01ef, B:68:0x01ff, B:70:0x020b, B:72:0x0210, B:73:0x0214, B:90:0x0230, B:91:0x0232, B:93:0x0238, B:95:0x023e, B:99:0x024f, B:103:0x0277, B:104:0x0261, B:108:0x0270, B:113:0x028a, B:114:0x02a8, B:116:0x02b9, B:117:0x02c2, B:119:0x02c6, B:121:0x02ca, B:59:0x02d7, B:128:0x02f1, B:129:0x02f6, B:131:0x02fc, B:138:0x0304, B:141:0x030b, B:142:0x0317, B:148:0x033d, B:151:0x0345, B:153:0x034b, B:155:0x035a, B:157:0x0364, B:159:0x036e, B:161:0x0374, B:163:0x037a, B:173:0x0387, B:174:0x038f, B:176:0x0395, B:178:0x03c4, B:180:0x03c8, B:182:0x03ce, B:277:0x039b, B:279:0x03a1, B:281:0x03a7, B:283:0x03b1, B:285:0x03b9), top: B:300:0x0132 }] */
-    /* JADX WARN: Removed duplicated region for block: B:286:0x03b6  */
-    /* JADX WARN: Removed duplicated region for block: B:289:0x031d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00cc A[Catch: all -> 0x0087, TryCatch #2 {all -> 0x0087, blocks: (B:12:0x0075, B:14:0x007c, B:17:0x008d, B:19:0x0093, B:21:0x00a7, B:22:0x00b4, B:24:0x00ba, B:26:0x00c7, B:28:0x00cc, B:30:0x00d2, B:32:0x00f6, B:34:0x00fc, B:35:0x00ff, B:37:0x0103, B:39:0x0109, B:40:0x0118, B:43:0x011e, B:44:0x0124, B:304:0x0144, B:309:0x0150, B:292:0x0322, B:145:0x032a, B:323:0x00c0), top: B:11:0x0075 }] */
-    /* JADX WARN: Removed duplicated region for block: B:298:0x0317 A[EDGE_INSN: B:298:0x0317->B:142:0x0317 BREAK  A[LOOP:2: B:129:0x02f6->B:136:0x02f6], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:299:0x01c1  */
-    /* JADX WARN: Removed duplicated region for block: B:300:0x0132 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:324:0x00b2  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00f6 A[Catch: all -> 0x0087, TryCatch #2 {all -> 0x0087, blocks: (B:12:0x0075, B:14:0x007c, B:17:0x008d, B:19:0x0093, B:21:0x00a7, B:22:0x00b4, B:24:0x00ba, B:26:0x00c7, B:28:0x00cc, B:30:0x00d2, B:32:0x00f6, B:34:0x00fc, B:35:0x00ff, B:37:0x0103, B:39:0x0109, B:40:0x0118, B:43:0x011e, B:44:0x0124, B:304:0x0144, B:309:0x0150, B:292:0x0322, B:145:0x032a, B:323:0x00c0), top: B:11:0x0075 }] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00fa  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0103 A[Catch: all -> 0x0087, TryCatch #2 {all -> 0x0087, blocks: (B:12:0x0075, B:14:0x007c, B:17:0x008d, B:19:0x0093, B:21:0x00a7, B:22:0x00b4, B:24:0x00ba, B:26:0x00c7, B:28:0x00cc, B:30:0x00d2, B:32:0x00f6, B:34:0x00fc, B:35:0x00ff, B:37:0x0103, B:39:0x0109, B:40:0x0118, B:43:0x011e, B:44:0x0124, B:304:0x0144, B:309:0x0150, B:292:0x0322, B:145:0x032a, B:323:0x00c0), top: B:11:0x0075 }] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x011c A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x01bf  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x01ca A[Catch: all -> 0x01ab, TRY_ENTER, TryCatch #5 {all -> 0x01ab, blocks: (B:301:0x0132, B:302:0x013e, B:307:0x014a, B:310:0x0168, B:315:0x0177, B:317:0x0183, B:320:0x018a, B:322:0x0161, B:46:0x01ad, B:50:0x01c2, B:53:0x01ca, B:55:0x01dc, B:64:0x01e9, B:66:0x01ef, B:68:0x01ff, B:70:0x020b, B:72:0x0210, B:73:0x0214, B:90:0x0230, B:91:0x0232, B:93:0x0238, B:95:0x023e, B:99:0x024f, B:103:0x0277, B:104:0x0261, B:108:0x0270, B:113:0x028a, B:114:0x02a8, B:116:0x02b9, B:117:0x02c2, B:119:0x02c6, B:121:0x02ca, B:59:0x02d7, B:128:0x02f1, B:129:0x02f6, B:131:0x02fc, B:138:0x0304, B:141:0x030b, B:142:0x0317, B:148:0x033d, B:151:0x0345, B:153:0x034b, B:155:0x035a, B:157:0x0364, B:159:0x036e, B:161:0x0374, B:163:0x037a, B:173:0x0387, B:174:0x038f, B:176:0x0395, B:178:0x03c4, B:180:0x03c8, B:182:0x03ce, B:277:0x039b, B:279:0x03a1, B:281:0x03a7, B:283:0x03b1, B:285:0x03b9), top: B:300:0x0132 }] */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x059d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -851,7 +812,6 @@ public final class WindowOrganizerController extends IWindowOrganizerController.
 
        if (r0 != false) goto L105;
     */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x024c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1301,7 +1261,6 @@ public final class WindowOrganizerController extends IWindowOrganizerController.
         this.mService.mWindowManager.mSyncEngine.setReady(i, true);
     }
 
-    /* JADX WARN: Finally extract failed */
     public final int startLegacyTransition(
             int i,
             RemoteAnimationAdapter remoteAnimationAdapter,
@@ -1376,7 +1335,6 @@ public final class WindowOrganizerController extends IWindowOrganizerController.
         return i2;
     }
 
-    /* JADX WARN: Finally extract failed */
     public final Transition.Token startTransition(
             int i, IBinder iBinder, WindowContainerTransaction windowContainerTransaction) {
         Transition.ReadyCondition readyCondition;

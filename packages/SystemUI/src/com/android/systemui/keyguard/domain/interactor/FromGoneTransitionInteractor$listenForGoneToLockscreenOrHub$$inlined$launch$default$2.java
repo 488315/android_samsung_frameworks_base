@@ -15,7 +15,6 @@ public final class FromGoneTransitionInteractor$listenForGoneToLockscreenOrHub$$
     int label;
     final /* synthetic */ FromGoneTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromGoneTransitionInteractor$listenForGoneToLockscreenOrHub$$inlined$launch$default$2(String str, Continuation continuation, FromGoneTransitionInteractor fromGoneTransitionInteractor) {
         super(2, continuation);
         this.$spanName = str;
@@ -34,8 +33,6 @@ public final class FromGoneTransitionInteractor$listenForGoneToLockscreenOrHub$$
         return ((FromGoneTransitionInteractor$listenForGoneToLockscreenOrHub$$inlined$launch$default$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00a7  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00ac  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

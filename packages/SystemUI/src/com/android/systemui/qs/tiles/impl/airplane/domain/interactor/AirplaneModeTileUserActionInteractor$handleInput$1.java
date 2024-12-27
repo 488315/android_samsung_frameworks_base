@@ -10,7 +10,6 @@ final class AirplaneModeTileUserActionInteractor$handleInput$1 extends Continuat
     /* synthetic */ Object result;
     final /* synthetic */ AirplaneModeTileUserActionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AirplaneModeTileUserActionInteractor$handleInput$1(AirplaneModeTileUserActionInteractor airplaneModeTileUserActionInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = airplaneModeTileUserActionInteractor;

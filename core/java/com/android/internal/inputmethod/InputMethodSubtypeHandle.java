@@ -19,13 +19,11 @@ public final class InputMethodSubtypeHandle implements Parcelable {
             new Parcelable.Creator<
                     InputMethodSubtypeHandle>() { // from class:
                                                   // com.android.internal.inputmethod.InputMethodSubtypeHandle.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputMethodSubtypeHandle createFromParcel(Parcel in) {
                     return InputMethodSubtypeHandle.of(in.readString8());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputMethodSubtypeHandle[] newArray(int size) {
                     return new InputMethodSubtypeHandle[size];

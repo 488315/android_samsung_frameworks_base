@@ -9,13 +9,11 @@ public final class VirtualMouseRelativeEvent implements Parcelable {
     public static final Parcelable.Creator<VirtualMouseRelativeEvent> CREATOR =
             new Parcelable.Creator<VirtualMouseRelativeEvent>() { // from class:
                 // android.hardware.input.VirtualMouseRelativeEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualMouseRelativeEvent createFromParcel(Parcel source) {
                     return new VirtualMouseRelativeEvent(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualMouseRelativeEvent[] newArray(int size) {
                     return new VirtualMouseRelativeEvent[size];

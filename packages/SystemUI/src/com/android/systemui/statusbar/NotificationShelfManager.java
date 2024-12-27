@@ -48,7 +48,6 @@ public final class NotificationShelfManager {
     public final Interpolator mSineInOut33 = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
     public final long ALPHA_DURATION = 300;
 
-    /* JADX WARN: Type inference failed for: r6v6, types: [com.android.systemui.statusbar.NotificationShelfManager$configurationListener$1] */
     public NotificationShelfManager(SettingsHelper settingsHelper, Context context, ConfigurationController configurationController, StatusBarStateController statusBarStateController) {
         this.settingsHelper = settingsHelper;
         this.context = context;

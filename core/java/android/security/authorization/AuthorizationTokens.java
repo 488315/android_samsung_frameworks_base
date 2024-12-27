@@ -11,7 +11,6 @@ public class AuthorizationTokens implements Parcelable {
             new Parcelable.Creator<
                     AuthorizationTokens>() { // from class:
                                              // android.security.authorization.AuthorizationTokens.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AuthorizationTokens createFromParcel(Parcel _aidl_source) {
                     AuthorizationTokens _aidl_out = new AuthorizationTokens();
@@ -19,7 +18,6 @@ public class AuthorizationTokens implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AuthorizationTokens[] newArray(int _aidl_size) {
                     return new AuthorizationTokens[_aidl_size];

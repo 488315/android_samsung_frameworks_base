@@ -8,13 +8,11 @@ public class PresTupleInfo implements Parcelable {
             new Parcelable.Creator<
                     PresTupleInfo>() { // from class:
                                        // com.android.ims.internal.uce.presence.PresTupleInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PresTupleInfo createFromParcel(Parcel source) {
                     return new PresTupleInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PresTupleInfo[] newArray(int size) {
                     return new PresTupleInfo[size];

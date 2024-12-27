@@ -397,7 +397,6 @@ final class PhysicalKeyLayout {
         return getKey(kcm, scanCode, 1.0f);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String getKeyText(KeyCharacterMap kcm, int keyCode, int modifierState) {
         int utf8Char;
         if (isSpecialKey(keyCode)

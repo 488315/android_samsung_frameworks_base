@@ -8,7 +8,6 @@ public class TouchDetectionParameters implements Parcelable {
     public static final Parcelable.Creator<TouchDetectionParameters> CREATOR =
             new Parcelable.Creator<TouchDetectionParameters>() { // from class:
                 // android.hardware.biometrics.fingerprint.TouchDetectionParameters.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TouchDetectionParameters createFromParcel(Parcel _aidl_source) {
                     TouchDetectionParameters _aidl_out = new TouchDetectionParameters();
@@ -16,7 +15,6 @@ public class TouchDetectionParameters implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TouchDetectionParameters[] newArray(int _aidl_size) {
                     return new TouchDetectionParameters[_aidl_size];

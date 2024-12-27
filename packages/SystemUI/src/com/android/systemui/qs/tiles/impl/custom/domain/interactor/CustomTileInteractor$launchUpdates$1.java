@@ -34,7 +34,6 @@ final class CustomTileInteractor$launchUpdates$1 extends SuspendLambda implement
         int label;
         final /* synthetic */ CustomTileInteractor this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(CustomTileInteractor customTileInteractor, UserHandle userHandle, Continuation continuation) {
             super(2, continuation);
             this.this$0 = customTileInteractor;
@@ -109,7 +108,6 @@ final class CustomTileInteractor$launchUpdates$1 extends SuspendLambda implement
         int label;
         final /* synthetic */ CustomTileInteractor this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(CustomTileInteractor customTileInteractor, UserHandle userHandle, Continuation continuation) {
             super(2, continuation);
             this.this$0 = customTileInteractor;
@@ -175,7 +173,6 @@ final class CustomTileInteractor$launchUpdates$1 extends SuspendLambda implement
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTileInteractor$launchUpdates$1(CustomTileInteractor customTileInteractor, UserHandle userHandle, Continuation continuation) {
         super(2, continuation);
         this.this$0 = customTileInteractor;

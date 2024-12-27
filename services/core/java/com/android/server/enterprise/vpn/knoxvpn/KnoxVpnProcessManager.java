@@ -38,8 +38,6 @@ public final class KnoxVpnProcessManager {
 
                 public final void onForegroundServicesChanged(int i, int i2, int i3) {}
 
-                /* JADX WARN: Removed duplicated region for block: B:56:0x00ac A[Catch: all -> 0x0071, Exception -> 0x0074, TryCatch #1 {Exception -> 0x0074, blocks: (B:34:0x005c, B:36:0x0064, B:38:0x0068, B:41:0x0079, B:43:0x0081, B:54:0x00a6, B:56:0x00ac, B:57:0x00bf, B:58:0x00a1), top: B:33:0x005c, outer: #0 }] */
-                /* JADX WARN: Removed duplicated region for block: B:57:0x00bf A[Catch: all -> 0x0071, Exception -> 0x0074, TRY_LEAVE, TryCatch #1 {Exception -> 0x0074, blocks: (B:34:0x005c, B:36:0x0064, B:38:0x0068, B:41:0x0079, B:43:0x0081, B:54:0x00a6, B:56:0x00ac, B:57:0x00bf, B:58:0x00a1), top: B:33:0x005c, outer: #0 }] */
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
                     To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -134,7 +132,6 @@ public final class KnoxVpnProcessManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.enterprise.vpn.knoxvpn.KnoxVpnProcessManager$1] */
     public KnoxVpnProcessManager(KnoxVpnEngineService knoxVpnEngineService) {
         this.mContext = null;
         this.mVpnConfig = null;

@@ -242,8 +242,6 @@ public final class GameServiceProviderInstanceImpl {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.app.GameServiceProviderInstanceImpl$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.app.GameServiceProviderInstanceImpl$3] */
     public GameServiceProviderInstanceImpl(
             UserHandle userHandle,
             Executor executor,

@@ -37,7 +37,6 @@ public class RingBuffer<T> {
         return (Object[]) Array.newInstance((Class<?>) c, cap);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Object createNewItem(Class c) {
         try {
             return c.getDeclaredConstructor(new Class[0]).newInstance(new Object[0]);

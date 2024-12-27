@@ -42,7 +42,6 @@ public final class ConstraintsChanges {
             function1 = function12;
         } else if (function12 != null) {
             function1 = new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerKt$plus$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -62,7 +61,6 @@ public final class ConstraintsChanges {
             function13 = function14;
         } else if (function14 != null) {
             function13 = new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerKt$plus$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -82,7 +80,6 @@ public final class ConstraintsChanges {
             function15 = function16;
         } else if (function16 != null) {
             function15 = new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerKt$plus$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }

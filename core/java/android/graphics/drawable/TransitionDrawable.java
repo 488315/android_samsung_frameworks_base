@@ -22,7 +22,6 @@ public class TransitionDrawable extends LayerDrawable implements Drawable.Callba
         this(new TransitionState(null, null, null), layers);
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     TransitionDrawable() {
         this(new TransitionState(null, null, null), (Resources) null);
     }

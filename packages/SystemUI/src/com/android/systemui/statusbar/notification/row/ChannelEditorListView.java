@@ -30,10 +30,6 @@ public final class ChannelEditorListView extends LinearLayout {
         this.channelListView = (LinearLayout) requireViewById(R.id.scrollView);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0132  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x0139  */
-    /* JADX WARN: Type inference failed for: r5v22, types: [java.lang.CharSequence] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

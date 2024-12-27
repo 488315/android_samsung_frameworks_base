@@ -44,8 +44,6 @@ public abstract class FadeAnimationController {
                 anonymousClass1, windowToken.getSurfaceAnimationRunner(), z);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.wm.FadeAnimationController$1] */
     public final void fadeWindowToken(
             boolean z,
             WindowToken windowToken,

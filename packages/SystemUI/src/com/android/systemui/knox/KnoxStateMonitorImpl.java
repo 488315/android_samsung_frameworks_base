@@ -326,9 +326,6 @@ public final class KnoxStateMonitorImpl implements KnoxStateMonitor, Dumpable {
     public final SdpMonitor mSdpMonitor = new SdpMonitor();
     public final UcmMonitor mUcmMonitor = new UcmMonitor();
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.knox.KnoxStateMonitorImpl$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.knox.KnoxStateMonitorImpl$2] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.knox.KnoxStateMonitorImpl$3] */
     public KnoxStateMonitorImpl(Context context, DumpManager dumpManager, SelectedUserInteractor selectedUserInteractor) {
         this.mContext = context;
         this.mSelectedUserInteractor = selectedUserInteractor;

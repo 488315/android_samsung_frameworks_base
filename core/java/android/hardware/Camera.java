@@ -175,7 +175,6 @@ public class Camera {
 
     private final native void native_takePicture(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final native void setHasPreviewCallback(boolean z, boolean z2);
 
     private final native void setPreviewCallbackSurface(Surface surface);
@@ -669,7 +668,6 @@ public class Camera {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateAppOpsPlayAudio() {
         synchronized (this.mShutterSoundLock) {
             boolean oldHasAppOpsPlayAudio = this.mHasAppOpsPlayAudio;
@@ -955,7 +953,6 @@ public class Camera {
             this.mMap.putAll(other.mMap);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Camera getOuter() {
             return Camera.this;
         }

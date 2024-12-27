@@ -131,7 +131,6 @@ public final class NotificationShadeWindowViewController implements Dumpable {
             shadeLogger.getClass();
             LogLevel logLevel = LogLevel.VERBOSE;
             Function1 function1 = new Function1() { // from class: com.android.systemui.shade.ShadeLogger$logShadeWindowDispatch$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }

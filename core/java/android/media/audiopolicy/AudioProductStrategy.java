@@ -27,7 +27,6 @@ public final class AudioProductStrategy implements Parcelable {
     public static final Parcelable.Creator<AudioProductStrategy> CREATOR =
             new Parcelable.Creator<AudioProductStrategy>() { // from class:
                 // android.media.audiopolicy.AudioProductStrategy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioProductStrategy createFromParcel(Parcel in) {
                     String name = in.readString();
@@ -40,7 +39,6 @@ public final class AudioProductStrategy implements Parcelable {
                     return new AudioProductStrategy(name, id, aag);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioProductStrategy[] newArray(int size) {
                     return new AudioProductStrategy[size];
@@ -280,7 +278,6 @@ public final class AudioProductStrategy implements Parcelable {
         return DEFAULT_ATTRIBUTES;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean attributesMatches(AudioAttributes refAttr, AudioAttributes attr) {
         Objects.requireNonNull(refAttr, "reference AudioAttributes must not be null");
         Objects.requireNonNull(attr, "requester's AudioAttributes must not be null");
@@ -309,7 +306,6 @@ public final class AudioProductStrategy implements Parcelable {
         public static final Parcelable.Creator<AudioAttributesGroup> CREATOR =
                 new Parcelable.Creator<AudioAttributesGroup>() { // from class:
                     // android.media.audiopolicy.AudioProductStrategy.AudioAttributesGroup.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AudioAttributesGroup createFromParcel(Parcel in) {
                         int volumeGroupId = in.readInt();
@@ -322,7 +318,6 @@ public final class AudioProductStrategy implements Parcelable {
                         return new AudioAttributesGroup(volumeGroupId, streamType, aa);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AudioAttributesGroup[] newArray(int size) {
                         return new AudioAttributesGroup[size];

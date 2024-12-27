@@ -17,7 +17,6 @@ public final class InternetTileDataInteractor$tileData$$inlined$flatMapLatest$1 
     int label;
     final /* synthetic */ InternetTileDataInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InternetTileDataInteractor$tileData$$inlined$flatMapLatest$1(Continuation continuation, InternetTileDataInteractor internetTileDataInteractor) {
         super(3, continuation);
         this.this$0 = internetTileDataInteractor;

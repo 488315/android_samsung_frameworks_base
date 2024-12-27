@@ -152,13 +152,11 @@ public class KeyCharacterMap implements Parcelable {
         CREATOR =
                 new Parcelable.Creator<
                         KeyCharacterMap>() { // from class: android.view.KeyCharacterMap.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public KeyCharacterMap createFromParcel(Parcel in) {
                         return new KeyCharacterMap(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public KeyCharacterMap[] newArray(int size) {
                         return new KeyCharacterMap[size];

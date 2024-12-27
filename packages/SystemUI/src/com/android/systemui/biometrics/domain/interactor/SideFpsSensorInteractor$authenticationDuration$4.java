@@ -12,7 +12,6 @@ final class SideFpsSensorInteractor$authenticationDuration$4 extends SuspendLamb
     int label;
     final /* synthetic */ SideFpsSensorInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SideFpsSensorInteractor$authenticationDuration$4(SideFpsSensorInteractor sideFpsSensorInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = sideFpsSensorInteractor;

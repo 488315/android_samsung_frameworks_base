@@ -14,7 +14,6 @@ public class BarringInfo implements Parcelable {
     public static final Parcelable.Creator<BarringInfo> CREATOR =
             new Parcelable.Creator<
                     BarringInfo>() { // from class: android.hardware.radio.network.BarringInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BarringInfo createFromParcel(Parcel _aidl_source) {
                     BarringInfo _aidl_out = new BarringInfo();
@@ -22,7 +21,6 @@ public class BarringInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BarringInfo[] newArray(int _aidl_size) {
                     return new BarringInfo[_aidl_size];

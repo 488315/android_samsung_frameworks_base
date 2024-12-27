@@ -19,7 +19,6 @@ final class NotifHeaderCoordinator$extractAllRepresentativeEntries$2 extends Res
     int label;
     final /* synthetic */ NotifHeaderCoordinator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotifHeaderCoordinator$extractAllRepresentativeEntries$2(ListEntry listEntry, NotifHeaderCoordinator notifHeaderCoordinator, Continuation continuation) {
         super(2, continuation);
         this.$listEntry = listEntry;

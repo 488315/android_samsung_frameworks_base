@@ -162,8 +162,6 @@ public class DozeUi implements DozeMachine.Part {
     
         if (r1 != false) goto L39;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.doze.DozeUi$2] */
     @Override // com.android.systemui.doze.DozeMachine.Part
     /*
         Code decompiled incorrectly, please refer to instructions dump.

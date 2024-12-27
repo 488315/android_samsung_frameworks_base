@@ -55,7 +55,6 @@ public class MM07 extends Metric {
             this(b, b2);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void serialize(ByteBuffer byteBuffer) throws BufferOverflowException {
             byteBuffer.put(this.m_ucMediaType);
             byteBuffer.put(this.m_ucFormat);

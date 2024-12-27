@@ -381,7 +381,6 @@ public class Build {
         return joinListOrElse(TelephonyProperties.baseband_version(), null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String getString(String property) {
         return SystemProperties.get(property, "unknown");
     }
@@ -394,7 +393,6 @@ public class Build {
                 : attestProp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String[] getStringList(String property, String separator) {
         String value = SystemProperties.get(property);
         if (value.isEmpty()) {

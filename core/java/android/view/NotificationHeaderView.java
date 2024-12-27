@@ -256,7 +256,6 @@ public class NotificationHeaderView extends RelativeLayout {
             return this.mTrackGesture;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isInside(float x, float y) {
             if (NotificationHeaderView.this.mAcceptAllTouches) {
                 return true;
@@ -277,7 +276,6 @@ public class NotificationHeaderView extends RelativeLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public View getFirstChildNotGone() {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);

@@ -48,7 +48,6 @@ public final class RotationLockTileMapper implements QSTileDataToStateMapper {
         Resources resources = this.resources;
         Resources.Theme theme = this.theme;
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.rotation.ui.mapper.RotationLockTileMapper$map$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -70,7 +69,6 @@ public final class RotationLockTileMapper implements QSTileDataToStateMapper {
                 }
                 final RotationLockTileMapper rotationLockTileMapper = RotationLockTileMapper.this;
                 builder.icon = new Function0() { // from class: com.android.systemui.qs.tiles.impl.rotation.ui.mapper.RotationLockTileMapper$map$1.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

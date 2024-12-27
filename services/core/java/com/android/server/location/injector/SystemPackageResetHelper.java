@@ -22,7 +22,6 @@ public final class SystemPackageResetHelper {
         public Receiver() {
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             Uri data;

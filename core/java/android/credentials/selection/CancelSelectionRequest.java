@@ -13,13 +13,11 @@ public final class CancelSelectionRequest implements Parcelable {
     public static final Parcelable.Creator<CancelSelectionRequest> CREATOR =
             new Parcelable.Creator<CancelSelectionRequest>() { // from class:
                 // android.credentials.selection.CancelSelectionRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CancelSelectionRequest createFromParcel(Parcel in) {
                     return new CancelSelectionRequest(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CancelSelectionRequest[] newArray(int size) {
                     return new CancelSelectionRequest[size];

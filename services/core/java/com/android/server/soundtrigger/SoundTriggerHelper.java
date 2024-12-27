@@ -120,7 +120,6 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             this.mModelState = 1;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:25:0x0055 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -799,8 +798,6 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         return SoundTrigger.STATUS_BAD_VALUE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0043 A[Catch: all -> 0x004c, TryCatch #0 {all -> 0x004c, blocks: (B:9:0x0017, B:11:0x001b, B:13:0x0025, B:16:0x0043, B:17:0x004a, B:20:0x004e, B:21:0x0057, B:23:0x0030, B:25:0x0036, B:26:0x0059, B:27:0x0060), top: B:8:0x0017 }] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x004e A[Catch: all -> 0x004c, TryCatch #0 {all -> 0x004c, blocks: (B:9:0x0017, B:11:0x001b, B:13:0x0025, B:16:0x0043, B:17:0x004a, B:20:0x004e, B:21:0x0057, B:23:0x0030, B:25:0x0036, B:26:0x0059, B:27:0x0060), top: B:8:0x0017 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

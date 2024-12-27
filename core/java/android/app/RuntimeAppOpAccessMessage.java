@@ -15,13 +15,11 @@ public final class RuntimeAppOpAccessMessage implements Parcelable {
     public static final Parcelable.Creator<RuntimeAppOpAccessMessage> CREATOR =
             new Parcelable.Creator<RuntimeAppOpAccessMessage>() { // from class:
                 // android.app.RuntimeAppOpAccessMessage.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RuntimeAppOpAccessMessage[] newArray(int size) {
                     return new RuntimeAppOpAccessMessage[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RuntimeAppOpAccessMessage createFromParcel(Parcel in) {
                     return new RuntimeAppOpAccessMessage(in);

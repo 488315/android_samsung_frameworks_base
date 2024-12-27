@@ -38,8 +38,6 @@ public final class DisplayLifecycle extends SecLifecycle implements Dumpable {
     public int mCurrentState = 0;
     public int mPreviousState = 0;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v7, types: [android.hardware.display.DisplayManager$DisplayListener, com.android.systemui.keyguard.DisplayLifecycle$1] */
     public DisplayLifecycle(Context context, Handler handler, final Lazy lazy) {
         ?? r0 = new DisplayManager.DisplayListener() { // from class: com.android.systemui.keyguard.DisplayLifecycle.1
             @Override // android.hardware.display.DisplayManager.DisplayListener

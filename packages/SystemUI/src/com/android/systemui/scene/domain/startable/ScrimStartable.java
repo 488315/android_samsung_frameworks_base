@@ -86,7 +86,6 @@ public final class ScrimStartable implements CoreStartable {
                 int label;
                 final /* synthetic */ ScrimStartable this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass3(Continuation continuation, ScrimStartable scrimStartable) {
                     super(3, continuation);
                     this.this$0 = scrimStartable;
@@ -100,12 +99,6 @@ public final class ScrimStartable implements CoreStartable {
                     return anonymousClass3.invokeSuspend(Unit.INSTANCE);
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:19:0x00b5  */
-                /* JADX WARN: Removed duplicated region for block: B:26:0x00d8 A[ADDED_TO_REGION] */
-                /* JADX WARN: Removed duplicated region for block: B:31:0x00e9  */
-                /* JADX WARN: Removed duplicated region for block: B:37:0x00fe  */
-                /* JADX WARN: Removed duplicated region for block: B:45:0x01c6 A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:48:0x0119  */
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -124,7 +117,6 @@ public final class ScrimStartable implements CoreStartable {
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
                 Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$combine$1.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -165,8 +157,6 @@ public final class ScrimStartable implements CoreStartable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

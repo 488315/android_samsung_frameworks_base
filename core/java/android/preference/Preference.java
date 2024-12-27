@@ -1116,13 +1116,11 @@ public class Preference implements Comparable<Preference> {
                 new Parcelable.Creator<
                         BaseSavedState>() { // from class:
                                             // android.preference.Preference.BaseSavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BaseSavedState createFromParcel(Parcel in) {
                         return new BaseSavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BaseSavedState[] newArray(int size) {
                         return new BaseSavedState[size];

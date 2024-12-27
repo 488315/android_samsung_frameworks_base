@@ -37,7 +37,6 @@ final class FromPrimaryBouncerTransitionInteractor$listenForPrimaryBouncerToDrea
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromPrimaryBouncerTransitionInteractor$listenForPrimaryBouncerToDreamingLockscreenHosted$1(FromPrimaryBouncerTransitionInteractor fromPrimaryBouncerTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromPrimaryBouncerTransitionInteractor;

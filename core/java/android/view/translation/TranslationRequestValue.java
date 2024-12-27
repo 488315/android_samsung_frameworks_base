@@ -10,13 +10,11 @@ public final class TranslationRequestValue implements Parcelable {
             new Parcelable.Creator<
                     TranslationRequestValue>() { // from class:
                                                  // android.view.translation.TranslationRequestValue.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TranslationRequestValue[] newArray(int size) {
                     return new TranslationRequestValue[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TranslationRequestValue createFromParcel(Parcel in) {
                     return new TranslationRequestValue(in);

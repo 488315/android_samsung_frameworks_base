@@ -21,7 +21,6 @@ final class PromptCredentialInteractor$prompt$1 extends SuspendLambda implements
     int label;
     final /* synthetic */ PromptCredentialInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptCredentialInteractor$prompt$1(PromptCredentialInteractor promptCredentialInteractor, Continuation continuation) {
         super(5, continuation);
         this.this$0 = promptCredentialInteractor;

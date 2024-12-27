@@ -475,9 +475,6 @@ public final class OverlayManagerServiceImpl {
 
        r13.add(android.content.pm.UserPackage.of(r26, r2.targetPackageName));
     */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00cf A[Catch: BadKeyException -> 0x0067, TryCatch #0 {BadKeyException -> 0x0067, blocks: (B:49:0x0046, B:52:0x0051, B:54:0x00c1, B:23:0x00c9, B:25:0x00cf, B:27:0x00d5, B:29:0x00dd, B:31:0x00ed, B:33:0x00f3, B:34:0x00f9, B:36:0x00ff, B:11:0x005d, B:12:0x006a, B:14:0x006e, B:16:0x0076, B:18:0x007c, B:22:0x0088), top: B:48:0x0046 }] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00ff A[Catch: BadKeyException -> 0x0067, TRY_LEAVE, TryCatch #0 {BadKeyException -> 0x0067, blocks: (B:49:0x0046, B:52:0x0051, B:54:0x00c1, B:23:0x00c9, B:25:0x00cf, B:27:0x00d5, B:29:0x00dd, B:31:0x00ed, B:33:0x00f3, B:34:0x00f9, B:36:0x00ff, B:11:0x005d, B:12:0x006a, B:14:0x006e, B:16:0x0076, B:18:0x007c, B:22:0x0088), top: B:48:0x0046 }] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x010b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1062,27 +1059,6 @@ public final class OverlayManagerServiceImpl {
 
        if (r5.mIdmapDaemon.idmapExists(r6.userId, r6.baseCodePath) == false) goto L128;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x0304  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00cb  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00f7  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x014b  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0302  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x035c  */
-    /* JADX WARN: Removed duplicated region for block: B:96:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x031e  */
-    /* JADX WARN: Type inference failed for: r0v23 */
-    /* JADX WARN: Type inference failed for: r0v24 */
-    /* JADX WARN: Type inference failed for: r0v28 */
-    /* JADX WARN: Type inference failed for: r0v29 */
-    /* JADX WARN: Type inference failed for: r11v1 */
-    /* JADX WARN: Type inference failed for: r11v2 */
-    /* JADX WARN: Type inference failed for: r11v3 */
-    /* JADX WARN: Type inference failed for: r11v4 */
-    /* JADX WARN: Type inference failed for: r11v5 */
-    /* JADX WARN: Type inference failed for: r11v6, types: [int] */
-    /* JADX WARN: Type inference failed for: r11v7 */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.om.OverlayManagerSettings] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

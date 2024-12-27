@@ -36,7 +36,6 @@ public class DevicePolicyKeyguardService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCreateKeyguardSurface$0(IBinder hostInputToken) {
             SurfaceControlViewHost.SurfacePackage surfacePackage =
                     DevicePolicyKeyguardService.this.onCreateKeyguardSurface(hostInputToken);

@@ -80,7 +80,6 @@ public final class EdgeLightingPolicyManager {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ EdgeLightingPolicyManager this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ AnonymousClass1(
                 EdgeLightingPolicyManager edgeLightingPolicyManager, Handler handler, int i) {
             super(handler);
@@ -646,8 +645,6 @@ public final class EdgeLightingPolicyManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0091 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

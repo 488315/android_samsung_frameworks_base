@@ -12,7 +12,6 @@ final class MediaCarouselController$getMediaLockScreenSetting$2 extends SuspendL
     int label;
     final /* synthetic */ MediaCarouselController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaCarouselController$getMediaLockScreenSetting$2(MediaCarouselController mediaCarouselController, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaCarouselController;

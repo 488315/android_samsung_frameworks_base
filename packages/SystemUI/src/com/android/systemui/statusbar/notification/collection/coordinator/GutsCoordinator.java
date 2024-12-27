@@ -86,7 +86,6 @@ public final class GutsCoordinator implements Coordinator, Dumpable {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void closeGutsAndEndLifetimeExtension(NotificationEntry notificationEntry) {
         NotifLifetimeExtender.OnEndLifetimeExtensionCallback onEndLifetimeExtensionCallback;
         this.notifsWithOpenGuts.remove(notificationEntry.mKey);
@@ -96,7 +95,6 @@ public final class GutsCoordinator implements Coordinator, Dumpable {
         ((NotifCollection$$ExternalSyntheticLambda4) onEndLifetimeExtensionCallback).onEndLifetimeExtension(notificationEntry, this.mLifetimeExtender);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean isCurrentlyShowingGuts(ListEntry listEntry) {
         return this.notifsWithOpenGuts.contains(listEntry.getKey());
     }

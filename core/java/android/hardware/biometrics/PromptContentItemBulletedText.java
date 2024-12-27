@@ -7,13 +7,11 @@ public final class PromptContentItemBulletedText implements PromptContentItemPar
     public static final Parcelable.Creator<PromptContentItemBulletedText> CREATOR =
             new Parcelable.Creator<PromptContentItemBulletedText>() { // from class:
                 // android.hardware.biometrics.PromptContentItemBulletedText.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PromptContentItemBulletedText createFromParcel(Parcel in) {
                     return new PromptContentItemBulletedText(in.readString());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PromptContentItemBulletedText[] newArray(int size) {
                     return new PromptContentItemBulletedText[size];

@@ -13,13 +13,11 @@ public final class ConvertCredentialRequest implements Parcelable {
             new Parcelable.Creator<
                     ConvertCredentialRequest>() { // from class:
                                                   // android.service.autofill.ConvertCredentialRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConvertCredentialRequest[] newArray(int size) {
                     return new ConvertCredentialRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConvertCredentialRequest createFromParcel(Parcel in) {
                     return new ConvertCredentialRequest(in);

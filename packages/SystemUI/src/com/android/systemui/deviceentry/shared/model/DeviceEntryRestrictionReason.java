@@ -2,8 +2,6 @@ package com.android.systemui.deviceentry.shared.model;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class DeviceEntryRestrictionReason {
     public static final /* synthetic */ DeviceEntryRestrictionReason[] $VALUES;
     public static final DeviceEntryRestrictionReason AdaptiveAuthRequest;

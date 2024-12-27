@@ -15,7 +15,6 @@ final class AlternateBouncerUdfpsIconViewModel$fgIconColor$2 extends SuspendLamb
     int label;
     final /* synthetic */ AlternateBouncerUdfpsIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AlternateBouncerUdfpsIconViewModel$fgIconColor$2(AlternateBouncerUdfpsIconViewModel alternateBouncerUdfpsIconViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = alternateBouncerUdfpsIconViewModel;

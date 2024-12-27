@@ -32,8 +32,6 @@ public final class FlexPanelInteractor {
     public final AnonymousClass5 mTaskStackChangeListener;
     public final WindowManager mWindowManager;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v8, types: [com.android.systemui.accessibility.FlexPanelInteractor$5, com.android.systemui.shared.system.TaskStackChangeListener] */
     public FlexPanelInteractor(Context context, CommandQueue commandQueue, AutoHideController autoHideController) {
         DesktopManager.Callback callback = new DesktopManager.Callback() { // from class: com.android.systemui.accessibility.FlexPanelInteractor.1
             @Override // com.android.systemui.util.DesktopManager.Callback

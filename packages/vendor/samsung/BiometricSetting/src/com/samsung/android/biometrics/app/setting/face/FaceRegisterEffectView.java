@@ -97,13 +97,6 @@ public class FaceRegisterEffectView extends View {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x008f  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00ef A[Catch: NumberFormatException -> 0x0103, LOOP:3: B:25:0x00b9->B:35:0x00ef, LOOP_END, TryCatch #1 {NumberFormatException -> 0x0103, blocks: (B:22:0x00a2, B:25:0x00b9, B:27:0x00bf, B:31:0x00cb, B:35:0x00ef, B:39:0x00f5, B:44:0x010b, B:57:0x0110, B:59:0x0113, B:64:0x0120, B:65:0x0125, B:68:0x0126, B:69:0x012b), top: B:21:0x00a2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00ee A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00f5 A[Catch: NumberFormatException -> 0x0103, TryCatch #1 {NumberFormatException -> 0x0103, blocks: (B:22:0x00a2, B:25:0x00b9, B:27:0x00bf, B:31:0x00cb, B:35:0x00ef, B:39:0x00f5, B:44:0x010b, B:57:0x0110, B:59:0x0113, B:64:0x0120, B:65:0x0125, B:68:0x0126, B:69:0x012b), top: B:21:0x00a2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0107  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x010b A[Catch: NumberFormatException -> 0x0103, TryCatch #1 {NumberFormatException -> 0x0103, blocks: (B:22:0x00a2, B:25:0x00b9, B:27:0x00bf, B:31:0x00cb, B:35:0x00ef, B:39:0x00f5, B:44:0x010b, B:57:0x0110, B:59:0x0113, B:64:0x0120, B:65:0x0125, B:68:0x0126, B:69:0x012b), top: B:21:0x00a2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0148 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

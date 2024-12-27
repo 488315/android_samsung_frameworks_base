@@ -11,13 +11,11 @@ public class SplitActivityInfo implements Parcelable {
             new Parcelable.Creator<
                     SplitActivityInfo>() { // from class:
                                            // com.samsung.android.multiwindow.splitactivity.SplitActivityInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SplitActivityInfo createFromParcel(Parcel in) {
                     return new SplitActivityInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SplitActivityInfo[] newArray(int size) {
                     return new SplitActivityInfo[size];

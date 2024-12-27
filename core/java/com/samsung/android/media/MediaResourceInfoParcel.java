@@ -9,7 +9,6 @@ public class MediaResourceInfoParcel implements Parcelable {
             new Parcelable.Creator<
                     MediaResourceInfoParcel>() { // from class:
                                                  // com.samsung.android.media.MediaResourceInfoParcel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaResourceInfoParcel createFromParcel(Parcel _aidl_source) {
                     MediaResourceInfoParcel _aidl_out = new MediaResourceInfoParcel();
@@ -17,7 +16,6 @@ public class MediaResourceInfoParcel implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaResourceInfoParcel[] newArray(int _aidl_size) {
                     return new MediaResourceInfoParcel[_aidl_size];

@@ -23,7 +23,6 @@ public class AppStatus implements Parcelable {
     public static final Parcelable.Creator<AppStatus> CREATOR =
             new Parcelable.Creator<
                     AppStatus>() { // from class: android.hardware.radio.sim.AppStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppStatus createFromParcel(Parcel _aidl_source) {
                     AppStatus _aidl_out = new AppStatus();
@@ -31,7 +30,6 @@ public class AppStatus implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppStatus[] newArray(int _aidl_size) {
                     return new AppStatus[_aidl_size];

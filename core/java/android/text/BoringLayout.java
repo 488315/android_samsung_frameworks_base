@@ -395,11 +395,6 @@ public class BoringLayout extends Layout implements TextUtils.EllipsizeCallback 
         init(getText(), paint, align, metrics, includePad, trust, fallbackLineSpacing);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0088  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0043  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x002d  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -759,7 +754,6 @@ public class BoringLayout extends Layout implements TextUtils.EllipsizeCallback 
                     + this.mDrawingBounds;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void reset() {
             this.top = 0;
             this.bottom = 0;

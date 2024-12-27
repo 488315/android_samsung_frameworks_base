@@ -20,13 +20,11 @@ public final class AccountTypePolicyKey extends PolicyKey {
     public static final Parcelable.Creator<AccountTypePolicyKey> CREATOR =
             new Parcelable.Creator<AccountTypePolicyKey>() { // from class:
                 // android.app.admin.AccountTypePolicyKey.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccountTypePolicyKey createFromParcel(Parcel source) {
                     return new AccountTypePolicyKey(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccountTypePolicyKey[] newArray(int size) {
                     return new AccountTypePolicyKey[size];

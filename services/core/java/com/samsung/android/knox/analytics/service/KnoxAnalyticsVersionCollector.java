@@ -259,8 +259,6 @@ public final class KnoxAnalyticsVersionCollector {
         return SystemProperties.get("ro.revision", "Unknown");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:38:0x003d -> B:13:0x0052). Please report as a decompilation issue!!! */
     public final String getKernelVersion() {
         String str = "";
         BufferedReader bufferedReader = null;

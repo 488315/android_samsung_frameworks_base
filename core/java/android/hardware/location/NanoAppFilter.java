@@ -11,13 +11,11 @@ public class NanoAppFilter implements Parcelable {
     public static final Parcelable.Creator<NanoAppFilter> CREATOR =
             new Parcelable.Creator<
                     NanoAppFilter>() { // from class: android.hardware.location.NanoAppFilter.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoAppFilter createFromParcel(Parcel in) {
                     return new NanoAppFilter(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoAppFilter[] newArray(int size) {
                     return new NanoAppFilter[size];

@@ -1158,21 +1158,13 @@ public final class CentralSurfacesImpl implements CoreStartable, CentralSurfaces
     }
 
     public enum StatusBarUiEvent implements UiEventLogger.UiEventEnum {
-        /* JADX INFO: Fake field, exist only in values array */
         LOCKSCREEN_OPEN_SECURE(405),
-        /* JADX INFO: Fake field, exist only in values array */
         LOCKSCREEN_OPEN_INSECURE(VolteConstants.ErrorCode.NOT_ACCEPTABLE),
-        /* JADX INFO: Fake field, exist only in values array */
         LOCKSCREEN_CLOSE_SECURE(407),
-        /* JADX INFO: Fake field, exist only in values array */
         LOCKSCREEN_CLOSE_INSECURE(VolteConstants.ErrorCode.REQUEST_TIMEOUT),
-        /* JADX INFO: Fake field, exist only in values array */
         BOUNCER_OPEN_SECURE(409),
-        /* JADX INFO: Fake field, exist only in values array */
         BOUNCER_OPEN_INSECURE(410),
-        /* JADX INFO: Fake field, exist only in values array */
         BOUNCER_CLOSE_SECURE(411),
-        /* JADX INFO: Fake field, exist only in values array */
         BOUNCER_CLOSE_INSECURE(412);
 
         private final int mId;
@@ -1266,17 +1258,6 @@ public final class CentralSurfacesImpl implements CoreStartable, CentralSurfaces
     
         if (r3.intValue() != 2) goto L23;
      */
-    /* JADX WARN: Type inference failed for: r7v1, types: [com.android.systemui.statusbar.phone.CentralSurfacesImpl$1] */
-    /* JADX WARN: Type inference failed for: r8v10, types: [com.android.systemui.statusbar.phone.CentralSurfacesImpl$14] */
-    /* JADX WARN: Type inference failed for: r8v13, types: [com.android.systemui.statusbar.phone.CentralSurfacesImpl$17] */
-    /* JADX WARN: Type inference failed for: r8v14, types: [com.android.systemui.statusbar.phone.CentralSurfacesImpl$18] */
-    /* JADX WARN: Type inference failed for: r8v15, types: [com.android.systemui.statusbar.phone.CentralSurfacesImpl$19] */
-    /* JADX WARN: Type inference failed for: r8v17, types: [com.android.systemui.statusbar.phone.CentralSurfacesImpl$21] */
-    /* JADX WARN: Type inference failed for: r8v18, types: [com.android.systemui.statusbar.phone.CentralSurfacesImpl$22] */
-    /* JADX WARN: Type inference failed for: r8v19, types: [com.android.systemui.statusbar.phone.CentralSurfacesImpl$23] */
-    /* JADX WARN: Type inference failed for: r8v3, types: [com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r8v7, types: [com.android.systemui.statusbar.phone.CentralSurfacesImpl$10] */
-    /* JADX WARN: Type inference failed for: r8v8, types: [com.android.systemui.statusbar.phone.CentralSurfacesImpl$12] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1603,19 +1584,6 @@ public final class CentralSurfacesImpl implements CoreStartable, CentralSurfaces
         });
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v35, types: [android.content.BroadcastReceiver, com.android.systemui.navigationbar.interactor.PackageRemovedInteractor$addCallback$2] */
-    /* JADX WARN: Type inference failed for: r10v37, types: [android.content.BroadcastReceiver, com.android.systemui.navigationbar.interactor.SettingsSoftResetInteractor$addCallback$2] */
-    /* JADX WARN: Type inference failed for: r10v39, types: [com.android.systemui.navigationbar.interactor.RotationLockInteractor$addCallback$2, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r13v37, types: [com.android.systemui.navigationbar.store.NavBarStoreImpl$initInteractor$4] */
-    /* JADX WARN: Type inference failed for: r13v38, types: [com.android.systemui.navigationbar.store.NavBarStoreImpl$initInteractor$3] */
-    /* JADX WARN: Type inference failed for: r13v39, types: [com.android.systemui.navigationbar.store.NavBarStoreImpl$initInteractor$2] */
-    /* JADX WARN: Type inference failed for: r13v40, types: [com.android.systemui.navigationbar.store.NavBarStoreImpl$initInteractor$1] */
-    /* JADX WARN: Type inference failed for: r14v12, types: [com.android.systemui.navigationbar.store.NavBarStoreImpl$initInteractor$8] */
-    /* JADX WARN: Type inference failed for: r14v13, types: [com.android.systemui.navigationbar.store.NavBarStoreImpl$initInteractor$7] */
-    /* JADX WARN: Type inference failed for: r1v176, types: [com.android.systemui.navigationbar.interactor.KnoxStateMonitorInteractor$addCallback$2] */
-    /* JADX WARN: Type inference failed for: r5v37, types: [com.android.systemui.navigationbar.store.NavBarStoreImpl$initInteractor$12] */
-    /* JADX WARN: Type inference failed for: r5v38, types: [com.android.systemui.navigationbar.store.NavBarStoreImpl$initInteractor$11] */
     @Override // com.android.systemui.CoreStartable
     public final void start() {
         RegisterStatusBarResult registerStatusBarResult;
@@ -2465,7 +2433,6 @@ public final class CentralSurfacesImpl implements CoreStartable, CentralSurfaces
             ExtensionFragmentListener.attachExtensonToFragment(fragmentService, findViewById, extensionBuilder.build());
             this.mBrightnessMirrorController = new BrightnessMirrorController(getNotificationShadeWindowViewController().mView, this.mShadeSurface, (NotificationShadeDepthController) this.mNotificationShadeDepthControllerLazy.get(), this.mBrightnessSliderFactory, new CentralSurfacesImpl$$ExternalSyntheticLambda2(this, 7));
             fragmentHostManager2.addTagListener(QS.TAG, new FragmentHostManager.FragmentListener() { // from class: com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda32
-                /* JADX WARN: Multi-variable type inference failed */
                 @Override // com.android.systemui.fragments.FragmentHostManager.FragmentListener
                 public final void onFragmentViewCreated(Fragment fragment) {
                     CentralSurfacesImpl centralSurfacesImpl = CentralSurfacesImpl.this;
@@ -3211,8 +3178,6 @@ public final class CentralSurfacesImpl implements CoreStartable, CentralSurfaces
     
         if (r1.isAnimatingBetweenKeyguardAndSurfaceBehind() == false) goto L15;
      */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00a7  */
     @Override // com.android.systemui.statusbar.phone.CentralSurfaces
     /*
         Code decompiled incorrectly, please refer to instructions dump.

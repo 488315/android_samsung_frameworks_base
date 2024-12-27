@@ -10,7 +10,6 @@ public final class PrecomputedImageFloatingTextView extends ImageFloatingTextVie
         this(context, null, 0, 6, null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final Runnable setTextAsync(CharSequence charSequence) {
         return TextPrecomputer.precompute$default(this, this, charSequence);
     }

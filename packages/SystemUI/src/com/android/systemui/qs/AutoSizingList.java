@@ -20,8 +20,6 @@ public class AutoSizingList extends LinearLayout {
     public final Handler mHandler;
     public final int mItemSize;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.qs.AutoSizingList$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.qs.AutoSizingList$1] */
     public AutoSizingList(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mBindChildren = new Runnable() { // from class: com.android.systemui.qs.AutoSizingList$$ExternalSyntheticLambda0

@@ -10,7 +10,6 @@ public class SecurityAlgorithmUpdate implements Parcelable {
     public static final Parcelable.Creator<SecurityAlgorithmUpdate> CREATOR =
             new Parcelable.Creator<SecurityAlgorithmUpdate>() { // from class:
                 // android.hardware.radio.network.SecurityAlgorithmUpdate.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SecurityAlgorithmUpdate createFromParcel(Parcel _aidl_source) {
                     SecurityAlgorithmUpdate _aidl_out = new SecurityAlgorithmUpdate();
@@ -18,7 +17,6 @@ public class SecurityAlgorithmUpdate implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SecurityAlgorithmUpdate[] newArray(int _aidl_size) {
                     return new SecurityAlgorithmUpdate[_aidl_size];

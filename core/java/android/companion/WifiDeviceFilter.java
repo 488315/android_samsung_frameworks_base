@@ -87,13 +87,11 @@ public final class WifiDeviceFilter implements DeviceFilter<ScanResult> {
         CREATOR =
                 new Parcelable.Creator<
                         WifiDeviceFilter>() { // from class: android.companion.WifiDeviceFilter.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public WifiDeviceFilter[] newArray(int size) {
                         return new WifiDeviceFilter[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public WifiDeviceFilter createFromParcel(Parcel in) {
                         return new WifiDeviceFilter(in);

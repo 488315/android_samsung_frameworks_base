@@ -444,7 +444,6 @@ public class DesktopManagerImpl implements DesktopManager {
         startSystemUIDesktopIfNeeded(desktopModeState, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void controlDesktopSettingsObserver(SemDesktopModeState semDesktopModeState) {
         if (semDesktopModeState.getState() == 50) {
             int i = semDesktopModeState.enabled;
@@ -530,7 +529,6 @@ public class DesktopManagerImpl implements DesktopManager {
         return bundle;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleNotifyPrivacyItemStateRequested() {
         Log.i(TAG, "handleNotifyPrivacyItemStateRequested");
         Iterator<DesktopManager.Callback> it = this.mCallbacks.iterator();
@@ -550,19 +548,16 @@ public class DesktopManagerImpl implements DesktopManager {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startSystemUIDesktopService$0() {
         this.mWakefulnessLifecycle.addObserver(this.mObserver);
         this.mUpdateMonitor.registerCallback(this.mUpdateMonitorCallback);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$stopSystemUIDesktopService$1() {
         this.mWakefulnessLifecycle.removeObserver(this.mObserver);
         this.mUpdateMonitor.removeCallback(this.mUpdateMonitorCallback);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startSystemUIDesktopIfNeeded(SemDesktopModeState semDesktopModeState, boolean z) {
         if (!z) {
             if (semDesktopModeState.getState() == 40 && semDesktopModeState.getEnabled() == 2) {
@@ -616,7 +611,6 @@ public class DesktopManagerImpl implements DesktopManager {
         this.mHandler.post(new DesktopManagerImpl$$ExternalSyntheticLambda0(this, 0));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateDesktopMode(SemDesktopModeState semDesktopModeState) {
         this.mDesktopMode = DESKTOP_NONE;
         if (semDesktopModeState.getEnabled() == 4) {

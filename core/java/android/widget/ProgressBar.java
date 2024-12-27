@@ -1113,7 +1113,6 @@ public class ProgressBar extends View {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void doRefreshProgress(
             int id, int progress, boolean fromUser, boolean callBackToApp, boolean animate) {
         int range = this.mMax - this.mMin;
@@ -1217,7 +1216,6 @@ public class ProgressBar extends View {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setVisualProgress(int id, float progress) {
         this.mVisualProgress = progress;
         Drawable d = this.mCurrentDrawable;
@@ -1515,7 +1513,6 @@ public class ProgressBar extends View {
         drawTrack(canvas);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     void drawTrack(Canvas canvas) {
         Drawable drawable = this.mCurrentDrawable;
         if (drawable != 0) {
@@ -1608,13 +1605,11 @@ public class ProgressBar extends View {
         public static final Parcelable.Creator<SavedState> CREATOR =
                 new Parcelable.Creator<
                         SavedState>() { // from class: android.widget.ProgressBar.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];

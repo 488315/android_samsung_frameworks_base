@@ -20,7 +20,6 @@ public final class StickyKeysIndicatorViewModel$special$$inlined$flatMapLatest$2
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public StickyKeysIndicatorViewModel$special$$inlined$flatMapLatest$2(Continuation continuation, StickyKeysRepository stickyKeysRepository) {
         super(3, continuation);
         this.$stickyKeysRepository$inlined = stickyKeysRepository;

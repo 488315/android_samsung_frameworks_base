@@ -20,13 +20,11 @@ public final class ParcelableUsageEventList implements Parcelable {
     public static final Parcelable.Creator<ParcelableUsageEventList> CREATOR =
             new Parcelable.Creator<ParcelableUsageEventList>() { // from class:
                 // android.app.usage.ParcelableUsageEventList.2
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableUsageEventList createFromParcel(Parcel in) {
                     return new ParcelableUsageEventList(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableUsageEventList[] newArray(int size) {
                     return new ParcelableUsageEventList[size];
@@ -196,7 +194,6 @@ public final class ParcelableUsageEventList implements Parcelable {
         return event;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void writeEventToParcel(UsageEvents.Event event, Parcel dest, int flags) {
         dest.writeString(event.mPackage);
         dest.writeString(event.mClass);

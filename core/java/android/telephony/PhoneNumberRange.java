@@ -14,13 +14,11 @@ public final class PhoneNumberRange implements Parcelable {
     public static final Parcelable.Creator<PhoneNumberRange> CREATOR =
             new Parcelable.Creator<
                     PhoneNumberRange>() { // from class: android.telephony.PhoneNumberRange.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhoneNumberRange createFromParcel(Parcel in) {
                     return new PhoneNumberRange(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhoneNumberRange[] newArray(int size) {
                     return new PhoneNumberRange[size];

@@ -713,7 +713,6 @@ class SemFastScroller {
         this.mThumbRange = max - min;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setState(int state) {
         this.mList.removeCallbacks(this.mDeferHide);
         if (this.mAlwaysShow && state == 0) {
@@ -1189,7 +1188,6 @@ class SemFastScroller {
         setState(2);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         if (!isEnabled()) {
             return false;

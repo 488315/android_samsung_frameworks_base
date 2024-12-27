@@ -694,10 +694,6 @@ public final class LoadedApk {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x01b3  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x01f9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1494,7 +1490,6 @@ public final class LoadedApk {
                 };
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$getRunnable$0() {
                 BroadcastReceiver receiver = ReceiverDispatcher.this.mReceiver;
                 IActivityManager mgr = ActivityManager.getService();

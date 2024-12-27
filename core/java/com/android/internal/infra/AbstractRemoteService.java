@@ -117,7 +117,6 @@ public abstract class AbstractRemoteService<
         return this.mComponentName;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnConnectedStateChangedInternal(boolean connected) {
         handleOnConnectedStateChanged(connected);
         if (connected) {
@@ -135,7 +134,6 @@ public abstract class AbstractRemoteService<
         return this.mService;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDestroy() {
         if (checkIfDestroyed()) {
             return;
@@ -159,7 +157,6 @@ public abstract class AbstractRemoteService<
                         this));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleBinderDied() {
         if (checkIfDestroyed()) {
             return;
@@ -312,7 +309,6 @@ public abstract class AbstractRemoteService<
                         finshedRequest));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleFinishRequest(BasePendingRequest<S, I> finishedRequest) {
         synchronized (this.mUnfinishedRequests) {
             this.mUnfinishedRequests.remove(finishedRequest);
@@ -373,7 +369,6 @@ public abstract class AbstractRemoteService<
         scheduleUnbind(true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void scheduleUnbind(boolean delay) {
         long unbindDelay = getTimeoutIdleBindMillis();
         if (unbindDelay <= 0) {
@@ -405,7 +400,6 @@ public abstract class AbstractRemoteService<
                 unbindDelay);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleUnbind() {
         if (checkIfDestroyed()) {
             return;
@@ -442,7 +436,6 @@ public abstract class AbstractRemoteService<
         return this.mService != null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleEnsureBound() {
         if (handleIsBound() || this.mConnecting) {
             return;
@@ -652,7 +645,6 @@ public abstract class AbstractRemoteService<
                     SystemClock.uptimeMillis() + service.getRemoteRequestMillis());
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$new$0(AbstractRemoteService service) {
             synchronized (this.mLock) {
                 if (this.mCancelled) {
@@ -683,7 +675,6 @@ public abstract class AbstractRemoteService<
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class MyAsyncPendingRequest<
                     S extends AbstractRemoteService<S, I>, I extends IInterface>
             extends BasePendingRequest<S, I> {

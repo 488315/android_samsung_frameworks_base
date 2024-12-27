@@ -14,7 +14,6 @@ final class LocationTileUserActionInteractor$handleInput$2$2 extends SuspendLamb
     int label;
     final /* synthetic */ LocationTileUserActionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LocationTileUserActionInteractor$handleInput$2$2(LocationTileUserActionInteractor locationTileUserActionInteractor, boolean z, Continuation continuation) {
         super(2, continuation);
         this.this$0 = locationTileUserActionInteractor;

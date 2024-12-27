@@ -228,9 +228,6 @@ public final class DockObserver extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.DockObserver$1] */
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.server.DockObserver$2] */
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.DockObserver$3] */
     public DockObserver(Context context) {
         super(context);
         ArrayList arrayList;

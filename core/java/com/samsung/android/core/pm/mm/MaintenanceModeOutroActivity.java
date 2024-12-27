@@ -95,7 +95,6 @@ public class MaintenanceModeOutroActivity extends Activity {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setContentView$0(View v) {
         showDialog();
     }
@@ -172,7 +171,6 @@ public class MaintenanceModeOutroActivity extends Activity {
         dialog.show();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialog$4(DialogInterface dialog, int which) {
         Runnable runningJob =
                 new Runnable() { // from class:
@@ -185,7 +183,6 @@ public class MaintenanceModeOutroActivity extends Activity {
         MaintenanceModeUtils.confirmSecureLock(this, runningJob);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialog$3() {
         this.mExitButton.setClickable(false);
         this.mWm.addView(this.mProgressView, this.mViewWindowParams);
@@ -209,7 +206,6 @@ public class MaintenanceModeOutroActivity extends Activity {
                 120000L);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialog$2() {
         this.mWm.removeView(this.mProgressView);
         this.mExitButton.setClickable(true);
@@ -217,7 +213,6 @@ public class MaintenanceModeOutroActivity extends Activity {
 
     static /* synthetic */ void lambda$showDialog$5(DialogInterface dialog, int which) {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: exitMaintenanceMode, reason: merged with bridge method [inline-methods] */
     public void lambda$showDialog$1() {
         try {

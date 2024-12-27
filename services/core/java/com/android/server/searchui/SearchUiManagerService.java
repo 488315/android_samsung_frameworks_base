@@ -62,7 +62,6 @@ public final class SearchUiManagerService extends AbstractMasterSystemService {
                             searchSessionId, query, searchTargetEvent, 0));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,

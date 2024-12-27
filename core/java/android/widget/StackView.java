@@ -586,7 +586,6 @@ public class StackView extends AdapterViewAnimator {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.widget.AdapterViewAnimator, android.view.View
     public boolean onTouchEvent(MotionEvent ev) {
         super.onTouchEvent(ev);
@@ -923,7 +922,6 @@ public class StackView extends AdapterViewAnimator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // android.widget.AdapterViewAnimator
     public LayoutParams createOrReuseLayoutParams(View v) {
         ViewGroup.LayoutParams currentLp = v.getLayoutParams();

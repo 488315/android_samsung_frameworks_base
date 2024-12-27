@@ -55,7 +55,6 @@ public final class HsumBootUserInitializer {
     public final boolean mShouldAlwaysHaveMainUser;
     public final UserManagerInternal mUmi;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.HsumBootUserInitializer$1] */
     public HsumBootUserInitializer(
             UserManagerInternal userManagerInternal,
             ActivityManagerService activityManagerService,

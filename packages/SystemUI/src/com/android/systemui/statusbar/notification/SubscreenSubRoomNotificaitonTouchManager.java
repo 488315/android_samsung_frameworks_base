@@ -28,8 +28,6 @@ public final class SubscreenSubRoomNotificaitonTouchManager {
     public float mSwipeEscapeVelocity = 5.0f;
     public boolean mItemViewSwipeEnabled = true;
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [androidx.recyclerview.widget.ItemTouchHelper$Callback, com.android.systemui.statusbar.notification.SubscreenSubRoomNotificaitonTouchManager$1] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.notification.SubscreenSubRoomNotificaitonTouchManager$2] */
     public SubscreenSubRoomNotificaitonTouchManager(Context context, SubscreenNotificationInfoManager subscreenNotificationInfoManager, Vibrator vibrator) {
         this.mItemTouchHelper = null;
         ?? r0 = new ItemTouchHelper.SimpleCallback(0, 8) { // from class: com.android.systemui.statusbar.notification.SubscreenSubRoomNotificaitonTouchManager.1

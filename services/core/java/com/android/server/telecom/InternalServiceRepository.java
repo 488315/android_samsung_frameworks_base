@@ -20,7 +20,6 @@ public final class InternalServiceRepository extends IInternalServiceRetriever.S
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.telecom.InternalServiceRepository$1] */
     public InternalServiceRepository(DeviceIdleInternal deviceIdleInternal) {
         this.mDeviceIdleController = deviceIdleInternal;
     }

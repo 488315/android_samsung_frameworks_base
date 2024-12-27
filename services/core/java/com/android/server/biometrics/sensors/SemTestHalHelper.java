@@ -89,8 +89,6 @@ public final class SemTestHalHelper {
         default void deliverTspEvent(int i) {}
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class CallbackType {
         public static final /* synthetic */ CallbackType[] $VALUES;
         public static final CallbackType ACQUIRED;
@@ -174,7 +172,6 @@ public final class SemTestHalHelper {
         list.add(new Action(callbackType, callback, 6, FrameworkStatsLog.SUBSYSTEM_SLEEP_STATE));
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(8:96|97|98|99|(5:100|101|(2:103|105)|(2:106|107)|108)|109|110|111) */
     /* JADX WARN: Code restructure failed: missing block: B:113:0x0171, code lost:
 
        r0 = move-exception;
@@ -184,17 +181,6 @@ public final class SemTestHalHelper {
        r0.printStackTrace();
        r0 = null;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0179  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x02a2 A[Catch: JSONException -> 0x021b, TryCatch #5 {JSONException -> 0x021b, blocks: (B:40:0x020e, B:41:0x0223, B:43:0x0235, B:55:0x02a2, B:57:0x02a8, B:58:0x02ae, B:62:0x0255, B:63:0x0263, B:65:0x0277, B:66:0x0283, B:67:0x0290), top: B:39:0x020e }] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x02b5 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x02ca A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Type inference failed for: r11v1 */
-    /* JADX WARN: Type inference failed for: r11v2 */
-    /* JADX WARN: Type inference failed for: r11v3, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r11v4 */
-    /* JADX WARN: Type inference failed for: r12v17, types: [int] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:139:0x013e -> B:94:0x0167). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

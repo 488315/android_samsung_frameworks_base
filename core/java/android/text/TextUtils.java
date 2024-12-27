@@ -111,7 +111,6 @@ public class TextUtils {
     public static final int URL_SPAN = 11;
     public static final Parcelable.Creator<CharSequence> CHAR_SEQUENCE_CREATOR =
             new Parcelable.Creator<CharSequence>() { // from class: android.text.TextUtils.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CharSequence createFromParcel(Parcel p) {
                     Object span;
@@ -228,7 +227,6 @@ public class TextUtils {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CharSequence[] newArray(int size) {
                     return new CharSequence[size];
@@ -886,7 +884,6 @@ public class TextUtils {
         return offset2;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void readSpan(Parcel p, Spannable sp, Object o) {
         sp.setSpan(o, p.readInt(), p.readInt(), p.readInt());
     }
@@ -981,7 +978,6 @@ public class TextUtils {
                 getEllipsisString(where));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:64:0x014c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1065,8 +1061,6 @@ public class TextUtils {
                 text, p, avail, oneMore, more, TextDirectionHeuristics.FIRSTSTRONG_LTR);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00f6  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00fb  */
     @java.lang.Deprecated
     /*
         Code decompiled incorrectly, please refer to instructions dump.

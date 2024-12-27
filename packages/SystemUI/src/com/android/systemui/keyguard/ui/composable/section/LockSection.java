@@ -91,7 +91,6 @@ public final class LockSection {
         }
         final Context context = (Context) composerImpl.consume(AndroidCompositionLocals_androidKt.LocalContext);
         AndroidView_androidKt.AndroidView(new Function1() { // from class: com.android.systemui.keyguard.ui.composable.section.LockSection$LockIcon$3
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -107,7 +106,6 @@ public final class LockSection {
                 return deviceEntryIconView;
             }
         }, LayoutModifierKt.layout(sceneScope.element(modifier, LockSectionKt.LockIconElementKey), new Function3() { // from class: com.android.systemui.keyguard.ui.composable.section.LockSection$LockIcon$4
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(3);
             }
@@ -163,7 +161,6 @@ public final class LockSection {
             final Color color2 = color;
             final Modifier modifier2 = modifier;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyguard.ui.composable.section.LockSection$LockIcon$5
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

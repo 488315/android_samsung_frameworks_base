@@ -35,7 +35,6 @@ public final class NotifLiveDataImpl implements PipelineDumpable {
 
     public final Function0 setValueAndProvideDispatcher(final Object obj) {
         return !Intrinsics.areEqual(this.atomicValue.getAndSet(obj), obj) ? new Function0() { // from class: com.android.systemui.statusbar.notification.collection.NotifLiveDataImpl$setValueAndProvideDispatcher$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

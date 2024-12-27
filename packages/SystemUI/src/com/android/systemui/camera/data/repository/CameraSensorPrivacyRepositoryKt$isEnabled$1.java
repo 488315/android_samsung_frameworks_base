@@ -19,7 +19,6 @@ final class CameraSensorPrivacyRepositoryKt$isEnabled$1 extends SuspendLambda im
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CameraSensorPrivacyRepositoryKt$isEnabled$1(SensorPrivacyManager sensorPrivacyManager, UserHandle userHandle, Continuation continuation) {
         super(2, continuation);
         this.$this_isEnabled = sensorPrivacyManager;
@@ -55,7 +54,6 @@ final class CameraSensorPrivacyRepositoryKt$isEnabled$1 extends SuspendLambda im
             this.$this_isEnabled.addSensorPrivacyListener(2, this.$userHandle.getIdentifier(), onSensorPrivacyChangedListener);
             final SensorPrivacyManager sensorPrivacyManager = this.$this_isEnabled;
             Function0 function0 = new Function0() { // from class: com.android.systemui.camera.data.repository.CameraSensorPrivacyRepositoryKt$isEnabled$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

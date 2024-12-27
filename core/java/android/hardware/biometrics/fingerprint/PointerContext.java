@@ -11,7 +11,6 @@ public class PointerContext implements Parcelable {
     public static final Parcelable.Creator<PointerContext> CREATOR =
             new Parcelable.Creator<PointerContext>() { // from class:
                 // android.hardware.biometrics.fingerprint.PointerContext.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PointerContext createFromParcel(Parcel _aidl_source) {
                     PointerContext _aidl_out = new PointerContext();
@@ -19,7 +18,6 @@ public class PointerContext implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PointerContext[] newArray(int _aidl_size) {
                     return new PointerContext[_aidl_size];

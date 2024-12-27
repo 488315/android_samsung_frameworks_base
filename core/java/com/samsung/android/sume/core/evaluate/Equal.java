@@ -9,13 +9,11 @@ public class Equal<T extends Comparable<T>> extends GenericEvaluator<T> {
     public static final Parcelable.Creator<Equal<?>> CREATOR =
             new Parcelable.Creator<
                     Equal<?>>() { // from class: com.samsung.android.sume.core.evaluate.Equal.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Equal<?> createFromParcel(Parcel in) {
                     return new Equal<>(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Equal<?>[] newArray(int size) {
                     return new Equal[size];

@@ -338,7 +338,6 @@ public final class Internal {
                             Integer,
                             T>() { // from class:
                                    // com.android.framework.protobuf.Internal.MapAdapter.1
-                        /* JADX WARN: Incorrect return type in method signature: (Ljava/lang/Integer;)TT; */
                         @Override // com.android.framework.protobuf.Internal.MapAdapter.Converter
                         public EnumLite doForward(Integer value) {
                             EnumLite findValueByNumber =
@@ -346,7 +345,6 @@ public final class Internal {
                             return findValueByNumber == null ? t : findValueByNumber;
                         }
 
-                        /* JADX WARN: Incorrect types in method signature: (TT;)Ljava/lang/Integer; */
                         @Override // com.android.framework.protobuf.Internal.MapAdapter.Converter
                         public Integer doBackward(EnumLite enumLite) {
                             return Integer.valueOf(enumLite.getNumber());
@@ -441,7 +439,6 @@ public final class Internal {
                 return (V) MapAdapter.this.valueConverter.doForward(this.realEntry.getValue());
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // java.util.Map.Entry
             public V setValue(V v) {
                 Object value =

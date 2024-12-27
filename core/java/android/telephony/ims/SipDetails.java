@@ -11,13 +11,11 @@ import java.util.Objects;
 public final class SipDetails implements Parcelable {
     public static final Parcelable.Creator<SipDetails> CREATOR =
             new Parcelable.Creator<SipDetails>() { // from class: android.telephony.ims.SipDetails.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SipDetails createFromParcel(Parcel source) {
                     return new SipDetails(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SipDetails[] newArray(int size) {
                     return new SipDetails[size];

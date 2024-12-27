@@ -259,13 +259,11 @@ public class VisualQueryDetector {
         @Override // android.service.voice.HotwordDetector
         public void dump(String prefix, PrintWriter pw) {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Object getLock() {
             return this.mLock;
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class BinderCallback extends IVisualQueryDetectionVoiceInteractionCallback.Stub {
         private final Callback mCallback;
         private final Executor mExecutor;
@@ -292,7 +290,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onQueryDetected$1(final String partialQuery)
                 throws Exception {
             synchronized (this.mLock) {
@@ -308,7 +305,6 @@ public class VisualQueryDetector {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onQueryDetected$0(String partialQuery) {
             this.mCallback.onQueryDetected(partialQuery);
         }
@@ -328,7 +324,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onResultDetected$3(
                 final VisualQueryDetectedResult partialResult) throws Exception {
             synchronized (this.mLock) {
@@ -344,7 +339,6 @@ public class VisualQueryDetector {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onResultDetected$2(
                 VisualQueryDetectedResult partialResult) {
             this.mCallback.onQueryDetected(partialResult);
@@ -364,7 +358,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onQueryFinished$5() throws Exception {
             synchronized (this.mLock) {
                 this.mExecutor.execute(
@@ -378,7 +371,6 @@ public class VisualQueryDetector {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onQueryFinished$4() {
             this.mCallback.onQueryFinished();
         }
@@ -397,7 +389,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onQueryRejected$7() throws Exception {
             synchronized (this.mLock) {
                 this.mExecutor.execute(
@@ -411,7 +402,6 @@ public class VisualQueryDetector {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onQueryRejected$6() {
             this.mCallback.onQueryRejected();
         }
@@ -436,7 +426,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVisualQueryDetectionServiceFailure$9(
                 final VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure)
                 throws Exception {
@@ -452,7 +441,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVisualQueryDetectionServiceFailure$8(
                 VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) {
             if (visualQueryDetectionServiceFailure != null) {
@@ -463,7 +451,6 @@ public class VisualQueryDetector {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class InitializationStateListener extends IHotwordRecognitionStatusCallback.Stub {
         private final Callback mCallback;
         private final Context mContext;
@@ -511,7 +498,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onStatusReported$1(final int status) throws Exception {
             this.mExecutor.execute(
                     new Runnable() { // from class:
@@ -524,7 +510,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onStatusReported$0(int status) {
             this.mCallback.onVisualQueryDetectionServiceInitialized(status);
         }
@@ -544,7 +529,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onProcessRestarted$3() throws Exception {
             this.mExecutor.execute(
                     new Runnable() { // from class:
@@ -557,7 +541,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onProcessRestarted$2() {
             this.mCallback.onVisualQueryDetectionServiceRestarted();
         }
@@ -591,7 +574,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVisualQueryDetectionServiceFailure$5(
                 final VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure)
                 throws Exception {
@@ -607,7 +589,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVisualQueryDetectionServiceFailure$4(
                 VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) {
             if (visualQueryDetectionServiceFailure != null) {
@@ -639,7 +620,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onUnknownFailure$7(final String errorMessage)
                 throws Exception {
             this.mExecutor.execute(
@@ -653,7 +633,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onUnknownFailure$6(String errorMessage) {
             this.mCallback.onUnknownFailure(
                     !TextUtils.isEmpty(errorMessage) ? errorMessage : "Error data is null");
@@ -675,7 +654,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onOpenFile$9(
                 final String filename, final AndroidFuture future) throws Exception {
             this.mExecutor.execute(
@@ -689,7 +667,6 @@ public class VisualQueryDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onOpenFile$8(String filename, AndroidFuture future) {
             Slog.v(
                     VisualQueryDetector.TAG,

@@ -8,7 +8,6 @@ public class AudioProfileSys implements Parcelable {
     public static final Parcelable.Creator<AudioProfileSys> CREATOR =
             new Parcelable.Creator<
                     AudioProfileSys>() { // from class: android.media.AudioProfileSys.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioProfileSys createFromParcel(Parcel _aidl_source) {
                     AudioProfileSys _aidl_out = new AudioProfileSys();
@@ -16,7 +15,6 @@ public class AudioProfileSys implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioProfileSys[] newArray(int _aidl_size) {
                     return new AudioProfileSys[_aidl_size];

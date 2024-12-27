@@ -7,13 +7,11 @@ public final class FrontendScanMessageStandard implements Parcelable {
     public static final Parcelable.Creator<FrontendScanMessageStandard> CREATOR =
             new Parcelable.Creator<FrontendScanMessageStandard>() { // from class:
                 // android.hardware.tv.tuner.FrontendScanMessageStandard.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendScanMessageStandard createFromParcel(Parcel _aidl_source) {
                     return new FrontendScanMessageStandard(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendScanMessageStandard[] newArray(int _aidl_size) {
                     return new FrontendScanMessageStandard[_aidl_size];

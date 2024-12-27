@@ -20,13 +20,11 @@ public final class ProgramSelector implements Parcelable {
     public static final Parcelable.Creator<ProgramSelector> CREATOR =
             new Parcelable.Creator<
                     ProgramSelector>() { // from class: android.hardware.radio.ProgramSelector.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ProgramSelector createFromParcel(Parcel in) {
                     return new ProgramSelector(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ProgramSelector[] newArray(int size) {
                     return new ProgramSelector[size];
@@ -343,13 +341,11 @@ public final class ProgramSelector implements Parcelable {
         public static final Parcelable.Creator<Identifier> CREATOR =
                 new Parcelable.Creator<Identifier>() { // from class:
                     // android.hardware.radio.ProgramSelector.Identifier.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Identifier createFromParcel(Parcel in) {
                         return new Identifier(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Identifier[] newArray(int size) {
                         return new Identifier[size];

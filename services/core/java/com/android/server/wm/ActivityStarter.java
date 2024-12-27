@@ -157,7 +157,6 @@ public final class ActivityStarter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public interface Factory {
         ActivityStarter obtain();
 
@@ -248,7 +247,6 @@ public final class ActivityStarter {
             this.errorCallbackToken = null;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:60:0x011d  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -388,23 +386,6 @@ public final class ActivityStarter {
     
         if (r30.getOptions(null, null, null, r2).getStartedByMDMAdmin() == false) goto L165;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x037e  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x038f  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x039d  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0298 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x0341 A[Catch: Exception -> 0x0372, TryCatch #6 {Exception -> 0x0372, blocks: (B:93:0x033d, B:95:0x0341, B:96:0x034b, B:98:0x034f, B:100:0x0358), top: B:92:0x033d }] */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x034f A[Catch: Exception -> 0x0372, TryCatch #6 {Exception -> 0x0372, blocks: (B:93:0x033d, B:95:0x0341, B:96:0x034b, B:98:0x034f, B:100:0x0358), top: B:92:0x033d }] */
-    /* JADX WARN: Type inference failed for: r6v16 */
-    /* JADX WARN: Type inference failed for: r6v17 */
-    /* JADX WARN: Type inference failed for: r6v19 */
-    /* JADX WARN: Type inference failed for: r6v30 */
-    /* JADX WARN: Type inference failed for: r6v35 */
-    /* JADX WARN: Type inference failed for: r6v36 */
-    /* JADX WARN: Type inference failed for: r6v37 */
-    /* JADX WARN: Type inference failed for: r6v40 */
-    /* JADX WARN: Type inference failed for: r6v42 */
-    /* JADX WARN: Type inference failed for: r6v45 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -430,7 +411,6 @@ public final class ActivityStarter {
         return InstantAppResolver.buildEphemeralInstallerIntent(intent, InstantAppResolver.sanitizeIntent(intent), auxiliaryResolveInfo == null ? null : auxiliaryResolveInfo.failureIntent, str, str2, bundle, str3, i, auxiliaryResolveInfo == null ? null : auxiliaryResolveInfo.installFailureActivity, auxiliaryResolveInfo == null ? null : auxiliaryResolveInfo.token, auxiliaryResolveInfo != null && auxiliaryResolveInfo.needsPhaseTwo, auxiliaryResolveInfo != null ? auxiliaryResolveInfo.filters : null);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(17:5|(1:7)(1:58)|8|(4:47|48|(2:50|(1:52))|53)|(1:46)(1:13)|14|(3:16|(1:18)(1:44)|(8:20|21|(6:34|35|(1:37)|38|30|31)|26|(1:28)|29|30|31))|45|21|(1:23)|32|34|35|(0)|38|30|31) */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x00f7, code lost:
     
         r0 = move-exception;
@@ -447,7 +427,6 @@ public final class ActivityStarter {
     
         android.util.Slog.w("ActivityTaskManager", r5 + r18, r0);
      */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00ec  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -488,7 +467,6 @@ public final class ActivityStarter {
         return 3;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(12:37|(4:(3:98|99|(19:103|104|40|41|(1:43)|44|(1:46)(1:94)|47|(1:49)|50|(2:54|55)|57|58|17d|71|72|73|74|75))|57|58|17d)|39|40|41|(0)|44|(0)(0)|47|(0)|50|(3:52|54|55)) */
     /* JADX WARN: Code restructure failed: missing block: B:95:0x0116, code lost:
     
         r0 = move-exception;
@@ -497,14 +475,6 @@ public final class ActivityStarter {
     
         r5 = r0;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0102 A[Catch: all -> 0x0027, RuntimeException -> 0x002b, IllegalArgumentException -> 0x0116, TryCatch #5 {IllegalArgumentException -> 0x0116, blocks: (B:41:0x00f8, B:43:0x0102, B:44:0x0119, B:46:0x0123, B:49:0x012c, B:50:0x0135, B:52:0x0142, B:54:0x0149), top: B:40:0x00f8 }] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0123 A[Catch: all -> 0x0027, RuntimeException -> 0x002b, IllegalArgumentException -> 0x0116, TryCatch #5 {IllegalArgumentException -> 0x0116, blocks: (B:41:0x00f8, B:43:0x0102, B:44:0x0119, B:46:0x0123, B:49:0x012c, B:50:0x0135, B:52:0x0142, B:54:0x0149), top: B:40:0x00f8 }] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x012c A[Catch: all -> 0x0027, RuntimeException -> 0x002b, IllegalArgumentException -> 0x0116, TryCatch #5 {IllegalArgumentException -> 0x0116, blocks: (B:41:0x00f8, B:43:0x0102, B:44:0x0119, B:46:0x0123, B:49:0x012c, B:50:0x0135, B:52:0x0142, B:54:0x0149), top: B:40:0x00f8 }] */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x017e A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x0128  */
-    /* JADX WARN: Type inference failed for: r4v34, types: [android.content.pm.ActivityInfo] */
-    /* JADX WARN: Type inference failed for: r4v36, types: [long] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -517,40 +487,6 @@ public final class ActivityStarter {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.ActivityStarter.execute():int");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:114:0x0318  */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x0467 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:138:0x04d0 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:142:0x04e5 A[Catch: RemoteException -> 0x04fa, TRY_LEAVE, TryCatch #6 {RemoteException -> 0x04fa, blocks: (B:140:0x04d2, B:142:0x04e5), top: B:139:0x04d2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x0503  */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x050a  */
-    /* JADX WARN: Removed duplicated region for block: B:151:0x0540  */
-    /* JADX WARN: Removed duplicated region for block: B:200:0x073b  */
-    /* JADX WARN: Removed duplicated region for block: B:202:0x0761  */
-    /* JADX WARN: Removed duplicated region for block: B:206:0x0799  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x011e  */
-    /* JADX WARN: Removed duplicated region for block: B:246:0x09ca  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0126  */
-    /* JADX WARN: Removed duplicated region for block: B:273:0x0a2b  */
-    /* JADX WARN: Removed duplicated region for block: B:296:0x0be6  */
-    /* JADX WARN: Removed duplicated region for block: B:300:0x0c36 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:305:0x0c51  */
-    /* JADX WARN: Removed duplicated region for block: B:307:0x0c58  */
-    /* JADX WARN: Removed duplicated region for block: B:310:0x0c8b  */
-    /* JADX WARN: Removed duplicated region for block: B:313:0x0c94 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:317:0x0ca4  */
-    /* JADX WARN: Removed duplicated region for block: B:322:0x0cde A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:323:0x0ce1  */
-    /* JADX WARN: Removed duplicated region for block: B:352:0x0c54  */
-    /* JADX WARN: Removed duplicated region for block: B:393:0x0bce  */
-    /* JADX WARN: Removed duplicated region for block: B:400:0x0bd4  */
-    /* JADX WARN: Removed duplicated region for block: B:425:0x0759  */
-    /* JADX WARN: Removed duplicated region for block: B:426:0x06fb  */
-    /* JADX WARN: Removed duplicated region for block: B:427:0x06b5 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:477:0x032a  */
-    /* JADX WARN: Removed duplicated region for block: B:557:0x020f  */
-    /* JADX WARN: Removed duplicated region for block: B:558:0x01f8  */
-    /* JADX WARN: Removed duplicated region for block: B:559:0x0121  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x01fe  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -571,7 +507,6 @@ public final class ActivityStarter {
     
         if (r1 != null) goto L62;
      */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0092  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -588,11 +523,6 @@ public final class ActivityStarter {
         return this.mRequest.reason + ":" + this.mRequest.callingPackage + ":" + this.mRequest.callingPid;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:118:0x01f7  */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x0219  */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x0222  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x022d  */
-    /* JADX WARN: Removed duplicated region for block: B:163:0x01b5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -605,37 +535,6 @@ public final class ActivityStarter {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.ActivityStarter.handleStartResult(com.android.server.wm.ActivityRecord, android.app.ActivityOptions, int, com.android.server.wm.Transition, android.window.RemoteTransition):com.android.server.wm.Task");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x025d  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x0260  */
-    /* JADX WARN: Removed duplicated region for block: B:132:0x0314  */
-    /* JADX WARN: Removed duplicated region for block: B:134:0x031f  */
-    /* JADX WARN: Removed duplicated region for block: B:136:0x032a  */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x0335  */
-    /* JADX WARN: Removed duplicated region for block: B:141:0x033d A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x0367 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:157:0x0391  */
-    /* JADX WARN: Removed duplicated region for block: B:165:0x03d0  */
-    /* JADX WARN: Removed duplicated region for block: B:169:0x040b  */
-    /* JADX WARN: Removed duplicated region for block: B:173:0x03cc  */
-    /* JADX WARN: Removed duplicated region for block: B:177:0x0331  */
-    /* JADX WARN: Removed duplicated region for block: B:178:0x0326  */
-    /* JADX WARN: Removed duplicated region for block: B:179:0x031b  */
-    /* JADX WARN: Removed duplicated region for block: B:225:0x00e4  */
-    /* JADX WARN: Removed duplicated region for block: B:235:0x00c4  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00c2  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00cc  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0128  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0137  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0148  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0171  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0168  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x013d  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x012e  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x01ad  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x040f A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0410 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x01b1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -788,8 +687,6 @@ public final class ActivityStarter {
         this.mController.mInExecution = true;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v7, types: [com.android.server.wm.ActivityStartInterceptor$$ExternalSyntheticLambda1] */
     public final void postStartActivityProcessing(int i, final ActivityRecord activityRecord, Task task) {
         boolean isStartResultSuccessful = ActivityManager.isStartResultSuccessful(i);
         ActivityTaskSupervisor activityTaskSupervisor = this.mSupervisor;
@@ -916,9 +813,6 @@ public final class ActivityStarter {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:184:0x0445  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x02f4  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0327  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -983,8 +877,6 @@ public final class ActivityStarter {
     
         if (r5 != null) goto L62;
      */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01af  */
-    /* JADX WARN: Removed duplicated region for block: B:60:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1094,13 +986,6 @@ public final class ActivityStarter {
         this.mRequest.activityOptions = SafeActivityOptions.fromBundle(bundle);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v11 */
-    /* JADX WARN: Type inference failed for: r10v12 */
-    /* JADX WARN: Type inference failed for: r10v13 */
-    /* JADX WARN: Type inference failed for: r10v6 */
-    /* JADX WARN: Type inference failed for: r10v7, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r10v8 */
     public final void setInitialState(ActivityRecord activityRecord, ActivityOptions activityOptions, Task task, TaskFragment taskFragment, int i, ActivityRecord activityRecord2, IVoiceInteractionSession iVoiceInteractionSession, IVoiceInteractor iVoiceInteractor, int i2, int i3) {
         ?? r10;
         TaskFragment taskFragment2;
@@ -1354,9 +1239,6 @@ public final class ActivityStarter {
     
         r7.intent.setLaunchTaskIdForSingleInstancePerTask(r8.mTaskId);
      */
-    /* JADX WARN: Removed duplicated region for block: B:307:0x06ae  */
-    /* JADX WARN: Removed duplicated region for block: B:312:0x06d9  */
-    /* JADX WARN: Removed duplicated region for block: B:480:0x0ac3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

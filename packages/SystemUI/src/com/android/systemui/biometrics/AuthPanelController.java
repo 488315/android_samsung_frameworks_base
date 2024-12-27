@@ -44,8 +44,6 @@ public final class AuthPanelController extends ViewOutlineProvider {
         return getLeftBound(1);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x004d  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0065  */
     @Override // android.view.ViewOutlineProvider
     /*
         Code decompiled incorrectly, please refer to instructions dump.

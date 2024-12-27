@@ -15,7 +15,6 @@ final class MediaOutputHostKt$MediaOutputHost$1$2$2$1 extends SuspendLambda impl
     final /* synthetic */ State $backStackEntry$delegate;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaOutputHostKt$MediaOutputHost$1$2$2$1(State state, Continuation continuation) {
         super(2, continuation);
         this.$backStackEntry$delegate = state;

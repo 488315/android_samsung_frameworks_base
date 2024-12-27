@@ -4,8 +4,6 @@ import com.android.systemui.R;
 import kotlin.enums.EnumEntries;
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class DolbyEnum {
     public static final /* synthetic */ EnumEntries $ENTRIES;
     public static final /* synthetic */ DolbyEnum[] $VALUES;

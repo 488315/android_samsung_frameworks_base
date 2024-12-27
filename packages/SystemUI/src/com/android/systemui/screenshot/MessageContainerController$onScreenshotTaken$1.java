@@ -29,7 +29,6 @@ final class MessageContainerController$onScreenshotTaken$1 extends SuspendLambda
     int label;
     final /* synthetic */ MessageContainerController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MessageContainerController$onScreenshotTaken$1(MessageContainerController messageContainerController, ScreenshotData screenshotData, Continuation continuation) {
         super(2, continuation);
         this.this$0 = messageContainerController;

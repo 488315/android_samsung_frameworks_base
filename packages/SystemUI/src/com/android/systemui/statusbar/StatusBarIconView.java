@@ -140,11 +140,6 @@ public final class StatusBarIconView extends AnimatedImageView implements Status
         rect.bottom = (int) (rect.bottom + translationY);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x005d  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00a0  */
-    /* JADX WARN: Removed duplicated region for block: B:35:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -451,11 +446,6 @@ public final class StatusBarIconView extends AnimatedImageView implements Status
     
         if (r0.getResId() == r3.getResId()) goto L6;
      */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0098  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x009f  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00d6  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0050  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -640,7 +630,6 @@ public final class StatusBarIconView extends AnimatedImageView implements Status
         setPivotY((getHeight() - (this.mIconScale * getWidth())) / 2.0f);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.StatusBarIconView$$ExternalSyntheticLambda0] */
     public StatusBarIconView(Context context, String str, StatusBarNotification statusBarNotification, boolean z) {
         super(context);
         this.mStatusBarIconDrawingSizeIncreased = 1;

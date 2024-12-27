@@ -9,13 +9,11 @@ public final class SemSdCardEncryptionPolicy
             new Parcelable.Creator<
                     SemSdCardEncryptionPolicy>() { // from class:
                                                    // com.samsung.android.security.SemSdCardEncryptionPolicy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSdCardEncryptionPolicy createFromParcel(Parcel in) {
                     return new SemSdCardEncryptionPolicy(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSdCardEncryptionPolicy[] newArray(int size) {
                     return new SemSdCardEncryptionPolicy[size];

@@ -14,13 +14,11 @@ public final class PlaybackParams implements Parcelable {
     public static final int AUDIO_STRETCH_MODE_VOICE = 1;
     public static final Parcelable.Creator<PlaybackParams> CREATOR =
             new Parcelable.Creator<PlaybackParams>() { // from class: android.media.PlaybackParams.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PlaybackParams createFromParcel(Parcel in) {
                     return new PlaybackParams(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PlaybackParams[] newArray(int size) {
                     return new PlaybackParams[size];

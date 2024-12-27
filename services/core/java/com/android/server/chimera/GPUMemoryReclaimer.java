@@ -465,7 +465,6 @@ public final class GPUMemoryReclaimer {
         public final GPUMemoryReclaimer self;
         public final /* synthetic */ GPUMemoryReclaimer this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public SwapInHandler(
                 GPUMemoryReclaimer gPUMemoryReclaimer,
                 GPUMemoryReclaimer gPUMemoryReclaimer2,

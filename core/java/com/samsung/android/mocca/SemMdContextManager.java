@@ -212,7 +212,6 @@ public class SemMdContextManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class MoccaListenerTransport extends IMoccaEventListener.Stub {
         private static final int MSG_CONTEXT_AVAILABLE = 3;
         private static final int MSG_CONTEXT_CHANGED = 1;
@@ -256,7 +255,6 @@ public class SemMdContextManager {
             this.mListenerHandler.obtainMessage(4, contextType).sendToTarget();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void _handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:

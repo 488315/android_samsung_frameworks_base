@@ -355,10 +355,6 @@ public final class DozeSensors {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.doze.DozeSensors$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.biometrics.AuthController$Callback, com.android.systemui.doze.DozeSensors$2] */
-    /* JADX WARN: Type inference failed for: r5v0, types: [com.android.systemui.doze.DozeSensors$1] */
     public DozeSensors(Resources resources, AsyncSensorManager asyncSensorManager, DozeParameters dozeParameters, AmbientDisplayConfiguration ambientDisplayConfiguration, WakeLock wakeLock, Callback callback, Consumer<Boolean> consumer, DozeLog dozeLog, ProximitySensor proximitySensor, SecureSettings secureSettings, AuthController authController, DevicePostureController devicePostureController, SelectedUserInteractor selectedUserInteractor) {
         boolean z;
         boolean z2;

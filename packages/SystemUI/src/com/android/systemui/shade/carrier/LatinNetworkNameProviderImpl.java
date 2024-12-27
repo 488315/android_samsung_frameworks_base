@@ -98,7 +98,6 @@ public final class LatinNetworkNameProviderImpl implements LatinNetworkNameProvi
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v7, types: [com.android.systemui.shade.carrier.LatinNetworkNameProviderImpl$cellBroadcastServiceConnection$1] */
     public LatinNetworkNameProviderImpl(Context context, BroadcastDispatcher broadcastDispatcher, CarrierInfraMediator carrierInfraMediator, TelephonyManager telephonyManager, LocationController locationController, SubscriptionManager subscriptionManager, Executor executor, DumpManager dumpManager, ImsRegStateUtil imsRegStateUtil, SubscriptionsOrder subscriptionsOrder) {
         this.context = context;
         this.broadcastDispatcher = broadcastDispatcher;
@@ -250,12 +249,6 @@ public final class LatinNetworkNameProviderImpl implements LatinNetworkNameProvi
     
         if (r2 == null) goto L19;
      */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x020f  */
-    /* JADX WARN: Removed duplicated region for block: B:184:0x0461  */
-    /* JADX WARN: Removed duplicated region for block: B:200:0x049d  */
-    /* JADX WARN: Removed duplicated region for block: B:202:0x04a3  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x020c  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0212  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

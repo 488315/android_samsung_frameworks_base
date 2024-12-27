@@ -31,13 +31,11 @@ public final class InputMethodInfo implements Parcelable {
     public static final Parcelable.Creator<InputMethodInfo> CREATOR =
             new Parcelable.Creator<
                     InputMethodInfo>() { // from class: android.view.inputmethod.InputMethodInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputMethodInfo createFromParcel(Parcel source) {
                     return new InputMethodInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputMethodInfo[] newArray(int size) {
                     return new InputMethodInfo[size];
@@ -106,10 +104,6 @@ public final class InputMethodInfo implements Parcelable {
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:68)
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.visit(DebugInfoApplyVisitor.java:55)
      */
-    /* JADX WARN: Not initialized variable reg: 21, insn: 0x03c1: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r21 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isAuxIme' boolean)]), block:B:179:0x03c1 */
-    /* JADX WARN: Not initialized variable reg: 21, insn: 0x03c7: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r21 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isAuxIme' boolean)]), block:B:181:0x03c7 */
-    /* JADX WARN: Not initialized variable reg: 24, insn: 0x03c3: MOVE (r7 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('inlineSuggestionsEnabled' boolean)]), block:B:179:0x03c1 */
-    /* JADX WARN: Not initialized variable reg: 24, insn: 0x03c9: MOVE (r7 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('inlineSuggestionsEnabled' boolean)]), block:B:181:0x03c7 */
     public InputMethodInfo(
             android.content.Context r34,
             android.content.pm.ResolveInfo r35,

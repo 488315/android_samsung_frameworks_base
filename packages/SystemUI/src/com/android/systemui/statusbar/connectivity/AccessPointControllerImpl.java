@@ -88,8 +88,6 @@ public final class AccessPointControllerImpl implements AccessPointController, W
         ICONS_WIFI7 = new int[][]{new int[]{R.drawable.sec_ic_wifi7_signal_0, R.drawable.sec_ic_wifi7_lock_signal_0}, new int[]{R.drawable.sec_ic_wifi7_signal_1, R.drawable.sec_ic_wifi7_lock_signal_1}, new int[]{R.drawable.sec_ic_wifi7_signal_2, R.drawable.sec_ic_wifi7_lock_signal_2}, new int[]{R.drawable.sec_ic_wifi7_signal_3, R.drawable.sec_ic_wifi7_lock_signal_3}, new int[]{R.drawable.sec_ic_wifi7_signal_4, R.drawable.sec_ic_wifi7_lock_signal_4}};
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.statusbar.connectivity.AccessPointControllerImpl$1] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.statusbar.connectivity.AccessPointControllerImpl$2] */
     public AccessPointControllerImpl(UserManager userManager, UserTracker userTracker, Executor executor, WifiPickerTrackerFactory wifiPickerTrackerFactory) {
         this.mUserManager = userManager;
         this.mUserTracker = userTracker;

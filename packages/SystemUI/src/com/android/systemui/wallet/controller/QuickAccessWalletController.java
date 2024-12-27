@@ -36,7 +36,6 @@ public final class QuickAccessWalletController {
     public final class AnonymousClass1 extends ContentObserver {
         public final /* synthetic */ QuickAccessWalletClient.OnWalletCardsRetrievedCallback val$cardsRetriever;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(Handler handler, QuickAccessWalletClient.OnWalletCardsRetrievedCallback onWalletCardsRetrievedCallback) {
             super(handler);
             this.val$cardsRetriever = onWalletCardsRetrievedCallback;
@@ -99,8 +98,6 @@ public final class QuickAccessWalletController {
         this.mQawClientCreatedTimeMillis = this.mClock.elapsedRealtime();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v4, types: [android.app.role.OnRoleHoldersChangedListener, com.android.systemui.wallet.controller.QuickAccessWalletController$$ExternalSyntheticLambda0] */
     public final void setupWalletChangeObservers(final QuickAccessWalletClient.OnWalletCardsRetrievedCallback onWalletCardsRetrievedCallback, WalletChangeEvent... walletChangeEventArr) {
         for (WalletChangeEvent walletChangeEvent : walletChangeEventArr) {
             WalletChangeEvent walletChangeEvent2 = WalletChangeEvent.WALLET_PREFERENCE_CHANGE;

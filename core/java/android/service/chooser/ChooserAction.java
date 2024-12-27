@@ -12,7 +12,6 @@ public final class ChooserAction implements Parcelable {
     public static final Parcelable.Creator<ChooserAction> CREATOR =
             new Parcelable.Creator<
                     ChooserAction>() { // from class: android.service.chooser.ChooserAction.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ChooserAction createFromParcel(Parcel source) {
                     return new ChooserAction(
@@ -21,7 +20,6 @@ public final class ChooserAction implements Parcelable {
                             PendingIntent.CREATOR.createFromParcel(source));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ChooserAction[] newArray(int size) {
                     return new ChooserAction[size];

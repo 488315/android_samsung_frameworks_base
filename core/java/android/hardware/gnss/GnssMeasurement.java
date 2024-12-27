@@ -14,7 +14,6 @@ public class GnssMeasurement implements Parcelable {
     public static final Parcelable.Creator<GnssMeasurement> CREATOR =
             new Parcelable.Creator<
                     GnssMeasurement>() { // from class: android.hardware.gnss.GnssMeasurement.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GnssMeasurement createFromParcel(Parcel _aidl_source) {
                     GnssMeasurement _aidl_out = new GnssMeasurement();
@@ -22,7 +21,6 @@ public class GnssMeasurement implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GnssMeasurement[] newArray(int _aidl_size) {
                     return new GnssMeasurement[_aidl_size];

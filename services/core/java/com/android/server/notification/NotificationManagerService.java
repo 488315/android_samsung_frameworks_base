@@ -657,10 +657,6 @@ public final class NotificationManagerService extends SystemService {
             return new StatusBarNotification(statusBarNotification.getPackageName(), statusBarNotification.getOpPkg(), statusBarNotification.getId(), statusBarNotification.getTag(), statusBarNotification.getUid(), statusBarNotification.getInitialPid(), clone, statusBarNotification.getUser(), statusBarNotification.getOverrideGroupKey(), statusBarNotification.getPostTime());
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:82:0x01ea A[Catch: all -> 0x0168, TryCatch #0 {all -> 0x0168, blocks: (B:69:0x0141, B:71:0x0145, B:73:0x0149, B:74:0x016b, B:77:0x01ad, B:80:0x01dd, B:82:0x01ea, B:83:0x01ec, B:85:0x01ee, B:86:0x01f5, B:87:0x01bb, B:89:0x01c2, B:91:0x01ce, B:93:0x01d2, B:95:0x01d8, B:96:0x0186, B:99:0x018d, B:102:0x0198, B:105:0x01a3, B:106:0x01f6, B:107:0x01fd), top: B:68:0x0141 }] */
-        /* JADX WARN: Removed duplicated region for block: B:85:0x01ee A[Catch: all -> 0x0168, TryCatch #0 {all -> 0x0168, blocks: (B:69:0x0141, B:71:0x0145, B:73:0x0149, B:74:0x016b, B:77:0x01ad, B:80:0x01dd, B:82:0x01ea, B:83:0x01ec, B:85:0x01ee, B:86:0x01f5, B:87:0x01bb, B:89:0x01c2, B:91:0x01ce, B:93:0x01d2, B:95:0x01d8, B:96:0x0186, B:99:0x018d, B:102:0x0198, B:105:0x01a3, B:106:0x01f6, B:107:0x01fd), top: B:68:0x0141 }] */
-        /* JADX WARN: Type inference failed for: r1v32, types: [android.content.pm.ActivityInfo] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -833,7 +829,6 @@ public final class NotificationManagerService extends SystemService {
             return NotificationManagerService.this.mPermissionHelper.hasPermission(i);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:21:0x0081 A[Catch: all -> 0x0047, TryCatch #1 {all -> 0x0047, blocks: (B:13:0x003e, B:15:0x0042, B:18:0x0075, B:19:0x007b, B:21:0x0081, B:24:0x0089, B:27:0x0091, B:28:0x009a, B:36:0x009c, B:37:0x00c0, B:39:0x004a), top: B:12:0x003e }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1052,10 +1047,6 @@ public final class NotificationManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Type inference failed for: r10v15 */
-        /* JADX WARN: Type inference failed for: r10v16 */
-        /* JADX WARN: Type inference failed for: r10v8 */
-        /* JADX WARN: Type inference failed for: r10v9, types: [boolean, int] */
         public final void cancelNotificationByGroupKey(String str, String str2, int i, int i2, String str3, String str4) {
             long j;
             EdgeLightingPolicyManager.GroupNotificationData groupNotificationData;
@@ -1183,8 +1174,6 @@ public final class NotificationManagerService extends SystemService {
             NotificationManagerService.this.cancelNotificationInternal(Binder.getCallingUid(), Binder.getCallingPid(), i, i2, i3, str, str2, str3);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:41:0x00bc  */
-        /* JADX WARN: Removed duplicated region for block: B:47:0x00c2  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1576,18 +1565,6 @@ public final class NotificationManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r11v1 */
-        /* JADX WARN: Type inference failed for: r11v2, types: [int] */
-        /* JADX WARN: Type inference failed for: r11v4 */
-        /* JADX WARN: Type inference failed for: r11v5, types: [int] */
-        /* JADX WARN: Type inference failed for: r11v7 */
-        /* JADX WARN: Type inference failed for: r11v8 */
-        /* JADX WARN: Type inference failed for: r4v2, types: [android.util.ArrayMap] */
-        /* JADX WARN: Type inference failed for: r9v1 */
-        /* JADX WARN: Type inference failed for: r9v2, types: [java.util.ArrayList] */
-        /* JADX WARN: Type inference failed for: r9v7 */
-        /* JADX WARN: Type inference failed for: r9v8 */
         public final void deleteNotificationChannelGroup(String str, String str2) {
             int i;
             NotificationChannelGroup notificationChannelGroup;
@@ -2164,8 +2141,6 @@ public final class NotificationManagerService extends SystemService {
         
             if (r4.mPackageManager.checkPermission("android.permission.UNLIMITED_TOASTS", r25, r2) == 0) goto L60;
          */
-        /* JADX WARN: Removed duplicated region for block: B:72:0x01a1  */
-        /* JADX WARN: Removed duplicated region for block: B:83:0x0212 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3429,7 +3404,6 @@ public final class NotificationManagerService extends SystemService {
         
             if (r0 == 0) goto L17;
          */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x007c A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3573,7 +3547,6 @@ public final class NotificationManagerService extends SystemService {
             }
             NotificationManagerService.m699$$Nest$mcheckCallerIsSystemOrSameApp(NotificationManagerService.this, str);
             NotificationManagerService.this.mHandler.post(new Runnable() { // from class: com.android.server.notification.NotificationManagerService.16.2
-                /* JADX WARN: Removed duplicated region for block: B:77:0x0142 A[Catch: all -> 0x00dc, TryCatch #1 {all -> 0x00dc, blocks: (B:56:0x00d5, B:58:0x00d9, B:62:0x00df, B:65:0x00ee, B:68:0x00f3, B:71:0x00fa, B:74:0x0103, B:75:0x013c, B:77:0x0142, B:79:0x0149, B:81:0x0155, B:83:0x0158, B:86:0x015b, B:87:0x015e, B:90:0x0109, B:91:0x0113, B:93:0x0119, B:98:0x0123, B:101:0x0128, B:104:0x012f, B:107:0x0138), top: B:55:0x00d5 }] */
                 @Override // java.lang.Runnable
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -3589,7 +3562,6 @@ public final class NotificationManagerService extends SystemService {
             });
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
             new NotificationShellCmd(NotificationManagerService.this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
         }
@@ -3653,8 +3625,6 @@ public final class NotificationManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:12:0x0062 A[Catch: all -> 0x0030, TryCatch #0 {all -> 0x0030, blocks: (B:4:0x0027, B:6:0x002b, B:9:0x0056, B:10:0x005c, B:12:0x0062, B:15:0x006a, B:30:0x0072, B:31:0x007a, B:17:0x007d, B:20:0x0085, B:22:0x0089, B:24:0x00ad, B:27:0x008d, B:37:0x00b1, B:38:0x00d4, B:55:0x0033), top: B:3:0x0027 }] */
-        /* JADX WARN: Removed duplicated region for block: B:42:0x00df  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4757,9 +4727,6 @@ public final class NotificationManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:12:0x004d A[Catch: all -> 0x001f, TryCatch #0 {all -> 0x001f, blocks: (B:4:0x0016, B:6:0x001a, B:9:0x0040, B:10:0x0047, B:12:0x004d, B:15:0x0055, B:25:0x0061, B:26:0x0069, B:30:0x006b, B:32:0x0073, B:33:0x0082, B:34:0x0086, B:36:0x0021), top: B:3:0x0016 }] */
-        /* JADX WARN: Removed duplicated region for block: B:25:0x0061 A[Catch: all -> 0x001f, TryCatch #0 {all -> 0x001f, blocks: (B:4:0x0016, B:6:0x001a, B:9:0x0040, B:10:0x0047, B:12:0x004d, B:15:0x0055, B:25:0x0061, B:26:0x0069, B:30:0x006b, B:32:0x0073, B:33:0x0082, B:34:0x0086, B:36:0x0021), top: B:3:0x0016 }] */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x006b A[Catch: all -> 0x001f, TryCatch #0 {all -> 0x001f, blocks: (B:4:0x0016, B:6:0x001a, B:9:0x0040, B:10:0x0047, B:12:0x004d, B:15:0x0055, B:25:0x0061, B:26:0x0069, B:30:0x006b, B:32:0x0073, B:33:0x0082, B:34:0x0086, B:36:0x0021), top: B:3:0x0016 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5569,7 +5536,6 @@ public final class NotificationManagerService extends SystemService {
             return notificationRecord;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:20:0x005b A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5717,7 +5683,6 @@ public final class NotificationManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:22:0x0154 A[Catch: all -> 0x003d, TryCatch #0 {all -> 0x003d, blocks: (B:7:0x001d, B:9:0x002a, B:10:0x003b, B:13:0x0040, B:19:0x00ac, B:20:0x00ce, B:22:0x0154, B:23:0x0191, B:26:0x00b8, B:27:0x00c2, B:28:0x00cc), top: B:6:0x001d }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6559,10 +6524,6 @@ public final class NotificationManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:133:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:191:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:73:? A[RETURN, SYNTHETIC] */
         @Override // android.content.BroadcastReceiver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -7333,20 +7294,6 @@ public final class NotificationManagerService extends SystemService {
             
                 if (((com.android.server.notification.NotificationManagerService) r19.this$1).isRecordBlockedLocked(r14) != false) goto L36;
              */
-            /* JADX WARN: Removed duplicated region for block: B:103:0x01fd A[Catch: all -> 0x0269, TRY_ENTER, TRY_LEAVE, TryCatch #5 {all -> 0x0269, blocks: (B:103:0x01fd, B:105:0x0206, B:107:0x020f, B:109:0x0225, B:112:0x0232, B:114:0x023f, B:116:0x0246, B:120:0x0257, B:123:0x0261, B:129:0x0312, B:131:0x031c, B:135:0x0343, B:147:0x0369, B:158:0x039c, B:185:0x040c, B:188:0x0418, B:194:0x0432, B:197:0x043c, B:203:0x044f, B:205:0x045f, B:208:0x046d, B:217:0x0499, B:225:0x04bf, B:228:0x04cb, B:236:0x0505, B:250:0x054a, B:254:0x0563, B:258:0x0577, B:263:0x0585, B:275:0x05af, B:285:0x05d0, B:290:0x05e4, B:292:0x05f6, B:298:0x061f, B:308:0x065b, B:312:0x0667, B:357:0x0695, B:359:0x06a0, B:363:0x06b5, B:374:0x02e1, B:379:0x02f4), top: B:101:0x01fb }] */
-            /* JADX WARN: Removed duplicated region for block: B:129:0x0312 A[Catch: all -> 0x0269, TRY_ENTER, TRY_LEAVE, TryCatch #5 {all -> 0x0269, blocks: (B:103:0x01fd, B:105:0x0206, B:107:0x020f, B:109:0x0225, B:112:0x0232, B:114:0x023f, B:116:0x0246, B:120:0x0257, B:123:0x0261, B:129:0x0312, B:131:0x031c, B:135:0x0343, B:147:0x0369, B:158:0x039c, B:185:0x040c, B:188:0x0418, B:194:0x0432, B:197:0x043c, B:203:0x044f, B:205:0x045f, B:208:0x046d, B:217:0x0499, B:225:0x04bf, B:228:0x04cb, B:236:0x0505, B:250:0x054a, B:254:0x0563, B:258:0x0577, B:263:0x0585, B:275:0x05af, B:285:0x05d0, B:290:0x05e4, B:292:0x05f6, B:298:0x061f, B:308:0x065b, B:312:0x0667, B:357:0x0695, B:359:0x06a0, B:363:0x06b5, B:374:0x02e1, B:379:0x02f4), top: B:101:0x01fb }] */
-            /* JADX WARN: Removed duplicated region for block: B:140:0x0358  */
-            /* JADX WARN: Removed duplicated region for block: B:151:0x0376  */
-            /* JADX WARN: Removed duplicated region for block: B:185:0x040c A[Catch: all -> 0x0269, TRY_ENTER, TRY_LEAVE, TryCatch #5 {all -> 0x0269, blocks: (B:103:0x01fd, B:105:0x0206, B:107:0x020f, B:109:0x0225, B:112:0x0232, B:114:0x023f, B:116:0x0246, B:120:0x0257, B:123:0x0261, B:129:0x0312, B:131:0x031c, B:135:0x0343, B:147:0x0369, B:158:0x039c, B:185:0x040c, B:188:0x0418, B:194:0x0432, B:197:0x043c, B:203:0x044f, B:205:0x045f, B:208:0x046d, B:217:0x0499, B:225:0x04bf, B:228:0x04cb, B:236:0x0505, B:250:0x054a, B:254:0x0563, B:258:0x0577, B:263:0x0585, B:275:0x05af, B:285:0x05d0, B:290:0x05e4, B:292:0x05f6, B:298:0x061f, B:308:0x065b, B:312:0x0667, B:357:0x0695, B:359:0x06a0, B:363:0x06b5, B:374:0x02e1, B:379:0x02f4), top: B:101:0x01fb }] */
-            /* JADX WARN: Removed duplicated region for block: B:301:0x0637  */
-            /* JADX WARN: Removed duplicated region for block: B:319:0x06dc A[Catch: all -> 0x06e6, TRY_LEAVE, TryCatch #3 {all -> 0x06e6, blocks: (B:127:0x02fb, B:137:0x0352, B:142:0x035c, B:182:0x03e3, B:317:0x06d4, B:319:0x06dc, B:353:0x067c, B:361:0x06af, B:365:0x06bc, B:368:0x0272, B:372:0x02d7, B:377:0x02ea), top: B:367:0x0272 }] */
-            /* JADX WARN: Removed duplicated region for block: B:325:0x0707 A[Catch: all -> 0x06e3, TRY_LEAVE, TryCatch #1 {all -> 0x06e3, blocks: (B:322:0x06df, B:323:0x06ea, B:325:0x0707), top: B:321:0x06df }] */
-            /* JADX WARN: Removed duplicated region for block: B:329:0x0720 A[Catch: all -> 0x0083, TryCatch #2 {all -> 0x0083, blocks: (B:9:0x0054, B:11:0x0061, B:15:0x0079, B:13:0x0087, B:16:0x008a, B:35:0x00df, B:37:0x00ec, B:41:0x0104, B:39:0x010e, B:42:0x0111, B:51:0x074a, B:53:0x0757, B:55:0x076f, B:57:0x0772, B:58:0x077b, B:75:0x015b, B:77:0x0168, B:81:0x0180, B:79:0x018a, B:82:0x018d, B:327:0x0713, B:329:0x0720, B:333:0x0738, B:331:0x0742, B:334:0x0745), top: B:4:0x0033 }] */
-            /* JADX WARN: Removed duplicated region for block: B:336:0x0745 A[EDGE_INSN: B:336:0x0745->B:334:0x0745 BREAK  A[LOOP:4: B:328:0x071e->B:331:0x0742], SYNTHETIC] */
-            /* JADX WARN: Removed duplicated region for block: B:342:0x06e9  */
-            /* JADX WARN: Removed duplicated region for block: B:353:0x067c A[Catch: all -> 0x06e6, TRY_ENTER, TRY_LEAVE, TryCatch #3 {all -> 0x06e6, blocks: (B:127:0x02fb, B:137:0x0352, B:142:0x035c, B:182:0x03e3, B:317:0x06d4, B:319:0x06dc, B:353:0x067c, B:361:0x06af, B:365:0x06bc, B:368:0x0272, B:372:0x02d7, B:377:0x02ea), top: B:367:0x0272 }] */
-            /* JADX WARN: Removed duplicated region for block: B:366:0x026e  */
-            /* JADX WARN: Removed duplicated region for block: B:53:0x0757 A[Catch: all -> 0x0083, TryCatch #2 {all -> 0x0083, blocks: (B:9:0x0054, B:11:0x0061, B:15:0x0079, B:13:0x0087, B:16:0x008a, B:35:0x00df, B:37:0x00ec, B:41:0x0104, B:39:0x010e, B:42:0x0111, B:51:0x074a, B:53:0x0757, B:55:0x076f, B:57:0x0772, B:58:0x077b, B:75:0x015b, B:77:0x0168, B:81:0x0180, B:79:0x018a, B:82:0x018d, B:327:0x0713, B:329:0x0720, B:333:0x0738, B:331:0x0742, B:334:0x0745), top: B:4:0x0033 }] */
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
                 To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7359,8 +7306,6 @@ public final class NotificationManagerService extends SystemService {
                 throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.NotificationManagerService.NotificationListeners.AnonymousClass1.postNotification():boolean");
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r4v5, types: [com.android.server.notification.NotificationManagerService$PostNotificationTracker] */
             @Override // java.lang.Runnable
             public final void run() {
                 try {
@@ -7698,8 +7643,6 @@ public final class NotificationManagerService extends SystemService {
         
             if (r2.targetSdkVersion < 28) goto L49;
          */
-        /* JADX WARN: Removed duplicated region for block: B:35:0x0098  */
-        /* JADX WARN: Removed duplicated region for block: B:39:0x009b  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7927,11 +7870,6 @@ public final class NotificationManagerService extends SystemService {
         
             r11.add(new com.android.server.notification.NotificationManagerService$$ExternalSyntheticLambda15(r33, r5, r4, r9.makeRankingUpdateLocked(r5), 1));
          */
-        /* JADX WARN: Removed duplicated region for block: B:104:0x012d  */
-        /* JADX WARN: Removed duplicated region for block: B:41:0x00ba  */
-        /* JADX WARN: Removed duplicated region for block: B:77:0x017c  */
-        /* JADX WARN: Removed duplicated region for block: B:83:0x01b1 A[Catch: Exception -> 0x008f, TryCatch #0 {Exception -> 0x008f, blocks: (B:8:0x0028, B:10:0x002d, B:11:0x0032, B:12:0x0049, B:14:0x004f, B:19:0x006a, B:24:0x0077, B:26:0x0081, B:35:0x009e, B:37:0x00a8, B:39:0x00b4, B:43:0x00be, B:45:0x00cc, B:47:0x00f9, B:50:0x00ff, B:52:0x0107, B:55:0x0115, B:60:0x0136, B:64:0x0148, B:69:0x0154, B:71:0x015c, B:73:0x0167, B:74:0x0162, B:75:0x0177, B:78:0x017d, B:81:0x01a3, B:83:0x01b1, B:84:0x01d5, B:85:0x01b7, B:88:0x01c4, B:92:0x01cc, B:94:0x00d8, B:97:0x00e7, B:101:0x00ef), top: B:7:0x0028 }] */
-        /* JADX WARN: Removed duplicated region for block: B:85:0x01b7 A[Catch: Exception -> 0x008f, TryCatch #0 {Exception -> 0x008f, blocks: (B:8:0x0028, B:10:0x002d, B:11:0x0032, B:12:0x0049, B:14:0x004f, B:19:0x006a, B:24:0x0077, B:26:0x0081, B:35:0x009e, B:37:0x00a8, B:39:0x00b4, B:43:0x00be, B:45:0x00cc, B:47:0x00f9, B:50:0x00ff, B:52:0x0107, B:55:0x0115, B:60:0x0136, B:64:0x0148, B:69:0x0154, B:71:0x015c, B:73:0x0167, B:74:0x0162, B:75:0x0177, B:78:0x017d, B:81:0x01a3, B:83:0x01b1, B:84:0x01d5, B:85:0x01b7, B:88:0x01c4, B:92:0x01cc, B:94:0x00d8, B:97:0x00e7, B:101:0x00ef), top: B:7:0x0028 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8893,9 +8831,6 @@ public final class NotificationManagerService extends SystemService {
             super(looper);
         }
 
-        /* JADX WARN: Can't wrap try/catch for region: R(8:110|(4:111|112|b2|128)|(3:141|142|(1:144)(2:145|(8:147|148|149|150|131|132|(3:134|135|136)(1:138)|137)))|130|131|132|(0)(0)|137) */
-        /* JADX WARN: Removed duplicated region for block: B:134:0x0151 A[Catch: NameNotFoundException -> 0x015b, TRY_LEAVE, TryCatch #9 {NameNotFoundException -> 0x015b, blocks: (B:132:0x0145, B:134:0x0151), top: B:131:0x0145 }] */
-        /* JADX WARN: Removed duplicated region for block: B:138:0x015b A[SYNTHETIC] */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -9514,7 +9449,6 @@ public final class NotificationManagerService extends SystemService {
         notificationManagerService.mHandler.obtainMessage(5, calculateHints, 0).sendToTarget();
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:57:0x00a2 -> B:18:0x00c1). Please report as a decompilation issue!!! */
     /* renamed from: -$$Nest$mwriteConversationAppPolicyJson, reason: not valid java name */
     public static void m724$$Nest$mwriteConversationAppPolicyJson(NotificationManagerService notificationManagerService, FileOutputStream fileOutputStream) {
         OutputStreamWriter outputStreamWriter;
@@ -9610,30 +9544,6 @@ public final class NotificationManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v1 */
-    /* JADX WARN: Type inference failed for: r0v17, types: [int] */
-    /* JADX WARN: Type inference failed for: r0v18 */
-    /* JADX WARN: Type inference failed for: r0v19 */
-    /* JADX WARN: Type inference failed for: r0v2 */
-    /* JADX WARN: Type inference failed for: r0v20 */
-    /* JADX WARN: Type inference failed for: r0v21 */
-    /* JADX WARN: Type inference failed for: r0v3 */
-    /* JADX WARN: Type inference failed for: r0v4, types: [android.util.JsonWriter] */
-    /* JADX WARN: Type inference failed for: r0v5 */
-    /* JADX WARN: Type inference failed for: r0v6, types: [android.util.JsonWriter] */
-    /* JADX WARN: Type inference failed for: r0v7 */
-    /* JADX WARN: Type inference failed for: r0v8 */
-    /* JADX WARN: Type inference failed for: r1v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r1v1 */
-    /* JADX WARN: Type inference failed for: r1v2 */
-    /* JADX WARN: Type inference failed for: r1v3, types: [java.io.OutputStreamWriter] */
-    /* JADX WARN: Type inference failed for: r1v4 */
-    /* JADX WARN: Type inference failed for: r1v5 */
-    /* JADX WARN: Type inference failed for: r1v6 */
-    /* JADX WARN: Type inference failed for: r1v7, types: [java.io.OutputStreamWriter] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [java.io.OutputStreamWriter, java.io.Writer] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:63:0x008e -> B:19:0x00ad). Please report as a decompilation issue!!! */
     /* renamed from: -$$Nest$mwriteOngoingDismissExceptionPolicyJson, reason: not valid java name */
     public static void m725$$Nest$mwriteOngoingDismissExceptionPolicyJson(NotificationManagerService notificationManagerService, FileOutputStream fileOutputStream) {
         notificationManagerService.getClass();
@@ -9845,7 +9755,6 @@ public final class NotificationManagerService extends SystemService {
         resolveSerializer.endDocument();
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:54:0x0069 -> B:15:0x0088). Please report as a decompilation issue!!! */
     /* renamed from: -$$Nest$mwriteScpmNotificationPoliciesJson, reason: not valid java name */
     public static void m727$$Nest$mwriteScpmNotificationPoliciesJson(NotificationManagerService notificationManagerService, FileOutputStream fileOutputStream) {
         OutputStreamWriter outputStreamWriter;
@@ -9947,7 +9856,6 @@ public final class NotificationManagerService extends SystemService {
         EDGE_NOTIFICATION_COMPONENT = new ComponentName("com.samsung.android.service.peoplestripe", "com.samsung.android.service.peoplestripe.PeopleNotiListenerService");
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -9969,10 +9877,6 @@ public final class NotificationManagerService extends SystemService {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.NotificationManagerService.<init>(android.content.Context):void");
     }
 
-    /* JADX WARN: Type inference failed for: r0v21, types: [com.android.server.notification.NotificationManagerService$1] */
-    /* JADX WARN: Type inference failed for: r0v43, types: [com.android.server.notification.NotificationManagerService$25] */
-    /* JADX WARN: Type inference failed for: r0v44, types: [com.android.server.notification.NotificationManagerService$26] */
-    /* JADX WARN: Type inference failed for: r5v6, types: [com.android.server.notification.NotificationManagerService$26] */
     public NotificationManagerService(Context context, NotificationRecordLogger notificationRecordLogger, InstanceIdSequence instanceIdSequence) {
         super(context);
         this.mForegroundToken = new Binder();
@@ -10525,10 +10429,6 @@ public final class NotificationManagerService extends SystemService {
         cancelNotification(i6, i2, str, str3, i3, i5, false, handleIncomingUser, 8, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:121:0x02ec  */
-    /* JADX WARN: Removed duplicated region for block: B:123:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x02c2 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x01fd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -10606,12 +10506,6 @@ public final class NotificationManagerService extends SystemService {
     
         if (findNotificationByListLocked(r19.sbn.getKey(), r14.mEnqueuedNotifications) != null) goto L45;
      */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x023f  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x02c6  */
-    /* JADX WARN: Removed duplicated region for block: B:135:0x031a  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x006b A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x01a9  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x01ee  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -10691,12 +10585,6 @@ public final class NotificationManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0099 A[Catch: all -> 0x004e, TryCatch #2 {all -> 0x004e, blocks: (B:6:0x0039, B:10:0x004a, B:11:0x0053, B:13:0x0062, B:15:0x006b, B:16:0x0081, B:18:0x008b, B:19:0x0093, B:21:0x0099, B:25:0x00bf, B:28:0x00c8, B:30:0x00cd, B:31:0x00d2, B:34:0x00ec, B:59:0x00d0), top: B:5:0x0039 }] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0135  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0188  */
-    /* JADX WARN: Removed duplicated region for block: B:48:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x013e A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x0121  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -10826,27 +10714,6 @@ public final class NotificationManagerService extends SystemService {
     
         r1 = null;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:170:0x0582  */
-    /* JADX WARN: Removed duplicated region for block: B:185:0x05f4  */
-    /* JADX WARN: Removed duplicated region for block: B:192:0x0641  */
-    /* JADX WARN: Removed duplicated region for block: B:195:0x0655 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:196:0x0656  */
-    /* JADX WARN: Removed duplicated region for block: B:240:0x09a7  */
-    /* JADX WARN: Removed duplicated region for block: B:267:0x08de  */
-    /* JADX WARN: Removed duplicated region for block: B:277:0x0919  */
-    /* JADX WARN: Removed duplicated region for block: B:279:0x0934  */
-    /* JADX WARN: Removed duplicated region for block: B:295:0x0941  */
-    /* JADX WARN: Removed duplicated region for block: B:303:0x094d  */
-    /* JADX WARN: Removed duplicated region for block: B:306:0x0968  */
-    /* JADX WARN: Removed duplicated region for block: B:319:0x096a  */
-    /* JADX WARN: Removed duplicated region for block: B:363:0x0643  */
-    /* JADX WARN: Removed duplicated region for block: B:364:0x05fe  */
-    /* JADX WARN: Removed duplicated region for block: B:372:0x05eb  */
-    /* JADX WARN: Type inference failed for: r6v11 */
-    /* JADX WARN: Type inference failed for: r6v12, types: [int] */
-    /* JADX WARN: Type inference failed for: r6v31 */
-    /* JADX WARN: Unreachable blocks removed: 2, instructions: 2 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -10913,20 +10780,6 @@ public final class NotificationManagerService extends SystemService {
         return null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:113:0x028f  */
-    /* JADX WARN: Removed duplicated region for block: B:135:0x0203  */
-    /* JADX WARN: Removed duplicated region for block: B:140:0x022a  */
-    /* JADX WARN: Removed duplicated region for block: B:141:0x0104  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00fd  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x010e  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x013f  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0150  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0179  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0183  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x018d  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x01ca  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x024d  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0258  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -11604,10 +11457,6 @@ public final class NotificationManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0087  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00eb  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00ee  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0096  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -11773,10 +11622,6 @@ public final class NotificationManagerService extends SystemService {
         onBootPhase(i, Looper.getMainLooper());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:110:0x03cc  */
-    /* JADX WARN: Removed duplicated region for block: B:115:0x03f2  */
-    /* JADX WARN: Removed duplicated region for block: B:133:0x0433  */
-    /* JADX WARN: Removed duplicated region for block: B:142:0x03d3 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -11870,28 +11715,6 @@ public final class NotificationManagerService extends SystemService {
         this.mHandler.post(new NotificationManagerService$$ExternalSyntheticLambda3(this, targetUser, 0));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1 */
-    /* JADX WARN: Type inference failed for: r1v2 */
-    /* JADX WARN: Type inference failed for: r1v6 */
-    /* JADX WARN: Type inference failed for: r4v0 */
-    /* JADX WARN: Type inference failed for: r4v1 */
-    /* JADX WARN: Type inference failed for: r4v10 */
-    /* JADX WARN: Type inference failed for: r4v13 */
-    /* JADX WARN: Type inference failed for: r4v14 */
-    /* JADX WARN: Type inference failed for: r4v15 */
-    /* JADX WARN: Type inference failed for: r4v16 */
-    /* JADX WARN: Type inference failed for: r4v17 */
-    /* JADX WARN: Type inference failed for: r4v18 */
-    /* JADX WARN: Type inference failed for: r4v19 */
-    /* JADX WARN: Type inference failed for: r4v2 */
-    /* JADX WARN: Type inference failed for: r4v3, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r4v4 */
-    /* JADX WARN: Type inference failed for: r4v5, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r4v6, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r4v7 */
-    /* JADX WARN: Type inference failed for: r4v8 */
-    /* JADX WARN: Type inference failed for: r4v9 */
     public final void readConversationAppPolicyJson(FileInputStream fileInputStream, boolean z) {
         BufferedReader bufferedReader;
         boolean z2;
@@ -12074,11 +11897,6 @@ public final class NotificationManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v15, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r3v16 */
-    /* JADX WARN: Type inference failed for: r3v18, types: [java.lang.String] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:124:0x0148 -> B:39:0x01a9). Please report as a decompilation issue!!! */
     public final void readOngoingDismissExceptionPolicyJson(FileInputStream fileInputStream, boolean z) {
         BufferedReader bufferedReader;
         boolean z2;
@@ -12257,11 +12075,6 @@ public final class NotificationManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:140:0x0479  */
-    /* JADX WARN: Removed duplicated region for block: B:150:0x0576 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x0487  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:245:? -> B:241:0x03fd). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -12274,8 +12087,6 @@ public final class NotificationManagerService extends SystemService {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.NotificationManagerService.readPolicyXml(int, java.io.InputStream, boolean):void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v19 */
     public final void readScpmNotificationPoliciesJson(FileInputStream fileInputStream, boolean z) {
         BufferedReader bufferedReader;
         boolean hasNext;
@@ -12868,8 +12679,6 @@ public final class NotificationManagerService extends SystemService {
     
         if (r18.mPackageManager.checkPermission("android.permission.UNLIMITED_TOASTS", r8, r4) == 0) goto L14;
      */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00dd  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0093 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -12967,7 +12776,6 @@ public final class NotificationManagerService extends SystemService {
     
         if (r18.getImportance() == 0) goto L31;
      */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x010b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

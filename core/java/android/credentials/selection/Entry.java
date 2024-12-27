@@ -14,13 +14,11 @@ import com.android.internal.util.AnnotationValidations;
 public final class Entry implements Parcelable {
     public static final Parcelable.Creator<Entry> CREATOR =
             new Parcelable.Creator<Entry>() { // from class: android.credentials.selection.Entry.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Entry createFromParcel(Parcel in) {
                     return new Entry(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Entry[] newArray(int size) {
                     return new Entry[size];

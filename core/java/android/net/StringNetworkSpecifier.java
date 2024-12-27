@@ -12,13 +12,11 @@ public final class StringNetworkSpecifier extends NetworkSpecifier implements Pa
     public static final Parcelable.Creator<StringNetworkSpecifier> CREATOR =
             new Parcelable.Creator<
                     StringNetworkSpecifier>() { // from class: android.net.StringNetworkSpecifier.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StringNetworkSpecifier createFromParcel(Parcel in) {
                     return new StringNetworkSpecifier(in.readString());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StringNetworkSpecifier[] newArray(int size) {
                     return new StringNetworkSpecifier[size];

@@ -245,13 +245,11 @@ public class ApnSetting implements Parcelable {
         CREATOR =
                 new Parcelable.Creator<
                         ApnSetting>() { // from class: android.telephony.data.ApnSetting.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ApnSetting createFromParcel(Parcel in) {
                         return ApnSetting.readFromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ApnSetting[] newArray(int size) {
                         return new ApnSetting[size];
@@ -1253,7 +1251,6 @@ public class ApnSetting implements Parcelable {
         dest.writeInt(this.mEditedStatus);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ApnSetting readFromParcel(Parcel in) {
         return new Builder()
                 .setId(in.readInt())

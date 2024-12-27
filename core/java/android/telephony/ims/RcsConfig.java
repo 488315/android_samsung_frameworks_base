@@ -55,22 +55,18 @@ public final class RcsConfig {
             return this.mType;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Map<String, String> getParms() {
             return this.mParms;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Set<Characteristic> getSubs() {
             return this.mSubs;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Characteristic getParent() {
             return this.mParent;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Characteristic getSubByType(String type) {
             if (TextUtils.equals(this.mType, type)) {
                 return this;
@@ -89,7 +85,6 @@ public final class RcsConfig {
             return getSubByType(type) != null;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public String getParmValue(String name) {
             String value = this.mParms.get(name);
             if (value == null) {

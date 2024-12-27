@@ -45,8 +45,6 @@ public final class RowContentBindStage extends BindStage {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r9v0, types: [com.android.systemui.statusbar.notification.row.RowContentBindStage$1] */
     @Override // com.android.systemui.statusbar.notification.row.BindStage
     public final void executeStage(NotificationEntry notificationEntry, ExpandableNotificationRow expandableNotificationRow, final NotifBindPipeline$$ExternalSyntheticLambda1 notifBindPipeline$$ExternalSyntheticLambda1) {
         RowContentBindParams rowContentBindParams = (RowContentBindParams) getStageParams(notificationEntry);

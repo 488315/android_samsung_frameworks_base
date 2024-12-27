@@ -35,9 +35,6 @@ public final class CoreStateObserverController {
         return bundle == null ? new Bundle() : (Bundle) bundle.clone();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:134:0x023d A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:138:0x01e4 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

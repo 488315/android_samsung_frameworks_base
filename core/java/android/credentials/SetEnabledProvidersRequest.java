@@ -12,13 +12,11 @@ public final class SetEnabledProvidersRequest implements Parcelable {
     public static final Parcelable.Creator<SetEnabledProvidersRequest> CREATOR =
             new Parcelable.Creator<SetEnabledProvidersRequest>() { // from class:
                 // android.credentials.SetEnabledProvidersRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SetEnabledProvidersRequest createFromParcel(Parcel in) {
                     return new SetEnabledProvidersRequest(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SetEnabledProvidersRequest[] newArray(int size) {
                     return new SetEnabledProvidersRequest[size];

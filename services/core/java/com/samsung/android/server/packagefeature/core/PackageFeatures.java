@@ -17,7 +17,6 @@ public final class PackageFeatures {
     public boolean mAllFeaturesDisabled;
     public final Map mGroups = new ConcurrentHashMap();
 
-    /* JADX WARN: Type inference failed for: r9v1, types: [com.samsung.android.server.packagefeature.core.PackageFeatures$$ExternalSyntheticLambda1] */
     public PackageFeatures(Context context, Handler handler, CoreLogger coreLogger) {
         for (PackageFeatureGroup packageFeatureGroup : PackageFeatureGroup.values()) {
             if (packageFeatureGroup.mEnabled) {

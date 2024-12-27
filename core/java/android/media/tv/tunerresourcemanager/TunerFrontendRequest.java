@@ -9,7 +9,6 @@ public class TunerFrontendRequest implements Parcelable {
             new Parcelable.Creator<
                     TunerFrontendRequest>() { // from class:
                                               // android.media.tv.tunerresourcemanager.TunerFrontendRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TunerFrontendRequest createFromParcel(Parcel _aidl_source) {
                     TunerFrontendRequest _aidl_out = new TunerFrontendRequest();
@@ -17,7 +16,6 @@ public class TunerFrontendRequest implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TunerFrontendRequest[] newArray(int _aidl_size) {
                     return new TunerFrontendRequest[_aidl_size];

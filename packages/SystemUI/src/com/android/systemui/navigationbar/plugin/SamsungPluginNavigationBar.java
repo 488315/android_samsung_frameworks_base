@@ -51,7 +51,6 @@ public final class SamsungPluginNavigationBar implements ExtendableBar {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.navigationbar.plugin.SamsungPluginNavigationBar$keyguardCallback$1] */
     public SamsungPluginNavigationBar(NavigationBarView navigationBarView, NavBarStore navBarStore, ButtonDispatcherProxy buttonDispatcherProxy, Context context) {
         this.navigationBarView = navigationBarView;
         this.navBarStore = navBarStore;

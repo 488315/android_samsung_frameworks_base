@@ -48,7 +48,6 @@ public final class MediaDeviceSessionInteractor {
         return (MediaController) obj;
     }
 
-    /* JADX WARN: Type inference failed for: r4v3, types: [com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaDeviceSessionInteractor$playbackInfo$$inlined$map$1] */
     public final MediaDeviceSessionInteractor$playbackInfo$$inlined$map$1 playbackInfo(MediaDeviceSession mediaDeviceSession) {
         final FlowKt__TransformKt$filterIsInstance$$inlined$filter$2 flowKt__TransformKt$filterIsInstance$$inlined$filter$2 = new FlowKt__TransformKt$filterIsInstance$$inlined$filter$2(FlowKt.flowOn(FlowKt.transformLatest(((MediaControllerRepositoryImpl) this.mediaControllerRepository).activeSessions, new MediaDeviceSessionInteractor$stateChanges$$inlined$flatMapLatest$1(null, this, mediaDeviceSession, new MediaDeviceSessionInteractor$playbackInfo$1(null))), this.backgroundCoroutineContext), Reflection.getOrCreateKotlinClass(MediaControllerChangeModel.AudioInfoChanged.class));
         return new Flow() { // from class: com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaDeviceSessionInteractor$playbackInfo$$inlined$map$1
@@ -79,8 +78,6 @@ public final class MediaDeviceSessionInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -142,7 +139,6 @@ public final class MediaDeviceSessionInteractor {
         };
     }
 
-    /* JADX WARN: Type inference failed for: r4v3, types: [com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaDeviceSessionInteractor$playbackState$$inlined$map$1] */
     public final MediaDeviceSessionInteractor$playbackState$$inlined$map$1 playbackState(MediaDeviceSession mediaDeviceSession) {
         final FlowKt__TransformKt$filterIsInstance$$inlined$filter$2 flowKt__TransformKt$filterIsInstance$$inlined$filter$2 = new FlowKt__TransformKt$filterIsInstance$$inlined$filter$2(FlowKt.flowOn(FlowKt.transformLatest(((MediaControllerRepositoryImpl) this.mediaControllerRepository).activeSessions, new MediaDeviceSessionInteractor$stateChanges$$inlined$flatMapLatest$1(null, this, mediaDeviceSession, new MediaDeviceSessionInteractor$playbackState$1(null))), this.backgroundCoroutineContext), Reflection.getOrCreateKotlinClass(MediaControllerChangeModel.PlaybackStateChanged.class));
         return new Flow() { // from class: com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaDeviceSessionInteractor$playbackState$$inlined$map$1
@@ -173,8 +169,6 @@ public final class MediaDeviceSessionInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

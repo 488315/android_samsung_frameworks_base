@@ -153,7 +153,6 @@ public final class ThumbnailBehavior implements Behavior, SecBehavior, SecAction
                 controlViewHolder8 = null;
             }
             controlViewHolder8.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.ui.ThumbnailBehavior$bind$3
-                /* JADX WARN: Removed duplicated region for block: B:16:0x0039  */
                 @Override // java.lang.Runnable
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -324,7 +323,6 @@ public final class ThumbnailBehavior implements Behavior, SecBehavior, SecAction
                 }
                 String str = controlWithState.ci.controlId;
                 Function0 function0 = new Function0() { // from class: com.android.systemui.controls.ui.ControlActionCoordinatorImpl$touch$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

@@ -8,7 +8,6 @@ public class SingleSatCorrection implements Parcelable {
     public static final Parcelable.Creator<SingleSatCorrection> CREATOR =
             new Parcelable.Creator<SingleSatCorrection>() { // from class:
                 // android.hardware.gnss.measurement_corrections.SingleSatCorrection.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SingleSatCorrection createFromParcel(Parcel _aidl_source) {
                     SingleSatCorrection _aidl_out = new SingleSatCorrection();
@@ -16,7 +15,6 @@ public class SingleSatCorrection implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SingleSatCorrection[] newArray(int _aidl_size) {
                     return new SingleSatCorrection[_aidl_size];
@@ -180,7 +178,6 @@ public class SingleSatCorrection implements Parcelable {
         public static final Parcelable.Creator<ExcessPathInfo> CREATOR =
                 new Parcelable.Creator<ExcessPathInfo>() { // from class:
                     // android.hardware.gnss.measurement_corrections.SingleSatCorrection.ExcessPathInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ExcessPathInfo createFromParcel(Parcel _aidl_source) {
                         ExcessPathInfo _aidl_out = new ExcessPathInfo();
@@ -188,7 +185,6 @@ public class SingleSatCorrection implements Parcelable {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ExcessPathInfo[] newArray(int _aidl_size) {
                         return new ExcessPathInfo[_aidl_size];

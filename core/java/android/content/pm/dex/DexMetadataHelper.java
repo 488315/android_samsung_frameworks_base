@@ -111,7 +111,6 @@ public class DexMetadataHelper {
                 SystemProperties.getBoolean(PROPERTY_DM_JSON_MANIFEST_REQUIRED, false));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0073 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

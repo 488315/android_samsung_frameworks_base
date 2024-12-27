@@ -74,8 +74,6 @@ public final class NotifInflaterImpl implements NotifInflater {
         logBuffer.commit(obtain2);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.statusbar.notification.collection.NotifInflaterImpl$1] */
     public final void inflateViewsImpl(NotificationEntry notificationEntry, NotifInflater.Params params, final NotifInflater.InflationCallback inflationCallback) {
         NotifInflationErrorManager notifInflationErrorManager = this.mNotifErrorManager;
         try {

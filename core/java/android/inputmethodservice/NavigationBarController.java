@@ -98,7 +98,6 @@ final class NavigationBarController {
         return this.mImpl.toDebugString();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class Impl implements Callback, Window.DecorCallback {
         private static final int DEFAULT_COLOR_ADAPT_TRANSITION_TIME = 1700;
         private static final Interpolator LEGACY_DECELERATE =
@@ -210,7 +209,6 @@ final class NavigationBarController {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ WindowInsets lambda$installNavigationBarFrameIfNecessary$0(
                 View view, WindowInsets insets) {
             if (this.mNavigationBarFrame != null) {
@@ -349,7 +347,6 @@ final class NavigationBarController {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$scheduleRelayout$1(NavigationBarFrame frame) {
             Window window;
             View decor;
@@ -500,7 +497,6 @@ final class NavigationBarController {
             this.mTintAnimator.start();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSystemBarAppearanceChanged$2(ValueAnimator animation) {
             setIconTintInternal(((Float) animation.getAnimatedValue()).floatValue());
         }

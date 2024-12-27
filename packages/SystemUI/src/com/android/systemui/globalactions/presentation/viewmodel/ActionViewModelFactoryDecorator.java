@@ -39,7 +39,6 @@ public final class ActionViewModelFactoryDecorator implements ActionViewModelFac
         this.mSAnalytics = samsungGlobalActionsAnalytics;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final ActionViewModel createActionViewModel(SamsungGlobalActions samsungGlobalActions, String str) {
         char c;
         ActionInfo actionInfo = new ActionInfo();

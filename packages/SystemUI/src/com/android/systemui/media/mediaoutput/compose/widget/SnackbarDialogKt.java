@@ -61,7 +61,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CancellableContinuation;
 
 public abstract class SnackbarDialogKt {
-    /* JADX WARN: Type inference failed for: r6v21, types: [com.android.systemui.media.mediaoutput.compose.widget.SnackbarDialogKt$SnackbarDialog$2$2$1$2, kotlin.jvm.internal.Lambda] */
     public static final void SnackbarDialog(final DialogInterface dialogInterface, final SnackbarData snackbarData, Composer composer, final int i) {
         Function2 function2;
         Function2 function22;
@@ -227,7 +226,6 @@ public abstract class SnackbarDialogKt {
                     }
                     composerImpl5.end(false);
                     ButtonKt.Button(new Function0() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SnackbarDialogKt$SnackbarDialog$2$2$1$1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(0);
                         }
@@ -246,7 +244,6 @@ public abstract class SnackbarDialogKt {
                             return Unit.INSTANCE;
                         }
                     }, rowScopeInstance.weight(Modifier.Companion, 1.0f, true), false, null, m208copyjRlVdoo, null, null, paddingValuesImpl, null, ComposableLambdaKt.rememberComposableLambda(1140690427, composerImpl5, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SnackbarDialogKt$SnackbarDialog$2$2$1$2
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(3);
                         }
@@ -297,7 +294,6 @@ public abstract class SnackbarDialogKt {
         RecomposeScopeImpl endRestartGroup = composerImpl2.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SnackbarDialogKt$SnackbarDialog$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

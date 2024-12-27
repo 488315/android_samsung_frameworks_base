@@ -39,7 +39,6 @@ public class AccessibilityServiceInfo implements Parcelable {
     public static final Parcelable.Creator<AccessibilityServiceInfo> CREATOR =
             new Parcelable.Creator<AccessibilityServiceInfo>() { // from class:
                 // android.accessibilityservice.AccessibilityServiceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessibilityServiceInfo createFromParcel(Parcel parcel) {
                     AccessibilityServiceInfo info = new AccessibilityServiceInfo();
@@ -47,7 +46,6 @@ public class AccessibilityServiceInfo implements Parcelable {
                     return info;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessibilityServiceInfo[] newArray(int size) {
                     return new AccessibilityServiceInfo[size];
@@ -147,7 +145,6 @@ public class AccessibilityServiceInfo implements Parcelable {
         this.mDynamicPropertyDefaults = new DynamicPropertyDefaults(this);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0214  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -435,7 +432,6 @@ public class AccessibilityServiceInfo implements Parcelable {
         parcel.writeInt(this.mObservedMotionEventSources);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void initFromParcel(Parcel parcel) {
         this.eventTypes = parcel.readInt();
         this.packageNames = parcel.readStringArray();

@@ -204,7 +204,6 @@ public class CrossProfileApps {
                 : DevicePolicyResources.Strings.Core.SWITCH_TO_PERSONAL_LABEL;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: getDefaultProfileSwitchingLabel, reason: merged with bridge method [inline-methods] */
     public String lambda$getProfileSwitchingLabel$0(boolean isManagedProfile, String label) {
         int stringRes =

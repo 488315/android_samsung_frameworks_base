@@ -28,7 +28,6 @@ public final class NotificationSettingsController implements Dumpable {
     public interface Listener {
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.statusbar.notification.row.NotificationSettingsController$1] */
     public NotificationSettingsController(UserTracker userTracker, Handler handler, Handler handler2, SecureSettings secureSettings, DumpManager dumpManager) {
         this.mUserTracker = userTracker;
         this.mMainHandler = handler;

@@ -96,7 +96,6 @@ final class AuthenticationRepositoryImpl$getAuthenticationMethod$3 extends Suspe
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AuthenticationRepositoryImpl$getAuthenticationMethod$3(AuthenticationRepositoryImpl authenticationRepositoryImpl, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = authenticationRepositoryImpl;

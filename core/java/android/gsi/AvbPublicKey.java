@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public class AvbPublicKey implements Parcelable {
     public static final Parcelable.Creator<AvbPublicKey> CREATOR =
             new Parcelable.Creator<AvbPublicKey>() { // from class: android.gsi.AvbPublicKey.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AvbPublicKey createFromParcel(Parcel _aidl_source) {
                     AvbPublicKey _aidl_out = new AvbPublicKey();
@@ -15,7 +14,6 @@ public class AvbPublicKey implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AvbPublicKey[] newArray(int _aidl_size) {
                     return new AvbPublicKey[_aidl_size];

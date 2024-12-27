@@ -22,13 +22,11 @@ public class CameraSessionStats implements Parcelable {
     public static final Parcelable.Creator<CameraSessionStats> CREATOR =
             new Parcelable.Creator<
                     CameraSessionStats>() { // from class: android.hardware.CameraSessionStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraSessionStats createFromParcel(Parcel in) {
                     return new CameraSessionStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraSessionStats[] newArray(int size) {
                     return new CameraSessionStats[size];

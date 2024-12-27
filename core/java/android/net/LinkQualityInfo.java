@@ -6,7 +6,6 @@ import android.os.Parcelable;
 public class LinkQualityInfo implements Parcelable {
     public static final Parcelable.Creator<LinkQualityInfo> CREATOR =
             new Parcelable.Creator<LinkQualityInfo>() { // from class: android.net.LinkQualityInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LinkQualityInfo createFromParcel(Parcel in) {
                     int objectType = in.readInt();
@@ -24,7 +23,6 @@ public class LinkQualityInfo implements Parcelable {
                     return null;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LinkQualityInfo[] newArray(int size) {
                     return new LinkQualityInfo[size];

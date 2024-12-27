@@ -15,7 +15,6 @@ final class LocationControllerExtKt$isLocationEnabledFlow$2 extends SuspendLambd
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LocationControllerExtKt$isLocationEnabledFlow$2(LocationController locationController, Continuation continuation) {
         super(2, continuation);
         this.$this_isLocationEnabledFlow = locationController;

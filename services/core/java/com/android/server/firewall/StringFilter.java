@@ -25,14 +25,11 @@ public abstract class StringFilter implements Filter {
     public final class AnonymousClass1 extends FilterFactory {
         public final /* synthetic */ int $r8$classId;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ AnonymousClass1(String str, int i) {
             super(str);
             this.$r8$classId = i;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:18:0x00a8  */
-        /* JADX WARN: Removed duplicated region for block: B:26:0x00b4 A[SYNTHETIC] */
         @Override // com.android.server.firewall.FilterFactory
         /*
             Code decompiled incorrectly, please refer to instructions dump.

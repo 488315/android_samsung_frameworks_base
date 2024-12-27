@@ -35,7 +35,6 @@ public class LocationPermissionChecker {
         return checkLocationPermissionInternal(pkgName, featureId, uid, message) == 0;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:5:0x002d, code lost:
 
        return r0;

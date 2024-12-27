@@ -10,7 +10,6 @@ public final class TouchableRegionViewController extends ViewController {
     public final TouchableRegionViewController$internalInsetsListener$1 internalInsetsListener;
     public final Rect tempRect;
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.temporarydisplay.TouchableRegionViewController$internalInsetsListener$1] */
     public TouchableRegionViewController(View view, final Function2 function2) {
         super(view);
         this.tempRect = new Rect();

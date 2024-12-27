@@ -16,7 +16,6 @@ public final class AlwaysOnDisplayNotificationIconsInteractor$special$$inlined$f
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AlwaysOnDisplayNotificationIconsInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, NotificationIconsInteractor notificationIconsInteractor) {
         super(3, continuation);
         this.$iconsInteractor$inlined = notificationIconsInteractor;

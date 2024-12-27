@@ -63,7 +63,6 @@ public final class FromAlternateBouncerTransitionInteractor extends TransitionIn
         TO_OCCLUDED_DURATION = duration;
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

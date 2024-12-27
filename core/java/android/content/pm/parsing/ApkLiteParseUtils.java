@@ -454,7 +454,6 @@ public class ApkLiteParseUtils {
         return null;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:20:0x03e9, code lost:
 
        if ((r79 & 128) != 0) goto L154;

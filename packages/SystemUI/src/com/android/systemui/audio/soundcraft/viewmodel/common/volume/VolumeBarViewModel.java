@@ -57,7 +57,6 @@ public final class VolumeBarViewModel extends BaseViewModel {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r3v14, types: [com.android.systemui.audio.soundcraft.viewmodel.common.volume.VolumeBarViewModel$recheckCallback$1] */
     public VolumeBarViewModel(ModelProvider modelProvider, VolumeManager volumeManager, BluetoothDeviceManager bluetoothDeviceManager) {
         this.modelProvider = modelProvider;
         this.volumeManager = volumeManager;

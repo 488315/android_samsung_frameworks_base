@@ -10,7 +10,6 @@ class FieldData implements Cloneable {
     private List<UnknownFieldData> unknownFieldData;
     private Object value;
 
-    /* JADX WARN: Multi-variable type inference failed */
     <T> FieldData(Extension<?, T> extension, T newValue) {
         this.cachedExtension = extension;
         this.value = newValue;
@@ -38,7 +37,6 @@ class FieldData implements Cloneable {
         return this.unknownFieldData.size();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     <T> T getValue(Extension<?, T> extension) {
         if (this.value != null) {
             if (this.cachedExtension != extension) {
@@ -53,7 +51,6 @@ class FieldData implements Cloneable {
         return (T) this.value;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     <T> void setValue(Extension<?, T> extension, T newValue) {
         this.cachedExtension = extension;
         this.value = newValue;

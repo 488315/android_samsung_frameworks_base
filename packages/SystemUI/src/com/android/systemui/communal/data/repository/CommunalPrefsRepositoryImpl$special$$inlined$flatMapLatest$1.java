@@ -20,7 +20,6 @@ public final class CommunalPrefsRepositoryImpl$special$$inlined$flatMapLatest$1 
     int label;
     final /* synthetic */ CommunalPrefsRepositoryImpl receiver$inlined;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalPrefsRepositoryImpl$special$$inlined$flatMapLatest$1(Continuation continuation, CommunalPrefsRepositoryImpl communalPrefsRepositoryImpl) {
         super(3, continuation);
         this.receiver$inlined = communalPrefsRepositoryImpl;
@@ -76,9 +75,6 @@ public final class CommunalPrefsRepositoryImpl$special$$inlined$flatMapLatest$1 
                         this.this$0 = communalPrefsRepositoryImpl;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:19:0x0066 A[RETURN] */
-                    /* JADX WARN: Removed duplicated region for block: B:20:0x003b  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

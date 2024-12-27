@@ -142,9 +142,6 @@ public final class TwoPhoneModeIconController implements Dumpable {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.phone.TwoPhoneModeIconController$userTrackerCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.statusbar.phone.TwoPhoneModeIconController$quickStarListener$1] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.statusbar.phone.TwoPhoneModeIconController$configurationListener$1] */
     public TwoPhoneModeIconController(Context context, CarrierInfraMediator carrierInfraMediator, UserManager userManager, SettingsHelper settingsHelper, DarkIconDispatcher darkIconDispatcher, SlimIndicatorViewMediator slimIndicatorViewMediator, DumpManager dumpManager, ConfigurationController configurationController, IndicatorScaleGardener indicatorScaleGardener, DelayableExecutor delayableExecutor, UserTracker userTracker) {
         this.context = context;
         this.carrierInfraMediator = carrierInfraMediator;
@@ -218,10 +215,6 @@ public final class TwoPhoneModeIconController implements Dumpable {
         ((UserTrackerImpl) this.userTracker).removeCallback(this.userTrackerCallback);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0130  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0138  */
-    /* JADX WARN: Removed duplicated region for block: B:46:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x0132  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

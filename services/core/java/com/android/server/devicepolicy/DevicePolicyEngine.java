@@ -1140,8 +1140,6 @@ public final class DevicePolicyEngine {
                         this, intent, enforcingAdmin, policyDefinition, i2, i, 0));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0053 A[Catch: all -> 0x0022, TryCatch #0 {all -> 0x0022, blocks: (B:4:0x0009, B:6:0x0013, B:8:0x001f, B:12:0x0025, B:17:0x0053, B:18:0x005a, B:21:0x005c, B:23:0x0069, B:24:0x0078, B:26:0x0080, B:28:0x0086, B:30:0x008a, B:37:0x00a4, B:38:0x00af, B:41:0x0038, B:44:0x004d), top: B:3:0x0009 }] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x005c A[Catch: all -> 0x0022, TryCatch #0 {all -> 0x0022, blocks: (B:4:0x0009, B:6:0x0013, B:8:0x001f, B:12:0x0025, B:17:0x0053, B:18:0x005a, B:21:0x005c, B:23:0x0069, B:24:0x0078, B:26:0x0080, B:28:0x0086, B:30:0x008a, B:37:0x00a4, B:38:0x00af, B:41:0x0038, B:44:0x004d), top: B:3:0x0009 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1257,7 +1255,6 @@ public final class DevicePolicyEngine {
                     + " android.app.admin.PolicyValue):void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void setLocalPolicy(
             PolicyDefinition policyDefinition,
             EnforcingAdmin enforcingAdmin,

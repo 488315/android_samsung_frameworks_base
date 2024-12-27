@@ -385,7 +385,6 @@ public interface IIQIService extends IInterface {
     }
 
     public class _Parcel {
-        /* JADX INFO: Access modifiers changed from: private */
         public static Object readTypedObject(Parcel parcel, Parcelable.Creator creator) {
             if (parcel.readInt() != 0) {
                 return creator.createFromParcel(parcel);
@@ -393,7 +392,6 @@ public interface IIQIService extends IInterface {
             return null;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void writeTypedObject(Parcel parcel, Parcelable parcelable, int i) {
             if (parcelable == null) {
                 parcel.writeInt(0);

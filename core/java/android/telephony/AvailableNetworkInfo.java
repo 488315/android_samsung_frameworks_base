@@ -15,13 +15,11 @@ public final class AvailableNetworkInfo implements Parcelable {
             new Parcelable.Creator<
                     AvailableNetworkInfo>() { // from class:
                                               // android.telephony.AvailableNetworkInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AvailableNetworkInfo createFromParcel(Parcel in) {
                     return new AvailableNetworkInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AvailableNetworkInfo[] newArray(int size) {
                     return new AvailableNetworkInfo[size];

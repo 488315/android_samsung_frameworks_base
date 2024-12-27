@@ -28,7 +28,6 @@ public class DeviceIDProvisionManager {
     private static final String TAG = "DeviceIDProvisionManager";
     private Context mContext;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native int installDeviceID(
             int i,
             String str,
@@ -65,7 +64,6 @@ public class DeviceIDProvisionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int generateCriticalKey() {
         try {
             KeyStore keyStore = KeyStore.getInstance(AndroidKeyStoreSpi.NAME);
@@ -419,7 +417,6 @@ public class DeviceIDProvisionManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int provisionDeviceID(int keyType) {
             String brand = Build.BRAND_FOR_ATTESTATION;
             String device = Build.DEVICE_FOR_ATTESTATION;

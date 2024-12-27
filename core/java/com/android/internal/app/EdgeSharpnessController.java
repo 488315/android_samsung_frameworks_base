@@ -93,8 +93,6 @@ public final class EdgeSharpnessController {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public void onSettingChanged(String setting) {
         char c;
         Slog.d(TAG, "onSettingChanged: " + setting);

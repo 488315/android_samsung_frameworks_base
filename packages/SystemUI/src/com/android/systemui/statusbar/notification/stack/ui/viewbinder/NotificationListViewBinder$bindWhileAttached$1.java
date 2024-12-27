@@ -55,7 +55,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
             int label;
             final /* synthetic */ NotificationListViewBinder this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(NotificationListViewBinder notificationListViewBinder, NotificationShelf notificationShelf, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = notificationListViewBinder;
@@ -109,7 +108,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
             int label;
             final /* synthetic */ NotificationListViewBinder this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass3(NotificationListViewBinder notificationListViewBinder, NotificationStackScrollLayout notificationStackScrollLayout, StateFlow stateFlow, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = notificationListViewBinder;
@@ -211,7 +209,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
             int label;
             final /* synthetic */ NotificationListViewBinder this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass4(NotificationListViewBinder notificationListViewBinder, NotificationStackScrollLayout notificationStackScrollLayout, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = notificationListViewBinder;
@@ -269,7 +266,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
             int label;
             final /* synthetic */ NotificationListViewBinder this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass5(NotificationListViewBinder notificationListViewBinder, NotificationStackScrollLayout notificationStackScrollLayout, StateFlow stateFlow, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = notificationListViewBinder;
@@ -321,7 +317,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
             int label;
             final /* synthetic */ NotificationListViewBinder this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass6(NotificationListViewBinder notificationListViewBinder, NotificationStackScrollLayout notificationStackScrollLayout, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = notificationListViewBinder;
@@ -373,7 +368,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
             int label;
             final /* synthetic */ NotificationListViewBinder this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass7(NotificationListViewBinder notificationListViewBinder, NotificationStackScrollLayout notificationStackScrollLayout, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = notificationListViewBinder;
@@ -411,7 +405,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(NotificationStackScrollLayoutController notificationStackScrollLayoutController, NotificationListViewBinder notificationListViewBinder, NotificationStackScrollLayout notificationStackScrollLayout, NotificationShelf notificationShelf, Continuation continuation) {
             super(2, continuation);
             this.$viewController = notificationStackScrollLayoutController;
@@ -491,7 +484,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationListViewBinder$bindWhileAttached$1(NotificationStackScrollLayoutController notificationStackScrollLayoutController, NotificationListViewBinder notificationListViewBinder, NotificationStackScrollLayout notificationStackScrollLayout, NotificationShelf notificationShelf, Continuation continuation) {
         super(3, continuation);
         this.$viewController = notificationStackScrollLayoutController;

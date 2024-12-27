@@ -25,7 +25,6 @@ public final class RingerModeLiveData extends MutableLiveData {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.util.RingerModeLiveData$receiver$1] */
     public RingerModeLiveData(BroadcastDispatcher broadcastDispatcher, Executor executor, String str, Function0 function0) {
         this.broadcastDispatcher = broadcastDispatcher;
         this.executor = executor;

@@ -12,13 +12,11 @@ public final class TimeZoneCapabilities implements Parcelable {
     public static final Parcelable.Creator<TimeZoneCapabilities> CREATOR =
             new Parcelable.Creator<
                     TimeZoneCapabilities>() { // from class: android.app.time.TimeZoneCapabilities.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneCapabilities createFromParcel(Parcel in) {
                     return TimeZoneCapabilities.createFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneCapabilities[] newArray(int size) {
                     return new TimeZoneCapabilities[size];
@@ -40,7 +38,6 @@ public final class TimeZoneCapabilities implements Parcelable {
         this.mSetManualTimeZoneCapability = builder.mSetManualTimeZoneCapability;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static TimeZoneCapabilities createFromParcel(Parcel in) {
         UserHandle userHandle = UserHandle.readFromParcel(in);
         return new Builder(userHandle)

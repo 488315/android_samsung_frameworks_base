@@ -112,7 +112,6 @@ public final class TraceurMessageSender {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.recordissue.TraceurMessageSender$traceurConnection$1] */
     public TraceurMessageSender(Looper looper) {
         this.backgroundLooper = looper;
     }

@@ -221,7 +221,6 @@ public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
         return this.reader.getSurface();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onImageTransit(ImageReader reader) {
         if (this.writer == null) {
             waitUntilSignaled("writer is given");
@@ -240,7 +239,6 @@ public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
         signal();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onImageReceive(ImageReader reader) {
         Image image = reader.acquireLatestImage();
         final HardwareBuffer hwBuffer = image.getHardwareBuffer();
@@ -326,7 +324,6 @@ public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
         return e == hwBuffer.getFormat();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void writeToSurface(MediaBuffer mediaBuffer) {
         Log.d(TAG, "writeToSurface: " + mediaBuffer);
         if (this.writer == null) {
@@ -360,7 +357,6 @@ public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
         this.sendHandler.accept(data);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.channel.Channel
     public MediaBuffer receive() {
         return this.receiveHandler.get();

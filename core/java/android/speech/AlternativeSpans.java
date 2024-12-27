@@ -14,13 +14,11 @@ public final class AlternativeSpans implements Parcelable {
     public static final Parcelable.Creator<AlternativeSpans> CREATOR =
             new Parcelable.Creator<
                     AlternativeSpans>() { // from class: android.speech.AlternativeSpans.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AlternativeSpans[] newArray(int size) {
                     return new AlternativeSpans[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AlternativeSpans createFromParcel(Parcel in) {
                     return new AlternativeSpans(in);

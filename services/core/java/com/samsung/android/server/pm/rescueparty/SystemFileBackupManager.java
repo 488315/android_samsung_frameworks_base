@@ -28,7 +28,6 @@ public final class SystemFileBackupManager {
             new Thread(
                             new Runnable() { // from class:
                                              // com.samsung.android.server.pm.rescueparty.SystemFileBackupManager$BackupJobService$$ExternalSyntheticLambda0
-                                /* JADX WARN: Multi-variable type inference failed */
                                 @Override // java.lang.Runnable
                                 public final void run() {
                                     int i = 0;

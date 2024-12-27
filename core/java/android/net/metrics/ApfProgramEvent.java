@@ -22,13 +22,11 @@ public final class ApfProgramEvent implements IpConnectivityLog.Event {
     public static final Parcelable.Creator<ApfProgramEvent> CREATOR =
             new Parcelable.Creator<
                     ApfProgramEvent>() { // from class: android.net.metrics.ApfProgramEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApfProgramEvent createFromParcel(Parcel in) {
                     return new ApfProgramEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApfProgramEvent[] newArray(int size) {
                     return new ApfProgramEvent[size];

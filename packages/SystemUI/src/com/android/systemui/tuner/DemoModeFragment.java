@@ -115,10 +115,6 @@ public final class DemoModeFragment extends PreferenceFragment implements Prefer
         MetricsLogger.visibility(getContext(), IKnoxCustomManager.Stub.TRANSACTION_setBrightness, false);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r8v1 */
-    /* JADX WARN: Type inference failed for: r8v2, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r8v38 */
     @Override // androidx.preference.Preference.OnPreferenceChangeListener
     public final boolean onPreferenceChange(Preference preference, Object obj) {
         String str;

@@ -25,7 +25,6 @@ public final class MusicRecognitionManagerService extends AbstractMasterSystemSe
     public final class MusicRecognitionManagerStub extends IMusicRecognitionManager.Stub {
         public MusicRecognitionManagerStub() {}
 
-        /* JADX WARN: Can't wrap try/catch for region: R(6:5|6|(5:8|(1:10)(1:20)|(2:12|(1:14))|15|16)|21|22|16) */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -150,7 +149,6 @@ public final class MusicRecognitionManagerService extends AbstractMasterSystemSe
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,

@@ -131,10 +131,6 @@ public final class FreecessTrigger {
         public static final FreecessTrigger INSTANCE = new FreecessTrigger();
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.am.FreecessTrigger$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.am.FreecessTrigger$2] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.am.FreecessTrigger$2] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.am.FreecessTrigger$2] */
     public FreecessTrigger() {
         final int i = 0;
         this.mPkgIntentReceiver =

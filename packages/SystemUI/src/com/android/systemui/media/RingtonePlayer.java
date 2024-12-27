@@ -206,7 +206,6 @@ public final class RingtonePlayer implements CoreStartable {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.media.RingtonePlayer$1] */
     public RingtonePlayer(Context context) {
         this.mContext = context;
     }

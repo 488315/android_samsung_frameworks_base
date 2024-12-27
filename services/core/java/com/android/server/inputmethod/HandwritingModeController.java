@@ -185,8 +185,6 @@ public final class HandwritingModeController {
         return this.mRecordingGesture;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.inputmethod.HandwritingModeController$$ExternalSyntheticLambda0, java.lang.Runnable] */
     public final void prepareStylusHandwritingDelegation(int i, String str, String str2, boolean z) {
         ComponentName defaultHomeActivity;
         this.mDelegatePackageName = str;

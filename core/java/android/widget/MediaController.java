@@ -421,7 +421,6 @@ public class MediaController extends FrameLayout {
         p.windowAnimations = 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateFloatingWindowLayout() {
         int[] anchorPos = new int[2];
         this.mAnchor.getLocationOnScreen(anchorPos);
@@ -569,7 +568,6 @@ public class MediaController extends FrameLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String stringForTime(int timeMs) {
         int totalSeconds = timeMs / 1000;
         int seconds = totalSeconds % 60;
@@ -590,7 +588,6 @@ public class MediaController extends FrameLayout {
                 .toString();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int setProgress() {
         if (this.mPlayer == null || this.mDragging) {
             return 0;
@@ -679,7 +676,6 @@ public class MediaController extends FrameLayout {
         return super.dispatchKeyEvent(event);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updatePausePlay() {
         if (this.mRoot == null || this.mPauseButton == null) {
             return;
@@ -693,7 +689,6 @@ public class MediaController extends FrameLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doPauseResume() {
         if (this.mPlayer.isPlaying()) {
             this.mPlayer.pause();
@@ -758,7 +753,6 @@ public class MediaController extends FrameLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void unregisterOnBackInvokedCallback() {
         if (!this.mBackCallbackRegistered) {
             return;
@@ -773,7 +767,6 @@ public class MediaController extends FrameLayout {
         this.mBackCallbackRegistered = false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void registerOnBackInvokedCallback() {
         ViewRootImpl viewRootImpl;
         if (!this.mBackCallbackRegistered

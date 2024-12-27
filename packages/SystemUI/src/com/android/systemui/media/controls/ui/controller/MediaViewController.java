@@ -94,8 +94,6 @@ public final class MediaViewController {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class TYPE {
         public static final /* synthetic */ TYPE[] $VALUES;
         public static final TYPE PLAYER;
@@ -145,8 +143,6 @@ public final class MediaViewController {
         GUTS_ANIMATION_DURATION = 234L;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r11v12, types: [com.android.systemui.media.controls.ui.controller.MediaViewController$configurationListener$1, java.lang.Object] */
     public MediaViewController(Context context, ConfigurationController configurationController, MediaHostStatesManager mediaHostStatesManager, MediaViewLogger mediaViewLogger, SeekBarViewModel seekBarViewModel, DelayableExecutor delayableExecutor, MediaFlags mediaFlags, GlobalSettings globalSettings) {
         this.context = context;
         this.configurationController = configurationController;
@@ -480,8 +476,6 @@ public final class MediaViewController {
         this.collapsedLayout = constraintSet;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0116  */
-    /* JADX WARN: Removed duplicated region for block: B:41:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

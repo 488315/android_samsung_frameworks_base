@@ -8,10 +8,6 @@ import android.text.TextUtils;
 import android.util.Pair;
 
 public final class MediaDataUtils {
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r4v1 */
-    /* JADX WARN: Type inference failed for: r4v3, types: [java.lang.CharSequence] */
     public static String getAppLabel(Context context, String str, String str2) {
         ApplicationInfo applicationInfo = null;
         if (TextUtils.isEmpty(str)) {

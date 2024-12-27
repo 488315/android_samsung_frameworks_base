@@ -9,7 +9,6 @@ final class AnnouncementResolver$getScreenshotAnnouncement$1 extends Continuatio
     /* synthetic */ Object result;
     final /* synthetic */ AnnouncementResolver this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AnnouncementResolver$getScreenshotAnnouncement$1(AnnouncementResolver announcementResolver, Continuation continuation) {
         super(continuation);
         this.this$0 = announcementResolver;

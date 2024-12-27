@@ -15,7 +15,6 @@ public class CameraFeatureCombinationStats implements Parcelable {
     public static final Parcelable.Creator<CameraFeatureCombinationStats> CREATOR =
             new Parcelable.Creator<CameraFeatureCombinationStats>() { // from class:
                 // android.hardware.CameraFeatureCombinationStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraFeatureCombinationStats createFromParcel(Parcel _aidl_source) {
                     CameraFeatureCombinationStats _aidl_out = new CameraFeatureCombinationStats();
@@ -23,7 +22,6 @@ public class CameraFeatureCombinationStats implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraFeatureCombinationStats[] newArray(int _aidl_size) {
                     return new CameraFeatureCombinationStats[_aidl_size];

@@ -8,13 +8,11 @@ public final class SetChanges<T> {
     private final Set<T> added;
     private final Set<T> removed;
 
-    /* JADX WARN: Multi-variable type inference failed */
     public SetChanges(Set<? extends T> set, Set<? extends T> set2) {
         this.removed = set;
         this.added = set2;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static /* synthetic */ SetChanges copy$default(SetChanges setChanges, Set set, Set set2, int i, Object obj) {
         if ((i & 1) != 0) {
             set = setChanges.removed;

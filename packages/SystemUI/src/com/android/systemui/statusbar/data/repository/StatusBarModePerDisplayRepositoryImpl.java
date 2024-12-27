@@ -129,7 +129,6 @@ public final class StatusBarModePerDisplayRepositoryImpl implements StatusBarIni
         }
     }
 
-    /* JADX WARN: Type inference failed for: r8v1, types: [com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$commandQueueCallback$1] */
     public StatusBarModePerDisplayRepositoryImpl(CoroutineScope coroutineScope, final int i, CommandQueue commandQueue, LetterboxAppearanceCalculator letterboxAppearanceCalculator, OngoingCallRepository ongoingCallRepository) {
         this.commandQueue = commandQueue;
         this.letterboxAppearanceCalculator = letterboxAppearanceCalculator;
@@ -199,8 +198,6 @@ public final class StatusBarModePerDisplayRepositoryImpl implements StatusBarIni
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -310,8 +307,6 @@ public final class StatusBarModePerDisplayRepositoryImpl implements StatusBarIni
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

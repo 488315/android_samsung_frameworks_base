@@ -240,7 +240,6 @@ public final class JobSchedulerService extends SystemService {
     public final class AnonymousClass1 extends MySimpleClock {
         public final /* synthetic */ int $r8$classId;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ AnonymousClass1(ZoneId zoneId, int i) {
             super(zoneId);
             this.$r8$classId = i;
@@ -564,7 +563,6 @@ public final class JobSchedulerService extends SystemService {
             onReceiveInternal(intent);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:15:0x018f A[Catch: all -> 0x0040, TryCatch #0 {all -> 0x0040, blocks: (B:4:0x0013, B:6:0x0021, B:8:0x0025, B:9:0x0043, B:11:0x0047, B:13:0x0182, B:15:0x018f, B:17:0x019c, B:19:0x01ae, B:22:0x004c, B:24:0x0054, B:26:0x0058, B:27:0x0072, B:29:0x0076, B:30:0x0079, B:32:0x0081, B:34:0x0085, B:35:0x009f, B:38:0x00b2, B:40:0x00ba, B:42:0x00be, B:43:0x00d8, B:45:0x00dc, B:47:0x00de, B:48:0x00e2, B:50:0x00ea, B:52:0x00ee, B:53:0x0108, B:55:0x010c, B:57:0x010e, B:58:0x0112, B:60:0x011a, B:62:0x011e, B:63:0x0138, B:65:0x013c, B:68:0x014a, B:70:0x0152, B:72:0x0156, B:73:0x0170, B:75:0x0174), top: B:3:0x0013 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -839,15 +837,6 @@ public final class JobSchedulerService extends SystemService {
         public ConstantsObserver() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:27:0x0296 A[Catch: all -> 0x0039, TryCatch #1 {all -> 0x0039, blocks: (B:9:0x0029, B:11:0x002d, B:12:0x003e, B:13:0x004a, B:15:0x0050, B:18:0x0059, B:20:0x005d, B:22:0x0084, B:23:0x0089, B:26:0x0293, B:27:0x0296, B:30:0x02a1, B:36:0x02ae, B:38:0x02ba, B:41:0x02cd, B:42:0x02f8, B:53:0x0309, B:57:0x030c, B:58:0x0315, B:59:0x032f, B:60:0x0338, B:73:0x008e, B:76:0x009b, B:79:0x00a8, B:82:0x00b5, B:85:0x00c2, B:88:0x00cf, B:91:0x00dc, B:94:0x00e8, B:97:0x00f5, B:100:0x0102, B:103:0x010f, B:106:0x011c, B:109:0x0129, B:112:0x0135, B:115:0x0142, B:118:0x014f, B:121:0x015c, B:124:0x0169, B:127:0x0175, B:130:0x0182, B:133:0x018f, B:136:0x019c, B:139:0x01a8, B:142:0x01b5, B:145:0x01c2, B:148:0x01cf, B:151:0x01dc, B:154:0x01e9, B:157:0x01f6, B:160:0x0203, B:163:0x0210, B:166:0x021d, B:169:0x022a, B:172:0x0235, B:175:0x0240, B:178:0x024c, B:181:0x0258, B:184:0x0264, B:187:0x0270, B:190:0x027b, B:193:0x0286, B:196:0x0061, B:44:0x02f9, B:46:0x02fd, B:47:0x0305), top: B:8:0x0029, inners: #0 }] */
-        /* JADX WARN: Removed duplicated region for block: B:40:0x02cb  */
-        /* JADX WARN: Removed duplicated region for block: B:56:0x030a  */
-        /* JADX WARN: Removed duplicated region for block: B:58:0x0315 A[Catch: all -> 0x0039, TryCatch #1 {all -> 0x0039, blocks: (B:9:0x0029, B:11:0x002d, B:12:0x003e, B:13:0x004a, B:15:0x0050, B:18:0x0059, B:20:0x005d, B:22:0x0084, B:23:0x0089, B:26:0x0293, B:27:0x0296, B:30:0x02a1, B:36:0x02ae, B:38:0x02ba, B:41:0x02cd, B:42:0x02f8, B:53:0x0309, B:57:0x030c, B:58:0x0315, B:59:0x032f, B:60:0x0338, B:73:0x008e, B:76:0x009b, B:79:0x00a8, B:82:0x00b5, B:85:0x00c2, B:88:0x00cf, B:91:0x00dc, B:94:0x00e8, B:97:0x00f5, B:100:0x0102, B:103:0x010f, B:106:0x011c, B:109:0x0129, B:112:0x0135, B:115:0x0142, B:118:0x014f, B:121:0x015c, B:124:0x0169, B:127:0x0175, B:130:0x0182, B:133:0x018f, B:136:0x019c, B:139:0x01a8, B:142:0x01b5, B:145:0x01c2, B:148:0x01cf, B:151:0x01dc, B:154:0x01e9, B:157:0x01f6, B:160:0x0203, B:163:0x0210, B:166:0x021d, B:169:0x022a, B:172:0x0235, B:175:0x0240, B:178:0x024c, B:181:0x0258, B:184:0x0264, B:187:0x0270, B:190:0x027b, B:193:0x0286, B:196:0x0061, B:44:0x02f9, B:46:0x02fd, B:47:0x0305), top: B:8:0x0029, inners: #0 }] */
-        /* JADX WARN: Removed duplicated region for block: B:59:0x032f A[Catch: all -> 0x0039, TryCatch #1 {all -> 0x0039, blocks: (B:9:0x0029, B:11:0x002d, B:12:0x003e, B:13:0x004a, B:15:0x0050, B:18:0x0059, B:20:0x005d, B:22:0x0084, B:23:0x0089, B:26:0x0293, B:27:0x0296, B:30:0x02a1, B:36:0x02ae, B:38:0x02ba, B:41:0x02cd, B:42:0x02f8, B:53:0x0309, B:57:0x030c, B:58:0x0315, B:59:0x032f, B:60:0x0338, B:73:0x008e, B:76:0x009b, B:79:0x00a8, B:82:0x00b5, B:85:0x00c2, B:88:0x00cf, B:91:0x00dc, B:94:0x00e8, B:97:0x00f5, B:100:0x0102, B:103:0x010f, B:106:0x011c, B:109:0x0129, B:112:0x0135, B:115:0x0142, B:118:0x014f, B:121:0x015c, B:124:0x0169, B:127:0x0175, B:130:0x0182, B:133:0x018f, B:136:0x019c, B:139:0x01a8, B:142:0x01b5, B:145:0x01c2, B:148:0x01cf, B:151:0x01dc, B:154:0x01e9, B:157:0x01f6, B:160:0x0203, B:163:0x0210, B:166:0x021d, B:169:0x022a, B:172:0x0235, B:175:0x0240, B:178:0x024c, B:181:0x0258, B:184:0x0264, B:187:0x0270, B:190:0x027b, B:193:0x0286, B:196:0x0061, B:44:0x02f9, B:46:0x02fd, B:47:0x0305), top: B:8:0x0029, inners: #0 }] */
-        /* JADX WARN: Removed duplicated region for block: B:60:0x0338 A[Catch: all -> 0x0039, TRY_LEAVE, TryCatch #1 {all -> 0x0039, blocks: (B:9:0x0029, B:11:0x002d, B:12:0x003e, B:13:0x004a, B:15:0x0050, B:18:0x0059, B:20:0x005d, B:22:0x0084, B:23:0x0089, B:26:0x0293, B:27:0x0296, B:30:0x02a1, B:36:0x02ae, B:38:0x02ba, B:41:0x02cd, B:42:0x02f8, B:53:0x0309, B:57:0x030c, B:58:0x0315, B:59:0x032f, B:60:0x0338, B:73:0x008e, B:76:0x009b, B:79:0x00a8, B:82:0x00b5, B:85:0x00c2, B:88:0x00cf, B:91:0x00dc, B:94:0x00e8, B:97:0x00f5, B:100:0x0102, B:103:0x010f, B:106:0x011c, B:109:0x0129, B:112:0x0135, B:115:0x0142, B:118:0x014f, B:121:0x015c, B:124:0x0169, B:127:0x0175, B:130:0x0182, B:133:0x018f, B:136:0x019c, B:139:0x01a8, B:142:0x01b5, B:145:0x01c2, B:148:0x01cf, B:151:0x01dc, B:154:0x01e9, B:157:0x01f6, B:160:0x0203, B:163:0x0210, B:166:0x021d, B:169:0x022a, B:172:0x0235, B:175:0x0240, B:178:0x024c, B:181:0x0258, B:184:0x0264, B:187:0x0270, B:190:0x027b, B:193:0x0286, B:196:0x0061, B:44:0x02f9, B:46:0x02fd, B:47:0x0305), top: B:8:0x0029, inners: #0 }] */
-        /* JADX WARN: Removed duplicated region for block: B:68:0x0364 A[Catch: all -> 0x038a, TryCatch #2 {all -> 0x038a, blocks: (B:63:0x034b, B:66:0x03d5, B:68:0x0364, B:69:0x038c, B:72:0x039a, B:202:0x03af, B:204:0x03bb, B:206:0x03cc), top: B:62:0x034b }] */
-        /* JADX WARN: Removed duplicated region for block: B:69:0x038c A[Catch: all -> 0x038a, TryCatch #2 {all -> 0x038a, blocks: (B:63:0x034b, B:66:0x03d5, B:68:0x0364, B:69:0x038c, B:72:0x039a, B:202:0x03af, B:204:0x03bb, B:206:0x03cc), top: B:62:0x034b }] */
-        /* JADX WARN: Removed duplicated region for block: B:70:0x0396  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1390,7 +1379,6 @@ public final class JobSchedulerService extends SystemService {
             return arrayList;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final int handleShellCommand(ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, ParcelFileDescriptor parcelFileDescriptor3, String[] strArr) {
             JobSchedulerService jobSchedulerService = JobSchedulerService.this;
             JobSchedulerShellCommand jobSchedulerShellCommand = new JobSchedulerShellCommand();
@@ -1505,10 +1493,6 @@ public final class JobSchedulerService extends SystemService {
             JobSchedulerService.this.mUserVisibleJobObservers.unregister(iUserVisibleJobObserver);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:23:0x0082  */
-        /* JADX WARN: Removed duplicated region for block: B:41:0x00a6 A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:42:0x00a7  */
-        /* JADX WARN: Removed duplicated region for block: B:44:0x0097  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1668,13 +1652,6 @@ public final class JobSchedulerService extends SystemService {
             reset();
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:21:0x01f3  */
-        /* JADX WARN: Removed duplicated region for block: B:24:0x0202  */
-        /* JADX WARN: Removed duplicated region for block: B:28:0x0231  */
-        /* JADX WARN: Removed duplicated region for block: B:33:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:34:0x0214  */
-        /* JADX WARN: Removed duplicated region for block: B:65:0x0188  */
-        /* JADX WARN: Removed duplicated region for block: B:66:0x018e  */
         @Override // java.util.function.Consumer
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1688,10 +1665,6 @@ public final class JobSchedulerService extends SystemService {
             throw new UnsupportedOperationException("Method not decompiled: com.android.server.job.JobSchedulerService.MaybeReadyJobQueueFunctor.accept(java.lang.Object):void");
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r7v28 */
-        /* JADX WARN: Type inference failed for: r7v29, types: [int] */
-        /* JADX WARN: Type inference failed for: r7v33 */
         public void postProcessLocked() {
             int i;
             String sb;
@@ -2134,8 +2107,6 @@ public final class JobSchedulerService extends SystemService {
         sJwiMinimumChunkKBLogger = new Histogram("job_scheduler.value_hist_w_uid_jwi_minimum_chunk_kilobytes", new Histogram.ScaledRangeOptions(25, 0, 5.0f, 1.76f));
     }
 
-    /* JADX WARN: Type inference failed for: r2v13, types: [com.android.server.job.JobSchedulerService$4] */
-    /* JADX WARN: Type inference failed for: r3v6, types: [com.android.server.job.JobSchedulerService$$ExternalSyntheticLambda3] */
     public JobSchedulerService(Context context) {
         super(context);
         JobStore jobStore;
@@ -3484,8 +3455,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0090 A[Catch: all -> 0x0032, TryCatch #0 {all -> 0x0032, blocks: (B:4:0x0003, B:6:0x0009, B:8:0x001a, B:10:0x002d, B:11:0x0039, B:13:0x0041, B:15:0x0047, B:22:0x0090, B:23:0x0098, B:26:0x009a, B:27:0x00ab, B:29:0x005c, B:32:0x0061, B:37:0x006e, B:43:0x008b, B:44:0x0069, B:45:0x00ad, B:46:0x00b9, B:48:0x00bb, B:49:0x00c3, B:51:0x0035, B:52:0x00c5, B:54:0x00cb, B:56:0x00d2, B:57:0x00e2, B:59:0x00d7, B:60:0x00e4, B:61:0x00e8), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x009a A[Catch: all -> 0x0032, TryCatch #0 {all -> 0x0032, blocks: (B:4:0x0003, B:6:0x0009, B:8:0x001a, B:10:0x002d, B:11:0x0039, B:13:0x0041, B:15:0x0047, B:22:0x0090, B:23:0x0098, B:26:0x009a, B:27:0x00ab, B:29:0x005c, B:32:0x0061, B:37:0x006e, B:43:0x008b, B:44:0x0069, B:45:0x00ad, B:46:0x00b9, B:48:0x00bb, B:49:0x00c3, B:51:0x0035, B:52:0x00c5, B:54:0x00cb, B:56:0x00d2, B:57:0x00e2, B:59:0x00d7, B:60:0x00e4, B:61:0x00e8), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3739,8 +3708,6 @@ public final class JobSchedulerService extends SystemService {
         return jobStatus2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00c0  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00e9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4574,7 +4541,6 @@ public final class JobSchedulerService extends SystemService {
         countQuotaTracker7.setCountLimit(category6, constants7.EXECUTION_SAFEGUARDS_UDC_ANR_COUNT, constants7.EXECUTION_SAFEGUARDS_UDC_ANR_WINDOW_MS);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x007c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

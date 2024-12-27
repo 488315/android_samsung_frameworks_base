@@ -78,7 +78,6 @@ public class SectionSettingsWithSectionBits extends SectionSettings {
                     this.mMode);
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         @Override // android.media.tv.tuner.filter.SectionSettings.Builder
         public Builder self() {
             return this;

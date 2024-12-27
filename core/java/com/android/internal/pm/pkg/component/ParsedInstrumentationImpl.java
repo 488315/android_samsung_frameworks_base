@@ -13,13 +13,11 @@ public class ParsedInstrumentationImpl extends ParsedComponentImpl
             new Parcelable.Creator<
                     ParsedInstrumentationImpl>() { // from class:
                                                    // com.android.internal.pm.pkg.component.ParsedInstrumentationImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParsedInstrumentationImpl createFromParcel(Parcel source) {
                     return new ParsedInstrumentationImpl(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParsedInstrumentationImpl[] newArray(int size) {
                     return new ParsedInstrumentationImpl[size];

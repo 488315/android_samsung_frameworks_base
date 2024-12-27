@@ -183,7 +183,6 @@ public class AudioManagerHelper {
                         .collect(Collectors.joining("<-"));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String makeMethodString(StackTraceElement element) {
         return getSimpleClassName(element)
                 + MediaMetrics.SEPARATOR

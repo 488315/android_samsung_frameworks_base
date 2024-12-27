@@ -16,7 +16,6 @@ final class AnnouncementResolver$getScreenshotAnnouncement$2 extends SuspendLamb
     int label;
     final /* synthetic */ AnnouncementResolver this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AnnouncementResolver$getScreenshotAnnouncement$2(Consumer<String> consumer, AnnouncementResolver announcementResolver, int i, Continuation continuation) {
         super(2, continuation);
         this.$announceCallback = consumer;

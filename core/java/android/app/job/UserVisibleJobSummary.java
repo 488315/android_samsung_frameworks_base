@@ -9,13 +9,11 @@ public class UserVisibleJobSummary implements Parcelable {
     public static final Parcelable.Creator<UserVisibleJobSummary> CREATOR =
             new Parcelable.Creator<UserVisibleJobSummary>() { // from class:
                 // android.app.job.UserVisibleJobSummary.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UserVisibleJobSummary createFromParcel(Parcel in) {
                     return new UserVisibleJobSummary(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UserVisibleJobSummary[] newArray(int size) {
                     return new UserVisibleJobSummary[size];

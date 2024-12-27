@@ -122,7 +122,6 @@ public class Filter implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onFilterStatus$0(int status) {
         FilterCallback callback;
         synchronized (this.mCallbackLock) {
@@ -161,7 +160,6 @@ public class Filter implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onFilterEvent$1(FilterEvent[] events) {
         FilterCallback callback;
         synchronized (this.mCallbackLock) {

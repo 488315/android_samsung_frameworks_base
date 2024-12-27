@@ -72,7 +72,6 @@ public final class DreamController {
         public PowerManager.WakeLock mWakeLock;
         public boolean mWakingGently;
 
-        /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.dreams.DreamController$DreamRecord$1] */
         public DreamRecord(
                 Binder binder,
                 ComponentName componentName,

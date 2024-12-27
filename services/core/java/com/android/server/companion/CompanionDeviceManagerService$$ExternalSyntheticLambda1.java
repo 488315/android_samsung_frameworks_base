@@ -15,9 +15,6 @@ public final /* synthetic */ class CompanionDeviceManagerService$$ExternalSynthe
         this.f$1 = packageInfo;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x009c A[Catch: IllegalArgumentException -> 0x00a4, TryCatch #0 {IllegalArgumentException -> 0x00a4, blocks: (B:13:0x0085, B:15:0x0091, B:21:0x009c, B:25:0x00a6), top: B:12:0x0085 }] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00a6 A[Catch: IllegalArgumentException -> 0x00a4, TRY_LEAVE, TryCatch #0 {IllegalArgumentException -> 0x00a4, blocks: (B:13:0x0085, B:15:0x0091, B:21:0x009c, B:25:0x00a6), top: B:12:0x0085 }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0064 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

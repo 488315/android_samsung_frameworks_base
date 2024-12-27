@@ -28,7 +28,6 @@ public class PrintServicesLoader extends Loader<List<PrintServiceInfo>> {
         queueNewResult();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void queueNewResult() {
         Message m = this.mHandler.obtainMessage(0);
         m.obj = this.mPrintManager.getPrintServices(this.mSelectionFlags);

@@ -281,7 +281,6 @@ public abstract class NotificationAssistantService extends NotificationListenerS
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setAdjustmentIssuer(Adjustment adjustment) {
         if (adjustment != null) {
             adjustment.setIssuer(getOpPackageName() + "/" + getClass().getName());

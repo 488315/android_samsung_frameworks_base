@@ -10,13 +10,11 @@ public class SatelliteSessionStats implements Parcelable {
             new Parcelable.Creator<
                     SatelliteSessionStats>() { // from class:
                                                // android.telephony.satellite.SatelliteSessionStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteSessionStats createFromParcel(Parcel in) {
                     return new SatelliteSessionStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteSessionStats[] newArray(int size) {
                     return new SatelliteSessionStats[size];

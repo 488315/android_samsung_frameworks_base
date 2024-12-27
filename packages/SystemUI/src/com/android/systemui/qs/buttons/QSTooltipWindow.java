@@ -32,7 +32,6 @@ public final class QSTooltipWindow {
     public int mToolTipString;
     public final TextView mTooltipText;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.qs.buttons.QSTooltipWindow$1] */
     public QSTooltipWindow(Context context) {
         this.mContext = context;
         PopupWindow popupWindow = new PopupWindow(context);

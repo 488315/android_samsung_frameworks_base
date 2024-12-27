@@ -51,8 +51,6 @@ public abstract class AppCategoryListParser {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00e9 A[LOOP:1: B:24:0x00e3->B:26:0x00e9, LOOP_END] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -81,8 +81,6 @@ public final class TrustRepositoryImpl implements TrustRepository {
                     this.this$0 = trustRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -161,7 +159,6 @@ public final class TrustRepositoryImpl implements TrustRepository {
         this.isCurrentUserTrustUsuallyManaged = FlowKt.stateIn(FlowKt.transformLatest(userRepositoryImpl.selectedUserInfo, new TrustRepositoryImpl$special$$inlined$flatMapLatest$1(null, this)), coroutineScope, startedEagerly, Boolean.FALSE);
     }
 
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$4] */
     public final TrustRepositoryImpl$special$$inlined$map$4 getTrustAgentRequestingToDismissKeyguard() {
         final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(this.trust, ((UserRepositoryImpl) this.userRepository).selectedUserInfo, TrustRepositoryImpl$trustAgentRequestingToDismissKeyguard$2.INSTANCE);
         final Flow distinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$3
@@ -194,8 +191,6 @@ public final class TrustRepositoryImpl implements TrustRepository {
                     this.this$0 = trustRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -292,8 +287,6 @@ public final class TrustRepositoryImpl implements TrustRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -391,8 +384,6 @@ public final class TrustRepositoryImpl implements TrustRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -486,8 +477,6 @@ public final class TrustRepositoryImpl implements TrustRepository {
                     this.this$0 = trustRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -596,8 +585,6 @@ public final class TrustRepositoryImpl implements TrustRepository {
                     this.this$0 = trustRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

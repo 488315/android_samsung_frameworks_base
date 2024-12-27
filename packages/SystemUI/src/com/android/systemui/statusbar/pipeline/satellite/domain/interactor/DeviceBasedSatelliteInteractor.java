@@ -50,7 +50,6 @@ public final class DeviceBasedSatelliteInteractor {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r8v2, types: [com.android.systemui.statusbar.pipeline.satellite.domain.interactor.DeviceBasedSatelliteInteractor$special$$inlined$map$1] */
     public DeviceBasedSatelliteInteractor(DeviceBasedSatelliteRepository deviceBasedSatelliteRepository, MobileIconsInteractor mobileIconsInteractor, WifiInteractor wifiInteractor, CoroutineScope coroutineScope, LogBuffer logBuffer) {
         this.logBuffer = logBuffer;
         this.isOpportunisticSatelliteIconEnabled = deviceBasedSatelliteRepository.isOpportunisticSatelliteIconEnabled();
@@ -91,8 +90,6 @@ public final class DeviceBasedSatelliteInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -184,8 +181,6 @@ public final class DeviceBasedSatelliteInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

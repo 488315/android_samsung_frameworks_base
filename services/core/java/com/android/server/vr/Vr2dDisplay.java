@@ -48,7 +48,6 @@ public final class Vr2dDisplay {
     public int mVirtualDisplayHeight = 1800;
     public int mVirtualDisplayDpi = 320;
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.vr.Vr2dDisplay$1] */
     public Vr2dDisplay(
             DisplayManager displayManager,
             WindowManagerInternal windowManagerInternal,
@@ -77,8 +76,6 @@ public final class Vr2dDisplay {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0070 A[Catch: all -> 0x0045, TryCatch #0 {all -> 0x0045, blocks: (B:4:0x0007, B:9:0x001c, B:10:0x0069, B:12:0x0070, B:13:0x007c, B:16:0x0082, B:18:0x0086, B:19:0x009a, B:20:0x009d, B:24:0x0073, B:26:0x007a, B:27:0x0047), top: B:3:0x0007 }] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0073 A[Catch: all -> 0x0045, TryCatch #0 {all -> 0x0045, blocks: (B:4:0x0007, B:9:0x001c, B:10:0x0069, B:12:0x0070, B:13:0x007c, B:16:0x0082, B:18:0x0086, B:19:0x009a, B:20:0x009d, B:24:0x0073, B:26:0x007a, B:27:0x0047), top: B:3:0x0007 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -216,7 +213,6 @@ public final class Vr2dDisplay {
         this.mWindowManagerInternal.setVr2dDisplayId(i);
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.vr.Vr2dDisplay$3] */
     public final void updateVirtualDisplay() {
         if (!this.mIsVirtualDisplayAllowed
                 || (!this.mBootsToVr && !this.mIsPersistentVrModeEnabled)) {

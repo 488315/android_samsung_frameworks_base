@@ -11,13 +11,11 @@ public final class DhcpClientEvent implements IpConnectivityLog.Event {
     public static final Parcelable.Creator<DhcpClientEvent> CREATOR =
             new Parcelable.Creator<
                     DhcpClientEvent>() { // from class: android.net.metrics.DhcpClientEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DhcpClientEvent createFromParcel(Parcel in) {
                     return new DhcpClientEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DhcpClientEvent[] newArray(int size) {
                     return new DhcpClientEvent[size];

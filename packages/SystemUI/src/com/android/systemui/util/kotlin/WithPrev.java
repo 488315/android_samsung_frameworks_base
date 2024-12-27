@@ -12,7 +12,6 @@ public final class WithPrev<S, T extends S> {
         this.newValue = t;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static /* synthetic */ WithPrev copy$default(WithPrev withPrev, Object obj, Object obj2, int i, Object obj3) {
         if ((i & 1) != 0) {
             obj = withPrev.previousValue;

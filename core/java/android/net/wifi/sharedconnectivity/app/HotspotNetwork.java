@@ -18,13 +18,11 @@ public final class HotspotNetwork implements Parcelable {
             new Parcelable.Creator<
                     HotspotNetwork>() { // from class:
                                         // android.net.wifi.sharedconnectivity.app.HotspotNetwork.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HotspotNetwork createFromParcel(Parcel in) {
                     return HotspotNetwork.readFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HotspotNetwork[] newArray(int size) {
                     return new HotspotNetwork[size];

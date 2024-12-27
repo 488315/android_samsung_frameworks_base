@@ -153,8 +153,6 @@ public final class SystemRepository {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.chimera.SystemRepository$2] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.chimera.SystemRepository$3] */
     public SystemRepository(Context context, ActivityManagerService activityManagerService) {
         new IUidObserver.Stub() { // from class: com.android.server.chimera.SystemRepository.1
             public final void onUidActive(int i) {}

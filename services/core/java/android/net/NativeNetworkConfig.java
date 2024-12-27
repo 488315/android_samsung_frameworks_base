@@ -90,7 +90,6 @@ public class NativeNetworkConfig implements Parcelable {
         this.excludeLocalRoutes = z2;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static NativeNetworkConfig internalCreateFromParcel(Parcel parcel) {
         Builder builder = new Builder();
         int dataPosition = parcel.dataPosition();

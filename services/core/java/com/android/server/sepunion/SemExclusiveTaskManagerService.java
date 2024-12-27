@@ -201,9 +201,6 @@ public final class SemExclusiveTaskManagerService extends ISemExclusiveTaskManag
         public int mUserId;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Type inference failed for: r5v5, types: [com.android.server.sepunion.SemExclusiveTaskManagerService$1] */
-    /* JADX WARN: Type inference failed for: r5v6, types: [com.android.server.sepunion.SemExclusiveTaskManagerService$2] */
     public SemExclusiveTaskManagerService(Context context) {
         char c;
         char c2;
@@ -239,7 +236,6 @@ public final class SemExclusiveTaskManagerService extends ISemExclusiveTaskManag
                        com.android.server.sepunion.SemExclusiveTaskManagerService.Task.m868$$Nest$mturnOnOff(r0, true, r13);
                        r11.executePostProccess(r0, true, r13);
                     */
-                    /* JADX WARN: Removed duplicated region for block: B:43:0x0169  */
                     @Override // android.database.ContentObserver
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

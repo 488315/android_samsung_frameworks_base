@@ -134,8 +134,6 @@ public final class SyncTile extends SQSTileImpl {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.content.BroadcastReceiver, com.android.systemui.qs.tiles.SyncTile$1] */
     public SyncTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, BroadcastDispatcher broadcastDispatcher, KeyguardStateController keyguardStateController, KeyguardUpdateMonitor keyguardUpdateMonitor, SettingsHelper settingsHelper, PanelInteractor panelInteractor) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         ?? r1 = new BroadcastReceiver() { // from class: com.android.systemui.qs.tiles.SyncTile.1
@@ -166,9 +164,6 @@ public final class SyncTile extends SQSTileImpl {
         this.mPanelInteractor = panelInteractor;
     }
 
-    /* JADX WARN: Type inference failed for: r7v4 */
-    /* JADX WARN: Type inference failed for: r7v5, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r7v7 */
     public static int getEnterprisePolicyEnabled(Context context, String str, String str2, String[] strArr) {
         Uri parse = Uri.parse(str);
         int i = -1;

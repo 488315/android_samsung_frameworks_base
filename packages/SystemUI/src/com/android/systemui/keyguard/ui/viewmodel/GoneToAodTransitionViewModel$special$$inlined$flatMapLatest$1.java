@@ -24,7 +24,6 @@ public final class GoneToAodTransitionViewModel$special$$inlined$flatMapLatest$1
     int label;
     final /* synthetic */ GoneToAodTransitionViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GoneToAodTransitionViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, GoneToAodTransitionViewModel goneToAodTransitionViewModel) {
         super(3, continuation);
         this.this$0 = goneToAodTransitionViewModel;

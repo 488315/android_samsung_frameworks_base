@@ -1120,42 +1120,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         this(context, attrs, defStyleAttr, 0);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:205:0x13ab  */
-    /* JADX WARN: Removed duplicated region for block: B:207:0x13c3  */
-    /* JADX WARN: Removed duplicated region for block: B:222:0x1442  */
-    /* JADX WARN: Removed duplicated region for block: B:227:0x1461  */
-    /* JADX WARN: Removed duplicated region for block: B:228:0x1467  */
-    /* JADX WARN: Removed duplicated region for block: B:229:0x146d  */
-    /* JADX WARN: Removed duplicated region for block: B:237:0x14a8  */
-    /* JADX WARN: Removed duplicated region for block: B:246:0x14d5  */
-    /* JADX WARN: Removed duplicated region for block: B:249:0x1502  */
-    /* JADX WARN: Removed duplicated region for block: B:252:0x1511  */
-    /* JADX WARN: Removed duplicated region for block: B:254:0x1515  */
-    /* JADX WARN: Removed duplicated region for block: B:257:0x151c  */
-    /* JADX WARN: Removed duplicated region for block: B:273:0x1568  */
-    /* JADX WARN: Removed duplicated region for block: B:276:0x1585  */
-    /* JADX WARN: Removed duplicated region for block: B:303:0x15ee  */
-    /* JADX WARN: Removed duplicated region for block: B:306:0x15fb  */
-    /* JADX WARN: Removed duplicated region for block: B:309:0x1602  */
-    /* JADX WARN: Removed duplicated region for block: B:312:0x160d  */
-    /* JADX WARN: Removed duplicated region for block: B:315:0x1619  */
-    /* JADX WARN: Removed duplicated region for block: B:335:0x166f  */
-    /* JADX WARN: Removed duplicated region for block: B:337:0x1674  */
-    /* JADX WARN: Removed duplicated region for block: B:339:0x167e  */
-    /* JADX WARN: Removed duplicated region for block: B:342:0x168a  */
-    /* JADX WARN: Removed duplicated region for block: B:349:0x169b  */
-    /* JADX WARN: Removed duplicated region for block: B:350:0x1684  */
-    /* JADX WARN: Removed duplicated region for block: B:351:0x167a  */
-    /* JADX WARN: Removed duplicated region for block: B:352:0x1665  */
-    /* JADX WARN: Removed duplicated region for block: B:353:0x1612  */
-    /* JADX WARN: Removed duplicated region for block: B:357:0x1509  */
-    /* JADX WARN: Removed duplicated region for block: B:358:0x14e2  */
-    /* JADX WARN: Removed duplicated region for block: B:368:0x13e4  */
-    /* JADX WARN: Removed duplicated region for block: B:370:0x13ed  */
-    /* JADX WARN: Removed duplicated region for block: B:372:0x13fe  */
-    /* JADX WARN: Removed duplicated region for block: B:373:0x13f9  */
-    /* JADX WARN: Removed duplicated region for block: B:374:0x13d4  */
-    /* JADX WARN: Removed duplicated region for block: B:375:0x13b9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3874,7 +3838,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         invalidate();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void clearGesturePreviewHighlight() {
         this.mGesturePreviewHighlightStart = -1;
         this.mGesturePreviewHighlightEnd = -1;
@@ -4120,29 +4083,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         this.mCharWrapper = null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:101:0x01fc  */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x0294  */
-    /* JADX WARN: Removed duplicated region for block: B:115:0x0299  */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x02cb  */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x02db  */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x02e6  */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x02f4  */
-    /* JADX WARN: Removed duplicated region for block: B:131:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:132:0x02ed  */
-    /* JADX WARN: Removed duplicated region for block: B:133:0x02df  */
-    /* JADX WARN: Removed duplicated region for block: B:137:0x0228 A[LOOP:1: B:136:0x0226->B:137:0x0228, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:141:0x0234  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x0248  */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x0251  */
-    /* JADX WARN: Removed duplicated region for block: B:152:0x026a  */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x0264  */
-    /* JADX WARN: Removed duplicated region for block: B:158:0x01f0  */
-    /* JADX WARN: Removed duplicated region for block: B:168:0x00ae  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00aa  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0156  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0168  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0172  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x01ed  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6669,7 +6609,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$performHandwritingInsertModeGesture$4() {
         this.mEditor.exitInsertMode();
     }
@@ -6846,8 +6785,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
        if (r27 == r29.mLayout.getParagraphDirection(r15)) goto L119;
     */
-    /* JADX WARN: Removed duplicated region for block: B:100:0x028f  */
-    /* JADX WARN: Removed duplicated region for block: B:103:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8237,7 +8174,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return this.mCursorVisibleFromAttr;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean canMarquee() {
         int width =
                 ((this.mRight - this.mLeft) - getCompoundPaddingLeft()) - getCompoundPaddingRight();
@@ -8320,7 +8256,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendBeforeTextChanged(CharSequence text, int start, int before, int after) {
         if (this.mListeners != null) {
             ArrayList<TextWatcher> list = this.mListeners;
@@ -9221,7 +9156,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateTextServicesLocaleLocked() {
         Locale locale;
         TextServicesManager textServicesManager = getTextServicesManagerForUser();
@@ -10537,7 +10471,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ TextClassification lambda$handleClick$5(
             TextClassification.Request request) {
         return getTextClassificationSession().classifyText(request);
@@ -11007,13 +10940,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         public static final Parcelable.Creator<SavedState> CREATOR =
                 new Parcelable.Creator<
                         SavedState>() { // from class: android.widget.TextView.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];
@@ -11786,7 +11717,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return ((int) getLayout().getLineWidth(0)) > width || getLayout().getEllipsisCount(0) > 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0050  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -12187,7 +12117,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public Rect getSpannedTextRect(Rect targetRect) {
         int line;
         int offset;
@@ -12250,7 +12179,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return rect;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Point getScreenPointOfView(View view) {
         Point screenPointOfView = new Point();
         int[] screenOffsetOfView = new int[2];
@@ -12290,7 +12218,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                         == 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean canTextMultiSelection() {
         return ViewRune.WIDGET_PEN_SUPPORTED
                 && this.mEnableMultiSelection
@@ -12358,7 +12285,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean checkPosInView(int x, int y, int overplus) {
         if (!isVisibleToUser()) {
             return false;
@@ -12371,7 +12297,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean checkPosOnText(int x, int y, int overplus) {
         int textEndX;
         Layout layout = getLayout();
@@ -12857,7 +12782,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         mMotionEventMonitorListener = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean selectCurrentWordForMultiSelection(int minOffset, int maxOffset) {
         CharSequence text;
         int selectionStart;
@@ -12946,7 +12870,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void showMultiSelectPopupWindow() {
         if (!ViewRune.WIDGET_PEN_SUPPORTED
                 || this.mLayout == null
@@ -12957,7 +12880,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         this.mMultiSelectPopupWindow.showMultiSelectPopupWindow();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void hideMultiSelectPopupWindow() {
         if (!ViewRune.WIDGET_PEN_SUPPORTED) {
             return;
@@ -13352,7 +13274,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public PenSelectionController getPenSelectionController() {
         if (this.mPenSelectionController == null) {
             this.mPenSelectionController = PenSelectionController.getInstance();

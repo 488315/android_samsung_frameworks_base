@@ -17,7 +17,6 @@ final class DeviceEntryRepositoryImpl$isBypassEnabled$1 extends SuspendLambda im
     int label;
     final /* synthetic */ DeviceEntryRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryRepositoryImpl$isBypassEnabled$1(DeviceEntryRepositoryImpl deviceEntryRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceEntryRepositoryImpl;
@@ -35,8 +34,6 @@ final class DeviceEntryRepositoryImpl$isBypassEnabled$1 extends SuspendLambda im
         return ((DeviceEntryRepositoryImpl$isBypassEnabled$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.deviceentry.data.repository.DeviceEntryRepositoryImpl$isBypassEnabled$1$listener$1, com.android.systemui.statusbar.phone.KeyguardBypassController$OnBypassStateChangedListener] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -53,7 +50,6 @@ final class DeviceEntryRepositoryImpl$isBypassEnabled$1 extends SuspendLambda im
             this.this$0.keyguardBypassController.registerOnBypassStateChangedListener(r1);
             final DeviceEntryRepositoryImpl deviceEntryRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryRepositoryImpl$isBypassEnabled$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -40,41 +40,29 @@ public class PropertyValuesHolder implements Cloneable {
     private static final HashMap<Class, HashMap<String, Method>> sGetterPropertyMap =
             new HashMap<>();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nCallFloatMethod(Object obj, long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nCallFourFloatMethod(
             Object obj, long j, float f, float f2, float f3, float f4);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nCallFourIntMethod(Object obj, long j, int i, int i2, int i3, int i4);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nCallIntMethod(Object obj, long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nCallMultipleFloatMethod(Object obj, long j, float[] fArr);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nCallMultipleIntMethod(Object obj, long j, int[] iArr);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nCallTwoFloatMethod(Object obj, long j, float f, float f2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nCallTwoIntMethod(Object obj, long j, int i, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nGetFloatMethod(Class cls, String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nGetIntMethod(Class cls, String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nGetMultipleFloatMethod(Class cls, String str, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nGetMultipleIntMethod(Class cls, String str, int i);
 
     private PropertyValuesHolder(String propertyName) {
@@ -317,7 +305,6 @@ public class PropertyValuesHolder implements Cloneable {
         this.mConverter = converter;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private Method getPropertyFunction(Class cls, String prefix, Class valueType) {
         Class[] typeVariants;
         Method returnVal = null;

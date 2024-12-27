@@ -69,7 +69,6 @@ public final class BatteryExternalStatsWorker {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(20:0|1|(5:3|(1:158)(1:7)|8|52|13)(1:159)|14|(2:16|(1:18)(2:19|(13:21|22|(3:24|(1:26)(2:39|(1:41))|(3:28|cd|33))|42|(1:44)|45|46|47|48|49|(1:146)(5:52|131|58|59|60)|61|17f)))|153|22|(0)|42|(0)|45|46|47|48|49|(0)|146|61|17f|(1:(0))) */
     /* JADX WARN: Code restructure failed: missing block: B:148:0x0104, code lost:
 
        r0 = move-exception;
@@ -90,10 +89,6 @@ public final class BatteryExternalStatsWorker {
 
        android.util.Slog.w("BatteryExternalStatsWorker", "exception reading modem stats: " + r0.getCause());
     */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x009e  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00e3  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x012c A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0180 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* renamed from: -$$Nest$mupdateExternalStatsLocked, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -117,8 +112,6 @@ public final class BatteryExternalStatsWorker {
                     + " java.lang.String, int, boolean, boolean, int[], boolean):void");
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.power.stats.BatteryExternalStatsWorker$1] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.power.stats.BatteryExternalStatsWorker$1] */
     public BatteryExternalStatsWorker(Injector injector, BatteryStatsImpl batteryStatsImpl) {
         final int i = 0;
         this.mSyncTask =

@@ -119,30 +119,6 @@ public final class LaunchParamsController {
 
        if (r4 != 3) goto L348;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x0723  */
-    /* JADX WARN: Removed duplicated region for block: B:172:0x0aa1  */
-    /* JADX WARN: Removed duplicated region for block: B:183:0x0b04  */
-    /* JADX WARN: Removed duplicated region for block: B:186:0x0b1a A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0d7f  */
-    /* JADX WARN: Removed duplicated region for block: B:205:0x0bd5  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0d9d A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:271:0x0c5c  */
-    /* JADX WARN: Removed duplicated region for block: B:273:0x0c90  */
-    /* JADX WARN: Removed duplicated region for block: B:283:0x0b07  */
-    /* JADX WARN: Removed duplicated region for block: B:295:0x07ec  */
-    /* JADX WARN: Removed duplicated region for block: B:392:0x0a7d  */
-    /* JADX WARN: Removed duplicated region for block: B:472:0x0536  */
-    /* JADX WARN: Removed duplicated region for block: B:474:0x0538  */
-    /* JADX WARN: Type inference failed for: r2v187, types: [com.android.server.wm.ConfigurationContainer, com.android.server.wm.Task] */
-    /* JADX WARN: Type inference failed for: r3v123 */
-    /* JADX WARN: Type inference failed for: r3v124 */
-    /* JADX WARN: Type inference failed for: r3v125 */
-    /* JADX WARN: Type inference failed for: r3v6 */
-    /* JADX WARN: Type inference failed for: r3v7, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r7v34 */
-    /* JADX WARN: Type inference failed for: r7v37 */
-    /* JADX WARN: Type inference failed for: r7v38 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

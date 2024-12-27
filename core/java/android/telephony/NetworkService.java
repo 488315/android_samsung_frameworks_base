@@ -56,21 +56,18 @@ public abstract class NetworkService extends Service {
             NetworkService.this.mHandler.obtainMessage(7, this.mSlotIndex, 0, null).sendToTarget();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void registerForInfoChanged(INetworkServiceCallback callback) {
             synchronized (this.mNetworkRegistrationInfoChangedCallbacks) {
                 this.mNetworkRegistrationInfoChangedCallbacks.add(callback);
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void unregisterForInfoChanged(INetworkServiceCallback callback) {
             synchronized (this.mNetworkRegistrationInfoChangedCallbacks) {
                 this.mNetworkRegistrationInfoChangedCallbacks.remove(callback);
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void notifyInfoChangedToCallbacks() {
             for (INetworkServiceCallback callback : this.mNetworkRegistrationInfoChangedCallbacks) {
                 try {

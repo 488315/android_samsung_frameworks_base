@@ -14,13 +14,11 @@ public final class VisibleActivityInfo implements Parcelable {
             new Parcelable.Creator<
                     VisibleActivityInfo>() { // from class:
                                              // android.service.voice.VisibleActivityInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VisibleActivityInfo[] newArray(int size) {
                     return new VisibleActivityInfo[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VisibleActivityInfo createFromParcel(Parcel in) {
                     return new VisibleActivityInfo(in);

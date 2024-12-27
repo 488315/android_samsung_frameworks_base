@@ -28,8 +28,6 @@ public final class UnfoldLightRevealOverlayAnimation implements FullscreenLightR
     public final ThreadFactory threadFactory;
     public final Handler unfoldProgressHandler;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class AddOverlayReason {
         public static final /* synthetic */ AddOverlayReason[] $VALUES;
         public static final AddOverlayReason FOLD;
@@ -94,7 +92,6 @@ public final class UnfoldLightRevealOverlayAnimation implements FullscreenLightR
         public final void onTransitionProgress(final float f) {
             final UnfoldLightRevealOverlayAnimation unfoldLightRevealOverlayAnimation = UnfoldLightRevealOverlayAnimation.this;
             Function0 function0 = new Function0() { // from class: com.android.systemui.unfold.UnfoldLightRevealOverlayAnimation$TransitionListener$onTransitionProgress$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -191,7 +188,6 @@ public final class UnfoldLightRevealOverlayAnimation implements FullscreenLightR
             return;
         }
         executeInBackground(new Function0() { // from class: com.android.systemui.unfold.UnfoldLightRevealOverlayAnimation$onScreenTurningOn$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

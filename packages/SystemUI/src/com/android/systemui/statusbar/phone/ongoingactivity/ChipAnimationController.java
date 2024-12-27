@@ -116,7 +116,6 @@ public final class ChipAnimationController {
         });
         springAnimation.start();
         cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$animateSpring$2$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -137,8 +136,6 @@ public final class ChipAnimationController {
         return result == CoroutineSingletons.COROUTINE_SUSPENDED ? result : Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -332,7 +329,6 @@ public final class ChipAnimationController {
         view.setScaleY(z ? 0.0f : 1.0f);
         JobImpl Job$default = JobKt.Job$default();
         Job$default.invokeOnCompletion(new Function1() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$startAnimation$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

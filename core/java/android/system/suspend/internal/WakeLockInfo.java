@@ -8,7 +8,6 @@ public class WakeLockInfo implements Parcelable {
     public static final Parcelable.Creator<WakeLockInfo> CREATOR =
             new Parcelable.Creator<
                     WakeLockInfo>() { // from class: android.system.suspend.internal.WakeLockInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WakeLockInfo createFromParcel(Parcel _aidl_source) {
                     WakeLockInfo _aidl_out = new WakeLockInfo();
@@ -16,7 +15,6 @@ public class WakeLockInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WakeLockInfo[] newArray(int _aidl_size) {
                     return new WakeLockInfo[_aidl_size];

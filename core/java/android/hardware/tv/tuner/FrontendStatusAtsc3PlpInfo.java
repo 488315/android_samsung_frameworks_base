@@ -8,7 +8,6 @@ public class FrontendStatusAtsc3PlpInfo implements Parcelable {
     public static final Parcelable.Creator<FrontendStatusAtsc3PlpInfo> CREATOR =
             new Parcelable.Creator<FrontendStatusAtsc3PlpInfo>() { // from class:
                 // android.hardware.tv.tuner.FrontendStatusAtsc3PlpInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendStatusAtsc3PlpInfo createFromParcel(Parcel _aidl_source) {
                     FrontendStatusAtsc3PlpInfo _aidl_out = new FrontendStatusAtsc3PlpInfo();
@@ -16,7 +15,6 @@ public class FrontendStatusAtsc3PlpInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendStatusAtsc3PlpInfo[] newArray(int _aidl_size) {
                     return new FrontendStatusAtsc3PlpInfo[_aidl_size];

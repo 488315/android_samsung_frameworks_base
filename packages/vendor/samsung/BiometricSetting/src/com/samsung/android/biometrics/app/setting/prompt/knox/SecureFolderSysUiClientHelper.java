@@ -85,8 +85,6 @@ public final class SecureFolderSysUiClientHelper implements KnoxSysUiClientHelpe
         arrayList.add(hashMap);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0344  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x035b  */
     @Override // com.samsung.android.biometrics.app.setting.prompt.knox.KnoxSysUiClientHelper
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -162,7 +160,6 @@ public final class SecureFolderSysUiClientHelper implements KnoxSysUiClientHelpe
         lockPatternView.setColors(-1, -1, -65536);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x008b  */
     @Override // com.samsung.android.biometrics.app.setting.prompt.knox.KnoxSysUiClientHelper
     /*
         Code decompiled incorrectly, please refer to instructions dump.

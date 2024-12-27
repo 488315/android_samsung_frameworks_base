@@ -19,7 +19,6 @@ final class ConnectivityRepositoryImpl$forceHiddenSlots$1 extends SuspendLambda 
     int label;
     final /* synthetic */ ConnectivityRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ConnectivityRepositoryImpl$forceHiddenSlots$1(TunerService tunerService, ConnectivityInputLogger connectivityInputLogger, ConnectivityRepositoryImpl connectivityRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.$tunerService = tunerService;
@@ -39,8 +38,6 @@ final class ConnectivityRepositoryImpl$forceHiddenSlots$1 extends SuspendLambda 
         return ((ConnectivityRepositoryImpl$forceHiddenSlots$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$forceHiddenSlots$1$callback$1, com.android.systemui.tuner.TunerService$Tunable] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -95,7 +92,6 @@ final class ConnectivityRepositoryImpl$forceHiddenSlots$1 extends SuspendLambda 
             this.$tunerService.addTunable(r1, "icon_blacklist");
             final TunerService tunerService = this.$tunerService;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$forceHiddenSlots$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

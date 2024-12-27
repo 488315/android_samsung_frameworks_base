@@ -21,7 +21,6 @@ class MediaFilterCreatorChain implements MediaFilterCreator {
     private DescriptorFinder descriptorFinder;
     private final List<Enum<?>> types;
 
-    /* JADX INFO: Access modifiers changed from: private */
     interface DescriptorFinder {
         MFDescriptor find(MFDescriptor mFDescriptor);
     }

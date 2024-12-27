@@ -277,7 +277,6 @@ public final class InstallPackageHelper {
         digestInputStream.close();
     }
 
-    /* JADX WARN: Finally extract failed */
     public final AndroidPackage addForInitLI(
             ParsedPackage parsedPackage,
             int i,
@@ -656,7 +655,6 @@ public final class InstallPackageHelper {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void commitPackageSettings(
             AndroidPackage androidPackage,
             PackageSetting packageSetting,
@@ -939,16 +937,6 @@ public final class InstallPackageHelper {
         Trace.traceEnd(262144L);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x01e9  */
-    /* JADX WARN: Removed duplicated region for block: B:270:0x04e1  */
-    /* JADX WARN: Removed duplicated region for block: B:272:0x04e7 A[Catch: all -> 0x035c, TryCatch #5 {all -> 0x035c, blocks: (B:91:0x0328, B:93:0x0332, B:96:0x033a, B:100:0x0344, B:102:0x0347, B:106:0x0357, B:108:0x0353, B:110:0x0340, B:113:0x0363, B:115:0x0367, B:118:0x0379, B:120:0x037d, B:122:0x0390, B:124:0x039a, B:125:0x03a2, B:127:0x03a8, B:129:0x03b4, B:133:0x03f1, B:134:0x03c6, B:138:0x03d8, B:144:0x0403, B:148:0x040a, B:150:0x0410, B:151:0x0467, B:152:0x04f7, B:154:0x0509, B:156:0x050d, B:158:0x0514, B:160:0x0540, B:162:0x0544, B:165:0x0549, B:167:0x0553, B:171:0x056c, B:173:0x0570, B:175:0x057c, B:177:0x0582, B:179:0x0594, B:183:0x05b3, B:185:0x05bb, B:187:0x05bf, B:188:0x05cb, B:190:0x05cf, B:192:0x05d7, B:194:0x05db, B:197:0x05de, B:199:0x05f1, B:200:0x05fe, B:202:0x0604, B:204:0x061f, B:206:0x0628, B:208:0x063c, B:209:0x0641, B:212:0x0649, B:214:0x0659, B:215:0x065e, B:216:0x0669, B:217:0x0688, B:219:0x0647, B:220:0x0632, B:223:0x0638, B:224:0x0613, B:230:0x0619, B:231:0x0597, B:233:0x05a1, B:236:0x0428, B:237:0x043e, B:241:0x0448, B:243:0x0452, B:246:0x0463, B:247:0x0444, B:249:0x0474, B:251:0x0478, B:253:0x048a, B:255:0x0499, B:257:0x04f5, B:258:0x04b1, B:260:0x04c0, B:266:0x04d5, B:268:0x04da, B:272:0x04e7, B:273:0x04eb, B:274:0x04e3), top: B:90:0x0328, inners: #6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:274:0x04e3 A[Catch: all -> 0x035c, TryCatch #5 {all -> 0x035c, blocks: (B:91:0x0328, B:93:0x0332, B:96:0x033a, B:100:0x0344, B:102:0x0347, B:106:0x0357, B:108:0x0353, B:110:0x0340, B:113:0x0363, B:115:0x0367, B:118:0x0379, B:120:0x037d, B:122:0x0390, B:124:0x039a, B:125:0x03a2, B:127:0x03a8, B:129:0x03b4, B:133:0x03f1, B:134:0x03c6, B:138:0x03d8, B:144:0x0403, B:148:0x040a, B:150:0x0410, B:151:0x0467, B:152:0x04f7, B:154:0x0509, B:156:0x050d, B:158:0x0514, B:160:0x0540, B:162:0x0544, B:165:0x0549, B:167:0x0553, B:171:0x056c, B:173:0x0570, B:175:0x057c, B:177:0x0582, B:179:0x0594, B:183:0x05b3, B:185:0x05bb, B:187:0x05bf, B:188:0x05cb, B:190:0x05cf, B:192:0x05d7, B:194:0x05db, B:197:0x05de, B:199:0x05f1, B:200:0x05fe, B:202:0x0604, B:204:0x061f, B:206:0x0628, B:208:0x063c, B:209:0x0641, B:212:0x0649, B:214:0x0659, B:215:0x065e, B:216:0x0669, B:217:0x0688, B:219:0x0647, B:220:0x0632, B:223:0x0638, B:224:0x0613, B:230:0x0619, B:231:0x0597, B:233:0x05a1, B:236:0x0428, B:237:0x043e, B:241:0x0448, B:243:0x0452, B:246:0x0463, B:247:0x0444, B:249:0x0474, B:251:0x0478, B:253:0x048a, B:255:0x0499, B:257:0x04f5, B:258:0x04b1, B:260:0x04c0, B:266:0x04d5, B:268:0x04da, B:272:0x04e7, B:273:0x04eb, B:274:0x04e3), top: B:90:0x0328, inners: #6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:286:0x0269  */
-    /* JADX WARN: Removed duplicated region for block: B:299:0x02c0  */
-    /* JADX WARN: Removed duplicated region for block: B:301:0x02c2  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0230  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x0328 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -964,10 +952,6 @@ public final class InstallPackageHelper {
                     + " int[]):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:68:0x01ef  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x0257  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x0275  */
-    /* JADX WARN: Type inference failed for: r2v26, types: [boolean] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1201,13 +1185,6 @@ public final class InstallPackageHelper {
 
        throw new com.android.server.pm.Installer.InstallerException("Failed to start " + r10 + ", res=" + r4);
     */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x0907  */
-    /* JADX WARN: Removed duplicated region for block: B:227:0x0990 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:233:0x08cb  */
-    /* JADX WARN: Removed duplicated region for block: B:292:0x07c1  */
-    /* JADX WARN: Removed duplicated region for block: B:295:0x07db  */
-    /* JADX WARN: Removed duplicated region for block: B:314:0x0851  */
-    /* JADX WARN: Removed duplicated region for block: B:317:0x086b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1324,13 +1301,6 @@ public final class InstallPackageHelper {
 
        if (r4 == com.android.server.pm.PackageManagerService.sPersonaManager.getAppSeparationId()) goto L235;
     */
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x0293 A[Catch: all -> 0x0219, TRY_ENTER, TryCatch #6 {all -> 0x0219, blocks: (B:70:0x01dd, B:72:0x01ed, B:75:0x01f7, B:77:0x01fd, B:82:0x020c, B:83:0x0214, B:86:0x021b, B:92:0x023c, B:101:0x0251, B:102:0x025e, B:103:0x028e, B:109:0x0293, B:113:0x02a3, B:114:0x02b4, B:117:0x02b9, B:119:0x02c3, B:121:0x02d1, B:123:0x02e0, B:127:0x02e7, B:128:0x02ef, B:132:0x02f6, B:134:0x02fc, B:136:0x0350, B:214:0x029b, B:216:0x0221, B:219:0x0235), top: B:69:0x01dd }] */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x039b A[Catch: all -> 0x01d2, TryCatch #1 {all -> 0x01d2, blocks: (B:61:0x01be, B:63:0x01ca, B:66:0x01d6, B:68:0x01dc, B:142:0x0397, B:144:0x039b, B:146:0x03ad, B:149:0x03ba, B:151:0x03c0, B:155:0x03cc, B:156:0x03cf, B:158:0x03d3, B:160:0x03dc, B:161:0x03ed, B:164:0x0413, B:175:0x0422, B:174:0x041f, B:176:0x0423, B:179:0x042a, B:180:0x0442, B:184:0x044d, B:201:0x0475, B:202:0x0477, B:228:0x04d2, B:229:0x04d4, B:182:0x0443, B:183:0x044c, B:163:0x040a, B:169:0x0419), top: B:60:0x01be, inners: #2, #5, #9 }] */
-    /* JADX WARN: Removed duplicated region for block: B:188:0x0488  */
-    /* JADX WARN: Removed duplicated region for block: B:206:0x0478  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x0249  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1419,9 +1389,6 @@ public final class InstallPackageHelper {
         this.mAppDataHelper.prepareAppDataAfterInstallLIF(initPackageTracedLI);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x01d7 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x0213  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1445,65 +1412,6 @@ public final class InstallPackageHelper {
                     + " com.android.server.pm.ApexManager$ActiveApexInfo):void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:166:0x0374  */
-    /* JADX WARN: Removed duplicated region for block: B:181:0x039e  */
-    /* JADX WARN: Removed duplicated region for block: B:225:0x061b  */
-    /* JADX WARN: Removed duplicated region for block: B:249:0x06cb  */
-    /* JADX WARN: Removed duplicated region for block: B:266:0x0682  */
-    /* JADX WARN: Removed duplicated region for block: B:404:0x042e A[Catch: all -> 0x03b5, TryCatch #10 {all -> 0x03b5, blocks: (B:95:0x02dd, B:162:0x0365, B:313:0x034f, B:314:0x0352, B:402:0x042a, B:404:0x042e, B:405:0x0432, B:406:0x0435, B:368:0x03d3, B:370:0x03d7, B:371:0x03db, B:411:0x0436, B:413:0x043d, B:10:0x0059, B:12:0x0063, B:13:0x0066), top: B:9:0x0059, inners: #34 }] */
-    /* JADX WARN: Removed duplicated region for block: B:456:0x04d5  */
-    /* JADX WARN: Removed duplicated region for block: B:478:0x053d  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x02ac A[Catch: all -> 0x0332, TRY_ENTER, TRY_LEAVE, TryCatch #9 {all -> 0x0332, blocks: (B:7:0x0052, B:18:0x0070, B:23:0x00d1, B:29:0x00e5, B:66:0x0214, B:72:0x0275, B:79:0x0298, B:83:0x02ac, B:85:0x02ba, B:128:0x0290), top: B:6:0x0052 }] */
-    /* JADX WARN: Type inference failed for: r12v0 */
-    /* JADX WARN: Type inference failed for: r12v1, types: [java.util.Map] */
-    /* JADX WARN: Type inference failed for: r12v10, types: [java.util.Map] */
-    /* JADX WARN: Type inference failed for: r12v12 */
-    /* JADX WARN: Type inference failed for: r12v13 */
-    /* JADX WARN: Type inference failed for: r12v23 */
-    /* JADX WARN: Type inference failed for: r12v24 */
-    /* JADX WARN: Type inference failed for: r12v25 */
-    /* JADX WARN: Type inference failed for: r12v26 */
-    /* JADX WARN: Type inference failed for: r12v3 */
-    /* JADX WARN: Type inference failed for: r12v4, types: [int] */
-    /* JADX WARN: Type inference failed for: r12v5 */
-    /* JADX WARN: Type inference failed for: r12v6 */
-    /* JADX WARN: Type inference failed for: r12v7 */
-    /* JADX WARN: Type inference failed for: r12v9 */
-    /* JADX WARN: Type inference failed for: r13v0 */
-    /* JADX WARN: Type inference failed for: r13v1 */
-    /* JADX WARN: Type inference failed for: r13v13 */
-    /* JADX WARN: Type inference failed for: r13v14 */
-    /* JADX WARN: Type inference failed for: r13v2 */
-    /* JADX WARN: Type inference failed for: r13v3 */
-    /* JADX WARN: Type inference failed for: r13v4 */
-    /* JADX WARN: Type inference failed for: r13v5 */
-    /* JADX WARN: Type inference failed for: r13v6 */
-    /* JADX WARN: Type inference failed for: r14v0, types: [android.util.ArrayMap, java.util.Map] */
-    /* JADX WARN: Type inference failed for: r14v1, types: [int] */
-    /* JADX WARN: Type inference failed for: r14v10 */
-    /* JADX WARN: Type inference failed for: r14v12 */
-    /* JADX WARN: Type inference failed for: r14v13 */
-    /* JADX WARN: Type inference failed for: r14v14 */
-    /* JADX WARN: Type inference failed for: r14v2 */
-    /* JADX WARN: Type inference failed for: r14v3 */
-    /* JADX WARN: Type inference failed for: r14v4 */
-    /* JADX WARN: Type inference failed for: r14v5 */
-    /* JADX WARN: Type inference failed for: r14v7 */
-    /* JADX WARN: Type inference failed for: r14v8, types: [int] */
-    /* JADX WARN: Type inference failed for: r14v9 */
-    /* JADX WARN: Type inference failed for: r1v67, types: [com.android.server.pm.PackageMetrics] */
-    /* JADX WARN: Type inference failed for: r2v110 */
-    /* JADX WARN: Type inference failed for: r2v111 */
-    /* JADX WARN: Type inference failed for: r2v114 */
-    /* JADX WARN: Type inference failed for: r2v115 */
-    /* JADX WARN: Type inference failed for: r2v22 */
-    /* JADX WARN: Type inference failed for: r2v23 */
-    /* JADX WARN: Type inference failed for: r2v24 */
-    /* JADX WARN: Type inference failed for: r2v35 */
-    /* JADX WARN: Type inference failed for: r2v37 */
-    /* JADX WARN: Type inference failed for: r2v42, types: [int[]] */
-    /* JADX WARN: Type inference failed for: r31v0, types: [com.android.server.pm.InstallPackageHelper] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1522,11 +1430,6 @@ public final class InstallPackageHelper {
 
        com.android.server.pm.PackageManagerServiceUtils.logCriticalInfo(6, "Failed to decompress; pkg: " + r3 + ", file: " + r13);
     */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0116  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x015d  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00a9  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x00e0  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x0108  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1568,8 +1471,6 @@ public final class InstallPackageHelper {
         return registerAppIdLPw;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00bd A[Catch: all -> 0x0085, TryCatch #0 {all -> 0x0085, blocks: (B:4:0x000c, B:6:0x002b, B:8:0x0034, B:10:0x003e, B:13:0x0049, B:14:0x004c, B:16:0x006a, B:17:0x0088, B:19:0x0097, B:25:0x00a7, B:27:0x00ad, B:29:0x00bd, B:30:0x00c8, B:45:0x00a0), top: B:3:0x000c }] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00c7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1591,7 +1492,6 @@ public final class InstallPackageHelper {
                     + " java.lang.String):com.android.server.pm.ScanRequest");
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(17:103|(1:105)(1:742)|106|107|(2:(1:110)|111)(2:737|(1:739)(2:740|741))|112|(2:113|114)|(10:116|117|118|119|120|121|122|(4:124|125|(2:127|128)|722)(1:730)|723|(2:725|(7:135|(1:137)(1:721)|138|139|(1:141)(1:717)|142|(8:144|145|146|(4:151|(2:154|(2:156|(17:158|3d1|336|(4:340|341|342|(2:344|345))|348|(3:673|674|(2:681|682))|357|(3:359|988|366)(3:629|(13:632|633|9d6|(1:662)(1:641)|642|(1:644)(1:661)|645|(1:647)(1:660)|(1:659)(1:651)|652|(2:656|657)|658|657)|631)|367|(4:369|(1:371)(1:619)|372|373)(1:620)|374|(2:(1:377)(1:613)|378)(1:614)|(5:431|432|af4|437|(5:448|(1:450)(1:597)|451|452|b28)(3:442|443|444))(9:380|381|382|383|e41|419|420|421|422)|393|394|395|(2:397|398)(1:399))(2:706|707))(1:708))|709|(0)(0))|710|(2:154|(0)(0))|709|(0)(0))(2:714|715))(2:133|134))(2:726|727))|735|(1:131)|135|(0)(0)|138|139|(0)(0)|142|(0)(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:351:0x0951, code lost:
 
        if (r28 != false) goto L411;
@@ -1628,43 +1528,6 @@ public final class InstallPackageHelper {
 
        com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0.m(r0, new java.lang.StringBuilder("RemoteException: "), "PackageManager");
     */
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:137:0x0323  */
-    /* JADX WARN: Removed duplicated region for block: B:141:0x032e A[Catch: RemoteException -> 0x0333, TryCatch #15 {RemoteException -> 0x0333, blocks: (B:139:0x0328, B:141:0x032e, B:142:0x0338, B:714:0x035a, B:715:0x0366), top: B:138:0x0328 }] */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x0359  */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x03b4 A[Catch: Exception -> 0x0394, TryCatch #24 {Exception -> 0x0394, blocks: (B:146:0x0373, B:148:0x0385, B:154:0x039c, B:156:0x03b4, B:708:0x03bd), top: B:145:0x0373 }] */
-    /* JADX WARN: Removed duplicated region for block: B:158:0x03cb  */
-    /* JADX WARN: Removed duplicated region for block: B:170:0x040e A[Catch: all -> 0x0404, TryCatch #21 {all -> 0x0404, blocks: (B:161:0x03d2, B:163:0x03df, B:165:0x03f1, B:167:0x03fb, B:170:0x040e, B:174:0x041d, B:175:0x044e, B:176:0x044f, B:178:0x0453, B:182:0x0472, B:184:0x047a, B:187:0x048f, B:190:0x0497, B:194:0x04a0, B:195:0x04bc, B:198:0x04c6, B:200:0x04cc, B:202:0x04d8, B:204:0x04e0, B:205:0x04f7, B:207:0x04fd, B:209:0x0505, B:211:0x0513, B:213:0x0523, B:215:0x0531, B:216:0x0551, B:219:0x0556, B:222:0x056a, B:225:0x057a, B:227:0x058c, B:228:0x0590, B:237:0x059d, B:238:0x059f, B:242:0x05b2, B:244:0x05bd, B:248:0x05cd, B:249:0x05c5, B:250:0x05de, B:251:0x05eb, B:253:0x05f6, B:255:0x0619, B:259:0x0626, B:261:0x062a, B:264:0x0637, B:268:0x063e, B:269:0x0683, B:272:0x0684, B:274:0x0689, B:276:0x0697, B:279:0x06bb, B:281:0x06f6, B:283:0x0700, B:285:0x0708, B:287:0x0738, B:288:0x076f, B:289:0x0770, B:291:0x077c, B:293:0x0785, B:295:0x078b, B:296:0x07bd, B:298:0x07c3, B:304:0x07d3, B:310:0x07f3, B:312:0x080c, B:314:0x0816, B:317:0x0822, B:318:0x0876, B:321:0x08ca, B:323:0x0877, B:324:0x08be, B:306:0x07ed, B:335:0x08d1, B:690:0x05a2, B:691:0x05ad), top: B:160:0x03d2, inners: #27 }] */
-    /* JADX WARN: Removed duplicated region for block: B:241:0x05b0  */
-    /* JADX WARN: Removed duplicated region for block: B:253:0x05f6 A[Catch: all -> 0x0404, TryCatch #21 {all -> 0x0404, blocks: (B:161:0x03d2, B:163:0x03df, B:165:0x03f1, B:167:0x03fb, B:170:0x040e, B:174:0x041d, B:175:0x044e, B:176:0x044f, B:178:0x0453, B:182:0x0472, B:184:0x047a, B:187:0x048f, B:190:0x0497, B:194:0x04a0, B:195:0x04bc, B:198:0x04c6, B:200:0x04cc, B:202:0x04d8, B:204:0x04e0, B:205:0x04f7, B:207:0x04fd, B:209:0x0505, B:211:0x0513, B:213:0x0523, B:215:0x0531, B:216:0x0551, B:219:0x0556, B:222:0x056a, B:225:0x057a, B:227:0x058c, B:228:0x0590, B:237:0x059d, B:238:0x059f, B:242:0x05b2, B:244:0x05bd, B:248:0x05cd, B:249:0x05c5, B:250:0x05de, B:251:0x05eb, B:253:0x05f6, B:255:0x0619, B:259:0x0626, B:261:0x062a, B:264:0x0637, B:268:0x063e, B:269:0x0683, B:272:0x0684, B:274:0x0689, B:276:0x0697, B:279:0x06bb, B:281:0x06f6, B:283:0x0700, B:285:0x0708, B:287:0x0738, B:288:0x076f, B:289:0x0770, B:291:0x077c, B:293:0x0785, B:295:0x078b, B:296:0x07bd, B:298:0x07c3, B:304:0x07d3, B:310:0x07f3, B:312:0x080c, B:314:0x0816, B:317:0x0822, B:318:0x0876, B:321:0x08ca, B:323:0x0877, B:324:0x08be, B:306:0x07ed, B:335:0x08d1, B:690:0x05a2, B:691:0x05ad), top: B:160:0x03d2, inners: #27 }] */
-    /* JADX WARN: Removed duplicated region for block: B:276:0x0697 A[Catch: all -> 0x0404, TryCatch #21 {all -> 0x0404, blocks: (B:161:0x03d2, B:163:0x03df, B:165:0x03f1, B:167:0x03fb, B:170:0x040e, B:174:0x041d, B:175:0x044e, B:176:0x044f, B:178:0x0453, B:182:0x0472, B:184:0x047a, B:187:0x048f, B:190:0x0497, B:194:0x04a0, B:195:0x04bc, B:198:0x04c6, B:200:0x04cc, B:202:0x04d8, B:204:0x04e0, B:205:0x04f7, B:207:0x04fd, B:209:0x0505, B:211:0x0513, B:213:0x0523, B:215:0x0531, B:216:0x0551, B:219:0x0556, B:222:0x056a, B:225:0x057a, B:227:0x058c, B:228:0x0590, B:237:0x059d, B:238:0x059f, B:242:0x05b2, B:244:0x05bd, B:248:0x05cd, B:249:0x05c5, B:250:0x05de, B:251:0x05eb, B:253:0x05f6, B:255:0x0619, B:259:0x0626, B:261:0x062a, B:264:0x0637, B:268:0x063e, B:269:0x0683, B:272:0x0684, B:274:0x0689, B:276:0x0697, B:279:0x06bb, B:281:0x06f6, B:283:0x0700, B:285:0x0708, B:287:0x0738, B:288:0x076f, B:289:0x0770, B:291:0x077c, B:293:0x0785, B:295:0x078b, B:296:0x07bd, B:298:0x07c3, B:304:0x07d3, B:310:0x07f3, B:312:0x080c, B:314:0x0816, B:317:0x0822, B:318:0x0876, B:321:0x08ca, B:323:0x0877, B:324:0x08be, B:306:0x07ed, B:335:0x08d1, B:690:0x05a2, B:691:0x05ad), top: B:160:0x03d2, inners: #27 }] */
-    /* JADX WARN: Removed duplicated region for block: B:359:0x0980  */
-    /* JADX WARN: Removed duplicated region for block: B:369:0x0a75  */
-    /* JADX WARN: Removed duplicated region for block: B:376:0x0abf  */
-    /* JADX WARN: Removed duplicated region for block: B:380:0x0e35  */
-    /* JADX WARN: Removed duplicated region for block: B:397:0x0e6a  */
-    /* JADX WARN: Removed duplicated region for block: B:399:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:404:0x0ee8  */
-    /* JADX WARN: Removed duplicated region for block: B:409:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:431:0x0aea A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x00ef A[Catch: all -> 0x00f6, PackageParserException -> 0x00fd, TRY_ENTER, TRY_LEAVE, TryCatch #22 {PackageParserException -> 0x00fd, blocks: (B:49:0x00b6, B:57:0x00ef, B:769:0x0f69, B:768:0x0f66), top: B:48:0x00b6, outer: #17 }] */
-    /* JADX WARN: Removed duplicated region for block: B:614:0x0ae3  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0117  */
-    /* JADX WARN: Removed duplicated region for block: B:620:0x0aab  */
-    /* JADX WARN: Removed duplicated region for block: B:629:0x09ca  */
-    /* JADX WARN: Removed duplicated region for block: B:685:0x05ea  */
-    /* JADX WARN: Removed duplicated region for block: B:706:0x0ef4  */
-    /* JADX WARN: Removed duplicated region for block: B:708:0x03bd A[Catch: Exception -> 0x0394, TRY_LEAVE, TryCatch #24 {Exception -> 0x0394, blocks: (B:146:0x0373, B:148:0x0385, B:154:0x039c, B:156:0x03b4, B:708:0x03bd), top: B:145:0x0373 }] */
-    /* JADX WARN: Removed duplicated region for block: B:714:0x035a A[Catch: RemoteException -> 0x0333, TryCatch #15 {RemoteException -> 0x0333, blocks: (B:139:0x0328, B:141:0x032e, B:142:0x0338, B:714:0x035a, B:715:0x0366), top: B:138:0x0328 }] */
-    /* JADX WARN: Removed duplicated region for block: B:717:0x0336  */
-    /* JADX WARN: Removed duplicated region for block: B:721:0x0326  */
-    /* JADX WARN: Removed duplicated region for block: B:746:0x0f29  */
-    /* JADX WARN: Type inference failed for: r14v14 */
-    /* JADX WARN: Type inference failed for: r14v15 */
-    /* JADX WARN: Type inference failed for: r14v16 */
-    /* JADX WARN: Type inference failed for: r14v17 */
-    /* JADX WARN: Type inference failed for: r14v57 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1679,12 +1542,6 @@ public final class InstallPackageHelper {
                     + " com.android.server.pm.InstallPackageHelper.preparePackageLI(com.android.server.pm.InstallRequest):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:101:0x006b  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x007f  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x017e  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0196  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1912,21 +1769,6 @@ public final class InstallPackageHelper {
         return scanPackageOnlyLI;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:105:0x0288  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x02b8  */
-    /* JADX WARN: Removed duplicated region for block: B:163:0x04a8  */
-    /* JADX WARN: Removed duplicated region for block: B:166:0x04b1 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:178:0x04e8  */
-    /* JADX WARN: Removed duplicated region for block: B:193:0x0529  */
-    /* JADX WARN: Removed duplicated region for block: B:197:0x052f  */
-    /* JADX WARN: Removed duplicated region for block: B:206:0x04aa  */
-    /* JADX WARN: Removed duplicated region for block: B:214:0x0360 A[Catch: all -> 0x054b, TRY_LEAVE, TryCatch #3 {all -> 0x054b, blocks: (B:212:0x034d, B:214:0x0360, B:216:0x054d, B:217:0x055e), top: B:211:0x034d }] */
-    /* JADX WARN: Removed duplicated region for block: B:216:0x054d A[Catch: all -> 0x054b, TRY_ENTER, TryCatch #3 {all -> 0x054b, blocks: (B:212:0x034d, B:214:0x0360, B:216:0x054d, B:217:0x055e), top: B:211:0x034d }] */
-    /* JADX WARN: Removed duplicated region for block: B:224:0x0342  */
-    /* JADX WARN: Removed duplicated region for block: B:226:0x0345  */
-    /* JADX WARN: Removed duplicated region for block: B:228:0x02c6  */
-    /* JADX WARN: Removed duplicated region for block: B:229:0x028b  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0171  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

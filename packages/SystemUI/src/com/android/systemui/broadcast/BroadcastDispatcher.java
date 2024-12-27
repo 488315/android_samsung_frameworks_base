@@ -50,7 +50,6 @@ public final class BroadcastDispatcher implements Dumpable {
     public final PendingRemovalStore removalPendingStore;
     public final UserTracker userTracker;
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.broadcast.BroadcastDispatcher$handler$1] */
     public BroadcastDispatcher(Context context, Executor executor, final Looper looper, Executor executor2, DumpManager dumpManager, BroadcastDispatcherLogger broadcastDispatcherLogger, UserTracker userTracker, PendingRemovalStore pendingRemovalStore) {
         this.context = context;
         this.mainExecutor = executor;

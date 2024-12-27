@@ -65,12 +65,6 @@ public class FreezePeriod {
         return this.mStartDay > dayOfYearDisregardLeapYear(localDate);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v0 */
-    /* JADX WARN: Type inference failed for: r2v2, types: [int] */
-    /* JADX WARN: Type inference failed for: r2v3 */
-    /* JADX WARN: Type inference failed for: r2v5 */
-    /* JADX WARN: Type inference failed for: r2v6 */
     Pair<LocalDate, LocalDate> toCurrentOrFutureRealDates(LocalDate localDate) {
         int i;
         ?? r2;

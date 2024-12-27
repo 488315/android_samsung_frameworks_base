@@ -19,7 +19,6 @@ public class AudioMix implements Parcelable {
     public static final int CALLBACK_FLAG_NOTIFY_ACTIVITY = 1;
     public static final Parcelable.Creator<AudioMix> CREATOR =
             new Parcelable.Creator<AudioMix>() { // from class: android.media.audiopolicy.AudioMix.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioMix createFromParcel(Parcel p) {
                     Builder mixBuilder = new Builder();
@@ -33,7 +32,6 @@ public class AudioMix implements Parcelable {
                     return mixBuilder.build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioMix[] newArray(int size) {
                     return new AudioMix[size];

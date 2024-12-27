@@ -118,8 +118,6 @@ public final class ContentService extends IContentService.Stub {
             });
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.IBinder, com.android.server.content.ContentService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? contentService = new ContentService(getContext(), FactoryTest.getMode() == 1);
@@ -1236,7 +1234,6 @@ public final class ContentService extends IContentService.Stub {
         Slog.wtf(str, str2);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         new ContentShellCommand(this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
     }

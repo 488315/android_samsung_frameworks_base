@@ -80,10 +80,6 @@ public class HdcptestATCmd implements IWorkOnAt {
         mContext = context;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:298:0x0b9c A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:304:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:313:0x0bbd A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:320:? A[SYNTHETIC] */
     @Override // com.android.server.IWorkOnAt
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -242,9 +238,6 @@ public class HdcptestATCmd implements IWorkOnAt {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00bb A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x009a A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:69:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

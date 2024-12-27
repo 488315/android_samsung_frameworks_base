@@ -14,13 +14,11 @@ public final class ClearCredentialStateRequest implements Parcelable {
             new Parcelable.Creator<
                     ClearCredentialStateRequest>() { // from class:
                                                      // android.service.credentials.ClearCredentialStateRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClearCredentialStateRequest[] newArray(int size) {
                     return new ClearCredentialStateRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClearCredentialStateRequest createFromParcel(Parcel in) {
                     return new ClearCredentialStateRequest(in);

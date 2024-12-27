@@ -48,7 +48,6 @@ public class BiometricPromptWrapper {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAuthenticationError$0() {
             BiometricPromptWrapper.this.mFailRunnable.run();
         }
@@ -69,7 +68,6 @@ public class BiometricPromptWrapper {
             super.onAuthenticationSucceeded(result);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAuthenticationSucceeded$1() {
             BiometricPromptWrapper.this.mSuccessRunnable.run();
         }

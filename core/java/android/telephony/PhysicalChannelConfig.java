@@ -25,13 +25,11 @@ public final class PhysicalChannelConfig implements Parcelable {
             new Parcelable.Creator<
                     PhysicalChannelConfig>() { // from class:
                                                // android.telephony.PhysicalChannelConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhysicalChannelConfig createFromParcel(Parcel in) {
                     return new PhysicalChannelConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhysicalChannelConfig[] newArray(int size) {
                     return new PhysicalChannelConfig[size];

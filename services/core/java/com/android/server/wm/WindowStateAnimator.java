@@ -58,11 +58,6 @@ public final class WindowStateAnimator {
 
        if (r24 != 2) goto L132;
     */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x011c  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x015b  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x019d  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0207  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x012f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

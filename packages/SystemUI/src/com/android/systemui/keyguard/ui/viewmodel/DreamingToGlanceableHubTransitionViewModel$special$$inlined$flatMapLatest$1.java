@@ -22,7 +22,6 @@ public final class DreamingToGlanceableHubTransitionViewModel$special$$inlined$f
     int label;
     final /* synthetic */ DreamingToGlanceableHubTransitionViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DreamingToGlanceableHubTransitionViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, DreamingToGlanceableHubTransitionViewModel dreamingToGlanceableHubTransitionViewModel) {
         super(3, continuation);
         this.this$0 = dreamingToGlanceableHubTransitionViewModel;
@@ -48,7 +47,6 @@ public final class DreamingToGlanceableHubTransitionViewModel$special$$inlined$f
             long j = DreamingToGlanceableHubTransitionViewModel.TO_GLANCEABLE_HUB_DURATION;
             Interpolator interpolator = Interpolators.EMPHASIZED;
             Function1 function1 = new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.DreamingToGlanceableHubTransitionViewModel$dreamOverlayTranslationX$1$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }

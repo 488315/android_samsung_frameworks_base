@@ -242,7 +242,6 @@ public class ProvisioningConfiguration {
             this.mInformationElements = Collections.unmodifiableList(new ArrayList(list));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static byte[] convertToByteArray(ByteBuffer byteBuffer) {
             byte[] bArr = new byte[byteBuffer.limit()];
             ByteBuffer asReadOnlyBuffer = byteBuffer.asReadOnlyBuffer();

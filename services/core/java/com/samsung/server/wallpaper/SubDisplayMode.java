@@ -143,7 +143,6 @@ public final class SubDisplayMode {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.samsung.server.wallpaper.SubDisplayMode$1] */
     public SubDisplayMode(WallpaperManagerService.SemCallback semCallback) {
         IDisplayFoldListener.Stub stub =
                 new IDisplayFoldListener

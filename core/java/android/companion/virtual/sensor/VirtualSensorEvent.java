@@ -10,13 +10,11 @@ public final class VirtualSensorEvent implements Parcelable {
     public static final Parcelable.Creator<VirtualSensorEvent> CREATOR =
             new Parcelable.Creator<VirtualSensorEvent>() { // from class:
                 // android.companion.virtual.sensor.VirtualSensorEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualSensorEvent createFromParcel(Parcel source) {
                     return new VirtualSensorEvent(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualSensorEvent[] newArray(int size) {
                     return new VirtualSensorEvent[size];

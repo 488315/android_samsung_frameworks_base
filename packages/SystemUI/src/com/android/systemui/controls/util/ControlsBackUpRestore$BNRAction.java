@@ -3,8 +3,6 @@ package com.android.systemui.controls.util;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class ControlsBackUpRestore$BNRAction {
     public static final /* synthetic */ ControlsBackUpRestore$BNRAction[] $VALUES;
     public static final Companion Companion;

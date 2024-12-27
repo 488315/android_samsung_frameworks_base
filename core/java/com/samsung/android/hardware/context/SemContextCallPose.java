@@ -9,13 +9,11 @@ public class SemContextCallPose extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextCallPose>() { // from class:
                                             // com.samsung.android.hardware.context.SemContextCallPose.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextCallPose createFromParcel(Parcel in) {
                     return new SemContextCallPose(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextCallPose[] newArray(int size) {
                     return new SemContextCallPose[size];

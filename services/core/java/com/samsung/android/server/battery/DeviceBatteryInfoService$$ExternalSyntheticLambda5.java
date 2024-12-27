@@ -15,7 +15,6 @@ public final /* synthetic */ class DeviceBatteryInfoService$$ExternalSyntheticLa
         this.f$2 = obj;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0066 A[Catch: Exception -> 0x004f, TRY_LEAVE, TryCatch #0 {Exception -> 0x004f, blocks: (B:5:0x0014, B:7:0x003a, B:10:0x0042, B:12:0x0049, B:13:0x005b, B:15:0x0066, B:20:0x0051), top: B:4:0x0014 }] */
     @Override // java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

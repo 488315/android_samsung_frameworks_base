@@ -15,7 +15,6 @@ public final class FromGoneTransitionInteractor$listenForGoneToDreaming$$inlined
     int label;
     final /* synthetic */ FromGoneTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromGoneTransitionInteractor$listenForGoneToDreaming$$inlined$launch$default$1(String str, Continuation continuation, FromGoneTransitionInteractor fromGoneTransitionInteractor) {
         super(2, continuation);
         this.$spanName = str;
@@ -34,8 +33,6 @@ public final class FromGoneTransitionInteractor$listenForGoneToDreaming$$inlined
         return ((FromGoneTransitionInteractor$listenForGoneToDreaming$$inlined$launch$default$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00a3  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00a8  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

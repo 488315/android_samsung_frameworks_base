@@ -15,8 +15,6 @@ public final class EditTilesListInteractor {
         this.iconAndNameCustomRepository = iconAndNameCustomRepository;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

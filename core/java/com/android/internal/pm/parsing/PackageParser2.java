@@ -94,7 +94,6 @@ public class PackageParser2 implements AutoCloseable {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ boolean lambda$new$1(
             Callback callback, long changeId, String packageName, int targetSdkVersion) {
         ApplicationInfo appInfo = this.mSharedAppInfo.get();

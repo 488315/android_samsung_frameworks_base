@@ -268,7 +268,6 @@ public class ActionMenuPresenter extends BaseMenuPresenter
         return null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.internal.view.menu.BaseMenuPresenter,
               // com.android.internal.view.menu.MenuPresenter
     public MenuView getMenuView(ViewGroup root) {
@@ -316,7 +315,6 @@ public class ActionMenuPresenter extends BaseMenuPresenter
         return item.isActionButton();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void computeMenuItemAnimationInfo(boolean preLayout) {
         ViewGroup menuView = (ViewGroup) this.mMenuView;
         int count = menuView.getChildCount();
@@ -331,7 +329,6 @@ public class ActionMenuPresenter extends BaseMenuPresenter
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void runItemAnimations() {
         ObjectAnimator anim;
         for (int i = 0; i < this.mPreLayoutItems.size(); i++) {
@@ -629,7 +626,6 @@ public class ActionMenuPresenter extends BaseMenuPresenter
         return true;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private View findViewForItem(MenuItem item) {
         ViewGroup parent = (ViewGroup) this.mMenuView;
         if (parent == null) {
@@ -702,11 +698,6 @@ public class ActionMenuPresenter extends BaseMenuPresenter
         return this.mReserveOverflow;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:114:0x014b  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0100  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x0188  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x015d  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x0185  */
     @Override // com.android.internal.view.menu.BaseMenuPresenter,
               // com.android.internal.view.menu.MenuPresenter
     /*
@@ -771,13 +762,11 @@ public class ActionMenuPresenter extends BaseMenuPresenter
                 new Parcelable.Creator<
                         SavedState>() { // from class:
                                         // android.widget.ActionMenuPresenter.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];
@@ -838,7 +827,6 @@ public class ActionMenuPresenter extends BaseMenuPresenter
             info.setCanOpenPopup(true);
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.widget.ImageView, android.view.View
         public boolean setFrame(int l, int t, int r, int b) {
             boolean changed = super.setFrame(l, t, r, b);
@@ -1185,7 +1173,6 @@ public class ActionMenuPresenter extends BaseMenuPresenter
             return ActionMenuPresenter.this.mNavigationBarHeight;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.widget.TextView, android.view.View
         public boolean setFrame(int l, int t, int r, int b) {
             boolean changed = super.setFrame(l, t, r, b);

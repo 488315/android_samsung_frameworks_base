@@ -160,8 +160,6 @@ public final class ResumeMediaBrowser {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.media.controls.domain.resume.ResumeMediaBrowser$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.media.controls.domain.resume.ResumeMediaBrowser$2] */
     public ResumeMediaBrowser(Context context, Callback callback, ComponentName componentName, MediaBrowserFactory mediaBrowserFactory, ResumeMediaBrowserLogger resumeMediaBrowserLogger, int i) {
         this.mContext = context;
         this.mCallback = callback;

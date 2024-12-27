@@ -9,13 +9,11 @@ import android.util.Log;
 final class FragmentState implements Parcelable {
     public static final Parcelable.Creator<FragmentState> CREATOR =
             new Parcelable.Creator<FragmentState>() { // from class: android.app.FragmentState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FragmentState createFromParcel(Parcel in) {
                     return new FragmentState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FragmentState[] newArray(int size) {
                     return new FragmentState[size];

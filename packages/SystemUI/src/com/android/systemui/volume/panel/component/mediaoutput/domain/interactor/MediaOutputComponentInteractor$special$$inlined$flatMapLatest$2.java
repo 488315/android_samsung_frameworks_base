@@ -18,7 +18,6 @@ public final class MediaOutputComponentInteractor$special$$inlined$flatMapLatest
     int label;
     final /* synthetic */ MediaOutputComponentInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaOutputComponentInteractor$special$$inlined$flatMapLatest$2(Continuation continuation, AudioOutputInteractor audioOutputInteractor, MediaOutputComponentInteractor mediaOutputComponentInteractor) {
         super(3, continuation);
         this.$audioOutputInteractor$inlined = audioOutputInteractor;

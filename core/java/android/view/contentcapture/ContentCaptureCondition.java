@@ -14,14 +14,12 @@ public final class ContentCaptureCondition implements Parcelable {
             new Parcelable.Creator<
                     ContentCaptureCondition>() { // from class:
                                                  // android.view.contentcapture.ContentCaptureCondition.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentCaptureCondition createFromParcel(Parcel parcel) {
                     return new ContentCaptureCondition(
                             (LocusId) parcel.readParcelable(null, LocusId.class), parcel.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentCaptureCondition[] newArray(int size) {
                     return new ContentCaptureCondition[size];

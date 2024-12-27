@@ -28,13 +28,11 @@ public final class UiccAccessRule implements Parcelable {
     public static final Parcelable.Creator<UiccAccessRule> CREATOR =
             new Parcelable.Creator<
                     UiccAccessRule>() { // from class: android.telephony.UiccAccessRule.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UiccAccessRule createFromParcel(Parcel in) {
                     return new UiccAccessRule(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UiccAccessRule[] newArray(int size) {
                     return new UiccAccessRule[size];

@@ -12,13 +12,11 @@ public class PermissionGroupInfo extends PackageItemInfo implements Parcelable {
     public static final Parcelable.Creator<PermissionGroupInfo> CREATOR =
             new Parcelable.Creator<
                     PermissionGroupInfo>() { // from class: android.content.pm.PermissionGroupInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PermissionGroupInfo createFromParcel(Parcel source) {
                     return new PermissionGroupInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PermissionGroupInfo[] newArray(int size) {
                     return new PermissionGroupInfo[size];

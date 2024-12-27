@@ -12,13 +12,11 @@ public final class WindowRelayoutResult implements Parcelable {
     public static final Parcelable.Creator<WindowRelayoutResult> CREATOR =
             new Parcelable.Creator<
                     WindowRelayoutResult>() { // from class: android.view.WindowRelayoutResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowRelayoutResult createFromParcel(Parcel in) {
                     return new WindowRelayoutResult(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowRelayoutResult[] newArray(int size) {
                     return new WindowRelayoutResult[size];

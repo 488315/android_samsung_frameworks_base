@@ -23,7 +23,6 @@ final class LabsViewModel$setGroupSpeakerDefaultExpanded$1 extends SuspendLambda
         /* synthetic */ Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(boolean z, Continuation continuation) {
             super(2, continuation);
             this.$enabled = z;
@@ -55,7 +54,6 @@ final class LabsViewModel$setGroupSpeakerDefaultExpanded$1 extends SuspendLambda
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LabsViewModel$setGroupSpeakerDefaultExpanded$1(LabsViewModel labsViewModel, boolean z, Continuation continuation) {
         super(2, continuation);
         this.this$0 = labsViewModel;

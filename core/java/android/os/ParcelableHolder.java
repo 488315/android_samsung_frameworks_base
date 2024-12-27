@@ -8,7 +8,6 @@ public final class ParcelableHolder implements Parcelable {
     public static final Parcelable.Creator<ParcelableHolder> CREATOR =
             new Parcelable.Creator<
                     ParcelableHolder>() { // from class: android.os.ParcelableHolder.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableHolder createFromParcel(Parcel parcel) {
                     ParcelableHolder parcelable = new ParcelableHolder();
@@ -16,7 +15,6 @@ public final class ParcelableHolder implements Parcelable {
                     return parcelable;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableHolder[] newArray(int size) {
                     return new ParcelableHolder[size];

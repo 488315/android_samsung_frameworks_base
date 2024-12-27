@@ -242,7 +242,6 @@ public final class InternalNano {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static final <K, V> Map<K, V> mergeMapEntry(
             CodedInputByteBufferNano codedInputByteBufferNano,
             Map<K, V> map,

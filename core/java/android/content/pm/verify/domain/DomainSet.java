@@ -13,13 +13,11 @@ public class DomainSet implements Parcelable {
     public static final Parcelable.Creator<DomainSet> CREATOR =
             new Parcelable.Creator<
                     DomainSet>() { // from class: android.content.pm.verify.domain.DomainSet.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DomainSet[] newArray(int size) {
                     return new DomainSet[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DomainSet createFromParcel(Parcel in) {
                     return new DomainSet(in);

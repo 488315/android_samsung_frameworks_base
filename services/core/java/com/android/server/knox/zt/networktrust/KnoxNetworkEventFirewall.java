@@ -23,8 +23,6 @@ public final class KnoxNetworkEventFirewall {
     public static KnoxNetworkEventFirewall mKnoxNwEventFw;
     public static final Map mangleChains;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class EventType {
         public static final /* synthetic */ EventType[] $VALUES;
         public static final EventType ABNORMAL_PACKETS;
@@ -50,8 +48,6 @@ public final class KnoxNetworkEventFirewall {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class IpRestoreActionType {
         public static final /* synthetic */ IpRestoreActionType[] $VALUES;
         public static final IpRestoreActionType APPEND;

@@ -9,13 +9,11 @@ public final class ResolverTarget implements Parcelable {
     public static final Parcelable.Creator<ResolverTarget> CREATOR =
             new Parcelable.Creator<
                     ResolverTarget>() { // from class: android.service.resolver.ResolverTarget.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ResolverTarget createFromParcel(Parcel source) {
                     return new ResolverTarget(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ResolverTarget[] newArray(int size) {
                     return new ResolverTarget[size];

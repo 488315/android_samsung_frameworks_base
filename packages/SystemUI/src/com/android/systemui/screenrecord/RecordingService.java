@@ -112,7 +112,6 @@ public class RecordingService extends Service implements ScreenMediaRecorder.Scr
         return null;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:33:0x0075, code lost:
     
         if (r4.equals("com.android.systemui.screenrecord.START_NOTIF") == false) goto L7;

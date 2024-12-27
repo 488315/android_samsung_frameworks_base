@@ -70,9 +70,6 @@ public class KeyguardUsimTextView extends SystemUITextView {
         super.setAlpha(Math.min(f, 1.0f));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v14, types: [java.lang.CharSequence] */
-    /* JADX WARN: Type inference failed for: r5v0, types: [android.widget.TextView, com.android.systemui.statusbar.phone.KeyguardUsimTextView, com.android.systemui.widget.SystemUITextView] */
     public final void updateText(int i) {
         Log.d("KeyguardUsimTextView", "updateText(simState): " + i);
         setVisibility(0);

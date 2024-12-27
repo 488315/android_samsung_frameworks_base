@@ -172,14 +172,12 @@ public class GlobalActionsContentItemView {
         return view5;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$inflateView$0(View l) {
         if (this.mViewStateController.getState() == ViewAnimationState.IDLE) {
             this.mViewModel.onPress();
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ boolean lambda$inflateView$1(View l) {
         if (this.mViewStateController.getState() == ViewAnimationState.IDLE) {
             this.mViewModel.onLongPress();
@@ -188,7 +186,6 @@ public class GlobalActionsContentItemView {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$inflateView$2(View l) {
         if (this.mViewStateController.getState() == ViewAnimationState.IDLE) {
             this.mViewModel.onPress();
@@ -317,14 +314,12 @@ public class GlobalActionsContentItemView {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setViewAttrs$3(View l) {
         if (this.mViewStateController.getState() == ViewAnimationState.IDLE) {
             this.mViewModel.onPress();
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ boolean lambda$setViewAttrs$4(View l) {
         if (this.mViewStateController.getState() == ViewAnimationState.IDLE) {
             this.mViewModel.onLongPress();

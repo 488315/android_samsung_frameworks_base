@@ -48,7 +48,6 @@ final class DeviceBasedSatelliteViewModelImpl$carrierText$1 extends SuspendLambd
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteViewModelImpl$carrierText$1(LogBuffer logBuffer, Context context, Continuation continuation) {
         super(3, continuation);
         this.$logBuffer = logBuffer;

@@ -20,8 +20,6 @@ public final class KeyguardUnlockInfo {
     public static SkipBouncerReason skipBouncerReason;
     public static UnlockTrigger unlockTrigger;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class AuthType {
         public static final /* synthetic */ AuthType[] $VALUES;
         public static final AuthType AUTH_BIOMETRICS;
@@ -56,8 +54,6 @@ public final class KeyguardUnlockInfo {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class SkipBouncerReason {
         public static final /* synthetic */ SkipBouncerReason[] $VALUES;
         public static final SkipBouncerReason BIOMETRICS_UNLOCK_LOCK_STAY;
@@ -86,8 +82,6 @@ public final class KeyguardUnlockInfo {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class UnlockTrigger {
         public static final /* synthetic */ UnlockTrigger[] $VALUES;
         public static final UnlockTrigger TRIGGER_BIO_UNLOCK;

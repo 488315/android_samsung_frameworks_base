@@ -592,7 +592,6 @@ public class AppSearchShortcutInfo extends GenericDocument {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static byte[] transformToByteArray(PersistableBundle extras) {
         Objects.requireNonNull(extras);
         try {
@@ -609,7 +608,6 @@ public class AppSearchShortcutInfo extends GenericDocument {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Bundle transformToBundle(byte[] extras) {
         if (extras == null) {
             return null;
@@ -646,7 +644,6 @@ public class AppSearchShortcutInfo extends GenericDocument {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String[] flattenFlags(int flags) {
         List<String> flattenedFlags = new ArrayList<>();
         for (int i = 0; i < 31; i++) {
@@ -685,7 +682,6 @@ public class AppSearchShortcutInfo extends GenericDocument {
         return ret;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static int parseFlag(String value) {
         char c;
         switch (value.hashCode()) {

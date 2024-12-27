@@ -41,7 +41,6 @@ class PreferenceInflater extends GenericInflater<Preference, PreferenceGroup> {
         setDefaultPackage("android.preference.");
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.preference.GenericInflater
     public boolean onCreateCustomFromTag(
             XmlPullParser parser, Preference parentPreference, AttributeSet attrs)
@@ -76,7 +75,6 @@ class PreferenceInflater extends GenericInflater<Preference, PreferenceGroup> {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.preference.GenericInflater
     public PreferenceGroup onMergeRoots(
             PreferenceGroup givenRoot, boolean attachToGivenRoot, PreferenceGroup xmlRoot) {

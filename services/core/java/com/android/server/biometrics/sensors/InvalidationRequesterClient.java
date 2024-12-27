@@ -12,7 +12,6 @@ public final class InvalidationRequesterClient extends BaseClientMonitor {
     public final AnonymousClass1 mInvalidationCallback;
     public final BiometricUtils mUtils;
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.biometrics.sensors.InvalidationRequesterClient$1] */
     public InvalidationRequesterClient(
             Context context,
             int i,

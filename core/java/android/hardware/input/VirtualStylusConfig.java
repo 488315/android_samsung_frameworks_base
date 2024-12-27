@@ -9,13 +9,11 @@ public final class VirtualStylusConfig extends VirtualTouchDeviceConfig implemen
     public static final Parcelable.Creator<VirtualStylusConfig> CREATOR =
             new Parcelable.Creator<VirtualStylusConfig>() { // from class:
                 // android.hardware.input.VirtualStylusConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualStylusConfig createFromParcel(Parcel in) {
                     return new VirtualStylusConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualStylusConfig[] newArray(int size) {
                     return new VirtualStylusConfig[size];

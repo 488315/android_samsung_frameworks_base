@@ -131,7 +131,6 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         return result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static <T extends FieldDescriptorLite<T>> SmallSortedMap<T, Object> cloneAllFieldsMap(
             SmallSortedMap<T, Object> fields, boolean copyList) {
         SmallSortedMap<T, Object> result = SmallSortedMap.newFieldMap(16);
@@ -281,7 +280,6 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isValidType(WireFormat.FieldType type, Object value) {
         Internal.checkNotNull(value);
         switch (type.getJavaType()) {
@@ -318,7 +316,6 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static <T extends FieldDescriptorLite<T>> boolean isInitialized(
             Map.Entry<T, Object> entry) {
         T descriptor = entry.getKey();
@@ -363,7 +360,6 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Object cloneIfMutable(Object value) {
         if (value instanceof byte[]) {
             byte[] bytes = (byte[]) value;

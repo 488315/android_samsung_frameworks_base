@@ -7,13 +7,11 @@ public class SemDevicePowerInfo implements Parcelable {
     public static final Parcelable.Creator<SemDevicePowerInfo> CREATOR =
             new Parcelable.Creator<
                     SemDevicePowerInfo>() { // from class: android.os.SemDevicePowerInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemDevicePowerInfo createFromParcel(Parcel in) {
                     return new SemDevicePowerInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemDevicePowerInfo[] newArray(int size) {
                     return new SemDevicePowerInfo[size];

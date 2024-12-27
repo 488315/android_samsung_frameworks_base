@@ -62,8 +62,6 @@ public final class NotificationListViewBinder {
         this.shelfManager = notificationShelfManager;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0032  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

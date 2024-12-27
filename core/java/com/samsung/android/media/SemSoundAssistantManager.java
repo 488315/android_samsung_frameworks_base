@@ -768,7 +768,6 @@ public class SemSoundAssistantManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void sleep(long millis) {
         try {
             Thread.sleep(millis);

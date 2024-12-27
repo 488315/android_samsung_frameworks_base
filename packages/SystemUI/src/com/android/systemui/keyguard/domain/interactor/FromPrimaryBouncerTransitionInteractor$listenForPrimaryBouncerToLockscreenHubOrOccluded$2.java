@@ -17,7 +17,6 @@ final class FromPrimaryBouncerTransitionInteractor$listenForPrimaryBouncerToLock
     int label;
     final /* synthetic */ FromPrimaryBouncerTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromPrimaryBouncerTransitionInteractor$listenForPrimaryBouncerToLockscreenHubOrOccluded$2(FromPrimaryBouncerTransitionInteractor fromPrimaryBouncerTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromPrimaryBouncerTransitionInteractor;

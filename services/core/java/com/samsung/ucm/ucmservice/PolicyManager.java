@@ -158,17 +158,6 @@ public final class PolicyManager {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x021a  */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x0240  */
-    /* JADX WARN: Removed duplicated region for block: B:115:0x0282  */
-    /* JADX WARN: Removed duplicated region for block: B:117:0x0288  */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x0275  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0159  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x015f  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0193  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0199  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x01eb  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x0201 A[Catch: Exception -> 0x0206, TRY_LEAVE, TryCatch #5 {Exception -> 0x0206, blocks: (B:96:0x01fb, B:98:0x0201), top: B:95:0x01fb }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -8,7 +8,6 @@ public class TrackSecondaryOutputInfo implements Parcelable {
     public static final Parcelable.Creator<TrackSecondaryOutputInfo> CREATOR =
             new Parcelable.Creator<TrackSecondaryOutputInfo>() { // from class:
                 // android.media.TrackSecondaryOutputInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TrackSecondaryOutputInfo createFromParcel(Parcel _aidl_source) {
                     TrackSecondaryOutputInfo _aidl_out = new TrackSecondaryOutputInfo();
@@ -16,7 +15,6 @@ public class TrackSecondaryOutputInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TrackSecondaryOutputInfo[] newArray(int _aidl_size) {
                     return new TrackSecondaryOutputInfo[_aidl_size];

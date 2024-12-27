@@ -536,7 +536,6 @@ public class AlertController {
         a.recycle();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setupView$1(
             final View parentPanel,
             View v,
@@ -558,7 +557,6 @@ public class AlertController {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setupView$0(View parentPanel) {
         if (this.mContext.getResources().getConfiguration().orientation != this.mLastOrientation) {
             semSetupPaddings();
@@ -1019,7 +1017,6 @@ public class AlertController {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$semSetupButtonsPadding$2(int btnTextSize, Button btn) {
         if (btn.getVisibility() != 8) {
             btn.setTextSize(0, btnTextSize);

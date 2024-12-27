@@ -44,7 +44,6 @@ public final class ScrimStateLogger {
         };
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x001e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -17,7 +17,6 @@ final class DeviceBasedSatelliteRepositoryImpl$listenForChangesToSatelliteSuppor
     int label;
     final /* synthetic */ DeviceBasedSatelliteRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteRepositoryImpl$listenForChangesToSatelliteSupport$2(DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl, SatelliteManager satelliteManager, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceBasedSatelliteRepositoryImpl;

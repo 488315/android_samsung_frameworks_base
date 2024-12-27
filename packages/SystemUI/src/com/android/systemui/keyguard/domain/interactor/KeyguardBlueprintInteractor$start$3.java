@@ -16,7 +16,6 @@ final class KeyguardBlueprintInteractor$start$3 extends SuspendLambda implements
     int label;
     final /* synthetic */ KeyguardBlueprintInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardBlueprintInteractor$start$3(KeyguardBlueprintInteractor keyguardBlueprintInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardBlueprintInteractor;

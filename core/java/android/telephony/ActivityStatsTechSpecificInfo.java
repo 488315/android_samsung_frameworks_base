@@ -12,7 +12,6 @@ public final class ActivityStatsTechSpecificInfo implements Parcelable {
             new Parcelable.Creator<
                     ActivityStatsTechSpecificInfo>() { // from class:
                                                        // android.telephony.ActivityStatsTechSpecificInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityStatsTechSpecificInfo createFromParcel(Parcel in) {
                     int rat = in.readInt();
@@ -24,7 +23,6 @@ public final class ActivityStatsTechSpecificInfo implements Parcelable {
                             rat, frequencyRange, txTimeMs, rxTimeMs);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityStatsTechSpecificInfo[] newArray(int size) {
                     return new ActivityStatsTechSpecificInfo[size];

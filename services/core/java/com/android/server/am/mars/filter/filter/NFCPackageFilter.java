@@ -65,7 +65,6 @@ public final class NFCPackageFilter implements IFilter {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.am.mars.filter.filter.NFCPackageFilter$$ExternalSyntheticLambda0] */
     @Override // com.android.server.am.mars.filter.IFilter
     public final void init(Context context) {
         this.mContext = context;

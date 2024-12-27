@@ -147,8 +147,6 @@ public class CardStackView extends FrameLayout {
     public static final Companion Companion = new Companion(null);
     public static final PathInterpolator expandContentsAlphaInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 0.0f);
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class CardSwipeState {
         public static final /* synthetic */ CardSwipeState[] $VALUES;
         public static final CardSwipeState HORIZONTAL;
@@ -188,8 +186,6 @@ public class CardStackView extends FrameLayout {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class GutsControlState {
         public static final /* synthetic */ GutsControlState[] $VALUES;
         public static final GutsControlState INIT;
@@ -709,7 +705,6 @@ public class CardStackView extends FrameLayout {
         return bundle;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:96:0x0377  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1162,9 +1157,6 @@ public class CardStackView extends FrameLayout {
         this(context, (i2 & 2) != 0 ? null : attributeSet, (i2 & 4) != 0 ? 0 : i);
     }
 
-    /* JADX WARN: Type inference failed for: r4v5, types: [com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$layoutListener$1] */
-    /* JADX WARN: Type inference failed for: r6v17, types: [com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$longPressRunnable$1] */
-    /* JADX WARN: Type inference failed for: r6v8, types: [com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$dataObserver$1] */
     public CardStackView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.displayMetrics = getResources().getDisplayMetrics();
@@ -1482,8 +1474,6 @@ public class CardStackView extends FrameLayout {
                             }
                             final Scene scene = (Scene) ((Pair) next).getSecond();
                             scene.setEnterAction(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$internalExpandAnimation$1$1
-                                /* JADX WARN: Multi-variable type inference failed */
-                                /* JADX WARN: Type inference failed for: r1v2, types: [T, android.view.View, java.lang.Object] */
                                 @Override // java.lang.Runnable
                                 public final void run() {
                                     final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
@@ -1498,7 +1488,6 @@ public class CardStackView extends FrameLayout {
                                     final ValueAnimator ofInt = ValueAnimator.ofInt(0, 10);
                                     ofInt.setDuration(300L);
                                     ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$internalExpandAnimation$1$1$1$1
-                                        /* JADX WARN: Multi-variable type inference failed */
                                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                                         public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                                             if (((Integer) ofInt.getAnimatedValue()).intValue() < 3 || ((ViewGroup) ref$ObjectRef.element).getVisibility() == 0) {

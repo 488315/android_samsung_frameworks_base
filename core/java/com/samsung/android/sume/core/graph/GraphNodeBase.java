@@ -532,7 +532,6 @@ public abstract class GraphNodeBase<T> extends MessageSubscriberBase implements 
         this.quit = quit;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean parseException(Exception exception) {
         try {
             String msg = exception.getMessage();

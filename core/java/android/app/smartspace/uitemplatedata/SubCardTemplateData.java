@@ -12,13 +12,11 @@ public final class SubCardTemplateData extends BaseTemplateData {
     public static final Parcelable.Creator<SubCardTemplateData> CREATOR =
             new Parcelable.Creator<SubCardTemplateData>() { // from class:
                 // android.app.smartspace.uitemplatedata.SubCardTemplateData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SubCardTemplateData createFromParcel(Parcel in) {
                     return new SubCardTemplateData(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SubCardTemplateData[] newArray(int size) {
                     return new SubCardTemplateData[size];

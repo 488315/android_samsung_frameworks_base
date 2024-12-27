@@ -4,7 +4,6 @@ public class SemInputTaasCaseFactory {
     public static final String TAAS_CASEA = "CASA";
     public static final String TAAS_CASEB = "CASB";
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public SemInputTaasTestCase create(String type) {
         char c;
         switch (type.hashCode()) {

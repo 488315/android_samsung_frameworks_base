@@ -55,7 +55,6 @@ public abstract class VirtualInputDeviceConfig {
         return this.mInputDeviceName;
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.mVendorId);
         dest.writeInt(this.mProductId);

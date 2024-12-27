@@ -67,7 +67,6 @@ public final class MediaSessionBasedFilter implements MediaDataManager.Listener 
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.systemui.media.controls.domain.pipeline.MediaSessionBasedFilter$sessionListener$1] */
     public MediaSessionBasedFilter(final Context context, MediaSessionManager mediaSessionManager, Executor executor, Executor executor2) {
         this.sessionManager = mediaSessionManager;
         this.foregroundExecutor = executor;

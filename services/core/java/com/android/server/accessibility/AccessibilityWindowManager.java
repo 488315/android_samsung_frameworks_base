@@ -136,10 +136,6 @@ public final class AccessibilityWindowManager {
             return z;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:29:0x006d  */
-        /* JADX WARN: Removed duplicated region for block: B:33:0x0081  */
-        /* JADX WARN: Removed duplicated region for block: B:70:0x0086  */
-        /* JADX WARN: Removed duplicated region for block: B:74:0x0073  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -198,17 +194,6 @@ public final class AccessibilityWindowManager {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Removed duplicated region for block: B:106:0x0174  */
-        /* JADX WARN: Removed duplicated region for block: B:143:0x0244  */
-        /* JADX WARN: Removed duplicated region for block: B:153:0x0270  */
-        /* JADX WARN: Removed duplicated region for block: B:166:0x02ac A[LOOP:7: B:165:0x02aa->B:166:0x02ac, LOOP_END] */
-        /* JADX WARN: Removed duplicated region for block: B:170:0x02c4 A[LOOP:8: B:169:0x02c2->B:170:0x02c4, LOOP_END] */
-        /* JADX WARN: Removed duplicated region for block: B:173:0x02d2  */
-        /* JADX WARN: Removed duplicated region for block: B:176:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:72:0x013e  */
-        /* JADX WARN: Removed duplicated region for block: B:75:0x0145  */
-        /* JADX WARN: Removed duplicated region for block: B:86:0x016c  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -377,9 +362,6 @@ public final class AccessibilityWindowManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0090  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0083 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

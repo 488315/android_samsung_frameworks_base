@@ -549,17 +549,6 @@ public abstract class IntentResolver {
         return obj;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0160  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0186 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x01ba  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x01d6  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x01fc  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0218  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0234  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0258  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x01f5  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x01bd  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0182  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

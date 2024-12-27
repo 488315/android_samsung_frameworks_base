@@ -4,8 +4,6 @@ import com.android.internal.logging.UiEventLogger;
 import com.sec.ims.volte2.data.VolteConstants;
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class StylusUiEvent implements UiEventLogger.UiEventEnum {
     public static final /* synthetic */ StylusUiEvent[] $VALUES;
     public static final StylusUiEvent BLUETOOTH_STYLUS_CONNECTED;

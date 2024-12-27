@@ -115,7 +115,6 @@ public class MessagingPropertyAnimator implements View.OnLayoutChangeListener {
         return tag.intValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void setTop(View v, int value) {
         v.setTagInternal(16909855, Integer.valueOf(value));
         updateTopAndBottom(v);
@@ -167,7 +166,6 @@ public class MessagingPropertyAnimator implements View.OnLayoutChangeListener {
         animator.start();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private static boolean isHidingAnimated(View view) {
         if (view instanceof MessagingLinearLayout.MessagingChild) {
             return ((MessagingLinearLayout.MessagingChild) view).isHidingAnimated();
@@ -202,7 +200,6 @@ public class MessagingPropertyAnimator implements View.OnLayoutChangeListener {
         animator.start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void updateLayerType(View view, boolean animating) {
         if (view.hasOverlappingRendering() && animating) {
             view.setLayerType(2, null);

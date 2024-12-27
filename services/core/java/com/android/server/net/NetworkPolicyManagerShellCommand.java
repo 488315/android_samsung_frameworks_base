@@ -53,7 +53,6 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
         outPrintWriter.println();
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:44:0x00b4, code lost:
 
        if (r6.equals("restrict-background-whitelist") == false) goto L50;
@@ -139,7 +138,6 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
         return -1;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runAdd() {
         char c;
         PrintWriter outPrintWriter = getOutPrintWriter();
@@ -232,7 +230,6 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
         return 0;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runList() {
         char c;
         PrintWriter outPrintWriter = getOutPrintWriter();
@@ -312,11 +309,6 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
         return -1;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v0 */
-    /* JADX WARN: Type inference failed for: r5v2 */
-    /* JADX WARN: Type inference failed for: r5v3 */
     public final int runSet() {
         boolean z;
         int i = 2;

@@ -255,7 +255,6 @@ public final class RemoteAnimationController implements IBinder.DeathRecipient {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.wm.RemoteAnimationController$$ExternalSyntheticLambda1] */
     public RemoteAnimationController(
             WindowManagerService windowManagerService,
             DisplayContent displayContent,

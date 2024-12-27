@@ -189,7 +189,6 @@ public class InlineContentView extends ViewGroup {
         getViewTreeObserver().addOnDrawListener(this.mOnDrawListener);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onAttachedToWindow$0(
             SurfaceControlViewHost.SurfacePackage sp) {
         if (getViewRootImpl() != null) {
@@ -230,7 +229,6 @@ public class InlineContentView extends ViewGroup {
         return this.mSurfaceView.setZOrderedOnTop(onTop, true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void computeParentPositionAndScale() {
         boolean contentPositionOrScaleChanged = false;
         SurfaceView parentSurfaceOwnerView =

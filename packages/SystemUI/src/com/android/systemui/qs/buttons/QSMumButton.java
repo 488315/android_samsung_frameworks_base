@@ -152,7 +152,6 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
             } else {
                 Log.d("QSMumButton", "MumAndDexHelper, onDesktopModeStateChanged()");
                 qSMumButton.mMainHandler.post(new Runnable() { // from class: com.android.systemui.qs.buttons.QSMumButton$MumAndDexHelper$$ExternalSyntheticLambda1
-                    /* JADX WARN: Removed duplicated region for block: B:10:0x001e  */
                     @Override // java.lang.Runnable
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

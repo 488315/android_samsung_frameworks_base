@@ -337,7 +337,6 @@ public class ConversationLayout extends FrameLayout
                 getResources().getDimensionPixelSize(R.dimen.conversation_expand_button_height);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onFinishInflate$0(Integer visibility) {
         boolean isGone = visibility.intValue() == 8;
         int oldVisibility = this.mConversationIconBadgeBg.getVisibility();
@@ -362,7 +361,6 @@ public class ConversationLayout extends FrameLayout
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onFinishInflate$1(Boolean forceHidden) {
         this.mPeopleHelper.animateViewForceHidden(
                 this.mConversationIconBadgeBg, forceHidden.booleanValue());
@@ -370,7 +368,6 @@ public class ConversationLayout extends FrameLayout
                 this.mImportanceRingView, forceHidden.booleanValue());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onFinishInflate$2(Boolean forceHidden) {
         this.mPeopleHelper.animateViewForceHidden(
                 this.mConversationIconBadgeBg, forceHidden.booleanValue());
@@ -379,7 +376,6 @@ public class ConversationLayout extends FrameLayout
         this.mPeopleHelper.animateViewForceHidden(this.mIcon, forceHidden.booleanValue());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onFinishInflate$3(Integer visibility) {
         onAppNameVisibilityChanged();
     }
@@ -466,7 +462,6 @@ public class ConversationLayout extends FrameLayout
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setIsImportantConversation$4(
             GradientDrawable ring, int ringColor, int baseSize, ValueAnimator animation) {
         int strokeWidth = Math.round(((Float) animation.getAnimatedValue()).floatValue());
@@ -566,7 +561,6 @@ public class ConversationLayout extends FrameLayout
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setDataAsync$6(MessagingData messagingData) {
         finalizeInflate(messagingData.getHistoricMessagingMessages());
         finalizeInflate(messagingData.getNewMessagingMessages());
@@ -1068,7 +1062,6 @@ public class ConversationLayout extends FrameLayout
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$removeGroups$10(MessagingGroup group) {
         this.mMessagingLinearLayout.removeTransientView(group);
         group.recycle();

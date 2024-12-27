@@ -79,8 +79,6 @@ public final class AppErrors {
         IAFDDiagnosis.getInstance().init(context);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x006b A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x006c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -209,18 +207,6 @@ public final class AppErrors {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:117:0x02de A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:124:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x003d  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0050  */
-    /* JADX WARN: Removed duplicated region for block: B:210:0x00e8  */
-    /* JADX WARN: Removed duplicated region for block: B:211:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:213:0x005e  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0063  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00a2  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00e0  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00f4 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -657,11 +643,6 @@ public final class AppErrors {
         }
     }
 
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x02ec  */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x0347  */
-    /* JADX WARN: Removed duplicated region for block: B:116:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x02a2 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -684,9 +665,6 @@ public final class AppErrors {
                     + " com.android.server.am.AppErrorDialog$Data):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00d8  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00df  */
-    /* JADX WARN: Removed duplicated region for block: B:36:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -701,7 +679,6 @@ public final class AppErrors {
                     + " com.android.server.am.AppErrors.handleShowAnrUi(android.os.Message):void");
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(24:47|48|(1:50)(1:116)|51|(1:53)(1:115)|54|(1:56)(1:114)|57|(1:113)(1:61)|62|(2:64|(4:66|67|(9:91|92|93|94|95|96|(3:98|(1:100)|101)(1:105)|102|(1:104))(2:(1:71)|72)|73))(1:112)|111|67|(0)|91|92|93|94|95|96|(0)(0)|102|(0)|73) */
     /* JADX WARN: Code restructure failed: missing block: B:108:0x019e, code lost:
 
        android.util.Slog.d("ActivityManager", "IAFDParse false");
@@ -711,11 +688,6 @@ public final class AppErrors {
 
        r3 = r19;
     */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x01c2 A[Catch: all -> 0x00d2, TryCatch #1 {all -> 0x00d2, blocks: (B:48:0x00c1, B:50:0x00c5, B:51:0x00d6, B:54:0x00e8, B:57:0x0102, B:59:0x010a, B:62:0x0117, B:64:0x011d, B:67:0x0131, B:71:0x01d2, B:73:0x01d9, B:89:0x0145, B:91:0x0149, B:93:0x0167, B:96:0x016d, B:98:0x01a8, B:100:0x01b2, B:102:0x01be, B:104:0x01c2, B:105:0x01b8, B:108:0x019e), top: B:47:0x00c1, outer: #4 }] */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x01b8 A[Catch: all -> 0x00d2, TryCatch #1 {all -> 0x00d2, blocks: (B:48:0x00c1, B:50:0x00c5, B:51:0x00d6, B:54:0x00e8, B:57:0x0102, B:59:0x010a, B:62:0x0117, B:64:0x011d, B:67:0x0131, B:71:0x01d2, B:73:0x01d9, B:89:0x0145, B:91:0x0149, B:93:0x0167, B:96:0x016d, B:98:0x01a8, B:100:0x01b2, B:102:0x01be, B:104:0x01c2, B:105:0x01b8, B:108:0x019e), top: B:47:0x00c1, outer: #4 }] */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x01e0 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:83:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x01a8 A[Catch: all -> 0x00d2, TryCatch #1 {all -> 0x00d2, blocks: (B:48:0x00c1, B:50:0x00c5, B:51:0x00d6, B:54:0x00e8, B:57:0x0102, B:59:0x010a, B:62:0x0117, B:64:0x011d, B:67:0x0131, B:71:0x01d2, B:73:0x01d9, B:89:0x0145, B:91:0x0149, B:93:0x0167, B:96:0x016d, B:98:0x01a8, B:100:0x01b2, B:102:0x01be, B:104:0x01c2, B:105:0x01b8, B:108:0x019e), top: B:47:0x00c1, outer: #4 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

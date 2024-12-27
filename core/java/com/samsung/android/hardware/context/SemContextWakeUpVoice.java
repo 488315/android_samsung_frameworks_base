@@ -9,13 +9,11 @@ public class SemContextWakeUpVoice extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextWakeUpVoice>() { // from class:
                                                // com.samsung.android.hardware.context.SemContextWakeUpVoice.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextWakeUpVoice createFromParcel(Parcel in) {
                     return new SemContextWakeUpVoice(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextWakeUpVoice[] newArray(int size) {
                     return new SemContextWakeUpVoice[size];

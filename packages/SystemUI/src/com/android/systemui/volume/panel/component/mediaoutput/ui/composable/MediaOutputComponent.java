@@ -161,7 +161,6 @@ public final class MediaOutputComponent implements ComposeVolumePanelUiComponent
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.mediaoutput.ui.composable.MediaOutputComponent$ConnectedDeviceIcon$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -230,7 +229,6 @@ public final class MediaOutputComponent implements ComposeVolumePanelUiComponent
         RecomposeScopeImpl endRestartGroup = composerImpl3.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.mediaoutput.ui.composable.MediaOutputComponent$ConnectedDeviceText$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -245,7 +243,6 @@ public final class MediaOutputComponent implements ComposeVolumePanelUiComponent
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.systemui.volume.panel.component.mediaoutput.ui.composable.MediaOutputComponent$Content$3, kotlin.jvm.internal.Lambda] */
     @Override // com.android.systemui.volume.panel.ui.composable.ComposeVolumePanelUiComponent
     public final void Content(final VolumePanelComposeScope volumePanelComposeScope, final Modifier modifier, Composer composer, final int i) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -258,7 +255,6 @@ public final class MediaOutputComponent implements ComposeVolumePanelUiComponent
         MutableState collectAsStateWithLifecycle3 = FlowExtKt.collectAsStateWithLifecycle(mediaOutputViewModel.enabled, composerImpl);
         Dp.Companion companion = Dp.Companion;
         Modifier semantics = SemanticsModifierKt.semantics(SizeKt.m108height3ABfNKs(SizeKt.fillMaxWidth(Modifier.Companion, 1.0f), 80), false, new Function1() { // from class: com.android.systemui.volume.panel.component.mediaoutput.ui.composable.MediaOutputComponent$Content$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -296,7 +292,6 @@ public final class MediaOutputComponent implements ComposeVolumePanelUiComponent
                 return Unit.INSTANCE;
             }
         } : null, null, ComposableLambdaKt.rememberComposableLambda(1146721710, composerImpl, new Function3() { // from class: com.android.systemui.volume.panel.component.mediaoutput.ui.composable.MediaOutputComponent$Content$3
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(3);
             }
@@ -357,7 +352,6 @@ public final class MediaOutputComponent implements ComposeVolumePanelUiComponent
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.mediaoutput.ui.composable.MediaOutputComponent$Content$4
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

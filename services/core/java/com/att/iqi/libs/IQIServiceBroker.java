@@ -602,7 +602,6 @@ public class IQIServiceBroker extends SystemService implements IIQIServiceBroker
         registerReceivers(true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean appEnabled() {
         ApplicationInfo applicationInfo;
         String packageName = getServiceComponent().getPackageName();
@@ -646,13 +645,11 @@ public class IQIServiceBroker extends SystemService implements IIQIServiceBroker
         handler.sendMessageDelayed(handler.obtainMessage(i), 3000L);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void disablePackage() {
         this.mContext.getPackageManager().setApplicationEnabledSetting(PACKAGE_NAME, 3, 0);
         LogUtil.logd("package has been disabled");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void dumpHelp(PrintWriter printWriter) {
         BatteryService$$ExternalSyntheticOutline0.m(
                 printWriter,
@@ -663,7 +660,6 @@ public class IQIServiceBroker extends SystemService implements IIQIServiceBroker
         printWriter.println("    -v: print the version of all artifacts");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public IIQIService getIBinderAsIInterface(IBinder iBinder) {
         return IIQIService.Stub.asInterface(iBinder);
     }
@@ -677,7 +673,6 @@ public class IQIServiceBroker extends SystemService implements IIQIServiceBroker
         return TARGET_IMPLEMENTATION_COMPONENT;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyServiceState(boolean z) {
         LogUtil.logd("notifyServiceState = " + z);
         if (z != this.mLastServiceEnabled) {
@@ -701,18 +696,15 @@ public class IQIServiceBroker extends SystemService implements IIQIServiceBroker
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void printAARVersion(PrintWriter printWriter) {
         printWriter.println("AAR version: " + Build.getSdkVersion());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void printArtifactsVersion(PrintWriter printWriter) {
         printConciergeVersion(printWriter);
         printAARVersion(printWriter);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void printConciergeVersion(PrintWriter printWriter) {
         printWriter.println("IQIConcierge version: " + IQIConcierge.getVersion());
     }
@@ -732,7 +724,6 @@ public class IQIServiceBroker extends SystemService implements IIQIServiceBroker
         }.register(this.mContext, BackgroundThread.getHandler().getLooper(), true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void registerReceivers(boolean z) {
         if (z) {
             this.mContext.registerReceiver(
@@ -822,7 +813,6 @@ public class IQIServiceBroker extends SystemService implements IIQIServiceBroker
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void tryConnecting(Bundle bundle) {
         LogUtil.logw("Connecting to implementation");
         synchronized (this) {
@@ -855,7 +845,6 @@ public class IQIServiceBroker extends SystemService implements IIQIServiceBroker
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void unregisterReceivers() {
         this.mContext.unregisterReceiver(this.mDebugReceiver);
         this.mContext.unregisterReceiver(this.mUserUnlockedReceiver);

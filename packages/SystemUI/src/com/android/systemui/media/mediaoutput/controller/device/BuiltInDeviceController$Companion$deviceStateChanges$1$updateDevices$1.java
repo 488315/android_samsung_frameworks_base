@@ -21,8 +21,6 @@ final class BuiltInDeviceController$Companion$deviceStateChanges$1$updateDevices
     final /* synthetic */ Pair<Context, AudioManager> $this_deviceStateChanges;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Multi-variable type inference failed */
     public BuiltInDeviceController$Companion$deviceStateChanges$1$updateDevices$1(ProducerScope producerScope, Pair<? extends Context, ? extends AudioManager> pair, Continuation continuation) {
         super(2, continuation);
         this.$$this$callbackFlow = producerScope;

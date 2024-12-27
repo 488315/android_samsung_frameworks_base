@@ -83,8 +83,6 @@ public final class KeyguardQuickAffordanceRemoteUserSelectionManager implements 
                     this.this$0 = keyguardQuickAffordanceRemoteUserSelectionManager;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

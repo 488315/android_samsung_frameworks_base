@@ -81,7 +81,6 @@ public class DisplayArea extends WindowContainer {
         public int mLastKeyguardForcedOrientation;
         public final Comparator mWindowComparator;
 
-        /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.wm.DisplayArea$Tokens$$ExternalSyntheticLambda1] */
         public Tokens(WindowManagerService windowManagerService, Type type, String str, int i) {
             super(windowManagerService, type, str, i);
             this.mLastKeyguardForcedOrientation = -1;
@@ -217,8 +216,6 @@ public class DisplayArea extends WindowContainer {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class Type {
         public static final /* synthetic */ Type[] $VALUES;
         public static final Type ABOVE_TASKS;

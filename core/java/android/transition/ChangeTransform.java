@@ -314,12 +314,10 @@ public class ChangeTransform extends Transition {
         startLocal.postConcat(toLocal);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void setIdentityTransforms(View view) {
         setTransforms(view, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void setTransforms(
             View view,
             float translationX,

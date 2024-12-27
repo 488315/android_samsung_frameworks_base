@@ -13,13 +13,11 @@ public final class TelephonyDisplayInfo implements Parcelable {
             new Parcelable.Creator<
                     TelephonyDisplayInfo>() { // from class:
                                               // android.telephony.TelephonyDisplayInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TelephonyDisplayInfo createFromParcel(Parcel source) {
                     return new TelephonyDisplayInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TelephonyDisplayInfo[] newArray(int size) {
                     return new TelephonyDisplayInfo[size];

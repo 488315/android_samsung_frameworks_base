@@ -993,13 +993,6 @@ public final class SyncManager {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:133:0x0547 A[Catch: all -> 0x0436, TryCatch #1 {all -> 0x0436, blocks: (B:69:0x041b, B:71:0x0424, B:72:0x0439, B:74:0x0441, B:79:0x045a, B:80:0x0471, B:113:0x0478, B:126:0x0508, B:128:0x0513, B:131:0x0536, B:133:0x0547, B:135:0x054f, B:139:0x0559, B:140:0x05b1, B:142:0x05f3, B:146:0x0600, B:147:0x0604, B:148:0x060b, B:149:0x0611, B:151:0x0624, B:153:0x063f, B:154:0x0658, B:156:0x0643, B:158:0x064c, B:159:0x0628, B:161:0x0631, B:163:0x056a, B:165:0x0573, B:168:0x057e, B:170:0x05a1, B:171:0x051d, B:173:0x0521, B:174:0x04c1, B:175:0x04cd, B:176:0x04d9, B:177:0x04e5, B:178:0x04f1, B:179:0x04fd), top: B:68:0x041b }] */
-        /* JADX WARN: Removed duplicated region for block: B:142:0x05f3 A[Catch: all -> 0x0436, TryCatch #1 {all -> 0x0436, blocks: (B:69:0x041b, B:71:0x0424, B:72:0x0439, B:74:0x0441, B:79:0x045a, B:80:0x0471, B:113:0x0478, B:126:0x0508, B:128:0x0513, B:131:0x0536, B:133:0x0547, B:135:0x054f, B:139:0x0559, B:140:0x05b1, B:142:0x05f3, B:146:0x0600, B:147:0x0604, B:148:0x060b, B:149:0x0611, B:151:0x0624, B:153:0x063f, B:154:0x0658, B:156:0x0643, B:158:0x064c, B:159:0x0628, B:161:0x0631, B:163:0x056a, B:165:0x0573, B:168:0x057e, B:170:0x05a1, B:171:0x051d, B:173:0x0521, B:174:0x04c1, B:175:0x04cd, B:176:0x04d9, B:177:0x04e5, B:178:0x04f1, B:179:0x04fd), top: B:68:0x041b }] */
-        /* JADX WARN: Removed duplicated region for block: B:151:0x0624 A[Catch: all -> 0x0436, TryCatch #1 {all -> 0x0436, blocks: (B:69:0x041b, B:71:0x0424, B:72:0x0439, B:74:0x0441, B:79:0x045a, B:80:0x0471, B:113:0x0478, B:126:0x0508, B:128:0x0513, B:131:0x0536, B:133:0x0547, B:135:0x054f, B:139:0x0559, B:140:0x05b1, B:142:0x05f3, B:146:0x0600, B:147:0x0604, B:148:0x060b, B:149:0x0611, B:151:0x0624, B:153:0x063f, B:154:0x0658, B:156:0x0643, B:158:0x064c, B:159:0x0628, B:161:0x0631, B:163:0x056a, B:165:0x0573, B:168:0x057e, B:170:0x05a1, B:171:0x051d, B:173:0x0521, B:174:0x04c1, B:175:0x04cd, B:176:0x04d9, B:177:0x04e5, B:178:0x04f1, B:179:0x04fd), top: B:68:0x041b }] */
-        /* JADX WARN: Removed duplicated region for block: B:153:0x063f A[Catch: all -> 0x0436, TryCatch #1 {all -> 0x0436, blocks: (B:69:0x041b, B:71:0x0424, B:72:0x0439, B:74:0x0441, B:79:0x045a, B:80:0x0471, B:113:0x0478, B:126:0x0508, B:128:0x0513, B:131:0x0536, B:133:0x0547, B:135:0x054f, B:139:0x0559, B:140:0x05b1, B:142:0x05f3, B:146:0x0600, B:147:0x0604, B:148:0x060b, B:149:0x0611, B:151:0x0624, B:153:0x063f, B:154:0x0658, B:156:0x0643, B:158:0x064c, B:159:0x0628, B:161:0x0631, B:163:0x056a, B:165:0x0573, B:168:0x057e, B:170:0x05a1, B:171:0x051d, B:173:0x0521, B:174:0x04c1, B:175:0x04cd, B:176:0x04d9, B:177:0x04e5, B:178:0x04f1, B:179:0x04fd), top: B:68:0x041b }] */
-        /* JADX WARN: Removed duplicated region for block: B:156:0x0643 A[Catch: all -> 0x0436, TryCatch #1 {all -> 0x0436, blocks: (B:69:0x041b, B:71:0x0424, B:72:0x0439, B:74:0x0441, B:79:0x045a, B:80:0x0471, B:113:0x0478, B:126:0x0508, B:128:0x0513, B:131:0x0536, B:133:0x0547, B:135:0x054f, B:139:0x0559, B:140:0x05b1, B:142:0x05f3, B:146:0x0600, B:147:0x0604, B:148:0x060b, B:149:0x0611, B:151:0x0624, B:153:0x063f, B:154:0x0658, B:156:0x0643, B:158:0x064c, B:159:0x0628, B:161:0x0631, B:163:0x056a, B:165:0x0573, B:168:0x057e, B:170:0x05a1, B:171:0x051d, B:173:0x0521, B:174:0x04c1, B:175:0x04cd, B:176:0x04d9, B:177:0x04e5, B:178:0x04f1, B:179:0x04fd), top: B:68:0x041b }] */
-        /* JADX WARN: Removed duplicated region for block: B:159:0x0628 A[Catch: all -> 0x0436, TryCatch #1 {all -> 0x0436, blocks: (B:69:0x041b, B:71:0x0424, B:72:0x0439, B:74:0x0441, B:79:0x045a, B:80:0x0471, B:113:0x0478, B:126:0x0508, B:128:0x0513, B:131:0x0536, B:133:0x0547, B:135:0x054f, B:139:0x0559, B:140:0x05b1, B:142:0x05f3, B:146:0x0600, B:147:0x0604, B:148:0x060b, B:149:0x0611, B:151:0x0624, B:153:0x063f, B:154:0x0658, B:156:0x0643, B:158:0x064c, B:159:0x0628, B:161:0x0631, B:163:0x056a, B:165:0x0573, B:168:0x057e, B:170:0x05a1, B:171:0x051d, B:173:0x0521, B:174:0x04c1, B:175:0x04cd, B:176:0x04d9, B:177:0x04e5, B:178:0x04f1, B:179:0x04fd), top: B:68:0x041b }] */
-        /* JADX WARN: Removed duplicated region for block: B:163:0x056a A[Catch: all -> 0x0436, TryCatch #1 {all -> 0x0436, blocks: (B:69:0x041b, B:71:0x0424, B:72:0x0439, B:74:0x0441, B:79:0x045a, B:80:0x0471, B:113:0x0478, B:126:0x0508, B:128:0x0513, B:131:0x0536, B:133:0x0547, B:135:0x054f, B:139:0x0559, B:140:0x05b1, B:142:0x05f3, B:146:0x0600, B:147:0x0604, B:148:0x060b, B:149:0x0611, B:151:0x0624, B:153:0x063f, B:154:0x0658, B:156:0x0643, B:158:0x064c, B:159:0x0628, B:161:0x0631, B:163:0x056a, B:165:0x0573, B:168:0x057e, B:170:0x05a1, B:171:0x051d, B:173:0x0521, B:174:0x04c1, B:175:0x04cd, B:176:0x04d9, B:177:0x04e5, B:178:0x04f1, B:179:0x04fd), top: B:68:0x041b }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1017,8 +1010,6 @@ public final class SyncManager {
                         + " com.android.server.content.SyncManager$ActiveSyncContext):void");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:73:0x0154  */
-        /* JADX WARN: Removed duplicated region for block: B:75:0x0169  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1033,8 +1024,6 @@ public final class SyncManager {
                         + " com.android.server.content.SyncManager.SyncHandler.startSyncH(com.android.server.content.SyncOperation):void");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:48:0x01a5 A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:49:0x01a6  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1345,8 +1334,6 @@ public final class SyncManager {
         syncHandler.sendMessage(obtainMessage);
     }
 
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.server.content.SyncManager$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.content.SyncManager$$ExternalSyntheticLambda0] */
     static {
         final int i = 0;
         sOpDumpComparator =
@@ -2579,7 +2566,6 @@ public final class SyncManager {
             final ContentResolver contentResolver = context.getContentResolver();
             ContentObserver contentObserver =
                     new ContentObserver() { // from class: com.android.server.content.SyncManager.11
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(null);
                         }
@@ -2904,8 +2890,6 @@ public final class SyncManager {
 
        if (r0.equals(r7.type) == false) goto L28;
     */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00b1 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00b2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2922,9 +2906,6 @@ public final class SyncManager {
                     + " int, java.lang.String, boolean, boolean):int");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:120:0x0430  */
-    /* JADX WARN: Removed duplicated region for block: B:123:0x045e  */
-    /* JADX WARN: Type inference failed for: r9v31, types: [com.android.server.content.SyncManager$$ExternalSyntheticLambda8] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3604,9 +3585,6 @@ public final class SyncManager {
         scheduleSyncOperationH(syncOperation, 0L);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:74:0x01a0  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x01db  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x01e5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

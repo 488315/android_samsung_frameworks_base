@@ -13,7 +13,6 @@ final class PromptCredentialInteractor$verifyCredential$finalStatus$1 extends Su
     int label;
     final /* synthetic */ PromptCredentialInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptCredentialInteractor$verifyCredential$finalStatus$1(PromptCredentialInteractor promptCredentialInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = promptCredentialInteractor;

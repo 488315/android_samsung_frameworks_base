@@ -9,7 +9,6 @@ public class GetEntriesResultParcel implements Parcelable {
             new Parcelable.Creator<
                     GetEntriesResultParcel>() { // from class:
                                                 // android.security.identity.GetEntriesResultParcel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetEntriesResultParcel createFromParcel(Parcel _aidl_source) {
                     GetEntriesResultParcel _aidl_out = new GetEntriesResultParcel();
@@ -17,7 +16,6 @@ public class GetEntriesResultParcel implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetEntriesResultParcel[] newArray(int _aidl_size) {
                     return new GetEntriesResultParcel[_aidl_size];

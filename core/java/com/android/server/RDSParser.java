@@ -38,7 +38,6 @@ public class RDSParser {
         this.mProgramService = new ProgramService();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x01fb  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -178,7 +177,6 @@ public class RDSParser {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void Log(String msg) {
         Log.d(TAG, msg);
     }

@@ -36,7 +36,6 @@ public class Manager<T> extends Element {
         return this.index;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public void add(T t) {
         this.map.put(Integer.valueOf(((Element) t).getId()), t);
         this.context.getNativeInterface().create((Element) t);

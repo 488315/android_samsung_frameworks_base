@@ -20,13 +20,11 @@ public final class SyncFence implements AutoCloseable, Parcelable {
                     SyncFence.class.getClassLoader(), nGetDestructor(), 4);
     public static final Parcelable.Creator<SyncFence> CREATOR =
             new Parcelable.Creator<SyncFence>() { // from class: android.hardware.SyncFence.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncFence createFromParcel(Parcel in) {
                     return new SyncFence(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncFence[] newArray(int size) {
                     return new SyncFence[size];

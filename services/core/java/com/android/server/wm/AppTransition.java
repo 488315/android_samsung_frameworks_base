@@ -147,7 +147,6 @@ public final class AppTransition implements DumpUtils.Dump {
         arrayList.add(new Pair(32, "TRANSIT_FLAG_OPEN_BEHIND"));
     }
 
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.server.wm.AppTransition$$ExternalSyntheticLambda2] */
     public AppTransition(
             Context context,
             WindowManagerService windowManagerService,

@@ -409,7 +409,6 @@ public abstract class WearableSensingService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Integer[] intArrayToIntegerArray(int[] integerSet) {
         Integer[] intArray = new Integer[integerSet.length];
         int i = 0;
@@ -424,7 +423,6 @@ public abstract class WearableSensingService extends Service {
         return intArray;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static WearableSensingDataRequester createDataRequester(
             final RemoteCallback dataRequestCallback) {
         return new WearableSensingDataRequester() { // from class:
@@ -462,7 +460,6 @@ public abstract class WearableSensingService extends Service {
         dataRequestCallback.sendResult(bundle);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Consumer<Integer> createWearableStatusConsumer(
             final RemoteCallback statusCallback) {
         return new Consumer() { // from class:

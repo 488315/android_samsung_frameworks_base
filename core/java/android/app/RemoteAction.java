@@ -11,13 +11,11 @@ import java.util.Objects;
 public final class RemoteAction implements Parcelable {
     public static final Parcelable.Creator<RemoteAction> CREATOR =
             new Parcelable.Creator<RemoteAction>() { // from class: android.app.RemoteAction.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteAction createFromParcel(Parcel in) {
                     return new RemoteAction(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteAction[] newArray(int size) {
                     return new RemoteAction[size];

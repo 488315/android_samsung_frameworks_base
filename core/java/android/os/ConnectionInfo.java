@@ -4,7 +4,6 @@ package android.os;
 public class ConnectionInfo implements Parcelable {
     public static final Parcelable.Creator<ConnectionInfo> CREATOR =
             new Parcelable.Creator<ConnectionInfo>() { // from class: android.os.ConnectionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConnectionInfo createFromParcel(Parcel _aidl_source) {
                     ConnectionInfo _aidl_out = new ConnectionInfo();
@@ -12,7 +11,6 @@ public class ConnectionInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConnectionInfo[] newArray(int _aidl_size) {
                     return new ConnectionInfo[_aidl_size];

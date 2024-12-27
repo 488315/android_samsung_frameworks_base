@@ -121,9 +121,6 @@ public final class VoiceInteractionManagerServiceImpl implements VoiceInteractio
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.server.voiceinteraction.VoiceInteractionManagerServiceImpl$2] */
-    /* JADX WARN: Type inference failed for: r3v0, types: [android.content.BroadcastReceiver, com.android.server.voiceinteraction.VoiceInteractionManagerServiceImpl$1] */
     public VoiceInteractionManagerServiceImpl(Context context, Handler handler, VoiceInteractionManagerService.VoiceInteractionManagerServiceStub voiceInteractionManagerServiceStub, int i, ComponentName componentName) {
         ?? r3 = new BroadcastReceiver() { // from class: com.android.server.voiceinteraction.VoiceInteractionManagerServiceImpl.1
             @Override // android.content.BroadcastReceiver

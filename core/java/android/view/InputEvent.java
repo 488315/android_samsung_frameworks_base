@@ -15,7 +15,6 @@ public abstract class InputEvent implements Parcelable {
     private static final AtomicInteger mNextSeq = new AtomicInteger();
     public static final Parcelable.Creator<InputEvent> CREATOR =
             new Parcelable.Creator<InputEvent>() { // from class: android.view.InputEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputEvent createFromParcel(Parcel in) {
                     int token = in.readInt();
@@ -28,7 +27,6 @@ public abstract class InputEvent implements Parcelable {
                     throw new IllegalStateException("Unexpected input event type token in parcel.");
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputEvent[] newArray(int size) {
                     return new InputEvent[size];

@@ -21,13 +21,11 @@ public final class WearableSensingDataRequest implements Parcelable {
     public static final Parcelable.Creator<WearableSensingDataRequest> CREATOR =
             new Parcelable.Creator<WearableSensingDataRequest>() { // from class:
                 // android.app.wearable.WearableSensingDataRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WearableSensingDataRequest[] newArray(int size) {
                     return new WearableSensingDataRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WearableSensingDataRequest createFromParcel(Parcel in) {
                     int dataType = in.readInt();

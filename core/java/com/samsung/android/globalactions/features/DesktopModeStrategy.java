@@ -28,7 +28,6 @@ public class DesktopModeStrategy
         this.mConditionChecker = conditionChecker;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onInitialize$0() {
         this.mView.dismiss();
     }

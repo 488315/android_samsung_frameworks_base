@@ -152,10 +152,6 @@ public final class KeyguardStatusViewController extends ViewController implement
         CLOCK_ANIMATION_PROPERTIES = animationProperties;
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.keyguard.KeyguardStatusViewController$3] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.keyguard.KeyguardStatusViewController$4] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.keyguard.KeyguardStatusViewController$1] */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.keyguard.KeyguardStatusViewController$2] */
     public KeyguardStatusViewController(DcmMascotViewContainer dcmMascotViewContainer, KeyguardStatusViewAlphaChangeControllerWrapper keyguardStatusViewAlphaChangeControllerWrapper, KeyguardStatusView keyguardStatusView, KeyguardSliceViewController keyguardSliceViewController, KeyguardClockSwitchController keyguardClockSwitchController, KeyguardStateController keyguardStateController, KeyguardUpdateMonitor keyguardUpdateMonitor, ConfigurationController configurationController, DozeParameters dozeParameters, ScreenOffAnimationController screenOffAnimationController, KeyguardLogger keyguardLogger, InteractionJankMonitor interactionJankMonitor, KeyguardInteractor keyguardInteractor, DumpManager dumpManager, PowerInteractor powerInteractor) {
         super(keyguardStatusView);
         this.mClipBounds = new Rect();
@@ -450,9 +446,6 @@ public final class KeyguardStatusViewController extends ViewController implement
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0176  */
-    /* JADX WARN: Removed duplicated region for block: B:39:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r5v0, types: [com.android.systemui.facewidget.plugin.FaceWidgetContainerWrapper$$ExternalSyntheticLambda0] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

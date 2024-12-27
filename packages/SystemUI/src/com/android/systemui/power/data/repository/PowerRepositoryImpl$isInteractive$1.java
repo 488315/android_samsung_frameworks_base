@@ -23,7 +23,6 @@ final class PowerRepositoryImpl$isInteractive$1 extends SuspendLambda implements
     int label;
     final /* synthetic */ PowerRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PowerRepositoryImpl$isInteractive$1(BroadcastDispatcher broadcastDispatcher, PowerRepositoryImpl powerRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.$dispatcher = broadcastDispatcher;
@@ -42,7 +41,6 @@ final class PowerRepositoryImpl$isInteractive$1 extends SuspendLambda implements
         return ((PowerRepositoryImpl$isInteractive$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.content.BroadcastReceiver, com.android.systemui.power.data.repository.PowerRepositoryImpl$isInteractive$1$receiver$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -64,7 +62,6 @@ final class PowerRepositoryImpl$isInteractive$1 extends SuspendLambda implements
             ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, producerScope, Boolean.valueOf(this.this$0.manager.isInteractive()), "PowerRepository");
             final BroadcastDispatcher broadcastDispatcher2 = this.$dispatcher;
             Function0 function0 = new Function0() { // from class: com.android.systemui.power.data.repository.PowerRepositoryImpl$isInteractive$1.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -19,13 +19,11 @@ public final class ImsSsInfo implements Parcelable {
     public static final int CLIR_STATUS_UNKNOWN = 2;
     public static final Parcelable.Creator<ImsSsInfo> CREATOR =
             new Parcelable.Creator<ImsSsInfo>() { // from class: android.telephony.ims.ImsSsInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsSsInfo createFromParcel(Parcel in) {
                     return new ImsSsInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsSsInfo[] newArray(int size) {
                     return new ImsSsInfo[size];

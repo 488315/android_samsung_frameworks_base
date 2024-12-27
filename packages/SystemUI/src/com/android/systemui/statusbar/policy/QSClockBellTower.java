@@ -168,7 +168,6 @@ public final class QSClockBellTower implements DemoModeCommandReceiver, Dumpable
         }
     }
 
-    /* JADX WARN: Type inference failed for: r6v0, types: [com.android.systemui.statusbar.policy.QSClockBellTower$1, java.lang.Runnable] */
     public QSClockBellTower(Context context, Handler handler, QSClockBellAlternateCalendarUtil qSClockBellAlternateCalendarUtil, SlimIndicatorViewMediator slimIndicatorViewMediator, BroadcastDispatcher broadcastDispatcher, ScreenLifecycle screenLifecycle, SettingsHelper settingsHelper) {
         TimeBroadcastReceiver timeBroadcastReceiver = new TimeBroadcastReceiver(this, 0);
         ?? r6 = new Runnable() { // from class: com.android.systemui.statusbar.policy.QSClockBellTower.1

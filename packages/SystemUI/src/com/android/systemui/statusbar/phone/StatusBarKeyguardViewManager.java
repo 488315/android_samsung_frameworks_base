@@ -298,8 +298,6 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
         return !statusBarKeyguardViewManager.needsFullscreenBouncer() && statusBarKeyguardViewManager.mIsBackAnimationEnabled;
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager$1] */
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager$2] */
     public StatusBarKeyguardViewManager(Context context, ViewMediatorCallback viewMediatorCallback, LockPatternUtils lockPatternUtils, SysuiStatusBarStateController sysuiStatusBarStateController, ConfigurationController configurationController, KeyguardUpdateMonitor keyguardUpdateMonitor, DreamOverlayStateController dreamOverlayStateController, NavigationModeController navigationModeController, DockManager dockManager, NotificationShadeWindowController notificationShadeWindowController, KeyguardStateController keyguardStateController, KeyguardMessageAreaController.Factory factory, Optional<SysUIUnfoldComponent> optional, Lazy lazy, LatencyTracker latencyTracker, KeyguardSecurityModel keyguardSecurityModel, PrimaryBouncerCallbackInteractor primaryBouncerCallbackInteractor, PrimaryBouncerInteractor primaryBouncerInteractor, BouncerView bouncerView, AlternateBouncerInteractor alternateBouncerInteractor, UdfpsOverlayInteractor udfpsOverlayInteractor, ActivityStarter activityStarter, KeyguardTransitionInteractor keyguardTransitionInteractor, CoroutineDispatcher coroutineDispatcher, Lazy lazy2, Lazy lazy3, SelectedUserInteractor selectedUserInteractor, JavaAdapter javaAdapter, Lazy lazy4, StatusBarKeyguardViewManagerInteractor statusBarKeyguardViewManagerInteractor) {
         new DockManager.DockEventListener(this) { // from class: com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager.3
         };
@@ -1124,25 +1122,6 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
         keyguardBouncerRepositoryImpl._resourceUpdateRequests.updateState(null, Boolean.TRUE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v16 */
-    /* JADX WARN: Type inference failed for: r10v2 */
-    /* JADX WARN: Type inference failed for: r10v3 */
-    /* JADX WARN: Type inference failed for: r11v10 */
-    /* JADX WARN: Type inference failed for: r11v11 */
-    /* JADX WARN: Type inference failed for: r11v13 */
-    /* JADX WARN: Type inference failed for: r13v1, types: [com.android.systemui.shade.ShadeSurface] */
-    /* JADX WARN: Type inference failed for: r17v0, types: [com.android.keyguard.KeyguardViewController, com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager] */
-    /* JADX WARN: Type inference failed for: r3v1 */
-    /* JADX WARN: Type inference failed for: r3v2, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r3v5 */
-    /* JADX WARN: Type inference failed for: r9v1 */
-    /* JADX WARN: Type inference failed for: r9v10 */
-    /* JADX WARN: Type inference failed for: r9v12 */
-    /* JADX WARN: Type inference failed for: r9v2 */
-    /* JADX WARN: Type inference failed for: r9v6 */
-    /* JADX WARN: Type inference failed for: r9v7 */
-    /* JADX WARN: Type inference failed for: r9v8, types: [com.android.keyguard.logging.KeyguardUpdateMonitorLogger] */
     public void updateStates() {
         if (this.mCentralSurfacesRegistered) {
             KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) this.mKeyguardStateController;

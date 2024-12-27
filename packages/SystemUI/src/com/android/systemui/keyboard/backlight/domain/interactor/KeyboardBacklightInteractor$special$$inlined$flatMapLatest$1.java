@@ -18,7 +18,6 @@ public final class KeyboardBacklightInteractor$special$$inlined$flatMapLatest$1 
     int label;
     final /* synthetic */ KeyboardBacklightInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyboardBacklightInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, KeyboardBacklightInteractor keyboardBacklightInteractor) {
         super(3, continuation);
         this.this$0 = keyboardBacklightInteractor;

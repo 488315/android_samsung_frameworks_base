@@ -12,7 +12,6 @@ final class AuthenticationRepositoryImpl$getMaxFailedUnlockAttemptsForWipe$2 ext
     int label;
     final /* synthetic */ AuthenticationRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AuthenticationRepositoryImpl$getMaxFailedUnlockAttemptsForWipe$2(AuthenticationRepositoryImpl authenticationRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = authenticationRepositoryImpl;

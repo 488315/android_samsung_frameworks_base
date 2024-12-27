@@ -134,7 +134,6 @@ public class SimTrayProtectionDialog implements PopupUIAlertDialog {
         return create;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createDialog$0(DialogInterface dialogInterface) {
         this.mDialog = null;
     }

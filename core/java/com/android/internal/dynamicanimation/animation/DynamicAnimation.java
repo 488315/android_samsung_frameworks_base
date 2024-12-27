@@ -274,7 +274,6 @@ public abstract class DynamicAnimation<T extends DynamicAnimation<T>>
                 new FloatProperty(
                         "FloatValueHolder") { // from class:
                                               // com.android.internal.dynamicanimation.animation.DynamicAnimation.15
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.util.Property
                     public Float get(Object object) {
                         return Float.valueOf(floatValueHolder.getValue());

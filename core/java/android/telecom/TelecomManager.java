@@ -1291,7 +1291,6 @@ public class TelecomManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void resetServiceCache() {
         synchronized (CACHE_LOCK) {
             if (sTelecomService != null) {

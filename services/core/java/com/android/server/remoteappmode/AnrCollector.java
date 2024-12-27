@@ -182,7 +182,6 @@ public final class AnrCollector {
 
                                                            r3.close();
                                                         */
-                                                        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:46:0x0089 -> B:26:0x0098). Please report as a decompilation issue!!! */
                                                         @Override // java.util.function.Predicate
                                                         /*
                                                             Code decompiled incorrectly, please refer to instructions dump.

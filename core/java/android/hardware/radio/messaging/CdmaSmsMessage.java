@@ -12,7 +12,6 @@ public class CdmaSmsMessage implements Parcelable {
     public static final Parcelable.Creator<CdmaSmsMessage> CREATOR =
             new Parcelable.Creator<CdmaSmsMessage>() { // from class:
                 // android.hardware.radio.messaging.CdmaSmsMessage.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CdmaSmsMessage createFromParcel(Parcel _aidl_source) {
                     CdmaSmsMessage _aidl_out = new CdmaSmsMessage();
@@ -20,7 +19,6 @@ public class CdmaSmsMessage implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CdmaSmsMessage[] newArray(int _aidl_size) {
                     return new CdmaSmsMessage[_aidl_size];

@@ -39,7 +39,6 @@ public final class TransitionLayout extends ConstraintLayout implements Launchab
         this(context, null, 0, 6, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void applyCurrentState() {
         int childCount = getChildCount();
         int i = (int) this.currentState.getContentTranslation().x;
@@ -255,7 +254,6 @@ public final class TransitionLayout extends ConstraintLayout implements Launchab
         this(context, (i2 & 2) != 0 ? null : attributeSet, (i2 & 4) != 0 ? 0 : i);
     }
 
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.util.animation.TransitionLayout$preDrawApplicator$1] */
     public TransitionLayout(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.boundsRect = new Rect();

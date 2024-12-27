@@ -401,7 +401,6 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
             return true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void removeEvent(Cue cue, long timeMs) {
             Vector<Cue> cues = this.mCues.get(Long.valueOf(timeMs));
             if (cues != null) {
@@ -485,7 +484,6 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
                 return !this.mDone;
             }
 
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // java.util.Iterator
             public Pair<Long, Cue> next() {
                 if (this.mDone) {

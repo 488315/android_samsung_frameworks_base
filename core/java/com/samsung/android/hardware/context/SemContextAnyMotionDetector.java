@@ -9,13 +9,11 @@ public class SemContextAnyMotionDetector extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextAnyMotionDetector>() { // from class:
                                                      // com.samsung.android.hardware.context.SemContextAnyMotionDetector.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextAnyMotionDetector createFromParcel(Parcel in) {
                     return new SemContextAnyMotionDetector(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextAnyMotionDetector[] newArray(int size) {
                     return new SemContextAnyMotionDetector[size];

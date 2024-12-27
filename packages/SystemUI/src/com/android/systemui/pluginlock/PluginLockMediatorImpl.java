@@ -402,52 +402,42 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isLockScreenEnabled() {
         return !this.mLockPatternUtils.isLockScreenDisabled(this.mSelectedUserInteractor.getSelectedUserId());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onBarStateChanged$5(int i) {
         this.mBasicListener.onBarStateChanged(i);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onBarStateChanged$6() {
         this.mBasicListener.onBarStateChanged(this.mBarState);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onViewModeChanged$0(int i) {
         this.mWindowListener.onViewModeChanged(i);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setLockscreenTimer$1(long j) {
         this.mWindowListener.onScreenTimeoutChanged(j);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setPluginWallpaperHint$7(SemWallpaperColors semWallpaperColors) {
         this.mWindowListener.onViewModePageChanged(semWallpaperColors);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setScreenOrientation$8(boolean z) {
         this.mWindowListener.onScreenOrientationChangeRequired(z);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updateBiometricRecognition$4(boolean z) {
         this.mWindowListener.updateBiometricRecognition(z);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updateOverlayUserTimeout$3(boolean z) {
         this.mWindowListener.updateOverlayUserTimeout(z);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updateWindowSecureState$2(boolean z) {
         this.mWindowListener.updateWindowSecureState(z);
     }
@@ -471,7 +461,6 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
         Settings.Secure.putInt(this.mContext.getContentResolver(), LOCKSTAR_FACEWIDGET_AREA, this.mIsDynamicLockData ? 0 : getLockStarItemLocationInfoToInt(FACE_WIDGET));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendWallpaperCommand(boolean z) {
         this.mIsWallpaperPaused = z;
         ((WallpaperManager) this.mContext.getSystemService("wallpaper")).semSendWallpaperCommand(2, z ? "samsung.android.wallpaper.pause" : "samsung.android.wallpaper.resume", AbsAdapter$1$$ExternalSyntheticOutline0.m("sender", "quick_panel_wallpaper"));
@@ -617,7 +606,6 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
         return dynamicLockData.toJsonString();
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:50:0x004d, code lost:
     
         if (r9.equals(com.android.systemui.pluginlock.PluginLockMediatorImpl.FACE_WIDGET) == false) goto L14;

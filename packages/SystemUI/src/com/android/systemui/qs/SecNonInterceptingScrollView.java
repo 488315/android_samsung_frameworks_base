@@ -30,7 +30,6 @@ public final class SecNonInterceptingScrollView {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.qs.SecNonInterceptingScrollView$panelTransitionStateListener$1] */
     public SecNonInterceptingScrollView(final Runnable runnable, Function0 function0) {
         this.scrollRange = function0;
         this.panelTransitionStateListener = new PanelTransitionStateListener() { // from class: com.android.systemui.qs.SecNonInterceptingScrollView$panelTransitionStateListener$1

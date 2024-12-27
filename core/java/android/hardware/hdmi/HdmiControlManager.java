@@ -292,7 +292,6 @@ public final class HdmiControlManager {
     @Retention(RetentionPolicy.SOURCE)
     public @interface VolumeControl {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setLocalPhysicalAddress(int physicalAddress) {
         synchronized (this.mLock) {
             this.mLocalPhysicalAddress = physicalAddress;

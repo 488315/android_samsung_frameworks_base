@@ -14,7 +14,6 @@ final class SecPanelSplitHelper$2$1 extends SuspendLambda implements Function3 {
     int label;
     final /* synthetic */ SecPanelSplitHelper this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SecPanelSplitHelper$2$1(SecPanelSplitHelper secPanelSplitHelper, Continuation continuation) {
         super(3, continuation);
         this.this$0 = secPanelSplitHelper;

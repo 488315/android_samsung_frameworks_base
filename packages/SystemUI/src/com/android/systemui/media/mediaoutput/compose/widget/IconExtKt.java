@@ -1,8 +1,6 @@
 package com.android.systemui.media.mediaoutput.compose.widget;
 
 public abstract class IconExtKt {
-    /* JADX WARN: Removed duplicated region for block: B:13:0x010c  */
-    /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
     /* renamed from: IconExt-ww6aTOc, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -177,7 +177,6 @@ public final class DexManager {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void cachePackageCodeLocation(
             String str, String str2, String[] strArr, String[] strArr2, int i) {
         synchronized (this.mPackageCodeLocationsCache) {
@@ -233,7 +232,6 @@ public final class DexManager {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void loadInternal(Map map) {
         PackageDexUsage packageDexUsage = this.mPackageDexUsage;
         HashMap hashMap = new HashMap();
@@ -303,12 +301,6 @@ public final class DexManager {
 
        r8.mPackageDynamicCodeLoading.maybeWriteAsync(null);
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x035b A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x00d4  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00cb  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x018e  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x01b1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

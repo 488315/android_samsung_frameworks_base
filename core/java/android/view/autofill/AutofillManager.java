@@ -557,7 +557,6 @@ public final class AutofillManager {
                         null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onVisibleForAutofill$0() {
         synchronized (this.mLock) {
             if (this.mEnabled && isActiveLocked() && this.mTrackedViews != null) {
@@ -630,7 +629,6 @@ public final class AutofillManager {
         notifyViewEntered(view, flags);
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public void requestAutofillFromNewSession(View view) {
         cancel();
         notifyViewEntered(view);
@@ -837,7 +835,6 @@ public final class AutofillManager {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isClientVisibleForAutofillLocked() {
         AutofillClient client = getClient();
         return client != null && client.autofillClientIsVisibleForAutofill();
@@ -1363,7 +1360,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public AutofillClient getClient() {
         AutofillClient client = this.mContext.getAutofillClient();
         if (client == null && Helper.sVerbose) {
@@ -1475,11 +1471,6 @@ public final class AutofillManager {
         return new AutofillId(parent.getAutofillViewId(), virtualId);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:53:0x01a7  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x01d9 A[Catch: TimeoutException -> 0x0214, RemoteException -> 0x0218, TryCatch #3 {RemoteException -> 0x0218, TimeoutException -> 0x0214, blocks: (B:51:0x0190, B:54:0x01ac, B:56:0x01d9, B:57:0x01db, B:59:0x01e6, B:61:0x01ea, B:62:0x020b, B:63:0x0210), top: B:50:0x0190 }] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x01e6 A[Catch: TimeoutException -> 0x0214, RemoteException -> 0x0218, TryCatch #3 {RemoteException -> 0x0218, TimeoutException -> 0x0214, blocks: (B:51:0x0190, B:54:0x01ac, B:56:0x01d9, B:57:0x01db, B:59:0x01e6, B:61:0x01ea, B:62:0x020b, B:63:0x0210), top: B:50:0x0190 }] */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x020e  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x01aa  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1499,7 +1490,6 @@ public final class AutofillManager {
                     + " android.graphics.Rect, android.view.autofill.AutofillValue, int):void");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void finishSessionLocked(int commitReason) {
         if (Helper.sVerbose) {
             Log.v("AutofillManager", "finishSessionLocked(): " + getStateAsStringLocked());
@@ -1746,7 +1736,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void requestShowFillUi(
             int sessionId,
             AutofillId id,
@@ -1787,7 +1776,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void authenticate(
             int sessionId,
             int authenticationId,
@@ -1809,7 +1797,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchUnhandledKey(int sessionId, AutofillId id, KeyEvent keyEvent) {
         AutofillClient client;
         View anchor = findView(id);
@@ -1823,7 +1810,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setState(int flags) {
         if (Helper.sVerbose) {
             Log.v(
@@ -1904,7 +1890,6 @@ public final class AutofillManager {
         return obj == null ? "null" : obj.toString();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onGetCredentialException(
             int sessionId, AutofillId id, String errorType, String errorMsg) {
         synchronized (this.mLock) {
@@ -1943,7 +1928,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onGetCredentialResponse(
             int sessionId, AutofillId id, GetCredentialResponse response) {
         synchronized (this.mLock) {
@@ -1993,7 +1977,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void autofill(
             int sessionId,
             List<AutofillId> ids,
@@ -2088,7 +2071,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void autofillContent(int sessionId, AutofillId id, ClipData clip) {
         synchronized (this.mLock) {
             if (sessionId != this.mSessionId) {
@@ -2157,7 +2139,6 @@ public final class AutofillManager {
         return log;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setTrackedViews(
             int sessionId,
             AutofillId[] trackedIds,
@@ -2245,7 +2226,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setSaveUiState(int sessionId, boolean shown) {
         if (Helper.sDebug) {
             Log.d("AutofillManager", "setSaveUiState(" + sessionId + "): " + shown);
@@ -2273,7 +2253,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setSessionFinished(int newState, List<AutofillId> autofillableIds) {
         if (autofillableIds != null) {
             for (int i = 0; i < autofillableIds.size(); i++) {
@@ -2303,7 +2282,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void getAugmentedAutofillClient(IResultReceiver result) {
         synchronized (this.mLock) {
             if (this.mAugmentedAutofillServiceClient == null) {
@@ -2321,7 +2299,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void requestShowSoftInput(AutofillId id) {
         if (Helper.sVerbose) {
             Log.v(
@@ -2364,7 +2341,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void requestShowSoftInputInViewThread(View view) {
         if (!view.isFocused()) {
             Log.w("AutofillManager", "Ignoring requestShowSoftInput() due to non-focused view");
@@ -2382,7 +2358,6 @@ public final class AutofillManager {
         requestHideFillUi(this.mIdShownFillUi, true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void requestHideFillUi(AutofillId id, boolean force) {
         AutofillClient client;
         View anchor = id == null ? null : findView(id);
@@ -2417,7 +2392,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyDisableAutofill(long disableDuration, ComponentName componentName) {
         synchronized (this.mLock) {
             if (this.mOptions == null) {
@@ -2449,7 +2423,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyNoFillUi(int sessionId, AutofillId id, int sessionFinishedState) {
         if (Helper.sVerbose) {
             Log.v(
@@ -2466,7 +2439,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyCallback(int sessionId, AutofillId id, int event) {
         if (Helper.sVerbose) {
             Log.v(
@@ -2715,7 +2687,6 @@ public final class AutofillManager {
         return this.mState == 2;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void post(Runnable runnable) {
         AutofillClient client = getClient();
         if (client == null) {
@@ -2728,7 +2699,6 @@ public final class AutofillManager {
         client.autofillClientRunOnUiThread(runnable);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setFillDialogTriggerIds(List<AutofillId> ids) {
         this.mFillDialogTriggerIds = ids;
     }
@@ -2751,7 +2721,6 @@ public final class AutofillManager {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showAutofillDialog$3(WeakReference wrView) {
         View v = (View) wrView.get();
         if (v != null) {
@@ -2777,7 +2746,6 @@ public final class AutofillManager {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showAutofillDialog$4(WeakReference wrView, int virtualId) {
         View v = (View) wrView.get();
         if (v != null) {
@@ -3258,7 +3226,6 @@ public final class AutofillManager {
         public void onAutofillEvent(View view, int virtualId, int event) {}
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class AutofillManagerClient extends IAutoFillManagerClient.Stub {
         private final WeakReference<AutofillManager> mAfm;
 
@@ -3648,7 +3615,6 @@ public final class AutofillManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class AugmentedAutofillManagerClient extends IAugmentedAutofillManagerClient.Stub {
         private final WeakReference<AutofillManager> mAfm;
 

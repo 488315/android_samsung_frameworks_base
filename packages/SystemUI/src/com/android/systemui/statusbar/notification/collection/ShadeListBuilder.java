@@ -124,7 +124,6 @@ public final class ShadeListBuilder implements Dumpable, PipelineDumpable {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.systemui.statusbar.notification.collection.ShadeListBuilder$$ExternalSyntheticLambda3] */
     public ShadeListBuilder(DumpManager dumpManager, NotifPipelineChoreographer notifPipelineChoreographer, NotifPipelineFlags notifPipelineFlags, NotificationInteractionTracker notificationInteractionTracker, ShadeListBuilderLogger shadeListBuilderLogger, SystemClock systemClock) {
         this.mSystemClock = systemClock;
         this.mLogger = shadeListBuilderLogger;
@@ -417,10 +416,6 @@ public final class ShadeListBuilder implements Dumpable, PipelineDumpable {
         annulAddition(list, groupEntry);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v3, types: [android.util.ArraySet] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [java.util.Collection, java.util.Set] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [java.util.Set] */
     public final void pruneIncompleteGroups(List list) {
         ?? arraySet;
         Trace.beginSection("ShadeListBuilder.pruneIncompleteGroups");

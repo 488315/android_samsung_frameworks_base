@@ -874,7 +874,6 @@ public class StatusBarManager {
             this.mCallback = callback;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onTileRequest$0(int userResponse) {
             this.mCallback.accept(Integer.valueOf(userResponse));
         }

@@ -14,13 +14,11 @@ public final class KeyboardShortcutGroup implements Parcelable {
     public static final Parcelable.Creator<KeyboardShortcutGroup> CREATOR =
             new Parcelable.Creator<
                     KeyboardShortcutGroup>() { // from class: android.view.KeyboardShortcutGroup.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyboardShortcutGroup createFromParcel(Parcel source) {
                     return new KeyboardShortcutGroup(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyboardShortcutGroup[] newArray(int size) {
                     return new KeyboardShortcutGroup[size];

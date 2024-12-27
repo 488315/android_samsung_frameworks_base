@@ -78,7 +78,6 @@ public abstract class SliceAndroidViewKt {
                 return Unit.INSTANCE;
             }
         }, new Function1() { // from class: com.android.systemui.volume.panel.component.anc.ui.composable.SliceAndroidViewKt$SliceAndroidView$3
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -107,7 +106,6 @@ public abstract class SliceAndroidViewKt {
             final Function1 function12 = function1;
             final boolean z2 = z;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.anc.ui.composable.SliceAndroidViewKt$SliceAndroidView$4
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

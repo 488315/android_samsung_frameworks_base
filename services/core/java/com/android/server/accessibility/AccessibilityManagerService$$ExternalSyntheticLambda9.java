@@ -144,12 +144,6 @@ public final /* synthetic */ class AccessibilityManagerService$$ExternalSyntheti
 
        if (r10.mIsAMEnabled != false) goto L11;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v2 */
-    /* JADX WARN: Type inference failed for: r0v3 */
-    /* JADX WARN: Type inference failed for: r0v36 */
-    /* JADX WARN: Type inference failed for: r0v51 */
-    /* JADX WARN: Type inference failed for: r0v52 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

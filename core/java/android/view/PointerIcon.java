@@ -161,7 +161,6 @@ public final class PointerIcon implements Parcelable {
     private static final SparseArray<PointerIcon> SYSTEM_ICONS = new SparseArray<>();
     public static final Parcelable.Creator<PointerIcon> CREATOR =
             new Parcelable.Creator<PointerIcon>() { // from class: android.view.PointerIcon.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PointerIcon createFromParcel(Parcel in) {
                     PointerIcon icon;
@@ -191,7 +190,6 @@ public final class PointerIcon implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PointerIcon[] newArray(int size) {
                     return new PointerIcon[size];
@@ -215,7 +213,6 @@ public final class PointerIcon implements Parcelable {
         return getSystemIcon(type);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static PointerIcon getSystemIcon(int type) {
         if (type == -1) {
             throw new IllegalArgumentException("cannot get system icon for TYPE_CUSTOM");
@@ -852,7 +849,6 @@ public final class PointerIcon implements Parcelable {
         InputManager.getInstance().setPointerIconType(10119);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static PointerIcon createSpenIcon(Bitmap bitmap, float hotSpotX, float hotSpotY) {
         return createIcon(bitmap, hotSpotX, hotSpotY, 20000);
     }

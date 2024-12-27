@@ -10,13 +10,11 @@ public class EnhancedAttestationResult implements Parcelable {
             new Parcelable.Creator<
                     EnhancedAttestationResult>() { // from class:
                                                    // com.samsung.android.knox.tima.attestation.EnhancedAttestationResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EnhancedAttestationResult createFromParcel(Parcel source) {
                     return new EnhancedAttestationResult(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EnhancedAttestationResult[] newArray(int size) {
                     return new EnhancedAttestationResult[size];

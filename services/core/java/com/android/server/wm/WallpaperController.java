@@ -215,8 +215,6 @@ public final class WallpaperController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.wm.WallpaperController$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.wm.WallpaperController$$ExternalSyntheticLambda2] */
     public WallpaperController(
             WindowManagerService windowManagerService, DisplayContent displayContent) {
         FindWallpaperTargetResult findWallpaperTargetResult = new FindWallpaperTargetResult();
@@ -244,16 +242,6 @@ public final class WallpaperController {
 
                        if (r0.mWindowManagerFuncs.isAppTransitionStateIdle() == false) goto L60;
                     */
-                    /* JADX WARN: Removed duplicated region for block: B:102:0x016c  */
-                    /* JADX WARN: Removed duplicated region for block: B:112:0x018c  */
-                    /* JADX WARN: Removed duplicated region for block: B:114:0x0194  */
-                    /* JADX WARN: Removed duplicated region for block: B:119:0x018e  */
-                    /* JADX WARN: Removed duplicated region for block: B:124:0x01a5  */
-                    /* JADX WARN: Removed duplicated region for block: B:133:0x01bf  */
-                    /* JADX WARN: Removed duplicated region for block: B:164:? A[RETURN, SYNTHETIC] */
-                    /* JADX WARN: Removed duplicated region for block: B:69:0x0103  */
-                    /* JADX WARN: Removed duplicated region for block: B:91:0x0144  */
-                    /* JADX WARN: Removed duplicated region for block: B:98:0x015d A[ADDED_TO_REGION] */
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
                         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1038,20 +1026,6 @@ public final class WallpaperController {
         return displayArea.getAnimationLeash();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:111:0x02ca  */
-    /* JADX WARN: Removed duplicated region for block: B:132:0x02a4 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:136:0x0277  */
-    /* JADX WARN: Removed duplicated region for block: B:138:0x0235  */
-    /* JADX WARN: Removed duplicated region for block: B:140:0x01f7  */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x01ee  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x01e8  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x01f5  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0221  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0229  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x022d  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x023a  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x025f  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0268  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

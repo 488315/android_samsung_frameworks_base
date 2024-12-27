@@ -21,7 +21,6 @@ public class LeakDetector implements Dumpable {
         dumpManager.registerDumpable(getClass().getSimpleName(), this);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$dump$0(Collection collection) {
         return !TrackedObjects.isTrackedObject(collection);
     }

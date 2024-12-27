@@ -14,7 +14,6 @@ final class DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthGatingChecks$1 exte
     int label;
     final /* synthetic */ DeviceEntryFaceAuthRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthGatingChecks$1(DeviceEntryFaceAuthRepositoryImpl deviceEntryFaceAuthRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceEntryFaceAuthRepositoryImpl;

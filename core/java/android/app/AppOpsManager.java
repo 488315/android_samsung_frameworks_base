@@ -1585,13 +1585,11 @@ public class AppOpsManager {
         public static final Parcelable.Creator<PackageOps> CREATOR =
                 new Parcelable.Creator<
                         PackageOps>() { // from class: android.app.AppOpsManager.PackageOps.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PackageOps createFromParcel(Parcel source) {
                         return new PackageOps(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PackageOps[] newArray(int size) {
                         return new PackageOps[size];
@@ -1650,13 +1648,11 @@ public class AppOpsManager {
         public static final Parcelable.Creator<OpEventProxyInfo> CREATOR =
                 new Parcelable.Creator<OpEventProxyInfo>() { // from class:
                     // android.app.AppOpsManager.OpEventProxyInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public OpEventProxyInfo[] newArray(int size) {
                         return new OpEventProxyInfo[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public OpEventProxyInfo createFromParcel(Parcel in) {
                         return new OpEventProxyInfo(in);
@@ -1761,13 +1757,11 @@ public class AppOpsManager {
         public static final Parcelable.Creator<NoteOpEvent> CREATOR =
                 new Parcelable.Creator<
                         NoteOpEvent>() { // from class: android.app.AppOpsManager.NoteOpEvent.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public NoteOpEvent[] newArray(int size) {
                         return new NoteOpEvent[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public NoteOpEvent createFromParcel(Parcel in) {
                         return new NoteOpEvent(in);
@@ -1904,7 +1898,6 @@ public class AppOpsManager {
                     AppOpsManager.resolveLastRestrictedUidState(this.mOp), 700, flags);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public NoteOpEvent getLastAccessEvent(int fromUidState, int toUidState, int flags) {
             return AppOpsManager.getLastEvent(this.mAccessEvents, fromUidState, toUidState, flags);
         }
@@ -1931,7 +1924,6 @@ public class AppOpsManager {
                     AppOpsManager.resolveLastRestrictedUidState(this.mOp), 700, flags);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public NoteOpEvent getLastRejectEvent(int fromUidState, int toUidState, int flags) {
             return AppOpsManager.getLastEvent(this.mRejectEvents, fromUidState, toUidState, flags);
         }
@@ -2014,7 +2006,6 @@ public class AppOpsManager {
                 }
             }
 
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // com.android.internal.util.Parcelling
             public LongSparseArray<NoteOpEvent> unparcel(Parcel source) {
                 int numEntries = source.readInt();
@@ -2066,13 +2057,11 @@ public class AppOpsManager {
             CREATOR =
                     new Parcelable.Creator<AttributedOpEntry>() { // from class:
                         // android.app.AppOpsManager.AttributedOpEntry.1
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public AttributedOpEntry[] newArray(int size) {
                             return new AttributedOpEntry[size];
                         }
 
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public AttributedOpEntry createFromParcel(Parcel in) {
                             return new AttributedOpEntry(in);
@@ -2126,13 +2115,11 @@ public class AppOpsManager {
         public static final Parcelable.Creator<OpEntry> CREATOR =
                 new Parcelable.Creator<
                         OpEntry>() { // from class: android.app.AppOpsManager.OpEntry.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public OpEntry[] newArray(int size) {
                         return new OpEntry[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public OpEntry createFromParcel(Parcel in) {
                         return new OpEntry(in);
@@ -2523,13 +2510,11 @@ public class AppOpsManager {
         public static final Parcelable.Creator<HistoricalOps> CREATOR =
                 new Parcelable.Creator<
                         HistoricalOps>() { // from class: android.app.AppOpsManager.HistoricalOps.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HistoricalOps createFromParcel(Parcel parcel) {
                         return new HistoricalOps(parcel);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HistoricalOps[] newArray(int size) {
                         return new HistoricalOps[size];
@@ -2924,13 +2909,11 @@ public class AppOpsManager {
         public static final Parcelable.Creator<HistoricalUidOps> CREATOR =
                 new Parcelable.Creator<HistoricalUidOps>() { // from class:
                     // android.app.AppOpsManager.HistoricalUidOps.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HistoricalUidOps createFromParcel(Parcel parcel) {
                         return new HistoricalUidOps(parcel);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HistoricalUidOps[] newArray(int size) {
                         return new HistoricalUidOps[size];
@@ -2961,7 +2944,6 @@ public class AppOpsManager {
             this.mHistoricalPackageOps = parcel.createTypedArrayMap(HistoricalPackageOps.CREATOR);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public HistoricalUidOps splice(double fractionToRemove) {
             HistoricalUidOps splice = null;
             int packageCount = getPackageCount();
@@ -2981,7 +2963,6 @@ public class AppOpsManager {
             return splice;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void merge(HistoricalUidOps other) {
             int packageCount = other.getPackageCount();
             for (int i = 0; i < packageCount; i++) {
@@ -3000,7 +2981,6 @@ public class AppOpsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void filter(
                 String packageName,
                 String attributionTag,
@@ -3030,7 +3010,6 @@ public class AppOpsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isEmpty() {
             int packageCount = getPackageCount();
             for (int i = packageCount - 1; i >= 0; i--) {
@@ -3042,7 +3021,6 @@ public class AppOpsManager {
             return true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void increaseAccessCount(
                 int opCode,
                 String packageName,
@@ -3054,7 +3032,6 @@ public class AppOpsManager {
                     .increaseAccessCount(opCode, attributionTag, uidState, flags, increment);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void increaseRejectCount(
                 int opCode,
                 String packageName,
@@ -3066,7 +3043,6 @@ public class AppOpsManager {
                     .increaseRejectCount(opCode, attributionTag, uidState, flags, increment);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void increaseAccessDuration(
                 int opCode,
                 String packageName,
@@ -3078,7 +3054,6 @@ public class AppOpsManager {
                     .increaseAccessDuration(opCode, attributionTag, uidState, flags, increment);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addDiscreteAccess(
                 int opCode,
                 String packageName,
@@ -3124,7 +3099,6 @@ public class AppOpsManager {
             return this.mHistoricalPackageOps.get(packageName);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void clearHistory(String packageName) {
             if (this.mHistoricalPackageOps != null) {
                 this.mHistoricalPackageOps.remove(packageName);
@@ -3142,7 +3116,6 @@ public class AppOpsManager {
             parcel.writeTypedArrayMap(this.mHistoricalPackageOps, flags);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void accept(HistoricalOpsVisitor visitor) {
             visitor.visitHistoricalUidOps(this);
             int packageCount = getPackageCount();
@@ -3199,13 +3172,11 @@ public class AppOpsManager {
         public static final Parcelable.Creator<HistoricalPackageOps> CREATOR =
                 new Parcelable.Creator<HistoricalPackageOps>() { // from class:
                     // android.app.AppOpsManager.HistoricalPackageOps.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HistoricalPackageOps createFromParcel(Parcel parcel) {
                         return new HistoricalPackageOps(parcel);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HistoricalPackageOps[] newArray(int size) {
                         return new HistoricalPackageOps[size];
@@ -3237,7 +3208,6 @@ public class AppOpsManager {
                     parcel.createTypedArrayMap(AttributedHistoricalOps.CREATOR);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public HistoricalPackageOps splice(double fractionToRemove) {
             HistoricalPackageOps splice = null;
             int attributionCount = getAttributedOpsCount();
@@ -3257,7 +3227,6 @@ public class AppOpsManager {
             return splice;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void merge(HistoricalPackageOps other) {
             int attributionCount = other.getAttributedOpsCount();
             for (int i = 0; i < attributionCount; i++) {
@@ -3276,7 +3245,6 @@ public class AppOpsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void filter(
                 String attributionTag,
                 String[] opNames,
@@ -3304,7 +3272,6 @@ public class AppOpsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void accept(HistoricalOpsVisitor visitor) {
             visitor.visitHistoricalPackageOps(this);
             int attributionCount = getAttributedOpsCount();
@@ -3313,7 +3280,6 @@ public class AppOpsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isEmpty() {
             int attributionCount = getAttributedOpsCount();
             for (int i = attributionCount - 1; i >= 0; i--) {
@@ -3325,28 +3291,24 @@ public class AppOpsManager {
             return true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void increaseAccessCount(
                 int opCode, String attributionTag, int uidState, int flags, long increment) {
             getOrCreateAttributedHistoricalOps(attributionTag)
                     .increaseAccessCount(opCode, uidState, flags, increment);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void increaseRejectCount(
                 int opCode, String attributionTag, int uidState, int flags, long increment) {
             getOrCreateAttributedHistoricalOps(attributionTag)
                     .increaseRejectCount(opCode, uidState, flags, increment);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void increaseAccessDuration(
                 int opCode, String attributionTag, int uidState, int flags, long increment) {
             getOrCreateAttributedHistoricalOps(attributionTag)
                     .increaseAccessDuration(opCode, uidState, flags, increment);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addDiscreteAccess(
                 int opCode,
                 String attributionTag,
@@ -3514,13 +3476,11 @@ public class AppOpsManager {
         public static final Parcelable.Creator<AttributedHistoricalOps> CREATOR =
                 new Parcelable.Creator<AttributedHistoricalOps>() { // from class:
                     // android.app.AppOpsManager.AttributedHistoricalOps.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AttributedHistoricalOps[] newArray(int size) {
                         return new AttributedHistoricalOps[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AttributedHistoricalOps createFromParcel(Parcel in) {
                         return new AttributedHistoricalOps(in);
@@ -3546,7 +3506,6 @@ public class AppOpsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public AttributedHistoricalOps splice(double fractionToRemove) {
             AttributedHistoricalOps splice = null;
             int opCount = getOpCount();
@@ -3568,7 +3527,6 @@ public class AppOpsManager {
             return splice;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void merge(AttributedHistoricalOps other) {
             int opCount = other.getOpCount();
             for (int i = 0; i < opCount; i++) {
@@ -3585,7 +3543,6 @@ public class AppOpsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void filter(
                 String[] opNames,
                 int filter,
@@ -3603,7 +3560,6 @@ public class AppOpsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isEmpty() {
             int opCount = getOpCount();
             for (int i = opCount - 1; i >= 0; i--) {
@@ -3615,22 +3571,18 @@ public class AppOpsManager {
             return true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void increaseAccessCount(int opCode, int uidState, int flags, long increment) {
             getOrCreateHistoricalOp(opCode).increaseAccessCount(uidState, flags, increment);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void increaseRejectCount(int opCode, int uidState, int flags, long increment) {
             getOrCreateHistoricalOp(opCode).increaseRejectCount(uidState, flags, increment);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void increaseAccessDuration(int opCode, int uidState, int flags, long increment) {
             getOrCreateHistoricalOp(opCode).increaseAccessDuration(uidState, flags, increment);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addDiscreteAccess(
                 int opCode,
                 int uidState,
@@ -3664,7 +3616,6 @@ public class AppOpsManager {
             return this.mHistoricalOps.get(opName);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void accept(HistoricalOpsVisitor visitor) {
             visitor.visitHistoricalAttributionOps(this);
             int opCount = getOpCount();
@@ -3754,13 +3705,11 @@ public class AppOpsManager {
         public static final Parcelable.Creator<HistoricalOp> CREATOR =
                 new Parcelable.Creator<
                         HistoricalOp>() { // from class: android.app.AppOpsManager.HistoricalOp.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HistoricalOp createFromParcel(Parcel source) {
                         return new HistoricalOp(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HistoricalOp[] newArray(int size) {
                         return new HistoricalOp[size];
@@ -3803,7 +3752,6 @@ public class AppOpsManager {
             this.mDiscreteAccesses = AppOpsManager.readDiscreteAccessArrayFromParcel(parcel);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void filter(
                 int historyFlag, double scaleFactor, long beginTimeMillis, long endTimeMillis) {
             if ((historyFlag & 1) == 0) {
@@ -3831,7 +3779,6 @@ public class AppOpsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isEmpty() {
             return (hasData(this.mAccessCount)
                             || hasData(this.mRejectCount)
@@ -3845,7 +3792,6 @@ public class AppOpsManager {
             return array != null && array.size() > 0;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public HistoricalOp splice(double fractionToRemove) {
             HistoricalOp splice = new HistoricalOp(this.mOp);
             LongSparseLongArray longSparseLongArray = this.mAccessCount;
@@ -3887,7 +3833,6 @@ public class AppOpsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void merge(HistoricalOp other) {
             merge(
                     new AppOpsManager$HistoricalOp$$ExternalSyntheticLambda0(this),
@@ -3934,17 +3879,14 @@ public class AppOpsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void increaseAccessCount(int uidState, int flags, long increment) {
             increaseCount(getOrCreateAccessCount(), uidState, flags, increment);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void increaseRejectCount(int uidState, int flags, long increment) {
             increaseCount(getOrCreateRejectCount(), uidState, flags, increment);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void increaseAccessDuration(int uidState, int flags, long increment) {
             increaseCount(getOrCreateAccessDuration(), uidState, flags, increment);
         }
@@ -3959,7 +3901,6 @@ public class AppOpsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addDiscreteAccess(
                 int uidState,
                 int flag,
@@ -4148,12 +4089,10 @@ public class AppOpsManager {
                     + Objects.hashCode(this.mDiscreteAccesses);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void accept(HistoricalOpsVisitor visitor) {
             visitor.visitHistoricalOp(this);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public LongSparseLongArray getOrCreateAccessCount() {
             if (this.mAccessCount == null) {
                 this.mAccessCount = new LongSparseLongArray();
@@ -4161,7 +4100,6 @@ public class AppOpsManager {
             return this.mAccessCount;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public LongSparseLongArray getOrCreateRejectCount() {
             if (this.mRejectCount == null) {
                 this.mRejectCount = new LongSparseLongArray();
@@ -4169,7 +4107,6 @@ public class AppOpsManager {
             return this.mRejectCount;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public LongSparseLongArray getOrCreateAccessDuration() {
             if (this.mAccessDuration == null) {
                 this.mAccessDuration = new LongSparseLongArray();
@@ -4215,7 +4152,6 @@ public class AppOpsManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static long sumForFlagsInStates(
             LongSparseLongArray counts, int beginUidState, int endUidState, int flags) {
         if (counts == null) {
@@ -4235,7 +4171,6 @@ public class AppOpsManager {
         return sum;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static List<AttributedOpEntry> listForFlagsInStates(
             List<AttributedOpEntry> accesses, int beginUidState, int endUidState, int flags) {
         List<AttributedOpEntry> result = new ArrayList<>();
@@ -5683,7 +5618,6 @@ public class AppOpsManager {
         return iBinder;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static IAppOpsService getService() {
         IAppOpsService iAppOpsService;
         synchronized (sLock) {
@@ -6412,7 +6346,6 @@ public class AppOpsManager {
         return sOnOpNotedCallback != null || isCollectingStackTraces();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isCollectingStackTraces() {
         if (sConfig.getSampledOpCode() == -1
                 && sConfig.getAcceptableLeftDistance() == 0
@@ -6457,7 +6390,6 @@ public class AppOpsManager {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$opNoted$0(AsyncNotedAppOp op) {
                 OnOpNotedCallback.this.onAsyncNoted(op);
             }
@@ -6477,7 +6409,6 @@ public class AppOpsManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String getFormattedStackTrace() {
         StackTraceElement[] trace = new Exception().getStackTrace();
         int firstInteresting = 0;
@@ -6618,7 +6549,6 @@ public class AppOpsManager {
         return 149;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static NoteOpEvent getLastEvent(
             LongSparseArray<NoteOpEvent> events, int beginUidState, int endUidState, int flags) {
         if (events == null) {
@@ -6643,7 +6573,6 @@ public class AppOpsManager {
         return lastEvent;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean equalsLongSparseLongArray(LongSparseLongArray a, LongSparseLongArray b) {
         if (a == b) {
             return true;
@@ -6660,7 +6589,6 @@ public class AppOpsManager {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void writeLongSparseLongArrayToParcel(LongSparseLongArray array, Parcel parcel) {
         if (array != null) {
             int size = array.size();
@@ -6674,7 +6602,6 @@ public class AppOpsManager {
         parcel.writeInt(-1);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static LongSparseLongArray readLongSparseLongArrayFromParcel(Parcel parcel) {
         int size = parcel.readInt();
         if (size < 0) {
@@ -6687,7 +6614,6 @@ public class AppOpsManager {
         return array;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void writeDiscreteAccessArrayToParcel(
             List<AttributedOpEntry> array, Parcel parcel, int flags) {
         ParceledListSlice<AttributedOpEntry> listSlice =
@@ -6695,7 +6621,6 @@ public class AppOpsManager {
         parcel.writeParcelable(listSlice, flags);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static List<AttributedOpEntry> readDiscreteAccessArrayFromParcel(Parcel parcel) {
         ParceledListSlice<AttributedOpEntry> listSlice =
                 (ParceledListSlice) parcel.readParcelable(null, ParceledListSlice.class);
@@ -6705,7 +6630,6 @@ public class AppOpsManager {
         return listSlice.getList();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static LongSparseArray<Object> collectKeys(
             LongSparseLongArray array, LongSparseArray<Object> result) {
         if (array != null) {
@@ -6741,7 +6665,6 @@ public class AppOpsManager {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static int parseHistoricalMode(String mode) {
         char c;
         switch (mode.hashCode()) {
@@ -6812,7 +6735,6 @@ public class AppOpsManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static List<AttributedOpEntry> deduplicateDiscreteEvents(List<AttributedOpEntry> list) {
         int n = list.size();
         int i = 0;
@@ -6834,7 +6756,6 @@ public class AppOpsManager {
         return list;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static AttributedOpEntry mergeAttributedOpEntries(List<AttributedOpEntry> opEntries) {
         int opCount;
         if (opEntries.size() == 1) {

@@ -425,7 +425,6 @@ public class TransitionSet extends Transition {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // android.transition.Transition
     public TransitionSet setSceneRoot(ViewGroup sceneRoot) {
         super.setSceneRoot(sceneRoot);

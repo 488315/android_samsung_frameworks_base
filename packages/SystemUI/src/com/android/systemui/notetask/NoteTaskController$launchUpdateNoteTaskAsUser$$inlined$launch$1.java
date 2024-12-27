@@ -30,7 +30,6 @@ public final class NoteTaskController$launchUpdateNoteTaskAsUser$$inlined$launch
     int label;
     final /* synthetic */ NoteTaskController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NoteTaskController$launchUpdateNoteTaskAsUser$$inlined$launch$1(String str, Continuation continuation, NoteTaskController noteTaskController, UserHandle userHandle) {
         super(2, continuation);
         this.$spanName = str;

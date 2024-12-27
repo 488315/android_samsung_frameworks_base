@@ -20,7 +20,6 @@ final class WifiInteractorImpl$wifiIconGroup$1 extends SuspendLambda implements 
     /* synthetic */ boolean Z$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiInteractorImpl$wifiIconGroup$1(WifiSignalIconResource wifiSignalIconResource, Continuation continuation) {
         super(3, continuation);
         this.$wifiSignalIconResource = wifiSignalIconResource;

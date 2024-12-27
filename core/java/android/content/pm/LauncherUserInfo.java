@@ -7,13 +7,11 @@ public final class LauncherUserInfo implements Parcelable {
     public static final Parcelable.Creator<LauncherUserInfo> CREATOR =
             new Parcelable.Creator<
                     LauncherUserInfo>() { // from class: android.content.pm.LauncherUserInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LauncherUserInfo createFromParcel(Parcel in) {
                     return new LauncherUserInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LauncherUserInfo[] newArray(int size) {
                     return new LauncherUserInfo[size];

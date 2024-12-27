@@ -89,7 +89,6 @@ public final class NSKmlWriter {
     }
 
     enum SATELLITE_STATE {
-        /* JADX INFO: Fake field, exist only in values array */
         EF0("in"),
         NO_SATELLITE("no"),
         SHADOW("sh"),

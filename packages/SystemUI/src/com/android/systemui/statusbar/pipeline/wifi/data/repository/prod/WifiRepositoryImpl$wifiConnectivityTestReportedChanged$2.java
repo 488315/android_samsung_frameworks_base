@@ -19,7 +19,6 @@ final class WifiRepositoryImpl$wifiConnectivityTestReportedChanged$2 extends Sus
     int label;
     final /* synthetic */ WifiRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiRepositoryImpl$wifiConnectivityTestReportedChanged$2(WifiRepositoryImpl wifiRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = wifiRepositoryImpl;

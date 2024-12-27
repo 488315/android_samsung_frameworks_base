@@ -1351,8 +1351,6 @@ public class GnssNative {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v0, types: [com.android.server.location.gnss.sec.LppeFusedLocationHelper$$ExternalSyntheticLambda3, java.lang.Runnable] */
     public final void lambda$requestCivicAddress$40(final double d, final double d2, final double d3) throws Exception {
         final LppeFusedLocationHelper lppeFusedLocationHelper = (LppeFusedLocationHelper) this.mLppeHelperCallbacks;
         lppeFusedLocationHelper.getClass();
@@ -1362,32 +1360,6 @@ public class GnssNative {
             public final /* synthetic */ double f$1;
             public final /* synthetic */ double f$2;
 
-            /* JADX WARN: Removed duplicated region for block: B:12:0x0057  */
-            /* JADX WARN: Removed duplicated region for block: B:15:0x0064  */
-            /* JADX WARN: Removed duplicated region for block: B:18:0x0071  */
-            /* JADX WARN: Removed duplicated region for block: B:21:0x007e  */
-            /* JADX WARN: Removed duplicated region for block: B:24:0x008b  */
-            /* JADX WARN: Removed duplicated region for block: B:27:0x0098  */
-            /* JADX WARN: Removed duplicated region for block: B:30:0x00a5  */
-            /* JADX WARN: Removed duplicated region for block: B:33:0x00b2  */
-            /* JADX WARN: Removed duplicated region for block: B:36:0x00bf  */
-            /* JADX WARN: Removed duplicated region for block: B:39:0x00d0  */
-            /* JADX WARN: Removed duplicated region for block: B:42:0x00e1  */
-            /* JADX WARN: Removed duplicated region for block: B:45:0x00f0  */
-            /* JADX WARN: Removed duplicated region for block: B:48:0x0103  */
-            /* JADX WARN: Removed duplicated region for block: B:50:0x00fb  */
-            /* JADX WARN: Removed duplicated region for block: B:51:0x00e8  */
-            /* JADX WARN: Removed duplicated region for block: B:52:0x00da  */
-            /* JADX WARN: Removed duplicated region for block: B:53:0x00c5  */
-            /* JADX WARN: Removed duplicated region for block: B:54:0x00b8  */
-            /* JADX WARN: Removed duplicated region for block: B:55:0x00ab  */
-            /* JADX WARN: Removed duplicated region for block: B:56:0x009e  */
-            /* JADX WARN: Removed duplicated region for block: B:57:0x0091  */
-            /* JADX WARN: Removed duplicated region for block: B:58:0x0084  */
-            /* JADX WARN: Removed duplicated region for block: B:59:0x0077  */
-            /* JADX WARN: Removed duplicated region for block: B:60:0x006a  */
-            /* JADX WARN: Removed duplicated region for block: B:61:0x005d  */
-            /* JADX WARN: Removed duplicated region for block: B:8:0x003a  */
             @Override // java.lang.Runnable
             /*
                 Code decompiled incorrectly, please refer to instructions dump.

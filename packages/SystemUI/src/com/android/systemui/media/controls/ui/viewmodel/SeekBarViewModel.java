@@ -249,7 +249,6 @@ public final class SeekBarViewModel {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r9v3, types: [com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$callback$1] */
     public SeekBarViewModel(RepeatableExecutor repeatableExecutor, FalsingManager falsingManager) {
         this.bgExecutor = repeatableExecutor;
         this.falsingManager = falsingManager;

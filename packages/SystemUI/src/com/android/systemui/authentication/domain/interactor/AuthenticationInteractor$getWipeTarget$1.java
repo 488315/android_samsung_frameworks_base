@@ -9,7 +9,6 @@ final class AuthenticationInteractor$getWipeTarget$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ AuthenticationInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AuthenticationInteractor$getWipeTarget$1(AuthenticationInteractor authenticationInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = authenticationInteractor;

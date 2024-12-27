@@ -62,12 +62,6 @@ public final class SAccessoryManager extends SAccessoryManagerInternal
     public final class AnonymousClass1 {
         public /* synthetic */ AnonymousClass1() {}
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r2v0, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r2v1 */
-        /* JADX WARN: Type inference failed for: r2v13, types: [int] */
-        /* JADX WARN: Type inference failed for: r2v2 */
-        /* JADX WARN: Type inference failed for: r2v3 */
         public void authenticationReady() {
             byte b;
             char[] cArr;
@@ -492,21 +486,6 @@ public final class SAccessoryManager extends SAccessoryManagerInternal
 
                        if (r4.getAttachState() != false) goto L44;
                     */
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Removed duplicated region for block: B:68:0x015c  */
-                    /* JADX WARN: Removed duplicated region for block: B:76:0x0172  */
-                    /* JADX WARN: Removed duplicated region for block: B:78:0x0179  */
-                    /* JADX WARN: Removed duplicated region for block: B:95:0x0156 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-                    /* JADX WARN: Type inference failed for: r4v8, types: [java.lang.StringBuilder] */
-                    /* JADX WARN: Type inference failed for: r7v12 */
-                    /* JADX WARN: Type inference failed for: r7v13, types: [int] */
-                    /* JADX WARN: Type inference failed for: r7v16 */
-                    /* JADX WARN: Type inference failed for: r7v2 */
-                    /* JADX WARN: Type inference failed for: r7v3 */
-                    /* JADX WARN: Type inference failed for: r7v5, types: [java.io.FileReader] */
-                    /* JADX WARN: Type inference failed for: r7v7 */
-                    /* JADX WARN: Type inference failed for: r7v8 */
-                    /* JADX WARN: Type inference failed for: r7v9 */
                     @Override // android.content.BroadcastReceiver
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -664,7 +643,6 @@ public final class SAccessoryManager extends SAccessoryManagerInternal
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:9:0x002d A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

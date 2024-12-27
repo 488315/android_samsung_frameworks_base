@@ -22,7 +22,6 @@ final class AnimationStatusRepositoryImpl$areAnimationsEnabled$1 extends Suspend
     int label;
     final /* synthetic */ AnimationStatusRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AnimationStatusRepositoryImpl$areAnimationsEnabled$1(AnimationStatusRepositoryImpl animationStatusRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = animationStatusRepositoryImpl;
@@ -35,8 +34,6 @@ final class AnimationStatusRepositoryImpl$areAnimationsEnabled$1 extends Suspend
         return animationStatusRepositoryImpl$areAnimationsEnabled$1;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v4, types: [android.database.ContentObserver, com.android.systemui.util.animation.data.repository.AnimationStatusRepositoryImpl$areAnimationsEnabled$1$observer$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         ContentResolver contentResolver;
@@ -68,7 +65,6 @@ final class AnimationStatusRepositoryImpl$areAnimationsEnabled$1 extends Suspend
             contentResolver2.registerContentObserver(Settings.Global.getUriFor(SettingsHelper.INDEX_GLOBAL_ANIMATOR_DURATION_SCALE), false, r3);
             final AnimationStatusRepositoryImpl animationStatusRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.util.animation.data.repository.AnimationStatusRepositoryImpl$areAnimationsEnabled$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

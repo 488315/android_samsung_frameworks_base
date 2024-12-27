@@ -486,7 +486,6 @@ public class ActionMenuItemView extends TextView
         super.onRestoreInstanceState(null);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.TextView, android.view.View
     public boolean setFrame(int l, int t, int r, int b) {
         boolean changed = super.setFrame(l, t, r, b);

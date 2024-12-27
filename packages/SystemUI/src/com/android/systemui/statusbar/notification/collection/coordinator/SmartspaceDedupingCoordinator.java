@@ -122,9 +122,6 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.notification.collection.coordinator.SmartspaceDedupingCoordinator$filter$1] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.notification.collection.coordinator.SmartspaceDedupingCoordinator$collectionListener$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.notification.collection.coordinator.SmartspaceDedupingCoordinator$statusBarStateListener$1] */
     public SmartspaceDedupingCoordinator(SysuiStatusBarStateController sysuiStatusBarStateController, LockscreenSmartspaceController lockscreenSmartspaceController, NotifPipeline notifPipeline, DelayableExecutor delayableExecutor, SystemClock systemClock) {
         this.statusBarStateController = sysuiStatusBarStateController;
         this.smartspaceController = lockscreenSmartspaceController;
@@ -133,7 +130,6 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
         this.clock = systemClock;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void cancelExceptionTimeout(TrackedSmartspaceTarget trackedSmartspaceTarget) {
         Runnable cancelTimeoutRunnable = trackedSmartspaceTarget.getCancelTimeoutRunnable();
         if (cancelTimeoutRunnable != null) {
@@ -150,7 +146,6 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
         return currentTimeMillis <= j;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean isDupedWithSmartspaceContent(NotificationEntry notificationEntry) {
         TrackedSmartspaceTarget trackedSmartspaceTarget = this.trackedSmartspaceTargets.get(notificationEntry.mKey);
         if (trackedSmartspaceTarget != null) {
@@ -159,7 +154,6 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onNewSmartspaceTargets(List<? extends Parcelable> list) {
         Runnable cancelTimeoutRunnable;
         String sourceNotificationKey;
@@ -195,7 +189,6 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
         this.trackedSmartspaceTargets = linkedHashMap;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void recordStatusBarState(int i) {
         boolean z = this.isOnLockscreen;
         boolean z2 = i == 1;
@@ -231,7 +224,6 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
         }, j2 - currentTimeMillis));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean updateFilterStatus(TrackedSmartspaceTarget trackedSmartspaceTarget) {
         boolean shouldFilter = trackedSmartspaceTarget.getShouldFilter();
         NotificationEntry entry = this.notifPipeline.mNotifCollection.getEntry(trackedSmartspaceTarget.getKey());

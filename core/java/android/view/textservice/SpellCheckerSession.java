@@ -102,7 +102,6 @@ public class SpellCheckerSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$handleOnGetSuggestionsMultiple$0(
             SuggestionsInfo[] suggestionsInfos) {
         this.mSpellCheckerSessionListener.onGetSuggestions(suggestionsInfos);
@@ -132,7 +131,6 @@ public class SpellCheckerSession {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$handleOnGetSentenceSuggestionsMultiple$1(
             SentenceSuggestionsInfo[] suggestionsInfos) {
         this.mSpellCheckerSessionListener.onGetSentenceSuggestions(suggestionsInfos);
@@ -205,7 +203,6 @@ public class SpellCheckerSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void processTask(
                 ISpellCheckerSession session, SpellCheckerParams scp, boolean async) {
             if (async || this.mAsyncHandler == null) {

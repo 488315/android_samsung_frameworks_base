@@ -304,7 +304,6 @@ public class ResourcesImpl {
                         + rule.select(quantity));
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static int attrForQuantityCode(String quantityCode) {
         char c;
         switch (quantityCode.hashCode()) {
@@ -565,7 +564,6 @@ public class ResourcesImpl {
         return this.mConfiguration.updateFrom(this.mTmpConfig);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:18:0x002f, code lost:
 
        if (r3.equals("id") != false) goto L19;
@@ -1492,7 +1490,6 @@ public class ResourcesImpl {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class LookupStack {
         private int[] mIds;
         private int mSize;

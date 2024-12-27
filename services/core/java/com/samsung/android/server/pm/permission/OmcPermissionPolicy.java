@@ -361,13 +361,6 @@ public final class OmcPermissionPolicy {
                     + " android.util.ArrayMap):void");
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(12:48|49|50|51|52|(2:53|54)|55|56|57|58|59|60) */
-    /* JADX WARN: Removed duplicated region for block: B:172:0x0107 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:175:0x008f A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:191:0x00dc A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:194:0x008f A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x01fa A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x017a A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

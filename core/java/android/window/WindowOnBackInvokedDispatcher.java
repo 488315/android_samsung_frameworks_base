@@ -329,7 +329,6 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class OnBackInvokedCallbackWrapper extends IOnBackInvokedCallback.Stub {
         private final WeakReference<OnBackInvokedCallback> mCallback;
         private final Handler mHandler;
@@ -360,7 +359,6 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onBackStarted$0(BackMotionEvent backEvent) {
             final OnBackAnimationCallback callback = getBackAnimationCallback();
             if (callback != null && this.mProgressAnimator.isBackAnimationInProgress()) {
@@ -400,7 +398,6 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onBackProgressed$1(BackMotionEvent backEvent) {
             if (getBackAnimationCallback() != null) {
                 this.mProgressAnimator.onBackProgressed(backEvent);
@@ -420,7 +417,6 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onBackCancelled$2() {
             final OnBackAnimationCallback callback = getBackAnimationCallback();
             this.mTouchTracker.reset();
@@ -452,7 +448,6 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onBackInvoked$3() {
             this.mTouchTracker.reset();
             boolean isInProgress = this.mProgressAnimator.isBackAnimationInProgress();
@@ -566,7 +561,6 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
             return true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Context getContext() {
             return this.mContext.get();
         }

@@ -12,7 +12,6 @@ final class FlowKt$throttle$1$1$1$emit$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ FlowKt$throttle$1.AnonymousClass1.C02801<Object> this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FlowKt$throttle$1$1$1$emit$1(FlowKt$throttle$1.AnonymousClass1.C02801<Object> c02801, Continuation continuation) {
         super(continuation);
         this.this$0 = c02801;

@@ -83,7 +83,6 @@ public final class ResourcesManagerService extends SystemService {
                         return true;
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
                     public final int handleShellCommand(
                             ParcelFileDescriptor parcelFileDescriptor,
                             ParcelFileDescriptor parcelFileDescriptor2,

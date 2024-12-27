@@ -69,7 +69,6 @@ public final class DeviceBasedSatelliteRepositoryImpl implements RealDeviceBased
             int label;
             final /* synthetic */ DeviceBasedSatelliteRepositoryImpl this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass3(DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = deviceBasedSatelliteRepositoryImpl;
@@ -121,7 +120,6 @@ public final class DeviceBasedSatelliteRepositoryImpl implements RealDeviceBased
             int label;
             final /* synthetic */ DeviceBasedSatelliteRepositoryImpl this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass4(DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = deviceBasedSatelliteRepositoryImpl;
@@ -305,8 +303,6 @@ public final class DeviceBasedSatelliteRepositoryImpl implements RealDeviceBased
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -409,7 +405,6 @@ public final class DeviceBasedSatelliteRepositoryImpl implements RealDeviceBased
         this.signalStrength = FlowKt.stateIn(FlowKt.transformLatest(MutableStateFlow, new SatelliteSupport$Companion$whenSupported$$inlined$flatMapLatest$1(null, flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1, new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(0), new DeviceBasedSatelliteRepositoryImpl$signalStrength$1(this))), coroutineScope, startedEagerly, 0);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(13:0|1|(2:3|(10:5|6|(1:(1:(3:10|11|12)(2:14|15))(1:16))(2:26|(2:28|(1:30)))|17|18|19|20|(1:22)|11|12))|31|6|(0)(0)|17|18|19|20|(0)|11|12) */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x009e, code lost:
     
         r11 = move-exception;
@@ -420,9 +415,6 @@ public final class DeviceBasedSatelliteRepositoryImpl implements RealDeviceBased
         r10 = kotlin.Result.$r8$clinit;
         r12.resumeWith(com.android.systemui.statusbar.pipeline.satellite.data.prod.SatelliteSupport.NotSupported.INSTANCE);
      */
-    /* JADX WARN: Removed duplicated region for block: B:22:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0045  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0027  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

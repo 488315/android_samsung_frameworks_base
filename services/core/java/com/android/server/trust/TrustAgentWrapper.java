@@ -347,11 +347,6 @@ public final class TrustAgentWrapper {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [android.content.BroadcastReceiver, com.android.server.trust.TrustAgentWrapper$1] */
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.server.trust.TrustAgentWrapper$4] */
-    /* JADX WARN: Type inference failed for: r3v1, types: [android.content.ServiceConnection, com.android.server.trust.TrustAgentWrapper$5] */
-    /* JADX WARN: Type inference failed for: r4v0, types: [android.content.BroadcastReceiver, com.android.server.trust.TrustAgentWrapper$1] */
     public TrustAgentWrapper(Context context, TrustManagerService trustManagerService, Intent intent, UserHandle userHandle) {
         final int i = 0;
         ?? r1 = new BroadcastReceiver(this) { // from class: com.android.server.trust.TrustAgentWrapper.1
@@ -684,8 +679,6 @@ public final class TrustAgentWrapper {
         return this.mTrusted && this.mManagingTrust && !this.mTrustDisabledByDpm;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00bc  */
-    /* JADX WARN: Removed duplicated region for block: B:38:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

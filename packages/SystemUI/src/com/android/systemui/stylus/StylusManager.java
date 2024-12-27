@@ -115,7 +115,6 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
                     final long j2 = j;
                     final BatteryState batteryState3 = batteryState;
                     stylusManager3.executeStylusCallbacks(new Function1() { // from class: com.android.systemui.stylus.StylusManager$onBatteryStateChanged$1.2
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }
@@ -144,7 +143,6 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
             final String bluetoothAddress = inputDevice.getBluetoothAddress();
             ((ArrayMap) this.inputDeviceAddressMap).put(Integer.valueOf(i), bluetoothAddress);
             executeStylusCallbacks(new Function1() { // from class: com.android.systemui.stylus.StylusManager$onInputDeviceAdded$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -159,7 +157,6 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
                 onStylusUsed();
                 onStylusBluetoothConnected(i, bluetoothAddress);
                 executeStylusCallbacks(new Function1() { // from class: com.android.systemui.stylus.StylusManager$onInputDeviceAdded$3
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -186,7 +183,6 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
             if (str == null && bluetoothAddress != null) {
                 onStylusBluetoothConnected(i, bluetoothAddress);
                 executeStylusCallbacks(new Function1() { // from class: com.android.systemui.stylus.StylusManager$onInputDeviceChanged$2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -202,7 +198,6 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
             }
             onStylusBluetoothDisconnected(i, str);
             executeStylusCallbacks(new Function1() { // from class: com.android.systemui.stylus.StylusManager$onInputDeviceChanged$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -232,7 +227,6 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
                 if (str != null) {
                     onStylusBluetoothDisconnected(i, str);
                     executeStylusCallbacks(new Function1() { // from class: com.android.systemui.stylus.StylusManager$onInputDeviceRemoved$2
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }
@@ -244,7 +238,6 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
                     });
                 }
                 executeStylusCallbacks(new Function1() { // from class: com.android.systemui.stylus.StylusManager$onInputDeviceRemoved$3
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -283,7 +276,6 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
                         StylusManager stylusManager3 = StylusManager.this;
                         final BluetoothDevice bluetoothDevice3 = bluetoothDevice;
                         stylusManager3.executeStylusCallbacks(new Function1() { // from class: com.android.systemui.stylus.StylusManager$onMetadataChanged$1.2
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(1);
                             }

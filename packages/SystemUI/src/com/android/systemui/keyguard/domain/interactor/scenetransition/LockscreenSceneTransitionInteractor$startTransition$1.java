@@ -9,7 +9,6 @@ final class LockscreenSceneTransitionInteractor$startTransition$1 extends Contin
     /* synthetic */ Object result;
     final /* synthetic */ LockscreenSceneTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LockscreenSceneTransitionInteractor$startTransition$1(LockscreenSceneTransitionInteractor lockscreenSceneTransitionInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = lockscreenSceneTransitionInteractor;

@@ -514,7 +514,6 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
         return WindowInsets.CONSUMED;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.ViewGroup
     public LayoutParams generateDefaultLayoutParams() {
         return new LayoutParams(-1, -1);
@@ -772,7 +771,6 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private DecorToolbar getDecorToolbar(View view) {
         if (view instanceof DecorToolbar) {
             return (DecorToolbar) view;
@@ -818,7 +816,6 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void haltActionBarHideOffsetAnimations() {
         removeCallbacks(this.mRemoveActionBarHideOffset);
         removeCallbacks(this.mAddActionBarHideOffset);

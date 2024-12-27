@@ -639,7 +639,6 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkAuthViewWindowToken(
             final CryptoObject crypto,
             final CancellationSignal cancel,
@@ -865,7 +864,6 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkEnrollViewWindowToken(
             final byte[] token,
             final CancellationSignal cancel,
@@ -1490,7 +1488,6 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendErrorResult(long deviceId, int errMsgId) {
         Log.w(TAG, "sendErrorResult, errMsgId : " + errMsgId);
         if (errMsgId == 4) {
@@ -1506,7 +1503,6 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendAcquiredResult(long deviceId, int acquireInfo) {
         if (this.mAuthenticationCallback != null) {
             this.mAuthenticationCallback.onAuthenticationAcquired(acquireInfo);
@@ -1531,10 +1527,8 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendAuthenticatedSucceeded(Iris ir, byte[] fidoResultData) {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendAuthenticatedFailed() {
         if (this.mAuthenticationCallback != null) {
             this.mAuthenticationCallback.onAuthenticationFailed();
@@ -1560,7 +1554,6 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelEnrollment() {
         Log.e(TAG, "cancelEnrollment");
         if (ensureServiceConnected() && this.mService != null) {
@@ -1572,7 +1565,6 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelAuthentication(CryptoObject cryptoObject) {
         Log.e(TAG, "cancelAuthentication");
         if (ensureServiceConnected() && this.mService != null) {

@@ -8,7 +8,6 @@ public final class DreamCoordinator$filter$1 extends NotifFilter {
     private boolean isFiltering;
     final /* synthetic */ DreamCoordinator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DreamCoordinator$filter$1(DreamCoordinator dreamCoordinator) {
         super("LockscreenHostedDreamFilter");
         this.this$0 = dreamCoordinator;

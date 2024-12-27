@@ -19,7 +19,6 @@ final class NoSessionController$execute$1 extends SuspendLambda implements Funct
     int label;
     final /* synthetic */ NoSessionController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NoSessionController$execute$1(long j, NoSessionController noSessionController, Continuation continuation) {
         super(2, continuation);
         this.$action = j;

@@ -16,7 +16,6 @@ final class MobileConnectionsRepositoryImpl$subscriptions$2 extends SuspendLambd
     int label;
     final /* synthetic */ MobileConnectionsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileConnectionsRepositoryImpl$subscriptions$2(MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mobileConnectionsRepositoryImpl;

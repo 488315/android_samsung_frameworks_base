@@ -33,7 +33,6 @@ public class MessageChannelRouter {
             super("", replay);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // com.samsung.android.sume.core.message.BlockingMessageChannel,
                   // com.samsung.android.sume.core.channel.Channel
         public void send(Message data) {

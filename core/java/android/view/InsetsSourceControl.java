@@ -15,13 +15,11 @@ public class InsetsSourceControl implements Parcelable {
     public static final Parcelable.Creator<InsetsSourceControl> CREATOR =
             new Parcelable.Creator<
                     InsetsSourceControl>() { // from class: android.view.InsetsSourceControl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InsetsSourceControl createFromParcel(Parcel in) {
                     return new InsetsSourceControl(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InsetsSourceControl[] newArray(int size) {
                     return new InsetsSourceControl[size];
@@ -258,13 +256,11 @@ public class InsetsSourceControl implements Parcelable {
         public static final Parcelable.Creator<Array> CREATOR =
                 new Parcelable.Creator<
                         Array>() { // from class: android.view.InsetsSourceControl.Array.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Array createFromParcel(Parcel in) {
                         return new Array(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Array[] newArray(int size) {
                         return new Array[size];

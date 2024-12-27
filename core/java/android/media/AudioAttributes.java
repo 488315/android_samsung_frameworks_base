@@ -162,13 +162,11 @@ public final class AudioAttributes implements Parcelable {
         CREATOR =
                 new Parcelable.Creator<
                         AudioAttributes>() { // from class: android.media.AudioAttributes.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AudioAttributes createFromParcel(Parcel p) {
                         return new AudioAttributes(p);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AudioAttributes[] newArray(int size) {
                         return new AudioAttributes[size];
@@ -519,7 +517,6 @@ public final class AudioAttributes implements Parcelable {
             return this;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public Builder setInternalLegacyStreamType(int streamType) {
             AudioAttributes attributes;
             this.mContentType = 0;
@@ -929,7 +926,6 @@ public final class AudioAttributes implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int usageForStreamType(int streamType) {
         switch (streamType) {
         }

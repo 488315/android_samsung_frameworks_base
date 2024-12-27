@@ -8,7 +8,6 @@ public class HermesObject implements Parcelable {
             new Parcelable.Creator<
                     HermesObject>() { // from class:
                                       // com.samsung.android.infoextraction.HermesObject.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HermesObject createFromParcel(Parcel in) {
                     HermesObject data = new HermesObject();
@@ -16,7 +15,6 @@ public class HermesObject implements Parcelable {
                     return data;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HermesObject[] newArray(int size) {
                     return new HermesObject[size];

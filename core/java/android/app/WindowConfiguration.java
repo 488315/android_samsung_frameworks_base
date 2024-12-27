@@ -35,13 +35,11 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
     public static final Parcelable.Creator<WindowConfiguration> CREATOR =
             new Parcelable.Creator<
                     WindowConfiguration>() { // from class: android.app.WindowConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowConfiguration createFromParcel(Parcel in) {
                     return new WindowConfiguration(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowConfiguration[] newArray(int size) {
                     return new WindowConfiguration[size];

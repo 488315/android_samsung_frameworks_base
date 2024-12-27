@@ -37,8 +37,6 @@ public final class MusicControlActionInteractor implements ActionInteractor {
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Action {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ Action[] $VALUES;
@@ -99,15 +97,6 @@ public final class MusicControlActionInteractor implements ActionInteractor {
         this.audioManagerWrapper = new AudioManagerWrapper(context);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0093 A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x005d A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0073 A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00ab A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00a9 A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:5:0x009f A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x007e A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -51,7 +51,6 @@ final class AccessibilityInputMethodSessionWrapper extends IAccessibilityInputMe
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: doUpdateSelection, reason: merged with bridge method [inline-methods] */
     public void lambda$updateSelection$0(
             int oldSelStart,
@@ -83,7 +82,6 @@ final class AccessibilityInputMethodSessionWrapper extends IAccessibilityInputMe
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doFinishInput() {
         AccessibilityInputMethodSession session = this.mSessionRef.get();
         if (session != null) {
@@ -107,7 +105,6 @@ final class AccessibilityInputMethodSessionWrapper extends IAccessibilityInputMe
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doFinishSession() {
         this.mSessionRef.set(null);
     }
@@ -132,7 +129,6 @@ final class AccessibilityInputMethodSessionWrapper extends IAccessibilityInputMe
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: doInvalidateInput, reason: merged with bridge method [inline-methods] */
     public void lambda$invalidateInput$1(
             EditorInfo editorInfo, IRemoteAccessibilityInputConnection connection, int sessionId) {

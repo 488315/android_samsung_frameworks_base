@@ -38,7 +38,6 @@ final class FromDreamingLockscreenHostedTransitionInteractor$listenForDreamingLo
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromDreamingLockscreenHostedTransitionInteractor$listenForDreamingLockscreenHostedToOccluded$1(FromDreamingLockscreenHostedTransitionInteractor fromDreamingLockscreenHostedTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromDreamingLockscreenHostedTransitionInteractor;

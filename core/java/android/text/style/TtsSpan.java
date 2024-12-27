@@ -147,19 +147,16 @@ public class TtsSpan implements ParcelableSpan {
             return new TtsSpan(this.mType, this.mArgs);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public C setStringArgument(String arg, String value) {
             this.mArgs.putString(arg, value);
             return this;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public C setIntArgument(String arg, int value) {
             this.mArgs.putInt(arg, value);
             return this;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public C setLongArgument(String arg, long value) {
             this.mArgs.putLong(arg, value);
             return this;
@@ -198,7 +195,6 @@ public class TtsSpan implements ParcelableSpan {
             setText(text);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public TextBuilder setText(String text) {
             return (TextBuilder) setStringArgument(TtsSpan.ARG_TEXT, text);
         }
@@ -223,7 +219,6 @@ public class TtsSpan implements ParcelableSpan {
             return setNumber(String.valueOf(number));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public CardinalBuilder setNumber(String number) {
             return (CardinalBuilder) setStringArgument(TtsSpan.ARG_NUMBER, number);
         }
@@ -248,7 +243,6 @@ public class TtsSpan implements ParcelableSpan {
             return setNumber(String.valueOf(number));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public OrdinalBuilder setNumber(String number) {
             return (OrdinalBuilder) setStringArgument(TtsSpan.ARG_NUMBER, number);
         }
@@ -291,12 +285,10 @@ public class TtsSpan implements ParcelableSpan {
             return setIntegerPart(String.valueOf(integerPart));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public DecimalBuilder setIntegerPart(String integerPart) {
             return (DecimalBuilder) setStringArgument(TtsSpan.ARG_INTEGER_PART, integerPart);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public DecimalBuilder setFractionalPart(String fractionalPart) {
             return (DecimalBuilder) setStringArgument(TtsSpan.ARG_FRACTIONAL_PART, fractionalPart);
         }
@@ -318,7 +310,6 @@ public class TtsSpan implements ParcelableSpan {
             return setIntegerPart(String.valueOf(integerPart));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public FractionBuilder setIntegerPart(String integerPart) {
             return (FractionBuilder) setStringArgument(TtsSpan.ARG_INTEGER_PART, integerPart);
         }
@@ -327,7 +318,6 @@ public class TtsSpan implements ParcelableSpan {
             return setNumerator(String.valueOf(numerator));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public FractionBuilder setNumerator(String numerator) {
             return (FractionBuilder) setStringArgument(TtsSpan.ARG_NUMERATOR, numerator);
         }
@@ -336,7 +326,6 @@ public class TtsSpan implements ParcelableSpan {
             return setDenominator(String.valueOf(denominator));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public FractionBuilder setDenominator(String denominator) {
             return (FractionBuilder) setStringArgument(TtsSpan.ARG_DENOMINATOR, denominator);
         }
@@ -351,7 +340,6 @@ public class TtsSpan implements ParcelableSpan {
             return setNumber(String.valueOf(number));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public MeasureBuilder setNumber(String number) {
             return (MeasureBuilder) setStringArgument(TtsSpan.ARG_NUMBER, number);
         }
@@ -360,12 +348,10 @@ public class TtsSpan implements ParcelableSpan {
             return setIntegerPart(String.valueOf(integerPart));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public MeasureBuilder setIntegerPart(String integerPart) {
             return (MeasureBuilder) setStringArgument(TtsSpan.ARG_INTEGER_PART, integerPart);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public MeasureBuilder setFractionalPart(String fractionalPart) {
             return (MeasureBuilder) setStringArgument(TtsSpan.ARG_FRACTIONAL_PART, fractionalPart);
         }
@@ -374,7 +360,6 @@ public class TtsSpan implements ParcelableSpan {
             return setNumerator(String.valueOf(numerator));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public MeasureBuilder setNumerator(String numerator) {
             return (MeasureBuilder) setStringArgument(TtsSpan.ARG_NUMERATOR, numerator);
         }
@@ -383,12 +368,10 @@ public class TtsSpan implements ParcelableSpan {
             return setDenominator(String.valueOf(denominator));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public MeasureBuilder setDenominator(String denominator) {
             return (MeasureBuilder) setStringArgument(TtsSpan.ARG_DENOMINATOR, denominator);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public MeasureBuilder setUnit(String unit) {
             return (MeasureBuilder) setStringArgument(TtsSpan.ARG_UNIT, unit);
         }
@@ -405,12 +388,10 @@ public class TtsSpan implements ParcelableSpan {
             setMinutes(minutes);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public TimeBuilder setHours(int hours) {
             return (TimeBuilder) setIntArgument(TtsSpan.ARG_HOURS, hours);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public TimeBuilder setMinutes(int minutes) {
             return (TimeBuilder) setIntArgument(TtsSpan.ARG_MINUTES, minutes);
         }
@@ -437,22 +418,18 @@ public class TtsSpan implements ParcelableSpan {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public DateBuilder setWeekday(int weekday) {
             return (DateBuilder) setIntArgument(TtsSpan.ARG_WEEKDAY, weekday);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public DateBuilder setDay(int day) {
             return (DateBuilder) setIntArgument(TtsSpan.ARG_DAY, day);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public DateBuilder setMonth(int month) {
             return (DateBuilder) setIntArgument(TtsSpan.ARG_MONTH, month);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public DateBuilder setYear(int year) {
             return (DateBuilder) setIntArgument(TtsSpan.ARG_YEAR, year);
         }
@@ -467,22 +444,18 @@ public class TtsSpan implements ParcelableSpan {
             return setIntegerPart(String.valueOf(integerPart));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public MoneyBuilder setIntegerPart(String integerPart) {
             return (MoneyBuilder) setStringArgument(TtsSpan.ARG_INTEGER_PART, integerPart);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public MoneyBuilder setFractionalPart(String fractionalPart) {
             return (MoneyBuilder) setStringArgument(TtsSpan.ARG_FRACTIONAL_PART, fractionalPart);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public MoneyBuilder setCurrency(String currency) {
             return (MoneyBuilder) setStringArgument(TtsSpan.ARG_CURRENCY, currency);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public MoneyBuilder setQuantity(String quantity) {
             return (MoneyBuilder) setStringArgument(TtsSpan.ARG_QUANTITY, quantity);
         }
@@ -498,17 +471,14 @@ public class TtsSpan implements ParcelableSpan {
             setNumberParts(numberParts);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public TelephoneBuilder setCountryCode(String countryCode) {
             return (TelephoneBuilder) setStringArgument(TtsSpan.ARG_COUNTRY_CODE, countryCode);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public TelephoneBuilder setNumberParts(String numberParts) {
             return (TelephoneBuilder) setStringArgument(TtsSpan.ARG_NUMBER_PARTS, numberParts);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public TelephoneBuilder setExtension(String extension) {
             return (TelephoneBuilder) setStringArgument(TtsSpan.ARG_EXTENSION, extension);
         }
@@ -523,42 +493,34 @@ public class TtsSpan implements ParcelableSpan {
             return setDomain(domain).setUsername(username);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public ElectronicBuilder setProtocol(String protocol) {
             return (ElectronicBuilder) setStringArgument(TtsSpan.ARG_PROTOCOL, protocol);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public ElectronicBuilder setUsername(String username) {
             return (ElectronicBuilder) setStringArgument(TtsSpan.ARG_USERNAME, username);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public ElectronicBuilder setPassword(String password) {
             return (ElectronicBuilder) setStringArgument(TtsSpan.ARG_PASSWORD, password);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public ElectronicBuilder setDomain(String domain) {
             return (ElectronicBuilder) setStringArgument(TtsSpan.ARG_DOMAIN, domain);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public ElectronicBuilder setPort(int port) {
             return (ElectronicBuilder) setIntArgument(TtsSpan.ARG_PORT, port);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public ElectronicBuilder setPath(String path) {
             return (ElectronicBuilder) setStringArgument(TtsSpan.ARG_PATH, path);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public ElectronicBuilder setQueryString(String queryString) {
             return (ElectronicBuilder) setStringArgument(TtsSpan.ARG_QUERY_STRING, queryString);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public ElectronicBuilder setFragmentId(String fragmentId) {
             return (ElectronicBuilder) setStringArgument(TtsSpan.ARG_FRAGMENT_ID, fragmentId);
         }
@@ -574,7 +536,6 @@ public class TtsSpan implements ParcelableSpan {
             setDigits(digits);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public DigitsBuilder setDigits(String digits) {
             return (DigitsBuilder) setStringArgument(TtsSpan.ARG_DIGITS, digits);
         }
@@ -590,7 +551,6 @@ public class TtsSpan implements ParcelableSpan {
             setVerbatim(verbatim);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public VerbatimBuilder setVerbatim(String verbatim) {
             return (VerbatimBuilder) setStringArgument(TtsSpan.ARG_VERBATIM, verbatim);
         }

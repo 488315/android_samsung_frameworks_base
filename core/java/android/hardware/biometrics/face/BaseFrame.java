@@ -8,7 +8,6 @@ public class BaseFrame implements Parcelable {
     public static final Parcelable.Creator<BaseFrame> CREATOR =
             new Parcelable.Creator<
                     BaseFrame>() { // from class: android.hardware.biometrics.face.BaseFrame.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BaseFrame createFromParcel(Parcel _aidl_source) {
                     BaseFrame _aidl_out = new BaseFrame();
@@ -16,7 +15,6 @@ public class BaseFrame implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BaseFrame[] newArray(int _aidl_size) {
                     return new BaseFrame[_aidl_size];

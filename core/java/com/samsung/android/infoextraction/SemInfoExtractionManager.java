@@ -244,7 +244,6 @@ public class SemInfoExtractionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void requestInfoExtraction(
             IBinder InfoExtractionService, int dataType, Object reqObject) {
         Log.d(TAG, "requestInfoExtraction data type = " + dataType);

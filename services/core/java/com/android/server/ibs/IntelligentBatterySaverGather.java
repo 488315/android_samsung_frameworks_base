@@ -98,7 +98,6 @@ public final class IntelligentBatterySaverGather {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.ibs.IntelligentBatterySaverGather$1] */
     public IntelligentBatterySaverGather(
             Context context, IntelligentBatterySaverService intelligentBatterySaverService) {
         this.mIBSService = intelligentBatterySaverService;

@@ -113,11 +113,6 @@ public final class NotificationGroupingUtil {
         private LeftIconApplicator() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:12:0x003e  */
-        /* JADX WARN: Removed duplicated region for block: B:22:0x0053  */
-        /* JADX WARN: Removed duplicated region for block: B:25:0x005b  */
-        /* JADX WARN: Removed duplicated region for block: B:60:0x00c5 A[ORIG_RETURN, RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:61:0x0055  */
         @Override // com.android.systemui.statusbar.NotificationGroupingUtil.ResultApplicator
         /*
             Code decompiled incorrectly, please refer to instructions dump.

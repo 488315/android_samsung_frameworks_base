@@ -39,12 +39,6 @@ public final class FirstUseDateData extends BaseData {
             this.this$0 = obj;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:45:0x02d2  */
-        /* JADX WARN: Removed duplicated region for block: B:50:0x02f8  */
-        /* JADX WARN: Removed duplicated region for block: B:52:0x013b A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:62:0x0174  */
-        /* JADX WARN: Type inference failed for: r11v3, types: [java.lang.Object, java.time.LocalDateTime] */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.

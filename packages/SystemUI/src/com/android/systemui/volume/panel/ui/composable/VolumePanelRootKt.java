@@ -83,7 +83,6 @@ public abstract class VolumePanelRootKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.ui.composable.VolumePanelRootKt$BottomBar$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -165,7 +164,6 @@ public abstract class VolumePanelRootKt {
         if (endRestartGroup != null) {
             final Modifier modifier2 = modifier;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.ui.composable.VolumePanelRootKt$Components$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

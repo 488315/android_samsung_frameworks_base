@@ -15,7 +15,6 @@ final class FromDozingTransitionInteractor$listenForDozingToAny$1$2$emit$1 exten
     /* synthetic */ Object result;
     final /* synthetic */ FromDozingTransitionInteractor$listenForDozingToAny$1.AnonymousClass2 this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromDozingTransitionInteractor$listenForDozingToAny$1$2$emit$1(FromDozingTransitionInteractor$listenForDozingToAny$1.AnonymousClass2 anonymousClass2, Continuation continuation) {
         super(continuation);
         this.this$0 = anonymousClass2;

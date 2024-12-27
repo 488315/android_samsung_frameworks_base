@@ -70,7 +70,6 @@ public final class VpnRules {
         runVpnRulesCommand(4, "*mangle\n-X vpn_POSTROUTING\nCOMMIT\n");
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(14:2|3|(11:5|(1:7)|8|9|(2:12|10)|13|14|(2:16|(5:18|(1:20)(1:25)|21|22|23))|26|27|28)|32|(3:34|35|36)|8|9|(1:10)|13|14|(0)|26|27|28) */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x003e, code lost:
 
        r7 = move-exception;
@@ -79,8 +78,6 @@ public final class VpnRules {
 
        android.util.Log.e("VpnRules", "runShellCmd: err = " + r7);
     */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x002a A[Catch: all -> 0x000b, Exception -> 0x003e, LOOP:0: B:10:0x0024->B:12:0x002a, LOOP_END, TryCatch #0 {Exception -> 0x003e, blocks: (B:9:0x001e, B:10:0x0024, B:12:0x002a, B:14:0x0041, B:16:0x0071, B:18:0x0088, B:21:0x00b0, B:25:0x00a8, B:26:0x00c2), top: B:8:0x001e, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0071 A[Catch: all -> 0x000b, Exception -> 0x003e, TryCatch #0 {Exception -> 0x003e, blocks: (B:9:0x001e, B:10:0x0024, B:12:0x002a, B:14:0x0041, B:16:0x0071, B:18:0x0088, B:21:0x00b0, B:25:0x00a8, B:26:0x00c2), top: B:8:0x001e, outer: #1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -206,7 +203,6 @@ public final class VpnRules {
                     + " com.android.server.connectivity.VpnRules.runShellCommand(java.lang.String):java.lang.String");
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(14:2|3|(11:5|(1:7)|8|9|(2:12|10)|13|14|(1:16)|17|18|19)|25|(3:27|28|29)|8|9|(1:10)|13|14|(0)|17|18|19) */
     /* JADX WARN: Code restructure failed: missing block: B:22:0x003d, code lost:
 
        r6 = move-exception;
@@ -215,8 +211,6 @@ public final class VpnRules {
 
        android.util.Log.e("VpnRules", "runCmd: err = " + r6);
     */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0029 A[Catch: all -> 0x000a, Exception -> 0x003d, LOOP:0: B:10:0x0023->B:12:0x0029, LOOP_END, TryCatch #0 {Exception -> 0x003d, blocks: (B:9:0x001d, B:10:0x0023, B:12:0x0029, B:14:0x003f, B:17:0x008b), top: B:8:0x001d, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0089  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

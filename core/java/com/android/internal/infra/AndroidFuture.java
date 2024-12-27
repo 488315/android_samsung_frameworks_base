@@ -36,13 +36,11 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
     private static final Executor DIRECT_EXECUTOR = new PendingIntent$$ExternalSyntheticLambda0();
     private static final StackTraceElement[] EMPTY_STACK_TRACE = new StackTraceElement[0];
     public static final Parcelable.Creator<AndroidFuture> CREATOR = new Parcelable.Creator<AndroidFuture>() { // from class: com.android.internal.infra.AndroidFuture.2
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public AndroidFuture createFromParcel(Parcel parcel) {
             return new AndroidFuture(parcel);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public AndroidFuture[] newArray(int size) {
             return new AndroidFuture[size];
@@ -56,7 +54,6 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
         this.mRemoteOrigin = null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     AndroidFuture(Parcel in) {
         this.mLock = new Object();
         this.mListenerExecutor = DIRECT_EXECUTOR;
@@ -202,8 +199,6 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
-    /* JADX WARN: Multi-variable type inference failed */
     public static <TT> void callListener(BiConsumer<? super TT, ? super Throwable> listener, TT tt, Throwable err) {
         try {
             listener.accept(tt, err);
@@ -271,7 +266,6 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
             source.whenComplete((BiConsumer) this);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // java.util.function.BiConsumer
         public void accept(Object obj, Throwable err) {
             if (err != null) {
@@ -315,7 +309,6 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
         private final Function<? super T, ? extends U> mFn;
         private volatile T mSourceResult = null;
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // java.util.function.BiConsumer
         public /* bridge */ /* synthetic */ void accept(Object obj, Throwable th) {
             accept2((ThenApplyAsync<T, U>) obj, th);
@@ -337,7 +330,6 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
             }
         }
 
-        /* JADX WARN: Type inference failed for: r0v2, types: [java.lang.Object] */
         @Override // java.lang.Runnable
         public void run() {
             try {
@@ -366,7 +358,6 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ThenCombine<T, U, V> extends AndroidFuture<V> implements BiConsumer<Object, Throwable> {
         private final BiFunction<? super T, ? super U, ? extends V> mCombineResults;
         private volatile T mResultT = null;
@@ -378,8 +369,6 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
             sourceT.whenComplete((BiConsumer) this);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v3, types: [java.lang.Object] */
         @Override // java.util.function.BiConsumer
         public void accept(Object obj, Throwable th) {
             if (th != null) {
@@ -403,7 +392,6 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$accept$0(Object r, Throwable e) {
             this.mSourceU = null;
             accept(r, e);
@@ -475,7 +463,6 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
         return t;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private static void writeThrowable(Parcel parcel, Throwable th) {
         boolean hasThrowable = th != 0;
         parcel.writeBoolean(hasThrowable);
@@ -503,15 +490,6 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
         writeThrowable(parcel, th.getCause());
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [java.lang.Throwable] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [java.lang.Throwable] */
-    /* JADX WARN: Type inference failed for: r0v7 */
-    /* JADX WARN: Type inference failed for: r0v8 */
-    /* JADX WARN: Type inference failed for: r0v9 */
-    /* JADX WARN: Type inference failed for: r9v1, types: [java.lang.StringBuilder] */
     private static Throwable readThrowable(Parcel parcel) {
         ?? r0 = ": ";
         boolean hasThrowable = parcel.readBoolean();

@@ -13,7 +13,6 @@ final class RouteDeviceController$packageName$2 extends SuspendLambda implements
     int label;
     final /* synthetic */ RouteDeviceController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RouteDeviceController$packageName$2(RouteDeviceController routeDeviceController, Continuation continuation) {
         super(2, continuation);
         this.this$0 = routeDeviceController;

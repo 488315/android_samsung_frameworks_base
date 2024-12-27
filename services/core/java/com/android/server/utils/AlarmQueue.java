@@ -25,7 +25,6 @@ public abstract class AlarmQueue implements AlarmManager.OnAlarmListener {
     public final AnonymousClass1 mScheduleAlarmRunnable;
     public long mTriggerTimeElapsed;
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public class AlarmPriorityQueue extends PriorityQueue {
         public static final AlarmQueue$AlarmPriorityQueue$$ExternalSyntheticLambda0
                 sTimeComparator = new AlarmQueue$AlarmPriorityQueue$$ExternalSyntheticLambda0();
@@ -53,7 +52,6 @@ public abstract class AlarmQueue implements AlarmManager.OnAlarmListener {
         this(context, looper, str, str2, z, j, new Injector());
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.utils.AlarmQueue$1] */
     public AlarmQueue(
             Context context,
             Looper looper,

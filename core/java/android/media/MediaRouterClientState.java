@@ -9,13 +9,11 @@ public final class MediaRouterClientState implements Parcelable {
     public static final Parcelable.Creator<MediaRouterClientState> CREATOR =
             new Parcelable.Creator<MediaRouterClientState>() { // from class:
                 // android.media.MediaRouterClientState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaRouterClientState createFromParcel(Parcel in) {
                     return new MediaRouterClientState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaRouterClientState[] newArray(int size) {
                     return new MediaRouterClientState[size];
@@ -60,13 +58,11 @@ public final class MediaRouterClientState implements Parcelable {
         public static final Parcelable.Creator<RouteInfo> CREATOR =
                 new Parcelable.Creator<RouteInfo>() { // from class:
                     // android.media.MediaRouterClientState.RouteInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RouteInfo createFromParcel(Parcel in) {
                         return new RouteInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RouteInfo[] newArray(int size) {
                         return new RouteInfo[size];

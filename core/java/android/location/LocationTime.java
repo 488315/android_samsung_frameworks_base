@@ -10,7 +10,6 @@ import java.time.Instant;
 public final class LocationTime implements Parcelable {
     public static final Parcelable.Creator<LocationTime> CREATOR =
             new Parcelable.Creator<LocationTime>() { // from class: android.location.LocationTime.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LocationTime createFromParcel(Parcel in) {
                     long time = in.readLong();
@@ -18,7 +17,6 @@ public final class LocationTime implements Parcelable {
                     return new LocationTime(time, elapsedRealtimeNanos);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LocationTime[] newArray(int size) {
                     return new LocationTime[size];

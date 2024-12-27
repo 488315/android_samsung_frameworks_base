@@ -12,7 +12,6 @@ final class ScreenBrightnessDisplayManagerRepository$brightnessInfoValue$2 exten
     int label;
     final /* synthetic */ ScreenBrightnessDisplayManagerRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenBrightnessDisplayManagerRepository$brightnessInfoValue$2(ScreenBrightnessDisplayManagerRepository screenBrightnessDisplayManagerRepository, Continuation continuation) {
         super(2, continuation);
         this.this$0 = screenBrightnessDisplayManagerRepository;

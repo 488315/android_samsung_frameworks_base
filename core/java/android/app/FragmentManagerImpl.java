@@ -539,16 +539,6 @@ final class FragmentManagerImpl extends FragmentManager implements LayoutInflate
         return this.mCurState >= state;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x02a2  */
-    /* JADX WARN: Removed duplicated region for block: B:123:0x02a6  */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x02ca  */
-    /* JADX WARN: Removed duplicated region for block: B:152:0x032b  */
-    /* JADX WARN: Removed duplicated region for block: B:157:0x034e  */
-    /* JADX WARN: Removed duplicated region for block: B:185:0x03dc  */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x042a  */
-    /* JADX WARN: Removed duplicated region for block: B:216:0x041e  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x01a1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -996,7 +986,6 @@ final class FragmentManagerImpl extends FragmentManager implements LayoutInflate
                     + " boolean):void");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void scheduleCommit() {
         synchronized (this) {
             boolean pendingReady = false;
@@ -1332,7 +1321,6 @@ final class FragmentManagerImpl extends FragmentManager implements LayoutInflate
         return postponeIndex;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void completeExecute(
             BackStackRecord record, boolean isPop, boolean runTransitions, boolean moveToState) {
         if (isPop) {

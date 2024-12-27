@@ -270,19 +270,6 @@ public final class ProcessStatsService extends IProcessStats.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r11v3 */
-    /* JADX WARN: Type inference failed for: r11v6 */
-    /* JADX WARN: Type inference failed for: r11v8 */
-    /* JADX WARN: Type inference failed for: r12v0 */
-    /* JADX WARN: Type inference failed for: r12v11 */
-    /* JADX WARN: Type inference failed for: r12v6, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r18v29 */
-    /* JADX WARN: Type inference failed for: r18v4 */
-    /* JADX WARN: Type inference failed for: r18v5 */
-    /* JADX WARN: Type inference failed for: r32v0 */
-    /* JADX WARN: Type inference failed for: r32v1 */
-    /* JADX WARN: Type inference failed for: r32v2 */
     @NeverCompile
     public final void dumpInner(PrintWriter printWriter, String[] strArr) {
         String str;
@@ -1006,7 +993,6 @@ public final class ProcessStatsService extends IProcessStats.Stub {
                         } else if (list != null) {
                             final ParcelFileDescriptor[] createPipe = ParcelFileDescriptor.createPipe();
                             new Thread() { // from class: com.android.server.am.ProcessStatsService.3
-                                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                                 {
                                     super("ProcessStats pipe output");
                                 }
@@ -1040,7 +1026,6 @@ public final class ProcessStatsService extends IProcessStats.Stub {
             if (z && list != null) {
                 final ParcelFileDescriptor[] createPipe2 = ParcelFileDescriptor.createPipe();
                 new Thread() { // from class: com.android.server.am.ProcessStatsService.3
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super("ProcessStats pipe output");
                     }
@@ -1187,7 +1172,6 @@ public final class ProcessStatsService extends IProcessStats.Stub {
             obtain.recycle();
             final ParcelFileDescriptor[] createPipe = ParcelFileDescriptor.createPipe();
             new Thread() { // from class: com.android.server.am.ProcessStatsService.4
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super("ProcessStats pipe output");
                 }
@@ -1334,9 +1318,6 @@ public final class ProcessStatsService extends IProcessStats.Stub {
         writeStateLocked(z, z2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0041 A[Catch: all -> 0x0010, TryCatch #0 {all -> 0x0010, blocks: (B:4:0x0003, B:6:0x000b, B:10:0x0041, B:11:0x0055, B:13:0x0062, B:14:0x006e, B:17:0x0070, B:20:0x0012, B:22:0x0026, B:23:0x002c), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0062 A[Catch: all -> 0x0010, TryCatch #0 {all -> 0x0010, blocks: (B:4:0x0003, B:6:0x000b, B:10:0x0041, B:11:0x0055, B:13:0x0062, B:14:0x006e, B:17:0x0070, B:20:0x0012, B:22:0x0026, B:23:0x002c), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0070 A[Catch: all -> 0x0010, DONT_GENERATE, TRY_LEAVE, TryCatch #0 {all -> 0x0010, blocks: (B:4:0x0003, B:6:0x000b, B:10:0x0041, B:11:0x0055, B:13:0x0062, B:14:0x006e, B:17:0x0070, B:20:0x0012, B:22:0x0026, B:23:0x002c), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

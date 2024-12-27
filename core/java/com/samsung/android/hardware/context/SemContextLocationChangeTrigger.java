@@ -9,13 +9,11 @@ public class SemContextLocationChangeTrigger extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextLocationChangeTrigger>() { // from class:
                                                          // com.samsung.android.hardware.context.SemContextLocationChangeTrigger.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextLocationChangeTrigger createFromParcel(Parcel in) {
                     return new SemContextLocationChangeTrigger(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextLocationChangeTrigger[] newArray(int size) {
                     return new SemContextLocationChangeTrigger[size];

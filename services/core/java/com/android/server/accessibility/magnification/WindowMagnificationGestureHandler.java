@@ -266,7 +266,6 @@ public final class WindowMagnificationGestureHandler extends MagnificationGestur
         MAX_SCALE = MagnificationScaleProvider.MAX_SCALE;
     }
 
-    /* JADX WARN: Type inference failed for: r11v1, types: [com.android.server.accessibility.magnification.WindowMagnificationGestureHandler$1] */
     public WindowMagnificationGestureHandler(
             Context context,
             MagnificationConnectionManager magnificationConnectionManager,

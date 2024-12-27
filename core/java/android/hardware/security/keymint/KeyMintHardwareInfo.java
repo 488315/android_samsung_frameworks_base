@@ -8,7 +8,6 @@ public class KeyMintHardwareInfo implements Parcelable {
     public static final Parcelable.Creator<KeyMintHardwareInfo> CREATOR =
             new Parcelable.Creator<KeyMintHardwareInfo>() { // from class:
                 // android.hardware.security.keymint.KeyMintHardwareInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyMintHardwareInfo createFromParcel(Parcel _aidl_source) {
                     KeyMintHardwareInfo _aidl_out = new KeyMintHardwareInfo();
@@ -16,7 +15,6 @@ public class KeyMintHardwareInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyMintHardwareInfo[] newArray(int _aidl_size) {
                     return new KeyMintHardwareInfo[_aidl_size];

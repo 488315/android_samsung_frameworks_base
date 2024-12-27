@@ -14,7 +14,6 @@ final class MediaProjectionChipInteractor$stopProjecting$1 extends SuspendLambda
     int label;
     final /* synthetic */ MediaProjectionChipInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaProjectionChipInteractor$stopProjecting$1(MediaProjectionChipInteractor mediaProjectionChipInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaProjectionChipInteractor;

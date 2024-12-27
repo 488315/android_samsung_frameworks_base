@@ -20,7 +20,6 @@ public final class DeviceEntryIconViewModel$special$$inlined$flatMapLatest$3 ext
     int label;
     final /* synthetic */ DeviceEntryIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryIconViewModel$special$$inlined$flatMapLatest$3(Continuation continuation, DeviceEntryIconViewModel deviceEntryIconViewModel) {
         super(3, continuation);
         this.this$0 = deviceEntryIconViewModel;
@@ -75,8 +74,6 @@ public final class DeviceEntryIconViewModel$special$$inlined$flatMapLatest$3 ext
                             this.this$0 = deviceEntryIconViewModel;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.

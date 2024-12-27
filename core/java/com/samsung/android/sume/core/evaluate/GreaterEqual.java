@@ -11,13 +11,11 @@ public class GreaterEqual<T extends Comparable<T>> extends GenericEvaluator<T> {
                     GreaterEqual<
                             ?>>() { // from class:
                                     // com.samsung.android.sume.core.evaluate.GreaterEqual.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GreaterEqual<?> createFromParcel(Parcel in) {
                     return new GreaterEqual<>(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GreaterEqual<?>[] newArray(int size) {
                     return new GreaterEqual[size];

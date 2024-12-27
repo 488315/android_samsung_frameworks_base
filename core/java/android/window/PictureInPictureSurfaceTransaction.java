@@ -18,13 +18,11 @@ public final class PictureInPictureSurfaceTransaction implements Parcelable {
             new Parcelable.Creator<
                     PictureInPictureSurfaceTransaction>() { // from class:
                                                             // android.window.PictureInPictureSurfaceTransaction.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PictureInPictureSurfaceTransaction createFromParcel(Parcel in) {
                     return new PictureInPictureSurfaceTransaction(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PictureInPictureSurfaceTransaction[] newArray(int size) {
                     return new PictureInPictureSurfaceTransaction[size];

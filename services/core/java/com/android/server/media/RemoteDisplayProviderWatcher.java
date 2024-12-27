@@ -203,8 +203,6 @@ public final class RemoteDisplayProviderWatcher {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.media.RemoteDisplayProviderWatcher$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.media.RemoteDisplayProviderWatcher$2] */
     public RemoteDisplayProviderWatcher(
             Context context, Callback callback, Handler handler, int i) {
         this.mContext = context;

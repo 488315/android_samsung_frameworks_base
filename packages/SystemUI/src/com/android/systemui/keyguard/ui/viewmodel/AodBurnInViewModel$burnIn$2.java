@@ -20,7 +20,6 @@ final class AodBurnInViewModel$burnIn$2 extends SuspendLambda implements Functio
     int label;
     final /* synthetic */ AodBurnInViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AodBurnInViewModel$burnIn$2(AodBurnInViewModel aodBurnInViewModel, BurnInParameters burnInParameters, Continuation continuation) {
         super(3, continuation);
         this.this$0 = aodBurnInViewModel;

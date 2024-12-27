@@ -15,7 +15,6 @@ final class SensorPrivacyToggleTileDataInteractor$availability$1 extends Suspend
     int label;
     final /* synthetic */ SensorPrivacyToggleTileDataInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SensorPrivacyToggleTileDataInteractor$availability$1(SensorPrivacyToggleTileDataInteractor sensorPrivacyToggleTileDataInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = sensorPrivacyToggleTileDataInteractor;

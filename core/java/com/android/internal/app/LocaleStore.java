@@ -292,7 +292,6 @@ public class LocaleStore {
             this.mIsSelected = selected;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public String getLangScriptKey() {
             String languageTag;
             if (this.mLangScriptKey == null) {
@@ -600,9 +599,6 @@ public class LocaleStore {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0082  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0092  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00b3 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -956,7 +952,6 @@ public class LocaleStore {
         return config.equals(locale.getLanguage());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isChina() {
         return "CHINA".equalsIgnoreCase(SystemProperties.get("ro.csc.country_code"));
     }

@@ -23,7 +23,6 @@ public class SemMobileWipsWifiSsid implements Parcelable {
             new Parcelable.Creator<
                     SemMobileWipsWifiSsid>() { // from class:
                                                // com.samsung.android.wifi.SemMobileWipsWifiSsid.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemMobileWipsWifiSsid createFromParcel(Parcel in) {
                     SemMobileWipsWifiSsid ssid = new SemMobileWipsWifiSsid();
@@ -32,7 +31,6 @@ public class SemMobileWipsWifiSsid implements Parcelable {
                     return ssid;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemMobileWipsWifiSsid[] newArray(int size) {
                     return new SemMobileWipsWifiSsid[size];

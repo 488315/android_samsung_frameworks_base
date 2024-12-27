@@ -357,7 +357,6 @@ public final class WindowManagerImpl implements WindowManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class OnFpsCallbackListenerProxy extends ITaskFpsCallback.Stub {
         private final TaskFpsCallback mCallback;
         private final Executor mExecutor;
@@ -380,7 +379,6 @@ public final class WindowManagerImpl implements WindowManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFpsReported$0(float fps) {
             this.mCallback.onFpsReported(fps);
         }

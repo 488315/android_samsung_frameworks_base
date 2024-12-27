@@ -14,13 +14,11 @@ public final class GetDefaultDownloadableSubscriptionListResult implements Parce
             new Parcelable.Creator<
                     GetDefaultDownloadableSubscriptionListResult>() { // from class:
                                                                       // android.service.euicc.GetDefaultDownloadableSubscriptionListResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetDefaultDownloadableSubscriptionListResult createFromParcel(Parcel in) {
                     return new GetDefaultDownloadableSubscriptionListResult(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetDefaultDownloadableSubscriptionListResult[] newArray(int size) {
                     return new GetDefaultDownloadableSubscriptionListResult[size];

@@ -10,7 +10,6 @@ final class DeviceBasedSatelliteRepositoryImpl$checkSatelliteSupportAfterMinUpti
     /* synthetic */ Object result;
     final /* synthetic */ DeviceBasedSatelliteRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteRepositoryImpl$checkSatelliteSupportAfterMinUptime$1(DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl, Continuation continuation) {
         super(continuation);
         this.this$0 = deviceBasedSatelliteRepositoryImpl;

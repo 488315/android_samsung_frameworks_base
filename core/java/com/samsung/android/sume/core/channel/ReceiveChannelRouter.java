@@ -79,7 +79,6 @@ public class ReceiveChannelRouter extends ChannelRouterBase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public MediaBuffer receiveAll() {
         final List<MediaBuffer> buffers =
                 (List)
@@ -105,7 +104,6 @@ public class ReceiveChannelRouter extends ChannelRouterBase {
         return MediaBuffer.groupOf(primaryId, buffers);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public MediaBuffer receiveAny() {
         Log.d(TAG, "anyReceived: # of channel=" + this.channels.size());
         Def.require(!this.channels.isEmpty());
@@ -200,7 +198,6 @@ public class ReceiveChannelRouter extends ChannelRouterBase {
         throw new UnsupportedOperationException();
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.channel.Channel
     public MediaBuffer receive() {
         return this.receiveOp.get();

@@ -828,7 +828,6 @@ public class Instrumentation {
         return apk.getAppFactory();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyStartActivityResult(int result, Bundle options) {
         if (this.mActivityMonitors == null) {
             return;

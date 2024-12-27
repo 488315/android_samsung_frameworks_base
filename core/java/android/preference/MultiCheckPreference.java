@@ -211,13 +211,11 @@ public class MultiCheckPreference extends DialogPreference {
                 new Parcelable.Creator<
                         SavedState>() { // from class:
                                         // android.preference.MultiCheckPreference.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];

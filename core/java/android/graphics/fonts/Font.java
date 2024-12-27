@@ -84,7 +84,6 @@ public final class Font {
     @CriticalNative
     private static native int nGetPackedStyle(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native long nGetReleaseNativeFont();
 

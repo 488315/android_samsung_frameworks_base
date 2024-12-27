@@ -159,14 +159,12 @@ public final class VolumeShaper implements AutoCloseable {
             CREATOR =
                     new Parcelable.Creator<Configuration>() { // from class:
                         // android.media.VolumeShaper.Configuration.1
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public Configuration createFromParcel(Parcel p) {
                             return Configuration.fromParcelable(
                                     VolumeShaperConfiguration.CREATOR.createFromParcel(p));
                         }
 
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public Configuration[] newArray(int size) {
                             return new Configuration[size];
@@ -466,7 +464,6 @@ public final class VolumeShaper implements AutoCloseable {
             return null;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void checkCurveForErrorsAndThrowException(
                 float[] times, float[] volumes, boolean log, boolean ise) {
             String error = checkCurveForErrors(times, volumes, log);
@@ -478,7 +475,6 @@ public final class VolumeShaper implements AutoCloseable {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void checkValidVolumeAndThrowException(float volume, boolean log) {
             if (log) {
                 if (volume > 0.0f) {
@@ -489,7 +485,6 @@ public final class VolumeShaper implements AutoCloseable {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void clampVolume(float[] volumes, boolean log) {
             if (log) {
                 for (int i = 0; i < volumes.length; i++) {
@@ -708,14 +703,12 @@ public final class VolumeShaper implements AutoCloseable {
         public static final Parcelable.Creator<Operation> CREATOR =
                 new Parcelable.Creator<
                         Operation>() { // from class: android.media.VolumeShaper.Operation.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Operation createFromParcel(Parcel p) {
                         return Operation.fromParcelable(
                                 VolumeShaperOperation.CREATOR.createFromParcel(p));
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Operation[] newArray(int size) {
                         return new Operation[size];
@@ -899,13 +892,11 @@ public final class VolumeShaper implements AutoCloseable {
     public static final class State implements Parcelable {
         public static final Parcelable.Creator<State> CREATOR =
                 new Parcelable.Creator<State>() { // from class: android.media.VolumeShaper.State.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public State createFromParcel(Parcel p) {
                         return State.fromParcelable(VolumeShaperState.CREATOR.createFromParcel(p));
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public State[] newArray(int size) {
                         return new State[size];

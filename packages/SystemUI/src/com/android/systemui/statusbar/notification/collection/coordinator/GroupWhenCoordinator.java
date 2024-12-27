@@ -45,7 +45,6 @@ public final class GroupWhenCoordinator implements Coordinator {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.notification.collection.coordinator.GroupWhenCoordinator$invalidator$1] */
     public GroupWhenCoordinator(DelayableExecutor delayableExecutor, SystemClock systemClock) {
         this.delayableExecutor = delayableExecutor;
         this.systemClock = systemClock;
@@ -90,7 +89,6 @@ public final class GroupWhenCoordinator implements Coordinator {
         this.cancelInvalidateListRunnable = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onAfterRenderGroupListener(GroupEntry groupEntry, NotifGroupController notifGroupController) {
         NotificationViewWrapper notificationViewWrapper;
         Long l = this.notificationGroupTimes.get(groupEntry);
@@ -128,7 +126,6 @@ public final class GroupWhenCoordinator implements Coordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onBeforeFinalizeFilterListener(List<? extends ListEntry> list) {
         cancelListInvalidation();
         this.notificationGroupTimes.clear();

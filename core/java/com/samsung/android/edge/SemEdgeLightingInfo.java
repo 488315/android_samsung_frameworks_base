@@ -13,13 +13,11 @@ public final class SemEdgeLightingInfo implements Parcelable {
             new Parcelable.Creator<
                     SemEdgeLightingInfo>() { // from class:
                                              // com.samsung.android.edge.SemEdgeLightingInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemEdgeLightingInfo createFromParcel(Parcel source) {
                     return new SemEdgeLightingInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemEdgeLightingInfo[] newArray(int size) {
                     return new SemEdgeLightingInfo[size];

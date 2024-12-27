@@ -16,7 +16,6 @@ final class SecQSExpansionStateRepository$expanded$1 extends SuspendLambda imple
     int label;
     final /* synthetic */ SecQSExpansionStateRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SecQSExpansionStateRepository$expanded$1(SecQSExpansionStateRepository secQSExpansionStateRepository, Continuation continuation) {
         super(5, continuation);
         this.this$0 = secQSExpansionStateRepository;

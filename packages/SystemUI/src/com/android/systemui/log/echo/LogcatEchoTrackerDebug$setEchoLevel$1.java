@@ -37,7 +37,6 @@ final class LogcatEchoTrackerDebug$setEchoLevel$1 extends SuspendLambda implemen
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LogcatEchoTrackerDebug$setEchoLevel$1(LogcatEchoTrackerDebug logcatEchoTrackerDebug, EchoOverrideType echoOverrideType, LogLevel logLevel, String str, Continuation continuation) {
         super(2, continuation);
         this.this$0 = logcatEchoTrackerDebug;

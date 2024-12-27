@@ -471,7 +471,6 @@ public final class ContextHubService extends IContextHubService.Stub {
             this.mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("location_mode"), true, new ContentObserver(this) { // from class: com.android.server.location.contexthub.ContextHubService.2
                 public final /* synthetic */ ContextHubService this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(null);
                     this.this$0 = this;
@@ -527,7 +526,6 @@ public final class ContextHubService extends IContextHubService.Stub {
             this.mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor("wifi_scan_always_enabled"), true, new ContentObserver(this) { // from class: com.android.server.location.contexthub.ContextHubService.2
                 public final /* synthetic */ ContextHubService this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(null);
                     this.this$0 = this;
@@ -559,7 +557,6 @@ public final class ContextHubService extends IContextHubService.Stub {
             this.mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor("airplane_mode_on"), true, new ContentObserver(this) { // from class: com.android.server.location.contexthub.ContextHubService.2
                 public final /* synthetic */ ContextHubService this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(null);
                     this.this$0 = this;
@@ -643,7 +640,6 @@ public final class ContextHubService extends IContextHubService.Stub {
             this.mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor("ble_scan_always_enabled"), false, new ContentObserver(this) { // from class: com.android.server.location.contexthub.ContextHubService.2
                 public final /* synthetic */ ContextHubService this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(null);
                     this.this$0 = this;
@@ -731,9 +727,6 @@ public final class ContextHubService extends IContextHubService.Stub {
         return this.mClientManager.registerClient((ContextHubInfo) this.mContextHubIdToInfoMap.get(Integer.valueOf(i)), iContextHubClientCallback, str, this.mTransactionManager, str2);
     }
 
-    /* JADX WARN: Type inference failed for: r2v10 */
-    /* JADX WARN: Type inference failed for: r2v5, types: [android.os.IBinder, com.android.server.location.contexthub.ContextHubClientBroker] */
-    /* JADX WARN: Type inference failed for: r2v9 */
     public final IContextHubClient createPendingIntentClient(int i, PendingIntent pendingIntent, long j, String str) {
         ?? r2;
         createPendingIntentClient_enforcePermission();
@@ -1047,7 +1040,6 @@ public final class ContextHubService extends IContextHubService.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         new ContextHubShellCommand(this.mContext, this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
     }
@@ -1187,9 +1179,6 @@ public final class ContextHubService extends IContextHubService.Stub {
         this.mContextHubWrapper.onMicrophoneSettingChanged(!isSensorPrivacyEnabled);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x001f A[Catch: all -> 0x0024, TryCatch #0 {all -> 0x0024, blocks: (B:4:0x0003, B:10:0x001f, B:14:0x002f, B:17:0x003c, B:19:0x0047, B:23:0x0040, B:24:0x0033, B:25:0x0026), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x002f A[Catch: all -> 0x0024, TryCatch #0 {all -> 0x0024, blocks: (B:4:0x0003, B:10:0x001f, B:14:0x002f, B:17:0x003c, B:19:0x0047, B:23:0x0040, B:24:0x0033, B:25:0x0026), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x003c A[Catch: all -> 0x0024, TryCatch #0 {all -> 0x0024, blocks: (B:4:0x0003, B:10:0x001f, B:14:0x002f, B:17:0x003c, B:19:0x0047, B:23:0x0040, B:24:0x0033, B:25:0x0026), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -46,13 +46,11 @@ public class InsetsSource implements Parcelable {
     private static final Rect[] NO_BOUNDING_RECTS = new Rect[0];
     public static final Parcelable.Creator<InsetsSource> CREATOR =
             new Parcelable.Creator<InsetsSource>() { // from class: android.view.InsetsSource.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InsetsSource createFromParcel(Parcel in) {
                     return new InsetsSource(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InsetsSource[] newArray(int size) {
                     return new InsetsSource[size];

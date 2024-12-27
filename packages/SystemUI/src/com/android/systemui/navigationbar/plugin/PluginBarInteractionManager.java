@@ -86,7 +86,6 @@ public final class PluginBarInteractionManager {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.navigationbar.plugin.PluginBarInteractionManager$pluginListener$1] */
     public PluginBarInteractionManager(Context context, NavBarStoreImpl navBarStoreImpl, SPluginManager sPluginManager) {
         this.mainContext = context;
         this.navBarStore = navBarStoreImpl;

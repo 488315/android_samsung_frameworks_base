@@ -216,7 +216,6 @@ public final class NamedListenerSet<E> implements IListenerSet<E> {
         } : function1);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void forEachTraced(Consumer<E> consumer) {
         Iterator<NamedListener> namedIterator = namedIterator();
         while (namedIterator.hasNext()) {

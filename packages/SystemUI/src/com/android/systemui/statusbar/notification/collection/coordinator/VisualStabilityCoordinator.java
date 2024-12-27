@@ -232,35 +232,29 @@ public class VisualStabilityCoordinator implements Coordinator, Dumpable {
         return !this.mEntriesWithSuppressedSectionChange.isEmpty();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$temporarilyAllowSectionChanges$0(String str) {
         this.mEntriesThatCanChangeSection.remove(str);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$temporarilyAllowSectionChanges$1(String str) {
         this.mEntriesThatCanChangeSection.remove(str);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onCommunalShowingChanged(boolean z) {
         this.mCommunalShowing = z;
         updateAllowedStates("communalShowing", z);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onLaunchingActivityChanged(boolean z) {
         this.mNotifPanelLaunchingActivity = z;
         updateAllowedStates("notifPanelLaunchingActivity", z);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onShadeOrQsClosingChanged(boolean z) {
         this.mNotifPanelCollapsing = z;
         updateAllowedStates("notifPanelCollapsing", z);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateAllowedStates(String str, boolean z) {
         boolean z2 = this.mPipelineRunAllowed;
         boolean z3 = this.mReorderingAllowed;

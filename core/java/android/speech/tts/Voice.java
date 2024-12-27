@@ -15,13 +15,11 @@ import java.util.Set;
 public class Voice implements Parcelable {
     public static final Parcelable.Creator<Voice> CREATOR =
             new Parcelable.Creator<Voice>() { // from class: android.speech.tts.Voice.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Voice createFromParcel(Parcel in) {
                     return new Voice(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Voice[] newArray(int size) {
                     return new Voice[size];

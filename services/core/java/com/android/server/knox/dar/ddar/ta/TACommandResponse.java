@@ -18,23 +18,6 @@ public class TACommandResponse {
         this.mResponse = bArr;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x009b A[Catch: Exception -> 0x0076, IOException -> 0x0078, TRY_ENTER, TryCatch #10 {IOException -> 0x0078, Exception -> 0x0076, blocks: (B:24:0x006f, B:33:0x009b, B:35:0x00a0), top: B:17:0x005a }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00a0 A[Catch: Exception -> 0x0076, IOException -> 0x0078, TRY_LEAVE, TryCatch #10 {IOException -> 0x0078, Exception -> 0x0076, blocks: (B:24:0x006f, B:33:0x009b, B:35:0x00a0), top: B:17:0x005a }] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00b0 A[Catch: Exception -> 0x00aa, IOException -> 0x00ac, TRY_LEAVE, TryCatch #9 {IOException -> 0x00ac, Exception -> 0x00aa, blocks: (B:55:0x00a6, B:45:0x00b0), top: B:54:0x00a6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00a6 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r2v10 */
-    /* JADX WARN: Type inference failed for: r2v11 */
-    /* JADX WARN: Type inference failed for: r2v12 */
-    /* JADX WARN: Type inference failed for: r2v13 */
-    /* JADX WARN: Type inference failed for: r2v14 */
-    /* JADX WARN: Type inference failed for: r2v15, types: [java.io.FileWriter] */
-    /* JADX WARN: Type inference failed for: r2v16, types: [java.io.FileWriter, java.io.Writer] */
-    /* JADX WARN: Type inference failed for: r2v18 */
-    /* JADX WARN: Type inference failed for: r2v19 */
-    /* JADX WARN: Type inference failed for: r2v7, types: [java.lang.Object[]] */
-    /* JADX WARN: Type inference failed for: r2v8 */
-    /* JADX WARN: Type inference failed for: r2v9, types: [java.io.FileWriter] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

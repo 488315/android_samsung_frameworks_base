@@ -23,13 +23,11 @@ public class ClipDescription implements Parcelable {
     public static final Parcelable.Creator<ClipDescription> CREATOR =
             new Parcelable.Creator<
                     ClipDescription>() { // from class: android.content.ClipDescription.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClipDescription createFromParcel(Parcel source) {
                     return new ClipDescription(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClipDescription[] newArray(int size) {
                     return new ClipDescription[size];

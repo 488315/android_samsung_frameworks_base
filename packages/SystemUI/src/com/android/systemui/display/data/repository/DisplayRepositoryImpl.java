@@ -53,9 +53,6 @@ public final class DisplayRepositoryImpl implements DisplayRepository {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.display.data.repository.DisplayRepositoryImpl$special$$inlined$map$1] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.display.data.repository.DisplayRepositoryImpl$special$$inlined$map$2] */
-    /* JADX WARN: Type inference failed for: r9v11, types: [com.android.systemui.display.data.repository.DisplayRepositoryImpl$special$$inlined$map$9] */
     public DisplayRepositoryImpl(DisplayManager displayManager, Handler handler, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher) {
         this.displayManager = displayManager;
         ConflatedCallbackFlow conflatedCallbackFlow = ConflatedCallbackFlow.INSTANCE;
@@ -91,8 +88,6 @@ public final class DisplayRepositoryImpl implements DisplayRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -180,8 +175,6 @@ public final class DisplayRepositoryImpl implements DisplayRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -272,8 +265,6 @@ public final class DisplayRepositoryImpl implements DisplayRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -363,8 +354,6 @@ public final class DisplayRepositoryImpl implements DisplayRepository {
                     this.this$0 = displayRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -456,10 +445,6 @@ public final class DisplayRepositoryImpl implements DisplayRepository {
                     this.this$0 = displayRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:25:0x005b  */
-                /* JADX WARN: Removed duplicated region for block: B:28:0x0068 A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -577,8 +562,6 @@ public final class DisplayRepositoryImpl implements DisplayRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -692,8 +675,6 @@ public final class DisplayRepositoryImpl implements DisplayRepository {
                     this.this$0 = displayRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -845,8 +826,6 @@ public final class DisplayRepositoryImpl implements DisplayRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -937,8 +916,6 @@ public final class DisplayRepositoryImpl implements DisplayRepository {
                     this.this$0 = displayRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -1034,8 +1011,6 @@ public final class DisplayRepositoryImpl implements DisplayRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -1136,8 +1111,6 @@ public final class DisplayRepositoryImpl implements DisplayRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

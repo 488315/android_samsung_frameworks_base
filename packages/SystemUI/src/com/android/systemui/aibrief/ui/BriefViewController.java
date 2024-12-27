@@ -87,7 +87,6 @@ public final class BriefViewController {
         this.logger = briefLogger;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void dismissAnimation(final LottieAnimationView lottieAnimationView) {
         final ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
         ofFloat.setDuration(FOUR_STAR_ANIMATION_DURATION);
@@ -132,7 +131,6 @@ public final class BriefViewController {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static /* synthetic */ GradientDrawable getNowBarBackground$default(BriefViewController briefViewController, NowBarData nowBarData, boolean z, List list, int i, Object obj) {
         if ((i & 2) != 0) {
             z = true;
@@ -155,7 +153,6 @@ public final class BriefViewController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void initAnimatedViews(LottieAnimationView lottieAnimationView) {
         TextView textView = this.subText;
         if (textView != null) {
@@ -269,7 +266,6 @@ public final class BriefViewController {
         ofFloat.start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void startFourStarAnimation() {
         final LottieAnimationView lottieAnimationView;
         View view = this.nowBarView;
@@ -287,7 +283,6 @@ public final class BriefViewController {
         });
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0051  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -347,7 +342,6 @@ public final class BriefViewController {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.aibrief.ui.BriefViewController.toBlobHandle(java.lang.String):android.app.blob.BlobHandle");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void translationAnimation() {
         final TextView textView = this.mainText;
         if (textView != null) {

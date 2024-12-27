@@ -15,7 +15,6 @@ public final class ExternalTimeSuggestion implements Parcelable {
     public static final Parcelable.Creator<ExternalTimeSuggestion> CREATOR =
             new Parcelable.Creator<ExternalTimeSuggestion>() { // from class:
                 // android.app.time.ExternalTimeSuggestion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExternalTimeSuggestion createFromParcel(Parcel in) {
                     TimeSuggestionHelper helper =
@@ -24,7 +23,6 @@ public final class ExternalTimeSuggestion implements Parcelable {
                     return new ExternalTimeSuggestion(helper);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExternalTimeSuggestion[] newArray(int size) {
                     return new ExternalTimeSuggestion[size];

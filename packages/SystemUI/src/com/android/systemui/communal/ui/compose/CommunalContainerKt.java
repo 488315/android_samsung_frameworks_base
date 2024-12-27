@@ -304,7 +304,6 @@ public abstract class CommunalContainerKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalContainerKt$BackgroundTopScrim$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -359,7 +358,6 @@ public abstract class CommunalContainerKt {
         }
         composerImpl.end(false);
         EffectsKt.DisposableEffect(mutableSceneTransitionLayoutState, new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalContainerKt$CommunalContainer$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -377,7 +375,6 @@ public abstract class CommunalContainerKt {
             }
         }, composerImpl);
         EffectsKt.DisposableEffect(communalViewModel, mutableSceneTransitionLayoutState, new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalContainerKt$CommunalContainer$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -403,7 +400,6 @@ public abstract class CommunalContainerKt {
         PassthroughSwipeDetector passthroughSwipeDetector = SwipeDetectorKt.DefaultSwipeDetector;
         FillElement fillElement = SizeKt.FillWholeMaxSize;
         SceneTransitionLayoutKt.SceneTransitionLayout(mutableSceneTransitionLayoutState, modifier2.then(fillElement), fixedSizeEdgeDetector, passthroughSwipeDetector, 0.0f, new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalContainerKt$CommunalContainer$3
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -479,7 +475,6 @@ public abstract class CommunalContainerKt {
                 final CommunalContent communalContent2 = communalContent;
                 final State state2 = collectAsStateWithLifecycle4;
                 sceneTransitionLayoutImpl$updateScenes$1.scene(sceneKey2, mapOf2, new ComposableLambdaImpl(-570310163, true, new Function3() { // from class: com.android.systemui.communal.ui.compose.CommunalContainerKt$CommunalContainer$3.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(3);
                     }
@@ -515,7 +510,6 @@ public abstract class CommunalContainerKt {
         if (endRestartGroup != null) {
             final Modifier modifier3 = modifier2;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalContainerKt$CommunalContainer$4
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -551,7 +545,6 @@ public abstract class CommunalContainerKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalContainerKt$DefaultBackground$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -595,7 +588,6 @@ public abstract class CommunalContainerKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalContainerKt$StaticLinearGradient$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -670,7 +662,6 @@ public abstract class CommunalContainerKt {
         if (endRestartGroup != null) {
             final Modifier modifier3 = modifier2;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalContainerKt$CommunalScene$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

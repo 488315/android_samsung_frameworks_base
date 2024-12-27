@@ -12,7 +12,6 @@ final class KeyguardQuickAffordanceRepository$getAffordancePickerRepresentations
     /* synthetic */ Object result;
     final /* synthetic */ KeyguardQuickAffordanceRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordanceRepository$getAffordancePickerRepresentations$1(KeyguardQuickAffordanceRepository keyguardQuickAffordanceRepository, Continuation continuation) {
         super(continuation);
         this.this$0 = keyguardQuickAffordanceRepository;

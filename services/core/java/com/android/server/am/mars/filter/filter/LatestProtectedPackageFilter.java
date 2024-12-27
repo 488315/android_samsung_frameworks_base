@@ -30,8 +30,6 @@ public final class LatestProtectedPackageFilter implements IFilter {
 
        if (r3 > 2) goto L24;
     */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0053 A[Catch: all -> 0x005a, TryCatch #0 {all -> 0x005a, blocks: (B:13:0x001b, B:15:0x0029, B:17:0x002f, B:26:0x0053, B:31:0x005e, B:35:0x0068, B:33:0x006a, B:39:0x0045, B:42:0x004a, B:44:0x004e, B:45:0x006d), top: B:12:0x001b }] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x005e A[Catch: all -> 0x005a, TryCatch #0 {all -> 0x005a, blocks: (B:13:0x001b, B:15:0x0029, B:17:0x002f, B:26:0x0053, B:31:0x005e, B:35:0x0068, B:33:0x006a, B:39:0x0045, B:42:0x004a, B:44:0x004e, B:45:0x006d), top: B:12:0x001b }] */
     @Override // com.android.server.am.mars.filter.IFilter
     /*
         Code decompiled incorrectly, please refer to instructions dump.

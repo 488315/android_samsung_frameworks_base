@@ -35,7 +35,6 @@ public final class UserSwitcherViewModel {
     public final UserSwitcherInteractor userSwitcherInteractor;
     public final UserSwitcherViewModel$special$$inlined$map$2 users;
 
-    /* JADX WARN: Type inference failed for: r5v4, types: [com.android.systemui.user.ui.viewmodel.UserSwitcherViewModel$special$$inlined$map$1] */
     public UserSwitcherViewModel(UserSwitcherInteractor userSwitcherInteractor, GuestUserInteractor guestUserInteractor) {
         this.userSwitcherInteractor = userSwitcherInteractor;
         this.guestUserInteractor = guestUserInteractor;
@@ -70,8 +69,6 @@ public final class UserSwitcherViewModel {
                     this.this$0 = userSwitcherViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -158,7 +155,6 @@ public final class UserSwitcherViewModel {
         CircularDrawable circularDrawable = new CircularDrawable(userModel.image);
         boolean z = userModel.isSelectable;
         return new UserViewModel(i, resource, circularDrawable, userModel.isSelected, z ? 1.0f : 0.38f, !z ? null : new Function0() { // from class: com.android.systemui.user.ui.viewmodel.UserSwitcherViewModel$createOnSelectedCallback$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

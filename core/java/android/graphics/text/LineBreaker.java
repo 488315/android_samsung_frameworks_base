@@ -46,35 +46,27 @@ public class LineBreaker {
             float f3,
             int i3);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native float nGetLineAscent(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native int nGetLineBreakOffset(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native int nGetLineCount(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native float nGetLineDescent(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native int nGetLineFlag(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native float nGetLineWidth(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native long nGetReleaseFunc();
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native long nGetReleaseResultFunc();
 

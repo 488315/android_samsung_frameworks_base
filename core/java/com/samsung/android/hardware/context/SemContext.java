@@ -7,13 +7,11 @@ public class SemContext implements Parcelable {
     public static final Parcelable.Creator<SemContext> CREATOR =
             new Parcelable.Creator<
                     SemContext>() { // from class: com.samsung.android.hardware.context.SemContext.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContext createFromParcel(Parcel in) {
                     return new SemContext(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContext[] newArray(int size) {
                     return new SemContext[size];

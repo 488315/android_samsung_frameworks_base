@@ -114,7 +114,6 @@ public final class BtHelper {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.audio.BtHelper$1] */
     public BtHelper(AudioDeviceBroker audioDeviceBroker, Context context) {
         this.mDeviceBroker = audioDeviceBroker;
         this.mContext = context;
@@ -157,7 +156,6 @@ public final class BtHelper {
         return new AudioDeviceAttributes(i, str, name);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static int getBtDeviceCategory(String str) {
         byte[] metadata;
         char c;
@@ -717,8 +715,6 @@ public final class BtHelper {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:33:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -813,7 +809,6 @@ public final class BtHelper {
                     + " com.android.server.audio.BtHelper.onHeadsetProfileConnected(android.bluetooth.BluetoothHeadset):void");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final void onScoAudioStateChanged(int i) {
         BluetoothHeadset bluetoothHeadset;
         BluetoothDevice bluetoothDevice;

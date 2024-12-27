@@ -231,9 +231,6 @@ public final class RegionSamplingHelper implements View.OnAttachStateChangeListe
         this(view, samplingCallback, executor, executor2, new SysuiCompositionSamplingListener());
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.shared.navigationbar.RegionSamplingHelper$1] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.shared.navigationbar.RegionSamplingHelper$2] */
-    /* JADX WARN: Type inference failed for: r6v1, types: [com.android.systemui.shared.navigationbar.RegionSamplingHelper$3] */
     public RegionSamplingHelper(View view, SamplingCallback samplingCallback, Executor executor, Executor executor2, SysuiCompositionSamplingListener sysuiCompositionSamplingListener) {
         this.mHandler = new Handler();
         this.mSamplingRequestBounds = new Rect();

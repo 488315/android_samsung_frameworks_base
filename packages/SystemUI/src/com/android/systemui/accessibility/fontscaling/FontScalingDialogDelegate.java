@@ -63,7 +63,6 @@ public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate 
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.accessibility.fontscaling.FontScalingDialogDelegate$fontSizeObserver$1] */
     public FontScalingDialogDelegate(Context context, SystemUIDialog.Factory factory, LayoutInflater layoutInflater, SystemSettings systemSettings, SecureSettings secureSettings, SystemClock systemClock, UserTracker userTracker, final Handler handler, DelayableExecutor delayableExecutor) {
         this.context = context;
         this.systemUIDialogFactory = factory;

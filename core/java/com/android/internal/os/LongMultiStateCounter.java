@@ -16,13 +16,11 @@ public final class LongMultiStateCounter implements Parcelable {
             new Parcelable.Creator<
                     LongMultiStateCounter>() { // from class:
                                                // com.android.internal.os.LongMultiStateCounter.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LongMultiStateCounter createFromParcel(Parcel in) {
                     return new LongMultiStateCounter(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LongMultiStateCounter[] newArray(int size) {
                     return new LongMultiStateCounter[size];

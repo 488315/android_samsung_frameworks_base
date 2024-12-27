@@ -33,13 +33,11 @@ public class SemContextCarryingDetection extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextCarryingDetection>() { // from class:
                                                      // com.samsung.android.hardware.context.SemContextCarryingDetection.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextCarryingDetection createFromParcel(Parcel in) {
                     return new SemContextCarryingDetection(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextCarryingDetection[] newArray(int size) {
                     return new SemContextCarryingDetection[size];

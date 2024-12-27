@@ -10,7 +10,6 @@ public class BarringTypeSpecificInfo implements Parcelable {
     public static final Parcelable.Creator<BarringTypeSpecificInfo> CREATOR =
             new Parcelable.Creator<BarringTypeSpecificInfo>() { // from class:
                 // android.hardware.radio.network.BarringTypeSpecificInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BarringTypeSpecificInfo createFromParcel(Parcel _aidl_source) {
                     BarringTypeSpecificInfo _aidl_out = new BarringTypeSpecificInfo();
@@ -18,7 +17,6 @@ public class BarringTypeSpecificInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BarringTypeSpecificInfo[] newArray(int _aidl_size) {
                     return new BarringTypeSpecificInfo[_aidl_size];

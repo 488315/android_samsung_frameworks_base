@@ -131,7 +131,6 @@ public class QueuedWork {
         return z;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void processPendingWork() {
         LinkedList<Runnable> work;
         synchronized (sProcessingWork) {

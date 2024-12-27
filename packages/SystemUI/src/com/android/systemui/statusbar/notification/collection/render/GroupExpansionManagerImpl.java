@@ -21,7 +21,6 @@ public final class GroupExpansionManagerImpl implements GroupExpansionManager, D
     public final Set mOnGroupChangeListeners = new HashSet();
     public final Set mExpandedGroups = new HashSet();
     public final GroupExpansionManagerImpl$$ExternalSyntheticLambda0 mNotifTracker = new OnBeforeRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.render.GroupExpansionManagerImpl$$ExternalSyntheticLambda0
-        /* JADX WARN: Removed duplicated region for block: B:24:0x0079 A[LOOP:1: B:22:0x0073->B:24:0x0079, LOOP_END] */
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeRenderListListener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -101,7 +100,6 @@ public final class GroupExpansionManagerImpl implements GroupExpansionManager, D
         }
     };
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.statusbar.notification.collection.render.GroupExpansionManagerImpl$$ExternalSyntheticLambda0] */
     public GroupExpansionManagerImpl(DumpManager dumpManager, GroupMembershipManager groupMembershipManager) {
         this.mDumpManager = dumpManager;
         this.mGroupMembershipManager = groupMembershipManager;

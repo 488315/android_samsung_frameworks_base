@@ -23,7 +23,6 @@ final class PromptCredentialInteractor$checkCredential$2 extends SuspendLambda i
     int label;
     final /* synthetic */ PromptCredentialInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptCredentialInteractor$checkCredential$2(BiometricPromptRequest.Credential credential, CharSequence charSequence, List<LockPatternView.Cell> list, PromptCredentialInteractor promptCredentialInteractor, Continuation continuation) {
         super(2, continuation);
         this.$request = credential;
@@ -42,9 +41,6 @@ final class PromptCredentialInteractor$checkCredential$2 extends SuspendLambda i
         return ((PromptCredentialInteractor$checkCredential$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v12, types: [java.lang.CharSequence] */
-    /* JADX WARN: Type inference failed for: r6v7, types: [java.lang.CharSequence] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         AutoCloseable createPattern;

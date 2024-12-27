@@ -426,10 +426,6 @@ public final class JobStore {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:75:0x0217 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Type inference failed for: r6v1 */
-        /* JADX WARN: Type inference failed for: r6v2, types: [boolean, int] */
-        /* JADX WARN: Type inference failed for: r6v7 */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -670,14 +666,6 @@ public final class JobStore {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:77:0x04c2  */
-        /* JADX WARN: Removed duplicated region for block: B:83:0x04f1 A[LOOP:1: B:20:0x005c->B:83:0x04f1, LOOP_END] */
-        /* JADX WARN: Removed duplicated region for block: B:84:0x04f0 A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:86:0x04dd  */
-        /* JADX WARN: Type inference failed for: r4v0 */
-        /* JADX WARN: Type inference failed for: r4v1, types: [boolean] */
-        /* JADX WARN: Type inference failed for: r4v4 */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -725,9 +713,6 @@ public final class JobStore {
 
            if (r14.getName().startsWith(com.android.server.job.JobStore.JOB_FILE_SPLIT_PREFIX) == false) goto L85;
         */
-        /* JADX WARN: Removed duplicated region for block: B:67:0x0182 A[Catch: all -> 0x006c, TryCatch #7 {all -> 0x006c, blocks: (B:14:0x003c, B:16:0x0045, B:18:0x0054, B:22:0x01a1, B:23:0x006f, B:25:0x007b, B:61:0x0123, B:87:0x0120, B:103:0x010b, B:65:0x017b, B:67:0x0182, B:73:0x0191, B:79:0x012d, B:64:0x013e, B:77:0x0161, B:114:0x01a9, B:116:0x01b3, B:117:0x01b9), top: B:13:0x003c }] */
-        /* JADX WARN: Removed duplicated region for block: B:73:0x0191 A[Catch: all -> 0x006c, TryCatch #7 {all -> 0x006c, blocks: (B:14:0x003c, B:16:0x0045, B:18:0x0054, B:22:0x01a1, B:23:0x006f, B:25:0x007b, B:61:0x0123, B:87:0x0120, B:103:0x010b, B:65:0x017b, B:67:0x0182, B:73:0x0191, B:79:0x012d, B:64:0x013e, B:77:0x0161, B:114:0x01a9, B:116:0x01b3, B:117:0x01b9), top: B:13:0x003c }] */
-        /* JADX WARN: Removed duplicated region for block: B:81:0x011a A[EXC_TOP_SPLITTER, SYNTHETIC] */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.

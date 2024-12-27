@@ -51,7 +51,6 @@ public final class PunchHoleVIHelper {
         return m;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final Rect getPunchHoleVIRect() {
         char c;
         PointF pointF;

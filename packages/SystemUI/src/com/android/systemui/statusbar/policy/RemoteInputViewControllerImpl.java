@@ -49,8 +49,6 @@ public final class RemoteInputViewControllerImpl implements RemoteInputViewContr
     public final UiEventLogger uiEventLogger;
     public final RemoteInputView view;
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.statusbar.policy.RemoteInputViewControllerImpl$onFocusChangeListener$1] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.statusbar.policy.RemoteInputViewControllerImpl$onSendRemoteInputListener$1] */
     public RemoteInputViewControllerImpl(RemoteInputView remoteInputView, NotificationEntry notificationEntry, RemoteInputQuickSettingsDisabler remoteInputQuickSettingsDisabler, RemoteInputController remoteInputController, ShortcutManager shortcutManager, UiEventLogger uiEventLogger, FeatureFlags featureFlags) {
         this.view = remoteInputView;
         this.entry = notificationEntry;

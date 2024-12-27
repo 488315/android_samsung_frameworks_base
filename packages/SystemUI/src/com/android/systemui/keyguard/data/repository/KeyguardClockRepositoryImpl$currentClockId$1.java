@@ -18,7 +18,6 @@ final class KeyguardClockRepositoryImpl$currentClockId$1 extends SuspendLambda i
     int label;
     final /* synthetic */ KeyguardClockRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardClockRepositoryImpl$currentClockId$1(KeyguardClockRepositoryImpl keyguardClockRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardClockRepositoryImpl;
@@ -36,8 +35,6 @@ final class KeyguardClockRepositoryImpl$currentClockId$1 extends SuspendLambda i
         return ((KeyguardClockRepositoryImpl$currentClockId$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$currentClockId$1$listener$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -58,7 +55,6 @@ final class KeyguardClockRepositoryImpl$currentClockId$1 extends SuspendLambda i
             ((ChannelCoroutine) producerScope).mo2552trySendJP2dKIU(this.this$0.clockRegistry.getCurrentClockId());
             final KeyguardClockRepositoryImpl keyguardClockRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$currentClockId$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

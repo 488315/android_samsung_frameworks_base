@@ -79,8 +79,6 @@ public final class NotificationScrollViewModel extends FlowDumperImpl {
                     this.this$0 = notificationScrollViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -156,7 +154,6 @@ public final class NotificationScrollViewModel extends FlowDumperImpl {
             }
         }, "isScrollable");
         LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationScrollViewModel$isDozing$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

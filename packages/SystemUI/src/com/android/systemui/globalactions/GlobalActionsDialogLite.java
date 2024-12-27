@@ -246,7 +246,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
             actionsDialogLite.dismiss();
         }
 
-        /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.globalactions.GlobalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda3] */
         public ActionsDialogLite(Context context, int i, MyAdapter myAdapter, MyOverflowAdapter myOverflowAdapter, SysuiColorExtractor sysuiColorExtractor, IStatusBarService iStatusBarService, LightBarController lightBarController, KeyguardStateController keyguardStateController, NotificationShadeWindowController notificationShadeWindowController, StatusBarWindowController statusBarWindowController, Runnable runnable, boolean z, MyPowerOptionsAdapter myPowerOptionsAdapter, UiEventLogger uiEventLogger, ShadeController shadeController, KeyguardUpdateMonitor keyguardUpdateMonitor, LockPatternUtils lockPatternUtils, SelectedUserInteractor selectedUserInteractor) {
             super(context, i, false);
             new Binder();
@@ -801,7 +800,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         GA_BUGREPORT_LONG_PRESS(345),
         GA_EMERGENCY_DIALER_PRESS(346),
         GA_SCREENSHOT_PRESS(347),
-        /* JADX INFO: Fake field, exist only in values array */
         GA_SCREENSHOT_LONG_PRESS(348),
         GA_SHUTDOWN_PRESS(802),
         GA_SHUTDOWN_LONG_PRESS(VpnErrorValues.ERROR_STORING_PROXY_PASSWORD),
@@ -809,15 +807,11 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         GA_REBOOT_LONG_PRESS(VpnErrorValues.ERROR_INVALID_PROXY_CONFIGURATION),
         GA_LOCKDOWN_PRESS(354),
         GA_OPEN_QS(VpnErrorValues.ERROR_INVALID_IPV6_CONFIGURATION),
-        /* JADX INFO: Fake field, exist only in values array */
         GA_OPEN_POWER_VOLUP(806),
-        /* JADX INFO: Fake field, exist only in values array */
         GA_CLOSE_POWER_VOLUP(807),
-        /* JADX INFO: Fake field, exist only in values array */
         GA_CLOSE_LONG_PRESS_POWER(808),
         GA_CLOSE_BACK(809),
         GA_CLOSE_TAP_OUTSIDE(810),
-        /* JADX INFO: Fake field, exist only in values array */
         GA_CLOSE_POWER_VOLUP(811),
         GA_SYSTEM_UPDATE_PRESS(1716);
 
@@ -1337,11 +1331,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         globalActionsDialogLite.mAirplaneState = z ? ToggleState.On : ToggleState.Off;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v1, types: [com.android.systemui.globalactions.GlobalActionsDialogLite$8] */
-    /* JADX WARN: Type inference failed for: r7v6, types: [android.content.BroadcastReceiver, com.android.systemui.globalactions.GlobalActionsDialogLite$5] */
-    /* JADX WARN: Type inference failed for: r8v1, types: [com.android.systemui.globalactions.GlobalActionsDialogLite$6, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r9v0, types: [android.database.ContentObserver, com.android.systemui.globalactions.GlobalActionsDialogLite$7] */
     public GlobalActionsDialogLite(Context context, GlobalActions.GlobalActionsManager globalActionsManager, AudioManager audioManager, IDreamManager iDreamManager, DevicePolicyManager devicePolicyManager, LockPatternUtils lockPatternUtils, BroadcastDispatcher broadcastDispatcher, TelephonyListenerManager telephonyListenerManager, GlobalSettings globalSettings, SecureSettings secureSettings, VibratorHelper vibratorHelper, Resources resources, ConfigurationController configurationController, ActivityStarter activityStarter, UserTracker userTracker, KeyguardStateController keyguardStateController, UserManager userManager, TrustManager trustManager, IActivityManager iActivityManager, TelecomManager telecomManager, MetricsLogger metricsLogger, SysuiColorExtractor sysuiColorExtractor, IStatusBarService iStatusBarService, LightBarController lightBarController, NotificationShadeWindowController notificationShadeWindowController, StatusBarWindowController statusBarWindowController, IWindowManager iWindowManager, Executor executor, UiEventLogger uiEventLogger, RingerModeTracker ringerModeTracker, Handler handler, PackageManager packageManager, ShadeController shadeController, KeyguardUpdateMonitor keyguardUpdateMonitor, DialogTransitionAnimator dialogTransitionAnimator, SelectedUserInteractor selectedUserInteractor, GlobalActionsInteractor globalActionsInteractor) {
         ?? r7 = new BroadcastReceiver() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.5
             @Override // android.content.BroadcastReceiver

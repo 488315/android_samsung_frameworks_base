@@ -12,7 +12,6 @@ public class AudioUuid implements Parcelable {
     public static final Parcelable.Creator<AudioUuid> CREATOR =
             new Parcelable.Creator<
                     AudioUuid>() { // from class: android.media.audio.common.AudioUuid.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioUuid createFromParcel(Parcel _aidl_source) {
                     AudioUuid _aidl_out = new AudioUuid();
@@ -20,7 +19,6 @@ public class AudioUuid implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioUuid[] newArray(int _aidl_size) {
                     return new AudioUuid[_aidl_size];
@@ -143,7 +141,6 @@ public class AudioUuid implements Parcelable {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
         return Arrays.deepHashCode(
                 Arrays.asList(

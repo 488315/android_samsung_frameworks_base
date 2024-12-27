@@ -12,13 +12,11 @@ public final class AppLinkInfo implements Parcelable {
     public static final Parcelable.Creator<AppLinkInfo> CREATOR =
             new Parcelable.Creator<
                     AppLinkInfo>() { // from class: android.media.tv.interactive.AppLinkInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppLinkInfo[] newArray(int size) {
                     return new AppLinkInfo[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppLinkInfo createFromParcel(Parcel in) {
                     return new AppLinkInfo(in);

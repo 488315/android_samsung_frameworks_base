@@ -9,13 +9,11 @@ public class SContextTemperatureAlert extends SContextEventContext {
     public static final Parcelable.Creator<SContextTemperatureAlert> CREATOR =
             new Parcelable.Creator<SContextTemperatureAlert>() { // from class:
                 // android.hardware.scontext.SContextTemperatureAlert.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextTemperatureAlert createFromParcel(Parcel in) {
                     return new SContextTemperatureAlert(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextTemperatureAlert[] newArray(int size) {
                     return new SContextTemperatureAlert[size];

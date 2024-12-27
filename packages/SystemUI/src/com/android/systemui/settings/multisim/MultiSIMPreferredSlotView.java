@@ -285,8 +285,6 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements MultiSIMC
             this.mCarrierNameText.setVisibility(0);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:17:0x00a3  */
-        /* JADX WARN: Removed duplicated region for block: B:35:? A[RETURN, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -523,7 +521,6 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements MultiSIMC
         DATA_ONLY_BUTTON_LIST = new MultiSIMController.ButtonType[]{buttonType3};
     }
 
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.systemui.settings.multisim.MultiSIMPreferredSlotView$1] */
     public MultiSIMPreferredSlotView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mSlotButtons = new ArrayList();

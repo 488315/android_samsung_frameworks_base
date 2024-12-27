@@ -24,7 +24,6 @@ public abstract class UnaryParamBase implements Param {
         indentingPrintWriter.println(" ".concat(Intrinsics.areEqual(valueParser, Type.Int) ? "<int>" : Intrinsics.areEqual(valueParser, Type.Float) ? "<float>" : Intrinsics.areEqual(valueParser, Type.String) ? "<string>" : Intrinsics.areEqual(valueParser, Type.Boolean) ? "<boolean>" : "<arg>"));
         if (getDescription() != null) {
             ParseableCommandKt.indented(indentingPrintWriter, new Function0() { // from class: com.android.systemui.statusbar.commandline.UnaryParamBase$describe$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

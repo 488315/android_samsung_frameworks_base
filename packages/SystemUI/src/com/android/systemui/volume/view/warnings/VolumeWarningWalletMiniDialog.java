@@ -36,8 +36,6 @@ public final class VolumeWarningWalletMiniDialog extends Dialog implements Volum
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class WarningDialogType {
         public static final /* synthetic */ WarningDialogType[] $VALUES;
         public static final WarningDialogType DEFAULT_SAFETY_VOLUME_WARNING;

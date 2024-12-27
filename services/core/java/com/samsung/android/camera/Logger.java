@@ -14,8 +14,6 @@ public final class Logger {
     public static final Logger[] mInstance = new Logger[ID.values().length];
     public Queue mLogQueue;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class ID {
         public static final /* synthetic */ ID[] $VALUES;
         public static final ID CAMERA_APPLICATION_EVENT;

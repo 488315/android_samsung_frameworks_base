@@ -166,13 +166,11 @@ public final class Debug {
     public static class MemoryInfo implements Parcelable {
         public static final Parcelable.Creator<MemoryInfo> CREATOR =
                 new Parcelable.Creator<MemoryInfo>() { // from class: android.os.Debug.MemoryInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public MemoryInfo createFromParcel(Parcel source) {
                         return new MemoryInfo(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public MemoryInfo[] newArray(int size) {
                         return new MemoryInfo[size];
@@ -455,7 +453,6 @@ public final class Debug {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public String getMemoryStat(String statName) {
             char c;
             switch (statName.hashCode()) {

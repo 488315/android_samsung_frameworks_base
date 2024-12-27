@@ -16,7 +16,6 @@ public final class KeyguardRootViewModel$updateBurnInParams$$inlined$launch$defa
     int label;
     final /* synthetic */ KeyguardRootViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardRootViewModel$updateBurnInParams$$inlined$launch$default$1(String str, Continuation continuation, KeyguardRootViewModel keyguardRootViewModel, BurnInParameters burnInParameters) {
         super(2, continuation);
         this.$spanName = str;
@@ -36,8 +35,6 @@ public final class KeyguardRootViewModel$updateBurnInParams$$inlined$launch$defa
         return ((KeyguardRootViewModel$updateBurnInParams$$inlined$launch$default$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0092  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0097  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

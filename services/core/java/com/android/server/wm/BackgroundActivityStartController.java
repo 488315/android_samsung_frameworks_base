@@ -75,15 +75,6 @@ public final class BackgroundActivityStartController {
         public BalVerdict mResultForRealCaller;
         public final /* synthetic */ BackgroundActivityStartController this$0;
 
-        /* JADX WARN: Removed duplicated region for block: B:104:0x0096  */
-        /* JADX WARN: Removed duplicated region for block: B:115:0x007a  */
-        /* JADX WARN: Removed duplicated region for block: B:11:0x0078  */
-        /* JADX WARN: Removed duplicated region for block: B:14:0x0090  */
-        /* JADX WARN: Removed duplicated region for block: B:17:0x00cd  */
-        /* JADX WARN: Removed duplicated region for block: B:22:0x0145  */
-        /* JADX WARN: Removed duplicated region for block: B:27:0x017d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:62:0x014f  */
-        /* JADX WARN: Removed duplicated region for block: B:73:0x00da  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -402,13 +393,6 @@ public final class BackgroundActivityStartController {
     
         if ((r14.mCheckedOptions.getPendingIntentBackgroundActivityStartMode() == 2) == false) goto L149;
      */
-    /* JADX WARN: Removed duplicated region for block: B:135:0x00d4  */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x0111  */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x011d  */
-    /* JADX WARN: Removed duplicated region for block: B:150:0x0124  */
-    /* JADX WARN: Removed duplicated region for block: B:153:0x0113  */
-    /* JADX WARN: Removed duplicated region for block: B:154:0x00d6  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x01d1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -576,7 +560,6 @@ public final class BackgroundActivityStartController {
         return (checkCrossUidActivitySwitchFromBelow2.mTopActivityMatchesSource || (taskFragment = activity2.getTaskFragment()) == null || (taskFragment2 = taskFragment.mAdjacentTaskFragment) == null || (activity = taskFragment2.getActivity(predicate)) == null) ? checkCrossUidActivitySwitchFromBelow2 : checkCrossUidActivitySwitchFromBelow(activity, i, checkCrossUidActivitySwitchFromBelow2);
     }
 
-    /* JADX WARN: Type inference failed for: r8v0, types: [com.android.server.wm.BackgroundActivityStartController$$ExternalSyntheticLambda5] */
     public final String getDebugInfoForActivitySecurity(String str, final ActivityRecord activityRecord, final ActivityRecord activityRecord2, Task task, final ActivityRecord activityRecord3, int i, int i2, boolean z, boolean z2, boolean z3, boolean z4, ActivityRecord activityRecord4) {
         Task task2 = task;
         final ?? r8 = new Function() { // from class: com.android.server.wm.BackgroundActivityStartController$$ExternalSyntheticLambda5

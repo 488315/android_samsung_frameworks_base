@@ -35,10 +35,6 @@ public final class TransitionEngine extends WallpaperEngine {
         this.mTransitionFinishListener = runnable;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r13v15 */
-    /* JADX WARN: Type inference failed for: r13v16 */
-    /* JADX WARN: Type inference failed for: r13v5, types: [android.view.Surface] */
     @Override // com.android.systemui.wallpaper.engines.WallpaperEngine
     public final synchronized boolean draw(SurfaceHolder surfaceHolder) {
         Bitmap bitmap;

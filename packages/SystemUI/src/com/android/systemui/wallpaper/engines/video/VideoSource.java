@@ -59,7 +59,6 @@ public final class VideoSource implements WallpaperSource {
             this.mFilename = str2;
         }
 
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:31:0x0095 -> B:23:0x0098). Please report as a decompilation issue!!! */
         public final AssetFileDescriptor getAssetFileDescriptor() {
             Context context;
             Resources resources;

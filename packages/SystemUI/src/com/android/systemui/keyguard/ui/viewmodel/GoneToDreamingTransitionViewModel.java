@@ -44,7 +44,6 @@ public final class GoneToDreamingTransitionViewModel {
         long duration = DurationKt.toDuration(500, DurationUnit.MILLISECONDS);
         Interpolator interpolator = Interpolators.EMPHASIZED_ACCELERATE;
         Function1 function1 = new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.GoneToDreamingTransitionViewModel$lockscreenTranslationY$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

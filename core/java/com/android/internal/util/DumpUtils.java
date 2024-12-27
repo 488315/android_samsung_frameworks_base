@@ -162,7 +162,6 @@ public final class DumpUtils {
         return cname != null && isSecMediaPackage(cname.getPackageName());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isSecMediaPackage(ComponentName.WithComponentName wcn) {
         return wcn != null && isSecMediaPackage(wcn.getComponentName());
     }

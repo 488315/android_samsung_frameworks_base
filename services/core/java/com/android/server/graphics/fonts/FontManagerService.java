@@ -257,7 +257,6 @@ public final class FontManagerService extends IFontManager.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(
             FileDescriptor fileDescriptor,
             FileDescriptor fileDescriptor2,
@@ -317,9 +316,6 @@ public final class FontManagerService extends IFontManager.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r1v12, types: [java.util.Iterator] */
     public final void updateSerializedFontMap() {
         SharedMemory sharedMemory;
         SharedMemory sharedMemory2;

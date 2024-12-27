@@ -529,9 +529,6 @@ public final class BatteryStatsService extends IBatteryStats.Stub
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.server.am.BatteryStatsService$2] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.server.am.BatteryStatsService$1] */
-    /* JADX WARN: Type inference failed for: r14v3, types: [com.android.server.am.BatteryStatsService$$ExternalSyntheticLambda16] */
     public BatteryStatsService(Context context, File file) {
         AggregatedPowerStatsConfig.PowerComponent powerComponent;
         CharsetDecoder newDecoder = StandardCharsets.UTF_8.newDecoder();
@@ -1554,7 +1551,6 @@ public final class BatteryStatsService extends IBatteryStats.Stub
         return asInterface;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeWaitWakeup(ByteBuffer byteBuffer);
 
     public final void awaitCompletion() {
@@ -5023,8 +5019,6 @@ public final class BatteryStatsService extends IBatteryStats.Stub
             deviceBatteryInfoService.mHandler.post(
                     new Runnable() { // from class:
                         // com.samsung.android.server.battery.DeviceBatteryInfoService$$ExternalSyntheticLambda0
-                        /* JADX WARN: Removed duplicated region for block: B:13:0x0065 A[Catch: Exception -> 0x004e, TRY_LEAVE, TryCatch #0 {Exception -> 0x004e, blocks: (B:3:0x000d, B:5:0x0039, B:8:0x0041, B:10:0x0048, B:11:0x005a, B:13:0x0065, B:18:0x0050), top: B:2:0x000d }] */
-                        /* JADX WARN: Removed duplicated region for block: B:17:? A[RETURN, SYNTHETIC] */
                         @Override // java.lang.Runnable
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.

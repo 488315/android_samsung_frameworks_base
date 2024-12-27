@@ -54,7 +54,6 @@ public final class CapturedLetterbox {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.wm.CapturedLetterbox$$ExternalSyntheticLambda0] */
     public CapturedLetterbox(DisplayContent displayContent) {
         Objects.requireNonNull(displayContent);
         this.mDisplay = displayContent;
@@ -69,8 +68,6 @@ public final class CapturedLetterbox {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0186 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0187  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

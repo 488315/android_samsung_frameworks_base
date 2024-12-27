@@ -21,8 +21,6 @@ import java.util.Map;
 public final class OverlayActorEnforcer {
     public final OverlayManagerService.PackageManagerHelperImpl mPackageManager;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class ActorState {
         public static final /* synthetic */ ActorState[] $VALUES;
         public static final ActorState ACTOR_NOT_FOUND;

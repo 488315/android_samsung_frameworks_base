@@ -54,7 +54,6 @@ public abstract class MediaBrowserService extends Service {
 
     public abstract void onLoadChildren(String str, Result<List<MediaBrowser.MediaItem>> result);
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ConnectionRecord implements IBinder.DeathRecipient {
         public final IMediaBrowserServiceCallbacks callbacks;
         public final int pid;
@@ -94,7 +93,6 @@ public abstract class MediaBrowserService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$binderDied$0() {
             this.serviceState.mConnections.remove(this.callbacks.asBinder());
         }
@@ -143,7 +141,6 @@ public abstract class MediaBrowserService extends Service {
         void onResultSent(T result, int flags) {}
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ServiceBinder extends IMediaBrowserService.Stub {
         private final AtomicReference<WeakReference<ServiceState>> mServiceState;
 
@@ -386,7 +383,6 @@ public abstract class MediaBrowserService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$notifyChildrenChanged$1(String parentId, Bundle options) {
         this.mServiceState.get().notifyChildrenChangeOnHandler(parentId, options);
     }
@@ -417,7 +413,6 @@ public abstract class MediaBrowserService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class ServiceState {
         private final ArrayMap<IBinder, ConnectionRecord> mConnections;
         private MediaSession.Token mSession;
@@ -445,7 +440,6 @@ public abstract class MediaBrowserService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void clearConnectionsOnHandler() {
             Iterator<ConnectionRecord> iterator = this.mConnections.values().iterator();
             while (iterator.hasNext()) {
@@ -612,7 +606,6 @@ public abstract class MediaBrowserService extends Service {
                             MediaBrowserService mediaBrowserService = MediaBrowserService.this;
                         }
 
-                        /* JADX INFO: Access modifiers changed from: package-private */
                         @Override // android.service.media.MediaBrowserService.Result
                         public void onResultSent(List<MediaBrowser.MediaItem> list, int flag) {
                             List<MediaBrowser.MediaItem> filteredList;
@@ -679,7 +672,6 @@ public abstract class MediaBrowserService extends Service {
                             MediaBrowserService mediaBrowserService = MediaBrowserService.this;
                         }
 
-                        /* JADX INFO: Access modifiers changed from: package-private */
                         @Override // android.service.media.MediaBrowserService.Result
                         public void onResultSent(MediaBrowser.MediaItem item, int flag) {
                             if (ServiceState.this.mConnections.get(connection.callbacks.asBinder())

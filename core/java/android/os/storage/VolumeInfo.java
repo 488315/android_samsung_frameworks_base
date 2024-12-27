@@ -127,13 +127,11 @@ public class VolumeInfo implements Parcelable {
         CREATOR =
                 new Parcelable.Creator<
                         VolumeInfo>() { // from class: android.os.storage.VolumeInfo.2
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public VolumeInfo createFromParcel(Parcel in) {
                         return new VolumeInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public VolumeInfo[] newArray(int size) {
                         return new VolumeInfo[size];

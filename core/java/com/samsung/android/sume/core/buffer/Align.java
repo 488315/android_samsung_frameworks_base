@@ -21,13 +21,11 @@ public class Align implements Serializable, Parcelable, Copyable<Align>, Compara
     public static final Parcelable.Creator<Align> CREATOR =
             new Parcelable.Creator<
                     Align>() { // from class: com.samsung.android.sume.core.buffer.Align.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Align createFromParcel(Parcel in) {
                     return new Align(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Align[] newArray(int size) {
                     return new Align[size];
@@ -73,7 +71,6 @@ public class Align implements Serializable, Parcelable, Copyable<Align>, Compara
         dest.writeInt(this.scanline);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.format.Copyable
     public Align copy() {
         try {
@@ -84,7 +81,6 @@ public class Align implements Serializable, Parcelable, Copyable<Align>, Compara
         }
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.format.Copyable
     /* renamed from: deepCopy */
     public Align deepCopy2() {

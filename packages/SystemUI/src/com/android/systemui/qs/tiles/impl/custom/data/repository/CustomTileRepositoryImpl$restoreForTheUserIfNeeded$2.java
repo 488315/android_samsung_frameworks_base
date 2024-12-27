@@ -12,7 +12,6 @@ final class CustomTileRepositoryImpl$restoreForTheUserIfNeeded$2 extends Suspend
     int label;
     final /* synthetic */ CustomTileRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTileRepositoryImpl$restoreForTheUserIfNeeded$2(CustomTileRepositoryImpl customTileRepositoryImpl, UserHandle userHandle, Continuation continuation) {
         super(2, continuation);
         this.this$0 = customTileRepositoryImpl;
@@ -29,8 +28,6 @@ final class CustomTileRepositoryImpl$restoreForTheUserIfNeeded$2 extends Suspend
         return ((CustomTileRepositoryImpl$restoreForTheUserIfNeeded$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:17:? A[RETURN, SYNTHETIC] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

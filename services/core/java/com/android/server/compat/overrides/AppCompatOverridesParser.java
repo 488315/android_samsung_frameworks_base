@@ -35,11 +35,6 @@ public final class AppCompatOverridesParser {
         this.mPackageManager = packageManager;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0080 A[Catch: IllegalArgumentException -> 0x007b, TRY_LEAVE, TryCatch #2 {IllegalArgumentException -> 0x007b, blocks: (B:14:0x0064, B:16:0x006a, B:21:0x0080), top: B:13:0x0064 }] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00a6  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00ab  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0182  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01a7 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -449,8 +449,6 @@ public final class DirEncryptService extends IDirEncryptService.Stub {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.DirEncryptService$1] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.DirEncryptService$2] */
     public DirEncryptService(Context context) {
         this.mHelper = null;
         this.mDew = null;
@@ -460,9 +458,6 @@ public final class DirEncryptService extends IDirEncryptService.Stub {
         this.mDew = new DirEncryptionWrapper(context);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:60:0x014f A[Catch: IOException -> 0x014b, TRY_LEAVE, TryCatch #4 {IOException -> 0x014b, blocks: (B:69:0x0147, B:60:0x014f), top: B:68:0x0147 }] */
-    /* JADX WARN: Removed duplicated region for block: B:67:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0147 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -319,7 +319,6 @@ public class LowLatencyModeManager {
         this.mContext.bindService(intent, this.mSecPhoneServiceConnection2, 1);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void unbindRilService(int slotId) {
         if (slotId == 0) {
             if (this.mServiceMessenger != null && this.mSecPhoneServiceConnection != null) {
@@ -347,7 +346,6 @@ public class LowLatencyModeManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void log(String info) {
         Log.d(TAG, info);
     }

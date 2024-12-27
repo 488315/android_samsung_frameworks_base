@@ -7,13 +7,11 @@ public final class DemuxFilterMonitorEvent implements Parcelable {
     public static final Parcelable.Creator<DemuxFilterMonitorEvent> CREATOR =
             new Parcelable.Creator<DemuxFilterMonitorEvent>() { // from class:
                 // android.hardware.tv.tuner.DemuxFilterMonitorEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterMonitorEvent createFromParcel(Parcel _aidl_source) {
                     return new DemuxFilterMonitorEvent(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterMonitorEvent[] newArray(int _aidl_size) {
                     return new DemuxFilterMonitorEvent[_aidl_size];

@@ -11,13 +11,11 @@ public final class GameStartedEvent implements Parcelable {
     public static final Parcelable.Creator<GameStartedEvent> CREATOR =
             new Parcelable.Creator<
                     GameStartedEvent>() { // from class: android.service.games.GameStartedEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GameStartedEvent createFromParcel(Parcel source) {
                     return new GameStartedEvent(source.readInt(), source.readString());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GameStartedEvent[] newArray(int size) {
                     return new GameStartedEvent[0];

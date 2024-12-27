@@ -10,7 +10,6 @@ import java.util.Objects;
 public final class AudioFocusInfo implements Parcelable {
     public static final Parcelable.Creator<AudioFocusInfo> CREATOR =
             new Parcelable.Creator<AudioFocusInfo>() { // from class: android.media.AudioFocusInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioFocusInfo createFromParcel(Parcel in) {
                     AudioFocusInfo afi =
@@ -27,7 +26,6 @@ public final class AudioFocusInfo implements Parcelable {
                     return afi;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioFocusInfo[] newArray(int size) {
                     return new AudioFocusInfo[size];

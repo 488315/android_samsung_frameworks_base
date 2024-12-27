@@ -127,7 +127,6 @@ public class DynamicSystemClient {
         this.mExecutor = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyOnStatusChangedListener(
             final int status, final int cause, final long progress, final Throwable detail) {
         if (this.mListener != null) {
@@ -147,7 +146,6 @@ public class DynamicSystemClient {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$notifyOnStatusChangedListener$0(
             int status, int cause, long progress, Throwable detail) {
         this.mListener.onStatusChanged(status, cause, progress, detail);
@@ -196,7 +194,6 @@ public class DynamicSystemClient {
         this.mContext.startActivity(intent);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleMessage(Message msg) {
         switch (msg.what) {
             case 3:

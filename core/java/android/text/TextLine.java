@@ -944,9 +944,6 @@ public class TextLine {
                     + " boolean):int");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:43:0x009f  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00b5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1473,8 +1470,6 @@ public class TextLine {
         paint.setUnderlineText(0, 0.0f);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x02f7  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x02e5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

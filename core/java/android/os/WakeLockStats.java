@@ -9,13 +9,11 @@ import java.util.List;
 public final class WakeLockStats implements Parcelable {
     public static final Parcelable.Creator<WakeLockStats> CREATOR =
             new Parcelable.Creator<WakeLockStats>() { // from class: android.os.WakeLockStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WakeLockStats createFromParcel(Parcel in) {
                     return new WakeLockStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WakeLockStats[] newArray(int size) {
                     return new WakeLockStats[size];
@@ -55,7 +53,6 @@ public final class WakeLockStats implements Parcelable {
             this.timeHeldMs = in.readLong();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void writeToParcel(Parcel out) {
             out.writeInt(this.timesAcquired);
             out.writeLong(this.totalTimeHeldMs);
@@ -112,7 +109,6 @@ public final class WakeLockStats implements Parcelable {
             this.backgroundWakeLockData = new WakeLockData(in);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void writeToParcel(Parcel out) {
             out.writeInt(this.uid);
             out.writeString(this.name);

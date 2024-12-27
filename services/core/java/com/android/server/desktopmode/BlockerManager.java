@@ -63,8 +63,6 @@ public final class BlockerManager {
         this.mInjector = injector;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00fe A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x00c1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

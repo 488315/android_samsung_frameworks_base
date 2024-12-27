@@ -41,7 +41,6 @@ final class LogcatEchoTrackerDebug$loadEchoOverrides$1 extends SuspendLambda imp
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LogcatEchoTrackerDebug$loadEchoOverrides$1(LogcatEchoTrackerDebug logcatEchoTrackerDebug, Continuation continuation) {
         super(2, continuation);
         this.this$0 = logcatEchoTrackerDebug;
@@ -57,7 +56,6 @@ final class LogcatEchoTrackerDebug$loadEchoOverrides$1 extends SuspendLambda imp
         return ((LogcatEchoTrackerDebug$loadEchoOverrides$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         EmptyList<LogcatEchoOverride> emptyList;

@@ -12,7 +12,6 @@ public class SimSlotStatus implements Parcelable {
     public static final Parcelable.Creator<SimSlotStatus> CREATOR =
             new Parcelable.Creator<
                     SimSlotStatus>() { // from class: android.hardware.radio.config.SimSlotStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SimSlotStatus createFromParcel(Parcel _aidl_source) {
                     SimSlotStatus _aidl_out = new SimSlotStatus();
@@ -20,7 +19,6 @@ public class SimSlotStatus implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SimSlotStatus[] newArray(int _aidl_size) {
                     return new SimSlotStatus[_aidl_size];

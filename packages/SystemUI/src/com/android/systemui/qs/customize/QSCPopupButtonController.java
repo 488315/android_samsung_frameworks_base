@@ -31,8 +31,6 @@ public final class QSCPopupButtonController {
     public QSBlurPopUpMenu qsBlurPopUpMenu;
     public final TunerService tunerService;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public abstract class POPUPTYPE {
         public static final /* synthetic */ EnumEntries $ENTRIES;
         public static final /* synthetic */ POPUPTYPE[] $VALUES;

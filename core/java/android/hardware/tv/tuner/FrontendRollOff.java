@@ -7,13 +7,11 @@ public final class FrontendRollOff implements Parcelable {
     public static final Parcelable.Creator<FrontendRollOff> CREATOR =
             new Parcelable.Creator<
                     FrontendRollOff>() { // from class: android.hardware.tv.tuner.FrontendRollOff.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendRollOff createFromParcel(Parcel _aidl_source) {
                     return new FrontendRollOff(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendRollOff[] newArray(int _aidl_size) {
                     return new FrontendRollOff[_aidl_size];

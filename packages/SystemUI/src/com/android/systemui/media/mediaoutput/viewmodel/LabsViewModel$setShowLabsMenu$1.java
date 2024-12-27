@@ -51,7 +51,6 @@ final class LabsViewModel$setShowLabsMenu$1 extends SuspendLambda implements Fun
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LabsViewModel$setShowLabsMenu$1(LabsViewModel labsViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = labsViewModel;

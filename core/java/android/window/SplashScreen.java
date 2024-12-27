@@ -98,8 +98,6 @@ public interface SplashScreen {
                 new Singleton<
                         SplashScreenManagerGlobal>() { // from class:
                                                        // android.window.SplashScreen.SplashScreenManagerGlobal.1
-                    /* JADX INFO: Access modifiers changed from: protected */
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.util.Singleton
                     public SplashScreenManagerGlobal create() {
                         return new SplashScreenManagerGlobal();
@@ -118,14 +116,12 @@ public interface SplashScreen {
             return sInstance.get();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addImpl(SplashScreenImpl impl) {
             synchronized (this.mGlobalLock) {
                 this.mImpls.add(impl);
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void removeImpl(SplashScreenImpl impl) {
             synchronized (this.mGlobalLock) {
                 this.mImpls.remove(impl);

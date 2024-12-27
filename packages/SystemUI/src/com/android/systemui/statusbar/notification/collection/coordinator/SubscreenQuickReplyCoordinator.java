@@ -26,7 +26,6 @@ public final class SubscreenQuickReplyCoordinator implements Coordinator, Dumpab
     private final SubscreenQuickReplyExtender mQuickReplyExtender = new SubscreenQuickReplyExtender();
 
     public final class SubscreenQuickReplyExtender extends SelfTrackingLifetimeExtender {
-        /* JADX WARN: Illegal instructions before constructor call */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -8,13 +8,11 @@ public class IccOpenLogicalChannelResponse implements Parcelable {
             new Parcelable.Creator<
                     IccOpenLogicalChannelResponse>() { // from class:
                                                        // android.telephony.IccOpenLogicalChannelResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IccOpenLogicalChannelResponse createFromParcel(Parcel in) {
                     return new IccOpenLogicalChannelResponse(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IccOpenLogicalChannelResponse[] newArray(int size) {
                     return new IccOpenLogicalChannelResponse[size];

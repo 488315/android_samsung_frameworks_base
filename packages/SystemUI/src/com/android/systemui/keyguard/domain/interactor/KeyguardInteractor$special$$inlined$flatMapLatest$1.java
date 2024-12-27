@@ -24,7 +24,6 @@ public final class KeyguardInteractor$special$$inlined$flatMapLatest$1 extends S
     int label;
     final /* synthetic */ KeyguardInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, KeyguardInteractor keyguardInteractor) {
         super(3, continuation);
         this.this$0 = keyguardInteractor;
@@ -114,8 +113,6 @@ public final class KeyguardInteractor$special$$inlined$flatMapLatest$1 extends S
                         this.$newBounds$inlined = notificationContainerBounds2;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x0033  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

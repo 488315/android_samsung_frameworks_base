@@ -258,9 +258,6 @@ public final class FlashNotificationsController {
             this(context, str, str2, i, i2, null, null);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0071  */
-        /* JADX WARN: Removed duplicated region for block: B:40:0x00b1  */
-        /* JADX WARN: Removed duplicated region for block: B:41:0x00b4  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -603,7 +600,6 @@ public final class FlashNotificationsController {
         Log.i("FlashNotifController", sb.toString());
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -629,7 +625,6 @@ public final class FlashNotificationsController {
                     + " com.android.server.accessibility.FlashNotificationsController.<init>(android.content.Context):void");
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.server.accessibility.FlashNotificationsController$1] */
     public FlashNotificationsController(Context context, Handler handler, Handler handler2) {
         this.mFlashNotifications = new LinkedList();
         this.mIsTorchTouched = false;

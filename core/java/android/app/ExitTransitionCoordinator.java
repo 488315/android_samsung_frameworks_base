@@ -124,7 +124,6 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void delayCancel() {
         if (this.mHandler != null) {
             this.mHandler.sendEmptyMessageDelayed(106, sMaxWaitMillis);
@@ -171,7 +170,6 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startSharedElementExit(ViewGroup decorView) {
         Transition transition = getSharedElementExitTransition();
         transition.addListener(
@@ -210,7 +208,6 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
         decorView.invalidate();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startSharedElementExit$0(ArrayList sharedElementSnapshots) {
         setSharedElementState(this.mExitSharedElementBundle, sharedElementSnapshots);
     }
@@ -310,7 +307,6 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startExitTransition() {
         Transition transition = getExitTransition();
         ViewGroup decorView = getDecor();
@@ -324,7 +320,6 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
         transitionStarted();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void fadeOutBackground() {
         Drawable background;
         if (this.mBackgroundAnimator == null) {
@@ -372,7 +367,6 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
             viewsTransition.addListener(
                     new ActivityTransitionCoordinator.ContinueTransitionListener() { // from class:
                         // android.app.ExitTransitionCoordinator.6
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super();
                         }
@@ -422,7 +416,6 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
         return sharedElementTransition;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void beginTransitions() {
         Transition sharedElementTransition = getSharedElementExitTransition();
         Transition viewsTransition = getExitTransition();
@@ -520,7 +513,6 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyExitComplete() {
         if (!this.mExitNotified && isViewsTransitionComplete()) {
             this.mExitNotified = true;
@@ -542,7 +534,6 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void finish() {
         stopCancel();
         if (this.mExitCallbacks != null) {

@@ -45,8 +45,6 @@ public final class TimeController extends StateController {
         DEBUG = JobSchedulerService.DEBUG || Log.isLoggable("JobScheduler.Time", 3);
     }
 
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.server.job.controllers.TimeController$2] */
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.server.job.controllers.TimeController$2] */
     public TimeController(JobSchedulerService jobSchedulerService) {
         super(jobSchedulerService);
         this.mAlarmService = null;

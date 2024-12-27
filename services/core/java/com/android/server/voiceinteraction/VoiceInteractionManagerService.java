@@ -188,8 +188,6 @@ public final class VoiceInteractionManagerService extends SystemService {
                     "android.app.role.ASSISTANT", UserHandle.of(i));
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:32:0x007d A[Catch: all -> 0x0092, TryCatch #0 {, blocks: (B:18:0x0050, B:20:0x0054, B:21:0x0090, B:24:0x005a, B:26:0x0067, B:29:0x006e, B:32:0x007d, B:33:0x0083, B:34:0x0072), top: B:17:0x0050 }] */
-        /* JADX WARN: Removed duplicated region for block: B:33:0x0083 A[Catch: all -> 0x0092, TryCatch #0 {, blocks: (B:18:0x0050, B:20:0x0054, B:21:0x0090, B:24:0x005a, B:26:0x0067, B:29:0x006e, B:32:0x007d, B:33:0x0083, B:34:0x0072), top: B:17:0x0050 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1156,7 +1154,6 @@ public final class VoiceInteractionManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.voiceinteraction.VoiceInteractionManagerService$VoiceInteractionManagerServiceStub$2] */
         public VoiceInteractionManagerServiceStub() {
             this.IS_HDS_REQUIRED =
                     AppOpsPolicy.isHotwordDetectionServiceRequired(
@@ -1999,7 +1996,6 @@ public final class VoiceInteractionManagerService extends SystemService {
                 Binder.withCleanCallingIdentity(
                         new FunctionalUtils.ThrowingRunnable() { // from class:
                             // com.android.server.voiceinteraction.VoiceInteractionManagerService$VoiceInteractionManagerServiceStub$$ExternalSyntheticLambda5
-                            /* JADX WARN: Multi-variable type inference failed */
                             public final void runOrThrow() {
                                 IHotwordRecognitionStatusCallback
                                         iHotwordRecognitionStatusCallback2;
@@ -2732,7 +2728,6 @@ public final class VoiceInteractionManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,
@@ -3412,8 +3407,6 @@ public final class VoiceInteractionManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:25:0x004a  */
-        /* JADX WARN: Removed duplicated region for block: B:26:0x004b A[Catch: all -> 0x0077, TryCatch #0 {all -> 0x0077, blocks: (B:12:0x0022, B:18:0x0029, B:20:0x0036, B:23:0x003d, B:26:0x004b, B:28:0x0051, B:29:0x0059, B:30:0x0040), top: B:11:0x0022, outer: #1 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4098,10 +4091,6 @@ public final class VoiceInteractionManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:23:0x005e  */
-        /* JADX WARN: Removed duplicated region for block: B:36:0x00ad  */
-        /* JADX WARN: Removed duplicated region for block: B:38:0x00b4  */
-        /* JADX WARN: Removed duplicated region for block: B:43:0x0105  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4290,7 +4279,6 @@ public final class VoiceInteractionManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.voiceinteraction.VoiceInteractionManagerService$3] */
     public VoiceInteractionManagerService(Context context) {
         super(context);
         this.mLoadedKeyphraseIds = new ArrayMap();

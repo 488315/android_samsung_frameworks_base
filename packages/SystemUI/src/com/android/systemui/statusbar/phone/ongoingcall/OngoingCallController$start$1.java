@@ -16,7 +16,6 @@ final class OngoingCallController$start$1 extends SuspendLambda implements Funct
     int label;
     final /* synthetic */ OngoingCallController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public OngoingCallController$start$1(OngoingCallController ongoingCallController, Continuation continuation) {
         super(2, continuation);
         this.this$0 = ongoingCallController;

@@ -17,7 +17,6 @@ public final class MediaControlViewModel$special$$inlined$flatMapLatest$1 extend
     int label;
     final /* synthetic */ MediaControlViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaControlViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, MediaControlViewModel mediaControlViewModel) {
         super(3, continuation);
         this.this$0 = mediaControlViewModel;
@@ -70,9 +69,6 @@ public final class MediaControlViewModel$special$$inlined$flatMapLatest$1 extend
                         this.this$0 = mediaControlViewModel;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:20:0x0065 A[RETURN] */
-                    /* JADX WARN: Removed duplicated region for block: B:21:0x003b  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

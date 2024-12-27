@@ -65,7 +65,6 @@ public class Location implements Parcelable {
                     });
     public static final Parcelable.Creator<Location> CREATOR =
             new Parcelable.Creator<Location>() { // from class: android.location.Location.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Location createFromParcel(Parcel in) {
                     Location l = new Location(in.readString8());
@@ -108,7 +107,6 @@ public class Location implements Parcelable {
                     return l;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Location[] newArray(int size) {
                     return new Location[size];
@@ -943,7 +941,6 @@ public class Location implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class BearingDistanceCache {
         float mDistance;
         float mFinalBearing;

@@ -15,7 +15,6 @@ final class BatteryControllerExtKt$isDevicePluggedIn$2 extends SuspendLambda imp
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BatteryControllerExtKt$isDevicePluggedIn$2(BatteryController batteryController, Continuation continuation) {
         super(2, continuation);
         this.$this_isDevicePluggedIn = batteryController;

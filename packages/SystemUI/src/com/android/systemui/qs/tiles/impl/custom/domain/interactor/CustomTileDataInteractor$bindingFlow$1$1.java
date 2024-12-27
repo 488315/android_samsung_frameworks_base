@@ -22,7 +22,6 @@ final class CustomTileDataInteractor$bindingFlow$1$1 extends SuspendLambda imple
         int label;
         final /* synthetic */ CustomTileDataInteractor this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(CustomTileDataInteractor customTileDataInteractor, UserHandle userHandle, Continuation continuation) {
             super(2, continuation);
             this.this$0 = customTileDataInteractor;
@@ -52,7 +51,6 @@ final class CustomTileDataInteractor$bindingFlow$1$1 extends SuspendLambda imple
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTileDataInteractor$bindingFlow$1$1(CustomTileDataInteractor customTileDataInteractor, UserHandle userHandle, Continuation continuation) {
         super(2, continuation);
         this.this$0 = customTileDataInteractor;
@@ -71,8 +69,6 @@ final class CustomTileDataInteractor$bindingFlow$1$1 extends SuspendLambda imple
         return ((CustomTileDataInteractor$bindingFlow$1$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00bb A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00a9 A[RETURN] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

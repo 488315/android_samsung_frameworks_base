@@ -180,7 +180,6 @@ public final class CacheOomRanker {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.am.CacheOomRanker$1] */
     public CacheOomRanker(
             ActivityManagerService activityManagerService,
             ProcessDependencies processDependencies) {

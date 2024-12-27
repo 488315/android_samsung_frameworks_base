@@ -256,9 +256,6 @@ public class SystemUIImageView extends ImageView implements SystemUIWidgetCallba
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x01a8  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x01ee  */
-    /* JADX WARN: Removed duplicated region for block: B:51:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -293,8 +290,6 @@ public class SystemUIImageView extends ImageView implements SystemUIWidgetCallba
         this(context, attributeSet, i, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.widget.SystemUIImageView$1] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.systemui.widget.SystemUIImageView$2] */
     public SystemUIImageView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mUpdateFlag = 0L;

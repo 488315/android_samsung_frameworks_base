@@ -19,7 +19,6 @@ public final class BiometricSettingsRepositoryImpl$special$$inlined$flatMapLates
     int label;
     final /* synthetic */ BiometricSettingsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$3(Continuation continuation, BiometricSettingsRepositoryImpl biometricSettingsRepositoryImpl) {
         super(3, continuation);
         this.this$0 = biometricSettingsRepositoryImpl;
@@ -75,8 +74,6 @@ public final class BiometricSettingsRepositoryImpl$special$$inlined$flatMapLates
                         this.$userInfo$inlined = userInfo;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

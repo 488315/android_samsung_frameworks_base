@@ -23,13 +23,11 @@ public final class RoutingSessionInfo implements Parcelable {
     public static final Parcelable.Creator<RoutingSessionInfo> CREATOR =
             new Parcelable.Creator<
                     RoutingSessionInfo>() { // from class: android.media.RoutingSessionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RoutingSessionInfo createFromParcel(Parcel in) {
                     return new RoutingSessionInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RoutingSessionInfo[] newArray(int size) {
                     return new RoutingSessionInfo[size];

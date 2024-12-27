@@ -3111,7 +3111,6 @@ public interface IPowerManager extends IInterface {
                 new Parcelable.Creator<
                         LowPowerStandbyPolicy>() { // from class:
                                                    // android.os.IPowerManager.LowPowerStandbyPolicy.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public LowPowerStandbyPolicy createFromParcel(Parcel _aidl_source) {
                         LowPowerStandbyPolicy _aidl_out = new LowPowerStandbyPolicy();
@@ -3119,7 +3118,6 @@ public interface IPowerManager extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public LowPowerStandbyPolicy[] newArray(int _aidl_size) {
                         return new LowPowerStandbyPolicy[_aidl_size];
@@ -3207,7 +3205,6 @@ public interface IPowerManager extends IInterface {
                 new Parcelable.Creator<
                         LowPowerStandbyPortDescription>() { // from class:
                                                             // android.os.IPowerManager.LowPowerStandbyPortDescription.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public LowPowerStandbyPortDescription createFromParcel(Parcel _aidl_source) {
                         LowPowerStandbyPortDescription _aidl_out =
@@ -3216,7 +3213,6 @@ public interface IPowerManager extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public LowPowerStandbyPortDescription[] newArray(int _aidl_size) {
                         return new LowPowerStandbyPortDescription[_aidl_size];
@@ -3304,7 +3300,6 @@ public interface IPowerManager extends IInterface {
                 new Parcelable.Creator<
                         AdaptiveScreenOffTimeoutConfig>() { // from class:
                                                             // android.os.IPowerManager.AdaptiveScreenOffTimeoutConfig.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AdaptiveScreenOffTimeoutConfig createFromParcel(Parcel _aidl_source) {
                         AdaptiveScreenOffTimeoutConfig _aidl_out =
@@ -3313,7 +3308,6 @@ public interface IPowerManager extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AdaptiveScreenOffTimeoutConfig[] newArray(int _aidl_size) {
                         return new AdaptiveScreenOffTimeoutConfig[_aidl_size];

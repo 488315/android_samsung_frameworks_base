@@ -273,24 +273,20 @@ public class NotificationController {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void lambda$deleteAllNotifications$1() {
         Log.d(TAG, "clear Notifiations call by bixby");
         this.mNotifCollection.dismissAllNotifications(this.mContext.getUserId(), false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$deleteAllNotificationsDismissable$2() {
         Log.d(TAG, "clear Notifiations call by bixby");
         this.mNotifCollection.dismissAllNotifications(this.mContext.getUserId(), true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void lambda$deleteAppNotifications$3(NotificationEntry notificationEntry) {
         this.mNotifCollection.dismissNotification(notificationEntry, new DismissedByUserStats(3, 1, NotificationVisibility.obtain(notificationEntry.mKey, notificationEntry.mRanking.getRank(), this.mEntries.size(), true, NotificationLogger.getNotificationLocation(notificationEntry))));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void lambda$getVisibleNotifications$0(List list, ListEntry listEntry) {
         list.add(listEntry.getRepresentativeEntry());
         if (listEntry instanceof GroupEntry) {

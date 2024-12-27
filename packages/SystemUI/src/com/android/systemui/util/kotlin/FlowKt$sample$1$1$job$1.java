@@ -16,7 +16,6 @@ final class FlowKt$sample$1$1$job$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ AtomicReference<Object> $sampledRef;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FlowKt$sample$1$1$job$1(Flow flow, AtomicReference<Object> atomicReference, Continuation continuation) {
         super(2, continuation);
         this.$other = flow;

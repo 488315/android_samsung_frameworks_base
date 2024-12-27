@@ -10,13 +10,11 @@ public final class SparseRectFArray implements Parcelable {
     public static final Parcelable.Creator<SparseRectFArray> CREATOR =
             new Parcelable.Creator<
                     SparseRectFArray>() { // from class: android.view.inputmethod.SparseRectFArray.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SparseRectFArray createFromParcel(Parcel source) {
                     return new SparseRectFArray(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SparseRectFArray[] newArray(int size) {
                     return new SparseRectFArray[size];

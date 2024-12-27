@@ -13,13 +13,11 @@ public final class GrantTrustResult implements Parcelable {
     public static final Parcelable.Creator<GrantTrustResult> CREATOR =
             new Parcelable.Creator<
                     GrantTrustResult>() { // from class: android.service.trust.GrantTrustResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GrantTrustResult[] newArray(int size) {
                     return new GrantTrustResult[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GrantTrustResult createFromParcel(Parcel in) {
                     return new GrantTrustResult(in);

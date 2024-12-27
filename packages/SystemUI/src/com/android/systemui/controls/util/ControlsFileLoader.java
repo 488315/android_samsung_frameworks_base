@@ -150,7 +150,6 @@ public final class ControlsFileLoader {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static ControlsBackupFormat parseXml(XmlPullParser xmlPullParser) {
         int i;
         ArrayList arrayList = new ArrayList();

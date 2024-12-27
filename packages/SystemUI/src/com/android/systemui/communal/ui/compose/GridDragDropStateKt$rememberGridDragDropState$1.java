@@ -12,7 +12,6 @@ final class GridDragDropStateKt$rememberGridDragDropState$1 extends SuspendLambd
     final /* synthetic */ GridDragDropState $state;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GridDragDropStateKt$rememberGridDragDropState$1(GridDragDropState gridDragDropState, LazyGridState lazyGridState, Continuation continuation) {
         super(2, continuation);
         this.$state = gridDragDropState;
@@ -35,9 +34,6 @@ final class GridDragDropStateKt$rememberGridDragDropState$1 extends SuspendLambd
         	at jadx.core.utils.ErrorsCounter.error(ErrorsCounter.java:31)
         	at jadx.core.dex.attributes.nodes.NotificationAttrNode.addError(NotificationAttrNode.java:19)
         */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0028 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0039 A[RETURN] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:10:0x0037 -> B:11:0x001c). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

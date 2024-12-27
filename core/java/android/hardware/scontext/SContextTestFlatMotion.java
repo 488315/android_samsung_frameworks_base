@@ -9,13 +9,11 @@ public class SContextTestFlatMotion extends SContextEventContext {
     public static final Parcelable.Creator<SContextTestFlatMotion> CREATOR =
             new Parcelable.Creator<SContextTestFlatMotion>() { // from class:
                 // android.hardware.scontext.SContextTestFlatMotion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextTestFlatMotion createFromParcel(Parcel in) {
                     return new SContextTestFlatMotion(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextTestFlatMotion[] newArray(int size) {
                     return new SContextTestFlatMotion[size];

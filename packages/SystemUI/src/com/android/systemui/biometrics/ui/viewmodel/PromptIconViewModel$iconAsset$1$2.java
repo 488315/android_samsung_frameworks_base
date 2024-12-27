@@ -16,7 +16,6 @@ final class PromptIconViewModel$iconAsset$1$2 extends SuspendLambda implements F
     int label;
     final /* synthetic */ PromptIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptIconViewModel$iconAsset$1$2(PromptIconViewModel promptIconViewModel, Continuation continuation) {
         super(5, continuation);
         this.this$0 = promptIconViewModel;

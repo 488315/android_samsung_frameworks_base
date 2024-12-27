@@ -7,13 +7,11 @@ public class AuthenticatorDescription implements Parcelable {
     public static final Parcelable.Creator<AuthenticatorDescription> CREATOR =
             new Parcelable.Creator<AuthenticatorDescription>() { // from class:
                 // android.accounts.AuthenticatorDescription.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AuthenticatorDescription createFromParcel(Parcel source) {
                     return new AuthenticatorDescription(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AuthenticatorDescription[] newArray(int size) {
                     return new AuthenticatorDescription[size];

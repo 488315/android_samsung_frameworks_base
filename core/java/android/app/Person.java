@@ -11,13 +11,11 @@ import java.util.function.Consumer;
 public final class Person implements Parcelable {
     public static final Parcelable.Creator<Person> CREATOR =
             new Parcelable.Creator<Person>() { // from class: android.app.Person.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Person createFromParcel(Parcel in) {
                     return new Person(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Person[] newArray(int size) {
                     return new Person[size];

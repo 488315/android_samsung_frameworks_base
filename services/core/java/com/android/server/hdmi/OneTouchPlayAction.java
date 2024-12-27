@@ -77,10 +77,6 @@ public final class OneTouchPlayAction extends HdmiCecFeatureAction {
         addTimer(2, 2000);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0054  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0073  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00ae  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00ba  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

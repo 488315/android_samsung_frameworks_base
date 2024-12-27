@@ -137,7 +137,6 @@ public class Typeface {
     @CriticalNative
     private static native void nativeAddFontCollections(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeCreateFromArray(long[] jArr, long j, int i, int i2);
 
     private static native long nativeCreateFromTypeface(long j, int i);
@@ -438,7 +437,6 @@ public class Typeface {
             return this;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static String createAssetUid(
                 AssetManager mgr,
                 String path,
@@ -650,7 +648,6 @@ public class Typeface {
         return createWeightStyle(family, weight, italic);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Typeface createWeightStyle(Typeface typeface, int i, boolean z) {
         int i2 = (i << 1) | (z ? 1 : 0);
         if (isFlipFontUsed && typeface.isLikeDefault) {
@@ -797,7 +794,6 @@ public class Typeface {
         this.mCleaner.run();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Typeface getSystemDefaultTypeface(String familyName) {
         Typeface tf = sSystemFontMap.get(familyName);
         return tf == null ? DEFAULT : tf;

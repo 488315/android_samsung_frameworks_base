@@ -335,7 +335,6 @@ public class PluginFilterCreator implements MediaFilterCreator {
                         .orElse(filter);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ NNFileDescriptor lambda$createNNFilter$7(
             Context context, Pair paths, String it) {
         AssetFileDescriptor afd = null;

@@ -38,7 +38,6 @@ public class ExecutorImpl implements DelayableExecutor {
         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean onHandleMessage(Message message) {
         if (message.what == 0) {
             ((ExecutionToken) message.obj).runnable.run();

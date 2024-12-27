@@ -89,7 +89,6 @@ public class KeyguardPINView extends KeyguardSecPinBasedInputView {
         }
         this.mAppearAnimator.setDuration(650L);
         this.mAppearAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.keyguard.KeyguardPINView$$ExternalSyntheticLambda1
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 KeyguardPINView keyguardPINView = KeyguardPINView.this;

@@ -452,8 +452,6 @@ public class TemplateManager {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:67:0x00ed, code lost:
 
        if (r5.equals("50") != false) goto L78;

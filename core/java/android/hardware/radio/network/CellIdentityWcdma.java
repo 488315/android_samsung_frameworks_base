@@ -12,7 +12,6 @@ public class CellIdentityWcdma implements Parcelable {
     public static final Parcelable.Creator<CellIdentityWcdma> CREATOR =
             new Parcelable.Creator<CellIdentityWcdma>() { // from class:
                 // android.hardware.radio.network.CellIdentityWcdma.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentityWcdma createFromParcel(Parcel _aidl_source) {
                     CellIdentityWcdma _aidl_out = new CellIdentityWcdma();
@@ -20,7 +19,6 @@ public class CellIdentityWcdma implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentityWcdma[] newArray(int _aidl_size) {
                     return new CellIdentityWcdma[_aidl_size];

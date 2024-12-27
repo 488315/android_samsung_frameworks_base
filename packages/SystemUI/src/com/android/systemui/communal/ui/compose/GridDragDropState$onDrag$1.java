@@ -19,7 +19,6 @@ final class GridDragDropState$onDrag$1 extends SuspendLambda implements Function
     int label;
     final /* synthetic */ GridDragDropState this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GridDragDropState$onDrag$1(GridDragDropState gridDragDropState, Integer num, LazyGridItemInfo lazyGridItemInfo, LazyGridItemInfo lazyGridItemInfo2, Continuation continuation) {
         super(2, continuation);
         this.this$0 = gridDragDropState;

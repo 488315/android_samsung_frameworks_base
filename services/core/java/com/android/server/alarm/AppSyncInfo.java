@@ -319,16 +319,6 @@ public final class AppSyncInfo extends AppSyncWrapper {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:109:0x00f1  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00ee  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0143  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0190  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x01d0  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x01d8  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x01e0 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0193  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0146  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x00b3  */
     /* renamed from: -$$Nest$mupdateSuspiciousPolicy, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -16,7 +16,6 @@ final class MobileConnectionsRepositoryImpl$activeMobileDataSubscriptionId$1 ext
     int label;
     final /* synthetic */ MobileConnectionsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileConnectionsRepositoryImpl$activeMobileDataSubscriptionId$1(MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mobileConnectionsRepositoryImpl;
@@ -46,7 +45,6 @@ final class MobileConnectionsRepositoryImpl$activeMobileDataSubscriptionId$1 ext
             mobileConnectionsRepositoryImpl.telephonyManager.registerTelephonyCallback(ExecutorsKt.asExecutor(mobileConnectionsRepositoryImpl.bgDispatcher), mobileConnectionsRepositoryImpl$activeMobileDataSubscriptionId$1$callback$1);
             final MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$activeMobileDataSubscriptionId$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -80,8 +80,6 @@ public class WalletView extends FrameLayout implements WalletCardCarousel.OnCard
         return this.mErrorView;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v6, types: [java.lang.CharSequence] */
     public final void onCardScroll(WalletCardViewInfo walletCardViewInfo, WalletCardViewInfo walletCardViewInfo2, float f) {
         String str;
         WalletScreenController.QAWalletCardViewInfo qAWalletCardViewInfo = (WalletScreenController.QAWalletCardViewInfo) walletCardViewInfo;
@@ -178,15 +176,6 @@ public class WalletView extends FrameLayout implements WalletCardCarousel.OnCard
         });
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0093  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00b4  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00c3  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00e3  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0131  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x014d  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x017f A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0101  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00c6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -19,7 +19,6 @@ final class LightRevealScrimInteractor$listenForStartedKeyguardTransitionStep$1 
     int label;
     final /* synthetic */ LightRevealScrimInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LightRevealScrimInteractor$listenForStartedKeyguardTransitionStep$1(LightRevealScrimInteractor lightRevealScrimInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = lightRevealScrimInteractor;

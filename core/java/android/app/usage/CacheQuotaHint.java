@@ -13,7 +13,6 @@ public final class CacheQuotaHint implements Parcelable {
     public static final Parcelable.Creator<CacheQuotaHint> CREATOR =
             new Parcelable.Creator<
                     CacheQuotaHint>() { // from class: android.app.usage.CacheQuotaHint.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CacheQuotaHint createFromParcel(Parcel in) {
                     Builder builder = new Builder();
@@ -28,7 +27,6 @@ public final class CacheQuotaHint implements Parcelable {
                             .build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CacheQuotaHint[] newArray(int size) {
                     return new CacheQuotaHint[size];

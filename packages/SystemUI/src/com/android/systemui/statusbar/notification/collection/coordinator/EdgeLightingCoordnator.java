@@ -27,7 +27,6 @@ public final class EdgeLightingCoordnator implements Coordinator {
         }
     };
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean disableDesktopLauncher(NotificationEntry notificationEntry) {
         StatusBarNotification statusBarNotification = notificationEntry.mSbn;
         return "com.sec.android.app.desktoplauncher".equals(statusBarNotification.getPackageName()) && notificationEntry.mRanking.getChannel() != null && Intrinsics.areEqual(notificationEntry.mRanking.getChannel().getId(), "desktop_launcher_chnnel_id") && (statusBarNotification.getNotification().flags & 64) != 0;

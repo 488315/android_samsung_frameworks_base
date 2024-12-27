@@ -222,10 +222,6 @@ public final class DisplayPolicy {
         public final DisplayPolicy$1$$ExternalSyntheticLambda0 mOnSwipeFromRight;
         public final DisplayPolicy$1$$ExternalSyntheticLambda0 mOnSwipeFromTop;
 
-        /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0] */
-        /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0] */
-        /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0] */
-        /* JADX WARN: Type inference failed for: r2v4, types: [com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0] */
         public AnonymousClass1() {
             final int i = 0;
             this.mOnSwipeFromLeft =
@@ -546,9 +542,6 @@ public final class DisplayPolicy {
         public final DisplayPolicy$2$$ExternalSyntheticLambda1 mAppTransitionFinished;
         public final DisplayPolicy$2$$ExternalSyntheticLambda1 mAppTransitionPending;
 
-        /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.wm.DisplayPolicy$2$$ExternalSyntheticLambda1] */
-        /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.wm.DisplayPolicy$2$$ExternalSyntheticLambda1] */
-        /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.wm.DisplayPolicy$2$$ExternalSyntheticLambda1] */
         public AnonymousClass2(final int i) {
             final int i2 = 0;
             this.mAppTransitionPending =
@@ -1132,7 +1125,6 @@ public final class DisplayPolicy {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.wm.DisplayPolicy$4] */
     public DisplayPolicy(WindowManagerService windowManagerService, DisplayContent displayContent) {
         this.mService = windowManagerService;
         Context createDisplayContext =
@@ -1195,7 +1187,6 @@ public final class DisplayPolicy {
 
                                            if (r10 == 3) goto L25;
                                         */
-                                        /* JADX WARN: Removed duplicated region for block: B:18:0x0060 A[ADDED_TO_REGION] */
                                         /*
                                             Code decompiled incorrectly, please refer to instructions dump.
                                             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1457,12 +1448,6 @@ public final class DisplayPolicy {
                 WindowInsets.Type.navigationBars());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0055  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x005b  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00b9  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x010a  */
-    /* JADX WARN: Removed duplicated region for block: B:65:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x00d6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1621,23 +1606,6 @@ public final class DisplayPolicy {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00df  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x00ec  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x015c  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0166  */
-    /* JADX WARN: Type inference failed for: r4v10, types: [int] */
-    /* JADX WARN: Type inference failed for: r4v11 */
-    /* JADX WARN: Type inference failed for: r4v12 */
-    /* JADX WARN: Type inference failed for: r4v13 */
-    /* JADX WARN: Type inference failed for: r4v14, types: [int] */
-    /* JADX WARN: Type inference failed for: r4v26 */
-    /* JADX WARN: Type inference failed for: r4v27 */
-    /* JADX WARN: Type inference failed for: r4v5, types: [com.samsung.android.cover.ICoverManager] */
-    /* JADX WARN: Type inference failed for: r4v6 */
-    /* JADX WARN: Type inference failed for: r4v7 */
-    /* JADX WARN: Type inference failed for: r4v8 */
-    /* JADX WARN: Type inference failed for: r4v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2910,15 +2878,6 @@ public final class DisplayPolicy {
 
        if (r0 != false) goto L114;
     */
-    /* JADX WARN: Removed duplicated region for block: B:128:0x02d9  */
-    /* JADX WARN: Removed duplicated region for block: B:174:0x039f  */
-    /* JADX WARN: Removed duplicated region for block: B:177:0x03b0 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:178:0x03b1  */
-    /* JADX WARN: Removed duplicated region for block: B:229:0x04a8  */
-    /* JADX WARN: Removed duplicated region for block: B:265:0x0590  */
-    /* JADX WARN: Removed duplicated region for block: B:270:0x05b9  */
-    /* JADX WARN: Removed duplicated region for block: B:273:0x05cf  */
-    /* JADX WARN: Type inference failed for: r3v12, types: [com.android.server.wm.DisplayPolicy$$ExternalSyntheticLambda12] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2933,7 +2892,6 @@ public final class DisplayPolicy {
                     + " com.android.server.wm.DisplayPolicy.updateSystemBarAttributes():void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00da  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

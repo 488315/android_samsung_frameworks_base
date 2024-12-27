@@ -14,7 +14,6 @@ final class CellularIconViewModel$isVisible$1 extends SuspendLambda implements F
     int label;
     final /* synthetic */ CellularIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CellularIconViewModel$isVisible$1(CellularIconViewModel cellularIconViewModel, Continuation continuation) {
         super(6, continuation);
         this.this$0 = cellularIconViewModel;

@@ -7,7 +7,6 @@ public class VoidBufferChannel implements BufferChannel {
     @Override // com.samsung.android.sume.core.channel.Channel
     public void send(MediaBuffer data) {}
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.channel.Channel
     public MediaBuffer receive() {
         return MediaBuffer.mutableOf(MediaFormat.mutableImageOf(new Object[0]));

@@ -15,13 +15,11 @@ final class VideoItemImpl extends Item implements IBundleHolder {
     public static final Parcelable.Creator<VideoItemImpl> CREATOR =
             new Parcelable.Creator<
                     VideoItemImpl>() { // from class: com.samsung.android.allshare.VideoItemImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VideoItemImpl createFromParcel(Parcel src) {
                     return new VideoItemImpl(src);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VideoItemImpl[] newArray(int size) {
                     return new VideoItemImpl[size];

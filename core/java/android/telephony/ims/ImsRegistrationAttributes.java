@@ -20,13 +20,11 @@ public final class ImsRegistrationAttributes implements Parcelable {
             new Parcelable.Creator<
                     ImsRegistrationAttributes>() { // from class:
                                                    // android.telephony.ims.ImsRegistrationAttributes.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsRegistrationAttributes createFromParcel(Parcel source) {
                     return new ImsRegistrationAttributes(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsRegistrationAttributes[] newArray(int size) {
                     return new ImsRegistrationAttributes[size];

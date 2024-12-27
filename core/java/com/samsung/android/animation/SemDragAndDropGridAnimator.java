@@ -112,8 +112,6 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         return this.mTempRect.contains(x, y);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0093 A[ADDED_TO_REGION, RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -214,7 +212,6 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         return this.mOnItemLongClickListener;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean initDragIfNecessary(int position) {
         if (isDraggable() && activatedByLongPress() && this.mGridView.getCount() > 1) {
             if (position >= 0
@@ -826,7 +823,6 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateDragViewBitmap() {
         if (this.mDragView != null) {
             this.mDragViewBitmap =

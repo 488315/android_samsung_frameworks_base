@@ -34,13 +34,11 @@ public class MFDescriptorGraph implements Parcelable {
             new Parcelable.Creator<
                     MFDescriptorGraph>() { // from class:
                                            // com.samsung.android.sume.core.graph.MFDescriptorGraph.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MFDescriptorGraph createFromParcel(Parcel in) {
                     return new MFDescriptorGraph(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MFDescriptorGraph[] newArray(int size) {
                     return new MFDescriptorGraph[size];
@@ -155,7 +153,6 @@ public class MFDescriptorGraph implements Parcelable {
         return new Pair(it, unitFactory.newNode(it.descriptor));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ void lambda$toMediaFilterGraph$4(
             final MFGraph.Builder builder, final List nodeList, Pair it) {
         List<Integer> children = ((DescriptorNode) it.first).children;
@@ -288,19 +285,16 @@ public class MFDescriptorGraph implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class DescriptorNode implements Parcelable {
         public static final Parcelable.Creator<DescriptorNode> CREATOR =
                 new Parcelable.Creator<
                         DescriptorNode>() { // from class:
                                             // com.samsung.android.sume.core.graph.MFDescriptorGraph.DescriptorNode.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DescriptorNode createFromParcel(Parcel in) {
                         return new DescriptorNode(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DescriptorNode[] newArray(int size) {
                         return new DescriptorNode[size];

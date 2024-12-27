@@ -121,27 +121,6 @@ public final class AudioVisSeekbarDefaults {
         return audioVisSeekbarColors;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0064  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x007f  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x009c  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00be  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00d4  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x012e  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x015f  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x01f6  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x00e4  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x00ec  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0107  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x010d  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0113  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x0109  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x00e7  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x00a2  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x005e  */
-    /* JADX WARN: Type inference failed for: r6v4, types: [com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$Thumb$1$1, kotlin.jvm.internal.Lambda] */
     /* renamed from: Thumb-FJfuzF0, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -155,25 +134,6 @@ public final class AudioVisSeekbarDefaults {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults.m1977ThumbFJfuzF0(androidx.compose.runtime.State, androidx.compose.ui.Modifier, com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarColors, boolean, float, androidx.compose.runtime.Composer, int, int):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x00aa  */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x009f  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x006c  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x008b  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00a6  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00be  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00d6  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00f8  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x0112  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0161  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0175  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x01b8  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x01e9  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x0128  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x012d  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x0133  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x00dc  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x00c2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

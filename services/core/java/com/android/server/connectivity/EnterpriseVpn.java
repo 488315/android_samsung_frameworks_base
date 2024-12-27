@@ -173,7 +173,6 @@ public class EnterpriseVpn {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v0, types: [com.android.server.connectivity.EnterpriseVpn$3] */
     public EnterpriseVpn(
             Looper looper,
             Context context,
@@ -396,7 +395,6 @@ public class EnterpriseVpn {
         return IKnoxVpnPolicy.Stub.asInterface(ServiceManager.getService("knox_vpn_policy"));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native int jniCheck(String str);
 
     private native int jniCreateknoxvpn(int i, boolean z);
@@ -407,7 +405,6 @@ public class EnterpriseVpn {
 
     private native int jniSetAddresses(String str, String str2);
 
-    /* JADX WARN: Type inference failed for: r11v0, types: [com.android.server.connectivity.EnterpriseVpn$1] */
     public final void agentConnect() {
         LinkProperties makeLinkProperties = makeLinkProperties();
         NetworkCapabilities.Builder builder =
@@ -546,9 +543,6 @@ public class EnterpriseVpn {
                 .getNotification();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v0, types: [int] */
-    /* JADX WARN: Type inference failed for: r5v4, types: [long] */
     public final synchronized ParcelFileDescriptor establish(VpnConfig vpnConfig) {
         long callingUid = Binder.getCallingUid();
         if (callingUid != this.mOwnerUID) {

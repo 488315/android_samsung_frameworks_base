@@ -12,7 +12,6 @@ public class ImsSmsMessage implements Parcelable {
     public static final Parcelable.Creator<ImsSmsMessage> CREATOR =
             new Parcelable.Creator<ImsSmsMessage>() { // from class:
                 // android.hardware.radio.messaging.ImsSmsMessage.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsSmsMessage createFromParcel(Parcel _aidl_source) {
                     ImsSmsMessage _aidl_out = new ImsSmsMessage();
@@ -20,7 +19,6 @@ public class ImsSmsMessage implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsSmsMessage[] newArray(int _aidl_size) {
                     return new ImsSmsMessage[_aidl_size];

@@ -304,7 +304,6 @@ public class UsbManager {
         DEFAULT_MODES = new int[] {2, 4, 6, 0, 1};
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class DisplayPortAltModeInfoDispatchingListener extends IDisplayPortAltModeInfoListener.Stub {
         private DisplayPortAltModeInfoDispatchingListener() {}
 

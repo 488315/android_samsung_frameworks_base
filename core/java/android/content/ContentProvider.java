@@ -823,7 +823,6 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int checkPermission(String permission, AttributionSource attributionSource) {
         if (Binder.getCallingPid() == Process.myPid()) {
             return 0;
@@ -1006,7 +1005,6 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         return ctx;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public AttributionSource setCallingAttributionSource(AttributionSource attributionSource) {
         AttributionSource original = this.mCallingAttributionSource.get();
         this.mCallingAttributionSource.set(attributionSource);
@@ -1431,7 +1429,6 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         writer.println("nothing to dump");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void validateIncomingAuthority(String authority) throws SecurityException {
         String message;
         if (!matchesOurAuthorities(getAuthorityWithoutUserId(authority))) {
@@ -1485,7 +1482,6 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         return uri;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Uri maybeGetUriWithoutUserId(Uri uri) {
         if (this.mSingleUser) {
             return uri;
@@ -1584,14 +1580,12 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         return uri;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void traceBegin(long traceTag, String methodName, String subInfo) {
         if (Trace.isTagEnabled(traceTag)) {
             Trace.traceBegin(traceTag, methodName + subInfo);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean deniedAccessSystemUserOnlyProvider(
             int callingUserId, boolean systemUserOnly) {
         return Flags.enableSystemUserOnlyForServicesAndProviders()

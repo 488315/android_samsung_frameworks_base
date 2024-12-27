@@ -262,7 +262,6 @@ public class SemIrisManager {
             return this.mFidoResultData;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setFidoResultData(byte[] fidoResultData) {
             this.mFidoResultData = fidoResultData;
         }
@@ -400,7 +399,6 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkAuthViewWindowToken(final CryptoObject crypto, final CancellationSignal cancel, final int flags, final AuthenticationCallback callback, final Handler handler, final int userId, final Bundle attr, final View irisView, final long sessionId, final byte[] fidoRequestData) {
         AuthenticationCallback authenticationCallback;
         if (this.mGetterHandler == null) {
@@ -506,12 +504,6 @@ public class SemIrisManager {
         enroll(token, cancel, flags, getCurrentUserId(), callback, null, irisView);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r8v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r8v1 */
-    /* JADX WARN: Type inference failed for: r8v3 */
-    /* JADX WARN: Type inference failed for: r8v4 */
-    /* JADX WARN: Type inference failed for: r8v5 */
     public void enroll(byte[] bArr, CancellationSignal cancellationSignal, int i, int i2, EnrollmentCallback enrollmentCallback, Bundle bundle, View view) {
         int i3;
         String str;
@@ -559,7 +551,6 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkEnrollViewWindowToken(final byte[] token, final CancellationSignal cancel, final int flags, final int userId, final EnrollmentCallback callback, final Bundle attr, final View irisView) {
         Log.v(TAG, "checkEnrollViewWindowToken");
         if (this.mGetterHandler == null) {
@@ -1132,7 +1123,6 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelEnrollment() {
         Log.e(TAG, "cancelEnrollment");
         if (ensureServiceConnected() && this.mService != null) {
@@ -1144,7 +1134,6 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelAuthentication(CryptoObject cryptoObject) {
         Log.e(TAG, "cancelAuthentication");
         if (ensureServiceConnected() && this.mService != null) {
@@ -1156,7 +1145,6 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String getErrorString(int errMsg) {
         Resources mRes;
         PackageManager mPm = this.mContext.getPackageManager();
@@ -1223,7 +1211,6 @@ public class SemIrisManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String getAcquiredString(int acquireInfo) {
         Resources mRes;
         PackageManager mPm = this.mContext.getPackageManager();

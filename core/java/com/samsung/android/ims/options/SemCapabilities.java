@@ -95,13 +95,11 @@ public class SemCapabilities implements Parcelable, Cloneable {
                 new Parcelable.Creator<
                         SemCapabilities>() { // from class:
                                              // com.samsung.android.ims.options.SemCapabilities.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SemCapabilities createFromParcel(Parcel in) {
                         return new SemCapabilities(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SemCapabilities[] newArray(int size) {
                         return new SemCapabilities[size];

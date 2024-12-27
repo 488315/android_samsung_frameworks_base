@@ -14,13 +14,11 @@ public class TransferSplashScreenViewStateItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<TransferSplashScreenViewStateItem> CREATOR =
             new Parcelable.Creator<TransferSplashScreenViewStateItem>() { // from class:
                 // android.app.servertransaction.TransferSplashScreenViewStateItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TransferSplashScreenViewStateItem createFromParcel(Parcel in) {
                     return new TransferSplashScreenViewStateItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TransferSplashScreenViewStateItem[] newArray(int size) {
                     return new TransferSplashScreenViewStateItem[size];

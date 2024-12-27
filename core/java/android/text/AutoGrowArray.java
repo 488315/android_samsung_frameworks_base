@@ -8,7 +8,6 @@ public final class AutoGrowArray {
     private static final int MAX_CAPACITY_TO_BE_KEPT = 10000;
     private static final int MIN_CAPACITY_INCREMENT = 12;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int computeNewCapacity(int currentSize, int requested) {
         int targetCapacity = (currentSize < 6 ? 12 : currentSize >> 1) + currentSize;
         return targetCapacity > requested ? targetCapacity : requested;

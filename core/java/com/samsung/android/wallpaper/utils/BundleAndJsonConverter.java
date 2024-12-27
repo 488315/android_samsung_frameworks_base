@@ -114,7 +114,6 @@ class BundleAndJsonConverter {
         reader.endObject();
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private boolean putValueToBundle(Bundle bundle, String key, String jsonValue) {
         char c;
         if (bundle == null || key == null || jsonValue == null) {

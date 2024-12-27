@@ -256,8 +256,6 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.systemui.unfold.updates.DeviceFoldStateProvider$timeoutRunnable$1] */
-    /* JADX WARN: Type inference failed for: r2v7, types: [com.android.systemui.unfold.updates.DeviceFoldStateProvider$progressExecutor$1] */
     public DeviceFoldStateProvider(UnfoldTransitionConfig unfoldTransitionConfig, Context context, ScreenStatusProvider screenStatusProvider, CurrentActivityTypeProvider currentActivityTypeProvider, UnfoldKeyguardVisibilityProvider unfoldKeyguardVisibilityProvider, FoldProvider foldProvider, HingeAngleProvider hingeAngleProvider, RotationChangeProvider rotationChangeProvider, Handler handler) {
         this.context = context;
         this.screenStatusProvider = screenStatusProvider;

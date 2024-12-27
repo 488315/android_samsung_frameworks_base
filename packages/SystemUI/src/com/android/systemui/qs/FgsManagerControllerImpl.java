@@ -159,8 +159,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
             return this.data.size();
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r8v1, types: [T, java.lang.Object] */
         @Override // androidx.recyclerview.widget.RecyclerView.Adapter
         public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
             ?? r8;
@@ -176,7 +174,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
             appItemViewHolder.appLabelView.setText(((RunningApp) ref$ObjectRef.element).appLabel);
             appItemViewHolder.durationView.setText(DateUtils.formatDuration(Math.max(fgsManagerControllerImpl.systemClock.elapsedRealtime() - ((RunningApp) ref$ObjectRef.element).timeStarted, 60000L), 10));
             appItemViewHolder.stopButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$AppListAdapter$onBindViewHolder$2$1
-                /* JADX WARN: Multi-variable type inference failed */
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
                     FgsManagerControllerImpl.AppItemViewHolder.this.stopButton.setText(R.string.sec_fgs_manager_app_item_stop_button_stopped_label);
@@ -323,8 +320,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class UIControl {
         public static final /* synthetic */ UIControl[] $VALUES;
         public static final UIControl HIDE_BUTTON;
@@ -367,7 +362,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
             this.userId = i;
             this.packageName = str;
             this.uid$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$UserPackage$uid$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -411,8 +405,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
             return Objects.hash(Integer.valueOf(this.userId), this.packageName);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:29:0x0064  */
-        /* JADX WARN: Removed duplicated region for block: B:32:? A[RETURN, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -537,7 +529,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.systemui.qs.FgsManagerControllerImpl$userTrackerCallback$1] */
     public FgsManagerControllerImpl(Context context, Executor executor, Executor executor2, SystemClock systemClock, IActivityManager iActivityManager, JobScheduler jobScheduler, PackageManager packageManager, UserTracker userTracker, DeviceConfigProxy deviceConfigProxy, DialogTransitionAnimator dialogTransitionAnimator, BroadcastDispatcher broadcastDispatcher, DumpManager dumpManager, SystemUIDialog.Factory factory) {
         this.context = context;
         this.mainExecutor = executor;
@@ -770,7 +761,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         return i;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void showDialog$1() {
         final SecFgsManagerController secFgsManagerController = this.secFgsManagerController;
         final Expandable expandable = null;
@@ -1031,7 +1021,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                     fgsManagerControllerImpl.runningApps.put(userPackage3, runningApp2);
                 }
                 fgsManagerControllerImpl.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$updateAppItems$4
-                    /* JADX WARN: Type inference failed for: r3v0, types: [T, java.util.List] */
                     @Override // java.lang.Runnable
                     public final void run() {
                         SystemUIDialog systemUIDialog;

@@ -292,7 +292,6 @@ public abstract class EFSProperties {
         Log.d("EFSProperties", str);
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:53:0x0070 -> B:23:0x0097). Please report as a decompilation issue!!! */
     public static boolean saveKeyguardConfig(KeyguardProperties keyguardProperties) {
         FileOutputStream fileOutputStream;
         byte[] bArr;
@@ -400,7 +399,6 @@ public abstract class EFSProperties {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:62:0x014f A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

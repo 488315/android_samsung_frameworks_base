@@ -73,7 +73,6 @@ final class DeviceEntryBackgroundViewModel$alpha$1$1 extends SuspendLambda imple
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryBackgroundViewModel$alpha$1$1(KeyguardTransitionInteractor keyguardTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.$keyguardTransitionInteractor = keyguardTransitionInteractor;

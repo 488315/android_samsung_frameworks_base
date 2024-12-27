@@ -9,13 +9,11 @@ public class SContextInactiveTimer extends SContextEventContext {
     public static final Parcelable.Creator<SContextInactiveTimer> CREATOR =
             new Parcelable.Creator<SContextInactiveTimer>() { // from class:
                 // android.hardware.scontext.SContextInactiveTimer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextInactiveTimer createFromParcel(Parcel in) {
                     return new SContextInactiveTimer(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextInactiveTimer[] newArray(int size) {
                     return new SContextInactiveTimer[size];

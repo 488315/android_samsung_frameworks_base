@@ -11,7 +11,6 @@ public class Temperature implements Parcelable {
     public static final Parcelable.Creator<Temperature> CREATOR =
             new Parcelable.Creator<
                     Temperature>() { // from class: android.hardware.thermal.Temperature.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Temperature createFromParcel(Parcel _aidl_source) {
                     Temperature _aidl_out = new Temperature();
@@ -19,7 +18,6 @@ public class Temperature implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Temperature[] newArray(int _aidl_size) {
                     return new Temperature[_aidl_size];

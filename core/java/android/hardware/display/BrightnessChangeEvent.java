@@ -12,13 +12,11 @@ public final class BrightnessChangeEvent implements Parcelable {
     public static final Parcelable.Creator<BrightnessChangeEvent> CREATOR =
             new Parcelable.Creator<BrightnessChangeEvent>() { // from class:
                 // android.hardware.display.BrightnessChangeEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BrightnessChangeEvent createFromParcel(Parcel source) {
                     return new BrightnessChangeEvent(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BrightnessChangeEvent[] newArray(int size) {
                     return new BrightnessChangeEvent[size];

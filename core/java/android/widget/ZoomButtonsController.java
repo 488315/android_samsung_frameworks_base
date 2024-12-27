@@ -246,7 +246,6 @@ public class ZoomButtonsController implements View.OnTouchListener {
         return this.mControls;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dismissControlsDelayed(int delay) {
         if (this.mAutoDismissControls) {
             this.mHandler.removeMessages(3);
@@ -254,7 +253,6 @@ public class ZoomButtonsController implements View.OnTouchListener {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void refreshPositioningVariables() {
         if (this.mOwnerView.getWindowToken() == null) {
             return;
@@ -275,7 +273,6 @@ public class ZoomButtonsController implements View.OnTouchListener {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean onContainerKey(KeyEvent event) {
         KeyEvent.DispatcherState ds;
         int keyCode = event.getKeyCode();
@@ -418,7 +415,6 @@ public class ZoomButtonsController implements View.OnTouchListener {
         return closestChild;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onPostConfigurationChanged() {
         dismissControlsDelayed(ZOOM_CONTROLS_TIMEOUT);
         refreshPositioningVariables();

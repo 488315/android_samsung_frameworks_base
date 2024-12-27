@@ -11,7 +11,6 @@ jadx.core.utils.exceptions.JadxRuntimeException: Init of enum field 'REGISTRATIO
 	at jadx.core.dex.visitors.EnumVisitor.convertToEnum(EnumVisitor.java:151)
 	at jadx.core.dex.visitors.EnumVisitor.visit(EnumVisitor.java:100)
  */
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 public final class Domain {
     public static final /* synthetic */ Domain[] $VALUES;
     public static final Domain DLS;

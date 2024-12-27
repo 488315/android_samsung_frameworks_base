@@ -296,12 +296,10 @@ public class ImageWallpaper extends LiveWallpaperService {
                 }
             };
 
-            /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.wallpapers.ImageWallpaper$IntegratedEngine$2$1] */
             public AnonymousClass2() {
             }
         }
 
-        /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.wallpapers.ImageWallpaper$IntegratedEngine$3] */
         public IntegratedEngine(int i, int i2) {
             super(i);
             this.mKeyguardWallpaperEventListener = new AnonymousClass1();
@@ -1247,8 +1245,6 @@ public class ImageWallpaper extends LiveWallpaperService {
             });
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:6:0x003a A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x003b  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1525,7 +1521,6 @@ public class ImageWallpaper extends LiveWallpaperService {
                 m.append(imageWallpaperCanvasHelper.mHighlightFilterAmount);
                 Log.i(imageWallpaperCanvasHelper.TAG, m.toString());
                 imageWallpaperCanvasHelper.useWallpaperBitmap(currentWhich, new Consumer() { // from class: com.android.systemui.wallpaper.canvaswallpaper.ImageWallpaperCanvasHelper$$ExternalSyntheticLambda0
-                    /* JADX WARN: Removed duplicated region for block: B:12:0x0048  */
                     @Override // java.util.function.Consumer
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

@@ -9,7 +9,6 @@ final class GuestUserInteractor$guaranteePresent$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ GuestUserInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GuestUserInteractor$guaranteePresent$1(GuestUserInteractor guestUserInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = guestUserInteractor;

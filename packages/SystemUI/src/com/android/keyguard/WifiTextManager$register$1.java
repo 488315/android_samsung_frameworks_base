@@ -16,7 +16,6 @@ final class WifiTextManager$register$1 extends SuspendLambda implements Function
     int label;
     final /* synthetic */ WifiTextManager this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiTextManager$register$1(WifiTextManager wifiTextManager, Function2 function2, Continuation continuation) {
         super(2, continuation);
         this.this$0 = wifiTextManager;

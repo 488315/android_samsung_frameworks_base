@@ -33,7 +33,6 @@ public final class EventHistoryImpl implements EventHistory {
     public final class EventsProtoDiskReadWriter extends AbstractProtoDiskReadWriter {
         public final /* synthetic */ int $r8$classId;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ EventsProtoDiskReadWriter(
                 File file, ScheduledExecutorService scheduledExecutorService, int i) {
             super(file, scheduledExecutorService);

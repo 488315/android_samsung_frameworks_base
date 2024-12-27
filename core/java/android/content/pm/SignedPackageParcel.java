@@ -8,7 +8,6 @@ public class SignedPackageParcel implements Parcelable {
     public static final Parcelable.Creator<SignedPackageParcel> CREATOR =
             new Parcelable.Creator<
                     SignedPackageParcel>() { // from class: android.content.pm.SignedPackageParcel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignedPackageParcel createFromParcel(Parcel _aidl_source) {
                     SignedPackageParcel _aidl_out = new SignedPackageParcel();
@@ -16,7 +15,6 @@ public class SignedPackageParcel implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignedPackageParcel[] newArray(int _aidl_size) {
                     return new SignedPackageParcel[_aidl_size];

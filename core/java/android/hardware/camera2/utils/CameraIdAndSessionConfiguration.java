@@ -8,13 +8,11 @@ public class CameraIdAndSessionConfiguration implements Parcelable {
     public static final Parcelable.Creator<CameraIdAndSessionConfiguration> CREATOR =
             new Parcelable.Creator<CameraIdAndSessionConfiguration>() { // from class:
                 // android.hardware.camera2.utils.CameraIdAndSessionConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraIdAndSessionConfiguration createFromParcel(Parcel in) {
                     return new CameraIdAndSessionConfiguration(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraIdAndSessionConfiguration[] newArray(int size) {
                     return new CameraIdAndSessionConfiguration[size];

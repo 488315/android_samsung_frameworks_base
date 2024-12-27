@@ -15,7 +15,6 @@ final class PointerInputScopeExtKt$observeTaps$2$1$up$1 extends RestrictedSuspen
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PointerInputScopeExtKt$observeTaps$2$1$up$1(PointerEventPass pointerEventPass, Continuation continuation) {
         super(2, continuation);
         this.$pass = pointerEventPass;

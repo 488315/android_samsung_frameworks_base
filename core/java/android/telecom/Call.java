@@ -941,7 +941,6 @@ public final class Call {
                 + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String stateToString(int state) {
         switch (state) {
             case 0:
@@ -1040,13 +1039,6 @@ public final class Call {
         return this.mTelecomCallId;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:71:0x01dc  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x01e3  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x01ea  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x01f1  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x01f8  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x020c  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x021b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1359,7 +1351,6 @@ public final class Call {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean areBundlesEqual(Bundle bundle, Bundle newBundle) {
         if (bundle == null || newBundle == null) {
             return bundle == newBundle;

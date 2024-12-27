@@ -30,7 +30,6 @@ final class DisplayRepositoryImpl$connectedDisplayIds$1 extends SuspendLambda im
     int label;
     final /* synthetic */ DisplayRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisplayRepositoryImpl$connectedDisplayIds$1(DisplayRepositoryImpl displayRepositoryImpl, Handler handler, Continuation continuation) {
         super(2, continuation);
         this.this$0 = displayRepositoryImpl;
@@ -49,8 +48,6 @@ final class DisplayRepositoryImpl$connectedDisplayIds$1 extends SuspendLambda im
         return ((DisplayRepositoryImpl$connectedDisplayIds$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v2, types: [android.hardware.display.DisplayManager$DisplayListener, com.android.systemui.display.data.repository.DisplayRepositoryImpl$connectedDisplayIds$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -119,7 +116,6 @@ final class DisplayRepositoryImpl$connectedDisplayIds$1 extends SuspendLambda im
                 this.this$0.displayManager.registerDisplayListener(r3, this.$backgroundHandler, 32L);
                 final DisplayRepositoryImpl displayRepositoryImpl3 = this.this$0;
                 Function0 function0 = new Function0() { // from class: com.android.systemui.display.data.repository.DisplayRepositoryImpl$connectedDisplayIds$1.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

@@ -82,7 +82,6 @@ public class SemPhotoRemasterManager {
             super(id);
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         @Override // com.samsung.android.media.photoremaster.SemPhotoRemasterManager.IGetParam
         public String getParam() {
             return Long.toString(
@@ -95,7 +94,6 @@ public class SemPhotoRemasterManager {
             super(id);
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         @Override // com.samsung.android.media.photoremaster.SemPhotoRemasterManager.IGetParam
         public String getParam() {
             return SemPhotoRemasterManager.getEngineInstance().getStringParam(this.mID);
@@ -107,15 +105,12 @@ public class SemPhotoRemasterManager {
             super(id);
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // com.samsung.android.media.photoremaster.SemPhotoRemasterManager.IGetParam
         public Bitmap getParam() {
             return SemPhotoRemasterManager.getEngineInstance().getBitmapParam(this.mID);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static synchronized IDirector getEngineInstance() {
         IDirector iDirector;
         synchronized (SemPhotoRemasterManager.class) {

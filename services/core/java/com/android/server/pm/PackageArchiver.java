@@ -473,7 +473,6 @@ public final class PackageArchiver {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final CompletableFuture createAndStoreArchiveState(final int i, final String str) {
         PackageManagerService packageManagerService = this.mPm;
         Computer snapshotComputer = packageManagerService.snapshotComputer();
@@ -774,10 +773,6 @@ public final class PackageArchiver {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0092 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0093  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x008b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

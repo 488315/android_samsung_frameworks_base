@@ -7,14 +7,6 @@ import android.util.Log;
 import com.android.keyguard.KeyguardSecPatternView$$ExternalSyntheticOutline0;
 
 public final class EdmUtils {
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r7v0 */
-    /* JADX WARN: Type inference failed for: r7v1 */
-    /* JADX WARN: Type inference failed for: r7v10 */
-    /* JADX WARN: Type inference failed for: r7v4, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r7v6 */
-    /* JADX WARN: Type inference failed for: r7v7 */
-    /* JADX WARN: Type inference failed for: r7v9 */
     public static boolean isScreenCaptureEnabled(Context context) {
         String[] strArr = {"false"};
         Uri parse = Uri.parse("content://com.sec.knox.provider/RestrictionPolicy3");

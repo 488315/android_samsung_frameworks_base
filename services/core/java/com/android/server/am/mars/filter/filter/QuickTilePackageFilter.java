@@ -106,7 +106,6 @@ public final class QuickTilePackageFilter implements IFilter {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r5v2, types: [com.android.server.am.mars.filter.filter.QuickTilePackageFilter$1] */
     @Override // com.android.server.am.mars.filter.IFilter
     public final void init(Context context) {
         this.mContext = context;

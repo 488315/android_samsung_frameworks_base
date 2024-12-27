@@ -23,7 +23,6 @@ public final class LockscreenToGlanceableHubTransitionViewModel$special$$inlined
     int label;
     final /* synthetic */ LockscreenToGlanceableHubTransitionViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LockscreenToGlanceableHubTransitionViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, LockscreenToGlanceableHubTransitionViewModel lockscreenToGlanceableHubTransitionViewModel) {
         super(3, continuation);
         this.this$0 = lockscreenToGlanceableHubTransitionViewModel;
@@ -50,7 +49,6 @@ public final class LockscreenToGlanceableHubTransitionViewModel$special$$inlined
             long j = FromLockscreenTransitionInteractor.TO_GLANCEABLE_HUB_DURATION;
             Interpolator interpolator = Interpolators.EMPHASIZED;
             Function1 function1 = new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToGlanceableHubTransitionViewModel$keyguardTranslationX$1$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }

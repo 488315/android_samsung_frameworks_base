@@ -8,7 +8,6 @@ public class CameraStreamStats implements Parcelable {
     public static final Parcelable.Creator<CameraStreamStats> CREATOR =
             new Parcelable.Creator<
                     CameraStreamStats>() { // from class: android.hardware.CameraStreamStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraStreamStats createFromParcel(Parcel in) {
                     try {
@@ -23,7 +22,6 @@ public class CameraStreamStats implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraStreamStats[] newArray(int size) {
                     return new CameraStreamStats[size];

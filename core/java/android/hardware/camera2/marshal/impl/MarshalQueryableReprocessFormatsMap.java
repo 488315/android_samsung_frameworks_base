@@ -31,7 +31,6 @@ public class MarshalQueryableReprocessFormatsMap implements MarshalQueryable<Rep
             }
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public ReprocessFormatsMap unmarshal(ByteBuffer buffer) {
             int len = buffer.remaining() / 4;

@@ -279,19 +279,14 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
         return z;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeGetHidrawBusType(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native byte[] nativeGetHidrawDesc(int i, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeGetHidrawDescSize(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native String nativeGetHidrawName(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native String nativeGetHidrawUniq(int i);
 
     public final void connectLocked(

@@ -28,7 +28,6 @@ final class FooterViewBinder$bindMessage$2 extends SuspendLambda implements Func
         final /* synthetic */ FooterViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(FooterViewModel footerViewModel, FooterView footerView, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = footerViewModel;
@@ -87,7 +86,6 @@ final class FooterViewBinder$bindMessage$2 extends SuspendLambda implements Func
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FooterViewBinder$bindMessage$2(FooterView footerView, FooterViewModel footerViewModel, Continuation continuation) {
         super(2, continuation);
         this.$footer = footerView;

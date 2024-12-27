@@ -25,7 +25,6 @@ public final class AlternateBouncerInteractor$canShowAlternateBouncer$lambda$5$$
     int label;
     final /* synthetic */ AlternateBouncerInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AlternateBouncerInteractor$canShowAlternateBouncer$lambda$5$$inlined$flatMapLatest$1(Continuation continuation, AlternateBouncerInteractor alternateBouncerInteractor) {
         super(3, continuation);
         this.this$0 = alternateBouncerInteractor;

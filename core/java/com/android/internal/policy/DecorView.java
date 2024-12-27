@@ -286,7 +286,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
                 }
             };
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ boolean lambda$new$0() {
         updateBackgroundBlurCorners();
         return true;
@@ -736,7 +735,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         return super.dispatchPopulateAccessibilityEventInternal(event);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public boolean setFrame(int l, int t, int r, int b) {
         boolean changed = super.setFrame(l, t, r, b);
@@ -765,11 +763,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         return changed;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00f6 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0184  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01a9  */
-    /* JADX WARN: Removed duplicated region for block: B:61:? A[RETURN, SYNTHETIC] */
     @Override // android.widget.FrameLayout, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -981,7 +974,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cleanupFloatingActionModeViews() {
         if (this.mFloatingToolbar != null) {
             this.mFloatingToolbar.dismiss();
@@ -1179,9 +1171,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
 
        if (r9.getHeight() != r8) goto L93;
     */
-    /* JADX WARN: Removed duplicated region for block: B:161:0x04cb  */
-    /* JADX WARN: Removed duplicated region for block: B:275:0x01f4  */
-    /* JADX WARN: Removed duplicated region for block: B:282:0x01f8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1197,7 +1186,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
                     + " boolean):android.view.WindowInsets");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updateColorViews$1(
             ViewGroup.MarginLayoutParams lp,
             int consumedRight,
@@ -1323,7 +1311,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setBackgroundBlurRadius$2(Boolean enabled) {
         this.mCrossWindowBlurEnabled = enabled.booleanValue();
         updateBackgroundBlurRadius();
@@ -1424,10 +1411,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         return barColor;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [android.view.ViewParent] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.view.ViewParent] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [android.view.ViewParent] */
     private int indexOfChildToRoot(View child) {
         if (child == null) {
             return -1;
@@ -2004,7 +1987,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         return mode;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void endOnGoingFadeAnimation() {
         if (this.mFadeAnim != null) {
             this.mFadeAnim.end();
@@ -2765,7 +2747,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
                 roundedCorner, MultiWindowUtils.getRoundedCornerColor(context));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public float dpToPixel(float dp) {
         return (this.mContext.getResources().getDisplayMetrics().densityDpi / 160.0f) * dp;
     }
@@ -2804,7 +2785,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         return (attrs.flags & 2) != 0 && attrs.dimAmount > 0.0f && attrs.dimAmount < 1.0f;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setBackgroundAlpha(float alpha) {
         if (this.mPopOverBackgroundAlpha != alpha) {
             this.mPopOverBackgroundAlpha = alpha;
@@ -2813,12 +2793,10 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public float getBackgroundAlpha() {
         return this.mPopOverBackgroundAlpha;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setContentAlpha(float alpha) {
         if (this.mPopOverContentAlpha != alpha) {
             this.mPopOverContentAlpha = alpha;
@@ -2827,7 +2805,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public float getContentAlpha() {
         return this.mPopOverContentAlpha;
     }
@@ -3174,14 +3151,12 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void hideKnoxBadge() {
         if (this.mKnoxBadgeViewGroupOverlay != null) {
             this.mKnoxBadgeViewGroupOverlay.remove(this.mKnoxBadgeView);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addKnoxBadge() {
         if (this.mKnoxBadgeViewGroupOverlay == null) {
             setKnoxBadge();
@@ -3214,7 +3189,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         this.mDensityForKnoxBadge = this.mContext.getResources().getConfiguration().densityDpi;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean shouldHideProfileBadge(
             boolean isGestureHintOff, boolean taskbarEnabled, int displayType) {
         if (((getParent() instanceof ViewGroup) && this.mKnoxBadgeView != null)

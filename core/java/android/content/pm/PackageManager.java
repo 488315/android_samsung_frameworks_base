@@ -1468,7 +1468,6 @@ public abstract class PackageManager {
         public static final Parcelable.Creator<Property> CREATOR =
                 new Parcelable.Creator<
                         Property>() { // from class: android.content.pm.PackageManager.Property.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Property createFromParcel(Parcel source) {
                         String name = source.readString();
@@ -1495,7 +1494,6 @@ public abstract class PackageManager {
                         return null;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Property[] newArray(int size) {
                         return new Property[size];
@@ -1657,13 +1655,11 @@ public abstract class PackageManager {
         public static final Parcelable.Creator<ComponentEnabledSetting> CREATOR =
                 new Parcelable.Creator<ComponentEnabledSetting>() { // from class:
                     // android.content.pm.PackageManager.ComponentEnabledSetting.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ComponentEnabledSetting[] newArray(int size) {
                         return new ComponentEnabledSetting[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ComponentEnabledSetting createFromParcel(Parcel in) {
                         return new ComponentEnabledSetting(in);
@@ -2814,13 +2810,11 @@ public abstract class PackageManager {
         public static final Parcelable.Creator<UninstallCompleteCallback> CREATOR =
                 new Parcelable.Creator<UninstallCompleteCallback>() { // from class:
                     // android.content.pm.PackageManager.UninstallCompleteCallback.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public UninstallCompleteCallback createFromParcel(Parcel source) {
                         return new UninstallCompleteCallback(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public UninstallCompleteCallback[] newArray(int size) {
                         return new UninstallCompleteCallback[size];
@@ -3098,7 +3092,6 @@ public abstract class PackageManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ApplicationInfo getApplicationInfoAsUserUncached(
             String packageName, long flags, int userId) {
         try {
@@ -3160,7 +3153,6 @@ public abstract class PackageManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static PackageInfo getPackageInfoAsUserUncached(
             String packageName, long flags, int userId) {
         try {

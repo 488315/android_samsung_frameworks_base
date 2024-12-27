@@ -43,7 +43,6 @@ final class PromptViewModel$iconPosition$1 extends SuspendLambda implements Func
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptViewModel$iconPosition$1(PromptViewModel promptViewModel, Continuation continuation) {
         super(5, continuation);
         this.this$0 = promptViewModel;

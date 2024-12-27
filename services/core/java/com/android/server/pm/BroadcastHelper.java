@@ -126,13 +126,10 @@ public final class BroadcastHelper {
                 : true;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:78:0x01bc, code lost:
 
        if ((r26.mContext.getPackageManager().getPackageInfo(r0, android.content.pm.PackageManager.PackageInfoFlags.of(0)).applicationInfo.flags & 129) != 0) goto L88;
     */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x019c  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x01fa  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

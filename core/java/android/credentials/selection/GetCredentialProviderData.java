@@ -13,13 +13,11 @@ public final class GetCredentialProviderData extends ProviderData implements Par
     public static final Parcelable.Creator<GetCredentialProviderData> CREATOR =
             new Parcelable.Creator<GetCredentialProviderData>() { // from class:
                 // android.credentials.selection.GetCredentialProviderData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetCredentialProviderData createFromParcel(Parcel in) {
                     return new GetCredentialProviderData(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetCredentialProviderData[] newArray(int size) {
                     return new GetCredentialProviderData[size];

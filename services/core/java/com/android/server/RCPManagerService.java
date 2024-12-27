@@ -141,8 +141,6 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.RCPManagerService$1] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.server.RCPManagerService$2] */
     public RCPManagerService(Context context) {
         Log.d("RCPManagerService", "start ");
         if (context == null) {
@@ -722,7 +720,6 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         return (IRCPInterface) this.mRCPInterfaceMap.get(valueOf);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00f9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -127,7 +127,6 @@ public final class PulseExpansionHandler implements Gefingerpoken, Dumpable {
         return canHandleMotionEvent() && startExpansion(motionEvent);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:69:0x012b  */
     @Override // com.android.systemui.Gefingerpoken
     /*
         Code decompiled incorrectly, please refer to instructions dump.

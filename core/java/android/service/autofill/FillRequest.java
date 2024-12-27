@@ -21,13 +21,11 @@ public final class FillRequest implements Parcelable {
     public static final Parcelable.Creator<FillRequest> CREATOR =
             new Parcelable.Creator<
                     FillRequest>() { // from class: android.service.autofill.FillRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FillRequest[] newArray(int size) {
                     return new FillRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FillRequest createFromParcel(Parcel in) {
                     return new FillRequest(in);

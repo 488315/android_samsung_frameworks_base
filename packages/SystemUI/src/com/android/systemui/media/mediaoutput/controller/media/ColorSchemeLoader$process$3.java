@@ -20,7 +20,6 @@ final class ColorSchemeLoader$process$3 extends SuspendLambda implements Functio
     int label;
     final /* synthetic */ ColorSchemeLoader this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ColorSchemeLoader$process$3(Context context, ColorSchemeLoader colorSchemeLoader, Function2 function2, String str, Continuation continuation) {
         super(2, continuation);
         this.$context = context;

@@ -504,9 +504,6 @@ public final class SpenGestureManagerService extends ISpenGestureService.Stub {
         spenGestureManagerService.mAcPendingPenDetectionInfo = null;
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.smartclip.SpenGestureManagerService$4] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.smartclip.SpenGestureManagerService$5] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.smartclip.SpenGestureManagerService$6] */
     public SpenGestureManagerService(Context context) {
         this.mInputManager = null;
         this.mIsEnableLockScreenQuickNote = false;
@@ -706,8 +703,6 @@ public final class SpenGestureManagerService extends ISpenGestureService.Stub {
             }
         };
         this.mPenDoubleTap = new Runnable() { // from class: com.android.server.smartclip.SpenGestureManagerService.4
-            /* JADX WARN: Removed duplicated region for block: B:28:0x00bd  */
-            /* JADX WARN: Removed duplicated region for block: B:30:0x00c5  */
             @Override // java.lang.Runnable
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -808,9 +803,6 @@ public final class SpenGestureManagerService extends ISpenGestureService.Stub {
         Log.i("SpenGestureManagerService", "SpenGestureManagerService(Context) ");
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.server.smartclip.SpenGestureManagerService$4] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.server.smartclip.SpenGestureManagerService$5] */
-    /* JADX WARN: Type inference failed for: r4v0, types: [com.android.server.smartclip.SpenGestureManagerService$6] */
     public SpenGestureManagerService(Context context, WindowManagerService windowManagerService) {
         this.mInputManager = null;
         this.mIsEnableLockScreenQuickNote = false;

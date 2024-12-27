@@ -17,7 +17,6 @@ public final class AlternateBouncerWindowViewModel$special$$inlined$flatMapLates
     int label;
     final /* synthetic */ AlternateBouncerWindowViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AlternateBouncerWindowViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, AlternateBouncerWindowViewModel alternateBouncerWindowViewModel) {
         super(3, continuation);
         this.this$0 = alternateBouncerWindowViewModel;

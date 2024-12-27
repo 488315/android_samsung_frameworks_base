@@ -18,7 +18,6 @@ final class UserSetupRepositoryImpl$isUserSetUp$1 extends SuspendLambda implemen
     int label;
     final /* synthetic */ UserSetupRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSetupRepositoryImpl$isUserSetUp$1(UserSetupRepositoryImpl userSetupRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userSetupRepositoryImpl;
@@ -36,8 +35,6 @@ final class UserSetupRepositoryImpl$isUserSetUp$1 extends SuspendLambda implemen
         return ((UserSetupRepositoryImpl$isUserSetUp$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.policy.data.repository.UserSetupRepositoryImpl$isUserSetUp$1$callback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -54,7 +51,6 @@ final class UserSetupRepositoryImpl$isUserSetUp$1 extends SuspendLambda implemen
             ((DeviceProvisionedControllerImpl) this.this$0.deviceProvisionedController).addCallback(r1);
             final UserSetupRepositoryImpl userSetupRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.policy.data.repository.UserSetupRepositoryImpl$isUserSetUp$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

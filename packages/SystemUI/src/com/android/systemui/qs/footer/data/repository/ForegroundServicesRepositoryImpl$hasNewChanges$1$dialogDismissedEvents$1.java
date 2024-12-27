@@ -17,7 +17,6 @@ final class ForegroundServicesRepositoryImpl$hasNewChanges$1$dialogDismissedEven
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ForegroundServicesRepositoryImpl$hasNewChanges$1$dialogDismissedEvents$1(FgsManagerController fgsManagerController, Continuation continuation) {
         super(2, continuation);
         this.$fgsManagerController = fgsManagerController;
@@ -49,7 +48,6 @@ final class ForegroundServicesRepositoryImpl$hasNewChanges$1$dialogDismissedEven
             }
             final FgsManagerController fgsManagerController = this.$fgsManagerController;
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$hasNewChanges$1$dialogDismissedEvents$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

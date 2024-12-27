@@ -70,7 +70,6 @@ public class PreferenceGroupAdapter extends BaseAdapter
         syncMyPreferences();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void syncMyPreferences() {
         synchronized (this) {
             if (this.mIsSyncing) {

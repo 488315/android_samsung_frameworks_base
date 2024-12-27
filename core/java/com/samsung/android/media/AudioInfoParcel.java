@@ -8,7 +8,6 @@ public class AudioInfoParcel implements Parcelable {
     public static final Parcelable.Creator<AudioInfoParcel> CREATOR =
             new Parcelable.Creator<
                     AudioInfoParcel>() { // from class: com.samsung.android.media.AudioInfoParcel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioInfoParcel createFromParcel(Parcel _aidl_source) {
                     AudioInfoParcel _aidl_out = new AudioInfoParcel();
@@ -16,7 +15,6 @@ public class AudioInfoParcel implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioInfoParcel[] newArray(int _aidl_size) {
                     return new AudioInfoParcel[_aidl_size];

@@ -17,7 +17,6 @@ final class DockManagerExtensionsKt$retrieveIsDocked$1 extends SuspendLambda imp
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DockManagerExtensionsKt$retrieveIsDocked$1(DockManager dockManager, Continuation continuation) {
         super(2, continuation);
         this.$this_retrieveIsDocked = dockManager;
@@ -35,7 +34,6 @@ final class DockManagerExtensionsKt$retrieveIsDocked$1 extends SuspendLambda imp
         return ((DockManagerExtensionsKt$retrieveIsDocked$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -51,7 +49,6 @@ final class DockManagerExtensionsKt$retrieveIsDocked$1 extends SuspendLambda imp
             ((ChannelCoroutine) producerScope).mo2552trySendJP2dKIU(Boolean.FALSE);
             final DockManager dockManager2 = this.$this_retrieveIsDocked;
             Function0 function0 = new Function0() { // from class: com.android.systemui.dock.DockManagerExtensionsKt$retrieveIsDocked$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

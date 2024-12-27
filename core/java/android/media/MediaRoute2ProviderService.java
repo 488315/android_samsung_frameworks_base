@@ -227,7 +227,6 @@ public abstract class MediaRoute2ProviderService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void publishState() {
         if (!this.mStatePublishScheduled.compareAndSet(true, false)
                 || this.mRemoteCallback == null
@@ -254,7 +253,6 @@ public abstract class MediaRoute2ProviderService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateSessions() {
         List<RoutingSessionInfo> sessions;
         if (!this.mSessionUpdateScheduled.compareAndSet(true, false)
@@ -271,7 +269,6 @@ public abstract class MediaRoute2ProviderService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addRequestId(long requestId) {
         synchronized (this.mRequestIdsLock) {
             if (this.mRequestIds.size() >= 500) {

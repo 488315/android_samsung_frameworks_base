@@ -52,7 +52,6 @@ public final class FullScreenViewController extends ViewAnimationController {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r13v15, types: [com.android.systemui.keyguard.animator.FullScreenViewController$longPressCallback$1] */
     public FullScreenViewController(KeyguardTouchAnimator keyguardTouchAnimator) {
         super(keyguardTouchAnimator);
         this.fullScreenViews = CollectionsKt__CollectionsKt.listOf(1, 2, 3, 4, 5, 6, 0, 7, 8, 9, 10, 12);

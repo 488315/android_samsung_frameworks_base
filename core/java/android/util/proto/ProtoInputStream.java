@@ -518,7 +518,6 @@ public final class ProtoInputStream extends ProtoStream {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public void skip() throws IOException {
         byte b;
         if ((this.mState & 2) == 2) {

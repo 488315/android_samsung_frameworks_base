@@ -10,13 +10,11 @@ public class SemContextSedentaryTimer extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextSedentaryTimer>() { // from class:
                                                   // com.samsung.android.hardware.context.SemContextSedentaryTimer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextSedentaryTimer createFromParcel(Parcel in) {
                     return new SemContextSedentaryTimer(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextSedentaryTimer[] newArray(int size) {
                     return new SemContextSedentaryTimer[size];

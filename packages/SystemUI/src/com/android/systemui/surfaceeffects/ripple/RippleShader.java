@@ -71,8 +71,6 @@ public final class RippleShader extends RuntimeShader {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class RippleShape {
         public static final /* synthetic */ RippleShape[] $VALUES;
         public static final RippleShape CIRCLE;
@@ -195,7 +193,6 @@ public final class RippleShader extends RuntimeShader {
         this((i & 1) != 0 ? RippleShape.CIRCLE : rippleShape);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

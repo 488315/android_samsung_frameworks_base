@@ -13,13 +13,11 @@ public final class UserRestrictionPolicyKey extends PolicyKey {
     public static final Parcelable.Creator<UserRestrictionPolicyKey> CREATOR =
             new Parcelable.Creator<UserRestrictionPolicyKey>() { // from class:
                 // android.app.admin.UserRestrictionPolicyKey.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UserRestrictionPolicyKey createFromParcel(Parcel source) {
                     return new UserRestrictionPolicyKey(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UserRestrictionPolicyKey[] newArray(int size) {
                     return new UserRestrictionPolicyKey[size];

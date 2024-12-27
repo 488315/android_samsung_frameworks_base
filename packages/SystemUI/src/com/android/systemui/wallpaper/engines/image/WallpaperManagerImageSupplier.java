@@ -52,15 +52,6 @@ public final class WallpaperManagerImageSupplier implements ImageSource.ImageSup
         return this.mFilterData;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0133  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x0054  */
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.systemui.wallpaper.engines.image.WallpaperManagerImageSupplier$CropType] */
-    /* JADX WARN: Type inference failed for: r3v4 */
-    /* JADX WARN: Type inference failed for: r3v5 */
-    /* JADX WARN: Type inference failed for: r3v6 */
-    /* JADX WARN: Type inference failed for: r3v8, types: [android.graphics.Bitmap] */
     @Override // com.android.systemui.wallpaper.engines.image.ImageSource.ImageSupplier
     /*
         Code decompiled incorrectly, please refer to instructions dump.

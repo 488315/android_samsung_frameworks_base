@@ -71,7 +71,6 @@ public abstract class FieldClassificationService extends Service {
 
     public void onDisconnected() {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnConnected(boolean debug, boolean verbose) {
         if (sDebug || debug) {
             Log.d(TAG, "handleOnConnected(): debug=" + debug + ", verbose=" + verbose);
@@ -81,12 +80,10 @@ public abstract class FieldClassificationService extends Service {
         onConnected();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnDisconnected() {
         onDisconnected();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnClassificationRequest(
             FieldClassificationRequest request, final IFieldClassificationCallback callback) {
         ICancellationSignal transport = CancellationSignal.createTransport();

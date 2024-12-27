@@ -29,14 +29,12 @@ public final class CellIdentityWcdma extends CellIdentity {
     public static final Parcelable.Creator<CellIdentityWcdma> CREATOR =
             new Parcelable.Creator<
                     CellIdentityWcdma>() { // from class: android.telephony.CellIdentityWcdma.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentityWcdma createFromParcel(Parcel in) {
                     in.readInt();
                     return CellIdentityWcdma.createFromParcelBody(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentityWcdma[] newArray(int size) {
                     return new CellIdentityWcdma[size];

@@ -376,7 +376,6 @@ public final class E2eeContactKeysManager {
                 new Parcelable.Creator<
                         E2eeContactKey>() { // from class:
                                             // android.provider.E2eeContactKeysManager.E2eeContactKey.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public E2eeContactKey createFromParcel(Parcel source) {
                         byte[] keyValue;
@@ -410,7 +409,6 @@ public final class E2eeContactKeysManager {
                                 address);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public E2eeContactKey[] newArray(int size) {
                         return new E2eeContactKey[size];
@@ -559,7 +557,6 @@ public final class E2eeContactKeysManager {
                 new Parcelable.Creator<
                         E2eeSelfKey>() { // from class:
                                          // android.provider.E2eeContactKeysManager.E2eeSelfKey.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public E2eeSelfKey createFromParcel(Parcel source) {
                         byte[] keyValue;
@@ -585,7 +582,6 @@ public final class E2eeContactKeysManager {
                                 remoteVerificationState);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public E2eeSelfKey[] newArray(int size) {
                         return new E2eeSelfKey[size];

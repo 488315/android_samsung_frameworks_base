@@ -212,7 +212,6 @@ public class DreamService extends Service implements Window.Callback {
         this.mDebug = dbg;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.view.Window.Callback
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (Flags.dreamHandlesConfirmKeys()) {
@@ -602,7 +601,6 @@ public class DreamService extends Service implements Window.Callback {
     class AnonymousClass2 extends IDreamOverlayCallback.Stub {
         AnonymousClass2() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onExitRequested$0() {
             DreamService.this.finish();
         }
@@ -652,7 +650,6 @@ public class DreamService extends Service implements Window.Callback {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onWakeUp$0(IDreamOverlayClient overlay) {
         try {
             try {
@@ -731,7 +728,6 @@ public class DreamService extends Service implements Window.Callback {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$finish$1(IDreamOverlayClient overlay) {
         try {
             overlay.endDream();
@@ -746,7 +742,6 @@ public class DreamService extends Service implements Window.Callback {
         wakeUp(false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void comeToFront() {
         this.mOverlayConnection.addConsumer(
                 new Consumer() { // from class:
@@ -758,7 +753,6 @@ public class DreamService extends Service implements Window.Callback {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$comeToFront$2(IDreamOverlayClient overlay) {
         try {
             overlay.comeToFront();
@@ -771,7 +765,6 @@ public class DreamService extends Service implements Window.Callback {
         return this.mOverlayConnection != null && this.mRedirectWake;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void wakeUp(boolean fromSystem) {
         if (this.mDebug) {
             Slog.v(
@@ -813,7 +806,6 @@ public class DreamService extends Service implements Window.Callback {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$wakeUp$3(IDreamOverlayClient overlay) {
         try {
             overlay.onWakeRequested();
@@ -905,7 +897,6 @@ public class DreamService extends Service implements Window.Callback {
         return cn;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void detach() {
         if (this.mStarted) {
             if (this.mDebug) {
@@ -923,7 +914,6 @@ public class DreamService extends Service implements Window.Callback {
         this.mCanDoze = false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void attach(
             IBinder dreamToken,
             boolean canDoze,
@@ -998,7 +988,6 @@ public class DreamService extends Service implements Window.Callback {
         this.mDispatchAfterOnAttachedToWindow.run();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$attach$4(IRemoteCallback started) {
         if (this.mWindow != null || this.mWindowless) {
             this.mStarted = true;
@@ -1020,7 +1009,6 @@ public class DreamService extends Service implements Window.Callback {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onWindowCreated(Window w) {
         this.mWindow = w;
         this.mWindow.setCallback(this);
@@ -1062,7 +1050,6 @@ public class DreamService extends Service implements Window.Callback {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onViewAttachedToWindow$0(IDreamOverlayClient overlay) {
             if (DreamService.this.mWindow == null) {
                 Slog.d(DreamService.TAG, "mWindow is null");
@@ -1153,7 +1140,6 @@ public class DreamService extends Service implements Window.Callback {
         return resources.getString(R.string.dream_preview_title, dreamLabel);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ServiceInfo fetchServiceInfo(Context context, ComponentName componentName) {
         PackageManager pm = context.getPackageManager();
         try {
@@ -1167,13 +1153,11 @@ public class DreamService extends Service implements Window.Callback {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dump$5(
             FileDescriptor fd, String[] args, PrintWriter pw1, String prefix) {
         dumpOnHandler(fd, pw1, args);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.app.Service
     public void dump(final FileDescriptor fd, PrintWriter pw, final String[] args) {
         DumpUtils.dumpAsync(
@@ -1251,7 +1235,6 @@ public class DreamService extends Service implements Window.Callback {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$attach$0(
                 IBinder dreamToken,
                 boolean canDoze,
@@ -1274,7 +1257,6 @@ public class DreamService extends Service implements Window.Callback {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$wakeUp$1() {
             DreamService.this.wakeUp(true);
         }

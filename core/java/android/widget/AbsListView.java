@@ -1250,7 +1250,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         return handled;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void updateOnScreenCheckedViews() {
         int firstPos = this.mFirstPosition;
         int count = getChildCount();
@@ -1308,7 +1307,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         this.mMultiChoiceModeCallback.setWrapped(listener);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean contentFits() {
         int childCount = getChildCount();
         if (childCount == 0) {
@@ -1348,7 +1346,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setFastScrollerEnabledUiThread(boolean enabled) {
         if (this.mFastScroll != null) {
             this.mFastScroll.setEnabled(enabled);
@@ -1391,7 +1388,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setFastScrollerAlwaysVisibleUiThread(boolean alwaysShow) {
         if (this.mFastScroll != null) {
             this.mFastScroll.setAlwaysShow(alwaysShow);
@@ -1684,13 +1680,11 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         public static final Parcelable.Creator<SavedState> CREATOR =
                 new Parcelable.Creator<
                         SavedState>() { // from class: android.widget.AbsListView.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];
@@ -2386,7 +2380,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isItemClickable(View view) {
         return !view.hasExplicitFocusable();
     }
@@ -2410,7 +2403,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         positionSelector(position, sel, false, -1.0f, -1.0f);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void positionSelector(
             int position, View view, boolean manageHotspot, float x, float y) {
         boolean positionChanged = position != this.mSelectorPosition;
@@ -3004,7 +2996,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
             this.mY = -1.0f;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setCoords(float x, float y) {
             this.mX = x;
             this.mY = y;
@@ -4259,7 +4250,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         return flingDistance < distance;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int consumeFlingInStretch(int unconsumed) {
         if (unconsumed < 0
                 && this.mEdgeGlowTop != null
@@ -4651,8 +4641,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         return super.onResolvePointerIcon(event, pointerIndex);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00db A[FALL_THROUGH, RETURN] */
     @Override // android.view.ViewGroup
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -5241,7 +5229,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void clearScrollingCache() {
         if (!isHardwareAccelerated()) {
             if (this.mClearScrollingCache == null) {
@@ -5294,9 +5281,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:101:0x0279  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x0250  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x025c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5516,7 +5500,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.widget.AdapterView
     protected void handleDataChanged() {
         int count = this.mItemCount;
@@ -6017,7 +6000,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public EditText getTextFilterInput() {
         if (this.mTextFilter == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
@@ -6295,7 +6277,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         extras.putInt(ViewStructure.EXTRA_FIRST_ACTIVE_POSITION, getFirstVisiblePosition());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void reportActiveViewsToContentCapture() {
         ContentCaptureSession session;
         if (sContentCaptureReportingEnabledByDeviceConfig
@@ -7601,7 +7582,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleMessage(Message msg) {
         int offset;
         switch (msg.what) {
@@ -7761,7 +7741,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
                                 + 0.5f);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addToPressItemListArray(int firstpoint, int secondpoint) {
         if (!this.mIsMultiFocusEnabled) {
             return;
@@ -8140,7 +8119,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void semPlayGotoToFadeOut() {
         if (this.mSemGoToTopFadeOutAnimator.isRunning()) {
             return;
@@ -8152,7 +8130,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         this.mSemGoToTopFadeOutAnimator.start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void semPlayGotoToFadeIn() {
         if (this.mSemGoToTopFadeInAnimator.isRunning()) {
             return;
@@ -8164,7 +8141,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         this.mSemGoToTopFadeInAnimator.start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void semPlayGotoTopHideImmediatley() {
         if (this.mSemGoToTopFadeInAnimator.isRunning()) {
             return;
@@ -8175,7 +8151,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         this.mSemGoToTopImage.setAlpha(0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean semIsSupportGotoTop() {
         return this.mSemEnableGoToTop && !semIsTalkBackIsRunning();
     }
@@ -8221,7 +8196,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         return this.mSemFastScroll.isEnabled();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void semSetFastScrollEnabledUiThread(boolean enabled) {
         if (this.mSemFastScroll != null) {
             this.mSemFastScroll.setEnabled(enabled);
@@ -8608,7 +8582,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         this.mIsMovedbeforeUP = false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void semToNotifyMultiSelectionEnded(int x, int y) {
         super.semNotifyMultiSelectedStop(x, y);
     }
@@ -8968,9 +8941,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         this.mTouchSlop = value;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0127  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0136  */
     @Override // android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -8986,9 +8956,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
                     + " android.widget.AbsListView.dispatchTouchEvent(android.view.MotionEvent):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:87:0x0384  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x03a8  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x03c4  */
     @Override // android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -9250,7 +9217,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
         triggerDoubleFling(1);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postOnJumpScrollToFinished() {
         postOnAnimation(
                 new Runnable() { // from class: android.widget.AbsListView.13
@@ -9369,7 +9335,6 @@ public abstract class AbsListView extends AdapterView<ListAdapter>
     public void updateCustomEdgeGlow(
             Drawable edgeeffectCustomEdge, Drawable edgeeffectCustomGlow) {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean shouldSkipScroll() {
         return Settings.Global.getInt(getContext().getContentResolver(), "remove_animations", 0)
                 == 1;

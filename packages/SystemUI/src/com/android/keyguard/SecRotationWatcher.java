@@ -37,8 +37,6 @@ public final class SecRotationWatcher {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.keyguard.SecRotationWatcher$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.keyguard.SecRotationWatcher$2] */
     public SecRotationWatcher(Context context) {
         this.mContext = context;
     }

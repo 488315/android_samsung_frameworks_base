@@ -18,7 +18,6 @@ final class UserRepositoryImpl$refreshUsers$1 extends SuspendLambda implements F
         int label;
         final /* synthetic */ UserRepositoryImpl this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(UserRepositoryImpl userRepositoryImpl, Continuation continuation) {
             super(2, continuation);
             this.this$0 = userRepositoryImpl;
@@ -45,7 +44,6 @@ final class UserRepositoryImpl$refreshUsers$1 extends SuspendLambda implements F
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserRepositoryImpl$refreshUsers$1(UserRepositoryImpl userRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userRepositoryImpl;
@@ -61,7 +59,6 @@ final class UserRepositoryImpl$refreshUsers$1 extends SuspendLambda implements F
         return ((UserRepositoryImpl$refreshUsers$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:8:0x009e  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -18,7 +18,6 @@ public final class KeyguardQuickAffordanceRepository$special$$inlined$flatMapLat
     int label;
     final /* synthetic */ KeyguardQuickAffordanceRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordanceRepository$special$$inlined$flatMapLatest$1(Continuation continuation, KeyguardQuickAffordanceRepository keyguardQuickAffordanceRepository) {
         super(3, continuation);
         this.this$0 = keyguardQuickAffordanceRepository;
@@ -71,8 +70,6 @@ public final class KeyguardQuickAffordanceRepository$special$$inlined$flatMapLat
                         this.this$0 = keyguardQuickAffordanceRepository;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

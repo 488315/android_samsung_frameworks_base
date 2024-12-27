@@ -18,7 +18,6 @@ final class CameraQuickAffordanceConfig$lockScreenState$1 extends SuspendLambda 
     int label;
     final /* synthetic */ CameraQuickAffordanceConfig this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CameraQuickAffordanceConfig$lockScreenState$1(CameraQuickAffordanceConfig cameraQuickAffordanceConfig, Continuation continuation) {
         super(2, continuation);
         this.this$0 = cameraQuickAffordanceConfig;

@@ -55,7 +55,6 @@ public class VpnService extends Service {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static IVpnManager getService() {
         return IVpnManager.Stub.asInterface(
                 ServiceManager.getService(Context.VPN_MANAGEMENT_SERVICE));
@@ -216,7 +215,6 @@ public class VpnService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void check(InetAddress address, int prefixLength) {
         if (address.isLoopbackAddress()) {
             throw new IllegalArgumentException("Bad address");
@@ -236,7 +234,6 @@ public class VpnService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void checkNonPrefixBytes(InetAddress address, int prefixLength) {
         IpPrefix prefix = new IpPrefix(address, prefixLength);
         if (!prefix.getAddress().equals(address)) {

@@ -22,8 +22,6 @@ public final class SleepTokenAcquirer {
     public final SleepTokenAcquirer$$ExternalSyntheticLambda0 mSleepTokenTask;
     public boolean mSwitchState;
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.sepunion.cover.SleepTokenAcquirer$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.sepunion.cover.SleepTokenAcquirer$$ExternalSyntheticLambda0] */
     public SleepTokenAcquirer(Context context, Looper looper) {
         final int i = 0;
         this.mSleepTokenTask =

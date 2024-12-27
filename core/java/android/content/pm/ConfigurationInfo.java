@@ -8,13 +8,11 @@ public class ConfigurationInfo implements Parcelable {
     public static final Parcelable.Creator<ConfigurationInfo> CREATOR =
             new Parcelable.Creator<
                     ConfigurationInfo>() { // from class: android.content.pm.ConfigurationInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConfigurationInfo createFromParcel(Parcel source) {
                     return new ConfigurationInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConfigurationInfo[] newArray(int size) {
                     return new ConfigurationInfo[size];

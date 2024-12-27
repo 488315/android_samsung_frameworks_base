@@ -13,7 +13,6 @@ final class DeviceEntryIconViewBinder$bind$1$onLongPressDetected$1 extends Suspe
     final /* synthetic */ DeviceEntryIconViewModel $viewModel;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryIconViewBinder$bind$1$onLongPressDetected$1(DeviceEntryIconViewModel deviceEntryIconViewModel, Continuation continuation) {
         super(2, continuation);
         this.$viewModel = deviceEntryIconViewModel;

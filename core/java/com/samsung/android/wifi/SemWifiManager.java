@@ -496,7 +496,6 @@ public class SemWifiManager {
             return this.mSemWifiApSmartCallbackProxy;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class SemWifiApSmartCallbackProxy extends ISemWifiApSmartCallback.Stub {
             private final Object mLock = new Object();
             private Executor mExecutor = null;
@@ -560,7 +559,6 @@ public class SemWifiManager {
             return this.mSemWifiApClientListUpdateCallbackProxy;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class SemWifiApClientListUpdateCallbackProxy
                 extends ISemWifiApClientListUpdateCallback.Stub {
             private final Object mLock = new Object();
@@ -654,7 +652,6 @@ public class SemWifiManager {
             return this.mSemWifiApClientUpdateCallbackProxy;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class SemWifiApClientUpdateCallbackProxy
                 extends ISemWifiApClientUpdateCallback.Stub {
             private final Object mLock = new Object();
@@ -1172,7 +1169,6 @@ public class SemWifiManager {
             return this.mSemWifiApDataUsageClient;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class SemWifiApDataUsageClient extends ISemWifiApDataUsageCallback.Stub {
             private final Object mLock = new Object();
             private Executor mExecutor = null;
@@ -3453,7 +3449,6 @@ public class SemWifiManager {
             return this.mProxy;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class TasPolicyListenerProxy extends SemTasPolicyListener.Stub {
             private TasPolicyListener mListener;
             private final Object mLock = new Object();
@@ -3673,7 +3668,6 @@ public class SemWifiManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class AbTestConfigUpdateObserverProxy
             extends ISemAbTestConfigurationUpdateObserver.Stub {
         private final Executor mExecutor;
@@ -3708,7 +3702,6 @@ public class SemWifiManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$registered$0(SemWifiManager manager) {
             AbTestConfigUpdateObserver abTestConfigUpdateObserver = this.mObserver;
             Objects.requireNonNull(manager);
@@ -3729,7 +3722,6 @@ public class SemWifiManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyAbTestConfigUpdate$1(
                 SemAbTestConfiguration config) {
             this.mObserver.onUpdated(config);

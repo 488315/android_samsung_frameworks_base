@@ -181,30 +181,6 @@ public final class FullRestoreEngine extends RestoreEngine {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:117:0x054c A[Catch: NullPointerException -> 0x02e0, IOException -> 0x0390, TryCatch #4 {NullPointerException -> 0x02e0, blocks: (B:51:0x02fe, B:53:0x0304, B:234:0x031b, B:236:0x0329, B:239:0x0341, B:240:0x0339, B:241:0x0346, B:244:0x0355, B:246:0x0372, B:250:0x037a, B:59:0x03b1, B:61:0x03b9, B:62:0x03d5, B:90:0x03ed, B:91:0x03ef, B:190:0x042b, B:117:0x054c, B:120:0x0561, B:122:0x056b, B:124:0x0572, B:130:0x0581, B:136:0x0587, B:141:0x05b3, B:146:0x05f8, B:148:0x0605, B:154:0x0611, B:69:0x0633, B:72:0x0641, B:74:0x0647, B:76:0x064c, B:78:0x0656, B:84:0x064a, B:81:0x0659, B:83:0x065d, B:175:0x0570, B:195:0x048c, B:198:0x04ba, B:114:0x0538, B:181:0x0544, B:109:0x052e, B:217:0x03fb, B:264:0x0370, B:343:0x02dc), top: B:342:0x02dc }] */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x05c7  */
-    /* JADX WARN: Removed duplicated region for block: B:163:0x069b  */
-    /* JADX WARN: Removed duplicated region for block: B:172:0x067c  */
-    /* JADX WARN: Removed duplicated region for block: B:174:0x0627  */
-    /* JADX WARN: Removed duplicated region for block: B:178:0x05bf  */
-    /* JADX WARN: Removed duplicated region for block: B:225:0x0312 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:248:0x0376  */
-    /* JADX WARN: Removed duplicated region for block: B:253:0x0393  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x06ac  */
-    /* JADX WARN: Removed duplicated region for block: B:42:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0304 A[Catch: NullPointerException -> 0x02e0, IOException -> 0x02e4, TRY_LEAVE, TryCatch #4 {NullPointerException -> 0x02e0, blocks: (B:51:0x02fe, B:53:0x0304, B:234:0x031b, B:236:0x0329, B:239:0x0341, B:240:0x0339, B:241:0x0346, B:244:0x0355, B:246:0x0372, B:250:0x037a, B:59:0x03b1, B:61:0x03b9, B:62:0x03d5, B:90:0x03ed, B:91:0x03ef, B:190:0x042b, B:117:0x054c, B:120:0x0561, B:122:0x056b, B:124:0x0572, B:130:0x0581, B:136:0x0587, B:141:0x05b3, B:146:0x05f8, B:148:0x0605, B:154:0x0611, B:69:0x0633, B:72:0x0641, B:74:0x0647, B:76:0x064c, B:78:0x0656, B:84:0x064a, B:81:0x0659, B:83:0x065d, B:175:0x0570, B:195:0x048c, B:198:0x04ba, B:114:0x0538, B:181:0x0544, B:109:0x052e, B:217:0x03fb, B:264:0x0370, B:343:0x02dc), top: B:342:0x02dc }] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x03b1 A[Catch: NullPointerException -> 0x02e0, IOException -> 0x0390, TryCatch #4 {NullPointerException -> 0x02e0, blocks: (B:51:0x02fe, B:53:0x0304, B:234:0x031b, B:236:0x0329, B:239:0x0341, B:240:0x0339, B:241:0x0346, B:244:0x0355, B:246:0x0372, B:250:0x037a, B:59:0x03b1, B:61:0x03b9, B:62:0x03d5, B:90:0x03ed, B:91:0x03ef, B:190:0x042b, B:117:0x054c, B:120:0x0561, B:122:0x056b, B:124:0x0572, B:130:0x0581, B:136:0x0587, B:141:0x05b3, B:146:0x05f8, B:148:0x0605, B:154:0x0611, B:69:0x0633, B:72:0x0641, B:74:0x0647, B:76:0x064c, B:78:0x0656, B:84:0x064a, B:81:0x0659, B:83:0x065d, B:175:0x0570, B:195:0x048c, B:198:0x04ba, B:114:0x0538, B:181:0x0544, B:109:0x052e, B:217:0x03fb, B:264:0x0370, B:343:0x02dc), top: B:342:0x02dc }] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x03db  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x062b  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0633 A[Catch: NullPointerException -> 0x02e0, IOException -> 0x0390, TryCatch #4 {NullPointerException -> 0x02e0, blocks: (B:51:0x02fe, B:53:0x0304, B:234:0x031b, B:236:0x0329, B:239:0x0341, B:240:0x0339, B:241:0x0346, B:244:0x0355, B:246:0x0372, B:250:0x037a, B:59:0x03b1, B:61:0x03b9, B:62:0x03d5, B:90:0x03ed, B:91:0x03ef, B:190:0x042b, B:117:0x054c, B:120:0x0561, B:122:0x056b, B:124:0x0572, B:130:0x0581, B:136:0x0587, B:141:0x05b3, B:146:0x05f8, B:148:0x0605, B:154:0x0611, B:69:0x0633, B:72:0x0641, B:74:0x0647, B:76:0x064c, B:78:0x0656, B:84:0x064a, B:81:0x0659, B:83:0x065d, B:175:0x0570, B:195:0x048c, B:198:0x04ba, B:114:0x0538, B:181:0x0544, B:109:0x052e, B:217:0x03fb, B:264:0x0370, B:343:0x02dc), top: B:342:0x02dc }] */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x03e0 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r10v2, types: [com.android.server.backup.restore.FullRestoreEngine$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r21v1, types: [long] */
-    /* JADX WARN: Type inference failed for: r21v10 */
-    /* JADX WARN: Type inference failed for: r21v11 */
-    /* JADX WARN: Type inference failed for: r21v12 */
-    /* JADX WARN: Type inference failed for: r21v13 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

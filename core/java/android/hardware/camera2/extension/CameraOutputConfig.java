@@ -12,7 +12,6 @@ public class CameraOutputConfig implements Parcelable {
     public static final Parcelable.Creator<CameraOutputConfig> CREATOR =
             new Parcelable.Creator<CameraOutputConfig>() { // from class:
                 // android.hardware.camera2.extension.CameraOutputConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraOutputConfig createFromParcel(Parcel _aidl_source) {
                     CameraOutputConfig _aidl_out = new CameraOutputConfig();
@@ -20,7 +19,6 @@ public class CameraOutputConfig implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraOutputConfig[] newArray(int _aidl_size) {
                     return new CameraOutputConfig[_aidl_size];

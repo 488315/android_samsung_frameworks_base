@@ -738,7 +738,6 @@ public class SemMediaPlayer implements SubtitleController.Listener {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void stayAwake(boolean awake) {
         if (this.mWakeLock != null) {
             if (awake && !this.mWakeLock.isHeld()) {
@@ -805,13 +804,11 @@ public class SemMediaPlayer implements SubtitleController.Listener {
                 new Parcelable.Creator<
                         TrackInfo>() { // from class:
                                        // com.samsung.android.media.SemMediaPlayer.TrackInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TrackInfo createFromParcel(Parcel in) {
                         return new TrackInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TrackInfo[] newArray(int size) {
                         return new TrackInfo[size];
@@ -1287,7 +1284,6 @@ public class SemMediaPlayer implements SubtitleController.Listener {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public synchronized void notifySeek() {
             this.mSeeking = false;
             try {
@@ -1310,14 +1306,12 @@ public class SemMediaPlayer implements SubtitleController.Listener {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public synchronized void notifyTrackData(Pair<SubtitleTrack, byte[]> trackData) {
             SubtitleTrack track = trackData.first;
             byte[] data = trackData.second;
             track.onData(data, true, -1L);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public synchronized void notifyStop() {
             for (MediaTimeProvider.OnMediaTimeListener listener : this.mListeners) {
                 if (listener == null) {
@@ -1404,7 +1398,6 @@ public class SemMediaPlayer implements SubtitleController.Listener {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public synchronized void notifyTimedEvent(boolean refreshTime) {
             long nowUs;
             try {
@@ -1467,7 +1460,6 @@ public class SemMediaPlayer implements SubtitleController.Listener {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:20:0x002f A[Catch: IllegalStateException -> 0x007e, all -> 0x00b9, TryCatch #0 {IllegalStateException -> 0x007e, blocks: (B:12:0x000d, B:14:0x0021, B:18:0x0029, B:20:0x002f, B:23:0x003f), top: B:11:0x000d, outer: #1 }] */
         @Override // android.media.MediaTimeProvider
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1905,13 +1897,11 @@ public class SemMediaPlayer implements SubtitleController.Listener {
                 new Parcelable.Creator<
                         SuperSlowRegion>() { // from class:
                                              // com.samsung.android.media.SemMediaPlayer.SuperSlowRegion.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SuperSlowRegion createFromParcel(Parcel in) {
                         return new SuperSlowRegion(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SuperSlowRegion[] newArray(int size) {
                         return new SuperSlowRegion[size];
@@ -2372,7 +2362,6 @@ public class SemMediaPlayer implements SubtitleController.Listener {
         populateInbandTracks();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void scanInternalSubtitleTracks() {
         setSubtitleAnchor();
         populateInbandTracks();
@@ -2385,7 +2374,6 @@ public class SemMediaPlayer implements SubtitleController.Listener {
         populateInbandTracks(null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void populateInbandTracks(TrackInfo[] trackInfo) {
         TrackInfo[] tracks;
         if (trackInfo == null) {

@@ -44,8 +44,6 @@ public final class NavBarEvents implements Parcelable {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class EventType {
         public static final /* synthetic */ EventType[] $VALUES;
         public static final EventType ON_APPEARANCE_CHANGED;
@@ -91,8 +89,6 @@ public final class NavBarEvents implements Parcelable {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class IconType {
         public static final /* synthetic */ IconType[] $VALUES;
 
@@ -224,7 +220,6 @@ public final class NavBarEvents implements Parcelable {
         this((i3 & 1) != 0 ? null : eventType, (i3 & 2) != 0 ? null : iconType, (i3 & 4) != 0 ? null : bundle, (i3 & 8) != 0 ? null : bundle2, (i3 & 16) != 0 ? true : z, (i3 & 32) != 0 ? 0 : i, (i3 & 64) != 0 ? false : z2, (i3 & 128) != 0 ? false : z3, (i3 & 256) != 0 ? 0 : i2, (i3 & 512) != 0 ? null : bundle3, (i3 & 1024) == 0 ? z4 : false, (i3 & 2048) == 0 ? bundle4 : null);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

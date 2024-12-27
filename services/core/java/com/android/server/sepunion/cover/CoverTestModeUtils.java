@@ -34,7 +34,6 @@ public final class CoverTestModeUtils {
         void onCoverTestModeChanged(int i, boolean z);
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.sepunion.cover.CoverTestModeUtils$1] */
     public CoverTestModeUtils(Context context, OnCoverTestModeChanged onCoverTestModeChanged) {
         if (SHIPPED) {
             Log.d(

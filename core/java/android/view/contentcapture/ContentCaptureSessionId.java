@@ -10,13 +10,11 @@ public final class ContentCaptureSessionId implements Parcelable {
             new Parcelable.Creator<
                     ContentCaptureSessionId>() { // from class:
                                                  // android.view.contentcapture.ContentCaptureSessionId.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentCaptureSessionId createFromParcel(Parcel parcel) {
                     return new ContentCaptureSessionId(parcel.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentCaptureSessionId[] newArray(int size) {
                     return new ContentCaptureSessionId[size];

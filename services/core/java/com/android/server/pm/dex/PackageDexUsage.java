@@ -243,7 +243,6 @@ public final class PackageDexUsage extends AbstractStatsBase {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.server.pm.AbstractStatsBase
     public final void readInternal(WatchedArrayMap watchedArrayMap) {
         BufferedReader bufferedReader = null;

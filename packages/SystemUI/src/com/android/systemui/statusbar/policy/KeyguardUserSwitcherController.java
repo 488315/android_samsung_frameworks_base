@@ -74,9 +74,6 @@ public final class KeyguardUserSwitcherController extends ViewController impleme
         ANIMATION_PROPERTIES = animationProperties;
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.statusbar.policy.KeyguardUserSwitcherController$2] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.statusbar.policy.KeyguardUserSwitcherController$3] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.statusbar.policy.KeyguardUserSwitcherController$4] */
     public KeyguardUserSwitcherController(KeyguardUserSwitcherView keyguardUserSwitcherView, Context context, Resources resources, LayoutInflater layoutInflater, ScreenLifecycle screenLifecycle, UserSwitcherController userSwitcherController, KeyguardStateController keyguardStateController, SysuiStatusBarStateController sysuiStatusBarStateController, KeyguardUpdateMonitor keyguardUpdateMonitor, DozeParameters dozeParameters, ScreenOffAnimationController screenOffAnimationController, PowerManager powerManager) {
         super(keyguardUserSwitcherView);
         this.mIsDexModeEnabled = false;

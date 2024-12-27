@@ -93,7 +93,6 @@ public final class IpConnectivityMetrics extends SystemService {
             return z;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public final void dump(
                 FileDescriptor fileDescriptor, final PrintWriter printWriter, String[] strArr) {
             char c;
@@ -474,7 +473,6 @@ public final class IpConnectivityMetrics extends SystemService {
         printWriter.print(str);
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public IpConnectivityMetrics(Context context) {
         super(context);
         IpConnectivityMetrics$$ExternalSyntheticLambda0

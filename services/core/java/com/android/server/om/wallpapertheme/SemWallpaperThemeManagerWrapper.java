@@ -200,8 +200,6 @@ public final class SemWallpaperThemeManagerWrapper {
         return nullableOverlayInfo.isEnabled() ? 1 : 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00d9 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:42:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

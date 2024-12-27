@@ -63,8 +63,6 @@ public final class KeyguardCarrierPasswordViewController extends KeyguardSecAbsK
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.keyguard.KeyguardCarrierPasswordViewController$1] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.keyguard.KeyguardCarrierPasswordViewController$3] */
     public KeyguardCarrierPasswordViewController(KeyguardCarrierPasswordView keyguardCarrierPasswordView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, FalsingCollector falsingCollector, EmergencyButtonController emergencyButtonController, FeatureFlags featureFlags, InputMethodManager inputMethodManager, SelectedUserInteractor selectedUserInteractor) {
         super(keyguardCarrierPasswordView, configurationController, vibrationUtil, accessibilityManager, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, falsingCollector, emergencyButtonController, featureFlags, selectedUserInteractor);
         this.mFailedAttempts = 0;

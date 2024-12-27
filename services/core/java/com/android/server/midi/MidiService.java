@@ -501,8 +501,6 @@ public final class MidiService extends IMidiManager.Stub {
             super(context);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.midi.MidiService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? midiService = new MidiService(getContext());
@@ -820,7 +818,6 @@ public final class MidiService extends IMidiManager.Stub {
         return midiDeviceInfo;
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:89:? -> B:85:0x01e5). Please report as a decompilation issue!!! */
     public final void addLegacyPackageDeviceServer(ServiceInfo serviceInfo, int i) {
         XmlResourceParser xmlResourceParser;
         int i2;
@@ -1028,7 +1025,6 @@ public final class MidiService extends IMidiManager.Stub {
         }
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:105:? -> B:101:0x01ff). Please report as a decompilation issue!!! */
     public final void addUmpPackageDeviceServer(ServiceInfo serviceInfo, int i) {
         XmlResourceParser xmlResourceParser;
         int i2;

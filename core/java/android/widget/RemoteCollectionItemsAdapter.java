@@ -116,7 +116,6 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$initLayoutIdToViewType$0(int position) {
         return this.mItems.getItemView(position).getLayoutId();
     }

@@ -10,7 +10,6 @@ final class AuthenticationRepositoryImpl$refreshingFlow$1$3$emit$1 extends Conti
     /* synthetic */ Object result;
     final /* synthetic */ AuthenticationRepositoryImpl$refreshingFlow$1.AnonymousClass3 this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AuthenticationRepositoryImpl$refreshingFlow$1$3$emit$1(AuthenticationRepositoryImpl$refreshingFlow$1.AnonymousClass3 anonymousClass3, Continuation continuation) {
         super(continuation);
         this.this$0 = anonymousClass3;

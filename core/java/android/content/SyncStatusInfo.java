@@ -16,13 +16,11 @@ public class SyncStatusInfo implements Parcelable {
     public static final Parcelable.Creator<SyncStatusInfo> CREATOR =
             new Parcelable.Creator<
                     SyncStatusInfo>() { // from class: android.content.SyncStatusInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncStatusInfo createFromParcel(Parcel in) {
                     return new SyncStatusInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncStatusInfo[] newArray(int size) {
                     return new SyncStatusInfo[size];

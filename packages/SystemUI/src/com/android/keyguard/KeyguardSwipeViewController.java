@@ -41,7 +41,6 @@ public final class KeyguardSwipeViewController extends KeyguardInputViewControll
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.keyguard.KeyguardSwipeViewController$1] */
     public KeyguardSwipeViewController(KeyguardSwipeView keyguardSwipeView, KeyguardSecurityModel.SecurityMode securityMode, KeyguardSecurityCallback keyguardSecurityCallback, EmergencyButtonController emergencyButtonController, AccessibilityManager accessibilityManager, ConfigurationController configurationController, KeyguardTouchSwipeDetector keyguardTouchSwipeDetector, KeyguardMessageAreaController.Factory factory, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor) {
         super(keyguardSwipeView, securityMode, keyguardSecurityCallback, emergencyButtonController, factory, featureFlags, selectedUserInteractor);
         this.mConfigurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.keyguard.KeyguardSwipeViewController.1

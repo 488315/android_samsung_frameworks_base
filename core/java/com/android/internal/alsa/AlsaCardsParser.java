@@ -52,7 +52,6 @@ public class AlsaCardsParser {
             this.mUsbDeviceAddress = usbDeviceAddress;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean parse(String line, int lineIndex) {
             int tokenIndex;
             if (lineIndex == 0) {

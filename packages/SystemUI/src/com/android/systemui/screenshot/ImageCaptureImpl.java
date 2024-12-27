@@ -18,10 +18,6 @@ public class ImageCaptureImpl implements ImageCapture {
         this.bgContext = coroutineDispatcher;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0047 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0030  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

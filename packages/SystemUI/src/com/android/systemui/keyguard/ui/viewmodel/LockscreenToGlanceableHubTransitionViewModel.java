@@ -33,7 +33,6 @@ public final class LockscreenToGlanceableHubTransitionViewModel {
     public final LockscreenToGlanceableHubTransitionViewModel$special$$inlined$map$1 showUmo;
     public final KeyguardTransitionAnimationFlow.FlowBuilder transitionAnimation;
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.keyguard.ui.viewmodel.LockscreenToGlanceableHubTransitionViewModel$special$$inlined$map$1] */
     public LockscreenToGlanceableHubTransitionViewModel(ConfigurationInteractor configurationInteractor, KeyguardTransitionAnimationFlow keyguardTransitionAnimationFlow) {
         FromLockscreenTransitionInteractor.Companion.getClass();
         long j = FromLockscreenTransitionInteractor.TO_GLANCEABLE_HUB_DURATION;
@@ -89,8 +88,6 @@ public final class LockscreenToGlanceableHubTransitionViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -191,8 +188,6 @@ public final class LockscreenToGlanceableHubTransitionViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

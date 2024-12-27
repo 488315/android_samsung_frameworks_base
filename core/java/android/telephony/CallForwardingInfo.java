@@ -14,13 +14,11 @@ public final class CallForwardingInfo implements Parcelable {
     public static final Parcelable.Creator<CallForwardingInfo> CREATOR =
             new Parcelable.Creator<
                     CallForwardingInfo>() { // from class: android.telephony.CallForwardingInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallForwardingInfo createFromParcel(Parcel in) {
                     return new CallForwardingInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallForwardingInfo[] newArray(int size) {
                     return new CallForwardingInfo[size];

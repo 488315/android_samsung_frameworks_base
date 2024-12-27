@@ -10,13 +10,11 @@ public class SemContextSlocationArDistanceAttribute extends SemContextAttribute 
             new Parcelable.Creator<
                     SemContextSlocationArDistanceAttribute>() { // from class:
                                                                 // com.samsung.android.hardware.context.SemContextSlocationArDistanceAttribute.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextSlocationArDistanceAttribute createFromParcel(Parcel in) {
                     return new SemContextSlocationArDistanceAttribute(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextSlocationArDistanceAttribute[] newArray(int size) {
                     return new SemContextSlocationArDistanceAttribute[size];

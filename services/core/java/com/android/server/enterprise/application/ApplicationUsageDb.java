@@ -47,17 +47,6 @@ public final class ApplicationUsageDb {
         return sQLiteDatabase;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0094  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0095 A[Catch: all -> 0x00a5, Exception -> 0x00a8, TryCatch #2 {all -> 0x00a5, blocks: (B:19:0x0032, B:21:0x0038, B:23:0x003d, B:33:0x007b, B:37:0x00b0, B:42:0x0095, B:44:0x00a2, B:45:0x00ad, B:46:0x00ab, B:47:0x007d, B:50:0x0083, B:51:0x0086), top: B:18:0x0032 }] */
-    /* JADX WARN: Type inference failed for: r13v0 */
-    /* JADX WARN: Type inference failed for: r13v1 */
-    /* JADX WARN: Type inference failed for: r13v10 */
-    /* JADX WARN: Type inference failed for: r13v15 */
-    /* JADX WARN: Type inference failed for: r13v2, types: [android.database.Cursor] */
-    /* JADX WARN: Type inference failed for: r13v4 */
-    /* JADX WARN: Type inference failed for: r13v5, types: [java.util.HashMap] */
-    /* JADX WARN: Type inference failed for: r13v6 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -88,8 +77,6 @@ public final class ApplicationUsageDb {
 
        r10.close();
     */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0082  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0087  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -202,8 +189,6 @@ public final class ApplicationUsageDb {
                     + " com.android.server.enterprise.application.ApplicationUsageDb.getLaunchCountOfAllApplication():java.util.HashMap");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x008e  */
-    /* JADX WARN: Removed duplicated region for block: B:19:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -295,8 +280,6 @@ public final class ApplicationUsageDb {
                     + " long, java.lang.String):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00a8  */
-    /* JADX WARN: Removed duplicated region for block: B:19:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

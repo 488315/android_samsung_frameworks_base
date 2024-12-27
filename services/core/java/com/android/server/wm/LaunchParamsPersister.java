@@ -161,7 +161,6 @@ public final class LaunchParamsPersister {
         public final FreeformPersistBoundsParams mFreeformPersistBoundsParams =
                 new FreeformPersistBoundsParams();
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public final void restore(File file, TypedXmlPullParser typedXmlPullParser) {
             char c;
             boolean z;

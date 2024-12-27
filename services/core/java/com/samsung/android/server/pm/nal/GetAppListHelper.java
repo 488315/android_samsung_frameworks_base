@@ -159,7 +159,6 @@ public final class GetAppListHelper {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final boolean isExemptedPackage(int i, SettingBase settingBase) {
         String packageName;
         if (i == 1000 || i == 0) {

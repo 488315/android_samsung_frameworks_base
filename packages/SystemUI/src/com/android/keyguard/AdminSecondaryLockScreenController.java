@@ -143,8 +143,6 @@ public final class AdminSecondaryLockScreenController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.keyguard.AdminSecondaryLockScreenController$1] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.keyguard.AdminSecondaryLockScreenController$$ExternalSyntheticLambda0] */
     private AdminSecondaryLockScreenController(Context context, KeyguardSecurityContainer keyguardSecurityContainer, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityCallback keyguardSecurityCallback, Handler handler, SelectedUserInteractor selectedUserInteractor) {
         this.mConnection = new ServiceConnection() { // from class: com.android.keyguard.AdminSecondaryLockScreenController.1
             @Override // android.content.ServiceConnection

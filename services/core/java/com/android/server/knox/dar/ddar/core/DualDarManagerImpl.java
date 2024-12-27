@@ -82,7 +82,6 @@ public final class DualDarManagerImpl {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.knox.dar.ddar.core.DualDarManagerImpl$$ExternalSyntheticLambda2] */
     public DualDarManagerImpl(Injector injector) {
         this.mInjector = injector;
         Context context = injector.mContext;

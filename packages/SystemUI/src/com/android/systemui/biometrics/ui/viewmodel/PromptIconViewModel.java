@@ -30,8 +30,6 @@ public final class PromptIconViewModel {
     public final ChannelFlowTransformLatest shouldFlipIconView;
     public final Flow showingError;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class AuthType {
         public static final /* synthetic */ AuthType[] $VALUES;
         public static final AuthType Coex;

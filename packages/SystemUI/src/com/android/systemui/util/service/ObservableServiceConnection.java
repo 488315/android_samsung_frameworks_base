@@ -76,7 +76,6 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void bindInternal() {
         boolean z = false;
         try {
@@ -91,7 +90,6 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$addCallback$1(Callback callback) {
         Iterator<WeakReference<Callback<T>>> it = this.mCallbacks.iterator();
         while (it.hasNext()) {
@@ -108,7 +106,6 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dump$7(IndentingPrintWriter indentingPrintWriter) {
         Iterator<WeakReference<Callback<T>>> it = this.mCallbacks.iterator();
         while (it.hasNext()) {
@@ -116,7 +113,6 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dump$8(IndentingPrintWriter indentingPrintWriter) {
         indentingPrintWriter.println("mServiceIntent: " + this.mServiceIntent);
         indentingPrintWriter.println("mLastDisconnectReason: " + this.mLastDisconnectReason.orElse(-1));
@@ -124,27 +120,22 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
         DumpUtilsKt.withIncreasedIndent(indentingPrintWriter, new ObservableServiceConnection$$ExternalSyntheticLambda0(this, indentingPrintWriter, 0));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onBindingDied$10() {
         onDisconnected(3);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onDisconnected$4(Callback callback) {
         callback.onDisconnected(this, this.mLastDisconnectReason.get().intValue());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onNullBinding$11() {
         onDisconnected(1);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onServiceConnected$5(Callback callback) {
         callback.onConnected(this, this.mProxy);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onServiceConnected$6(IBinder iBinder) {
         if (DEBUG) {
             Log.d(TAG, "onServiceConnected");
@@ -153,17 +144,14 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
         applyToCallbacksLocked(new ObservableServiceConnection$$ExternalSyntheticLambda2(this, 0));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onServiceDisconnected$9() {
         onDisconnected(2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$removeCallback$2(Callback callback, WeakReference weakReference) {
         return weakReference.get() == callback;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$removeCallback$3(final Callback callback) {
         this.mCallbacks.removeIf(new Predicate() { // from class: com.android.systemui.util.service.ObservableServiceConnection$$ExternalSyntheticLambda7
             @Override // java.util.function.Predicate
@@ -175,7 +163,6 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$unbind$0() {
         onDisconnected(4);
     }

@@ -18,7 +18,6 @@ final class MediaDeviceViewModel$2$1$2$1 extends SuspendLambda implements Functi
     int label;
     final /* synthetic */ MediaDeviceViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaDeviceViewModel$2$1$2$1(SmartThingsMediaSdkManager smartThingsMediaSdkManager, MediaDeviceViewModel mediaDeviceViewModel, Continuation continuation) {
         super(2, continuation);
         this.$service = smartThingsMediaSdkManager;

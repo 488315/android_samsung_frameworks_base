@@ -128,9 +128,6 @@ public final class RecentsAnimation {
 
                        if (r7.mRoot.isLayoutNeeded() != false) goto L22;
                     */
-                    /* JADX WARN: Removed duplicated region for block: B:13:0x0043 A[Catch: all -> 0x0036, Exception -> 0x0039, TRY_LEAVE, TryCatch #1 {Exception -> 0x0039, blocks: (B:3:0x001f, B:5:0x002a, B:8:0x002f, B:11:0x003d, B:13:0x0043, B:21:0x0081, B:23:0x0087, B:25:0x008e, B:26:0x00a9, B:28:0x00b1, B:30:0x00bd, B:32:0x00c1, B:33:0x011d, B:35:0x0128, B:36:0x012a, B:39:0x00a3, B:42:0x00dd, B:44:0x00f1, B:47:0x00fb, B:49:0x00ff, B:50:0x0150, B:52:0x0154, B:57:0x0159, B:59:0x015f), top: B:2:0x001f, outer: #0 }] */
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x0065  */
-                    /* JADX WARN: Removed duplicated region for block: B:21:0x0081 A[Catch: all -> 0x0036, Exception -> 0x0039, TRY_ENTER, TryCatch #1 {Exception -> 0x0039, blocks: (B:3:0x001f, B:5:0x002a, B:8:0x002f, B:11:0x003d, B:13:0x0043, B:21:0x0081, B:23:0x0087, B:25:0x008e, B:26:0x00a9, B:28:0x00b1, B:30:0x00bd, B:32:0x00c1, B:33:0x011d, B:35:0x0128, B:36:0x012a, B:39:0x00a3, B:42:0x00dd, B:44:0x00f1, B:47:0x00fb, B:49:0x00ff, B:50:0x0150, B:52:0x0154, B:57:0x0159, B:59:0x015f), top: B:2:0x001f, outer: #0 }] */
                     @Override // java.lang.Runnable
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

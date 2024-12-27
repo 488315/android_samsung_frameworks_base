@@ -656,15 +656,6 @@ public final class DeletePackageHelper {
 
        if (r1.getUserInfo(com.android.server.pm.UserManagerService.this.getProfileParentIdUnchecked(r39)).isAdmin() == false) goto L40;
     */
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Removed duplicated region for block: B:154:0x03f5 A[Catch: all -> 0x0401, TryCatch #0 {all -> 0x0401, blocks: (B:152:0x03f1, B:154:0x03f5, B:156:0x0407, B:157:0x040b, B:188:0x0485, B:192:0x049a, B:194:0x04a0, B:195:0x04a4, B:201:0x04b6, B:203:0x04ba, B:204:0x04d4, B:205:0x04da, B:207:0x04de, B:211:0x04fb, B:212:0x04fd, B:253:0x0494, B:260:0x0489, B:261:0x048b, B:159:0x040c, B:161:0x0416, B:163:0x041a, B:167:0x042a, B:169:0x042d, B:171:0x0446, B:178:0x0457, B:186:0x047c, B:187:0x0484, B:256:0x045f, B:197:0x04a5, B:198:0x04b1), top: B:151:0x03f1, inners: #2, #10 }] */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x0407 A[Catch: all -> 0x0401, TryCatch #0 {all -> 0x0401, blocks: (B:152:0x03f1, B:154:0x03f5, B:156:0x0407, B:157:0x040b, B:188:0x0485, B:192:0x049a, B:194:0x04a0, B:195:0x04a4, B:201:0x04b6, B:203:0x04ba, B:204:0x04d4, B:205:0x04da, B:207:0x04de, B:211:0x04fb, B:212:0x04fd, B:253:0x0494, B:260:0x0489, B:261:0x048b, B:159:0x040c, B:161:0x0416, B:163:0x041a, B:167:0x042a, B:169:0x042d, B:171:0x0446, B:178:0x0457, B:186:0x047c, B:187:0x0484, B:256:0x045f, B:197:0x04a5, B:198:0x04b1), top: B:151:0x03f1, inners: #2, #10 }] */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x0491  */
-    /* JADX WARN: Removed duplicated region for block: B:196:0x04a5 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:228:0x054f  */
-    /* JADX WARN: Removed duplicated region for block: B:249:0x05be  */
-    /* JADX WARN: Removed duplicated region for block: B:253:0x0494 A[Catch: all -> 0x0401, TryCatch #0 {all -> 0x0401, blocks: (B:152:0x03f1, B:154:0x03f5, B:156:0x0407, B:157:0x040b, B:188:0x0485, B:192:0x049a, B:194:0x04a0, B:195:0x04a4, B:201:0x04b6, B:203:0x04ba, B:204:0x04d4, B:205:0x04da, B:207:0x04de, B:211:0x04fb, B:212:0x04fd, B:253:0x0494, B:260:0x0489, B:261:0x048b, B:159:0x040c, B:161:0x0416, B:163:0x041a, B:167:0x042a, B:169:0x042d, B:171:0x0446, B:178:0x0457, B:186:0x047c, B:187:0x0484, B:256:0x045f, B:197:0x04a5, B:198:0x04b1), top: B:151:0x03f1, inners: #2, #10 }] */
-    /* JADX WARN: Removed duplicated region for block: B:262:0x048c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

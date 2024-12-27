@@ -23,13 +23,11 @@ public final class InlineSuggestionsRequest implements Parcelable {
             new Parcelable.Creator<
                     InlineSuggestionsRequest>() { // from class:
                                                   // android.view.inputmethod.InlineSuggestionsRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InlineSuggestionsRequest[] newArray(int size) {
                     return new InlineSuggestionsRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InlineSuggestionsRequest createFromParcel(Parcel in) {
                     return new InlineSuggestionsRequest(in);
@@ -81,22 +79,18 @@ public final class InlineSuggestionsRequest implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultMaxSuggestionCount() {
         return Integer.MAX_VALUE;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String defaultHostPackageName() {
         return ActivityThread.currentPackageName();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static InlinePresentationSpec defaultInlineTooltipPresentationSpec() {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static LocaleList defaultSupportedLocales() {
         if (CompatChanges.isChangeEnabled(IME_AUTOFILL_DEFAULT_SUPPORTED_LOCALES_IS_EMPTY)) {
             return LocaleList.getEmptyLocaleList();
@@ -104,17 +98,14 @@ public final class InlineSuggestionsRequest implements Parcelable {
         return LocaleList.getDefault();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static IBinder defaultHostInputToken() {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultHostDisplayId() {
         return -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Bundle defaultExtras() {
         return Bundle.EMPTY;
     }

@@ -337,8 +337,6 @@ public final class ExynosDisplayATC {
         TimeUnit.SECONDS.toNanos(10L);
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.server.display.exynos.ExynosDisplayATC$3] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.server.display.exynos.ExynosDisplayATC$1] */
     public ExynosDisplayATC(Context context) {
         this.mLightSensor = null;
         this.mSensorManager = null;

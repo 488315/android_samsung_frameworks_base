@@ -10,13 +10,11 @@ public class NotificationListenerFilter implements Parcelable {
             new Parcelable.Creator<
                     NotificationListenerFilter>() { // from class:
                                                     // android.service.notification.NotificationListenerFilter.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotificationListenerFilter createFromParcel(Parcel in) {
                     return new NotificationListenerFilter(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotificationListenerFilter[] newArray(int size) {
                     return new NotificationListenerFilter[size];

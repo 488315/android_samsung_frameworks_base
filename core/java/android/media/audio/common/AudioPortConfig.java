@@ -12,7 +12,6 @@ public class AudioPortConfig implements Parcelable {
     public static final Parcelable.Creator<AudioPortConfig> CREATOR =
             new Parcelable.Creator<
                     AudioPortConfig>() { // from class: android.media.audio.common.AudioPortConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPortConfig createFromParcel(Parcel _aidl_source) {
                     AudioPortConfig _aidl_out = new AudioPortConfig();
@@ -20,7 +19,6 @@ public class AudioPortConfig implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPortConfig[] newArray(int _aidl_size) {
                     return new AudioPortConfig[_aidl_size];

@@ -25,7 +25,6 @@ final class NotificationListViewBinder$reinflateAndBindFooter$2$1 extends Suspen
     int label;
     final /* synthetic */ NotificationListViewBinder this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationListViewBinder$reinflateAndBindFooter$2$1(NotificationStackScrollLayout notificationStackScrollLayout, NotificationListViewBinder notificationListViewBinder, FooterViewModel footerViewModel, StateFlow stateFlow, Continuation continuation) {
         super(2, continuation);
         this.$parentView = notificationStackScrollLayout;

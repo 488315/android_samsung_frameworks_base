@@ -22,7 +22,6 @@ public final class DeviceEntryForegroundViewModel$special$$inlined$flatMapLatest
     int label;
     final /* synthetic */ DeviceEntryForegroundViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryForegroundViewModel$special$$inlined$flatMapLatest$3(Continuation continuation, UdfpsOverlayInteractor udfpsOverlayInteractor, ConfigurationInteractor configurationInteractor, DeviceEntryForegroundViewModel deviceEntryForegroundViewModel) {
         super(3, continuation);
         this.$udfpsOverlayInteractor$inlined = udfpsOverlayInteractor;
@@ -81,8 +80,6 @@ public final class DeviceEntryForegroundViewModel$special$$inlined$flatMapLatest
                             this.this$0 = deviceEntryForegroundViewModel;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.

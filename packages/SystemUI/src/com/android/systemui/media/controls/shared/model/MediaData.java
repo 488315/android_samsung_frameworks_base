@@ -63,8 +63,6 @@ public final class MediaData {
         this(0, false, null, null, null, null, null, null, null, null, null, null, null, null, false, null, 0, false, null, false, null, false, 0L, 0L, null, 0, false, null, 268435455, null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r15v20, types: [java.lang.Runnable] */
     public static MediaData copy$default(MediaData mediaData, List list, List list2, MediaButton mediaButton, String str, PendingIntent pendingIntent, MediaDeviceData mediaDeviceData, boolean z, MediaResumeListener$getResumeAction$1 mediaResumeListener$getResumeAction$1, boolean z2, boolean z3, Boolean bool, boolean z4, long j, long j2, InstanceId instanceId, int i, int i2) {
         int i3;
         boolean z5;
@@ -232,7 +230,6 @@ public final class MediaData {
         this.resumeProgress = d;
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

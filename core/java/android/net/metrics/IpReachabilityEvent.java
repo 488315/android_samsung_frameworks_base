@@ -14,13 +14,11 @@ public final class IpReachabilityEvent implements IpConnectivityLog.Event {
             new Parcelable.Creator<
                     IpReachabilityEvent>() { // from class:
                                              // android.net.metrics.IpReachabilityEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IpReachabilityEvent createFromParcel(Parcel in) {
                     return new IpReachabilityEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IpReachabilityEvent[] newArray(int size) {
                     return new IpReachabilityEvent[size];

@@ -3,8 +3,6 @@ package com.android.systemui.audio.soundcraft.interfaces.connectivity;
 import com.samsung.android.bluetooth.SmepTag;
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class BluetoothStateEnum {
     public static final /* synthetic */ BluetoothStateEnum[] $VALUES;
     public static final BluetoothStateEnum ADAPTIVE;

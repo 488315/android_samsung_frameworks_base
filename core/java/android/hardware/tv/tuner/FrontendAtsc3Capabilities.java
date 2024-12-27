@@ -8,7 +8,6 @@ public class FrontendAtsc3Capabilities implements Parcelable {
     public static final Parcelable.Creator<FrontendAtsc3Capabilities> CREATOR =
             new Parcelable.Creator<FrontendAtsc3Capabilities>() { // from class:
                 // android.hardware.tv.tuner.FrontendAtsc3Capabilities.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendAtsc3Capabilities createFromParcel(Parcel _aidl_source) {
                     FrontendAtsc3Capabilities _aidl_out = new FrontendAtsc3Capabilities();
@@ -16,7 +15,6 @@ public class FrontendAtsc3Capabilities implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendAtsc3Capabilities[] newArray(int _aidl_size) {
                     return new FrontendAtsc3Capabilities[_aidl_size];

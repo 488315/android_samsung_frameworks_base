@@ -778,8 +778,6 @@ public class SysUiManager implements SemBiometricConstants, Handler.Callback {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v3, types: [com.samsung.android.biometrics.app.setting.SysUiManager$1] */
     public void handleShow(
             SysUiClientOptions sysUiClientOptions,
             ISemBiometricSysUiCallback iSemBiometricSysUiCallback) {

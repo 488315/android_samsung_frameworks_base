@@ -43,13 +43,6 @@ public final /* synthetic */ class ProcessList$$ExternalSyntheticLambda4 impleme
         this.f$10 = j;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v1 */
-    /* JADX WARN: Type inference failed for: r10v3, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r10v4 */
-    /* JADX WARN: Type inference failed for: r12v2 */
-    /* JADX WARN: Type inference failed for: r12v5, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r12v6 */
     @Override // java.lang.Runnable
     public final void run() {
         long j;

@@ -30,9 +30,6 @@ public final class HeimdAllFsService {
     public volatile IInstalld mInstalld =
             IInstalld.Stub.asInterface(ServiceManager.getService("installd"));
 
-    /* JADX INFO: Access modifiers changed from: package-private */
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class FunctionOrder {
         public static final /* synthetic */ FunctionOrder[] $VALUES;
         public static final FunctionOrder COMPRESS;
@@ -92,16 +89,6 @@ public final class HeimdAllFsService {
 
        if (r6.contains("supported") == false) goto L105;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v0 */
-    /* JADX WARN: Type inference failed for: r6v1 */
-    /* JADX WARN: Type inference failed for: r6v11 */
-    /* JADX WARN: Type inference failed for: r6v16 */
-    /* JADX WARN: Type inference failed for: r6v17 */
-    /* JADX WARN: Type inference failed for: r6v2, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r6v4 */
-    /* JADX WARN: Type inference failed for: r6v5 */
-    /* JADX WARN: Type inference failed for: r6v7, types: [java.lang.String] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -188,8 +175,6 @@ public final class HeimdAllFsService {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:81:0x027e A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x01cc A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -205,9 +190,6 @@ public final class HeimdAllFsService {
                     + " boolean):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0115  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0135 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0127 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -232,10 +214,6 @@ public final class HeimdAllFsService {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0147  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x020b  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0140 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x00f8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

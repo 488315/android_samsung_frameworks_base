@@ -155,8 +155,6 @@ public class Heimdall {
 
            if ((r3 & 4) == 0) goto L27;
         */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0051  */
-        /* JADX WARN: Removed duplicated region for block: B:36:0x0052 A[Catch: Exception -> 0x0021, TryCatch #1 {Exception -> 0x0021, blocks: (B:6:0x000c, B:8:0x0014, B:11:0x0024, B:13:0x002f, B:17:0x0040, B:23:0x005b, B:24:0x005f, B:33:0x006c, B:36:0x0052, B:38:0x0039, B:41:0x006d, B:43:0x0077, B:45:0x0083, B:47:0x008d, B:51:0x009f, B:53:0x00a6, B:55:0x00b0, B:57:0x00c8, B:26:0x0060, B:27:0x0067), top: B:5:0x000c, inners: #0 }] */
         @Override // android.database.ContentObserver
         /*
             Code decompiled incorrectly, please refer to instructions dump.

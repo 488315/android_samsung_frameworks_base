@@ -16,7 +16,6 @@ public class ScaleAnimation extends Animation<Vector3> {
         super(context, AnimationType.SCALE, id, name);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.vekit.Animation.Animation
     public void rollback() {
         if (isEnableRollback()) {

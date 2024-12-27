@@ -4,9 +4,6 @@ import java.util.function.Consumer;
 
 public final /* synthetic */ class AccessibilityServiceConnection$$ExternalSyntheticLambda1
         implements Consumer {
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0046 A[Catch: all -> 0x0012, TryCatch #1 {all -> 0x0012, blocks: (B:4:0x0005, B:6:0x000f, B:10:0x0015, B:12:0x0024, B:17:0x0046, B:19:0x0052, B:20:0x0059, B:23:0x005b, B:38:0x0032), top: B:3:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x005e  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0062 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // java.util.function.Consumer
     /*
         Code decompiled incorrectly, please refer to instructions dump.

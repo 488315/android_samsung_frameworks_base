@@ -15,7 +15,6 @@ final class MobileConnectionRepositoryImpl$imsRegState$2 extends SuspendLambda i
     int label;
     final /* synthetic */ MobileConnectionRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileConnectionRepositoryImpl$imsRegState$2(MobileInputLogger mobileInputLogger, MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.$logger = mobileInputLogger;

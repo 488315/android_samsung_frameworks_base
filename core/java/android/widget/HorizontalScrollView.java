@@ -592,7 +592,6 @@ public class HorizontalScrollView extends FrameLayout {
         this.HOVERSCROLL_DELAY = hoverdelay;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.view.ViewGroup, android.view.View
     protected boolean dispatchHoverEvent(MotionEvent ev) {
         if (!isHoveringUIEnabled()) {
@@ -1593,8 +1592,6 @@ public class HorizontalScrollView extends FrameLayout {
         return (parent2 instanceof ViewGroup) && isViewDescendantOf((View) parent2, parent);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x006e  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00bc  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1785,7 +1782,6 @@ public class HorizontalScrollView extends FrameLayout {
         return n;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public void onRestoreInstanceState(Parcelable state) {
         if (this.mContext.getApplicationInfo().targetSdkVersion <= 18
@@ -1799,7 +1795,6 @@ public class HorizontalScrollView extends FrameLayout {
         requestLayout();
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public Parcelable onSaveInstanceState() {
         if (this.mContext.getApplicationInfo().targetSdkVersion <= 18) {
@@ -1822,13 +1817,11 @@ public class HorizontalScrollView extends FrameLayout {
                 new Parcelable.Creator<
                         SavedState>() { // from class:
                                         // android.widget.HorizontalScrollView.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];
@@ -1877,7 +1870,6 @@ public class HorizontalScrollView extends FrameLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleMessage(Message msg) {
         switch (msg.what) {
             case 1:

@@ -22,8 +22,6 @@ public abstract class UsageStatsXmlV1 {
         XmlUtils.skipCurrentTag(xmlPullParser);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     public static void read(XmlPullParser xmlPullParser, IntervalStats intervalStats) {
         int i;
         String readStringAttribute;

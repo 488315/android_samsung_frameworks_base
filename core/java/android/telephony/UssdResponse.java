@@ -7,7 +7,6 @@ import android.text.TextUtils;
 public final class UssdResponse implements Parcelable {
     public static final Parcelable.Creator<UssdResponse> CREATOR =
             new Parcelable.Creator<UssdResponse>() { // from class: android.telephony.UssdResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UssdResponse createFromParcel(Parcel in) {
                     String request = in.readString();
@@ -15,7 +14,6 @@ public final class UssdResponse implements Parcelable {
                     return new UssdResponse(request, message);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UssdResponse[] newArray(int size) {
                     return new UssdResponse[size];

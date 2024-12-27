@@ -57,7 +57,6 @@ final class KeyguardBottomAreaViewBinder$bind$disposableHandle$1 extends Suspend
         int label;
         final /* synthetic */ KeyguardBottomAreaViewBinder this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(KeyguardBottomAreaViewBinder keyguardBottomAreaViewBinder, ActivityStarter activityStarter, KeyguardBottomAreaViewModel keyguardBottomAreaViewModel, ImageView imageView, FalsingManager falsingManager, Function1 function1, VibratorHelper vibratorHelper, ImageView imageView2, View view, View view2, MutableStateFlow mutableStateFlow, LaunchableLinearLayout launchableLinearLayout, Continuation continuation) {
             super(2, continuation);
             this.this$0 = keyguardBottomAreaViewBinder;
@@ -119,7 +118,6 @@ final class KeyguardBottomAreaViewBinder$bind$disposableHandle$1 extends Suspend
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardBottomAreaViewBinder$bind$disposableHandle$1(KeyguardBottomAreaViewBinder keyguardBottomAreaViewBinder, ActivityStarter activityStarter, KeyguardBottomAreaViewModel keyguardBottomAreaViewModel, ImageView imageView, FalsingManager falsingManager, Function1 function1, VibratorHelper vibratorHelper, ImageView imageView2, View view, View view2, MutableStateFlow mutableStateFlow, LaunchableLinearLayout launchableLinearLayout, Continuation continuation) {
         super(3, continuation);
         this.this$0 = keyguardBottomAreaViewBinder;

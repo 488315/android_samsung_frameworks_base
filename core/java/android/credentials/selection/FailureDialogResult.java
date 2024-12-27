@@ -9,13 +9,11 @@ public final class FailureDialogResult extends BaseDialogResult implements Parce
     public static final Parcelable.Creator<FailureDialogResult> CREATOR =
             new Parcelable.Creator<FailureDialogResult>() { // from class:
                 // android.credentials.selection.FailureDialogResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FailureDialogResult createFromParcel(Parcel in) {
                     return new FailureDialogResult(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FailureDialogResult[] newArray(int size) {
                     return new FailureDialogResult[size];

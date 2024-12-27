@@ -53,7 +53,6 @@ public class SipDelegateConnectionAidlWrapper
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCreated$0() {
             SipDelegateConnectionAidlWrapper.this.mStateCallback.onCreated(
                     SipDelegateConnectionAidlWrapper.this);
@@ -80,7 +79,6 @@ public class SipDelegateConnectionAidlWrapper
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFeatureTagStatusChanged$1(
                 DelegateRegistrationState registrationState, List deniedFeatureTags) {
             SipDelegateConnectionAidlWrapper.this.mStateCallback.onFeatureTagStatusChanged(
@@ -106,7 +104,6 @@ public class SipDelegateConnectionAidlWrapper
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onImsConfigurationChanged$2(
                 SipDelegateImsConfiguration registeredSipConfig) {
             SipDelegateConnectionAidlWrapper.this.mStateCallback.onImsConfigurationChanged(
@@ -131,7 +128,6 @@ public class SipDelegateConnectionAidlWrapper
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onConfigurationChanged$3(
                 SipDelegateConfiguration registeredSipConfig) {
             SipDelegateConnectionAidlWrapper.this.mStateCallback.onConfigurationChanged(
@@ -157,7 +153,6 @@ public class SipDelegateConnectionAidlWrapper
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDestroyed$4(int reason) {
             SipDelegateConnectionAidlWrapper.this.mStateCallback.onDestroyed(reason);
         }
@@ -185,7 +180,6 @@ public class SipDelegateConnectionAidlWrapper
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onMessageReceived$0(SipMessage message) {
             SipDelegateConnectionAidlWrapper.this.mMessageCallback.onMessageReceived(message);
         }
@@ -208,7 +202,6 @@ public class SipDelegateConnectionAidlWrapper
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onMessageSent$1(String viaTransactionId) {
             SipDelegateConnectionAidlWrapper.this.mMessageCallback.onMessageSent(viaTransactionId);
         }
@@ -231,7 +224,6 @@ public class SipDelegateConnectionAidlWrapper
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onMessageSendFailure$2(
                 String viaTransactionId, int reason) {
             SipDelegateConnectionAidlWrapper.this.mMessageCallback.onMessageSendFailure(
@@ -311,7 +303,6 @@ public class SipDelegateConnectionAidlWrapper
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$binderDied$0() {
         this.mStateCallback.onDestroyed(1);
     }
@@ -328,7 +319,6 @@ public class SipDelegateConnectionAidlWrapper
         return this.mDelegateBinder.get();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void associateSipDelegate(ISipDelegate c) {
         if (c != null) {
             try {
@@ -340,7 +330,6 @@ public class SipDelegateConnectionAidlWrapper
         this.mDelegateBinder.set(c);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void invalidateSipDelegateBinder() {
         ISipDelegate oldVal =
                 this.mDelegateBinder.getAndUpdate(
@@ -378,7 +367,6 @@ public class SipDelegateConnectionAidlWrapper
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$notifyLocalMessageFailedToSend$2(
             String transactionId, int reason) {
         this.mMessageCallback.onMessageSendFailure(transactionId, reason);

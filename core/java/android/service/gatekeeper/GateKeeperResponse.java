@@ -17,7 +17,6 @@ public final class GateKeeperResponse implements Parcelable {
             new Parcelable.Creator<
                     GateKeeperResponse>() { // from class:
                                             // android.service.gatekeeper.GateKeeperResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GateKeeperResponse createFromParcel(Parcel source) {
                     int responseCode = source.readInt();
@@ -43,7 +42,6 @@ public final class GateKeeperResponse implements Parcelable {
                     return response3;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GateKeeperResponse[] newArray(int size) {
                     return new GateKeeperResponse[size];
@@ -58,7 +56,6 @@ public final class GateKeeperResponse implements Parcelable {
         return new GateKeeperResponse(responseCode);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static GateKeeperResponse createRetryResponse(int timeout) {
         GateKeeperResponse response = new GateKeeperResponse(1);
         response.mTimeout = timeout;

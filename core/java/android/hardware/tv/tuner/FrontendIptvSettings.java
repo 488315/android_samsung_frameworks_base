@@ -8,7 +8,6 @@ public class FrontendIptvSettings implements Parcelable {
     public static final Parcelable.Creator<FrontendIptvSettings> CREATOR =
             new Parcelable.Creator<FrontendIptvSettings>() { // from class:
                 // android.hardware.tv.tuner.FrontendIptvSettings.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendIptvSettings createFromParcel(Parcel _aidl_source) {
                     FrontendIptvSettings _aidl_out = new FrontendIptvSettings();
@@ -16,7 +15,6 @@ public class FrontendIptvSettings implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendIptvSettings[] newArray(int _aidl_size) {
                     return new FrontendIptvSettings[_aidl_size];

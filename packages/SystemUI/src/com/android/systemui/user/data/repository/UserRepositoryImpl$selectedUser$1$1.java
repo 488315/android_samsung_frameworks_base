@@ -25,14 +25,12 @@ final class UserRepositoryImpl$selectedUser$1$1 extends SuspendLambda implements
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserRepositoryImpl$selectedUser$1$1(UserRepositoryImpl userRepositoryImpl, Ref$ObjectRef<SelectionStatus> ref$ObjectRef, Continuation continuation) {
         super(2, continuation);
         this.$this_run = userRepositoryImpl;
         this.$currentSelectionStatus = ref$ObjectRef;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static final void invokeSuspend$send(Ref$ObjectRef ref$ObjectRef, ProducerScope producerScope, UserRepositoryImpl userRepositoryImpl, SelectionStatus selectionStatus) {
         ref$ObjectRef.element = selectionStatus;
         ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, producerScope, new SelectedUserModel(((UserTrackerImpl) userRepositoryImpl.tracker).getUserInfo(), selectionStatus), "UserRepository");
@@ -50,8 +48,6 @@ final class UserRepositoryImpl$selectedUser$1$1 extends SuspendLambda implements
         return ((UserRepositoryImpl$selectedUser$1$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.settings.UserTracker$Callback, com.android.systemui.user.data.repository.UserRepositoryImpl$selectedUser$1$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -62,7 +58,6 @@ final class UserRepositoryImpl$selectedUser$1$1 extends SuspendLambda implements
             final Ref$ObjectRef<SelectionStatus> ref$ObjectRef = this.$currentSelectionStatus;
             final UserRepositoryImpl userRepositoryImpl = this.$this_run;
             final ?? r1 = new UserTracker.Callback() { // from class: com.android.systemui.user.data.repository.UserRepositoryImpl$selectedUser$1$1$callback$1
-                /* JADX WARN: Multi-variable type inference failed */
                 @Override // com.android.systemui.settings.UserTracker.Callback
                 public final void onProfilesChanged(List list) {
                     Ref$ObjectRef ref$ObjectRef2 = ref$ObjectRef;
@@ -87,7 +82,6 @@ final class UserRepositoryImpl$selectedUser$1$1 extends SuspendLambda implements
             invokeSuspend$send(ref$ObjectRef2, producerScope, this.$this_run, ref$ObjectRef2.element);
             final UserRepositoryImpl userRepositoryImpl3 = this.$this_run;
             Function0 function0 = new Function0() { // from class: com.android.systemui.user.data.repository.UserRepositoryImpl$selectedUser$1$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

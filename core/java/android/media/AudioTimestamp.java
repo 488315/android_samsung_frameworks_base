@@ -9,13 +9,11 @@ import java.lang.annotation.RetentionPolicy;
 public final class AudioTimestamp implements Parcelable {
     public static final Parcelable.Creator<AudioTimestamp> CREATOR =
             new Parcelable.Creator<AudioTimestamp>() { // from class: android.media.AudioTimestamp.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioTimestamp createFromParcel(Parcel in) {
                     return new AudioTimestamp(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioTimestamp[] newArray(int size) {
                     return new AudioTimestamp[size];

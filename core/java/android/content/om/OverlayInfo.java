@@ -12,13 +12,11 @@ public final class OverlayInfo implements CriticalOverlayInfo, Parcelable {
     public static final String CATEGORY_THEME = "android.theme";
     public static final Parcelable.Creator<OverlayInfo> CREATOR =
             new Parcelable.Creator<OverlayInfo>() { // from class: android.content.om.OverlayInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OverlayInfo createFromParcel(Parcel source) {
                     return new OverlayInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OverlayInfo[] newArray(int size) {
                     return new OverlayInfo[size];

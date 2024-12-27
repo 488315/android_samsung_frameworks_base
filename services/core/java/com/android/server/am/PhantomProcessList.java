@@ -158,7 +158,6 @@ public final class PhantomProcessList {
         return sb.toString();
     }
 
-    /* JADX WARN: Type inference failed for: r9v0, types: [com.android.server.am.PhantomProcessList$$ExternalSyntheticLambda0] */
     public final PhantomProcessRecord getOrCreatePhantomProcessIfNeededLocked(
             int i, int i2, String str, boolean z) {
         boolean z2;

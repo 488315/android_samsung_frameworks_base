@@ -27,8 +27,6 @@ public final /* synthetic */ class BroadcastQueueModernImpl$$ExternalSyntheticLa
         broadcastQueueModernImpl.mBroadcastConsumerSkipAndCanceled.accept(broadcastRecord, i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00af  */
-    /* JADX WARN: Removed duplicated region for block: B:40:? A[RETURN, SYNTHETIC] */
     @Override // com.android.server.am.BroadcastProcessQueue.BroadcastPredicate
     /*
         Code decompiled incorrectly, please refer to instructions dump.

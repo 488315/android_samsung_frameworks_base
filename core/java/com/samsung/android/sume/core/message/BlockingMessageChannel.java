@@ -33,7 +33,6 @@ public class BlockingMessageChannel implements MessageChannel {
         }
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.channel.Channel
     public Message receive() {
         try {

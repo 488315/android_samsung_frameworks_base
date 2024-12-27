@@ -37,7 +37,6 @@ public final class SemDlnaDevice implements Parcelable {
     public static final Parcelable.Creator<SemDlnaDevice> CREATOR =
             new Parcelable.Creator<
                     SemDlnaDevice>() { // from class: android.hardware.display.SemDlnaDevice.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemDlnaDevice createFromParcel(Parcel in) {
                     String deviceName = in.readString();
@@ -67,7 +66,6 @@ public final class SemDlnaDevice implements Parcelable {
                     return dlnaDevice;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemDlnaDevice[] newArray(int size) {
                     return size == 0 ? SemDlnaDevice.EMPTY_ARRAY : new SemDlnaDevice[size];

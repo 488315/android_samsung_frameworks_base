@@ -32,10 +32,6 @@ public final class PDSTrigger {
     public abstract class PDSTriggerHolder {
         public static final PDSTrigger INSTANCE;
 
-        /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.am.pds.PDSTrigger$1] */
-        /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.am.pds.PDSTrigger$1] */
-        /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.am.pds.PDSTrigger$1] */
-        /* JADX WARN: Type inference failed for: r1v6, types: [com.android.server.am.pds.PDSTrigger$1] */
         static {
             final PDSTrigger pDSTrigger = new PDSTrigger();
             pDSTrigger.mReceiverRegistered = false;

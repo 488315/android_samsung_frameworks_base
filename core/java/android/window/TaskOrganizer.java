@@ -204,7 +204,6 @@ public class TaskOrganizer extends WindowOrganizer {
     class AnonymousClass1 extends ITaskOrganizer.Stub {
         AnonymousClass1() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$addStartingWindow$0(StartingWindowInfo windowInfo) {
             TaskOrganizer.this.addStartingWindow(windowInfo);
         }
@@ -222,7 +221,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$removeStartingWindow$1(
                 StartingWindowRemovalInfo removalInfo) {
             TaskOrganizer.this.removeStartingWindow(removalInfo);
@@ -241,7 +239,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$copySplashScreenView$2(int taskId) {
             TaskOrganizer.this.copySplashScreenView(taskId);
         }
@@ -259,7 +256,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAppSplashScreenViewRemoved$3(int taskId) {
             TaskOrganizer.this.onAppSplashScreenViewRemoved(taskId);
         }
@@ -277,7 +273,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onTaskAppeared$4(
                 ActivityManager.RunningTaskInfo taskInfo, SurfaceControl leash) {
             TaskOrganizer.this.onTaskAppeared(taskInfo, leash);
@@ -297,7 +292,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onTaskVanished$5(
                 ActivityManager.RunningTaskInfo taskInfo) {
             TaskOrganizer.this.onTaskVanished(taskInfo);
@@ -315,7 +309,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onTaskInfoChanged$6(
                 ActivityManager.RunningTaskInfo info) {
             TaskOrganizer.this.onTaskInfoChanged(info);
@@ -333,7 +326,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onBackPressedOnTaskRoot$7(
                 ActivityManager.RunningTaskInfo info) {
             TaskOrganizer.this.onBackPressedOnTaskRoot(info);
@@ -352,7 +344,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onImeDrawnOnTask$8(int taskId) {
             TaskOrganizer.this.onImeDrawnOnTask(taskId);
         }
@@ -383,7 +374,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSplitLayoutChangeRequested$9(
                 ActivityManager.RunningTaskInfo taskInfo, Bundle infoBundle) {
             TaskOrganizer.this.onSplitLayoutChangeRequested(taskInfo, infoBundle);
@@ -402,7 +392,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onImmersiveModeChanged$10(
                 int taskId, boolean immersive) {
             TaskOrganizer.this.onImmersiveModeChanged(taskId, immersive);
@@ -421,7 +410,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$resetStashedFreeform$11(int taskId, boolean anim) {
             TaskOrganizer.this.resetStashedFreeform(taskId, anim);
         }
@@ -440,7 +428,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$requestAffordanceAnim$12(
                 ActivityManager.RunningTaskInfo taskInfo, int gestureFrom) {
             TaskOrganizer.this.requestAffordanceAnim(taskInfo, gestureFrom);
@@ -460,7 +447,6 @@ public class TaskOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$preloadSplashScreenAppIcon$13(
                 ActivityInfo info, int userId, Configuration config) {
             TaskOrganizer.this.preloadSplashScreenAppIcon(info, userId, config);

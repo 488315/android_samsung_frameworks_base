@@ -43,10 +43,6 @@ public final class FoldAodAnimationController implements CallbackController, Scr
     public final ArrayList statusListeners = new ArrayList();
     public final FoldToAodLatencyTracker foldToAodLatencyTracker = new FoldToAodLatencyTracker();
     public final FoldAodAnimationController$startAnimationRunnable$1 startAnimationRunnable = new Runnable() { // from class: com.android.systemui.unfold.FoldAodAnimationController$startAnimationRunnable$1
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.unfold.FoldAodAnimationController$startAnimationRunnable$1$1] */
-        /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.unfold.FoldAodAnimationController$startAnimationRunnable$1$2] */
-        /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.unfold.FoldAodAnimationController$startAnimationRunnable$1$3] */
         @Override // java.lang.Runnable
         public final void run() {
             ShadeFoldAnimator shadeFoldAnimator$1 = FoldAodAnimationController.this.getShadeFoldAnimator$1();
@@ -104,7 +100,6 @@ public final class FoldAodAnimationController implements CallbackController, Scr
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.unfold.FoldAodAnimationController$startAnimationRunnable$1] */
     public FoldAodAnimationController(DelayableExecutor delayableExecutor, Context context, DeviceStateManager deviceStateManager, WakefulnessLifecycle wakefulnessLifecycle, GlobalSettings globalSettings, LatencyTracker latencyTracker, Lazy lazy, Lazy lazy2) {
         this.mainExecutor = delayableExecutor;
         this.context = context;

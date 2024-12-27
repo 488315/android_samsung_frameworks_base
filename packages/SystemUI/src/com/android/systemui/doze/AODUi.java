@@ -34,7 +34,6 @@ public final class AODUi extends DozeUi {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.doze.AODUi$1] */
     public AODUi(Context context, AlarmManager alarmManager, WakeLock wakeLock, DozeHost dozeHost, Handler handler, Handler handler2, DozeParameters dozeParameters, DelayableExecutor delayableExecutor, DozeLog dozeLog, AmbientDisplayConfiguration ambientDisplayConfiguration) {
         super(context, alarmManager, wakeLock, dozeHost, handler, handler2, dozeParameters, delayableExecutor, dozeLog);
         this.mHostCallback = new DozeHost.Callback() { // from class: com.android.systemui.doze.AODUi.1

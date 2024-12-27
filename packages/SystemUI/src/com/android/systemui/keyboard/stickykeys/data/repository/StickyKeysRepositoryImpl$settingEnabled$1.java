@@ -12,7 +12,6 @@ final class StickyKeysRepositoryImpl$settingEnabled$1 extends SuspendLambda impl
     int label;
     final /* synthetic */ StickyKeysRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public StickyKeysRepositoryImpl$settingEnabled$1(StickyKeysRepositoryImpl stickyKeysRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = stickyKeysRepositoryImpl;

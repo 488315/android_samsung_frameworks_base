@@ -31,7 +31,6 @@ public class UsbResolverActivity extends ResolverActivity {
     public ResolveInfo mForwardResolveInfo;
     public Intent mOtherProfileIntent;
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onCreate(Bundle bundle) {
         boolean z;
         getWindow().addSystemFlags(524288);
@@ -131,7 +130,6 @@ public class UsbResolverActivity extends ResolverActivity {
         super.onDestroy();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final boolean onTargetSelected(TargetInfo targetInfo, boolean z) {
         ResolveInfo resolveInfo = targetInfo.getResolveInfo();
         ResolveInfo resolveInfo2 = this.mForwardResolveInfo;

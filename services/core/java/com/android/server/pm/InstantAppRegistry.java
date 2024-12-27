@@ -357,8 +357,6 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         dispatchChange(this);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x00e8  */
-    /* JADX WARN: Removed duplicated region for block: B:39:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -16,7 +16,6 @@ public final class EdgeLightNotiEffectView extends AbsEdgeLightingMaskView {
     public final boolean mBasicLighting;
     public final AnonymousClass1 mHandler;
 
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.edgelighting.effect.view.EdgeLightNotiEffectView$1] */
     public EdgeLightNotiEffectView(Context context) {
         super(context);
         this.TAG = "EdgeLightNotiEffectView";
@@ -98,7 +97,6 @@ public final class EdgeLightNotiEffectView extends AbsEdgeLightingMaskView {
         AbsEdgeLightingMaskView.changeRingImageAlpha(this.mContainer, this.mStrokeAlpha, 200L);
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.edgelighting.effect.view.EdgeLightNotiEffectView$1] */
     public EdgeLightNotiEffectView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.TAG = "EdgeLightNotiEffectView";
@@ -122,7 +120,6 @@ public final class EdgeLightNotiEffectView extends AbsEdgeLightingMaskView {
         };
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.edgelighting.effect.view.EdgeLightNotiEffectView$1] */
     public EdgeLightNotiEffectView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.TAG = "EdgeLightNotiEffectView";
@@ -146,7 +143,6 @@ public final class EdgeLightNotiEffectView extends AbsEdgeLightingMaskView {
         };
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.edgelighting.effect.view.EdgeLightNotiEffectView$1] */
     public EdgeLightNotiEffectView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.TAG = "EdgeLightNotiEffectView";

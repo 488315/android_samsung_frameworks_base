@@ -50,13 +50,11 @@ public abstract class VibrationEffect implements Parcelable {
     public static final int[] RINGTONES = {6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
     public static final Parcelable.Creator<VibrationEffect> CREATOR =
             new Parcelable.Creator<VibrationEffect>() { // from class: android.os.VibrationEffect.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VibrationEffect createFromParcel(Parcel in) {
                     return new Composed(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VibrationEffect[] newArray(int size) {
                     return new VibrationEffect[size];
@@ -256,13 +254,11 @@ public abstract class VibrationEffect implements Parcelable {
         public static final Parcelable.Creator<Composed> CREATOR =
                 new Parcelable.Creator<
                         Composed>() { // from class: android.os.VibrationEffect.Composed.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Composed createFromParcel(Parcel in) {
                         return new Composed(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Composed[] newArray(int size) {
                         return new Composed[size];
@@ -813,7 +809,6 @@ public abstract class VibrationEffect implements Parcelable {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <T extends VibrationEffect> T semApplyEffectStrength(int effectStrength) {
         return this;
     }

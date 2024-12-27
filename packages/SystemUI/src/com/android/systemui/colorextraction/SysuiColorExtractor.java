@@ -70,7 +70,6 @@ public final class SysuiColorExtractor extends ColorExtractor implements Dumpabl
         triggerColorsChanged(3);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public SysuiColorExtractor(Context context, ExtractionType extractionType, ConfigurationController configurationController, WallpaperManager wallpaperManager, DumpManager dumpManager, boolean z, Lazy lazy) {
         super(context, extractionType, z, wallpaperManager);
         this.mTonal = extractionType instanceof Tonal ? (Tonal) extractionType : new Tonal(context);

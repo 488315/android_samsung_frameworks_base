@@ -21,7 +21,6 @@ final class MobileIconsInteractorImpl$forcingCellularValidation$2 extends Suspen
         return mobileIconsInteractorImpl$forcingCellularValidation$2.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x005a A[RETURN] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

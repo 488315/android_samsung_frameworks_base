@@ -50,7 +50,6 @@ public final class MediaMetricsManagerService extends SystemService {
     public final class BinderService extends IMediaMetricsManager.Stub {
         public BinderService() {}
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:22:0x003b, code lost:
 
            if (r9.equals("player_metrics_app_allowlist") == false) goto L11;
@@ -345,59 +344,6 @@ public final class MediaMetricsManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Removed duplicated region for block: B:103:0x0384  */
-        /* JADX WARN: Removed duplicated region for block: B:106:0x03b7 A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:111:0x0409  */
-        /* JADX WARN: Removed duplicated region for block: B:114:0x0418  */
-        /* JADX WARN: Removed duplicated region for block: B:117:0x0427  */
-        /* JADX WARN: Removed duplicated region for block: B:120:0x0436  */
-        /* JADX WARN: Removed duplicated region for block: B:123:0x0445  */
-        /* JADX WARN: Removed duplicated region for block: B:126:0x0454  */
-        /* JADX WARN: Removed duplicated region for block: B:129:0x0463  */
-        /* JADX WARN: Removed duplicated region for block: B:132:0x0472  */
-        /* JADX WARN: Removed duplicated region for block: B:135:0x047f  */
-        /* JADX WARN: Removed duplicated region for block: B:138:0x048c  */
-        /* JADX WARN: Removed duplicated region for block: B:141:0x0499  */
-        /* JADX WARN: Removed duplicated region for block: B:147:0x0525  */
-        /* JADX WARN: Removed duplicated region for block: B:150:0x055c A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:159:0x0527  */
-        /* JADX WARN: Removed duplicated region for block: B:160:0x04d8  */
-        /* JADX WARN: Removed duplicated region for block: B:184:0x049b  */
-        /* JADX WARN: Removed duplicated region for block: B:185:0x048e  */
-        /* JADX WARN: Removed duplicated region for block: B:186:0x0481  */
-        /* JADX WARN: Removed duplicated region for block: B:187:0x0474  */
-        /* JADX WARN: Removed duplicated region for block: B:188:0x0465  */
-        /* JADX WARN: Removed duplicated region for block: B:189:0x0456  */
-        /* JADX WARN: Removed duplicated region for block: B:190:0x0447  */
-        /* JADX WARN: Removed duplicated region for block: B:191:0x0438  */
-        /* JADX WARN: Removed duplicated region for block: B:192:0x0429  */
-        /* JADX WARN: Removed duplicated region for block: B:193:0x041a  */
-        /* JADX WARN: Removed duplicated region for block: B:194:0x040b  */
-        /* JADX WARN: Removed duplicated region for block: B:199:0x031f  */
-        /* JADX WARN: Removed duplicated region for block: B:225:0x02e0  */
-        /* JADX WARN: Removed duplicated region for block: B:226:0x02d1  */
-        /* JADX WARN: Removed duplicated region for block: B:227:0x02c2  */
-        /* JADX WARN: Removed duplicated region for block: B:228:0x02b3  */
-        /* JADX WARN: Removed duplicated region for block: B:229:0x02a4  */
-        /* JADX WARN: Removed duplicated region for block: B:230:0x0295  */
-        /* JADX WARN: Removed duplicated region for block: B:231:0x0286  */
-        /* JADX WARN: Removed duplicated region for block: B:232:0x0277  */
-        /* JADX WARN: Removed duplicated region for block: B:233:0x0268  */
-        /* JADX WARN: Removed duplicated region for block: B:234:0x0259  */
-        /* JADX WARN: Removed duplicated region for block: B:235:0x024a  */
-        /* JADX WARN: Removed duplicated region for block: B:66:0x0248  */
-        /* JADX WARN: Removed duplicated region for block: B:69:0x0257  */
-        /* JADX WARN: Removed duplicated region for block: B:72:0x0266  */
-        /* JADX WARN: Removed duplicated region for block: B:75:0x0275  */
-        /* JADX WARN: Removed duplicated region for block: B:78:0x0284  */
-        /* JADX WARN: Removed duplicated region for block: B:81:0x0293  */
-        /* JADX WARN: Removed duplicated region for block: B:84:0x02a2  */
-        /* JADX WARN: Removed duplicated region for block: B:87:0x02b1  */
-        /* JADX WARN: Removed duplicated region for block: B:90:0x02c0  */
-        /* JADX WARN: Removed duplicated region for block: B:93:0x02cf  */
-        /* JADX WARN: Removed duplicated region for block: B:96:0x02de  */
-        /* JADX WARN: Removed duplicated region for block: B:99:0x0318  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -660,7 +606,6 @@ public final class MediaMetricsManagerService extends SystemService {
         this.mSecureRandom = new SecureRandom();
     }
 
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     public static String getFilteredMimeType(String str) {
         if (TextUtils.isEmpty(str)) {
             return "";

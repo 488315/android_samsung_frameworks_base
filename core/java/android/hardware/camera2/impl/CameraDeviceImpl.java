@@ -572,11 +572,6 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                 config.getSessionParameters());
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:48:0x009e */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0104 A[Catch: all -> 0x0115, TryCatch #1 {all -> 0x0115, blocks: (B:12:0x001b, B:13:0x0022, B:73:0x0113, B:15:0x0023, B:17:0x0027, B:18:0x002c, B:20:0x0030, B:21:0x0035, B:23:0x0039, B:24:0x003e, B:26:0x0043, B:27:0x004a, B:29:0x004e, B:32:0x0066, B:37:0x006f, B:46:0x008a, B:47:0x009a, B:49:0x00a0, B:57:0x00ba, B:58:0x00c9, B:59:0x0100, B:61:0x0104, B:62:0x010c, B:64:0x010f, B:65:0x00e8), top: B:3:0x0009 }] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x010f A[Catch: all -> 0x0115, TryCatch #1 {all -> 0x0115, blocks: (B:12:0x001b, B:13:0x0022, B:73:0x0113, B:15:0x0023, B:17:0x0027, B:18:0x002c, B:20:0x0030, B:21:0x0035, B:23:0x0039, B:24:0x003e, B:26:0x0043, B:27:0x004a, B:29:0x004e, B:32:0x0066, B:37:0x006f, B:46:0x008a, B:47:0x009a, B:49:0x00a0, B:57:0x00ba, B:58:0x00c9, B:59:0x0100, B:61:0x0104, B:62:0x010c, B:64:0x010f, B:65:0x00e8), top: B:3:0x0009 }] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x00e8 A[Catch: all -> 0x0115, TryCatch #1 {all -> 0x0115, blocks: (B:12:0x001b, B:13:0x0022, B:73:0x0113, B:15:0x0023, B:17:0x0027, B:18:0x002c, B:20:0x0030, B:21:0x0035, B:23:0x0039, B:24:0x003e, B:26:0x0043, B:27:0x004a, B:29:0x004e, B:32:0x0066, B:37:0x006f, B:46:0x008a, B:47:0x009a, B:49:0x00a0, B:57:0x00ba, B:58:0x00c9, B:59:0x0100, B:61:0x0104, B:62:0x010c, B:64:0x010f, B:65:0x00e8), top: B:3:0x0009 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -979,7 +974,6 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         return submitCaptureRequest(requests, callback, executor, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkEarlyTriggerSequenceCompleteLocked(
             final int requestId, long lastFrameNumber, int[] repeatingRequestTypes) {
         if (lastFrameNumber == -1) {
@@ -1043,7 +1037,6 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateTracker(
             int requestId,
             long frameNumber,
@@ -1382,7 +1375,6 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         public void onSurfacePrepared(Surface surface) {}
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkAndFireSequenceComplete() {
         long completedFrameNumber;
         long completedFrameNumber2 = this.mFrameNumberTracker.getCompletedFrameNumber();
@@ -1456,7 +1448,6 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeCompletedCallbackHolderLocked(
             long lastCompletedRegularFrameNumber,
             long lastCompletedReprocessFrameNumber,
@@ -1550,7 +1541,6 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyError(int code) {
         if (!isClosed()) {
             this.mDeviceCallback.onError(this, code);
@@ -2227,12 +2217,10 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isClosed() {
         return this.mClosing.get();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public CameraCharacteristics getCharacteristics() {
         return this.mCharacteristics;
     }

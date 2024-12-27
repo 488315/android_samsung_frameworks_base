@@ -195,8 +195,6 @@ public final class LocationControllerImpl extends BroadcastReceiver implements L
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00b2  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00b4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -249,10 +247,6 @@ public final class LocationControllerImpl extends BroadcastReceiver implements L
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0071 A[Catch: RemoteException -> 0x007e, TryCatch #0 {RemoteException -> 0x007e, blocks: (B:15:0x006d, B:17:0x0071, B:18:0x0080, B:20:0x0084, B:23:0x008a), top: B:14:0x006d }] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0084 A[Catch: RemoteException -> 0x007e, TryCatch #0 {RemoteException -> 0x007e, blocks: (B:15:0x006d, B:17:0x0071, B:18:0x0080, B:20:0x0084, B:23:0x008a), top: B:14:0x006d }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x008a A[Catch: RemoteException -> 0x007e, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x007e, blocks: (B:15:0x006d, B:17:0x0071, B:18:0x0080, B:20:0x0084, B:23:0x008a), top: B:14:0x006d }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -26,7 +26,6 @@ public class MarshalQueryableColorSpaceTransform implements MarshalQueryable<Col
             }
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public ColorSpaceTransform unmarshal(ByteBuffer buffer) {
             int[] transformAsArray = new int[18];

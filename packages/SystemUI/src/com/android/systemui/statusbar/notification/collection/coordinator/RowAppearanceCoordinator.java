@@ -40,7 +40,6 @@ public final class RowAppearanceCoordinator implements Coordinator {
         this.mAutoExpandFirstNotification = context.getResources().getBoolean(R.bool.config_autoExpandFirstNotification);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onAfterRenderEntry(NotificationEntry notificationEntry, NotifRowController notifRowController) {
         boolean z = notificationEntry.isOngoingAcitivty() && notificationEntry.isPromotedState();
         ExpandableNotificationRowController expandableNotificationRowController = (ExpandableNotificationRowController) notifRowController;
@@ -97,7 +96,6 @@ public final class RowAppearanceCoordinator implements Coordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onBeforeRenderList(List<? extends ListEntry> list) {
         NotificationEntry representativeEntry;
         ListEntry listEntry = (ListEntry) CollectionsKt___CollectionsKt.firstOrNull((List) list);

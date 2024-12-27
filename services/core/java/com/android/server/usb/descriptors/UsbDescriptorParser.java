@@ -105,7 +105,6 @@ public final class UsbDescriptorParser {
 
     private native byte[] getRawDescriptors_native(String str);
 
-    /* JADX WARN: Removed duplicated region for block: B:74:0x023d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

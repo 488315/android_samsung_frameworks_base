@@ -9,13 +9,11 @@ public class VibrationDebugInfo implements Parcelable {
             new Parcelable.Creator<
                     VibrationDebugInfo>() { // from class:
                                             // com.samsung.android.vibrator.VibrationDebugInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VibrationDebugInfo createFromParcel(Parcel source) {
                     return new VibrationDebugInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VibrationDebugInfo[] newArray(int size) {
                     return new VibrationDebugInfo[size];

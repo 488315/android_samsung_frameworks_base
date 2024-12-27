@@ -122,7 +122,6 @@ public class AppWidgetManager {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$3() {
         try {
             this.mService.notifyProviderInheritance(
@@ -247,7 +246,6 @@ public class AppWidgetManager {
                 "Error updating app widget views in background");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updateAppWidget$5(int[] appWidgetIds, RemoteViews view)
             throws RemoteException {
         this.mService.updateAppWidgetIds(this.mPackageName, appWidgetIds, view);
@@ -336,7 +334,6 @@ public class AppWidgetManager {
                 "Error partially updating app widget views in background");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$partiallyUpdateAppWidget$6(
             int[] appWidgetIds, RemoteViews view) throws RemoteException {
         this.mService.partiallyUpdateAppWidgetIds(this.mPackageName, appWidgetIds, view);
@@ -365,7 +362,6 @@ public class AppWidgetManager {
                 "Error updating app widget view using provider in background");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updateAppWidget$7(ComponentName provider, RemoteViews view)
             throws RemoteException {
         this.mService.updateAppWidgetProvider(provider, view);
@@ -420,7 +416,6 @@ public class AppWidgetManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: notifyCollectionWidgetChange, reason: merged with bridge method [inline-methods] */
     public void lambda$notifyAppWidgetViewDataChanged$8(int[] appWidgetIds, final int viewId) {
         try {
@@ -455,7 +450,6 @@ public class AppWidgetManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$notifyCollectionWidgetChange$9(int widgetId, int viewId) {
         try {
             RemoteViews views = this.mService.getAppWidgetViews(this.mPackageName, widgetId);

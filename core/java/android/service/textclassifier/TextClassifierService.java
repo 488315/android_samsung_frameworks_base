@@ -98,7 +98,6 @@ public abstract class TextClassifierService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSuggestSelection$0(
                 TextClassificationSessionId sessionId,
                 TextSelection.Request request,
@@ -125,7 +124,6 @@ public abstract class TextClassifierService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onClassifyText$1(
                 TextClassificationSessionId sessionId,
                 TextClassification.Request request,
@@ -152,7 +150,6 @@ public abstract class TextClassifierService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onGenerateLinks$2(
                 TextClassificationSessionId sessionId,
                 TextLinks.Request request,
@@ -176,7 +173,6 @@ public abstract class TextClassifierService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSelectionEvent$3(
                 TextClassificationSessionId sessionId, SelectionEvent event) {
             TextClassifierService.this.onSelectionEvent(sessionId, event);
@@ -197,7 +193,6 @@ public abstract class TextClassifierService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onTextClassifierEvent$4(
                 TextClassificationSessionId sessionId, TextClassifierEvent event) {
             TextClassifierService.this.onTextClassifierEvent(sessionId, event);
@@ -221,7 +216,6 @@ public abstract class TextClassifierService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDetectLanguage$5(
                 TextClassificationSessionId sessionId,
                 TextLanguage.Request request,
@@ -249,7 +243,6 @@ public abstract class TextClassifierService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSuggestConversationActions$6(
                 TextClassificationSessionId sessionId,
                 ConversationActions.Request request,
@@ -275,7 +268,6 @@ public abstract class TextClassifierService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCreateTextClassificationSession$7(
                 TextClassificationContext context, TextClassificationSessionId sessionId) {
             TextClassifierService.this.onCreateTextClassificationSession(context, sessionId);
@@ -295,7 +287,6 @@ public abstract class TextClassifierService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDestroyTextClassificationSession$8(
                 TextClassificationSessionId sessionId) {
             TextClassifierService.this.onDestroyTextClassificationSession(sessionId);
@@ -363,7 +354,6 @@ public abstract class TextClassifierService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onDetectLanguage$0(
             Callback callback, TextLanguage.Request request) {
         callback.onSuccess(getLocalTextClassifier().detectLanguage(request));
@@ -385,7 +375,6 @@ public abstract class TextClassifierService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onSuggestConversationActions$1(
             Callback callback, ConversationActions.Request request) {
         callback.onSuccess(getLocalTextClassifier().suggestConversationActions(request));

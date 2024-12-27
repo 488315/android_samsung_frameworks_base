@@ -69,7 +69,6 @@ final class PointerInputScopeExtKt$consumeAllGestures$2 extends SuspendLambda im
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PointerInputScopeExtKt$consumeAllGestures$2(PointerInputScope pointerInputScope, Continuation continuation) {
         super(2, continuation);
         this.$this_consumeAllGestures = pointerInputScope;

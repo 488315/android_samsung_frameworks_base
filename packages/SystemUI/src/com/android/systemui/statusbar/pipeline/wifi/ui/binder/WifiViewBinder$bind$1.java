@@ -79,7 +79,6 @@ final class WifiViewBinder$bind$1 extends SuspendLambda implements Function3 {
             final /* synthetic */ MutableStateFlow $visibilityState;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02531(MutableStateFlow mutableStateFlow, ViewGroup viewGroup, StatusBarIconView statusBarIconView, Continuation continuation) {
                 super(2, continuation);
                 this.$visibilityState = mutableStateFlow;
@@ -138,7 +137,6 @@ final class WifiViewBinder$bind$1 extends SuspendLambda implements Function3 {
             final /* synthetic */ LocationBasedWifiViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(LocationBasedWifiViewModel locationBasedWifiViewModel, ViewGroup viewGroup, ImageView imageView, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = locationBasedWifiViewModel;
@@ -213,7 +211,6 @@ final class WifiViewBinder$bind$1 extends SuspendLambda implements Function3 {
             final /* synthetic */ LocationBasedWifiViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass3(LocationBasedWifiViewModel locationBasedWifiViewModel, ImageView imageView, ViewGroup viewGroup, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = locationBasedWifiViewModel;
@@ -286,7 +283,6 @@ final class WifiViewBinder$bind$1 extends SuspendLambda implements Function3 {
             final /* synthetic */ ImageView $iconView;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass4(MutableStateFlow mutableStateFlow, ImageView imageView, ImageView imageView2, ImageView imageView3, ImageView imageView4, StatusBarIconView statusBarIconView, Continuation continuation) {
                 super(2, continuation);
                 this.$iconTint = mutableStateFlow;
@@ -352,7 +348,6 @@ final class WifiViewBinder$bind$1 extends SuspendLambda implements Function3 {
             final /* synthetic */ StatusBarIconView $dotView;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass5(MutableStateFlow mutableStateFlow, StatusBarIconView statusBarIconView, Continuation continuation) {
                 super(2, continuation);
                 this.$decorTint = mutableStateFlow;
@@ -398,7 +393,6 @@ final class WifiViewBinder$bind$1 extends SuspendLambda implements Function3 {
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(Ref$BooleanRef ref$BooleanRef, MutableStateFlow mutableStateFlow, ViewGroup viewGroup, StatusBarIconView statusBarIconView, LocationBasedWifiViewModel locationBasedWifiViewModel, ViewGroup viewGroup2, ImageView imageView, ImageView imageView2, MutableStateFlow mutableStateFlow2, ImageView imageView3, ImageView imageView4, MutableStateFlow mutableStateFlow3, View view, View view2, View view3, Continuation continuation) {
             super(2, continuation);
             this.$isCollecting = ref$BooleanRef;
@@ -462,7 +456,6 @@ final class WifiViewBinder$bind$1 extends SuspendLambda implements Function3 {
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiViewBinder$bind$1(Ref$BooleanRef ref$BooleanRef, MutableStateFlow mutableStateFlow, ViewGroup viewGroup, StatusBarIconView statusBarIconView, LocationBasedWifiViewModel locationBasedWifiViewModel, ViewGroup viewGroup2, ImageView imageView, ImageView imageView2, MutableStateFlow mutableStateFlow2, ImageView imageView3, ImageView imageView4, MutableStateFlow mutableStateFlow3, View view, View view2, View view3, Continuation continuation) {
         super(3, continuation);
         this.$isCollecting = ref$BooleanRef;

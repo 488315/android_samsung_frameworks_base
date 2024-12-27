@@ -22,7 +22,6 @@ final class UiModeNightTileDataInteractor$tileData$1 extends SuspendLambda imple
     int label;
     final /* synthetic */ UiModeNightTileDataInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UiModeNightTileDataInteractor$tileData$1(UiModeNightTileDataInteractor uiModeNightTileDataInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = uiModeNightTileDataInteractor;
@@ -40,10 +39,6 @@ final class UiModeNightTileDataInteractor$tileData$1 extends SuspendLambda imple
         return ((UiModeNightTileDataInteractor$tileData$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.qs.tiles.impl.uimodenight.domain.interactor.UiModeNightTileDataInteractor$tileData$1$configurationCallback$1, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r3v6, types: [com.android.systemui.qs.tiles.impl.uimodenight.domain.interactor.UiModeNightTileDataInteractor$tileData$1$batteryCallback$1, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r4v4, types: [com.android.systemui.qs.tiles.impl.uimodenight.domain.interactor.UiModeNightTileDataInteractor$tileData$1$locationCallback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -78,7 +73,6 @@ final class UiModeNightTileDataInteractor$tileData$1 extends SuspendLambda imple
             ((LocationControllerImpl) this.this$0.locationController).addCallback(r4);
             final UiModeNightTileDataInteractor uiModeNightTileDataInteractor4 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.tiles.impl.uimodenight.domain.interactor.UiModeNightTileDataInteractor$tileData$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

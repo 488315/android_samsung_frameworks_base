@@ -20,7 +20,6 @@ final class ResourceTrimmer$start$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ ResourceTrimmer this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ResourceTrimmer$start$1(ResourceTrimmer resourceTrimmer, Continuation continuation) {
         super(2, continuation);
         this.this$0 = resourceTrimmer;

@@ -351,7 +351,6 @@ public class SubscriptionManager {
     private static final LruCache<Pair<String, Configuration>, Resources> sResourcesCache =
             new LruCache<>(1000);
 
-    /* JADX INFO: Access modifiers changed from: private */
     interface CallISubMethodHelper {
         int callMethod(ISub iSub) throws RemoteException;
     }
@@ -1534,7 +1533,6 @@ public class SubscriptionManager {
                 == 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$setOpportunistic$7(
             boolean opportunistic, int subId, ISub iSub) throws RemoteException {
         return iSub.setOpportunistic(opportunistic, subId, this.mContext.getOpPackageName());
@@ -1993,7 +1991,6 @@ public class SubscriptionManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$setUsageSetting$13(
             int usageSetting, int subscriptionId, ISub iSub) throws RemoteException {
         return iSub.setUsageSetting(usageSetting, subscriptionId, this.mContext.getOpPackageName());

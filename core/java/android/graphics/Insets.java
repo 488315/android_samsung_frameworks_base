@@ -11,13 +11,11 @@ public final class Insets implements Parcelable {
     public static final Insets NONE = new Insets(0, 0, 0, 0);
     public static final Parcelable.Creator<Insets> CREATOR =
             new Parcelable.Creator<Insets>() { // from class: android.graphics.Insets.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Insets createFromParcel(Parcel in) {
                     return new Insets(in.readInt(), in.readInt(), in.readInt(), in.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Insets[] newArray(int size) {
                     return new Insets[size];

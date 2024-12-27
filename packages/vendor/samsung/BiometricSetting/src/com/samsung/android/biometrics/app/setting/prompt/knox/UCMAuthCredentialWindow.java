@@ -56,7 +56,6 @@ public final class UCMAuthCredentialWindow extends FocusableWindow {
         this.mBaseView.requestFocus();
     }
 
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.samsung.android.biometrics.app.setting.prompt.knox.UCMAuthCredentialWindow$1] */
     @Override // com.samsung.android.biometrics.app.setting.FocusableWindow,
               // com.samsung.android.biometrics.app.setting.SysUiWindow
     public final void addView() {

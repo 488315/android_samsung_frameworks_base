@@ -843,7 +843,6 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateAndNotifyStateChangedLocked(int availability) {
         updateAvailabilityLocked(availability);
         notifyStateChangedLocked();
@@ -861,7 +860,6 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         message.sendToTarget();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendUnknownFailure(String failureMessage) {
         updateAvailabilityLocked(3);
         Message.obtain(this.mHandler, 11, failureMessage).sendToTarget();
@@ -1024,7 +1022,6 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$handleMessage$1(final Message message) throws Exception {
             AlwaysOnHotwordDetector.this.mExternalExecutor.execute(
                     new Runnable() { // from class:
@@ -1036,7 +1033,6 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$handleMessage$0(Message message) {
             Slog.i(AlwaysOnHotwordDetector.TAG, "handle message " + message.what);
             switch (message.what) {

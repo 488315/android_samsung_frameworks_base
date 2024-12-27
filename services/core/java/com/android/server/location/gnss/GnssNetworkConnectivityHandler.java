@@ -462,8 +462,6 @@ class GnssNetworkConnectivityHandler {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v3, types: [android.net.ConnectivityManager$NetworkCallback, com.android.server.location.gnss.GnssNetworkConnectivityHandler$2] */
     public final void registerNetworkCallbacks() {
         NetworkRequest.Builder builder = new NetworkRequest.Builder();
         builder.addCapability(12);

@@ -22,7 +22,6 @@ public final class Septuple<A, B, C, D, E, F, G> {
         this.seventh = g;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static /* synthetic */ Septuple copy$default(Septuple septuple, Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6, Object obj7, int i, Object obj8) {
         A a = obj;
         if ((i & 1) != 0) {

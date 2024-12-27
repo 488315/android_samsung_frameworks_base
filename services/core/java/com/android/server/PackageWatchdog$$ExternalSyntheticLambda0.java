@@ -56,7 +56,6 @@ public final /* synthetic */ class PackageWatchdog$$ExternalSyntheticLambda0 imp
                     }
                     if (z2) {
                         Consumer consumer = new Consumer() { // from class: com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda1
-                            /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda2] */
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 final ExplicitHealthCheckController explicitHealthCheckController2 = ExplicitHealthCheckController.this;

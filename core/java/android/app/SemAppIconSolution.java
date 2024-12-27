@@ -881,8 +881,6 @@ public class SemAppIconSolution {
                 context, itemInfo, dr, forDefaultContainer, fromThemePackage, 0, "NULL", mode);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:109:0x0534  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x058f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -908,7 +906,6 @@ public class SemAppIconSolution {
                     + " int):android.graphics.drawable.Drawable");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public Drawable checkAndDrawLiveIconFromTheme(
             Context context,
             PackageItemInfo itemInfo,
@@ -1061,7 +1058,6 @@ public class SemAppIconSolution {
         return applyNightLayer(context, dr, mode);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public boolean needToGetLiveIcon(Context context, PackageItemInfo itemInfo) {
         char c;
         if (!CALENDAR_PACKAGE_NAME.equals(itemInfo.packageName)

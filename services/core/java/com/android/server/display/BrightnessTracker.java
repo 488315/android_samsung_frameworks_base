@@ -507,14 +507,6 @@ public final class BrightnessTracker {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00f2 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x006e A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r3v0, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r3v1 */
-    /* JADX WARN: Type inference failed for: r3v11 */
-    /* JADX WARN: Type inference failed for: r3v12 */
-    /* JADX WARN: Type inference failed for: r3v4, types: [java.lang.AutoCloseable] */
     /* renamed from: -$$Nest$mbackgroundStart, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.

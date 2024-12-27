@@ -30,7 +30,6 @@ public class MarshalQueryableMeteringRectangle implements MarshalQueryable<Meter
             buffer.putInt(weight);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public MeteringRectangle unmarshal(ByteBuffer buffer) {
             int xMin = buffer.getInt();

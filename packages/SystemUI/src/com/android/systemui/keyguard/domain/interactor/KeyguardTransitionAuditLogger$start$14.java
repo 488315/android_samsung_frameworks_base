@@ -16,7 +16,6 @@ final class KeyguardTransitionAuditLogger$start$14 extends SuspendLambda impleme
     int label;
     final /* synthetic */ KeyguardTransitionAuditLogger this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardTransitionAuditLogger$start$14(KeyguardTransitionAuditLogger keyguardTransitionAuditLogger, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardTransitionAuditLogger;

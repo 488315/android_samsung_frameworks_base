@@ -8,7 +8,6 @@ public class Smpte2086 implements Parcelable {
     public static final Parcelable.Creator<Smpte2086> CREATOR =
             new Parcelable.Creator<
                     Smpte2086>() { // from class: android.hardware.graphics.common.Smpte2086.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Smpte2086 createFromParcel(Parcel _aidl_source) {
                     Smpte2086 _aidl_out = new Smpte2086();
@@ -16,7 +15,6 @@ public class Smpte2086 implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Smpte2086[] newArray(int _aidl_size) {
                     return new Smpte2086[_aidl_size];

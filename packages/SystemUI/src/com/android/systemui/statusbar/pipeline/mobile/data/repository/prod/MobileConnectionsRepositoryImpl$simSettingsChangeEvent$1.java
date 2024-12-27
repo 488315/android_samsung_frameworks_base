@@ -21,7 +21,6 @@ final class MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1 extends Sus
     int label;
     final /* synthetic */ MobileConnectionsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1(MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mobileConnectionsRepositoryImpl;
@@ -74,7 +73,6 @@ final class MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1 extends Sus
             }
             final MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

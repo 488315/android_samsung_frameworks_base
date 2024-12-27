@@ -10,13 +10,11 @@ public final class EditorBoundsInfo implements Parcelable {
     public static final Parcelable.Creator<EditorBoundsInfo> CREATOR =
             new Parcelable.Creator<
                     EditorBoundsInfo>() { // from class: android.view.inputmethod.EditorBoundsInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EditorBoundsInfo createFromParcel(Parcel source) {
                     return new EditorBoundsInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EditorBoundsInfo[] newArray(int size) {
                     return new EditorBoundsInfo[size];

@@ -6,13 +6,11 @@ import android.os.Parcelable;
 public final class TimerStat implements Parcelable {
     public static final Parcelable.Creator<TimerStat> CREATOR =
             new Parcelable.Creator<TimerStat>() { // from class: android.os.health.TimerStat.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimerStat createFromParcel(Parcel in) {
                     return new TimerStat(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimerStat[] newArray(int size) {
                     return new TimerStat[size];

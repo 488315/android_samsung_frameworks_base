@@ -535,7 +535,6 @@ public class SContextManager extends SemContextManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean checkHistoryMode(SContextEvent scontextevent) {
         boolean res = false;
         StringBuffer sb = new StringBuffer();

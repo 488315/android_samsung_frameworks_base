@@ -17,13 +17,11 @@ public final class CursorAnchorInfo implements Parcelable {
     public static final Parcelable.Creator<CursorAnchorInfo> CREATOR =
             new Parcelable.Creator<
                     CursorAnchorInfo>() { // from class: android.view.inputmethod.CursorAnchorInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CursorAnchorInfo createFromParcel(Parcel source) {
                     return new CursorAnchorInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CursorAnchorInfo[] newArray(int size) {
                     return new CursorAnchorInfo[size];
@@ -322,7 +320,6 @@ public final class CursorAnchorInfo implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static CursorAnchorInfo create(Builder builder) {
         SparseRectFArray characterBoundsArray;
         if (builder.mCharacterBoundsArrayBuilder != null) {

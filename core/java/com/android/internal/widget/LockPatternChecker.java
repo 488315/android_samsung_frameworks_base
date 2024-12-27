@@ -31,14 +31,12 @@ public final class LockPatternChecker {
                         Void,
                         VerifyCredentialResponse>() { // from class:
                                                       // com.android.internal.widget.LockPatternChecker.1
-                    /* JADX INFO: Access modifiers changed from: protected */
                     @Override // android.os.AsyncTask
                     public VerifyCredentialResponse doInBackground(Void... args) {
                         return LockPatternUtils.this.verifyCredential(
                                 credentialCopy, userId, flags);
                     }
 
-                    /* JADX INFO: Access modifiers changed from: protected */
                     @Override // android.os.AsyncTask
                     public void onPostExecute(VerifyCredentialResponse result) {
                         callback.onVerified(result, result.getTimeout());
@@ -67,7 +65,6 @@ public final class LockPatternChecker {
                         Boolean>() { // from class: com.android.internal.widget.LockPatternChecker.2
                     private int mThrottleTimeout;
 
-                    /* JADX INFO: Access modifiers changed from: protected */
                     @Override // android.os.AsyncTask
                     public Boolean doInBackground(Void... args) {
                         try {
@@ -96,7 +93,6 @@ public final class LockPatternChecker {
                         }
                     }
 
-                    /* JADX INFO: Access modifiers changed from: protected */
                     @Override // android.os.AsyncTask
                     public void onPostExecute(Boolean result) {
                         callback.onChecked(result.booleanValue(), this.mThrottleTimeout);
@@ -126,14 +122,12 @@ public final class LockPatternChecker {
                         Void,
                         VerifyCredentialResponse>() { // from class:
                                                       // com.android.internal.widget.LockPatternChecker.3
-                    /* JADX INFO: Access modifiers changed from: protected */
                     @Override // android.os.AsyncTask
                     public VerifyCredentialResponse doInBackground(Void... args) {
                         return LockPatternUtils.this.verifyTiedProfileChallenge(
                                 credentialCopy, userId, flags);
                     }
 
-                    /* JADX INFO: Access modifiers changed from: protected */
                     @Override // android.os.AsyncTask
                     public void onPostExecute(VerifyCredentialResponse response) {
                         callback.onVerified(response, response.getTimeout());
@@ -160,7 +154,6 @@ public final class LockPatternChecker {
                         Void,
                         Void,
                         Boolean>() { // from class: com.android.internal.widget.LockPatternChecker.4
-                    /* JADX INFO: Access modifiers changed from: protected */
                     @Override // android.os.AsyncTask
                     public Boolean doInBackground(Void... args) {
                         return Boolean.valueOf(
@@ -168,7 +161,6 @@ public final class LockPatternChecker {
                                         remoteLockType, password, userId));
                     }
 
-                    /* JADX INFO: Access modifiers changed from: protected */
                     @Override // android.os.AsyncTask
                     public void onPostExecute(Boolean result) {
                         callback.onChecked(result.booleanValue(), 0);
@@ -192,7 +184,6 @@ public final class LockPatternChecker {
                         Boolean>() { // from class: com.android.internal.widget.LockPatternChecker.5
                     private int mThrottleTimeout;
 
-                    /* JADX INFO: Access modifiers changed from: protected */
                     @Override // android.os.AsyncTask
                     public Boolean doInBackground(Void... args) {
                         try {
@@ -207,7 +198,6 @@ public final class LockPatternChecker {
                         }
                     }
 
-                    /* JADX INFO: Access modifiers changed from: protected */
                     @Override // android.os.AsyncTask
                     public void onPostExecute(Boolean result) {
                         callback.onChecked(result.booleanValue(), this.mThrottleTimeout);

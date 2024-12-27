@@ -986,7 +986,6 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final boolean finishActivityAffinity(IBinder iBinder) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -1547,7 +1546,6 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final boolean navigateUpTo(
             IBinder iBinder, Intent intent, String str, int i, Intent intent2) {
         boolean navigateUpTo;
@@ -1592,7 +1590,6 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final void onBackPressed(
             IBinder iBinder, IRequestFinishCallback iRequestFinishCallback) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -2319,7 +2316,6 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final int setVrMode(IBinder iBinder, boolean z, ComponentName componentName) {
         ActivityRecord isInRootTaskLocked;
         int isValid;
@@ -2397,7 +2393,6 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final boolean showAssistFromActivity(IBinder iBinder, Bundle bundle) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -2682,7 +2677,6 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0042  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

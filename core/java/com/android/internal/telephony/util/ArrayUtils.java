@@ -54,7 +54,6 @@ public final class ArrayUtils {
         return tArr3;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private static <T> T[] createEmptyArray(Class<T> cls) {
         if (cls == String.class) {
             return (T[]) EmptyArray.STRING;

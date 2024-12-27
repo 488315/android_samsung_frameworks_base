@@ -29,7 +29,6 @@ public abstract class DreamOverlayService extends Service {
 
     public abstract void onStartDream(WindowManager.LayoutParams layoutParams);
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class OverlayClient extends IDreamOverlayClient.Stub {
         private ComponentName mDreamComponent;
         IDreamOverlayCallback mDreamOverlayCallback;
@@ -75,7 +74,6 @@ public abstract class DreamOverlayService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void requestExit() {
             try {
                 this.mDreamOverlayCallback.onExitRequested();
@@ -84,7 +82,6 @@ public abstract class DreamOverlayService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void redirectWake(boolean redirect) {
             try {
                 this.mDreamOverlayCallback.onRedirectWake(redirect);
@@ -93,18 +90,15 @@ public abstract class DreamOverlayService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean shouldShowComplications() {
             return this.mShowComplications;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public ComponentName getComponent() {
             return this.mDreamComponent;
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startDream(final OverlayClient client, final WindowManager.LayoutParams params) {
         this.mExecutor.execute(
                 new Runnable() { // from class:
@@ -116,7 +110,6 @@ public abstract class DreamOverlayService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startDream$0(
             OverlayClient client, WindowManager.LayoutParams params) {
         lambda$endDream$1(this.mCurrentClient);
@@ -124,7 +117,6 @@ public abstract class DreamOverlayService extends Service {
         onStartDream(params);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void endDream(final OverlayClient client) {
         this.mExecutor.execute(
                 new Runnable() { // from class:
@@ -136,7 +128,6 @@ public abstract class DreamOverlayService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: endDreamInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$endDream$1(OverlayClient client) {
         if (client == null || client != this.mCurrentClient) {
@@ -146,7 +137,6 @@ public abstract class DreamOverlayService extends Service {
         this.mCurrentClient = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void wakeUp(final OverlayClient client) {
         this.mExecutor.execute(
                 new Runnable() { // from class:
@@ -158,7 +148,6 @@ public abstract class DreamOverlayService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$wakeUp$2(OverlayClient client) {
         if (this.mCurrentClient != client) {
             return;
@@ -166,7 +155,6 @@ public abstract class DreamOverlayService extends Service {
         onWakeUp();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void comeToFront(final OverlayClient client) {
         this.mExecutor.execute(
                 new Runnable() { // from class:
@@ -178,7 +166,6 @@ public abstract class DreamOverlayService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$comeToFront$3(OverlayClient client) {
         if (this.mCurrentClient != client) {
             return;

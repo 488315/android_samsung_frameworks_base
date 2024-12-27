@@ -25,8 +25,6 @@ public final class DeviceStateController {
     final Map mDeviceStateCallbacks = new ArrayMap();
     public DeviceState mCurrentDeviceState = DeviceState.UNKNOWN;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class DeviceState {
         public static final /* synthetic */ DeviceState[] $VALUES;
         public static final DeviceState CONCURRENT;

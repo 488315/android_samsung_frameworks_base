@@ -67,7 +67,6 @@ public class CallLayout extends FrameLayout {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onFinishInflate$0(Boolean forceHidden) {
         this.mPeopleHelper.animateViewForceHidden(
                 this.mConversationIconBadgeBg, forceHidden.booleanValue());

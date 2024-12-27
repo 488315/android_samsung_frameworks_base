@@ -19,7 +19,6 @@ final class KeyguardRepositoryImpl$dozeTransitionModel$1 extends SuspendLambda i
     int label;
     final /* synthetic */ KeyguardRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardRepositoryImpl$dozeTransitionModel$1(KeyguardRepositoryImpl keyguardRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardRepositoryImpl;
@@ -55,7 +54,6 @@ final class KeyguardRepositoryImpl$dozeTransitionModel$1 extends SuspendLambda i
             ChannelExt.trySendWithFailureLogging(producerScope, dozeTransitionModel, "KeyguardRepositoryImpl", "initial doze transition model");
             final KeyguardRepositoryImpl keyguardRepositoryImpl3 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$dozeTransitionModel$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

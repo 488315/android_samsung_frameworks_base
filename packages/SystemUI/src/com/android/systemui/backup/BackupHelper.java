@@ -60,7 +60,6 @@ public class BackupHelper extends BackupAgentHelper {
         public final Map fileNamesAndPostProcess;
         public final Object lock;
 
-        /* JADX WARN: Illegal instructions before constructor call */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -147,7 +146,6 @@ public class BackupHelper extends BackupAgentHelper {
         final int identifier = userHandle.getIdentifier();
         UserFileManagerImpl.Companion.getClass();
         addHelper("systemui.files_no_overwrite", new NoOverwriteFileBackupHelper(controlsDataLock, this, MapsKt__MapsJVMKt.mapOf(new Pair(UserFileManagerImpl.Companion.createFile(identifier, "controls_favorites.xml").getPath(), new Function0() { // from class: com.android.systemui.backup.BackupHelperKt$getPPControlsFile$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

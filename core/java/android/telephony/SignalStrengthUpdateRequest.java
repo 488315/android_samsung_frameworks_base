@@ -24,13 +24,11 @@ public final class SignalStrengthUpdateRequest implements Parcelable {
             new Parcelable.Creator<
                     SignalStrengthUpdateRequest>() { // from class:
                                                      // android.telephony.SignalStrengthUpdateRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignalStrengthUpdateRequest createFromParcel(Parcel source) {
                     return new SignalStrengthUpdateRequest(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignalStrengthUpdateRequest[] newArray(int size) {
                     return new SignalStrengthUpdateRequest[size];

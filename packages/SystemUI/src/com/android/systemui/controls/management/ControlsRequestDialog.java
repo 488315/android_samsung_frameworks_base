@@ -82,8 +82,6 @@ public class ControlsRequestDialog extends ComponentActivity implements DialogIn
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.controls.management.ControlsRequestDialog$callback$1] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.controls.management.ControlsRequestDialog$userTrackerCallback$1] */
     public ControlsRequestDialog(Executor executor, ControlsController controlsController, UserTracker userTracker, ControlsListingController controlsListingController, ControlsUtil controlsUtil) {
         this.mainExecutor = executor;
         this.controller = controlsController;

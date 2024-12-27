@@ -64,7 +64,6 @@ public final class NoteTaskQuickAffordanceConfig implements KeyguardQuickAfforda
             int label;
             final /* synthetic */ NoteTaskQuickAffordanceConfig this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass1(NoteTaskQuickAffordanceConfig noteTaskQuickAffordanceConfig, Continuation continuation) {
                 super(5, continuation);
                 this.this$0 = noteTaskQuickAffordanceConfig;
@@ -125,7 +124,6 @@ public final class NoteTaskQuickAffordanceConfig implements KeyguardQuickAfforda
             int label;
             final /* synthetic */ NoteTaskQuickAffordanceConfig this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(NoteTaskQuickAffordanceConfig noteTaskQuickAffordanceConfig, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = noteTaskQuickAffordanceConfig;
@@ -199,8 +197,6 @@ public final class NoteTaskQuickAffordanceConfig implements KeyguardQuickAfforda
                         this.$key$inlined = str;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

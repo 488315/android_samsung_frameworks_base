@@ -111,11 +111,9 @@ public final class KeyguardTextBuilder {
     }
 
     enum DismissActionType {
-        /* JADX INFO: Fake field, exist only in values array */
         Active(SystemUIAnalytics.QPBSE_KEY_ACTIVE),
         ShutDown("shutdown"),
         Reboot("reboot"),
-        /* JADX INFO: Fake field, exist only in values array */
         Dex("dex"),
         FingerPrintError("fingerprinterror");
 
@@ -261,8 +259,6 @@ public final class KeyguardTextBuilder {
         return str;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00f9  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00fe  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

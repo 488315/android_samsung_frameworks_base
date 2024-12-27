@@ -70,7 +70,6 @@ public class RefreshRateController {
     public final class NullController extends RefreshRateController {
         public final /* synthetic */ int $r8$classId;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ NullController(int i, IBinder iBinder) {
             super(iBinder);
             this.$r8$classId = i;

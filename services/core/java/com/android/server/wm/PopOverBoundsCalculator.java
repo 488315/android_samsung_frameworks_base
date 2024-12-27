@@ -10,7 +10,6 @@ import com.samsung.android.rune.CoreRune;
 import java.util.function.Predicate;
 
 public abstract class PopOverBoundsCalculator {
-    /* JADX WARN: Multi-variable type inference failed */
     public static Rect getBounds(final ActivityRecord activityRecord) {
         ActivityOptions activityOptions = activityRecord.mPopOverState.mOptions;
         if (activityOptions == null) {

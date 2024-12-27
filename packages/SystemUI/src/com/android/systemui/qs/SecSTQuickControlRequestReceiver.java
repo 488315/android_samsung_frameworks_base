@@ -114,7 +114,6 @@ public final class SecSTQuickControlRequestReceiver extends BroadcastReceiver {
             
                 if (r1.equals("android.intent.action.PACKAGES_SUSPENDED") == false) goto L71;
              */
-            /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
             @Override // java.lang.Runnable
             /*
                 Code decompiled incorrectly, please refer to instructions dump.

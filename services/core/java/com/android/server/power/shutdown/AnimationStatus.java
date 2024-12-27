@@ -1,7 +1,5 @@
 package com.android.server.power.shutdown;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 final class AnimationStatus {
     public static final /* synthetic */ AnimationStatus[] $VALUES;
     public static final AnimationStatus FINISH;

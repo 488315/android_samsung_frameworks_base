@@ -121,7 +121,6 @@ public final class BuiltInDeviceController extends DeviceController {
                     int label;
                     final /* synthetic */ BuiltInDeviceController this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     public AnonymousClass1(BuiltInDeviceController builtInDeviceController, Continuation continuation) {
                         super(2, continuation);
                         this.this$0 = builtInDeviceController;
@@ -137,8 +136,6 @@ public final class BuiltInDeviceController extends DeviceController {
                         return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:16:0x006d A[RETURN] */
-                    /* JADX WARN: Removed duplicated region for block: B:20:0x0057 A[RETURN] */
                     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -264,11 +261,6 @@ public final class BuiltInDeviceController extends DeviceController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x03a8  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x03ad  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x03b0 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

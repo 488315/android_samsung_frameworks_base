@@ -107,7 +107,6 @@ public final class VolumePanelExpandWindow extends Dialog implements VolumeObser
         new Companion(null);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

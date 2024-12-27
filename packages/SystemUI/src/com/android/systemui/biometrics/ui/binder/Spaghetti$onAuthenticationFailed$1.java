@@ -18,7 +18,6 @@ final class Spaghetti$onAuthenticationFailed$1 extends SuspendLambda implements 
     int label;
     final /* synthetic */ Spaghetti this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public Spaghetti$onAuthenticationFailed$1(Spaghetti spaghetti, String str, BiometricModality biometricModality, Continuation continuation) {
         super(2, continuation);
         this.this$0 = spaghetti;
@@ -50,7 +49,6 @@ final class Spaghetti$onAuthenticationFailed$1 extends SuspendLambda implements 
             final Spaghetti spaghetti2 = this.this$0;
             final BiometricModality biometricModality = this.$failedModality;
             Function2 function2 = new Function2() { // from class: com.android.systemui.biometrics.ui.binder.Spaghetti$onAuthenticationFailed$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

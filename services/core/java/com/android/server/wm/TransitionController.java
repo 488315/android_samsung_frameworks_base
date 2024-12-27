@@ -316,7 +316,6 @@ public final class TransitionController {
         public final ITransitionPlayer mPlayer;
         public final WindowProcessController mPlayerProc;
 
-        /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.wm.TransitionController$TransitionPlayerRecord$$ExternalSyntheticLambda0] */
         public TransitionPlayerRecord(
                 ITransitionPlayer iTransitionPlayer,
                 WindowProcessController windowProcessController) {
@@ -525,19 +524,6 @@ public final class TransitionController {
 
        if (r7 == false) goto L291;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x0287  */
-    /* JADX WARN: Removed duplicated region for block: B:155:0x0319  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x036a  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x03db A[ADDED_TO_REGION, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r0v101 */
-    /* JADX WARN: Type inference failed for: r0v125 */
-    /* JADX WARN: Type inference failed for: r0v23, types: [com.android.server.wm.BackNavigationController] */
-    /* JADX WARN: Type inference failed for: r0v80 */
-    /* JADX WARN: Type inference failed for: r0v81 */
-    /* JADX WARN: Type inference failed for: r3v10, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r3v41 */
-    /* JADX WARN: Type inference failed for: r3v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1207,7 +1193,6 @@ public final class TransitionController {
         queueTransition(transition, onStartCollect);
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.wm.TransitionController$$ExternalSyntheticLambda6] */
     public final void startLegacySyncOrQueue(
             BLASTSyncEngine.SyncGroup syncGroup,
             final WindowOrganizerController$$ExternalSyntheticLambda1

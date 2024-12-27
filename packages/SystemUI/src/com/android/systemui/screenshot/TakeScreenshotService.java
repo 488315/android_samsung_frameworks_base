@@ -259,7 +259,6 @@ public class TakeScreenshotService extends Service {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.screenshot.TakeScreenshotService$1] */
     public TakeScreenshotService(UserManager userManager, DevicePolicyManager devicePolicyManager, UiEventLogger uiEventLogger, ScreenshotNotificationsController.Factory factory, ScreenshotErrorController screenshotErrorController, Context context, Executor executor, TakeScreenshotExecutor takeScreenshotExecutor) {
         this.mUserManager = userManager;
         this.mUiEventLogger = uiEventLogger;

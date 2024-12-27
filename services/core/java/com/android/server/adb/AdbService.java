@@ -266,8 +266,6 @@ public final class AdbService extends IAdbManager.Stub {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.adb.AdbService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? adbService = new AdbService(getContext());
@@ -477,7 +475,6 @@ public final class AdbService extends IAdbManager.Stub {
         return fingerprintAndPairDeviceArr;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final int handleShellCommand(ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, ParcelFileDescriptor parcelFileDescriptor3, String[] strArr) {
         return new AdbShellCommand(this).exec(this, parcelFileDescriptor.getFileDescriptor(), parcelFileDescriptor2.getFileDescriptor(), parcelFileDescriptor3.getFileDescriptor(), strArr);
     }

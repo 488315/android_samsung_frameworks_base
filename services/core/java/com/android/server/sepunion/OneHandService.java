@@ -149,7 +149,6 @@ public final class OneHandService extends IOneHandService.Stub implements AbsSem
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.sepunion.OneHandService$1] */
     public OneHandService(Context context) {
         this.mContext = context;
     }

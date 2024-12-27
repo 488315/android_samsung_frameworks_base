@@ -23,8 +23,6 @@ public final class ConnectedDeviceItemFactory extends DeviceItemFactory {
         return DeviceItemFactory.Companion.createDeviceItem(context, cachedBluetoothDevice, deviceItemType, str, i, string, false);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:23:? A[RETURN, SYNTHETIC] */
     @Override // com.android.systemui.bluetooth.qsdialog.DeviceItemFactory
     /*
         Code decompiled incorrectly, please refer to instructions dump.

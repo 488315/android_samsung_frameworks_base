@@ -238,13 +238,11 @@ public final class Configuration implements Parcelable, Comparable<Configuration
     public static final Parcelable.Creator<Configuration> CREATOR =
             new Parcelable.Creator<
                     Configuration>() { // from class: android.content.res.Configuration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Configuration createFromParcel(Parcel source) {
                     return new Configuration(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Configuration[] newArray(int size) {
                     return new Configuration[size];
@@ -900,9 +898,6 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         dumpDebug(protoOutputStream, fieldId, false, critical);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:103:0x034d A[Catch: IllformedLocaleException -> 0x0378, all -> 0x03ab, TRY_ENTER, TryCatch #5 {all -> 0x03ab, blocks: (B:97:0x0324, B:99:0x0327, B:103:0x034d, B:105:0x03aa, B:111:0x0374, B:113:0x037d, B:148:0x023f, B:150:0x0252, B:153:0x025d, B:156:0x0277, B:161:0x02c7, B:166:0x027d), top: B:147:0x023f }] */
-    /* JADX WARN: Removed duplicated region for block: B:111:0x0374 A[Catch: IllformedLocaleException -> 0x0378, all -> 0x03ab, TRY_LEAVE, TryCatch #5 {all -> 0x03ab, blocks: (B:97:0x0324, B:99:0x0327, B:103:0x034d, B:105:0x03aa, B:111:0x0374, B:113:0x037d, B:148:0x023f, B:150:0x0252, B:153:0x025d, B:156:0x0277, B:161:0x02c7, B:166:0x027d), top: B:147:0x023f }] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0430  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -26,7 +26,6 @@ public final class SemMobileWipsScanResult implements Parcelable {
             new Parcelable.Creator<
                     SemMobileWipsScanResult>() { // from class:
                                                  // com.samsung.android.wifi.SemMobileWipsScanResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemMobileWipsScanResult createFromParcel(Parcel in) {
                     SemMobileWipsWifiSsid wifiSsid = null;
@@ -94,7 +93,6 @@ public final class SemMobileWipsScanResult implements Parcelable {
                     return sr;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemMobileWipsScanResult[] newArray(int size) {
                     return new SemMobileWipsScanResult[size];
@@ -572,7 +570,6 @@ public final class SemMobileWipsScanResult implements Parcelable {
                 new Parcelable.Creator<
                         InformationElement>() { // from class:
                                                 // com.samsung.android.wifi.SemMobileWipsScanResult.InformationElement.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public InformationElement createFromParcel(Parcel in) {
                         InformationElement informationElement = new InformationElement();
@@ -582,7 +579,6 @@ public final class SemMobileWipsScanResult implements Parcelable {
                         return informationElement;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public InformationElement[] newArray(int size) {
                         return new InformationElement[size];

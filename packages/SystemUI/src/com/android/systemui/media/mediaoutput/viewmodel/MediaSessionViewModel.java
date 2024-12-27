@@ -209,8 +209,6 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                         return ((StatusBarNotification) obj).getNotification();
                     }
                 }), new Function1() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$Companion$newSessionControllerWith$4
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                    /* JADX WARN: Multi-variable type inference failed */
                     {
                         super(1);
                     }
@@ -233,7 +231,6 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                 final Context context2 = mediaSessionViewModel.context;
                 final List plus = CollectionsKt___CollectionsKt.plus((Iterable) linkedHashSet, (Collection) list2);
                 CollectionsKt__MutableCollectionsKt.addAll(SequencesKt___SequencesKt.toList(new TransformingSequence(new SequencesKt___SequencesKt$sortedWith$1(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(mediaSessionManager.getActiveSessions(null)), new Comparator() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$Companion$newSessionControllerWith$$inlined$sortedBy$1
-                    /* JADX WARN: Removed duplicated region for block: B:10:0x0029  */
                     @Override // java.util.Comparator
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -279,8 +276,6 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$Companion$newSessionControllerWith$$inlined$sortedBy$1.compare(java.lang.Object, java.lang.Object):int");
                     }
                 }), new Function1() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$Companion$newSessionControllerWith$6
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                    /* JADX WARN: Multi-variable type inference failed */
                     {
                         super(1);
                     }
@@ -337,7 +332,6 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                             int label;
                             final /* synthetic */ MediaSessionViewModel.AnonymousClass4.AnonymousClass1 this$0;
 
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             public AnonymousClass1(MediaSessionViewModel.AnonymousClass4.AnonymousClass1 anonymousClass1, Continuation continuation) {
                                 super(2, continuation);
                                 this.this$0 = anonymousClass1;
@@ -380,7 +374,6 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                             int label;
                             final /* synthetic */ MediaSessionViewModel this$0;
 
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             public AnonymousClass2(MediaSessionViewModel mediaSessionViewModel, Continuation continuation) {
                                 super(2, continuation);
                                 this.this$0 = mediaSessionViewModel;
@@ -630,11 +623,6 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
         BuildersKt.launch$default(androidx.lifecycle.ViewModelKt.getViewModelScope(this), null, null, new AnonymousClass4(null), 3);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v1, types: [kotlin.collections.EmptyList] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [java.util.ArrayList] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [java.lang.Object] */
     public static final SessionController access$currentSessionController$lambda$3$selectController(List list, MediaSessionViewModel mediaSessionViewModel) {
         Iterable iterable;
         SessionController sessionController;

@@ -160,7 +160,6 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final void dismissSplitTask(IBinder iBinder, boolean z) {
         MultiStarController multiStarController = this.mAtm.mMultiStarController;
         ArrayList arrayList = new ArrayList(Arrays.asList("com.samsung.controlpanel"));
@@ -317,7 +316,6 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         return arrayList;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final int getDexTaskInfoFlags(IBinder iBinder) {
         Task task;
         if (UserHandle.isIsolated(Binder.getCallingUid())) {
@@ -515,7 +513,6 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         return i2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0069  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -737,7 +734,6 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final boolean isAllTasksResizable(int i, int i2, int i3) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -1167,7 +1163,6 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(
             FileDescriptor fileDescriptor,
             FileDescriptor fileDescriptor2,
@@ -1293,7 +1288,6 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void rotateDexCompatTask(IBinder iBinder) {
         if (UserHandle.isIsolated(Binder.getCallingUid())) {
             throw new SecurityException(
@@ -1835,7 +1829,6 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final void toggleFreeformWindowingModeForDex(WindowContainerToken windowContainerToken) {
         ActivityTaskManagerService.enforceTaskPermission("toggleFreeformWindowingModeForDex");
         long clearCallingIdentity = Binder.clearCallingIdentity();

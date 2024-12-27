@@ -33,13 +33,11 @@ public final class NanoAppBinary implements Parcelable {
     public static final Parcelable.Creator<NanoAppBinary> CREATOR =
             new Parcelable.Creator<
                     NanoAppBinary>() { // from class: android.hardware.location.NanoAppBinary.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoAppBinary createFromParcel(Parcel in) {
                     return new NanoAppBinary(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoAppBinary[] newArray(int size) {
                     return new NanoAppBinary[size];

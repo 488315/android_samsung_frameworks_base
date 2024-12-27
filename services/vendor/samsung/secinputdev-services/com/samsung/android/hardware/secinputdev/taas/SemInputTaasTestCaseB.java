@@ -32,7 +32,6 @@ public class SemInputTaasTestCaseB implements SemInputTaasTestCase {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void runEvent(MotionEvent mEvent) {
         try {
             final int toolType = mEvent.getToolType(0);
@@ -50,7 +49,6 @@ public class SemInputTaasTestCaseB implements SemInputTaasTestCase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: runEvent, reason: merged with bridge method [inline-methods] */
     public void lambda$runEvent$0(int cur_tool_type, String deviceName) {
         if ((this.prv_tool_type == 1 || this.prv_tool_type == 2)

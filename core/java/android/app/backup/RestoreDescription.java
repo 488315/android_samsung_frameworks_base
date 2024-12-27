@@ -16,7 +16,6 @@ public class RestoreDescription implements Parcelable {
     public static final Parcelable.Creator<RestoreDescription> CREATOR =
             new Parcelable.Creator<
                     RestoreDescription>() { // from class: android.app.backup.RestoreDescription.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RestoreDescription createFromParcel(Parcel in) {
                     RestoreDescription unparceled = new RestoreDescription(in);
@@ -27,7 +26,6 @@ public class RestoreDescription implements Parcelable {
                     return unparceled;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RestoreDescription[] newArray(int size) {
                     return new RestoreDescription[size];

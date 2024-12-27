@@ -101,10 +101,6 @@ public abstract class HdmiUtils {
     }
 
     public abstract class ShortAudioDescriptorXmlParser {
-        /* JADX WARN: Removed duplicated region for block: B:113:0x01af A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:116:0x0019 A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:37:0x0178  */
-        /* JADX WARN: Removed duplicated region for block: B:39:0x0188 A[ADDED_TO_REGION] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

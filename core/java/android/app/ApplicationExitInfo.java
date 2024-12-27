@@ -30,13 +30,11 @@ public final class ApplicationExitInfo implements Parcelable {
     public static final Parcelable.Creator<ApplicationExitInfo> CREATOR =
             new Parcelable.Creator<
                     ApplicationExitInfo>() { // from class: android.app.ApplicationExitInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApplicationExitInfo createFromParcel(Parcel in) {
                     return new ApplicationExitInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApplicationExitInfo[] newArray(int size) {
                     return new ApplicationExitInfo[size];

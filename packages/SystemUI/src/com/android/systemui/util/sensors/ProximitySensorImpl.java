@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public class ProximitySensorImpl implements ProximitySensor {
     private static final boolean DEBUG;
     private static final long SECONDARY_PING_INTERVAL_MS = 5000;
@@ -46,7 +45,6 @@ public class ProximitySensorImpl implements ProximitySensor {
         public AnonymousClass1() {
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onThresholdCrossed$0() {
             ProximitySensorImpl.this.mPrimaryThresholdSensor.pause();
             ProximitySensorImpl.this.mSecondaryThresholdSensor.resume();
@@ -92,7 +90,6 @@ public class ProximitySensorImpl implements ProximitySensor {
         this.mExecution = execution;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void chooseSensor() {
         this.mExecution.assertIsMainThread();
         if (!this.mRegistered || this.mPaused || this.mListeners.isEmpty()) {
@@ -107,7 +104,6 @@ public class ProximitySensorImpl implements ProximitySensor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onPrimarySensorEvent(ThresholdSensorEvent thresholdSensorEvent) {
         this.mExecution.assertIsMainThread();
         if (this.mLastPrimaryEvent == null || thresholdSensorEvent.getBelow() != this.mLastPrimaryEvent.getBelow()) {
@@ -138,7 +134,6 @@ public class ProximitySensorImpl implements ProximitySensor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onSensorEvent(ThresholdSensorEvent thresholdSensorEvent) {
         this.mExecution.assertIsMainThread();
         if (this.mLastEvent == null || thresholdSensorEvent.getBelow() != this.mLastEvent.getBelow()) {

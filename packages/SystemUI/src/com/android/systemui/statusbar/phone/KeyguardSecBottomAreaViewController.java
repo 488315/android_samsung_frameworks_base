@@ -159,12 +159,6 @@ public final class KeyguardSecBottomAreaViewController extends KeyguardBottomAre
         KEY_HELP_TEXT_BOTTOM = "help_text_margin";
     }
 
-    /* JADX WARN: Type inference failed for: r1v17, types: [com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$keyguardUpdateMonitorCallbackForShortcuts$1] */
-    /* JADX WARN: Type inference failed for: r1v20, types: [com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$mWakefulnessObserver$1] */
-    /* JADX WARN: Type inference failed for: r1v22, types: [com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$shortcutAnimRunnable$1] */
-    /* JADX WARN: Type inference failed for: r1v23, types: [com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$startDelayRunnable$1] */
-    /* JADX WARN: Type inference failed for: r1v24, types: [com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$restoreRunnable$1] */
-    /* JADX WARN: Type inference failed for: r5v0, types: [com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$mDevicePolicyReceiver$1] */
     public KeyguardSecBottomAreaViewController(ActivityStarter activityStarter, DevicePolicyManager devicePolicyManager, BroadcastDispatcher broadcastDispatcher, dagger.Lazy lazy, KeyguardInteractor keyguardInteractor, KeyguardStateController keyguardStateController, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardQuickAffordanceInteractor keyguardQuickAffordanceInteractor, dagger.Lazy lazy2, SettingsHelper settingsHelper, dagger.Lazy lazy3, WakefulnessLifecycle wakefulnessLifecycle, SelectedUserInteractor selectedUserInteractor, KeyguardBottomAreaView keyguardBottomAreaView, LockscreenSmartspaceController lockscreenSmartspaceController, FeatureFlagsClassic featureFlagsClassic, DumpManager dumpManager) {
         super((KeyguardSecBottomAreaView) keyguardBottomAreaView, lockscreenSmartspaceController, featureFlagsClassic);
         this.activityStarter = activityStarter;

@@ -74,7 +74,6 @@ public class BinderLatencyObserver {
             new BinderLatencyBuckets(
                     this.mBucketCount, this.mFirstBucketSize, this.mBucketScaleFactor);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void fillApiStatsProto(
             ProtoOutputStream proto, LatencyDims dims, String transactionName, int[] histogram) {
         int firstNonEmptyBucket = 0;
@@ -131,7 +130,6 @@ public class BinderLatencyObserver {
                 this.mBucketScaleFactor);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void noteLatencyDelayed() {
         this.mLatencyObserverHandler.removeCallbacks(this.mLatencyObserverRunnable);
         this.mLatencyObserverHandler.postDelayed(

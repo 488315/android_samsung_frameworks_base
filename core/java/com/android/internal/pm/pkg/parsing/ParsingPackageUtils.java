@@ -214,10 +214,6 @@ public class ParsingPackageUtils {
         return parseMonolithicPackage(input, packageFile, flags);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00a3 A[Catch: all -> 0x0075, IllegalArgumentException -> 0x0080, TRY_ENTER, TRY_LEAVE, TryCatch #6 {IllegalArgumentException -> 0x0080, all -> 0x0075, blocks: (B:66:0x006d, B:26:0x00a3), top: B:65:0x006d }] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0145  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0147  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00ab A[Catch: all -> 0x012a, IllegalArgumentException -> 0x0134, TRY_ENTER, TryCatch #7 {IllegalArgumentException -> 0x0134, all -> 0x012a, blocks: (B:20:0x005e, B:24:0x008e, B:43:0x00ab, B:45:0x00bc, B:47:0x00d3), top: B:19:0x005e }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -648,12 +644,10 @@ public class ParsingPackageUtils {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:68:0x00ba, code lost:
 
        if (r5.equals(com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils.TAG_PROVIDER) != false) goto L48;
     */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x01b5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -680,7 +674,6 @@ public class ParsingPackageUtils {
                     + " int):android.content.pm.parsing.result.ParseResult");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private ParseResult parseSplitBaseAppChildTags(
             ParseInput input,
             String tag,
@@ -881,7 +874,6 @@ public class ParsingPackageUtils {
         return input.success(pkg);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private ParseResult parseBaseApkTag(
             String tag,
             ParseInput input,
@@ -1161,7 +1153,6 @@ public class ParsingPackageUtils {
                         .setSharedUserLabelResourceId(resId(3, sa)));
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0235, code lost:
 
        r0 = r22.getPackageName();
@@ -1315,11 +1306,6 @@ public class ParsingPackageUtils {
         return val;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00a2  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00df  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00d7 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00a5 A[Catch: all -> 0x0216, TryCatch #0 {all -> 0x0216, blocks: (B:3:0x0011, B:5:0x0030, B:6:0x0033, B:8:0x0041, B:9:0x0044, B:10:0x004f, B:14:0x005b, B:27:0x0076, B:28:0x007e, B:31:0x009f, B:33:0x00cd, B:34:0x00d1, B:39:0x00d7, B:43:0x00a5, B:45:0x00af, B:46:0x00b9, B:48:0x00c3, B:49:0x0084, B:52:0x0091, B:60:0x00f3, B:64:0x00fe, B:66:0x0102, B:71:0x010a, B:73:0x010e, B:75:0x0118, B:82:0x0134, B:84:0x013c, B:92:0x0153, B:94:0x0161, B:98:0x0173, B:101:0x0181, B:105:0x01b8, B:107:0x0202, B:96:0x01ea), top: B:2:0x0011 }] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00b9 A[Catch: all -> 0x0216, TryCatch #0 {all -> 0x0216, blocks: (B:3:0x0011, B:5:0x0030, B:6:0x0033, B:8:0x0041, B:9:0x0044, B:10:0x004f, B:14:0x005b, B:27:0x0076, B:28:0x007e, B:31:0x009f, B:33:0x00cd, B:34:0x00d1, B:39:0x00d7, B:43:0x00a5, B:45:0x00af, B:46:0x00b9, B:48:0x00c3, B:49:0x0084, B:52:0x0091, B:60:0x00f3, B:64:0x00fe, B:66:0x0102, B:71:0x010a, B:73:0x010e, B:75:0x0118, B:82:0x0134, B:84:0x013c, B:92:0x0153, B:94:0x0161, B:98:0x0173, B:101:0x0181, B:105:0x01b8, B:107:0x0202, B:96:0x01ea), top: B:2:0x0011 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1706,7 +1692,6 @@ public class ParsingPackageUtils {
                     + " android.content.res.XmlResourceParser):android.content.pm.parsing.result.ParseResult");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:157:0x062b, code lost:
 
        if (com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils.useLegacyRuntimeManifest(r33.getMetaData()) != false) goto L277;
@@ -1771,10 +1756,6 @@ public class ParsingPackageUtils {
 
        return r32.success(r33);
     */
-    /* JADX WARN: Removed duplicated region for block: B:199:0x0604  */
-    /* JADX WARN: Removed duplicated region for block: B:202:0x05ff A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:232:0x05b5 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:248:0x05a4 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1893,7 +1874,6 @@ public class ParsingPackageUtils {
                 .setAllowCrossUidActivitySwitchFromBelow(bool(true, 74, sa));
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private ParseResult parseBaseAppChildTag(
             ParseInput input,
             String tag,

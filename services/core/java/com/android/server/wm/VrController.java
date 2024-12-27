@@ -36,7 +36,6 @@ public final class VrController {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.wm.VrController$1] */
     public VrController(Object obj) {
         this.mGlobalAmLock = obj;
     }

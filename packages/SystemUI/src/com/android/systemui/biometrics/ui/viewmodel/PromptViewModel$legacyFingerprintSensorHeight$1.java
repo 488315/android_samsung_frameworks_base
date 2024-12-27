@@ -15,7 +15,6 @@ final class PromptViewModel$legacyFingerprintSensorHeight$1 extends SuspendLambd
     int label;
     final /* synthetic */ PromptViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptViewModel$legacyFingerprintSensorHeight$1(PromptViewModel promptViewModel, Continuation continuation) {
         super(3, continuation);
         this.this$0 = promptViewModel;

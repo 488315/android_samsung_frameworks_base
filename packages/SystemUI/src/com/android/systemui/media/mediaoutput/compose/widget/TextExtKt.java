@@ -140,7 +140,6 @@ public abstract class TextExtKt {
             final int i12 = i7;
             final TextStyle textStyle3 = textStyle2;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.TextExtKt$TextExt$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

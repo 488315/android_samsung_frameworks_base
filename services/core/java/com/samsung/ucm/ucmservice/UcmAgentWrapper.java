@@ -177,8 +177,6 @@ public final class UcmAgentWrapper {
         public int eventId;
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.ucm.ucmservice.UcmAgentWrapper$2] */
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.samsung.ucm.ucmservice.UcmAgentWrapper$1] */
     public UcmAgentWrapper(
             Context context,
             IUcmAgentManagerDeleteDelegate iUcmAgentManagerDeleteDelegate,
@@ -236,8 +234,6 @@ public final class UcmAgentWrapper {
 
        if (r8 == null) goto L161;
     */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x0348  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x035e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

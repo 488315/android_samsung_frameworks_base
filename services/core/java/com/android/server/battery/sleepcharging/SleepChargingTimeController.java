@@ -145,8 +145,6 @@ public final class SleepChargingTimeController {
             Slog.d("[SS]SleepChargingTimeController", "[updateExpectedFullChargeDateTime]expectedFullChargeDateTime:" + sleepChargingStatus.expectedFullChargeDateTime);
         }
 
-        /* JADX WARN: Type inference failed for: r1v4, types: [java.time.LocalDateTime] */
-        /* JADX WARN: Type inference failed for: r7v6, types: [java.time.LocalDateTime] */
         public SleepChargingStatus(PersonalPatternManager.SleepPattern sleepPattern, LocalDate localDate) {
             this.matchedDate = localDate;
             LocalTime localTime = SleepChargingTimeController.mRuglarUpdateCheckTime;
@@ -182,7 +180,6 @@ public final class SleepChargingTimeController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v8, types: [java.time.LocalDateTime] */
     /* renamed from: -$$Nest$mgetNextAlarmDateTimeWithinSleepTime, reason: not valid java name */
     public static LocalDateTime m306$$Nest$mgetNextAlarmDateTimeWithinSleepTime(SleepChargingTimeController sleepChargingTimeController) {
         Slog.d("[SS]SleepChargingTimeController", "[getNextAlarmDateTimeWithinSleepTime]");
@@ -218,7 +215,6 @@ public final class SleepChargingTimeController {
         return null;
     }
 
-    /* JADX WARN: Type inference failed for: r4v3, types: [java.time.LocalDateTime] */
     /* renamed from: -$$Nest$mgetSleepChargingStatus, reason: not valid java name */
     public static SleepChargingStatus m307$$Nest$mgetSleepChargingStatus(SleepChargingTimeController sleepChargingTimeController) {
         sleepChargingTimeController.getClass();
@@ -382,8 +378,6 @@ public final class SleepChargingTimeController {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Type inference failed for: r3v4, types: [java.time.ZonedDateTime] */
     public final void setTimeNoti(String str) {
         char c;
         LocalDateTime of;
@@ -446,7 +440,6 @@ public final class SleepChargingTimeController {
         Slog.i("[SS]SleepChargingTimeController", "[setTimeNoti]action:" + str + " ,scheduledTime:" + of);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final void unsetTimeNoti(String str) {
         char c;
         Slog.d("[SS]SleepChargingTimeController", "[unsetTimeNoti]action:".concat(str));

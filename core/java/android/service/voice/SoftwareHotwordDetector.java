@@ -58,7 +58,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                 this.mAttributionTag);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onDetectorRemoteException$1() throws Exception {
         this.mExecutor.execute(
                 new Runnable() { // from class:
@@ -82,7 +81,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onDetectorRemoteException$0() {
         this.mCallback.onFailure(
                 new HotwordDetectionServiceFailure(7, "Detector remote exception occurs"));
@@ -135,7 +133,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
 
     private void maybeCloseExistingSession() {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class BinderCallback extends IMicrophoneHotwordDetectionVoiceInteractionCallback.Stub {
         private final HotwordDetector.Callback mCallback;
         private final Executor mExecutor;
@@ -145,7 +142,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
             this.mExecutor = executor;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDetected$1(
                 final AudioFormat audioFormat,
                 final ParcelFileDescriptor audioStream,
@@ -179,7 +175,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDetected$0(
                 AudioFormat audioFormat,
                 ParcelFileDescriptor audioStream,
@@ -212,7 +207,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onHotwordDetectionServiceFailure$3(
                 final HotwordDetectionServiceFailure hotwordDetectionServiceFailure)
                 throws Exception {
@@ -228,7 +222,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onHotwordDetectionServiceFailure$2(
                 HotwordDetectionServiceFailure hotwordDetectionServiceFailure) {
             if (hotwordDetectionServiceFailure != null) {
@@ -238,7 +231,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRejected$5(final HotwordRejectedResult result)
                 throws Exception {
             this.mExecutor.execute(
@@ -264,14 +256,12 @@ class SoftwareHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRejected$4(HotwordRejectedResult result) {
             this.mCallback.onRejected(
                     result != null ? result : new HotwordRejectedResult.Builder().build());
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class InitializationStateListener extends IHotwordRecognitionStatusCallback.Stub {
         private final HotwordDetector.Callback mCallback;
         private final Executor mExecutor;
@@ -316,7 +306,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onHotwordDetectionServiceFailure$1(
                 final HotwordDetectionServiceFailure hotwordDetectionServiceFailure)
                 throws Exception {
@@ -332,7 +321,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onHotwordDetectionServiceFailure$0(
                 HotwordDetectionServiceFailure hotwordDetectionServiceFailure) {
             if (hotwordDetectionServiceFailure != null) {
@@ -374,7 +362,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onUnknownFailure$3(final String errorMessage)
                 throws Exception {
             this.mExecutor.execute(
@@ -388,7 +375,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onUnknownFailure$2(String errorMessage) {
             this.mCallback.onUnknownFailure(
                     !TextUtils.isEmpty(errorMessage) ? errorMessage : "Error data is null");
@@ -415,7 +401,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onStatusReported$5(final int status) throws Exception {
             this.mExecutor.execute(
                     new Runnable() { // from class:
@@ -428,7 +413,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onStatusReported$4(int status) {
             this.mCallback.onHotwordDetectionServiceInitialized(status);
         }
@@ -448,7 +432,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onProcessRestarted$7() throws Exception {
             this.mExecutor.execute(
                     new Runnable() { // from class:
@@ -461,7 +444,6 @@ class SoftwareHotwordDetector extends AbstractDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onProcessRestarted$6() {
             this.mCallback.onHotwordDetectionServiceRestarted();
         }

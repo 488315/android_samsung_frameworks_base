@@ -15,7 +15,6 @@ final class RequiredValidators extends InternalValidator {
             new Parcelable.Creator<
                     RequiredValidators>() { // from class:
                                             // android.service.autofill.RequiredValidators.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RequiredValidators createFromParcel(Parcel parcel) {
                     return new RequiredValidators(
@@ -23,7 +22,6 @@ final class RequiredValidators extends InternalValidator {
                                     parcel.readParcelableArray(null, InternalValidator.class));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RequiredValidators[] newArray(int size) {
                     return new RequiredValidators[size];

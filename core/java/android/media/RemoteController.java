@@ -341,7 +341,6 @@ public final class RemoteController {
         handler.sendMessageDelayed(handler.obtainMessage(msg, arg1, arg2, obj), delayMs);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onClientChange(boolean clearing) {
         OnClientUpdateListener l;
         synchronized (mInfoLock) {
@@ -353,7 +352,6 @@ public final class RemoteController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateController(MediaController controller) {
         synchronized (mInfoLock) {
             if (controller == null) {
@@ -380,7 +378,6 @@ public final class RemoteController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onNewPlaybackState(PlaybackState state) {
         OnClientUpdateListener l;
         synchronized (mInfoLock) {
@@ -405,7 +402,6 @@ public final class RemoteController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onNewMediaMetadata(MediaMetadata metadata) {
         OnClientUpdateListener l;
         MetadataEditor metadataEditor;

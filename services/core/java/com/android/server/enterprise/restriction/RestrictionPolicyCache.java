@@ -205,9 +205,6 @@ public final class RestrictionPolicyCache {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0148 A[Catch: all -> 0x00b8, SQLException -> 0x00bb, TryCatch #0 {SQLException -> 0x00bb, blocks: (B:18:0x007f, B:19:0x0082, B:21:0x0088, B:23:0x0096, B:25:0x00ab, B:26:0x00c2, B:27:0x00cf, B:30:0x00d7, B:32:0x0106, B:34:0x0114, B:36:0x0144, B:38:0x0148, B:40:0x0159, B:45:0x016b, B:47:0x017c, B:52:0x0125, B:54:0x0133, B:57:0x0187, B:59:0x018f, B:61:0x0197, B:66:0x01c6, B:67:0x01cb, B:68:0x01d8, B:70:0x01ae, B:73:0x01bb, B:76:0x01c2, B:79:0x00be), top: B:17:0x007f, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x016b A[Catch: all -> 0x00b8, SQLException -> 0x00bb, TryCatch #0 {SQLException -> 0x00bb, blocks: (B:18:0x007f, B:19:0x0082, B:21:0x0088, B:23:0x0096, B:25:0x00ab, B:26:0x00c2, B:27:0x00cf, B:30:0x00d7, B:32:0x0106, B:34:0x0114, B:36:0x0144, B:38:0x0148, B:40:0x0159, B:45:0x016b, B:47:0x017c, B:52:0x0125, B:54:0x0133, B:57:0x0187, B:59:0x018f, B:61:0x0197, B:66:0x01c6, B:67:0x01cb, B:68:0x01d8, B:70:0x01ae, B:73:0x01bb, B:76:0x01c2, B:79:0x00be), top: B:17:0x007f, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x0183 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

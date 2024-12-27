@@ -14,7 +14,6 @@ public class CaptionsToggleImageButton extends AlphaOptimizedImageButton {
     public GestureDetector mGestureDetector;
     public final AnonymousClass1 mGestureListener;
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.volume.CaptionsToggleImageButton$1] */
     public CaptionsToggleImageButton(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mCaptionsEnabled = false;

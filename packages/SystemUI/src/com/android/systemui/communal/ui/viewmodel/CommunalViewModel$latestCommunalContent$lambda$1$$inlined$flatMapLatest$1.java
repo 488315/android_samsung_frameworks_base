@@ -16,7 +16,6 @@ public final class CommunalViewModel$latestCommunalContent$lambda$1$$inlined$fla
     int label;
     final /* synthetic */ CommunalViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalViewModel$latestCommunalContent$lambda$1$$inlined$flatMapLatest$1(Continuation continuation, CommunalViewModel communalViewModel) {
         super(3, continuation);
         this.this$0 = communalViewModel;

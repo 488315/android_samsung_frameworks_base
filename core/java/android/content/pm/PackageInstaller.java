@@ -525,7 +525,6 @@ public class PackageInstaller {
             this.mStatusReceiver = statusReceiver;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public IntentSender getIntentSender() {
             Intent intent =
                     new Intent(PackageInstaller.ACTION_WAIT_INSTALL_CONSTRAINTS)
@@ -1388,13 +1387,11 @@ public class PackageInstaller {
         public static final Parcelable.Creator<SessionParams> CREATOR =
                 new Parcelable.Creator<SessionParams>() { // from class:
                     // android.content.pm.PackageInstaller.SessionParams.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SessionParams createFromParcel(Parcel p) {
                         return new SessionParams(p);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SessionParams[] newArray(int size) {
                         return new SessionParams[size];
@@ -1987,20 +1984,17 @@ public class PackageInstaller {
         public static final Parcelable.Creator<SessionInfo> CREATOR =
                 new Parcelable.Creator<SessionInfo>() { // from class:
                     // android.content.pm.PackageInstaller.SessionInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SessionInfo createFromParcel(Parcel p) {
                         return new SessionInfo(p);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SessionInfo[] newArray(int size) {
                         return new SessionInfo[size];
                     }
                 };
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static String userActionToString(int requireUserAction) {
             switch (requireUserAction) {
                 case 1:
@@ -2414,13 +2408,11 @@ public class PackageInstaller {
         public static final Parcelable.Creator<PreapprovalDetails> CREATOR =
                 new Parcelable.Creator<PreapprovalDetails>() { // from class:
                     // android.content.pm.PackageInstaller.PreapprovalDetails.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PreapprovalDetails[] newArray(int size) {
                         return new PreapprovalDetails[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PreapprovalDetails createFromParcel(Parcel in) {
                         return new PreapprovalDetails(in);
@@ -2567,13 +2559,11 @@ public class PackageInstaller {
         public static final Parcelable.Creator<InstallConstraintsResult> CREATOR =
                 new Parcelable.Creator<InstallConstraintsResult>() { // from class:
                     // android.content.pm.PackageInstaller.InstallConstraintsResult.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public InstallConstraintsResult[] newArray(int size) {
                         return new InstallConstraintsResult[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public InstallConstraintsResult createFromParcel(Parcel in) {
                         return new InstallConstraintsResult(in);
@@ -2621,13 +2611,11 @@ public class PackageInstaller {
         public static final Parcelable.Creator<InstallConstraints> CREATOR =
                 new Parcelable.Creator<InstallConstraints>() { // from class:
                     // android.content.pm.PackageInstaller.InstallConstraints.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public InstallConstraints[] newArray(int size) {
                         return new InstallConstraints[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public InstallConstraints createFromParcel(Parcel in) {
                         return new InstallConstraints(in);

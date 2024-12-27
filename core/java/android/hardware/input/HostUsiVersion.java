@@ -7,13 +7,11 @@ public final class HostUsiVersion implements Parcelable {
     public static final Parcelable.Creator<HostUsiVersion> CREATOR =
             new Parcelable.Creator<
                     HostUsiVersion>() { // from class: android.hardware.input.HostUsiVersion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HostUsiVersion[] newArray(int size) {
                     return new HostUsiVersion[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HostUsiVersion createFromParcel(Parcel in) {
                     return new HostUsiVersion(in);

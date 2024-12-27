@@ -13,7 +13,6 @@ public final class CellBroadcastIdRange implements Parcelable {
             new Parcelable.Creator<
                     CellBroadcastIdRange>() { // from class:
                                               // android.telephony.CellBroadcastIdRange.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellBroadcastIdRange createFromParcel(Parcel in) {
                     int startId = in.readInt();
@@ -23,7 +22,6 @@ public final class CellBroadcastIdRange implements Parcelable {
                     return new CellBroadcastIdRange(startId, endId, type, isEnabled);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellBroadcastIdRange[] newArray(int size) {
                     return new CellBroadcastIdRange[size];

@@ -110,13 +110,11 @@ public class JobInfo implements Parcelable {
     private static String TAG = "JobInfo";
     public static final Parcelable.Creator<JobInfo> CREATOR =
             new Parcelable.Creator<JobInfo>() { // from class: android.app.job.JobInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public JobInfo createFromParcel(Parcel in) {
                     return new JobInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public JobInfo[] newArray(int size) {
                     return new JobInfo[size];
@@ -608,13 +606,11 @@ public class JobInfo implements Parcelable {
         public static final Parcelable.Creator<TriggerContentUri> CREATOR =
                 new Parcelable.Creator<TriggerContentUri>() { // from class:
                     // android.app.job.JobInfo.TriggerContentUri.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TriggerContentUri createFromParcel(Parcel in) {
                         return new TriggerContentUri(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TriggerContentUri[] newArray(int size) {
                         return new TriggerContentUri[size];

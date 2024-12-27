@@ -948,46 +948,6 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
         return "OFF";
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0144 A[Catch: IOException -> 0x0140, TRY_LEAVE, TryCatch #14 {IOException -> 0x0140, blocks: (B:38:0x013c, B:30:0x0144), top: B:37:0x013c }] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x013c A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x011d A[Catch: IOException -> 0x0119, TRY_LEAVE, TryCatch #17 {IOException -> 0x0119, blocks: (B:50:0x0115, B:44:0x011d), top: B:49:0x0115 }] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0115 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x00f4 A[Catch: IOException -> 0x00f0, TRY_LEAVE, TryCatch #5 {IOException -> 0x00f0, blocks: (B:62:0x00ec, B:56:0x00f4), top: B:61:0x00ec }] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00ec A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x015a A[Catch: IOException -> 0x0156, TRY_LEAVE, TryCatch #19 {IOException -> 0x0156, blocks: (B:74:0x0152, B:67:0x015a), top: B:73:0x0152 }] */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0152 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r0v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r0v1 */
-    /* JADX WARN: Type inference failed for: r0v10, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r0v12, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r0v14 */
-    /* JADX WARN: Type inference failed for: r0v15, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r0v2 */
-    /* JADX WARN: Type inference failed for: r0v22 */
-    /* JADX WARN: Type inference failed for: r0v23 */
-    /* JADX WARN: Type inference failed for: r0v24 */
-    /* JADX WARN: Type inference failed for: r0v25 */
-    /* JADX WARN: Type inference failed for: r0v26 */
-    /* JADX WARN: Type inference failed for: r0v27 */
-    /* JADX WARN: Type inference failed for: r0v28 */
-    /* JADX WARN: Type inference failed for: r0v29 */
-    /* JADX WARN: Type inference failed for: r0v3 */
-    /* JADX WARN: Type inference failed for: r0v30, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r0v35 */
-    /* JADX WARN: Type inference failed for: r0v36 */
-    /* JADX WARN: Type inference failed for: r0v37 */
-    /* JADX WARN: Type inference failed for: r0v38 */
-    /* JADX WARN: Type inference failed for: r0v39 */
-    /* JADX WARN: Type inference failed for: r0v4 */
-    /* JADX WARN: Type inference failed for: r0v40 */
-    /* JADX WARN: Type inference failed for: r0v41 */
-    /* JADX WARN: Type inference failed for: r0v42 */
-    /* JADX WARN: Type inference failed for: r0v45 */
-    /* JADX WARN: Type inference failed for: r0v46 */
-    /* JADX WARN: Type inference failed for: r0v47 */
-    /* JADX WARN: Type inference failed for: r0v5 */
-    /* JADX WARN: Type inference failed for: r0v6, types: [java.io.BufferedReader] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

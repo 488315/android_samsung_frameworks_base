@@ -290,8 +290,6 @@ public final class ImageWallpaperCanvasHelper {
         return bitmap;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0054  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

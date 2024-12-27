@@ -73,7 +73,6 @@ public final class ZramWriteback extends JobService {
         }
         if (jobParameters.getJobId() != 811) {
             new Thread() { // from class: com.android.server.ZramWriteback.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super("ZramWriteback_WritebackIdlePages");
                 }

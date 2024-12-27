@@ -12,13 +12,11 @@ import java.util.Objects;
 public class NanoApp implements Parcelable {
     public static final Parcelable.Creator<NanoApp> CREATOR =
             new Parcelable.Creator<NanoApp>() { // from class: android.hardware.location.NanoApp.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoApp createFromParcel(Parcel in) {
                     return new NanoApp(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoApp[] newArray(int size) {
                     return new NanoApp[size];

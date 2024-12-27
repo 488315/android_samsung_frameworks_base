@@ -64,7 +64,6 @@ class ActivityTransitionState {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ArrayList<String> getPendingExitNames() {
         if (this.mPendingExitNames == null
                 && this.mEnterTransitionCoordinator != null
@@ -222,7 +221,6 @@ class ActivityTransitionState {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$run$0() {
             ActivityTransitionState.this.getPendingExitNames();
             ActivityTransitionState.this.mEnterTransitionCoordinator = null;
@@ -240,7 +238,6 @@ class ActivityTransitionState {
         this.mExitTransitionCoordinators = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void restoreExitedViews() {
         if (this.mCalledExitCoordinator != null) {
             this.mCalledExitCoordinator.resetViews();
@@ -248,7 +245,6 @@ class ActivityTransitionState {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void restoreReenteringViews() {
         if (this.mEnterTransitionCoordinator != null
                 && this.mEnterTransitionCoordinator.isReturning()
@@ -317,7 +313,6 @@ class ActivityTransitionState {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startExitBackTransition$0(Activity activity) {
         if (this.mReturnExitCoordinator != null) {
             this.mReturnExitCoordinator.startExit(activity);

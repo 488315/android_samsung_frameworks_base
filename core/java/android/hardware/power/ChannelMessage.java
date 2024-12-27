@@ -8,7 +8,6 @@ public class ChannelMessage implements Parcelable {
     public static final Parcelable.Creator<ChannelMessage> CREATOR =
             new Parcelable.Creator<
                     ChannelMessage>() { // from class: android.hardware.power.ChannelMessage.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ChannelMessage createFromParcel(Parcel _aidl_source) {
                     ChannelMessage _aidl_out = new ChannelMessage();
@@ -16,7 +15,6 @@ public class ChannelMessage implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ChannelMessage[] newArray(int _aidl_size) {
                     return new ChannelMessage[_aidl_size];
@@ -107,13 +105,11 @@ public class ChannelMessage implements Parcelable {
         public static final Parcelable.Creator<ChannelMessageContents> CREATOR =
                 new Parcelable.Creator<ChannelMessageContents>() { // from class:
                     // android.hardware.power.ChannelMessage.ChannelMessageContents.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ChannelMessageContents createFromParcel(Parcel _aidl_source) {
                         return new ChannelMessageContents(_aidl_source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ChannelMessageContents[] newArray(int _aidl_size) {
                         return new ChannelMessageContents[_aidl_size];
@@ -336,7 +332,6 @@ public class ChannelMessage implements Parcelable {
             public static final Parcelable.Creator<SessionModeSetter> CREATOR =
                     new Parcelable.Creator<SessionModeSetter>() { // from class:
                         // android.hardware.power.ChannelMessage.ChannelMessageContents.SessionModeSetter.1
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public SessionModeSetter createFromParcel(Parcel _aidl_source) {
                             SessionModeSetter _aidl_out = new SessionModeSetter();
@@ -344,7 +339,6 @@ public class ChannelMessage implements Parcelable {
                             return _aidl_out;
                         }
 
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public SessionModeSetter[] newArray(int _aidl_size) {
                             return new SessionModeSetter[_aidl_size];

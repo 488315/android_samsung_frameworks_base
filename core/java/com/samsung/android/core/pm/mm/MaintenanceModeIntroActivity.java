@@ -207,7 +207,6 @@ public class MaintenanceModeIntroActivity extends Activity {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setContentView$2(View v) {
         this.mButtonExecutor.submit(
                 new Runnable() { // from class:
@@ -227,17 +226,14 @@ public class MaintenanceModeIntroActivity extends Activity {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setContentView$0() {
         MaintenanceModeUtils.startCloudActivity(this);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setContentView$1() {
         MaintenanceModeUtils.sendLoggingDataToSA(this.mContext, "7083", null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setContentView$4(View v) {
         MaintenanceModeUtils.startSmartSwitchActivity(this.mContext);
         this.mLoggingExecutor.submit(
@@ -250,12 +246,10 @@ public class MaintenanceModeIntroActivity extends Activity {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setContentView$3() {
         MaintenanceModeUtils.sendLoggingDataToSA(this.mContext, "7074", null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setContentView$8(View v) {
         if (!MaintenanceModeUtils.isSecureLockSet(this.mContext)) {
             showDialogToInformSecureLockIsNeeded();
@@ -284,7 +278,6 @@ public class MaintenanceModeIntroActivity extends Activity {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setContentView$6() {
         final String backupStatus = MaintenanceModeUtils.getStatusOfBackupInProgress(this.mContext);
         runOnUiThread(
@@ -297,7 +290,6 @@ public class MaintenanceModeIntroActivity extends Activity {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setContentView$5(String backupStatus) {
         if ("NOT_IN_PROGRESS".equals(backupStatus)) {
             showDialogToConfirmRestart();
@@ -307,7 +299,6 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mTurnOnButton.setClickable(true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setContentView$7() {
         MaintenanceModeUtils.sendLoggingDataToSA(this.mContext, "7066", null);
     }
@@ -424,7 +415,6 @@ public class MaintenanceModeIntroActivity extends Activity {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$run$0() {
             MaintenanceModeIntroActivity.this.updateCloudBackupStatusFromProvider();
         }
@@ -478,7 +468,6 @@ public class MaintenanceModeIntroActivity extends Activity {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$checkAndUpdateCloudBackupMenu$10() {
         updateCloudBackupStatusFromProvider();
         MaintenanceModeUtils.CloudInfo cloudInfo =
@@ -496,19 +485,16 @@ public class MaintenanceModeIntroActivity extends Activity {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$checkAndUpdateCloudBackupMenu$9() {
         updateCloudBackupMenuSubText();
         updateCloudBackupMenuVisibility();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateCloudBackupStatusFromProvider() {
         this.mCloudBackupStatus = MaintenanceModeUtils.getCloudBackupStatus(this.mContext);
         runOnUiThread(new MaintenanceModeIntroActivity$$ExternalSyntheticLambda23(this));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateCloudBackupStatusFromReceiver(String action) {
         this.mCloudBackupStatus = convertActionToStatusForCloudBackup(action);
         runOnUiThread(new MaintenanceModeIntroActivity$$ExternalSyntheticLambda23(this));
@@ -533,8 +519,6 @@ public class MaintenanceModeIntroActivity extends Activity {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public void updateCloudBackupMenuSubText() {
         char c;
         if (this.mColudBackupMenuSubTextView == null) {}
@@ -601,7 +585,6 @@ public class MaintenanceModeIntroActivity extends Activity {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class CloudBackupReceiver extends BroadcastReceiver {
         private CloudBackupReceiver() {}
 
@@ -625,7 +608,6 @@ public class MaintenanceModeIntroActivity extends Activity {
             Log.i("MaintenanceMode", "onReceive: " + action);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onReceive$0(String action) {
             MaintenanceModeIntroActivity.this.updateCloudBackupStatusFromReceiver(action);
         }
@@ -647,7 +629,6 @@ public class MaintenanceModeIntroActivity extends Activity {
                 2);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private String convertActionToStatusForCloudBackup(String action) {
         char c;
         switch (action.hashCode()) {
@@ -736,7 +717,6 @@ public class MaintenanceModeIntroActivity extends Activity {
         dialog.show();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToInformSecureLockIsNeeded$11(
             DialogInterface dialog, int which) {
         MaintenanceModeUtils.startActivityToSetSecureLock(this);
@@ -776,13 +756,11 @@ public class MaintenanceModeIntroActivity extends Activity {
         dialog.show();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToNotifyLowOnStorage$13(
             DialogInterface dialog, int which) {
         MaintenanceModeUtils.startMyFilesActivity(this);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private void showDialogToReconfirmCancelingBackup(String backupStatus) {
         char c;
         int messageResId = R.string.maintenance_mode_stop_backup_dialog_message;
@@ -876,7 +854,6 @@ public class MaintenanceModeIntroActivity extends Activity {
         dialog.show();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToReconfirmCancelingBackup$16(
             boolean needToLaunchCloudApp, DialogInterface dialog, int which) {
         if (needToLaunchCloudApp) {
@@ -903,22 +880,18 @@ public class MaintenanceModeIntroActivity extends Activity {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToReconfirmCancelingBackup$14() {
         MaintenanceModeUtils.startCloudActivity(this);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToReconfirmCancelingBackup$15() {
         MaintenanceModeUtils.sendLoggingDataToSA(this.mContext, "7068", null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToReconfirmCancelingBackup$17() {
         MaintenanceModeUtils.sendLoggingDataToSA(this.mContext, "7069", null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToReconfirmCancelingBackup$18(
             DialogInterface dialog, int which) {
         this.mLoggingExecutor.submit(
@@ -932,12 +905,10 @@ public class MaintenanceModeIntroActivity extends Activity {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToReconfirmCancelingBackup$19() {
         MaintenanceModeUtils.sendLoggingDataToSA(this.mContext, "7069", null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToReconfirmCancelingBackup$20(
             DialogInterface dialog) {
         this.mLoggingExecutor.submit(
@@ -1019,7 +990,6 @@ public class MaintenanceModeIntroActivity extends Activity {
         dialog.show();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToConfirmRestart$27(
             CheckedTextView checkedTextView, DialogInterface dialog, int which) {
         if (!MaintenanceModeUtils.isSecureLockSet(this.mContext)) {
@@ -1039,7 +1009,6 @@ public class MaintenanceModeIntroActivity extends Activity {
         MaintenanceModeUtils.confirmSecureLock(this, runningJob);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToConfirmRestart$26(final boolean skipDump) {
         this.mTurnOnButton.setClickable(false);
         if (this.mIsTablet) {
@@ -1081,7 +1050,6 @@ public class MaintenanceModeIntroActivity extends Activity {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToConfirmRestart$23() {
         UserInfo userInfo = enterMaintenanceMode();
         if (userInfo == null) {
@@ -1098,7 +1066,6 @@ public class MaintenanceModeIntroActivity extends Activity {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToConfirmRestart$22() {
         if (MaintenanceModeUtils.isLowOnStorage(this.mContext)) {
             showDialogToNotifyLowOnStorage();
@@ -1106,12 +1073,10 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mTurnOnButton.setClickable(true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToConfirmRestart$24(boolean skipDump) {
         MaintenanceModeUtils.sendLoggingDataToSA(this.mContext, "7070", skipDump ? "1" : "0");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialogToConfirmRestart$25() {
         MaintenanceModeUtils.sendLoggingDataToSA(this.mContext, "7071", null);
     }
@@ -1196,7 +1161,6 @@ public class MaintenanceModeIntroActivity extends Activity {
                 10000L);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: checkPendingDump, reason: merged with bridge method [inline-methods] and merged with bridge method [inline-methods] */
     public void lambda$triggerDump$28() {
         if (isDumpRunning() && !isDumpTimeout()) {
@@ -1222,7 +1186,6 @@ public class MaintenanceModeIntroActivity extends Activity {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$checkPendingDump$31() {
         UserInfo userInfo = enterMaintenanceMode();
         if (userInfo == null) {
@@ -1238,7 +1201,6 @@ public class MaintenanceModeIntroActivity extends Activity {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$checkPendingDump$30() {
         if (MaintenanceModeUtils.isLowOnStorage(this.mContext)) {
             showDialogToNotifyLowOnStorage();

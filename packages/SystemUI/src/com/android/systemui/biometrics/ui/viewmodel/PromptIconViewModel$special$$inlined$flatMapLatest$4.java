@@ -23,7 +23,6 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$4 extends 
     int label;
     final /* synthetic */ PromptIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptIconViewModel$special$$inlined$flatMapLatest$4(Continuation continuation, PromptSelectorInteractor promptSelectorInteractor, PromptViewModel promptViewModel, PromptIconViewModel promptIconViewModel) {
         super(3, continuation);
         this.$promptSelectorInteractor$inlined = promptSelectorInteractor;

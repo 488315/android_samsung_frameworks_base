@@ -66,7 +66,6 @@ public final class RecordIssueTile extends QSTileImpl {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.qs.tiles.RecordIssueTile$onRecordingChangeListener$1] */
     public RecordIssueTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, KeyguardDismissUtil keyguardDismissUtil, KeyguardStateController keyguardStateController, DialogTransitionAnimator dialogTransitionAnimator, PanelInteractor panelInteractor, UserContextProvider userContextProvider, TraceurMessageSender traceurMessageSender, Executor executor, IssueRecordingState issueRecordingState, RecordIssueDialogDelegate.Factory factory) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.keyguardDismissUtil = keyguardDismissUtil;

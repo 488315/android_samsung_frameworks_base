@@ -84,7 +84,6 @@ public final class NotificationStatsLoggerCoordinator implements Coordinator {
     };
     private final Optional<NotificationStatsLogger> loggerOptional;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.notification.collection.coordinator.NotificationStatsLoggerCoordinator$collectionListener$1] */
     public NotificationStatsLoggerCoordinator(Optional<NotificationStatsLogger> optional) {
         this.loggerOptional = optional;
     }

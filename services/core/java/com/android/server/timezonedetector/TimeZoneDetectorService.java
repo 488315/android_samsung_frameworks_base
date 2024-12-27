@@ -53,8 +53,6 @@ public final class TimeZoneDetectorService extends ITimeZoneDetectorService.Stub
             super(context);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r5v3, types: [android.os.IBinder, com.android.server.timezonedetector.TimeZoneDetectorService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             Context context = getContext();
@@ -236,7 +234,6 @@ public final class TimeZoneDetectorService extends ITimeZoneDetectorService.Stub
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         new TimeZoneDetectorShellCommand(this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
     }

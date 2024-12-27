@@ -34,7 +34,6 @@ public final class CommunalTransitionViewModel {
     public final CommunalTransitionViewModel$special$$inlined$map$1 showUmoFromOccludedToGlanceableHub;
     public final CommunalTransitionViewModel$special$$inlined$filter$3 transitionFromOccludedEnded;
 
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$filter$3] */
     public CommunalTransitionViewModel(CoroutineScope coroutineScope, CommunalColors communalColors, GlanceableHubToLockscreenTransitionViewModel glanceableHubToLockscreenTransitionViewModel, LockscreenToGlanceableHubTransitionViewModel lockscreenToGlanceableHubTransitionViewModel, DreamingToGlanceableHubTransitionViewModel dreamingToGlanceableHubTransitionViewModel, GlanceableHubToDreamingTransitionViewModel glanceableHubToDreamingTransitionViewModel, CommunalInteractor communalInteractor, CommunalSceneInteractor communalSceneInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor) {
         Edge.Companion companion = Edge.Companion;
         KeyguardState keyguardState = KeyguardState.OCCLUDED;
@@ -70,8 +69,6 @@ public final class CommunalTransitionViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -165,8 +162,6 @@ public final class CommunalTransitionViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -265,8 +260,6 @@ public final class CommunalTransitionViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -363,8 +356,6 @@ public final class CommunalTransitionViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -466,8 +457,6 @@ public final class CommunalTransitionViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

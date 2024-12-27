@@ -203,10 +203,6 @@ public final class TransitionAnimator {
             
                 if (com.android.systemui.animation.TransitionAnimator.Companion.getProgress(r11, r1, r13, r11.contentAfterFadeInDuration) > 0.0f) goto L15;
              */
-            /* JADX WARN: Removed duplicated region for block: B:25:0x017e  */
-            /* JADX WARN: Removed duplicated region for block: B:28:0x01ed  */
-            /* JADX WARN: Removed duplicated region for block: B:39:0x022e  */
-            /* JADX WARN: Removed duplicated region for block: B:46:0x0184  */
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.

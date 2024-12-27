@@ -17,13 +17,11 @@ public final class ValidationProbeEvent implements IpConnectivityLog.Event {
             new Parcelable.Creator<
                     ValidationProbeEvent>() { // from class:
                                               // android.net.metrics.ValidationProbeEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ValidationProbeEvent createFromParcel(Parcel in) {
                     return new ValidationProbeEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ValidationProbeEvent[] newArray(int size) {
                     return new ValidationProbeEvent[size];
@@ -95,7 +93,6 @@ public final class ValidationProbeEvent implements IpConnectivityLog.Event {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int makeProbeType(int probeType, boolean firstValidation) {
         return (probeType & 255) | (firstValidation ? 256 : 512);
     }

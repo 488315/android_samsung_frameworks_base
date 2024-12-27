@@ -79,7 +79,6 @@ class StrictJarVerifier {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static SecurityException invalidDigest(
             String signatureFile, String name, String jarName) {
         throw new SecurityException(
@@ -378,7 +377,6 @@ class StrictJarVerifier {
         return ignorable;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean verifyMessageDigest(byte[] expected, byte[] encodedActual) {
         try {
             byte[] actual = Base64.getDecoder().decode(encodedActual);

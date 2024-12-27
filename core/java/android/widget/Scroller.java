@@ -170,7 +170,6 @@ public class Scroller {
         return this.mFinalY;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public boolean computeScrollOffset() {
         if (this.mFinished) {
             return false;

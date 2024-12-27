@@ -14,13 +14,11 @@ public final class AssociationInfo implements Parcelable {
     public static final Parcelable.Creator<AssociationInfo> CREATOR =
             new Parcelable.Creator<
                     AssociationInfo>() { // from class: android.companion.AssociationInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AssociationInfo[] newArray(int size) {
                     return new AssociationInfo[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AssociationInfo createFromParcel(Parcel in) {
                     return new AssociationInfo(in);

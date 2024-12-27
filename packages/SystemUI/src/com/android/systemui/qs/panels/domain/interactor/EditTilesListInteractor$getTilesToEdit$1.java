@@ -9,7 +9,6 @@ final class EditTilesListInteractor$getTilesToEdit$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ EditTilesListInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public EditTilesListInteractor$getTilesToEdit$1(EditTilesListInteractor editTilesListInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = editTilesListInteractor;

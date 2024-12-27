@@ -54,7 +54,6 @@ public class BaseBundle {
         this.mClassLoader = loader == null ? getClass().getClassLoader() : loader;
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     BaseBundle() {
         this((ClassLoader) null, 0);
     }
@@ -81,7 +80,6 @@ public class BaseBundle {
         this(loader, 0);
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     BaseBundle(int capacity) {
         this((ClassLoader) null, capacity);
     }

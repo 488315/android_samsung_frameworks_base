@@ -110,7 +110,6 @@ public final class StringFlag implements ParcelableFlag {
         this(str, str2, str3, false, false, 24, null);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

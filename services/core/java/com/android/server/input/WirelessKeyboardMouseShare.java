@@ -519,8 +519,6 @@ public final class WirelessKeyboardMouseShare {
         "true".equals(SystemProperties.get("ro.product_ship", "false"));
     }
 
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.server.input.WirelessKeyboardMouseShare$3] */
-    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.server.input.WirelessKeyboardMouseShare$4] */
     public WirelessKeyboardMouseShare(
             Context context,
             InputManagerService inputManagerService,

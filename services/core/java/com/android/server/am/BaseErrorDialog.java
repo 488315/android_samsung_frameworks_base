@@ -34,7 +34,6 @@ public class BaseErrorDialog extends AlertDialog {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.am.BaseErrorDialog$2] */
     public BaseErrorDialog(Context context) {
         super(context, R.style.Theme.Leanback.Settings.Dialog.Alert);
         this.mConsuming = true;
@@ -76,7 +75,6 @@ public class BaseErrorDialog extends AlertDialog {
         return super.dispatchKeyEvent(keyEvent);
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.am.BaseErrorDialog$1] */
     @Override // android.app.Dialog
     public final void onStart() {
         super.onStart();

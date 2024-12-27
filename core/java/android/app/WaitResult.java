@@ -12,13 +12,11 @@ import java.lang.annotation.RetentionPolicy;
 public class WaitResult implements Parcelable {
     public static final Parcelable.Creator<WaitResult> CREATOR =
             new Parcelable.Creator<WaitResult>() { // from class: android.app.WaitResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WaitResult createFromParcel(Parcel source) {
                     return new WaitResult(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WaitResult[] newArray(int size) {
                     return new WaitResult[size];

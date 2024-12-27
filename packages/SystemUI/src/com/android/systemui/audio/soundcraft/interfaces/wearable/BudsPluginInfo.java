@@ -8,8 +8,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class BudsPluginInfo {
     public static final /* synthetic */ BudsPluginInfo[] $VALUES;
     public static final Companion Companion;

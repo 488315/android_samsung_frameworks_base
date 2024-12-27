@@ -250,9 +250,6 @@ public final class ExtendedEthernetServiceImpl extends IExtendedEthernetManager.
         notificationManager.notifyAsUser(null, 1000, builder.build(), UserHandle.ALL);
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.ExtendedEthernetServiceImpl$1] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.ExtendedEthernetServiceImpl$2] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.ExtendedEthernetServiceImpl$3] */
     public ExtendedEthernetServiceImpl(Context context) {
         this.mContext = context;
         INetworkManagementService asInterface =

@@ -337,7 +337,6 @@ public class SemClipboardManager {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void requestPaste(SemClipData data) {
         if (this.mPasteListener != null) {
             if (data != null) {
@@ -421,7 +420,6 @@ public class SemClipboardManager {
         return null;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private boolean makeFileDescriptor(SemClipData data) {
         FileHelper fh = FileHelper.getInstance();
         switch (data.getClipType()) {
@@ -560,7 +558,6 @@ public class SemClipboardManager {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyEvent(Message msg) {
         switch (msg.what) {
             case 1:

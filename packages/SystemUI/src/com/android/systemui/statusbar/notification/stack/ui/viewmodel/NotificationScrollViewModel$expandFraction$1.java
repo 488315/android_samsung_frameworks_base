@@ -17,7 +17,6 @@ final class NotificationScrollViewModel$expandFraction$1 extends SuspendLambda i
     int label;
     final /* synthetic */ NotificationScrollViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationScrollViewModel$expandFraction$1(NotificationScrollViewModel notificationScrollViewModel, Continuation continuation) {
         super(6, continuation);
         this.this$0 = notificationScrollViewModel;

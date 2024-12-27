@@ -11,7 +11,6 @@ public class SsInfoData implements Parcelable {
     public static final Parcelable.Creator<SsInfoData> CREATOR =
             new Parcelable.Creator<
                     SsInfoData>() { // from class: android.hardware.radio.voice.SsInfoData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SsInfoData createFromParcel(Parcel _aidl_source) {
                     SsInfoData _aidl_out = new SsInfoData();
@@ -19,7 +18,6 @@ public class SsInfoData implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SsInfoData[] newArray(int _aidl_size) {
                     return new SsInfoData[_aidl_size];

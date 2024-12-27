@@ -62,7 +62,6 @@ public final class CriticalEventLog {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.criticalevents.CriticalEventLog$$ExternalSyntheticLambda0] */
     public CriticalEventLog(
             String str, int i, int i2, long j, boolean z, final ILogLoader iLogLoader) {
         this.mLogFile = Paths.get(str, FILENAME).toFile();

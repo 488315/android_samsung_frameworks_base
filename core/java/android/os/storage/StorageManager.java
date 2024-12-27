@@ -228,7 +228,6 @@ public class StorageManager {
 
     private static native boolean setQuotaProjectId(String str, long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     class StorageEventListenerDelegate extends IStorageEventListener.Stub {
         final StorageVolumeCallback mCallback;
         final Executor mExecutor;
@@ -255,7 +254,6 @@ public class StorageManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onUsbMassStorageConnectionChanged$0(boolean connected) {
             this.mListener.onUsbMassStorageConnectionChanged(connected);
         }
@@ -274,7 +272,6 @@ public class StorageManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onStorageStateChanged$1(
                 String path, String oldState, String newState) {
             this.mListener.onStorageStateChanged(path, oldState, newState);
@@ -301,7 +298,6 @@ public class StorageManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVolumeStateChanged$2(
                 VolumeInfo vol, int oldState, int newState) {
             this.mListener.onVolumeStateChanged(vol, oldState, newState);
@@ -328,7 +324,6 @@ public class StorageManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVolumeRecordChanged$3(VolumeRecord rec) {
             this.mListener.onVolumeRecordChanged(rec);
         }
@@ -346,7 +341,6 @@ public class StorageManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVolumeForgotten$4(String fsUuid) {
             this.mListener.onVolumeForgotten(fsUuid);
         }
@@ -364,7 +358,6 @@ public class StorageManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDiskScanned$5(DiskInfo disk, int volumeCount) {
             this.mListener.onDiskScanned(disk, volumeCount);
         }
@@ -382,7 +375,6 @@ public class StorageManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDiskDestroyed$6(DiskInfo disk) {
             this.mListener.onDiskDestroyed(disk);
         }
@@ -418,7 +410,6 @@ public class StorageManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getNextNonce() {
         return this.mNextNonce.getAndIncrement();
     }

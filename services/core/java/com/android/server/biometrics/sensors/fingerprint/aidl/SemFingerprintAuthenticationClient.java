@@ -304,10 +304,6 @@ public final class SemFingerprintAuthenticationClient extends AuthenticationClie
         return Utils.isTalkBackEnabled(this.mContext);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:65:0x01c4  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0216  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x022e A[EDGE_INSN: B:73:0x022e->B:75:0x022e BREAK  A[LOOP:0: B:67:0x0214->B:70:0x0227], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x01d7  */
     @Override // com.android.server.biometrics.sensors.AcquisitionClient
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -868,7 +864,6 @@ public final class SemFingerprintAuthenticationClient extends AuthenticationClie
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.biometrics.sensors.fingerprint.aidl.SemFingerprintAuthenticationClient$2] */
     @Override // com.android.server.biometrics.sensors.AuthenticationClient,
               // com.android.server.biometrics.sensors.BaseClientMonitor
     public final void start(ClientMonitorCallback clientMonitorCallback) {

@@ -12,13 +12,11 @@ public final class ConversationChannelWrapper implements Parcelable {
             new Parcelable.Creator<
                     ConversationChannelWrapper>() { // from class:
                                                     // android.service.notification.ConversationChannelWrapper.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConversationChannelWrapper createFromParcel(Parcel in) {
                     return new ConversationChannelWrapper(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConversationChannelWrapper[] newArray(int size) {
                     return new ConversationChannelWrapper[size];

@@ -23,7 +23,6 @@ public class MarshalQueryableRect implements MarshalQueryable<Rect> {
             buffer.putInt(value.height());
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public Rect unmarshal(ByteBuffer buffer) {
             int left = buffer.getInt();

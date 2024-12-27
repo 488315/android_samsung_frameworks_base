@@ -61,7 +61,6 @@ public final class BarMeasurePolicy implements MeasurePolicy {
                                         int i11 = this.selectedIndex;
                                         this.onTargetIndicatorOffsetMeasured.invoke(Integer.valueOf((i7 * i11) + (i8 * i11)));
                                         layout$1 = measureScope.layout$1(Constraints.m724getMaxWidthimpl(j), mo528measureBRTryo0.height + mo528measureBRTryo02.height, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: com.android.systemui.volume.panel.component.selector.ui.composable.BarMeasurePolicy$measure$1
-                                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                                             {
                                                 super(1);
                                             }

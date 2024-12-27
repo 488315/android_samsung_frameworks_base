@@ -27,13 +27,11 @@ public class UserInfo implements Parcelable {
     public static final int ATTR_TRUST_AGENT_UI_ENABLED = 256;
     public static final Parcelable.Creator<UserInfo> CREATOR =
             new Parcelable.Creator<UserInfo>() { // from class: android.content.pm.UserInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UserInfo createFromParcel(Parcel source) {
                     return new UserInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UserInfo[] newArray(int size) {
                     return new UserInfo[size];

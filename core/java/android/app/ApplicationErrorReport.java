@@ -22,13 +22,11 @@ public class ApplicationErrorReport implements Parcelable {
     public static final Parcelable.Creator<ApplicationErrorReport> CREATOR =
             new Parcelable.Creator<
                     ApplicationErrorReport>() { // from class: android.app.ApplicationErrorReport.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApplicationErrorReport createFromParcel(Parcel source) {
                     return new ApplicationErrorReport(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApplicationErrorReport[] newArray(int size) {
                     return new ApplicationErrorReport[size];
@@ -304,13 +302,11 @@ public class ApplicationErrorReport implements Parcelable {
         public static final Parcelable.Creator<ParcelableCrashInfo> CREATOR =
                 new Parcelable.Creator<ParcelableCrashInfo>() { // from class:
                     // android.app.ApplicationErrorReport.ParcelableCrashInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ParcelableCrashInfo createFromParcel(Parcel in) {
                         return new ParcelableCrashInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ParcelableCrashInfo[] newArray(int size) {
                         return new ParcelableCrashInfo[size];

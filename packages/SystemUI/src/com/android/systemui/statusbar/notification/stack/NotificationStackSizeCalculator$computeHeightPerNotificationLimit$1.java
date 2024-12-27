@@ -23,7 +23,6 @@ final class NotificationStackSizeCalculator$computeHeightPerNotificationLimit$1 
     int label;
     final /* synthetic */ NotificationStackSizeCalculator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationStackSizeCalculator$computeHeightPerNotificationLimit$1(NotificationStackSizeCalculator notificationStackSizeCalculator, NotificationStackScrollLayout notificationStackScrollLayout, float f, Continuation continuation) {
         super(2, continuation);
         this.this$0 = notificationStackSizeCalculator;
@@ -47,11 +46,6 @@ final class NotificationStackSizeCalculator$computeHeightPerNotificationLimit$1 
     
         if (r10.intValue() == 1) goto L52;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x01fb  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x00f2  */
-    /* JADX WARN: Type inference failed for: r4v2, types: [T, com.android.systemui.statusbar.notification.row.ExpandableView] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:48:0x01e1 -> B:6:0x01ec). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

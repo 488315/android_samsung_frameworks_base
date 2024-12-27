@@ -12,13 +12,11 @@ public final class CreateGameSessionRequest implements Parcelable {
             new Parcelable.Creator<
                     CreateGameSessionRequest>() { // from class:
                                                   // android.service.games.CreateGameSessionRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CreateGameSessionRequest createFromParcel(Parcel source) {
                     return new CreateGameSessionRequest(source.readInt(), source.readString8());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CreateGameSessionRequest[] newArray(int size) {
                     return new CreateGameSessionRequest[0];

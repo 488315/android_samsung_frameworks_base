@@ -17,7 +17,6 @@ public final class CommunalSceneRepositoryImpl$special$$inlined$flatMapLatest$1 
     int label;
     final /* synthetic */ CommunalSceneRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalSceneRepositoryImpl$special$$inlined$flatMapLatest$1(Continuation continuation, CommunalSceneRepositoryImpl communalSceneRepositoryImpl) {
         super(3, continuation);
         this.this$0 = communalSceneRepositoryImpl;

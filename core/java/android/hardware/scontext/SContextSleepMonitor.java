@@ -9,13 +9,11 @@ public class SContextSleepMonitor extends SContextEventContext {
     public static final Parcelable.Creator<SContextSleepMonitor> CREATOR =
             new Parcelable.Creator<SContextSleepMonitor>() { // from class:
                 // android.hardware.scontext.SContextSleepMonitor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextSleepMonitor createFromParcel(Parcel in) {
                     return new SContextSleepMonitor(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextSleepMonitor[] newArray(int size) {
                     return new SContextSleepMonitor[size];

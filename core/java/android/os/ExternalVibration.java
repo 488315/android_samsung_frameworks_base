@@ -13,13 +13,11 @@ public class ExternalVibration implements Parcelable {
     public static final Parcelable.Creator<ExternalVibration> CREATOR =
             new Parcelable.Creator<
                     ExternalVibration>() { // from class: android.os.ExternalVibration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExternalVibration createFromParcel(Parcel in) {
                     return new ExternalVibration(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExternalVibration[] newArray(int size) {
                     return new ExternalVibration[size];

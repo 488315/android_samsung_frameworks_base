@@ -18,7 +18,6 @@ final class PeopleScreenKt$PeopleScreen$1 extends SuspendLambda implements Funct
     final /* synthetic */ PeopleViewModel $viewModel;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PeopleScreenKt$PeopleScreen$1(PeopleViewModel peopleViewModel, Function1 function1, Continuation continuation) {
         super(2, continuation);
         this.$viewModel = peopleViewModel;

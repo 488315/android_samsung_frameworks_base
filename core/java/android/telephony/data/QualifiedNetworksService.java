@@ -63,7 +63,6 @@ public abstract class QualifiedNetworksService extends Service {
             return this.mSlotIndex;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void registerForQualifiedNetworkTypesChanged(
                 IQualifiedNetworksServiceCallback callback) {
             this.mCallback = callback;
@@ -110,7 +109,6 @@ public abstract class QualifiedNetworksService extends Service {
                     .sendToTarget();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onUpdateQualifiedNetworkTypes(int apnTypes, int[] qualifiedNetworkTypes) {
             this.mQualifiedNetworkTypesList.put(apnTypes, qualifiedNetworkTypes);
             if (this.mCallback != null) {
@@ -123,7 +121,6 @@ public abstract class QualifiedNetworksService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onReconnectQualifiedNetworkType(int apnTypes, int qualifiedNetworkType) {
             if (this.mCallback != null) {
                 try {
@@ -202,7 +199,6 @@ public abstract class QualifiedNetworksService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onRequestNetworkValidation(NetworkValidationRequestData data) {
             try {
                 QualifiedNetworksService.this.log("onRequestNetworkValidation");
@@ -227,7 +223,6 @@ public abstract class QualifiedNetworksService extends Service {
                     .sendToTarget();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onUpdateHandoverEnabled(int supportedApnTypes) {
             if (this.mCallback != null) {
                 try {
@@ -409,12 +404,10 @@ public abstract class QualifiedNetworksService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void log(String s) {
         Rlog.d(TAG, s);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void loge(String s) {
         Rlog.e(TAG, s);
     }

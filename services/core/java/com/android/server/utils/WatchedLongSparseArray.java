@@ -7,7 +7,6 @@ public final class WatchedLongSparseArray extends WatchableImpl implements Snapp
     public final LongSparseArray mStorage;
     public volatile boolean mWatching;
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedLongSparseArray$1] */
     public WatchedLongSparseArray() {
         this.mWatching = false;
         this.mObserver =
@@ -20,7 +19,6 @@ public final class WatchedLongSparseArray extends WatchableImpl implements Snapp
         this.mStorage = new LongSparseArray();
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedLongSparseArray$1] */
     public WatchedLongSparseArray(int i) {
         this.mWatching = false;
         this.mObserver =

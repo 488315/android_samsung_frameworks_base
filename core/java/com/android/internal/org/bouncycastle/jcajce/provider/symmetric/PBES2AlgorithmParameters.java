@@ -289,7 +289,6 @@ public class PBES2AlgorithmParameters {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static PBEParameterSpec createPBEParameterSpec(
             byte[] salt, int iterationCount, byte[] iv) {
         try {

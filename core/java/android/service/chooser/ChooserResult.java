@@ -16,13 +16,11 @@ public final class ChooserResult implements Parcelable {
     public static final Parcelable.Creator<ChooserResult> CREATOR =
             new Parcelable.Creator<
                     ChooserResult>() { // from class: android.service.chooser.ChooserResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ChooserResult createFromParcel(Parcel source) {
                     return new ChooserResult(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ChooserResult[] newArray(int size) {
                     return new ChooserResult[0];

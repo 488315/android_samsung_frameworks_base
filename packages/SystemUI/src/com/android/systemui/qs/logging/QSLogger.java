@@ -35,7 +35,6 @@ public final class QSLogger {
     public final void d(Object obj, final String str) {
         LogLevel logLevel = LogLevel.DEBUG;
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.logging.QSLogger$d$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -72,7 +71,6 @@ public final class QSLogger {
     public final void logException(final String str, Exception exc) {
         LogLevel logLevel = LogLevel.ERROR;
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.logging.QSLogger$logException$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

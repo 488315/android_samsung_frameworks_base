@@ -14,14 +14,12 @@ import java.util.Objects;
 public final class StepSegment extends VibrationEffectSegment {
     public static final Parcelable.Creator<StepSegment> CREATOR =
             new Parcelable.Creator<StepSegment>() { // from class: android.os.vibrator.StepSegment.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StepSegment createFromParcel(Parcel in) {
                     in.readInt();
                     return new StepSegment(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StepSegment[] newArray(int size) {
                     return new StepSegment[size];

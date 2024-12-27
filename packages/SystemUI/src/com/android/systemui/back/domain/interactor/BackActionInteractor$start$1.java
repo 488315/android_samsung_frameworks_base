@@ -19,7 +19,6 @@ final class BackActionInteractor$start$1 extends SuspendLambda implements Functi
     int label;
     final /* synthetic */ BackActionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BackActionInteractor$start$1(BackActionInteractor backActionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = backActionInteractor;

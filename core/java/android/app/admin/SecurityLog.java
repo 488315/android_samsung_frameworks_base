@@ -98,13 +98,11 @@ public class SecurityLog {
         public static final Parcelable.Creator<SecurityEvent> CREATOR =
                 new Parcelable.Creator<SecurityEvent>() { // from class:
                     // android.app.admin.SecurityLog.SecurityEvent.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SecurityEvent createFromParcel(Parcel source) {
                         return new SecurityEvent(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SecurityEvent[] newArray(int size) {
                         return new SecurityEvent[size];

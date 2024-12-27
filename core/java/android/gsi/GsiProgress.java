@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public class GsiProgress implements Parcelable {
     public static final Parcelable.Creator<GsiProgress> CREATOR =
             new Parcelable.Creator<GsiProgress>() { // from class: android.gsi.GsiProgress.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GsiProgress createFromParcel(Parcel _aidl_source) {
                     GsiProgress _aidl_out = new GsiProgress();
@@ -15,7 +14,6 @@ public class GsiProgress implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GsiProgress[] newArray(int _aidl_size) {
                     return new GsiProgress[_aidl_size];

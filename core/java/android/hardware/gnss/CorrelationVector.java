@@ -9,7 +9,6 @@ public class CorrelationVector implements Parcelable {
     public static final Parcelable.Creator<CorrelationVector> CREATOR =
             new Parcelable.Creator<
                     CorrelationVector>() { // from class: android.hardware.gnss.CorrelationVector.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CorrelationVector createFromParcel(Parcel _aidl_source) {
                     CorrelationVector _aidl_out = new CorrelationVector();
@@ -17,7 +16,6 @@ public class CorrelationVector implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CorrelationVector[] newArray(int _aidl_size) {
                     return new CorrelationVector[_aidl_size];

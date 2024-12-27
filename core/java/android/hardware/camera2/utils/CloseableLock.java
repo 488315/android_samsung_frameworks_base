@@ -36,8 +36,6 @@ public class CloseableLock implements AutoCloseable {
         this.mLockCount =
                 new ThreadLocal<
                         Integer>() { // from class: android.hardware.camera2.utils.CloseableLock.1
-                    /* JADX INFO: Access modifiers changed from: protected */
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // java.lang.ThreadLocal
                     public Integer initialValue() {
                         return 0;
@@ -56,8 +54,6 @@ public class CloseableLock implements AutoCloseable {
         this.mLockCount =
                 new ThreadLocal<
                         Integer>() { // from class: android.hardware.camera2.utils.CloseableLock.1
-                    /* JADX INFO: Access modifiers changed from: protected */
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // java.lang.ThreadLocal
                     public Integer initialValue() {
                         return 0;

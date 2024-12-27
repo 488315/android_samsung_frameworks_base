@@ -18,7 +18,6 @@ public final class LoopedAnimatable2DrawableWrapper extends DrawableWrapperCompa
         private Companion() {
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final LoopedAnimatable2DrawableWrapper fromDrawable(Drawable drawable) {
             if (drawable instanceof Animatable2) {
                 return new LoopedAnimatable2DrawableWrapper((Animatable2) drawable, null);
@@ -32,7 +31,6 @@ public final class LoopedAnimatable2DrawableWrapper extends DrawableWrapperCompa
     }
 
     final class LoopedCallback extends Animatable2.AnimationCallback {
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Animatable2.AnimationCallback
         public void onAnimationEnd(Drawable drawable) {
             Animatable2 animatable2 = drawable instanceof Animatable2 ? (Animatable2) drawable : null;
@@ -136,7 +134,6 @@ public final class LoopedAnimatable2DrawableWrapper extends DrawableWrapperCompa
         return this.animatable2.unregisterAnimationCallback(animationCallback);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private LoopedAnimatable2DrawableWrapper(Animatable2 animatable2) {
         super((Drawable) animatable2);
         this.animatable2 = animatable2;

@@ -396,7 +396,6 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
                     + " com.android.server.pm.UserManagerServiceShellCommand.runIsUserVisible():int");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runList() {
         int i;
         String str;
@@ -531,7 +530,6 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runReportPackageAllowlistProblems() {
         char c;
         PrintWriter outPrintWriter = getOutPrintWriter();
@@ -617,7 +615,6 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runSetSystemUserModeEmulation() {
         char c;
         boolean z = true;

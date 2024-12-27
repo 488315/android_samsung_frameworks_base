@@ -78,7 +78,6 @@ public abstract class BiometricUserState {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.biometrics.sensors.BiometricUserState$$ExternalSyntheticLambda0] */
     public BiometricUserState(Context context, String str, int i) {
         File file = new File(Environment.getUserSystemDirectory(i), str);
         this.mFile = file;

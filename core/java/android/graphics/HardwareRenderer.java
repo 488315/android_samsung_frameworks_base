@@ -121,7 +121,6 @@ public class HardwareRenderer {
 
     private static native long nCreateTextureLayer(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nDeleteProxy(long j);
 
     private static native void nDestroy(long j, long j2);
@@ -140,10 +139,8 @@ public class HardwareRenderer {
 
     private static native void nForceDrawNextFrame(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nGetRenderThreadTid(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nInitDisplayInfo(
             int i, int i2, float f, int i3, long j, long j2, boolean z, boolean z2, boolean z3);
 
@@ -173,7 +170,6 @@ public class HardwareRenderer {
 
     private static native void nRemoveRenderNode(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nRotateProcessStatsBuffer();
 
     private static native boolean nSemSetResourceCacheLimit(int i);
@@ -197,7 +193,6 @@ public class HardwareRenderer {
 
     private static native void nSetFrameCallback(long j, FrameDrawingCallback frameDrawingCallback);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nSetFrameCommitCallback(
             long j, FrameCommitCallback frameCommitCallback);
 
@@ -206,10 +201,8 @@ public class HardwareRenderer {
 
     private static native void nSetHighContrastText(boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nSetIsHighEndGfx(boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nSetIsLowRam(boolean z);
 
     private static native void nSetIsSystemOrPersistent(boolean z);
@@ -233,7 +226,6 @@ public class HardwareRenderer {
             long j,
             PrepareSurfaceControlForWebviewCallback prepareSurfaceControlForWebviewCallback);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nSetProcessStatsBuffer(int i);
 
     private static native void nSetRendererAsGl(boolean z);
@@ -336,7 +328,6 @@ public class HardwareRenderer {
             this.mFrameInfo = new FrameInfo();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void reset() {
             this.mWaitForPresent = false;
             HardwareRenderer.this.mRenderRequest.setVsyncTime(
@@ -1051,7 +1042,6 @@ public class HardwareRenderer {
             this.mDisplayInitialized = true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void rotateBuffer() {
             HardwareRenderer.nRotateProcessStatsBuffer();
             requestBuffer();

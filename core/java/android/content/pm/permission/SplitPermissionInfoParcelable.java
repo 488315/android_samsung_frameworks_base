@@ -16,13 +16,11 @@ public class SplitPermissionInfoParcelable implements Parcelable {
     public static final Parcelable.Creator<SplitPermissionInfoParcelable> CREATOR =
             new Parcelable.Creator<SplitPermissionInfoParcelable>() { // from class:
                 // android.content.pm.permission.SplitPermissionInfoParcelable.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SplitPermissionInfoParcelable[] newArray(int size) {
                     return new SplitPermissionInfoParcelable[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SplitPermissionInfoParcelable createFromParcel(Parcel in) {
                     return new SplitPermissionInfoParcelable(in);

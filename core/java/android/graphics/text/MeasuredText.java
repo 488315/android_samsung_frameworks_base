@@ -36,7 +36,6 @@ public class MeasuredText {
     @CriticalNative
     private static native int nGetMemoryUsage(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native long nGetReleaseFunc();
 

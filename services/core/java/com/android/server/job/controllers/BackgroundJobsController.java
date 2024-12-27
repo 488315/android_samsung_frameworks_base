@@ -66,8 +66,6 @@ public final class BackgroundJobsController extends StateController {
         DEBUG = JobSchedulerService.DEBUG || Log.isLoggable("JobScheduler.Background", 3);
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.job.controllers.BackgroundJobsController$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.job.controllers.BackgroundJobsController$2] */
     public BackgroundJobsController(JobSchedulerService jobSchedulerService) {
         super(jobSchedulerService);
         this.mPackageStoppedState = new SparseArrayMap();
@@ -318,11 +316,6 @@ public final class BackgroundJobsController extends StateController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00bb  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00c4  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00bf  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0089  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

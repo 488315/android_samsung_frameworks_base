@@ -52,13 +52,11 @@ public class CocktailProviderInfo implements Parcelable {
             new Parcelable.Creator<
                     CocktailProviderInfo>() { // from class:
                                               // com.samsung.android.cocktailbar.CocktailProviderInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CocktailProviderInfo createFromParcel(Parcel in) {
                     return new CocktailProviderInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CocktailProviderInfo[] newArray(int size) {
                     return new CocktailProviderInfo[size];

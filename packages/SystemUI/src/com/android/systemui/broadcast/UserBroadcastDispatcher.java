@@ -110,7 +110,6 @@ public final class UserBroadcastDispatcher implements Dumpable {
 
     public ActionReceiver createActionReceiver$frameworks__base__packages__SystemUI__android_common__SystemUI_core(final String str, final String str2, final int i) {
         return new ActionReceiver(str, this.userId, new Function2() { // from class: com.android.systemui.broadcast.UserBroadcastDispatcher$createActionReceiver$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
             }
@@ -130,7 +129,6 @@ public final class UserBroadcastDispatcher implements Dumpable {
                 return Unit.INSTANCE;
             }
         }, new Function1() { // from class: com.android.systemui.broadcast.UserBroadcastDispatcher$createActionReceiver$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -205,7 +203,6 @@ public final class UserBroadcastDispatcher implements Dumpable {
                 ReceiverProperties receiverProperties = (ReceiverProperties) entry.getKey();
                 ActionReceiver actionReceiver = (ActionReceiver) entry.getValue();
                 if (Intrinsics.areEqual(receiverProperties.action, str) && CollectionsKt__MutableCollectionsKt.filterInPlace$CollectionsKt__MutableCollectionsKt(actionReceiver.receiverDatas, new Function1() { // from class: com.android.systemui.broadcast.ActionReceiver$removeReceiver$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }

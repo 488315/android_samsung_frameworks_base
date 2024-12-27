@@ -47,7 +47,6 @@ public final class RowAlertTimeCoordinator implements Coordinator {
         throw new IllegalStateException("Required value was null.".toString());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onAfterRenderEntry(NotificationEntry notificationEntry, NotifRowController notifRowController) {
         Long l = this.latestAlertTimeBySummary.get(notificationEntry);
         if (l == null) {
@@ -66,7 +65,6 @@ public final class RowAlertTimeCoordinator implements Coordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onBeforeFinalizeFilterListener(List<? extends ListEntry> list) {
         this.latestAlertTimeBySummary.clear();
         FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.RowAlertTimeCoordinator$onBeforeFinalizeFilterListener$$inlined$filterIsInstance$1

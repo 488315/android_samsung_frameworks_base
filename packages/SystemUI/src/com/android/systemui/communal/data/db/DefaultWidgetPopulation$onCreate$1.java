@@ -14,7 +14,6 @@ final class DefaultWidgetPopulation$onCreate$1 extends SuspendLambda implements 
     int label;
     final /* synthetic */ DefaultWidgetPopulation this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DefaultWidgetPopulation$onCreate$1(DefaultWidgetPopulation defaultWidgetPopulation, Continuation continuation) {
         super(2, continuation);
         this.this$0 = defaultWidgetPopulation;

@@ -111,7 +111,6 @@ public final class DreamOverlayConnectionHandler {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onOverlayClientReady(IDreamOverlayClient client) {
         this.mClient = client;
         for (Consumer<IDreamOverlayClient> consumer : this.mConsumers) {
@@ -119,7 +118,6 @@ public final class DreamOverlayConnectionHandler {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onAddConsumer(Consumer<IDreamOverlayClient> consumer) {
         if (this.mClient != null) {
             consumer.accept(this.mClient);
@@ -127,7 +125,6 @@ public final class DreamOverlayConnectionHandler {
         this.mConsumers.add(consumer);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onRemoveConsumer(Consumer<IDreamOverlayClient> consumer) {
         this.mConsumers.remove(consumer);
     }

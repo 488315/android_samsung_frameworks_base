@@ -15,7 +15,6 @@ final class WifiDisplayDeviceController$Companion$activeDeviceChanges$1$updateDe
     final /* synthetic */ ProducerScope $$this$callbackFlow;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiDisplayDeviceController$Companion$activeDeviceChanges$1$updateDevices$1(ProducerScope producerScope, Continuation continuation) {
         super(2, continuation);
         this.$$this$callbackFlow = producerScope;

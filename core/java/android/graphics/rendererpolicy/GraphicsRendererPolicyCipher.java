@@ -142,7 +142,6 @@ public class GraphicsRendererPolicyCipher {
             return keyGenerator.generateKey();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static SecretKey getKey(Context context, String appId) throws Exception {
             KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyStore.load(null);
@@ -158,7 +157,6 @@ public class GraphicsRendererPolicyCipher {
             return key;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void clear(Context context, String appId) {
             try {
                 KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");

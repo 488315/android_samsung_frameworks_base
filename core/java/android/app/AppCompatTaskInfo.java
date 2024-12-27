@@ -11,13 +11,11 @@ public class AppCompatTaskInfo implements Parcelable {
     public static final Parcelable.Creator<AppCompatTaskInfo> CREATOR =
             new Parcelable.Creator<
                     AppCompatTaskInfo>() { // from class: android.app.AppCompatTaskInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppCompatTaskInfo createFromParcel(Parcel in) {
                     return new AppCompatTaskInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppCompatTaskInfo[] newArray(int size) {
                     return new AppCompatTaskInfo[size];

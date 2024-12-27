@@ -433,7 +433,6 @@ public abstract class OnDeviceSandboxedInferenceService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ProcessingCallback wrapResponseCallback(final IResponseCallback callback) {
         return new ProcessingCallback() { // from class:
                                           // android.service.ondeviceintelligence.OnDeviceSandboxedInferenceService.2
@@ -474,7 +473,6 @@ public abstract class OnDeviceSandboxedInferenceService extends Service {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public StreamingProcessingCallback wrapStreamingResponseCallback(
             final IStreamingResponseCallback callback) {
         return new StreamingProcessingCallback() { // from class:
@@ -525,7 +523,6 @@ public abstract class OnDeviceSandboxedInferenceService extends Service {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public RemoteCallback wrapRemoteCallback(final Consumer<Bundle> contentCallback) {
         return new RemoteCallback(
                 new RemoteCallback
@@ -539,7 +536,6 @@ public abstract class OnDeviceSandboxedInferenceService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$wrapRemoteCallback$9(
             final Consumer contentCallback, final Bundle result) {
         if (result != null) {
@@ -570,7 +566,6 @@ public abstract class OnDeviceSandboxedInferenceService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public OutcomeReceiver<TokenInfo, OnDeviceIntelligenceException> wrapTokenInfoCallback(
             final ITokenInfoCallback tokenInfoCallback) {
         return new OutcomeReceiver<
@@ -600,7 +595,6 @@ public abstract class OnDeviceSandboxedInferenceService extends Service {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static OutcomeReceiver<PersistableBundle, OnDeviceIntelligenceException>
             wrapOutcomeReceiver(final IProcessingUpdateStatusCallback callback) {
         return new OutcomeReceiver<

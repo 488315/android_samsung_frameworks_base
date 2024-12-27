@@ -205,7 +205,6 @@ public class BrightnessSynchronizer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void runUpdate() {
         do {
             if (this.mCurrentUpdate != null) {
@@ -232,13 +231,11 @@ public class BrightnessSynchronizer {
         return this.mDisplayManager.getBrightness(0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getScreenBrightnessInt() {
         return Settings.System.getIntForUser(
                 this.mContext.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, -1, -2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setScreenBrightnessInt(int brightnessInt) {
         Settings.System.putIntForUser(
                 this.mContext.getContentResolver(),

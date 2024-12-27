@@ -28,30 +28,25 @@ public final class HotwordAudioStream implements Parcelable {
             new Parcelable.Creator<
                     HotwordAudioStream>() { // from class:
                                             // android.service.voice.HotwordAudioStream.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HotwordAudioStream[] newArray(int size) {
                     return new HotwordAudioStream[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HotwordAudioStream createFromParcel(Parcel in) {
                     return new HotwordAudioStream(in);
                 }
             };
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static AudioTimestamp defaultTimestamp() {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static PersistableBundle defaultMetadata() {
         return new PersistableBundle();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static byte[] defaultInitialAudio() {
         return DEFAULT_INITIAL_EMPTY_AUDIO;
     }

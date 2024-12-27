@@ -87,8 +87,6 @@ public final class SessionTracker implements CoreStartable {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.log.SessionTracker$2] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.log.SessionTracker$3] */
     public SessionTracker(IStatusBarService iStatusBarService, AuthController authController, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, UiEventLogger uiEventLogger) {
         this.mStatusBarManagerService = iStatusBarService;
         this.mAuthController = authController;

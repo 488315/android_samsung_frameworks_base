@@ -67,13 +67,11 @@ public final class ComponentController extends StateController {
         DEBUG = JobSchedulerService.DEBUG || Log.isLoggable("JobScheduler.Component", 3);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.job.controllers.ComponentController$1] */
     public ComponentController(JobSchedulerService jobSchedulerService) {
         super(jobSchedulerService);
         this.mBroadcastReceiver =
                 new BroadcastReceiver() { // from class:
                                           // com.android.server.job.controllers.ComponentController.1
-                    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                     @Override // android.content.BroadcastReceiver
                     public final void onReceive(Context context, Intent intent) {
                         char c;

@@ -99,7 +99,6 @@ public final class MediaLoggerImpl implements MediaLogger {
         mediaLogWriter.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         Function1 function1 = new Function1() { // from class: com.android.systemui.log.MediaLogWriter$logOnMediaDataLoaded$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

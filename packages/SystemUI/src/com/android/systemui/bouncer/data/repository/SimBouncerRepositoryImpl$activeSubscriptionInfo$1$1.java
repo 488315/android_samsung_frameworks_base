@@ -15,7 +15,6 @@ final class SimBouncerRepositoryImpl$activeSubscriptionInfo$1$1 extends SuspendL
     int label;
     final /* synthetic */ SimBouncerRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SimBouncerRepositoryImpl$activeSubscriptionInfo$1$1(SimBouncerRepositoryImpl simBouncerRepositoryImpl, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = simBouncerRepositoryImpl;

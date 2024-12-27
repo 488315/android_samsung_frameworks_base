@@ -18,13 +18,11 @@ public final class VirtualCameraConfig implements Parcelable {
     public static final Parcelable.Creator<VirtualCameraConfig> CREATOR =
             new Parcelable.Creator<VirtualCameraConfig>() { // from class:
                 // android.companion.virtual.camera.VirtualCameraConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualCameraConfig createFromParcel(Parcel in) {
                     return new VirtualCameraConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualCameraConfig[] newArray(int size) {
                     return new VirtualCameraConfig[size];
@@ -198,7 +196,6 @@ public final class VirtualCameraConfig implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class VirtualCameraCallbackInternal extends IVirtualCameraCallback.Stub {
         private final VirtualCameraCallback mCallback;
         private final Executor mExecutor;
@@ -208,7 +205,6 @@ public final class VirtualCameraConfig implements Parcelable {
             this.mExecutor = executor;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onStreamConfigured$0(
                 int streamId, Surface surface, int width, int height, int format) {
             this.mCallback.onStreamConfigured(streamId, surface, width, height, format);
@@ -233,7 +229,6 @@ public final class VirtualCameraConfig implements Parcelable {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onProcessCaptureRequest$1(int streamId, long frameId) {
             this.mCallback.onProcessCaptureRequest(streamId, frameId);
         }
@@ -251,7 +246,6 @@ public final class VirtualCameraConfig implements Parcelable {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onStreamClosed$2(int streamId) {
             this.mCallback.onStreamClosed(streamId);
         }
@@ -270,7 +264,6 @@ public final class VirtualCameraConfig implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isFormatSupported(int format) {
         switch (format) {
             case 1:

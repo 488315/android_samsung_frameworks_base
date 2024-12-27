@@ -26,12 +26,10 @@ public class ProximityCheck implements Runnable {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$onProximityEvent$0(ThresholdSensorEvent thresholdSensorEvent, Consumer consumer) {
         consumer.accept(thresholdSensorEvent == null ? null : Boolean.valueOf(thresholdSensorEvent.getBelow()));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onProximityEvent(final ThresholdSensorEvent thresholdSensorEvent) {
         this.mCallbacks.forEach(new Consumer() { // from class: com.android.systemui.util.sensors.ProximityCheck$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer

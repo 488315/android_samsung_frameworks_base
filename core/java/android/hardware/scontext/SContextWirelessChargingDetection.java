@@ -9,13 +9,11 @@ public class SContextWirelessChargingDetection extends SContextEventContext {
     public static final Parcelable.Creator<SContextWirelessChargingDetection> CREATOR =
             new Parcelable.Creator<SContextWirelessChargingDetection>() { // from class:
                 // android.hardware.scontext.SContextWirelessChargingDetection.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextWirelessChargingDetection createFromParcel(Parcel in) {
                     return new SContextWirelessChargingDetection(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextWirelessChargingDetection[] newArray(int size) {
                     return new SContextWirelessChargingDetection[size];

@@ -10,7 +10,6 @@ final class AirplaneModeInteractor$setIsAirplaneMode$1 extends ContinuationImpl 
     /* synthetic */ Object result;
     final /* synthetic */ AirplaneModeInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AirplaneModeInteractor$setIsAirplaneMode$1(AirplaneModeInteractor airplaneModeInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = airplaneModeInteractor;

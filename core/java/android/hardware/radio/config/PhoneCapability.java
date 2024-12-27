@@ -11,7 +11,6 @@ public class PhoneCapability implements Parcelable {
     public static final Parcelable.Creator<PhoneCapability> CREATOR =
             new Parcelable.Creator<PhoneCapability>() { // from class:
                 // android.hardware.radio.config.PhoneCapability.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhoneCapability createFromParcel(Parcel _aidl_source) {
                     PhoneCapability _aidl_out = new PhoneCapability();
@@ -19,7 +18,6 @@ public class PhoneCapability implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhoneCapability[] newArray(int _aidl_size) {
                     return new PhoneCapability[_aidl_size];

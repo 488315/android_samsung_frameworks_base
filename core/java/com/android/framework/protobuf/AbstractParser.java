@@ -32,7 +32,6 @@ public abstract class AbstractParser<MessageType extends MessageLite>
         return (MessageType) parsePartialFrom(input, EMPTY_REGISTRY);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.framework.protobuf.Parser
     public MessageType parseFrom(
             CodedInputStream codedInputStream, ExtensionRegistryLite extensionRegistryLite)
@@ -80,7 +79,6 @@ public abstract class AbstractParser<MessageType extends MessageLite>
         return parseFrom(data, EMPTY_REGISTRY);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.framework.protobuf.Parser
     public MessageType parseFrom(ByteBuffer byteBuffer, ExtensionRegistryLite extensionRegistryLite)
             throws InvalidProtocolBufferException {

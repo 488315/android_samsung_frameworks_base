@@ -182,7 +182,6 @@ public class TimePicker extends FrameLayout {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(Context context, TimePicker v, int h, int m) {
         AutofillManager afm = (AutofillManager) context.getSystemService(AutofillManager.class);
         if (afm != null) {
@@ -265,14 +264,12 @@ public class TimePicker extends FrameLayout {
         return this.mDelegate.validateInput();
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
         return this.mDelegate.onSaveInstanceState(superState);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public void onRestoreInstanceState(Parcelable state) {
         View.BaseSavedState ss = (View.BaseSavedState) state;
@@ -374,13 +371,11 @@ public class TimePicker extends FrameLayout {
                     new Parcelable.Creator<
                             SavedState>() { // from class:
                                             // android.widget.TimePicker.AbstractTimePickerDelegate.SavedState.1
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public SavedState createFromParcel(Parcel in) {
                             return new SavedState(in);
                         }
 
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public SavedState[] newArray(int size) {
                             return new SavedState[size];

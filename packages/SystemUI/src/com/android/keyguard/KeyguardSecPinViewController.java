@@ -49,8 +49,6 @@ public class KeyguardSecPinViewController extends KeyguardPinViewController {
     public final KeyguardSecurityModel.SecurityMode mSecurityMode;
     public final KeyguardSecPinViewController$$ExternalSyntheticLambda0 mVerifyNDigitsPINRunnable;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.keyguard.KeyguardSecPinViewController$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.keyguard.KeyguardSecPinViewController$1] */
     public KeyguardSecPinViewController(KeyguardSecPINView keyguardSecPINView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, LiftToActivateListener liftToActivateListener, EmergencyButtonController emergencyButtonController, FalsingCollector falsingCollector, DevicePostureController devicePostureController, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, UiEventLogger uiEventLogger, KeyguardKeyboardInteractor keyguardKeyboardInteractor) {
         super(keyguardSecPINView, configurationController, vibrationUtil, accessibilityManager, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, liftToActivateListener, emergencyButtonController, falsingCollector, devicePostureController, featureFlags, selectedUserInteractor, uiEventLogger, keyguardKeyboardInteractor);
         this.mHandler = new Handler(Looper.getMainLooper());

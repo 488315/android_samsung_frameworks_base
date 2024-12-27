@@ -58,7 +58,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
     private String mLastTargetId = "";
     private String mLastSourceId = "";
 
-    /* JADX INFO: Access modifiers changed from: private */
     class StopDrainListener implements TaskDrainer.DrainListener {
         private StopDrainListener() {}
 
@@ -78,7 +77,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDrained$0() {
             DeviceInjectorSessionImpl.this.mStatusCallback.onClose();
         }
@@ -180,7 +178,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$binderDied$0() {
         synchronized (this.mInterfaceLock) {
             this.mStatusCallback.onError(1);
@@ -207,7 +204,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
         return new DeviceInjectorRemoteDevice(device);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setRemoteInjectorSession(IDeviceInjectorSession injectorSession) {
         synchronized (this.mInterfaceLock) {
             if (injectorSession == null) {
@@ -241,12 +237,10 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setRemoteInjectorSession$1() {
         this.mStatusCallback.onSessionCreated(this);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onInjectionStarted(
             final String packageName, final String targetId, final String sourceId) {
         synchronized (this.mInterfaceLock) {
@@ -275,13 +269,11 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onInjectionStarted$2(
             String packageName, String targetId, String sourceId) {
         this.mStatusCallback.onInjectionStarted(packageName, targetId, sourceId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onInjectionStopped(
             final String packageName, final String targetId, final String sourceId) {
         synchronized (this.mInterfaceLock) {
@@ -309,13 +301,11 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onInjectionStopped$3(
             String packageName, String targetId, String sourceId) {
         this.mStatusCallback.onInjectionStopped(packageName, targetId, sourceId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onInjectionPendingStarted(final String packageName, final String targetId) {
         synchronized (this.mInterfaceLock) {
             if (this.mInjectorSession == null) {
@@ -343,13 +333,11 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onInjectionPendingStarted$4(
             String packageName, String targetId) {
         this.mStatusCallback.onInjectionPendingStarted(packageName, targetId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onInjectionPendingStopped(final String packageName, final String targetId) {
         synchronized (this.mInterfaceLock) {
             if (this.mInjectorSession == null) {
@@ -376,13 +364,11 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onInjectionPendingStopped$5(
             String packageName, String targetId) {
         this.mStatusCallback.onInjectionPendingStopped(packageName, targetId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onInjectionError(int errorCode) {
         Log.i(
                 TAG,
@@ -428,7 +414,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyError(int errorCode) {
         boolean isInjectorSessionExists;
         synchronized (this.mInterfaceLock) {
@@ -529,7 +514,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
             return this;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ String lambda$open$1(String targetId, int targetLensFacing)
                 throws Exception {
             return this.mRemoteDevice.open(targetId, targetLensFacing);
@@ -585,7 +569,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
                             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ CameraMetadataNative lambda$getCameraCharacteristic$2(
                 DeviceInjectorSession.CharacteristicBuilder builder) throws Exception {
             return this.mRemoteDevice.getCameraCharacteristic(builder).getNativeMetadata();
@@ -611,7 +594,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$createStream$3(Surface surface) throws Exception {
             return Integer.valueOf(
                     this.mRemoteDevice.createStream(surface, SurfaceUtils.getSurfaceSize(surface)));
@@ -633,7 +615,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Object lambda$deleteStream$4(int streamId) throws Exception {
             this.mRemoteDevice.deleteStream(streamId);
             return null;
@@ -669,7 +650,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
                             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ CameraMetadataNative lambda$createDefaultRequest$5(
                 CaptureRequest.Builder builder) throws Exception {
             return this.mRemoteDevice.createDefaultRequest(builder).getNativeMetadata();
@@ -696,7 +676,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Object lambda$submitRequest$6(
                 CaptureRequest.Builder builder, int[] outputStreams, boolean streaming)
                 throws Exception {
@@ -720,7 +699,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Object lambda$clearRequest$7() throws Exception {
             this.mRemoteDevice.clearRequest();
             return null;
@@ -742,7 +720,6 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Object lambda$setCallback$8(final IRemoteDeviceCallback callback)
                 throws Exception {
             this.mRemoteDevice.setCallback(
@@ -800,14 +777,12 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Object lambda$close$9() throws Exception {
             this.mRemoteDevice.close();
             return null;
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class CharacteristicBuilderImpl extends DeviceInjectorSession.CharacteristicBuilder {
         private boolean mAELockAvailable;
         private Set<Integer> mAEModes;

@@ -11,7 +11,6 @@ public class UriRelativeFilterGroupParcel implements Parcelable {
     public static final Parcelable.Creator<UriRelativeFilterGroupParcel> CREATOR =
             new Parcelable.Creator<UriRelativeFilterGroupParcel>() { // from class:
                 // android.content.UriRelativeFilterGroupParcel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UriRelativeFilterGroupParcel createFromParcel(Parcel _aidl_source) {
                     UriRelativeFilterGroupParcel _aidl_out = new UriRelativeFilterGroupParcel();
@@ -19,7 +18,6 @@ public class UriRelativeFilterGroupParcel implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UriRelativeFilterGroupParcel[] newArray(int _aidl_size) {
                     return new UriRelativeFilterGroupParcel[_aidl_size];

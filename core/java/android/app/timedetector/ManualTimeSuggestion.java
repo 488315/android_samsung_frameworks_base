@@ -13,7 +13,6 @@ public final class ManualTimeSuggestion implements Parcelable {
     public static final Parcelable.Creator<ManualTimeSuggestion> CREATOR =
             new Parcelable.Creator<ManualTimeSuggestion>() { // from class:
                 // android.app.timedetector.ManualTimeSuggestion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ManualTimeSuggestion createFromParcel(Parcel in) {
                     TimeSuggestionHelper helper =
@@ -22,7 +21,6 @@ public final class ManualTimeSuggestion implements Parcelable {
                     return new ManualTimeSuggestion(helper);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ManualTimeSuggestion[] newArray(int size) {
                     return new ManualTimeSuggestion[size];

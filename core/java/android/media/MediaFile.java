@@ -136,7 +136,6 @@ public class MediaFile {
         return null;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static boolean isDocumentMimeType(String mimeType) {
         char c;
         if (mimeType == null) {
@@ -631,7 +630,6 @@ public class MediaFile {
         return normalizeMimeType(mimeType).startsWith(MessagingMessage.IMAGE_MIME_TYPE_PREFIX);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static boolean isPlayListMimeType(String mimeType) {
         char c;
         String normalizeMimeType = normalizeMimeType(mimeType);

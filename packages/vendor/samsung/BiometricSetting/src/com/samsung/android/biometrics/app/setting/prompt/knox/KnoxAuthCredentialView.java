@@ -64,7 +64,6 @@ public abstract class KnoxAuthCredentialView extends LinearLayout {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.samsung.android.biometrics.app.setting.prompt.knox.KnoxAuthCredentialView$1] */
     public KnoxAuthCredentialView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mOnKeyListener =
@@ -180,8 +179,6 @@ public abstract class KnoxAuthCredentialView extends LinearLayout {
     @Override // android.view.View
     public abstract void onConfigurationChanged(Configuration configuration);
 
-    /* JADX WARN: Type inference failed for: r9v0, types: [com.samsung.android.biometrics.app.setting.prompt.knox.KnoxAuthCredentialView$3] */
-    /* JADX WARN: Type inference failed for: r9v1, types: [com.samsung.android.biometrics.app.setting.prompt.knox.KnoxAuthCredentialView$3] */
     public void onCredentialVerified(VerifyCredentialResponse verifyCredentialResponse, int i) {
         String errorMessage;
         Log.d("BSS_KnoxAuthCredentialView", "onCredentialVerified: " + i);
@@ -236,7 +233,6 @@ public abstract class KnoxAuthCredentialView extends LinearLayout {
                         public final TextView mErrorView;
                         public final /* synthetic */ KnoxAuthCredentialView this$0;
 
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(r5, 1000L);
                             this.$r8$classId = r8;
@@ -318,7 +314,6 @@ public abstract class KnoxAuthCredentialView extends LinearLayout {
                         public final TextView mErrorView;
                         public final /* synthetic */ KnoxAuthCredentialView this$0;
 
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(r5, 1000L);
                             this.$r8$classId = r8;

@@ -14,13 +14,11 @@ public final class SatelliteSubscriberInfo implements Parcelable {
             new Parcelable.Creator<
                     SatelliteSubscriberInfo>() { // from class:
                                                  // android.telephony.satellite.SatelliteSubscriberInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteSubscriberInfo createFromParcel(Parcel in) {
                     return new SatelliteSubscriberInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteSubscriberInfo[] newArray(int size) {
                     return new SatelliteSubscriberInfo[size];

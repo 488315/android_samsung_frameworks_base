@@ -251,7 +251,6 @@ public final class AmbientBrightnessStatsTracker {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.display.AmbientBrightnessStatsTracker$$ExternalSyntheticLambda0] */
     public AmbientBrightnessStatsTracker(UserManager userManager) {
         this.mUserManager = userManager;
     }

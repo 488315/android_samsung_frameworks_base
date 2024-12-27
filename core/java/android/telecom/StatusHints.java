@@ -16,13 +16,11 @@ import java.util.Objects;
 public final class StatusHints implements Parcelable {
     public static final Parcelable.Creator<StatusHints> CREATOR =
             new Parcelable.Creator<StatusHints>() { // from class: android.telecom.StatusHints.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StatusHints createFromParcel(Parcel in) {
                     return new StatusHints(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StatusHints[] newArray(int size) {
                     return new StatusHints[size];

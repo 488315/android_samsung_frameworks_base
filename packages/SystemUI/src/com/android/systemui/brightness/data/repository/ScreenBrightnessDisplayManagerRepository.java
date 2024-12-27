@@ -60,16 +60,6 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
             return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:11:0x0089  */
-        /* JADX WARN: Removed duplicated region for block: B:14:0x00ab  */
-        /* JADX WARN: Removed duplicated region for block: B:21:0x004e  */
-        /* JADX WARN: Removed duplicated region for block: B:25:0x00c9  */
-        /* JADX WARN: Removed duplicated region for block: B:27:0x0045 A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:28:0x00ae  */
-        /* JADX WARN: Removed duplicated region for block: B:29:0x0093  */
-        /* JADX WARN: Removed duplicated region for block: B:32:0x0080  */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x007e  */
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:22:0x0061 -> B:6:0x0064). Please report as a decompilation issue!!! */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -337,9 +327,6 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
                     this.this$0 = screenBrightnessDisplayManagerRepository;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:19:0x0066 A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:20:0x003b  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -453,8 +440,6 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -544,8 +529,6 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -635,8 +618,6 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -699,12 +680,6 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
         }, tableLogBuffer, "brightness"), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), LinearBrightness.m935boximpl(0.0f));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0053  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0059  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0056  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

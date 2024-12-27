@@ -1474,7 +1474,6 @@ public class AudioManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CallbackUtil.DispatcherStub
             lambda$addOnPreferredDevicesForStrategyChangedListener$0() {
         return new StrategyPreferredDevicesDispatcherStub();
@@ -1511,7 +1510,6 @@ public class AudioManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CallbackUtil.DispatcherStub
             lambda$addOnNonDefaultDevicesForStrategyChangedListener$1() {
         return new StrategyNonDefaultDevicesDispatcherStub();
@@ -1525,7 +1523,6 @@ public class AudioManager {
                 listener, "removeOnNonDefaultDevicesForStrategyChangedListener");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class StrategyPreferredDevicesDispatcherStub
             extends IStrategyPreferredDevicesDispatcher.Stub
             implements CallbackUtil.DispatcherStub {
@@ -1564,7 +1561,6 @@ public class AudioManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class StrategyNonDefaultDevicesDispatcherStub
             extends IStrategyNonDefaultDevicesDispatcher.Stub
             implements CallbackUtil.DispatcherStub {
@@ -1763,7 +1759,6 @@ public class AudioManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class DevRoleListenerInfo<T> {
         final Executor mExecutor;
         final T mListener;
@@ -1796,12 +1791,10 @@ public class AudioManager {
             return null;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean hasDevRoleListener(T listener) {
             return getDevRoleListenerInfo(listener) != null;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean removeDevRoleListener(T listener) {
             DevRoleListenerInfo<T> infoToRemove = getDevRoleListenerInfo(listener);
             if (infoToRemove != null) {
@@ -1812,7 +1805,6 @@ public class AudioManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class CapturePresetDevicesRoleDispatcherStub
             extends ICapturePresetDevicesRoleDispatcher.Stub {
         private CapturePresetDevicesRoleDispatcherStub() {}
@@ -2096,7 +2088,6 @@ public class AudioManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CallbackUtil.DispatcherStub lambda$addOnModeChangedListener$2() {
         return new ModeDispatcherStub();
     }
@@ -2400,7 +2391,6 @@ public class AudioManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public FocusRequestInfo findFocusRequestInfo(String id) {
         return this.mAudioFocusIdListenerMap.get(id);
     }
@@ -3424,7 +3414,6 @@ public class AudioManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class IDevicesForAttributesCallbackStub
             extends IDevicesForAttributesCallback.Stub {
         CallbackUtil.ListenerInfo<OnDevicesForAttributesChangedListener> mInfo;
@@ -3463,7 +3452,6 @@ public class AudioManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDevicesForAttributesChanged$0(
                 AudioAttributes attributes, List devices) {
             this.mInfo.mListener.onDevicesForAttributesChanged(attributes, devices);
@@ -4468,7 +4456,6 @@ public class AudioManager {
         return getHwOffloadFormatsSupportedForLeAudio(536870914);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void broadcastDeviceListChange_sync(Handler handler) {
         ArrayList<AudioDevicePort> current_ports = new ArrayList<>();
         int status = listAudioDevicePorts(current_ports);
@@ -4968,7 +4955,6 @@ public class AudioManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CallbackUtil.DispatcherStub
             lambda$addOnCommunicationDeviceChangedListener$3() {
         return new CommunicationDeviceDispatcherStub();
@@ -4980,7 +4966,6 @@ public class AudioManager {
                 listener, "removeOnCommunicationDeviceChangedListener");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class CommunicationDeviceDispatcherStub extends ICommunicationDeviceDispatcher.Stub
             implements CallbackUtil.DispatcherStub {
         private CommunicationDeviceDispatcherStub() {}
@@ -5294,7 +5279,6 @@ public class AudioManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ MuteAwaitConnectionDispatcherStub
             lambda$registerMuteAwaitConnectionCallback$4() {
         return new MuteAwaitConnectionDispatcherStub();
@@ -5457,7 +5441,6 @@ public class AudioManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CallbackUtil.DispatcherStub
             lambda$addOnPreferredMixerAttributesChangedListener$7() {
         return new PreferredMixerAttributesDispatcherStub();
@@ -5470,7 +5453,6 @@ public class AudioManager {
                 listener, "removeOnPreferredMixerAttributesChangedListener");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class PreferredMixerAttributesDispatcherStub
             extends IPreferredMixerAttributesDispatcher.Stub
             implements CallbackUtil.DispatcherStub {
@@ -5585,7 +5567,6 @@ public class AudioManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CallbackUtil.DispatcherStub
             lambda$addOnStreamAliasingChangedListener$8() {
         return new StreamAliasingDispatcherStub();
@@ -5645,7 +5626,6 @@ public class AudioManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class MuteAwaitConnectionDispatcherStub extends IMuteAwaitConnectionCallback.Stub {
         private MuteAwaitConnectionDispatcherStub() {}
 

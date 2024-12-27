@@ -158,7 +158,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
             updateSecurityViewLocation(isLeftAligned(), false);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.keyguard.KeyguardSecurityContainer.ViewMode
         public final void updatePositionByTouchX(float f) {
             boolean z = f <= ((float) this.mView.getWidth()) / 2.0f ? 1 : 0;
@@ -238,7 +237,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         public interface UserSwitcherCallback {
         }
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda0] */
         public UserSwitcherViewMode(UserSwitcherCallback userSwitcherCallback) {
             this.mUserSwitcherCallback = userSwitcherCallback;
         }
@@ -283,7 +281,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
             setupUserSwitcher();
         }
 
-        /* JADX WARN: Type inference failed for: r2v13, types: [com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$2] */
         public final void setupUserSwitcher() {
             String str;
             Drawable defaultUserIcon;

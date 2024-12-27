@@ -161,7 +161,6 @@ public class SmartClipRemoteRequestDispatcher {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchInputEventInjection(final SmartClipRemoteRequestInfo request) {
         if (request.mRequestData != null) {
             if (request.mRequestData instanceof MotionEvent) {
@@ -251,7 +250,6 @@ public class SmartClipRemoteRequestDispatcher {
         Log.e(TAG, "dispatchInputEventInjection : Empty input event!");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchScrollableAreaInfo(SmartClipRemoteRequestInfo request) {
         View rootView = this.mViewRootImplGateway.getRootView();
         if (rootView == null) {
@@ -314,7 +312,6 @@ public class SmartClipRemoteRequestDispatcher {
         sendResult(request, resultData);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchScrollableViewInfo(SmartClipRemoteRequestInfo request) {
         View rootView = this.mViewRootImplGateway.getRootView();
         if (rootView != null) {
@@ -357,7 +354,6 @@ public class SmartClipRemoteRequestDispatcher {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchAirCommandHitTest(SmartClipRemoteRequestInfo request) {
         if (this.mContext != null) {
             Bundle resultData = new Bundle();
@@ -505,7 +501,6 @@ public class SmartClipRemoteRequestDispatcher {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void enqueueInputEvent(InputEvent inputEvent, boolean processImmediately) {
         if (this.mViewRootImplGateway == null) {
             Log.e(TAG, "enqueueInputEvent : Gateway is null!");
@@ -518,7 +513,6 @@ public class SmartClipRemoteRequestDispatcher {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendResult(SmartClipRemoteRequestInfo request, Parcelable resultData) {
         SpenGestureManager spenGestureManager =
                 (SpenGestureManager)

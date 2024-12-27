@@ -41,7 +41,6 @@ public final class VirtualAudioController
     public ArraySet mPlayingAppUids = new ArraySet();
     public final Object mCallbackLock = new Object();
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.companion.virtual.audio.VirtualAudioController$$ExternalSyntheticLambda0] */
     public VirtualAudioController(Context context, AttributionSource attributionSource) {
         this.mContext = context;
         this.mAudioPlaybackDetector = new AudioPlaybackDetector(context);

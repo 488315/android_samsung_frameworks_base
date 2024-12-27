@@ -46,7 +46,6 @@ public class UsbDebuggingSecondaryUserActivity extends AlertActivity implements 
         finish();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onCreate(Bundle bundle) {
         getWindow().addSystemFlags(524288);
         super.onCreate(bundle);

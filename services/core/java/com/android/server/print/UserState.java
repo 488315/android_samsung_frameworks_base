@@ -109,7 +109,6 @@ public final class UserState {
         public final List mStartedPrinterDiscoveryTokens = new ArrayList();
         public final List mStateTrackedPrinters = new ArrayList();
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.print.UserState$PrinterDiscoverySessionMediator$1] */
         public AnonymousClass1() {
             this.this$0$1 = UserState.this;
             Handler.getMain()
@@ -470,7 +469,6 @@ public final class UserState {
             iInterface.asBinder().linkToDeath(this, 0);
         }
 
-        /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(
                 UserState userState, IPrintServicesChangeListener iPrintServicesChangeListener) {
             this(iPrintServicesChangeListener);
@@ -478,7 +476,6 @@ public final class UserState {
             this.this$0 = userState;
         }
 
-        /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(
                 UserState userState,
                 IRecommendationsChangeListener iRecommendationsChangeListener) {
@@ -743,8 +740,6 @@ public final class UserState {
         return printJobInfo;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v3, types: [java.util.List] */
     public final List getPrintJobInfos(int i) {
         int i2;
         ArrayList arrayList;
@@ -801,7 +796,6 @@ public final class UserState {
         return new ArrayList(arrayMap.values());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0049 A[Catch: all -> 0x004f, TryCatch #0 {all -> 0x004f, blocks: (B:4:0x0003, B:6:0x000f, B:8:0x003d, B:12:0x0054, B:14:0x0049, B:15:0x0051, B:17:0x0042, B:22:0x0057), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

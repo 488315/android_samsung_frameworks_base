@@ -16,7 +16,6 @@ final class ConvenienceExtensionsKt$takeUntil$1 extends RestrictedSuspendLambda 
     Object L$2;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ConvenienceExtensionsKt$takeUntil$1(Sequence sequence, Function1 function1, Continuation continuation) {
         super(2, continuation);
         this.$this_takeUntil = sequence;
@@ -34,7 +33,6 @@ final class ConvenienceExtensionsKt$takeUntil$1 extends RestrictedSuspendLambda 
     
         if (((java.lang.Boolean) r5.$pred.invoke(r1)).booleanValue() == false) goto L9;
      */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:10:0x0044 -> B:5:0x0047). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

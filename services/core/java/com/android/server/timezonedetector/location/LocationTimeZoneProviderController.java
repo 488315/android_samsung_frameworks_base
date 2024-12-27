@@ -199,7 +199,6 @@ public final class LocationTimeZoneProviderController implements Dumpable {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final LocationTimeZoneAlgorithmStatus generateCurrentAlgorithmStatus() {
         char c;
         String str = (String) this.mState.get();
@@ -593,7 +592,6 @@ public final class LocationTimeZoneProviderController implements Dumpable {
         reportEvent(locationAlgorithmEvent);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final void setState(String str) {
         char c;
         ReferenceWithHistory referenceWithHistory = this.mState;

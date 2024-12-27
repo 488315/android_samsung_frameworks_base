@@ -20,7 +20,6 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
     public static final Parcelable.Creator<HardwareBuffer> CREATOR =
             new Parcelable.Creator<
                     HardwareBuffer>() { // from class: android.hardware.HardwareBuffer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HardwareBuffer createFromParcel(Parcel in) {
                     if (in == null) {
@@ -33,7 +32,6 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
                     throw new BadParcelableException("Failed to read hardware buffer");
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HardwareBuffer[] newArray(int size) {
                     return new HardwareBuffer[size];
@@ -110,7 +108,6 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
 
     private static native boolean nIsSupported(int i, int i2, int i3, int i4, long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nReadHardwareBufferFromParcel(Parcel parcel);
 
     private static native void nWriteHardwareBufferToParcel(long j, Parcel parcel);

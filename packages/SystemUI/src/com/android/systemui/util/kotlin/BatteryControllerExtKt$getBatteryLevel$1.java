@@ -19,7 +19,6 @@ final class BatteryControllerExtKt$getBatteryLevel$1 extends SuspendLambda imple
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BatteryControllerExtKt$getBatteryLevel$1(BatteryController batteryController, Continuation continuation) {
         super(2, continuation);
         this.$this_getBatteryLevel = batteryController;
@@ -32,8 +31,6 @@ final class BatteryControllerExtKt$getBatteryLevel$1 extends SuspendLambda imple
         return batteryControllerExtKt$getBatteryLevel$1;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.util.kotlin.BatteryControllerExtKt$getBatteryLevel$1$batteryCallback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -88,7 +85,6 @@ final class BatteryControllerExtKt$getBatteryLevel$1 extends SuspendLambda imple
             ((BatteryControllerImpl) this.$this_getBatteryLevel).addCallback(r1);
             final BatteryController batteryController = this.$this_getBatteryLevel;
             Function0 function0 = new Function0() { // from class: com.android.systemui.util.kotlin.BatteryControllerExtKt$getBatteryLevel$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

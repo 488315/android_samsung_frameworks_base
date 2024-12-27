@@ -175,7 +175,6 @@ public final class GesturePointerEventListener implements CoreStartable {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.systemui.statusbar.gesture.GesturePointerEventListener$start$2] */
     @Override // com.android.systemui.CoreStartable
     public final void start() {
         if (ViewRootImpl.CLIENT_TRANSIENT) {
@@ -184,7 +183,6 @@ public final class GesturePointerEventListener implements CoreStartable {
                     super(1);
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:77:0x00fd  */
                 @Override // kotlin.jvm.functions.Function1
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

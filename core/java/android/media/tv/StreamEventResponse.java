@@ -7,14 +7,12 @@ public final class StreamEventResponse extends BroadcastInfoResponse implements 
     public static final Parcelable.Creator<StreamEventResponse> CREATOR =
             new Parcelable.Creator<
                     StreamEventResponse>() { // from class: android.media.tv.StreamEventResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StreamEventResponse createFromParcel(Parcel source) {
                     source.readInt();
                     return StreamEventResponse.createFromParcelBody(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StreamEventResponse[] newArray(int size) {
                     return new StreamEventResponse[size];

@@ -11,7 +11,6 @@ public class CoolingDevice implements Parcelable {
     public static final Parcelable.Creator<CoolingDevice> CREATOR =
             new Parcelable.Creator<
                     CoolingDevice>() { // from class: android.hardware.thermal.CoolingDevice.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CoolingDevice createFromParcel(Parcel _aidl_source) {
                     CoolingDevice _aidl_out = new CoolingDevice();
@@ -19,7 +18,6 @@ public class CoolingDevice implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CoolingDevice[] newArray(int _aidl_size) {
                     return new CoolingDevice[_aidl_size];

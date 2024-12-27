@@ -594,11 +594,6 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
 
        if (r12 == 0) goto L95;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r13v14 */
-    /* JADX WARN: Type inference failed for: r13v15, types: [int] */
-    /* JADX WARN: Type inference failed for: r13v17 */
-    /* JADX WARN: Type inference failed for: r14v14, types: [android.util.ArrayMap] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

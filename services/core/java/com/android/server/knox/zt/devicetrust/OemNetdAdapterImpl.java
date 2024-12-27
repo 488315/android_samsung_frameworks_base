@@ -148,7 +148,6 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
         return 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x0012  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -179,7 +178,6 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
                     + " com.android.server.knox.zt.devicetrust.OemNetdAdapterImpl.disablePacketTracing(java.lang.String):int");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x0012  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -335,7 +335,6 @@ public final class MediaController {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postMessage(int what, Object obj, Bundle data) {
         synchronized (this.mLock) {
             for (int i = this.mCallbacks.size() - 1; i >= 0; i--) {
@@ -578,13 +577,11 @@ public final class MediaController {
         public static final Parcelable.Creator<PlaybackInfo> CREATOR =
                 new Parcelable.Creator<PlaybackInfo>() { // from class:
                     // android.media.session.MediaController.PlaybackInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PlaybackInfo createFromParcel(Parcel in) {
                         return new PlaybackInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PlaybackInfo[] newArray(int size) {
                         return new PlaybackInfo[size];

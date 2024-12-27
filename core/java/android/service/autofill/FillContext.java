@@ -15,13 +15,11 @@ public final class FillContext implements Parcelable {
     public static final Parcelable.Creator<FillContext> CREATOR =
             new Parcelable.Creator<
                     FillContext>() { // from class: android.service.autofill.FillContext.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FillContext[] newArray(int size) {
                     return new FillContext[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FillContext createFromParcel(Parcel in) {
                     int requestId = in.readInt();
@@ -46,7 +44,6 @@ public final class FillContext implements Parcelable {
                         + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:21:0x0053 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

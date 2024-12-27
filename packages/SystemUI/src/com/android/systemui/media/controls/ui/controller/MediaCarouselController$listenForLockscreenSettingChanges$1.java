@@ -67,7 +67,6 @@ final class MediaCarouselController$listenForLockscreenSettingChanges$1 extends 
         int label;
         final /* synthetic */ MediaCarouselController this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(MediaCarouselController mediaCarouselController, Continuation continuation) {
             super(2, continuation);
             this.this$0 = mediaCarouselController;
@@ -102,7 +101,6 @@ final class MediaCarouselController$listenForLockscreenSettingChanges$1 extends 
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaCarouselController$listenForLockscreenSettingChanges$1(MediaCarouselController mediaCarouselController, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaCarouselController;
@@ -156,9 +154,6 @@ final class MediaCarouselController$listenForLockscreenSettingChanges$1 extends 
                         this.this$0 = mediaCarouselController;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:19:0x0066 A[RETURN] */
-                    /* JADX WARN: Removed duplicated region for block: B:20:0x003b  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

@@ -230,7 +230,6 @@ public class VcnManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class VcnUnderlyingNetworkPolicyListenerBinder
             extends IVcnUnderlyingNetworkPolicyListener.Stub {
         private final Executor mExecutor;
@@ -256,12 +255,10 @@ public class VcnManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onPolicyChanged$0() {
             this.mListener.onPolicyChanged();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onPolicyChanged$1() throws Exception {
             this.mExecutor.execute(
                     new Runnable() { // from class:
@@ -298,12 +295,10 @@ public class VcnManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVcnStatusChanged$0(int statusCode) {
             this.mCallback.onStatusChanged(statusCode);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVcnStatusChanged$1(final int statusCode)
                 throws Exception {
             this.mExecutor.execute(
@@ -337,7 +332,6 @@ public class VcnManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onGatewayConnectionError$3(
                 final String gatewayConnectionName, final int errorCode, final Throwable cause)
                 throws Exception {
@@ -353,7 +347,6 @@ public class VcnManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onGatewayConnectionError$2(
                 String gatewayConnectionName, int errorCode, Throwable cause) {
             this.mCallback.onGatewayConnectionError(gatewayConnectionName, errorCode, cause);

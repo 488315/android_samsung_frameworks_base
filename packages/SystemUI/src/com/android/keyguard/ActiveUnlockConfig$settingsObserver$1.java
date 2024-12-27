@@ -24,7 +24,6 @@ public final class ActiveUnlockConfig$settingsObserver$1 extends ContentObserver
     public final Uri wakeupsConsideredUnlockIntentsUri;
     public final Uri wakeupsToForceDismissKeyguardUri;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ActiveUnlockConfig$settingsObserver$1(ActiveUnlockConfig activeUnlockConfig, Handler handler) {
         super(handler);
         this.this$0 = activeUnlockConfig;

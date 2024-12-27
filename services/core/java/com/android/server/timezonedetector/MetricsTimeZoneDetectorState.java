@@ -65,10 +65,6 @@ public final class MetricsTimeZoneDetectorState {
         this.mLatestGeolocationSuggestion = metricsTimeZoneSuggestion3;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r8v0, types: [com.android.server.timezonedetector.MetricsTimeZoneDetectorState$MetricsTimeZoneSuggestion] */
-    /* JADX WARN: Type inference failed for: r9v2, types: [com.android.server.timezonedetector.MetricsTimeZoneDetectorState$MetricsTimeZoneSuggestion] */
-    /* JADX WARN: Type inference failed for: r9v4, types: [com.android.server.timezonedetector.MetricsTimeZoneDetectorState$MetricsTimeZoneSuggestion] */
     public static MetricsTimeZoneDetectorState create(
             OrdinalGenerator ordinalGenerator,
             ConfigurationInternal configurationInternal,

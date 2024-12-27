@@ -264,8 +264,6 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
         this.wrapStream.erase();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0044 A[Catch: all -> 0x0063, TRY_LEAVE, TryCatch #0 {all -> 0x0063, blocks: (B:5:0x0009, B:23:0x000e, B:10:0x003f, B:12:0x0044, B:16:0x004f, B:17:0x0057, B:9:0x002c, B:26:0x0022, B:27:0x002b, B:20:0x0059, B:21:0x0062), top: B:4:0x0009, inners: #1, #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x004f A[Catch: all -> 0x0063, TRY_ENTER, TryCatch #0 {all -> 0x0063, blocks: (B:5:0x0009, B:23:0x000e, B:10:0x003f, B:12:0x0044, B:16:0x004f, B:17:0x0057, B:9:0x002c, B:26:0x0022, B:27:0x002b, B:20:0x0059, B:21:0x0062), top: B:4:0x0009, inners: #1, #2 }] */
     @Override // javax.crypto.CipherSpi
     /*
         Code decompiled incorrectly, please refer to instructions dump.

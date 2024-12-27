@@ -75,21 +75,6 @@ public final class QSSecurityFooterUtils implements DialogInterface.OnClickListe
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v12, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v13, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v14, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3] */
     public QSSecurityFooterUtils(Context context, DevicePolicyManager devicePolicyManager, UserTracker userTracker, Handler handler, ActivityStarter activityStarter, SecurityController securityController, Looper looper, DialogTransitionAnimator dialogTransitionAnimator) {
         final int i = 0;
         this.mManagementTitleSupplier = new Supplier(this) { // from class: com.android.systemui.qs.QSSecurityFooterUtils$$ExternalSyntheticLambda3

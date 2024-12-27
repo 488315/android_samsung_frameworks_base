@@ -174,7 +174,6 @@ public class ViewDebug {
         MOVE_FROM_ACTIVE_TO_SCRAP_HEAP
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     abstract static class PropertyInfo<T extends Annotation, R extends AccessibleObject & Member> {
         public final R member;
         public final String name;
@@ -192,7 +191,6 @@ public class ViewDebug {
             this.returnType = cls2;
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         public static <T extends Annotation> PropertyInfo<T, ?> forMethod(
                 Method method, Class<T> property) {
             try {
@@ -213,7 +211,6 @@ public class ViewDebug {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         public static <T extends Annotation> PropertyInfo<T, ?> forField(
                 Field field, Class<T> property) {
             if (!field.isAnnotationPresent(property)) {
@@ -993,7 +990,6 @@ public class ViewDebug {
         return data;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private static View findView(ViewGroup group, String className, int hashCode) {
         View found;
         View found2;
@@ -1111,8 +1107,6 @@ public class ViewDebug {
         } while (klass != Object.class);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Multi-variable type inference failed */
     public static void dumpViewHierarchyOnUIThread(
             Context context,
             ViewGroup viewGroup,

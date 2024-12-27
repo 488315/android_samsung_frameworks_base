@@ -19,8 +19,6 @@ public final class PowerStatsHALWrapper$VintfHalCache implements Supplier, IBind
         this.mInstance = null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v7, types: [android.hardware.power.stats.IPowerStats] */
     @Override // java.util.function.Supplier
     public final Object get() {
         IPowerStats iPowerStats;

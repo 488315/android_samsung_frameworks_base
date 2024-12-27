@@ -6,8 +6,6 @@ import com.sec.ims.volte2.data.VolteConstants;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public class FaceAuthUiEvent implements UiEventLogger.UiEventEnum {
     public static final /* synthetic */ FaceAuthUiEvent[] $VALUES;
     public static final FaceAuthUiEvent FACE_AUTH_ACCESSIBILITY_ACTION;

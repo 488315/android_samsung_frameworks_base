@@ -8,13 +8,11 @@ public class SemImsRegistrationError implements Parcelable {
             new Parcelable.Creator<
                     SemImsRegistrationError>() { // from class:
                                                  // com.samsung.android.ims.SemImsRegistrationError.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemImsRegistrationError createFromParcel(Parcel in) {
                     return new SemImsRegistrationError(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemImsRegistrationError[] newArray(int size) {
                     return new SemImsRegistrationError[size];

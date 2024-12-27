@@ -219,7 +219,6 @@ public interface IGnssDebug extends IInterface {
         public static final Parcelable.Creator<TimeDebug> CREATOR =
                 new Parcelable.Creator<
                         TimeDebug>() { // from class: android.hardware.gnss.IGnssDebug.TimeDebug.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TimeDebug createFromParcel(Parcel _aidl_source) {
                         TimeDebug _aidl_out = new TimeDebug();
@@ -227,7 +226,6 @@ public interface IGnssDebug extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TimeDebug[] newArray(int _aidl_size) {
                         return new TimeDebug[_aidl_size];
@@ -309,7 +307,6 @@ public interface IGnssDebug extends IInterface {
         public static final Parcelable.Creator<PositionDebug> CREATOR =
                 new Parcelable.Creator<PositionDebug>() { // from class:
                     // android.hardware.gnss.IGnssDebug.PositionDebug.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PositionDebug createFromParcel(Parcel _aidl_source) {
                         PositionDebug _aidl_out = new PositionDebug();
@@ -317,7 +314,6 @@ public interface IGnssDebug extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PositionDebug[] newArray(int _aidl_size) {
                         return new PositionDebug[_aidl_size];
@@ -479,7 +475,6 @@ public interface IGnssDebug extends IInterface {
         public static final Parcelable.Creator<SatelliteData> CREATOR =
                 new Parcelable.Creator<SatelliteData>() { // from class:
                     // android.hardware.gnss.IGnssDebug.SatelliteData.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SatelliteData createFromParcel(Parcel _aidl_source) {
                         SatelliteData _aidl_out = new SatelliteData();
@@ -487,7 +482,6 @@ public interface IGnssDebug extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SatelliteData[] newArray(int _aidl_size) {
                         return new SatelliteData[_aidl_size];
@@ -619,7 +613,6 @@ public interface IGnssDebug extends IInterface {
         public static final Parcelable.Creator<DebugData> CREATOR =
                 new Parcelable.Creator<
                         DebugData>() { // from class: android.hardware.gnss.IGnssDebug.DebugData.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DebugData createFromParcel(Parcel _aidl_source) {
                         DebugData _aidl_out = new DebugData();
@@ -627,7 +620,6 @@ public interface IGnssDebug extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DebugData[] newArray(int _aidl_size) {
                         return new DebugData[_aidl_size];

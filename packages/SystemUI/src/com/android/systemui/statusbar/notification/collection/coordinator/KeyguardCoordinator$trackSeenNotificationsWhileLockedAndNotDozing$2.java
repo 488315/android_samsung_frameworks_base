@@ -28,7 +28,6 @@ final class KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2 
         int label;
         final /* synthetic */ KeyguardCoordinator this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(KeyguardCoordinator keyguardCoordinator, Map<NotificationEntry, Job> map, Set<NotificationEntry> set, Continuation continuation) {
             super(2, continuation);
             this.this$0 = keyguardCoordinator;
@@ -75,7 +74,6 @@ final class KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2 
         int label;
         final /* synthetic */ KeyguardCoordinator this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(KeyguardCoordinator keyguardCoordinator, Map<NotificationEntry, Job> map, Continuation continuation) {
             super(2, continuation);
             this.this$0 = keyguardCoordinator;
@@ -114,16 +112,12 @@ final class KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2 
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2(KeyguardCoordinator keyguardCoordinator, Set<NotificationEntry> set, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardCoordinator;
         this.$notificationsSeenWhileLocked = set;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -175,9 +169,6 @@ final class KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2 
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.coordinator.KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2.invokeSuspend$stopTrackingRemovedNotifs(com.android.systemui.statusbar.notification.collection.coordinator.KeyguardCoordinator, java.util.Map, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -229,9 +220,6 @@ final class KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2 
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.coordinator.KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2.invokeSuspend$trackNewUnseenNotifs(com.android.systemui.statusbar.notification.collection.coordinator.KeyguardCoordinator, java.util.Map, java.util.Set, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0042  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

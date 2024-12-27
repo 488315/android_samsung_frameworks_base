@@ -29,7 +29,6 @@ public class MarshalQueryableRecommendedStreamConfiguration
             byteBuffer.putInt(recommendedStreamConfiguration.getUsecaseBitmap());
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public RecommendedStreamConfiguration unmarshal(ByteBuffer buffer) {
             int width = buffer.getInt();

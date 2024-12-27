@@ -10,13 +10,11 @@ public class SemContextMovementAlert extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextMovementAlert>() { // from class:
                                                  // com.samsung.android.hardware.context.SemContextMovementAlert.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextMovementAlert createFromParcel(Parcel in) {
                     return new SemContextMovementAlert(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextMovementAlert[] newArray(int size) {
                     return new SemContextMovementAlert[size];

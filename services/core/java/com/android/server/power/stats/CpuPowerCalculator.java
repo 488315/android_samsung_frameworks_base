@@ -51,13 +51,6 @@ public final class CpuPowerCalculator extends PowerCalculator {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0067  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00a4  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00ff  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x01fa  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x01ff  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x0103  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x008a  */
     @Override // com.android.server.power.stats.PowerCalculator
     /*
         Code decompiled incorrectly, please refer to instructions dump.

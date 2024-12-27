@@ -55,7 +55,6 @@ public final class GalaxyRegistryService extends IGalaxyRegistryService.Stub
                         };
         public IBinder mWatcher;
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.sepunion.GalaxyRegistryService$GalaxyRegistryServiceMonitor$$ExternalSyntheticLambda0] */
         public GalaxyRegistryServiceMonitor() {}
 
         @Override // android.os.IBinder.DeathRecipient
@@ -107,7 +106,6 @@ public final class GalaxyRegistryService extends IGalaxyRegistryService.Stub
         Slog.d("GalaxyRegistryService", "startService()");
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.sepunion.GalaxyRegistryService$1] */
     public GalaxyRegistryService(Context context) {
         this.mContext = context;
     }

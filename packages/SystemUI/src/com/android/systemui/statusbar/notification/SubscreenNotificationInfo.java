@@ -111,13 +111,6 @@ public final class SubscreenNotificationInfo implements Parcelable {
         this.mContext = context;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0067  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x006b  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0041  */
-    /* JADX WARN: Type inference failed for: r9v0, types: [android.content.Context] */
-    /* JADX WARN: Type inference failed for: r9v1 */
-    /* JADX WARN: Type inference failed for: r9v3, types: [android.database.Cursor] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

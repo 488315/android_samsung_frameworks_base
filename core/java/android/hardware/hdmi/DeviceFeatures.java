@@ -54,7 +54,6 @@ public class DeviceFeatures {
         return builder.build();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int updateFeatureSupportStatus(int oldStatus, int newStatus) {
         if (newStatus == 2) {
             return oldStatus;

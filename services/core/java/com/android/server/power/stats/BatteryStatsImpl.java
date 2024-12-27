@@ -594,10 +594,6 @@ public final class BatteryStatsImpl extends BatteryStats {
             this.val$initialTimeMs = j;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r10v10, types: [android.os.Parcel] */
-        /* JADX WARN: Type inference failed for: r10v13 */
-        /* JADX WARN: Type inference failed for: r10v14 */
         @Override // java.lang.Runnable
         public final void run() {
             switch (this.$r8$classId) {
@@ -753,7 +749,6 @@ public final class BatteryStatsImpl extends BatteryStats {
             this.mPowerStatsThrottlePeriods = Map.of();
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public BatteryStatsConfig(Builder builder) {
             boolean z = builder.mResetOnUnplugHighBatteryLevel;
             this.mFlags = builder.mResetOnUnplugAfterSignificantCharge ? (z ? 1 : 0) | 2 : z;
@@ -1329,8 +1324,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         public CustomTelephonyCallback() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:10:0x002c A[Catch: all -> 0x0047, TryCatch #0 {all -> 0x0047, blocks: (B:3:0x0001, B:10:0x002c, B:11:0x003a, B:14:0x0040, B:15:0x0045, B:18:0x0049, B:19:0x004e, B:24:0x0035, B:25:0x0038), top: B:2:0x0001 }] */
-        /* JADX WARN: Removed duplicated region for block: B:21:0x002f  */
         @Override // android.telephony.TelephonyCallback.ServiceStateListener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -2948,7 +2941,6 @@ public final class BatteryStatsImpl extends BatteryStats {
                 this.mUid = i;
             }
 
-            /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
             public AnonymousClass1(Uid uid, BatteryStatsImpl batteryStatsImpl, int i, int i2) {
                 this(i);
                 this.$r8$classId = i2;
@@ -4866,8 +4858,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         SUPPORTED_PER_PROCESS_STATE_STANDARD_ENERGY_BUCKETS = new int[]{3, 7, 4, 5};
     }
 
-    /* JADX WARN: Type inference failed for: r13v15, types: [com.android.server.power.stats.BatteryStatsImpl$$ExternalSyntheticLambda2] */
-    /* JADX WARN: Type inference failed for: r8v1, types: [com.android.server.power.stats.BatteryStatsImpl$3] */
     public BatteryStatsImpl(BatteryStatsConfig batteryStatsConfig, Clock clock, MonotonicClock monotonicClock, File file, Handler handler, PlatformIdleStateCallback platformIdleStateCallback, EnergyStatsRetriever energyStatsRetriever, UserInfoProvider userInfoProvider, PowerProfile powerProfile, CpuScalingPolicies cpuScalingPolicies, PowerStatsUidResolver powerStatsUidResolver) {
         FrameworkStatsLogger frameworkStatsLogger = new FrameworkStatsLogger();
         BatteryStatsHistory.TraceDelegate traceDelegate = new BatteryStatsHistory.TraceDelegate();
@@ -5383,14 +5373,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         return strArr2;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v1 */
-    /* JADX WARN: Type inference failed for: r0v10 */
-    /* JADX WARN: Type inference failed for: r0v2, types: [int] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [java.io.BufferedReader] */
-    /* JADX WARN: Type inference failed for: r0v8 */
-    /* JADX WARN: Type inference failed for: r0v9 */
     public static int getBatteryLevel() {
         ?? r0;
         try {
@@ -8197,7 +8179,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x001d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8251,16 +8232,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0068  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x008a  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00b4  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0087  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0027  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8460,14 +8431,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         maybeUpdateOverallScreenBrightness(evaluateOverallScreenBrightnessBinLocked, i2, j, j2);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:193:0x0366  */
-    /* JADX WARN: Removed duplicated region for block: B:228:0x0123  */
-    /* JADX WARN: Removed duplicated region for block: B:232:0x0129  */
-    /* JADX WARN: Removed duplicated region for block: B:239:0x0198  */
-    /* JADX WARN: Removed duplicated region for block: B:246:0x01ac  */
-    /* JADX WARN: Removed duplicated region for block: B:273:0x015d  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x035e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8673,7 +8636,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void noteUidProcessStateLocked(int i, int i2, long j, long j2) {
         boolean z;
         int mapUid = mapUid(i);
@@ -9507,8 +9469,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x00aa  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00c2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -9525,7 +9485,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         return networkStatsManager.getMobileUidStats();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void readSummaryFromParcel(Parcel parcel) {
         long j;
         Uid uid;
@@ -10777,7 +10736,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(9:112|(23:(2:114|(26:116|117|118|119|120|121|123|124|(4:214|215|216|217)(6:126|127|128|129|(12:131|132|133|134|135|136|137|138|139|140|(5:142|143|(1:(5:145|146|(3:148|149|(2:151|(3:155|156|157))(2:179|180))(1:181)|153|154)(2:194|195))|158|(3:160|(3:162|(2:164|165)(1:167)|166)|168))(1:197)|169)(3:207|208|209)|170)|171|(1:173)|174|(1:177)|178|52|(1:54)|55|(1:57)(1:107)|58|59|(1:61)|62|(1:64)(2:103|(1:105)(1:106))|65|(2:67|(1:69)(2:70|(1:72)(1:73)))|74))(1:252)|120|121|123|124|(0)(0)|171|(0)|174|(1:177)|178|52|(0)|55|(0)(0)|58|59|(0)|62|(0)(0)|65|(0)|74)|242|(1:246)|248|(1:250)|117|118|119) */
     /* JADX WARN: Code restructure failed: missing block: B:236:0x038c, code lost:
     
         r0 = e;
@@ -10806,78 +10764,6 @@ public final class BatteryStatsImpl extends BatteryStats {
     
         if (r46 >= 80) goto L99;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x04e2  */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x049c  */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x027b A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:173:0x040e  */
-    /* JADX WARN: Removed duplicated region for block: B:176:0x0442 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:214:0x0243 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:253:0x0539  */
-    /* JADX WARN: Removed duplicated region for block: B:258:0x05af  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00e2  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00eb  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x017b  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0469  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x048c  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x04a5  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x04d0  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x050e  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0594  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x077a  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x078e  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x07c2  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x07c5  */
-    /* JADX WARN: Type inference failed for: r19v1 */
-    /* JADX WARN: Type inference failed for: r19v10 */
-    /* JADX WARN: Type inference failed for: r19v11 */
-    /* JADX WARN: Type inference failed for: r19v12 */
-    /* JADX WARN: Type inference failed for: r19v13 */
-    /* JADX WARN: Type inference failed for: r19v14 */
-    /* JADX WARN: Type inference failed for: r19v16 */
-    /* JADX WARN: Type inference failed for: r19v18 */
-    /* JADX WARN: Type inference failed for: r19v22 */
-    /* JADX WARN: Type inference failed for: r19v3 */
-    /* JADX WARN: Type inference failed for: r19v32 */
-    /* JADX WARN: Type inference failed for: r19v4 */
-    /* JADX WARN: Type inference failed for: r19v5 */
-    /* JADX WARN: Type inference failed for: r19v7 */
-    /* JADX WARN: Type inference failed for: r19v8 */
-    /* JADX WARN: Type inference failed for: r19v9 */
-    /* JADX WARN: Type inference failed for: r22v0, types: [int] */
-    /* JADX WARN: Type inference failed for: r22v1 */
-    /* JADX WARN: Type inference failed for: r22v13, types: [java.io.FileOutputStream] */
-    /* JADX WARN: Type inference failed for: r22v2 */
-    /* JADX WARN: Type inference failed for: r22v3 */
-    /* JADX WARN: Type inference failed for: r22v5 */
-    /* JADX WARN: Type inference failed for: r22v6 */
-    /* JADX WARN: Type inference failed for: r22v7 */
-    /* JADX WARN: Type inference failed for: r22v9 */
-    /* JADX WARN: Type inference failed for: r2v65, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r2v66 */
-    /* JADX WARN: Type inference failed for: r2v67 */
-    /* JADX WARN: Type inference failed for: r2v68 */
-    /* JADX WARN: Type inference failed for: r2v70, types: [java.io.PrintWriter] */
-    /* JADX WARN: Type inference failed for: r2v71 */
-    /* JADX WARN: Type inference failed for: r2v72 */
-    /* JADX WARN: Type inference failed for: r2v73 */
-    /* JADX WARN: Type inference failed for: r2v76 */
-    /* JADX WARN: Type inference failed for: r2v80 */
-    /* JADX WARN: Type inference failed for: r2v81 */
-    /* JADX WARN: Type inference failed for: r2v82, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r8v0 */
-    /* JADX WARN: Type inference failed for: r8v10 */
-    /* JADX WARN: Type inference failed for: r8v11 */
-    /* JADX WARN: Type inference failed for: r8v12 */
-    /* JADX WARN: Type inference failed for: r8v13 */
-    /* JADX WARN: Type inference failed for: r8v14 */
-    /* JADX WARN: Type inference failed for: r8v15 */
-    /* JADX WARN: Type inference failed for: r8v16 */
-    /* JADX WARN: Type inference failed for: r8v27 */
-    /* JADX WARN: Type inference failed for: r8v36 */
-    /* JADX WARN: Type inference failed for: r8v4 */
-    /* JADX WARN: Type inference failed for: r8v5 */
-    /* JADX WARN: Type inference failed for: r8v6 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -11201,9 +11087,6 @@ public final class BatteryStatsImpl extends BatteryStats {
     
         if (r27 != 0) goto L90;
      */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x036d  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x038e  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x03a3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -12351,8 +12234,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         typedXmlSerializer.endDocument();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v3, types: [java.util.concurrent.locks.ReentrantLock] */
     public final void writeParcelToFileLocked(Parcel parcel, AtomicFile atomicFile) {
         this.mWriteLock.lock();
         FileOutputStream fileOutputStream = null;
@@ -12376,10 +12257,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r15v18, types: [int] */
-    /* JADX WARN: Type inference failed for: r15v54 */
-    /* JADX WARN: Type inference failed for: r15v55 */
     public final void writeSummaryToParcel(Parcel parcel, boolean z) {
         int i;
         int i2;

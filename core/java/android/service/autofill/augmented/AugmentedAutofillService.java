@@ -53,7 +53,6 @@ public abstract class AugmentedAutofillService extends Service {
     private Handler mHandler;
     private ComponentName mServiceComponentName;
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class AugmentedAutofillServiceImpl extends IAugmentedAutofillService.Stub {
         private AugmentedAutofillServiceImpl() {}
 
@@ -219,7 +218,6 @@ public abstract class AugmentedAutofillService extends Service {
 
     public void onDisconnected() {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnConnected(boolean debug, boolean verbose) {
         if (sDebug || debug) {
             Log.d(TAG, "handleOnConnected(): debug=" + debug + ", verbose=" + verbose);
@@ -229,12 +227,10 @@ public abstract class AugmentedAutofillService extends Service {
         onConnected();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnDisconnected() {
         onDisconnected();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnFillRequest(
             int sessionId,
             IBinder client,
@@ -296,7 +292,6 @@ public abstract class AugmentedAutofillService extends Service {
                 new FillCallback(proxy));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnDestroyAllFillWindowsRequest() {
         if (this.mAutofillProxies != null) {
             int size = this.mAutofillProxies.size();
@@ -323,7 +318,6 @@ public abstract class AugmentedAutofillService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnUnbind() {
         if (this.mAutofillProxies == null) {
             if (sDebug) {
@@ -511,12 +505,10 @@ public abstract class AugmentedAutofillService extends Service {
             this.mClient.requestHideFillUi(this.mSessionId, this.mFocusedId);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean requestAutofill() throws RemoteException {
             return this.mClient.requestAutofill(this.mSessionId, this.mFocusedId);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void update(
                 AutofillId focusedId,
                 AutofillValue focusedValue,
@@ -724,7 +716,6 @@ public abstract class AugmentedAutofillService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void destroy() {
             synchronized (this.mLock) {
                 if (this.mFillWindow != null) {

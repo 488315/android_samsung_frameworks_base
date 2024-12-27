@@ -179,8 +179,6 @@ public final class SettingsHelper {
                 -1);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:62:0x0189  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0191  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -292,8 +290,6 @@ public final class SettingsHelper {
         ((CopyOnWriteArrayList) this.mListeners).add(onSettingChangedListener);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:13:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

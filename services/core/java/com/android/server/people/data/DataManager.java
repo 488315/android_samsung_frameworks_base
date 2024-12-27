@@ -106,10 +106,6 @@ public final class DataManager {
             DataManager.m750$$Nest$mforAllUnlockedUsers(DataManager.this, new DataManager$MmsSmsContentObserver$$ExternalSyntheticLambda0((String) obj, (Event) obj2, 1));
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:29:0x00ba A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:38:? A[Catch: SecurityException -> 0x003e, SYNTHETIC, TRY_LEAVE, TryCatch #3 {SecurityException -> 0x003e, blocks: (B:3:0x0023, B:53:0x003a, B:37:0x00c3, B:36:0x00c0, B:41:0x00b3, B:30:0x00ba), top: B:2:0x0023, inners: #4 }] */
-        /* JADX WARN: Removed duplicated region for block: B:44:0x00d9  */
-        /* JADX WARN: Removed duplicated region for block: B:46:? A[RETURN, SYNTHETIC] */
         @Override // android.database.ContentObserver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -633,7 +629,6 @@ public final class DataManager {
         public long mLastEventTimestamp;
         public final UsageStatsQueryHelper mUsageStatsQueryHelper;
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.people.data.DataManager$UsageStatsQueryRunnable$$ExternalSyntheticLambda0] */
         public UsageStatsQueryRunnable(final int i) {
             ?? r0 = new Function() { // from class: com.android.server.people.data.DataManager$UsageStatsQueryRunnable$$ExternalSyntheticLambda0
                 @Override // java.util.function.Function
@@ -784,7 +779,6 @@ public final class DataManager {
         return str.startsWith("video/") ? 6 : 7;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0100  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

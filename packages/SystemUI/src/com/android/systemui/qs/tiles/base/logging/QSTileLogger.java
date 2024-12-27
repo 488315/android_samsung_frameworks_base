@@ -109,7 +109,6 @@ public final class QSTileLogger {
     public final void logError(TileSpec tileSpec, final String str, Throwable th) {
         LogBuffer logBuffer = getLogBuffer(tileSpec);
         logBuffer.commit(logBuffer.obtain(getLogTag(tileSpec), LogLevel.ERROR, new Function1() { // from class: com.android.systemui.qs.tiles.base.logging.QSTileLogger$logError$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -223,7 +222,6 @@ public final class QSTileLogger {
     public final void logUserActionRejectedByPolicy(QSTileUserAction qSTileUserAction, TileSpec tileSpec, final String str) {
         LogBuffer logBuffer = getLogBuffer(tileSpec);
         LogMessage obtain = logBuffer.obtain(getLogTag(tileSpec), LogLevel.DEBUG, new Function1() { // from class: com.android.systemui.qs.tiles.base.logging.QSTileLogger$logUserActionRejectedByPolicy$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

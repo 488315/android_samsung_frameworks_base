@@ -14,7 +14,6 @@ final class UdfpsControllerOverlay$addViewNowOrLater$2 extends SuspendLambda imp
     int label;
     final /* synthetic */ UdfpsControllerOverlay this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UdfpsControllerOverlay$addViewNowOrLater$2(UdfpsControllerOverlay udfpsControllerOverlay, Continuation continuation) {
         super(2, continuation);
         this.this$0 = udfpsControllerOverlay;

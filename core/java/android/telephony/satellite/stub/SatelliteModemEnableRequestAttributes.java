@@ -9,7 +9,6 @@ public class SatelliteModemEnableRequestAttributes implements Parcelable {
             new Parcelable.Creator<
                     SatelliteModemEnableRequestAttributes>() { // from class:
                                                                // android.telephony.satellite.stub.SatelliteModemEnableRequestAttributes.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteModemEnableRequestAttributes createFromParcel(Parcel _aidl_source) {
                     SatelliteModemEnableRequestAttributes _aidl_out =
@@ -18,7 +17,6 @@ public class SatelliteModemEnableRequestAttributes implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteModemEnableRequestAttributes[] newArray(int _aidl_size) {
                     return new SatelliteModemEnableRequestAttributes[_aidl_size];

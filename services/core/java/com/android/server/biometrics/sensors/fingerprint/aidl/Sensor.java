@@ -66,7 +66,6 @@ public class Sensor {
             this.val$lockoutResetDispatcher = lockoutResetDispatcher;
         }
 
-        /* JADX WARN: Type inference failed for: r12v1, types: [com.android.server.biometrics.sensors.fingerprint.aidl.Sensor$$ExternalSyntheticLambda4] */
         @Override // com.android.server.biometrics.sensors.UserSwitchProvider
         public final StartUserClient getStartUserClient(final int i) {
             final Sensor sensor = Sensor.this;

@@ -21,7 +21,6 @@ public final class AuthenticationRepositoryImpl$special$$inlined$flatMapLatest$1
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AuthenticationRepositoryImpl$special$$inlined$flatMapLatest$1(Continuation continuation, BroadcastDispatcher broadcastDispatcher) {
         super(3, continuation);
         this.$broadcastDispatcher$inlined = broadcastDispatcher;
@@ -74,8 +73,6 @@ public final class AuthenticationRepositoryImpl$special$$inlined$flatMapLatest$1
                         this.$selectedUserId$inlined = i;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

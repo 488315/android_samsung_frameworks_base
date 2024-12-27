@@ -703,17 +703,6 @@ public class PluginLockWallpaper extends AbstractPluginLockItem {
     
         if (r2.getBitmap() == null) goto L107;
      */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00c9  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x014f  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0177  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0197  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x01a2  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x01a6  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x01a9  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x017a  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x00ea  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x00fa  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x00cd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

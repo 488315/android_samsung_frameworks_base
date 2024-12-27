@@ -23,13 +23,11 @@ public class DisplayResolveInfo implements TargetInfo, Parcelable {
             new Parcelable.Creator<
                     DisplayResolveInfo>() { // from class:
                                             // com.android.internal.app.chooser.DisplayResolveInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisplayResolveInfo createFromParcel(Parcel in) {
                     return new DisplayResolveInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisplayResolveInfo[] newArray(int size) {
                     return new DisplayResolveInfo[size];

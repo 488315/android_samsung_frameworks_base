@@ -22,7 +22,6 @@ public final class KeyguardQuickAffordancesCombinedViewModel$button$$inlined$fla
     int label;
     final /* synthetic */ KeyguardQuickAffordancesCombinedViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordancesCombinedViewModel$button$$inlined$flatMapLatest$1(Continuation continuation, KeyguardQuickAffordancesCombinedViewModel keyguardQuickAffordancesCombinedViewModel, KeyguardQuickAffordancePosition keyguardQuickAffordancePosition) {
         super(3, continuation);
         this.this$0 = keyguardQuickAffordancesCombinedViewModel;

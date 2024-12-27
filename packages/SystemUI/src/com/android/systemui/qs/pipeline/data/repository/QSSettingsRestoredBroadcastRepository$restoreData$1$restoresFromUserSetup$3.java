@@ -14,7 +14,6 @@ final class QSSettingsRestoredBroadcastRepository$restoreData$1$restoresFromUser
     /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QSSettingsRestoredBroadcastRepository$restoreData$1$restoresFromUserSetup$3(QSPipelineLogger qSPipelineLogger, Continuation continuation) {
         super(2, continuation);
         this.$logger = qSPipelineLogger;

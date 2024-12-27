@@ -158,7 +158,6 @@ public abstract class ExploreByTouchHelper extends View.AccessibilityDelegate {
         return event;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public AccessibilityNodeInfo createNode(int virtualViewId) {
         switch (virtualViewId) {
             case -1:
@@ -251,7 +250,6 @@ public abstract class ExploreByTouchHelper extends View.AccessibilityDelegate {
         this.mTempScreenRect = new Rect();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean performAction(int virtualViewId, int action, Bundle arguments) {
         switch (virtualViewId) {
             case -1:

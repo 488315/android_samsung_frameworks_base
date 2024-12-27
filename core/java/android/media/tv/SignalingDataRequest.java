@@ -15,13 +15,11 @@ public final class SignalingDataRequest extends BroadcastInfoRequest implements 
     public static final Parcelable.Creator<SignalingDataRequest> CREATOR =
             new Parcelable.Creator<
                     SignalingDataRequest>() { // from class: android.media.tv.SignalingDataRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignalingDataRequest[] newArray(int size) {
                     return new SignalingDataRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignalingDataRequest createFromParcel(Parcel in) {
                     return new SignalingDataRequest(in);

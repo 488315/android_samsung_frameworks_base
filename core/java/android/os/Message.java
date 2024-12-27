@@ -26,7 +26,6 @@ public final class Message implements Parcelable {
     private static boolean gCheckRecycle = true;
     public static final Parcelable.Creator<Message> CREATOR =
             new Parcelable.Creator<Message>() { // from class: android.os.Message.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Message createFromParcel(Parcel source) {
                     Message msg = Message.obtain();
@@ -34,7 +33,6 @@ public final class Message implements Parcelable {
                     return msg;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Message[] newArray(int size) {
                     return new Message[size];
@@ -336,7 +334,6 @@ public final class Message implements Parcelable {
         dest.writeInt(this.workSourceUid);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void readFromParcel(Parcel source) {
         this.what = source.readInt();
         this.arg1 = source.readInt();

@@ -44,7 +44,6 @@ public final class TileServiceManager {
     public final UserTracker mUserTracker;
     public boolean mWaitingUnlock;
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -209,8 +208,6 @@ public final class TileServiceManager {
         handler.postDelayed(anonymousClass2, this.mIsChinaModel ? 10000L : 30000L);
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.qs.external.TileServiceManager$1] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.qs.external.TileServiceManager$2] */
     public TileServiceManager(TileServices tileServices, Handler handler, UserTracker userTracker, CustomTileAddedRepository customTileAddedRepository, TileLifecycleManager tileLifecycleManager) {
         this.mPendingBind = true;
         this.mStarted = false;

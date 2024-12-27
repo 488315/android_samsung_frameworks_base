@@ -8,7 +8,6 @@ public class DemuxFilterSectionBits implements Parcelable {
     public static final Parcelable.Creator<DemuxFilterSectionBits> CREATOR =
             new Parcelable.Creator<DemuxFilterSectionBits>() { // from class:
                 // android.hardware.tv.tuner.DemuxFilterSectionBits.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterSectionBits createFromParcel(Parcel _aidl_source) {
                     DemuxFilterSectionBits _aidl_out = new DemuxFilterSectionBits();
@@ -16,7 +15,6 @@ public class DemuxFilterSectionBits implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterSectionBits[] newArray(int _aidl_size) {
                     return new DemuxFilterSectionBits[_aidl_size];

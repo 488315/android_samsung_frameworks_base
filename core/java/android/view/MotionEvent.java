@@ -423,14 +423,12 @@ public final class MotionEvent extends InputEvent implements Parcelable {
         gRecyclerLock = new Object();
         gSharedTempLock = new Object();
         CREATOR = new Parcelable.Creator<MotionEvent>() { // from class: android.view.MotionEvent.1
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public MotionEvent createFromParcel(Parcel in) {
                 in.readInt();
                 return MotionEvent.createFromParcelBody(in);
             }
 
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public MotionEvent[] newArray(int size) {
                 return new MotionEvent[size];
@@ -1749,7 +1747,6 @@ public final class MotionEvent extends InputEvent implements Parcelable {
             return false;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean equals(PointerProperties other) {
             return other != null && this.id == other.id && this.toolType == other.toolType;
         }

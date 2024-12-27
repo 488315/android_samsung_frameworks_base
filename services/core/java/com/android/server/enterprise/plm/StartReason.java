@@ -1,7 +1,5 @@
 package com.android.server.enterprise.plm;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class StartReason {
     public static final /* synthetic */ StartReason[] $VALUES;
     public static final StartReason EDM_SERVICE_READY;

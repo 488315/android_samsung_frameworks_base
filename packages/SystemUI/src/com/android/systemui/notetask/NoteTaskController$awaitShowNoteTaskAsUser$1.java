@@ -11,7 +11,6 @@ final class NoteTaskController$awaitShowNoteTaskAsUser$1 extends ContinuationImp
     /* synthetic */ Object result;
     final /* synthetic */ NoteTaskController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NoteTaskController$awaitShowNoteTaskAsUser$1(NoteTaskController noteTaskController, Continuation continuation) {
         super(continuation);
         this.this$0 = noteTaskController;

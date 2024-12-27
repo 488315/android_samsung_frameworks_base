@@ -122,7 +122,6 @@ public final class SecColorSchemeTransition {
         final SecColorSchemeTransition$bgGradientStart$1 secColorSchemeTransition$bgGradientStart$1 = SecColorSchemeTransition$bgGradientStart$1.INSTANCE;
         final float f = 0.45f;
         SecAnimatingColorTransition secAnimatingColorTransition4 = (SecAnimatingColorTransition) function3.invoke(valueOf, new Function1() { // from class: com.android.systemui.media.controls.ui.SecColorSchemeTransition$albumGradientPicker$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -162,7 +161,6 @@ public final class SecColorSchemeTransition {
         final SecColorSchemeTransition$bgGradientEnd$1 secColorSchemeTransition$bgGradientEnd$1 = SecColorSchemeTransition$bgGradientEnd$1.INSTANCE;
         final float f2 = 1.0f;
         SecAnimatingColorTransition secAnimatingColorTransition5 = (SecAnimatingColorTransition) function3.invoke(valueOf2, new Function1() { // from class: com.android.systemui.media.controls.ui.SecColorSchemeTransition$albumGradientPicker$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

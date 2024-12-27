@@ -39,8 +39,6 @@ public final class IsrbManagerServiceImpl extends IIsrbManager.Stub {
             super(looper);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v6, types: [android.content.BroadcastReceiver, com.android.server.isrb.IsrbManagerServiceImpl$1] */
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
             int i = message.what;

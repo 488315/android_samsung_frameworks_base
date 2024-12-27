@@ -368,7 +368,6 @@ public final class PowerStatsService extends SystemService {
         return iArr;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0075  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -38,7 +38,6 @@ final class NotificationListViewBinder$bindFooter$2 extends SuspendLambda implem
         int label;
         final /* synthetic */ NotificationListViewBinder this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(NotificationListViewBinder notificationListViewBinder, FooterView footerView, Continuation continuation) {
             super(2, continuation);
             this.this$0 = notificationListViewBinder;
@@ -101,7 +100,6 @@ final class NotificationListViewBinder$bindFooter$2 extends SuspendLambda implem
         int label;
         final /* synthetic */ NotificationListViewBinder this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(NotificationListViewBinder notificationListViewBinder, FooterView footerView, Continuation continuation) {
             super(2, continuation);
             this.this$0 = notificationListViewBinder;
@@ -148,7 +146,6 @@ final class NotificationListViewBinder$bindFooter$2 extends SuspendLambda implem
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationListViewBinder$bindFooter$2(FooterView footerView, FooterViewModel footerViewModel, NotificationListViewBinder notificationListViewBinder, NotificationStackScrollLayout notificationStackScrollLayout, StateFlow stateFlow, Continuation continuation) {
         super(2, continuation);
         this.$footerView = footerView;
@@ -170,9 +167,6 @@ final class NotificationListViewBinder$bindFooter$2 extends SuspendLambda implem
         return ((NotificationListViewBinder$bindFooter$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Type inference failed for: r5v0, types: [com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationListViewBinder$bindFooter$2$disposableHandle$1] */
-    /* JADX WARN: Type inference failed for: r6v1, types: [com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationListViewBinder$bindFooter$2$disposableHandle$2] */
-    /* JADX WARN: Type inference failed for: r7v2, types: [com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationListViewBinder$bindFooter$2$disposableHandle$3] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;

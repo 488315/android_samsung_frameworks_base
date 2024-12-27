@@ -8,7 +8,6 @@ public class ArchivedPackageParcel implements Parcelable {
     public static final Parcelable.Creator<ArchivedPackageParcel> CREATOR =
             new Parcelable.Creator<ArchivedPackageParcel>() { // from class:
                 // android.content.pm.ArchivedPackageParcel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ArchivedPackageParcel createFromParcel(Parcel _aidl_source) {
                     ArchivedPackageParcel _aidl_out = new ArchivedPackageParcel();
@@ -16,7 +15,6 @@ public class ArchivedPackageParcel implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ArchivedPackageParcel[] newArray(int _aidl_size) {
                     return new ArchivedPackageParcel[_aidl_size];

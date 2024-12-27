@@ -17,7 +17,6 @@ final class LooperSlowLogControllerImpl$updateSlowDispatchOnChoreographer$2 exte
     int label;
     final /* synthetic */ LooperSlowLogControllerImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LooperSlowLogControllerImpl$updateSlowDispatchOnChoreographer$2(LooperSlowLogControllerImpl looperSlowLogControllerImpl, long j, String str, String str2, Continuation continuation) {
         super(2, continuation);
         this.this$0 = looperSlowLogControllerImpl;

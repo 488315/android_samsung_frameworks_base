@@ -365,7 +365,6 @@ public class MenuInflater {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Object getRealOwner() {
         if (this.mRealOwner == null) {
             this.mRealOwner = findRealOwner(this.mContext);

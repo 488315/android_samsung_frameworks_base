@@ -185,7 +185,6 @@ public final class MediaProjection {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class CallbackRecord extends Callback {
         private final Callback mCallback;
         private final Handler mHandler;
@@ -207,7 +206,6 @@ public final class MediaProjection {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCapturedContentResize$0(int width, int height) {
             this.mCallback.onCapturedContentResize(width, height);
         }
@@ -225,7 +223,6 @@ public final class MediaProjection {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCapturedContentVisibilityChanged$1(boolean isVisible) {
             this.mCallback.onCapturedContentVisibilityChanged(isVisible);
         }

@@ -21,7 +21,6 @@ public final class WindowManagerLockscreenVisibilityInteractor$special$$inlined$
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WindowManagerLockscreenVisibilityInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, FromLockscreenTransitionInteractor fromLockscreenTransitionInteractor, FromPrimaryBouncerTransitionInteractor fromPrimaryBouncerTransitionInteractor, FromAlternateBouncerTransitionInteractor fromAlternateBouncerTransitionInteractor) {
         super(3, continuation);
         this.$fromLockscreenInteractor$inlined = fromLockscreenTransitionInteractor;

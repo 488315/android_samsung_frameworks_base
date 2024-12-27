@@ -9,7 +9,6 @@ import java.net.UnknownHostException;
 public final class ConnectEvent extends NetworkEvent implements Parcelable {
     public static final Parcelable.Creator<ConnectEvent> CREATOR =
             new Parcelable.Creator<ConnectEvent>() { // from class: android.app.admin.ConnectEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConnectEvent createFromParcel(Parcel in) {
                     if (in.readInt() != 2) {
@@ -18,7 +17,6 @@ public final class ConnectEvent extends NetworkEvent implements Parcelable {
                     return new ConnectEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConnectEvent[] newArray(int size) {
                     return new ConnectEvent[size];

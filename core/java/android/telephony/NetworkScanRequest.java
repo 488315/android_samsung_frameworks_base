@@ -13,13 +13,11 @@ public final class NetworkScanRequest implements Parcelable {
     public static final Parcelable.Creator<NetworkScanRequest> CREATOR =
             new Parcelable.Creator<
                     NetworkScanRequest>() { // from class: android.telephony.NetworkScanRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkScanRequest createFromParcel(Parcel in) {
                     return new NetworkScanRequest(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkScanRequest[] newArray(int size) {
                     return new NetworkScanRequest[size];

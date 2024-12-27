@@ -209,8 +209,6 @@ public final class AnimHelper {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class AnimationState {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ AnimationState[] $VALUES;
@@ -244,8 +242,6 @@ public final class AnimHelper {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class AnimationType {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ AnimationType[] $VALUES;
@@ -325,7 +321,6 @@ public final class AnimHelper {
         return ofFloat;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void updateProperty(View view, float f, AnimationType animationType) {
         int i = WhenMappings.$EnumSwitchMapping$0[animationType.ordinal()];
         if (i == 1) {

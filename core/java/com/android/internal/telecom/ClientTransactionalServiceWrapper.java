@@ -71,7 +71,6 @@ public class ClientTransactionalServiceWrapper {
         return this.mCallEventCallback;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class ReceiverWrapper implements Consumer<Boolean> {
         private final ResultReceiver mRepeaterReceiver;
 
@@ -157,8 +156,6 @@ public class ClientTransactionalServiceWrapper {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public /* synthetic */ void lambda$handleCallEventCallback$0(
                 String action,
                 CallControlCallback callback,
@@ -330,7 +327,6 @@ public class ClientTransactionalServiceWrapper {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         static /* synthetic */ void lambda$handleEventCallback$1(
                 String action, CallEventCallback callback, Object arg) {
             char c;

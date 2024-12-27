@@ -9,7 +9,6 @@ public class SatellitePvt implements Parcelable {
     public static final Parcelable.Creator<SatellitePvt> CREATOR =
             new Parcelable.Creator<
                     SatellitePvt>() { // from class: android.hardware.gnss.SatellitePvt.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatellitePvt createFromParcel(Parcel _aidl_source) {
                     SatellitePvt _aidl_out = new SatellitePvt();
@@ -17,7 +16,6 @@ public class SatellitePvt implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatellitePvt[] newArray(int _aidl_size) {
                     return new SatellitePvt[_aidl_size];

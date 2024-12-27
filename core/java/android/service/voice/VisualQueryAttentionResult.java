@@ -17,13 +17,11 @@ public final class VisualQueryAttentionResult implements Parcelable {
             new Parcelable.Creator<
                     VisualQueryAttentionResult>() { // from class:
                                                     // android.service.voice.VisualQueryAttentionResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VisualQueryAttentionResult[] newArray(int size) {
                     return new VisualQueryAttentionResult[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VisualQueryAttentionResult createFromParcel(Parcel in) {
                     return new VisualQueryAttentionResult(in);
@@ -37,12 +35,10 @@ public final class VisualQueryAttentionResult implements Parcelable {
     @Retention(RetentionPolicy.SOURCE)
     public @interface InteractionIntention {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultInteractionIntention() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultEngagementLevel() {
         return 100;
     }

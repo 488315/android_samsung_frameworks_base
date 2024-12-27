@@ -38,7 +38,6 @@ final class ActivatableNotificationViewBinder$bind$1 extends SuspendLambda imple
             final /* synthetic */ ActivatableNotificationViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C01951(ActivatableNotificationViewModel activatableNotificationViewModel, TouchHandler touchHandler, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = activatableNotificationViewModel;
@@ -84,7 +83,6 @@ final class ActivatableNotificationViewBinder$bind$1 extends SuspendLambda imple
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(ActivatableNotificationView activatableNotificationView, TouchHandler touchHandler, ActivatableNotificationViewModel activatableNotificationViewModel, Continuation continuation) {
             super(2, continuation);
             this.$view = activatableNotificationView;
@@ -128,7 +126,6 @@ final class ActivatableNotificationViewBinder$bind$1 extends SuspendLambda imple
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ActivatableNotificationViewBinder$bind$1(ActivatableNotificationView activatableNotificationView, TouchHandler touchHandler, ActivatableNotificationViewModel activatableNotificationViewModel, Continuation continuation) {
         super(3, continuation);
         this.$view = activatableNotificationView;

@@ -56,13 +56,11 @@ public class SemWifiDisplayParameter implements Parcelable {
     public static final Parcelable.Creator<SemWifiDisplayParameter> CREATOR =
             new Parcelable.Creator<SemWifiDisplayParameter>() { // from class:
                 // android.hardware.display.SemWifiDisplayParameter.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWifiDisplayParameter createFromParcel(Parcel in) {
                     return new SemWifiDisplayParameter(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWifiDisplayParameter[] newArray(int size) {
                     return size == 0

@@ -276,7 +276,6 @@ public final class PinnerService extends SystemService {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public class Injector {}
 
     public final class PinRange {
@@ -425,7 +424,6 @@ public final class PinnerService extends SystemService {
         this(context, new Injector());
     }
 
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.server.PinnerService$2] */
     public PinnerService(Context context, Injector injector) {
         super(context);
         this.mPinnedFiles = new ArrayMap();
@@ -514,7 +512,6 @@ public final class PinnerService extends SystemService {
                         uriFor,
                         false,
                         new ContentObserver() { // from class: com.android.server.PinnerService.3
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(null);
                             }
@@ -574,12 +571,6 @@ public final class PinnerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x004e A[Catch: all -> 0x0031, TRY_LEAVE, TryCatch #1 {all -> 0x0031, blocks: (B:23:0x002c, B:8:0x003a, B:9:0x0048, B:11:0x004e, B:20:0x0040), top: B:22:0x002c }] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0040 A[Catch: all -> 0x0031, TryCatch #1 {all -> 0x0031, blocks: (B:23:0x002c, B:8:0x003a, B:9:0x0048, B:11:0x004e, B:20:0x0040), top: B:22:0x002c }] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0037  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x002c A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x003a A[Catch: all -> 0x0031, TryCatch #1 {all -> 0x0031, blocks: (B:23:0x002c, B:8:0x003a, B:9:0x0048, B:11:0x004e, B:20:0x0040), top: B:22:0x002c }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -655,9 +646,6 @@ public final class PinnerService extends SystemService {
                     + " java.lang.String, boolean):com.android.server.PinnerService$PinnedFile");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00f2  */
-    /* JADX WARN: Removed duplicated region for block: B:48:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0100  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -19,7 +19,6 @@ final class WifiRepositoryImpl$receivedInetCondition$2 extends SuspendLambda imp
     int label;
     final /* synthetic */ WifiRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiRepositoryImpl$receivedInetCondition$2(WifiRepositoryImpl wifiRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = wifiRepositoryImpl;

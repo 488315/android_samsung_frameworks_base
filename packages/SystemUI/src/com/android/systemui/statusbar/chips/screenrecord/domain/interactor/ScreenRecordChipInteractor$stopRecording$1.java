@@ -14,7 +14,6 @@ final class ScreenRecordChipInteractor$stopRecording$1 extends SuspendLambda imp
     int label;
     final /* synthetic */ ScreenRecordChipInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenRecordChipInteractor$stopRecording$1(ScreenRecordChipInteractor screenRecordChipInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = screenRecordChipInteractor;

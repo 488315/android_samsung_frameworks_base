@@ -178,10 +178,6 @@ public class SecQSTileBaseView extends QSTileView implements LaunchableView {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.qs.tileimpl.SecQSTileBaseView$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.qs.tileimpl.SecQSTileBaseView$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.qs.tileimpl.SecQSTileBaseView$$ExternalSyntheticLambda3] */
     @Override // com.android.systemui.plugins.qs.QSTileView
     public final void init(final QSTile qSTile) {
         Expandable.Companion.getClass();

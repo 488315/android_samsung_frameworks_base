@@ -710,12 +710,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v11 */
-    /* JADX WARN: Type inference failed for: r3v13 */
-    /* JADX WARN: Type inference failed for: r3v14 */
-    /* JADX WARN: Type inference failed for: r3v15 */
-    /* JADX WARN: Type inference failed for: r3v9 */
     public static /* synthetic */ void lambda$startStopWiFiTcpdump$158(boolean z, String str) {
         StringBuilder sb;
         byte[] bArr;
@@ -1374,9 +1368,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         return bundle;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0067  */
-    /* JADX WARN: Removed duplicated region for block: B:22:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x006d A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1815,10 +1806,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         return file;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0089 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:61:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x007f A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:72:0x0056 -> B:31:0x007b). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1937,29 +1924,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.custom.KnoxCustomManagerService.fileCopy(android.os.ParcelFileDescriptor, java.lang.String):boolean");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [java.io.File] */
-    /* JADX WARN: Type inference failed for: r0v1 */
-    /* JADX WARN: Type inference failed for: r0v12 */
-    /* JADX WARN: Type inference failed for: r0v13 */
-    /* JADX WARN: Type inference failed for: r0v14 */
-    /* JADX WARN: Type inference failed for: r0v15 */
-    /* JADX WARN: Type inference failed for: r0v16 */
-    /* JADX WARN: Type inference failed for: r0v17 */
-    /* JADX WARN: Type inference failed for: r0v18, types: [java.io.FileOutputStream] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [java.io.FileOutputStream] */
-    /* JADX WARN: Type inference failed for: r0v20 */
-    /* JADX WARN: Type inference failed for: r0v21 */
-    /* JADX WARN: Type inference failed for: r0v22 */
-    /* JADX WARN: Type inference failed for: r0v23 */
-    /* JADX WARN: Type inference failed for: r0v24 */
-    /* JADX WARN: Type inference failed for: r0v3 */
-    /* JADX WARN: Type inference failed for: r0v4 */
-    /* JADX WARN: Type inference failed for: r0v5 */
-    /* JADX WARN: Type inference failed for: r0v6, types: [java.io.FileOutputStream] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [java.io.FileOutputStream] */
-    /* JADX WARN: Type inference failed for: r0v8 */
-    /* JADX WARN: Type inference failed for: r0v9 */
     public final boolean fileCopy(String str, String str2) {
         FileOutputStream fileOutputStream;
         ?? file = new File(str);
@@ -2914,10 +2878,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         return m;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00b5  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00ba  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00c1  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x00c6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3058,12 +3018,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00ff  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x010c A[ADDED_TO_REGION, ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x00f5  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0111  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0116  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4786,8 +4740,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         return -33;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x006e A[Catch: Exception -> 0x004a, TryCatch #0 {Exception -> 0x004a, blocks: (B:5:0x0006, B:8:0x000e, B:10:0x0014, B:15:0x0026, B:18:0x0032, B:20:0x0038, B:23:0x003f, B:25:0x0045, B:29:0x0062, B:31:0x006e, B:33:0x0073, B:37:0x008d, B:39:0x004e, B:40:0x00a0, B:46:0x00a5), top: B:4:0x0006 }] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0073 A[Catch: Exception -> 0x004a, TryCatch #0 {Exception -> 0x004a, blocks: (B:5:0x0006, B:8:0x000e, B:10:0x0014, B:15:0x0026, B:18:0x0032, B:20:0x0038, B:23:0x003f, B:25:0x0045, B:29:0x0062, B:31:0x006e, B:33:0x0073, B:37:0x008d, B:39:0x004e, B:40:0x00a0, B:46:0x00a5), top: B:4:0x0006 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4885,8 +4837,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.custom.KnoxCustomManagerService.lambda$addDexURLShortcut$0(int, int, java.lang.String, java.lang.String, android.content.ComponentName):java.lang.Integer");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0093 A[Catch: Exception -> 0x0116, IOException -> 0x011b, TryCatch #3 {IOException -> 0x011b, Exception -> 0x0116, blocks: (B:6:0x0017, B:9:0x001f, B:11:0x0025, B:14:0x0033, B:16:0x0039, B:22:0x004d, B:25:0x0059, B:27:0x005f, B:30:0x0066, B:32:0x006c, B:36:0x0087, B:38:0x0093, B:40:0x0098, B:42:0x00a8, B:44:0x00ae, B:46:0x00b3, B:49:0x00d1, B:61:0x00c3, B:63:0x00cc, B:65:0x0074, B:66:0x010c, B:72:0x0111), top: B:5:0x0017 }] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0098 A[Catch: Exception -> 0x0116, IOException -> 0x011b, TryCatch #3 {IOException -> 0x011b, Exception -> 0x0116, blocks: (B:6:0x0017, B:9:0x001f, B:11:0x0025, B:14:0x0033, B:16:0x0039, B:22:0x004d, B:25:0x0059, B:27:0x005f, B:30:0x0066, B:32:0x006c, B:36:0x0087, B:38:0x0093, B:40:0x0098, B:42:0x00a8, B:44:0x00ae, B:46:0x00b3, B:49:0x00d1, B:61:0x00c3, B:63:0x00cc, B:65:0x0074, B:66:0x010c, B:72:0x0111), top: B:5:0x0017 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5481,8 +5431,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         return -33;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x005c A[Catch: Exception -> 0x003c, TryCatch #0 {Exception -> 0x003c, blocks: (B:6:0x0002, B:8:0x0008, B:13:0x0019, B:16:0x0024, B:18:0x002a, B:21:0x0031, B:23:0x0037, B:25:0x0052, B:27:0x005c, B:29:0x0063, B:31:0x003e, B:32:0x0072, B:2:0x0077), top: B:5:0x0002 }] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0063 A[Catch: Exception -> 0x003c, TryCatch #0 {Exception -> 0x003c, blocks: (B:6:0x0002, B:8:0x0008, B:13:0x0019, B:16:0x0024, B:18:0x002a, B:21:0x0031, B:23:0x0037, B:25:0x0052, B:27:0x005c, B:29:0x0063, B:31:0x003e, B:32:0x0072, B:2:0x0077), top: B:5:0x0002 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5784,11 +5732,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v5, types: [java.lang.Integer] */
-    /* JADX WARN: Type inference failed for: r3v7 */
-    /* JADX WARN: Type inference failed for: r3v8 */
-    /* JADX WARN: Type inference failed for: r3v9 */
     public final /* synthetic */ Integer lambda$setAutoRotationState$58(boolean z, String str, int i) throws Exception {
         try {
             IWindowManager asInterface = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
@@ -5847,8 +5790,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:0x006c A[Catch: Exception -> 0x0014, TryCatch #0 {Exception -> 0x0014, blocks: (B:27:0x0006, B:29:0x000f, B:31:0x0017, B:33:0x001d, B:35:0x0020, B:37:0x0024, B:39:0x002b, B:41:0x0030, B:57:0x0034, B:43:0x0039, B:45:0x003f, B:47:0x0047, B:49:0x004e, B:52:0x0055, B:60:0x005a, B:4:0x0060, B:6:0x006c, B:9:0x0071, B:11:0x0075, B:12:0x007d, B:14:0x0083, B:17:0x0091, B:22:0x0095, B:24:0x009a), top: B:26:0x0006 }] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0071 A[Catch: Exception -> 0x0014, TryCatch #0 {Exception -> 0x0014, blocks: (B:27:0x0006, B:29:0x000f, B:31:0x0017, B:33:0x001d, B:35:0x0020, B:37:0x0024, B:39:0x002b, B:41:0x0030, B:57:0x0034, B:43:0x0039, B:45:0x003f, B:47:0x0047, B:49:0x004e, B:52:0x0055, B:60:0x005a, B:4:0x0060, B:6:0x006c, B:9:0x0071, B:11:0x0075, B:12:0x007d, B:14:0x0083, B:17:0x0091, B:22:0x0095, B:24:0x009a), top: B:26:0x0006 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6624,10 +6565,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r7v5, types: [java.lang.Integer] */
-    /* JADX WARN: Type inference failed for: r7v7 */
-    /* JADX WARN: Type inference failed for: r7v8 */
     public final Integer lambda$setInfraredState$69(int i, boolean z) throws Exception {
         try {
             ConsumerIrManager consumerIrManager = (ConsumerIrManager) this.mContext.getSystemService("consumer_ir");
@@ -6644,14 +6581,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x006e A[Catch: Exception -> 0x003a, TRY_LEAVE, TryCatch #1 {Exception -> 0x003a, blocks: (B:3:0x0003, B:5:0x001b, B:6:0x001f, B:8:0x0025, B:11:0x0035, B:14:0x006e, B:39:0x003d, B:40:0x0041, B:42:0x0047), top: B:2:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0073 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r8v11 */
-    /* JADX WARN: Type inference failed for: r8v12 */
-    /* JADX WARN: Type inference failed for: r8v13 */
-    /* JADX WARN: Type inference failed for: r8v14 */
-    /* JADX WARN: Type inference failed for: r8v6, types: [java.lang.Integer] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7113,8 +7042,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:0x003a A[Catch: Exception -> 0x0018, TRY_LEAVE, TryCatch #0 {Exception -> 0x0018, blocks: (B:12:0x0003, B:15:0x000a, B:17:0x0011, B:19:0x001a, B:4:0x002d, B:6:0x003a, B:3:0x0024), top: B:11:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x003f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -10082,8 +10009,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         return setHardKeyIntentBroadcastInternal(getProcessName(Binder.getCallingPid()), z, i, i2, intent, str, z2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:48:0x011c A[Catch: all -> 0x0114, Exception -> 0x0116, TryCatch #1 {Exception -> 0x0116, blocks: (B:44:0x00f9, B:46:0x00ff, B:48:0x011c, B:51:0x0123, B:55:0x0137), top: B:43:0x00f9, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0137 A[Catch: all -> 0x0114, Exception -> 0x0116, TRY_LEAVE, TryCatch #1 {Exception -> 0x0116, blocks: (B:44:0x00f9, B:46:0x00ff, B:48:0x011c, B:51:0x0123, B:55:0x0137), top: B:43:0x00f9, outer: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -10558,8 +10483,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         return ((Integer) Binder.withCleanCallingIdentity(knoxCustomManagerService$$ExternalSyntheticLambda2)).intValue();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x0056  */
-    /* JADX WARN: Removed duplicated region for block: B:8:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -11502,8 +11425,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         return ((Integer) Binder.withCleanCallingIdentity(knoxCustomManagerService$$ExternalSyntheticLambda12)).intValue();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x007e A[Catch: all -> 0x0067, Exception -> 0x0069, TRY_ENTER, TryCatch #0 {Exception -> 0x0069, blocks: (B:38:0x0037, B:41:0x003e, B:43:0x0044, B:11:0x007e, B:13:0x0088, B:23:0x009a, B:44:0x006b, B:5:0x0072), top: B:37:0x0037, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x007a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -12296,10 +12217,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r3v1 */
-    /* JADX WARN: Type inference failed for: r3v7, types: [android.os.ParcelFileDescriptor] */
     public final void updateMAMConfiguration() {
         ParcelFileDescriptor parcelFileDescriptor = "/knox-sdk-mam-configuration";
         if (!isScpmV2Available()) {
@@ -12415,7 +12332,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         return Build.VERSION.SEM_PLATFORM_INT >= 80200;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final boolean writePathToFile(File file, String str) {
         BufferedWriter bufferedWriter;
         Throwable th;

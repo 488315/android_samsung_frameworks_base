@@ -44,7 +44,6 @@ public class SurfaceControlRegistry {
                 WeakHashMap<SurfaceControl, Long> weakHashMap, int i, PrintWriter printWriter);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class DefaultReporter implements Reporter {
         private DefaultReporter() {}
 

@@ -22,7 +22,6 @@ public final class DisconnectCause implements Parcelable {
     public static final Parcelable.Creator<DisconnectCause> CREATOR =
             new Parcelable.Creator<
                     DisconnectCause>() { // from class: android.telecom.DisconnectCause.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisconnectCause createFromParcel(Parcel source) {
                     int code = source.readInt();
@@ -46,7 +45,6 @@ public final class DisconnectCause implements Parcelable {
                             imsReasonInfo);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisconnectCause[] newArray(int size) {
                     return new DisconnectCause[size];

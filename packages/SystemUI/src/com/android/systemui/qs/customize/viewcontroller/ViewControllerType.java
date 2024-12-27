@@ -2,8 +2,6 @@ package com.android.systemui.qs.customize.viewcontroller;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class ViewControllerType {
     public static final /* synthetic */ ViewControllerType[] $VALUES;
     public static final ViewControllerType LayoutEdit;

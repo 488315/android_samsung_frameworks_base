@@ -11,8 +11,6 @@ public final class TapGestureDetector extends GenericGestureDetector {
     public GestureDetector gestureDetector;
     public final TapGestureDetector$gestureListener$1 gestureListener;
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.statusbar.gesture.TapGestureDetector$gestureListener$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

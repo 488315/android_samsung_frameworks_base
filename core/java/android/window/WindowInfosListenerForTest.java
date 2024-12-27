@@ -107,7 +107,6 @@ public class WindowInfosListenerForTest {
         listener.unregister();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static List<WindowInfo> buildWindowInfos(
             InputWindowHandle[] windowHandles, WindowInfosListener.DisplayInfo[] displayInfos) {
         InputWindowHandle[] inputWindowHandleArr = windowHandles;

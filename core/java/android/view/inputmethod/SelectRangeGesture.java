@@ -11,13 +11,11 @@ public final class SelectRangeGesture extends PreviewableHandwritingGesture impl
             new Parcelable.Creator<
                     SelectRangeGesture>() { // from class:
                                             // android.view.inputmethod.SelectRangeGesture.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SelectRangeGesture createFromParcel(Parcel source) {
                     return new SelectRangeGesture(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SelectRangeGesture[] newArray(int size) {
                     return new SelectRangeGesture[size];

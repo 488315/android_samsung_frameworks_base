@@ -112,7 +112,6 @@ public class NotificationShadeWindowView extends WindowRootView {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.shade.NotificationShadeWindowView$1] */
     public NotificationShadeWindowView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mFakeWindow = new Window(((FrameLayout) this).mContext) { // from class: com.android.systemui.shade.NotificationShadeWindowView.1
@@ -466,8 +465,6 @@ public class NotificationShadeWindowView extends WindowRootView {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r14v1, types: [android.view.View] */
     @Override // android.view.ViewGroup, android.view.View
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
         Boolean bool;
@@ -735,7 +732,6 @@ public class NotificationShadeWindowView extends WindowRootView {
         super.requestLayout();
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.shade.NotificationShadeWindowView$$ExternalSyntheticLambda0] */
     @Override // android.view.ViewGroup, android.view.ViewParent
     public final ActionMode startActionModeForChild(View view, ActionMode.Callback callback, int i) {
         if (i != 1) {

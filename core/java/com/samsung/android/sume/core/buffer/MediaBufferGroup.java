@@ -300,7 +300,6 @@ public abstract class MediaBufferGroup extends MediaBufferBase {
         return copied;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
               // com.samsung.android.sume.core.format.Copyable
     /* renamed from: deepCopy */

@@ -9,7 +9,6 @@ import libcore.util.EmptyArray;
 
 import java.lang.reflect.Array;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public abstract class SpannableStringInternal {
     private static final int COLUMNS = 3;
     static final Object[] EMPTY = new Object[0];
@@ -21,7 +20,6 @@ public abstract class SpannableStringInternal {
     private Object[] mSpans;
     private String mText;
 
-    /* JADX WARN: Multi-variable type inference failed */
     SpannableStringInternal(
             CharSequence charSequence, int start, int end, boolean ignoreNoCopySpan) {
         if (start == 0 && end == charSequence.length()) {
@@ -143,7 +141,6 @@ public abstract class SpannableStringInternal {
         this.mText.getChars(start, end, dest, off);
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public void setSpan(Object what, int start, int end, int flags) {
         setSpan(what, start, end, flags, true);
     }
@@ -212,7 +209,6 @@ public abstract class SpannableStringInternal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public void removeSpan(Object what) {
         removeSpan(what, 0);
     }
@@ -274,7 +270,6 @@ public abstract class SpannableStringInternal {
         return 0;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <T> T[] getSpans(int i, int i2, Class<T> cls) {
         int i3 = i;
         int i4 = 0;
@@ -357,7 +352,6 @@ public abstract class SpannableStringInternal {
         return limit;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void sendSpanAdded(Object what, int start, int end) {
         SpanWatcher[] recip = (SpanWatcher[]) getSpans(start, end, SpanWatcher.class);
         for (SpanWatcher spanWatcher : recip) {
@@ -365,7 +359,6 @@ public abstract class SpannableStringInternal {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void sendSpanRemoved(Object what, int start, int end) {
         SpanWatcher[] recip = (SpanWatcher[]) getSpans(start, end, SpanWatcher.class);
         for (SpanWatcher spanWatcher : recip) {
@@ -373,7 +366,6 @@ public abstract class SpannableStringInternal {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void sendSpanChanged(Object what, int s, int e, int st, int en) {
         SpanWatcher[] recip =
                 (SpanWatcher[]) getSpans(Math.min(s, st), Math.max(e, en), SpanWatcher.class);

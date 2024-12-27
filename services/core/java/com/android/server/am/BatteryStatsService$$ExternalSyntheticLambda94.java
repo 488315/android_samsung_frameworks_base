@@ -58,8 +58,6 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda9
 
        if (r5 != 1) goto L23;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r15v4, types: [com.android.server.power.stats.BatteryStatsImpl] */
     @Override // java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

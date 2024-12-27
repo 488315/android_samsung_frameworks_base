@@ -12,7 +12,6 @@ public final class AnimatableEvent<T> {
         this.startAnimating = z;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static /* synthetic */ AnimatableEvent copy$default(AnimatableEvent animatableEvent, Object obj, boolean z, int i, Object obj2) {
         if ((i & 1) != 0) {
             obj = animatableEvent.value;

@@ -459,7 +459,6 @@ class WebVttParser {
         this.mCue = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void log_warning(
             String nameType, String name, String message, String subMessage, String value) {
         Log.w(
@@ -476,12 +475,10 @@ class WebVttParser {
                         + NavigationBarInflaterView.KEY_CODE_END);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void log_warning(String nameType, String name, String message, String value) {
         Log.w(getClass().getName(), nameType + " '" + name + "' " + message + " ('" + value + "')");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void log_warning(String message, String value) {
         Log.w(getClass().getName(), message + " ('" + value + "')");
     }

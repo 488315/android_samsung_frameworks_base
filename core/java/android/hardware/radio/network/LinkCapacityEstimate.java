@@ -10,7 +10,6 @@ public class LinkCapacityEstimate implements Parcelable {
     public static final Parcelable.Creator<LinkCapacityEstimate> CREATOR =
             new Parcelable.Creator<LinkCapacityEstimate>() { // from class:
                 // android.hardware.radio.network.LinkCapacityEstimate.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LinkCapacityEstimate createFromParcel(Parcel _aidl_source) {
                     LinkCapacityEstimate _aidl_out = new LinkCapacityEstimate();
@@ -18,7 +17,6 @@ public class LinkCapacityEstimate implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LinkCapacityEstimate[] newArray(int _aidl_size) {
                     return new LinkCapacityEstimate[_aidl_size];

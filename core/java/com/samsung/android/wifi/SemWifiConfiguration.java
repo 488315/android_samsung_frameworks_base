@@ -57,7 +57,6 @@ public class SemWifiConfiguration implements Parcelable {
             new Parcelable.Creator<
                     SemWifiConfiguration>() { // from class:
                                               // com.samsung.android.wifi.SemWifiConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWifiConfiguration createFromParcel(Parcel in) {
                     SemWifiConfiguration config = new SemWifiConfiguration();
@@ -75,7 +74,6 @@ public class SemWifiConfiguration implements Parcelable {
                     return config;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWifiConfiguration[] newArray(int size) {
                     return new SemWifiConfiguration[size];

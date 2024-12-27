@@ -79,7 +79,6 @@ public abstract class CompanionDeviceService extends Service {
 
     public void onBindCompanionDeviceService(Intent intent) {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     class Stub extends ICompanionDeviceService.Stub {
         final Handler mMainHandler;
         final CompanionDeviceService mService;
@@ -89,7 +88,6 @@ public abstract class CompanionDeviceService extends Service {
             this.mService = CompanionDeviceService.this;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDeviceAppeared$0(AssociationInfo associationInfo) {
             this.mService.onDeviceAppeared(associationInfo);
         }
@@ -107,7 +105,6 @@ public abstract class CompanionDeviceService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDeviceDisappeared$1(AssociationInfo associationInfo) {
             this.mService.onDeviceDisappeared(associationInfo);
         }
@@ -140,7 +137,6 @@ public abstract class CompanionDeviceService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDevicePresenceEvent$2(DevicePresenceEvent event) {
             this.mService.onDevicePresenceEvent(event);
         }

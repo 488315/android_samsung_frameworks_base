@@ -13,7 +13,6 @@ final class KeyguardLongPressInteractor$scheduleAutomaticMenuHiding$1 extends Su
     int label;
     final /* synthetic */ KeyguardLongPressInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardLongPressInteractor$scheduleAutomaticMenuHiding$1(KeyguardLongPressInteractor keyguardLongPressInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardLongPressInteractor;

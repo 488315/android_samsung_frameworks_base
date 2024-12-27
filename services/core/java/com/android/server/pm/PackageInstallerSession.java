@@ -544,7 +544,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         Handler.Callback callback =
                 new Handler
                         .Callback() { // from class: com.android.server.pm.PackageInstallerSession.4
-                    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                     @Override // android.os.Handler.Callback
                     public final boolean handleMessage(Message message) {
                         String string;
@@ -1064,8 +1063,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x001f  */
-    /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1110,7 +1107,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
                     + " int, java.lang.String):void");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static PackageInstallerSession readFromXml(
             TypedXmlPullParser typedXmlPullParser,
             PackageInstallerService.InternalCallback internalCallback,
@@ -2057,12 +2053,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00a9  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00c3  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00d7 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x011e A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x00ad  */
-    /* JADX WARN: Type inference failed for: r11v0, types: [com.android.server.pm.PackageInstallerSession$5] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3253,10 +3243,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         Slog.d("PackageInstallerSession", "Linked " + list.size() + " files into " + file);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x005e A[Catch: all -> 0x0049, TryCatch #1 {all -> 0x0049, blocks: (B:9:0x001c, B:11:0x0036, B:15:0x005e, B:17:0x0077, B:22:0x008f, B:23:0x0096, B:25:0x0083, B:29:0x0099, B:32:0x00b6, B:33:0x00b8, B:37:0x00bc, B:39:0x00c0, B:42:0x00c2, B:43:0x00c5, B:46:0x00c7, B:51:0x00cb, B:52:0x00a8, B:53:0x00af, B:54:0x00b0, B:56:0x00cc, B:57:0x00d3, B:58:0x0044, B:59:0x004c, B:35:0x00b9, B:36:0x00bb), top: B:8:0x001c, inners: #0, #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0099 A[Catch: all -> 0x0049, TryCatch #1 {all -> 0x0049, blocks: (B:9:0x001c, B:11:0x0036, B:15:0x005e, B:17:0x0077, B:22:0x008f, B:23:0x0096, B:25:0x0083, B:29:0x0099, B:32:0x00b6, B:33:0x00b8, B:37:0x00bc, B:39:0x00c0, B:42:0x00c2, B:43:0x00c5, B:46:0x00c7, B:51:0x00cb, B:52:0x00a8, B:53:0x00af, B:54:0x00b0, B:56:0x00cc, B:57:0x00d3, B:58:0x0044, B:59:0x004c, B:35:0x00b9, B:36:0x00bb), top: B:8:0x001c, inners: #0, #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00b9 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00b0 A[Catch: all -> 0x0049, TryCatch #1 {all -> 0x0049, blocks: (B:9:0x001c, B:11:0x0036, B:15:0x005e, B:17:0x0077, B:22:0x008f, B:23:0x0096, B:25:0x0083, B:29:0x0099, B:32:0x00b6, B:33:0x00b8, B:37:0x00bc, B:39:0x00c0, B:42:0x00c2, B:43:0x00c5, B:46:0x00c7, B:51:0x00cb, B:52:0x00a8, B:53:0x00af, B:54:0x00b0, B:56:0x00cc, B:57:0x00d3, B:58:0x0044, B:59:0x004c, B:35:0x00b9, B:36:0x00bb), top: B:8:0x001c, inners: #0, #2 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3458,7 +3444,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00c6 A[Catch: all -> 0x0051, TryCatch #2 {, blocks: (B:4:0x0005, B:6:0x000b, B:8:0x000f, B:10:0x0013, B:12:0x0017, B:14:0x001b, B:16:0x001f, B:18:0x0028, B:20:0x002c, B:22:0x0030, B:24:0x0036, B:78:0x0056, B:27:0x0065, B:28:0x006a, B:30:0x0077, B:32:0x007f, B:33:0x0081, B:38:0x008b, B:65:0x008f, B:40:0x009c, B:42:0x00a0, B:43:0x00a5, B:45:0x00b2, B:47:0x00b8, B:50:0x00bf, B:52:0x00c6, B:54:0x00ce, B:57:0x00d8, B:58:0x00e3, B:60:0x00e4, B:61:0x00ef, B:63:0x00a3, B:68:0x0094, B:69:0x009b, B:73:0x00f2, B:74:0x00f3, B:76:0x0068, B:81:0x005b, B:82:0x0062, B:83:0x006f, B:84:0x00f5, B:85:0x00fc, B:86:0x00fd, B:87:0x0104, B:88:0x0105, B:89:0x010c, B:90:0x010d, B:91:0x0114, B:92:0x0115, B:93:0x011c, B:94:0x011d, B:95:0x0124, B:36:0x0084, B:37:0x008a), top: B:3:0x0005, inners: #0, #1, #3 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4060,9 +4045,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x0180 A[Catch: all -> 0x013c, TryCatch #5 {all -> 0x013c, blocks: (B:61:0x012e, B:63:0x0135, B:65:0x0138, B:66:0x013f, B:67:0x0149, B:71:0x014d, B:75:0x0158, B:76:0x015f, B:78:0x0164, B:81:0x0168, B:83:0x017d, B:84:0x0182, B:85:0x018b, B:89:0x018f, B:93:0x0198, B:94:0x019f, B:95:0x019c, B:99:0x01ac, B:100:0x0180, B:103:0x015c, B:107:0x01b0, B:87:0x018c, B:88:0x018e, B:69:0x014a, B:70:0x014c), top: B:60:0x012e, inners: #4, #7 }] */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x017d A[Catch: all -> 0x013c, TryCatch #5 {all -> 0x013c, blocks: (B:61:0x012e, B:63:0x0135, B:65:0x0138, B:66:0x013f, B:67:0x0149, B:71:0x014d, B:75:0x0158, B:76:0x015f, B:78:0x0164, B:81:0x0168, B:83:0x017d, B:84:0x0182, B:85:0x018b, B:89:0x018f, B:93:0x0198, B:94:0x019f, B:95:0x019c, B:99:0x01ac, B:100:0x0180, B:103:0x015c, B:107:0x01b0, B:87:0x018c, B:88:0x018e, B:69:0x014a, B:70:0x014c), top: B:60:0x012e, inners: #4, #7 }] */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x018c A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4623,12 +4605,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         this.mHasDeviceAdminReceiver = apkLite.isHasDeviceAdminReceiver();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:294:0x09a6  */
-    /* JADX WARN: Removed duplicated region for block: B:311:0x09ee  */
-    /* JADX WARN: Removed duplicated region for block: B:324:0x09f0  */
-    /* JADX WARN: Removed duplicated region for block: B:395:0x0783  */
-    /* JADX WARN: Removed duplicated region for block: B:437:0x082c  */
-    /* JADX WARN: Removed duplicated region for block: B:457:0x0876  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4665,10 +4641,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0095  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x01c0  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01d1  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x01ec A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4683,11 +4655,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
                     + " com.android.server.pm.PackageInstallerSession.verifyNonStaged():void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:47:0x02e5 A[Catch: all -> 0x000f, LOOP:2: B:46:0x02e3->B:47:0x02e5, LOOP_END, TryCatch #4 {all -> 0x000f, blocks: (B:4:0x0003, B:6:0x0007, B:8:0x000d, B:11:0x0012, B:13:0x0081, B:14:0x008b, B:16:0x008f, B:17:0x0095, B:20:0x0190, B:22:0x0197, B:23:0x01d3, B:24:0x01da, B:26:0x01e0, B:30:0x01f7, B:34:0x0206, B:36:0x020c, B:38:0x0213, B:40:0x022b, B:42:0x025d, B:44:0x0263, B:45:0x02dd, B:47:0x02e5, B:49:0x02fa, B:51:0x0302, B:53:0x0343, B:55:0x034c, B:57:0x0362, B:59:0x038b, B:61:0x038e, B:63:0x0396, B:65:0x03aa, B:70:0x03ae, B:69:0x03c6, B:74:0x03c9, B:76:0x03cd, B:77:0x03d5, B:79:0x03db, B:81:0x03f3, B:84:0x0268, B:86:0x026e, B:88:0x027a, B:93:0x02a0, B:94:0x02d0, B:101:0x02d9, B:102:0x02dc), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x0302 A[Catch: all -> 0x000f, LOOP:3: B:50:0x0300->B:51:0x0302, LOOP_END, TryCatch #4 {all -> 0x000f, blocks: (B:4:0x0003, B:6:0x0007, B:8:0x000d, B:11:0x0012, B:13:0x0081, B:14:0x008b, B:16:0x008f, B:17:0x0095, B:20:0x0190, B:22:0x0197, B:23:0x01d3, B:24:0x01da, B:26:0x01e0, B:30:0x01f7, B:34:0x0206, B:36:0x020c, B:38:0x0213, B:40:0x022b, B:42:0x025d, B:44:0x0263, B:45:0x02dd, B:47:0x02e5, B:49:0x02fa, B:51:0x0302, B:53:0x0343, B:55:0x034c, B:57:0x0362, B:59:0x038b, B:61:0x038e, B:63:0x0396, B:65:0x03aa, B:70:0x03ae, B:69:0x03c6, B:74:0x03c9, B:76:0x03cd, B:77:0x03d5, B:79:0x03db, B:81:0x03f3, B:84:0x0268, B:86:0x026e, B:88:0x027a, B:93:0x02a0, B:94:0x02d0, B:101:0x02d9, B:102:0x02dc), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x034c A[Catch: all -> 0x000f, TryCatch #4 {all -> 0x000f, blocks: (B:4:0x0003, B:6:0x0007, B:8:0x000d, B:11:0x0012, B:13:0x0081, B:14:0x008b, B:16:0x008f, B:17:0x0095, B:20:0x0190, B:22:0x0197, B:23:0x01d3, B:24:0x01da, B:26:0x01e0, B:30:0x01f7, B:34:0x0206, B:36:0x020c, B:38:0x0213, B:40:0x022b, B:42:0x025d, B:44:0x0263, B:45:0x02dd, B:47:0x02e5, B:49:0x02fa, B:51:0x0302, B:53:0x0343, B:55:0x034c, B:57:0x0362, B:59:0x038b, B:61:0x038e, B:63:0x0396, B:65:0x03aa, B:70:0x03ae, B:69:0x03c6, B:74:0x03c9, B:76:0x03cd, B:77:0x03d5, B:79:0x03db, B:81:0x03f3, B:84:0x0268, B:86:0x026e, B:88:0x027a, B:93:0x02a0, B:94:0x02d0, B:101:0x02d9, B:102:0x02dc), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0396 A[Catch: all -> 0x000f, TryCatch #4 {all -> 0x000f, blocks: (B:4:0x0003, B:6:0x0007, B:8:0x000d, B:11:0x0012, B:13:0x0081, B:14:0x008b, B:16:0x008f, B:17:0x0095, B:20:0x0190, B:22:0x0197, B:23:0x01d3, B:24:0x01da, B:26:0x01e0, B:30:0x01f7, B:34:0x0206, B:36:0x020c, B:38:0x0213, B:40:0x022b, B:42:0x025d, B:44:0x0263, B:45:0x02dd, B:47:0x02e5, B:49:0x02fa, B:51:0x0302, B:53:0x0343, B:55:0x034c, B:57:0x0362, B:59:0x038b, B:61:0x038e, B:63:0x0396, B:65:0x03aa, B:70:0x03ae, B:69:0x03c6, B:74:0x03c9, B:76:0x03cd, B:77:0x03d5, B:79:0x03db, B:81:0x03f3, B:84:0x0268, B:86:0x026e, B:88:0x027a, B:93:0x02a0, B:94:0x02d0, B:101:0x02d9, B:102:0x02dc), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x03cd A[Catch: all -> 0x000f, TryCatch #4 {all -> 0x000f, blocks: (B:4:0x0003, B:6:0x0007, B:8:0x000d, B:11:0x0012, B:13:0x0081, B:14:0x008b, B:16:0x008f, B:17:0x0095, B:20:0x0190, B:22:0x0197, B:23:0x01d3, B:24:0x01da, B:26:0x01e0, B:30:0x01f7, B:34:0x0206, B:36:0x020c, B:38:0x0213, B:40:0x022b, B:42:0x025d, B:44:0x0263, B:45:0x02dd, B:47:0x02e5, B:49:0x02fa, B:51:0x0302, B:53:0x0343, B:55:0x034c, B:57:0x0362, B:59:0x038b, B:61:0x038e, B:63:0x0396, B:65:0x03aa, B:70:0x03ae, B:69:0x03c6, B:74:0x03c9, B:76:0x03cd, B:77:0x03d5, B:79:0x03db, B:81:0x03f3, B:84:0x0268, B:86:0x026e, B:88:0x027a, B:93:0x02a0, B:94:0x02d0, B:101:0x02d9, B:102:0x02dc), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

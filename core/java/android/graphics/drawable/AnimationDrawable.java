@@ -210,7 +210,6 @@ public class AnimationDrawable extends DrawableContainer implements Runnable, An
         return this;
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // android.graphics.drawable.DrawableContainer
     public AnimationState cloneConstantState() {
         return new AnimationState(this.mAnimationState, this, null);
@@ -238,7 +237,6 @@ public class AnimationDrawable extends DrawableContainer implements Runnable, An
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void mutate() {
             this.mDurations = (int[]) this.mDurations.clone();
         }

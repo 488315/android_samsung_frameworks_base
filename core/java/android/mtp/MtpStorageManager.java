@@ -320,22 +320,18 @@ public class MtpStorageManager {
             return false;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setName(String name) {
             this.mName = name;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setId(int id) {
             this.mId = id;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isVisited() {
             return this.mVisited;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setParent(MtpObject parent) {
             if (getStorageId() != parent.getStorageId()) {
                 this.mStorage = (MtpStorage) Preconditions.checkNotNull(parent.getStorage());
@@ -347,7 +343,6 @@ public class MtpStorageManager {
             return this.mStorage;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setDir(boolean dir) {
             if (dir != this.mIsDir) {
                 this.mIsDir = dir;
@@ -355,17 +350,14 @@ public class MtpStorageManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setVisited(boolean visited) {
             this.mVisited = visited;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public MtpObjectState getState() {
             return this.mState;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setState(MtpObjectState state) {
             this.mState = state;
             if (this.mState == MtpObjectState.NORMAL) {
@@ -373,47 +365,38 @@ public class MtpStorageManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public MtpOperation getOperation() {
             return this.mOp;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setOperation(MtpOperation op) {
             this.mOp = op;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public FileObserver getObserver() {
             return this.mObserver;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setObserver(FileObserver observer) {
             this.mObserver = observer;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addChild(MtpObject child) {
             this.mChildren.put(child.getName(), child);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public MtpObject getChild(String name) {
             return this.mChildren.get(name);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Collection<MtpObject> getChildren() {
             return this.mChildren.values();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean exists() {
             return getPath().toFile().exists();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public MtpObject copy(boolean recursive) {
             MtpObject copy =
                     new MtpObject(this.mName, this.mId, this.mStorage, this.mParent, this.mIsDir);
@@ -440,7 +423,6 @@ public class MtpStorageManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0() {
         while (this.mCheckConsistency) {
             try {
@@ -582,7 +564,6 @@ public class MtpStorageManager {
         return i;
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:15:0x002a */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -766,12 +747,6 @@ public class MtpStorageManager {
         return obj;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0021 A[Catch: all -> 0x00ab, TryCatch #0 {, blocks: (B:3:0x0001, B:5:0x0009, B:10:0x0021, B:11:0x002a, B:13:0x0030, B:19:0x0061, B:20:0x006a, B:22:0x0070, B:23:0x007b, B:26:0x0083, B:27:0x0090, B:29:0x0096, B:44:0x0049), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0030 A[Catch: all -> 0x00ab, TryCatch #0 {, blocks: (B:3:0x0001, B:5:0x0009, B:10:0x0021, B:11:0x002a, B:13:0x0030, B:19:0x0061, B:20:0x006a, B:22:0x0070, B:23:0x007b, B:26:0x0083, B:27:0x0090, B:29:0x0096, B:44:0x0049), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0061 A[Catch: all -> 0x00ab, TryCatch #0 {, blocks: (B:3:0x0001, B:5:0x0009, B:10:0x0021, B:11:0x002a, B:13:0x0030, B:19:0x0061, B:20:0x006a, B:22:0x0070, B:23:0x007b, B:26:0x0083, B:27:0x0090, B:29:0x0096, B:44:0x0049), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0070 A[Catch: all -> 0x00ab, TryCatch #0 {, blocks: (B:3:0x0001, B:5:0x0009, B:10:0x0021, B:11:0x002a, B:13:0x0030, B:19:0x0061, B:20:0x006a, B:22:0x0070, B:23:0x007b, B:26:0x0083, B:27:0x0090, B:29:0x0096, B:44:0x0049), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0096 A[Catch: all -> 0x00ab, TRY_LEAVE, TryCatch #0 {, blocks: (B:3:0x0001, B:5:0x0009, B:10:0x0021, B:11:0x002a, B:13:0x0030, B:19:0x0061, B:20:0x006a, B:22:0x0070, B:23:0x007b, B:26:0x0083, B:27:0x0090, B:29:0x0096, B:44:0x0049), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0047  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -880,7 +855,6 @@ public class MtpStorageManager {
                     + " boolean, boolean):boolean");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void handleAddedObject(MtpObject parent, String path, boolean isDir) {
         DirectoryStream<Path> stream;
         MtpOperation op = MtpOperation.NONE;
@@ -964,7 +938,6 @@ public class MtpStorageManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void handleRemovedObject(MtpObject obj) {
         MtpObjectState state = obj.getState();
         MtpOperation op = obj.getOperation();
@@ -997,7 +970,6 @@ public class MtpStorageManager {
         Log.i(TAG, state + " transitioned to " + obj.getState() + " in op " + op);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void handleChangedObject(MtpObject parent, String path) {
         MtpOperation mtpOperation = MtpOperation.NONE;
         MtpObject obj = parent.getChild(path);
@@ -1481,7 +1453,6 @@ public class MtpStorageManager {
         return ret;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sDebugLog(String str, String path) {
         try {
             Log.i(TAG, str + " : " + Base64.encodeToString(path.getBytes("UTF-8"), 2));
@@ -1489,7 +1460,6 @@ public class MtpStorageManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sDebugLog(String str, Path path) {
         try {
             Log.i(TAG, str + " : " + Base64.encodeToString(path.toString().getBytes("UTF-8"), 2));

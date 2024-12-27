@@ -7,13 +7,11 @@ public class StatusCode implements Parcelable {
     public static final Parcelable.Creator<StatusCode> CREATOR =
             new Parcelable.Creator<
                     StatusCode>() { // from class: com.android.ims.internal.uce.common.StatusCode.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StatusCode createFromParcel(Parcel source) {
                     return new StatusCode(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StatusCode[] newArray(int size) {
                     return new StatusCode[size];

@@ -45,7 +45,6 @@ class AppZygoteInit {
             return true;
         }
 
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:16:0x008a -> B:4:0x00a8). Please report as a decompilation issue!!! */
         @Override // com.android.internal.os.ZygoteConnection
         protected void handlePreloadApp(ApplicationInfo appInfo) {
             Log.i(AppZygoteInit.TAG, "Beginning application preload for " + appInfo.packageName);

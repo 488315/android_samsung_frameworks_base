@@ -18,7 +18,6 @@ final class SensitiveContentCoordinatorKt$extractAllRepresentativeEntries$2 exte
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SensitiveContentCoordinatorKt$extractAllRepresentativeEntries$2(ListEntry listEntry, Continuation continuation) {
         super(2, continuation);
         this.$listEntry = listEntry;

@@ -546,7 +546,6 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ InputManagerService this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ AnonymousClass8(
                 InputManagerService inputManagerService, Handler handler, int i) {
             super(handler);
@@ -3797,7 +3796,6 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 PooledLambda.obtainMessage(
                         new BiConsumer() { // from class:
                             // com.android.server.wm.InputManagerCallback$$ExternalSyntheticLambda2
-                            /* JADX WARN: Finally extract failed */
                             @Override // java.util.function.BiConsumer
                             public final void accept(Object obj, Object obj2) {
                                 WindowManagerService windowManagerService2 =
@@ -4022,7 +4020,6 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         return i3 == 4 ? 4 : 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00df  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4534,7 +4531,6 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(
             FileDescriptor fileDescriptor,
             FileDescriptor fileDescriptor2,

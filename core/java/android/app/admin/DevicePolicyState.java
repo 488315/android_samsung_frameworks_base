@@ -14,13 +14,11 @@ public final class DevicePolicyState implements Parcelable {
     public static final Parcelable.Creator<DevicePolicyState> CREATOR =
             new Parcelable.Creator<
                     DevicePolicyState>() { // from class: android.app.admin.DevicePolicyState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DevicePolicyState createFromParcel(Parcel source) {
                     return new DevicePolicyState(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DevicePolicyState[] newArray(int size) {
                     return new DevicePolicyState[size];

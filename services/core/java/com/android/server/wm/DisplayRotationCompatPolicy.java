@@ -84,8 +84,6 @@ public final class DisplayRotationCompatPolicy
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0046 A[Catch: all -> 0x0066, TryCatch #0 {all -> 0x0066, blocks: (B:12:0x0020, B:14:0x0026, B:17:0x0033, B:19:0x0046, B:21:0x004c, B:22:0x0068, B:24:0x006a), top: B:11:0x0020 }] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x006a A[Catch: all -> 0x0066, DONT_GENERATE, TRY_LEAVE, TryCatch #0 {all -> 0x0066, blocks: (B:12:0x0020, B:14:0x0026, B:17:0x0033, B:19:0x0046, B:21:0x004c, B:22:0x0068, B:24:0x006a), top: B:11:0x0020 }] */
     @Override // com.android.server.wm.CameraStateMonitor.CameraCompatStateListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -369,7 +369,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
 
     private native void nPurgePendingResources();
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class ProviderKey {
         final String authority;
         ContentProviderHolder mHolder;
@@ -532,12 +531,10 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isPreHoneycomb() {
             return this.activity != null && this.activity.getApplicationInfo().targetSdkVersion < 11;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isPreP() {
             return this.activity != null && this.activity.getApplicationInfo().targetSdkVersion < 28;
         }
@@ -853,8 +850,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
-    /* JADX INFO: Access modifiers changed from: private */
     public class ApplicationThread extends IApplicationThread.Stub {
         private static final String DB_CONNECTION_INFO_FORMAT = "  %8s %8s %14s %5d %5d %5d  %s";
         private static final String DB_CONNECTION_INFO_HEADER = "  %8s %8s %14s %5s %5s %5s  %s";
@@ -1547,7 +1542,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
             return context.getDatabasePath(FullBackup.APK_TREE_TOKEN).getParentFile();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void dumpDatabaseInfo(ParcelFileDescriptor pfd, String[] args, boolean isSystem) {
             PrintWriter pw = new FastPrintWriter(new FileOutputStream(pfd.getFileDescriptor()));
             PrintWriterPrinter printer = new PrintWriterPrinter(pw);
@@ -1838,7 +1832,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public SafeCancellationTransport createSafeCancellationTransport(CancellationSignal cancellationSignal) {
         SafeCancellationTransport transport;
         synchronized (this) {
@@ -1851,7 +1844,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         return transport;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public CancellationSignal removeSafeCancellationTransport(SafeCancellationTransport transport) {
         CancellationSignal cancellation;
         synchronized (this) {
@@ -1880,7 +1872,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void throwRemoteServiceException(String message, int typeId, Bundle extras) {
         switch (typeId) {
             case 1:
@@ -3285,17 +3276,14 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         sendMessage(what, obj, 0, 0, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendMessage(int what, Object obj, int arg1) {
         sendMessage(what, obj, arg1, 0, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendMessage(int what, Object obj, int arg1, int arg2) {
         sendMessage(what, obj, arg1, arg2, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendMessage(int what, Object obj, int arg1, int arg2, boolean async) {
         Message msg = Message.obtain();
         msg.what = what;
@@ -3316,30 +3304,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         sendMessage(119, cci);
     }
 
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x0368  */
-    /* JADX WARN: Type inference failed for: r1v6, types: [android.app.Instrumentation] */
-    /* JADX WARN: Type inference failed for: r2v39, types: [android.content.Intent] */
-    /* JADX WARN: Type inference failed for: r3v1 */
-    /* JADX WARN: Type inference failed for: r3v30, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r3v32, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r4v11 */
-    /* JADX WARN: Type inference failed for: r4v17 */
-    /* JADX WARN: Type inference failed for: r4v20 */
-    /* JADX WARN: Type inference failed for: r4v23 */
-    /* JADX WARN: Type inference failed for: r4v25 */
-    /* JADX WARN: Type inference failed for: r4v26 */
-    /* JADX WARN: Type inference failed for: r4v30, types: [android.app.Activity] */
-    /* JADX WARN: Type inference failed for: r4v31, types: [android.app.Activity] */
-    /* JADX WARN: Type inference failed for: r4v32 */
-    /* JADX WARN: Type inference failed for: r4v34, types: [android.content.AttributionSource] */
-    /* JADX WARN: Type inference failed for: r4v35 */
-    /* JADX WARN: Type inference failed for: r4v39 */
-    /* JADX WARN: Type inference failed for: r4v4 */
-    /* JADX WARN: Type inference failed for: r4v5, types: [java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r6v19, types: [android.app.Instrumentation] */
-    /* JADX WARN: Type inference failed for: r6v24, types: [android.app.Instrumentation] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3726,7 +3690,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleRequestDirectActions(IBinder activityToken, IVoiceInteractor interactor, CancellationSignal cancellationSignal, final RemoteCallback callback, int retryCount) {
         final ActivityClientRecord r = this.mActivities.get(activityToken);
         if (r == null) {
@@ -3786,7 +3749,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         callback.sendResult(null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handlePerformDirectAction(IBinder activityToken, String actionId, Bundle arguments, CancellationSignal cancellationSignal, final RemoteCallback resultCallback) {
         ActivityClientRecord r = this.mActivities.get(activityToken);
         if (r != null) {
@@ -3832,7 +3794,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleEnterAnimationComplete(IBinder token) {
         ActivityClientRecord r = this.mActivities.get(token);
         if (r != null) {
@@ -3840,7 +3801,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleStartBinderTracking() {
         if (Binder.isSystemServerBinderTrackerEnabled) {
             Binder.getTransactionTracker().clearTraces();
@@ -3848,7 +3808,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         Binder.enableStackTracking();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleStopBinderTrackingAndDump(ParcelFileDescriptor fd) {
         try {
             Binder.disableStackTracking();
@@ -3859,7 +3818,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleStopBinderTrackingAndDump(ParcelFileDescriptor fd, String _processName, String _packageName, int _pid, int _uid) {
         try {
             Binder.getTransactionTracker().setBinderInfo(_pid, _uid, _processName, _packageName);
@@ -3951,13 +3909,11 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
             return true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onPreDraw$0(SplashScreenView view) {
             view.getViewTreeObserver().removeOnPreDrawListener(this);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: reportSplashscreenViewShown, reason: merged with bridge method [inline-methods] */
     public void lambda$syncTransferSplashscreenViewTransaction$4(IBinder token, SplashScreenView view) {
         ActivityClient.getInstance().reportSplashScreenAttached(token);
@@ -3968,7 +3924,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void syncTransferSplashscreenViewTransaction(final SplashScreenView view, final IBinder token, View decorView, SurfaceControl startingWindowLeash) {
         SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
         transaction.hide(startingWindowLeash);
@@ -4012,7 +3967,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         executeTransaction(transaction);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleLocalVoiceInteractionStarted(IBinder token, IVoiceInteractor interactor) {
         ActivityClientRecord r = this.mActivities.get(token);
         if (r != null) {
@@ -4066,7 +4020,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateUiTranslationState(IBinder activityToken, int state, TranslationSpec sourceSpec, TranslationSpec targetSpec, List<AutofillId> viewIds, UiTranslationSpec uiTranslationSpec) {
         ActivityClientRecord r = this.mActivities.get(activityToken);
         if (r == null) {
@@ -4080,8 +4033,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         return sCurrentBroadcastIntent.get();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Can't wrap try/catch for region: R(23:0|1|(1:3)(1:54)|4|5|6|(1:8)|9|(1:13)|14|(11:19|20|21|22|23|(1:25)(1:39)|26|(1:30)|31|32|(2:34|35)(1:37))|50|20|21|22|23|(0)(0)|26|(2:28|30)|31|32|(0)(0)|(1:(0))) */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x0100, code lost:
     
         r5 = move-exception;
@@ -4098,10 +4049,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
     
         throw new java.lang.RuntimeException("Unable to start receiver " + r1 + ": " + r5.toString(), r5);
      */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00c5  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:37:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00c6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4114,7 +4061,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         throw new UnsupportedOperationException("Method not decompiled: android.app.ActivityThread.handleReceiver(android.app.ActivityThread$ReceiverData):void");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleCreateBackupAgent(CreateBackupAgentData data) {
         IBinder binder;
         try {
@@ -4194,7 +4140,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         return agentName;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDestroyBackupAgent(CreateBackupAgentData data) {
         LoadedApk packageInfo = getPackageInfoNoCheck(data.appInfo);
         String packageName = packageInfo.mPackageName;
@@ -4223,7 +4168,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         return backupAgents;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleCreateService(CreateServiceData data) {
         Application app;
         ClassLoader cl;
@@ -4285,7 +4229,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleBindService(BindServiceData data) {
         CreateServiceData createData = this.mServicesData.get(data.token);
         Service s = this.mServices.get(data.token);
@@ -4312,7 +4255,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleUnbindService(BindServiceData data) {
         CreateServiceData createData = this.mServicesData.get(data.token);
         Service s = this.mServices.get(data.token);
@@ -4338,7 +4280,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDumpGfxInfo(DumpComponentInfo info) {
         StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskWrites();
         try {
@@ -4353,7 +4294,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDumpService(DumpComponentInfo info) {
         StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskWrites();
         try {
@@ -4369,7 +4309,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDumpResources(DumpResourcesData info) {
         StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskWrites();
         try {
@@ -4385,7 +4324,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDumpActivity(DumpComponentInfo info) {
         StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskWrites();
         try {
@@ -4401,7 +4339,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDumpProvider(DumpComponentInfo info) {
         StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskWrites();
         try {
@@ -4417,7 +4354,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleServiceArgs(ServiceArgsData data) {
         int res;
         CreateServiceData createData = this.mServicesData.get(data.token);
@@ -4448,7 +4384,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleStopService(IBinder token) {
         this.mServicesData.remove(token);
         Service s = this.mServices.remove(token);
@@ -4479,7 +4414,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleTimeoutService(IBinder token, int startId) {
         Service s = this.mServices.get(token);
         if (s == null) {
@@ -4497,7 +4431,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleTimeoutServiceForType(IBinder token, int startId, int fgsType) {
         Service s = this.mServices.get(token);
         if (s == null) {
@@ -4930,7 +4863,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         ActivityClient.getInstance().activityRefreshed(r.token);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleSetCoreSettings(Bundle coreSettings) {
         synchronized (this.mCoreSettingsLock) {
             this.mCoreSettings = coreSettings;
@@ -4960,7 +4892,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleUpdatePackageCompatibilityInfo(UpdateCompatibilityData data) {
         this.mCompatibilityInfo = data.info;
         LoadedApk apk = peekPackageInfo(data.pkg, false);
@@ -5362,9 +5293,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         return reportedConfig;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00b5  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00c7  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0103  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5477,7 +5405,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         r.mLastReportedWindowingMode = newWindowingMode;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void applyPendingApplicationInfoChanges(String packageName) {
         ApplicationInfo ai;
         synchronized (this.mResourcesManager) {
@@ -5814,7 +5741,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleTrimMemory(int level) {
         if (Trace.isTagEnabled(64L)) {
             Trace.traceBegin(64L, "trimMemory: " + level);
@@ -5899,8 +5825,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         return insInfo.nativeLibraryDir;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Can't wrap try/catch for region: R(20:0|1|(1:3)|4|(1:6)|7|(2:9|(75:11|12|(1:14)|15|(1:17)|18|(1:20)(1:277)|21|22|23|24|12d|29|(1:31)(1:264)|32|(1:34)|(1:36)|37|(1:39)|40|(3:42|(1:44)(1:262)|45)(1:263)|46|(1:48)(1:261)|49|(1:51)(1:(1:260)(1:259))|52|(1:255)|(1:252)|(1:251)(1:62)|63|(1:65)|66|(1:68)(1:250)|69|70|71|(2:240|241)|73|(4:75|76|77|78)(1:239)|79|(1:81)|(1:83)(1:234)|84|(1:86)(1:233)|87|(2:89|(1:91)(2:92|(1:94)))|95|96|97|300|(2:219|220)|103|(1:107)|119|120|121|122|(10:190|191|192|193|194|195|196|197|(2:199|(4:201|202|203|204))|206)(1:124)|125|126|128|129|(1:131)|132|133|134|(1:173)|138|(6:157|158|159|160|161|(1:165))(1:140)|141|142|143|(2:147|148)|151|152))|278|12|(0)|15|(0)|18|(0)(0)|21|22|23|24|12d|(1:(0))) */
     /* JADX WARN: Code restructure failed: missing block: B:114:0x053b, code lost:
     
         if (android.os.StrictMode.getThreadPolicy().equals(r18) != false) goto L239;
@@ -5910,17 +5834,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         android.util.Slog.e(android.app.ActivityThread.TAG, "Failed to parse serialized system font map");
         android.graphics.Typeface.loadPreinstalledSystemFontMap();
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x0531  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x053e  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x00df  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00ec  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00f9  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x012e A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:277:0x00fb  */
-    /* JADX WARN: Type inference failed for: r0v136, types: [android.os.StrictMode$ThreadPolicy, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r14v1, types: [android.os.StrictMode$ThreadPolicy, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r35v0, types: [android.app.ActivityThread] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5973,7 +5886,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleSetContentCaptureOptionsCallback(String packageName) {
         IBinder b;
         if (this.mContentCaptureOptionsCallback != null || (b = ServiceManager.getService(Context.CONTENT_CAPTURE_MANAGER_SERVICE)) == null) {
@@ -5996,7 +5908,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleInstrumentWithoutRestart(AppBindData data) {
         try {
             data.compatInfo = CompatibilityInfo.DEFAULT_COMPATIBILITY_INFO;
@@ -6072,7 +5983,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleFinishInstrumentationWithoutRestart() {
         this.mInstrumentation.onDestroy();
         this.mInstrumentationPackageName = null;
@@ -6116,7 +6026,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:70:0x011b A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6129,7 +6038,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         throw new UnsupportedOperationException("Method not decompiled: android.app.ActivityThread.acquireProvider(android.content.Context, java.lang.String, int, boolean):android.content.IContentProvider");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ProviderKey getGetProviderKey(String auth, int userId) {
         ProviderKey lock;
         ProviderKey key = new ProviderKey(auth, userId);
@@ -6319,7 +6227,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private ProviderClientRecord installProviderAuthoritiesLocked(IContentProvider provider, ContentProvider localProvider, ContentProviderHolder holder) {
         char c;
         String[] auths = holder.info.authority.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
@@ -6524,7 +6431,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleRunIsolatedEntryPoint(String entryPoint, String[] entryPointArgs) {
         try {
             Method main = Class.forName(entryPoint).getMethod("main", String[].class);
@@ -6590,7 +6496,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         ViewRootImpl.addConfigCallback(configChangedCallback);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$attach$6(Configuration globalConfig) {
         synchronized (this.mResourcesManager) {
             if (this.mResourcesManager.applyConfigurationToResources(globalConfig, null)) {
@@ -6823,7 +6728,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void purgePendingResources() {
         Trace.traceBegin(64L, "purgePendingResources");
         nPurgePendingResources();
@@ -6955,7 +6859,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         UcmKeyStoreHelper.addUcmProvider();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void getProfileSizeOfApp(String pkg) {
         if (CoreRune.SYSPERF_ACTIVE_APP_ADCP_ENABLE) {
             long len = 0;
@@ -6978,7 +6881,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setFlingerFlag(String pkgName, boolean flag) {
         Choreographer choreographer = Choreographer.getMainThreadInstance();
         if (choreographer != null) {
@@ -7023,7 +6925,6 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         activity.onDexTaskDockingChanged(state);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void relaunchActivityIfWebViewAttached(IBinder token) {
     }
 }

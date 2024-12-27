@@ -237,28 +237,20 @@ public abstract class SemDvfsManager {
     @Retention(RetentionPolicy.SOURCE)
     public @interface TypeResource {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeAcquire(int i, int i2, String str, int i3, int[] iArr);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native boolean nativeCheckHintExist(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native boolean nativeCheckResourceExist(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native boolean nativeCheckSysfsIdExist(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int[] nativeGetSupportedFrequency(int i, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeRelease(int i, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native String nativeSysfsRead(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSysfsWrite(int i, String str);
 
     public abstract void acquire();

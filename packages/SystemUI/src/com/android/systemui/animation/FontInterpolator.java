@@ -122,7 +122,6 @@ public final class FontInterpolator {
             return font3;
         }
         Function3 function3 = new Function3() { // from class: com.android.systemui.animation.FontInterpolator$lerp$newAxes$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(3);
             }
@@ -278,7 +277,6 @@ public final class FontInterpolator {
             return m.toString();
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

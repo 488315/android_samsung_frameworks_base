@@ -58,7 +58,6 @@ public abstract class StickyKeysIndicatorKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.stickykeys.ui.view.StickyKeysIndicatorKt$StickyKeysIndicator$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -73,14 +72,6 @@ public abstract class StickyKeysIndicatorKt {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00ef  */
-    /* JADX WARN: Removed duplicated region for block: B:21:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0072  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0083  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0099  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00ab  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0088  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0075  */
     /* renamed from: access$StickyKeyText-GLLOLKI, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -101,7 +92,6 @@ public abstract class StickyKeysIndicatorKt {
                 super(2);
             }
 
-            /* JADX WARN: Type inference failed for: r4v5, types: [com.android.systemui.keyboard.stickykeys.ui.view.StickyKeysIndicatorKt$createStickyKeyIndicatorView$1$1$1, kotlin.jvm.internal.Lambda] */
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 Composer composer = (Composer) obj;
@@ -119,7 +109,6 @@ public abstract class StickyKeysIndicatorKt {
                         super(2);
                     }
 
-                    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.keyboard.stickykeys.ui.view.StickyKeysIndicatorKt$createStickyKeyIndicatorView$1$1$1$1, kotlin.jvm.internal.Lambda] */
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj3, Object obj4) {
                         Composer composer2 = (Composer) obj3;
@@ -163,7 +152,6 @@ public abstract class StickyKeysIndicatorKt {
         return composeView;
     }
 
-    /* JADX WARN: Type inference failed for: r6v4, types: [com.android.systemui.keyboard.stickykeys.ui.view.StickyKeysIndicatorKt$StickyKeysIndicator$2, kotlin.jvm.internal.Lambda] */
     public static final void StickyKeysIndicator(final Map map, Modifier modifier, Composer composer, final int i, final int i2) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(371615851);
@@ -175,7 +163,6 @@ public abstract class StickyKeysIndicatorKt {
         Dp.Companion companion = Dp.Companion;
         final Modifier modifier3 = modifier2;
         SurfaceKt.m248SurfaceT9BRK9s(SizeKt.m119width3ABfNKs(SizeKt.m110heightInVpY3zN4$default(modifier2, 84, 0.0f, 2), 96), cornerBasedShape, j, 0L, 0.0f, 0.0f, null, ComposableLambdaKt.rememberComposableLambda(-1119523152, composerImpl, new Function2() { // from class: com.android.systemui.keyboard.stickykeys.ui.view.StickyKeysIndicatorKt$StickyKeysIndicator$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
             }
@@ -240,7 +227,6 @@ public abstract class StickyKeysIndicatorKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.stickykeys.ui.view.StickyKeysIndicatorKt$StickyKeysIndicator$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

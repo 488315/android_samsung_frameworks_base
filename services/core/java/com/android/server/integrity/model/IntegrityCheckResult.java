@@ -6,8 +6,6 @@ public final class IntegrityCheckResult {
     public final Effect mEffect;
     public final List mRuleList;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Effect {
         public static final /* synthetic */ Effect[] $VALUES;
         public static final Effect ALLOW;

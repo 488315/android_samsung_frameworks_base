@@ -9,13 +9,11 @@ public class SemContextWirelessChargingDetection extends SemContextEventContext 
             new Parcelable.Creator<
                     SemContextWirelessChargingDetection>() { // from class:
                                                              // com.samsung.android.hardware.context.SemContextWirelessChargingDetection.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextWirelessChargingDetection createFromParcel(Parcel in) {
                     return new SemContextWirelessChargingDetection(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextWirelessChargingDetection[] newArray(int size) {
                     return new SemContextWirelessChargingDetection[size];

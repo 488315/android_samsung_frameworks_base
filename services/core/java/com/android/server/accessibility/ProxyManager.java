@@ -564,7 +564,6 @@ public final class ProxyManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r6v11, types: [com.android.server.accessibility.ProxyManager$2] */
     public final void registerProxy(
             final IAccessibilityServiceClient iAccessibilityServiceClient,
             final int i,

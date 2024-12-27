@@ -21,13 +21,11 @@ public class ParsedActivityImpl extends ParsedMainComponentImpl
             new Parcelable.Creator<
                     ParsedActivityImpl>() { // from class:
                                             // com.android.internal.pm.pkg.component.ParsedActivityImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParsedActivityImpl createFromParcel(Parcel source) {
                     return new ParsedActivityImpl(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParsedActivityImpl[] newArray(int size) {
                     return new ParsedActivityImpl[size];

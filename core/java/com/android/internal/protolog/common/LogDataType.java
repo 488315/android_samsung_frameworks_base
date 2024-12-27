@@ -31,7 +31,6 @@ public class LogDataType {
         return (bitmask >> (index * 2)) & 3;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static List<Integer> parseFormatString(String messageString) {
         ArrayList<Integer> types = new ArrayList<>();
         int i = 0;

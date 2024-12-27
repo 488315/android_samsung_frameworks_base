@@ -13,7 +13,6 @@ final class FromDozingTransitionInteractor$dismissFromDozing$1 extends SuspendLa
     int label;
     final /* synthetic */ FromDozingTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromDozingTransitionInteractor$dismissFromDozing$1(FromDozingTransitionInteractor fromDozingTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromDozingTransitionInteractor;

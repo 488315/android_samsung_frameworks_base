@@ -74,9 +74,6 @@ public final class DcmMascotViewContainer extends LinearLayout {
         MASCOT_ACTION = new String[]{null, "LOCK_CLICK_MASCOT", "LOCK_CLICK_POPUP", "ACTION_UNLOCK", "LOCK_CLICK_POPUP"};
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.phone.DcmMascotViewContainer$serviceConnection$1] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.phone.DcmMascotViewContainer$updateRunnable$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.phone.DcmMascotViewContainer$broadcastReceiver$1] */
     public DcmMascotViewContainer(Context context, DelayableExecutor delayableExecutor, Executor executor, BroadcastDispatcher broadcastDispatcher, StatusBarStateController statusBarStateController, NotificationLockscreenUserManager notificationLockscreenUserManager, KeyguardUpdateMonitor keyguardUpdateMonitor, PackageManager packageManager, ActivityStarter activityStarter) {
         super(context);
         this.mainExecutor = delayableExecutor;
@@ -149,8 +146,6 @@ public final class DcmMascotViewContainer extends LinearLayout {
             }
         };
         this.broadcastReceiver = new BroadcastReceiver() { // from class: com.android.systemui.statusbar.phone.DcmMascotViewContainer$broadcastReceiver$1
-            /* JADX WARN: Removed duplicated region for block: B:39:0x00ce  */
-            /* JADX WARN: Removed duplicated region for block: B:41:? A[RETURN, SYNTHETIC] */
             @Override // android.content.BroadcastReceiver
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -285,8 +280,6 @@ public final class DcmMascotViewContainer extends LinearLayout {
             }
         };
         this.updateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.statusbar.phone.DcmMascotViewContainer$updateMonitorCallback$1
-            /* JADX WARN: Removed duplicated region for block: B:13:0x0036  */
-            /* JADX WARN: Removed duplicated region for block: B:16:0x003d  */
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             /*
                 Code decompiled incorrectly, please refer to instructions dump.

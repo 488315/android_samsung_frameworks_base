@@ -237,7 +237,6 @@ public final class KeyguardFastBioUnlockController implements MessageQueue.IdleH
             }
         };
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.keyguard.KeyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1] */
         public DelayedActionParams(Handler handler, Function0 function0, long j) {
             this.handler = handler;
             this.action = function0;
@@ -348,9 +347,6 @@ public final class KeyguardFastBioUnlockController implements MessageQueue.IdleH
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardFastBioUnlockController.<clinit>():void");
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.keyguard.KeyguardFastBioUnlockController$resetRunnable$1] */
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.systemui.keyguard.KeyguardFastBioUnlockController$visibilityChangedListener$1] */
-    /* JADX WARN: Type inference failed for: r2v6, types: [com.android.systemui.keyguard.KeyguardFastBioUnlockController$brightnessChangedCallback$1] */
     public KeyguardFastBioUnlockController(Handler handler, Context context, DisplayManager displayManager, DisplayTracker displayTracker, BinderCallMonitor binderCallMonitor, SettingsHelper settingsHelper, SysuiStatusBarStateController sysuiStatusBarStateController, SurfaceVisibilityController surfaceVisibilityController, WindowVisibilityController windowVisibilityController, WakefulnessLifecycle wakefulnessLifecycle, ScreenLifecycle screenLifecycle, Lazy lazy, AODAmbientWallpaperHelper aODAmbientWallpaperHelper, Lazy lazy2, Lazy lazy3, Lazy lazy4, Lazy lazy5, Lazy lazy6, Lazy lazy7) {
         this.mainHandler = handler;
         this.context = context;

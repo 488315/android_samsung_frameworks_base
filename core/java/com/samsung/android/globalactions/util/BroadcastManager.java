@@ -42,7 +42,6 @@ public class BroadcastManager {
         this.mDismissBroadcastReceiver =
                 new BroadcastReceiver() { // from class:
                                           // com.samsung.android.globalactions.util.BroadcastManager.1
-                    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                     @Override // android.content.BroadcastReceiver
                     public void onReceive(Context context, Intent intent) {
                         char c;

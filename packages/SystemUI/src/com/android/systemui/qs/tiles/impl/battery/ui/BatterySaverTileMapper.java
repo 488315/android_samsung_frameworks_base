@@ -31,7 +31,6 @@ public final class BatterySaverTileMapper implements QSTileDataToStateMapper {
         Resources resources = this.resources;
         Resources.Theme theme = this.theme;
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.battery.ui.BatterySaverTileMapper$map$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -45,7 +44,6 @@ public final class BatterySaverTileMapper implements QSTileDataToStateMapper {
                 builder.iconRes = batterySaverTileModel.isPowerSaving() ? Integer.valueOf(R.drawable.qs_battery_saver_icon_on) : Integer.valueOf(R.drawable.qs_battery_saver_icon_off);
                 final BatterySaverTileMapper batterySaverTileMapper = BatterySaverTileMapper.this;
                 builder.icon = new Function0() { // from class: com.android.systemui.qs.tiles.impl.battery.ui.BatterySaverTileMapper$map$1.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

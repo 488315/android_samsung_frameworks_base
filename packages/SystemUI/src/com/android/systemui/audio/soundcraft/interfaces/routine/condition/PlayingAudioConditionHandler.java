@@ -95,7 +95,6 @@ public final class PlayingAudioConditionHandler implements RoutineConditionHandl
                 Log.d("SoundCraft.PlayingAudioConditionHandler", "onPlaybackConfigChanged : notifyChanged");
                 final Context context2 = PlayingAudioConditionHandler.this.context;
                 final Function0 function0 = new Function0() { // from class: com.android.systemui.audio.soundcraft.interfaces.routine.condition.PlayingAudioConditionHandler$notifyChanged$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -143,7 +142,6 @@ public final class PlayingAudioConditionHandler implements RoutineConditionHandl
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.audio.soundcraft.interfaces.routine.condition.PlayingAudioConditionHandler$audioPlaybackCallback$1] */
     public PlayingAudioConditionHandler(Context context) {
         this.context = context;
         this.settingObserver = new SystemBooleanSettingObserver(context, "audio_soundcraft_app_setting", new Function1() { // from class: com.android.systemui.audio.soundcraft.interfaces.routine.condition.PlayingAudioConditionHandler$settingObserver$1

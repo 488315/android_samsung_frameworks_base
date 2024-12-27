@@ -20,9 +20,6 @@ public final class IconInfo {
         this.isAppIcon = z;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.common.shared.model.ContentDescription] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.systemui.media.taptotransfer.common.MediaTttIcon] */
     public static IconInfo copy$default(IconInfo iconInfo, ContentDescription.Loaded loaded, MediaTttIcon.Loaded loaded2, boolean z, int i) {
         ContentDescription.Loaded loaded3 = loaded;
         if ((i & 1) != 0) {

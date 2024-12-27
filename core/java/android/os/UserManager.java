@@ -1780,7 +1780,6 @@ public class UserManager {
         return getDefaultUserBadge(this.mUserId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Drawable lambda$getUserBadge$0() {
         return getDefaultUserBadge(this.mUserId);
     }
@@ -1821,7 +1820,6 @@ public class UserManager {
                 : DevicePolicyResources.UNDEFINED;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: getDefaultUserBadgedLabel, reason: merged with bridge method [inline-methods] */
     public String lambda$getBadgedLabelForUser$1(CharSequence label, int userId) {
         try {
@@ -1854,7 +1852,6 @@ public class UserManager {
         return getDefaultProfileLabel(this.mUserId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getProfileLabel$2() {
         return getDefaultProfileLabel(this.mUserId);
     }
@@ -1891,7 +1888,6 @@ public class UserManager {
         return lambda$getProfileAccessibilityString$3(userId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: getProfileAccessibilityLabel, reason: merged with bridge method [inline-methods] */
     public String lambda$getProfileAccessibilityString$3(int userId) {
         try {
@@ -2174,13 +2170,11 @@ public class UserManager {
         public static final Parcelable.Creator<EnforcingUser> CREATOR =
                 new Parcelable.Creator<
                         EnforcingUser>() { // from class: android.os.UserManager.EnforcingUser.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public EnforcingUser createFromParcel(Parcel in) {
                         return new EnforcingUser(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public EnforcingUser[] newArray(int size) {
                         return new EnforcingUser[size];

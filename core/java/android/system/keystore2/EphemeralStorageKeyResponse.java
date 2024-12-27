@@ -9,7 +9,6 @@ public class EphemeralStorageKeyResponse implements Parcelable {
             new Parcelable.Creator<
                     EphemeralStorageKeyResponse>() { // from class:
                                                      // android.system.keystore2.EphemeralStorageKeyResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EphemeralStorageKeyResponse createFromParcel(Parcel _aidl_source) {
                     EphemeralStorageKeyResponse _aidl_out = new EphemeralStorageKeyResponse();
@@ -17,7 +16,6 @@ public class EphemeralStorageKeyResponse implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EphemeralStorageKeyResponse[] newArray(int _aidl_size) {
                     return new EphemeralStorageKeyResponse[_aidl_size];

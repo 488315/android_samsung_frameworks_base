@@ -11,13 +11,11 @@ public final class TextClassificationContext implements Parcelable {
             new Parcelable.Creator<
                     TextClassificationContext>() { // from class:
                                                    // android.view.textclassifier.TextClassificationContext.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextClassificationContext createFromParcel(Parcel parcel) {
                     return new TextClassificationContext(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextClassificationContext[] newArray(int size) {
                     return new TextClassificationContext[size];

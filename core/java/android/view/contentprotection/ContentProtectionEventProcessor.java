@@ -185,7 +185,6 @@ public class ContentProtectionEventProcessor {
         return group.matches(eventText) || group.matches(viewNodeText) || group.matches(hintText);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$processViewAppearedEvent$2(SearchGroup group) {
         group.mFound = true;
         this.mAnyGroupFound = true;
@@ -246,7 +245,6 @@ public class ContentProtectionEventProcessor {
         return new ParceledListSlice<>(events);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: handlerOnLoginDetected, reason: merged with bridge method [inline-methods] */
     public void lambda$flush$6(ParceledListSlice<ContentCaptureEvent> events) {
         try {
@@ -256,7 +254,6 @@ public class ContentProtectionEventProcessor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class SearchGroup {
         public boolean mFound = false;
         private final List<String> mSearchStrings;

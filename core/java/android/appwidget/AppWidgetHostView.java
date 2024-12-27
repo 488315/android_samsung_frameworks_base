@@ -274,7 +274,6 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleViewError() {
         removeViewInLayout(this.mView);
         View child = getErrorView();
@@ -502,7 +501,6 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         applyContent(content, recycled, exception);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void applyContent(View content, boolean recycled, Exception exception) {
         this.mColorMappingChanged = false;
         if (content == null) {
@@ -636,7 +634,6 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.appwidget.AppWidgetHost.AppWidgetHostListener
     public void onViewDataChanged(int viewId) {
         View v = findViewById(viewId);
@@ -803,7 +800,6 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         return defaultView;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onDefaultViewClicked(View view) {
         if (this.mInfo != null) {
             LauncherApps launcherApps =
@@ -883,7 +879,6 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ boolean lambda$getHandler$1(
             RemoteViews.InteractionHandler handler,
             View view,

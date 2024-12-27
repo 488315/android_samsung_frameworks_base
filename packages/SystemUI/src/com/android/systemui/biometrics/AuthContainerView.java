@@ -495,7 +495,6 @@ public final class AuthContainerView extends LinearLayout implements AuthDialog,
         }
     }
 
-    /* JADX WARN: Type inference failed for: r6v1, types: [com.android.systemui.biometrics.AuthContainerView$$ExternalSyntheticLambda3] */
     public AuthContainerView(Config config, CoroutineScope coroutineScope, List<FingerprintSensorPropertiesInternal> list, List<FaceSensorPropertiesInternal> list2, WakefulnessLifecycle wakefulnessLifecycle, AuthDialogPanelInteractionDetector authDialogPanelInteractionDetector, UserManager userManager, LockPatternUtils lockPatternUtils, InteractionJankMonitor interactionJankMonitor, Provider provider, PromptViewModel promptViewModel, Provider provider2, Handler handler, DelayableExecutor delayableExecutor, VibratorHelper vibratorHelper) {
         super(config.mContext);
         boolean z;

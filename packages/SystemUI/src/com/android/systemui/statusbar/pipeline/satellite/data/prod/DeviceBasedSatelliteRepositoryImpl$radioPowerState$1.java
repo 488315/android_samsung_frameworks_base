@@ -18,7 +18,6 @@ final class DeviceBasedSatelliteRepositoryImpl$radioPowerState$1 extends Suspend
     int label;
     final /* synthetic */ DeviceBasedSatelliteRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteRepositoryImpl$radioPowerState$1(TelephonyManager telephonyManager, DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.$telephonyManager = telephonyManager;
@@ -48,7 +47,6 @@ final class DeviceBasedSatelliteRepositoryImpl$radioPowerState$1 extends Suspend
             this.$telephonyManager.registerTelephonyCallback(ExecutorsKt.asExecutor(this.this$0.bgDispatcher), deviceBasedSatelliteRepositoryImpl$radioPowerState$1$cb$1);
             final TelephonyManager telephonyManager = this.$telephonyManager;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$radioPowerState$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -332,7 +332,6 @@ public final class SemClipboardService extends IClipboardService.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0179 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

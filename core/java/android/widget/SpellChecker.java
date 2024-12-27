@@ -121,7 +121,6 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
         return this.mLength - 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addSpellCheckSpan(Editable editable, int start, int end) {
         int index = nextSpellCheckSpanIndex();
         SpellCheckSpan spellCheckSpan = this.mSpellCheckSpans[index];
@@ -193,7 +192,6 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
         spellCheck(false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void spellCheck(boolean forceCheckWhenEditingWord) {
         boolean isNotEditing;
         if (this.mSpellCheckerSession == null) {
@@ -602,7 +600,6 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Range<Integer> detectSentenceBoundary(
             CharSequence sequence, int textChangeStart, int textChangeEnd) {
         int iteratorWindowStart =

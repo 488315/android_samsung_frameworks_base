@@ -13,7 +13,6 @@ final class BacklightDialogViewModel$timeout$1$1 extends SuspendLambda implement
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BacklightDialogViewModel$timeout$1$1(Object obj, long j, Object obj2, Continuation continuation) {
         super(2, continuation);
         this.$it = obj;
@@ -33,7 +32,6 @@ final class BacklightDialogViewModel$timeout$1$1 extends SuspendLambda implement
         return ((BacklightDialogViewModel$timeout$1$1) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x005a A[RETURN] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

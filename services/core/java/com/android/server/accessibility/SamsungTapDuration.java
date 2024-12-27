@@ -62,7 +62,6 @@ public final class SamsungTapDuration extends BaseEventStreamTransformation {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.accessibility.SamsungTapDuration$1] */
     public SamsungTapDuration(Context context, int i) {
         ?? r1 = new Handler() { // from class: com.android.server.accessibility.SamsungTapDuration.1
             @Override // android.os.Handler

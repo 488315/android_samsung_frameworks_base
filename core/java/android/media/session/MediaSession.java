@@ -507,13 +507,11 @@ public final class MediaSession {
         public static final Parcelable.Creator<Token> CREATOR =
                 new Parcelable.Creator<
                         Token>() { // from class: android.media.session.MediaSession.Token.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Token createFromParcel(Parcel in) {
                         return new Token(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Token[] newArray(int size) {
                         return new Token[size];
@@ -585,7 +583,6 @@ public final class MediaSession {
 
         public void onCommand(String command, Bundle args, ResultReceiver cb) {}
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public boolean onMediaButtonEvent(Intent mediaButtonIntent) {
             KeyEvent ke;
             if (this.mSession != null
@@ -669,7 +666,6 @@ public final class MediaSession {
             return false;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void handleMediaPlayPauseKeySingleTapIfPending() {
             boolean isPlaying;
             boolean canPlay;
@@ -985,13 +981,11 @@ public final class MediaSession {
         public static final Parcelable.Creator<QueueItem> CREATOR =
                 new Parcelable.Creator<
                         QueueItem>() { // from class: android.media.session.MediaSession.QueueItem.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public QueueItem createFromParcel(Parcel p) {
                         return new QueueItem(p);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public QueueItem[] newArray(int size) {
                         return new QueueItem[size];
@@ -1120,7 +1114,6 @@ public final class MediaSession {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
             VolumeProvider vp;

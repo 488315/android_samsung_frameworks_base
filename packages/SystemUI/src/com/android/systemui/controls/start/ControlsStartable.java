@@ -89,7 +89,6 @@ public final class ControlsStartable implements CoreStartable {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.controls.start.ControlsStartable$userTrackerCallback$1] */
     public ControlsStartable(CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, DelayableExecutor delayableExecutor, ControlsComponent controlsComponent, UserTracker userTracker, AuthorizedPanelsRepository authorizedPanelsRepository, SelectedComponentRepository selectedComponentRepository, PackageChangeInteractor packageChangeInteractor, UserManager userManager, BroadcastDispatcher broadcastDispatcher, ControlsUtil controlsUtil) {
         this.scope = coroutineScope;
         this.bgDispatcher = coroutineDispatcher;
@@ -216,8 +215,6 @@ public final class ControlsStartable implements CoreStartable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -308,8 +305,6 @@ public final class ControlsStartable implements CoreStartable {
                     this.this$0 = controlsStartable;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

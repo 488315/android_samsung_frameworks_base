@@ -12,7 +12,6 @@ public final class WifiBatteryStats implements Parcelable {
     public static final Parcelable.Creator<WifiBatteryStats> CREATOR =
             new Parcelable.Creator<
                     WifiBatteryStats>() { // from class: android.os.connectivity.WifiBatteryStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiBatteryStats createFromParcel(Parcel in) {
                     long loggingDurationMillis = in.readLong();
@@ -52,7 +51,6 @@ public final class WifiBatteryStats implements Parcelable {
                             monitoredRailChargeConsumedMaMillis);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiBatteryStats[] newArray(int size) {
                     return new WifiBatteryStats[size];

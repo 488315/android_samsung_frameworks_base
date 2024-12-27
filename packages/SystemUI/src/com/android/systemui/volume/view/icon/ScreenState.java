@@ -2,8 +2,6 @@ package com.android.systemui.volume.view.icon;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class ScreenState {
     public static final /* synthetic */ ScreenState[] $VALUES;
     public static final ScreenState SCREEN_NORMAL;

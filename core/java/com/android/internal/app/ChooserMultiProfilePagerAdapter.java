@@ -96,7 +96,6 @@ public class ChooserMultiProfilePagerAdapter extends AbstractMultiProfilePagerAd
         return this.mItems[pageIndex].chooserGridAdapter;
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter
     public ChooserListAdapter getListAdapterForUserHandle(UserHandle userHandle) {
         if (getPersonalListAdapter().getUserHandle().equals(userHandle)
@@ -157,19 +156,16 @@ public class ChooserMultiProfilePagerAdapter extends AbstractMultiProfilePagerAd
         return getAdapterForIndex(1).getListAdapter();
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter
     public ChooserActivity.ChooserGridAdapter getCurrentRootAdapter() {
         return getAdapterForIndex(getCurrentPage());
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter
     public RecyclerView getActiveAdapterView() {
         return getListViewForIndex(getCurrentPage());
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter
     public RecyclerView getInactiveAdapterView() {
         if (getCount() == 1) {

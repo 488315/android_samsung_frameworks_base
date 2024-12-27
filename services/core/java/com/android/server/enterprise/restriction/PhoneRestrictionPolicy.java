@@ -2718,9 +2718,6 @@ public final class PhoneRestrictionPolicy extends IPhoneRestrictionPolicy.Stub
         return z;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0106 A[Catch: Exception -> 0x0101, TRY_LEAVE, TryCatch #0 {Exception -> 0x0101, blocks: (B:61:0x00f6, B:49:0x0106), top: B:60:0x00f6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x015f  */
-    /* JADX WARN: Removed duplicated region for block: B:59:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -20,7 +20,6 @@ final class AlarmTileDataInteractor$tileData$1 extends SuspendLambda implements 
     int label;
     final /* synthetic */ AlarmTileDataInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AlarmTileDataInteractor$tileData$1(AlarmTileDataInteractor alarmTileDataInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = alarmTileDataInteractor;
@@ -55,7 +54,6 @@ final class AlarmTileDataInteractor$tileData$1 extends SuspendLambda implements 
             ((NextAlarmControllerImpl) this.this$0.alarmController).addCallback(nextAlarmChangeCallback);
             final AlarmTileDataInteractor alarmTileDataInteractor2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.tiles.impl.alarm.domain.interactor.AlarmTileDataInteractor$tileData$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -291,7 +291,6 @@ public class MediaSessionLegacyHelper {
         return holder;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void sendKeyEvent(PendingIntent pi, Context context, Intent intent) {
         try {
             pi.send(context, 0, intent);

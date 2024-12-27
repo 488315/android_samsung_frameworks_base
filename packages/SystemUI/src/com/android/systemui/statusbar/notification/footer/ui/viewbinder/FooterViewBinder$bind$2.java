@@ -29,7 +29,6 @@ final class FooterViewBinder$bind$2 extends SuspendLambda implements Function2 {
         final /* synthetic */ FooterViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(FooterView footerView, FooterViewModel footerViewModel, View.OnClickListener onClickListener, Continuation continuation) {
             super(2, continuation);
             this.$footer = footerView;
@@ -80,7 +79,6 @@ final class FooterViewBinder$bind$2 extends SuspendLambda implements Function2 {
         final /* synthetic */ FooterViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(FooterView footerView, FooterViewModel footerViewModel, View.OnClickListener onClickListener, View.OnClickListener onClickListener2, Continuation continuation) {
             super(2, continuation);
             this.$footer = footerView;
@@ -131,7 +129,6 @@ final class FooterViewBinder$bind$2 extends SuspendLambda implements Function2 {
         final /* synthetic */ FooterViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(FooterView footerView, FooterViewModel footerViewModel, Continuation continuation) {
             super(2, continuation);
             this.$footer = footerView;
@@ -172,7 +169,6 @@ final class FooterViewBinder$bind$2 extends SuspendLambda implements Function2 {
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FooterViewBinder$bind$2(FooterView footerView, FooterViewModel footerViewModel, View.OnClickListener onClickListener, View.OnClickListener onClickListener2, View.OnClickListener onClickListener3, Continuation continuation) {
         super(2, continuation);
         this.$footer = footerView;

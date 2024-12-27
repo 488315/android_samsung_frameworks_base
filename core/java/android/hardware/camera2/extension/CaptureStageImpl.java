@@ -9,7 +9,6 @@ public class CaptureStageImpl implements Parcelable {
     public static final Parcelable.Creator<CaptureStageImpl> CREATOR =
             new Parcelable.Creator<CaptureStageImpl>() { // from class:
                 // android.hardware.camera2.extension.CaptureStageImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CaptureStageImpl createFromParcel(Parcel _aidl_source) {
                     CaptureStageImpl _aidl_out = new CaptureStageImpl();
@@ -17,7 +16,6 @@ public class CaptureStageImpl implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CaptureStageImpl[] newArray(int _aidl_size) {
                     return new CaptureStageImpl[_aidl_size];

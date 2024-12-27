@@ -92,13 +92,11 @@ public final class SemExecutableInfo implements Parcelable {
             new Parcelable.Creator<
                     SemExecutableInfo>() { // from class:
                                            // com.samsung.android.app.SemExecutableInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemExecutableInfo createFromParcel(Parcel in) {
                     return new SemExecutableInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemExecutableInfo[] newArray(int size) {
                     return new SemExecutableInfo[size];
@@ -366,8 +364,6 @@ public final class SemExecutableInfo implements Parcelable {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r18v2, types: [java.lang.String] */
     public static List<SemExecutableInfo> scanExecutableInfos(Context context) {
         SemExecutableInfo lastSemExecutableInfo;
         PackageItemInfo itemInfo;

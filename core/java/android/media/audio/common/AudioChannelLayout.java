@@ -41,13 +41,11 @@ public final class AudioChannelLayout implements Parcelable {
     public static final Parcelable.Creator<AudioChannelLayout> CREATOR =
             new Parcelable.Creator<AudioChannelLayout>() { // from class:
                 // android.media.audio.common.AudioChannelLayout.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioChannelLayout createFromParcel(Parcel _aidl_source) {
                     return new AudioChannelLayout(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioChannelLayout[] newArray(int _aidl_size) {
                     return new AudioChannelLayout[_aidl_size];

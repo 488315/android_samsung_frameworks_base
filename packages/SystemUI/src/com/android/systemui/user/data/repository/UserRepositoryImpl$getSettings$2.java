@@ -15,7 +15,6 @@ final class UserRepositoryImpl$getSettings$2 extends SuspendLambda implements Fu
     int label;
     final /* synthetic */ UserRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserRepositoryImpl$getSettings$2(UserRepositoryImpl userRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userRepositoryImpl;

@@ -42,7 +42,6 @@ public class BatteryStatsHistoryIterator
         return this.mHistoryItem != null;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // java.util.Iterator
     public BatteryStats.HistoryItem next() {
         if (!this.mNextItemReady) {

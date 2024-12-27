@@ -51,8 +51,6 @@ public final class FingerprintPropertyRepositoryImpl implements FingerprintPrope
         DEFAULT_PROPS = new FingerprintSensorPropertiesInternal(-1, 0, 0, emptyList, 0, false, true, Collections.singletonList(sensorLocationInternal));
     }
 
-    /* JADX WARN: Type inference failed for: r13v4, types: [com.android.systemui.biometrics.data.repository.FingerprintPropertyRepositoryImpl$special$$inlined$map$4, kotlinx.coroutines.flow.Flow] */
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.biometrics.data.repository.FingerprintPropertyRepositoryImpl$special$$inlined$map$2, kotlinx.coroutines.flow.Flow] */
     public FingerprintPropertyRepositoryImpl(CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, FingerprintManager fingerprintManager) {
         this.backgroundDispatcher = coroutineDispatcher;
         this.fingerprintManager = fingerprintManager;
@@ -92,8 +90,6 @@ public final class FingerprintPropertyRepositoryImpl implements FingerprintPrope
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -183,8 +179,6 @@ public final class FingerprintPropertyRepositoryImpl implements FingerprintPrope
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -274,8 +268,6 @@ public final class FingerprintPropertyRepositoryImpl implements FingerprintPrope
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -365,8 +357,6 @@ public final class FingerprintPropertyRepositoryImpl implements FingerprintPrope
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -476,8 +466,6 @@ public final class FingerprintPropertyRepositoryImpl implements FingerprintPrope
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -567,8 +555,6 @@ public final class FingerprintPropertyRepositoryImpl implements FingerprintPrope
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -656,8 +642,6 @@ public final class FingerprintPropertyRepositoryImpl implements FingerprintPrope
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -744,8 +728,6 @@ public final class FingerprintPropertyRepositoryImpl implements FingerprintPrope
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -832,8 +814,6 @@ public final class FingerprintPropertyRepositoryImpl implements FingerprintPrope
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

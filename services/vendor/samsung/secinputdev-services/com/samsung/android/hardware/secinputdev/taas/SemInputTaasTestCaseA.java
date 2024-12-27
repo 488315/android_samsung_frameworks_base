@@ -54,7 +54,6 @@ public class SemInputTaasTestCaseA implements SemInputTaasTestCase {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void runEvent(MotionEvent mEvent) {
         final int action = mEvent.getAction();
         this.mExternalApi.post(
@@ -67,7 +66,6 @@ public class SemInputTaasTestCaseA implements SemInputTaasTestCase {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: runEvent, reason: merged with bridge method [inline-methods] */
     public void lambda$runEvent$0(int action) {
         Time time = new Time();
@@ -235,7 +233,6 @@ public class SemInputTaasTestCaseA implements SemInputTaasTestCase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean getSurfaceTimerStates() {
         long surfaceForCurrentTime = SystemClock.uptimeMillis();
         long surfaceBeginTime = this.mExternalApi.getSurfaceTimerStates();

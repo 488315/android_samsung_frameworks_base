@@ -101,30 +101,6 @@ public final class EdgeLightingSettingManager {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x016a A[Catch: all -> 0x0164, IOException -> 0x0166, TRY_LEAVE, TryCatch #14 {IOException -> 0x0166, blocks: (B:133:0x0160, B:122:0x016a), top: B:132:0x0160, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:131:0x0189 A[Catch: IOException -> 0x0177, TRY_ENTER, TRY_LEAVE, TryCatch #2 {IOException -> 0x0177, blocks: (B:131:0x0189, B:128:0x0173, B:133:0x0160, B:122:0x016a), top: B:119:0x015e, inners: #14 }] */
-    /* JADX WARN: Removed duplicated region for block: B:132:0x0160 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00d4  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00db A[Catch: JSONException -> 0x0146, TryCatch #5 {JSONException -> 0x0146, blocks: (B:18:0x00c3, B:21:0x00d7, B:23:0x00db, B:25:0x00eb, B:26:0x00f8, B:28:0x00fe, B:31:0x0114, B:34:0x011e, B:37:0x0124, B:39:0x0134, B:41:0x013c, B:42:0x0140, B:51:0x0148, B:70:0x014d), top: B:17:0x00c3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x01e0  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0207  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0225  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0242  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x025e  */
-    /* JADX WARN: Removed duplicated region for block: B:69:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x014d A[Catch: JSONException -> 0x0146, TRY_LEAVE, TryCatch #5 {JSONException -> 0x0146, blocks: (B:18:0x00c3, B:21:0x00d7, B:23:0x00db, B:25:0x00eb, B:26:0x00f8, B:28:0x00fe, B:31:0x0114, B:34:0x011e, B:37:0x0124, B:39:0x0134, B:41:0x013c, B:42:0x0140, B:51:0x0148, B:70:0x014d), top: B:17:0x00c3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x00d6  */
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.edgelighting.manager.EdgeLightingSettingManager$1] */
-    /* JADX WARN: Type inference failed for: r6v2, types: [java.lang.Object, java.lang.String] */
-    /* JADX WARN: Type inference failed for: r6v23, types: [android.content.pm.PackageManager] */
-    /* JADX WARN: Type inference failed for: r6v3 */
-    /* JADX WARN: Type inference failed for: r6v5, types: [java.lang.CharSequence] */
-    /* JADX WARN: Type inference failed for: r7v2, types: [android.content.pm.PackageManager] */
-    /* JADX WARN: Type inference failed for: r7v6, types: [java.lang.Object, java.lang.String] */
-    /* JADX WARN: Type inference failed for: r7v7 */
-    /* JADX WARN: Type inference failed for: r7v9, types: [java.lang.CharSequence] */
-    /* JADX WARN: Type inference failed for: r9v0, types: [com.android.systemui.edgelighting.manager.EdgeLightingSettingManager] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

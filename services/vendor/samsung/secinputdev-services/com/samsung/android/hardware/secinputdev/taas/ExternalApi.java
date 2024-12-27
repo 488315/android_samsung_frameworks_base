@@ -204,14 +204,12 @@ public class ExternalApi {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDisplayStateChanged$0() {
             ExternalApi.this.mDispatcher.registerMotionEventListener(
                     ExternalApi.this.motionEventListener);
             ExternalApi.this.motionEventRunnable = null;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDisplayStateChanged$1() {
             ExternalApi.this.mDispatcher.unregisterMotionEventListener(
                     ExternalApi.this.motionEventListener);
@@ -222,7 +220,6 @@ public class ExternalApi {
         this.listeners.add(listener);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void runEvent(MotionEvent event) {
         if (!this.listeners.isEmpty()) {
             for (Consumer<MotionEvent> listener : this.listeners) {

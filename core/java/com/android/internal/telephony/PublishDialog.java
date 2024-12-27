@@ -11,13 +11,11 @@ public class PublishDialog implements Parcelable {
     public static final Parcelable.Creator<PublishDialog> CREATOR =
             new Parcelable.Creator<
                     PublishDialog>() { // from class: com.android.internal.telephony.PublishDialog.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PublishDialog createFromParcel(Parcel in) {
                     return new PublishDialog(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PublishDialog[] newArray(int size) {
                     return new PublishDialog[size];

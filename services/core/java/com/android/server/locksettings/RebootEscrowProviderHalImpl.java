@@ -19,8 +19,6 @@ public final class RebootEscrowProviderHalImpl implements RebootEscrowProviderIn
     public final Injector mInjector;
 
     public final class Injector {
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r2v6, types: [android.hardware.rebootescrow.IRebootEscrow] */
         public static IRebootEscrow getRebootEscrow() {
             IRebootEscrow.Stub.Proxy proxy;
             try {

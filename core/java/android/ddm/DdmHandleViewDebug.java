@@ -129,9 +129,6 @@ public class DdmHandleViewDebug extends DdmHandle {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0 */
-    /* JADX WARN: Type inference failed for: r1v7, types: [byte[]] */
     private Chunk dumpHierarchy(View rootView, ByteBuffer in) {
         int i = 1;
         boolean skipChildren = in.getInt() > 0;

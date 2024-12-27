@@ -25,7 +25,6 @@ final class CustomTileDataInteractor$dataFlow$3 extends SuspendLambda implements
     int label;
     final /* synthetic */ CustomTileDataInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTileDataInteractor$dataFlow$3(CustomTileDataInteractor customTileDataInteractor, UserHandle userHandle, Continuation continuation) {
         super(5, continuation);
         this.this$0 = customTileDataInteractor;

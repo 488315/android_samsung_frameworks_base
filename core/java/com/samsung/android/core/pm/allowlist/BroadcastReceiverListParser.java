@@ -189,7 +189,6 @@ public class BroadcastReceiverListParser {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:86:0x0062, code lost:
 
        if (r5.equals("intent") != false) goto L35;

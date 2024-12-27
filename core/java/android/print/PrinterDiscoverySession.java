@@ -150,11 +150,6 @@ public final class PrinterDiscoverySession {
         return this.mObserver == null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [android.print.IPrinterDiscoveryObserver] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [android.print.IPrinterDiscoveryObserver] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [java.util.LinkedHashMap, java.util.LinkedHashMap<android.print.PrinterId, android.print.PrinterInfo>] */
-    /* JADX WARN: Type inference failed for: r0v4 */
     private void destroyNoCheck() {
         stopPrinterDiscovery();
         ?? r0 = 0;
@@ -171,7 +166,6 @@ public final class PrinterDiscoverySession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handlePrintersAdded(List<PrinterInfo> addedPrinters) {
         if (isDestroyed()) {
             return;
@@ -201,7 +195,6 @@ public final class PrinterDiscoverySession {
         notifyOnPrintersChanged();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handlePrintersRemoved(List<PrinterId> printerIds) {
         if (isDestroyed()) {
             return;

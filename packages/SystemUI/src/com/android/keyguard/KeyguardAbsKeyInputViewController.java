@@ -35,7 +35,6 @@ public abstract class KeyguardAbsKeyInputViewController extends KeyguardInputVie
     public LockscreenCredential mPrevCredential;
     public boolean mResumed;
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.keyguard.KeyguardAbsKeyInputViewController$1] */
     public KeyguardAbsKeyInputViewController(KeyguardAbsKeyInputView keyguardAbsKeyInputView, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, FalsingCollector falsingCollector, EmergencyButtonController emergencyButtonController, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor) {
         super(keyguardAbsKeyInputView, securityMode, keyguardSecurityCallback, emergencyButtonController, factory, featureFlags, selectedUserInteractor);
         this.mKeyDownListener = new KeyguardAbsKeyInputViewController$$ExternalSyntheticLambda0(this);

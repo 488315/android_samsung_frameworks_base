@@ -39,7 +39,6 @@ public final class CustomTileUserActionInteractor implements QSTileUserActionInt
         this.serviceInteractor = customTileServiceInteractor;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(10:0|1|(2:3|(7:5|6|7|(1:(2:10|11)(2:18|19))(4:20|45|27|(1:29))|(1:13)(1:17)|14|15))|41|6|7|(0)(0)|(0)(0)|14|15) */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x0036, code lost:
     
         r9 = move-exception;
@@ -48,10 +47,6 @@ public final class CustomTileUserActionInteractor implements QSTileUserActionInt
     
         r8.qsTileLogger.logError(r8.tileSpec, "Failed to deliver click", r9);
      */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x007e A[Catch: RemoteException -> 0x0036, TryCatch #2 {RemoteException -> 0x0036, blocks: (B:11:0x0032, B:13:0x007e, B:17:0x0091, B:27:0x006b), top: B:7:0x0020 }] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0091 A[Catch: RemoteException -> 0x0036, TRY_LEAVE, TryCatch #2 {RemoteException -> 0x0036, blocks: (B:11:0x0032, B:13:0x007e, B:17:0x0091, B:27:0x006b), top: B:7:0x0020 }] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0022  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -165,8 +160,6 @@ public final class CustomTileUserActionInteractor implements QSTileUserActionInt
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileUserActionInteractor.click(com.android.systemui.animation.Expandable, android.app.PendingIntent, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0039  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0024  */
     @Override // com.android.systemui.qs.tiles.base.interactor.QSTileUserActionInteractor
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -256,12 +249,6 @@ public final class CustomTileUserActionInteractor implements QSTileUserActionInt
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileUserActionInteractor.handleInput(com.android.systemui.qs.tiles.base.interactor.QSTileInput, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x006d  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x007c  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0079  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -31,7 +31,6 @@ final class CommunalHubKt$ScrollOnUpdatedLiveContentEffect$1 extends SuspendLamb
         final /* synthetic */ int $indexOfFirstUpdatedContent;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(LazyGridState lazyGridState, int i, Continuation continuation) {
             super(2, continuation);
             this.$gridState = lazyGridState;
@@ -75,8 +74,6 @@ final class CommunalHubKt$ScrollOnUpdatedLiveContentEffect$1 extends SuspendLamb
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Multi-variable type inference failed */
     public CommunalHubKt$ScrollOnUpdatedLiveContentEffect$1(List<String> list, List<? extends CommunalContentModel> list2, LazyGridState lazyGridState, CoroutineScope coroutineScope, Continuation continuation) {
         super(2, continuation);
         this.$liveContentKeys = list;

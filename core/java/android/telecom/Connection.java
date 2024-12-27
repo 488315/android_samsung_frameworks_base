@@ -1466,7 +1466,6 @@ public abstract class Connection extends Conferenceable {
         return this.mCallEndpoint;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$sendRttInitiationSuccess$0(Listener l) {
         l.onRttInitiationSuccess(this);
     }
@@ -1482,7 +1481,6 @@ public abstract class Connection extends Conferenceable {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$sendRttInitiationFailure$1(int reason, Listener l) {
         l.onRttInitiationFailure(this, reason);
     }
@@ -1498,7 +1496,6 @@ public abstract class Connection extends Conferenceable {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$sendRttSessionRemotelyTerminated$2(Listener l) {
         l.onRttSessionRemotelyTerminated(this);
     }
@@ -1514,7 +1511,6 @@ public abstract class Connection extends Conferenceable {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$sendRemoteRttRequest$3(Listener l) {
         l.onRemoteRttRequest(this);
     }
@@ -1554,7 +1550,6 @@ public abstract class Connection extends Conferenceable {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$queryLocationForEmergency$4(
             long timeoutMillis,
             String provider,
@@ -1643,13 +1638,11 @@ public abstract class Connection extends Conferenceable {
                 new Parcelable.Creator<
                         CallFilteringCompletionInfo>() { // from class:
                                                          // android.telecom.Connection.CallFilteringCompletionInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CallFilteringCompletionInfo createFromParcel(Parcel in) {
                         return new CallFilteringCompletionInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CallFilteringCompletionInfo[] newArray(int size) {
                         return new CallFilteringCompletionInfo[size];
@@ -1798,7 +1791,6 @@ public abstract class Connection extends Conferenceable {
         return new FailureSignalingConnection(new DisconnectCause(4));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void fireOnConferenceableConnectionsChanged() {
         for (Listener l : this.mListeners) {
             l.onConferenceablesChanged(this, getConferenceables());

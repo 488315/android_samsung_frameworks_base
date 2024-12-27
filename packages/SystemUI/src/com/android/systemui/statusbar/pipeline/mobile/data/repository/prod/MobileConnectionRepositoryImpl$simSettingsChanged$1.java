@@ -22,7 +22,6 @@ final class MobileConnectionRepositoryImpl$simSettingsChanged$1 extends SuspendL
     int label;
     final /* synthetic */ MobileConnectionRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileConnectionRepositoryImpl$simSettingsChanged$1(MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl, MobileInputLogger mobileInputLogger, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mobileConnectionRepositoryImpl;
@@ -85,7 +84,6 @@ final class MobileConnectionRepositoryImpl$simSettingsChanged$1 extends SuspendL
             }
             final MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$simSettingsChanged$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

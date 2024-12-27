@@ -39,7 +39,6 @@ public class NativeLibraryHelper {
 
     private static native int hasRenderscriptBitcode(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeClose(long j);
 
     private static native int nativeCopyNativeBinaries(
@@ -47,10 +46,8 @@ public class NativeLibraryHelper {
 
     private static native int nativeFindSupportedAbi(long j, String[] strArr, boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeOpenApk(String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeOpenApkFd(FileDescriptor fileDescriptor, String str);
 
     private static native long nativeSumNativeBinaries(long j, String str, boolean z);

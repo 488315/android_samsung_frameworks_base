@@ -53,7 +53,6 @@ public interface ServiceConnector<I extends IInterface> {
     public interface VoidJob<II> extends Job<II, Void> {
         void runNoResult(II ii) throws Exception;
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.internal.infra.ServiceConnector.Job
         /* bridge */
         /* synthetic */ default Void run(Object obj) throws Exception {
@@ -224,7 +223,6 @@ public interface ServiceConnector<I extends IInterface> {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         /* renamed from: enqueueJobThread, reason: merged with bridge method [inline-methods] */
         public void lambda$enqueue$1(Job<I, ?> job) {
             cancelTimeout();
@@ -266,7 +264,6 @@ public interface ServiceConnector<I extends IInterface> {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         static <BASE, T extends BASE> T castOrNull(BASE base, Class<T> cls) {
             if (cls.isInstance(base)) {
                 return base;
@@ -305,7 +302,6 @@ public interface ServiceConnector<I extends IInterface> {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void maybeScheduleUnbindTimeout() {
             if (this.mUnfinishedJobs.isEmpty() && this.mQueue.isEmpty()) {
                 scheduleUnbindTimeout();
@@ -524,7 +520,6 @@ public interface ServiceConnector<I extends IInterface> {
                 }
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // java.util.function.BiConsumer
             public /* bridge */ /* synthetic */ void accept(Object obj, Throwable th) {
                 accept2((CompletionAwareJob<II, R>) obj, th);

@@ -9,7 +9,6 @@ public class KeyOperationWithPurposeAndModesInfo implements Parcelable {
             new Parcelable.Creator<
                     KeyOperationWithPurposeAndModesInfo>() { // from class:
                                                              // android.security.metrics.KeyOperationWithPurposeAndModesInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyOperationWithPurposeAndModesInfo createFromParcel(Parcel _aidl_source) {
                     KeyOperationWithPurposeAndModesInfo _aidl_out =
@@ -18,7 +17,6 @@ public class KeyOperationWithPurposeAndModesInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyOperationWithPurposeAndModesInfo[] newArray(int _aidl_size) {
                     return new KeyOperationWithPurposeAndModesInfo[_aidl_size];

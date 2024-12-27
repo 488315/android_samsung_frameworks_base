@@ -40,14 +40,11 @@ public final class RemoteDeviceController extends DeviceController {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.media.mediaoutput.controller.device.RemoteDeviceController$callback$1] */
     public RemoteDeviceController(MediaSessionManager mediaSessionManager) {
         this.mediaSessionManager = mediaSessionManager;
         Log.d("RemoteDeviceController", "init()");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -184,7 +184,6 @@ public final class SecSeekBarViewModel {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r9v3, types: [com.android.systemui.media.SecSeekBarViewModel$callback$1] */
     public SecSeekBarViewModel(RepeatableExecutor repeatableExecutor, DelayableExecutor delayableExecutor) {
         this.bgExecutor = repeatableExecutor;
         this.mainExecutor = delayableExecutor;

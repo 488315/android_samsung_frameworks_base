@@ -17,7 +17,6 @@ final class KeyguardQuickAffordanceRemoteUserSelectionManager$setSelections$1$1 
     Object L$2;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordanceRemoteUserSelectionManager$setSelections$1$1(CustomizationProviderClient customizationProviderClient, String str, List<String> list, Continuation continuation) {
         super(2, continuation);
         this.$client = customizationProviderClient;
@@ -35,13 +34,6 @@ final class KeyguardQuickAffordanceRemoteUserSelectionManager$setSelections$1$1 
         return ((KeyguardQuickAffordanceRemoteUserSelectionManager$setSelections$1$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0050  */
-    /* JADX WARN: Type inference failed for: r7v10, types: [com.android.systemui.shared.customization.data.content.CustomizationProviderClientImpl] */
-    /* JADX WARN: Type inference failed for: r7v12 */
-    /* JADX WARN: Type inference failed for: r7v7 */
-    /* JADX WARN: Type inference failed for: r7v8 */
-    /* JADX WARN: Type inference failed for: r7v9, types: [java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -13,13 +13,11 @@ public final class TexturedMesh implements Parcelable {
     public static final Parcelable.Creator<TexturedMesh> CREATOR =
             new Parcelable.Creator<TexturedMesh>() { // from class:
                 // android.app.wallpapereffectsgeneration.TexturedMesh.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TexturedMesh createFromParcel(Parcel in) {
                     return new TexturedMesh(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TexturedMesh[] newArray(int size) {
                     return new TexturedMesh[size];

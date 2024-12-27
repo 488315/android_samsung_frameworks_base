@@ -392,7 +392,6 @@ public class AppJumpBlockTool {
                 new Parcelable.Creator<
                         AppInfo>() { // from class:
                                      // com.samsung.android.core.AppJumpBlockTool.AppInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AppInfo createFromParcel(Parcel in) {
                         AppInfo appInfo = new AppInfo();
@@ -402,7 +401,6 @@ public class AppJumpBlockTool {
                         return appInfo;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AppInfo[] newArray(int size) {
                         return new AppInfo[size];

@@ -14,7 +14,6 @@ final class DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1 extends Su
     int label;
     final /* synthetic */ DeviceBasedSatelliteRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1(DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl, SatelliteManager satelliteManager, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceBasedSatelliteRepositoryImpl;
@@ -33,7 +32,6 @@ final class DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1 extends Su
         return ((DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(10:0|1|(1:(1:(3:5|6|7)(2:9|10))(1:11))(2:21|(1:23)(1:24))|12|13|14|15|(1:17)|6|7) */
     /* JADX WARN: Code restructure failed: missing block: B:19:0x0078, code lost:
     
         r4 = move-exception;

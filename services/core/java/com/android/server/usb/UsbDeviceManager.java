@@ -433,26 +433,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
 
         public abstract void getUsbSpeedCb(int i);
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:173:0x0420  */
-        /* JADX WARN: Removed duplicated region for block: B:176:0x0432  */
-        /* JADX WARN: Removed duplicated region for block: B:182:0x0443  */
-        /* JADX WARN: Removed duplicated region for block: B:206:0x0457 A[Catch: IOException -> 0x0453, TRY_LEAVE, TryCatch #4 {IOException -> 0x0453, blocks: (B:215:0x044f, B:206:0x0457), top: B:214:0x044f }] */
-        /* JADX WARN: Removed duplicated region for block: B:213:? A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:214:0x044f A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:221:0x03e4 A[Catch: IOException -> 0x03e0, TRY_LEAVE, TryCatch #17 {IOException -> 0x03e0, blocks: (B:229:0x03dc, B:221:0x03e4), top: B:228:0x03dc }] */
-        /* JADX WARN: Removed duplicated region for block: B:228:0x03dc A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:235:0x03b9 A[Catch: IOException -> 0x03b5, TRY_LEAVE, TryCatch #2 {IOException -> 0x03b5, blocks: (B:241:0x03b1, B:235:0x03b9), top: B:240:0x03b1 }] */
-        /* JADX WARN: Removed duplicated region for block: B:240:0x03b1 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Type inference failed for: r6v16, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r6v20 */
-        /* JADX WARN: Type inference failed for: r6v24, types: [java.io.FileReader] */
-        /* JADX WARN: Type inference failed for: r6v26 */
-        /* JADX WARN: Type inference failed for: r6v27, types: [java.io.FileReader] */
-        /* JADX WARN: Type inference failed for: r6v41 */
-        /* JADX WARN: Type inference failed for: r6v42 */
-        /* JADX WARN: Type inference failed for: r6v63 */
-        /* JADX WARN: Type inference failed for: r6v64 */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -538,9 +518,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
             setEnabledFunctions(i, this.mScreenUnlockedFunctions, false);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:10:0x006b  */
-        /* JADX WARN: Removed duplicated region for block: B:16:0x0073  */
-        /* JADX WARN: Removed duplicated region for block: B:7:0x0036  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -644,16 +621,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
                         + " com.android.server.usb.UsbDeviceManager.UsbHandler.updateState(java.lang.String):void");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:29:0x0063  */
-        /* JADX WARN: Removed duplicated region for block: B:39:0x006d  */
-        /* JADX WARN: Removed duplicated region for block: B:44:0x007f  */
-        /* JADX WARN: Removed duplicated region for block: B:54:0x00e3  */
-        /* JADX WARN: Removed duplicated region for block: B:57:0x00ed  */
-        /* JADX WARN: Removed duplicated region for block: B:60:0x010f A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:78:0x015d  */
-        /* JADX WARN: Removed duplicated region for block: B:80:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:81:0x00ef  */
-        /* JADX WARN: Removed duplicated region for block: B:82:0x00e5  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -672,7 +639,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
 
            if (r7 == 0) goto L70;
         */
-        /* JADX WARN: Removed duplicated region for block: B:40:0x01bc  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -687,11 +653,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
                         + " com.android.server.usb.UsbDeviceManager.UsbHandler.updateUsbNotification(boolean):void");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:17:0x00ab A[LOOP:0: B:15:0x00a5->B:17:0x00ab, LOOP_END] */
-        /* JADX WARN: Removed duplicated region for block: B:21:0x00c8  */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x0110  */
-        /* JADX WARN: Removed duplicated region for block: B:33:0x012f  */
-        /* JADX WARN: Removed duplicated region for block: B:37:0x00e0  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -907,7 +868,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.server.usb.UsbDeviceManager.UsbHandler
         public final void setEnabledFunctions(int i, long j, boolean z) {
             Object obj;
@@ -1186,13 +1146,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
 
            if ((com.android.server.usb.UsbDeviceManager.UsbHandler.isAdbEnabled() ? addFunction(r0) : removeFunction(r0)).equals("none") != false) goto L19;
         */
-        /* JADX WARN: Removed duplicated region for block: B:101:0x0262  */
-        /* JADX WARN: Removed duplicated region for block: B:123:0x01f6  */
-        /* JADX WARN: Removed duplicated region for block: B:78:0x0195  */
-        /* JADX WARN: Removed duplicated region for block: B:88:0x021a  */
-        /* JADX WARN: Removed duplicated region for block: B:95:0x0236  */
-        /* JADX WARN: Removed duplicated region for block: B:99:0x025c  */
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:62:0x00fb -> B:33:0x011c). Please report as a decompilation issue!!! */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1329,7 +1282,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
         mEnableUsbHiddenMenu = false;
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.usb.UsbDeviceManager$1] */
     public UsbDeviceManager(
             Context context,
             UsbAlsaManager usbAlsaManager,

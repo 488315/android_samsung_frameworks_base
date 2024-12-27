@@ -19,7 +19,6 @@ public final class TunedInfo implements Parcelable {
     public static final int APP_TYPE_SYSTEM = 2;
     public static final Parcelable.Creator<TunedInfo> CREATOR =
             new Parcelable.Creator<TunedInfo>() { // from class: android.media.tv.TunedInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TunedInfo createFromParcel(Parcel source) {
                     try {
@@ -30,7 +29,6 @@ public final class TunedInfo implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TunedInfo[] newArray(int size) {
                     return new TunedInfo[size];

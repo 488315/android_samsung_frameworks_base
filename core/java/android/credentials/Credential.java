@@ -13,13 +13,11 @@ import java.util.Objects;
 public final class Credential implements Parcelable {
     public static final Parcelable.Creator<Credential> CREATOR =
             new Parcelable.Creator<Credential>() { // from class: android.credentials.Credential.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Credential[] newArray(int size) {
                     return new Credential[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Credential createFromParcel(Parcel in) {
                     return new Credential(in);

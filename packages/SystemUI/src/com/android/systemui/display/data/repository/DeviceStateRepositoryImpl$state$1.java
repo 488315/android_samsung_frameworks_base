@@ -26,7 +26,6 @@ final class DeviceStateRepositoryImpl$state$1 extends SuspendLambda implements F
     int label;
     final /* synthetic */ DeviceStateRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceStateRepositoryImpl$state$1(DeviceStateManager deviceStateManager, Executor executor, DeviceStateRepositoryImpl deviceStateRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.$deviceStateManager = deviceStateManager;
@@ -83,7 +82,6 @@ final class DeviceStateRepositoryImpl$state$1 extends SuspendLambda implements F
             this.$deviceStateManager.registerCallback(this.$executor, deviceStateCallback);
             final DeviceStateManager deviceStateManager = this.$deviceStateManager;
             Function0 function0 = new Function0() { // from class: com.android.systemui.display.data.repository.DeviceStateRepositoryImpl$state$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -15,7 +15,6 @@ final class FlowKt$setChangesBy$2 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FlowKt$setChangesBy$2(Function3 function3, Continuation continuation) {
         super(3, continuation);
         this.$transform = function3;

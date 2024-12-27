@@ -12,7 +12,6 @@ public final class DefaultAmbientContextManagerPerUserService
     DefaultRemoteAmbientContextDetectionService mRemoteService;
     public final AmbientContextManagerPerUserService.ServiceType mServiceType;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DefaultAmbientContextManagerPerUserService(
             AmbientContextManagerService ambientContextManagerService,
             Object obj,

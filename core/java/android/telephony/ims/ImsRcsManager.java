@@ -46,11 +46,9 @@ public class ImsRcsManager {
     @Retention(RetentionPolicy.SOURCE)
     public @interface RcsImsCapabilityFlag {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class AvailabilityCallbackAdapter {
         private final CapabilityBinder mBinder;
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class CapabilityBinder extends IImsCapabilityCallback.Stub {
             private final Executor mExecutor;
             private final OnAvailabilityChangedListener mOnAvailabilityChangedListener;
@@ -81,7 +79,6 @@ public class ImsRcsManager {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onCapabilitiesStatusChanged$0(int config) {
                 this.mOnAvailabilityChangedListener.onAvailabilityChanged(config);
             }

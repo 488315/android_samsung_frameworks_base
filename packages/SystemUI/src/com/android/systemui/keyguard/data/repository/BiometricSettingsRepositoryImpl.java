@@ -107,7 +107,6 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
         }
     }
 
-    /* JADX WARN: Type inference failed for: r9v0, types: [com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$1] */
     public BiometricSettingsRepositoryImpl(Context context, LockPatternUtils lockPatternUtils, BroadcastDispatcher broadcastDispatcher, AuthController authController, UserRepository userRepository, DevicePolicyManager devicePolicyManager, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, BiometricManager biometricManager, DevicePostureRepository devicePostureRepository, FacePropertyRepository facePropertyRepository, FingerprintPropertyRepository fingerprintPropertyRepository, MobileConnectionsRepository mobileConnectionsRepository, DumpManager dumpManager) {
         Flow flow;
         this.userRepository = userRepository;
@@ -141,8 +140,6 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -245,8 +242,6 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
                         this.$configFaceAuthSupportedPosture$inlined = devicePosture;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -346,8 +341,6 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -460,8 +453,6 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

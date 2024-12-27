@@ -53,7 +53,6 @@ final class SystemStatusAnimationSchedulerImpl$cancelCurrentlyDisplayedEvent$1 e
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl, Continuation continuation) {
             super(2, continuation);
             this.this$0 = systemStatusAnimationSchedulerImpl;
@@ -96,7 +95,6 @@ final class SystemStatusAnimationSchedulerImpl$cancelCurrentlyDisplayedEvent$1 e
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SystemStatusAnimationSchedulerImpl$cancelCurrentlyDisplayedEvent$1(SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = systemStatusAnimationSchedulerImpl;

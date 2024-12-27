@@ -288,7 +288,6 @@ public final class QuickSettingsControllerImpl implements QuickSettingsControlle
         public QsFragmentListener() {
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.systemui.fragments.FragmentHostManager.FragmentListener
         public final void onFragmentViewCreated(Fragment fragment) {
             View view;
@@ -1296,10 +1295,6 @@ public final class QuickSettingsControllerImpl implements QuickSettingsControlle
         asIndenting.println(this.mLastClipBounds);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x005f  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x006c  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00c6  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00df  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1668,8 +1663,6 @@ public final class QuickSettingsControllerImpl implements QuickSettingsControlle
         this.mNotificationStackScrollLayoutController.mView.mMaxTopPadding = this.mMaxExpansionHeight;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:84:0x020c  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x0213  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1899,7 +1892,6 @@ public final class QuickSettingsControllerImpl implements QuickSettingsControlle
     
         if (r0 == false) goto L75;
      */
-    /* JADX WARN: Removed duplicated region for block: B:47:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

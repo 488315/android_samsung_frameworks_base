@@ -36,7 +36,6 @@ public class AsyncSensorManager extends SensorManager implements PluginListener<
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$cancelTriggerSensorImpl$4(TriggerEventListener triggerEventListener, Sensor sensor) {
         if (this.mInner.cancelTriggerSensor(triggerEventListener, sensor)) {
             return;
@@ -44,12 +43,10 @@ public class AsyncSensorManager extends SensorManager implements PluginListener<
         Log.e(TAG, "Canceling " + triggerEventListener + " for " + sensor + " failed.");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$registerDynamicSensorCallbackImpl$1(SensorManager.DynamicSensorCallback dynamicSensorCallback, Handler handler) {
         this.mInner.registerDynamicSensorCallback(dynamicSensorCallback, handler);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$registerListenerImpl$0(SensorEventListener sensorEventListener, Sensor sensor, int i, int i2, Handler handler) {
         if (this.mInner.registerListener(sensorEventListener, sensor, i, i2, handler)) {
             return;
@@ -57,14 +54,12 @@ public class AsyncSensorManager extends SensorManager implements PluginListener<
         Log.e(TAG, "Registering " + sensorEventListener + " for " + sensor + " failed.");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$registerPluginListener$5(SensorManagerPlugin.Sensor sensor, SensorManagerPlugin.SensorEventListener sensorEventListener) {
         for (int i = 0; i < this.mPlugins.size(); i++) {
             this.mPlugins.get(i).registerListener(sensor, sensorEventListener);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$requestTriggerSensorImpl$3(TriggerEventListener triggerEventListener, Sensor sensor) {
         if (this.mInner.requestTriggerSensor(triggerEventListener, sensor)) {
             return;
@@ -72,17 +67,14 @@ public class AsyncSensorManager extends SensorManager implements PluginListener<
         Log.e(TAG, "Requesting " + triggerEventListener + " for " + sensor + " failed.");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setOperationParameterImpl$7(SensorAdditionalInfo sensorAdditionalInfo) {
         this.mInner.setOperationParameter(sensorAdditionalInfo);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$unregisterDynamicSensorCallbackImpl$2(SensorManager.DynamicSensorCallback dynamicSensorCallback) {
         this.mInner.unregisterDynamicSensorCallback(dynamicSensorCallback);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$unregisterListenerImpl$8(Sensor sensor, SensorEventListener sensorEventListener) {
         if (sensor == null) {
             this.mInner.unregisterListener(sensorEventListener);
@@ -91,7 +83,6 @@ public class AsyncSensorManager extends SensorManager implements PluginListener<
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$unregisterPluginListener$6(SensorManagerPlugin.Sensor sensor, SensorManagerPlugin.SensorEventListener sensorEventListener) {
         for (int i = 0; i < this.mPlugins.size(); i++) {
             this.mPlugins.get(i).unregisterListener(sensor, sensorEventListener);

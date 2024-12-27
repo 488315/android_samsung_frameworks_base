@@ -77,9 +77,6 @@ public final class LightRevealScrimRepositoryImpl implements LightRevealScrimRep
         TAG = simpleName;
     }
 
-    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.systemui.keyguard.data.repository.LightRevealScrimRepositoryImpl$special$$inlined$map$1] */
-    /* JADX WARN: Type inference failed for: r3v6, types: [com.android.systemui.keyguard.data.repository.LightRevealScrimRepositoryImpl$special$$inlined$map$2] */
-    /* JADX WARN: Type inference failed for: r3v7, types: [com.android.systemui.keyguard.data.repository.LightRevealScrimRepositoryImpl$special$$inlined$map$3] */
     public LightRevealScrimRepositoryImpl(KeyguardRepository keyguardRepository, Context context, PowerRepository powerRepository, ScrimLogger scrimLogger) {
         this.context = context;
         this.scrimLogger = scrimLogger;
@@ -116,8 +113,6 @@ public final class LightRevealScrimRepositoryImpl implements LightRevealScrimRep
                     this.this$0 = lightRevealScrimRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -214,8 +209,6 @@ public final class LightRevealScrimRepositoryImpl implements LightRevealScrimRep
                     this.this$0 = lightRevealScrimRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -312,8 +305,6 @@ public final class LightRevealScrimRepositoryImpl implements LightRevealScrimRep
                     this.this$0 = lightRevealScrimRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

@@ -101,9 +101,6 @@ public final class KeyguardQsUserSwitchController extends ViewController {
         ANIMATION_PROPERTIES = animationProperties;
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.statusbar.policy.KeyguardQsUserSwitchController$1] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.policy.KeyguardQsUserSwitchController$2] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.policy.KeyguardQsUserSwitchController$3] */
     public KeyguardQsUserSwitchController(FrameLayout frameLayout, Context context, Resources resources, UserSwitcherController userSwitcherController, KeyguardStateController keyguardStateController, FalsingManager falsingManager, ConfigurationController configurationController, SysuiStatusBarStateController sysuiStatusBarStateController, DozeParameters dozeParameters, ScreenOffAnimationController screenOffAnimationController, UserSwitchDialogController userSwitchDialogController, UiEventLogger uiEventLogger) {
         super(frameLayout);
         this.mStatusBarStateListener = new StatusBarStateController.StateListener() { // from class: com.android.systemui.statusbar.policy.KeyguardQsUserSwitchController.1
@@ -160,7 +157,6 @@ public final class KeyguardQsUserSwitchController extends ViewController {
         this.mUserAvatarView.getHeight();
     }
 
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.systemui.statusbar.policy.KeyguardQsUserSwitchController$4] */
     @Override // com.android.systemui.util.ViewController
     public final void onInit() {
         super.onInit();

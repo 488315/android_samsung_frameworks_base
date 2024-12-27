@@ -24,7 +24,6 @@ final class MobileRepositorySwitcher$isDemoMode$1 extends SuspendLambda implemen
     int label;
     final /* synthetic */ MobileRepositorySwitcher this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileRepositorySwitcher$isDemoMode$1(DemoModeController demoModeController, MobileRepositorySwitcher mobileRepositorySwitcher, Continuation continuation) {
         super(2, continuation);
         this.$demoModeController = demoModeController;
@@ -43,8 +42,6 @@ final class MobileRepositorySwitcher$isDemoMode$1 extends SuspendLambda implemen
         return ((MobileRepositorySwitcher$isDemoMode$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.demomode.DemoMode, com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcher$isDemoMode$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -78,7 +75,6 @@ final class MobileRepositorySwitcher$isDemoMode$1 extends SuspendLambda implemen
             this.$demoModeController.addCallback((DemoMode) r1);
             final DemoModeController demoModeController = this.$demoModeController;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcher$isDemoMode$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

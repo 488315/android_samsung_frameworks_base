@@ -86,13 +86,11 @@ public abstract class CallScreeningService extends Service {
                 new Parcelable.Creator<
                         ParcelableCallResponse>() { // from class:
                                                     // android.telecom.CallScreeningService.ParcelableCallResponse.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ParcelableCallResponse createFromParcel(Parcel in) {
                         return new ParcelableCallResponse(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ParcelableCallResponse[] newArray(int size) {
                         return new ParcelableCallResponse[size];

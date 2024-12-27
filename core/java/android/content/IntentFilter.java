@@ -110,13 +110,11 @@ public class IntentFilter implements Parcelable {
     private static final boolean[] EMPTY_BOOLEAN_ARRAY = new boolean[0];
     public static final Parcelable.Creator<IntentFilter> CREATOR =
             new Parcelable.Creator<IntentFilter>() { // from class: android.content.IntentFilter.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IntentFilter createFromParcel(Parcel source) {
                     return new IntentFilter(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IntentFilter[] newArray(int size) {
                     return new IntentFilter[size];
@@ -501,7 +499,6 @@ public class IntentFilter implements Parcelable {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$addDataType$0(String internalType, Boolean isPartial) {
         if (this.mDataTypes == null) {
             this.mDataTypes = new ArrayList<>();
@@ -529,7 +526,6 @@ public class IntentFilter implements Parcelable {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$addDynamicDataType$1(
             String internalType, Boolean isPartial) {
         if (this.mDataTypes == null) {
@@ -1318,7 +1314,6 @@ public class IntentFilter implements Parcelable {
         return this.mExtras == null ? new PersistableBundle() : this.mExtras;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ boolean lambda$asPredicate$2(Intent i) {
         return match(null, i, false, TAG) >= 0;
     }
@@ -1350,7 +1345,6 @@ public class IntentFilter implements Parcelable {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ boolean lambda$asPredicateWithTypeResolution$3(
             ContentResolver resolver, Intent i) {
         return match(resolver, i, true, TAG) >= 0;

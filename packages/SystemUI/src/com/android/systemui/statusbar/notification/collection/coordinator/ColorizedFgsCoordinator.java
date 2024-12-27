@@ -25,7 +25,6 @@ public class ColorizedFgsCoordinator implements Coordinator {
         }
     };
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isCall(NotificationEntry notificationEntry) {
         return notificationEntry.mRanking.getImportance() > 1 && notificationEntry.mSbn.getNotification().isStyle(Notification.CallStyle.class);
     }

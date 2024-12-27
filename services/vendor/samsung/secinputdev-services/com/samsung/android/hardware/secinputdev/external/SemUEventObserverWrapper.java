@@ -36,7 +36,6 @@ public class SemUEventObserverWrapper extends ExternalService {
         return "";
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int processGestureEvent(SemUEventObserver.SemUEvent event) {
         String pos;
         String gesture = event.get("GESTURE");
@@ -89,7 +88,6 @@ public class SemUEventObserverWrapper extends ExternalService {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSemUEvent$0(String result) {
             SemUEventObserverWrapper.this.listener.onSemUEvent(result);
         }

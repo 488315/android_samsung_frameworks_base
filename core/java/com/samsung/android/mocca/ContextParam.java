@@ -15,13 +15,11 @@ public final class ContextParam implements Parcelable {
     public static final Parcelable.Creator<ContextParam> CREATOR =
             new Parcelable.Creator<
                     ContextParam>() { // from class: com.samsung.android.mocca.ContextParam.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContextParam createFromParcel(Parcel in) {
                     return new ContextParam(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContextParam[] newArray(int size) {
                     return new ContextParam[size];

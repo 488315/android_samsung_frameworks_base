@@ -115,7 +115,6 @@ public final class ProgramListChunk implements Parcelable {
         return 1;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final int hashCode() {
         return Arrays.deepHashCode(
                 Arrays.asList(

@@ -178,7 +178,6 @@ public final class GameManagerShellCommand extends ShellCommand {
         BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, "]", printWriter);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runResetGameModeConfig(PrintWriter printWriter) {
         boolean z;
         String str = null;
@@ -269,7 +268,6 @@ public final class GameManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runSetGameMode(PrintWriter printWriter) {
         char c;
         String nextOption = getNextOption();
@@ -418,7 +416,6 @@ public final class GameManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runSetGameModeConfig(PrintWriter printWriter) {
         char c;
         String str = null;

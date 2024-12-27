@@ -113,7 +113,6 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
     public interface VelocityTrackerFactory {
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.ambient.touch.BouncerSwipeTouchHandler$2] */
     public BouncerSwipeTouchHandler(ScrimManager scrimManager, Optional<CentralSurfaces> optional, NotificationShadeWindowController notificationShadeWindowController, ValueAnimatorCreator valueAnimatorCreator, VelocityTrackerFactory velocityTrackerFactory, LockPatternUtils lockPatternUtils, UserTracker userTracker, FlingAnimationUtils flingAnimationUtils, FlingAnimationUtils flingAnimationUtils2, float f, float f2, UiEventLogger uiEventLogger) {
         this.mCentralSurfaces = optional;
         this.mScrimManager = scrimManager;

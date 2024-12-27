@@ -280,8 +280,6 @@ public abstract class BaseHeadsUpManager implements HeadsUpManager {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:15:0x0063 A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:16:0x0064  */
         @Override // java.lang.Comparable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -671,7 +669,6 @@ public abstract class BaseHeadsUpManager implements HeadsUpManager {
         headsUpManagerLogger.getClass();
         LogLevel logLevel = LogLevel.INFO;
         Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.policy.HeadsUpManagerLogger$logRemoveEntryRequest$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -706,7 +703,6 @@ public abstract class BaseHeadsUpManager implements HeadsUpManager {
                 headsUpManagerLogger2.getClass();
                 LogLevel logLevel2 = LogLevel.INFO;
                 Function1 function12 = new Function1() { // from class: com.android.systemui.statusbar.policy.HeadsUpManagerLogger$logRemoveEntry$2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }

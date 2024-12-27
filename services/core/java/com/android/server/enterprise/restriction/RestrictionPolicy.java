@@ -229,8 +229,6 @@ public class RestrictionPolicy extends IRestrictionPolicy.Stub
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.server.enterprise.restriction.RestrictionPolicy$3] */
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.server.enterprise.restriction.RestrictionPolicy$4] */
     public RestrictionPolicy(Context context) {
         this.mAppPolicy = null;
         this.mVpnPolicy = null;
@@ -881,7 +879,6 @@ public class RestrictionPolicy extends IRestrictionPolicy.Stub
 
        if (r11 == null) goto L22;
     */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0068 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -942,10 +939,6 @@ public class RestrictionPolicy extends IRestrictionPolicy.Stub
                 sb.toString());
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r11v0, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r11v1, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r11v3, types: [java.util.ArrayList] */
     public final boolean adjustPreferredSim(List list) {
         SubscriptionInfo subscriptionInfo;
         SubscriptionManager subScriptionManager = getSubScriptionManager();
@@ -3888,7 +3881,6 @@ public class RestrictionPolicy extends IRestrictionPolicy.Stub
         return extract;
     }
 
-    /* JADX WARN: Finally extract failed */
     public final boolean isFirmwareRecoveryAllowed(ContextInfo contextInfo, boolean z) {
         boolean z2 = true;
         boolean extract = this.mRestrictionCache.extract(0, 16777216L, true);
@@ -4783,13 +4775,6 @@ public class RestrictionPolicy extends IRestrictionPolicy.Stub
 
        if (r10 == null) goto L39;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00e5 A[Catch: Exception -> 0x0122, TryCatch #2 {Exception -> 0x0122, blocks: (B:13:0x00c0, B:15:0x00e5, B:16:0x00f1, B:18:0x00f7, B:20:0x00fd, B:21:0x0102, B:25:0x0100, B:26:0x00ec), top: B:12:0x00c0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00ec A[Catch: Exception -> 0x0122, TryCatch #2 {Exception -> 0x0122, blocks: (B:13:0x00c0, B:15:0x00e5, B:16:0x00f1, B:18:0x00f7, B:20:0x00fd, B:21:0x0102, B:25:0x0100, B:26:0x00ec), top: B:12:0x00c0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x012a  */
-    /* JADX WARN: Type inference failed for: r13v1 */
-    /* JADX WARN: Type inference failed for: r13v2, types: [android.database.Cursor] */
-    /* JADX WARN: Type inference failed for: r13v3 */
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -4885,7 +4870,6 @@ public class RestrictionPolicy extends IRestrictionPolicy.Stub
         return z2;
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.enterprise.restriction.RestrictionPolicy$5] */
     public final void registerSubscriptionCallback() {
         if (this.mSubscriptionsChangedListener != null) {
             return;
@@ -5089,11 +5073,6 @@ public class RestrictionPolicy extends IRestrictionPolicy.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x009f  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0144  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x01b4  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x01b0  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x00fd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6143,28 +6122,6 @@ public class RestrictionPolicy extends IRestrictionPolicy.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x026b  */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x027b  */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x0288  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x02cb  */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x008a  */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x02db  */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x02e8 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:128:0x02f1  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x033e A[Catch: Exception -> 0x0370, TRY_LEAVE, TryCatch #1 {Exception -> 0x0370, blocks: (B:142:0x033a, B:144:0x033e), top: B:141:0x033a }] */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x0378 A[Catch: Exception -> 0x03a9, TRY_LEAVE, TryCatch #11 {Exception -> 0x03a9, blocks: (B:147:0x0374, B:149:0x0378), top: B:146:0x0374 }] */
-    /* JADX WARN: Removed duplicated region for block: B:168:0x044e  */
-    /* JADX WARN: Removed duplicated region for block: B:172:0x0463  */
-    /* JADX WARN: Removed duplicated region for block: B:181:0x04c4  */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x04d6 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x0491  */
-    /* JADX WARN: Removed duplicated region for block: B:223:0x0455  */
-    /* JADX WARN: Removed duplicated region for block: B:232:0x027f  */
-    /* JADX WARN: Removed duplicated region for block: B:240:0x021f  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0215  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x021d  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x0226  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0083  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6185,8 +6142,6 @@ public class RestrictionPolicy extends IRestrictionPolicy.Stub
                     + " int, java.lang.String[], java.lang.String[], java.lang.String[]):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0134 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0135  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6236,8 +6191,6 @@ public class RestrictionPolicy extends IRestrictionPolicy.Stub
         return putBoolean;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0052  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6598,7 +6551,6 @@ public class RestrictionPolicy extends IRestrictionPolicy.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0083  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7164,9 +7116,6 @@ public class RestrictionPolicy extends IRestrictionPolicy.Stub
         return this.mEdmStorageProvider.putValuesNoUpdate("RESTRICTION", contentValues2);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [long] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [java.lang.String] */
     public final boolean updateUsbStorageStatebyIntent(boolean z) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         boolean z2 = false;

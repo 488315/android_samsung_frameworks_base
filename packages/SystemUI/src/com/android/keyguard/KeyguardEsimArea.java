@@ -68,7 +68,6 @@ class KeyguardEsimArea extends Button implements View.OnClickListener {
         this(context, attributeSet, i, R.style.Widget.Material.Button.Borderless);
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.keyguard.KeyguardEsimArea$1] */
     public KeyguardEsimArea(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mReceiver = new BroadcastReceiver() { // from class: com.android.keyguard.KeyguardEsimArea.1

@@ -16,7 +16,6 @@ public final class RemoteInputCoordinatorKt {
     private static final long REMOTE_INPUT_EXTENDER_RELEASE_DELAY = 200;
     private static final String TAG = "RemoteInputCoordinator";
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final boolean getDEBUG() {
         return ((Boolean) DEBUG$delegate.getValue()).booleanValue();
     }

@@ -55,8 +55,6 @@ public final class VolumeToggleSeekBar extends SeekBar {
         public VolumeSeekbarChangeListener() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:27:0x0052  */
-        /* JADX WARN: Removed duplicated region for block: B:29:? A[RETURN, SYNTHETIC] */
         @Override // android.widget.SeekBar.OnSeekBarChangeListener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -155,7 +153,6 @@ public final class VolumeToggleSeekBar extends SeekBar {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r4v9, types: [com.android.systemui.qs.bar.VolumeToggleSeekBar$recheckCallback$1] */
     public VolumeToggleSeekBar(Context context) {
         super(context);
         this.stream = 3;
@@ -281,7 +278,6 @@ public final class VolumeToggleSeekBar extends SeekBar {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v9, types: [com.android.systemui.qs.bar.VolumeToggleSeekBar$recheckCallback$1] */
     public VolumeToggleSeekBar(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.stream = 3;
@@ -325,7 +321,6 @@ public final class VolumeToggleSeekBar extends SeekBar {
         };
     }
 
-    /* JADX WARN: Type inference failed for: r2v9, types: [com.android.systemui.qs.bar.VolumeToggleSeekBar$recheckCallback$1] */
     public VolumeToggleSeekBar(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.stream = 3;

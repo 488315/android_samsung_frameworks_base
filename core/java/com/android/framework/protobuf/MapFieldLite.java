@@ -138,7 +138,6 @@ public final class MapFieldLite<K, V> extends LinkedHashMap<K, V> {
         return object;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static <K, V> Map<K, V> copy(Map<K, V> map) {
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         for (Map.Entry<K, V> entry : map.entrySet()) {

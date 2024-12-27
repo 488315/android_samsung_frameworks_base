@@ -23,7 +23,6 @@ public final class MediaSessionReleaseDialog extends SystemUIDialog {
     public final int mIconColor;
     public final MediaSessionReleaseDialog$$ExternalSyntheticLambda0 mPositiveButtonListener;
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.media.dialog.MediaSessionReleaseDialog$$ExternalSyntheticLambda0] */
     public MediaSessionReleaseDialog(Context context, final Runnable runnable, int i, int i2) {
         super(context, R.style.Theme_SystemUI_Dialog_Media);
         this.mContext = getContext();

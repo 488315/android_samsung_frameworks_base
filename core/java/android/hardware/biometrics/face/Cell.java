@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public class Cell implements Parcelable {
     public static final Parcelable.Creator<Cell> CREATOR =
             new Parcelable.Creator<Cell>() { // from class: android.hardware.biometrics.face.Cell.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Cell createFromParcel(Parcel _aidl_source) {
                     Cell _aidl_out = new Cell();
@@ -15,7 +14,6 @@ public class Cell implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Cell[] newArray(int _aidl_size) {
                     return new Cell[_aidl_size];

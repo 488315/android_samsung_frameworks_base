@@ -16,7 +16,6 @@ public final class BatchUpdates implements Parcelable {
     public static final Parcelable.Creator<BatchUpdates> CREATOR =
             new Parcelable.Creator<
                     BatchUpdates>() { // from class: android.service.autofill.BatchUpdates.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BatchUpdates createFromParcel(Parcel parcel) {
                     Builder builder = new Builder();
@@ -39,7 +38,6 @@ public final class BatchUpdates implements Parcelable {
                     return builder.build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BatchUpdates[] newArray(int size) {
                     return new BatchUpdates[size];

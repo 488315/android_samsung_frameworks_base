@@ -655,8 +655,6 @@ public final class QSTileHost implements QSHost, TunerService.Tunable, PluginLis
         ((ShadeController) this.mShadeControllerProvider.get()).postAnimateForceCollapseShade();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:121:0x0114  */
-    /* JADX WARN: Removed duplicated region for block: B:123:0x0116  */
     @Override // com.android.systemui.qs.QSHost
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1243,7 +1241,6 @@ public final class QSTileHost implements QSHost, TunerService.Tunable, PluginLis
         onTuningChanged("sysui_qs_tiles", value);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(9:57|(2:59|(3:77|(4:79|(1:83)|84|85)(2:86|87)|71))(1:88)|(1:64)|65|66|67|(2:69|70)(1:72)|71|55) */
     /* JADX WARN: Code restructure failed: missing block: B:74:0x0236, code lost:
     
         r0 = move-exception;

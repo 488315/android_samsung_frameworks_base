@@ -9,13 +9,11 @@ public final class VirtualDpadConfig extends VirtualInputDeviceConfig implements
     public static final Parcelable.Creator<VirtualDpadConfig> CREATOR =
             new Parcelable.Creator<
                     VirtualDpadConfig>() { // from class: android.hardware.input.VirtualDpadConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualDpadConfig createFromParcel(Parcel in) {
                     return new VirtualDpadConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualDpadConfig[] newArray(int size) {
                     return new VirtualDpadConfig[size];

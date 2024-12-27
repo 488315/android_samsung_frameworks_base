@@ -94,7 +94,6 @@ public final class NavigationBarView extends FrameLayout {
         return super.onTouchEvent(event);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0022, code lost:
 
        return true;

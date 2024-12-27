@@ -37,12 +37,6 @@ public final class LocationUsageLogger {
         return min >= 60;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00cf  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00e0  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x011f  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0122  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00e3 A[Catch: Exception -> 0x00c7, TryCatch #0 {Exception -> 0x00c7, blocks: (B:2:0x0000, B:27:0x0099, B:37:0x0124, B:41:0x00e3, B:79:0x008b, B:80:0x006c, B:89:0x0036, B:105:0x001f, B:106:0x0016), top: B:1:0x0000 }] */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x00d2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

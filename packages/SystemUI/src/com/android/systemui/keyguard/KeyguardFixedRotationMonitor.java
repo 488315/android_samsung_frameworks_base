@@ -106,8 +106,6 @@ public final class KeyguardFixedRotationMonitor {
         DEBUG = android.util.Log.isLoggable("KeyguardFixedRotation", 3);
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.keyguard.KeyguardFixedRotationMonitor$preDrawListener$1] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.keyguard.KeyguardFixedRotationMonitor$displayWindowListener$1] */
     public KeyguardFixedRotationMonitor(Lazy lazy, Handler handler, IWindowManager iWindowManager) {
         this.notificationShadeWindowController = lazy;
         this.handler = handler;

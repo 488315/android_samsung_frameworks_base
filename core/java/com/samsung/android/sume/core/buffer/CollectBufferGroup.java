@@ -17,13 +17,11 @@ public class CollectBufferGroup extends MediaBufferGroup {
             new Parcelable.Creator<
                     CollectBufferGroup>() { // from class:
                                             // com.samsung.android.sume.core.buffer.CollectBufferGroup.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CollectBufferGroup createFromParcel(Parcel in) {
                     return new CollectBufferGroup(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CollectBufferGroup[] newArray(int size) {
                     return new CollectBufferGroup[size];

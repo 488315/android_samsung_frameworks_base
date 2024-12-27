@@ -108,13 +108,6 @@ public final class BroadcastSkipPolicy {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r13v35 */
-    /* JADX WARN: Type inference failed for: r13v5 */
-    /* JADX WARN: Type inference failed for: r13v6, types: [int] */
-    /* JADX WARN: Type inference failed for: r4v14 */
-    /* JADX WARN: Type inference failed for: r4v15, types: [int] */
-    /* JADX WARN: Type inference failed for: r4v66 */
     public final String shouldSkipMessage(BroadcastRecord broadcastRecord, Object obj) {
         ComponentName componentName;
         boolean z;

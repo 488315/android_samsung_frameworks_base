@@ -14,7 +14,6 @@ final class ClockRegistry$triggerOnCurrentClockChanged$1 extends SuspendLambda i
     int label;
     final /* synthetic */ ClockRegistry this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ClockRegistry$triggerOnCurrentClockChanged$1(ClockRegistry clockRegistry, Continuation continuation) {
         super(2, continuation);
         this.this$0 = clockRegistry;

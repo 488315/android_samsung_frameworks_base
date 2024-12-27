@@ -22,7 +22,6 @@ public final class ReduceBrightColorsControllerImpl implements ReduceBrightColor
     public final SecureSettings mSecureSettings;
     public final UserTracker mUserTracker;
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.qs.ReduceBrightColorsControllerImpl$1] */
     public ReduceBrightColorsControllerImpl(UserTracker userTracker, Handler handler, ColorDisplayManager colorDisplayManager, SecureSettings secureSettings) {
         this.mManager = colorDisplayManager;
         this.mUserTracker = userTracker;

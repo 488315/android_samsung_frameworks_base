@@ -18,14 +18,12 @@ public final class LuhnChecksumValidator extends InternalValidator
             new Parcelable.Creator<
                     LuhnChecksumValidator>() { // from class:
                                                // android.service.autofill.LuhnChecksumValidator.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LuhnChecksumValidator createFromParcel(Parcel parcel) {
                     return new LuhnChecksumValidator(
                             (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LuhnChecksumValidator[] newArray(int size) {
                     return new LuhnChecksumValidator[size];

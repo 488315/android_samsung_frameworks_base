@@ -310,8 +310,6 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0042  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0054 A[Catch: Exception -> 0x0029, TryCatch #0 {Exception -> 0x0029, blocks: (B:7:0x0008, B:18:0x0046, B:20:0x004b, B:22:0x004f, B:24:0x0054, B:26:0x0063, B:30:0x001f, B:33:0x002b, B:36:0x0035), top: B:6:0x0008 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

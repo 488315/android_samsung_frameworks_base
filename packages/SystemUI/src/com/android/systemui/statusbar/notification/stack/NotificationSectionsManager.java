@@ -142,7 +142,6 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
         SECTION = new SourceType$Companion$from$1("Section");
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.notification.stack.NotificationSectionsManager$configurationListener$1] */
     public NotificationSectionsManager(ConfigurationController configurationController, KeyguardMediaController keyguardMediaController, NotificationSectionsFeatureManager notificationSectionsFeatureManager, MediaContainerController mediaContainerController, NotificationRoundnessManager notificationRoundnessManager, SectionHeaderController sectionHeaderController, SectionHeaderController sectionHeaderController2, SectionHeaderController sectionHeaderController3, SectionHeaderController sectionHeaderController4, SectionHeaderController sectionHeaderController5, SectionHeaderController sectionHeaderController6, SectionHeaderController sectionHeaderController7) {
         this.configurationController = configurationController;
         this.sectionsFeatureManager = notificationSectionsFeatureManager;

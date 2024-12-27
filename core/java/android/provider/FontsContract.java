@@ -473,7 +473,6 @@ public class FontsContract {
         return new Typeface.CustomFallbackBuilder(family).setStyle(bestFont.getStyle()).build();
     }
 
-    /* JADX WARN: Unreachable blocks removed: 2, instructions: 2 */
     private static Map<Uri, ByteBuffer> prepareFontData(
             Context context, FontInfo[] fonts, CancellationSignal cancellationSignal) {
         HashMap<Uri, ByteBuffer> out = new HashMap<>();

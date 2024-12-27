@@ -27,7 +27,6 @@ final class WifiDisplayDeviceController$Companion$activeVolumeChanges$1 extends 
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiDisplayDeviceController$Companion$activeVolumeChanges$1(DisplayManagerWrapper displayManagerWrapper, Continuation continuation) {
         super(2, continuation);
         this.$this_activeVolumeChanges = displayManagerWrapper;
@@ -60,7 +59,6 @@ final class WifiDisplayDeviceController$Companion$activeVolumeChanges$1 extends 
                     final /* synthetic */ ProducerScope $$this$callbackFlow;
                     int label;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     public AnonymousClass1(ProducerScope producerScope, Continuation continuation) {
                         super(2, continuation);
                         this.$$this$callbackFlow = producerScope;

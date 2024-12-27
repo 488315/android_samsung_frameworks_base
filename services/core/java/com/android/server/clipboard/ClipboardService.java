@@ -1354,8 +1354,6 @@ public final class ClipboardService extends SystemService {
 
        if (r6.isUidFocused(r14) != false) goto L36;
     */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00c7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1489,8 +1487,6 @@ public final class ClipboardService extends SystemService {
         return unflattenFromString.getPackageName().equals(str);
     }
 
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.clipboard.ClipboardService$1] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.clipboard.ClipboardService$2] */
     @Override // com.android.server.SystemService
     public final void onStart() {
         VirtualDeviceManager virtualDeviceManager;

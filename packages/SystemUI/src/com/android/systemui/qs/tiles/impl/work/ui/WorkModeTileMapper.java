@@ -35,7 +35,6 @@ public final class WorkModeTileMapper implements QSTileDataToStateMapper {
         Resources resources = this.resources;
         Resources.Theme theme = this.theme;
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.work.ui.WorkModeTileMapper$map$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -56,7 +55,6 @@ public final class WorkModeTileMapper implements QSTileDataToStateMapper {
                 builder.iconRes = 17304492;
                 final WorkModeTileMapper workModeTileMapper2 = WorkModeTileMapper.this;
                 builder.icon = new Function0() { // from class: com.android.systemui.qs.tiles.impl.work.ui.WorkModeTileMapper$map$1.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

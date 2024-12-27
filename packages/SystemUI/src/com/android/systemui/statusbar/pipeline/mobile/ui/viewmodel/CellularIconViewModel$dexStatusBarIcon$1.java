@@ -18,7 +18,6 @@ final class CellularIconViewModel$dexStatusBarIcon$1 extends SuspendLambda imple
     int label;
     final /* synthetic */ CellularIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CellularIconViewModel$dexStatusBarIcon$1(CellularIconViewModel cellularIconViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = cellularIconViewModel;
@@ -54,7 +53,6 @@ final class CellularIconViewModel$dexStatusBarIcon$1 extends SuspendLambda imple
             this.this$0.desktopManager.setDesktopStatusBarIconCallback(desktopCallback);
             final CellularIconViewModel cellularIconViewModel2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModel$dexStatusBarIcon$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

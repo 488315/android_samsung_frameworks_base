@@ -292,8 +292,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
             windowContainer.forAllLeafTasks(this);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:63:0x010a  */
-        /* JADX WARN: Removed duplicated region for block: B:67:0x0111  */
         @Override // java.util.function.Predicate
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -931,43 +929,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
     
         if (r6 != 4) goto L246;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x0275  */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x0301  */
-    /* JADX WARN: Removed duplicated region for block: B:166:0x0324  */
-    /* JADX WARN: Removed duplicated region for block: B:176:0x0346  */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x059f  */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x05e1 A[LOOP:13: B:189:0x05df->B:190:0x05e1, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:194:0x05fd A[LOOP:14: B:193:0x05fb->B:194:0x05fd, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:198:0x0619 A[LOOP:15: B:197:0x0617->B:198:0x0619, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:205:0x0668  */
-    /* JADX WARN: Removed duplicated region for block: B:207:0x0671  */
-    /* JADX WARN: Removed duplicated region for block: B:209:0x067c  */
-    /* JADX WARN: Removed duplicated region for block: B:213:0x0686  */
-    /* JADX WARN: Removed duplicated region for block: B:241:0x0796  */
-    /* JADX WARN: Removed duplicated region for block: B:253:0x07cd  */
-    /* JADX WARN: Removed duplicated region for block: B:255:0x07d7  */
-    /* JADX WARN: Removed duplicated region for block: B:266:0x084c  */
-    /* JADX WARN: Removed duplicated region for block: B:283:0x08a8  */
-    /* JADX WARN: Removed duplicated region for block: B:298:0x08ba  */
-    /* JADX WARN: Removed duplicated region for block: B:304:0x08cc  */
-    /* JADX WARN: Removed duplicated region for block: B:315:0x08f5  */
-    /* JADX WARN: Removed duplicated region for block: B:409:0x0acc  */
-    /* JADX WARN: Removed duplicated region for block: B:411:0x0ad1  */
-    /* JADX WARN: Removed duplicated region for block: B:417:0x0ada A[ADDED_TO_REGION, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:418:0x0ace  */
-    /* JADX WARN: Removed duplicated region for block: B:434:0x08c9 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:436:0x07d2  */
-    /* JADX WARN: Removed duplicated region for block: B:481:0x0677  */
-    /* JADX WARN: Removed duplicated region for block: B:482:0x066e  */
-    /* JADX WARN: Removed duplicated region for block: B:483:0x063e  */
-    /* JADX WARN: Removed duplicated region for block: B:651:0x0587  */
-    /* JADX WARN: Removed duplicated region for block: B:656:0x0335 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:659:0x0312 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x01e5  */
-    /* JADX WARN: Type inference failed for: r2v0 */
-    /* JADX WARN: Type inference failed for: r2v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r2v4 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1261,8 +1222,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
         return getOrCreateRootTask(null, activityOptions, task, null, z, null, 0);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:160:0x021a  */
-    /* JADX WARN: Removed duplicated region for block: B:163:0x0221  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1336,9 +1295,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
         return null;
     }
 
-    /* JADX WARN: Type inference failed for: r2v0 */
-    /* JADX WARN: Type inference failed for: r2v1, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r2v2 */
     public final void handleResizingWindows() {
         boolean computeDragResizing;
         ?? r2 = 1;
@@ -1427,15 +1383,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:101:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:102:0x024a A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x010f A[Catch: all -> 0x00b0, TryCatch #0 {all -> 0x00b0, blocks: (B:23:0x0078, B:25:0x007c, B:27:0x0084, B:29:0x008a, B:31:0x0091, B:33:0x009b, B:35:0x00a1, B:37:0x00ac, B:38:0x00b3, B:40:0x00c3, B:42:0x00cc, B:44:0x00d2, B:45:0x00d9, B:48:0x00ea, B:50:0x00ee, B:51:0x00f5, B:53:0x00fe, B:54:0x0102, B:56:0x01f3, B:59:0x01fe, B:60:0x0201, B:62:0x0205, B:64:0x020b, B:65:0x021b, B:67:0x0225, B:68:0x0228, B:70:0x022c, B:72:0x0230, B:74:0x0236, B:76:0x023c, B:104:0x010f, B:106:0x013a, B:107:0x013f, B:109:0x0147, B:111:0x0152, B:112:0x0156, B:115:0x015c, B:116:0x0160, B:118:0x0173, B:120:0x018c, B:122:0x0193, B:124:0x0199, B:125:0x019b, B:127:0x01a1, B:130:0x01ad, B:132:0x01b3, B:133:0x01b7, B:135:0x01d0, B:137:0x01d8, B:139:0x01e5, B:140:0x01a6, B:141:0x01aa, B:142:0x0187, B:144:0x014c, B:145:0x013d), top: B:22:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:163:0x02be A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00c3 A[Catch: all -> 0x00b0, TryCatch #0 {all -> 0x00b0, blocks: (B:23:0x0078, B:25:0x007c, B:27:0x0084, B:29:0x008a, B:31:0x0091, B:33:0x009b, B:35:0x00a1, B:37:0x00ac, B:38:0x00b3, B:40:0x00c3, B:42:0x00cc, B:44:0x00d2, B:45:0x00d9, B:48:0x00ea, B:50:0x00ee, B:51:0x00f5, B:53:0x00fe, B:54:0x0102, B:56:0x01f3, B:59:0x01fe, B:60:0x0201, B:62:0x0205, B:64:0x020b, B:65:0x021b, B:67:0x0225, B:68:0x0228, B:70:0x022c, B:72:0x0230, B:74:0x0236, B:76:0x023c, B:104:0x010f, B:106:0x013a, B:107:0x013f, B:109:0x0147, B:111:0x0152, B:112:0x0156, B:115:0x015c, B:116:0x0160, B:118:0x0173, B:120:0x018c, B:122:0x0193, B:124:0x0199, B:125:0x019b, B:127:0x01a1, B:130:0x01ad, B:132:0x01b3, B:133:0x01b7, B:135:0x01d0, B:137:0x01d8, B:139:0x01e5, B:140:0x01a6, B:141:0x01aa, B:142:0x0187, B:144:0x014c, B:145:0x013d), top: B:22:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00e8  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0225 A[Catch: all -> 0x00b0, TryCatch #0 {all -> 0x00b0, blocks: (B:23:0x0078, B:25:0x007c, B:27:0x0084, B:29:0x008a, B:31:0x0091, B:33:0x009b, B:35:0x00a1, B:37:0x00ac, B:38:0x00b3, B:40:0x00c3, B:42:0x00cc, B:44:0x00d2, B:45:0x00d9, B:48:0x00ea, B:50:0x00ee, B:51:0x00f5, B:53:0x00fe, B:54:0x0102, B:56:0x01f3, B:59:0x01fe, B:60:0x0201, B:62:0x0205, B:64:0x020b, B:65:0x021b, B:67:0x0225, B:68:0x0228, B:70:0x022c, B:72:0x0230, B:74:0x0236, B:76:0x023c, B:104:0x010f, B:106:0x013a, B:107:0x013f, B:109:0x0147, B:111:0x0152, B:112:0x0156, B:115:0x015c, B:116:0x0160, B:118:0x0173, B:120:0x018c, B:122:0x0193, B:124:0x0199, B:125:0x019b, B:127:0x01a1, B:130:0x01ad, B:132:0x01b3, B:133:0x01b7, B:135:0x01d0, B:137:0x01d8, B:139:0x01e5, B:140:0x01a6, B:141:0x01aa, B:142:0x0187, B:144:0x014c, B:145:0x013d), top: B:22:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0276  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x028c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1944,7 +1891,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
         activityTaskSupervisor.computeProcessActivityStateBatch();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final boolean reclaimSomeSurfaceMemory(WindowStateAnimator windowStateAnimator, String str, boolean z) {
         boolean z2;
         WindowSurfaceController windowSurfaceController = windowStateAnimator.mSurfaceController;
@@ -2170,7 +2116,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.RootWindowContainer.resolveHomeActivity(int, android.content.Intent):android.content.pm.ActivityInfo");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0041  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

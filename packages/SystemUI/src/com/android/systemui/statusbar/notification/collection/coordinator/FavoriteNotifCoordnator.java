@@ -29,7 +29,6 @@ public final class FavoriteNotifCoordnator extends Invalidator implements Coordi
     private final NotifTimeSortCoordnator timeSortCoordnator;
     private final VisualStabilityCoordinator visualStabilityCoordinator;
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.statusbar.notification.collection.coordinator.FavoriteNotifCoordnator$mFavoriteNotifSectioner$1] */
     public FavoriteNotifCoordnator(Context context, VisualStabilityCoordinator visualStabilityCoordinator, NotifLiveDataStoreImpl notifLiveDataStoreImpl, NotifTimeSortCoordnator notifTimeSortCoordnator, NodeController nodeController) {
         super("FavoriteNotifCoordinator");
         this.context = context;

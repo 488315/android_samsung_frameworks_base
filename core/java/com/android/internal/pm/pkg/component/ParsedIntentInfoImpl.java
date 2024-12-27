@@ -12,13 +12,11 @@ public class ParsedIntentInfoImpl implements ParsedIntentInfo, Parcelable {
             new Parcelable.Creator<
                     ParsedIntentInfoImpl>() { // from class:
                                               // com.android.internal.pm.pkg.component.ParsedIntentInfoImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParsedIntentInfoImpl[] newArray(int size) {
                     return new ParsedIntentInfoImpl[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParsedIntentInfoImpl createFromParcel(Parcel in) {
                     return new ParsedIntentInfoImpl(in);

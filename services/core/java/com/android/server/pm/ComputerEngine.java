@@ -747,7 +747,6 @@ public class ComputerEngine implements Computer {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.ComputerEngine.currentToCanonicalPackageNames(java.lang.String[]):java.lang.String[]");
     }
 
-    /* JADX WARN: Type inference failed for: r0v29, types: [com.android.server.pm.ComputerEngine$$ExternalSyntheticLambda6] */
     @Override // com.android.server.pm.Computer
     public final void dump(int i, FileDescriptor fileDescriptor, PrintWriter printWriter, DumpState dumpState) {
         CompilerStats.PackageStats packageStats;
@@ -1437,11 +1436,6 @@ public class ComputerEngine implements Computer {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v10, types: [android.util.ArraySet] */
-    /* JADX WARN: Type inference failed for: r14v0 */
-    /* JADX WARN: Type inference failed for: r14v1, types: [int] */
-    /* JADX WARN: Type inference failed for: r14v4 */
     @Override // com.android.server.pm.Computer
     public final void dumpSharedUsers(PrintWriter printWriter, String str, ArraySet arraySet, DumpState dumpState, boolean z) {
         com.android.server.pm.Settings settings = this.mSettings.mSettings;
@@ -1739,10 +1733,6 @@ public class ComputerEngine implements Computer {
     
         if (r2 == r14) goto L193;
      */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x032d  */
-    /* JADX WARN: Removed duplicated region for block: B:131:0x0370  */
-    /* JADX WARN: Removed duplicated region for block: B:165:0x0517  */
-    /* JADX WARN: Removed duplicated region for block: B:220:0x060b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1760,10 +1750,6 @@ public class ComputerEngine implements Computer {
         return findPreferredActivityBody(intent, str, j, list, z, z2, z3, i, z4, Binder.getCallingUid(), z5);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v3, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [java.util.ArrayList] */
     @Override // com.android.server.pm.Computer
     public final List findSharedNonSystemLibraries(PackageStateInternal packageStateInternal) {
         ?? emptyList;
@@ -1811,14 +1797,6 @@ public class ComputerEngine implements Computer {
         return generateApplicationInfo;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:120:0x02f7  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x03ad  */
-    /* JADX WARN: Removed duplicated region for block: B:159:0x0413  */
-    /* JADX WARN: Removed duplicated region for block: B:174:0x0479  */
-    /* JADX WARN: Removed duplicated region for block: B:189:0x04e0 A[LOOP:7: B:188:0x04de->B:189:0x04e0, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:208:0x0576  */
-    /* JADX WARN: Removed duplicated region for block: B:211:0x05ea  */
-    /* JADX WARN: Removed duplicated region for block: B:213:0x0579  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2379,8 +2357,6 @@ public class ComputerEngine implements Computer {
     
         if (shouldFilterApplicationIncludingUninstalled(r1, r11, r17) == false) goto L56;
      */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0095  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x00a3  */
     @Override // com.android.server.pm.Computer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -4196,37 +4172,6 @@ public class ComputerEngine implements Computer {
     
         if (r11 == false) goto L399;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:189:0x036b  */
-    /* JADX WARN: Removed duplicated region for block: B:225:0x0ab9  */
-    /* JADX WARN: Removed duplicated region for block: B:227:0x0ac2  */
-    /* JADX WARN: Removed duplicated region for block: B:249:0x0b7a  */
-    /* JADX WARN: Removed duplicated region for block: B:267:0x0c62 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:270:0x0c70 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:272:0x0c74  */
-    /* JADX WARN: Removed duplicated region for block: B:273:0x0c7c  */
-    /* JADX WARN: Removed duplicated region for block: B:280:0x0c96  */
-    /* JADX WARN: Removed duplicated region for block: B:286:0x0ce9 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:291:0x0db6  */
-    /* JADX WARN: Removed duplicated region for block: B:295:0x0d06  */
-    /* JADX WARN: Removed duplicated region for block: B:333:0x0cd3  */
-    /* JADX WARN: Removed duplicated region for block: B:358:0x052d A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:362:0x053e  */
-    /* JADX WARN: Removed duplicated region for block: B:373:0x055b  */
-    /* JADX WARN: Removed duplicated region for block: B:388:0x05c4  */
-    /* JADX WARN: Removed duplicated region for block: B:391:0x05ed  */
-    /* JADX WARN: Removed duplicated region for block: B:394:0x060e  */
-    /* JADX WARN: Removed duplicated region for block: B:649:0x049a  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x01a0  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x0dcd  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x0dd5  */
-    /* JADX WARN: Type inference failed for: r0v125 */
-    /* JADX WARN: Type inference failed for: r0v72 */
-    /* JADX WARN: Type inference failed for: r0v73 */
-    /* JADX WARN: Type inference failed for: r0v75, types: [int] */
-    /* JADX WARN: Type inference failed for: r1v152 */
-    /* JADX WARN: Type inference failed for: r1v156, types: [java.util.ArrayList, java.util.List] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [java.util.List] */
     @Override // com.android.server.pm.Computer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -4240,11 +4185,6 @@ public class ComputerEngine implements Computer {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.ComputerEngine.queryIntentActivitiesInternal(android.content.Intent, java.lang.String, long, int, int, int, boolean, boolean):java.util.List");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v11, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r1v12, types: [java.util.ArrayList, java.util.List] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [java.util.List] */
     @Override // com.android.server.pm.Computer
     public final List queryIntentServicesInternal(Intent intent, String str, long j, int i, int i2, int i3, boolean z) {
         Intent intent2;

@@ -13,7 +13,6 @@ final class AudioVolumeComponentViewModel$onExpandedChanged$1 extends SuspendLam
     int label;
     final /* synthetic */ AudioVolumeComponentViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AudioVolumeComponentViewModel$onExpandedChanged$1(AudioVolumeComponentViewModel audioVolumeComponentViewModel, boolean z, Continuation continuation) {
         super(2, continuation);
         this.this$0 = audioVolumeComponentViewModel;

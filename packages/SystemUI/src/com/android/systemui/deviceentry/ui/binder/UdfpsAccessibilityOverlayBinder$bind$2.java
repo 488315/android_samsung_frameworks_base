@@ -28,7 +28,6 @@ final class UdfpsAccessibilityOverlayBinder$bind$2 extends SuspendLambda impleme
         final /* synthetic */ UdfpsAccessibilityOverlayViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(UdfpsAccessibilityOverlayViewModel udfpsAccessibilityOverlayViewModel, UdfpsAccessibilityOverlay udfpsAccessibilityOverlay, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = udfpsAccessibilityOverlayViewModel;
@@ -74,7 +73,6 @@ final class UdfpsAccessibilityOverlayBinder$bind$2 extends SuspendLambda impleme
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UdfpsAccessibilityOverlayBinder$bind$2(UdfpsAccessibilityOverlayViewModel udfpsAccessibilityOverlayViewModel, UdfpsAccessibilityOverlay udfpsAccessibilityOverlay, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = udfpsAccessibilityOverlayViewModel;

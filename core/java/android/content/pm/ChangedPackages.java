@@ -9,13 +9,11 @@ public final class ChangedPackages implements Parcelable {
     public static final Parcelable.Creator<ChangedPackages> CREATOR =
             new Parcelable.Creator<
                     ChangedPackages>() { // from class: android.content.pm.ChangedPackages.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ChangedPackages createFromParcel(Parcel in) {
                     return new ChangedPackages(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ChangedPackages[] newArray(int size) {
                     return new ChangedPackages[size];

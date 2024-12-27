@@ -74,9 +74,6 @@ public final class StrongAuthPopup extends AlertDialog implements View.OnApplyWi
         }
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v1, types: [com.android.keyguard.StrongAuthPopup$3, java.lang.Object] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

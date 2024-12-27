@@ -10,13 +10,11 @@ import java.util.Objects;
 public final class UrspRule implements Parcelable {
     public static final Parcelable.Creator<UrspRule> CREATOR =
             new Parcelable.Creator<UrspRule>() { // from class: android.telephony.data.UrspRule.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UrspRule createFromParcel(Parcel source) {
                     return new UrspRule(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UrspRule[] newArray(int size) {
                     return new UrspRule[size];

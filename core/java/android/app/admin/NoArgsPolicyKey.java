@@ -10,13 +10,11 @@ public final class NoArgsPolicyKey extends PolicyKey {
     public static final Parcelable.Creator<NoArgsPolicyKey> CREATOR =
             new Parcelable.Creator<
                     NoArgsPolicyKey>() { // from class: android.app.admin.NoArgsPolicyKey.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NoArgsPolicyKey createFromParcel(Parcel source) {
                     return new NoArgsPolicyKey(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NoArgsPolicyKey[] newArray(int size) {
                     return new NoArgsPolicyKey[size];

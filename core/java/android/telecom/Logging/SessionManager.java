@@ -59,7 +59,6 @@ public class SessionManager {
         int get();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     interface ISessionCleanupTimeoutMs {
         long get();
     }
@@ -72,12 +71,10 @@ public class SessionManager {
         void sessionComplete(String str, long j);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0() {
         cleanupStaleSessions(getSessionCleanupTimeoutMs());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ long lambda$new$1() {
         if (this.mContext == null) {
             return 30000L;

@@ -495,7 +495,6 @@ public final class ThemeOverlayController implements CoreStartable, Dumpable {
         return new FabricatedOverlay.Builder("com.android.systemui", str, "android").build();
     }
 
-    /* JADX WARN: Type inference failed for: r2v10, types: [com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda0] */
     public final void reevaluateSystemTheme(boolean z) {
         final FabricatedOverlay[] fabricatedOverlayArr;
         FabricatedOverlay fabricatedOverlay;

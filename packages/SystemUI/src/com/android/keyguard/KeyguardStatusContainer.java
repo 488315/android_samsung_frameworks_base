@@ -21,7 +21,6 @@ public final class KeyguardStatusContainer extends LinearLayout {
         KeyguardClockFrame.Companion companion = KeyguardClockFrame.Companion;
         int i = this.drawAlpha;
         Function1 function1 = new Function1() { // from class: com.android.keyguard.KeyguardStatusContainer$dispatchDraw$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

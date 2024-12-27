@@ -24,13 +24,11 @@ public class VendorConfigurationState implements Parcelable {
             new Parcelable.Creator<
                     VendorConfigurationState>() { // from class:
                                                   // android.telephony.VendorConfigurationState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VendorConfigurationState createFromParcel(Parcel in) {
                     return new VendorConfigurationState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VendorConfigurationState[] newArray(int size) {
                     return new VendorConfigurationState[size];

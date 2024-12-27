@@ -52,7 +52,6 @@ public final class AppNotRespondingDialog extends BaseErrorDialog implements Vie
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.am.AppNotRespondingDialog$1] */
     public AppNotRespondingDialog(
             ActivityManagerService activityManagerService, Context context, Data data) {
         super(context);

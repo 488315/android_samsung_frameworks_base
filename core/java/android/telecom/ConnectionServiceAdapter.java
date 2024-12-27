@@ -434,7 +434,6 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass1(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -603,7 +602,6 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass2(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;

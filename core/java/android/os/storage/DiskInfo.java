@@ -19,13 +19,11 @@ public class DiskInfo implements Parcelable {
     public static final String ACTION_DISK_SCANNED = "android.os.storage.action.DISK_SCANNED";
     public static final Parcelable.Creator<DiskInfo> CREATOR =
             new Parcelable.Creator<DiskInfo>() { // from class: android.os.storage.DiskInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DiskInfo createFromParcel(Parcel in) {
                     return new DiskInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DiskInfo[] newArray(int size) {
                     return new DiskInfo[size];

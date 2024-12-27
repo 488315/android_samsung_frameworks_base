@@ -11,13 +11,11 @@ public class FaceSensorPropertiesInternal extends SensorPropertiesInternal {
     public static final Parcelable.Creator<FaceSensorPropertiesInternal> CREATOR =
             new Parcelable.Creator<FaceSensorPropertiesInternal>() { // from class:
                 // android.hardware.face.FaceSensorPropertiesInternal.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceSensorPropertiesInternal createFromParcel(Parcel in) {
                     return new FaceSensorPropertiesInternal(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceSensorPropertiesInternal[] newArray(int size) {
                     return new FaceSensorPropertiesInternal[size];

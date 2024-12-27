@@ -200,13 +200,6 @@ public class ActionMenuView extends LinearLayout implements MenuBuilder.ItemInvo
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:108:0x02cf  */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x0302  */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x0305  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x02fc  */
-    /* JADX WARN: Type inference failed for: r2v27 */
-    /* JADX WARN: Type inference failed for: r2v28, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r2v46 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -418,7 +411,6 @@ public class ActionMenuView extends LinearLayout implements MenuBuilder.ItemInvo
         this.mReserveOverflow = reserveOverflow;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.LinearLayout, android.view.ViewGroup
     public LayoutParams generateDefaultLayoutParams() {
         LayoutParams params = new LayoutParams(-2, -2);
@@ -431,7 +423,6 @@ public class ActionMenuView extends LinearLayout implements MenuBuilder.ItemInvo
         return new LayoutParams(getContext(), attrs);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.LinearLayout, android.view.ViewGroup
     public LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
         LayoutParams result;

@@ -12,7 +12,6 @@ public class CellIdentityLte implements Parcelable {
     public static final Parcelable.Creator<CellIdentityLte> CREATOR =
             new Parcelable.Creator<CellIdentityLte>() { // from class:
                 // android.hardware.radio.network.CellIdentityLte.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentityLte createFromParcel(Parcel _aidl_source) {
                     CellIdentityLte _aidl_out = new CellIdentityLte();
@@ -20,7 +19,6 @@ public class CellIdentityLte implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentityLte[] newArray(int _aidl_size) {
                     return new CellIdentityLte[_aidl_size];

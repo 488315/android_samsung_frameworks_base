@@ -8,13 +8,11 @@ public final class EyeInfo implements Parcelable {
     public static final Parcelable.Creator<EyeInfo> CREATOR =
             new Parcelable.Creator<
                     EyeInfo>() { // from class: com.samsung.android.camera.iris.EyeInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EyeInfo createFromParcel(Parcel in) {
                     return new EyeInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EyeInfo[] newArray(int size) {
                     return new EyeInfo[size];

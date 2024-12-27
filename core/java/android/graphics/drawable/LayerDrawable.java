@@ -65,7 +65,6 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
         refreshPadding();
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     LayerDrawable() {
         this((LayerState) null, (Resources) null);
     }

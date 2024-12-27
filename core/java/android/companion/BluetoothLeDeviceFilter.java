@@ -24,7 +24,6 @@ public final class BluetoothLeDeviceFilter implements DeviceFilter<ScanResult> {
     public static final Parcelable.Creator<BluetoothLeDeviceFilter> CREATOR =
             new Parcelable.Creator<BluetoothLeDeviceFilter>() { // from class:
                 // android.companion.BluetoothLeDeviceFilter.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BluetoothLeDeviceFilter createFromParcel(Parcel in) {
                     Builder builder =
@@ -63,7 +62,6 @@ public final class BluetoothLeDeviceFilter implements DeviceFilter<ScanResult> {
                     return builder.build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BluetoothLeDeviceFilter[] newArray(int size) {
                     return new BluetoothLeDeviceFilter[size];
@@ -355,7 +353,6 @@ public final class BluetoothLeDeviceFilter implements DeviceFilter<ScanResult> {
             return this;
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.provider.OneTimeUseBuilder
         public BluetoothLeDeviceFilter build() {
             markUsed();

@@ -52,7 +52,6 @@ public final class LocationTimeZoneManagerService extends Binder {
         public LocationTimeZoneManagerService mService;
         public final ServiceConfigAccessor mServiceConfigAccessor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public Lifecycle(Context context) {
             super(context);
             Objects.requireNonNull(context);

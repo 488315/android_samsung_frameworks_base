@@ -24,7 +24,6 @@ public interface ListenerTransport<TListener> {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* synthetic */ default void lambda$execute$0(Consumer operation) {
         TListener listener = getListener();
         if (listener == null) {

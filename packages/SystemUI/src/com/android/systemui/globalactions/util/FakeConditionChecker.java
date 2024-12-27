@@ -17,8 +17,6 @@ public final class FakeConditionChecker implements ConditionChecker {
     public final LogWrapper mLogWrapper;
     public final AnonymousClass1 mReceiver;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v1, types: [android.content.BroadcastReceiver, com.android.systemui.globalactions.util.FakeConditionChecker$1] */
     public FakeConditionChecker(Context context, ConditionChecker conditionChecker, LogWrapper logWrapper) {
         this.mDefaultSystemCondition = conditionChecker;
         this.mLogWrapper = logWrapper;

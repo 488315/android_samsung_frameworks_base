@@ -12,7 +12,6 @@ final class ClockRegistry$userSwitchObserver$1$onUserSwitchComplete$1 extends Su
     int label;
     final /* synthetic */ ClockRegistry this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ClockRegistry$userSwitchObserver$1$onUserSwitchComplete$1(ClockRegistry clockRegistry, Continuation continuation) {
         super(2, continuation);
         this.this$0 = clockRegistry;

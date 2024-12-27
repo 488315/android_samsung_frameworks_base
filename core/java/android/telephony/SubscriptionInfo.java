@@ -35,7 +35,6 @@ public class SubscriptionInfo implements Parcelable {
     public static final Parcelable.Creator<SubscriptionInfo> CREATOR =
             new Parcelable.Creator<
                     SubscriptionInfo>() { // from class: android.telephony.SubscriptionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SubscriptionInfo createFromParcel(Parcel source) {
                     return new Builder()
@@ -82,7 +81,6 @@ public class SubscriptionInfo implements Parcelable {
                             .build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SubscriptionInfo[] newArray(int size) {
                     return new SubscriptionInfo[size];

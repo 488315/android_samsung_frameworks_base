@@ -74,14 +74,11 @@ public final class CalendarTracker {
         public long recheckAt;
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.notification.CalendarTracker$1] */
     public CalendarTracker(Context context, Context context2) {
         this.mSystemContext = context;
         this.mUserContext = context2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0114  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x0117  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -188,7 +185,6 @@ public final class CalendarTracker {
 
        android.util.Log.d("ConditionProviders.CT", "No attendees found");
     */
-    /* JADX WARN: Multi-variable type inference failed */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

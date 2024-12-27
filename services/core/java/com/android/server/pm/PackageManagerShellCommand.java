@@ -1088,56 +1088,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r15v1 */
-    /* JADX WARN: Type inference failed for: r15v2, types: [int] */
-    /* JADX WARN: Type inference failed for: r15v4 */
-    /* JADX WARN: Type inference failed for: r18v0, types: [java.util.Set] */
-    /* JADX WARN: Type inference failed for: r4v100 */
-    /* JADX WARN: Type inference failed for: r4v103 */
-    /* JADX WARN: Type inference failed for: r4v106 */
-    /* JADX WARN: Type inference failed for: r4v109 */
-    /* JADX WARN: Type inference failed for: r4v112 */
-    /* JADX WARN: Type inference failed for: r4v115 */
-    /* JADX WARN: Type inference failed for: r4v118 */
-    /* JADX WARN: Type inference failed for: r4v121 */
-    /* JADX WARN: Type inference failed for: r4v124 */
-    /* JADX WARN: Type inference failed for: r4v127 */
-    /* JADX WARN: Type inference failed for: r4v130 */
-    /* JADX WARN: Type inference failed for: r4v133 */
-    /* JADX WARN: Type inference failed for: r4v136 */
-    /* JADX WARN: Type inference failed for: r4v139 */
-    /* JADX WARN: Type inference failed for: r4v142 */
-    /* JADX WARN: Type inference failed for: r4v145 */
-    /* JADX WARN: Type inference failed for: r4v146 */
-    /* JADX WARN: Type inference failed for: r4v149 */
-    /* JADX WARN: Type inference failed for: r4v150 */
-    /* JADX WARN: Type inference failed for: r4v2 */
-    /* JADX WARN: Type inference failed for: r4v28 */
-    /* JADX WARN: Type inference failed for: r4v31 */
-    /* JADX WARN: Type inference failed for: r4v34 */
-    /* JADX WARN: Type inference failed for: r4v37 */
-    /* JADX WARN: Type inference failed for: r4v40 */
-    /* JADX WARN: Type inference failed for: r4v43 */
-    /* JADX WARN: Type inference failed for: r4v46 */
-    /* JADX WARN: Type inference failed for: r4v49 */
-    /* JADX WARN: Type inference failed for: r4v52 */
-    /* JADX WARN: Type inference failed for: r4v55 */
-    /* JADX WARN: Type inference failed for: r4v58 */
-    /* JADX WARN: Type inference failed for: r4v61 */
-    /* JADX WARN: Type inference failed for: r4v64 */
-    /* JADX WARN: Type inference failed for: r4v67 */
-    /* JADX WARN: Type inference failed for: r4v70 */
-    /* JADX WARN: Type inference failed for: r4v73 */
-    /* JADX WARN: Type inference failed for: r4v76 */
-    /* JADX WARN: Type inference failed for: r4v79 */
-    /* JADX WARN: Type inference failed for: r4v82 */
-    /* JADX WARN: Type inference failed for: r4v85 */
-    /* JADX WARN: Type inference failed for: r4v88 */
-    /* JADX WARN: Type inference failed for: r4v91 */
-    /* JADX WARN: Type inference failed for: r4v94 */
-    /* JADX WARN: Type inference failed for: r4v97 */
     public final InstallParams makeInstallParams(Set set) {
         int i;
         int parseInt;
@@ -3135,8 +3085,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0007 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0084 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3577,11 +3525,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v16, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r0v17, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r0v25, types: [java.util.ArrayList] */
-    /* JADX WARN: Type inference failed for: r0v26, types: [java.util.ArrayList] */
     public final int runGrantRevokePermission(boolean z) {
         List<PackageInfo> singletonList;
         PermissionInfo permissionInfo;
@@ -3930,7 +3873,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runList() {
         char c;
         char c2;
@@ -4306,32 +4248,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
     
         if (r0 == null) goto L148;
      */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0108 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:191:0x0283  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x011e A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:204:0x02ed  */
-    /* JADX WARN: Removed duplicated region for block: B:207:0x02fe  */
-    /* JADX WARN: Removed duplicated region for block: B:212:0x0316  */
-    /* JADX WARN: Removed duplicated region for block: B:218:0x032e  */
-    /* JADX WARN: Removed duplicated region for block: B:228:0x02df  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0122 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0126 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x012e A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0132 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x013c A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0140 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0146 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x014a A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x014d A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0151 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0154 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0157 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x015b A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x015e A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0164 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0167 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x0026 A[SYNTHETIC] */
-    /* JADX WARN: Unreachable blocks removed: 2, instructions: 7 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4344,7 +4260,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.PackageManagerShellCommand.runListPackages(boolean, boolean):int");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runListStagedSessions() {
         char c;
         IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(getOutPrintWriter(), "  ", 120);
@@ -4620,9 +4535,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v4, types: [com.android.server.pm.PackageManagerShellCommand$4, com.android.server.pm.UserManagerInternal$UserLifecycleListener] */
     public final int runRemoveUser() {
         boolean z;
         boolean z2 = false;
@@ -5054,7 +4966,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
         return 1;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runSetSilentUpdatesPolicy() {
         char c;
         PrintWriter outPrintWriter = getOutPrintWriter();
@@ -5173,8 +5084,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
         return doRunInstall(makeInstallParams);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:86:0x0146 A[Catch: RemoteException | IllegalArgumentException -> 0x015f, TryCatch #0 {RemoteException | IllegalArgumentException -> 0x015f, blocks: (B:82:0x0118, B:86:0x0146, B:88:0x0161, B:91:0x0177, B:94:0x0182, B:95:0x018e, B:97:0x0194, B:104:0x012f, B:106:0x0135, B:108:0x0142), top: B:81:0x0118 }] */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0161 A[Catch: RemoteException | IllegalArgumentException -> 0x015f, TryCatch #0 {RemoteException | IllegalArgumentException -> 0x015f, blocks: (B:82:0x0118, B:86:0x0146, B:88:0x0161, B:91:0x0177, B:94:0x0182, B:95:0x018e, B:97:0x0194, B:104:0x012f, B:106:0x0135, B:108:0x0142), top: B:81:0x0118 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5269,7 +5178,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runUninstall() {
         boolean z;
         boolean z2;

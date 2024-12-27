@@ -74,7 +74,6 @@ public final class KnoxForesightService extends IBasicCommand.Stub {
         return knoxForesightService;
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.server.knox.KnoxForesightService$1] */
     public final void initializeKnoxForesight() {
         String str;
         if (this.mContext

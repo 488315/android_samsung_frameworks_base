@@ -11,13 +11,11 @@ public class ReferrerIntent extends Intent {
     public static final Parcelable.Creator<ReferrerIntent> CREATOR =
             new Parcelable.Creator<
                     ReferrerIntent>() { // from class: com.android.internal.content.ReferrerIntent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ReferrerIntent createFromParcel(Parcel source) {
                     return new ReferrerIntent(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ReferrerIntent[] newArray(int size) {
                     return new ReferrerIntent[size];

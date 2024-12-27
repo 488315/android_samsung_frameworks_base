@@ -3,8 +3,6 @@ package com.android.systemui.biometrics.udfps;
 import com.sec.ims.settings.ImsProfile;
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class InteractionEvent {
     public static final /* synthetic */ InteractionEvent[] $VALUES;
     public static final InteractionEvent CANCEL;

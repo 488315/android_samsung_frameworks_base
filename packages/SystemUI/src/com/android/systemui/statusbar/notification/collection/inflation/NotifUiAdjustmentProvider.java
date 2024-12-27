@@ -31,11 +31,6 @@ public final class NotifUiAdjustmentProvider {
     public final NotifUiAdjustmentProvider$settingsObserver$1 settingsObserver;
     public final NotifUiAdjustmentProvider$userTrackerCallback$1 userTrackerCallback;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.notification.collection.inflation.NotifUiAdjustmentProvider$onAppLockPackagesChangedListener$1] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.settings.UserTracker$Callback, com.android.systemui.statusbar.notification.collection.inflation.NotifUiAdjustmentProvider$userTrackerCallback$1] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.statusbar.notification.collection.inflation.NotifUiAdjustmentProvider$onSensitiveStateChangedListener$1] */
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.systemui.statusbar.notification.collection.inflation.NotifUiAdjustmentProvider$settingsObserver$1] */
     public NotifUiAdjustmentProvider(final Handler handler, SecureSettings secureSettings, NotificationLockscreenUserManager notificationLockscreenUserManager, SensitiveNotificationProtectionController sensitiveNotificationProtectionController, SectionStyleProvider sectionStyleProvider, UserTracker userTracker, GroupMembershipManager groupMembershipManager, HighPriorityProvider highPriorityProvider, AppLockNotificationController appLockNotificationController) {
         this.secureSettings = secureSettings;
         this.lockscreenUserManager = notificationLockscreenUserManager;

@@ -36,7 +36,6 @@ final class UserSwitcherInteractor$actions$1 extends SuspendLambda implements Fu
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherInteractor$actions$1(UserSwitcherInteractor userSwitcherInteractor, Continuation continuation) {
         super(5, continuation);
         this.this$0 = userSwitcherInteractor;
@@ -52,8 +51,6 @@ final class UserSwitcherInteractor$actions$1 extends SuspendLambda implements Fu
         return userSwitcherInteractor$actions$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0115  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x011a A[SYNTHETIC] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

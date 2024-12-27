@@ -101,8 +101,6 @@ public final class SecQSDetailController extends ViewController {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.qs.SecQSDetailController$detailCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.qs.SecQSDetailController$detailCallbackForPopup$1] */
     public SecQSDetailController(SecQSDetail secQSDetail, ShadeInteractor shadeInteractor, StatusBarStateControllerImpl statusBarStateControllerImpl, SecQSPanelResourcePicker secQSPanelResourcePicker, ActivityStarter activityStarter, MetricsLogger metricsLogger, QSTileHost qSTileHost, ShadeHeaderController shadeHeaderController, ColoredBGHelper coloredBGHelper) {
         super(secQSDetail);
         this.view = secQSDetail;
@@ -281,18 +279,6 @@ public final class SecQSDetailController extends ViewController {
         return ((Boolean) ((ShadeInteractorImpl) this.shadeInteractor).baseShadeInteractor.isQsExpanded().getValue()).booleanValue();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x0286  */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x01c1  */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x0110  */
-    /* JADX WARN: Removed duplicated region for block: B:150:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0041  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0046  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0051  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00a2  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00c1  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x01ba  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -405,10 +391,6 @@ public final class SecQSDetailController extends ViewController {
         Button button2 = this.detailDoneButton;
         if (button2 != null) {
             button2.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.SecQSDetailController$setupDetailFooter$2
-                /* JADX WARN: Removed duplicated region for block: B:10:0x0043  */
-                /* JADX WARN: Removed duplicated region for block: B:12:0x0049  */
-                /* JADX WARN: Removed duplicated region for block: B:14:0x004f  */
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0046  */
                 @Override // android.view.View.OnClickListener
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -548,9 +530,6 @@ public final class SecQSDetailController extends ViewController {
                     }
                 });
                 secQSSwitch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.android.systemui.qs.SecQSDetailController$setupHeaderSwitchListener$1$2
-                    /* JADX WARN: Removed duplicated region for block: B:10:0x0022  */
-                    /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
-                    /* JADX WARN: Removed duplicated region for block: B:7:0x0017  */
                     @Override // android.widget.CompoundButton.OnCheckedChangeListener
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

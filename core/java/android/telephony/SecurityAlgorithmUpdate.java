@@ -28,13 +28,11 @@ public final class SecurityAlgorithmUpdate implements Parcelable {
             new Parcelable.Creator<
                     SecurityAlgorithmUpdate>() { // from class:
                                                  // android.telephony.SecurityAlgorithmUpdate.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SecurityAlgorithmUpdate createFromParcel(Parcel in) {
                     return new SecurityAlgorithmUpdate(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SecurityAlgorithmUpdate[] newArray(int size) {
                     return new SecurityAlgorithmUpdate[size];

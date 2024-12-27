@@ -290,8 +290,6 @@ final class RemoteSpeechRecognitionService extends ServiceConnector.Impl {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.server.speech.RemoteSpeechRecognitionService$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.server.speech.RemoteSpeechRecognitionService$$ExternalSyntheticLambda3] */
     public final void startListening(
             Intent intent,
             final IRecognitionListener iRecognitionListener,

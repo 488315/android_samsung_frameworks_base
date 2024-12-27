@@ -14,7 +14,6 @@ final class ProfileTypeRepositoryImpl$getProfileType$2$1 extends SuspendLambda i
     int label;
     final /* synthetic */ ProfileTypeRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ProfileTypeRepositoryImpl$getProfileType$2$1(ProfileTypeRepositoryImpl profileTypeRepositoryImpl, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = profileTypeRepositoryImpl;

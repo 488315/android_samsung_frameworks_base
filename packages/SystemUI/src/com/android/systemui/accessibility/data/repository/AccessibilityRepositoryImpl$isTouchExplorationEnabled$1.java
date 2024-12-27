@@ -18,7 +18,6 @@ final class AccessibilityRepositoryImpl$isTouchExplorationEnabled$1 extends Susp
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AccessibilityRepositoryImpl$isTouchExplorationEnabled$1(AccessibilityManager accessibilityManager, Continuation continuation) {
         super(2, continuation);
         this.$manager = accessibilityManager;
@@ -36,7 +35,6 @@ final class AccessibilityRepositoryImpl$isTouchExplorationEnabled$1 extends Susp
         return ((AccessibilityRepositoryImpl$isTouchExplorationEnabled$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -55,7 +53,6 @@ final class AccessibilityRepositoryImpl$isTouchExplorationEnabled$1 extends Susp
             ((ChannelCoroutine) producerScope).mo2552trySendJP2dKIU(Boolean.valueOf(this.$manager.isTouchExplorationEnabled()));
             final AccessibilityManager accessibilityManager = this.$manager;
             Function0 function0 = new Function0() { // from class: com.android.systemui.accessibility.data.repository.AccessibilityRepositoryImpl$isTouchExplorationEnabled$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

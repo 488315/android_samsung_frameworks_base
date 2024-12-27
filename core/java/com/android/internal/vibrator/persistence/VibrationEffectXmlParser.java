@@ -14,7 +14,6 @@ public class VibrationEffectXmlParser {
         return parseVibrationContent(parser, flags);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x003e, code lost:
 
        if (r2.equals(com.android.internal.vibrator.persistence.XmlConstants.TAG_PREDEFINED_EFFECT) != false) goto L15;

@@ -8,7 +8,6 @@ import libcore.util.NativeAllocationRegistry;
 public final class Gainmap implements Parcelable {
     public static final Parcelable.Creator<Gainmap> CREATOR =
             new Parcelable.Creator<Gainmap>() { // from class: android.graphics.Gainmap.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Gainmap createFromParcel(Parcel in) {
                     Gainmap gm = new Gainmap((Bitmap) in.readTypedObject(Bitmap.CREATOR));
@@ -16,7 +15,6 @@ public final class Gainmap implements Parcelable {
                     return gm;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Gainmap[] newArray(int size) {
                     return new Gainmap[size];
@@ -37,7 +35,6 @@ public final class Gainmap implements Parcelable {
 
     private static native void nGetEpsilonSdr(long j, float[] fArr);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nGetFinalizer();
 
     private static native void nGetGamma(long j, float[] fArr);
@@ -46,7 +43,6 @@ public final class Gainmap implements Parcelable {
 
     private static native void nGetRatioMin(long j, float[] fArr);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nReadGainmapFromParcel(long j, Parcel parcel);
 
     private static native void nSetBitmap(long j, Bitmap bitmap);

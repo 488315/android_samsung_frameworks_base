@@ -9,13 +9,11 @@ public final class AuthenticateReason implements Parcelable {
     public static final Parcelable.Creator<AuthenticateReason> CREATOR =
             new Parcelable.Creator<AuthenticateReason>() { // from class:
                 // android.hardware.biometrics.common.AuthenticateReason.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AuthenticateReason createFromParcel(Parcel _aidl_source) {
                     return new AuthenticateReason(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AuthenticateReason[] newArray(int _aidl_size) {
                     return new AuthenticateReason[_aidl_size];
@@ -200,7 +198,6 @@ public final class AuthenticateReason implements Parcelable {
         public static final Parcelable.Creator<Vendor> CREATOR =
                 new Parcelable.Creator<Vendor>() { // from class:
                     // android.hardware.biometrics.common.AuthenticateReason.Vendor.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Vendor createFromParcel(Parcel _aidl_source) {
                         Vendor _aidl_out = new Vendor();
@@ -208,7 +205,6 @@ public final class AuthenticateReason implements Parcelable {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Vendor[] newArray(int _aidl_size) {
                         return new Vendor[_aidl_size];

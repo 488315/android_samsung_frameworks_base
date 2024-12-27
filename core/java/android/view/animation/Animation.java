@@ -111,7 +111,6 @@ public abstract class Animation implements Cloneable {
         ensureInterpolator();
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override //
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
     public Animation mo5909clone() throws CloneNotSupportedException {

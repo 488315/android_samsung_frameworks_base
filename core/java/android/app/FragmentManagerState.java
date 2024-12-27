@@ -7,13 +7,11 @@ final class FragmentManagerState implements Parcelable {
     public static final Parcelable.Creator<FragmentManagerState> CREATOR =
             new Parcelable.Creator<
                     FragmentManagerState>() { // from class: android.app.FragmentManagerState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FragmentManagerState createFromParcel(Parcel in) {
                     return new FragmentManagerState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FragmentManagerState[] newArray(int size) {
                     return new FragmentManagerState[size];

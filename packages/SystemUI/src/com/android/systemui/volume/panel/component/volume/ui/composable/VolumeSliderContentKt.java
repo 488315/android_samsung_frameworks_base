@@ -1,13 +1,6 @@
 package com.android.systemui.volume.panel.component.volume.ui.composable;
 
 public abstract class VolumeSliderContentKt {
-    /* JADX WARN: Removed duplicated region for block: B:26:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00ac  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00c1  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00f7  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x01f0  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x008f  */
-    /* JADX WARN: Type inference failed for: r8v5, types: [com.android.systemui.volume.panel.component.volume.ui.composable.VolumeSliderContentKt$VolumeSliderContent$1$1$1, kotlin.jvm.internal.Lambda] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

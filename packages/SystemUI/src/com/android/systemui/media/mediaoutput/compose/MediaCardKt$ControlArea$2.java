@@ -31,7 +31,6 @@ final class MediaCardKt$ControlArea$2 extends SuspendLambda implements Function2
     Object L$2;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaCardKt$ControlArea$2(State state, State state2, Context context, SnackbarHostState snackbarHostState, MediaInteraction mediaInteraction, Continuation continuation) {
         super(2, continuation);
         this.$actions$delegate = state;

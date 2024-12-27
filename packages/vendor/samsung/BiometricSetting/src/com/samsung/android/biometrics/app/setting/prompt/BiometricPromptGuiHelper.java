@@ -405,8 +405,6 @@ public abstract class BiometricPromptGuiHelper {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v55, types: [android.text.TextWatcher, com.samsung.android.biometrics.app.setting.prompt.BiometricPromptGuiHelper$4] */
     public void initPrompt() {
         Drawable userBadgedIcon;
         this.mLastOrientation = getOrientation();

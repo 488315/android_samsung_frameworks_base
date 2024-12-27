@@ -16,7 +16,6 @@ final class CustomComposeView$onAttachedToWindow$1 extends SuspendLambda impleme
     int label;
     final /* synthetic */ CustomComposeView this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomComposeView$onAttachedToWindow$1(CustomComposeView customComposeView, Continuation continuation) {
         super(2, continuation);
         this.this$0 = customComposeView;

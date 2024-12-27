@@ -65,7 +65,6 @@ public class ServiceProxySupplier implements Supplier<ServiceProxy> {
         return new RemoteServiceProxy(context, packageName, serviceName, this.options);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // java.util.function.Supplier
     public ServiceProxy get() {
         return this.supplier.get();
@@ -136,7 +135,6 @@ public class ServiceProxySupplier implements Supplier<ServiceProxy> {
             return this;
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // com.samsung.android.sume.core.functional.PlaceHolder
         public ServiceProxySupplier reset() {
             Def.require((this.packageName == null || this.serviceName == null) ? false : true);

@@ -24,7 +24,6 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
         this.f$0 = obj;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // java.lang.Runnable
     public final void run() {
         int pause;

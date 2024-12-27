@@ -1046,7 +1046,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         mFMRadioServiceLock = new Object();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleAvrcpMode() {
         int type = this.mAudioManager.semGetRadioOutputPath();
         this.mAvrcpMode =
@@ -1071,7 +1070,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean checkUsbExternalChipset(UsbDevice usbDevice) {
         if (usbDevice.getVendorId() == 1256) {
             if (usbDevice.getProductId() == 41044
@@ -1138,7 +1136,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void clearMessageQueue() {
         this.mAudioFocusHandler.removeMessages(-1);
         this.mAudioFocusHandler.removeMessages(-2);
@@ -1147,7 +1144,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         this.mHandler.removeMessages(200);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void responedFocusEvent(int focusEvent) {
         switch (focusEvent) {
             case -3:
@@ -1290,7 +1286,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void inDirectModeBroadcast() {
         log("Broadcast audio focus loss intent");
         Intent intent = new Intent();
@@ -1300,7 +1295,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         this.mContext.sendBroadcast(intent);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void releaseAudioSystemMute() {
         log("releaseAudioSystemMute ");
         if (this.mAudioManager != null) {
@@ -1390,7 +1384,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         this.mContext.getContentResolver().unregisterContentObserver(this.mAvrcpObserver);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void readTuningParameters() {
         SemCscFeature mCscFeature = SemCscFeature.getInstance();
         String mCscTuningValue = mCscFeature.getString("CscFeature_FMRadio_SetLocalTunning");
@@ -1960,7 +1953,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void queueUpdate(int what, long delay) {
         log("queueUpdate(" + what + "," + delay + ") is called");
         if (what == 200) {
@@ -2323,15 +2315,10 @@ public class FMRadioService extends IFMPlayer.Stub {
         return FMTEST_APP_NAME.equals(mPackageName);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Code restructure failed: missing block: B:168:0x00ce, code lost:
 
        if (r13.mIsTransientPaused == false) goto L58;
     */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x0431 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0126 A[Catch: Exception -> 0x047f, all -> 0x04bc, TryCatch #0 {Exception -> 0x047f, blocks: (B:167:0x00cc, B:165:0x0119, B:58:0x0126, B:60:0x0130, B:62:0x013b, B:64:0x0143, B:66:0x0164, B:67:0x017a, B:69:0x019c, B:72:0x01a3, B:74:0x01a7, B:75:0x01c1, B:79:0x01ff, B:80:0x0224, B:83:0x020a, B:84:0x0228, B:87:0x0172, B:88:0x022c, B:90:0x0232, B:92:0x023c, B:94:0x0249, B:95:0x0283, B:96:0x026d, B:97:0x028e, B:100:0x0297, B:102:0x02a1, B:104:0x02b2, B:107:0x02b7, B:109:0x02bf, B:111:0x02e6, B:113:0x02ea, B:116:0x02f0, B:118:0x02f4, B:121:0x02fc, B:123:0x0301, B:124:0x03fe, B:128:0x0433, B:129:0x0458, B:132:0x043e, B:133:0x045c, B:136:0x031f, B:138:0x0324, B:140:0x034d, B:141:0x0354, B:143:0x035a, B:144:0x0363, B:146:0x0369, B:148:0x039f, B:149:0x03a7, B:150:0x03b1, B:151:0x03c7, B:152:0x02c3, B:154:0x02c7, B:156:0x02d3, B:157:0x02dd, B:158:0x0460, B:160:0x0464, B:161:0x0467, B:50:0x00d0, B:52:0x00d6, B:54:0x00dc), top: B:166:0x00cc, outer: #4 }] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0143 A[Catch: Exception -> 0x047f, all -> 0x04bc, TryCatch #0 {Exception -> 0x047f, blocks: (B:167:0x00cc, B:165:0x0119, B:58:0x0126, B:60:0x0130, B:62:0x013b, B:64:0x0143, B:66:0x0164, B:67:0x017a, B:69:0x019c, B:72:0x01a3, B:74:0x01a7, B:75:0x01c1, B:79:0x01ff, B:80:0x0224, B:83:0x020a, B:84:0x0228, B:87:0x0172, B:88:0x022c, B:90:0x0232, B:92:0x023c, B:94:0x0249, B:95:0x0283, B:96:0x026d, B:97:0x028e, B:100:0x0297, B:102:0x02a1, B:104:0x02b2, B:107:0x02b7, B:109:0x02bf, B:111:0x02e6, B:113:0x02ea, B:116:0x02f0, B:118:0x02f4, B:121:0x02fc, B:123:0x0301, B:124:0x03fe, B:128:0x0433, B:129:0x0458, B:132:0x043e, B:133:0x045c, B:136:0x031f, B:138:0x0324, B:140:0x034d, B:141:0x0354, B:143:0x035a, B:144:0x0363, B:146:0x0369, B:148:0x039f, B:149:0x03a7, B:150:0x03b1, B:151:0x03c7, B:152:0x02c3, B:154:0x02c7, B:156:0x02d3, B:157:0x02dd, B:158:0x0460, B:160:0x0464, B:161:0x0467, B:50:0x00d0, B:52:0x00d6, B:54:0x00dc), top: B:166:0x00cc, outer: #4 }] */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x022c A[Catch: Exception -> 0x047f, all -> 0x04bc, TRY_ENTER, TryCatch #0 {Exception -> 0x047f, blocks: (B:167:0x00cc, B:165:0x0119, B:58:0x0126, B:60:0x0130, B:62:0x013b, B:64:0x0143, B:66:0x0164, B:67:0x017a, B:69:0x019c, B:72:0x01a3, B:74:0x01a7, B:75:0x01c1, B:79:0x01ff, B:80:0x0224, B:83:0x020a, B:84:0x0228, B:87:0x0172, B:88:0x022c, B:90:0x0232, B:92:0x023c, B:94:0x0249, B:95:0x0283, B:96:0x026d, B:97:0x028e, B:100:0x0297, B:102:0x02a1, B:104:0x02b2, B:107:0x02b7, B:109:0x02bf, B:111:0x02e6, B:113:0x02ea, B:116:0x02f0, B:118:0x02f4, B:121:0x02fc, B:123:0x0301, B:124:0x03fe, B:128:0x0433, B:129:0x0458, B:132:0x043e, B:133:0x045c, B:136:0x031f, B:138:0x0324, B:140:0x034d, B:141:0x0354, B:143:0x035a, B:144:0x0363, B:146:0x0369, B:148:0x039f, B:149:0x03a7, B:150:0x03b1, B:151:0x03c7, B:152:0x02c3, B:154:0x02c7, B:156:0x02d3, B:157:0x02dd, B:158:0x0460, B:160:0x0464, B:161:0x0467, B:50:0x00d0, B:52:0x00d6, B:54:0x00dc), top: B:166:0x00cc, outer: #4 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2588,7 +2575,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         return this.mIsOn;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Code restructure failed: missing block: B:93:0x0065, code lost:
 
        if (com.android.server.FMRadioServiceFeature.CHIP_VENDOR != 7) goto L29;
@@ -3592,7 +3578,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         return this.mMtk_ATJ_config;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:189:0x02a3, code lost:
 
        if (r17.equals(com.android.server.FMRadioService.PARAMETER_AFRMSSI_SAMPLES) != false) goto L168;
@@ -3605,7 +3590,6 @@ public class FMRadioService extends IFMPlayer.Stub {
 
        if (r17.equals(com.android.server.FMRadioService.PARAMETER_IF_COUNT_2) != false) goto L77;
     */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -3622,7 +3606,6 @@ public class FMRadioService extends IFMPlayer.Stub {
                     + " int):void");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:150:0x022f, code lost:
 
        if (r17.equals(com.android.server.FMRadioService.PARAMETER_ON_CHANNEL_TH) != false) goto L168;
@@ -3643,7 +3626,6 @@ public class FMRadioService extends IFMPlayer.Stub {
 
        if (r17.equals(com.android.server.FMRadioService.PARAMETER_SOFTMUTE_TH) != false) goto L101;
     */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -3660,7 +3642,6 @@ public class FMRadioService extends IFMPlayer.Stub {
                     + " int):int");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x00b6, code lost:
 
        if (r9.equals(com.android.server.FMRadioService.PARAMETER_SOFT_STEREO_BLEND_COEFF) != false) goto L43;
@@ -3820,7 +3801,6 @@ public class FMRadioService extends IFMPlayer.Stub {
                     + " long):void");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x0097, code lost:
 
        if (r8.equals(com.android.server.FMRadioService.PARAMETER_SOFT_STEREO_BLEND_COEFF) != false) goto L36;
@@ -3961,7 +3941,6 @@ public class FMRadioService extends IFMPlayer.Stub {
                     + " long):long");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:18:0x0059, code lost:
 
        if (r7.equals(com.android.server.FMRadioService.PARAMETER_FAKE_CHANNEL) != false) goto L26;
@@ -3970,7 +3949,6 @@ public class FMRadioService extends IFMPlayer.Stub {
 
        if (r7.equals(com.android.server.FMRadioService.PARAMETER_HYBRID_SEARCH) != false) goto L39;
     */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
     java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null
     	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.restoreSwitchOverString(SwitchOverStringVisitor.java:109)
@@ -4121,7 +4099,6 @@ public class FMRadioService extends IFMPlayer.Stub {
                     + " java.lang.String):void");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:15:0x0048, code lost:
 
        if (r7.equals(com.android.server.FMRadioService.PARAMETER_FAKE_CHANNEL) != false) goto L23;
@@ -4130,7 +4107,6 @@ public class FMRadioService extends IFMPlayer.Stub {
 
        if (r7.equals(com.android.server.FMRadioService.PARAMETER_HYBRID_SEARCH) != false) goto L37;
     */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
     java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null
     	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.restoreSwitchOverString(SwitchOverStringVisitor.java:109)
@@ -4289,7 +4265,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setSignalSetting(int rssi, int snr, int cnt) {
         if (this.mIsOn && !this.mIsExternalChipset) {
             this.mPlayerNative.setRSSI_th(rssi);
@@ -4511,7 +4486,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         return SystemProperties.get("ro.product.name");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleBikeMode() {
         this.mBikeMode =
                 Settings.Secure.getInt(
@@ -4543,7 +4517,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         return Settings.System.getInt(this.mContext.getContentResolver(), "all_sound_off", 0) == 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setFMAudioPath(boolean isOn) {
         String keyValuePairs;
         log("setFMAudioPath : " + isOn + " mIsFMAudioPathOn : " + this.mIsFMAudioPathOn);
@@ -4578,7 +4551,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         return this.mIsMDMSpeakerEnabled;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setDelay(long ms) {
         try {
             Thread.sleep(ms);
@@ -4627,7 +4599,6 @@ public class FMRadioService extends IFMPlayer.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendInfoSamsungAnalytics(String packageName, String version) {
         log("sendInfoSamsungAnalytics ,packageName : " + packageName + ", version : " + version);
         Bundle bundle = new Bundle();

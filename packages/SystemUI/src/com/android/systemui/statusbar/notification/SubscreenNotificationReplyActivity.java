@@ -98,8 +98,6 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
         TAG = "SubscreenNotificationReplyActivity";
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.notification.SubscreenNotificationReplyActivity$displayListener$1] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.notification.SubscreenNotificationReplyActivity$broadcastReceiver$1] */
     public SubscreenNotificationReplyActivity(SubscreenNotificationController subscreenNotificationController, NotifPipeline notifPipeline) {
         this.controller = subscreenNotificationController;
         this.notifPipeLine = notifPipeline;

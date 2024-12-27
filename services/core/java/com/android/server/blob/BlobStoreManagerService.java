@@ -403,7 +403,6 @@ public final class BlobStoreManagerService extends SystemService {
             return BlobStoreManagerService.this.getRemainingLeaseQuotaBytesInternal(callingUid, str);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final int handleShellCommand(ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, ParcelFileDescriptor parcelFileDescriptor3, String[] strArr) {
             return new BlobStoreManagerShellCommand(BlobStoreManagerService.this).exec(this, parcelFileDescriptor.getFileDescriptor(), parcelFileDescriptor2.getFileDescriptor(), parcelFileDescriptor3.getFileDescriptor(), strArr);
         }
@@ -432,7 +431,6 @@ public final class BlobStoreManagerService extends SystemService {
             return BlobStoreManagerService.this.openSessionInternal(callingUid, str, j);
         }
 
-        /* JADX WARN: Type inference failed for: r3v0, types: [com.android.server.blob.BlobStoreManagerService$$ExternalSyntheticLambda13] */
         public final List queryBlobsForUser(final int i) {
             verifyCallerIsSystemUid("queryBlobsForUser");
             if (i == -2) {
@@ -973,8 +971,6 @@ public final class BlobStoreManagerService extends SystemService {
         this(context, new Injector());
     }
 
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.blob.BlobStoreManagerService$$ExternalSyntheticLambda5] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.server.blob.BlobStoreManagerService$$ExternalSyntheticLambda5] */
     public BlobStoreManagerService(Context context, Injector injector) {
         super(context);
         this.mBlobsLock = new Object();

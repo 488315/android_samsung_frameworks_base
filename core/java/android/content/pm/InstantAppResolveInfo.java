@@ -28,13 +28,11 @@ public final class InstantAppResolveInfo implements Parcelable {
     public static final Parcelable.Creator<InstantAppResolveInfo> CREATOR =
             new Parcelable.Creator<InstantAppResolveInfo>() { // from class:
                 // android.content.pm.InstantAppResolveInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InstantAppResolveInfo createFromParcel(Parcel in) {
                     return new InstantAppResolveInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InstantAppResolveInfo[] newArray(int size) {
                     return new InstantAppResolveInfo[size];
@@ -182,7 +180,6 @@ public final class InstantAppResolveInfo implements Parcelable {
             CREATOR =
                     new Parcelable.Creator<InstantAppDigest>() { // from class:
                         // android.content.pm.InstantAppResolveInfo.InstantAppDigest.1
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public InstantAppDigest createFromParcel(Parcel in) {
                             if (in.readBoolean()) {
@@ -191,7 +188,6 @@ public final class InstantAppResolveInfo implements Parcelable {
                             return new InstantAppDigest(in);
                         }
 
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public InstantAppDigest[] newArray(int size) {
                             return new InstantAppDigest[size];

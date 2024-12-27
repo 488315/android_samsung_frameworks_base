@@ -16,7 +16,6 @@ final class SharedNotificationContainerViewModel$awaitCollapse$3 extends Suspend
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SharedNotificationContainerViewModel$awaitCollapse$3(Ref$BooleanRef ref$BooleanRef, Continuation continuation) {
         super(3, continuation);
         this.$aodTransitionIsComplete = ref$BooleanRef;

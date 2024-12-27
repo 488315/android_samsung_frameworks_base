@@ -11,7 +11,6 @@ final class UserTileSpecRepository$loadTilesFromSettingsAndParse$1 extends Conti
     /* synthetic */ Object result;
     final /* synthetic */ UserTileSpecRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserTileSpecRepository$loadTilesFromSettingsAndParse$1(UserTileSpecRepository userTileSpecRepository, Continuation continuation) {
         super(continuation);
         this.this$0 = userTileSpecRepository;

@@ -8,7 +8,6 @@ public class InterpolatorConfig implements Parcelable {
     public static final Parcelable.Creator<InterpolatorConfig> CREATOR =
             new Parcelable.Creator<
                     InterpolatorConfig>() { // from class: android.media.InterpolatorConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InterpolatorConfig createFromParcel(Parcel _aidl_source) {
                     InterpolatorConfig _aidl_out = new InterpolatorConfig();
@@ -16,7 +15,6 @@ public class InterpolatorConfig implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InterpolatorConfig[] newArray(int _aidl_size) {
                     return new InterpolatorConfig[_aidl_size];

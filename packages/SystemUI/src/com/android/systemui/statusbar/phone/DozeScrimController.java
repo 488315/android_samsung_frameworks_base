@@ -75,8 +75,6 @@ public final class DozeScrimController implements StatusBarStateController.State
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.statusbar.phone.DozeScrimController$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.statusbar.phone.DozeScrimController$2] */
     public DozeScrimController(DozeParameters dozeParameters, DozeLog dozeLog, StatusBarStateController statusBarStateController) {
         this.mDozeParameters = dozeParameters;
         statusBarStateController.addCallback(this);

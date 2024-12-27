@@ -47,7 +47,6 @@ public final class AutomaticBrightnessStrategy extends AutomaticBrightnessStrate
     public float mTemporaryAutoBrightnessAdjustment;
     public boolean mUseAutoBrightness;
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public interface Injector {
         BrightnessEvent getBrightnessEvent(int i);
     }

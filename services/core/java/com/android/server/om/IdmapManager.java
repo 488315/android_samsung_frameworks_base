@@ -36,10 +36,6 @@ public final class IdmapManager {
         this.mConfigSignaturePackage = knownPackageNames.length == 0 ? null : knownPackageNames[0];
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:30:0x006b  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x007f  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0082  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x001f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -134,8 +130,6 @@ public final class IdmapManager {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.om.IdmapManager.calculateFulfilledPolicies(com.android.server.pm.pkg.AndroidPackage, com.android.server.pm.pkg.PackageState, com.android.server.pm.pkg.AndroidPackage, int):int");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v9, types: [java.util.List] */
     public final List getFabricatedOverlayInfos() {
         ArrayList arrayList;
         int i;

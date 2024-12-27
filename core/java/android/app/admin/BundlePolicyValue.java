@@ -11,13 +11,11 @@ public final class BundlePolicyValue extends PolicyValue<Bundle> {
     public static final Parcelable.Creator<BundlePolicyValue> CREATOR =
             new Parcelable.Creator<
                     BundlePolicyValue>() { // from class: android.app.admin.BundlePolicyValue.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BundlePolicyValue createFromParcel(Parcel source) {
                     return new BundlePolicyValue(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BundlePolicyValue[] newArray(int size) {
                     return new BundlePolicyValue[size];

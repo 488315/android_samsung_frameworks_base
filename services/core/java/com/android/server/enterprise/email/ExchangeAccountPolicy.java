@@ -427,7 +427,6 @@ public final class ExchangeAccountPolicy extends IExchangeAccountPolicy.Stub
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.server.enterprise.email.ExchangeAccountPolicy$2] */
     public ExchangeAccountPolicy(Context context) {
         int i = 1;
         this.mContext = context;
@@ -1420,9 +1419,6 @@ public final class ExchangeAccountPolicy extends IExchangeAccountPolicy.Stub
         return null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v1 */
-    /* JADX WARN: Type inference failed for: r3v3, types: [long] */
     public final String getDeviceId(ContextInfo contextInfo) {
         AnonymousClass1 anonymousClass1;
         Context context;

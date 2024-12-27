@@ -180,7 +180,6 @@ public final class CompilerStats extends AbstractStatsBase {
                     + " com.android.server.pm.CompilerStats.read(java.io.Reader):void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.server.pm.AbstractStatsBase
     public final void readInternal(WatchedArrayMap watchedArrayMap) {
         BufferedReader bufferedReader = null;

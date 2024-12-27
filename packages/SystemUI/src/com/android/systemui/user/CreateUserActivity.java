@@ -71,7 +71,6 @@ public class CreateUserActivity extends Activity {
     public Dialog mSetupUserDialog;
     public final UserCreator mUserCreator;
 
-    /* JADX WARN: Type inference failed for: r5v1, types: [com.android.systemui.user.CreateUserActivity$$ExternalSyntheticLambda3] */
     public CreateUserActivity(UserCreator userCreator, CreateUserDialogController createUserDialogController, IActivityManager iActivityManager, ActivityStarter activityStarter, UiEventLogger uiEventLogger) {
         this.mUserCreator = userCreator;
         this.mCreateUserDialogController = createUserDialogController;
@@ -113,16 +112,6 @@ public class CreateUserActivity extends Activity {
             } else if (intent.getData() != null) {
                 final Uri data = intent.getData();
                 Futures.addCallback(((AbstractListeningExecutorService) listeningExecutorService).submit(new Callable() { // from class: com.android.settingslib.users.EditUserPhotoController$$ExternalSyntheticLambda1
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Removed duplicated region for block: B:25:0x003b A[EXC_TOP_SPLITTER, SYNTHETIC] */
-                    /* JADX WARN: Type inference failed for: r3v2, types: [java.io.InputStream] */
-                    /* JADX WARN: Type inference failed for: r3v3 */
-                    /* JADX WARN: Type inference failed for: r3v8 */
-                    /* JADX WARN: Type inference failed for: r5v10, types: [java.io.InputStream] */
-                    /* JADX WARN: Type inference failed for: r5v2, types: [java.io.IOException, java.lang.Throwable] */
-                    /* JADX WARN: Type inference failed for: r5v6 */
-                    /* JADX WARN: Type inference failed for: r5v7, types: [java.io.InputStream] */
-                    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:34:0x0021 -> B:9:0x0038). Please report as a decompilation issue!!! */
                     @Override // java.util.concurrent.Callable
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

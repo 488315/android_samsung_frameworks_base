@@ -11,7 +11,6 @@ public class EmergencyNetworkScanTrigger implements Parcelable {
     public static final Parcelable.Creator<EmergencyNetworkScanTrigger> CREATOR =
             new Parcelable.Creator<EmergencyNetworkScanTrigger>() { // from class:
                 // android.hardware.radio.network.EmergencyNetworkScanTrigger.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EmergencyNetworkScanTrigger createFromParcel(Parcel _aidl_source) {
                     EmergencyNetworkScanTrigger _aidl_out = new EmergencyNetworkScanTrigger();
@@ -19,7 +18,6 @@ public class EmergencyNetworkScanTrigger implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EmergencyNetworkScanTrigger[] newArray(int _aidl_size) {
                     return new EmergencyNetworkScanTrigger[_aidl_size];

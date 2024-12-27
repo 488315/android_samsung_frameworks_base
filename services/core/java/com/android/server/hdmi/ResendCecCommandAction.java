@@ -10,7 +10,6 @@ public final class ResendCecCommandAction extends HdmiCecFeatureAction {
     public final HdmiControlService.SendMessageCallback mResultCallback;
     public int mRetransmissionCount;
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.hdmi.ResendCecCommandAction$1] */
     public ResendCecCommandAction(
             HdmiCecLocalDevice hdmiCecLocalDevice,
             HdmiCecMessage hdmiCecMessage,

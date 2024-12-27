@@ -12,7 +12,6 @@ public class ParcelableGranteeMap implements Parcelable {
     public static final Parcelable.Creator<ParcelableGranteeMap> CREATOR =
             new Parcelable.Creator<ParcelableGranteeMap>() { // from class:
                 // android.app.admin.ParcelableGranteeMap.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableGranteeMap createFromParcel(Parcel source) {
                     Map<Integer, Set<String>> packagesByUid = new ArrayMap<>();
@@ -25,7 +24,6 @@ public class ParcelableGranteeMap implements Parcelable {
                     return new ParcelableGranteeMap(packagesByUid);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableGranteeMap[] newArray(int size) {
                     return new ParcelableGranteeMap[size];

@@ -33,8 +33,6 @@ public final class DexCompatController implements IController {
             super(looper);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:33:0x0094  */
-        /* JADX WARN: Removed duplicated region for block: B:34:0x00b3  */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -380,8 +378,6 @@ public final class DexCompatController implements IController {
         activityTaskManagerService.deferWindowLayout();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00aa  */
-    /* JADX WARN: Removed duplicated region for block: B:22:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

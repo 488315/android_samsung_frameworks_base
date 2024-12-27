@@ -7,13 +7,11 @@ public class BluetoothBatteryStats implements Parcelable {
     public static final Parcelable.Creator<BluetoothBatteryStats> CREATOR =
             new Parcelable.Creator<
                     BluetoothBatteryStats>() { // from class: android.os.BluetoothBatteryStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BluetoothBatteryStats createFromParcel(Parcel in) {
                     return new BluetoothBatteryStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BluetoothBatteryStats[] newArray(int size) {
                     return new BluetoothBatteryStats[size];
@@ -53,7 +51,6 @@ public class BluetoothBatteryStats implements Parcelable {
             this.txTimeMs = in.readLong();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void writeToParcel(Parcel out) {
             out.writeInt(this.uid);
             out.writeLong(this.scanTimeMs);

@@ -1088,7 +1088,6 @@ public class CarrierConfigManager {
 
         private Apn() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putString(KEY_SETTINGS_DEFAULT_PROTOCOL_STRING, "");
@@ -1129,7 +1128,6 @@ public class CarrierConfigManager {
                 "opportunistic.exit_threshold_ss_rsrq_double_bundle";
         public static final String PREFIX = "opportunistic.";
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             CarrierConfigManager.sDefaults.putInt(
@@ -1178,7 +1176,6 @@ public class CarrierConfigManager {
 
         private ImsServiceEntitlement() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putString(KEY_ENTITLEMENT_SERVER_URL_STRING, "");
@@ -1218,7 +1215,6 @@ public class CarrierConfigManager {
 
         private Gps() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putBoolean(KEY_PERSIST_LPP_MODE_BOOL, true);
@@ -1382,7 +1378,6 @@ public class CarrierConfigManager {
 
         private Ims() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putInt(KEY_WIFI_OFF_DEFERRING_TIME_MILLIS_INT, 4000);
@@ -1631,7 +1626,6 @@ public class CarrierConfigManager {
 
         private ImsVoice() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putBoolean(KEY_CARRIER_VOLTE_ROAMING_AVAILABLE_BOOL, true);
@@ -1723,7 +1717,6 @@ public class CarrierConfigManager {
 
         private ImsSms() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putBoolean(KEY_SMS_OVER_IMS_SUPPORTED_BOOL, true);
@@ -1768,7 +1761,6 @@ public class CarrierConfigManager {
 
         private ImsRtt() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putBoolean(KEY_TEXT_ON_DEFAULT_BEARER_SUPPORTED_BOOL, false);
@@ -1865,7 +1857,6 @@ public class CarrierConfigManager {
 
         private ImsEmergency() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putBoolean(KEY_RETRY_EMERGENCY_ON_IMS_PDN_BOOL, false);
@@ -1944,7 +1935,6 @@ public class CarrierConfigManager {
 
         private ImsVt() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putBoolean(KEY_VIDEO_ON_DEFAULT_BEARER_SUPPORTED_BOOL, false);
@@ -1984,7 +1974,6 @@ public class CarrierConfigManager {
 
         private ImsWfc() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putBoolean(KEY_EMERGENCY_CALL_OVER_EMERGENCY_PDN_BOOL, false);
@@ -2055,7 +2044,6 @@ public class CarrierConfigManager {
 
         private ImsSs() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putBoolean(KEY_UT_REQUIRES_IMS_REGISTRATION_BOOL, false);
@@ -2089,7 +2077,6 @@ public class CarrierConfigManager {
 
         private Bsf() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putInt(KEY_BSF_SERVER_PORT_INT, 80);
@@ -2198,7 +2185,6 @@ public class CarrierConfigManager {
 
         private Iwlan() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putInt(KEY_IKE_REKEY_SOFT_TIMER_SEC_INT, 7200);
@@ -3020,7 +3006,6 @@ public class CarrierConfigManager {
         public static final String KEY_SUGGESTION_SSID_LIST_WITH_MAC_RANDOMIZATION_DISABLED =
                 "wifi.suggestion_ssid_list_with_mac_randomization_disabled";
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static PersistableBundle getDefaults() {
             PersistableBundle defaults = new PersistableBundle();
             defaults.putInt(KEY_HOTSPOT_MAX_CLIENT_COUNT, 0);

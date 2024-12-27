@@ -11,13 +11,11 @@ public final class SystemTextClassifierMetadata implements Parcelable {
             new Parcelable.Creator<
                     SystemTextClassifierMetadata>() { // from class:
                                                       // android.view.textclassifier.SystemTextClassifierMetadata.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SystemTextClassifierMetadata createFromParcel(Parcel in) {
                     return SystemTextClassifierMetadata.readFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SystemTextClassifierMetadata[] newArray(int size) {
                     return new SystemTextClassifierMetadata[size];
@@ -57,7 +55,6 @@ public final class SystemTextClassifierMetadata implements Parcelable {
                 Boolean.valueOf(this.mUseDefaultTextClassifier));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static SystemTextClassifierMetadata readFromParcel(Parcel in) {
         String packageName = in.readString();
         int userId = in.readInt();

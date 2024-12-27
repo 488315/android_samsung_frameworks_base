@@ -34,7 +34,6 @@ public final class HighContrastFontTile extends QSTileImpl {
     public final AnonymousClass1 mSetting;
     private SettingsHelper.OnChangedCallback mSettingsCallback;
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.qs.tiles.HighContrastFontTile$1] */
     public HighContrastFontTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, Resources resources, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, UserTracker userTracker, SecureSettings secureSettings) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mSettingsCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.qs.tiles.HighContrastFontTile.2

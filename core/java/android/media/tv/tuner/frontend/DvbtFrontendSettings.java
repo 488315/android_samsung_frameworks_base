@@ -194,12 +194,10 @@ public class DvbtFrontendSettings extends FrontendSettings {
         return this.mPlpGroupId;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isExtendedTransmissionMode(int transmissionMode) {
         return transmissionMode == 128 || transmissionMode == 256 || transmissionMode == 512;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isExtendedConstellation(int constellation) {
         return constellation == 32
                 || constellation == 64

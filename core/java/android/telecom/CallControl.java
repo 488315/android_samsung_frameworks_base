@@ -153,7 +153,6 @@ public final class CallControl {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class CallControlResultReceiver extends ResultReceiver {
         private final String mCallingMethod;
         private final OutcomeReceiver<Void, CallException> mClientCallback;
@@ -205,18 +204,15 @@ public final class CallControl {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onReceiveResult$0() {
             this.mClientCallback.onResult(null);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onReceiveResult$1(Bundle resultData) {
             this.mClientCallback.onError(CallControl.this.getTransactionException(resultData));
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public CallException getTransactionException(Bundle resultData) {
         if (resultData != null && resultData.containsKey(CallException.TRANSACTION_EXCEPTION_KEY)) {
             return (CallException)

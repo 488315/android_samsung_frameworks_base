@@ -51,7 +51,6 @@ public final class InternetTileNewImpl extends QSTileImpl {
         WIFI_SETTINGS = new Intent("android.settings.WIFI_SETTINGS");
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.qs.tiles.InternetTileNewImpl$1] */
     public InternetTileNewImpl(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, InternetTileViewModel internetTileViewModel, InternetDialogManager internetDialogManager, AccessPointController accessPointController) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mainHandler = handler;

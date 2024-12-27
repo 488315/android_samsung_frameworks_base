@@ -10,13 +10,11 @@ public class SemContextStepCountAlertAttribute extends SemContextAttribute {
             new Parcelable.Creator<
                     SemContextStepCountAlertAttribute>() { // from class:
                                                            // com.samsung.android.hardware.context.SemContextStepCountAlertAttribute.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextStepCountAlertAttribute createFromParcel(Parcel in) {
                     return new SemContextStepCountAlertAttribute(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextStepCountAlertAttribute[] newArray(int size) {
                     return new SemContextStepCountAlertAttribute[size];

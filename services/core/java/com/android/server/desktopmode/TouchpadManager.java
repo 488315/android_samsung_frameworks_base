@@ -42,7 +42,6 @@ public final class TouchpadManager {
                 public final /* synthetic */ int $r8$classId;
                 public final /* synthetic */ TouchpadManager this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super("spen_enabled");
                     this.$r8$classId = r2;
@@ -235,10 +234,6 @@ public final class TouchpadManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.desktopmode.TouchpadManager$2] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.desktopmode.TouchpadManager$4] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.desktopmode.TouchpadManager$5] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.desktopmode.TouchpadManager$6] */
     public TouchpadManager(
             Context context,
             IStateManager iStateManager,
@@ -251,7 +246,6 @@ public final class TouchpadManager {
                     public final /* synthetic */ int $r8$classId;
                     public final /* synthetic */ TouchpadManager this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super("spen_enabled");
                         this.$r8$classId = r2;

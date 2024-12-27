@@ -45,8 +45,6 @@ public class HandwritingInitiator {
         this.mImm = inputMethodManager;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0158  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -250,7 +248,6 @@ public class HandwritingInitiator {
                 consumer);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$tryAcceptStylusHandwritingDelegationAsync$0(
             WeakReference viewRef, Boolean delegationAccepted) {
         if (delegationAccepted.booleanValue()) {
@@ -555,7 +552,6 @@ public class HandwritingInitiator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isViewActive(View view) {
         return view != null
                 && view.isAttachedToWindow()

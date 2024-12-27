@@ -17,7 +17,6 @@ public final class TrustRepositoryImpl$special$$inlined$flatMapLatest$1 extends 
     int label;
     final /* synthetic */ TrustRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TrustRepositoryImpl$special$$inlined$flatMapLatest$1(Continuation continuation, TrustRepositoryImpl trustRepositoryImpl) {
         super(3, continuation);
         this.this$0 = trustRepositoryImpl;

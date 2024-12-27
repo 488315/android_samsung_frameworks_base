@@ -12,7 +12,6 @@ final class FromOccludedTransitionInteractor$listenForOccludedToAsleep$1 extends
     int label;
     final /* synthetic */ FromOccludedTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromOccludedTransitionInteractor$listenForOccludedToAsleep$1(FromOccludedTransitionInteractor fromOccludedTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromOccludedTransitionInteractor;

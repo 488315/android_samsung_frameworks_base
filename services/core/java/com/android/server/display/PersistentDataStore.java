@@ -217,7 +217,6 @@ public final class PersistentDataStore {
             }
         }
 
-        /* JADX WARN: Can't wrap try/catch for region: R(11:0|1|(13:107|108|110|111|113|114|(1:116)(2:117|118)|5|6|(2:8|(1:(2:11|12)(5:14|15|16|(1:18)(3:81|82|83)|19))(5:90|91|92|(1:94)(3:96|97|98)|95))(1:104)|(2:(8:23|24|25|(1:27)(5:31|32|(4:36|(2:39|37)|40|41)|(4:45|(2:48|46)|49|50)|(4:54|(2:57|55)|58|59))|28|29|30|21)|65)|(2:76|77)|(3:68|69|71)(1:75))(1:3)|4|5|6|(0)(0)|(0)|(0)|(0)(0)|(1:(0))) */
         /* JADX WARN: Code restructure failed: missing block: B:105:0x008e, code lost:
 
            r0 = e;
@@ -226,23 +225,8 @@ public final class PersistentDataStore {
 
            r3 = null;
         */
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:104:0x00e8 A[Catch: IOException -> 0x008e, TRY_ENTER, TRY_LEAVE, TryCatch #11 {IOException -> 0x008e, blocks: (B:11:0x0088, B:14:0x0092, B:90:0x00bd, B:104:0x00e8), top: B:6:0x007c }] */
-        /* JADX WARN: Removed duplicated region for block: B:116:0x004d  */
-        /* JADX WARN: Removed duplicated region for block: B:117:0x0054 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /* JADX WARN: Removed duplicated region for block: B:21:0x00fb A[LOOP:0: B:21:0x00fb->B:30:0x029b, LOOP_START, PHI: r6
         0x00fb: PHI (r6v1 int) = (r6v0 int), (r6v2 int) binds: [B:20:0x00f9, B:30:0x029b] A[DONT_GENERATE, DONT_INLINE]] */
-        /* JADX WARN: Removed duplicated region for block: B:68:0x02ac A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:75:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:76:0x02a1 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x007e  */
-        /* JADX WARN: Type inference failed for: r3v11 */
-        /* JADX WARN: Type inference failed for: r3v12, types: [java.io.FileOutputStream] */
-        /* JADX WARN: Type inference failed for: r3v15 */
-        /* JADX WARN: Type inference failed for: r3v17, types: [java.io.FileOutputStream] */
-        /* JADX WARN: Type inference failed for: r3v22 */
-        /* JADX WARN: Type inference failed for: r3v23 */
-        /* JADX WARN: Type inference failed for: r4v19, types: [java.io.FileOutputStream] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -466,7 +450,6 @@ public final class PersistentDataStore {
         return displayState2;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final void loadFromXml(TypedXmlPullParser typedXmlPullParser) {
         int i;
         int i2;

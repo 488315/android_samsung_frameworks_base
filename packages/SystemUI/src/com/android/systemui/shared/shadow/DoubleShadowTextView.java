@@ -26,7 +26,6 @@ public class DoubleShadowTextView extends TextView {
         DoubleShadowTextHelper.ShadowInfo shadowInfo = this.mKeyShadowInfo;
         DoubleShadowTextHelper.ShadowInfo shadowInfo2 = this.mAmbientShadowInfo;
         Function0 function0 = new Function0() { // from class: com.android.systemui.shared.shadow.DoubleShadowTextView$onDraw$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

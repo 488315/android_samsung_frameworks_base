@@ -16,7 +16,6 @@ public final class LineBreakConfigSpan implements ParcelableSpan {
     public static final Parcelable.Creator<LineBreakConfigSpan> CREATOR =
             new Parcelable.Creator<
                     LineBreakConfigSpan>() { // from class: android.text.style.LineBreakConfigSpan.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LineBreakConfigSpan createFromParcel(Parcel source) {
                     LineBreakConfig lbc =
@@ -27,7 +26,6 @@ public final class LineBreakConfigSpan implements ParcelableSpan {
                     return new LineBreakConfigSpan(lbc);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LineBreakConfigSpan[] newArray(int size) {
                     return new LineBreakConfigSpan[size];

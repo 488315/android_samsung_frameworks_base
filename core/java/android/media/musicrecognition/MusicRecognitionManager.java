@@ -54,7 +54,6 @@ public class MusicRecognitionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class MusicRecognitionCallbackWrapper extends IMusicRecognitionManagerCallback.Stub {
         private final RecognitionCallback mCallback;
         private final Executor mCallbackExecutor;
@@ -82,7 +81,6 @@ public class MusicRecognitionManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRecognitionSucceeded$0(
                 MediaMetadata result, Bundle extras) {
             this.mCallback.onRecognitionSucceeded(this.mRecognitionRequest, result, extras);
@@ -101,7 +99,6 @@ public class MusicRecognitionManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRecognitionFailed$1(int failureCode) {
             this.mCallback.onRecognitionFailed(this.mRecognitionRequest, failureCode);
         }

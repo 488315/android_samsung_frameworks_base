@@ -8,7 +8,6 @@ public class DemuxInfo implements Parcelable {
     public static final Parcelable.Creator<DemuxInfo> CREATOR =
             new Parcelable.Creator<
                     DemuxInfo>() { // from class: android.hardware.tv.tuner.DemuxInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxInfo createFromParcel(Parcel _aidl_source) {
                     DemuxInfo _aidl_out = new DemuxInfo();
@@ -16,7 +15,6 @@ public class DemuxInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxInfo[] newArray(int _aidl_size) {
                     return new DemuxInfo[_aidl_size];

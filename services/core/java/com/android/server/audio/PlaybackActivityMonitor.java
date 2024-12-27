@@ -332,7 +332,6 @@ public final class PlaybackActivityMonitor
     public final class FadeInEvent extends VolumeShaperEvent {
         public final /* synthetic */ int $r8$classId;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ FadeInEvent(
                 AudioPlaybackConfiguration audioPlaybackConfiguration,
                 boolean z,
@@ -636,8 +635,6 @@ public final class PlaybackActivityMonitor
         mGoodCatchSystemUiStream = new HashSet(Arrays.asList(5));
     }
 
-    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.server.audio.PlaybackActivityMonitor$2] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.server.audio.PlaybackActivityMonitor$1] */
     public PlaybackActivityMonitor(
             Context context,
             int i,

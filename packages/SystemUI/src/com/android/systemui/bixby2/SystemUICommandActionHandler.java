@@ -87,7 +87,6 @@ public class SystemUICommandActionHandler implements ICommandActionHandler {
         return this.mCommandMap;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isPanelBarExpanded() {
         SemStatusBarManager semStatusBarManager = (SemStatusBarManager) this.mContext.getSystemService(SemStatusBarManager.class);
         if (semStatusBarManager != null) {

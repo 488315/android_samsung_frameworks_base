@@ -62,8 +62,6 @@ public final class WorkProfileSysUiClientHelper implements KnoxSysUiClientHelper
         this.mUserManager = (UserManager) context.getSystemService("user");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0398  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x03c4  */
     @Override // com.samsung.android.biometrics.app.setting.prompt.knox.KnoxSysUiClientHelper
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -215,11 +213,6 @@ public final class WorkProfileSysUiClientHelper implements KnoxSysUiClientHelper
         imageView.setImageDrawable(drawable);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:108:0x00b0  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x00b8  */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x00e6 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x00bd  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x00b5  */
     @Override // com.samsung.android.biometrics.app.setting.prompt.knox.KnoxSysUiClientHelper
     /*
         Code decompiled incorrectly, please refer to instructions dump.

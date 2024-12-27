@@ -163,7 +163,6 @@ class RippleForeground extends RippleComponent {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void pruneHwFinished() {
         if (!this.mRunningHwAnimators.isEmpty()) {
             for (int i = this.mRunningHwAnimators.size() - 1; i >= 0; i--) {
@@ -174,7 +173,6 @@ class RippleForeground extends RippleComponent {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void pruneSwFinished() {
         if (!this.mRunningSwAnimators.isEmpty()) {
             for (int i = this.mRunningSwAnimators.size() - 1; i >= 0; i--) {
@@ -362,14 +360,12 @@ class RippleForeground extends RippleComponent {
         this.mRunningHwAnimators.clear();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onAnimationPropertyChanged() {
         if (!this.mUsingProperties) {
             invalidateSelf();
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void clearHwProps() {
         this.mPropPaint = null;
         this.mPropRadius = null;

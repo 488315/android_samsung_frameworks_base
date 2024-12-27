@@ -48,7 +48,6 @@ final class BouncerMessageViewBinder$bind$1 extends SuspendLambda implements Fun
             final /* synthetic */ BouncerMessageView $view;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C00531(BouncerMessageInteractor bouncerMessageInteractor, BouncerLogger bouncerLogger, BouncerMessageView bouncerMessageView, Continuation continuation) {
                 super(2, continuation);
                 this.$interactor = bouncerMessageInteractor;
@@ -102,7 +101,6 @@ final class BouncerMessageViewBinder$bind$1 extends SuspendLambda implements Fun
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(BouncerLogger bouncerLogger, BouncerMessageInteractor bouncerMessageInteractor, BouncerMessageView bouncerMessageView, Continuation continuation) {
             super(2, continuation);
             this.$bouncerLogger = bouncerLogger;
@@ -138,7 +136,6 @@ final class BouncerMessageViewBinder$bind$1 extends SuspendLambda implements Fun
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BouncerMessageViewBinder$bind$1(BouncerMessageView bouncerMessageView, KeyguardMessageAreaController.Factory factory, BouncerLogger bouncerLogger, BouncerMessageInteractor bouncerMessageInteractor, Continuation continuation) {
         super(3, continuation);
         this.$view = bouncerMessageView;

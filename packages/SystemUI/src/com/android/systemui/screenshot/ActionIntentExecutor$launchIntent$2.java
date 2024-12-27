@@ -18,7 +18,6 @@ final class ActionIntentExecutor$launchIntent$2 extends SuspendLambda implements
     int label;
     final /* synthetic */ ActionIntentExecutor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ActionIntentExecutor$launchIntent$2(ActionIntentExecutor actionIntentExecutor, Intent intent, Ref$ObjectRef<ActivityOptions> ref$ObjectRef, Continuation continuation) {
         super(2, continuation);
         this.this$0 = actionIntentExecutor;

@@ -534,8 +534,6 @@ public final class DualModeChanger extends ModeChanger {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.desktopmode.DualModeChanger$1] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.desktopmode.DualModeChanger$1] */
     public DualModeChanger(
             Context context,
             IStateManager iStateManager,
@@ -582,7 +580,6 @@ public final class DualModeChanger extends ModeChanger {
                     public final /* synthetic */ int $r8$classId;
                     public final /* synthetic */ DualModeChanger this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super("touchpad_enabled");
                         this.$r8$classId = r2;
@@ -624,7 +621,6 @@ public final class DualModeChanger extends ModeChanger {
                     public final /* synthetic */ int $r8$classId;
                     public final /* synthetic */ DualModeChanger this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super("touchpad_enabled");
                         this.$r8$classId = r2;

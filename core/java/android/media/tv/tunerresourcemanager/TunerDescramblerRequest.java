@@ -9,7 +9,6 @@ public class TunerDescramblerRequest implements Parcelable {
             new Parcelable.Creator<
                     TunerDescramblerRequest>() { // from class:
                                                  // android.media.tv.tunerresourcemanager.TunerDescramblerRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TunerDescramblerRequest createFromParcel(Parcel _aidl_source) {
                     TunerDescramblerRequest _aidl_out = new TunerDescramblerRequest();
@@ -17,7 +16,6 @@ public class TunerDescramblerRequest implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TunerDescramblerRequest[] newArray(int _aidl_size) {
                     return new TunerDescramblerRequest[_aidl_size];

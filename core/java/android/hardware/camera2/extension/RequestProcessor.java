@@ -187,7 +187,6 @@ public final class RequestProcessor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class RequestCallbackImpl extends IRequestCallback.Stub {
         private final RequestCallback mCallback;
         private final Executor mExecutor;
@@ -224,7 +223,6 @@ public final class RequestProcessor {
             Log.e(RequestProcessor.TAG, "Request id: " + requestId + " not found!");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureStarted$0(
                 int requestId, long frameNumber, long timestamp) {
             this.mCallback.onCaptureStarted(this.mRequests.get(requestId), frameNumber, timestamp);
@@ -259,7 +257,6 @@ public final class RequestProcessor {
             Log.e(RequestProcessor.TAG, "Request id: " + requestId + " not found!");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureProgressed$1(
                 int requestId, CaptureResult result) {
             this.mCallback.onCaptureProgressed(this.mRequests.get(requestId), result);
@@ -318,7 +315,6 @@ public final class RequestProcessor {
             Log.e(RequestProcessor.TAG, "Request id: " + requestId + " not found!");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureCompleted$2(
                 int requestId, TotalCaptureResult result) {
             this.mCallback.onCaptureCompleted(this.mRequests.get(requestId), result);
@@ -354,7 +350,6 @@ public final class RequestProcessor {
             Log.e(RequestProcessor.TAG, "Request id: " + requestId + " not found!");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureFailed$3(
                 int requestId, android.hardware.camera2.CaptureFailure failure) {
             this.mCallback.onCaptureFailed(this.mRequests.get(requestId), failure);
@@ -384,7 +379,6 @@ public final class RequestProcessor {
             Log.e(RequestProcessor.TAG, "Request id: " + requestId + " not found!");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureBufferLost$4(
                 int requestId, long frameNumber, int outputStreamId) {
             this.mCallback.onCaptureBufferLost(
@@ -410,7 +404,6 @@ public final class RequestProcessor {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureSequenceCompleted$5(
                 int sequenceId, long frameNumber) {
             this.mCallback.onCaptureSequenceCompleted(sequenceId, frameNumber);
@@ -434,7 +427,6 @@ public final class RequestProcessor {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureSequenceAborted$6(int sequenceId) {
             this.mCallback.onCaptureSequenceAborted(sequenceId);
         }

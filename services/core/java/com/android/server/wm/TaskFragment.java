@@ -420,9 +420,6 @@ public class TaskFragment extends WindowContainer {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:47:0x02db  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x02ea  */
-    /* JADX WARN: Removed duplicated region for block: B:63:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -481,7 +478,6 @@ public class TaskFragment extends WindowContainer {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final boolean dump(
             final String str,
             FileDescriptor fileDescriptor,
@@ -956,8 +952,6 @@ public class TaskFragment extends WindowContainer {
 
        r3 = r6;
     */
-    /* JADX WARN: Removed duplicated region for block: B:276:0x02e1 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00c3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1465,7 +1459,6 @@ public class TaskFragment extends WindowContainer {
                     + " com.android.server.wm.TaskFragment.resolveOverrideConfiguration(android.content.res.Configuration):void");
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(20:177|(1:179)(1:472)|180|(4:182|(2:184|(1:186))|187|(4:193|(1:195)|196|(1:(1:199))(2:200|(2:202|(2:(1:205)|206)(2:207|(3:459|460|(1:(1:467))(1:465))(2:209|(1:211)(2:212|(4:441|442|(1:(2:(2:446|(1:448))|(1:452)))|(1:454))(17:214|(2:413|(2:(2:(2:433|434)|432)|(1:439))(3:417|418|(1:(1:426))(2:423|424)))(4:218|219|(1:409)(2:(4:224|225|226|(1:228))(1:408)|(1:235))|(1:403))|236|(3:238|(3:240|(4:247|(1:249)|250|251)|252)|257)|(1:264)|265|266|(1:268)(3:396|(1:398)|399)|(1:270)(1:395)|271|272|(2:274|(3:276|(1:278)(1:379)|279)(2:380|(1:382)(5:383|(1:385)(1:389)|386|387|388)))(2:390|(1:392)(2:393|388))|(1:281)(1:378)|282|(24:284|(1:369)(1:290)|291|(1:368)|296|(1:300)|(1:302)(1:367)|303|(1:305)|306|(2:308|(2:310|311))|312|313|(1:315)(1:365)|316|(2:318|(2:321|(1:323)(1:324)))|325|(5:327|328|329|330|(1:332)(1:333))|353|(1:355)(1:364)|356|357|(1:359)|361)(5:370|(1:372)(1:377)|373|(1:375)|376)|362|363))))))))|471|236|(0)|(3:260|262|264)|265|266|(0)(0)|(0)(0)|271|272|(0)(0)|(0)(0)|282|(0)(0)|362|363) */
     /* JADX WARN: Code restructure failed: missing block: B:400:0x0609, code lost:
 
        r0 = move-exception;
@@ -1478,21 +1471,6 @@ public class TaskFragment extends WindowContainer {
 
        if (r3.processName.equals(r4.processName) != false) goto L306;
     */
-    /* JADX WARN: Removed duplicated region for block: B:136:0x0276  */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x02b5  */
-    /* JADX WARN: Removed duplicated region for block: B:168:0x02f8  */
-    /* JADX WARN: Removed duplicated region for block: B:238:0x0562  */
-    /* JADX WARN: Removed duplicated region for block: B:259:0x05b8 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:268:0x05d0  */
-    /* JADX WARN: Removed duplicated region for block: B:270:0x05e4 A[Catch: IllegalArgumentException -> 0x0609, TryCatch #8 {IllegalArgumentException -> 0x0609, blocks: (B:266:0x05c6, B:270:0x05e4, B:271:0x05f7, B:395:0x05f4, B:396:0x05d2, B:398:0x05d6, B:399:0x05e0), top: B:265:0x05c6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:274:0x0629  */
-    /* JADX WARN: Removed duplicated region for block: B:281:0x0680  */
-    /* JADX WARN: Removed duplicated region for block: B:284:0x0694  */
-    /* JADX WARN: Removed duplicated region for block: B:370:0x0869  */
-    /* JADX WARN: Removed duplicated region for block: B:378:0x0684  */
-    /* JADX WARN: Removed duplicated region for block: B:390:0x0669  */
-    /* JADX WARN: Removed duplicated region for block: B:395:0x05f4 A[Catch: IllegalArgumentException -> 0x0609, TryCatch #8 {IllegalArgumentException -> 0x0609, blocks: (B:266:0x05c6, B:270:0x05e4, B:271:0x05f7, B:395:0x05f4, B:396:0x05d2, B:398:0x05d6, B:399:0x05e0), top: B:265:0x05c6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:396:0x05d2 A[Catch: IllegalArgumentException -> 0x0609, TryCatch #8 {IllegalArgumentException -> 0x0609, blocks: (B:266:0x05c6, B:270:0x05e4, B:271:0x05f7, B:395:0x05f4, B:396:0x05d2, B:398:0x05d6, B:399:0x05e0), top: B:265:0x05c6 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1762,7 +1740,6 @@ public class TaskFragment extends WindowContainer {
         return shouldSleepActivities() || this.mAtmService.mShuttingDown;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:72:0x01ad  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

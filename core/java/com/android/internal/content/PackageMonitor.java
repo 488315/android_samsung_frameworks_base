@@ -278,7 +278,6 @@ public abstract class PackageMonitor extends BroadcastReceiver {
         lambda$postHandlePackageEvent$0(intent);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postHandlePackageEvent(final Intent intent) {
         if (this.mExecutor != null) {
             this.mExecutor.execute(

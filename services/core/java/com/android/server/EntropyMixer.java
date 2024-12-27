@@ -35,7 +35,6 @@ public final class EntropyMixer extends Binder {
     public static final long START_TIME = System.currentTimeMillis();
     public static final long START_NANOTIME = System.nanoTime();
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -64,8 +63,6 @@ public final class EntropyMixer extends Binder {
                     + " com.android.server.EntropyMixer.<init>(android.content.Context):void");
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.EntropyMixer$1] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.EntropyMixer$2] */
     public EntropyMixer(Context context, File file, File file2, File file3) {
         this.mHandler =
                 new Handler(

@@ -9,7 +9,6 @@ import java.util.List;
 interface Hue {
     double get(Cam cam);
 
-    /* JADX WARN: Multi-variable type inference failed */
     default double getHueRotation(float sourceHue, List<Pair> hueAndRotations) {
         float f = 0.0f;
         if (sourceHue >= 0.0f && sourceHue < 360.0f) {

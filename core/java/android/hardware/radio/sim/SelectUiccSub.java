@@ -12,7 +12,6 @@ public class SelectUiccSub implements Parcelable {
     public static final Parcelable.Creator<SelectUiccSub> CREATOR =
             new Parcelable.Creator<
                     SelectUiccSub>() { // from class: android.hardware.radio.sim.SelectUiccSub.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SelectUiccSub createFromParcel(Parcel _aidl_source) {
                     SelectUiccSub _aidl_out = new SelectUiccSub();
@@ -20,7 +19,6 @@ public class SelectUiccSub implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SelectUiccSub[] newArray(int _aidl_size) {
                     return new SelectUiccSub[_aidl_size];

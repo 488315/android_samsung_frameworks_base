@@ -15,7 +15,6 @@ public final class FromDreamingTransitionInteractor$listenForDreamingToAlternate
     int label;
     final /* synthetic */ FromDreamingTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromDreamingTransitionInteractor$listenForDreamingToAlternateBouncer$$inlined$launch$default$1(String str, Continuation continuation, FromDreamingTransitionInteractor fromDreamingTransitionInteractor) {
         super(2, continuation);
         this.$spanName = str;
@@ -34,8 +33,6 @@ public final class FromDreamingTransitionInteractor$listenForDreamingToAlternate
         return ((FromDreamingTransitionInteractor$listenForDreamingToAlternateBouncer$$inlined$launch$default$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x009f  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

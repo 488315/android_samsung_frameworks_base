@@ -76,13 +76,11 @@ public class AssistStructure implements Parcelable {
     public static final Parcelable.Creator<AssistStructure> CREATOR =
             new Parcelable.Creator<
                     AssistStructure>() { // from class: android.app.assist.AssistStructure.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AssistStructure createFromParcel(Parcel in) {
                     return new AssistStructure(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AssistStructure[] newArray(int size) {
                     return new AssistStructure[size];
@@ -788,7 +786,6 @@ public class AssistStructure implements Parcelable {
 
            if ((((r25.mWidth & (-32768)) != 0) | ((r25.mHeight & (-32768)) != 0)) != false) goto L19;
         */
-        /* JADX WARN: Multi-variable type inference failed */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1129,13 +1126,11 @@ public class AssistStructure implements Parcelable {
         public static final Parcelable.Creator<ViewNodeParcelable> CREATOR =
                 new Parcelable.Creator<ViewNodeParcelable>() { // from class:
                     // android.app.assist.AssistStructure.ViewNodeParcelable.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ViewNodeParcelable createFromParcel(Parcel in) {
                         return new ViewNodeParcelable(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ViewNodeParcelable[] newArray(int size) {
                         return new ViewNodeParcelable[size];
@@ -1671,7 +1666,6 @@ public class AssistStructure implements Parcelable {
         public static final Parcelable.Creator<HtmlInfoNode> CREATOR =
                 new Parcelable.Creator<HtmlInfoNode>() { // from class:
                     // android.app.assist.AssistStructure.HtmlInfoNode.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HtmlInfoNode createFromParcel(Parcel parcel) {
                         String tag = parcel.readString();
@@ -1695,7 +1689,6 @@ public class AssistStructure implements Parcelable {
                         return builder.build();
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HtmlInfoNode[] newArray(int size) {
                         return new HtmlInfoNode[size];

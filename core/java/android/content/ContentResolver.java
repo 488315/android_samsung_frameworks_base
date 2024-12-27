@@ -279,7 +279,6 @@ public abstract class ContentResolver implements ContentInterface {
         throw new UnsupportedOperationException("appNotRespondingViaProvider");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.content.ContentInterface
     public final String getType(Uri url) {
         Objects.requireNonNull(url, "url");
@@ -411,7 +410,6 @@ public abstract class ContentResolver implements ContentInterface {
             super();
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.content.ContentResolver.ResultListener
         public String getResultFromBundle(Bundle result) {
             return result.getString("result");
@@ -423,8 +421,6 @@ public abstract class ContentResolver implements ContentInterface {
             super();
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.content.ContentResolver.ResultListener
         public Uri getResultFromBundle(Bundle result) {
             return (Uri) result.getParcelable("result", Uri.class);
@@ -613,7 +609,6 @@ public abstract class ContentResolver implements ContentInterface {
         return res != null ? res : uri;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.content.ContentInterface
     public final Uri canonicalize(Uri url) {
         Objects.requireNonNull(url, "url");
@@ -646,7 +641,6 @@ public abstract class ContentResolver implements ContentInterface {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.content.ContentInterface
     public final Uri uncanonicalize(Uri url) {
         Objects.requireNonNull(url, "url");

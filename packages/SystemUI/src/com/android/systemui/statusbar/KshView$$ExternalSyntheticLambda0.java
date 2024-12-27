@@ -9,10 +9,6 @@ public final /* synthetic */ class KshView$$ExternalSyntheticLambda0 implements 
         this.f$0 = obj;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x008f  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00a7  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00b5  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x009b  */
     @Override // java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

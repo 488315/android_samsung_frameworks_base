@@ -3,7 +3,6 @@ package android.util;
 public abstract class FloatProperty<T> extends Property<T, Float> {
     public abstract void setValue(T t, float f);
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.util.Property
     public /* bridge */ /* synthetic */ void set(Object obj, Float f) {
         set2((FloatProperty<T>) obj, f);

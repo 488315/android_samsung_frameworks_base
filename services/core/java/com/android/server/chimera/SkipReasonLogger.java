@@ -8,8 +8,6 @@ public final class SkipReasonLogger {
     public final Set[] mSkippedPids = new Set[Reason.values().length];
     public final SystemRepository mSystemRepository;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class Reason {
         public static final /* synthetic */ Reason[] $VALUES;
         public static final Reason ADJ_OR_PROC_STATE;

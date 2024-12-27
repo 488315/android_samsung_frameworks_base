@@ -232,7 +232,6 @@ public final class PermissionControllerManager {
                         executor);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CompletableFuture lambda$revokeRuntimePermissions$0(
             Map request, boolean doDryRun, int reason, IPermissionController service)
             throws Exception {
@@ -1146,7 +1145,6 @@ public final class PermissionControllerManager {
                                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CompletableFuture lambda$revokeSelfPermissionsOnKill$38(
             String packageName, List permissions, IPermissionController service) throws Exception {
         AndroidFuture<Void> callback = new AndroidFuture<>();
@@ -1155,7 +1153,6 @@ public final class PermissionControllerManager {
         return callback;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$revokeSelfPermissionsOnKill$39(
             List permissions, String packageName, Void result, Throwable err) {
         if (err != null) {

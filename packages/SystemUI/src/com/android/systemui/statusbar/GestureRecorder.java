@@ -65,7 +65,6 @@ public final class GestureRecorder {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.statusbar.GestureRecorder$1] */
     public GestureRecorder(String str) {
         this.mLogfile = str;
     }

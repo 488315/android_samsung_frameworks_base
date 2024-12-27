@@ -856,7 +856,6 @@ public abstract class AbsSeekBar extends ProgressBar {
                         dh + this.mPaddingTop + this.mPaddingBottom, heightMeasureSpec, 0));
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:44:0x00ee, code lost:
 
        return true;
@@ -951,10 +950,6 @@ public abstract class AbsSeekBar extends ProgressBar {
 
     void onKeyChange() {}
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0028  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x001b  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0019  */
     @Override // android.view.View, android.view.KeyEvent.Callback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2113,7 +2108,6 @@ public abstract class AbsSeekBar extends ProgressBar {
             this.mThumbReleased.start();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setRadius(int radius) {
             this.mRadiusForAni = radius;
         }

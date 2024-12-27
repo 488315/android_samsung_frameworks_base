@@ -174,7 +174,6 @@ public final class DragDropController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.wm.DragDropController$1] */
     public DragDropController(WindowManagerService windowManagerService, Looper looper) {
         this.mService = windowManagerService;
         this.mHandler = new DragHandler(windowManagerService, looper);
@@ -363,8 +362,6 @@ public final class DragDropController {
         dragState.closeLocked(false);
     }
 
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0400 A[Catch: all -> 0x0367, TRY_ENTER, TRY_LEAVE, TryCatch #2 {all -> 0x0367, blocks: (B:227:0x0423, B:146:0x0228, B:204:0x039d, B:66:0x0400, B:69:0x0410, B:81:0x0421, B:80:0x041e, B:83:0x0422, B:41:0x03c1, B:44:0x03d2, B:56:0x03e3, B:55:0x03e0, B:58:0x03e4, B:68:0x040a, B:43:0x03cc, B:75:0x0418, B:50:0x03da), top: B:4:0x0086, inners: #12, #14, #18, #19 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -400,9 +397,6 @@ public final class DragDropController {
 
        if (r2.type == 2024) goto L42;
     */
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00b2 A[Catch: all -> 0x0051, TryCatch #0 {all -> 0x0051, blocks: (B:6:0x0036, B:8:0x003a, B:9:0x0041, B:13:0x0054, B:15:0x0058, B:17:0x0072, B:18:0x0083, B:21:0x0087, B:23:0x0094, B:27:0x0099, B:30:0x00a7, B:32:0x00b2, B:34:0x00bb, B:37:0x00ce, B:38:0x00d8, B:40:0x00e7, B:46:0x00f1, B:49:0x00fa, B:50:0x0101, B:54:0x00c2, B:56:0x00c8, B:60:0x0113, B:61:0x012c), top: B:5:0x0036, outer: #1, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00e7 A[Catch: all -> 0x0051, TRY_LEAVE, TryCatch #0 {all -> 0x0051, blocks: (B:6:0x0036, B:8:0x003a, B:9:0x0041, B:13:0x0054, B:15:0x0058, B:17:0x0072, B:18:0x0083, B:21:0x0087, B:23:0x0094, B:27:0x0099, B:30:0x00a7, B:32:0x00b2, B:34:0x00bb, B:37:0x00ce, B:38:0x00d8, B:40:0x00e7, B:46:0x00f1, B:49:0x00fa, B:50:0x0101, B:54:0x00c2, B:56:0x00c8, B:60:0x0113, B:61:0x012c), top: B:5:0x0036, outer: #1, inners: #2 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

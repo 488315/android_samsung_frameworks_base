@@ -182,7 +182,6 @@ public class KnoxAnalyticsContentProvider extends ContentProvider {
         return affectedRows;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.content.ContentProvider
     public Bundle call(String method, String arg, Bundle extras) {
         char c;
@@ -275,7 +274,6 @@ public class KnoxAnalyticsContentProvider extends ContentProvider {
         return result;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private Cursor queryEvents(String[] projection, String selection, String[] selectionArgs) {
         char c;
         DatabaseCryptoAdapter databaseCryptoAdapter = getDatabaseCryptoAdapter();
@@ -399,7 +397,6 @@ public class KnoxAnalyticsContentProvider extends ContentProvider {
         return ContentUris.withAppendedId(Contract.DatabaseClean.CONTENT_URI, id);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x0066, code lost:
 
        if (r17.equals(com.samsung.android.knox.analytics.database.Contract.Events.Selection.DELETE_UP_TO_ID) != false) goto L31;

@@ -27,7 +27,6 @@ public class FrontLargeDisplayStrategy implements SecureConfirmStrategy, Disposi
         this.mKeyguardManagerWrapper = keyguardManagerWrapper;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // com.samsung.android.globalactions.presentation.strategies.SecureConfirmStrategy
     public boolean doActionBeforeSecureConfirm(
             final ActionViewModel viewModel, SamsungGlobalActions globalActions) {

@@ -19,7 +19,6 @@ final class BrightnessPolicyRepositoryImpl$restrictionPolicy$1 extends SuspendLa
     int label;
     final /* synthetic */ BrightnessPolicyRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BrightnessPolicyRepositoryImpl$restrictionPolicy$1(BrightnessPolicyRepositoryImpl brightnessPolicyRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = brightnessPolicyRepositoryImpl;

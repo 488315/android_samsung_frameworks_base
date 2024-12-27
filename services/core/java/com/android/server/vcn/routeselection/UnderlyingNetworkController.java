@@ -112,7 +112,6 @@ public final class UnderlyingNetworkController {
 
     public interface UnderlyingNetworkControllerCallback {}
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public class UnderlyingNetworkListener extends ConnectivityManager.NetworkCallback {
         public UnderlyingNetworkListener() {
             super(1);

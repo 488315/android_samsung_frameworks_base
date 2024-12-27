@@ -32,8 +32,6 @@ public final class Permission {
         this.mType = i;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x007e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

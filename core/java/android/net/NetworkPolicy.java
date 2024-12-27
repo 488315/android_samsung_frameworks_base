@@ -45,13 +45,11 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
     private static final String TAG = NetworkPolicy.class.getSimpleName();
     public static final Parcelable.Creator<NetworkPolicy> CREATOR =
             new Parcelable.Creator<NetworkPolicy>() { // from class: android.net.NetworkPolicy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkPolicy createFromParcel(Parcel in) {
                     return new NetworkPolicy(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkPolicy[] newArray(int size) {
                     return new NetworkPolicy[size];

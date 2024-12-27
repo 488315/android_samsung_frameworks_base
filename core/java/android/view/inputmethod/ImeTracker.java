@@ -291,7 +291,6 @@ public interface ImeTracker {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void reloadSystemProperties() {
             this.mLogProgress = SystemProperties.getBoolean("persist.debug.imetracker", false);
             this.mLogStackTrace =
@@ -303,13 +302,11 @@ public interface ImeTracker {
         public static final Parcelable.Creator<Token> CREATOR =
                 new Parcelable.Creator<
                         Token>() { // from class: android.view.inputmethod.ImeTracker.Token.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Token createFromParcel(Parcel in) {
                         return new Token(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Token[] newArray(int size) {
                         return new Token[size];
@@ -337,7 +334,6 @@ public interface ImeTracker {
             return this.mTag;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static String createTag(String component) {
             return component + ":" + Integer.toHexString(ThreadLocalRandom.current().nextInt());
         }
@@ -437,7 +433,6 @@ public interface ImeTracker {
                                             }));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static int getFieldValue(Field field) {
             try {
                 return field.getInt(null);

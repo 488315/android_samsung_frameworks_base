@@ -11,7 +11,6 @@ public class SimRefreshResult implements Parcelable {
     public static final Parcelable.Creator<SimRefreshResult> CREATOR =
             new Parcelable.Creator<SimRefreshResult>() { // from class:
                 // android.hardware.radio.sim.SimRefreshResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SimRefreshResult createFromParcel(Parcel _aidl_source) {
                     SimRefreshResult _aidl_out = new SimRefreshResult();
@@ -19,7 +18,6 @@ public class SimRefreshResult implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SimRefreshResult[] newArray(int _aidl_size) {
                     return new SimRefreshResult[_aidl_size];

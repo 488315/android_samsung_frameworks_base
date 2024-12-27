@@ -10,7 +10,6 @@ final class ShellRecentTaskListProvider$loadRecentTasks$2 extends SuspendLambda 
     int label;
     final /* synthetic */ ShellRecentTaskListProvider this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ShellRecentTaskListProvider$loadRecentTasks$2(ShellRecentTaskListProvider shellRecentTaskListProvider, Continuation continuation) {
         super(2, continuation);
         this.this$0 = shellRecentTaskListProvider;
@@ -30,7 +29,6 @@ final class ShellRecentTaskListProvider$loadRecentTasks$2 extends SuspendLambda 
     
         if (r13 != null) goto L17;
      */
-    /* JADX WARN: Type inference failed for: r5v0, types: [com.android.systemui.mediaprojection.appselector.data.ShellRecentTaskListProvider$getTasks$2$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

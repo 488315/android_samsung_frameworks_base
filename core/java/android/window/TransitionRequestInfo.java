@@ -14,13 +14,11 @@ public final class TransitionRequestInfo implements Parcelable {
     public static final Parcelable.Creator<TransitionRequestInfo> CREATOR =
             new Parcelable.Creator<
                     TransitionRequestInfo>() { // from class: android.window.TransitionRequestInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TransitionRequestInfo[] newArray(int size) {
                     return new TransitionRequestInfo[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TransitionRequestInfo createFromParcel(Parcel in) {
                     return new TransitionRequestInfo(in);
@@ -77,13 +75,11 @@ public final class TransitionRequestInfo implements Parcelable {
                 new Parcelable.Creator<
                         DisplayChange>() { // from class:
                                            // android.window.TransitionRequestInfo.DisplayChange.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DisplayChange[] newArray(int size) {
                         return new DisplayChange[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DisplayChange createFromParcel(Parcel in) {
                         return new DisplayChange(in);

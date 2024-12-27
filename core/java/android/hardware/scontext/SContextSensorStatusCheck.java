@@ -9,13 +9,11 @@ public class SContextSensorStatusCheck extends SContextEventContext {
     public static final Parcelable.Creator<SContextSensorStatusCheck> CREATOR =
             new Parcelable.Creator<SContextSensorStatusCheck>() { // from class:
                 // android.hardware.scontext.SContextSensorStatusCheck.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextSensorStatusCheck createFromParcel(Parcel in) {
                     return new SContextSensorStatusCheck(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextSensorStatusCheck[] newArray(int size) {
                     return new SContextSensorStatusCheck[size];

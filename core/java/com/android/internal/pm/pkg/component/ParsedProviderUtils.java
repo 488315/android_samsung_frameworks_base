@@ -48,7 +48,6 @@ public class ParsedProviderUtils {
                     + " android.content.pm.parsing.result.ParseInput):android.content.pm.parsing.result.ParseResult");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:11:0x010f, code lost:
 
        return r24.success(r23);

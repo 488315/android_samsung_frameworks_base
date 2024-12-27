@@ -10,13 +10,11 @@ public final class SentenceSuggestionsInfo implements Parcelable {
             new Parcelable.Creator<
                     SentenceSuggestionsInfo>() { // from class:
                                                  // android.view.textservice.SentenceSuggestionsInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SentenceSuggestionsInfo createFromParcel(Parcel source) {
                     return new SentenceSuggestionsInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SentenceSuggestionsInfo[] newArray(int size) {
                     return new SentenceSuggestionsInfo[size];

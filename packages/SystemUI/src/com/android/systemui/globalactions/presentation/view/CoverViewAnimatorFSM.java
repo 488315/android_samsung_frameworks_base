@@ -16,7 +16,6 @@ public final class CoverViewAnimatorFSM {
         HIDE,
         SHOW_CONFIRM,
         HIDE_CONFIRM,
-        /* JADX INFO: Fake field, exist only in values array */
         CONFIGURATION_CHANGED,
         SECURE_CONFIRM,
         COVER_TOAST

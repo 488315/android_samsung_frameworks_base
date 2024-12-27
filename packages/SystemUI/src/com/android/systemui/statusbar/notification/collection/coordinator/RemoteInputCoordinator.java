@@ -46,7 +46,6 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
     private final SmartReplyHistoryExtender mSmartReplyHistoryExtender;
 
     public final class RemoteInputActiveExtender extends SelfTrackingLifetimeExtender {
-        /* JADX WARN: Illegal instructions before constructor call */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -73,7 +72,6 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
     }
 
     public final class RemoteInputHistoryExtender extends SelfTrackingLifetimeExtender {
-        /* JADX WARN: Illegal instructions before constructor call */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -114,7 +112,6 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
     }
 
     public final class SmartReplyHistoryExtender extends SelfTrackingLifetimeExtender {
-        /* JADX WARN: Illegal instructions before constructor call */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -270,7 +267,6 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onSmartReplySent(NotificationEntry notificationEntry, CharSequence charSequence) {
         boolean debug;
         debug = RemoteInputCoordinatorKt.getDEBUG();

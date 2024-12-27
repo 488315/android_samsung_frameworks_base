@@ -119,7 +119,6 @@ public class ConnectivityModuleConnector {
         this.mDeps = dependencies;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void checkModuleServicePermission(
             PackageManager packageManager, ComponentName componentName, String str) {
         if (packageManager.checkPermission(str, componentName.getPackageName()) != 0) {
@@ -170,12 +169,10 @@ public class ConnectivityModuleConnector {
         Log.e(TAG, str, th);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void logi(String str) {
         Log.i(TAG, str);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void maybeCrashWithTerribleFailure(String str, String str2) {
         ArraySet arraySet;
         logWtf(str, null);

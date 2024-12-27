@@ -575,7 +575,6 @@ public class SysinputHAL_AIDL implements SysinputHALInterface {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String getStringForLog(String text) {
         if (text.length() > 30) {
             return text.substring(0, 20) + "...";

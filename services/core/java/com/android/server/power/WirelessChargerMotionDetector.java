@@ -87,7 +87,6 @@ public final class WirelessChargerMotionDetector {
             };
     public long mPassedWakeupTime = 0;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.power.WirelessChargerMotionDetector$1] */
     public WirelessChargerMotionDetector(
             Object obj,
             Context context,

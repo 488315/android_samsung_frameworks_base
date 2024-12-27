@@ -112,7 +112,6 @@ public final class DeviceState {
         public static final Parcelable.Creator<Configuration> CREATOR =
                 new Parcelable.Creator<Configuration>() { // from class:
                     // android.hardware.devicestate.DeviceState.Configuration.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Configuration createFromParcel(Parcel source) {
                         int identifier = source.readInt();
@@ -124,7 +123,6 @@ public final class DeviceState {
                                 source.readArraySet(null));
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Configuration[] newArray(int size) {
                         return new Configuration[size];

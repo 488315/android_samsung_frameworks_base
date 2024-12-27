@@ -166,7 +166,6 @@ public final class DefaultAppFilter implements IFilter {
         MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.cancelDisablePolicy(stringForUser, i, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.server.am.mars.filter.filter.DefaultAppFilter$1] */
     @Override // com.android.server.am.mars.filter.IFilter
     public final void init(Context context) {
         this.mContext = context;

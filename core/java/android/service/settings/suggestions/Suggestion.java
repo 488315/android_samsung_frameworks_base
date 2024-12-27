@@ -15,13 +15,11 @@ public final class Suggestion implements Parcelable {
     public static final Parcelable.Creator<Suggestion> CREATOR =
             new Parcelable.Creator<
                     Suggestion>() { // from class: android.service.settings.suggestions.Suggestion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Suggestion createFromParcel(Parcel in) {
                     return new Suggestion(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Suggestion[] newArray(int size) {
                     return new Suggestion[size];

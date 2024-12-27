@@ -96,7 +96,6 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
         return onKeyUp(keyCode, event);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     boolean onKeyDown(int keyCode, KeyEvent event) {
         KeyEvent.DispatcherState dispatcher = this.mView.getKeyDispatcherState();
         switch (keyCode) {

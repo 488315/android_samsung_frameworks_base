@@ -93,7 +93,6 @@ public class SemVideoTranscoderClient extends ClientImpl {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isSupportedHdrToSdr() {
         boolean result = false;
         if (Build.VERSION.SEM_PLATFORM_INT >= 100000) {

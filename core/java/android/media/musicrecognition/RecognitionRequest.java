@@ -13,13 +13,11 @@ public final class RecognitionRequest implements Parcelable {
     public static final Parcelable.Creator<RecognitionRequest> CREATOR =
             new Parcelable.Creator<RecognitionRequest>() { // from class:
                 // android.media.musicrecognition.RecognitionRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecognitionRequest createFromParcel(Parcel p) {
                     return new RecognitionRequest(p);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecognitionRequest[] newArray(int size) {
                     return new RecognitionRequest[size];

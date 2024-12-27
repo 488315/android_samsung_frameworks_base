@@ -819,7 +819,6 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
             return false;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void mutate() {
             int N = this.mNumChildren;
             Drawable[] drawables = this.mDrawables;

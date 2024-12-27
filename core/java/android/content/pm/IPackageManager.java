@@ -4782,7 +4782,6 @@ public interface IPackageManager extends IInterface {
             reply.writeStringArray(v);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements IPackageManager {
             private IBinder mRemote;
 

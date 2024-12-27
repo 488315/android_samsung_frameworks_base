@@ -15,7 +15,6 @@ public final class ParcelableConference implements Parcelable {
     public static final Parcelable.Creator<ParcelableConference> CREATOR =
             new Parcelable.Creator<
                     ParcelableConference>() { // from class: android.telecom.ParcelableConference.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableConference createFromParcel(Parcel source) {
                     ClassLoader classLoader = ParcelableConference.class.getClassLoader();
@@ -65,7 +64,6 @@ public final class ParcelableConference implements Parcelable {
                             callDirection);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableConference[] newArray(int size) {
                     return new ParcelableConference[size];

@@ -367,7 +367,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass2(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -501,7 +500,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass3(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -619,7 +617,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass4(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -754,7 +751,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass5(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -890,7 +886,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass6(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -1636,7 +1631,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass13(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -2177,7 +2171,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass18(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -2313,7 +2306,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass19(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -2448,7 +2440,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass20(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -2921,7 +2912,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass24(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -3389,7 +3379,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass29(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -3528,7 +3517,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass30(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -3667,7 +3655,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass31(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -3804,7 +3791,6 @@ public final class SatelliteManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass32(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -3924,12 +3910,10 @@ public final class SatelliteManager {
         return binder;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void logd(String log) {
         Rlog.d(TAG, log);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void loge(String log) {
         Rlog.e(TAG, log);
     }

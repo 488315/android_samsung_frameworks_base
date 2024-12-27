@@ -61,7 +61,6 @@ public class RemoteLockscreenValidationClientImpl
         executeApiCall(
                 new Call() { // from class:
                              // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super();
                     }
@@ -98,7 +97,6 @@ public class RemoteLockscreenValidationClientImpl
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void disconnectInternal() {
         if (!this.mIsConnected) {
             Log.w(TAG, "already disconnected");
@@ -117,7 +115,6 @@ public class RemoteLockscreenValidationClientImpl
         this.mRequestQueue.clear();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$disconnectInternal$0() {
         this.mContext.unbindService(this);
     }
@@ -133,7 +130,6 @@ public class RemoteLockscreenValidationClientImpl
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void connectInternal() {
         if (this.mServiceInfo == null) {
             Log.w(TAG, "RemoteLockscreenValidation service unavailable");
@@ -157,12 +153,10 @@ public class RemoteLockscreenValidationClientImpl
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$connectInternal$1(Intent intent, int flags) {
         this.mContext.bindService(intent, this, flags);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: onConnectedInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$onServiceConnected$3(IRemoteLockscreenValidationService service) {
         if (!this.mIsConnected) {
@@ -222,7 +216,6 @@ public class RemoteLockscreenValidationClientImpl
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: executeInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$executeApiCall$2(Call call) {
         if (this.mIsConnected && this.mService != null) {
@@ -276,7 +269,6 @@ public class RemoteLockscreenValidationClientImpl
         disconnect();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     abstract static class Call {
         abstract void exec(IRemoteLockscreenValidationService iRemoteLockscreenValidationService)
                 throws RemoteException;

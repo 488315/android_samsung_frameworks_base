@@ -37,7 +37,6 @@ public final class UaSecurityProtocolIdentifier implements Parcelable {
             new Parcelable.Creator<
                     UaSecurityProtocolIdentifier>() { // from class:
                                                       // android.telephony.gba.UaSecurityProtocolIdentifier.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UaSecurityProtocolIdentifier createFromParcel(Parcel in) {
                     int org2 = in.readInt();
@@ -63,7 +62,6 @@ public final class UaSecurityProtocolIdentifier implements Parcelable {
                     return builder.build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UaSecurityProtocolIdentifier[] newArray(int size) {
                     return new UaSecurityProtocolIdentifier[size];
@@ -141,7 +139,6 @@ public final class UaSecurityProtocolIdentifier implements Parcelable {
                 Integer.valueOf(this.mTlsCipherSuite));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isTlsSupported() {
         if (this.mOrg == 1) {
             return this.mProtocol == 65536 || this.mProtocol == 131072;

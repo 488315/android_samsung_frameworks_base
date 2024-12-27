@@ -17,7 +17,6 @@ final class FromDreamingTransitionInteractor$listenForDreamingToGoneWhenDismissa
     int label;
     final /* synthetic */ FromDreamingTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromDreamingTransitionInteractor$listenForDreamingToGoneWhenDismissable$1(FromDreamingTransitionInteractor fromDreamingTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromDreamingTransitionInteractor;

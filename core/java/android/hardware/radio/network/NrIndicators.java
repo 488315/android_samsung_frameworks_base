@@ -10,7 +10,6 @@ public class NrIndicators implements Parcelable {
     public static final Parcelable.Creator<NrIndicators> CREATOR =
             new Parcelable.Creator<
                     NrIndicators>() { // from class: android.hardware.radio.network.NrIndicators.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NrIndicators createFromParcel(Parcel _aidl_source) {
                     NrIndicators _aidl_out = new NrIndicators();
@@ -18,7 +17,6 @@ public class NrIndicators implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NrIndicators[] newArray(int _aidl_size) {
                     return new NrIndicators[_aidl_size];

@@ -8,7 +8,6 @@ public class ApexSessionParams implements Parcelable {
     public static final Parcelable.Creator<ApexSessionParams> CREATOR =
             new Parcelable.Creator<
                     ApexSessionParams>() { // from class: android.apex.ApexSessionParams.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApexSessionParams createFromParcel(Parcel _aidl_source) {
                     ApexSessionParams _aidl_out = new ApexSessionParams();
@@ -16,7 +15,6 @@ public class ApexSessionParams implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApexSessionParams[] newArray(int _aidl_size) {
                     return new ApexSessionParams[_aidl_size];

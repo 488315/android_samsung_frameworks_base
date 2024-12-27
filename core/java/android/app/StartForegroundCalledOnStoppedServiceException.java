@@ -9,14 +9,12 @@ public final class StartForegroundCalledOnStoppedServiceException extends Illega
             new Parcelable.Creator<
                     StartForegroundCalledOnStoppedServiceException>() { // from class:
                 // android.app.StartForegroundCalledOnStoppedServiceException.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StartForegroundCalledOnStoppedServiceException createFromParcel(
                         Parcel source) {
                     return new StartForegroundCalledOnStoppedServiceException(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StartForegroundCalledOnStoppedServiceException[] newArray(int size) {
                     return new StartForegroundCalledOnStoppedServiceException[size];

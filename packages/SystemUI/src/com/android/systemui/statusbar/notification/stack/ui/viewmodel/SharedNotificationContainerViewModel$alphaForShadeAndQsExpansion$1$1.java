@@ -16,7 +16,6 @@ final class SharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$1$1
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$1$1(SharedNotificationContainerInteractor.ConfigurationBasedDimensions configurationBasedDimensions, Continuation continuation) {
         super(4, continuation);
         this.$configurationBasedDimensions = configurationBasedDimensions;

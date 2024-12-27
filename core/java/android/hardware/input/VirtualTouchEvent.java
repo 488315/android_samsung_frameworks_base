@@ -18,13 +18,11 @@ public final class VirtualTouchEvent implements Parcelable {
     public static final Parcelable.Creator<VirtualTouchEvent> CREATOR =
             new Parcelable.Creator<
                     VirtualTouchEvent>() { // from class: android.hardware.input.VirtualTouchEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualTouchEvent createFromParcel(Parcel source) {
                     return new VirtualTouchEvent(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualTouchEvent[] newArray(int size) {
                     return new VirtualTouchEvent[size];

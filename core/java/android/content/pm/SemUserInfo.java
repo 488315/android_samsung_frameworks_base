@@ -7,13 +7,11 @@ import android.os.UserHandle;
 public class SemUserInfo implements Parcelable {
     public static final Parcelable.Creator<SemUserInfo> CREATOR =
             new Parcelable.Creator<SemUserInfo>() { // from class: android.content.pm.SemUserInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemUserInfo createFromParcel(Parcel source) {
                     return new SemUserInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemUserInfo[] newArray(int size) {
                     return new SemUserInfo[size];

@@ -129,8 +129,6 @@ public final class BriefNowBarController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.aibrief.control.BriefNowBarController$nowBarCallback$1, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r2v7, types: [com.android.systemui.aibrief.control.BriefNowBarController$configurationListener$1] */
     public BriefNowBarController(Context context, BriefLogger briefLogger, BriefViewController briefViewController, FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper, NotificationShadeWindowController notificationShadeWindowController, PowerInteractor powerInteractor, ConfigurationController configurationController, Handler handler) {
         this.context = context;
         this.logger = briefLogger;
@@ -248,7 +246,6 @@ public final class BriefNowBarController {
         return (this.context.getResources().getConfiguration().uiMode & 48) == 32;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void startFullViewActivity() {
         Object failure;
         try {
@@ -269,7 +266,6 @@ public final class BriefNowBarController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void updateNowBar(boolean z) {
         ArrayList<Integer> arrayList;
         if (this.nowBarData == null) {

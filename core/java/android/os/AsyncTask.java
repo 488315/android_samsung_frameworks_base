@@ -145,7 +145,6 @@ public abstract class AsyncTask<Params, Progress, Result> {
         sDefaultExecutor = exec;
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     public AsyncTask() {
         this((Looper) null);
     }
@@ -167,7 +166,6 @@ public abstract class AsyncTask<Params, Progress, Result> {
         this.mHandler = mainHandler;
         this.mWorker =
                 new WorkerRunnable<Params, Result>() { // from class: android.os.AsyncTask.3
-                    /* JADX WARN: Multi-variable type inference failed */
                     @Override // java.util.concurrent.Callable
                     public Result call() throws Exception {
                         AsyncTask.this.mTaskInvoked.set(true);
@@ -200,7 +198,6 @@ public abstract class AsyncTask<Params, Progress, Result> {
                 };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postResultIfNotInvoked(Result result) {
         boolean wasTaskInvoked = this.mTaskInvoked.get();
         if (!wasTaskInvoked) {
@@ -208,7 +205,6 @@ public abstract class AsyncTask<Params, Progress, Result> {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Result postResult(Result result) {
         Message message = getHandler().obtainMessage(1, new AsyncTaskResult(this, result));
         message.sendToTarget();
@@ -283,7 +279,6 @@ public abstract class AsyncTask<Params, Progress, Result> {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void finish(Result result) {
         if (isCancelled()) {
             onCancelled(result);

@@ -658,56 +658,6 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
 
        if (r13.getMode() == 1) goto L263;
     */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x018f  */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x01ba  */
-    /* JADX WARN: Removed duplicated region for block: B:163:0x02e2  */
-    /* JADX WARN: Removed duplicated region for block: B:166:0x02e9  */
-    /* JADX WARN: Removed duplicated region for block: B:174:0x02ff  */
-    /* JADX WARN: Removed duplicated region for block: B:177:0x0306  */
-    /* JADX WARN: Removed duplicated region for block: B:185:0x031c  */
-    /* JADX WARN: Removed duplicated region for block: B:198:0x0354  */
-    /* JADX WARN: Removed duplicated region for block: B:216:0x03b9  */
-    /* JADX WARN: Removed duplicated region for block: B:222:0x0429  */
-    /* JADX WARN: Removed duplicated region for block: B:245:0x0493  */
-    /* JADX WARN: Removed duplicated region for block: B:247:0x049a  */
-    /* JADX WARN: Removed duplicated region for block: B:249:0x04a3  */
-    /* JADX WARN: Removed duplicated region for block: B:251:0x04e8  */
-    /* JADX WARN: Removed duplicated region for block: B:299:0x05fc  */
-    /* JADX WARN: Removed duplicated region for block: B:301:0x0604  */
-    /* JADX WARN: Removed duplicated region for block: B:307:0x0609  */
-    /* JADX WARN: Removed duplicated region for block: B:308:0x0601  */
-    /* JADX WARN: Removed duplicated region for block: B:322:0x0634  */
-    /* JADX WARN: Removed duplicated region for block: B:324:0x0637  */
-    /* JADX WARN: Removed duplicated region for block: B:329:0x0679  */
-    /* JADX WARN: Removed duplicated region for block: B:342:0x06b4  */
-    /* JADX WARN: Removed duplicated region for block: B:345:0x06c2  */
-    /* JADX WARN: Removed duplicated region for block: B:348:0x06cf  */
-    /* JADX WARN: Removed duplicated region for block: B:351:0x06da  */
-    /* JADX WARN: Removed duplicated region for block: B:390:0x0793  */
-    /* JADX WARN: Removed duplicated region for block: B:392:0x0798  */
-    /* JADX WARN: Removed duplicated region for block: B:399:0x07c6  */
-    /* JADX WARN: Removed duplicated region for block: B:401:0x07d2  */
-    /* JADX WARN: Removed duplicated region for block: B:405:0x07e4  */
-    /* JADX WARN: Removed duplicated region for block: B:412:0x0805  */
-    /* JADX WARN: Removed duplicated region for block: B:415:0x0811  */
-    /* JADX WARN: Removed duplicated region for block: B:419:0x0795  */
-    /* JADX WARN: Removed duplicated region for block: B:422:0x0641  */
-    /* JADX WARN: Removed duplicated region for block: B:429:0x065d  */
-    /* JADX WARN: Removed duplicated region for block: B:431:0x0660  */
-    /* JADX WARN: Removed duplicated region for block: B:432:0x0646  */
-    /* JADX WARN: Removed duplicated region for block: B:435:0x05a7  */
-    /* JADX WARN: Removed duplicated region for block: B:451:0x05a9  */
-    /* JADX WARN: Removed duplicated region for block: B:452:0x04a7  */
-    /* JADX WARN: Removed duplicated region for block: B:453:0x04a0  */
-    /* JADX WARN: Removed duplicated region for block: B:477:0x0511  */
-    /* JADX WARN: Removed duplicated region for block: B:483:0x0364  */
-    /* JADX WARN: Removed duplicated region for block: B:488:0x037f A[EDGE_INSN: B:488:0x037f->B:200:0x037f BREAK  A[LOOP:1: B:482:0x0362->B:485:0x037c], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:489:0x035c  */
-    /* JADX WARN: Removed duplicated region for block: B:508:0x028f  */
-    /* JADX WARN: Removed duplicated region for block: B:531:0x01ab  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x010c  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x0136  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x013d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -728,10 +678,6 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
                     + " android.view.SurfaceControl$Transaction):android.window.TransitionInfo");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0172  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0196  */
     /* JADX WARN: Removed duplicated region for block: B:38:0x0132 A[LOOP:1: B:38:0x0132->B:40:0x0138, LOOP_START, PHI: r0
     0x0132: PHI (r0v4 com.android.server.wm.WindowContainer) = (r0v3 com.android.server.wm.WindowContainer), (r0v5 com.android.server.wm.WindowContainer) binds: [B:26:0x0116, B:40:0x0138] A[DONT_GENERATE, DONT_INLINE]] */
     /*
@@ -1335,7 +1281,6 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         ((ChangeInfo) this.mChanges.get(windowContainer)).mExistenceChanged = true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0097  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1476,18 +1421,6 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
 
        if ((r3.mChangeTransitFlags & 1) != 0) goto L226;
     */
-    /* JADX WARN: Removed duplicated region for block: B:185:0x0525  */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x052a  */
-    /* JADX WARN: Removed duplicated region for block: B:189:0x0530  */
-    /* JADX WARN: Removed duplicated region for block: B:200:0x0598  */
-    /* JADX WARN: Removed duplicated region for block: B:203:0x05a2  */
-    /* JADX WARN: Removed duplicated region for block: B:210:0x05c6  */
-    /* JADX WARN: Removed duplicated region for block: B:213:0x0607  */
-    /* JADX WARN: Removed duplicated region for block: B:218:0x0628  */
-    /* JADX WARN: Removed duplicated region for block: B:220:0x060a  */
-    /* JADX WARN: Removed duplicated region for block: B:228:0x0532  */
-    /* JADX WARN: Removed duplicated region for block: B:229:0x052c  */
-    /* JADX WARN: Removed duplicated region for block: B:230:0x0527  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1881,18 +1814,6 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:281:0x0513  */
-    /* JADX WARN: Removed duplicated region for block: B:283:0x053e  */
-    /* JADX WARN: Removed duplicated region for block: B:285:0x0546  */
-    /* JADX WARN: Removed duplicated region for block: B:348:0x065a  */
-    /* JADX WARN: Removed duplicated region for block: B:365:0x0689  */
-    /* JADX WARN: Removed duplicated region for block: B:367:0x0685 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:578:0x0a61 A[Catch: RemoteException -> 0x0a6c, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x0a6c, blocks: (B:575:0x0a54, B:576:0x0a59, B:578:0x0a61), top: B:574:0x0a54 }] */
-    /* JADX WARN: Removed duplicated region for block: B:583:0x0a78  */
-    /* JADX WARN: Removed duplicated region for block: B:593:0x0ad1  */
-    /* JADX WARN: Removed duplicated region for block: B:616:0x0b1a  */
-    /* JADX WARN: Removed duplicated region for block: B:619:0x0b28  */
-    /* JADX WARN: Removed duplicated region for block: B:621:? A[RETURN, SYNTHETIC] */
     @Override // com.android.server.wm.BLASTSyncEngine.TransactionReadyListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.

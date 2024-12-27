@@ -12,13 +12,11 @@ public class AssistContent implements Parcelable {
     public static final Parcelable.Creator<AssistContent> CREATOR =
             new Parcelable.Creator<
                     AssistContent>() { // from class: android.app.assist.AssistContent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AssistContent createFromParcel(Parcel in) {
                     return new AssistContent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AssistContent[] newArray(int size) {
                     return new AssistContent[size];

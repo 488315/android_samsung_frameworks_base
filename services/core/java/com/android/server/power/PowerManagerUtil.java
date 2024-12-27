@@ -236,7 +236,6 @@ public abstract class PowerManagerUtil {
         public int mWmsDuration;
         public long mWmsStartTime;
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.power.PowerManagerUtil$ScreenOnProfiler$1] */
         public ScreenOnProfiler() {
             if (!sInitialized) {
                 HandlerThread handlerThread = new HandlerThread("PmsFrameChecker");
@@ -248,7 +247,6 @@ public abstract class PowerManagerUtil {
             clearAll();
         }
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.power.PowerManagerUtil$ScreenOnProfiler$1] */
         public ScreenOnProfiler(ScreenOnProfiler screenOnProfiler) {
             this.mOrder = screenOnProfiler.mOrder;
             this.mWakeUpDiff = screenOnProfiler.mWakeUpDiff;

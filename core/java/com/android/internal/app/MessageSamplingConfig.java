@@ -11,13 +11,11 @@ public final class MessageSamplingConfig implements Parcelable {
             new Parcelable.Creator<
                     MessageSamplingConfig>() { // from class:
                                                // com.android.internal.app.MessageSamplingConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MessageSamplingConfig[] newArray(int size) {
                     return new MessageSamplingConfig[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MessageSamplingConfig createFromParcel(Parcel in) {
                     return new MessageSamplingConfig(in);

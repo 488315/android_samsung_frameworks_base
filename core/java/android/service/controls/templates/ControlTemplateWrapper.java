@@ -10,14 +10,12 @@ public final class ControlTemplateWrapper implements Parcelable {
             new Parcelable.Creator<
                     ControlTemplateWrapper>() { // from class:
                                                 // android.service.controls.templates.ControlTemplateWrapper.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ControlTemplateWrapper createFromParcel(Parcel source) {
                     return new ControlTemplateWrapper(
                             ControlTemplate.createTemplateFromBundle(source.readBundle()));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ControlTemplateWrapper[] newArray(int size) {
                     return new ControlTemplateWrapper[size];

@@ -117,7 +117,6 @@ final class ShadeInteractorLegacyImpl$userInteractingFlow$1 extends SuspendLambd
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ShadeInteractorLegacyImpl$userInteractingFlow$1(Flow flow, StateFlow stateFlow, Continuation continuation) {
         super(2, continuation);
         this.$tracking = flow;
@@ -136,13 +135,6 @@ final class ShadeInteractorLegacyImpl$userInteractingFlow$1 extends SuspendLambd
         return ((ShadeInteractorLegacyImpl$userInteractingFlow$1) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0059  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0079 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x008c A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x009f A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00ae  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00ad A[RETURN] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:21:0x009d -> B:7:0x00a0). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

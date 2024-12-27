@@ -18,8 +18,6 @@ public final class WindowManagerConstants {
     public long mSystemGestureExclusionLogDebounceTimeoutMillis;
     public final Runnable mUpdateSystemGestureExclusionCallback;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.wm.WindowManagerConstants$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.wm.WindowManagerConstants$$ExternalSyntheticLambda0] */
     public WindowManagerConstants(
             WindowManagerGlobalLock windowManagerGlobalLock,
             Runnable runnable,
@@ -39,8 +37,6 @@ public final class WindowManagerConstants {
                         this.f$0 = this;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:52:0x00a6  */
-                    /* JADX WARN: Removed duplicated region for block: B:61:0x00b8 A[SYNTHETIC] */
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
                         To view partially-correct code enable 'Show inconsistent code' option in preferences

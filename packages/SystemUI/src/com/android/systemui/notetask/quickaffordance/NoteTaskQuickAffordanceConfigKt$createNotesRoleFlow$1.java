@@ -26,7 +26,6 @@ final class NoteTaskQuickAffordanceConfigKt$createNotesRoleFlow$1 extends Suspen
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NoteTaskQuickAffordanceConfigKt$createNotesRoleFlow$1(RoleManager roleManager, Executor executor, NoteTaskInfoResolver noteTaskInfoResolver, NoteTaskController noteTaskController, Continuation continuation) {
         super(2, continuation);
         this.$this_createNotesRoleFlow = roleManager;
@@ -78,7 +77,6 @@ final class NoteTaskQuickAffordanceConfigKt$createNotesRoleFlow$1 extends Suspen
             this.$this_createNotesRoleFlow.addOnRoleHoldersChangedListenerAsUser(this.$executor, onRoleHoldersChangedListener, UserHandle.ALL);
             final RoleManager roleManager = this.$this_createNotesRoleFlow;
             Function0 function0 = new Function0() { // from class: com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfigKt$createNotesRoleFlow$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -95,7 +95,6 @@ public final class BGProtectManager {
 
     enum exceptFlag {
         NORMALANDKNOXPWHL("NORMALANDKNOXPWHL"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF1("NORMALONLY"),
         NORMALANDKNOX("NORMALANDKNOX"),
         KNOXONLY("KNOXONLY"),

@@ -274,7 +274,6 @@ public final class TimeDetectorService extends ITimeDetectorService.Stub
         throw new ParcelableException(new DateTimeException("Missing network time fix"));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(
             FileDescriptor fileDescriptor,
             FileDescriptor fileDescriptor2,

@@ -152,8 +152,6 @@ public final class UcmServiceAppletHelper {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.ucm.ucmservice.appletmanage.UcmServiceAppletHelper$2] */
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.samsung.ucm.ucmservice.appletmanage.UcmServiceAppletHelper$1] */
     public UcmServiceAppletHelper(
             Context context, IPackageManager iPackageManager, UcmSecurityHelper ucmSecurityHelper) {
         this.mContext = context;
@@ -205,12 +203,6 @@ public final class UcmServiceAppletHelper {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00a1  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00fb A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:31:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:46:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x009b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

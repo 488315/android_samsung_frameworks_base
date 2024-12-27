@@ -149,7 +149,6 @@ public class BatteryStatsHistory {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class BatteryHistoryDirectory {
         private boolean mCleanupNeeded;
         private final File mDirectory;
@@ -237,7 +236,6 @@ public class BatteryStatsHistory {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ boolean lambda$load$0(
                 List toRemove, Set dedup, File dir, String name) {
             int b = name.lastIndexOf(BatteryStatsHistory.FILE_SUFFIX);
@@ -255,7 +253,6 @@ public class BatteryStatsHistory {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$load$1(List toRemove) {
             lock();
             try {
@@ -466,7 +463,6 @@ public class BatteryStatsHistory {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void cleanup() {
             if (this.mDirectory == null) {
                 return;
@@ -994,7 +990,6 @@ public class BatteryStatsHistory {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean hasFreeDiskSpace(File systemDir) {
         StatFs stats = new StatFs(systemDir.getAbsolutePath());
         return stats.getAvailableBytes() > 104857600;

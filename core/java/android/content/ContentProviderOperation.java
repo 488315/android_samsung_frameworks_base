@@ -19,13 +19,11 @@ public class ContentProviderOperation implements Parcelable {
     public static final Parcelable.Creator<ContentProviderOperation> CREATOR =
             new Parcelable.Creator<ContentProviderOperation>() { // from class:
                 // android.content.ContentProviderOperation.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentProviderOperation createFromParcel(Parcel source) {
                     return new ContentProviderOperation(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentProviderOperation[] newArray(int size) {
                     return new ContentProviderOperation[size];
@@ -426,13 +424,11 @@ public class ContentProviderOperation implements Parcelable {
         public static final Parcelable.Creator<BackReference> CREATOR =
                 new Parcelable.Creator<BackReference>() { // from class:
                     // android.content.ContentProviderOperation.BackReference.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BackReference createFromParcel(Parcel source) {
                         return new BackReference(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BackReference[] newArray(int size) {
                         return new BackReference[size];

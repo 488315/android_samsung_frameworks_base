@@ -26,7 +26,6 @@ public final class UserAwareSecureSettingsRepositoryImpl implements UserAwareSec
         this.backgroundDispatcher = coroutineDispatcher;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final Flow settingObserver(final String str, final boolean z, final int i) {
         final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new UserAwareSecureSettingsRepositoryImpl$settingObserver$1(null), SettingsProxyExt.INSTANCE.observerFlow(this.secureSettings, i, str));
         return new Flow() { // from class: com.android.systemui.util.settings.repository.UserAwareSecureSettingsRepositoryImpl$settingObserver$$inlined$map$1
@@ -65,8 +64,6 @@ public final class UserAwareSecureSettingsRepositoryImpl implements UserAwareSec
                     this.$userId$inlined = i;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

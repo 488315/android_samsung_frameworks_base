@@ -36,7 +36,6 @@ public final class SubScreenTimeOutHelper {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.subscreen.SubScreenTimeOutHelper$contentObserver$1] */
     public SubScreenTimeOutHelper(Supplier<WindowManager.LayoutParams> supplier, Supplier<SubScreenQuickPanelWindowView> supplier2, Supplier<WindowManager> supplier3) {
         this.layoutParamsSupplier = supplier;
         this.subScreenQsWindowViewSupplier = supplier2;

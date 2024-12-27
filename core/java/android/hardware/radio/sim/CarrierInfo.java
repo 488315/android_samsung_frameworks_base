@@ -13,7 +13,6 @@ public class CarrierInfo implements Parcelable {
     public static final Parcelable.Creator<CarrierInfo> CREATOR =
             new Parcelable.Creator<
                     CarrierInfo>() { // from class: android.hardware.radio.sim.CarrierInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarrierInfo createFromParcel(Parcel _aidl_source) {
                     CarrierInfo _aidl_out = new CarrierInfo();
@@ -21,7 +20,6 @@ public class CarrierInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarrierInfo[] newArray(int _aidl_size) {
                     return new CarrierInfo[_aidl_size];

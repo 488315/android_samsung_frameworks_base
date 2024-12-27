@@ -275,7 +275,6 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
         return this.isLaunching;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.animation.TransitionAnimator.Controller
     public final void onTransitionAnimationEnd(boolean z) {
         if (this.ghostView == null) {

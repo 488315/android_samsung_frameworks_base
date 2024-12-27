@@ -8,13 +8,11 @@ public final class QosFilterTypeOfService implements Parcelable {
     public static final Parcelable.Creator<QosFilterTypeOfService> CREATOR =
             new Parcelable.Creator<QosFilterTypeOfService>() { // from class:
                 // android.hardware.radio.data.QosFilterTypeOfService.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public QosFilterTypeOfService createFromParcel(Parcel _aidl_source) {
                     return new QosFilterTypeOfService(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public QosFilterTypeOfService[] newArray(int _aidl_size) {
                     return new QosFilterTypeOfService[_aidl_size];

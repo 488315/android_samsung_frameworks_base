@@ -80,7 +80,6 @@ public final class DynamicFlagBinderDelegate {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.flags.DynamicFlagBinderDelegate$1] */
     public DynamicFlagBinderDelegate(FlagOverrideStore flagOverrideStore) {
         DynamicFlagBinderDelegate$$ExternalSyntheticLambda1
                 dynamicFlagBinderDelegate$$ExternalSyntheticLambda1 =

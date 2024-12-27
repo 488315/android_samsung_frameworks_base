@@ -16,7 +16,6 @@ final class CommunalInteractor$isCommunalShowing$3 extends SuspendLambda impleme
     int label;
     final /* synthetic */ CommunalInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalInteractor$isCommunalShowing$3(CommunalInteractor communalInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalInteractor;

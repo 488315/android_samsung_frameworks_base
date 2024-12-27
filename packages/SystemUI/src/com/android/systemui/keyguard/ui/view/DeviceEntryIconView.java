@@ -31,8 +31,6 @@ public final class DeviceEntryIconView extends FrameLayout {
     public final ImageView iconView;
     public final LongPressHandlingView longPressHandlingView;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class AccessibilityHintType {
         public static final /* synthetic */ AccessibilityHintType[] $VALUES;
         public static final AccessibilityHintType BOUNCER;
@@ -63,8 +61,6 @@ public final class DeviceEntryIconView extends FrameLayout {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class IconType {
         public static final /* synthetic */ IconType[] $VALUES;
         public static final IconType FINGERPRINT;

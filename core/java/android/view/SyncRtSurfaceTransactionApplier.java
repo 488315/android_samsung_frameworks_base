@@ -43,7 +43,6 @@ public class SyncRtSurfaceTransactionApplier {
         this.mTargetViewRootImpl.getView().invalidate();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$scheduleApply$0(SurfaceControl.Transaction t, long frame) {
         if (this.mTargetSc != null && this.mTargetSc.isValid()) {
             applyTransaction(t, frame);

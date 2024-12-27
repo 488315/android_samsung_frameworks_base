@@ -67,7 +67,6 @@ public abstract class ExplicitHealthCheckService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$notifyHealthCheckPassed$0(String packageName) {
         if (this.mCallback != null) {
             Objects.requireNonNull(
@@ -89,13 +88,11 @@ public abstract class ExplicitHealthCheckService extends Service {
                 new Parcelable.Creator<
                         PackageConfig>() { // from class:
                                            // android.service.watchdog.ExplicitHealthCheckService.PackageConfig.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PackageConfig createFromParcel(Parcel source) {
                         return new PackageConfig(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PackageConfig[] newArray(int size) {
                         return new PackageConfig[size];
@@ -163,7 +160,6 @@ public abstract class ExplicitHealthCheckService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class ExplicitHealthCheckServiceWrapper extends IExplicitHealthCheckService.Stub {
         private ExplicitHealthCheckServiceWrapper() {}
 
@@ -180,12 +176,10 @@ public abstract class ExplicitHealthCheckService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setCallback$0(RemoteCallback callback) {
             ExplicitHealthCheckService.this.mCallback = callback;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$request$1(String packageName) {
             ExplicitHealthCheckService.this.onRequestHealthCheck(packageName);
         }
@@ -203,7 +197,6 @@ public abstract class ExplicitHealthCheckService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$cancel$2(String packageName) {
             ExplicitHealthCheckService.this.onCancelHealthCheck(packageName);
         }
@@ -234,7 +227,6 @@ public abstract class ExplicitHealthCheckService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$getSupportedPackages$3(RemoteCallback callback) {
             List<PackageConfig> packages = ExplicitHealthCheckService.this.onGetSupportedPackages();
             Objects.requireNonNull(packages, "Supported package list must be non-null");
@@ -257,7 +249,6 @@ public abstract class ExplicitHealthCheckService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$getRequestedPackages$4(RemoteCallback callback) {
             List<String> packages = ExplicitHealthCheckService.this.onGetRequestedPackages();
             Objects.requireNonNull(packages, "Requested  package list must be non-null");

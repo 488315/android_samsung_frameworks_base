@@ -110,12 +110,6 @@ public class MediaProjectionPermissionActivity extends Activity implements Dialo
         finish(0, null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x01e7  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x0255  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x026f  */
-    /* JADX WARN: Removed duplicated region for block: B:60:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x022c  */
     @Override // android.app.Activity
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -84,10 +84,6 @@ public final class AudioVisSeekBarProgressDrawable extends Drawable {
         });
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0228  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0242 A[LOOP:1: B:17:0x00ee->B:37:0x0242, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0251 A[EDGE_INSN: B:38:0x0251->B:39:0x0251 BREAK  A[LOOP:1: B:17:0x00ee->B:37:0x0242], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x023a  */
     @Override // android.graphics.drawable.Drawable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

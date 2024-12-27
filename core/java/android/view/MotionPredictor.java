@@ -10,7 +10,6 @@ public final class MotionPredictor {
     private final boolean mIsPredictionEnabled;
     private final long mPtr;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeGetNativeMotionPredictorFinalizer();
 
     private static native long nativeInitialize(int i);

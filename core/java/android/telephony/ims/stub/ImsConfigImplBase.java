@@ -82,7 +82,6 @@ public class ImsConfigImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$addImsConfigCallback$0(
                 IImsConfigCallback c, AtomicReference exceptionRef) {
             try {
@@ -111,7 +110,6 @@ public class ImsConfigImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$removeImsConfigCallback$1(
                 IImsConfigCallback c, AtomicReference exceptionRef) {
             try {
@@ -148,7 +146,6 @@ public class ImsConfigImplBase {
             return retVal;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$getConfigInt$2(
                 int item, AtomicReference exceptionRef) {
             int returnVal = -1;
@@ -196,7 +193,6 @@ public class ImsConfigImplBase {
             return retVal;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ String lambda$getConfigString$3(
                 int item, AtomicReference exceptionRef) {
             String returnVal = null;
@@ -247,7 +243,6 @@ public class ImsConfigImplBase {
             return retVal;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$setConfigInt$4(
                 int item, int value, AtomicReference exceptionRef) {
             int returnVal = -1;
@@ -306,7 +301,6 @@ public class ImsConfigImplBase {
             return retVal;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$setConfigString$5(
                 int item, String value, AtomicReference exceptionRef) {
             int returnVal = -1;
@@ -345,7 +339,6 @@ public class ImsConfigImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$updateImsCarrierConfigs$6(
                 PersistableBundle bundle, AtomicReference exceptionRef) {
             try {
@@ -386,7 +379,6 @@ public class ImsConfigImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyRcsAutoConfigurationReceived$7(
                 byte[] config, boolean isCompressed, AtomicReference exceptionRef) {
             try {
@@ -417,7 +409,6 @@ public class ImsConfigImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyRcsAutoConfigurationRemoved$8(
                 AtomicReference exceptionRef) {
             try {
@@ -449,12 +440,10 @@ public class ImsConfigImplBase {
             getImsConfigImpl().notifyProvisionedValueChanged(item, value);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void notifyImsConfigChanged(int item, int value) throws RemoteException {
             getImsConfigImpl().notifyConfigChanged(item, value);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void notifyImsConfigChanged(int item, String value) throws RemoteException {
             getImsConfigImpl().notifyConfigChanged(item, value);
         }
@@ -490,7 +479,6 @@ public class ImsConfigImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$addRcsConfigCallback$9(
                 IRcsConfigCallback c, AtomicReference exceptionRef) {
             try {
@@ -519,7 +507,6 @@ public class ImsConfigImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$removeRcsConfigCallback$10(
                 IRcsConfigCallback c, AtomicReference exceptionRef) {
             try {
@@ -550,7 +537,6 @@ public class ImsConfigImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$triggerRcsReconfiguration$11(
                 AtomicReference exceptionRef) {
             try {
@@ -587,7 +573,6 @@ public class ImsConfigImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setRcsClientConfiguration$12(
                 RcsClientConfiguration rcc, AtomicReference exceptionRef) {
             try {
@@ -619,7 +604,6 @@ public class ImsConfigImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyIntImsConfigChanged$13(
                 int item, int value, AtomicReference exceptionRef) {
             try {
@@ -652,7 +636,6 @@ public class ImsConfigImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyStringImsConfigChanged$14(
                 int item, String value, AtomicReference exceptionRef) {
             try {
@@ -745,17 +728,14 @@ public class ImsConfigImplBase {
         this.mImsConfigStub = new ImsConfigStub(this, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addImsConfigCallback(IImsConfigCallback c) {
         this.mCallbacks.register(c);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeImsConfigCallback(IImsConfigCallback c) {
         this.mCallbacks.unregister(c);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void notifyConfigChanged(final int item, final int value) {
         if (this.mCallbacks == null) {
             return;
@@ -782,7 +762,6 @@ public class ImsConfigImplBase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyConfigChanged(final int item, final String value) {
         if (this.mCallbacks == null) {
             return;
@@ -809,7 +788,6 @@ public class ImsConfigImplBase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addRcsConfigCallback(IRcsConfigCallback c) {
         this.mRcsCallbacks.register(c);
         synchronized (this.mRcsConfigDataLock) {
@@ -825,12 +803,10 @@ public class ImsConfigImplBase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeRcsConfigCallback(IRcsConfigCallback c) {
         this.mRcsCallbacks.unregister(c);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onNotifyRcsAutoConfigurationReceived(byte[] config, boolean isCompressed) {
         final byte[] rcsConfigData = isCompressed ? RcsConfig.decompressGzip(config) : config;
         synchronized (this.mRcsConfigDataLock) {
@@ -864,7 +840,6 @@ public class ImsConfigImplBase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onNotifyRcsAutoConfigurationRemoved() {
         synchronized (this.mRcsConfigDataLock) {
             this.mRcsConfigData = null;

@@ -9,13 +9,11 @@ public class CellConfigLte implements Parcelable {
     public static final Parcelable.Creator<CellConfigLte> CREATOR =
             new Parcelable.Creator<
                     CellConfigLte>() { // from class: android.telephony.CellConfigLte.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellConfigLte createFromParcel(Parcel in) {
                     return new CellConfigLte(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellConfigLte[] newArray(int size) {
                     return new CellConfigLte[0];

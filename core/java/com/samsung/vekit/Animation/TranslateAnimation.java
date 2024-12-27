@@ -16,7 +16,6 @@ public class TranslateAnimation extends Animation<Vector3<Float>> {
         super(context, AnimationType.TRANSLATE, id, name);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.vekit.Animation.Animation
     public void rollback() {
         if (isEnableRollback()) {

@@ -662,13 +662,11 @@ public class Intent implements Parcelable, Cloneable {
     private static final int COPY_MODE_HISTORY = 2;
     public static final Parcelable.Creator<Intent> CREATOR =
             new Parcelable.Creator<Intent>() { // from class: android.content.Intent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Intent createFromParcel(Parcel in) {
                     return new Intent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Intent[] newArray(int size) {
                     return new Intent[size];
@@ -1210,7 +1208,6 @@ public class Intent implements Parcelable, Cloneable {
         public static final Parcelable.Creator<ShortcutIconResource> CREATOR =
                 new Parcelable.Creator<ShortcutIconResource>() { // from class:
                     // android.content.Intent.ShortcutIconResource.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ShortcutIconResource createFromParcel(Parcel source) {
                         ShortcutIconResource icon = new ShortcutIconResource();
@@ -1219,7 +1216,6 @@ public class Intent implements Parcelable, Cloneable {
                         return icon;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ShortcutIconResource[] newArray(int size) {
                         return new ShortcutIconResource[size];
@@ -1737,8 +1733,6 @@ public class Intent implements Parcelable, Cloneable {
         return intent;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:57:0x01af  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x01ad A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3505,7 +3499,6 @@ public class Intent implements Parcelable, Cloneable {
         prepareToLeaveProcess(leavingPackage);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:90:0x0149, code lost:
 
        if (r1.equals(android.content.Intent.ACTION_PROVIDER_CHANGED) != false) goto L100;

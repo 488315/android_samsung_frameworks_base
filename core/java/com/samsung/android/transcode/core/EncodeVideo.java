@@ -741,7 +741,6 @@ public class EncodeVideo extends EncodeBase {
         return formatV;
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:46:0x0129 */
     @Override // com.samsung.android.transcode.core.Encode
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -8,7 +8,6 @@ import android.text.TextUtils;
 public class GatewayInfo implements Parcelable {
     public static final Parcelable.Creator<GatewayInfo> CREATOR =
             new Parcelable.Creator<GatewayInfo>() { // from class: android.telecom.GatewayInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GatewayInfo createFromParcel(Parcel source) {
                     String gatewayPackageName = source.readString();
@@ -17,7 +16,6 @@ public class GatewayInfo implements Parcelable {
                     return new GatewayInfo(gatewayPackageName, gatewayUri, originalAddress);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GatewayInfo[] newArray(int size) {
                     return new GatewayInfo[size];

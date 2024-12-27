@@ -491,7 +491,6 @@ public class Toast {
         return this.mTN;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static INotificationManager getService() {
         if (sService != null) {
             return sService;
@@ -714,7 +713,6 @@ public class Toast {
         public void onToastHidden() {}
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class CallbackBinder extends ITransientNotificationCallback.Stub {
         private final List<Callback> mCallbacks;
         private final Handler mHandler;
@@ -736,7 +734,6 @@ public class Toast {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onToastShown$0() {
             for (Callback callback : getCallbacks()) {
                 callback.onToastShown();
@@ -755,7 +752,6 @@ public class Toast {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onToastHidden$1() {
             for (Callback callback : getCallbacks()) {
                 callback.onToastHidden();

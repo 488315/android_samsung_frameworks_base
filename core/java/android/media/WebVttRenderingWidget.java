@@ -166,7 +166,6 @@ class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.Rendering
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setCaptionStyle(CaptioningManager.CaptionStyle captionStyle, float fontSize) {
         CaptioningManager.CaptionStyle captionStyle2 =
                 DEFAULT_CAPTION_STYLE.applyStyle(captionStyle);
@@ -336,7 +335,6 @@ class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.Rendering
         return 100;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int resolveCueAlignment(int layoutDirection, int alignment) {
         switch (alignment) {
             case 201:

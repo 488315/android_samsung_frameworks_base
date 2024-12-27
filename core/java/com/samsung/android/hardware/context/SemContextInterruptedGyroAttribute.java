@@ -10,13 +10,11 @@ public class SemContextInterruptedGyroAttribute extends SemContextAttribute {
             new Parcelable.Creator<
                     SemContextInterruptedGyroAttribute>() { // from class:
                                                             // com.samsung.android.hardware.context.SemContextInterruptedGyroAttribute.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextInterruptedGyroAttribute createFromParcel(Parcel in) {
                     return new SemContextInterruptedGyroAttribute(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextInterruptedGyroAttribute[] newArray(int size) {
                     return new SemContextInterruptedGyroAttribute[size];

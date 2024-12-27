@@ -86,8 +86,6 @@ public abstract class PackageManagerServiceUtils {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.pm.PackageManagerServiceUtils$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.pm.PackageManagerServiceUtils$$ExternalSyntheticLambda0] */
     static {
         final int i = 0;
         REMOVE_IF_APEX_PKG =

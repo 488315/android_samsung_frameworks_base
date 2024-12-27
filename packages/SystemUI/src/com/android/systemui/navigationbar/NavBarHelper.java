@@ -159,8 +159,6 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
         }
     }
 
-    /* JADX WARN: Type inference failed for: r5v2, types: [com.android.systemui.navigationbar.NavBarHelper$3] */
-    /* JADX WARN: Type inference failed for: r6v3, types: [com.android.systemui.navigationbar.NavBarHelper$1] */
     public NavBarHelper(Context context, AccessibilityManager accessibilityManager, AccessibilityButtonModeObserver accessibilityButtonModeObserver, AccessibilityButtonTargetsObserver accessibilityButtonTargetsObserver, SystemActions systemActions, OverviewProxyService overviewProxyService, Lazy lazy, Lazy lazy2, KeyguardStateController keyguardStateController, NavigationModeController navigationModeController, EdgeBackGestureHandler.Factory factory, IWindowManager iWindowManager, UserTracker userTracker, DisplayTracker displayTracker, NotificationShadeWindowController notificationShadeWindowController, ConfigurationController configurationController, DumpManager dumpManager, CommandQueue commandQueue, Executor executor, NavBarStore navBarStore, DisplayManager displayManager, CornerGestureHandler cornerGestureHandler) {
         Handler handler = new Handler(Looper.getMainLooper());
         this.mHandler = handler;
@@ -467,7 +465,6 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void updateAssistantAvailability() {
         if (!BasicRune.NAVBAR_AOSP_BUG_FIX || this.mContext == null || this.mContentResolver == null) {
             return;

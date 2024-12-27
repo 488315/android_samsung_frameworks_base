@@ -16,13 +16,11 @@ public class ProfilerInfo implements Parcelable {
     public static final int CLOCK_TYPE_WALL = 16;
     public static final Parcelable.Creator<ProfilerInfo> CREATOR =
             new Parcelable.Creator<ProfilerInfo>() { // from class: android.app.ProfilerInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ProfilerInfo createFromParcel(Parcel in) {
                     return new ProfilerInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ProfilerInfo[] newArray(int size) {
                     return new ProfilerInfo[size];

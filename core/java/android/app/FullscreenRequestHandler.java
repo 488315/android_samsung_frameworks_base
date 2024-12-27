@@ -53,7 +53,6 @@ public class FullscreenRequestHandler {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void notifyFullscreenRequestResult(
             OutcomeReceiver<Void, Throwable> callback, int result) {
         Throwable e = null;

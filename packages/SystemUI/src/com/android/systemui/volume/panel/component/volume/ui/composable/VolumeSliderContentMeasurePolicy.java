@@ -49,7 +49,6 @@ public final class VolumeSliderContentMeasurePolicy implements MeasurePolicy {
                 Measurable measurable2 = (Measurable) obj;
                 final Placeable mo528measureBRTryo02 = measurable2 != null ? measurable2.mo528measureBRTryo0(Constraints.m717copyZbe2FdA$default(j, 0, m724getMaxWidthimpl2, 0, 0, 13)) : null;
                 layout$1 = measureScope.layout$1(m724getMaxWidthimpl, mo528measureBRTryo0.height + (mo528measureBRTryo02 != null ? mo528measureBRTryo02.height : 0), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.VolumeSliderContentMeasurePolicy$measure$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }

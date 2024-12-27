@@ -17,7 +17,6 @@ public final class WallpaperLoggerImpl implements WallpaperLogger {
         Log.i(str, str2);
         LogLevel logLevel = LogLevel.INFO;
         Function1 function1 = new Function1() { // from class: com.android.systemui.wallpaper.log.WallpaperLoggerImpl$log$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

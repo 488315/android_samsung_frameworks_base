@@ -399,13 +399,11 @@ public final class ImsReasonInfo implements Parcelable {
         CREATOR =
                 new Parcelable.Creator<
                         ImsReasonInfo>() { // from class: android.telephony.ims.ImsReasonInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ImsReasonInfo createFromParcel(Parcel in) {
                         return new ImsReasonInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ImsReasonInfo[] newArray(int size) {
                         return new ImsReasonInfo[size];

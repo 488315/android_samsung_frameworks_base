@@ -60,7 +60,6 @@ public final class InsetsStateController {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.wm.InsetsStateController$1] */
     public InsetsStateController(DisplayContent displayContent) {
         this.mDisplayContent = displayContent;
     }

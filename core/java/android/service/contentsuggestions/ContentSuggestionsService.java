@@ -181,7 +181,6 @@ public abstract class ContentSuggestionsService extends Service {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ContentSuggestionsManager.SelectionsCallback wrapSelectionsCallback(
             final ISelectionsCallback callback) {
         return new ContentSuggestionsManager
@@ -204,7 +203,6 @@ public abstract class ContentSuggestionsService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ContentSuggestionsManager.ClassificationsCallback wrapClassificationCallback(
             final IClassificationsCallback callback) {
         return new ContentSuggestionsManager

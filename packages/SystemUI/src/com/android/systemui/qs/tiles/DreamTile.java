@@ -44,9 +44,6 @@ public final class DreamTile extends QSTileImpl {
     public final AnonymousClass1 mReceiver;
     public final UserTrackerImpl mUserTracker;
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.qs.tiles.DreamTile$1] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.systemui.qs.tiles.DreamTile$2] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.qs.tiles.DreamTile$3] */
     public DreamTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, IDreamManager iDreamManager, SecureSettings secureSettings, BroadcastDispatcher broadcastDispatcher, UserTracker userTracker, boolean z, boolean z2) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mIconDocked = QSTileImpl.ResourceIcon.get(R.drawable.ic_qs_screen_saver);

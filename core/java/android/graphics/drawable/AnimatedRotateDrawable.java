@@ -60,7 +60,6 @@ public class AnimatedRotateDrawable extends DrawableWrapper implements Animatabl
         return this.mRunning;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void nextFrame() {
         unscheduleSelf(this.mNextFrame);
         scheduleSelf(this.mNextFrame, SystemClock.uptimeMillis() + this.mState.mFrameDuration);

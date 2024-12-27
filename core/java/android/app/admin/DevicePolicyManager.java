@@ -2732,8 +2732,6 @@ public class DevicePolicyManager {
         return getKeyguardDisabledFeatures(admin, myUserId());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Multi-variable type inference failed */
     public /* synthetic */ Integer lambda$new$2(Pair query) throws RemoteException {
         return Integer.valueOf(
                 getService()
@@ -2992,7 +2990,6 @@ public class DevicePolicyManager {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Boolean lambda$new$3(Void query) throws RemoteException {
         return Boolean.valueOf(getService().hasDeviceOwner());
     }
@@ -3187,7 +3184,6 @@ public class DevicePolicyManager {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ ComponentName lambda$new$4(UserHandle arg) throws RemoteException {
         return getService().getProfileOwnerOrDeviceOwnerSupervisionComponent(arg);
     }
@@ -3234,7 +3230,6 @@ public class DevicePolicyManager {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Object lambda$new$5(Object query) throws RemoteException {
         return Boolean.valueOf(getService().isOrganizationOwnedDeviceWithManagedProfile());
     }
@@ -5063,7 +5058,6 @@ public class DevicePolicyManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Object lambda$new$8(Object query) throws RemoteException {
         return getService().getDeviceOwnerOrganizationName();
     }
@@ -5073,7 +5067,6 @@ public class DevicePolicyManager {
         return this.mGetDeviceOwnerOrganizationNameCache.query(null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CharSequence lambda$new$9(Integer query) throws RemoteException {
         return getService().getOrganizationNameForUser(query.intValue());
     }
@@ -5240,7 +5233,6 @@ public class DevicePolicyManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Boolean lambda$new$10(ComponentName admin) throws RemoteException {
         return Boolean.valueOf(
                 getService().isNetworkLoggingEnabled(admin, getContext().getPackageName()));
@@ -5667,7 +5659,6 @@ public class DevicePolicyManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void executeCallback(
             final int errorCode,
             final String errorMessage,

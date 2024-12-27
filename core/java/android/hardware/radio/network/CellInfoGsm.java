@@ -11,7 +11,6 @@ public class CellInfoGsm implements Parcelable {
     public static final Parcelable.Creator<CellInfoGsm> CREATOR =
             new Parcelable.Creator<
                     CellInfoGsm>() { // from class: android.hardware.radio.network.CellInfoGsm.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellInfoGsm createFromParcel(Parcel _aidl_source) {
                     CellInfoGsm _aidl_out = new CellInfoGsm();
@@ -19,7 +18,6 @@ public class CellInfoGsm implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellInfoGsm[] newArray(int _aidl_size) {
                     return new CellInfoGsm[_aidl_size];

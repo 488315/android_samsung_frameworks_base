@@ -76,7 +76,6 @@ class ReverseLinearLayout extends LinearLayout {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private static void reverseParams(
             ViewGroup.LayoutParams params, View view, boolean isLayoutReverse) {
         if (view instanceof Reversible) {
@@ -129,7 +128,6 @@ class ReverseLinearLayout extends LinearLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void reverseGroup(ViewGroup group, boolean isLayoutReverse) {
         for (int i = 0; i < group.getChildCount(); i++) {
             View child = group.getChildAt(i);

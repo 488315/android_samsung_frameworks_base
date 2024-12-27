@@ -336,7 +336,6 @@ public class SmsMessage extends SmsMessageBase {
         return bo;
     }
 
-    /* JADX WARN: Type inference failed for: r13v6, types: [java.time.LocalDateTime] */
     public static SubmitPdu getDeliverPdu(String scAddress, String originatingAddress, String message, long date) {
         byte[] header;
         boolean isNumeric;
@@ -904,7 +903,6 @@ public class SmsMessage extends SmsMessageBase {
         parseUserData(p, hasUserDataHeader);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x0269, code lost:
     
         if ((r18.mDataCodingScheme & 240) != 224) goto L107;
@@ -917,8 +915,6 @@ public class SmsMessage extends SmsMessageBase {
     
         if ((r18.mDataCodingScheme & 3) != 0) goto L107;
      */
-    /* JADX WARN: Removed duplicated region for block: B:185:0x00aa  */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x00ac  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1065,11 +1061,6 @@ public class SmsMessage extends SmsMessageBase {
         return getSubmitPdu(subId, scAddress, destinationAddress, message, statusReportRequested, null, replyPath, expiry, serviceType, encodingType, a, b);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:47:0x017a  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x01a9  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x01cb A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x01cd  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x01c3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

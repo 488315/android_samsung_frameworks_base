@@ -193,7 +193,6 @@ public abstract class ServiceNameBaseResolver {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.infra.ServiceNameBaseResolver$1] */
     public final void setTemporaryServices(final int i, int i2, String[] strArr) {
         synchronized (this.mLock) {
             try {

@@ -119,8 +119,6 @@ public final class ImmersiveModeConfirmation {
         public final AnonymousClass3 mReceiver;
         public final AnonymousClass1 mUpdateLayoutRunnable;
 
-        /* JADX WARN: Type inference failed for: r3v3, types: [com.android.server.wm.ImmersiveModeConfirmation$ClingWindowView$2] */
-        /* JADX WARN: Type inference failed for: r3v4, types: [com.android.server.wm.ImmersiveModeConfirmation$ClingWindowView$3] */
         public ClingWindowView(Context context, Runnable runnable) {
             super(context);
             ColorDrawable colorDrawable = new ColorDrawable(0);

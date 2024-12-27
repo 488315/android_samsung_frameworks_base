@@ -428,13 +428,11 @@ public class AccessibilityShortcutController {
         return alertDialog;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createShortcutWarningDialog$0(
             int userId, DialogInterface d, int which) {
         enableDefaultHardwareShortcut(userId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createShortcutWarningDialog$1(
             int userId, AccessibilityManager am, DialogInterface d, int which) {
         Set<String> targetServices =
@@ -457,7 +455,6 @@ public class AccessibilityShortcutController {
                 userId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createShortcutWarningDialog$2(
             int userId, DialogInterface d) {
         Settings.Secure.putIntForUser(
@@ -539,12 +536,10 @@ public class AccessibilityShortcutController {
         return accessibilityManager.getEnabledAccessibilityServiceList(-1).contains(serviceInfo);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean hasFeatureLeanback() {
         return this.mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void playNotificationTone() {
         int audioAttributesUsage;
         if (hasFeatureLeanback()) {
@@ -646,7 +641,6 @@ public class AccessibilityShortcutController {
         return ComponentName.unflattenFromString(shortcutTargets.get(0));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class TtsPrompt implements TextToSpeech.OnInitListener {
         private static final int RETRY_MILLIS = 1000;
         private boolean mDismiss;
@@ -687,7 +681,6 @@ public class AccessibilityShortcutController {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void play() {
             if (this.mDismiss) {
                 return;
@@ -699,7 +692,6 @@ public class AccessibilityShortcutController {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void waitForTtsReady() {
             if (this.mDismiss) {
                 return;

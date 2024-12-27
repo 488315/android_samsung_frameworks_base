@@ -8,7 +8,6 @@ public class ActivePwle implements Parcelable {
     public static final Parcelable.Creator<ActivePwle> CREATOR =
             new Parcelable.Creator<
                     ActivePwle>() { // from class: android.hardware.vibrator.ActivePwle.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivePwle createFromParcel(Parcel _aidl_source) {
                     ActivePwle _aidl_out = new ActivePwle();
@@ -16,7 +15,6 @@ public class ActivePwle implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivePwle[] newArray(int _aidl_size) {
                     return new ActivePwle[_aidl_size];

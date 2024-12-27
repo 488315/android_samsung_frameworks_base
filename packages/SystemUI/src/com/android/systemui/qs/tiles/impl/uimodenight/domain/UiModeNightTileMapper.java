@@ -38,19 +38,10 @@ public final class UiModeNightTileMapper implements QSTileDataToStateMapper {
         Resources resources = this.resources;
         Resources.Theme theme = this.theme;
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.uimodenight.domain.UiModeNightTileMapper$map$1$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:10:0x00c0  */
-            /* JADX WARN: Removed duplicated region for block: B:15:0x0101  */
-            /* JADX WARN: Removed duplicated region for block: B:18:0x0134  */
-            /* JADX WARN: Removed duplicated region for block: B:22:0x013b  */
-            /* JADX WARN: Removed duplicated region for block: B:23:0x0109  */
-            /* JADX WARN: Removed duplicated region for block: B:24:0x00d3  */
-            /* JADX WARN: Removed duplicated region for block: B:35:0x00a3  */
-            /* JADX WARN: Removed duplicated region for block: B:7:0x00a0  */
             @Override // kotlin.jvm.functions.Function1
             /*
                 Code decompiled incorrectly, please refer to instructions dump.

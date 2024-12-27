@@ -611,8 +611,6 @@ public class EnterpriseDeviceManagerServiceImpl extends EnterpriseDeviceManagerS
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:28:0x00ce A[Catch: all -> 0x009b, TryCatch #1 {all -> 0x009b, blocks: (B:4:0x0009, B:6:0x002a, B:8:0x003a, B:13:0x004a, B:18:0x0072, B:21:0x0078, B:23:0x0081, B:26:0x008b, B:28:0x00ce, B:30:0x0104, B:32:0x00a0, B:36:0x00b0, B:38:0x012b, B:12:0x0160, B:42:0x0164), top: B:3:0x0009, inners: #0 }] */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x0104 A[Catch: all -> 0x009b, TryCatch #1 {all -> 0x009b, blocks: (B:4:0x0009, B:6:0x002a, B:8:0x003a, B:13:0x004a, B:18:0x0072, B:21:0x0078, B:23:0x0081, B:26:0x008b, B:28:0x00ce, B:30:0x0104, B:32:0x00a0, B:36:0x00b0, B:38:0x012b, B:12:0x0160, B:42:0x0164), top: B:3:0x0009, inners: #0 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1082,7 +1080,6 @@ public class EnterpriseDeviceManagerServiceImpl extends EnterpriseDeviceManagerS
         hashMap2.put("delegation-cert-selection", "dcs");
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.enterprise.EnterpriseDeviceManagerServiceImpl$1] */
     public EnterpriseDeviceManagerServiceImpl(Context context) {
         SQLiteDatabase sQLiteDatabase;
         int i;
@@ -1955,7 +1952,6 @@ public class EnterpriseDeviceManagerServiceImpl extends EnterpriseDeviceManagerS
         return this.mConstrainedState.disableConstrainedState(enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_ADVANCED_RESTRICTION"))).mCallerUid);
     }
 
-    /* JADX WARN: Type inference failed for: r8v37, types: [boolean, int] */
     public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         String str;
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
@@ -2235,8 +2231,6 @@ public class EnterpriseDeviceManagerServiceImpl extends EnterpriseDeviceManagerS
     
         if (com.samsung.android.knox.SemPersonaManager.isKnoxId(r4) == false) goto L141;
      */
-    /* JADX WARN: Removed duplicated region for block: B:138:0x02df  */
-    /* JADX WARN: Removed duplicated region for block: B:148:0x031f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2370,8 +2364,6 @@ public class EnterpriseDeviceManagerServiceImpl extends EnterpriseDeviceManagerS
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00b3  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00b9 A[Catch: Exception -> 0x0064, TryCatch #1 {Exception -> 0x0064, blocks: (B:3:0x0015, B:4:0x001f, B:6:0x0025, B:50:0x003c, B:24:0x0087, B:33:0x00c4, B:35:0x00b6, B:36:0x00b9, B:37:0x009a, B:40:0x00a5, B:19:0x0106, B:48:0x0101, B:53:0x012f, B:55:0x0135, B:56:0x013e, B:58:0x0144, B:59:0x014d, B:61:0x0153, B:10:0x0067, B:45:0x0074, B:12:0x0077, B:14:0x007d), top: B:2:0x0015, inners: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3386,10 +3378,6 @@ public class EnterpriseDeviceManagerServiceImpl extends EnterpriseDeviceManagerS
         RestrictionToastManager.show(i2);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r8v0 */
-    /* JADX WARN: Type inference failed for: r8v1, types: [int] */
-    /* JADX WARN: Type inference failed for: r8v2 */
     public final boolean sendKnoxAnalyticsDeviceStatus() {
         int deviceOwnerUserId;
         int callingUid = Binder.getCallingUid();

@@ -53,7 +53,6 @@ public abstract class ResolverRankerService extends Service {
         super.onDestroy();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void sendResult(List<ResolverTarget> targets, IResolverRankerResult result) {
         try {
             result.sendResult(targets);

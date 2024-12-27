@@ -12,7 +12,6 @@ public class SemStrokeData implements Parcelable {
             new Parcelable.Creator<
                     SemStrokeData>() { // from class:
                                        // com.samsung.android.infoextraction.SemStrokeData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemStrokeData createFromParcel(Parcel in) {
                     SemStrokeData semStrokeData = new SemStrokeData();
@@ -20,7 +19,6 @@ public class SemStrokeData implements Parcelable {
                     return semStrokeData;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemStrokeData[] newArray(int size) {
                     return new SemStrokeData[size];

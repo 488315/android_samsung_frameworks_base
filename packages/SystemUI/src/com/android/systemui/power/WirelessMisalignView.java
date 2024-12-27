@@ -51,7 +51,6 @@ public class WirelessMisalignView extends RelativeLayout implements View.OnClick
         this(context, attributeSet, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.power.WirelessMisalignView$1] */
     public WirelessMisalignView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.mOnClickListener = new View.OnClickListener() { // from class: com.android.systemui.power.WirelessMisalignView.1

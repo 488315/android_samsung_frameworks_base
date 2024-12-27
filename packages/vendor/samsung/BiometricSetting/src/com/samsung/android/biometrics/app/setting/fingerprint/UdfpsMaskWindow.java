@@ -240,7 +240,6 @@ public final class UdfpsMaskWindow extends SysUiWindow
 
        if (r6 != 2) goto L26;
     */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0086  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

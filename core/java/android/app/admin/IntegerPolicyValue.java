@@ -9,13 +9,11 @@ public final class IntegerPolicyValue extends PolicyValue<Integer> {
     public static final Parcelable.Creator<IntegerPolicyValue> CREATOR =
             new Parcelable.Creator<
                     IntegerPolicyValue>() { // from class: android.app.admin.IntegerPolicyValue.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IntegerPolicyValue createFromParcel(Parcel source) {
                     return new IntegerPolicyValue(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IntegerPolicyValue[] newArray(int size) {
                     return new IntegerPolicyValue[size];

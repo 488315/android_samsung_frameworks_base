@@ -87,8 +87,6 @@ public final class MediaTttSenderCoordinator implements CoreStartable, Dumpable 
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.media.taptotransfer.sender.MediaTttSenderCoordinator$commandQueueCallbacks$1] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.media.taptotransfer.sender.MediaTttSenderCoordinator$displayListener$1] */
     public MediaTttSenderCoordinator(ChipbarCoordinator chipbarCoordinator, CommandQueue commandQueue, Context context, DumpManager dumpManager, MediaTttSenderLogger mediaTttSenderLogger, MediaTttFlags mediaTttFlags, MediaTttSenderUiEventLogger mediaTttSenderUiEventLogger) {
         this.chipbarCoordinator = chipbarCoordinator;
         this.commandQueue = commandQueue;
@@ -203,7 +201,6 @@ public final class MediaTttSenderCoordinator implements CoreStartable, Dumpable 
                 Intrinsics.checkNotNull(string);
                 MediaTttUtils.Companion companion2 = MediaTttUtils.Companion;
                 Function0 function0 = new Function0() { // from class: com.android.systemui.media.taptotransfer.sender.MediaTttSenderCoordinator$createChipbarInfo$icon$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

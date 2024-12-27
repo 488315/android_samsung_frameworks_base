@@ -47,7 +47,6 @@ public final class VolumeBarView extends LinearLayout implements SoundCraftVMCom
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.audio.soundcraft.view.volume.VolumeBarView$volumeKeyHandler$1] */
     public VolumeBarView(Context context) {
         super(context);
         SoundCraftViewModelExt soundCraftViewModelExt = SoundCraftViewModelExt.INSTANCE;
@@ -137,7 +136,6 @@ public final class VolumeBarView extends LinearLayout implements SoundCraftVMCom
         removeOnUnhandledKeyEventListener(this.volumeKeyHandler);
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.audio.soundcraft.view.volume.VolumeBarView$volumeKeyHandler$1] */
     public VolumeBarView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         SoundCraftViewModelExt soundCraftViewModelExt = SoundCraftViewModelExt.INSTANCE;
@@ -207,7 +205,6 @@ public final class VolumeBarView extends LinearLayout implements SoundCraftVMCom
         };
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.audio.soundcraft.view.volume.VolumeBarView$volumeKeyHandler$1] */
     public VolumeBarView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         SoundCraftViewModelExt soundCraftViewModelExt = SoundCraftViewModelExt.INSTANCE;

@@ -174,7 +174,6 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public SubjectKeyIdentifier createSubjectKeyId(PublicKey pubKey) {
         try {
             SubjectPublicKeyInfo info = SubjectPublicKeyInfo.getInstance(pubKey.getEncoded());
@@ -544,7 +543,6 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi
         return cipher;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // java.security.KeyStoreSpi
     public void engineLoad(InputStream stream, char[] password) throws IOException {
         Vector chain;
@@ -1131,22 +1129,6 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi
         doStore(stream, password, false);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x01e8 A[Catch: CertificateEncodingException -> 0x01cb, TRY_ENTER, TRY_LEAVE, TryCatch #12 {CertificateEncodingException -> 0x01cb, blocks: (B:47:0x01bd, B:52:0x01e8), top: B:46:0x01bd }] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x01ff A[Catch: CertificateEncodingException -> 0x0240, TRY_LEAVE, TryCatch #3 {CertificateEncodingException -> 0x0240, blocks: (B:50:0x01e0, B:54:0x01f5, B:55:0x01f9, B:57:0x01ff, B:82:0x01d4), top: B:53:0x01f5 }] */
-    /* JADX WARN: Type inference failed for: r1v22, types: [java.lang.Object, java.security.cert.Certificate] */
-    /* JADX WARN: Type inference failed for: r1v24 */
-    /* JADX WARN: Type inference failed for: r1v25 */
-    /* JADX WARN: Type inference failed for: r1v28 */
-    /* JADX WARN: Type inference failed for: r3v22, types: [java.lang.Object, java.security.cert.Certificate] */
-    /* JADX WARN: Type inference failed for: r5v0, types: [java.util.Hashtable] */
-    /* JADX WARN: Type inference failed for: r5v1, types: [java.util.Hashtable] */
-    /* JADX WARN: Type inference failed for: r5v11 */
-    /* JADX WARN: Type inference failed for: r5v12 */
-    /* JADX WARN: Type inference failed for: r5v13 */
-    /* JADX WARN: Type inference failed for: r5v15 */
-    /* JADX WARN: Type inference failed for: r5v9 */
-    /* JADX WARN: Type inference failed for: r9v1, types: [java.util.Set] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1163,7 +1145,6 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi
                     + " char[], boolean):void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private SafeBag createSafeBag(String certId, Certificate certificate)
             throws CertificateEncodingException {
         CertBag cBag = new CertBag(x509Certificate, new DEROctetString(certificate.getEncoded()));

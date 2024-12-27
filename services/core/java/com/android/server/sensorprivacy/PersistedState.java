@@ -65,13 +65,6 @@ public final class PersistedState {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0100  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0109  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x016b  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x01cd  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x01d4  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x007c A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

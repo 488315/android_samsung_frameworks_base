@@ -17,13 +17,11 @@ public final class TextSelection implements Parcelable {
     public static final Parcelable.Creator<TextSelection> CREATOR =
             new Parcelable.Creator<
                     TextSelection>() { // from class: android.view.textclassifier.TextSelection.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextSelection createFromParcel(Parcel in) {
                     return new TextSelection(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextSelection[] newArray(int size) {
                     return new TextSelection[size];
@@ -159,13 +157,11 @@ public final class TextSelection implements Parcelable {
                 new Parcelable.Creator<
                         Request>() { // from class:
                                      // android.view.textclassifier.TextSelection.Request.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Request createFromParcel(Parcel in) {
                         return Request.readFromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Request[] newArray(int size) {
                         return new Request[size];
@@ -304,7 +300,6 @@ public final class TextSelection implements Parcelable {
             dest.writeBoolean(this.mIncludeTextClassification);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static Request readFromParcel(Parcel in) {
             CharSequence text = in.readCharSequence();
             int startIndex = in.readInt();

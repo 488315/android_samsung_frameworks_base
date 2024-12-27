@@ -89,7 +89,6 @@ public final class AssociationRequestsProcessor {
             };
     public final PackageManagerInternal mPackageManagerInternal;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.companion.association.AssociationRequestsProcessor$1] */
     public AssociationRequestsProcessor(
             Context context,
             PackageManagerInternal packageManagerInternal,

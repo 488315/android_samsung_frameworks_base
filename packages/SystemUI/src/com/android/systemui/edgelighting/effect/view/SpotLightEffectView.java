@@ -22,7 +22,6 @@ public final class SpotLightEffectView extends View {
     public int mCurrWidth;
     public final Drawable mSpotlightDrawable;
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.edgelighting.effect.view.SpotLightEffectView$2] */
     public SpotLightEffectView(Context context) {
         super(context);
         this.mAnimtorListener = new AnimatorListenerAdapter() { // from class: com.android.systemui.edgelighting.effect.view.SpotLightEffectView.2
@@ -132,7 +131,6 @@ public final class SpotLightEffectView extends View {
         invalidate();
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.edgelighting.effect.view.SpotLightEffectView$2] */
     public SpotLightEffectView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mAnimtorListener = new AnimatorListenerAdapter() { // from class: com.android.systemui.edgelighting.effect.view.SpotLightEffectView.2
@@ -174,7 +172,6 @@ public final class SpotLightEffectView extends View {
         setBackground(drawable);
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.edgelighting.effect.view.SpotLightEffectView$2] */
     public SpotLightEffectView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.mAnimtorListener = new AnimatorListenerAdapter() { // from class: com.android.systemui.edgelighting.effect.view.SpotLightEffectView.2
@@ -216,7 +213,6 @@ public final class SpotLightEffectView extends View {
         setBackground(drawable);
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.edgelighting.effect.view.SpotLightEffectView$2] */
     public SpotLightEffectView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mAnimtorListener = new AnimatorListenerAdapter() { // from class: com.android.systemui.edgelighting.effect.view.SpotLightEffectView.2

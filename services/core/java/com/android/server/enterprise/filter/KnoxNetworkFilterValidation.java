@@ -307,8 +307,6 @@ public final class KnoxNetworkFilterValidation {
         return instanceValidation;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0050 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0052  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

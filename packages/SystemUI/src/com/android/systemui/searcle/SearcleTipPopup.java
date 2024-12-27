@@ -86,8 +86,6 @@ public final class SearcleTipPopup {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r3v11, types: [com.android.systemui.searcle.SearcleTipPopup$onAttachStateChangeListener$1] */
-    /* JADX WARN: Type inference failed for: r3v12, types: [com.android.systemui.searcle.SearcleTipPopup$inputEventListener$1] */
     public SearcleTipPopup(Context context) {
         this.context = context;
         Object systemService = context.getSystemService("window");
@@ -174,11 +172,6 @@ public final class SearcleTipPopup {
         };
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:109:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x00c1  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0098  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00be  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00db  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

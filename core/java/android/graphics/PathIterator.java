@@ -96,7 +96,6 @@ public class PathIterator implements Iterator<Segment> {
         return verb;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // java.util.Iterator
     public Segment next() {
         int returnVerb = getReturnVerb(this.mCachedVerb);

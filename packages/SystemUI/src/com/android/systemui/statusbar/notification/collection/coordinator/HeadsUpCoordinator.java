@@ -487,10 +487,6 @@ public final class HeadsUpCoordinator implements Coordinator {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$mNotifPromoter$1] */
-    /* JADX WARN: Type inference failed for: r1v12, types: [com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$mOnHeadsUpChangedListener$1] */
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$mNotifCollectionListener$1] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$mLifetimeExtender$1] */
     public HeadsUpCoordinator(HeadsUpCoordinatorLogger headsUpCoordinatorLogger, SystemClock systemClock, HeadsUpManager headsUpManager, HeadsUpViewBinder headsUpViewBinder, VisualInterruptionDecisionProvider visualInterruptionDecisionProvider, NotificationRemoteInputManager notificationRemoteInputManager, LaunchFullScreenIntentProvider launchFullScreenIntentProvider, NotifPipelineFlags notifPipelineFlags, NodeController nodeController, DelayableExecutor delayableExecutor) {
         this.mLogger = headsUpCoordinatorLogger;
         this.mSystemClock = systemClock;
@@ -504,13 +500,11 @@ public final class HeadsUpCoordinator implements Coordinator {
         this.mExecutor = delayableExecutor;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void cancelHeadsUpBind(NotificationEntry notificationEntry) {
         this.mEntriesBindingUntil.remove(notificationEntry.mKey);
         this.mHeadsUpViewBinder.abortBindCallback(notificationEntry);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void cleanUpEntryTimes() {
         long currentTimeMillis = this.mSystemClock.currentTimeMillis() - 2000;
         ArraySet arraySet = new ArraySet();
@@ -533,7 +527,6 @@ public final class HeadsUpCoordinator implements Coordinator {
         this.mFSIUpdateCandidates.removeAll(arraySet2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void endNotifLifetimeExtensionIfExtended(NotificationEntry notificationEntry) {
         if (this.mNotifsExtendingLifetime.containsKey(notificationEntry)) {
             Runnable remove = this.mNotifsExtendingLifetime.remove(notificationEntry);
@@ -547,7 +540,6 @@ public final class HeadsUpCoordinator implements Coordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final NotificationEntry findBestTransferChild(List<NotificationEntry> list, final Function1 function1) {
         return (NotificationEntry) SequencesKt___SequencesKt.firstOrNull(new SequencesKt___SequencesKt$sortedWith$1(SequencesKt___SequencesKt.filter(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$findBestTransferChild$1
             @Override // kotlin.jvm.functions.Function1
@@ -582,7 +574,6 @@ public final class HeadsUpCoordinator implements Coordinator {
         })));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final NotificationEntry findHeadsUpOverride(List<PostedEntry> list, Function1 function1) {
         PostedEntry postedEntry = (PostedEntry) SequencesKt___SequencesKt.firstOrNull(new SequencesKt___SequencesKt$sortedWith$1(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$findHeadsUpOverride$1
             @Override // kotlin.jvm.functions.Function1
@@ -590,7 +581,6 @@ public final class HeadsUpCoordinator implements Coordinator {
                 return Boolean.valueOf(!postedEntry2.getEntry().mSbn.getNotification().isGroupSummary());
             }
         }), new Comparator() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$findHeadsUpOverride$$inlined$sortedBy$1
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // java.util.Comparator
             public final int compare(T t, T t2) {
                 return ComparisonsKt__ComparisonsKt.compareValues(Long.valueOf(-((HeadsUpCoordinator.PostedEntry) t).getEntry().mSbn.getNotification().getWhen()), Long.valueOf(-((HeadsUpCoordinator.PostedEntry) t2).getEntry().mSbn.getNotification().getWhen()));
@@ -606,7 +596,6 @@ public final class HeadsUpCoordinator implements Coordinator {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final Map<String, GroupLocation> getGroupLocationsByKey(List<? extends ListEntry> list) {
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         for (ListEntry listEntry : list) {
@@ -630,7 +619,6 @@ public final class HeadsUpCoordinator implements Coordinator {
         return linkedHashMap;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void handlePostedEntry(PostedEntry postedEntry, HunMutator hunMutator, String str) {
         this.mLogger.logPostedEntryWillEvaluate(postedEntry, str);
         if (postedEntry.getWasAdded()) {
@@ -662,7 +650,6 @@ public final class HeadsUpCoordinator implements Coordinator {
         return ((BaseHeadsUpManager) this.mHeadsUpManager).isHeadsUpEntry(listEntry.getKey()) || isEntryBinding(listEntry);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean isCandidateForFSIReconsideration(NotificationEntry notificationEntry) {
         Long l = this.mFSIUpdateCandidates.get(notificationEntry.mKey);
         if (l == null) {
@@ -671,13 +658,11 @@ public final class HeadsUpCoordinator implements Coordinator {
         return this.mSystemClock.currentTimeMillis() - l.longValue() <= 2000;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean isEntryBinding(ListEntry listEntry) {
         Long l = this.mEntriesBindingUntil.get(listEntry.getKey());
         return l != null && l.longValue() >= this.mNow;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean isGoingToShowHunNoRetract(ListEntry listEntry) {
         PostedEntry postedEntry = this.mPostedEntries.get(listEntry.getKey());
         if (!(postedEntry != null ? postedEntry.getCalculateShouldBeHeadsUpNoRetract() : isAttemptingToShowHun(listEntry))) {
@@ -689,13 +674,11 @@ public final class HeadsUpCoordinator implements Coordinator {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean isGoingToShowHunStrict(ListEntry listEntry) {
         PostedEntry postedEntry = this.mPostedEntries.get(listEntry.getKey());
         return postedEntry != null ? postedEntry.getCalculateShouldBeHeadsUpStrict() : isAttemptingToShowHun(listEntry);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean isNewEnoughForRankingUpdate(NotificationEntry notificationEntry) {
         Long l;
         if (this.mEntriesUpdateTimes.containsKey(notificationEntry.mKey) && (l = this.mEntriesUpdateTimes.get(notificationEntry.mKey)) != null) {
@@ -704,7 +687,6 @@ public final class HeadsUpCoordinator implements Coordinator {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean isSticky(NotificationEntry notificationEntry) {
         BaseHeadsUpManager.HeadsUpEntry headsUpEntry = ((BaseHeadsUpManager) this.mHeadsUpManager).getHeadsUpEntry(notificationEntry.mKey);
         if (headsUpEntry != null) {
@@ -713,7 +695,6 @@ public final class HeadsUpCoordinator implements Coordinator {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onHeadsUpViewBound(NotificationEntry notificationEntry) {
         ((BaseHeadsUpManager) this.mHeadsUpManager).showNotification(notificationEntry);
         this.mEntriesBindingUntil.remove(notificationEntry.mKey);
@@ -725,7 +706,6 @@ public final class HeadsUpCoordinator implements Coordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean shouldHunAgain(NotificationEntry notificationEntry) {
         return !notificationEntry.interruption || (notificationEntry.mSbn.getNotification().flags & 8) == 0;
     }
@@ -783,8 +763,6 @@ public final class HeadsUpCoordinator implements Coordinator {
 
     public final void onBeforeFinalizeFilter(final List<? extends ListEntry> list) {
         HeadsUpCoordinatorKt.modifyHuns(this.mHeadsUpManager, new Function1() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$onBeforeFinalizeFilter$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            /* JADX WARN: Multi-variable type inference failed */
             {
                 super(1);
             }

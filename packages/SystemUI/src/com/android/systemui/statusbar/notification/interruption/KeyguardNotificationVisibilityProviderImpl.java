@@ -60,7 +60,6 @@ public final class KeyguardNotificationVisibilityProviderImpl implements CoreSta
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.notification.interruption.KeyguardNotificationVisibilityProviderImpl$userTrackerCallback$1] */
     public KeyguardNotificationVisibilityProviderImpl(Handler handler, KeyguardStateController keyguardStateController, NotificationLockscreenUserManager notificationLockscreenUserManager, KeyguardUpdateMonitor keyguardUpdateMonitor, HighPriorityProvider highPriorityProvider, SysuiStatusBarStateController sysuiStatusBarStateController, UserTracker userTracker, SecureSettings secureSettings, GlobalSettings globalSettings, FeatureFlagsClassic featureFlagsClassic, INotificationManager iNotificationManager) {
         this.handler = handler;
         this.keyguardStateController = keyguardStateController;
@@ -123,7 +122,6 @@ public final class KeyguardNotificationVisibilityProviderImpl implements CoreSta
         this.hideSilentNotificationsOnLockscreen = !this.secureSettings.getBoolForUser(SettingsHelper.INDEX_SHOW_SILENT_NOTIFICATION_ON_LOCKSCREEN, true, -2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

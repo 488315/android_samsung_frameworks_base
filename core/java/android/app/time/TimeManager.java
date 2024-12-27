@@ -113,7 +113,6 @@ public final class TimeManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyTimeZoneDetectorListeners() {
         synchronized (this.mLock) {
             if (this.mTimeZoneDetectorListeners != null

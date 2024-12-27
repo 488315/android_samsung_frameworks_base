@@ -292,7 +292,6 @@ public class StaticLayout extends Layout {
         this(Builder.obtain(source, bufstart, bufend, paint, outerwidth).setAlignment(align).setTextDirection(textDir).setLineSpacing(spacingadd, spacingmult).setIncludePad(includepad).setEllipsize(ellipsize).setEllipsizedWidth(ellipsizedWidth).setMaxLines(maxLines), includepad, ellipsize != null ? 7 : 5);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -518,15 +517,6 @@ public class StaticLayout extends Layout {
     
         if (r2 != android.text.TextUtils.TruncateAt.MARQUEE) goto L117;
      */
-    /* JADX WARN: Removed duplicated region for block: B:175:0x076b A[LOOP:0: B:30:0x0208->B:175:0x076b, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:176:0x0757 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:199:0x03d3  */
-    /* JADX WARN: Removed duplicated region for block: B:200:0x036b  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0343  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x037e A[LOOP:3: B:63:0x037c->B:64:0x037e, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x03be  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x03db A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x0450  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -539,10 +529,6 @@ public class StaticLayout extends Layout {
         throw new UnsupportedOperationException("Method not decompiled: android.text.StaticLayout.generate(android.text.StaticLayout$Builder, boolean, boolean):void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r13v1 */
-    /* JADX WARN: Type inference failed for: r13v2, types: [int] */
-    /* JADX WARN: Type inference failed for: r13v7 */
     private int out(CharSequence text, int start, int end, int above, int below, int top, int bottom, int v, float spacingmult, float spacingadd, LineHeightSpan[] chooseHt, int[] chooseHtv, Paint.FontMetricsInt fm, boolean hasTab, int hyphenEdit, boolean needMultiply, MeasuredParagraph measured, int bufEnd, boolean includePad, boolean trackPad, boolean addLastLineLineSpacing, char[] chs, int widthStart, TextUtils.TruncateAt ellipsize, float ellipsisWidth, float textWidth, TextPaint paint, boolean moreChars) {
         int[] lines;
         ?? r13;

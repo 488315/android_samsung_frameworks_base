@@ -254,8 +254,6 @@ public final class OngoingCallController implements CallbackController, Dumpable
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v18, types: [com.android.systemui.statusbar.phone.ongoingcall.OngoingCallController$notifListener$1] */
-    /* JADX WARN: Type inference failed for: r1v19, types: [com.android.systemui.statusbar.phone.ongoingcall.OngoingCallController$configurationListener$1] */
     public OngoingCallController(CoroutineScope coroutineScope, Context context, OngoingCallRepository ongoingCallRepository, CommonNotifCollection commonNotifCollection, SystemClock systemClock, ActivityStarter activityStarter, Executor executor, IActivityManager iActivityManager, OngoingCallLogger ongoingCallLogger, DumpManager dumpManager, StatusBarWindowController statusBarWindowController, SwipeStatusBarAwayGestureHandler swipeStatusBarAwayGestureHandler, StatusBarModeRepositoryStore statusBarModeRepositoryStore, KeyguardCallChipController keyguardCallChipController, ConfigurationController configurationController, IndicatorScaleGardener indicatorScaleGardener) {
         this.scope = coroutineScope;
         this.context = context;

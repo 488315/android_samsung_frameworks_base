@@ -277,8 +277,6 @@ public final class DisplayDeviceRepository implements DisplayAdapter.Listener {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:45:0x011c  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0122  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

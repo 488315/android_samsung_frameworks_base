@@ -232,7 +232,6 @@ public final class SoundCraftManager {
     public final void requestGWPluginModel(final BluetoothDevice bluetoothDevice) {
         Intent intent;
         Function1 function1 = new Function1() { // from class: com.android.systemui.audio.soundcraft.interfaces.connectivity.SoundCraftManager$requestGWPluginModel$success$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

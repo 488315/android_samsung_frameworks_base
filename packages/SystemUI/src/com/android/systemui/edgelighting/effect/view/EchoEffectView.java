@@ -28,7 +28,6 @@ public final class EchoEffectView extends RelativeLayout {
     public int mScreenHeight;
     public int mScreenWidth;
 
-    /* JADX WARN: Type inference failed for: r3v7, types: [com.android.systemui.edgelighting.effect.view.EchoEffectView$1] */
     public EchoEffectView(Context context) {
         super(context);
         this.mRightLine = new ArrayList();
@@ -118,7 +117,6 @@ public final class EchoEffectView extends RelativeLayout {
         this.mAnimatorSet.start();
     }
 
-    /* JADX WARN: Type inference failed for: r2v7, types: [com.android.systemui.edgelighting.effect.view.EchoEffectView$1] */
     public EchoEffectView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mRightLine = new ArrayList();
@@ -155,7 +153,6 @@ public final class EchoEffectView extends RelativeLayout {
         };
     }
 
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.edgelighting.effect.view.EchoEffectView$1] */
     public EchoEffectView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.mRightLine = new ArrayList();
@@ -192,7 +189,6 @@ public final class EchoEffectView extends RelativeLayout {
         };
     }
 
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.edgelighting.effect.view.EchoEffectView$1] */
     public EchoEffectView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mRightLine = new ArrayList();

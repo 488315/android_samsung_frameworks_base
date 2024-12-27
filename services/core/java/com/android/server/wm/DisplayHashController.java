@@ -274,8 +274,6 @@ public final class DisplayHashController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:0x003e A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x003f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -12,7 +12,6 @@ import java.util.StringJoiner;
 public class Double implements Parcelable {
     public static final Parcelable.Creator<Double> CREATOR =
             new Parcelable.Creator<Double>() { // from class: android.media.audio.common.Double.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Double createFromParcel(Parcel _aidl_source) {
                     Double _aidl_out = new Double();
@@ -20,7 +19,6 @@ public class Double implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Double[] newArray(int _aidl_size) {
                     return new Double[_aidl_size];

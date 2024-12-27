@@ -52,8 +52,6 @@ public abstract class DomainVerificationPersistence {
         return new ReadResult(arrayMap, arrayMap2);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Failed to find 'out' block for switch in B:14:0x0097. Please report as an issue. */
     public static void readPackageStates(
             SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl, ArrayMap arrayMap) {
         boolean z;

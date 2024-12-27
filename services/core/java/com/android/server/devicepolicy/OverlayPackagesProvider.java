@@ -105,8 +105,6 @@ public final class OverlayPackagesProvider {
         this.salesCode = SemCscFeature.getInstance().getString("SalesCode", "");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
     java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null
     	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.restoreSwitchOverString(SwitchOverStringVisitor.java:109)
@@ -114,37 +112,6 @@ public final class OverlayPackagesProvider {
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
      */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x060f  */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x0657  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x0654 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x0670  */
-    /* JADX WARN: Removed duplicated region for block: B:165:0x054c  */
-    /* JADX WARN: Removed duplicated region for block: B:166:0x0550  */
-    /* JADX WARN: Removed duplicated region for block: B:205:0x048e  */
-    /* JADX WARN: Removed duplicated region for block: B:208:0x0498  */
-    /* JADX WARN: Removed duplicated region for block: B:211:0x04a2  */
-    /* JADX WARN: Removed duplicated region for block: B:214:0x0476  */
-    /* JADX WARN: Removed duplicated region for block: B:215:0x047a  */
-    /* JADX WARN: Removed duplicated region for block: B:216:0x044b  */
-    /* JADX WARN: Removed duplicated region for block: B:219:0x0454  */
-    /* JADX WARN: Removed duplicated region for block: B:222:0x045d  */
-    /* JADX WARN: Removed duplicated region for block: B:225:0x0423  */
-    /* JADX WARN: Removed duplicated region for block: B:226:0x042f  */
-    /* JADX WARN: Removed duplicated region for block: B:227:0x03dc  */
-    /* JADX WARN: Removed duplicated region for block: B:230:0x03e9  */
-    /* JADX WARN: Removed duplicated region for block: B:233:0x03f6  */
-    /* JADX WARN: Removed duplicated region for block: B:239:0x03c1  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x034a  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x037a  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x03d6  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0405  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x0413  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0449  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0468  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0472  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x048b  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x04ae  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x04b8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -139,7 +139,6 @@ public final class CountQuotaTracker extends QuotaTracker {
         this(context, categorizer, new QuotaTracker.Injector());
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.utils.quota.CountQuotaTracker$$ExternalSyntheticLambda0] */
     public CountQuotaTracker(
             Context context, Categorizer categorizer, QuotaTracker.Injector injector) {
         super(context, categorizer, injector);
@@ -466,10 +465,6 @@ public final class CountQuotaTracker extends QuotaTracker {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0079 A[Catch: all -> 0x008e, TryCatch #0 {all -> 0x008e, blocks: (B:4:0x0003, B:6:0x0008, B:9:0x001a, B:11:0x0031, B:14:0x0038, B:15:0x005a, B:17:0x0079, B:18:0x007c, B:20:0x0082, B:22:0x008a, B:24:0x0090, B:25:0x00cf, B:28:0x00da, B:35:0x00aa, B:37:0x00b0, B:38:0x003d, B:40:0x004c, B:41:0x0056, B:42:0x00dc), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00d8 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00d9  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00a6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -208,7 +208,6 @@ public class WearableSensingManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$openFile$1(
                 Executor executor, final String filename, final AndroidFuture future)
                 throws Exception {
@@ -223,8 +222,6 @@ public class WearableSensingManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:30:0x002d -> B:8:0x004b). Please report as a decompilation issue!!! */
         public /* synthetic */ void lambda$openFile$0(String filename, AndroidFuture future) {
             File file = new File(WearableSensingManager.this.mContext.getFilesDir(), filename);
             ParcelFileDescriptor pfd = null;

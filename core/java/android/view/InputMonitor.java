@@ -10,13 +10,11 @@ import com.android.internal.util.AnnotationValidations;
 public final class InputMonitor implements Parcelable {
     public static final Parcelable.Creator<InputMonitor> CREATOR =
             new Parcelable.Creator<InputMonitor>() { // from class: android.view.InputMonitor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputMonitor[] newArray(int size) {
                     return new InputMonitor[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputMonitor createFromParcel(Parcel in) {
                     return new InputMonitor(in);

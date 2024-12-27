@@ -19,7 +19,6 @@ public abstract class AnimatableProperty {
         public final /* synthetic */ Function val$getter;
         public final /* synthetic */ BiConsumer val$setter;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass5(String str, Function function, BiConsumer biConsumer) {
             super(str);
             this.val$getter = function;

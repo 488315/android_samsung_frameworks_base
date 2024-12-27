@@ -433,14 +433,6 @@ public final class WindowState extends WindowContainer
 
        if (r0.isUpdatedSystemApp() != false) goto L109;
     */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x03b7  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x03c2  */
-    /* JADX WARN: Removed duplicated region for block: B:115:0x0397  */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x03dd  */
-    /* JADX WARN: Removed duplicated region for block: B:126:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x030f  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x035f  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x038f A[Catch: NameNotFoundException -> 0x0395, TRY_LEAVE, TryCatch #0 {NameNotFoundException -> 0x0395, blocks: (B:94:0x037f, B:96:0x038f), top: B:93:0x037f }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -654,11 +646,6 @@ public final class WindowState extends WindowContainer
 
        if (r1.compareTo((com.android.server.wm.WindowContainer) r6) <= 0) goto L85;
     */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00d0  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00ec  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0110  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0116  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x00d5  */
     @Override // com.android.server.wm.WindowContainer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1638,12 +1625,6 @@ public final class WindowState extends WindowContainer
         return this.mAttrs.type == 3;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:107:0x02d7  */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x031c  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x0319  */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x02ac  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x0260  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x02aa  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2253,8 +2234,6 @@ public final class WindowState extends WindowContainer
         matrix.setValues(fArr);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2811,7 +2790,6 @@ public final class WindowState extends WindowContainer
         return (this.mToken.isVisible() || this.mAttrs.type == 3) && isVisible();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0040  */
     @Override // com.android.server.wm.WindowContainer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -3597,10 +3575,6 @@ public final class WindowState extends WindowContainer
 
        if (r5 == false) goto L122;
     */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x01e8  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x01f7  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x01eb  */
     @Override // com.android.server.wm.WindowContainer
     /*
         Code decompiled incorrectly, please refer to instructions dump.

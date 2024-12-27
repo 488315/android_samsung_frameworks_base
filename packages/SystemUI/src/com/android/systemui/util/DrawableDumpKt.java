@@ -65,16 +65,6 @@ public final class DrawableDumpKt {
         appendable.append(">");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00aa  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0162  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x01af  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x01c0  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x01ed  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x01fd  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x0182  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -177,7 +177,6 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
         }
     }
 
-    /* JADX WARN: Type inference failed for: r12v43, types: [com.samsung.android.displaysolution.SemDisplaySolutionManagerService$1] */
     public SemDisplaySolutionManagerService(Context context) {
         "eng".equals(Build.TYPE);
         this.mLock = new Object();
@@ -492,16 +491,6 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
         Slog.d("SemDisplaySolutionManagerService", "IRC Mode : flat_gamma_mode");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0079 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:33:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0083 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r1v1 */
-    /* JADX WARN: Type inference failed for: r1v2, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r1v3 */
-    /* JADX WARN: Type inference failed for: r1v5, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r5v1, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r6v5, types: [java.lang.String] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1096,8 +1085,6 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0201 A[Catch: all -> 0x0157, TryCatch #0 {all -> 0x0157, blocks: (B:5:0x006c, B:7:0x0093, B:9:0x0097, B:11:0x00a1, B:14:0x00ad, B:16:0x00b8, B:19:0x00c5, B:21:0x00cf, B:24:0x00db, B:26:0x00e5, B:28:0x00ef, B:30:0x00f9, B:32:0x0103, B:34:0x010d, B:36:0x0117, B:38:0x0121, B:41:0x012d, B:43:0x0137, B:46:0x0142, B:48:0x014c, B:51:0x01fd, B:53:0x0201, B:54:0x0221, B:56:0x0225, B:57:0x0241, B:59:0x0245, B:60:0x0265, B:64:0x026f, B:67:0x028a, B:74:0x02c8, B:76:0x02d0, B:77:0x02e4, B:70:0x0309, B:81:0x033e, B:83:0x0342, B:85:0x034c, B:86:0x037c, B:89:0x038a, B:91:0x03bc, B:93:0x03c0, B:95:0x03c5, B:97:0x03cb, B:99:0x03d8, B:100:0x0408, B:101:0x043c, B:103:0x0444, B:104:0x0474, B:105:0x049f, B:107:0x04a9, B:109:0x04ad, B:111:0x04d1, B:112:0x04f3, B:114:0x04fd, B:116:0x0501, B:118:0x0525, B:119:0x0547, B:122:0x0553, B:124:0x057f, B:125:0x05a9, B:128:0x05b5, B:130:0x05bc, B:131:0x061c, B:132:0x063e, B:134:0x0648, B:135:0x066a, B:139:0x0672, B:141:0x068d, B:146:0x06d0, B:147:0x015b, B:149:0x0165, B:150:0x016d, B:152:0x0177, B:153:0x017b, B:155:0x0185, B:156:0x018d, B:158:0x0197, B:159:0x019a, B:161:0x01a4, B:162:0x01a7, B:163:0x01ae, B:165:0x01b8, B:166:0x01bb, B:168:0x01c5, B:169:0x01c8, B:171:0x01d3, B:172:0x01d6, B:174:0x01e1, B:175:0x01e4, B:177:0x01ee, B:178:0x01f1, B:180:0x01fb, B:181:0x06f6), top: B:4:0x006c }] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0221 A[Catch: all -> 0x0157, TryCatch #0 {all -> 0x0157, blocks: (B:5:0x006c, B:7:0x0093, B:9:0x0097, B:11:0x00a1, B:14:0x00ad, B:16:0x00b8, B:19:0x00c5, B:21:0x00cf, B:24:0x00db, B:26:0x00e5, B:28:0x00ef, B:30:0x00f9, B:32:0x0103, B:34:0x010d, B:36:0x0117, B:38:0x0121, B:41:0x012d, B:43:0x0137, B:46:0x0142, B:48:0x014c, B:51:0x01fd, B:53:0x0201, B:54:0x0221, B:56:0x0225, B:57:0x0241, B:59:0x0245, B:60:0x0265, B:64:0x026f, B:67:0x028a, B:74:0x02c8, B:76:0x02d0, B:77:0x02e4, B:70:0x0309, B:81:0x033e, B:83:0x0342, B:85:0x034c, B:86:0x037c, B:89:0x038a, B:91:0x03bc, B:93:0x03c0, B:95:0x03c5, B:97:0x03cb, B:99:0x03d8, B:100:0x0408, B:101:0x043c, B:103:0x0444, B:104:0x0474, B:105:0x049f, B:107:0x04a9, B:109:0x04ad, B:111:0x04d1, B:112:0x04f3, B:114:0x04fd, B:116:0x0501, B:118:0x0525, B:119:0x0547, B:122:0x0553, B:124:0x057f, B:125:0x05a9, B:128:0x05b5, B:130:0x05bc, B:131:0x061c, B:132:0x063e, B:134:0x0648, B:135:0x066a, B:139:0x0672, B:141:0x068d, B:146:0x06d0, B:147:0x015b, B:149:0x0165, B:150:0x016d, B:152:0x0177, B:153:0x017b, B:155:0x0185, B:156:0x018d, B:158:0x0197, B:159:0x019a, B:161:0x01a4, B:162:0x01a7, B:163:0x01ae, B:165:0x01b8, B:166:0x01bb, B:168:0x01c5, B:169:0x01c8, B:171:0x01d3, B:172:0x01d6, B:174:0x01e1, B:175:0x01e4, B:177:0x01ee, B:178:0x01f1, B:180:0x01fb, B:181:0x06f6), top: B:4:0x006c }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

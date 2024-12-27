@@ -125,7 +125,6 @@ public final class DisplayTransformManager {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(8:3|4|(3:6|(1:8)|9)|12|13|14|15|9) */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0030, code lost:
 
        r4 = move-exception;

@@ -10,13 +10,11 @@ public final class PromptVerticalListContentView implements PromptContentViewPar
     public static final Parcelable.Creator<PromptVerticalListContentView> CREATOR =
             new Parcelable.Creator<PromptVerticalListContentView>() { // from class:
                 // android.hardware.biometrics.PromptVerticalListContentView.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PromptVerticalListContentView createFromParcel(Parcel in) {
                     return new PromptVerticalListContentView(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PromptVerticalListContentView[] newArray(int size) {
                     return new PromptVerticalListContentView[size];

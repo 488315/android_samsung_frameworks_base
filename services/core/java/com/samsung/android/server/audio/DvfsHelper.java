@@ -44,7 +44,6 @@ public final class DvfsHelper {
 
     public interface DvfsManagerFactory {}
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.samsung.android.server.audio.DvfsHelper$$ExternalSyntheticLambda0] */
     public DvfsHelper(Context context, DvfsManagerFactory dvfsManagerFactory) {
         this.mSemDvfsCpuMin = null;
         this.mDvfsManagerFactory = dvfsManagerFactory;

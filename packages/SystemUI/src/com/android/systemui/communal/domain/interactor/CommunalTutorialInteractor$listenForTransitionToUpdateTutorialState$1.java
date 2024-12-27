@@ -63,7 +63,6 @@ final class CommunalTutorialInteractor$listenForTransitionToUpdateTutorialState$
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalTutorialInteractor$listenForTransitionToUpdateTutorialState$1(CommunalTutorialInteractor communalTutorialInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalTutorialInteractor;

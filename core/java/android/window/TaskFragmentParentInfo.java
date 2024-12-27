@@ -12,13 +12,11 @@ public final class TaskFragmentParentInfo implements Parcelable {
             new Parcelable.Creator<
                     TaskFragmentParentInfo>() { // from class:
                                                 // android.window.TaskFragmentParentInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TaskFragmentParentInfo createFromParcel(Parcel in) {
                     return new TaskFragmentParentInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TaskFragmentParentInfo[] newArray(int size) {
                     return new TaskFragmentParentInfo[size];

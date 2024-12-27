@@ -63,10 +63,6 @@ public final class HeaderPrivacyIconsController {
     public final UiEventLogger uiEventLogger;
     public final Executor uiExecutor;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.qs.HeaderPrivacyIconsController$picCallback$1] */
-    /* JADX WARN: Type inference failed for: r3v8, types: [com.android.systemui.qs.HeaderPrivacyIconsController$desktopCallback$1] */
-    /* JADX WARN: Type inference failed for: r3v9, types: [android.content.BroadcastReceiver, com.android.systemui.qs.HeaderPrivacyIconsController$safetyCenterReceiver$1] */
-    /* JADX WARN: Type inference failed for: r4v3, types: [com.android.systemui.qs.HeaderPrivacyIconsController$panelEventReceiver$1] */
     public HeaderPrivacyIconsController(PrivacyItemController privacyItemController, UiEventLogger uiEventLogger, OngoingPrivacyChip ongoingPrivacyChip, PrivacyDialogController privacyDialogController, PrivacyDialogControllerV2 privacyDialogControllerV2, PrivacyLogger privacyLogger, StatusIconContainer statusIconContainer, PermissionManager permissionManager, Executor executor, Executor executor2, ActivityStarter activityStarter, AppOpsController appOpsController, BroadcastDispatcher broadcastDispatcher, SafetyCenterManager safetyCenterManager, DeviceProvisionedController deviceProvisionedController, FeatureFlags featureFlags) {
         this.privacyItemController = privacyItemController;
         this.uiEventLogger = uiEventLogger;

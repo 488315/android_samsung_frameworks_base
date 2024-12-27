@@ -138,7 +138,6 @@ public final class NotificationGutsManager implements NotifGutsViewManager, Core
         }
     };
 
-    /* JADX WARN: Type inference failed for: r4v0, types: [com.android.systemui.statusbar.notification.row.NotificationGutsManager$2] */
     public NotificationGutsManager(Context context, Handler handler, Handler handler2, JavaAdapter javaAdapter, AccessibilityManager accessibilityManager, HighPriorityProvider highPriorityProvider, INotificationManager iNotificationManager, UserManager userManager, PeopleSpaceWidgetManager peopleSpaceWidgetManager, LauncherApps launcherApps, ShortcutManager shortcutManager, ChannelEditorDialogController channelEditorDialogController, UserContextProvider userContextProvider, AssistantFeedbackController assistantFeedbackController, Optional<BubblesManager> optional, UiEventLogger uiEventLogger, OnUserInteractionCallback onUserInteractionCallback, ShadeController shadeController, WindowRootViewVisibilityInteractor windowRootViewVisibilityInteractor, NotificationLockscreenUserManager notificationLockscreenUserManager, StatusBarStateController statusBarStateController, IStatusBarService iStatusBarService, DeviceProvisionedController deviceProvisionedController, MetricsLogger metricsLogger, HeadsUpManager headsUpManager, ActivityStarter activityStarter, SecQpBlurController secQpBlurController) {
         this.mContext = context;
         this.mMainHandler = handler;
@@ -536,8 +535,6 @@ public final class NotificationGutsManager implements NotifGutsViewManager, Core
         return true;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.systemui.statusbar.notification.row.NotificationGutsManager$1, java.lang.Runnable] */
     public boolean openGutsInternal(View view, final int i, final int i2, final NotificationMenuRowPlugin.MenuItem menuItem) {
         boolean z;
         NotificationGuts.GutsContent gutsContent;
@@ -578,7 +575,6 @@ public final class NotificationGutsManager implements NotifGutsViewManager, Core
         }
         notificationGuts2.setVisibility(4);
         ?? r0 = new Runnable() { // from class: com.android.systemui.statusbar.notification.row.NotificationGutsManager.1
-            /* JADX WARN: Type inference failed for: r7v0, types: [com.android.systemui.statusbar.notification.row.NotificationGutsManager$1$$ExternalSyntheticLambda0] */
             @Override // java.lang.Runnable
             public final void run() {
                 if (expandableNotificationRow.getWindowToken() == null) {

@@ -1952,7 +1952,6 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
         super.requestDisallowInterceptTouchEvent(disallowIntercept);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0202  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -3125,8 +3124,6 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
         return hidden;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0036 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5770,7 +5767,6 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onSmoothScrollerStopped(SmoothScroller smoothScroller) {
             if (this.mSmoothScroller == smoothScroller) {
                 this.mSmoothScroller = null;
@@ -6241,14 +6237,12 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
             RecyclerView.clearNestedRecyclerViewIfNotNested(this);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onEnteredHiddenState(RecyclerView parent) {
             this.mWasImportantForAccessibilityBeforeHidden =
                     this.itemView.getImportantForAccessibility();
             parent.setChildImportantForAccessibilityInternal(this, 4);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onLeftHiddenState(RecyclerView parent) {
             parent.setChildImportantForAccessibilityInternal(
                     this, this.mWasImportantForAccessibilityBeforeHidden);
@@ -6327,12 +6321,10 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
             return (this.mFlags & 16) == 0 && !this.itemView.hasTransientState();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean shouldBeKeptAsChild() {
             return (this.mFlags & 16) != 0;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean doesTransientStatePreventRecycling() {
             return (this.mFlags & 16) == 0 && this.itemView.hasTransientState();
         }
@@ -6531,7 +6523,6 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
             return this.mTargetPosition;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onAnimation(int dx, int dy) {
             RecyclerView recyclerView = this.mRecyclerView;
             if (!this.mRunning || this.mTargetPosition == -1 || recyclerView == null) {
@@ -6771,13 +6762,11 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
                 new Parcelable.Creator<
                         SavedState>() { // from class:
                                         // com.android.internal.widget.RecyclerView.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];

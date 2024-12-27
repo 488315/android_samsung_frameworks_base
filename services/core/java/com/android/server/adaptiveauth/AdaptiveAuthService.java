@@ -58,9 +58,6 @@ public final class AdaptiveAuthService extends SystemService {
         this(context, new LockPatternUtils(context));
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.adaptiveauth.AdaptiveAuthService$1] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.adaptiveauth.AdaptiveAuthService$2] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.adaptiveauth.AdaptiveAuthService$3] */
     public AdaptiveAuthService(Context context, LockPatternUtils lockPatternUtils) {
         super(context);
         this.mFailedAttemptsForUser = new SparseIntArray();

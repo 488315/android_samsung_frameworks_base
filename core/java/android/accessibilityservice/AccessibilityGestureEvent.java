@@ -17,13 +17,11 @@ public final class AccessibilityGestureEvent implements Parcelable {
     public static final Parcelable.Creator<AccessibilityGestureEvent> CREATOR =
             new Parcelable.Creator<AccessibilityGestureEvent>() { // from class:
                 // android.accessibilityservice.AccessibilityGestureEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessibilityGestureEvent createFromParcel(Parcel parcel) {
                     return new AccessibilityGestureEvent(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessibilityGestureEvent[] newArray(int size) {
                     return new AccessibilityGestureEvent[size];

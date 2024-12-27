@@ -29,7 +29,6 @@ public final class QSTileViewModelImpl$createTileDataFlow$$inlined$flatMapLatest
     int label;
     final /* synthetic */ QSTileViewModelImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QSTileViewModelImpl$createTileDataFlow$$inlined$flatMapLatest$1(Continuation continuation, QSTileViewModelImpl qSTileViewModelImpl) {
         super(3, continuation);
         this.this$0 = qSTileViewModelImpl;
@@ -84,8 +83,6 @@ public final class QSTileViewModelImpl$createTileDataFlow$$inlined$flatMapLatest
                         this.this$0 = qSTileViewModelImpl;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -213,17 +210,6 @@ public final class QSTileViewModelImpl$createTileDataFlow$$inlined$flatMapLatest
                             this.$user$inlined = userHandle;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:19:0x00bb  */
-                        /* JADX WARN: Removed duplicated region for block: B:21:0x00d1  */
-                        /* JADX WARN: Removed duplicated region for block: B:23:0x00de  */
-                        /* JADX WARN: Removed duplicated region for block: B:25:0x00f2  */
-                        /* JADX WARN: Removed duplicated region for block: B:28:0x00e3  */
-                        /* JADX WARN: Removed duplicated region for block: B:31:0x0082  */
-                        /* JADX WARN: Removed duplicated region for block: B:35:0x00ee  */
-                        /* JADX WARN: Removed duplicated region for block: B:36:0x00bd  */
-                        /* JADX WARN: Removed duplicated region for block: B:41:0x0054  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
-                        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:34:0x00a5 -> B:17:0x00ab). Please report as a decompilation issue!!! */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
@@ -278,8 +264,6 @@ public final class QSTileViewModelImpl$createTileDataFlow$$inlined$flatMapLatest
                         this.$user$inlined = userHandle;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -414,8 +398,6 @@ public final class QSTileViewModelImpl$createTileDataFlow$$inlined$flatMapLatest
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

@@ -155,7 +155,6 @@ public final class MediaProjectionManager {
                 MediaProjectionInfo info, ContentRecordingSession session) {}
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class CallbackDelegate extends IMediaProjectionWatcherCallback.Stub {
         private Callback mCallback;
         private Handler mHandler;
@@ -189,7 +188,6 @@ public final class MediaProjectionManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRecordingSessionSet$0(
                 MediaProjectionInfo info, ContentRecordingSession session) {
             this.mCallback.onRecordingSessionSet(info, session);

@@ -713,7 +713,6 @@ public class LauncherApps {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public List<ShortcutInfo> maybeUpdateDisabledMessage(List<ShortcutInfo> shortcuts) {
         if (shortcuts == null) {
             return null;
@@ -1408,13 +1407,11 @@ public class LauncherApps {
         public static final Parcelable.Creator<PinItemRequest> CREATOR =
                 new Parcelable.Creator<PinItemRequest>() { // from class:
                     // android.content.pm.LauncherApps.PinItemRequest.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PinItemRequest createFromParcel(Parcel source) {
                         return new PinItemRequest(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PinItemRequest[] newArray(int size) {
                         return new PinItemRequest[size];
@@ -1509,13 +1506,11 @@ public class LauncherApps {
         public static final Parcelable.Creator<AppUsageLimit> CREATOR =
                 new Parcelable.Creator<AppUsageLimit>() { // from class:
                     // android.content.pm.LauncherApps.AppUsageLimit.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AppUsageLimit createFromParcel(Parcel source) {
                         return new AppUsageLimit(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AppUsageLimit[] newArray(int size) {
                         return new AppUsageLimit[size];

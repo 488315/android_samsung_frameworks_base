@@ -42,7 +42,6 @@ public class DexObserver {
         this.mDexUEventObserver.startObserving(CCIC_DOCK_UEVENT_MATCH);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setDexState(int state, UEventObserver.UEvent event) {
         Slog.d(TAG, "setDockState() : " + state);
         switch (state) {
@@ -150,7 +149,6 @@ public class DexObserver {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [android.util.sysfwutil.DexObserver$2] */
     private void onUpdateDexMode() {
         if (this.mTestModeOn) {
             Slog.d(TAG, "setDexMode() : delay ++");

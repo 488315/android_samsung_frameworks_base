@@ -9,13 +9,11 @@ public class SContextMovement extends SContextEventContext {
     public static final Parcelable.Creator<SContextMovement> CREATOR =
             new Parcelable.Creator<SContextMovement>() { // from class:
                 // android.hardware.scontext.SContextMovement.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextMovement createFromParcel(Parcel in) {
                     return new SContextMovement(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextMovement[] newArray(int size) {
                     return new SContextMovement[size];

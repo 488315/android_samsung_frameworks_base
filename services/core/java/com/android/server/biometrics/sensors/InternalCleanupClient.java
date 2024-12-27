@@ -68,8 +68,6 @@ public abstract class InternalCleanupClient extends HalClientMonitor
         internalCleanupClient.mCurrentTask.start(internalCleanupClient.mRemoveCallback);
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.biometrics.sensors.InternalCleanupClient$1] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.biometrics.sensors.InternalCleanupClient$1] */
     public InternalCleanupClient(
             Context context,
             Supplier supplier,

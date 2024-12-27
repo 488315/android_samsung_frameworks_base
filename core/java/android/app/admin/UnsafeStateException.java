@@ -12,13 +12,11 @@ public final class UnsafeStateException extends IllegalStateException implements
     public static final Parcelable.Creator<UnsafeStateException> CREATOR =
             new Parcelable.Creator<UnsafeStateException>() { // from class:
                 // android.app.admin.UnsafeStateException.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UnsafeStateException createFromParcel(Parcel source) {
                     return new UnsafeStateException(source.readInt(), source.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UnsafeStateException[] newArray(int size) {
                     return new UnsafeStateException[size];

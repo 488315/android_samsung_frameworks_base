@@ -233,7 +233,6 @@ public final class WearableSensingManagerPerUserService extends AbstractPerUserS
         }
     }
 
-    /* JADX WARN: Type inference failed for: r7v3, types: [com.android.server.wearable.WearableSensingManagerPerUserService$3] */
     public final AnonymousClass3 wrapWearableSensingCallback(
             final IWearableSensingCallback iWearableSensingCallback) {
         if (iWearableSensingCallback == null) {

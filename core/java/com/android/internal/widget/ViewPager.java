@@ -265,7 +265,6 @@ public class ViewPager extends ViewGroup {
         super.onDetachedFromWindow();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setScrollState(int newState) {
         if (this.mScrollState == newState) {
             return;
@@ -974,7 +973,6 @@ public class ViewPager extends ViewGroup {
                 new Parcelable.ClassLoaderCreator<
                         SavedState>() { // from class:
                                         // com.android.internal.widget.ViewPager.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.ClassLoaderCreator
                     public SavedState createFromParcel(Parcel in, ClassLoader loader) {
                         return new SavedState(in, loader);

@@ -175,7 +175,6 @@ public final class AudioManagerRouteController implements DeviceRouteController 
                         13, "ROUTE_ID_DOCK_ANALOG", R.string.global_action_power_options));
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.media.AudioManagerRouteController$$ExternalSyntheticLambda3] */
     public AudioManagerRouteController(
             Context context,
             AudioManager audioManager,

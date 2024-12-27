@@ -48,7 +48,6 @@ public final class LatencyTester implements CoreStartable {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.LatencyTester$1] */
     public LatencyTester(BroadcastDispatcher broadcastDispatcher, DeviceConfigProxy deviceConfigProxy, DelayableExecutor delayableExecutor, KeyguardUpdateMonitor keyguardUpdateMonitor, SelectedUserInteractor selectedUserInteractor) {
         this.mBroadcastDispatcher = broadcastDispatcher;
         this.mDeviceConfigProxy = deviceConfigProxy;

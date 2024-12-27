@@ -120,7 +120,6 @@ public final class EasyMuteController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.server.notification.EasyMuteController$1] */
     public EasyMuteController(Context context) {
         this.mContext = context;
         Handler handler = new Handler();

@@ -173,8 +173,6 @@ public final class AdbDebuggingManager {
         public final AnonymousClass1 mBroadcastReceiver;
         public NotificationManager mNotificationManager;
 
-        /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.adb.AdbDebuggingManager$AdbDebuggingHandler$1] */
-        /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.adb.AdbDebuggingManager$AdbDebuggingHandler$2] */
         public AdbDebuggingHandler(Looper looper, AdbDebuggingThread adbDebuggingThread) {
             super(looper);
             this.mBroadcastReceiver =
@@ -1269,7 +1267,6 @@ public final class AdbDebuggingManager {
         public LocalSocket mSocket;
         public boolean mStopped;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AdbDebuggingThread() {
             super("AdbDebuggingManager");
             AdbDebuggingManager$$ExternalSyntheticLambda0
@@ -1803,7 +1800,6 @@ public final class AdbDebuggingManager {
         public final String mServiceName;
         public final String mServiceType;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public PairingThread(String str, String str2) {
             super("AdbDebuggingManager");
             AdbDebuggingManager$$ExternalSyntheticLambda0
@@ -2068,7 +2064,6 @@ public final class AdbDebuggingManager {
         context.sendBroadcastAsUser(intent, userHandle, "android.permission.MANAGE_DEBUGGING");
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:25:0x0054 -> B:9:0x0059). Please report as a decompilation issue!!! */
     public final void dump(DualDumpOutputStream dualDumpOutputStream) {
         long start = dualDumpOutputStream.start("debugging_manager", 1146756268033L);
         dualDumpOutputStream.write("connected_to_adb", 1133871366145L, this.mThread != null);

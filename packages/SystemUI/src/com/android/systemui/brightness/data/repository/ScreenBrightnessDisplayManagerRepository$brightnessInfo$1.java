@@ -17,7 +17,6 @@ final class ScreenBrightnessDisplayManagerRepository$brightnessInfo$1 extends Su
     int label;
     final /* synthetic */ ScreenBrightnessDisplayManagerRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenBrightnessDisplayManagerRepository$brightnessInfo$1(ScreenBrightnessDisplayManagerRepository screenBrightnessDisplayManagerRepository, Continuation continuation) {
         super(2, continuation);
         this.this$0 = screenBrightnessDisplayManagerRepository;
@@ -35,8 +34,6 @@ final class ScreenBrightnessDisplayManagerRepository$brightnessInfo$1 extends Su
         return ((ScreenBrightnessDisplayManagerRepository$brightnessInfo$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.hardware.display.DisplayManager$DisplayListener, com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$brightnessInfo$1$listener$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -64,7 +61,6 @@ final class ScreenBrightnessDisplayManagerRepository$brightnessInfo$1 extends Su
             this.this$0.displayManager.registerDisplayListener(r1, null, 8L);
             final ScreenBrightnessDisplayManagerRepository screenBrightnessDisplayManagerRepository2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$brightnessInfo$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

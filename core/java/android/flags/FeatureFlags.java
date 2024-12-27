@@ -207,7 +207,6 @@ public class FeatureFlags {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addBooleanOverride(String namespace, String name, String override) {
         Map<String, Boolean> nsOverrides = this.mBooleanOverrides.get(namespace);
         if (nsOverrides == null) {
@@ -257,7 +256,6 @@ public class FeatureFlags {
         return result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean flagEqualsSyncableFlag(Flag<?> f, SyncableFlag sf) {
         return f.getName().equals(sf.getName()) && f.getNamespace().equals(sf.getNamespace());
     }

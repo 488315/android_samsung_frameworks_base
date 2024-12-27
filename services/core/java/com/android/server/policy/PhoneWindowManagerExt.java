@@ -293,11 +293,6 @@ public final class PhoneWindowManagerExt {
         
             if (r4.queryIntentActivities(r0, 327680).size() > 0) goto L60;
          */
-        /* JADX WARN: Removed duplicated region for block: B:181:0x0303 A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:185:0x030f  */
-        /* JADX WARN: Removed duplicated region for block: B:188:0x0316  */
-        /* JADX WARN: Removed duplicated region for block: B:201:0x032d  */
-        /* JADX WARN: Removed duplicated region for block: B:203:? A[RETURN, SYNTHETIC] */
         @Override // android.content.BroadcastReceiver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -316,7 +311,6 @@ public final class PhoneWindowManagerExt {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ PhoneWindowManagerExt this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public HomeKeyRule(PhoneWindowManagerExt phoneWindowManagerExt, int i) {
             super(3);
             this.$r8$classId = i;
@@ -767,7 +761,6 @@ public final class PhoneWindowManagerExt {
     }
 
     public final class OpeningApps extends SideKeyDoublePress.Behavior {
-        /* JADX WARN: Removed duplicated region for block: B:24:0x00ac  */
         @Override // com.android.server.policy.SideKeyDoublePress.Behavior
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -923,7 +916,6 @@ public final class PhoneWindowManagerExt {
     public final class OpeningBixby extends SideKeyDoublePress.Behavior {
         public final /* synthetic */ int $r8$classId;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ OpeningBixby(String str, int i) {
             super(str);
             this.$r8$classId = i;
@@ -1290,9 +1282,6 @@ public final class PhoneWindowManagerExt {
         arraySet2.add(23);
     }
 
-    /* JADX WARN: Type inference failed for: r2v16, types: [com.android.server.policy.PhoneWindowManagerExt$12] */
-    /* JADX WARN: Type inference failed for: r2v8, types: [com.android.server.policy.PhoneWindowManagerExt$10] */
-    /* JADX WARN: Type inference failed for: r2v9, types: [com.android.server.policy.PhoneWindowManagerExt$10] */
     public PhoneWindowManagerExt(Context context, WindowManagerPolicy windowManagerPolicy, WindowManagerServiceExt windowManagerServiceExt) {
         new AnonymousClass2(this, 3);
         this.mKeyUpTime = new long[2];
@@ -1516,8 +1505,6 @@ public final class PhoneWindowManagerExt {
         CoreSaLogger.logForBasic(str, hashMap);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0073  */
-    /* JADX WARN: Removed duplicated region for block: B:26:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2194,7 +2181,6 @@ public final class PhoneWindowManagerExt {
         init(new Injector(this.mContext, this.mPolicy));
     }
 
-    /* JADX WARN: Type inference failed for: r1v18, types: [com.android.server.policy.PhoneWindowManagerExt$13] */
     public void init(Injector injector) {
         InputManager inputManager;
         this.mHandler = new PolicyExtHandler();
@@ -5665,7 +5651,6 @@ public final class PhoneWindowManagerExt {
         	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeMthRegion(RegionMaker.java:49)
         	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:25)
         */
-    /* JADX WARN: Removed duplicated region for block: B:391:0x0701  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5718,8 +5703,6 @@ public final class PhoneWindowManagerExt {
         return i == 224 && this.mIsDoubleTapToWakeUpSupported && this.mIsDoubleTapToWakeUp;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0040 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x003e A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5814,7 +5797,6 @@ public final class PhoneWindowManagerExt {
         return inputMethodManager != null ? inputMethodManager.isInputMethodShown() : false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0068  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5854,19 +5836,6 @@ public final class PhoneWindowManagerExt {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:101:0x01a8  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00f1  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0125  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x012f  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x0155  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0178  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x017c  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0165  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x01a6  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x01c9  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x01e5 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x01f1  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x01f5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5953,9 +5922,6 @@ public final class PhoneWindowManagerExt {
         this.mPolicy.mKeyguardDelegate.isShowing();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00c1 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00c2  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00ad  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -217,9 +217,6 @@ public final class AutoclickController extends BaseEventStreamTransformation {
         super.onKeyEvent(keyEvent, i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00ef  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00fc  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0109  */
     @Override // com.android.server.accessibility.EventStreamTransformation
     /*
         Code decompiled incorrectly, please refer to instructions dump.

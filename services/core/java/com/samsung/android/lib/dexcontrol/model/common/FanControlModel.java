@@ -57,10 +57,6 @@ public abstract class FanControlModel extends BaseModel {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [android.media.AudioManager$AudioRecordingCallback, com.samsung.android.lib.dexcontrol.model.common.FanControlModel$3] */
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.samsung.android.lib.dexcontrol.model.common.FanControlModel$4] */
-    /* JADX WARN: Type inference failed for: r8v3, types: [android.telephony.PhoneStateListener, com.samsung.android.lib.dexcontrol.model.common.FanControlModel$2] */
     public FanControlModel(Context context, int i, boolean z) {
         super(context);
         this.mIsCallMode = false;

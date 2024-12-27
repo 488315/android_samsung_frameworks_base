@@ -8,7 +8,6 @@ public class NanSessionStateUpdate implements Parcelable {
     public static final Parcelable.Creator<NanSessionStateUpdate> CREATOR =
             new Parcelable.Creator<NanSessionStateUpdate>() { // from class:
                 // android.hardware.contexthub.NanSessionStateUpdate.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanSessionStateUpdate createFromParcel(Parcel _aidl_source) {
                     NanSessionStateUpdate _aidl_out = new NanSessionStateUpdate();
@@ -16,7 +15,6 @@ public class NanSessionStateUpdate implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanSessionStateUpdate[] newArray(int _aidl_size) {
                     return new NanSessionStateUpdate[_aidl_size];

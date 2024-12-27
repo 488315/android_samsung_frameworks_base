@@ -249,13 +249,11 @@ public abstract class TranslationService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnConnected(IBinder callback) {
         this.mCallback = ITranslationServiceCallback.Stub.asInterface(callback);
         onConnected();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnCreateTranslationSession(
             final TranslationContext translationContext,
             final int sessionId,
@@ -292,7 +290,6 @@ public abstract class TranslationService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnTranslationCapabilitiesRequest(
             final int sourceFormat, final int targetFormat, final ResultReceiver resultReceiver) {
         onTranslationCapabilitiesRequest(
@@ -322,7 +319,6 @@ public abstract class TranslationService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isValidCapabilities(
             int sourceFormat, int targetFormat, Set<TranslationCapability> capabilities) {
         if (sourceFormat != 1 && targetFormat != 1) {

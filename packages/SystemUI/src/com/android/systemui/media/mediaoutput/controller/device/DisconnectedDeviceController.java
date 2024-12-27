@@ -124,15 +124,6 @@ public final class DisconnectedDeviceController extends DeviceController {
         bluetoothA2dp.semConnect(bluetoothDevice);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00cc A[LOOP:1: B:31:0x00c6->B:33:0x00cc, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0112 A[LOOP:2: B:36:0x010c->B:38:0x0112, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0138 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
-    /* JADX WARN: Type inference failed for: r7v0, types: [kotlin.collections.EmptyList] */
-    /* JADX WARN: Type inference failed for: r7v1, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r7v7, types: [java.util.ArrayList] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

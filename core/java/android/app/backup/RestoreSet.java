@@ -8,13 +8,11 @@ import android.os.Parcelable;
 public class RestoreSet implements Parcelable {
     public static final Parcelable.Creator<RestoreSet> CREATOR =
             new Parcelable.Creator<RestoreSet>() { // from class: android.app.backup.RestoreSet.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RestoreSet createFromParcel(Parcel in) {
                     return new RestoreSet(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RestoreSet[] newArray(int size) {
                     return new RestoreSet[size];

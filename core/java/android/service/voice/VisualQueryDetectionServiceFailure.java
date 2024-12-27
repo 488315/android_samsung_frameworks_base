@@ -14,13 +14,11 @@ public final class VisualQueryDetectionServiceFailure implements Parcelable {
             new Parcelable.Creator<
                     VisualQueryDetectionServiceFailure>() { // from class:
                                                             // android.service.voice.VisualQueryDetectionServiceFailure.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VisualQueryDetectionServiceFailure[] newArray(int size) {
                     return new VisualQueryDetectionServiceFailure[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VisualQueryDetectionServiceFailure createFromParcel(Parcel in) {
                     return new VisualQueryDetectionServiceFailure(in.readInt(), in.readString8());

@@ -261,7 +261,6 @@ public class MediaRouteButton extends View {
         this.mRemoteIndicator.draw(canvas);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void refreshRoute() {
         MediaRouter.RouteInfo route = this.mRouter.getSelectedRoute();
         boolean isConnecting = false;

@@ -94,7 +94,6 @@ public class DisplayAreaOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDisplayAreaAppeared$0(
                 DisplayAreaInfo displayAreaInfo, SurfaceControl leash) {
             DisplayAreaOrganizer.this.onDisplayAreaAppeared(displayAreaInfo, leash);
@@ -113,7 +112,6 @@ public class DisplayAreaOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDisplayAreaVanished$1(
                 DisplayAreaInfo displayAreaInfo) {
             DisplayAreaOrganizer.this.onDisplayAreaVanished(displayAreaInfo);
@@ -132,7 +130,6 @@ public class DisplayAreaOrganizer extends WindowOrganizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDisplayAreaInfoChanged$2(
                 DisplayAreaInfo displayAreaInfo) {
             DisplayAreaOrganizer.this.onDisplayAreaInfoChanged(displayAreaInfo);

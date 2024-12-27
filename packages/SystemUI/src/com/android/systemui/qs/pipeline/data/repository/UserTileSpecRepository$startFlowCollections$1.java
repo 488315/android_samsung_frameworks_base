@@ -36,7 +36,6 @@ final class UserTileSpecRepository$startFlowCollections$1 extends SuspendLambda 
         int label;
         final /* synthetic */ UserTileSpecRepository this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(StateFlow stateFlow, UserTileSpecRepository userTileSpecRepository, Continuation continuation) {
             super(2, continuation);
             this.$tiles = stateFlow;
@@ -95,7 +94,6 @@ final class UserTileSpecRepository$startFlowCollections$1 extends SuspendLambda 
             int label;
             final /* synthetic */ UserTileSpecRepository this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass1(UserTileSpecRepository userTileSpecRepository, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = userTileSpecRepository;
@@ -113,8 +111,6 @@ final class UserTileSpecRepository$startFlowCollections$1 extends SuspendLambda 
                 return ((AnonymousClass1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r1v1, types: [android.database.ContentObserver, com.android.systemui.qs.pipeline.data.repository.UserTileSpecRepository$startFlowCollections$1$2$1$observer$1] */
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Object invokeSuspend(Object obj) {
                 CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -136,7 +132,6 @@ final class UserTileSpecRepository$startFlowCollections$1 extends SuspendLambda 
                     userTileSpecRepository.secureSettings.registerContentObserverForUserSync("sysui_qs_tiles", (ContentObserver) r1, userTileSpecRepository.userId);
                     final UserTileSpecRepository userTileSpecRepository2 = this.this$0;
                     Function0 function0 = new Function0() { // from class: com.android.systemui.qs.pipeline.data.repository.UserTileSpecRepository.startFlowCollections.1.2.1.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(0);
                         }
@@ -161,7 +156,6 @@ final class UserTileSpecRepository$startFlowCollections$1 extends SuspendLambda 
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(UserTileSpecRepository userTileSpecRepository, StateFlow stateFlow, Continuation continuation) {
             super(2, continuation);
             this.this$0 = userTileSpecRepository;
@@ -219,9 +213,6 @@ final class UserTileSpecRepository$startFlowCollections$1 extends SuspendLambda 
                             this.this$0 = userTileSpecRepository;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:19:0x005b A[RETURN] */
-                        /* JADX WARN: Removed duplicated region for block: B:20:0x003a  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
@@ -325,7 +316,6 @@ final class UserTileSpecRepository$startFlowCollections$1 extends SuspendLambda 
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserTileSpecRepository$startFlowCollections$1(StateFlow stateFlow, UserTileSpecRepository userTileSpecRepository, Continuation continuation) {
         super(2, continuation);
         this.$tiles = stateFlow;

@@ -11,13 +11,11 @@ public class SemNetworkUsageStats implements Parcelable {
             new Parcelable.Creator<
                     SemNetworkUsageStats>() { // from class:
                                               // com.samsung.android.sdhms.SemNetworkUsageStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemNetworkUsageStats createFromParcel(Parcel in) {
                     return new SemNetworkUsageStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemNetworkUsageStats[] newArray(int size) {
                     return new SemNetworkUsageStats[size];
@@ -111,13 +109,11 @@ public class SemNetworkUsageStats implements Parcelable {
                 new Parcelable.Creator<
                         NetworkUsageHistoryItem>() { // from class:
                                                      // com.samsung.android.sdhms.SemNetworkUsageStats.NetworkUsageHistoryItem.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public NetworkUsageHistoryItem createFromParcel(Parcel in) {
                         return new NetworkUsageHistoryItem(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public NetworkUsageHistoryItem[] newArray(int size) {
                         return new NetworkUsageHistoryItem[size];

@@ -7,7 +7,6 @@ public final class WatchedArraySet extends WatchableImpl implements Snappable {
     public final ArraySet mStorage;
     public volatile boolean mWatching;
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.utils.WatchedArraySet$1] */
     public WatchedArraySet() {
         this.mWatching = false;
         this.mObserver =
@@ -20,7 +19,6 @@ public final class WatchedArraySet extends WatchableImpl implements Snappable {
         this.mStorage = new ArraySet(0, false);
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedArraySet$1] */
     public WatchedArraySet(WatchedArraySet watchedArraySet) {
         this.mWatching = false;
         this.mObserver =

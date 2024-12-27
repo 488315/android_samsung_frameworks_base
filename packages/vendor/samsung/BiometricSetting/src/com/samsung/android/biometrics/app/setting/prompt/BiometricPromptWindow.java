@@ -112,7 +112,6 @@ public class BiometricPromptWindow extends FocusableWindow
         super.addView();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public BiometricPromptGuiHelper createGuiHelper(int i) {
         FingerprintPromptGuiHelper fingerprintPromptGuiHelper;
         if (i == 2) {

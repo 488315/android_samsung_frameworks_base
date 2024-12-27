@@ -181,8 +181,6 @@ public class PackageHelperExt {
         return InstallLocationUtils.calculateInstalledSize(pkg, handle, abiOverride);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0063 A[Catch: RemoteException -> 0x0068, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x0068, blocks: (B:3:0x0013, B:7:0x0021, B:9:0x004a, B:12:0x0063, B:14:0x0035), top: B:2:0x0013 }] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x004a A[Catch: RemoteException -> 0x0068, TryCatch #0 {RemoteException -> 0x0068, blocks: (B:3:0x0013, B:7:0x0021, B:9:0x004a, B:12:0x0063, B:14:0x0035), top: B:2:0x0013 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

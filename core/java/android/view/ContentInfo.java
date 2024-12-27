@@ -21,7 +21,6 @@ import java.util.function.Predicate;
 public final class ContentInfo implements Parcelable {
     public static final Parcelable.Creator<ContentInfo> CREATOR =
             new Parcelable.Creator<ContentInfo>() { // from class: android.view.ContentInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentInfo createFromParcel(Parcel parcel) {
                     ClipData clip = ClipData.CREATOR.createFromParcel(parcel);
@@ -50,7 +49,6 @@ public final class ContentInfo implements Parcelable {
                             .build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentInfo[] newArray(int size) {
                     return new ContentInfo[size];

@@ -219,7 +219,6 @@ public final class UserSwitcherInteractor {
             int label;
             final /* synthetic */ UserSwitcherInteractor this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass1(KeyguardUpdateMonitor keyguardUpdateMonitor, UserSwitcherInteractor userSwitcherInteractor, Continuation continuation) {
                 super(2, continuation);
                 this.$keyguardUpdateMonitor = keyguardUpdateMonitor;
@@ -248,7 +247,6 @@ public final class UserSwitcherInteractor {
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass6(KeyguardUpdateMonitor keyguardUpdateMonitor, Continuation continuation) {
             super(2, continuation);
             this.$keyguardUpdateMonitor = keyguardUpdateMonitor;
@@ -333,7 +331,6 @@ public final class UserSwitcherInteractor {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r5v5, types: [com.android.systemui.user.domain.interactor.UserSwitcherInteractor$special$$inlined$map$1, kotlinx.coroutines.flow.Flow] */
     public UserSwitcherInteractor(Context context, UserRepository userRepository, ActivityStarter activityStarter, KeyguardInteractor keyguardInteractor, FeatureFlags featureFlags, UserManager userManager, HeadlessSystemUserMode headlessSystemUserMode, CoroutineScope coroutineScope, TelephonyInteractor telephonyInteractor, BroadcastDispatcher broadcastDispatcher, KeyguardUpdateMonitor keyguardUpdateMonitor, CoroutineDispatcher coroutineDispatcher, CoroutineDispatcher coroutineDispatcher2, ActivityManager activityManager, RefreshUsersScheduler refreshUsersScheduler, GuestUserInteractor guestUserInteractor, UiEventLogger uiEventLogger, UserRestrictionChecker userRestrictionChecker, ProcessWrapper processWrapper) {
         this.applicationContext = context;
         this.repository = userRepository;
@@ -381,8 +378,6 @@ public final class UserSwitcherInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -492,9 +487,6 @@ public final class UserSwitcherInteractor {
                     this.this$0 = userSwitcherInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:19:0x005c A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:20:0x003a  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -608,10 +600,6 @@ public final class UserSwitcherInteractor {
         BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass6(keyguardUpdateMonitor, null), 3);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00a2  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -733,10 +721,6 @@ public final class UserSwitcherInteractor {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.user.domain.interactor.UserSwitcherInteractor.access$onBroadcastReceived(com.android.systemui.user.domain.interactor.UserSwitcherInteractor, android.content.Intent, android.content.pm.UserInfo, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0079  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x004a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x002d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -749,13 +733,6 @@ public final class UserSwitcherInteractor {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.user.domain.interactor.UserSwitcherInteractor.access$toRecord(com.android.systemui.user.domain.interactor.UserSwitcherInteractor, android.content.pm.UserInfo, int, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x017d  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00a9  */
-    /* JADX WARN: Removed duplicated region for block: B:41:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0185  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0066  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x002c  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:40:0x0176 -> B:11:0x0179). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -772,14 +749,6 @@ public final class UserSwitcherInteractor {
         BuildersKt.launch$default(this.applicationScope, null, null, new UserSwitcherInteractor$addCallback$1(this, userCallback, null), 3);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x00af  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0095  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x008d  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x007d A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -910,7 +879,6 @@ public final class UserSwitcherInteractor {
             UserSwitcherInteractor$executeAction$1 userSwitcherInteractor$executeAction$1 = new UserSwitcherInteractor$executeAction$1(this);
             UserSwitcherInteractor$executeAction$2 userSwitcherInteractor$executeAction$2 = new UserSwitcherInteractor$executeAction$2(this);
             Function1 function1 = new Function1() { // from class: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$executeAction$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -976,10 +944,6 @@ public final class UserSwitcherInteractor {
         return FlowKt.flowOn(FlowKt.combine(userRepositoryImpl.selectedUserInfo, this.userInfos, userRepositoryImpl.userSwitcherSettings, this.keyguardInteractor.isKeyguardShowing, new UserSwitcherInteractor$actions$1(this, null)), this.backgroundDispatcher);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x005a  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0060  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1068,13 +1032,6 @@ public final class UserSwitcherInteractor {
         return FlowKt.combine(this.userInfos, userRepositoryImpl.selectedUserInfo, userRepositoryImpl.userSwitcherSettings, new UserSwitcherInteractor$users$1(this, null));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0088  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x005e  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x008f  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x008b  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:22:0x007d -> B:10:0x0080). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1255,16 +1212,6 @@ public final class UserSwitcherInteractor {
         BuildersKt.launch$default(this.applicationScope, null, null, new UserSwitcherInteractor$switchUser$1(this, runnable, null), 3);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00c4  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00c6  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x008f  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0059  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x002b  */
-    /* JADX WARN: Type inference failed for: r17v0, types: [com.android.systemui.user.domain.interactor.UserSwitcherInteractor] */
-    /* JADX WARN: Type inference failed for: r4v4, types: [com.android.systemui.common.shared.model.Text] */
-    /* JADX WARN: Type inference failed for: r4v6, types: [com.android.systemui.common.shared.model.Text] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1277,18 +1224,6 @@ public final class UserSwitcherInteractor {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.user.domain.interactor.UserSwitcherInteractor.toUserModel(android.content.pm.UserInfo, int, boolean, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x008d  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0094  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00b6  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00b9  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00a8  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x008f  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0088  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x002a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

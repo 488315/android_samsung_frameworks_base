@@ -87,8 +87,6 @@ public final class SideFpsProgressBarViewModel {
                 
                     if (kotlin.jvm.internal.Intrinsics.areEqual(r7.authenticationReason, com.android.systemui.biometrics.shared.model.AuthenticationReason.BiometricPromptAuthentication.INSTANCE) == false) goto L23;
                  */
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -191,8 +189,6 @@ public final class SideFpsProgressBarViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -287,8 +283,6 @@ public final class SideFpsProgressBarViewModel {
                     this.this$0 = sideFpsProgressBarViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -440,8 +434,6 @@ public final class SideFpsProgressBarViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

@@ -25,7 +25,6 @@ public final class BiometricStrengthController {
             };
     public final BiometricService mService;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.biometrics.BiometricStrengthController$$ExternalSyntheticLambda0] */
     public BiometricStrengthController(BiometricService biometricService) {
         this.mService = biometricService;
     }

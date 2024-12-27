@@ -613,7 +613,6 @@ public final class MediaRouter2Manager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateRouteListingPreference(
             final String packageName, final RouteListingPreference routeListingPreference) {
         RouteListingPreference oldRouteListingPreference;
@@ -836,7 +835,6 @@ public final class MediaRouter2Manager {
         return requestId;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleTransferTimeout(TransferRequest request) {
         boolean removed = this.mTransferRequests.remove(request);
         if (removed) {

@@ -56,7 +56,6 @@ public final class ButtonComponent implements ComposeVolumePanelUiComponent {
         this.onClick = function2;
     }
 
-    /* JADX WARN: Type inference failed for: r6v9, types: [com.android.systemui.volume.panel.component.button.ui.composable.ButtonComponent$Content$2$1, kotlin.jvm.internal.Lambda] */
     @Override // com.android.systemui.volume.panel.ui.composable.ComposeVolumePanelUiComponent
     public final void Content(final VolumePanelComposeScope volumePanelComposeScope, final Modifier modifier, Composer composer, final int i) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -67,7 +66,6 @@ public final class ButtonComponent implements ComposeVolumePanelUiComponent {
             RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
             if (endRestartGroup != null) {
                 endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.button.ui.composable.ButtonComponent$Content$viewModel$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(2);
                     }
@@ -105,7 +103,6 @@ public final class ButtonComponent implements ComposeVolumePanelUiComponent {
         Object rememberedValue2 = composerImpl.rememberedValue();
         if (changed || rememberedValue2 == composer$Companion$Empty$1) {
             rememberedValue2 = new Function1() { // from class: com.android.systemui.volume.panel.component.button.ui.composable.ButtonComponent$Content$1$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -152,7 +149,6 @@ public final class ButtonComponent implements ComposeVolumePanelUiComponent {
         Updater.m276setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
         ColumnScopeInstance columnScopeInstance = ColumnScopeInstance.INSTANCE;
         BottomComponentButtonSurfaceKt.BottomComponentButtonSurface(null, ComposableLambdaKt.rememberComposableLambda(-440073138, composerImpl, new Function2() { // from class: com.android.systemui.volume.panel.component.button.ui.composable.ButtonComponent$Content$2$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
             }
@@ -161,7 +157,6 @@ public final class ButtonComponent implements ComposeVolumePanelUiComponent {
             
                 if (r1 == androidx.compose.runtime.Composer.Companion.Empty) goto L12;
              */
-            /* JADX WARN: Type inference failed for: r14v7, types: [com.android.systemui.volume.panel.component.button.ui.composable.ButtonComponent$Content$2$1$3, kotlin.jvm.internal.Lambda] */
             @Override // kotlin.jvm.functions.Function2
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -291,7 +286,6 @@ public final class ButtonComponent implements ComposeVolumePanelUiComponent {
         RecomposeScopeImpl endRestartGroup2 = composerImpl.endRestartGroup();
         if (endRestartGroup2 != null) {
             endRestartGroup2.block = new Function2() { // from class: com.android.systemui.volume.panel.component.button.ui.composable.ButtonComponent$Content$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

@@ -12,13 +12,11 @@ import java.util.Map;
 public final class GameModeInfo implements Parcelable {
     public static final Parcelable.Creator<GameModeInfo> CREATOR =
             new Parcelable.Creator<GameModeInfo>() { // from class: android.app.GameModeInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GameModeInfo createFromParcel(Parcel in) {
                     return new GameModeInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GameModeInfo[] newArray(int size) {
                     return new GameModeInfo[size];

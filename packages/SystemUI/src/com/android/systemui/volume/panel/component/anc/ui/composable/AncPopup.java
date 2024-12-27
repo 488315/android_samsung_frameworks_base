@@ -62,7 +62,6 @@ public final class AncPopup {
             RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
             if (endRestartGroup != null) {
                 endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.anc.ui.composable.AncPopup$Content$2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(2);
                     }
@@ -97,7 +96,6 @@ public final class AncPopup {
             RecomposeScopeImpl endRestartGroup2 = composerImpl.endRestartGroup();
             if (endRestartGroup2 != null) {
                 endRestartGroup2.block = new Function2() { // from class: com.android.systemui.volume.panel.component.anc.ui.composable.AncPopup$Content$4
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(2);
                     }
@@ -118,7 +116,6 @@ public final class AncPopup {
         RecomposeScopeImpl endRestartGroup3 = composerImpl.endRestartGroup();
         if (endRestartGroup3 != null) {
             endRestartGroup3.block = new Function2() { // from class: com.android.systemui.volume.panel.component.anc.ui.composable.AncPopup$Content$6
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -154,7 +151,6 @@ public final class AncPopup {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.anc.ui.composable.AncPopup$Title$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

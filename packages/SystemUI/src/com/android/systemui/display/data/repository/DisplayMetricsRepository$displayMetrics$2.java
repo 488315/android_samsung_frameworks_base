@@ -19,7 +19,6 @@ final class DisplayMetricsRepository$displayMetrics$2 extends SuspendLambda impl
     /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisplayMetricsRepository$displayMetrics$2(LogBuffer logBuffer, Continuation continuation) {
         super(2, continuation);
         this.$logBuffer = logBuffer;

@@ -659,9 +659,6 @@ public final class PerProcessNandswap {
             return treeSet;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:52:0x0152 A[Catch: Exception -> 0x0230, TryCatch #0 {Exception -> 0x0230, blocks: (B:3:0x000e, B:7:0x0015, B:17:0x002d, B:19:0x0042, B:21:0x004a, B:24:0x0057, B:25:0x0060, B:29:0x0069, B:33:0x005c, B:34:0x0077, B:36:0x0084, B:39:0x008f, B:41:0x0095, B:43:0x00b0, B:44:0x00b4, B:52:0x0152, B:55:0x015b, B:57:0x0175, B:59:0x00da, B:62:0x00e5, B:65:0x00ee, B:67:0x00fa, B:77:0x00c3, B:78:0x00c4, B:79:0x00c8, B:86:0x017e, B:88:0x017f, B:92:0x0199, B:93:0x01ae, B:95:0x01b6, B:98:0x01ef, B:100:0x01fe, B:102:0x020d, B:104:0x0213, B:108:0x021b, B:110:0x0221, B:112:0x0229, B:116:0x01a4, B:46:0x00b5, B:47:0x00bf, B:81:0x00c9, B:82:0x00d3), top: B:2:0x000e, inners: #1, #2 }] */
-        /* JADX WARN: Removed duplicated region for block: B:54:0x0159  */
-        /* JADX WARN: Removed duplicated region for block: B:59:0x00da A[Catch: Exception -> 0x0230, TRY_ENTER, TryCatch #0 {Exception -> 0x0230, blocks: (B:3:0x000e, B:7:0x0015, B:17:0x002d, B:19:0x0042, B:21:0x004a, B:24:0x0057, B:25:0x0060, B:29:0x0069, B:33:0x005c, B:34:0x0077, B:36:0x0084, B:39:0x008f, B:41:0x0095, B:43:0x00b0, B:44:0x00b4, B:52:0x0152, B:55:0x015b, B:57:0x0175, B:59:0x00da, B:62:0x00e5, B:65:0x00ee, B:67:0x00fa, B:77:0x00c3, B:78:0x00c4, B:79:0x00c8, B:86:0x017e, B:88:0x017f, B:92:0x0199, B:93:0x01ae, B:95:0x01b6, B:98:0x01ef, B:100:0x01fe, B:102:0x020d, B:104:0x0213, B:108:0x021b, B:110:0x0221, B:112:0x0229, B:116:0x01a4, B:46:0x00b5, B:47:0x00bf, B:81:0x00c9, B:82:0x00d3), top: B:2:0x000e, inners: #1, #2 }] */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -675,9 +672,6 @@ public final class PerProcessNandswap {
             throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.ppn.PerProcessNandswap.NandswapHandler.handleMessage(android.os.Message):void");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:106:0x02e9  */
-        /* JADX WARN: Removed duplicated region for block: B:39:0x0307  */
-        /* JADX WARN: Removed duplicated region for block: B:79:0x0226  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -911,7 +905,6 @@ public final class PerProcessNandswap {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:63:0x01f9 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1365,10 +1358,8 @@ public final class PerProcessNandswap {
         return __WritebackOnFreezeEnabled.booleanValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long prefetchProcess(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long prefetchProcessFast(int i);
 
     public final void checkProcessStatusForNandswap(int i, int i2, String str) {
@@ -1441,10 +1432,6 @@ public final class PerProcessNandswap {
         printWriter.println("\n== PerProcessNandswap dump end ==");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v1, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [java.util.ArrayList] */
     public final void dumpProcessList(PrintWriter printWriter) {
         int i;
         ?? emptyList;

@@ -13,7 +13,6 @@ final class AudioMirroringDeviceController$packageName$4 extends SuspendLambda i
     int label;
     final /* synthetic */ AudioMirroringDeviceController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AudioMirroringDeviceController$packageName$4(AudioMirroringDeviceController audioMirroringDeviceController, Continuation continuation) {
         super(2, continuation);
         this.this$0 = audioMirroringDeviceController;

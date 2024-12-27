@@ -15,7 +15,6 @@ public final class CompositeUserData implements FieldClassificationUserData, Par
             new Parcelable.Creator<
                     CompositeUserData>() { // from class:
                                            // android.service.autofill.CompositeUserData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompositeUserData createFromParcel(Parcel parcel) {
                     UserData genericUserData =
@@ -25,7 +24,6 @@ public final class CompositeUserData implements FieldClassificationUserData, Par
                     return new CompositeUserData(genericUserData, packageUserData);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompositeUserData[] newArray(int size) {
                     return new CompositeUserData[size];

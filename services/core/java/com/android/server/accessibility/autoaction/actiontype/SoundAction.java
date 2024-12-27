@@ -6,7 +6,6 @@ public final class SoundAction extends CornerActionType {
     public AudioManager mAudioManager;
     public String mType;
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // com.android.server.accessibility.autoaction.actiontype.CornerActionType
     public final void performCornerAction(int i) {
         char c;

@@ -897,8 +897,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
             return string.contains(":") ? string.split(":") : new String[] {string};
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:41:0x00b0  */
-        /* JADX WARN: Removed duplicated region for block: B:44:0x00b7  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2671,12 +2669,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         CROSS_USER_PERMISSIONS = new HashMap();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x080a  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0b2a  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0b34  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0c47  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0c4a A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0825  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3196,7 +3188,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.server.devicepolicy.DevicePolicyManagerService$8] */
     public final void applyManagedSubscriptionsPolicyIfRequired() {
         final int organizationOwnedProfileUserId = getOrganizationOwnedProfileUserId();
         if (organizationOwnedProfileUserId != -10000) {
@@ -4523,8 +4514,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         return createShowAdminSupportIntent;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:60:0x015b  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0167  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4546,7 +4535,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
                     + " android.os.PersistableBundle, int):android.os.UserHandle");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:47:0x0235 A[Catch: all -> 0x0067, TryCatch #1 {all -> 0x0067, blocks: (B:3:0x0043, B:5:0x0055, B:59:0x0062, B:8:0x007b, B:10:0x0081, B:11:0x00ba, B:13:0x00d0, B:17:0x00e9, B:20:0x0105, B:22:0x0161, B:24:0x0192, B:25:0x0196, B:33:0x01a1, B:35:0x01a5, B:38:0x01f9, B:39:0x0201, B:40:0x0202, B:41:0x020a, B:45:0x0220, B:47:0x0235, B:48:0x023c, B:53:0x0089, B:54:0x008d, B:56:0x0093, B:7:0x006d, B:60:0x020b, B:61:0x021d), top: B:2:0x0043 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5412,8 +5400,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         setActiveAdmin(componentName, true, i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x006f A[Catch: all -> 0x0057, RemoteException -> 0x0059, TRY_LEAVE, TryCatch #1 {RemoteException -> 0x0059, blocks: (B:29:0x0048, B:12:0x005c, B:14:0x006f), top: B:28:0x0048, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00a9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6783,7 +6769,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         return 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0054 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8497,9 +8482,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         return new ParcelableGranteeMap(arrayMap);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0040 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0078 A[Catch: all -> 0x0067, TryCatch #0 {all -> 0x0067, blocks: (B:50:0x005a, B:52:0x0060, B:27:0x0071, B:29:0x0078, B:33:0x0091, B:34:0x0093, B:36:0x008b, B:38:0x0095, B:26:0x0069), top: B:49:0x005a, outer: #1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8855,7 +8837,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         return this.mDevicePolicyEngine.mPolicySizeLimit;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0041 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8922,7 +8903,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
                     + " int, boolean):int");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x003a A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -9633,7 +9613,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
                 393216);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0039 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -9935,7 +9914,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         return arrayList;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final int getPersonalAppsSuspendedReasons(ComponentName componentName) {
         int i;
         Objects.requireNonNull(componentName, "ComponentName is null");
@@ -13616,11 +13594,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         return listPolicyExemptAppsUnchecked(this.mContext);
     }
 
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0084 A[Catch: all -> 0x0059, RemoteException -> 0x005c, TryCatch #2 {all -> 0x0059, blocks: (B:11:0x0034, B:13:0x0048, B:15:0x0053, B:16:0x005f, B:17:0x0066, B:19:0x0067, B:20:0x006e, B:28:0x0072, B:32:0x007c, B:34:0x0084, B:37:0x009d, B:38:0x00c1, B:42:0x00cb, B:43:0x00d1, B:46:0x0089, B:47:0x00b1, B:50:0x0028), top: B:49:0x0028, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00cb A[Catch: all -> 0x0059, RemoteException -> 0x005c, TryCatch #2 {all -> 0x0059, blocks: (B:11:0x0034, B:13:0x0048, B:15:0x0053, B:16:0x005f, B:17:0x0066, B:19:0x0067, B:20:0x006e, B:28:0x0072, B:32:0x007c, B:34:0x0084, B:37:0x009d, B:38:0x00c1, B:42:0x00cb, B:43:0x00d1, B:46:0x0089, B:47:0x00b1, B:50:0x0028), top: B:49:0x0028, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00d0  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00b1 A[Catch: all -> 0x0059, RemoteException -> 0x005c, TryCatch #2 {all -> 0x0059, blocks: (B:11:0x0034, B:13:0x0048, B:15:0x0053, B:16:0x005f, B:17:0x0066, B:19:0x0067, B:20:0x006e, B:28:0x0072, B:32:0x007c, B:34:0x0084, B:37:0x009d, B:38:0x00c1, B:42:0x00cb, B:43:0x00d1, B:46:0x0089, B:47:0x00b1, B:50:0x0028), top: B:49:0x0028, outer: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -14075,8 +14048,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0094  */
-    /* JADX WARN: Removed duplicated region for block: B:36:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -14570,8 +14541,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         Binder.withCleanCallingIdentity(devicePolicyManagerService$$ExternalSyntheticLambda46);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:44:0x01c2 A[Catch: all -> 0x0193, Exception -> 0x01ca, LOOP:1: B:44:0x01c2->B:46:0x01c6, LOOP_START, TryCatch #2 {Exception -> 0x01ca, blocks: (B:35:0x014b, B:42:0x019d, B:44:0x01c2, B:46:0x01c6, B:54:0x01cc, B:55:0x01d4, B:58:0x019a), top: B:34:0x014b, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x01cc A[Catch: all -> 0x0193, Exception -> 0x01ca, TryCatch #2 {Exception -> 0x01ca, blocks: (B:35:0x014b, B:42:0x019d, B:44:0x01c2, B:46:0x01c6, B:54:0x01cc, B:55:0x01d4, B:58:0x019a), top: B:34:0x014b, outer: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -14588,8 +14557,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
                     + " int):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:44:0x01b0 A[Catch: all -> 0x0181, Exception -> 0x01b8, LOOP:1: B:44:0x01b0->B:46:0x01b4, LOOP_START, TryCatch #2 {Exception -> 0x01b8, blocks: (B:35:0x013e, B:42:0x018b, B:44:0x01b0, B:46:0x01b4, B:54:0x01ba, B:55:0x01c2, B:58:0x0188), top: B:34:0x013e, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x01ba A[Catch: all -> 0x0181, Exception -> 0x01b8, TryCatch #2 {Exception -> 0x01b8, blocks: (B:35:0x013e, B:42:0x018b, B:44:0x01b0, B:46:0x01b4, B:54:0x01ba, B:55:0x01c2, B:58:0x0188), top: B:34:0x013e, outer: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -14880,7 +14847,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(
             FileDescriptor fileDescriptor,
             FileDescriptor fileDescriptor2,
@@ -14984,8 +14950,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
 
        if (getHeadlessDeviceOwnerModeForDeviceAdmin(android.os.UserHandle.getUserId(r6), r4) == 2) goto L17;
     */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x017d A[Catch: all -> 0x007a, Exception -> 0x007d, TryCatch #1 {Exception -> 0x007d, blocks: (B:11:0x0063, B:14:0x006c, B:17:0x0087, B:19:0x008d, B:22:0x009a, B:25:0x00b1, B:26:0x00b8, B:28:0x00b9, B:30:0x00c7, B:32:0x00db, B:39:0x00ec, B:40:0x00f3, B:43:0x00fb, B:45:0x0106, B:46:0x010e, B:51:0x0118, B:52:0x0130, B:54:0x013a, B:60:0x0155, B:56:0x0174, B:57:0x017c, B:65:0x0152, B:48:0x017d, B:49:0x0185, B:69:0x012d, B:71:0x0186, B:72:0x0198, B:74:0x0080), top: B:10:0x0063, outer: #3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x0118 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -15099,8 +15063,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v0, types: [com.android.server.devicepolicy.DevicePolicyManagerService$4] */
     public final void removeActiveAdminLocked(final int i, final ComponentName componentName) {
         ActiveAdmin activeAdminUncheckedLocked = getActiveAdminUncheckedLocked(i, componentName);
         DevicePolicyData userData = getUserData(i);
@@ -16659,8 +16621,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x004c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -17962,11 +17922,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         sendActiveAdminCommand(str, bundle, deviceOwnerUserId, deviceOwnerComponent, false);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0023  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0041  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x003e  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x002c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -18149,8 +18104,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00bd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -19558,10 +19511,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00c9 A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:16:0x008f, B:19:0x00b9, B:21:0x00bf, B:23:0x00c9, B:24:0x00e6, B:26:0x00eb, B:28:0x00f1, B:30:0x00fa, B:32:0x0110, B:34:0x0116, B:36:0x011c, B:37:0x0121, B:39:0x0129, B:43:0x012c, B:44:0x012f, B:47:0x00e0, B:48:0x0131, B:49:0x0147, B:50:0x009c, B:52:0x00a2, B:55:0x00b2), top: B:15:0x008f }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00eb A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:16:0x008f, B:19:0x00b9, B:21:0x00bf, B:23:0x00c9, B:24:0x00e6, B:26:0x00eb, B:28:0x00f1, B:30:0x00fa, B:32:0x0110, B:34:0x0116, B:36:0x011c, B:37:0x0121, B:39:0x0129, B:43:0x012c, B:44:0x012f, B:47:0x00e0, B:48:0x0131, B:49:0x0147, B:50:0x009c, B:52:0x00a2, B:55:0x00b2), top: B:15:0x008f }] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00fa A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:16:0x008f, B:19:0x00b9, B:21:0x00bf, B:23:0x00c9, B:24:0x00e6, B:26:0x00eb, B:28:0x00f1, B:30:0x00fa, B:32:0x0110, B:34:0x0116, B:36:0x011c, B:37:0x0121, B:39:0x0129, B:43:0x012c, B:44:0x012f, B:47:0x00e0, B:48:0x0131, B:49:0x0147, B:50:0x009c, B:52:0x00a2, B:55:0x00b2), top: B:15:0x008f }] */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00e0 A[Catch: all -> 0x00de, TryCatch #0 {all -> 0x00de, blocks: (B:16:0x008f, B:19:0x00b9, B:21:0x00bf, B:23:0x00c9, B:24:0x00e6, B:26:0x00eb, B:28:0x00f1, B:30:0x00fa, B:32:0x0110, B:34:0x0116, B:36:0x011c, B:37:0x0121, B:39:0x0129, B:43:0x012c, B:44:0x012f, B:47:0x00e0, B:48:0x0131, B:49:0x0147, B:50:0x009c, B:52:0x00a2, B:55:0x00b2), top: B:15:0x008f }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -21504,7 +21453,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         Binder.withCleanCallingIdentity(devicePolicyManagerService$$ExternalSyntheticLambda3);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void setNetworkLoggingEnabled(ComponentName componentName, String str, boolean z) {
         if (this.mHasFeature) {
             CallerIdentity callerIdentity = getCallerIdentity(componentName, str);
@@ -21737,9 +21685,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.devicepolicy.DevicePolicyManagerService] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.devicepolicy.DevicePolicyManagerService$Injector, java.lang.Object] */
     public final String[] setPackagesSuspended(
             ComponentName componentName, String str, String[] strArr, boolean z) {
         String[] suspend;
@@ -22533,8 +22478,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
 
        if (r1.intValue() != 0) goto L56;
     */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x008a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -24615,7 +24558,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
                     + " java.lang.String, java.lang.String, boolean, boolean):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x006d A[ADDED_TO_REGION] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -25134,7 +25076,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x009a A[Catch: all -> 0x0085, TryCatch #1 {all -> 0x0085, blocks: (B:4:0x001d, B:13:0x0077, B:15:0x0081, B:16:0x0087, B:35:0x009f, B:37:0x00a9, B:38:0x00ac, B:24:0x0090, B:26:0x009a, B:27:0x009d), top: B:3:0x001d }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -25579,8 +25520,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         this.mDeviceAdminServiceController.startServiceForAdmin(i, componentName2.getPackageName());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x005a  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0170  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -26140,8 +26079,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
         return arraySet;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0037  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -26209,9 +26146,6 @@ public final class DevicePolicyManagerService extends IDevicePolicyManager.Stub 
                     + " com.android.server.devicepolicy.DevicePolicyManagerService.updatePersonalAppsSuspension(int):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x006d  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00b1  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00ba  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

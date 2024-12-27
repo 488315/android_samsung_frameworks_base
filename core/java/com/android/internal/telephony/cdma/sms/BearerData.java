@@ -198,7 +198,6 @@ public final class BearerData {
             return ts;
         }
 
-        /* JADX WARN: Type inference failed for: r1v2, types: [java.time.LocalDateTime] */
         public static TimeStamp fromMillis(long timeInMillis) {
             TimeStamp ts = new TimeStamp();
             ?? localDateTime = Instant.ofEpochMilli(timeInMillis).atZone(ts.mZoneId).toLocalDateTime();
@@ -1678,7 +1677,6 @@ public final class BearerData {
         }
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:7:0x002e */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

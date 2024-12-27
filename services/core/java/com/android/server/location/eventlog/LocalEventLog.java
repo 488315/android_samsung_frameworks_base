@@ -187,7 +187,6 @@ public abstract class LocalEventLog {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x005d A[Catch: all -> 0x003b, TryCatch #1 {all -> 0x003b, blocks: (B:5:0x0005, B:10:0x0016, B:12:0x001f, B:16:0x002f, B:18:0x0036, B:20:0x0059, B:22:0x005d, B:23:0x0066, B:27:0x003d, B:30:0x0052, B:33:0x0057, B:34:0x0058, B:29:0x003e), top: B:4:0x0005, inners: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

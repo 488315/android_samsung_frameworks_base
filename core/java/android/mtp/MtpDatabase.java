@@ -385,7 +385,6 @@ public class MtpDatabase implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Boolean lambda$addStorage$0() {
         return Boolean.valueOf(this.mHostIsWindows);
     }
@@ -1014,7 +1013,6 @@ public class MtpDatabase implements AutoCloseable {
         return false;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0098, code lost:
 
        if (r4 != null) goto L23;

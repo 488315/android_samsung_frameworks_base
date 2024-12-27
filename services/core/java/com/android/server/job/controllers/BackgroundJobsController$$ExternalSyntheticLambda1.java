@@ -15,11 +15,6 @@ public final /* synthetic */ class BackgroundJobsController$$ExternalSyntheticLa
         this.f$1 = obj;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0088  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x0103  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0113  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0119  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0106  */
     @Override // java.util.function.Consumer
     /*
         Code decompiled incorrectly, please refer to instructions dump.

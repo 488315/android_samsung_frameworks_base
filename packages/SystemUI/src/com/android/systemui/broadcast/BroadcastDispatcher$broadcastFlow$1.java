@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public final class BroadcastDispatcher$broadcastFlow$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ IntentFilter $filter;
     final /* synthetic */ int $flags;
@@ -27,7 +26,6 @@ public final class BroadcastDispatcher$broadcastFlow$1 extends SuspendLambda imp
     int label;
     final /* synthetic */ BroadcastDispatcher this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BroadcastDispatcher$broadcastFlow$1(BroadcastDispatcher broadcastDispatcher, IntentFilter intentFilter, UserHandle userHandle, int i, String str, Function2 function2, Continuation continuation) {
         super(2, continuation);
         this.this$0 = broadcastDispatcher;
@@ -50,8 +48,6 @@ public final class BroadcastDispatcher$broadcastFlow$1 extends SuspendLambda imp
         return ((BroadcastDispatcher$broadcastFlow$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.content.BroadcastReceiver, com.android.systemui.broadcast.BroadcastDispatcher$broadcastFlow$1$receiver$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -70,7 +66,6 @@ public final class BroadcastDispatcher$broadcastFlow$1 extends SuspendLambda imp
             broadcastDispatcher.registerReceiver(r1, this.$filter, broadcastDispatcher.broadcastExecutor, this.$user, this.$flags, this.$permission);
             final BroadcastDispatcher broadcastDispatcher2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.broadcast.BroadcastDispatcher$broadcastFlow$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -29,7 +29,6 @@ final class SceneContainerViewModel$destinationScenesBySceneKey$1$1 extends Susp
     int label;
     final /* synthetic */ SceneContainerViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SceneContainerViewModel$destinationScenesBySceneKey$1$1(SceneContainerViewModel sceneContainerViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = sceneContainerViewModel;
@@ -92,8 +91,6 @@ final class SceneContainerViewModel$destinationScenesBySceneKey$1$1 extends Susp
                         this.$actionResult$inlined = userActionResult;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -192,8 +189,6 @@ final class SceneContainerViewModel$destinationScenesBySceneKey$1$1 extends Susp
                         this.$k$inlined = obj;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -302,7 +297,6 @@ final class SceneContainerViewModel$destinationScenesBySceneKey$1$1 extends Susp
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
                 Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.scene.ui.viewmodel.SceneContainerViewModelKt$combineValueFlows$$inlined$combine$1.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

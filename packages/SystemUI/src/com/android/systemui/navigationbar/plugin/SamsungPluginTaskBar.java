@@ -50,7 +50,6 @@ public final class SamsungPluginTaskBar implements ExtendableBar {
     public final RotationLockController rotationLockContainer;
     public TaskbarDelegate taskbarDelegate;
 
-    /* JADX WARN: Type inference failed for: r3v10, types: [com.android.systemui.navigationbar.plugin.SamsungPluginTaskBar$keyguardCallback$1] */
     public SamsungPluginTaskBar(NavBarStore navBarStore, Context context) {
         this.navBarStore = navBarStore;
         this.mainContext = context;

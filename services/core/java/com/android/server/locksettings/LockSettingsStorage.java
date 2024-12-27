@@ -577,21 +577,6 @@ public final class LockSettingsStorage {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0087  */
-    /* JADX WARN: Type inference failed for: r0v5, types: [java.io.RandomAccessFile] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [android.util.ArrayMap] */
-    /* JADX WARN: Type inference failed for: r3v0 */
-    /* JADX WARN: Type inference failed for: r3v1 */
-    /* JADX WARN: Type inference failed for: r3v11, types: [byte[]] */
-    /* JADX WARN: Type inference failed for: r3v12 */
-    /* JADX WARN: Type inference failed for: r3v2 */
-    /* JADX WARN: Type inference failed for: r3v3 */
-    /* JADX WARN: Type inference failed for: r3v4 */
-    /* JADX WARN: Type inference failed for: r3v5 */
-    /* JADX WARN: Type inference failed for: r3v6 */
-    /* JADX WARN: Type inference failed for: r3v8 */
-    /* JADX WARN: Type inference failed for: r3v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -956,8 +941,6 @@ public final class LockSettingsStorage {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0078 A[Catch: all -> 0x0028, TryCatch #2 {all -> 0x0028, blocks: (B:4:0x000a, B:6:0x0010, B:7:0x002b, B:13:0x003b, B:14:0x0073, B:16:0x0078, B:17:0x007f, B:19:0x008a, B:20:0x008f, B:21:0x0094, B:31:0x0096, B:32:0x0099, B:27:0x0070), top: B:3:0x000a }] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x008a A[Catch: all -> 0x0028, TryCatch #2 {all -> 0x0028, blocks: (B:4:0x000a, B:6:0x0010, B:7:0x002b, B:13:0x003b, B:14:0x0073, B:16:0x0078, B:17:0x007f, B:19:0x008a, B:20:0x008f, B:21:0x0094, B:31:0x0096, B:32:0x0099, B:27:0x0070), top: B:3:0x000a }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

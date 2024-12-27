@@ -9,13 +9,11 @@ public class SemContextBounceShortMotion extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextBounceShortMotion>() { // from class:
                                                      // com.samsung.android.hardware.context.SemContextBounceShortMotion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextBounceShortMotion createFromParcel(Parcel in) {
                     return new SemContextBounceShortMotion(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextBounceShortMotion[] newArray(int size) {
                     return new SemContextBounceShortMotion[size];

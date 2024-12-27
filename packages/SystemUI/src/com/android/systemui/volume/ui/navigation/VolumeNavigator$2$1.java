@@ -58,7 +58,6 @@ final class VolumeNavigator$2$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ VolumeNavigator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public VolumeNavigator$2$1(VolumeNavigator volumeNavigator, Continuation continuation) {
         super(2, continuation);
         this.this$0 = volumeNavigator;
@@ -91,7 +90,6 @@ final class VolumeNavigator$2$1 extends SuspendLambda implements Function2 {
                     super(3);
                 }
 
-                /* JADX WARN: Type inference failed for: r1v11, types: [com.android.systemui.statusbar.phone.SystemUIDialogFactoryExtKt$createBottomSheet$1$2$2, kotlin.jvm.internal.Lambda] */
                 @Override // kotlin.jvm.functions.Function3
                 public final Object invoke(Object obj2, Object obj3, Object obj4) {
                     final SystemUIDialog systemUIDialog = (SystemUIDialog) obj2;
@@ -161,7 +159,6 @@ final class VolumeNavigator$2$1 extends SuspendLambda implements Function2 {
                     RoundedCornerShape m153RoundedCornerShapea9UjIt4$default = RoundedCornerShapeKt.m153RoundedCornerShapea9UjIt4$default(dimensionResource, dimensionResource, 0.0f, 0.0f, 12);
                     MaterialTheme.INSTANCE.getClass();
                     SurfaceKt.m248SurfaceT9BRK9s(m121widthInVpY3zN4$default, m153RoundedCornerShapea9UjIt4$default, MaterialTheme.getColorScheme(composer).surfaceContainer, 0L, 0.0f, 0.0f, null, ComposableLambdaKt.rememberComposableLambda(-775727375, composer, new Function2() { // from class: com.android.systemui.statusbar.phone.SystemUIDialogFactoryExtKt$createBottomSheet$1$2$2
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(2);
                         }
@@ -225,7 +222,6 @@ final class VolumeNavigator$2$1 extends SuspendLambda implements Function2 {
             this.this$0.uiEventLogger.log(VolumePanelUiEvent.VOLUME_PANEL_SHOWN);
             create.show();
             Function0 function0 = new Function0() { // from class: com.android.systemui.volume.ui.navigation.VolumeNavigator$2$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

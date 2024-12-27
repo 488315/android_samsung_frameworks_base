@@ -9,13 +9,11 @@ import android.os.Parcelable;
 public final class ActivityId implements Parcelable {
     public static final Parcelable.Creator<ActivityId> CREATOR =
             new Parcelable.Creator<ActivityId>() { // from class: android.app.assist.ActivityId.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityId createFromParcel(Parcel parcel) {
                     return new ActivityId(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityId[] newArray(int size) {
                     return new ActivityId[size];

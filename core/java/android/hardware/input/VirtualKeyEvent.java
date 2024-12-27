@@ -16,13 +16,11 @@ public final class VirtualKeyEvent implements Parcelable {
     public static final Parcelable.Creator<VirtualKeyEvent> CREATOR =
             new Parcelable.Creator<
                     VirtualKeyEvent>() { // from class: android.hardware.input.VirtualKeyEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualKeyEvent createFromParcel(Parcel source) {
                     return new VirtualKeyEvent(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualKeyEvent[] newArray(int size) {
                     return new VirtualKeyEvent[size];

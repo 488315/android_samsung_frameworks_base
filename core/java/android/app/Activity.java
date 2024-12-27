@@ -1827,7 +1827,6 @@ public class Activity extends ContextThemeWrapper
         onBackInvoked();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onBackInvoked() {
         Slog.d(TAG, "onBackInvoked, activity=" + this + ", caller=" + Debug.getCallers(3));
         ActivityClient.getInstance()
@@ -2889,7 +2888,6 @@ public class Activity extends ContextThemeWrapper
         startActivityForResult(fragment.mWho, intent, requestCode, options);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startActivityAsUserFromFragment(
             Fragment fragment, Intent intent, int requestCode, Bundle options, UserHandle user) {
         startActivityForResultAsUser(intent, fragment.mWho, requestCode, options, user);
@@ -2958,7 +2956,6 @@ public class Activity extends ContextThemeWrapper
                 options);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startIntentSenderFromFragment(
             Fragment fragment,
             IntentSender intent,
@@ -3490,7 +3487,6 @@ public class Activity extends ContextThemeWrapper
         return this.mDumpableContainer.addDumpable(dumpable);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public void dumpInternal(String prefix, FileDescriptor fd, PrintWriter writer, String[] args) {
         char c;
         if (this.mAutofillClientController != null) {
@@ -4662,7 +4658,6 @@ public class Activity extends ContextThemeWrapper
             return Activity.this.getApplicationInfo().targetSdkVersion >= 21;
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.app.FragmentHostCallback
         public Activity onGetHost() {
             return Activity.this;
@@ -4803,7 +4798,6 @@ public class Activity extends ContextThemeWrapper
         return this.mWindow.peekDecorView() != null && this.mWindow.isOutOfBounds(this, ev);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void applyTransparentPopOver() {
         WindowManager.LayoutParams attrs = this.mWindow.getAttributes();
         attrs.semAddExtensionFlags(2);

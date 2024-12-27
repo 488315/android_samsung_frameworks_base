@@ -232,7 +232,6 @@ public final class UserController implements Handler.Callback {
             public final int mUserId;
             public final /* synthetic */ Runnable val$onFinish;
 
-            /* JADX WARN: Type inference failed for: r5v2, types: [com.android.server.am.PreBootBroadcaster$1] */
             public AnonymousClass1(ActivityManagerService activityManagerService, int i, boolean z, UserController$$ExternalSyntheticLambda18 userController$$ExternalSyntheticLambda18) {
                 this.val$onFinish = userController$$ExternalSyntheticLambda18;
                 final Looper looper = UiThread.get().getLooper();
@@ -475,7 +474,6 @@ public final class UserController implements Handler.Callback {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.am.UserController$1] */
     public UserController(Injector injector) {
         SparseArray sparseArray = new SparseArray();
         this.mStartedUsers = sparseArray;
@@ -796,17 +794,6 @@ public final class UserController implements Handler.Callback {
         timingsTraceAndSlog.traceEnd();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00b1  */
-    /* JADX WARN: Type inference failed for: r18v0, types: [long] */
-    /* JADX WARN: Type inference failed for: r18v1 */
-    /* JADX WARN: Type inference failed for: r18v2 */
-    /* JADX WARN: Type inference failed for: r18v3 */
-    /* JADX WARN: Type inference failed for: r18v4 */
-    /* JADX WARN: Type inference failed for: r18v5, types: [java.util.concurrent.atomic.AtomicInteger] */
-    /* JADX WARN: Type inference failed for: r2v3, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r3v14, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r4v10, types: [java.lang.String] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1461,8 +1448,6 @@ public final class UserController implements Handler.Callback {
         return userId;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Type inference failed for: r8v18, types: [com.android.server.am.UserController$$ExternalSyntheticLambda18] */
     @Override // android.os.Handler.Callback
     public final boolean handleMessage(Message message) {
         FileInputStream fileInputStream;
@@ -1574,8 +1559,6 @@ public final class UserController implements Handler.Callback {
                                                     final ProcessRecord processRecord = (ProcessRecord) sparseArray.valueAt(i8);
                                                     if (processRecord.userId == identifier && processRecord.mThread != null && !processRecord.mUnlocked) {
                                                         processRecord.mPkgList.forEachPackage(new Consumer() { // from class: com.android.server.am.ContentProviderHelper$$ExternalSyntheticLambda4
-                                                            /* JADX WARN: Removed duplicated region for block: B:23:0x0056 A[Catch: RemoteException -> 0x009b, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x009b, blocks: (B:3:0x0009, B:5:0x001a, B:7:0x0022, B:9:0x0029, B:11:0x0036, B:15:0x003e, B:17:0x0044, B:21:0x004c, B:23:0x0056, B:31:0x006c, B:34:0x0084), top: B:2:0x0009 }] */
-                                                            /* JADX WARN: Removed duplicated region for block: B:28:0x0066 A[ADDED_TO_REGION] */
                                                             @Override // java.util.function.Consumer
                                                             /*
                                                                 Code decompiled incorrectly, please refer to instructions dump.
@@ -1966,8 +1949,6 @@ public final class UserController implements Handler.Callback {
         maybeUnlockUser(i, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0172  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x0179  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2358,12 +2339,6 @@ public final class UserController implements Handler.Callback {
         return startUserNoChecks(i, 0, i2, null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x0382 A[Catch: all -> 0x0075, TryCatch #4 {all -> 0x0075, blocks: (B:10:0x0057, B:12:0x0065, B:14:0x006b, B:15:0x0097, B:17:0x009c, B:18:0x00aa, B:20:0x00b9, B:25:0x00d1, B:27:0x00d7, B:32:0x0115, B:34:0x012d, B:37:0x0151, B:38:0x0159, B:44:0x01b8, B:46:0x01c1, B:48:0x01ce, B:49:0x01d3, B:51:0x01d8, B:52:0x01ec, B:54:0x01f4, B:55:0x01ff, B:59:0x0205, B:62:0x0225, B:64:0x022a, B:67:0x0243, B:69:0x0249, B:70:0x024c, B:72:0x0254, B:73:0x026c, B:77:0x0271, B:79:0x029e, B:81:0x02a2, B:82:0x02c2, B:84:0x02ee, B:86:0x02f4, B:88:0x02fa, B:89:0x030d, B:91:0x0315, B:97:0x034c, B:95:0x0354, B:100:0x0357, B:104:0x035e, B:110:0x037d, B:112:0x0382, B:117:0x03a0, B:118:0x038f, B:120:0x037a, B:126:0x0278, B:128:0x027b, B:129:0x0292, B:133:0x0297, B:137:0x029d, B:141:0x0237, B:142:0x0238, B:153:0x03b2, B:154:0x00f6, B:156:0x00fa, B:161:0x007c, B:164:0x0081, B:170:0x008a, B:173:0x008d, B:40:0x015a, B:42:0x0165, B:43:0x01b7, B:143:0x0186, B:145:0x018a, B:146:0x01af, B:57:0x0200, B:58:0x0204, B:75:0x026d, B:76:0x0270, B:131:0x0293, B:132:0x0296), top: B:9:0x0057, inners: #0, #3, #5, #6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x038f A[Catch: all -> 0x0075, TryCatch #4 {all -> 0x0075, blocks: (B:10:0x0057, B:12:0x0065, B:14:0x006b, B:15:0x0097, B:17:0x009c, B:18:0x00aa, B:20:0x00b9, B:25:0x00d1, B:27:0x00d7, B:32:0x0115, B:34:0x012d, B:37:0x0151, B:38:0x0159, B:44:0x01b8, B:46:0x01c1, B:48:0x01ce, B:49:0x01d3, B:51:0x01d8, B:52:0x01ec, B:54:0x01f4, B:55:0x01ff, B:59:0x0205, B:62:0x0225, B:64:0x022a, B:67:0x0243, B:69:0x0249, B:70:0x024c, B:72:0x0254, B:73:0x026c, B:77:0x0271, B:79:0x029e, B:81:0x02a2, B:82:0x02c2, B:84:0x02ee, B:86:0x02f4, B:88:0x02fa, B:89:0x030d, B:91:0x0315, B:97:0x034c, B:95:0x0354, B:100:0x0357, B:104:0x035e, B:110:0x037d, B:112:0x0382, B:117:0x03a0, B:118:0x038f, B:120:0x037a, B:126:0x0278, B:128:0x027b, B:129:0x0292, B:133:0x0297, B:137:0x029d, B:141:0x0237, B:142:0x0238, B:153:0x03b2, B:154:0x00f6, B:156:0x00fa, B:161:0x007c, B:164:0x0081, B:170:0x008a, B:173:0x008d, B:40:0x015a, B:42:0x0165, B:43:0x01b7, B:143:0x0186, B:145:0x018a, B:146:0x01af, B:57:0x0200, B:58:0x0204, B:75:0x026d, B:76:0x0270, B:131:0x0293, B:132:0x0296), top: B:9:0x0057, inners: #0, #3, #5, #6 }] */
-    /* JADX WARN: Type inference failed for: r12v0 */
-    /* JADX WARN: Type inference failed for: r12v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r12v2 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2443,7 +2418,6 @@ public final class UserController implements Handler.Callback {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final int stopUsersLU(int i, boolean z, boolean z2, IStopUserCallback iStopUserCallback, AnonymousClass4 anonymousClass4) {
         boolean z3;
         ArrayList arrayList;

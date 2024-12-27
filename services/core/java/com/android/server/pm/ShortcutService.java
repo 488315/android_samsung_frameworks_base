@@ -1875,8 +1875,6 @@ public final class ShortcutService extends IShortcutService.Stub {
         shortcutService.verifyStates();
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.pm.ShortcutService$1] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.pm.ShortcutService$1] */
     static {
         final int i = 0;
         ACTIVITY_NOT_EXPORTED =
@@ -1914,7 +1912,6 @@ public final class ShortcutService extends IShortcutService.Stub {
                 };
     }
 
-    /* JADX WARN: Type inference failed for: r2v17, types: [com.android.server.pm.ShortcutService$$ExternalSyntheticLambda9] */
     public ShortcutService(Context context, Looper looper, boolean z) {
         Object obj = new Object();
         this.mServiceLock = obj;
@@ -4858,8 +4855,6 @@ public final class ShortcutService extends IShortcutService.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00cc  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x00e4 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4938,7 +4933,6 @@ public final class ShortcutService extends IShortcutService.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(
             FileDescriptor fileDescriptor,
             FileDescriptor fileDescriptor2,
@@ -5759,8 +5753,6 @@ public final class ShortcutService extends IShortcutService.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x005a  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x006f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

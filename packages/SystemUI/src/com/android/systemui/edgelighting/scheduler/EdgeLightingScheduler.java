@@ -60,16 +60,6 @@ public final class EdgeLightingScheduler {
         
             if (r0 != 6) goto L200;
          */
-        /* JADX WARN: Removed duplicated region for block: B:155:0x0447  */
-        /* JADX WARN: Removed duplicated region for block: B:157:0x044e  */
-        /* JADX WARN: Removed duplicated region for block: B:182:0x04ae  */
-        /* JADX WARN: Removed duplicated region for block: B:185:0x04bc  */
-        /* JADX WARN: Removed duplicated region for block: B:206:0x0552  */
-        /* JADX WARN: Removed duplicated region for block: B:352:0x04b1  */
-        /* JADX WARN: Removed duplicated region for block: B:410:0x09aa  */
-        /* JADX WARN: Removed duplicated region for block: B:411:0x09ac A[Catch: all -> 0x08f6, TryCatch #1 {all -> 0x08f6, blocks: (B:380:0x08e1, B:382:0x08ec, B:383:0x08f3, B:386:0x08f9, B:388:0x0909, B:390:0x0925, B:392:0x093c, B:394:0x0945, B:395:0x094d, B:397:0x0951, B:399:0x0955, B:400:0x095b, B:401:0x0978, B:403:0x097c, B:405:0x0982, B:407:0x098a, B:408:0x0992, B:411:0x09ac, B:413:0x09b6, B:414:0x09bb, B:416:0x09c3, B:417:0x09c8, B:419:0x09dd, B:421:0x09e3, B:422:0x09e6, B:424:0x0a31), top: B:379:0x08e1 }] */
-        /* JADX WARN: Removed duplicated region for block: B:70:0x01b8  */
-        /* JADX WARN: Removed duplicated region for block: B:71:0x01ba A[Catch: all -> 0x010d, TryCatch #2 {all -> 0x010d, blocks: (B:42:0x00fa, B:44:0x0103, B:45:0x010a, B:48:0x0110, B:50:0x0120, B:52:0x014c, B:54:0x0155, B:55:0x015d, B:57:0x0161, B:59:0x0165, B:60:0x016a, B:61:0x0187, B:63:0x018b, B:65:0x0191, B:67:0x0199, B:68:0x01a1, B:71:0x01ba, B:73:0x01c4, B:74:0x01c9, B:76:0x01d1, B:77:0x01d6, B:79:0x01eb, B:81:0x01f1, B:82:0x01f4, B:84:0x0275, B:87:0x0240, B:89:0x024e, B:91:0x0258, B:93:0x0264, B:95:0x026a, B:96:0x0270), top: B:41:0x00fa }] */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -106,8 +96,6 @@ public final class EdgeLightingScheduler {
         public AnonymousClass4() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:13:0x007f  */
-        /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -308,7 +296,6 @@ public final class EdgeLightingScheduler {
         return true;
     }
 
-    /* JADX WARN: Type inference failed for: r8v7, types: [com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler$7] */
     /* renamed from: -$$Nest$mstartNotiEffect, reason: not valid java name */
     public static void m1939$$Nest$mstartNotiEffect(EdgeLightingScheduler edgeLightingScheduler, boolean z) {
         ArrayList arrayList;
@@ -490,8 +477,6 @@ public final class EdgeLightingScheduler {
         Slog.d("EdgeLightingScheduler", stringBuffer.toString());
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler$1] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler$2] */
     public EdgeLightingScheduler(SemEdgeManager semEdgeManager) {
         this.mEdgeManager = semEdgeManager;
     }

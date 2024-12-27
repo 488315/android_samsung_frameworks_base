@@ -320,7 +320,6 @@ final class KeyButtonRipple extends Drawable {
         exitSoftware();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void enterSoftware() {
         endAnimations("enterSoftware", true);
         this.mVisible = true;
@@ -409,7 +408,6 @@ final class KeyButtonRipple extends Drawable {
         return Math.min(size, this.mMaxWidth);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void enterHardware() {
         endAnimations("enterHardware", true);
         this.mVisible = true;

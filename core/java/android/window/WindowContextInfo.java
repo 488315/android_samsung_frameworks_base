@@ -10,13 +10,11 @@ public class WindowContextInfo implements Parcelable {
     public static final Parcelable.Creator<WindowContextInfo> CREATOR =
             new Parcelable.Creator<
                     WindowContextInfo>() { // from class: android.window.WindowContextInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowContextInfo createFromParcel(Parcel in) {
                     return new WindowContextInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowContextInfo[] newArray(int size) {
                     return new WindowContextInfo[size];

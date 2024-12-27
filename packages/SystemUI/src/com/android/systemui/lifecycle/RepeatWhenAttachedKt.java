@@ -29,17 +29,12 @@ public abstract class RepeatWhenAttachedKt {
         MAIN_DISPATCHER_SINGLETON = CoroutineContext.DefaultImpls.plus(mainCoroutineDispatcher, emptyCoroutineContext);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r7v0, types: [android.view.View$OnAttachStateChangeListener, com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$onAttachListener$1] */
-    /* JADX WARN: Type inference failed for: r9v0, types: [T, com.android.systemui.lifecycle.ViewLifecycleOwner] */
     public static final RepeatWhenAttachedKt$repeatWhenAttached$1 repeatWhenAttached(final View view, CoroutineContext coroutineContext, final Function3 function3) {
         Assert.isMainThread();
         final CoroutineContext plus = MAIN_DISPATCHER_SINGLETON.plus(coroutineContext);
         final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
         final String str = "repeatWhenAttached";
         ?? r7 = new View.OnAttachStateChangeListener() { // from class: com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$onAttachListener$1
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r9v2, types: [T, com.android.systemui.lifecycle.ViewLifecycleOwner] */
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewAttachedToWindow(View view2) {
                 Assert.isMainThread();
@@ -59,7 +54,6 @@ public abstract class RepeatWhenAttachedKt {
                 ref$ObjectRef2.element = viewLifecycleOwner2;
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewDetachedFromWindow(View view2) {
                 ViewLifecycleOwner viewLifecycleOwner = (ViewLifecycleOwner) ref$ObjectRef.element;

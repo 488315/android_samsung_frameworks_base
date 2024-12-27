@@ -139,25 +139,6 @@ public class QSIconViewImpl extends QSIconView {
     
         if (r12 != false) goto L40;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0099  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00b5  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x00de  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x0108  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x008e  */
-    /* JADX WARN: Type inference failed for: r10v0, types: [android.widget.ImageView] */
-    /* JADX WARN: Type inference failed for: r4v0 */
-    /* JADX WARN: Type inference failed for: r4v1, types: [android.graphics.drawable.Drawable] */
-    /* JADX WARN: Type inference failed for: r4v18 */
-    /* JADX WARN: Type inference failed for: r4v19 */
-    /* JADX WARN: Type inference failed for: r4v2, types: [android.graphics.drawable.Drawable] */
-    /* JADX WARN: Type inference failed for: r4v20 */
-    /* JADX WARN: Type inference failed for: r4v21 */
-    /* JADX WARN: Type inference failed for: r4v5, types: [android.graphics.drawable.Drawable] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

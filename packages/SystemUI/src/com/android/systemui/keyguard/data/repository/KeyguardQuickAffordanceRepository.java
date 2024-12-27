@@ -133,8 +133,6 @@ public final class KeyguardQuickAffordanceRepository {
                     this.this$0 = keyguardQuickAffordanceRepository;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -212,11 +210,6 @@ public final class KeyguardQuickAffordanceRepository {
         DumpManager.registerDumpable$default(dumpManager, "KeyguardQuickAffordances", new Dumpster());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0064  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x003d  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x007c -> B:10:0x007d). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

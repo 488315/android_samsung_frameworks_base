@@ -6,7 +6,6 @@ public class FabricatedOverlayInternalEntry implements Parcelable {
             new Parcelable.Creator<
                     FabricatedOverlayInternalEntry>() { // from class:
                                                         // android.os.FabricatedOverlayInternalEntry.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FabricatedOverlayInternalEntry createFromParcel(Parcel _aidl_source) {
                     FabricatedOverlayInternalEntry _aidl_out = new FabricatedOverlayInternalEntry();
@@ -14,7 +13,6 @@ public class FabricatedOverlayInternalEntry implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FabricatedOverlayInternalEntry[] newArray(int _aidl_size) {
                     return new FabricatedOverlayInternalEntry[_aidl_size];

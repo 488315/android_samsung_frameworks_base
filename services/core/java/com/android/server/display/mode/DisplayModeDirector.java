@@ -188,11 +188,6 @@ public final class DisplayModeDirector {
 
            if (r1.max == com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler.MAX_SCALE) goto L11;
         */
-        /* JADX WARN: Removed duplicated region for block: B:12:0x0032  */
-        /* JADX WARN: Removed duplicated region for block: B:14:0x003f  */
-        /* JADX WARN: Removed duplicated region for block: B:18:0x006a  */
-        /* JADX WARN: Removed duplicated region for block: B:23:0x0059  */
-        /* JADX WARN: Removed duplicated region for block: B:29:0x003c  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -381,7 +376,6 @@ public final class DisplayModeDirector {
             public boolean mLoggingEnabled;
             public long mTimestamp;
 
-            /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.display.mode.DisplayModeDirector$BrightnessObserver$LightSensorEventListener$1] */
             public LightSensorEventListener() {}
 
             public static boolean isDifferentZone(float f, float f2, float[] fArr) {
@@ -579,7 +573,6 @@ public final class DisplayModeDirector {
             brightnessObserver.restartObserver();
         }
 
-        /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.display.mode.DisplayModeDirector$BrightnessObserver$1] */
         public BrightnessObserver(
                 Context context,
                 DisplayManagerService.DisplayManagerHandler displayManagerHandler,
@@ -754,8 +747,6 @@ public final class DisplayModeDirector {
                             .isEmpty();
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:4:0x000c A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -809,9 +800,6 @@ public final class DisplayModeDirector {
                         + " java.util.function.Function):float[]");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:13:0x002d  */
-        /* JADX WARN: Removed duplicated region for block: B:5:0x0017  */
-        /* JADX WARN: Removed duplicated region for block: B:9:0x002b  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -865,9 +853,6 @@ public final class DisplayModeDirector {
                         + " boolean):void");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:13:0x002d  */
-        /* JADX WARN: Removed duplicated region for block: B:5:0x0017  */
-        /* JADX WARN: Removed duplicated region for block: B:9:0x002b  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -921,10 +906,6 @@ public final class DisplayModeDirector {
                         + " boolean):void");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:20:0x00a9  */
-        /* JADX WARN: Removed duplicated region for block: B:27:0x00ba  */
-        /* JADX WARN: Removed duplicated region for block: B:57:0x0105 A[EDGE_INSN: B:57:0x0105->B:58:0x0105 BREAK  A[LOOP:0: B:25:0x00b5->B:43:0x0102], SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:60:0x0109  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2059,7 +2040,6 @@ public final class DisplayModeDirector {
         public final Uri mPeakRefreshRateSetting;
         public final boolean mVsyncLowPowerVoteEnabled;
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.display.mode.DisplayModeDirector$SettingsObserver$1] */
         public SettingsObserver(
                 Context context,
                 DisplayManagerService.DisplayManagerHandler displayManagerHandler,
@@ -2134,7 +2114,6 @@ public final class DisplayModeDirector {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:6:0x001a  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2713,24 +2692,6 @@ public final class DisplayModeDirector {
         return this.mBrightnessObserver;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x01c5 A[Catch: all -> 0x008f, TryCatch #0 {all -> 0x008f, blocks: (B:4:0x0009, B:8:0x0027, B:13:0x004d, B:22:0x0060, B:24:0x0064, B:15:0x0092, B:17:0x0096, B:19:0x00b8, B:25:0x00bb, B:27:0x00da, B:31:0x00e2, B:35:0x00ef, B:40:0x015d, B:41:0x00fb, B:44:0x0105, B:47:0x010d, B:49:0x0137, B:51:0x013d, B:52:0x015b, B:61:0x0169, B:62:0x01b5, B:65:0x01b7, B:72:0x01c5, B:76:0x01e5, B:79:0x01ef, B:81:0x01ff, B:82:0x0217, B:83:0x025a, B:86:0x01cd, B:88:0x01d6, B:90:0x01e2, B:94:0x025c, B:95:0x0277), top: B:3:0x0009 }] */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x01ea  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x01ff A[Catch: all -> 0x008f, TryCatch #0 {all -> 0x008f, blocks: (B:4:0x0009, B:8:0x0027, B:13:0x004d, B:22:0x0060, B:24:0x0064, B:15:0x0092, B:17:0x0096, B:19:0x00b8, B:25:0x00bb, B:27:0x00da, B:31:0x00e2, B:35:0x00ef, B:40:0x015d, B:41:0x00fb, B:44:0x0105, B:47:0x010d, B:49:0x0137, B:51:0x013d, B:52:0x015b, B:61:0x0169, B:62:0x01b5, B:65:0x01b7, B:72:0x01c5, B:76:0x01e5, B:79:0x01ef, B:81:0x01ff, B:82:0x0217, B:83:0x025a, B:86:0x01cd, B:88:0x01d6, B:90:0x01e2, B:94:0x025c, B:95:0x0277), top: B:3:0x0009 }] */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x01ed  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x01d6 A[Catch: all -> 0x008f, TryCatch #0 {all -> 0x008f, blocks: (B:4:0x0009, B:8:0x0027, B:13:0x004d, B:22:0x0060, B:24:0x0064, B:15:0x0092, B:17:0x0096, B:19:0x00b8, B:25:0x00bb, B:27:0x00da, B:31:0x00e2, B:35:0x00ef, B:40:0x015d, B:41:0x00fb, B:44:0x0105, B:47:0x010d, B:49:0x0137, B:51:0x013d, B:52:0x015b, B:61:0x0169, B:62:0x01b5, B:65:0x01b7, B:72:0x01c5, B:76:0x01e5, B:79:0x01ef, B:81:0x01ff, B:82:0x0217, B:83:0x025a, B:86:0x01cd, B:88:0x01d6, B:90:0x01e2, B:94:0x025c, B:95:0x0277), top: B:3:0x0009 }] */
-    /* JADX WARN: Type inference failed for: r12v0, types: [com.android.server.display.mode.VoteSummary, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [java.util.ArrayList] */
-    /* JADX WARN: Type inference failed for: r1v35, types: [java.lang.Object, java.util.List] */
-    /* JADX WARN: Type inference failed for: r1v4 */
-    /* JADX WARN: Type inference failed for: r1v5, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r4v14, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r5v15, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r6v0, types: [com.android.server.display.mode.VoteSummary] */
-    /* JADX WARN: Type inference failed for: r6v1 */
-    /* JADX WARN: Type inference failed for: r6v12 */
-    /* JADX WARN: Type inference failed for: r6v15 */
-    /* JADX WARN: Type inference failed for: r6v6 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

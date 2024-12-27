@@ -160,8 +160,6 @@ public class MARsPolicyManager {
         public MARsAppIdleStateChangeListener() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:21:0x00f5  */
-        /* JADX WARN: Removed duplicated region for block: B:24:? A[RETURN, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -811,8 +809,6 @@ public class MARsPolicyManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00b7 A[Catch: all -> 0x0090, TryCatch #0 {all -> 0x0090, blocks: (B:26:0x004b, B:28:0x0055, B:29:0x0060, B:31:0x0066, B:33:0x0072, B:35:0x0076, B:37:0x007e, B:39:0x0084, B:43:0x00ba, B:44:0x0093, B:46:0x00a5, B:48:0x00b7, B:53:0x00bf, B:55:0x00c4), top: B:25:0x004b }] */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00ba A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2699,8 +2695,6 @@ public class MARsPolicyManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00a1  */
-    /* JADX WARN: Removed duplicated region for block: B:30:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2948,8 +2942,6 @@ public class MARsPolicyManager {
     
         throw r0;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x03c4 A[Catch: all -> 0x011b, TRY_LEAVE, TryCatch #4 {all -> 0x011b, all -> 0x0296, blocks: (B:31:0x00a3, B:33:0x00ad, B:34:0x00b8, B:36:0x00be, B:38:0x00c6, B:40:0x00ce, B:42:0x00e0, B:52:0x03c4, B:55:0x03cf, B:56:0x0101, B:58:0x0105, B:60:0x0109, B:62:0x011e, B:64:0x012f, B:66:0x013b, B:68:0x014c, B:71:0x0177, B:73:0x0181, B:75:0x018e, B:77:0x019b, B:78:0x01ab, B:80:0x01b7, B:81:0x01c7, B:89:0x01f8, B:91:0x0204, B:93:0x0210, B:94:0x0220, B:95:0x0244, B:97:0x024e, B:99:0x0252, B:101:0x025f, B:103:0x026c, B:104:0x0280, B:105:0x0287, B:113:0x029d, B:118:0x02bb, B:119:0x02a5, B:122:0x02ad, B:124:0x02b2, B:127:0x02dc, B:129:0x02e9, B:130:0x0349, B:132:0x034d, B:137:0x0360, B:139:0x0367, B:143:0x0372, B:145:0x037a, B:149:0x03b1, B:151:0x03b7, B:154:0x02fb, B:158:0x0305, B:161:0x0310, B:162:0x0315, B:163:0x0324, B:171:0x03ce, B:175:0x03e0, B:178:0x03f7, B:107:0x0288, B:109:0x0290, B:110:0x0294, B:165:0x0299), top: B:30:0x00a3 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3160,10 +3152,6 @@ public class MARsPolicyManager {
         MARsDBHandler.MARsDBHandlerHolder.INSTANCE.sendUpdateResetTimeMsgToDBHandler(arrayList);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v1 */
-    /* JADX WARN: Type inference failed for: r6v19 */
-    /* JADX WARN: Type inference failed for: r6v7 */
     public final boolean updateRestrictionInfo(SemAppRestrictionManager.RestrictionInfo restrictionInfo, List list) {
         ?? r6;
         List list2;

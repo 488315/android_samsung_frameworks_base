@@ -364,8 +364,6 @@ public class WallpaperBackupRestoreManager {
         return true;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0024 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -415,7 +413,6 @@ public class WallpaperBackupRestoreManager {
                     + " int):boolean");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private boolean isRestorableDeviceType(ArrayList<WallpaperBNRHelper> helpers) {
         char c;
         WallpaperBNRHelper helper = helpers.get(0);
@@ -480,7 +477,6 @@ public class WallpaperBackupRestoreManager {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void response(ArrayList<WallpaperBNRHelper> helpers) {
         BnRFileHelper.ErrorCode errorCode = BnRFileHelper.ErrorCode.ERROR_NONE;
         int successCount = 0;
@@ -829,7 +825,6 @@ public class WallpaperBackupRestoreManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void convertToImageWallpaperForSCloud() {
             addErrorDescription(
                     "convertImageWallpaperForSCloud: Backup with Samsung cloud, change layered type"
@@ -1220,7 +1215,6 @@ public class WallpaperBackupRestoreManager {
             return this.mWallpaperManager;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         @Deprecated
         public String getOriginalFilePath() {
             int i = this.mMode;
@@ -1245,7 +1239,6 @@ public class WallpaperBackupRestoreManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         @Deprecated
         public String getOriginalXmlFilePath() {
             switch (this.mMode) {
@@ -1265,7 +1258,6 @@ public class WallpaperBackupRestoreManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public String getXmlFilePath() {
             switch (this.mMode) {
                 case 4:
@@ -1580,7 +1572,6 @@ public class WallpaperBackupRestoreManager {
             extends AsyncTask<ArrayList, WallpaperBNRHelper, ArrayList<WallpaperBNRHelper>> {
         WallpaperBackupAsyncTask() {}
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public ArrayList doInBackground(ArrayList... helpers) {
             ArrayList arrayList = helpers[0];
@@ -1606,7 +1597,6 @@ public class WallpaperBackupRestoreManager {
             return arrayList;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onProgressUpdate(WallpaperBNRHelper... helpers) {
             try {
@@ -1618,7 +1608,6 @@ public class WallpaperBackupRestoreManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onPostExecute(ArrayList<WallpaperBNRHelper> helpers) {
             WallpaperBackupRestoreManager.response(helpers);
@@ -1762,7 +1751,6 @@ public class WallpaperBackupRestoreManager {
             extends AsyncTask<ArrayList, WallpaperBNRHelper, ArrayList<WallpaperBNRHelper>> {
         WallpaperRestoreAsyncTask() {}
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public ArrayList doInBackground(ArrayList... helpers) {
             ArrayList arrayList = helpers[0];
@@ -1802,7 +1790,6 @@ public class WallpaperBackupRestoreManager {
             return arrayList;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onProgressUpdate(WallpaperBNRHelper... helpers) {
             try {
@@ -1813,7 +1800,6 @@ public class WallpaperBackupRestoreManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onPostExecute(ArrayList<WallpaperBNRHelper> helpers) {
             WallpaperBackupRestoreManager.response(helpers);
@@ -1936,8 +1922,6 @@ public class WallpaperBackupRestoreManager {
             return true;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:29:0x00ad A[Catch: Exception -> 0x00f2, TryCatch #0 {Exception -> 0x00f2, blocks: (B:6:0x001b, B:8:0x003c, B:10:0x0042, B:13:0x004d, B:15:0x0059, B:16:0x005e, B:18:0x0065, B:20:0x006f, B:22:0x0077, B:25:0x0081, B:26:0x0087, B:27:0x0093, B:29:0x00ad, B:31:0x00d4, B:33:0x00db, B:35:0x00e1), top: B:5:0x001b }] */
-        /* JADX WARN: Removed duplicated region for block: B:31:0x00d4 A[Catch: Exception -> 0x00f2, TryCatch #0 {Exception -> 0x00f2, blocks: (B:6:0x001b, B:8:0x003c, B:10:0x0042, B:13:0x004d, B:15:0x0059, B:16:0x005e, B:18:0x0065, B:20:0x006f, B:22:0x0077, B:25:0x0081, B:26:0x0087, B:27:0x0093, B:29:0x00ad, B:31:0x00d4, B:33:0x00db, B:35:0x00e1), top: B:5:0x001b }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -72,8 +72,6 @@ public final class SmartMirroringDeviceController extends DeviceController {
                             this.this$0 = smartMirroringDeviceController;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x0038  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
@@ -159,8 +157,6 @@ public final class SmartMirroringDeviceController extends DeviceController {
                                     this.$this_unsafeFlow = flowCollector;
                                 }
 
-                                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                                 @Override // kotlinx.coroutines.flow.FlowCollector
                                 /*
                                     Code decompiled incorrectly, please refer to instructions dump.
@@ -267,7 +263,6 @@ public final class SmartMirroringDeviceController extends DeviceController {
 
     public SmartMirroringDeviceController(final Context context, final AudioManager audioManager) {
         this.smartMirroringClient$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.device.SmartMirroringDeviceController$smartMirroringClient$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

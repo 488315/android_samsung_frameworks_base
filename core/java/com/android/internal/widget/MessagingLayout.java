@@ -207,7 +207,6 @@ public class MessagingLayout extends FrameLayout implements ImageMessageConsumer
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setDataAsync$1(MessagingData messagingData) {
         finalizeInflate(messagingData.getHistoricMessagingMessages());
         finalizeInflate(messagingData.getNewMessagingMessages());
@@ -331,7 +330,6 @@ public class MessagingLayout extends FrameLayout implements ImageMessageConsumer
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$removeGroups$2(MessagingGroup group) {
         this.mMessagingLinearLayout.removeTransientView(group);
         group.recycle();

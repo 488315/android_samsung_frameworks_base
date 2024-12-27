@@ -9,13 +9,11 @@ public class SemContextPedometer extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextPedometer>() { // from class:
                                              // com.samsung.android.hardware.context.SemContextPedometer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextPedometer createFromParcel(Parcel in) {
                     return new SemContextPedometer(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextPedometer[] newArray(int size) {
                     return new SemContextPedometer[size];

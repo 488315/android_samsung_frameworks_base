@@ -54,7 +54,6 @@ public final class SemBiometricSysUiWrapper {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.server.biometrics.SemBiometricSysUiWrapper$$ExternalSyntheticLambda0] */
     public SemBiometricSysUiWrapper(
             Context context,
             Handler handler,

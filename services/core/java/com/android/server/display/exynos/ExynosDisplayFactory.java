@@ -57,7 +57,6 @@ public final class ExynosDisplayFactory {
                 exynosDisplayFactory.MODE_IDX_SYSFS_PATH, Integer.toString(i));
     }
 
-    /* JADX WARN: Type inference failed for: r13v41, types: [com.android.server.display.exynos.ExynosDisplayFactory$3] */
     public ExynosDisplayFactory(Context context) {
         boolean equals = "eng".equals(Build.TYPE);
         this.DEBUG = equals;

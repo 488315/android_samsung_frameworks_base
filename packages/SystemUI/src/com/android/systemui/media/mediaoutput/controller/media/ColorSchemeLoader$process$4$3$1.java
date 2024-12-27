@@ -17,7 +17,6 @@ final class ColorSchemeLoader$process$4$3$1 extends SuspendLambda implements Fun
     final /* synthetic */ ColorScheme $it;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ColorSchemeLoader$process$4$3$1(Function2 function2, Drawable drawable, ColorScheme colorScheme, Continuation continuation) {
         super(2, continuation);
         this.$callback = function2;

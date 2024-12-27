@@ -29,7 +29,6 @@ public final class NotificationPanelUnfoldAnimationController {
             }
         };
         this.translateAnimator$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shade.NotificationPanelUnfoldAnimationController$translateAnimator$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -40,7 +39,6 @@ public final class NotificationPanelUnfoldAnimationController {
             }
         });
         this.translateAnimatorStatusBar$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shade.NotificationPanelUnfoldAnimationController$translateAnimatorStatusBar$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

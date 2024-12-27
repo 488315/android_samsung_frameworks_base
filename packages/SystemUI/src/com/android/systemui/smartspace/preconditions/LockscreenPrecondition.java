@@ -18,8 +18,6 @@ public final class LockscreenPrecondition implements SmartspacePrecondition {
     public final Execution execution;
     public final Set listeners = new LinkedHashSet();
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.smartspace.preconditions.LockscreenPrecondition$deviceProvisionedListener$1, java.lang.Object] */
     public LockscreenPrecondition(DeviceProvisionedController deviceProvisionedController, Execution execution) {
         this.deviceProvisionedController = deviceProvisionedController;
         this.execution = execution;

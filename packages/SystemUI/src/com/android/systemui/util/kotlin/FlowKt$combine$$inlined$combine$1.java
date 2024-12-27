@@ -22,7 +22,6 @@ public final class FlowKt$combine$$inlined$combine$1 implements Flow {
     public final class AnonymousClass2 extends Lambda implements Function0 {
         final /* synthetic */ Flow[] $flows;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(Flow[] flowArr) {
             super(0);
             this.$flows = flowArr;
@@ -41,7 +40,6 @@ public final class FlowKt$combine$$inlined$combine$1 implements Flow {
         /* synthetic */ Object L$1;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(Continuation continuation, Function7 function7) {
             super(3, continuation);
             this.$transform$inlined = function7;

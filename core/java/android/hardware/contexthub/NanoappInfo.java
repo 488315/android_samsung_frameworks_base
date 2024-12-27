@@ -8,7 +8,6 @@ public class NanoappInfo implements Parcelable {
     public static final Parcelable.Creator<NanoappInfo> CREATOR =
             new Parcelable.Creator<
                     NanoappInfo>() { // from class: android.hardware.contexthub.NanoappInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoappInfo createFromParcel(Parcel _aidl_source) {
                     NanoappInfo _aidl_out = new NanoappInfo();
@@ -16,7 +15,6 @@ public class NanoappInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoappInfo[] newArray(int _aidl_size) {
                     return new NanoappInfo[_aidl_size];

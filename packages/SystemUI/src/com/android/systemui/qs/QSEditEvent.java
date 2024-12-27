@@ -4,8 +4,6 @@ import com.android.internal.logging.UiEventLogger;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class QSEditEvent implements UiEventLogger.UiEventEnum {
     public static final /* synthetic */ QSEditEvent[] $VALUES;
     public static final QSEditEvent QS_EDIT_ADD;

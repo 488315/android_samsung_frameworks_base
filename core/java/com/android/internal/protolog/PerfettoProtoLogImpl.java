@@ -161,7 +161,6 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$log$1(
             LogLevel level,
             IProtoLogGroup group,
@@ -172,7 +171,6 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         logToProto(level, group.name(), messageHash, paramsMask, args, tsNanos);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dumpTransitionTraceConfig() {
         final ProtoInputStream pis = this.mViewerConfigInputStreamProvider.getInputStream();
         if (pis == null) {
@@ -370,7 +368,6 @@ public class PerfettoProtoLogImpl implements IProtoLog {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$doLogToProto$5(
             String groupName,
             LogLevel level,
@@ -720,7 +717,6 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         return 0;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public int onShellCommand(ShellCommand shell) {
         char c;
         final PrintWriter pw = shell.getOutPrintWriter();
@@ -800,7 +796,6 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         return -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void onTracingInstanceStart(ProtoLogDataSource.ProtoLogConfig config) {
         this.mTracingInstances.incrementAndGet();
         LogLevel defaultLogFrom = config.getDefaultGroupConfig().logFrom;
@@ -823,7 +818,6 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         this.mCacheUpdater.run();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void onTracingInstanceStop(ProtoLogDataSource.ProtoLogConfig config) {
         this.mTracingInstances.decrementAndGet();
         LogLevel defaultLogFrom = config.getDefaultGroupConfig().logFrom;
@@ -852,7 +846,6 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         this.mCacheUpdater.run();
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public static void logAndPrintln(PrintWriter pw, String msg) {
         Slog.i(LOG_TAG, msg);
         if (pw != null) {

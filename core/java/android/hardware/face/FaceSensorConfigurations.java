@@ -22,13 +22,11 @@ public class FaceSensorConfigurations implements Parcelable {
     public static final Parcelable.Creator<FaceSensorConfigurations> CREATOR =
             new Parcelable.Creator<FaceSensorConfigurations>() { // from class:
                 // android.hardware.face.FaceSensorConfigurations.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceSensorConfigurations createFromParcel(Parcel in) {
                     return new FaceSensorConfigurations(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceSensorConfigurations[] newArray(int size) {
                     return new FaceSensorConfigurations[size];
@@ -128,7 +126,6 @@ public class FaceSensorConfigurations implements Parcelable {
         parcel.writeMap(this.mSensorPropsMap);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public SensorProps[] getSensorPropForInstance(String str) {
         SensorProps[] sensorPropsArr = this.mSensorPropsMap.get(str);
         if (sensorPropsArr != null) {

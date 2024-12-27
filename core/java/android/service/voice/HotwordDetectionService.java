@@ -202,7 +202,6 @@ public abstract class HotwordDetectionService extends Service
         throw new UnsupportedOperationException();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onUpdateStateInternal(
             PersistableBundle options, SharedMemory sharedMemory, IRemoteCallback callback) {
         IntConsumer intConsumer =

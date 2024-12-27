@@ -145,7 +145,6 @@ public class MediaBufferFileReader {
         return format.toMediaFormat();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: getFormatFromName, reason: merged with bridge method [inline-methods] */
     public MediaFormat m9111x86d04131(String name) {
         String ext = getExtension(name);

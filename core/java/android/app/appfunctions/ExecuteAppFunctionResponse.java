@@ -11,7 +11,6 @@ public final class ExecuteAppFunctionResponse implements Parcelable {
     public static final Parcelable.Creator<ExecuteAppFunctionResponse> CREATOR =
             new Parcelable.Creator<ExecuteAppFunctionResponse>() { // from class:
                 // android.app.appfunctions.ExecuteAppFunctionResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExecuteAppFunctionResponse createFromParcel(Parcel parcel) {
                     GenericDocumentWrapper resultWrapper =
@@ -26,7 +25,6 @@ public final class ExecuteAppFunctionResponse implements Parcelable {
                     return new ExecuteAppFunctionResponse(resultWrapper.getValue(), extras);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExecuteAppFunctionResponse[] newArray(int size) {
                     return new ExecuteAppFunctionResponse[size];

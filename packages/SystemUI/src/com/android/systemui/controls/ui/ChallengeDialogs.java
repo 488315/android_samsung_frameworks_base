@@ -48,7 +48,6 @@ public final class ChallengeDialogs {
         throw new IllegalStateException("'action' is not a known type: " + controlAction);
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [android.app.AlertDialog, com.android.systemui.controls.ui.ChallengeDialogs$createSecPinDialog$1] */
     public static ChallengeDialogs$createSecPinDialog$1 createPinDialog(final ControlViewHolder controlViewHolder, final boolean z, final boolean z2, final Function0 function0) {
         final ControlAction controlAction = controlViewHolder.lastAction;
         if (controlAction == null) {

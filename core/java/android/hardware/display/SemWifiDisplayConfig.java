@@ -18,13 +18,11 @@ public final class SemWifiDisplayConfig implements Parcelable {
     public static final Parcelable.Creator<SemWifiDisplayConfig> CREATOR =
             new Parcelable.Creator<SemWifiDisplayConfig>() { // from class:
                 // android.hardware.display.SemWifiDisplayConfig.2
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWifiDisplayConfig createFromParcel(Parcel in) {
                     return new SemWifiDisplayConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWifiDisplayConfig[] newArray(int size) {
                     return new SemWifiDisplayConfig[size];

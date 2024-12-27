@@ -18,7 +18,6 @@ final class DisabledByPolicyInteractorImpl$isDisabled$2 extends SuspendLambda im
     int label;
     final /* synthetic */ DisabledByPolicyInteractorImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisabledByPolicyInteractorImpl$isDisabled$2(DisabledByPolicyInteractorImpl disabledByPolicyInteractorImpl, UserHandle userHandle, String str, Continuation continuation) {
         super(2, continuation);
         this.this$0 = disabledByPolicyInteractorImpl;

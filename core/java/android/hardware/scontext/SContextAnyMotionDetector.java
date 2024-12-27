@@ -9,13 +9,11 @@ public class SContextAnyMotionDetector extends SContextEventContext {
     public static final Parcelable.Creator<SContextAnyMotionDetector> CREATOR =
             new Parcelable.Creator<SContextAnyMotionDetector>() { // from class:
                 // android.hardware.scontext.SContextAnyMotionDetector.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextAnyMotionDetector createFromParcel(Parcel in) {
                     return new SContextAnyMotionDetector(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextAnyMotionDetector[] newArray(int size) {
                     return new SContextAnyMotionDetector[size];

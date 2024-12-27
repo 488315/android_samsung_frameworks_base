@@ -40,7 +40,6 @@ public final class UdfpsShell implements Command {
         return MotionEvent.obtain(0L, 0L, i, 1, new MotionEvent.PointerProperties[]{pointerProperties}, new MotionEvent.PointerCoords[]{pointerCoords}, 0, 0, 1.0f, 1.0f, 0, 0, 0, 0);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // com.android.systemui.statusbar.commandline.Command
     public final void execute(PrintWriter printWriter, List list) {
         int i;

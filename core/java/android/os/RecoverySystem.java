@@ -387,7 +387,6 @@ public class RecoverySystem {
         installPackage(context, packageFile, false);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0296 A[Catch: all -> 0x0306, TryCatch #2 {, blocks: (B:4:0x0005, B:6:0x0064, B:8:0x0072, B:9:0x007d, B:10:0x008b, B:15:0x0092, B:19:0x009b, B:20:0x00a9, B:21:0x00aa, B:24:0x00c7, B:26:0x00d3, B:28:0x00f5, B:29:0x00db, B:32:0x00ff, B:33:0x0103, B:34:0x0104, B:36:0x0153, B:37:0x0167, B:39:0x0173, B:41:0x01bf, B:42:0x01d1, B:45:0x01d7, B:49:0x01fa, B:51:0x0200, B:100:0x0208, B:57:0x022a, B:59:0x0233, B:61:0x023a, B:67:0x0258, B:69:0x027e, B:71:0x0296, B:73:0x02aa, B:74:0x02be, B:75:0x02c8, B:79:0x0277, B:91:0x0271, B:90:0x026e, B:97:0x02c9, B:98:0x02d9, B:53:0x0210, B:112:0x02f1, B:111:0x02ee, B:115:0x02f7, B:116:0x0305, B:120:0x0188, B:122:0x0194, B:123:0x01a9, B:23:0x00b1), top: B:3:0x0005, inners: #10 }] */
     @android.annotation.SystemApi
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1071,7 +1070,6 @@ public class RecoverySystem {
         }
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:114:0x008e -> B:26:0x00b5). Please report as a decompilation issue!!! */
     public static String handleAftermath(Context context) {
         synchronized (mShutdownIsInProgressLock) {
             if (mShutdownIsInProgress.booleanValue()) {

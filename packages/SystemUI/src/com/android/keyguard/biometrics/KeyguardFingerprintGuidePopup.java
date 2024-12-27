@@ -146,9 +146,6 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
         this(context, (i & 2) != 0 ? null : attributeSet);
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.keyguard.biometrics.KeyguardFingerprintGuidePopup$displayLifeCycleObserver$1] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.keyguard.biometrics.KeyguardFingerprintGuidePopup$keyguardUpdateMonitorCallback$1] */
-    /* JADX WARN: Type inference failed for: r3v12, types: [com.android.keyguard.biometrics.KeyguardFingerprintGuidePopup$hidePopupRunnable$1] */
     public KeyguardFingerprintGuidePopup(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.keyguardUpdateMonitor = (KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class);

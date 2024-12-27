@@ -34,12 +34,10 @@ public class MessagePublisher {
         return this.messageProducer;
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public Message getMessage(int code) {
         return new Message(code).setPublisher(this);
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public Message getMessage(int code, Map<String, Object> data) {
         return new Message(code).put(data).setPublisher(this);
     }
@@ -52,7 +50,6 @@ public class MessagePublisher {
         message.setPublisher(this).post();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class MessageProducerImpl implements MessageProducer {
         private final WeakReference<MessagePublisher> weakProducer;
 
@@ -179,7 +176,6 @@ public class MessagePublisher {
                                 });
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
             /* renamed from: lambda$new$0$com-samsung-android-sume-core-message-MessagePublisher$MessageProducerImpl$3, reason: not valid java name */
             /* synthetic */ void m9194x9f89700c(Pair it) {
                 put((String) it.first, it.second);

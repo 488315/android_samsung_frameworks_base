@@ -358,7 +358,6 @@ public abstract class GeneratedMessageLite<
             return result;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // com.android.framework.protobuf.AbstractMessageLite.Builder
         public BuilderType internalMergeFrom(MessageType message) {
             return mergeFrom((Builder<MessageType, BuilderType>) message);
@@ -976,7 +975,6 @@ public abstract class GeneratedMessageLite<
             return this.enumTypeMap;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.framework.protobuf.FieldSet.FieldDescriptorLite
         public MessageLite.Builder internalMergeFrom(MessageLite.Builder to, MessageLite from) {
             return ((Builder) to).mergeFrom((Builder) from);
@@ -1188,7 +1186,6 @@ public abstract class GeneratedMessageLite<
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static <
                     MessageType extends ExtendableMessage<MessageType, BuilderType>,
                     BuilderType extends ExtendableBuilder<MessageType, BuilderType>,
@@ -1225,7 +1222,6 @@ public abstract class GeneratedMessageLite<
         return IntArrayList.emptyList();
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.framework.protobuf.Internal$IntList] */
     protected static Internal.IntList mutableCopy(Internal.IntList list) {
         int size = list.size();
         return list.mutableCopyWithCapacity2(size == 0 ? 10 : size * 2);
@@ -1235,7 +1231,6 @@ public abstract class GeneratedMessageLite<
         return LongArrayList.emptyList();
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.framework.protobuf.Internal$LongList] */
     protected static Internal.LongList mutableCopy(Internal.LongList list) {
         int size = list.size();
         return list.mutableCopyWithCapacity2(size == 0 ? 10 : size * 2);
@@ -1245,7 +1240,6 @@ public abstract class GeneratedMessageLite<
         return FloatArrayList.emptyList();
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.framework.protobuf.Internal$FloatList] */
     protected static Internal.FloatList mutableCopy(Internal.FloatList list) {
         int size = list.size();
         return list.mutableCopyWithCapacity2(size == 0 ? 10 : size * 2);
@@ -1255,7 +1249,6 @@ public abstract class GeneratedMessageLite<
         return DoubleArrayList.emptyList();
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.framework.protobuf.Internal$DoubleList] */
     protected static Internal.DoubleList mutableCopy(Internal.DoubleList list) {
         int size = list.size();
         return list.mutableCopyWithCapacity2(size == 0 ? 10 : size * 2);
@@ -1265,7 +1258,6 @@ public abstract class GeneratedMessageLite<
         return BooleanArrayList.emptyList();
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.framework.protobuf.Internal$BooleanList] */
     protected static Internal.BooleanList mutableCopy(Internal.BooleanList list) {
         int size = list.size();
         return list.mutableCopyWithCapacity2(size == 0 ? 10 : size * 2);
@@ -1280,7 +1272,6 @@ public abstract class GeneratedMessageLite<
         return list.mutableCopyWithCapacity2(size == 0 ? 10 : size * 2);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public static class DefaultInstanceBasedParser<T extends GeneratedMessageLite<T, ?>>
             extends AbstractParser<T> {
         private final T defaultInstance;
@@ -1342,7 +1333,6 @@ public abstract class GeneratedMessageLite<
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static <T extends GeneratedMessageLite<T, ?>> T parsePartialFrom(
             T t, byte[] bArr, int i, int i2, ExtensionRegistryLite extensionRegistryLite)
             throws InvalidProtocolBufferException {

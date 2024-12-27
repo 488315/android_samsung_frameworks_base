@@ -240,10 +240,6 @@ public final class UiManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6] */
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda9] */
     public UiManager(Context context, ServiceThread serviceThread, IStateManager iStateManager) {
         final int i = 0;
         this.mBindServiceRunnable =

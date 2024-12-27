@@ -160,8 +160,6 @@ public final class AsyncRotationController extends FadeAnimationController imple
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.server.wm.AsyncRotationController$$ExternalSyntheticLambda0] */
     public final void finishOp(WindowToken windowToken) {
         SurfaceControl surfaceControl;
         Operation operation = (Operation) this.mTargetWindowTokens.remove(windowToken);

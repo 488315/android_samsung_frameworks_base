@@ -41,8 +41,6 @@ public final class MediaRecommendationsViewModel {
     
         r11 = r11.getString("com.google.android.apps.gsa.smartspace.extra.SMARTSPACE_INTENT");
      */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0068  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -118,13 +116,6 @@ public final class MediaRecommendationsViewModel {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.controls.ui.viewmodel.MediaRecommendationsViewModel.access$onClicked(com.android.systemui.media.controls.ui.viewmodel.MediaRecommendationsViewModel, com.android.systemui.animation.Expandable, android.content.Intent, java.lang.String, com.android.internal.logging.InstanceId, int):void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x013a  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x027a  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x00b1  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x002a  */
-    /* JADX WARN: Type inference failed for: r15v8, types: [java.lang.CharSequence] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:48:0x023d -> B:10:0x0259). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

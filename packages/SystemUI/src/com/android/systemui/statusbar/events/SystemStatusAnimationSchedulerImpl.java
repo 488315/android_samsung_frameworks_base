@@ -134,7 +134,6 @@ public final class SystemStatusAnimationSchedulerImpl implements SystemStatusAni
                 Flow debounce = FlowKt.debounce(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(systemStatusAnimationSchedulerImpl.animationState, systemStatusAnimationSchedulerImpl.scheduledEvent, new C01861(null)), 500L);
                 final SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl2 = SystemStatusAnimationSchedulerImpl.this;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl.1.2
-                    /* JADX WARN: Multi-variable type inference failed */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
                         Pair pair = (Pair) obj2;

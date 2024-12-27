@@ -7,7 +7,6 @@ public final class Usb10ACHeader extends UsbACHeaderInterface {
     public byte[] mInterfaceNums;
     public byte mNumInterfaces;
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.server.usb.descriptors.UsbDescriptor
     public final int parseRawDescriptors(ByteStream byteStream) {
         this.mTotalLength = byteStream.unpackUsbShort();

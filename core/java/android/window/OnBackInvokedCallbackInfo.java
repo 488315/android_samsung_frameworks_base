@@ -8,13 +8,11 @@ public final class OnBackInvokedCallbackInfo implements Parcelable {
             new Parcelable.Creator<
                     OnBackInvokedCallbackInfo>() { // from class:
                                                    // android.window.OnBackInvokedCallbackInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OnBackInvokedCallbackInfo createFromParcel(Parcel in) {
                     return new OnBackInvokedCallbackInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OnBackInvokedCallbackInfo[] newArray(int size) {
                     return new OnBackInvokedCallbackInfo[size];

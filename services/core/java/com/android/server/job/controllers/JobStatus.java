@@ -139,25 +139,6 @@ public final class JobStatus {
         arrayMap.put(Patterns.PHONE, "[PHONE]");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0113  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0139  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0176  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0185  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x01e2  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x01e9  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x01f5  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x01fe  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x020f  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0218  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x023f  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0254 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0260  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0286  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x028f  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x01a3  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0179  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x016f  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0129  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1629,8 +1610,6 @@ public final class JobStatus {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0043 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0044  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

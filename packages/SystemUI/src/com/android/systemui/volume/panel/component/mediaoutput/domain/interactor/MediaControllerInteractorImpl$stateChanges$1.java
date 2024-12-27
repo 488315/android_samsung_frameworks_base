@@ -17,7 +17,6 @@ final class MediaControllerInteractorImpl$stateChanges$1 extends SuspendLambda i
     int label;
     final /* synthetic */ MediaControllerInteractorImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaControllerInteractorImpl$stateChanges$1(MediaController mediaController, MediaControllerInteractorImpl mediaControllerInteractorImpl, Continuation continuation) {
         super(2, continuation);
         this.$mediaController = mediaController;
@@ -47,7 +46,6 @@ final class MediaControllerInteractorImpl$stateChanges$1 extends SuspendLambda i
             this.$mediaController.registerCallback(mediaControllerCallbackProducer, this.this$0.backgroundHandler);
             final MediaController mediaController = this.$mediaController;
             Function0 function0 = new Function0() { // from class: com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaControllerInteractorImpl$stateChanges$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

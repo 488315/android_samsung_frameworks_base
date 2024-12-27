@@ -16,13 +16,11 @@ public final class PrintDocumentInfo implements Parcelable {
     public static final Parcelable.Creator<PrintDocumentInfo> CREATOR =
             new Parcelable.Creator<
                     PrintDocumentInfo>() { // from class: android.print.PrintDocumentInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrintDocumentInfo createFromParcel(Parcel parcel) {
                     return new PrintDocumentInfo(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrintDocumentInfo[] newArray(int size) {
                     return new PrintDocumentInfo[size];

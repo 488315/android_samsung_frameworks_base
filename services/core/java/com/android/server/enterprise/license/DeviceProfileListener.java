@@ -26,7 +26,6 @@ public final class DeviceProfileListener extends BroadcastReceiver {
         context.registerReceiver(this, intentFilter);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.content.BroadcastReceiver
     public final void onReceive(Context context, Intent intent) {
         char c;

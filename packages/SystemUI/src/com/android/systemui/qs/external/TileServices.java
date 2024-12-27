@@ -119,7 +119,6 @@ public final class TileServices extends IQSService.Stub {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.systemui.qs.external.TileServices$4] */
     public TileServices(QSHost qSHost, Provider provider, BroadcastDispatcher broadcastDispatcher, UserTracker userTracker, KeyguardStateController keyguardStateController, CommandQueue commandQueue, StatusBarIconController statusBarIconController, PanelInteractor panelInteractor, TileLifecycleManager.Factory factory, CustomTileAddedRepository customTileAddedRepository, DelayableExecutor delayableExecutor) {
         AnonymousClass2 anonymousClass2 = new AnonymousClass2();
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.systemui.qs.external.TileServices.3

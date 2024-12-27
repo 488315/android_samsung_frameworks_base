@@ -9,7 +9,6 @@ final class RemoteDeviceController$updateMediaController$1 extends ContinuationI
     /* synthetic */ Object result;
     final /* synthetic */ RemoteDeviceController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RemoteDeviceController$updateMediaController$1(RemoteDeviceController remoteDeviceController, Continuation continuation) {
         super(continuation);
         this.this$0 = remoteDeviceController;

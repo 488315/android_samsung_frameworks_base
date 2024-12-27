@@ -43,8 +43,6 @@ public final class WallpaperEffectsGenerationManagerService extends AbstractMast
                     true,
                     new Consumer() { // from class:
                         // com.android.server.wallpapereffectsgeneration.WallpaperEffectsGenerationManagerService$WallpaperEffectsGenerationManagerStub$$ExternalSyntheticLambda1
-                        /* JADX WARN: Multi-variable type inference failed */
-                        /* JADX WARN: Type inference failed for: r3v1, types: [com.android.server.wallpapereffectsgeneration.WallpaperEffectsGenerationPerUserService$$ExternalSyntheticLambda0] */
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
                             final CinematicEffectRequest cinematicEffectRequest2 =
@@ -136,7 +134,6 @@ public final class WallpaperEffectsGenerationManagerService extends AbstractMast
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,

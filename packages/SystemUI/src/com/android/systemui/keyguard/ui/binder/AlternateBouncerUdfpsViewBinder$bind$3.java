@@ -29,7 +29,6 @@ final class AlternateBouncerUdfpsViewBinder$bind$3 extends SuspendLambda impleme
         private /* synthetic */ Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(AlternateBouncerUdfpsIconViewModel alternateBouncerUdfpsIconViewModel, ImageView imageView, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = alternateBouncerUdfpsIconViewModel;
@@ -65,7 +64,6 @@ final class AlternateBouncerUdfpsViewBinder$bind$3 extends SuspendLambda impleme
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AlternateBouncerUdfpsViewBinder$bind$3(AlternateBouncerUdfpsIconViewModel alternateBouncerUdfpsIconViewModel, ImageView imageView, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = alternateBouncerUdfpsIconViewModel;

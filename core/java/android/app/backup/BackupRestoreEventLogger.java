@@ -147,7 +147,6 @@ public final class BackupRestoreEventLogger {
         public static final Parcelable.Creator<DataTypeResult> CREATOR =
                 new Parcelable.Creator<DataTypeResult>() { // from class:
                     // android.app.backup.BackupRestoreEventLogger.DataTypeResult.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DataTypeResult createFromParcel(Parcel in) {
                         String dataType = in.readString();
@@ -167,7 +166,6 @@ public final class BackupRestoreEventLogger {
                         return result;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DataTypeResult[] newArray(int size) {
                         return new DataTypeResult[size];

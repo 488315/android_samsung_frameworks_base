@@ -344,7 +344,6 @@ public class WallpaperManager implements SemWallpaperManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class Globals extends IWallpaperManagerCallback.Stub {
         private CachedWallpaper mCachedWallpaper;
         private boolean mColorCallbackRegistered;
@@ -483,7 +482,6 @@ public class WallpaperManager implements SemWallpaperManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onWallpaperColorsChanged$1(Pair listener, WallpaperColors colors, int which, int userId) {
             boolean stillExists;
             synchronized (WallpaperManager.sGlobals) {
@@ -744,7 +742,6 @@ public class WallpaperManager implements SemWallpaperManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Bitmap getCurrentWallpaperLocked(Context context, int which, int userId, final boolean hardware, final ColorManagementProxy cmProxy) {
             Bundle params;
             ImageDecoder.Source src;
@@ -993,7 +990,6 @@ public class WallpaperManager implements SemWallpaperManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSemWallpaperColorsChanged$4(Pair listener, SemWallpaperColors colors, int which) {
             boolean stillExists;
             synchronized (this) {
@@ -1250,9 +1246,6 @@ public class WallpaperManager implements SemWallpaperManager {
         return getBuiltInDrawable(outWidth, outHeight, scaleToFit, horizontalAlignment, verticalAlignment, 1);
     }
 
-    /* JADX WARN: Type inference failed for: r1v18 */
-    /* JADX WARN: Type inference failed for: r1v3 */
-    /* JADX WARN: Type inference failed for: r1v4, types: [android.graphics.BitmapFactory$Options, android.graphics.Rect] */
     public Drawable getBuiltInDrawable(int outWidth, int outHeight, boolean scaleToFit, float horizontalAlignment, float verticalAlignment, int which) {
         int which2;
         ?? r1;
@@ -1901,8 +1894,6 @@ public class WallpaperManager implements SemWallpaperManager {
         return setResource(context, resid, which, 0, allowBackup, true, extras);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x011b  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0125  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1956,8 +1947,6 @@ public class WallpaperManager implements SemWallpaperManager {
         semSetUri(uri, allowBackup, which, type, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00a6  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00b0  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2984,7 +2973,6 @@ public class WallpaperManager implements SemWallpaperManager {
         return this.mCmProxy;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void checkExactlyOneWallpaperFlagSet(int which) {
         if (WhichChecker.isSingleType(which)) {
         } else {

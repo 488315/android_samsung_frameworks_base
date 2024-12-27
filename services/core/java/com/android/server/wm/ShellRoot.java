@@ -19,8 +19,6 @@ public final class ShellRoot {
     public WindowToken mToken;
     public final int mWindowType;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v0, types: [android.os.IBinder$DeathRecipient, com.android.server.wm.ShellRoot$$ExternalSyntheticLambda0] */
     public ShellRoot(IWindow iWindow, DisplayContent displayContent, final int i) {
         WindowToken windowToken;
         this.mSurfaceControl = null;
@@ -95,7 +93,6 @@ public final class ShellRoot {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.wm.ShellRoot$$ExternalSyntheticLambda1] */
     public final void setAccessibilityWindow(IWindow iWindow) {
         IWindow iWindow2 = this.mAccessibilityWindow;
         if (iWindow2 != null) {

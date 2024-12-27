@@ -1728,7 +1728,6 @@ public abstract class EncodeBase extends Encode {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendVideoFramesToMuxer(
             int encoderOutputBufferIndex, MediaCodec.BufferInfo videoEncoderOutputBufferInfo) {
         if (!checkEncoderOutputBufferIndex(encoderOutputBufferIndex)) {
@@ -1771,7 +1770,6 @@ public abstract class EncodeBase extends Encode {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isVideoDecoderAvailableCondition() {
         return (this.mCodecError
                         || this.mUserStop
@@ -1783,7 +1781,6 @@ public abstract class EncodeBase extends Encode {
                 : true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0017, code lost:
 
        if (r1.mMuxerStarted != false) goto L15;
@@ -1865,7 +1862,6 @@ public abstract class EncodeBase extends Encode {
         this.mSkippedFramesCount++;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void getVideoDecoderOutput(
             int decoderOutputBufferIndex, MediaCodec.BufferInfo videoDecoderOutputBufferInfo) {
         if (!checkDecoderOutputBufferIndex(

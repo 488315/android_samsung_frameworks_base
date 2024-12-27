@@ -16,7 +16,6 @@ final class DeviceAudioPathViewModel$Companion$mediaoutputChanged$1$mediaOutputS
     final /* synthetic */ String $deviceId;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceAudioPathViewModel$Companion$mediaoutputChanged$1$mediaOutputSelectedCallback$1$onMediaOutputSelected$1(ProducerScope producerScope, String str, Continuation continuation) {
         super(2, continuation);
         this.$$this$callbackFlow = producerScope;

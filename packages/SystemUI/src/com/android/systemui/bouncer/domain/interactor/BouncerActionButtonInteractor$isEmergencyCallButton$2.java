@@ -14,7 +14,6 @@ final class BouncerActionButtonInteractor$isEmergencyCallButton$2 extends Suspen
     int label;
     final /* synthetic */ BouncerActionButtonInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BouncerActionButtonInteractor$isEmergencyCallButton$2(BouncerActionButtonInteractor bouncerActionButtonInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = bouncerActionButtonInteractor;

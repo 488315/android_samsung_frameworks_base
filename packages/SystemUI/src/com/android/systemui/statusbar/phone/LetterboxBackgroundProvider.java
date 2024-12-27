@@ -26,7 +26,6 @@ public final class LetterboxBackgroundProvider implements CoreStartable, Dumpabl
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.phone.LetterboxBackgroundProvider$wallpaperColorsListener$1] */
     public LetterboxBackgroundProvider(IWindowManager iWindowManager, Executor executor, WallpaperManager wallpaperManager, Handler handler) {
         this.windowManager = iWindowManager;
         this.backgroundExecutor = executor;

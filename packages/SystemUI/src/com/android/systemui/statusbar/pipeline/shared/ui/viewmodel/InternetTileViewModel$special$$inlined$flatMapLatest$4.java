@@ -22,7 +22,6 @@ public final class InternetTileViewModel$special$$inlined$flatMapLatest$4 extend
     int label;
     final /* synthetic */ InternetTileViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InternetTileViewModel$special$$inlined$flatMapLatest$4(Continuation continuation, InternetTileViewModel internetTileViewModel) {
         super(3, continuation);
         this.this$0 = internetTileViewModel;

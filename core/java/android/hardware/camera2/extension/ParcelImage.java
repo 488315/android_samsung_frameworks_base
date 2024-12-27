@@ -11,7 +11,6 @@ public class ParcelImage implements Parcelable {
     public static final Parcelable.Creator<ParcelImage> CREATOR =
             new Parcelable.Creator<
                     ParcelImage>() { // from class: android.hardware.camera2.extension.ParcelImage.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelImage createFromParcel(Parcel _aidl_source) {
                     ParcelImage _aidl_out = new ParcelImage();
@@ -19,7 +18,6 @@ public class ParcelImage implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelImage[] newArray(int _aidl_size) {
                     return new ParcelImage[_aidl_size];

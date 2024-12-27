@@ -50,7 +50,6 @@ public final class KeyguardIndicationRotateTextViewController extends ViewContro
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.keyguard.KeyguardIndicationRotateTextViewController$1] */
     public KeyguardIndicationRotateTextViewController(KeyguardIndicationTextView keyguardIndicationTextView, DelayableExecutor delayableExecutor, StatusBarStateController statusBarStateController, KeyguardLogger keyguardLogger, FeatureFlags featureFlags) {
         super(keyguardIndicationTextView);
         this.mIndicationMessages = new HashMap();

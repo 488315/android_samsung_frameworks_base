@@ -68,7 +68,6 @@ public final class RoutineManager {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.audio.soundcraft.interfaces.routine.manager.RoutineManager$changeObserver$1] */
     public RoutineManager(Context context, ModelProvider modelProvider, SoundCraftSettings soundCraftSettings) {
         this.context = context;
         this.modelProvider = modelProvider;
@@ -77,7 +76,6 @@ public final class RoutineManager {
 
     public final void createRoutine(final EffectModel effectModel, final String str) {
         Function0 function0 = new Function0() { // from class: com.android.systemui.audio.soundcraft.interfaces.routine.manager.RoutineManager$createRoutine$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -251,7 +249,6 @@ public final class RoutineManager {
 
     public final void updateRoutine(final String str, final String str2, final EffectModel effectModel) {
         Function0 function0 = new Function0() { // from class: com.android.systemui.audio.soundcraft.interfaces.routine.manager.RoutineManager$updateRoutine$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

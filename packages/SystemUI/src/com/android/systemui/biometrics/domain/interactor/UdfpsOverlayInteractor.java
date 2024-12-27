@@ -51,7 +51,6 @@ public final class UdfpsOverlayInteractor {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r12v6, types: [com.android.systemui.biometrics.domain.interactor.UdfpsOverlayInteractor$special$$inlined$map$1] */
     public UdfpsOverlayInteractor(Context context, AuthController authController, SelectedUserInteractor selectedUserInteractor, FingerprintManager fingerprintManager, CoroutineScope coroutineScope) {
         this.authController = authController;
         this.fingerprintManager = fingerprintManager;
@@ -103,8 +102,6 @@ public final class UdfpsOverlayInteractor {
                     this.this$0 = udfpsOverlayInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

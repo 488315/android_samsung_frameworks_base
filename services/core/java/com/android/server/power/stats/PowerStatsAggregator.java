@@ -25,7 +25,6 @@ public final class PowerStatsAggregator {
         this.mHistory = batteryStatsHistory;
     }
 
-    /* JADX WARN: Finally extract failed */
     public final void aggregatePowerStats(long j, long j2, Consumer consumer) {
         PowerStats.Descriptor descriptor;
         synchronized (this) {

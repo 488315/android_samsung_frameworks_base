@@ -157,7 +157,6 @@ public final class MusicFxHelper {
         public List mSessions;
     }
 
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.audio.MusicFxHelper$1] */
     public MusicFxHelper(Context context, AudioService.AudioHandler audioHandler) {
         this.mContext = context;
         this.mAudioHandler = audioHandler;

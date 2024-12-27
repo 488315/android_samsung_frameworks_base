@@ -89,7 +89,6 @@ public final class PanelTransitionAnimator extends SecQSImplAnimatorBase {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.qs.animator.PanelTransitionAnimator$onHeadsUpChangedListener$1] */
     public PanelTransitionAnimator(Context context, ShadeHeaderController shadeHeaderController, HeadsUpManager headsUpManager) {
         this.context = context;
         this.shadeHeaderController = shadeHeaderController;

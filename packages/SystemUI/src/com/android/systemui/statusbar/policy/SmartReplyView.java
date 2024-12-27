@@ -291,7 +291,6 @@ public class SmartReplyView extends ViewGroup implements PanelScreenShotLogger.L
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:185:0x037d  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -156,8 +156,6 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v16, types: [com.android.systemui.controls.ui.SecControlsUiControllerImpl$openAppButtonClickListener$1] */
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.systemui.controls.ui.SecControlsUiControllerImpl$special$$inlined$compareBy$1] */
     public SecControlsUiControllerImpl(Lazy lazy, Context context, DelayableExecutor delayableExecutor, DelayableExecutor delayableExecutor2, Lazy lazy2, ControlActionCoordinator controlActionCoordinator, ActivityStarter activityStarter, ControlsMetricsLogger controlsMetricsLogger, KeyguardStateController keyguardStateController, UserTracker userTracker, Optional<TaskViewFactoryController.TaskViewFactoryImpl> optional, ControlsSettingsRepository controlsSettingsRepository, AuthorizedPanelsRepository authorizedPanelsRepository, SelectedComponentRepository selectedComponentRepository, DumpManager dumpManager, LogWrapper logWrapper, Lazy lazy3, SecControlActionCoordinator secControlActionCoordinator, Lazy lazy4, SecSelectedComponentRepository secSelectedComponentRepository, SharedPreferences sharedPreferences, LayoutUtil layoutUtil, ControlsUtil controlsUtil, AUIFacade aUIFacade, SALogger sALogger, BadgeSubject badgeSubject, BadgeProvider badgeProvider) {
         this.controlsController = lazy;
         this.context = context;
@@ -742,7 +740,6 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void update(List<? extends ControlsServiceInfo> list, List<ComponentInfo> list2, SelectedItem selectedItem) {
         Object obj;
         MainFragment mainFragment;

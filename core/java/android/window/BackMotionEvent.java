@@ -8,13 +8,11 @@ public final class BackMotionEvent implements Parcelable {
     public static final Parcelable.Creator<BackMotionEvent> CREATOR =
             new Parcelable.Creator<
                     BackMotionEvent>() { // from class: android.window.BackMotionEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BackMotionEvent createFromParcel(Parcel in) {
                     return new BackMotionEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BackMotionEvent[] newArray(int size) {
                     return new BackMotionEvent[size];

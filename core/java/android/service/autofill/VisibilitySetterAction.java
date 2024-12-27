@@ -17,7 +17,6 @@ public final class VisibilitySetterAction extends InternalOnClickAction
             new Parcelable.Creator<
                     VisibilitySetterAction>() { // from class:
                                                 // android.service.autofill.VisibilitySetterAction.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VisibilitySetterAction createFromParcel(Parcel parcel) {
                     SparseIntArray visibilities = parcel.readSparseIntArray();
@@ -37,7 +36,6 @@ public final class VisibilitySetterAction extends InternalOnClickAction
                     return builder.build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VisibilitySetterAction[] newArray(int size) {
                     return new VisibilitySetterAction[size];

@@ -348,7 +348,6 @@ public class TableRow extends LinearLayout {
         return new LayoutParams(getContext(), attrs);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.LinearLayout, android.view.ViewGroup
     public LinearLayout.LayoutParams generateDefaultLayoutParams() {
         return new LayoutParams();
@@ -359,7 +358,6 @@ public class TableRow extends LinearLayout {
         return p instanceof LayoutParams;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.LinearLayout, android.view.ViewGroup
     public LinearLayout.LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
         return new LayoutParams(p);
@@ -375,7 +373,6 @@ public class TableRow extends LinearLayout {
 
         private ChildrenTracker() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setOnHierarchyChangeListener(ViewGroup.OnHierarchyChangeListener listener) {
             this.listener = listener;
         }

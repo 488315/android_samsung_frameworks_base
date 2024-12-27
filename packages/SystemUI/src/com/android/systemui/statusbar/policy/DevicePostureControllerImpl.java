@@ -31,7 +31,6 @@ public final class DevicePostureControllerImpl implements DevicePostureControlle
         public AnonymousClass1() {
         }
 
-        /* JADX WARN: Type inference failed for: r2v0, types: [com.android.app.tracing.ListenersTracing$forEachTraced$1$1$1] */
         public final void onDeviceStateChanged(DeviceState deviceState) {
             DevicePostureControllerImpl.this.mCurrentDeviceState = deviceState;
             Assert.isMainThread();

@@ -9,13 +9,11 @@ public class ParsedPermissionGroupImpl extends ParsedComponentImpl
             new Parcelable.Creator<
                     ParsedPermissionGroupImpl>() { // from class:
                                                    // com.android.internal.pm.pkg.component.ParsedPermissionGroupImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParsedPermissionGroupImpl[] newArray(int size) {
                     return new ParsedPermissionGroupImpl[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParsedPermissionGroupImpl createFromParcel(Parcel in) {
                     return new ParsedPermissionGroupImpl(in);

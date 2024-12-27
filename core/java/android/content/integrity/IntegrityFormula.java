@@ -89,7 +89,6 @@ public abstract class IntegrityFormula {
         private SourceStamp() {}
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static void writeToParcel(IntegrityFormula integrityFormula, Parcel dest, int flags) {
         dest.writeInt(integrityFormula.getTag());
         ((Parcelable) integrityFormula).writeToParcel(dest, flags);

@@ -44,9 +44,6 @@ public final class DndDetailAdapter implements DetailAdapter, View.OnAttachState
         this.mHandler = sHandler;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:134:0x0194  */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x018e A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x017a A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // com.android.systemui.plugins.qs.DetailAdapter
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -33,7 +33,6 @@ final class MediaRecommendationsViewModel$getRecCoverBackground$2 extends Suspen
     int label;
     final /* synthetic */ MediaRecommendationsViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaRecommendationsViewModel$getRecCoverBackground$2(MediaRecommendationsViewModel mediaRecommendationsViewModel, Icon icon, int i, int i2, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaRecommendationsViewModel;

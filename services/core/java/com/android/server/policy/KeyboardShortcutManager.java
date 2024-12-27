@@ -65,7 +65,6 @@ public final class KeyboardShortcutManager {
     public final class DefaultBehavior extends Behavior {
         public final /* synthetic */ int $r8$classId;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public DefaultBehavior(Context context, PhoneWindowManagerExt phoneWindowManagerExt) {
             super(context, phoneWindowManagerExt);
             this.$r8$classId = 3;
@@ -74,7 +73,6 @@ public final class KeyboardShortcutManager {
                             67108864, "android.settings.SETTINGS");
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ DefaultBehavior(
                 Context context, PhoneWindowManagerExt phoneWindowManagerExt, int i) {
             super(context, phoneWindowManagerExt);
@@ -273,8 +271,6 @@ public final class KeyboardShortcutManager {
                 -2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0083  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0089  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

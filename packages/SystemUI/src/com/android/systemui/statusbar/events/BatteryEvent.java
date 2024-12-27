@@ -18,7 +18,6 @@ public final class BatteryEvent implements StatusEvent {
     public BatteryEvent(int i, final int i2) {
         this.batteryLevel = i;
         this.viewCreator = new Function1() { // from class: com.android.systemui.statusbar.events.BatteryEvent$viewCreator$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

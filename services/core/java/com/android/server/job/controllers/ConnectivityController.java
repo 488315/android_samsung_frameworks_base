@@ -568,7 +568,6 @@ public final class ConnectivityController extends RestrictingController
         sparseIntArray.put(1, 1);
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.job.controllers.ConnectivityController$2] */
     public ConnectivityController(
             JobSchedulerService jobSchedulerService, FlexibilityController flexibilityController) {
         super(jobSchedulerService);
@@ -1579,14 +1578,6 @@ public final class ConnectivityController extends RestrictingController
 
        if (r7 != false) goto L63;
     */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x0235 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0237  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x0252 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0254  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x030b A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x030d  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x03a7 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x03a8 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2165,8 +2156,6 @@ public final class ConnectivityController extends RestrictingController
         return z;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0066  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0069 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

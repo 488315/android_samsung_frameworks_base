@@ -38,8 +38,6 @@ public final class KeyguardClockRepositoryImpl implements KeyguardClockRepositor
     public final SecureSettings secureSettings;
     public final ReadonlyStateFlow selectedClockSize;
 
-    /* JADX WARN: Type inference failed for: r2v8, types: [com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$map$3] */
-    /* JADX WARN: Type inference failed for: r5v4, types: [com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$mapNotNull$1, kotlinx.coroutines.flow.Flow] */
     public KeyguardClockRepositoryImpl(SecureSettings secureSettings, ClockRegistry clockRegistry, ClockEventController clockEventController, CoroutineDispatcher coroutineDispatcher, CoroutineScope coroutineScope, Context context, FeatureFlagsClassic featureFlagsClassic) {
         this.secureSettings = secureSettings;
         this.clockRegistry = clockRegistry;
@@ -76,9 +74,6 @@ public final class KeyguardClockRepositoryImpl implements KeyguardClockRepositor
                     this.this$0 = keyguardClockRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:19:0x0060 A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:20:0x003b  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -187,8 +182,6 @@ public final class KeyguardClockRepositoryImpl implements KeyguardClockRepositor
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -279,8 +272,6 @@ public final class KeyguardClockRepositoryImpl implements KeyguardClockRepositor
                     this.this$0 = keyguardClockRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -376,8 +367,6 @@ public final class KeyguardClockRepositoryImpl implements KeyguardClockRepositor
                     this.this$0 = keyguardClockRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

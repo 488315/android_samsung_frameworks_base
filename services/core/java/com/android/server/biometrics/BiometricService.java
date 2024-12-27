@@ -399,7 +399,6 @@ public final class BiometricService extends SystemService {
         };
         public final /* synthetic */ long val$requestId;
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.biometrics.SemBiometricSysUiReceiver$1] */
         public AnonymousClass2(long j) {
             this.val$requestId = j;
         }
@@ -773,11 +772,6 @@ public final class BiometricService extends SystemService {
             return arrayList;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v4, types: [boolean] */
-        /* JADX WARN: Type inference failed for: r0v6 */
-        /* JADX WARN: Type inference failed for: r0v7 */
-        /* JADX WARN: Type inference failed for: r0v8 */
         public final int getSupportedModalities(int i) {
             getSupportedModalities_enforcePermission();
             AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "getSupportedModalities: Authenticators=", "BiometricService");
@@ -1501,19 +1495,6 @@ public final class BiometricService extends SystemService {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0252  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x01a4 A[Catch: all -> 0x0193, RemoteException -> 0x0196, TryCatch #1 {all -> 0x0193, blocks: (B:39:0x01a0, B:41:0x01a4, B:42:0x01c0, B:44:0x01c8, B:46:0x01d1, B:47:0x01db, B:48:0x01e9, B:49:0x01ba, B:53:0x018f, B:71:0x021f, B:54:0x0199), top: B:15:0x0147 }] */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x01c8 A[Catch: all -> 0x0193, RemoteException -> 0x0196, TryCatch #1 {all -> 0x0193, blocks: (B:39:0x01a0, B:41:0x01a4, B:42:0x01c0, B:44:0x01c8, B:46:0x01d1, B:47:0x01db, B:48:0x01e9, B:49:0x01ba, B:53:0x018f, B:71:0x021f, B:54:0x0199), top: B:15:0x0147 }] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x01e9 A[Catch: all -> 0x0193, RemoteException -> 0x0196, TRY_LEAVE, TryCatch #1 {all -> 0x0193, blocks: (B:39:0x01a0, B:41:0x01a4, B:42:0x01c0, B:44:0x01c8, B:46:0x01d1, B:47:0x01db, B:48:0x01e9, B:49:0x01ba, B:53:0x018f, B:71:0x021f, B:54:0x0199), top: B:15:0x0147 }] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x01ba A[Catch: all -> 0x0193, RemoteException -> 0x0196, TryCatch #1 {all -> 0x0193, blocks: (B:39:0x01a0, B:41:0x01a4, B:42:0x01c0, B:44:0x01c8, B:46:0x01d1, B:47:0x01db, B:48:0x01e9, B:49:0x01ba, B:53:0x018f, B:71:0x021f, B:54:0x0199), top: B:15:0x0147 }] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x026a A[LOOP:1: B:62:0x0265->B:64:0x026a, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0271 A[EDGE_INSN: B:65:0x0271->B:66:0x0271 BREAK  A[LOOP:1: B:62:0x0265->B:64:0x026a], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0235 A[LOOP:2: B:77:0x0230->B:79:0x0235, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x023c A[EDGE_INSN: B:80:0x023c->B:81:0x023c BREAK  A[LOOP:2: B:77:0x0230->B:79:0x0235], SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r6v15, types: [com.android.server.biometrics.log.BiometricFrameworkStatsLogger, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r6v28, types: [com.android.server.biometrics.log.BiometricFrameworkStatsLogger, java.lang.Object] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1590,7 +1571,6 @@ public final class BiometricService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.biometrics.BiometricService$$ExternalSyntheticLambda0] */
     @Override // com.android.server.SystemService
     public final void onStart() {
         Context context = getContext();

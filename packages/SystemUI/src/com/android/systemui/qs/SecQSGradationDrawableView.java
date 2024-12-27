@@ -10,7 +10,6 @@ import kotlin.jvm.internal.Intrinsics;
 public final class SecQSGradationDrawableView extends FrameLayout {
     public ConfigurationController.ConfigurationListener configChangedCallback;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SecQSGradationDrawableView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         Intrinsics.checkNotNull(context);

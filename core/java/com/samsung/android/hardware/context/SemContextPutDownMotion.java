@@ -9,13 +9,11 @@ public class SemContextPutDownMotion extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextPutDownMotion>() { // from class:
                                                  // com.samsung.android.hardware.context.SemContextPutDownMotion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextPutDownMotion createFromParcel(Parcel in) {
                     return new SemContextPutDownMotion(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextPutDownMotion[] newArray(int size) {
                     return new SemContextPutDownMotion[size];

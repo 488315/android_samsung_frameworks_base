@@ -213,15 +213,6 @@ class ZygoteConnection {
 
        return r0;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v3, types: [java.lang.String[]] */
-    /* JADX WARN: Type inference failed for: r6v5 */
-    /* JADX WARN: Type inference failed for: r6v6 */
-    /* JADX WARN: Type inference failed for: r6v8, types: [java.io.FileDescriptor] */
-    /* JADX WARN: Type inference failed for: r7v10 */
-    /* JADX WARN: Type inference failed for: r7v6, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r7v8 */
-    /* JADX WARN: Type inference failed for: r7v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -417,7 +408,6 @@ class ZygoteConnection {
         return ZygoteInit.childZygoteInit(parsedArgs.mRemainingArgs);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00c2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

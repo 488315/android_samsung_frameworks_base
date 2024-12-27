@@ -298,13 +298,11 @@ public abstract class Item implements Parcelable {
                 new Parcelable.Creator<
                         BuilderGeneratedItem>() { // from class:
                                                   // com.samsung.android.allshare.Item.BuilderGeneratedItem.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BuilderGeneratedItem createFromParcel(Parcel source) {
                         return new BuilderGeneratedItem(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BuilderGeneratedItem[] newArray(int size) {
                         return new BuilderGeneratedItem[size];
@@ -793,7 +791,6 @@ public abstract class Item implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static MediaType convertItemTypeFromMimeType(String type) {
         if (type == null) {
             return MediaType.ITEM_UNKNOWN;

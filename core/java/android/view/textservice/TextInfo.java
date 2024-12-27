@@ -9,13 +9,11 @@ import android.text.style.SpellCheckSpan;
 public final class TextInfo implements Parcelable {
     public static final Parcelable.Creator<TextInfo> CREATOR =
             new Parcelable.Creator<TextInfo>() { // from class: android.view.textservice.TextInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextInfo createFromParcel(Parcel source) {
                     return new TextInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextInfo[] newArray(int size) {
                     return new TextInfo[size];

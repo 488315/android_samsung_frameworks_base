@@ -15,7 +15,6 @@ public final class SecHysteresisLevels extends HysteresisLevels {
     public final Spline mHysteresisBrightSpline;
     public final Spline mHysteresisDarkSpline;
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

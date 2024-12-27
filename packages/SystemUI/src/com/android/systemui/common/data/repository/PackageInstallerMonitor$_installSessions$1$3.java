@@ -23,7 +23,6 @@ final class PackageInstallerMonitor$_installSessions$1$3 extends SuspendLambda i
     int label;
     final /* synthetic */ PackageInstallerMonitor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PackageInstallerMonitor$_installSessions$1$3(PackageInstallerMonitor packageInstallerMonitor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = packageInstallerMonitor;

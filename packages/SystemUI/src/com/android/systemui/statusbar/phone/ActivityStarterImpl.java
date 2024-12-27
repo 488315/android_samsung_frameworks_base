@@ -260,12 +260,10 @@ public final class ActivityStarterImpl implements ActivityStarter {
                 final int i3 = i2;
                 final UserHandle userHandle2 = activityUserHandle;
                 Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startActivityDismissingKeyguard$runnable$2.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:10:0x0059  */
                     @Override // kotlin.jvm.functions.Function1
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

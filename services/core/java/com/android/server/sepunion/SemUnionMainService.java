@@ -38,8 +38,6 @@ public final class SemUnionMainService extends SystemService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.os.IBinder, com.android.server.sepunion.SemUnionMainServiceImpl] */
     @Override // com.android.server.SystemService
     public final void onStart() {
         Log.d("SemUnionMainService", "onStart");

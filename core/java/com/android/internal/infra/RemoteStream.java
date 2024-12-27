@@ -30,7 +30,6 @@ public abstract class RemoteStream<RES, IOSTREAM extends Closeable> extends Andr
                 read,
                 AsyncTask.THREAD_POOL_EXECUTOR,
                 true) { // from class: com.android.internal.infra.RemoteStream.1
-            /* JADX INFO: Access modifiers changed from: protected */
             @Override // com.android.internal.infra.RemoteStream
             public InputStream createStream(ParcelFileDescriptor fd) {
                 return new ParcelFileDescriptor.AutoCloseInputStream(fd);
@@ -73,7 +72,6 @@ public abstract class RemoteStream<RES, IOSTREAM extends Closeable> extends Andr
                 write,
                 AsyncTask.THREAD_POOL_EXECUTOR,
                 false) { // from class: com.android.internal.infra.RemoteStream.2
-            /* JADX INFO: Access modifiers changed from: protected */
             @Override // com.android.internal.infra.RemoteStream
             public OutputStream createStream(ParcelFileDescriptor fd) {
                 return new ParcelFileDescriptor.AutoCloseOutputStream(fd);

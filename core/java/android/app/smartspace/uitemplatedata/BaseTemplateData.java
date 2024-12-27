@@ -13,13 +13,11 @@ public class BaseTemplateData implements Parcelable {
     public static final Parcelable.Creator<BaseTemplateData> CREATOR =
             new Parcelable.Creator<BaseTemplateData>() { // from class:
                 // android.app.smartspace.uitemplatedata.BaseTemplateData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BaseTemplateData createFromParcel(Parcel in) {
                     return new BaseTemplateData(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BaseTemplateData[] newArray(int size) {
                     return new BaseTemplateData[size];
@@ -238,13 +236,11 @@ public class BaseTemplateData implements Parcelable {
         public static final Parcelable.Creator<SubItemInfo> CREATOR =
                 new Parcelable.Creator<SubItemInfo>() { // from class:
                     // android.app.smartspace.uitemplatedata.BaseTemplateData.SubItemInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SubItemInfo createFromParcel(Parcel in) {
                         return new SubItemInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SubItemInfo[] newArray(int size) {
                         return new SubItemInfo[size];
@@ -372,13 +368,11 @@ public class BaseTemplateData implements Parcelable {
         public static final Parcelable.Creator<SubItemLoggingInfo> CREATOR =
                 new Parcelable.Creator<SubItemLoggingInfo>() { // from class:
                     // android.app.smartspace.uitemplatedata.BaseTemplateData.SubItemLoggingInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SubItemLoggingInfo createFromParcel(Parcel in) {
                         return new SubItemLoggingInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SubItemLoggingInfo[] newArray(int size) {
                         return new SubItemLoggingInfo[size];

@@ -218,7 +218,6 @@ public final class FirewallRulesApplier {
         return arrayList2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:96:0x0245  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -845,11 +844,6 @@ public final class FirewallRulesApplier {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00a6 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x000b A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0083  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00a2  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0087  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

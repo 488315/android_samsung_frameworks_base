@@ -56,8 +56,6 @@ public class WorkLockActivity extends Activity {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.keyguard.WorkLockActivity$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.keyguard.WorkLockActivity$1] */
     public WorkLockActivity(BroadcastDispatcher broadcastDispatcher, UserManager userManager, PackageManager packageManager) {
         this.mBroadcastDispatcher = broadcastDispatcher;
         this.mUserManager = userManager;

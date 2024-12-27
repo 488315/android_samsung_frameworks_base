@@ -19,13 +19,11 @@ public class ScoredNetwork implements Parcelable {
             "android.net.attributes.key.RANKING_SCORE_OFFSET";
     public static final Parcelable.Creator<ScoredNetwork> CREATOR =
             new Parcelable.Creator<ScoredNetwork>() { // from class: android.net.ScoredNetwork.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ScoredNetwork createFromParcel(Parcel in) {
                     return new ScoredNetwork(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ScoredNetwork[] newArray(int size) {
                     return new ScoredNetwork[size];

@@ -46,8 +46,6 @@ public final class VibratorControlService extends IVibratorControlService.Stub {
 
     public final class VibrationParamsRecords extends GroupedAggregatedLogRecords {
 
-        /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-        /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
         final class Operation {
             public static final /* synthetic */ Operation[] $VALUES;
             public static final Operation CLEAR;

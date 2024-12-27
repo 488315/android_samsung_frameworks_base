@@ -15,7 +15,6 @@ final class DummyMobileConnectionRepository$serviceStateBroadcast$3 extends Susp
     int label;
     final /* synthetic */ DummyMobileConnectionRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DummyMobileConnectionRepository$serviceStateBroadcast$3(DummyMobileConnectionRepository dummyMobileConnectionRepository, Continuation continuation) {
         super(2, continuation);
         this.this$0 = dummyMobileConnectionRepository;

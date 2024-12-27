@@ -18,7 +18,6 @@ final class AccessibilityRepositoryImpl$isEnabled$1 extends SuspendLambda implem
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AccessibilityRepositoryImpl$isEnabled$1(AccessibilityManager accessibilityManager, Continuation continuation) {
         super(2, continuation);
         this.$manager = accessibilityManager;
@@ -36,7 +35,6 @@ final class AccessibilityRepositoryImpl$isEnabled$1 extends SuspendLambda implem
         return ((AccessibilityRepositoryImpl$isEnabled$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -55,7 +53,6 @@ final class AccessibilityRepositoryImpl$isEnabled$1 extends SuspendLambda implem
             ((ChannelCoroutine) producerScope).mo2552trySendJP2dKIU(Boolean.valueOf(this.$manager.isEnabled()));
             final AccessibilityManager accessibilityManager = this.$manager;
             Function0 function0 = new Function0() { // from class: com.android.systemui.accessibility.data.repository.AccessibilityRepositoryImpl$isEnabled$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -24,8 +24,6 @@ public final class ExplicitHealthCheckController {
 
        android.util.Slog.i("ExplicitHealthCheckController", "Not binding to service, service disabled");
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v5, types: [android.content.ServiceConnection, com.android.server.ExplicitHealthCheckController$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -98,8 +96,6 @@ public final class ExplicitHealthCheckController {
                     + " com.android.server.ExplicitHealthCheckController.bindService():void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0037 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0038  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

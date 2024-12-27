@@ -433,7 +433,6 @@ class PowerComponents {
         serializer.endTag(null, "power_components");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     static void parseXml(TypedXmlPullParser parser, Builder builder)
             throws XmlPullParserException, IOException {
         String str;

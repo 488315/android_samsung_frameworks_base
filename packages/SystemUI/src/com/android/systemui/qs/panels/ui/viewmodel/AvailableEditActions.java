@@ -2,8 +2,6 @@ package com.android.systemui.qs.panels.ui.viewmodel;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class AvailableEditActions {
     public static final /* synthetic */ AvailableEditActions[] $VALUES;
     public static final AvailableEditActions ADD;

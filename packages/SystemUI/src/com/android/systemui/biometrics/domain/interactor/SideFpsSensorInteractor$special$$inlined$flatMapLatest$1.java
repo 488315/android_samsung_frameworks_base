@@ -18,7 +18,6 @@ public final class SideFpsSensorInteractor$special$$inlined$flatMapLatest$1 exte
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SideFpsSensorInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, Optional optional) {
         super(3, continuation);
         this.$fingerprintInteractiveToAuthProvider$inlined = optional;

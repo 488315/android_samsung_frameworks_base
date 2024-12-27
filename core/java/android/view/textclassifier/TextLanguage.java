@@ -14,13 +14,11 @@ public final class TextLanguage implements Parcelable {
     public static final Parcelable.Creator<TextLanguage> CREATOR =
             new Parcelable.Creator<
                     TextLanguage>() { // from class: android.view.textclassifier.TextLanguage.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextLanguage createFromParcel(Parcel in) {
                     return TextLanguage.readFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextLanguage[] newArray(int size) {
                     return new TextLanguage[size];
@@ -78,7 +76,6 @@ public final class TextLanguage implements Parcelable {
         dest.writeBundle(this.mBundle);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static TextLanguage readFromParcel(Parcel in) {
         return new TextLanguage(
                 in.readString(), EntityConfidence.CREATOR.createFromParcel(in), in.readBundle());
@@ -117,13 +114,11 @@ public final class TextLanguage implements Parcelable {
                 new Parcelable.Creator<
                         Request>() { // from class:
                                      // android.view.textclassifier.TextLanguage.Request.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Request createFromParcel(Parcel in) {
                         return Request.readFromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Request[] newArray(int size) {
                         return new Request[size];
@@ -173,7 +168,6 @@ public final class TextLanguage implements Parcelable {
             dest.writeParcelable(this.mSystemTcMetadata, flags);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static Request readFromParcel(Parcel in) {
             CharSequence text = in.readCharSequence();
             Bundle extra = in.readBundle();

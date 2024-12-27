@@ -103,7 +103,6 @@ public final class AutofillManagerServiceShellCommand extends ShellCommand {
         return Integer.parseInt(getNextArgRequired());
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:164:0x042f, code lost:
 
        if (r0.equals("default") == false) goto L181;
@@ -116,7 +115,6 @@ public final class AutofillManagerServiceShellCommand extends ShellCommand {
 
        if (r11.equals("max_visible_datasets") == false) goto L92;
     */
-    /* JADX WARN: Type inference failed for: r0v54, types: [com.android.server.autofill.AutofillManagerServiceShellCommand$2] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -226,7 +224,6 @@ public final class AutofillManagerServiceShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int requestGet(final PrintWriter printWriter) {
         char c;
         String str;

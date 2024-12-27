@@ -2732,7 +2732,6 @@ public abstract class BatteryStats {
         }
     }
 
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     private final void printControllerActivity(
             PrintWriter pw,
             StringBuilder sb,
@@ -4400,34 +4399,6 @@ public abstract class BatteryStats {
         sb.append(formatCharge(power));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:460:0x1b8d  */
-    /* JADX WARN: Removed duplicated region for block: B:468:0x1c1a  */
-    /* JADX WARN: Removed duplicated region for block: B:523:0x1e51  */
-    /* JADX WARN: Removed duplicated region for block: B:542:0x1ece  */
-    /* JADX WARN: Removed duplicated region for block: B:552:0x1fc0  */
-    /* JADX WARN: Removed duplicated region for block: B:571:0x20d7  */
-    /* JADX WARN: Removed duplicated region for block: B:576:0x2120  */
-    /* JADX WARN: Removed duplicated region for block: B:598:0x21e0  */
-    /* JADX WARN: Removed duplicated region for block: B:620:0x228c  */
-    /* JADX WARN: Removed duplicated region for block: B:635:0x22f8  */
-    /* JADX WARN: Removed duplicated region for block: B:638:0x2397  */
-    /* JADX WARN: Removed duplicated region for block: B:678:0x24ed  */
-    /* JADX WARN: Removed duplicated region for block: B:695:0x2566  */
-    /* JADX WARN: Removed duplicated region for block: B:722:0x2624  */
-    /* JADX WARN: Removed duplicated region for block: B:730:0x267b  */
-    /* JADX WARN: Removed duplicated region for block: B:736:0x26e3  */
-    /* JADX WARN: Removed duplicated region for block: B:743:0x272e  */
-    /* JADX WARN: Removed duplicated region for block: B:773:0x27d0  */
-    /* JADX WARN: Removed duplicated region for block: B:835:0x2990  */
-    /* JADX WARN: Removed duplicated region for block: B:860:0x2aa6  */
-    /* JADX WARN: Removed duplicated region for block: B:862:0x2aae A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:869:0x271d  */
-    /* JADX WARN: Removed duplicated region for block: B:876:0x26cd  */
-    /* JADX WARN: Removed duplicated region for block: B:878:0x2556  */
-    /* JADX WARN: Removed duplicated region for block: B:880:0x2112  */
-    /* JADX WARN: Removed duplicated region for block: B:916:0x20c5  */
-    /* JADX WARN: Removed duplicated region for block: B:917:0x1e9a  */
-    /* JADX WARN: Removed duplicated region for block: B:952:0x1e38  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5378,12 +5349,6 @@ public abstract class BatteryStats {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00bc  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00d3 A[Catch: all -> 0x01ae, TryCatch #7 {all -> 0x01ae, blocks: (B:31:0x00cc, B:33:0x00d3, B:35:0x00d7, B:38:0x00df, B:40:0x00ec, B:43:0x00ff, B:47:0x0184, B:48:0x010c, B:49:0x0114, B:51:0x011a, B:52:0x012b, B:54:0x0131, B:58:0x0156, B:67:0x018a, B:68:0x0198, B:71:0x01a0), top: B:30:0x00cc }] */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x01da  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x01e3  */
-    /* JADX WARN: Removed duplicated region for block: B:91:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x00bf  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6449,7 +6414,6 @@ public abstract class BatteryStats {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00f4 A[Catch: all -> 0x01cd, TryCatch #2 {all -> 0x01cd, blocks: (B:39:0x00bf, B:42:0x00cb, B:44:0x00f4, B:46:0x00f8, B:49:0x0100, B:51:0x010b, B:54:0x011e, B:58:0x01a1, B:59:0x012b, B:60:0x0133, B:62:0x0139, B:63:0x014a, B:65:0x0150, B:69:0x0175, B:78:0x01a7, B:79:0x01b3, B:82:0x01bb, B:101:0x00db, B:104:0x00e5), top: B:38:0x00bf }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6870,7 +6834,6 @@ public abstract class BatteryStats {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class UidMobileRadioStats {
         public final double millisecondsPerPacket;
         public final int radioActiveCount;

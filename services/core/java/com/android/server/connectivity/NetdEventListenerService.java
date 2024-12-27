@@ -341,7 +341,6 @@ public final class NetdEventListenerService extends BaseNetdEventListener {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.server.connectivity.NetdEventListenerService$1] */
     public NetdEventListenerService(ConnectivityManager connectivityManager) {
         TransportForNetIdNetworkCallback transportForNetIdNetworkCallback =
                 new TransportForNetIdNetworkCallback();

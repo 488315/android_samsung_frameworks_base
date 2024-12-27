@@ -461,8 +461,6 @@ public final class IbsQuickDim {
                 && !ibsQuickDim.mCharging;
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.ibs.sqd.IbsQuickDim$3] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.ibs.sqd.IbsQuickDim$2] */
     public IbsQuickDim(Context context) {
         this.mContext = context;
     }

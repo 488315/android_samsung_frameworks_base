@@ -111,7 +111,6 @@ public final class ResourceTimer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void handleMessage(Message msg) {
         synchronized (sLock) {
             publish();

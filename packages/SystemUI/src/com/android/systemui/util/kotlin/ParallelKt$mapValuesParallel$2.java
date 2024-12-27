@@ -14,7 +14,6 @@ final class ParallelKt$mapValuesParallel$2 extends SuspendLambda implements Func
     /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ParallelKt$mapValuesParallel$2(Function2 function2, Continuation continuation) {
         super(2, continuation);
         this.$transform = function2;

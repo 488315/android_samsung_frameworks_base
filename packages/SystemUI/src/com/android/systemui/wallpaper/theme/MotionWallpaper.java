@@ -145,8 +145,6 @@ public final class MotionWallpaper extends FrameLayout implements SensorEventLis
         this(context, null, null, false, i, null, z);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:67:0x018c  */
-    /* JADX WARN: Removed duplicated region for block: B:69:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -247,8 +245,6 @@ public final class MotionWallpaper extends FrameLayout implements SensorEventLis
         arrayList5.clear();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00ef  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x0248 A[ADDED_TO_REGION, ORIG_RETURN, RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -539,7 +535,6 @@ public final class MotionWallpaper extends FrameLayout implements SensorEventLis
         this(context, null, null, false, i, consumer, false);
     }
 
-    /* JADX WARN: Type inference failed for: r8v7, types: [com.android.systemui.wallpaper.theme.MotionWallpaper$1] */
     public MotionWallpaper(Context context, String str, String str2, boolean z, int i, Consumer<Integer> consumer, boolean z2) {
         super(context);
         this.mMotionBitmapList = new ArrayList();

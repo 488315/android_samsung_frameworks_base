@@ -10,8 +10,6 @@ public final class ActivityEmbeddedPackageRepository {
     public final List mRepository = new ArrayList();
     public final AnonymousClass1 mPackageReceiver = new BroadcastReceiver() { // from class:
                 // com.android.server.wm.ActivityEmbeddedPackageRepository.1
-                /* JADX WARN: Removed duplicated region for block: B:16:0x004a  */
-                /* JADX WARN: Removed duplicated region for block: B:23:0x0061  */
                 @Override // android.content.BroadcastReceiver
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -103,7 +101,6 @@ public final class ActivityEmbeddedPackageRepository {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.wm.ActivityEmbeddedPackageRepository$1] */
     public ActivityEmbeddedPackageRepository(
             ActivityTaskManagerService activityTaskManagerService) {
         this.mAtm = activityTaskManagerService;

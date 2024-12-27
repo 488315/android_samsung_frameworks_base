@@ -16,13 +16,11 @@ import java.util.List;
 public final class SmsCbMessage implements Parcelable {
     public static final Parcelable.Creator<SmsCbMessage> CREATOR =
             new Parcelable.Creator<SmsCbMessage>() { // from class: android.telephony.SmsCbMessage.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmsCbMessage createFromParcel(Parcel in) {
                     return new SmsCbMessage(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmsCbMessage[] newArray(int size) {
                     return new SmsCbMessage[size];

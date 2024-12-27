@@ -416,11 +416,6 @@ public final class SmartManagerService extends ISmartManagerService.Stub
         smartManagerService.mHandler.sendMessageDelayed(obtain, 100L);
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.server.sepunion.SmartManagerService$4] */
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.server.sepunion.SmartManagerService$5] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.server.sepunion.SmartManagerService$1] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.sepunion.SmartManagerService$2] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.server.sepunion.SmartManagerService$3] */
     public SmartManagerService(Context context) {
         this.mContext = context;
     }
@@ -493,7 +488,6 @@ public final class SmartManagerService extends ISmartManagerService.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x006c A[Catch: all -> 0x0024, SQLiteException | IllegalArgumentException | NullPointerException -> 0x0070, SQLiteException | IllegalArgumentException | NullPointerException -> 0x0070, SQLiteException | IllegalArgumentException | NullPointerException -> 0x0070, TRY_ENTER, TRY_LEAVE, TryCatch #3 {SQLiteException | IllegalArgumentException | NullPointerException -> 0x0070, blocks: (B:11:0x0026, B:15:0x006c, B:15:0x006c, B:15:0x006c, B:30:0x007c, B:30:0x007c, B:30:0x007c, B:35:0x0079, B:35:0x0079, B:35:0x0079), top: B:10:0x0026, outer: #1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

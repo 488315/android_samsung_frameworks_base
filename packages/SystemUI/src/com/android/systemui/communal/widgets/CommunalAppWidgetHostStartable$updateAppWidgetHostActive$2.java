@@ -13,7 +13,6 @@ final class CommunalAppWidgetHostStartable$updateAppWidgetHostActive$2 extends S
     int label;
     final /* synthetic */ CommunalAppWidgetHostStartable this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalAppWidgetHostStartable$updateAppWidgetHostActive$2(boolean z, CommunalAppWidgetHostStartable communalAppWidgetHostStartable, Continuation continuation) {
         super(2, continuation);
         this.$active = z;

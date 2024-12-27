@@ -31,7 +31,6 @@ public abstract class UCMAuthCredentialView extends LinearLayout {
     public TextView mTitleView;
     public TextView mUCMtitleView;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.samsung.android.biometrics.app.setting.prompt.knox.UCMAuthCredentialView$1] */
     public UCMAuthCredentialView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mOnKeyListener =

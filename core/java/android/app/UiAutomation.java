@@ -523,12 +523,6 @@ public final class UiAutomation {
         }
     }
 
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00ef A[LOOP:3: B:49:0x00ed->B:50:0x00ef, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00fe  */
-    /* JADX WARN: Type inference failed for: r4v1 */
-    /* JADX WARN: Type inference failed for: r4v10 */
-    /* JADX WARN: Type inference failed for: r4v8, types: [boolean, int] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

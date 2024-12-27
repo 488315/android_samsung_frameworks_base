@@ -403,7 +403,6 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
             }
         };
 
-        /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity$ColorListAdapter$1] */
         public ColorListAdapter() {
             this.mAreDisabledAll = false;
             this.mAreDisabledAll = EdgeLightingStyleActivity.this.mSelectedColorIndex == 0;
@@ -527,7 +526,6 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
             }
         };
 
-        /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity$EdgeLightingStyleEffectAdapter$1] */
         public EdgeLightingStyleEffectAdapter() {
             EdgeLightingStyleManager edgeLightingStyleManager = EdgeLightingStyleManager.getInstance();
             edgeLightingStyleManager.getClass();

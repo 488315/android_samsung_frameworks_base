@@ -141,7 +141,6 @@ public abstract class ShortcutHelperKt {
                 shape = ShortcutHelper$Shapes.singlePaneCategory;
             }
             CategoryItemSinglePane(shortcutHelperCategory, areEqual, new Function0() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$CategoriesPanelSinglePane$1$1$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -159,7 +158,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$CategoriesPanelSinglePane$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -211,7 +209,6 @@ public abstract class ShortcutHelperKt {
         for (int i3 = 0; i3 < size; i3++) {
             final ShortcutHelperCategory shortcutHelperCategory2 = (ShortcutHelperCategory) list.get(i3);
             CategoryItemTwoPane(StringResources_androidKt.stringResource(shortcutHelperCategory2.labelResId, composerImpl), shortcutHelperCategory2.icon, Intrinsics.areEqual(shortcutHelperCategory, shortcutHelperCategory2), new Function0() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$CategoriesPanelTwoPane$1$1$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -229,7 +226,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$CategoriesPanelTwoPane$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -244,19 +240,16 @@ public abstract class ShortcutHelperKt {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$CategoryItemSinglePane$1, kotlin.jvm.internal.Lambda] */
     public static final void CategoryItemSinglePane(final ShortcutHelperCategory shortcutHelperCategory, final boolean z, final Function0 function0, final Shape shape, Composer composer, final int i) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(-1597101201);
         OpaqueKey opaqueKey = ComposerKt.invocation;
         MaterialTheme.INSTANCE.getClass();
         SurfaceKt.m250Surfaceo_FOJdg(function0, null, false, shape, MaterialTheme.getColorScheme(composerImpl).surfaceBright, 0L, 0.0f, null, null, ComposableLambdaKt.rememberComposableLambda(-1716585596, composerImpl, new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$CategoryItemSinglePane$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
             }
 
-            /* JADX WARN: Type inference failed for: r0v15, types: [com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$CategoryItemSinglePane$1$1$2, kotlin.jvm.internal.Lambda] */
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 Composer composer2 = (Composer) obj;
@@ -354,7 +347,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$CategoryItemSinglePane$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -373,7 +365,6 @@ public abstract class ShortcutHelperKt {
     
         if ((r41 & 16) != 0) goto L68;
      */
-    /* JADX WARN: Type inference failed for: r4v24, types: [com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$CategoryItemTwoPane$2, kotlin.jvm.internal.Lambda] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -476,7 +467,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$KeyboardSettings$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -503,7 +493,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutDescriptionText$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -520,18 +509,6 @@ public abstract class ShortcutHelperKt {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0046  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0116  */
-    /* JADX WARN: Removed duplicated region for block: B:30:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00d4  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00f2  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x009d  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00a3  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00b3  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x00a0  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0061  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -592,7 +569,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutHelperSinglePane$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -711,7 +687,6 @@ public abstract class ShortcutHelperKt {
         if (endRestartGroup != null) {
             final Modifier modifier3 = modifier2;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutHelperTwoPane$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -726,7 +701,6 @@ public abstract class ShortcutHelperKt {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutKeyCombinations$1, kotlin.jvm.internal.Lambda] */
     public static final void ShortcutKeyCombinations(final int i, final int i2, Composer composer, final Modifier modifier, final Shortcut shortcut) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(1686592245);
@@ -783,7 +757,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutKeyCombinations$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -847,7 +820,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutKeyContainer$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -903,7 +875,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutSinglePane$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -938,7 +909,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutSubCategorySinglePane$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1016,7 +986,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutsSearchBar$4
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1074,7 +1043,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$StartSidePanel$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1111,7 +1079,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$SubCategoryTitle$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1157,7 +1124,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$TitleBar$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1331,7 +1297,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutCategoryDetailsSinglePane$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1346,7 +1311,6 @@ public abstract class ShortcutHelperKt {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutCommand$1$1, kotlin.jvm.internal.Lambda] */
     public static final void access$ShortcutCommand(final ShortcutCommand shortcutCommand, Composer composer, final int i) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(833482787);
@@ -1411,7 +1375,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutCommand$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1451,7 +1414,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutIconKey$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1496,7 +1458,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutOrSeparator$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1541,7 +1502,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutTextKey$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1596,7 +1556,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutViewDualPane$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -1611,7 +1570,6 @@ public abstract class ShortcutHelperKt {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v0, types: [com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$SubCategoryContainerDualPane$1, kotlin.jvm.internal.Lambda] */
     public static final void access$SubCategoryContainerDualPane(final SubCategory subCategory, Composer composer, final int i) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(-1182719252);
@@ -1692,7 +1650,6 @@ public abstract class ShortcutHelperKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$SubCategoryContainerDualPane$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

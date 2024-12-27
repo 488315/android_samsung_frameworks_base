@@ -141,13 +141,11 @@ public final class MediaMetadata implements Parcelable {
         CREATOR =
                 new Parcelable.Creator<
                         MediaMetadata>() { // from class: android.media.MediaMetadata.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public MediaMetadata createFromParcel(Parcel in) {
                         return new MediaMetadata(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public MediaMetadata[] newArray(int size) {
                         return new MediaMetadata[size];

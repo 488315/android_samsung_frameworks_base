@@ -35,7 +35,6 @@ public class MaintenanceModeNotificationService extends Service {
         startForeground(NOTIFICATION_ID, buildNotification(this));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void createNotificationChannel(Context context) {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(NotificationManager.class);
@@ -75,7 +74,6 @@ public class MaintenanceModeNotificationService extends Service {
         return builder.build();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void registerNotification(Context context) {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(NotificationManager.class);

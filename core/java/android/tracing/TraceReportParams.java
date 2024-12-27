@@ -9,7 +9,6 @@ public class TraceReportParams implements Parcelable {
     public static final Parcelable.Creator<TraceReportParams> CREATOR =
             new Parcelable.Creator<
                     TraceReportParams>() { // from class: android.tracing.TraceReportParams.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TraceReportParams createFromParcel(Parcel _aidl_source) {
                     TraceReportParams _aidl_out = new TraceReportParams();
@@ -17,7 +16,6 @@ public class TraceReportParams implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TraceReportParams[] newArray(int _aidl_size) {
                     return new TraceReportParams[_aidl_size];

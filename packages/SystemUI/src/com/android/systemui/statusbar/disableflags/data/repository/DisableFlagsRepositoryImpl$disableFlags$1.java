@@ -21,7 +21,6 @@ final class DisableFlagsRepositoryImpl$disableFlags$1 extends SuspendLambda impl
     int label;
     final /* synthetic */ DisableFlagsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisableFlagsRepositoryImpl$disableFlags$1(CommandQueue commandQueue, DisableFlagsRepositoryImpl disableFlagsRepositoryImpl, RemoteInputQuickSettingsDisabler remoteInputQuickSettingsDisabler, Continuation continuation) {
         super(2, continuation);
         this.$commandQueue = commandQueue;
@@ -41,8 +40,6 @@ final class DisableFlagsRepositoryImpl$disableFlags$1 extends SuspendLambda impl
         return ((DisableFlagsRepositoryImpl$disableFlags$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.CommandQueue$Callbacks, com.android.systemui.statusbar.disableflags.data.repository.DisableFlagsRepositoryImpl$disableFlags$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -65,7 +62,6 @@ final class DisableFlagsRepositoryImpl$disableFlags$1 extends SuspendLambda impl
             this.$commandQueue.addCallback((CommandQueue.Callbacks) r1);
             final CommandQueue commandQueue = this.$commandQueue;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.disableflags.data.repository.DisableFlagsRepositoryImpl$disableFlags$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

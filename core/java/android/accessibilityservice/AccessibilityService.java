@@ -229,7 +229,6 @@ public abstract class AccessibilityService extends Service {
 
     public abstract void onInterrupt();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchServiceConnected() {
         synchronized (this.mLock) {
             for (int i = 0; i < this.mMagnificationControllers.size(); i++) {
@@ -459,7 +458,6 @@ public abstract class AccessibilityService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onMagnificationChanged(int displayId, Region region, MagnificationConfig config) {
         MagnificationController controller;
         synchronized (this.mLock) {
@@ -470,12 +468,10 @@ public abstract class AccessibilityService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onFingerprintCapturingGesturesChanged(boolean active) {
         getFingerprintGestureController().onGestureDetectionActiveChanged(active);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onFingerprintGesture(int gesture) {
         getFingerprintGestureController().onGesture(gesture);
     }
@@ -583,7 +579,6 @@ public abstract class AccessibilityService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$dispatchMagnificationChanged$0(
                 OnMagnificationChangedListener listener,
                 Region region,
@@ -826,7 +821,6 @@ public abstract class AccessibilityService extends Service {
         return this.mInputMethod;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onSoftKeyboardShowModeChanged(int showMode) {
         if (this.mSoftKeyboardController != null) {
             this.mSoftKeyboardController.dispatchSoftKeyboardShowModeChanged(showMode);
@@ -1025,12 +1019,10 @@ public abstract class AccessibilityService extends Service {
         return controller;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onAccessibilityButtonClicked(int displayId) {
         getAccessibilityButtonController(displayId).dispatchAccessibilityButtonClicked();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onAccessibilityButtonAvailabilityChanged(boolean available) {
         getAccessibilityButtonController()
                 .dispatchAccessibilityButtonAvailabilityChanged(available);
@@ -1224,7 +1216,6 @@ public abstract class AccessibilityService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$takeScreenshot$0(
             Executor executor, TakeScreenshotCallback callback, Bundle result) {
         int status = result.getInt(KEY_ACCESSIBILITY_SCREENSHOT_STATUS);
@@ -1443,7 +1434,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$init$0(
                 int connectionId, IAccessibilityServiceConnection connection, IBinder windowToken) {
             this.mConnectionId = connectionId;
@@ -1483,7 +1473,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onInterrupt$1() {
             if (this.mConnectionId != -1) {
                 this.mCallback.onInterrupt();
@@ -1504,7 +1493,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAccessibilityEvent$2(
                 AccessibilityEvent event, boolean serviceWantsEvent) {
             if (event != null) {
@@ -1529,7 +1517,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onGesture$3(AccessibilityGestureEvent gestureInfo) {
             if (this.mConnectionId != -1) {
                 this.mCallback.onGesture(gestureInfo);
@@ -1549,7 +1536,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$clearAccessibilityCache$4() {
             AccessibilityInteractionClient.getInstance(this.mContext)
                     .clearCache(this.mConnectionId);
@@ -1568,7 +1554,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onKeyEvent$5(KeyEvent event, int sequence) {
             try {
                 AccessibilityInteractionClient.getInstance(this.mContext);
@@ -1608,7 +1593,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onMagnificationChanged$6(
                 int displayId, Region region, MagnificationConfig config) {
             if (this.mConnectionId != -1) {
@@ -1629,7 +1613,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSoftKeyboardShowModeChanged$7(int showMode) {
             if (this.mConnectionId != -1) {
                 this.mCallback.onSoftKeyboardShowModeChanged(showMode);
@@ -1649,7 +1632,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onPerformGestureResult$8(
                 int sequence, boolean successfully) {
             if (this.mConnectionId != -1) {
@@ -1670,7 +1652,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFingerprintCapturingGesturesChanged$9(boolean active) {
             if (this.mConnectionId != -1) {
                 this.mCallback.onFingerprintCapturingGesturesChanged(active);
@@ -1690,7 +1671,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFingerprintGesture$10(int gesture) {
             if (this.mConnectionId != -1) {
                 this.mCallback.onFingerprintGesture(gesture);
@@ -1710,7 +1690,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAccessibilityButtonClicked$11(int displayId) {
             if (this.mConnectionId != -1) {
                 this.mCallback.onAccessibilityButtonClicked(displayId);
@@ -1730,7 +1709,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAccessibilityButtonAvailabilityChanged$12(
                 boolean available) {
             if (this.mConnectionId != -1) {
@@ -1751,7 +1729,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSystemActionsChanged$13() {
             if (this.mConnectionId != -1) {
                 this.mCallback.onSystemActionsChanged();
@@ -1771,7 +1748,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$createImeSession$14(
                 IAccessibilityInputMethodSessionCallback callback) {
             if (this.mConnectionId != -1) {
@@ -1806,7 +1782,6 @@ public abstract class AccessibilityService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setImeSessionEnabled$15(
                 AccessibilityInputMethodSession ls, boolean enabled) {
             if (this.mConnectionId != -1) {
@@ -1852,7 +1827,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$startInput$16(
                 IRemoteAccessibilityInputConnection connection,
                 EditorInfo editorInfo,
@@ -1881,7 +1855,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onMotionEvent$17(MotionEvent event) {
             this.mCallback.onMotionEvent(event);
         }
@@ -1899,7 +1872,6 @@ public abstract class AccessibilityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onTouchStateChanged$18(int displayId, int state) {
             this.mCallback.onTouchStateChanged(displayId, state);
         }
@@ -2141,12 +2113,10 @@ public abstract class AccessibilityService extends Service {
                         this.mConnectionId, accessibilityWindowId, sc, null, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyKnoxZtInternalService(int what) {
         notifyKnoxZtInternalService(what, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyKnoxZtInternalService(int what, Bundle bundle) {
         try {
             IKnoxZtInternalService service =

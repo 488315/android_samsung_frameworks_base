@@ -211,7 +211,6 @@ public abstract class AdvancedExtender {
         return new AdvancedExtenderImpl();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static List<SizeList> initializeParcelable(Map<Integer, List<android.util.Size>> sizes) {
         if (sizes == null) {
             return null;

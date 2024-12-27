@@ -200,7 +200,6 @@ public final class DatabaseHelper extends SQLiteOpenHelper implements IEnrolledM
 
        r11 = null;
     */
-    /* JADX WARN: Multi-variable type inference failed */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

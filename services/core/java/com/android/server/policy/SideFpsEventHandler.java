@@ -46,8 +46,6 @@ public final class SideFpsEventHandler implements View.OnClickListener {
                 SideFpsEventHandler.dismissDialog("mTurnOffDialog");
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.policy.SideFpsEventHandler$2$1$$ExternalSyntheticLambda0, java.lang.Runnable] */
             public final void onStateChanged(final int i) {
                 NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "onStateChanged : ", "SideFpsEventHandler");
                 SideFpsEventHandler$2$1$$ExternalSyntheticLambda0 sideFpsEventHandler$2$1$$ExternalSyntheticLambda0 = this.mStateRunnable;

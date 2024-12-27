@@ -72,7 +72,6 @@ public final class PixelCopy {
         final /* synthetic */ OnPixelCopyFinishedListener val$listener;
         final /* synthetic */ Handler val$listenerThread;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass1(
                 Rect srcRect,
                 Bitmap destinationBitmap,
@@ -123,7 +122,6 @@ public final class PixelCopy {
                 listenerThread);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void validateBitmapDest(Bitmap bitmap) {
         if (bitmap == null) {
             throw new IllegalArgumentException("Bitmap cannot be null");
@@ -136,7 +134,6 @@ public final class PixelCopy {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Surface sourceForWindow(Window source, Rect outInsets) {
         if (source == null) {
             throw new IllegalArgumentException("source is null");
@@ -161,7 +158,6 @@ public final class PixelCopy {
         return surface;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Rect adjustSourceRectForInsets(Rect insets, Rect srcRect) {
         if (srcRect == null) {
             return insets;
@@ -315,7 +311,6 @@ public final class PixelCopy {
             final /* synthetic */ Executor val$callbackExecutor;
             final /* synthetic */ Consumer val$listener;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             AnonymousClass1(
                     Rect srcRect, Bitmap destinationBitmap, Executor executor, Consumer consumer) {
                 super(srcRect, destinationBitmap);
@@ -323,7 +318,6 @@ public final class PixelCopy {
                 this.val$listener = consumer;
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onCopyFinished$0(Consumer listener, int result) {
                 listener.accept(new Result(result, this.mDestinationBitmap));
             }

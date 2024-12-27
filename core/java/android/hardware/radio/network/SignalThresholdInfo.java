@@ -12,7 +12,6 @@ public class SignalThresholdInfo implements Parcelable {
     public static final Parcelable.Creator<SignalThresholdInfo> CREATOR =
             new Parcelable.Creator<SignalThresholdInfo>() { // from class:
                 // android.hardware.radio.network.SignalThresholdInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignalThresholdInfo createFromParcel(Parcel _aidl_source) {
                     SignalThresholdInfo _aidl_out = new SignalThresholdInfo();
@@ -20,7 +19,6 @@ public class SignalThresholdInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignalThresholdInfo[] newArray(int _aidl_size) {
                     return new SignalThresholdInfo[_aidl_size];

@@ -108,7 +108,6 @@ public class AppClipsActivity extends ComponentActivity {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.screenshot.appclips.AppClipsActivity$1] */
     public AppClipsActivity(AppClipsViewModel.Factory factory, PackageManager packageManager, UserTracker userTracker, UiEventLogger uiEventLogger) {
         this.mViewModelFactory = factory;
         this.mPackageManager = packageManager;

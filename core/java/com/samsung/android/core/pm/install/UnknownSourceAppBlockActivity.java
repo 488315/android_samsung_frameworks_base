@@ -155,7 +155,6 @@ public class UnknownSourceAppBlockActivity extends Activity {
         finish();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void rejectInstall() {
         Log.d(TAG, "Reject installing");
         getPackageManager()

@@ -14,13 +14,11 @@ public final class Adjustment implements Parcelable {
     public static final Parcelable.Creator<Adjustment> CREATOR =
             new Parcelable.Creator<
                     Adjustment>() { // from class: android.service.notification.Adjustment.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Adjustment createFromParcel(Parcel in) {
                     return new Adjustment(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Adjustment[] newArray(int size) {
                     return new Adjustment[size];

@@ -11,7 +11,6 @@ final class FlowKt$pairwiseBy$2 extends SuspendLambda implements Function1 {
     final /* synthetic */ Object $initialValue;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FlowKt$pairwiseBy$2(Object obj, Continuation continuation) {
         super(1, continuation);
         this.$initialValue = obj;

@@ -10,13 +10,11 @@ public final class CellInfoRatSpecificInfo implements Parcelable {
     public static final Parcelable.Creator<CellInfoRatSpecificInfo> CREATOR =
             new Parcelable.Creator<CellInfoRatSpecificInfo>() { // from class:
                 // android.hardware.radio.network.CellInfoRatSpecificInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellInfoRatSpecificInfo createFromParcel(Parcel _aidl_source) {
                     return new CellInfoRatSpecificInfo(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellInfoRatSpecificInfo[] newArray(int _aidl_size) {
                     return new CellInfoRatSpecificInfo[_aidl_size];

@@ -308,7 +308,6 @@ public abstract class Vibration {
     }
 
     enum Status {
-        /* JADX INFO: Fake field, exist only in values array */
         EF0("UNKNOWN"),
         RUNNING("RUNNING"),
         FINISHED("FINISHED"),
@@ -337,9 +336,7 @@ public abstract class Vibration {
         IGNORED_SUPERSEDED("IGNORED_SUPERSEDED"),
         IGNORED_FROM_VIRTUAL_DEVICE("IGNORED_FROM_VIRTUAL_DEVICE"),
         IGNORED_ON_WIRELESS_CHARGER("IGNORED_ON_WIRELESS_CHARGER"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF14("CANCELLED_ACH_REPEATED"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF15("CANCELLED_ACH_NON_REPEATED"),
         CANCELLED_SERVICE_RECOVERED("CANCELLED_SERVICE_RECOVERED"),
         CANCELLED_BY_DISABLED_NOTIFICATION("CANCELLED_BY_DISABLED_NOTIFICATION");

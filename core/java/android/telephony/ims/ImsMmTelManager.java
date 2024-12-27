@@ -66,7 +66,6 @@ public class ImsMmTelManager implements RegistrationManager {
     public static class CapabilityCallback {
         private final CapabilityBinder mBinder = new CapabilityBinder(this);
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class CapabilityBinder extends IImsCapabilityCallback.Stub {
             private Executor mExecutor;
             private final CapabilityCallback mLocalCallback;
@@ -97,7 +96,6 @@ public class ImsMmTelManager implements RegistrationManager {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onCapabilitiesStatusChanged$0(int config) {
                 this.mLocalCallback.onCapabilitiesStatusChanged(
                         new MmTelFeature.MmTelCapabilities(config));
@@ -111,7 +109,6 @@ public class ImsMmTelManager implements RegistrationManager {
             public void onChangeCapabilityConfigurationError(
                     int capability, int radioTech, int reason) {}
 
-            /* JADX INFO: Access modifiers changed from: private */
             public void setExecutor(Executor executor) {
                 this.mExecutor = executor;
             }
@@ -907,7 +904,6 @@ public class ImsMmTelManager implements RegistrationManager {
         return this.mBinderCache.getBinder();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ITelephony getITelephonyInterface() {
         ITelephony binder =
                 ITelephony.Stub.asInterface(

@@ -249,10 +249,6 @@ public final class CertificatePolicy extends ICertificatePolicy.Stub implements 
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.enterprise.certificate.CertificatePolicy$2] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.enterprise.certificate.CertificatePolicy$2] */
-    /* JADX WARN: Type inference failed for: r1v11, types: [android.content.BroadcastReceiver, com.android.server.enterprise.certificate.CertificatePolicy$2] */
     public CertificatePolicy(Context context) {
         this.mPackageChangeIntentReceiver = null;
         this.mDarManagerService = null;
@@ -580,8 +576,6 @@ public final class CertificatePolicy extends ICertificatePolicy.Stub implements 
         this.mDarManagerService = (DarManagerService) ServiceManager.getService("dar");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0083 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0066 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -684,7 +678,6 @@ public final class CertificatePolicy extends ICertificatePolicy.Stub implements 
     
         if (r9 != null) goto L29;
      */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00c1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -865,12 +858,6 @@ public final class CertificatePolicy extends ICertificatePolicy.Stub implements 
         return new PermissionApplicationPrivateKey(validStr, validStr2, port, validStr3, validStr4);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x005f A[LOOP:0: B:19:0x0059->B:21:0x005f, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0129 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x012b  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x00cb  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:106:0x0107 -> B:99:0x010d). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1092,8 +1079,6 @@ public final class CertificatePolicy extends ICertificatePolicy.Stub implements 
         return arrayList;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0040  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1227,10 +1212,6 @@ public final class CertificatePolicy extends ICertificatePolicy.Stub implements 
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0047  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0044  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x003f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1327,7 +1308,6 @@ public final class CertificatePolicy extends ICertificatePolicy.Stub implements 
         return getCertificatesList(UserHandle.getUserId(enforceCertificatePermission$1(contextInfo).mCallerUid), 5);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0029 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1565,22 +1545,6 @@ public final class CertificatePolicy extends ICertificatePolicy.Stub implements 
     
         if (r12 != 13) goto L79;
      */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x01d3  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x03a0 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:24:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x01f1  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x020f  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x022d  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x024b  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0269  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0287  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x02a5  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x02c3  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x02e1  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x02fe  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x031b  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0338  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0355  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1758,8 +1722,6 @@ public final class CertificatePolicy extends ICertificatePolicy.Stub implements 
         return removeCertificateList(enforceCertificatePermission$1(contextInfo), list, 3);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00b4 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0036 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

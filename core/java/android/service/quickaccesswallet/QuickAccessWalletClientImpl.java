@@ -120,7 +120,6 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
         final /* synthetic */ QuickAccessWalletClient.OnWalletCardsRetrievedCallback val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass1(
                 Executor executor,
                 QuickAccessWalletClient.OnWalletCardsRetrievedCallback
@@ -233,7 +232,6 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
         final /* synthetic */ Executor val$executor;
         final /* synthetic */ QuickAccessWalletClient.WalletServiceEventListener val$listener;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass5(
                 Executor executor,
                 QuickAccessWalletClient.WalletServiceEventListener walletServiceEventListener) {
@@ -292,7 +290,6 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
         disconnect();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$disconnect$1() {
         disconnectInternal(true);
     }
@@ -326,7 +323,6 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
         final /* synthetic */ QuickAccessWalletClient.WalletPendingIntentCallback
                 val$pendingIntentCallback;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass8(
                 Executor executor,
                 QuickAccessWalletClient.WalletPendingIntentCallback walletPendingIntentCallback) {
@@ -475,7 +471,6 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void connectInternal() {
         if (this.mServiceInfo == null) {
             Log.w(TAG, "Wallet service unavailable");
@@ -499,12 +494,10 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
         resetServiceConnectionTimeout();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$connectInternal$2(Intent intent, int flags) {
         this.mContext.bindService(intent, this, flags);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: onConnectedInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$onServiceConnected$7(IQuickAccessWalletService service) {
         if (!this.mIsConnected) {
@@ -535,7 +528,6 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
                 60000L);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$resetServiceConnectionTimeout$3() {
         disconnectInternal(true);
     }
@@ -574,12 +566,10 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
         this.mRequestQueue.clear();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$disconnectInternal$4() {
         disconnectInternal(false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$disconnectInternal$5() {
         this.mContext.unbindService(this);
     }
@@ -595,7 +585,6 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: executeInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$executeApiCall$6(ApiCaller apiCaller) {
         if (this.mIsConnected && this.mService != null) {
@@ -621,7 +610,6 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     abstract static class ApiCaller {
         private final String mDesc;
 

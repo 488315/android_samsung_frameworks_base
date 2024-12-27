@@ -249,7 +249,6 @@ public class SmartFaceManager {
         return ret;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$checkForSmartStay$0(FaceInfo data, int service_type) {
         Log.e(
                 TAG,

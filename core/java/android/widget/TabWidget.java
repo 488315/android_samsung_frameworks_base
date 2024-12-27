@@ -454,7 +454,6 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
             this.mTabIndex = tabIndex;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:19:0x00bf, code lost:
 
            return false;
@@ -565,7 +564,6 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getSelectedColor(ColorStateList colorStateList) {
         if (colorStateList != null) {
             return colorStateList.getColorForState(
@@ -574,7 +572,6 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
         return -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getNotSelectedColor(ColorStateList colorStateList) {
         if (colorStateList != null) {
             return colorStateList.getColorForState(

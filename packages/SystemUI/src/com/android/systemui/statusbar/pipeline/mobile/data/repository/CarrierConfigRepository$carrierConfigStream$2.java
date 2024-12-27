@@ -13,7 +13,6 @@ final class CarrierConfigRepository$carrierConfigStream$2 extends SuspendLambda 
     /* synthetic */ int I$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CarrierConfigRepository$carrierConfigStream$2(MobileInputLogger mobileInputLogger, Continuation continuation) {
         super(2, continuation);
         this.$logger = mobileInputLogger;

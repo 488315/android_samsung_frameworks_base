@@ -14,7 +14,6 @@ final class CustomTileServiceInteractor$ReceivingInterface$refreshState$1 extend
     int label;
     final /* synthetic */ CustomTileServiceInteractor.ReceivingInterface this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTileServiceInteractor$ReceivingInterface$refreshState$1(CustomTileServiceInteractor.ReceivingInterface receivingInterface, Continuation continuation) {
         super(2, continuation);
         this.this$0 = receivingInterface;

@@ -23,7 +23,6 @@ public class MarshalQueryableRggbChannelVector implements MarshalQueryable<RggbC
             }
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public RggbChannelVector unmarshal(ByteBuffer buffer) {
             float red = buffer.getFloat();

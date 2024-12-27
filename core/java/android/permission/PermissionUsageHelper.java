@@ -85,7 +85,6 @@ public class PermissionUsageHelper
                         KnoxZtInternalConst.Event.LogKeys.PRIVACY, RUNNING_ACCESS_TIME_MS, 5000L);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static String getGroupForOp(String op) {
         char c;
         switch (op.hashCode()) {

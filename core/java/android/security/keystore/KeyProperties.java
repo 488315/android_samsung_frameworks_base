@@ -370,7 +370,6 @@ public abstract class KeyProperties {
     public abstract static class SignaturePadding {
         private SignaturePadding() {}
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public static int toKeymaster(String padding) {
             char c;
             String upperCase = padding.toUpperCase(Locale.US);
@@ -431,7 +430,6 @@ public abstract class KeyProperties {
     public abstract static class Digest {
         private Digest() {}
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public static int toKeymaster(String digest) {
             char c;
             String upperCase = digest.toUpperCase(Locale.US);
@@ -615,7 +613,6 @@ public abstract class KeyProperties {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int[] getSetFlags(int flags) {
         if (flags == 0) {
             return EmptyArray.INT;

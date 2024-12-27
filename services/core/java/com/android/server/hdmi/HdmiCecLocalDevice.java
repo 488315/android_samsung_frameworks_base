@@ -136,7 +136,6 @@ public abstract class HdmiCecLocalDevice extends HdmiLocalDevice {
 
     public interface StandbyCompletedCallback {}
 
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.server.hdmi.HdmiCecLocalDevice$1] */
     public HdmiCecLocalDevice(HdmiControlService hdmiControlService, int i) {
         super(hdmiControlService, i);
         this.mLastKeycode = -1;
@@ -564,10 +563,6 @@ public abstract class HdmiCecLocalDevice extends HdmiLocalDevice {
         return -2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0090 A[LOOP:0: B:36:0x006a->B:42:0x0090, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0096 A[EDGE_INSN: B:43:0x0096->B:44:0x0096 BREAK  A[LOOP:0: B:36:0x006a->B:42:0x0090], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00ab  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00b8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

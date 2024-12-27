@@ -288,7 +288,6 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
             Object obj3,
             String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final native void native_start();
 
     private final native void native_stop();
@@ -787,7 +786,6 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
             return track;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:8:0x0042, code lost:
 
            if (android.media.AudioTrack.shouldEnablePowerSaving(r13.mAttributes, r13.mFormat, r13.mBufferSizeInBytes, r13.mMode) == false) goto L13;
@@ -807,7 +805,6 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void unregisterAudioPolicyOnRelease(AudioPolicy audioPolicy) {
         this.mAudioPolicy = audioPolicy;
     }
@@ -955,7 +952,6 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean shouldEnablePowerSaving(
             AudioAttributes attributes, AudioFormat format, int bufferSizeInBytes, int mode) {
         int flags = attributes.getAllFlags() & 792;
@@ -1516,7 +1512,6 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         this.mState = state;
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [android.media.AudioTrack$1] */
     public void play() throws IllegalStateException {
         if (this.mState != 1) {
             throw new IllegalStateException("play() called on uninitialized AudioTrack.");
@@ -1543,7 +1538,6 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startImpl() {
         synchronized (this.mRoutingChangeListeners) {
             if (!this.mEnableSelfRoutingMonitor) {
@@ -2024,7 +2018,6 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$addOnCodecFormatChangedListener$0(
             OnCodecFormatChangedListener listener, int eventCode, AudioMetadataReadMap readMap) {
         listener.onCodecFormatChanged(this, readMap);
@@ -2088,7 +2081,6 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class StreamEventCbInfo {
         final StreamEventCallback mStreamEventCb;
         final Executor mStreamEventExec;
@@ -2116,7 +2108,6 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class StreamEventHandler extends Handler {
         StreamEventHandler(Looper looper) {
             super(looper);
@@ -2193,17 +2184,14 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$handleMessage$0(StreamEventCbInfo cbi, Message msg) {
             cbi.mStreamEventCb.onDataRequest(AudioTrack.this, msg.arg1);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$handleMessage$1(StreamEventCbInfo cbi) {
             cbi.mStreamEventCb.onTearDown(AudioTrack.this);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$handleMessage$2(StreamEventCbInfo cbi) {
             cbi.mStreamEventCb.onPresentationEnded(AudioTrack.this);
         }
@@ -2345,7 +2333,6 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         Log.d(TAG, msg);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void loge(String msg) {
         Log.e(TAG, msg);
     }

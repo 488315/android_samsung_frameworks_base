@@ -80,7 +80,6 @@ public final class SemFaceBrightManager {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.biometrics.sensors.face.SemFaceBrightManager$1] */
     public SemFaceBrightManager(Context context) {
         this.mContext = context;
         this.mPowerManager = (PowerManager) context.getSystemService(PowerManager.class);
@@ -124,7 +123,6 @@ public final class SemFaceBrightManager {
         Slog.i("SemFaceBrightManager", "setBrightness : " + i + ", " + (isFlipFolded ? 1 : 0));
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.server.biometrics.sensors.face.SemFaceBrightManager$2] */
     public final void showNotificationIfNeed(int i) {
         if (Settings.Secure.getIntForUser(
                         this.mContext.getContentResolver(),

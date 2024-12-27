@@ -41,8 +41,6 @@ public final class RoamingPolicy extends IRoamingPolicy.Stub implements Enterpri
     public final AnonymousClass1 mSimFactoryIntentReceiver;
     public final TelephonyManager mTelMgr;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v1, types: [android.content.BroadcastReceiver, com.android.server.enterprise.restriction.RoamingPolicy$1] */
     public RoamingPolicy(Context context) {
         final int i = 0;
         ?? r0 = new BroadcastReceiver(this) { // from class: com.android.server.enterprise.restriction.RoamingPolicy.1

@@ -16,7 +16,6 @@ final class UserSwitcherDialogCoordinator$startHandlingDialogDismissRequests$1 e
     int label;
     final /* synthetic */ UserSwitcherDialogCoordinator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherDialogCoordinator$startHandlingDialogDismissRequests$1(UserSwitcherDialogCoordinator userSwitcherDialogCoordinator, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userSwitcherDialogCoordinator;

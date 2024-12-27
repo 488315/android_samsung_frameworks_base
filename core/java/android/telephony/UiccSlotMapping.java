@@ -12,13 +12,11 @@ public final class UiccSlotMapping implements Parcelable {
     public static final Parcelable.Creator<UiccSlotMapping> CREATOR =
             new Parcelable.Creator<
                     UiccSlotMapping>() { // from class: android.telephony.UiccSlotMapping.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UiccSlotMapping createFromParcel(Parcel in) {
                     return new UiccSlotMapping(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UiccSlotMapping[] newArray(int size) {
                     return new UiccSlotMapping[size];

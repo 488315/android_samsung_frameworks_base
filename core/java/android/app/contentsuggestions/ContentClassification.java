@@ -10,13 +10,11 @@ public final class ContentClassification implements Parcelable {
     public static final Parcelable.Creator<ContentClassification> CREATOR =
             new Parcelable.Creator<ContentClassification>() { // from class:
                 // android.app.contentsuggestions.ContentClassification.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentClassification createFromParcel(Parcel source) {
                     return new ContentClassification(source.readString(), source.readBundle());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentClassification[] newArray(int size) {
                     return new ContentClassification[size];

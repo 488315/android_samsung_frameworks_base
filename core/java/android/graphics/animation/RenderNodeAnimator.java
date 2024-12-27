@@ -372,7 +372,6 @@ public class RenderNodeAnimator extends Animator {
         return this.mNativePtr.get();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean processDelayed(long frameTimeMs) {
         if (this.mStartTime == 0) {
             this.mStartTime = frameTimeMs;

@@ -8,7 +8,6 @@ public final class GeofenceHardwareRequestParcelable implements Parcelable {
     public static final Parcelable.Creator<GeofenceHardwareRequestParcelable> CREATOR =
             new Parcelable.Creator<GeofenceHardwareRequestParcelable>() { // from class:
                 // android.hardware.location.GeofenceHardwareRequestParcelable.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GeofenceHardwareRequestParcelable createFromParcel(Parcel parcel) {
                     int geofenceType = parcel.readInt();
@@ -27,7 +26,6 @@ public final class GeofenceHardwareRequestParcelable implements Parcelable {
                     return new GeofenceHardwareRequestParcelable(id, request);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GeofenceHardwareRequestParcelable[] newArray(int size) {
                     return new GeofenceHardwareRequestParcelable[size];

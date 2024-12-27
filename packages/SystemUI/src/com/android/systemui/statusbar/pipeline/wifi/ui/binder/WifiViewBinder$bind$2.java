@@ -38,7 +38,6 @@ final class WifiViewBinder$bind$2 extends SuspendLambda implements Function3 {
             final /* synthetic */ LocationBasedWifiViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02591(LocationBasedWifiViewModel locationBasedWifiViewModel, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = locationBasedWifiViewModel;
@@ -80,7 +79,6 @@ final class WifiViewBinder$bind$2 extends SuspendLambda implements Function3 {
             final /* synthetic */ LocationBasedWifiViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(LocationBasedWifiViewModel locationBasedWifiViewModel, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = locationBasedWifiViewModel;
@@ -117,7 +115,6 @@ final class WifiViewBinder$bind$2 extends SuspendLambda implements Function3 {
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(Ref$BooleanRef ref$BooleanRef, LocationBasedWifiViewModel locationBasedWifiViewModel, Continuation continuation) {
             super(2, continuation);
             this.$isCollecting = ref$BooleanRef;
@@ -165,7 +162,6 @@ final class WifiViewBinder$bind$2 extends SuspendLambda implements Function3 {
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiViewBinder$bind$2(Ref$BooleanRef ref$BooleanRef, LocationBasedWifiViewModel locationBasedWifiViewModel, Continuation continuation) {
         super(3, continuation);
         this.$isCollecting = ref$BooleanRef;

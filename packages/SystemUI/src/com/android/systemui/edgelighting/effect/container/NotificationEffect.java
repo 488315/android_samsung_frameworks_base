@@ -441,7 +441,6 @@ public class NotificationEffect extends AbsEdgeLightingView {
         }.run();
     }
 
-    /* JADX WARN: Type inference failed for: r3v7, types: [com.android.systemui.edgelighting.effect.container.NotificationEffect$4] */
     public NotificationEffect(Context context) {
         super(context);
         this.TAG = "NotificationEffect";
@@ -1116,7 +1115,6 @@ public class NotificationEffect extends AbsEdgeLightingView {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v7, types: [com.android.systemui.edgelighting.effect.container.NotificationEffect$4] */
     public NotificationEffect(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.TAG = "NotificationEffect";

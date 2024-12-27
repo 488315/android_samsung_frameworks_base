@@ -50,7 +50,6 @@ public final class HidlToAidlSensorAdapter extends Sensor implements IHwBinder.D
     public AidlSession mSession;
     public final HidlToAidlSensorAdapter$$ExternalSyntheticLambda3 mUserStartedCallback;
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.biometrics.sensors.face.hidl.HidlToAidlSensorAdapter$$ExternalSyntheticLambda3] */
     public HidlToAidlSensorAdapter(
             FaceProvider faceProvider,
             Context context,

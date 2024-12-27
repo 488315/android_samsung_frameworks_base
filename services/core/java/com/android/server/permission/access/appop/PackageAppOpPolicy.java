@@ -178,8 +178,6 @@ public final class PackageAppOpPolicy extends BaseAppOpPolicy {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v23, types: [com.android.server.permission.access.immutable.Immutable] */
     public final void setAppOpMode(
             MutateStateScope mutateStateScope, String str, int i, String str2, int i2) {
         if (!mutateStateScope.newState.getUserStates().array.contains(i)) {

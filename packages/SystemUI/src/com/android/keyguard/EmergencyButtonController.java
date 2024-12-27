@@ -118,7 +118,6 @@ public final class EmergencyButtonController extends ViewController {
         throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.EmergencyButtonController.m829$r8$lambda$xQ0QlP59a82QvETJ9i9UaMk1vM(com.android.keyguard.EmergencyButtonController, boolean, boolean):void");
     }
 
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.keyguard.EmergencyButtonController$2] */
     public EmergencyButtonController(EmergencyButton emergencyButton, ConfigurationController configurationController, InputMethodManager inputMethodManager, KeyguardUpdateMonitor keyguardUpdateMonitor, PowerManager powerManager, ActivityTaskManager activityTaskManager, ShadeController shadeController, TelecomManager telecomManager, MetricsLogger metricsLogger, LockPatternUtils lockPatternUtils, Executor executor, Executor executor2, SelectedUserInteractor selectedUserInteractor) {
         super(emergencyButton);
         this.mKeyguardShowing = true;

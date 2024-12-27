@@ -125,7 +125,6 @@ public class EmphasizedNotificationButton extends Button {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: setImageDrawable, reason: merged with bridge method [inline-methods] */
     public void lambda$setImageIconAsync$0(Drawable drawable) {
         if (drawable != null) {
@@ -152,7 +151,6 @@ public class EmphasizedNotificationButton extends Button {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: setIconToGlue, reason: merged with bridge method [inline-methods] */
     public void lambda$glueIconAsync$1(Drawable icon) {
         if (!Flags.evenlyDividedCallStyleActionLayout()) {
@@ -190,7 +188,6 @@ public class EmphasizedNotificationButton extends Button {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: setLabelToGlue, reason: merged with bridge method [inline-methods] */
     public void lambda$glueLabelAsync$2(CharSequence label) {
         if (!Flags.evenlyDividedCallStyleActionLayout()) {

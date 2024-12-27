@@ -55,7 +55,6 @@ public final class BluetoothConstraint implements IDeviceIdleConstraint {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.deviceidle.BluetoothConstraint$$ExternalSyntheticLambda0] */
     public BluetoothConstraint(
             Context context, Handler handler, DeviceIdleInternal deviceIdleInternal) {
         this.mContext = context;

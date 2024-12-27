@@ -33,13 +33,11 @@ public final class WindowContainerTransaction implements Parcelable {
             new Parcelable.Creator<
                     WindowContainerTransaction>() { // from class:
                                                     // android.window.WindowContainerTransaction.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowContainerTransaction createFromParcel(Parcel in) {
                     return new WindowContainerTransaction(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowContainerTransaction[] newArray(int size) {
                     return new WindowContainerTransaction[size];
@@ -941,13 +939,11 @@ public final class WindowContainerTransaction implements Parcelable {
                 new Parcelable.Creator<
                         Change>() { // from class:
                                     // android.window.WindowContainerTransaction.Change.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Change createFromParcel(Parcel in) {
                         return new Change(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Change[] newArray(int size) {
                         return new Change[size];
@@ -1406,13 +1402,11 @@ public final class WindowContainerTransaction implements Parcelable {
                 new Parcelable.Creator<
                         HierarchyOp>() { // from class:
                                          // android.window.WindowContainerTransaction.HierarchyOp.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HierarchyOp createFromParcel(Parcel in) {
                         return new HierarchyOp(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HierarchyOp[] newArray(int size) {
                         return new HierarchyOp[size];
@@ -2044,13 +2038,11 @@ public final class WindowContainerTransaction implements Parcelable {
                 new Parcelable.Creator<
                         ContainerChange>() { // from class:
                                              // android.window.WindowContainerTransaction.ContainerChange.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ContainerChange createFromParcel(Parcel in) {
                         return new ContainerChange(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ContainerChange[] newArray(int size) {
                         return new ContainerChange[size];

@@ -20,13 +20,11 @@ public class BlockchainTZServiceConfig implements Parcelable {
     public static final Parcelable.Creator<BlockchainTZServiceConfig> CREATOR =
             new Parcelable.Creator<BlockchainTZServiceConfig>() { // from class:
                 // android.blockchain.BlockchainTZServiceConfig.2
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BlockchainTZServiceConfig createFromParcel(Parcel in) {
                     return new BlockchainTZServiceConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BlockchainTZServiceConfig[] newArray(int size) {
                     return new BlockchainTZServiceConfig[size];

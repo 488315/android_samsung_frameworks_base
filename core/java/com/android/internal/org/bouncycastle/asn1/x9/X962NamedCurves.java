@@ -663,19 +663,16 @@ public class X962NamedCurves {
     static final Hashtable curves = new Hashtable();
     static final Hashtable names = new Hashtable();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static X9ECPoint configureBasepoint(ECCurve curve, String encoding) {
         X9ECPoint G = new X9ECPoint(curve, Hex.decodeStrict(encoding));
         WNafUtil.configureBasepoint(G.getPoint());
         return G;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ECCurve configureCurve(ECCurve curve) {
         return curve;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static BigInteger fromHex(String hex) {
         return new BigInteger(1, Hex.decodeStrict(hex));
     }

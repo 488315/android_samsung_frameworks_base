@@ -43,7 +43,6 @@ final class FromDreamingTransitionInteractor$listenForDreamingToOccluded$2 exten
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromDreamingTransitionInteractor$listenForDreamingToOccluded$2(FromDreamingTransitionInteractor fromDreamingTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromDreamingTransitionInteractor;

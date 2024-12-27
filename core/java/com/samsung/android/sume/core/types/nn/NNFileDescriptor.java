@@ -12,13 +12,11 @@ public class NNFileDescriptor implements Parcelable, Cloneable {
             new Parcelable.Creator<
                     NNFileDescriptor>() { // from class:
                                           // com.samsung.android.sume.core.types.nn.NNFileDescriptor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NNFileDescriptor createFromParcel(Parcel in) {
                     return new NNFileDescriptor(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NNFileDescriptor[] newArray(int size) {
                     return new NNFileDescriptor[size];

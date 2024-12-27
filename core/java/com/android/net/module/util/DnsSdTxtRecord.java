@@ -10,7 +10,6 @@ public class DnsSdTxtRecord implements Parcelable {
     public static final Parcelable.Creator<DnsSdTxtRecord> CREATOR =
             new Parcelable.Creator<
                     DnsSdTxtRecord>() { // from class: com.android.net.module.util.DnsSdTxtRecord.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DnsSdTxtRecord createFromParcel(Parcel in) {
                     DnsSdTxtRecord info = new DnsSdTxtRecord();
@@ -18,7 +17,6 @@ public class DnsSdTxtRecord implements Parcelable {
                     return info;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DnsSdTxtRecord[] newArray(int size) {
                     return new DnsSdTxtRecord[size];

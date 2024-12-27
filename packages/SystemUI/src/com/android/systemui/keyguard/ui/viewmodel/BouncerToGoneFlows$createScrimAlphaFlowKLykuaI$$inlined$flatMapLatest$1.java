@@ -33,7 +33,6 @@ public final class BouncerToGoneFlows$createScrimAlphaFlowKLykuaI$$inlined$flatM
     int label;
     final /* synthetic */ BouncerToGoneFlows this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BouncerToGoneFlows$createScrimAlphaFlowKLykuaI$$inlined$flatMapLatest$1(Continuation continuation, KeyguardTransitionAnimationFlow.FlowBuilder flowBuilder, long j, Ref$BooleanRef ref$BooleanRef, BouncerToGoneFlows bouncerToGoneFlows, Ref$BooleanRef ref$BooleanRef2, Function0 function0, Ref$BooleanRef ref$BooleanRef3) {
         super(3, continuation);
         this.$transitionAnimation$inlined = flowBuilder;
@@ -76,7 +75,6 @@ public final class BouncerToGoneFlows$createScrimAlphaFlowKLykuaI$$inlined$flatM
             final Function0 function0 = this.$willRunAnimationOnKeyguard$inlined;
             final Ref$BooleanRef ref$BooleanRef3 = this.$isShadeExpanded$inlined;
             Function0 function02 = new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.BouncerToGoneFlows$createScrimAlphaFlow$2$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -128,8 +126,6 @@ public final class BouncerToGoneFlows$createScrimAlphaFlowKLykuaI$$inlined$flatM
                         this.$leaveShadeOpen$inlined = ref$BooleanRef3;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x0033  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

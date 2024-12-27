@@ -147,14 +147,12 @@ public class TransitionAnimation extends Animation<Float> {
         return this;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.vekit.Animation.Animation
     @Deprecated
     public TransitionAnimation setFrom(Float from) {
         return this;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.vekit.Animation.Animation
     @Deprecated
     public TransitionAnimation setTo(Float to) {

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public class ApexInfoList implements Parcelable {
     public static final Parcelable.Creator<ApexInfoList> CREATOR =
             new Parcelable.Creator<ApexInfoList>() { // from class: android.apex.ApexInfoList.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApexInfoList createFromParcel(Parcel _aidl_source) {
                     ApexInfoList _aidl_out = new ApexInfoList();
@@ -15,7 +14,6 @@ public class ApexInfoList implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApexInfoList[] newArray(int _aidl_size) {
                     return new ApexInfoList[_aidl_size];

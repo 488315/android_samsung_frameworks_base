@@ -48,7 +48,6 @@ public final class BrightnessSetting {
 
     public interface BrightnessSettingListener {}
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.display.BrightnessSetting$1] */
     public BrightnessSetting(
             int i,
             PersistentDataStore persistentDataStore,

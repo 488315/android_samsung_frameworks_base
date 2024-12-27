@@ -59,7 +59,6 @@ public final class SecQSExpansionStateInteractor {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.shade.domain.interactor.SecQSExpansionStateInteractor$panelTransitionStateListener$1] */
     public SecQSExpansionStateInteractor(final CoroutineScope coroutineScope, final ShadeRepository shadeRepository) {
         this.repository$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shade.domain.interactor.SecQSExpansionStateInteractor$repository$2
 
@@ -90,7 +89,6 @@ public final class SecQSExpansionStateInteractor {
                 }
             }
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

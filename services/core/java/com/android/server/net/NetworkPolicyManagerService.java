@@ -1134,20 +1134,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         return z2;
     }
 
-    /* JADX WARN: Type inference failed for: r1v49, types: [com.android.server.net.NetworkPolicyManagerService$4] */
-    /* JADX WARN: Type inference failed for: r1v50, types: [com.android.server.net.NetworkPolicyManagerService$5] */
-    /* JADX WARN: Type inference failed for: r1v51, types: [com.android.server.net.NetworkPolicyManagerService$5] */
-    /* JADX WARN: Type inference failed for: r1v52, types: [com.android.server.net.NetworkPolicyManagerService$5] */
-    /* JADX WARN: Type inference failed for: r1v53, types: [com.android.server.net.NetworkPolicyManagerService$5] */
-    /* JADX WARN: Type inference failed for: r1v55, types: [com.android.server.net.NetworkPolicyManagerService$5] */
-    /* JADX WARN: Type inference failed for: r1v56, types: [com.android.server.net.NetworkPolicyManagerService$5] */
-    /* JADX WARN: Type inference failed for: r1v57, types: [com.android.server.net.NetworkPolicyManagerService$11] */
-    /* JADX WARN: Type inference failed for: r1v58, types: [com.android.server.net.NetworkPolicyManagerService$12] */
-    /* JADX WARN: Type inference failed for: r1v59, types: [com.android.server.net.NetworkPolicyManagerService$5] */
-    /* JADX WARN: Type inference failed for: r1v60, types: [com.android.server.net.NetworkPolicyManagerService$5] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.server.net.NetworkPolicyManagerService$5] */
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.server.net.NetworkPolicyManagerService$18] */
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.server.net.NetworkPolicyManagerService$5] */
     public NetworkPolicyManagerService(
             Context context,
             IActivityManager iActivityManager,
@@ -5178,7 +5164,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
                         this.this$0 = this;
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
                     private final boolean
                             handleMessage$com$android$server$net$NetworkPolicyManagerService$15(
                                     Message message) {
@@ -5786,7 +5771,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
                         this.this$0 = this;
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
                     private final boolean
                             handleMessage$com$android$server$net$NetworkPolicyManagerService$15(
                                     Message message) {
@@ -8065,14 +8049,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00c6  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00db  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0186  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x01a0  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x01dc  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x02ba  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x01a2  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x0188  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8845,7 +8821,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final int handleShellCommand(
             ParcelFileDescriptor parcelFileDescriptor,
             ParcelFileDescriptor parcelFileDescriptor2,
@@ -9162,27 +9137,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x012c A[Catch: all -> 0x0063, Exception -> 0x0067, FileNotFoundException -> 0x006b, TryCatch #4 {FileNotFoundException -> 0x006b, Exception -> 0x0067, all -> 0x0063, blocks: (B:9:0x002a, B:10:0x0035, B:12:0x003b, B:15:0x0046, B:17:0x004f, B:19:0x0058, B:22:0x006f, B:26:0x0074, B:28:0x007d, B:30:0x008f, B:33:0x009c, B:36:0x00bd, B:37:0x0102, B:39:0x0114, B:43:0x012c, B:45:0x0140, B:48:0x014e, B:49:0x0159, B:51:0x0164, B:53:0x0171, B:54:0x0178, B:56:0x0182, B:67:0x0120, B:69:0x00e4, B:71:0x00ed, B:72:0x00f8, B:75:0x00ad, B:79:0x0192, B:82:0x01a7, B:84:0x01b5, B:86:0x01ba, B:88:0x01d1, B:90:0x01d9, B:92:0x01ee, B:94:0x01f2, B:96:0x0208, B:100:0x0210, B:103:0x021b, B:105:0x0224, B:108:0x022f, B:114:0x023d, B:121:0x0248, B:123:0x024f, B:125:0x025e, B:128:0x027f, B:130:0x0285, B:132:0x028b, B:133:0x02ac, B:135:0x02b0), top: B:8:0x002a }] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0140 A[Catch: all -> 0x0063, Exception -> 0x0067, FileNotFoundException -> 0x006b, TryCatch #4 {FileNotFoundException -> 0x006b, Exception -> 0x0067, all -> 0x0063, blocks: (B:9:0x002a, B:10:0x0035, B:12:0x003b, B:15:0x0046, B:17:0x004f, B:19:0x0058, B:22:0x006f, B:26:0x0074, B:28:0x007d, B:30:0x008f, B:33:0x009c, B:36:0x00bd, B:37:0x0102, B:39:0x0114, B:43:0x012c, B:45:0x0140, B:48:0x014e, B:49:0x0159, B:51:0x0164, B:53:0x0171, B:54:0x0178, B:56:0x0182, B:67:0x0120, B:69:0x00e4, B:71:0x00ed, B:72:0x00f8, B:75:0x00ad, B:79:0x0192, B:82:0x01a7, B:84:0x01b5, B:86:0x01ba, B:88:0x01d1, B:90:0x01d9, B:92:0x01ee, B:94:0x01f2, B:96:0x0208, B:100:0x0210, B:103:0x021b, B:105:0x0224, B:108:0x022f, B:114:0x023d, B:121:0x0248, B:123:0x024f, B:125:0x025e, B:128:0x027f, B:130:0x0285, B:132:0x028b, B:133:0x02ac, B:135:0x02b0), top: B:8:0x002a }] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x014e A[Catch: all -> 0x0063, Exception -> 0x0067, FileNotFoundException -> 0x006b, TryCatch #4 {FileNotFoundException -> 0x006b, Exception -> 0x0067, all -> 0x0063, blocks: (B:9:0x002a, B:10:0x0035, B:12:0x003b, B:15:0x0046, B:17:0x004f, B:19:0x0058, B:22:0x006f, B:26:0x0074, B:28:0x007d, B:30:0x008f, B:33:0x009c, B:36:0x00bd, B:37:0x0102, B:39:0x0114, B:43:0x012c, B:45:0x0140, B:48:0x014e, B:49:0x0159, B:51:0x0164, B:53:0x0171, B:54:0x0178, B:56:0x0182, B:67:0x0120, B:69:0x00e4, B:71:0x00ed, B:72:0x00f8, B:75:0x00ad, B:79:0x0192, B:82:0x01a7, B:84:0x01b5, B:86:0x01ba, B:88:0x01d1, B:90:0x01d9, B:92:0x01ee, B:94:0x01f2, B:96:0x0208, B:100:0x0210, B:103:0x021b, B:105:0x0224, B:108:0x022f, B:114:0x023d, B:121:0x0248, B:123:0x024f, B:125:0x025e, B:128:0x027f, B:130:0x0285, B:132:0x028b, B:133:0x02ac, B:135:0x02b0), top: B:8:0x002a }] */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x0164 A[Catch: all -> 0x0063, Exception -> 0x0067, FileNotFoundException -> 0x006b, TryCatch #4 {FileNotFoundException -> 0x006b, Exception -> 0x0067, all -> 0x0063, blocks: (B:9:0x002a, B:10:0x0035, B:12:0x003b, B:15:0x0046, B:17:0x004f, B:19:0x0058, B:22:0x006f, B:26:0x0074, B:28:0x007d, B:30:0x008f, B:33:0x009c, B:36:0x00bd, B:37:0x0102, B:39:0x0114, B:43:0x012c, B:45:0x0140, B:48:0x014e, B:49:0x0159, B:51:0x0164, B:53:0x0171, B:54:0x0178, B:56:0x0182, B:67:0x0120, B:69:0x00e4, B:71:0x00ed, B:72:0x00f8, B:75:0x00ad, B:79:0x0192, B:82:0x01a7, B:84:0x01b5, B:86:0x01ba, B:88:0x01d1, B:90:0x01d9, B:92:0x01ee, B:94:0x01f2, B:96:0x0208, B:100:0x0210, B:103:0x021b, B:105:0x0224, B:108:0x022f, B:114:0x023d, B:121:0x0248, B:123:0x024f, B:125:0x025e, B:128:0x027f, B:130:0x0285, B:132:0x028b, B:133:0x02ac, B:135:0x02b0), top: B:8:0x002a }] */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0171 A[Catch: all -> 0x0063, Exception -> 0x0067, FileNotFoundException -> 0x006b, TryCatch #4 {FileNotFoundException -> 0x006b, Exception -> 0x0067, all -> 0x0063, blocks: (B:9:0x002a, B:10:0x0035, B:12:0x003b, B:15:0x0046, B:17:0x004f, B:19:0x0058, B:22:0x006f, B:26:0x0074, B:28:0x007d, B:30:0x008f, B:33:0x009c, B:36:0x00bd, B:37:0x0102, B:39:0x0114, B:43:0x012c, B:45:0x0140, B:48:0x014e, B:49:0x0159, B:51:0x0164, B:53:0x0171, B:54:0x0178, B:56:0x0182, B:67:0x0120, B:69:0x00e4, B:71:0x00ed, B:72:0x00f8, B:75:0x00ad, B:79:0x0192, B:82:0x01a7, B:84:0x01b5, B:86:0x01ba, B:88:0x01d1, B:90:0x01d9, B:92:0x01ee, B:94:0x01f2, B:96:0x0208, B:100:0x0210, B:103:0x021b, B:105:0x0224, B:108:0x022f, B:114:0x023d, B:121:0x0248, B:123:0x024f, B:125:0x025e, B:128:0x027f, B:130:0x0285, B:132:0x028b, B:133:0x02ac, B:135:0x02b0), top: B:8:0x002a }] */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0182 A[Catch: all -> 0x0063, Exception -> 0x0067, FileNotFoundException -> 0x006b, TryCatch #4 {FileNotFoundException -> 0x006b, Exception -> 0x0067, all -> 0x0063, blocks: (B:9:0x002a, B:10:0x0035, B:12:0x003b, B:15:0x0046, B:17:0x004f, B:19:0x0058, B:22:0x006f, B:26:0x0074, B:28:0x007d, B:30:0x008f, B:33:0x009c, B:36:0x00bd, B:37:0x0102, B:39:0x0114, B:43:0x012c, B:45:0x0140, B:48:0x014e, B:49:0x0159, B:51:0x0164, B:53:0x0171, B:54:0x0178, B:56:0x0182, B:67:0x0120, B:69:0x00e4, B:71:0x00ed, B:72:0x00f8, B:75:0x00ad, B:79:0x0192, B:82:0x01a7, B:84:0x01b5, B:86:0x01ba, B:88:0x01d1, B:90:0x01d9, B:92:0x01ee, B:94:0x01f2, B:96:0x0208, B:100:0x0210, B:103:0x021b, B:105:0x0224, B:108:0x022f, B:114:0x023d, B:121:0x0248, B:123:0x024f, B:125:0x025e, B:128:0x027f, B:130:0x0285, B:132:0x028b, B:133:0x02ac, B:135:0x02b0), top: B:8:0x002a }] */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0244 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0157  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0149  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0136  */
-    /* JADX WARN: Type inference failed for: r10v14 */
-    /* JADX WARN: Type inference failed for: r10v15, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r10v18 */
-    /* JADX WARN: Type inference failed for: r4v10 */
-    /* JADX WARN: Type inference failed for: r4v15 */
-    /* JADX WARN: Type inference failed for: r4v19 */
-    /* JADX WARN: Type inference failed for: r4v20 */
-    /* JADX WARN: Type inference failed for: r4v21 */
-    /* JADX WARN: Type inference failed for: r4v8 */
-    /* JADX WARN: Type inference failed for: r4v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -9283,8 +9237,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x002d A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x002e A[Catch: all -> 0x000f, TryCatch #1 {all -> 0x000f, blocks: (B:4:0x0005, B:6:0x0009, B:9:0x0025, B:12:0x003c, B:56:0x002e, B:57:0x0012), top: B:3:0x0005 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -10007,7 +9959,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
 
        if (r7.mIPm.checkUidPermission("android.permission.MAINLINE_NETWORK_STACK", r8) == 0) goto L9;
     */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0026 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -10523,7 +10474,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void updateNotificationsNL() {
         int i;
         long j;

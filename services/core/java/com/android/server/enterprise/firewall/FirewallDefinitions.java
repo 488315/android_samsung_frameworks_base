@@ -9,8 +9,6 @@ public abstract class FirewallDefinitions {
     public static final List EXEMPT_PACKAGE_LIST;
     public static final Pattern PATTERN_NUMERAL_ENDING_SUFIX = Pattern.compile("[0-9]*$");
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Table {
         public static final /* synthetic */ Table[] $VALUES;
         public static final Table FILTER;

@@ -9,7 +9,6 @@ public class MeasurementCorrections implements Parcelable {
     public static final Parcelable.Creator<MeasurementCorrections> CREATOR =
             new Parcelable.Creator<MeasurementCorrections>() { // from class:
                 // android.hardware.gnss.measurement_corrections.MeasurementCorrections.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MeasurementCorrections createFromParcel(Parcel _aidl_source) {
                     MeasurementCorrections _aidl_out = new MeasurementCorrections();
@@ -17,7 +16,6 @@ public class MeasurementCorrections implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MeasurementCorrections[] newArray(int _aidl_size) {
                     return new MeasurementCorrections[_aidl_size];

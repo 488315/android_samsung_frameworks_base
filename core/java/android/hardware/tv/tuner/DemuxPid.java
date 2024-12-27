@@ -6,13 +6,11 @@ import android.os.Parcelable;
 public final class DemuxPid implements Parcelable {
     public static final Parcelable.Creator<DemuxPid> CREATOR =
             new Parcelable.Creator<DemuxPid>() { // from class: android.hardware.tv.tuner.DemuxPid.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxPid createFromParcel(Parcel _aidl_source) {
                     return new DemuxPid(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxPid[] newArray(int _aidl_size) {
                     return new DemuxPid[_aidl_size];

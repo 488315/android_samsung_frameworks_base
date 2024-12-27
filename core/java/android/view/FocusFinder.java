@@ -15,8 +15,6 @@ import java.util.List;
 public class FocusFinder {
     private static final ThreadLocal<FocusFinder> tlFocusFinder =
             new ThreadLocal<FocusFinder>() { // from class: android.view.FocusFinder.1
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // java.lang.ThreadLocal
                 public FocusFinder initialValue() {
                     return new FocusFinder();
@@ -662,7 +660,6 @@ public class FocusFinder {
 
         FocusSorter() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ int lambda$new$0(View first, View second) {
             if (first == second) {
                 return 0;
@@ -676,7 +673,6 @@ public class FocusFinder {
             return result;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ int lambda$new$1(View first, View second) {
             if (first == second) {
                 return 0;
@@ -740,7 +736,6 @@ public class FocusFinder {
         getInstance().mFocusSorter.sort(views, start, end, root, isRtl);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class UserSpecifiedFocusComparator implements Comparator<View> {
         private final NextFocusGetter mNextFocusGetter;
         private View mRoot;

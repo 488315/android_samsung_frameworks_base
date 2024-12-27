@@ -11,7 +11,6 @@ public class IccIoResult implements Parcelable {
     public static final Parcelable.Creator<IccIoResult> CREATOR =
             new Parcelable.Creator<
                     IccIoResult>() { // from class: android.hardware.radio.sim.IccIoResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IccIoResult createFromParcel(Parcel _aidl_source) {
                     IccIoResult _aidl_out = new IccIoResult();
@@ -19,7 +18,6 @@ public class IccIoResult implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IccIoResult[] newArray(int _aidl_size) {
                     return new IccIoResult[_aidl_size];

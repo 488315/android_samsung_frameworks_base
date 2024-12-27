@@ -101,7 +101,6 @@ public final class FingerprintPromptGuiHelper extends BiometricPromptGuiHelper {
         showTemporaryMessage(i, str, true);
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.samsung.android.biometrics.app.setting.prompt.FingerprintPromptGuiHelper$$ExternalSyntheticLambda0] */
     @Override // com.samsung.android.biometrics.app.setting.prompt.BiometricPromptGuiHelper
     public final void initPrompt() {
         super.initPrompt();

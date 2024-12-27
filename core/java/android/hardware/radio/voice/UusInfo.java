@@ -11,7 +11,6 @@ public class UusInfo implements Parcelable {
     public static final Parcelable.Creator<UusInfo> CREATOR =
             new Parcelable.Creator<
                     UusInfo>() { // from class: android.hardware.radio.voice.UusInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UusInfo createFromParcel(Parcel _aidl_source) {
                     UusInfo _aidl_out = new UusInfo();
@@ -19,7 +18,6 @@ public class UusInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UusInfo[] newArray(int _aidl_size) {
                     return new UusInfo[_aidl_size];

@@ -683,7 +683,6 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
             setBgRectParams();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getColorWithAlpha(int color, float ratio) {
             int alpha = Math.round(Color.alpha(color) * ratio);
             int r = Color.red(color);
@@ -1387,7 +1386,6 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void fadeOutAnimation() {
             if (this.mIsOpen) {
                 startAnimation();

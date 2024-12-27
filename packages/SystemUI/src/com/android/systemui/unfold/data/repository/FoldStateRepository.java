@@ -5,8 +5,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 public interface FoldStateRepository {
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class FoldUpdate {
         public static final /* synthetic */ FoldUpdate[] $VALUES;
         public static final Companion Companion;

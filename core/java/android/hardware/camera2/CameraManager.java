@@ -174,7 +174,6 @@ public final class CameraManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isPublicId(String cameraId) {
         return ((Boolean)
                         Optional.ofNullable(cameraId)
@@ -226,7 +225,6 @@ public final class CameraManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class FoldStateListener implements DeviceStateManager.DeviceStateCallback {
         private ArrayList<WeakReference<DeviceStateListener>> mDeviceStateListeners =
                 new ArrayList<>();
@@ -1075,7 +1073,6 @@ public final class CameraManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class CameraManagerGlobal extends ICameraServiceListener.Stub
             implements IBinder.DeathRecipient {
         private static final String CAMERA_SERVICE_BINDER_NAME = "media.camera";
@@ -2454,7 +2451,6 @@ public final class CameraManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$scheduleCameraServiceReconnectionLocked$10() {
             ICameraService cameraService = getCameraService();
             if (cameraService == null) {

@@ -48,7 +48,6 @@ public final class MediaFilterRepository {
     public TreeMap sortedMedia;
     public final SystemClock systemClock;
 
-    /* JADX WARN: Type inference failed for: r1v19, types: [com.android.systemui.media.controls.data.repository.MediaFilterRepository$special$$inlined$thenByDescending$8, java.util.Comparator] */
     public MediaFilterRepository(Context context, SystemClock systemClock, ConfigurationController configurationController) {
         this.systemClock = systemClock;
         this.configurationController = configurationController;

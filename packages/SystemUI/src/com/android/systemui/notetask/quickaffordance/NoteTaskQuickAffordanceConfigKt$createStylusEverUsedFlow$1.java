@@ -20,7 +20,6 @@ final class NoteTaskQuickAffordanceConfigKt$createStylusEverUsedFlow$1 extends S
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NoteTaskQuickAffordanceConfigKt$createStylusEverUsedFlow$1(Context context, StylusManager stylusManager, Continuation continuation) {
         super(2, continuation);
         this.$context = context;
@@ -39,7 +38,6 @@ final class NoteTaskQuickAffordanceConfigKt$createStylusEverUsedFlow$1 extends S
         return ((NoteTaskQuickAffordanceConfigKt$createStylusEverUsedFlow$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfigKt$createStylusEverUsedFlow$1$callback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -58,7 +56,6 @@ final class NoteTaskQuickAffordanceConfigKt$createStylusEverUsedFlow$1 extends S
             this.$this_createStylusEverUsedFlow.stylusCallbacks.add(r1);
             final StylusManager stylusManager = this.$this_createStylusEverUsedFlow;
             Function0 function0 = new Function0() { // from class: com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfigKt$createStylusEverUsedFlow$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

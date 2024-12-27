@@ -13,13 +13,11 @@ public final class ClientRequestStats implements Parcelable {
     public static final Parcelable.Creator<ClientRequestStats> CREATOR =
             new Parcelable.Creator<
                     ClientRequestStats>() { // from class: android.telephony.ClientRequestStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClientRequestStats createFromParcel(Parcel in) {
                     return new ClientRequestStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClientRequestStats[] newArray(int size) {
                     return new ClientRequestStats[size];

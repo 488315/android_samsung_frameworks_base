@@ -9,13 +9,11 @@ public class SContextSLocationCore extends SContextEventContext {
     public static final Parcelable.Creator<SContextSLocationCore> CREATOR =
             new Parcelable.Creator<SContextSLocationCore>() { // from class:
                 // android.hardware.scontext.SContextSLocationCore.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextSLocationCore createFromParcel(Parcel in) {
                     return new SContextSLocationCore(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextSLocationCore[] newArray(int size) {
                     return new SContextSLocationCore[size];

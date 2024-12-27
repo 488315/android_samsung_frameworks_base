@@ -81,7 +81,6 @@ final class SharedNotificationContainerViewModel$shadeCollapseFadeIn$1 extends S
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SharedNotificationContainerViewModel$shadeCollapseFadeIn$1(SharedNotificationContainerViewModel sharedNotificationContainerViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = sharedNotificationContainerViewModel;
@@ -99,12 +98,6 @@ final class SharedNotificationContainerViewModel$shadeCollapseFadeIn$1 extends S
         return ((SharedNotificationContainerViewModel$shadeCollapseFadeIn$1) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x004d  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x006e A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0082 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00c2 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00c3  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:23:0x00c0 -> B:8:0x001a). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

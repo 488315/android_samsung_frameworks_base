@@ -504,7 +504,6 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
         final /* synthetic */ CameraCaptureSession.CaptureCallback val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass1(
                 Executor executor,
                 CameraCaptureSession.CaptureCallback callback,
@@ -545,7 +544,6 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureStarted$0(
                 CameraCaptureSession.CaptureCallback callback,
                 CaptureRequest request,
@@ -585,7 +583,6 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onReadoutStarted$1(
                 CameraCaptureSession.CaptureCallback callback,
                 CaptureRequest request,
@@ -619,7 +616,6 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCapturePartial$2(
                 CameraCaptureSession.CaptureCallback callback,
                 CaptureRequest request,
@@ -653,7 +649,6 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureProgressed$3(
                 CameraCaptureSession.CaptureCallback callback,
                 CaptureRequest request,
@@ -687,7 +682,6 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureCompleted$4(
                 CameraCaptureSession.CaptureCallback callback,
                 CaptureRequest request,
@@ -719,7 +713,6 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureFailed$5(
                 CameraCaptureSession.CaptureCallback callback,
                 CaptureRequest request,
@@ -752,7 +745,6 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
             CameraCaptureSessionImpl.this.finishPendingSequence(sequenceId);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureSequenceCompleted$6(
                 CameraCaptureSession.CaptureCallback callback, int sequenceId, long frameNumber) {
             callback.onCaptureSequenceCompleted(
@@ -783,7 +775,6 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
             CameraCaptureSessionImpl.this.finishPendingSequence(sequenceId);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureSequenceAborted$7(
                 CameraCaptureSession.CaptureCallback callback, int sequenceId) {
             callback.onCaptureSequenceAborted(CameraCaptureSessionImpl.this, sequenceId);
@@ -816,7 +807,6 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureBufferLost$8(
                 CameraCaptureSession.CaptureCallback callback,
                 CaptureRequest request,
@@ -924,7 +914,6 @@ public class CameraCaptureSessionImpl extends CameraCaptureSession
         return sequenceId;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void finishPendingSequence(int sequenceId) {
         try {
             this.mSequenceDrainer.taskFinished(Integer.valueOf(sequenceId));

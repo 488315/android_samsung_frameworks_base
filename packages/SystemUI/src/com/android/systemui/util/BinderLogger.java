@@ -103,7 +103,6 @@ public final class BinderLogger implements CoreStartable, Binder.ProxyTransactLi
         private Companion() {
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final String getBinderCallRef(StackTraceElement stackTraceElement) {
             if (stackTraceElement == null) {
                 return BinderLogger.UNKNOWN;
@@ -118,12 +117,10 @@ public final class BinderLogger implements CoreStartable, Binder.ProxyTransactLi
             return indexOf$default > 0 ? className.substring(0, indexOf$default) : className;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final String getSimpleCallRef(StackTraceElement stackTraceElement) {
             return stackTraceElement != null ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(getSimpleClassName(stackTraceElement), "#", stackTraceElement.getMethodName()) : BinderLogger.UNKNOWN;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public final String getSimpleCallRefWithFileAndLineNumber(StackTraceElement stackTraceElement) {
             if (stackTraceElement == null) {
                 return BinderLogger.UNKNOWN;

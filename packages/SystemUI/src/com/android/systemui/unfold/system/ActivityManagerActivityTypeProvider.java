@@ -16,7 +16,6 @@ public final class ActivityManagerActivityTypeProvider implements CurrentActivit
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.unfold.system.ActivityManagerActivityTypeProvider$taskStackChangeListener$1] */
     public ActivityManagerActivityTypeProvider(ActivityManager activityManager) {
         this.activityManager = activityManager;
     }

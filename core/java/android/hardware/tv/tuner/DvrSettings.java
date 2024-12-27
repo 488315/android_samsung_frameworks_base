@@ -7,13 +7,11 @@ public final class DvrSettings implements Parcelable {
     public static final Parcelable.Creator<DvrSettings> CREATOR =
             new Parcelable.Creator<
                     DvrSettings>() { // from class: android.hardware.tv.tuner.DvrSettings.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DvrSettings createFromParcel(Parcel _aidl_source) {
                     return new DvrSettings(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DvrSettings[] newArray(int _aidl_size) {
                     return new DvrSettings[_aidl_size];

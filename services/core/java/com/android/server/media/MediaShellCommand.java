@@ -439,9 +439,6 @@ public final class MediaShellCommand extends ShellCommand {
         this.mErrorWriter.println("No session found with id ".concat(nextArgRequired));
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x02af  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x0190  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

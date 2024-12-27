@@ -51,10 +51,6 @@ public final class CustomizationProvider extends ContentProvider implements Syst
         this.uriMatcher = uriMatcher;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00bb  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0044  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0026  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -67,10 +63,6 @@ public final class CustomizationProvider extends ContentProvider implements Syst
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.CustomizationProvider.access$deleteSelection(com.android.systemui.keyguard.CustomizationProvider, android.net.Uri, java.lang.String[], kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0093  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00b7  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -83,10 +75,6 @@ public final class CustomizationProvider extends ContentProvider implements Syst
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.CustomizationProvider.access$insertSelection(com.android.systemui.keyguard.CustomizationProvider, android.content.ContentValues, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0082  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x003c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -203,10 +191,6 @@ public final class CustomizationProvider extends ContentProvider implements Syst
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.CustomizationProvider.access$queryAffordances(com.android.systemui.keyguard.CustomizationProvider, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x006e A[LOOP:0: B:11:0x0068->B:13:0x006e, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -291,10 +275,6 @@ public final class CustomizationProvider extends ContentProvider implements Syst
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.CustomizationProvider.access$queryFlags(com.android.systemui.keyguard.CustomizationProvider, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0076  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -391,10 +371,6 @@ public final class CustomizationProvider extends ContentProvider implements Syst
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.CustomizationProvider.access$querySelections(com.android.systemui.keyguard.CustomizationProvider, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x006d A[LOOP:0: B:11:0x0067->B:13:0x006d, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

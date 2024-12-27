@@ -18,14 +18,12 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public final class KeyguardQuickAffordanceLegacySettingSyncer$startSyncing$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ List<KeyguardQuickAffordanceLegacySettingSyncer.Binding> $bindings;
     private /* synthetic */ Object L$0;
     int label;
     final /* synthetic */ KeyguardQuickAffordanceLegacySettingSyncer this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordanceLegacySettingSyncer$startSyncing$1(List<KeyguardQuickAffordanceLegacySettingSyncer.Binding> list, KeyguardQuickAffordanceLegacySettingSyncer keyguardQuickAffordanceLegacySettingSyncer, Continuation continuation) {
         super(2, continuation);
         this.$bindings = list;
@@ -90,8 +88,6 @@ public final class KeyguardQuickAffordanceLegacySettingSyncer$startSyncing$1 ext
                         this.$binding$inlined = binding;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -192,8 +188,6 @@ public final class KeyguardQuickAffordanceLegacySettingSyncer$startSyncing$1 ext
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -286,8 +280,6 @@ public final class KeyguardQuickAffordanceLegacySettingSyncer$startSyncing$1 ext
                         this.$binding$inlined = binding;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

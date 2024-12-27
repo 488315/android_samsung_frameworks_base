@@ -197,7 +197,6 @@ public class ActivityChooserView extends ViewGroup
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void showPopupUnchecked(int maxActivityCount) {
         if (this.mAdapter.getDataModel() == null) {
             throw new IllegalStateException("No data model. Did you call #setDataModel?");
@@ -317,7 +316,6 @@ public class ActivityChooserView extends ViewGroup
         this.mDefaultActionButtonContentDescription = resourceId;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ListPopupWindow getListPopupWindow() {
         if (this.mListPopupWindow == null) {
             this.mListPopupWindow = new ListPopupWindow(getContext());
@@ -330,7 +328,6 @@ public class ActivityChooserView extends ViewGroup
         return this.mListPopupWindow;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateAppearance() {
         if (this.mAdapter.getCount() > 0) {
             this.mExpandActivityOverflowButton.setEnabled(true);

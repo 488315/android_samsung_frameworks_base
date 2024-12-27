@@ -108,7 +108,6 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
                 new Object[0]);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int onCommand(String str) {
         char c;
         if (str == null) {

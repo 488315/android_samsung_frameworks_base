@@ -10,7 +10,6 @@ public class PhonebookCapacity implements Parcelable {
     public static final Parcelable.Creator<PhonebookCapacity> CREATOR =
             new Parcelable.Creator<PhonebookCapacity>() { // from class:
                 // android.hardware.radio.sim.PhonebookCapacity.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhonebookCapacity createFromParcel(Parcel _aidl_source) {
                     PhonebookCapacity _aidl_out = new PhonebookCapacity();
@@ -18,7 +17,6 @@ public class PhonebookCapacity implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhonebookCapacity[] newArray(int _aidl_size) {
                     return new PhonebookCapacity[_aidl_size];

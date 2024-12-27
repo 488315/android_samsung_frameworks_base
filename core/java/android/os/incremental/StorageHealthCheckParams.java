@@ -9,7 +9,6 @@ public class StorageHealthCheckParams implements Parcelable {
             new Parcelable.Creator<
                     StorageHealthCheckParams>() { // from class:
                                                   // android.os.incremental.StorageHealthCheckParams.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StorageHealthCheckParams createFromParcel(Parcel _aidl_source) {
                     StorageHealthCheckParams _aidl_out = new StorageHealthCheckParams();
@@ -17,7 +16,6 @@ public class StorageHealthCheckParams implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StorageHealthCheckParams[] newArray(int _aidl_size) {
                     return new StorageHealthCheckParams[_aidl_size];

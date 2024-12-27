@@ -126,9 +126,6 @@ public class SemEmergencySettings {
 
        if ("China".equalsIgnoreCase(r0) != false) goto L57;
     */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0117  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x011c  */
-    /* JADX WARN: Removed duplicated region for block: B:35:? A[RETURN, SYNTHETIC] */
     @java.lang.Deprecated
     /*
         Code decompiled incorrectly, please refer to instructions dump.

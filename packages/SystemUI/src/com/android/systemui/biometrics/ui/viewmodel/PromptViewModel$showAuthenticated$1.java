@@ -12,7 +12,6 @@ final class PromptViewModel$showAuthenticated$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ PromptViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptViewModel$showAuthenticated$1(PromptViewModel promptViewModel, Continuation continuation) {
         super(continuation);
         this.this$0 = promptViewModel;

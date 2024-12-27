@@ -257,7 +257,6 @@ public final class MediaDeviceManager implements MediaDataManager.Listener {
         public String playbackVolumeControlId;
         public boolean started;
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.media.controls.domain.pipeline.MediaDeviceManager$Entry$configListener$1] */
         public Entry(String str, String str2, MediaController mediaController, LocalMediaManager localMediaManager, MediaMuteAwaitConnectionManager mediaMuteAwaitConnectionManager) {
             this.key = str;
             this.oldKey = str2;

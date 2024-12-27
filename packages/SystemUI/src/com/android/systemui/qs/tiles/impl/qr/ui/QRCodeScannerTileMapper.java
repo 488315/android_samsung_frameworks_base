@@ -30,7 +30,6 @@ public final class QRCodeScannerTileMapper implements QSTileDataToStateMapper {
         Resources resources = this.resources;
         Resources.Theme theme = this.theme;
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.qr.ui.QRCodeScannerTileMapper$map$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -44,7 +43,6 @@ public final class QRCodeScannerTileMapper implements QSTileDataToStateMapper {
                 builder.iconRes = Integer.valueOf(R.drawable.ic_qr_code_scanner);
                 final QRCodeScannerTileMapper qRCodeScannerTileMapper = QRCodeScannerTileMapper.this;
                 builder.icon = new Function0() { // from class: com.android.systemui.qs.tiles.impl.qr.ui.QRCodeScannerTileMapper$map$1.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

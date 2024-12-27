@@ -28,7 +28,6 @@ public final class PulledStats {
                     i, "Unknown pulled stats request: ", "PulledStats");
         } else {
             new Thread() { // from class: com.android.server.notification.PulledStats.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super("NotificationManager pulled metric output");
                 }

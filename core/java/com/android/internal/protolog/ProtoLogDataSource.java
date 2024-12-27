@@ -63,7 +63,6 @@ public class ProtoLogDataSource extends DataSource<Instance, TlsState, Increment
                 this, instanceIndex, config, this.mOnStart, this.mOnFlush, this.mOnStop);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.tracing.perfetto.DataSource
     public TlsState createTlsState(CreateTlsStateArgs<Instance> args) {
         Instance dsInstance = args.getDataSourceInstanceLocked();
@@ -92,7 +91,6 @@ public class ProtoLogDataSource extends DataSource<Instance, TlsState, Increment
         }
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.tracing.perfetto.DataSource
     public IncrementalState createIncrementalState(CreateIncrementalStateArgs<Instance> args) {
         return new IncrementalState();

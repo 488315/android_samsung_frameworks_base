@@ -186,9 +186,6 @@ public final class BatteryMeterViewController extends ViewController {
         ((BatteryMeterView) batteryMeterViewController.mView).updateShowPercent();
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.battery.BatteryMeterViewController$2] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.battery.BatteryMeterViewController$3] */
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.battery.BatteryMeterViewController$$ExternalSyntheticLambda1] */
     public BatteryMeterViewController(BatteryMeterView batteryMeterView, StatusBarLocation statusBarLocation, UserTracker userTracker, ConfigurationController configurationController, TunerService tunerService, Handler handler, ContentResolver contentResolver, FeatureFlags featureFlags, BatteryController batteryController, SettingsHelper settingsHelper, IndicatorScaleGardener indicatorScaleGardener, SlimIndicatorViewMediator slimIndicatorViewMediator) {
         super(batteryMeterView);
         this.mAdditionalScaleFactorForSpecificBatteryView = 0.0f;

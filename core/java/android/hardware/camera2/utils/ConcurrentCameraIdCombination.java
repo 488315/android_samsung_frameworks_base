@@ -11,13 +11,11 @@ public class ConcurrentCameraIdCombination implements Parcelable {
     public static final Parcelable.Creator<ConcurrentCameraIdCombination> CREATOR =
             new Parcelable.Creator<ConcurrentCameraIdCombination>() { // from class:
                 // android.hardware.camera2.utils.ConcurrentCameraIdCombination.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConcurrentCameraIdCombination createFromParcel(Parcel in) {
                     return new ConcurrentCameraIdCombination(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConcurrentCameraIdCombination[] newArray(int size) {
                     return new ConcurrentCameraIdCombination[size];

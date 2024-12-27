@@ -121,7 +121,6 @@ public final class AppPredictionPerUserService extends AbstractPerUserSystemServ
         }
     }
 
-    /* JADX WARN: Type inference failed for: r8v0, types: [com.android.server.appprediction.AppPredictionPerUserService$$ExternalSyntheticLambda2] */
     public final void onCreatePredictionSessionLocked(
             AppPredictionContext appPredictionContext,
             final AppPredictionSessionId appPredictionSessionId,

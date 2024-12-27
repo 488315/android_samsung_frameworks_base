@@ -21,7 +21,6 @@ public final class LocaleManagerShellCommand extends ShellCommand {
         this.mBinderService = iLocaleManager;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int onCommand(String str) {
         char c;
         char c2;

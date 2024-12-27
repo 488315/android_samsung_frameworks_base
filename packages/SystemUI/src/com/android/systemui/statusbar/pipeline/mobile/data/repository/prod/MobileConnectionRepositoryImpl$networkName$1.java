@@ -27,7 +27,6 @@ final class MobileConnectionRepositoryImpl$networkName$1 extends SuspendLambda i
     int label;
     final /* synthetic */ MobileConnectionRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileConnectionRepositoryImpl$networkName$1(MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl, MobileInputLogger mobileInputLogger, String str, NetworkNameModel networkNameModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mobileConnectionRepositoryImpl;
@@ -48,8 +47,6 @@ final class MobileConnectionRepositoryImpl$networkName$1 extends SuspendLambda i
         return ((MobileConnectionRepositoryImpl$networkName$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.content.BroadcastReceiver, com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$networkName$1$receiver$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -78,7 +75,6 @@ final class MobileConnectionRepositoryImpl$networkName$1 extends SuspendLambda i
             this.this$0.context.registerReceiver(r1, new IntentFilter("android.telephony.action.SERVICE_PROVIDERS_UPDATED"));
             final MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$networkName$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

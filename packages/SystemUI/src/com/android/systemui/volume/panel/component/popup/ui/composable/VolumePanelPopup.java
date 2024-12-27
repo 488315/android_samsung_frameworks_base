@@ -68,7 +68,6 @@ public final class VolumePanelPopup {
 
     public final void show(Expandable expandable, int i, final ComposableLambdaImpl composableLambdaImpl, final ComposableLambdaImpl composableLambdaImpl2) {
         ComponentSystemUIDialog create$default = SystemUIDialogFactoryExtKt.create$default(this.dialogFactory, null, R.style.Theme_VolumePanel_Popup, Integer.valueOf(i), new ComposableLambdaImpl(1290029988, true, new Function3() { // from class: com.android.systemui.volume.panel.component.popup.ui.composable.VolumePanelPopup$show$dialog$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(3);
             }

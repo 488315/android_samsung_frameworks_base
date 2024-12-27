@@ -35,8 +35,6 @@ final class ExtensionSchemaLite extends ExtensionSchema<GeneratedMessageLite.Ext
         getExtensions(message).makeImmutable();
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.framework.protobuf.ExtensionSchema
     <UT, UB> UB parseExtension(
             Object obj,

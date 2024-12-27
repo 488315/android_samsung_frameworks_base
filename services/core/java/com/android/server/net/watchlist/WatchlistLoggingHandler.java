@@ -132,10 +132,6 @@ public final class WatchlistLoggingHandler extends Handler {
         return new ArrayList(hashSet);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x014c A[LOOP:0: B:33:0x00fc->B:38:0x014c, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x014a A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x00f1 A[LOOP:1: B:57:0x00a2->B:62:0x00f1, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x00f4 A[EDGE_INSN: B:63:0x00f4->B:29:0x00f4 BREAK  A[LOOP:1: B:57:0x00a2->B:62:0x00f1], SYNTHETIC] */
     @Override // android.os.Handler
     /*
         Code decompiled incorrectly, please refer to instructions dump.

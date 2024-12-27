@@ -53,7 +53,6 @@ public abstract class HermesBigdataFunction {
     }
 
     public enum BigdataError {
-        /* JADX INFO: Fake field, exist only in values array */
         EF0("NO_ERROR", "No Error"),
         ERR_NOT_SUPPORTED("ERR_NOT_SUPPORTED", "Bigdata function is not supported"),
         ERR_SEND_DIAGMON("ERR_SEND_DIAGMON", "sending diagmon agent is failed"),

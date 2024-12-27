@@ -5,7 +5,6 @@ public final class ActionUpOrCancelHandler extends ActionHandlerType {
         super(keyguardTouchAnimator);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:115:0x029c  */
     @Override // com.android.systemui.keyguard.animator.ActionHandlerType
     /*
         Code decompiled incorrectly, please refer to instructions dump.

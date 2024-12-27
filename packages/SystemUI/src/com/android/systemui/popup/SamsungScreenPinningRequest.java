@@ -163,7 +163,6 @@ public class SamsungScreenPinningRequest implements DialogInterface.OnClickListe
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createDialog$0(DialogInterface dialogInterface, int i) {
         clearPrompt();
     }

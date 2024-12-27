@@ -11,13 +11,11 @@ public final class VersionedPackage implements Parcelable {
     public static final Parcelable.Creator<VersionedPackage> CREATOR =
             new Parcelable.Creator<
                     VersionedPackage>() { // from class: android.content.pm.VersionedPackage.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VersionedPackage createFromParcel(Parcel source) {
                     return new VersionedPackage(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VersionedPackage[] newArray(int size) {
                     return new VersionedPackage[size];

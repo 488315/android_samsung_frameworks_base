@@ -5,8 +5,6 @@ import kotlin.enums.EnumEntriesKt;
 
 public final class GlobalActionCommandDispatcher implements PlankCommandDispatcher {
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Action {
         public static final /* synthetic */ Action[] $VALUES;
         public static final Action add_condition;
@@ -93,7 +91,6 @@ public final class GlobalActionCommandDispatcher implements PlankCommandDispatch
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x00b1, code lost:
     
         return r5;

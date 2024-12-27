@@ -620,8 +620,6 @@ public final class AudioDeviceInventory {
 
        if (r3.isModeEnabled(r7) != false) goto L67;
     */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x01df  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x01f7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1051,10 +1049,6 @@ public final class AudioDeviceInventory {
         this.mPrefDevDispatchers.finishBroadcast();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r7v2, types: [java.util.Set] */
-    /* JADX WARN: Type inference failed for: r7v3, types: [java.util.Set] */
-    /* JADX WARN: Type inference failed for: r7v6, types: [java.util.Set] */
     public AdiDeviceState findBtDeviceStateForAddress(String str, int i) {
         HashSet hashSet;
         if (AudioSystem.isBluetoothA2dpOutDevice(i)) {
@@ -1171,8 +1165,6 @@ public final class AudioDeviceInventory {
         return (DeviceInfo) arrayList.get(0);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x01a7 A[Catch: all -> 0x010c, TryCatch #0 {all -> 0x010c, blocks: (B:7:0x0083, B:10:0x00a9, B:16:0x0112, B:17:0x016c, B:20:0x016f, B:22:0x0187, B:25:0x01a7, B:29:0x01b3, B:31:0x01b8, B:32:0x01ca, B:35:0x01e2, B:38:0x01f4, B:41:0x01bc, B:43:0x0207, B:44:0x0243, B:46:0x0214, B:47:0x00d1, B:49:0x00db, B:51:0x00e1, B:56:0x0193), top: B:6:0x0083 }] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0214 A[Catch: all -> 0x010c, TryCatch #0 {all -> 0x010c, blocks: (B:7:0x0083, B:10:0x00a9, B:16:0x0112, B:17:0x016c, B:20:0x016f, B:22:0x0187, B:25:0x01a7, B:29:0x01b3, B:31:0x01b8, B:32:0x01ca, B:35:0x01e2, B:38:0x01f4, B:41:0x01bc, B:43:0x0207, B:44:0x0243, B:46:0x0214, B:47:0x00d1, B:49:0x00db, B:51:0x00e1, B:56:0x0193), top: B:6:0x0083 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1418,8 +1410,6 @@ public final class AudioDeviceInventory {
         this.mDeviceBroker.postCheckCommunicationDeviceRemoval(audioDeviceAttributes);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00c3  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00de  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1513,7 +1503,6 @@ public final class AudioDeviceInventory {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0158 A[Catch: all -> 0x0097, TryCatch #0 {all -> 0x0097, blocks: (B:13:0x0066, B:15:0x0075, B:17:0x0088, B:18:0x00ae, B:20:0x009a, B:21:0x00b0, B:29:0x0158, B:30:0x015b, B:35:0x00e2, B:38:0x00f5, B:40:0x00fe, B:41:0x012e), top: B:12:0x0066 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

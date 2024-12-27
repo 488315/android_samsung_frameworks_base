@@ -107,7 +107,6 @@ public final class PdpService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.os.HandlerThread, com.android.server.pdp.PdpService$1] */
     public PdpService(Context context) {
         super(context);
         this.mContext = context;

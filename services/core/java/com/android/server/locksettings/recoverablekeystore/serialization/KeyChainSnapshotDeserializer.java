@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public abstract class KeyChainSnapshotDeserializer {
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static KeyChainSnapshot deserializeInternal(InputStream inputStream) {
         String str;
         char c;

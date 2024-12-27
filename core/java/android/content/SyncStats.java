@@ -7,13 +7,11 @@ import android.os.Parcelable;
 public class SyncStats implements Parcelable {
     public static final Parcelable.Creator<SyncStats> CREATOR =
             new Parcelable.Creator<SyncStats>() { // from class: android.content.SyncStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncStats createFromParcel(Parcel in) {
                     return new SyncStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncStats[] newArray(int size) {
                     return new SyncStats[size];

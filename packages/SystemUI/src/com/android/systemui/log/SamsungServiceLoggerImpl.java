@@ -17,7 +17,6 @@ public final class SamsungServiceLoggerImpl implements SamsungServiceLogger {
 
     public final void log(String str, LogLevel logLevel, final String str2) {
         Function1 function1 = new Function1() { // from class: com.android.systemui.log.SamsungServiceLoggerImpl$log$4
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -33,7 +32,6 @@ public final class SamsungServiceLoggerImpl implements SamsungServiceLogger {
 
     public final void logWithThreadId(String str, LogLevel logLevel, final String str2) {
         Function1 function1 = new Function1() { // from class: com.android.systemui.log.SamsungServiceLoggerImpl$logWithThreadId$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

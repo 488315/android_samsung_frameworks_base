@@ -213,13 +213,11 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
     public static final Parcelable.Creator<ActivityInfo> CREATOR =
             new Parcelable.Creator<
                     ActivityInfo>() { // from class: android.content.pm.ActivityInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityInfo createFromParcel(Parcel source) {
                     return new ActivityInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityInfo[] newArray(int size) {
                     return new ActivityInfo[size];

@@ -17,13 +17,11 @@ public final class TapAction implements Parcelable {
     public static final Parcelable.Creator<TapAction> CREATOR =
             new Parcelable.Creator<
                     TapAction>() { // from class: android.app.smartspace.uitemplatedata.TapAction.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TapAction createFromParcel(Parcel in) {
                     return new TapAction(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TapAction[] newArray(int size) {
                     return new TapAction[size];

@@ -104,7 +104,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.IntConsumer;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public class ContextImpl extends Context {
     private static final int CONTEXT_TYPE_ACTIVITY = 2;
     private static final int CONTEXT_TYPE_DISPLAY_CONTEXT = 1;
@@ -178,7 +177,6 @@ public class ContextImpl extends Context {
     @Retention(RetentionPolicy.SOURCE)
     @interface ServiceInitializationState {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class DeviceIdChangeListenerDelegate {
         final Executor mExecutor;
         final IntConsumer mListener;
@@ -2529,8 +2527,6 @@ public class ContextImpl extends Context {
         return this.mMainThread.getHandler();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0094  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x009a A[Catch: RemoteException -> 0x00b3, TryCatch #0 {RemoteException -> 0x00b3, blocks: (B:25:0x0067, B:31:0x009a, B:32:0x00b2), top: B:24:0x0067 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4162,12 +4158,6 @@ public class ContextImpl extends Context {
         return context;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00d0  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0123  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0126  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0100  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00b4  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x00ae  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

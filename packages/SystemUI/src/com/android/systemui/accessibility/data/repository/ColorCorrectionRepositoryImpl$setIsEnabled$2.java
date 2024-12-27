@@ -17,7 +17,6 @@ final class ColorCorrectionRepositoryImpl$setIsEnabled$2 extends SuspendLambda i
     int label;
     final /* synthetic */ ColorCorrectionRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ColorCorrectionRepositoryImpl$setIsEnabled$2(ColorCorrectionRepositoryImpl colorCorrectionRepositoryImpl, boolean z, UserHandle userHandle, Continuation continuation) {
         super(2, continuation);
         this.this$0 = colorCorrectionRepositoryImpl;

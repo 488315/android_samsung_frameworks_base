@@ -12,13 +12,11 @@ public final class BluetoothCallQualityReport implements Parcelable {
             new Parcelable.Creator<
                     BluetoothCallQualityReport>() { // from class:
                                                     // android.telecom.BluetoothCallQualityReport.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BluetoothCallQualityReport createFromParcel(Parcel in) {
                     return new BluetoothCallQualityReport(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BluetoothCallQualityReport[] newArray(int size) {
                     return new BluetoothCallQualityReport[size];

@@ -84,12 +84,10 @@ public abstract class SystemUIDialogFactoryExtKt {
         componentSystemUIDialog.create();
         ComposeView composeView = new ComposeView(context, null, 0, 6, null);
         composeView.setContent(new ComposableLambdaImpl(-1860640285, true, new Function2() { // from class: com.android.systemui.statusbar.phone.SystemUIDialogFactoryExtKt$create$2$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
             }
 
-            /* JADX WARN: Type inference failed for: r4v5, types: [com.android.systemui.statusbar.phone.SystemUIDialogFactoryExtKt$create$2$1$1, kotlin.jvm.internal.Lambda] */
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 Composer composer = (Composer) obj;
@@ -104,12 +102,10 @@ public abstract class SystemUIDialogFactoryExtKt {
                 final Function3 function3 = Function3.this;
                 final ComponentSystemUIDialog componentSystemUIDialog2 = componentSystemUIDialog;
                 PlatformThemeKt.PlatformTheme(false, ComposableLambdaKt.rememberComposableLambda(-962447399, composer, new Function2() { // from class: com.android.systemui.statusbar.phone.SystemUIDialogFactoryExtKt$create$2$1.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(2);
                     }
 
-                    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.statusbar.phone.SystemUIDialogFactoryExtKt$create$2$1$1$1, kotlin.jvm.internal.Lambda] */
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj3, Object obj4) {
                         Composer composer2 = (Composer) obj3;
@@ -126,7 +122,6 @@ public abstract class SystemUIDialogFactoryExtKt {
                         final Function3 function32 = Function3.this;
                         final ComponentSystemUIDialog componentSystemUIDialog3 = componentSystemUIDialog2;
                         CompositionLocalKt.CompositionLocalProvider(defaultProvidedValue$runtime_release, ComposableLambdaKt.rememberComposableLambda(582245529, composer2, new Function2() { // from class: com.android.systemui.statusbar.phone.SystemUIDialogFactoryExtKt.create.2.1.1.1
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(2);
                             }

@@ -23,7 +23,6 @@ public final class SchedulingPolicyService extends ISchedulingPolicyService.Stub
             };
     public int mBoostedPid = -1;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.os.SchedulingPolicyService$1] */
     public SchedulingPolicyService() {
         SystemServerInitThreadPool.submit(
                 "SchedulingPolicyService.<init>",

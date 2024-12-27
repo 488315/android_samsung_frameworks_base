@@ -31,7 +31,6 @@ public final class TracingServiceProxy extends SystemService {
     public boolean mServicePublished;
     public final AnonymousClass1 mTracingServiceProxy;
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.tracing.TracingServiceProxy$1] */
     public TracingServiceProxy(Context context) {
         super(context);
         this.mServicePublished = false;

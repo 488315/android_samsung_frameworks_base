@@ -10,13 +10,11 @@ public final class VirtualDevice implements Parcelable {
     public static final Parcelable.Creator<VirtualDevice> CREATOR =
             new Parcelable.Creator<
                     VirtualDevice>() { // from class: android.companion.virtual.VirtualDevice.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualDevice createFromParcel(Parcel in) {
                     return new VirtualDevice(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualDevice[] newArray(int size) {
                     return new VirtualDevice[size];

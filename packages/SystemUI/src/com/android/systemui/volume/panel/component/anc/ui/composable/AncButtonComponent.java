@@ -104,7 +104,6 @@ public final class AncButtonComponent implements ComposeVolumePanelUiComponent {
         Object rememberedValue2 = composerImpl.rememberedValue();
         if (changed || rememberedValue2 == obj) {
             rememberedValue2 = new Function1() { // from class: com.android.systemui.volume.panel.component.anc.ui.composable.AncButtonComponent$Content$1$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -185,7 +184,6 @@ public final class AncButtonComponent implements ComposeVolumePanelUiComponent {
         Object rememberedValue3 = composerImpl.rememberedValue();
         if (changed2 || rememberedValue3 == obj) {
             rememberedValue3 = new Function1() { // from class: com.android.systemui.volume.panel.component.anc.ui.composable.AncButtonComponent$Content$2$1$2$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -207,7 +205,6 @@ public final class AncButtonComponent implements ComposeVolumePanelUiComponent {
         long j = Color.Transparent;
         ButtonColors buttonColors = new ButtonColors(j, j, j, j, null);
         Function0 function02 = new Function0() { // from class: com.android.systemui.volume.panel.component.anc.ui.composable.AncButtonComponent$Content$2$1$3
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -262,7 +259,6 @@ public final class AncButtonComponent implements ComposeVolumePanelUiComponent {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.anc.ui.composable.AncButtonComponent$Content$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

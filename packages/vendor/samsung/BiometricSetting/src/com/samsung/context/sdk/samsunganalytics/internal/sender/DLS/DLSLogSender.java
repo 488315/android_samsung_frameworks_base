@@ -90,8 +90,6 @@ public final class DLSLogSender extends BaseLogSender {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.samsung.context.sdk.samsunganalytics.internal.sender.DLS.DLSLogSender$1] */
     @Override // com.samsung.context.sdk.samsunganalytics.internal.sender.BaseLogSender
     public final int send(Map map) {
         NetworkInfo activeNetworkInfo = ((ConnectivityManager) this.context.getSystemService("connectivity")).getActiveNetworkInfo();

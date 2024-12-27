@@ -26,7 +26,6 @@ final class ScreenshotSoundControllerImpl$releaseScreenshotSound$2 extends Suspe
         int label;
         final /* synthetic */ ScreenshotSoundControllerImpl this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(ScreenshotSoundControllerImpl screenshotSoundControllerImpl, Continuation continuation) {
             super(2, continuation);
             this.this$0 = screenshotSoundControllerImpl;
@@ -69,7 +68,6 @@ final class ScreenshotSoundControllerImpl$releaseScreenshotSound$2 extends Suspe
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenshotSoundControllerImpl$releaseScreenshotSound$2(ScreenshotSoundControllerImpl screenshotSoundControllerImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = screenshotSoundControllerImpl;

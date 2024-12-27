@@ -910,7 +910,6 @@ public class Switch extends CompoundButton {
         return this.mThumbPosition > 0.5f;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setThumbPosition(float position) {
         this.mThumbPosition = position;
         invalidate();

@@ -39,24 +39,6 @@ public abstract class PermissionFlags {
 
        if (com.android.server.permission.access.util.IntExtensionsKt.hasBits(r7, 524288) != false) goto L43;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v12 */
-    /* JADX WARN: Type inference failed for: r0v17, types: [int] */
-    /* JADX WARN: Type inference failed for: r0v20 */
-    /* JADX WARN: Type inference failed for: r0v21 */
-    /* JADX WARN: Type inference failed for: r0v22 */
-    /* JADX WARN: Type inference failed for: r0v23 */
-    /* JADX WARN: Type inference failed for: r0v24 */
-    /* JADX WARN: Type inference failed for: r0v25 */
-    /* JADX WARN: Type inference failed for: r0v26 */
-    /* JADX WARN: Type inference failed for: r0v27 */
-    /* JADX WARN: Type inference failed for: r0v28 */
-    /* JADX WARN: Type inference failed for: r0v29 */
-    /* JADX WARN: Type inference failed for: r0v30 */
-    /* JADX WARN: Type inference failed for: r0v31 */
-    /* JADX WARN: Type inference failed for: r0v32 */
-    /* JADX WARN: Type inference failed for: r0v76 */
-    /* JADX WARN: Type inference failed for: r0v77 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

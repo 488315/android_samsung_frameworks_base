@@ -55,8 +55,6 @@ public final class BlurEffect {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0163  */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x016f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

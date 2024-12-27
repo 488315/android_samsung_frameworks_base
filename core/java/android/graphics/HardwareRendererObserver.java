@@ -54,7 +54,6 @@ public final class HardwareRendererObserver {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$notifyDataAvailable$0() {
         boolean hasMoreData = true;
         while (hasMoreData) {

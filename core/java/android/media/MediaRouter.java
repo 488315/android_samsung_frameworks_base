@@ -638,7 +638,6 @@ public class MediaRouter {
                         });
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onRestoreRoute$0() {
                 if (this == Static.this.mClient && Static.this.mSelectedRoute != null) {
                     if (!Static.this.mSelectedRoute.isDefault()
@@ -675,7 +674,6 @@ public class MediaRouter {
                         });
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onGroupRouteSelected$1(String groupRouteId) {
                 if (this == Static.this.mClient) {
                     Static.this.handleGroupRouteSelected(groupRouteId);

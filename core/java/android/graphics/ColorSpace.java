@@ -544,7 +544,6 @@ public abstract class ColorSpace {
         return colorSpace;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float[] adaptToIlluminantD50(float[] origWhitePoint, float[] origTransform) {
         float[] desired = ILLUMINANT_D50;
         if (compare(origWhitePoint, desired)) {
@@ -602,7 +601,6 @@ public abstract class ColorSpace {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static double transferHLGOETF(Rgb.TransferParameters params, double x) {
         double sign = x < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? -1.0d : 1.0d;
         double x2 = x * sign;
@@ -617,7 +615,6 @@ public abstract class ColorSpace {
         return (x3 <= 1.0d ? Math.pow(x3, G) * R : (Math.log(x3 - b) * a) + c) * sign2;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static double transferHLGEOTF(Rgb.TransferParameters params, double x) {
         double sign = x < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? -1.0d : 1.0d;
         double x2 = x * sign;
@@ -631,7 +628,6 @@ public abstract class ColorSpace {
         return K * sign * (x2 * R <= 1.0d ? Math.pow(x2 * R, G) : Math.exp((x2 - c) * a) + b);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static double transferST2048OETF(Rgb.TransferParameters params, double x) {
         double sign = x < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? -1.0d : 1.0d;
         double x2 = x * sign;
@@ -646,7 +642,6 @@ public abstract class ColorSpace {
         return Math.pow(tmp / ((Math.pow(x2, c) * e) + d), f) * sign;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static double transferST2048EOTF(Rgb.TransferParameters pq, double x) {
         double sign = x < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? -1.0d : 1.0d;
         double x2 = x * sign;
@@ -657,29 +652,24 @@ public abstract class ColorSpace {
         return Math.pow(tmp / (pq.d + (pq.e * Math.pow(x2, pq.c))), pq.f) * sign;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static double rcpResponse(double x, double a, double b, double c, double d, double g) {
         return x >= d * c ? (Math.pow(x, 1.0d / g) - b) / a : x / c;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static double response(double x, double a, double b, double c, double d, double g) {
         return x >= d ? Math.pow((a * x) + b, g) : c * x;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static double rcpResponse(
             double x, double a, double b, double c, double d, double e, double f, double g) {
         return x >= d * c ? (Math.pow(x - e, 1.0d / g) - b) / a : (x - f) / c;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static double response(
             double x, double a, double b, double c, double d, double e, double f, double g) {
         return x >= d ? Math.pow((a * x) + b, g) + e : (c * x) + f;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static double absRcpResponse(
             double x, double a, double b, double c, double d, double g) {
         return Math.copySign(
@@ -688,7 +678,6 @@ public abstract class ColorSpace {
                 x);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static double absResponse(double x, double a, double b, double c, double d, double g) {
         return Math.copySign(
                 response(x < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? -x : x, a, b, c, d, g),
@@ -710,7 +699,6 @@ public abstract class ColorSpace {
                 && Math.abs(a.g - b.g) < 0.001d;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean compare(float[] a, float[] b) {
         if (a == b) {
             return true;
@@ -723,7 +711,6 @@ public abstract class ColorSpace {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float[] inverse3x3(float[] m) {
         float a = m[0];
         float b = m[3];
@@ -751,7 +738,6 @@ public abstract class ColorSpace {
         return inverted;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float[] mul3x3(float[] lhs, float[] rhs) {
         float[] r = {
             (lhs[0] * rhs[0]) + (lhs[3] * rhs[1]) + (lhs[6] * rhs[2]),
@@ -767,7 +753,6 @@ public abstract class ColorSpace {
         return r;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float[] mul3x3Float3(float[] lhs, float[] rhs) {
         float r0 = rhs[0];
         float r1 = rhs[1];
@@ -778,7 +763,6 @@ public abstract class ColorSpace {
         return rhs;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float[] mul3x3Diag(float[] lhs, float[] rhs) {
         return new float[] {
             lhs[0] * rhs[0],
@@ -793,12 +777,10 @@ public abstract class ColorSpace {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float[] xyYToXyz(float[] xyY) {
         return new float[] {xyY[0] / xyY[1], 1.0f, ((1.0f - xyY[0]) - xyY[1]) / xyY[1]};
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float[] chromaticAdaptation(
             float[] matrix, float[] srcWhitePoint, float[] dstWhitePoint) {
         float[] srcLMS = mul3x3Float3(matrix, srcWhitePoint);
@@ -962,7 +944,6 @@ public abstract class ColorSpace {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float clamp(float x, float min, float max) {
         return x < min ? min : x > max ? max : x;
     }
@@ -1179,12 +1160,10 @@ public abstract class ColorSpace {
                 return (result6 * 31) + ((int) ((temp7 >>> 32) ^ temp7));
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public boolean isHLGish() {
                 return this.g == TYPE_HLGish;
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public boolean isPQish() {
                 return this.g == TYPE_PQish;
             }
@@ -1701,7 +1680,6 @@ public abstract class ColorSpace {
             return v;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public double clamp(double x) {
             float f;
             if (x < this.mMin) {

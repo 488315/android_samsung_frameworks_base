@@ -81,7 +81,6 @@ public class TextToSpeech {
     private volatile UtteranceProgressListener mUtteranceProgressListener;
     private final Map<CharSequence, Uri> mUtterances;
 
-    /* JADX INFO: Access modifiers changed from: private */
     interface Action<R> {
         R run(ITextToSpeechService iTextToSpeechService) throws RemoteException;
     }
@@ -251,7 +250,6 @@ public class TextToSpeech {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int initTts() {
         if (this.mRequestedEngine == null) {
             this.mRequestedEngine = getDefaultEngine();
@@ -314,7 +312,6 @@ public class TextToSpeech {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchOnInit(final int result) {
         Runnable onInitCommand =
                 new Runnable() { // from class:
@@ -331,7 +328,6 @@ public class TextToSpeech {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dispatchOnInit$0(int result) {
         synchronized (this.mStartLock) {
             if (this.mInitListener != null) {
@@ -369,7 +365,6 @@ public class TextToSpeech {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Object lambda$shutdown$1(ITextToSpeechService service)
             throws RemoteException {
         service.setCallback(getCallerIdentity(), null);
@@ -459,7 +454,6 @@ public class TextToSpeech {
                 .intValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Integer lambda$speak$2(
             CharSequence text,
             int queueMode,
@@ -519,7 +513,6 @@ public class TextToSpeech {
                 .intValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Integer lambda$playEarcon$3(
             String earcon,
             int queueMode,
@@ -569,7 +562,6 @@ public class TextToSpeech {
                 .intValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Integer lambda$playSilentUtterance$4(
             long durationInMs, int queueMode, String utteranceId, ITextToSpeechService service)
             throws RemoteException {
@@ -663,7 +655,6 @@ public class TextToSpeech {
                 .intValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Integer lambda$stop$7(ITextToSpeechService service)
             throws RemoteException {
         return Integer.valueOf(service.stop(getCallerIdentity()));
@@ -747,7 +738,6 @@ public class TextToSpeech {
                 .intValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Integer lambda$setLanguage$9(Locale loc, ITextToSpeechService service)
             throws RemoteException {
         if (loc == null) {
@@ -857,7 +847,6 @@ public class TextToSpeech {
                         "getLanguage");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Locale lambda$getLanguage$10(ITextToSpeechService service)
             throws RemoteException {
         String lang = this.mParams.getString("language", "");
@@ -934,7 +923,6 @@ public class TextToSpeech {
                 .intValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Integer lambda$setVoice$13(Voice voice, ITextToSpeechService service)
             throws RemoteException {
         int result = service.loadVoice(getCallerIdentity(), voice.getName());
@@ -983,7 +971,6 @@ public class TextToSpeech {
                         "getVoice");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Voice lambda$getVoice$14(ITextToSpeechService service)
             throws RemoteException {
         String voiceName = this.mParams.getString(Engine.KEY_PARAM_VOICE_NAME, "");
@@ -1112,7 +1099,6 @@ public class TextToSpeech {
                 .intValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Integer lambda$synthesizeToFile$17(
             CharSequence text,
             ParcelFileDescriptor fileDescriptor,
@@ -1410,7 +1396,6 @@ public class TextToSpeech {
         private class SetupConnectionAsyncTask extends AsyncTask<Void, Void, Integer> {
             private SetupConnectionAsyncTask() {}
 
-            /* JADX INFO: Access modifiers changed from: protected */
             @Override // android.os.AsyncTask
             public Integer doInBackground(Void... params) {
                 synchronized (TextToSpeech.this.mStartLock) {
@@ -1447,7 +1432,6 @@ public class TextToSpeech {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: protected */
             @Override // android.os.AsyncTask
             public void onPostExecute(Integer result) {
                 synchronized (TextToSpeech.this.mStartLock) {

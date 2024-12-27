@@ -31,7 +31,6 @@ final class KeyguardEditModeControllerImpl$bind$1 extends Lambda implements Func
     final /* synthetic */ View $root;
     final /* synthetic */ KeyguardEditModeControllerImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardEditModeControllerImpl$bind$1(KeyguardEditModeControllerImpl keyguardEditModeControllerImpl, View view, ImageView imageView, ImageView imageView2, FrameLayout frameLayout) {
         super(2);
         this.this$0 = keyguardEditModeControllerImpl;

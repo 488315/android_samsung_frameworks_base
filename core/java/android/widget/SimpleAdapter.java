@@ -111,7 +111,6 @@ public class SimpleAdapter extends BaseAdapter implements Filterable, ThemedSpin
                 inflater, position, convertView, parent, this.mDropDownResource);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void bindView(int position, View view) {
         Map dataSet = this.mData.get(position);
         if (dataSet == null) {

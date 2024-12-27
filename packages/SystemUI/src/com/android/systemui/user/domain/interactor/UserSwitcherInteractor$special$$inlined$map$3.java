@@ -42,11 +42,6 @@ public final class UserSwitcherInteractor$special$$inlined$map$3 implements Flow
             this.this$0 = userSwitcherInteractor;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:20:0x009b A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:24:0x008d A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:25:0x008e  */
-        /* JADX WARN: Removed duplicated region for block: B:26:0x0054  */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
         @Override // kotlinx.coroutines.flow.FlowCollector
         /*
             Code decompiled incorrectly, please refer to instructions dump.

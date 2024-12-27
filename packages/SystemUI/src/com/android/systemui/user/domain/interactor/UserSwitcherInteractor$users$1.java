@@ -17,7 +17,6 @@ final class UserSwitcherInteractor$users$1 extends SuspendLambda implements Func
     int label;
     final /* synthetic */ UserSwitcherInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherInteractor$users$1(UserSwitcherInteractor userSwitcherInteractor, Continuation continuation) {
         super(4, continuation);
         this.this$0 = userSwitcherInteractor;

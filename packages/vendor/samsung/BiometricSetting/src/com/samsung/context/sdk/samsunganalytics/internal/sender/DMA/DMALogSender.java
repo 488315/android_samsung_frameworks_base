@@ -25,8 +25,6 @@ public final class DMALogSender extends BaseLogSender {
     public final DMABinder dmaBinder;
     public int dmaStatus;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.samsung.context.sdk.samsunganalytics.internal.sender.DMA.DMALogSender$1] */
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.samsung.context.sdk.samsunganalytics.internal.sender.DMA.DMABinder$1] */
     public DMALogSender(Context context, Configuration configuration) {
         super(context, configuration);
         this.dmaStatus = 0;

@@ -263,7 +263,6 @@ public interface IGnssVisibilityControlCallback extends IInterface {
         public static final Parcelable.Creator<NfwNotification> CREATOR =
                 new Parcelable.Creator<NfwNotification>() { // from class:
                     // android.hardware.gnss.visibility_control.IGnssVisibilityControlCallback.NfwNotification.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public NfwNotification createFromParcel(Parcel _aidl_source) {
                         NfwNotification _aidl_out = new NfwNotification();
@@ -271,7 +270,6 @@ public interface IGnssVisibilityControlCallback extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public NfwNotification[] newArray(int _aidl_size) {
                         return new NfwNotification[_aidl_size];

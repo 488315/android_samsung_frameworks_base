@@ -50,7 +50,6 @@ final class ShadeControllerSceneImpl$postOnShadeExpanded$1 extends SuspendLambda
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ShadeControllerSceneImpl$postOnShadeExpanded$1(ShadeControllerSceneImpl shadeControllerSceneImpl, Runnable runnable, Continuation continuation) {
         super(2, continuation);
         this.this$0 = shadeControllerSceneImpl;

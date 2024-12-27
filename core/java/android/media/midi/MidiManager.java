@@ -39,7 +39,6 @@ public final class MidiManager {
     @Retention(RetentionPolicy.SOURCE)
     public @interface Transport {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     class DeviceListener extends IMidiDeviceListener.Stub {
         private final DeviceCallback mCallback;
         private final Executor mExecutor;
@@ -69,7 +68,6 @@ public final class MidiManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDeviceAdded$0(MidiDeviceInfo device) {
             this.mCallback.onDeviceAdded(device);
         }
@@ -93,7 +91,6 @@ public final class MidiManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDeviceRemoved$1(MidiDeviceInfo device) {
             this.mCallback.onDeviceRemoved(device);
         }
@@ -115,7 +112,6 @@ public final class MidiManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDeviceStatusChanged$2(MidiDeviceStatus status) {
             this.mCallback.onDeviceStatusChanged(status);
         }
@@ -203,7 +199,6 @@ public final class MidiManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendOpenDeviceResponse(
             final MidiDevice device, final OnDeviceOpenedListener listener, Handler handler) {
         if (handler != null) {

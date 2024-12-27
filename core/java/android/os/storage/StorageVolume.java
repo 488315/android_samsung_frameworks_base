@@ -27,13 +27,11 @@ public final class StorageVolume implements Parcelable {
     public static final Parcelable.Creator<StorageVolume> CREATOR =
             new Parcelable.Creator<
                     StorageVolume>() { // from class: android.os.storage.StorageVolume.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StorageVolume createFromParcel(Parcel in) {
                     return new StorageVolume(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StorageVolume[] newArray(int size) {
                     return new StorageVolume[size];
@@ -137,7 +135,6 @@ public final class StorageVolume implements Parcelable {
         return this.mPath;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public File getDirectory() {
         char c;
         String str = this.mState;

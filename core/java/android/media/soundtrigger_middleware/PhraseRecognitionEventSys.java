@@ -14,7 +14,6 @@ public class PhraseRecognitionEventSys implements Parcelable {
     public static final Parcelable.Creator<PhraseRecognitionEventSys> CREATOR =
             new Parcelable.Creator<PhraseRecognitionEventSys>() { // from class:
                 // android.media.soundtrigger_middleware.PhraseRecognitionEventSys.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhraseRecognitionEventSys createFromParcel(Parcel _aidl_source) {
                     PhraseRecognitionEventSys _aidl_out = new PhraseRecognitionEventSys();
@@ -22,7 +21,6 @@ public class PhraseRecognitionEventSys implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhraseRecognitionEventSys[] newArray(int _aidl_size) {
                     return new PhraseRecognitionEventSys[_aidl_size];

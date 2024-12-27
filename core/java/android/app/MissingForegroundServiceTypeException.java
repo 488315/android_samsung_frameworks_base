@@ -8,13 +8,11 @@ public final class MissingForegroundServiceTypeException extends ForegroundServi
     public static final Parcelable.Creator<MissingForegroundServiceTypeException> CREATOR =
             new Parcelable.Creator<MissingForegroundServiceTypeException>() { // from class:
                 // android.app.MissingForegroundServiceTypeException.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MissingForegroundServiceTypeException createFromParcel(Parcel source) {
                     return new MissingForegroundServiceTypeException(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MissingForegroundServiceTypeException[] newArray(int size) {
                     return new MissingForegroundServiceTypeException[size];

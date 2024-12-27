@@ -9,13 +9,11 @@ public class SContextActivityBatch extends SContextEventContext {
     public static final Parcelable.Creator<SContextActivityBatch> CREATOR =
             new Parcelable.Creator<SContextActivityBatch>() { // from class:
                 // android.hardware.scontext.SContextActivityBatch.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextActivityBatch createFromParcel(Parcel in) {
                     return new SContextActivityBatch(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextActivityBatch[] newArray(int size) {
                     return new SContextActivityBatch[size];

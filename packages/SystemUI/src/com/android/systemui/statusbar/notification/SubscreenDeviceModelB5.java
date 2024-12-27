@@ -318,8 +318,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v19, types: [com.android.systemui.statusbar.notification.SubscreenDeviceModelB5$mSrResponseCallback$1] */
-    /* JADX WARN: Type inference failed for: r4v0, types: [com.android.systemui.statusbar.notification.SubscreenDeviceModelB5$aodTspUpdateReceiver$1] */
     public SubscreenDeviceModelB5(Context context, KeyguardUpdateMonitor keyguardUpdateMonitor, SettingsHelper settingsHelper, UserContextProvider userContextProvider, SubscreenNotificationController subscreenNotificationController, Lazy lazy, CommonNotifCollection commonNotifCollection, LogBuffer logBuffer, NotificationInterruptStateProvider notificationInterruptStateProvider, Lazy lazy2, Lazy lazy3, NotificationVisibilityProvider notificationVisibilityProvider, BindEventManager bindEventManager, NotificationController notificationController, UserManager userManager, ConversationNotificationManager conversationNotificationManager) {
         super(context, keyguardUpdateMonitor, settingsHelper, userContextProvider, subscreenNotificationController, lazy, commonNotifCollection, logBuffer, notificationInterruptStateProvider, lazy2, lazy3, notificationVisibilityProvider, bindEventManager, notificationController, userManager, conversationNotificationManager);
         this.isDebug = DeviceType.getDebugLevel() == DeviceType.DEBUG_LEVEL_MID || DeviceType.getDebugLevel() == DeviceType.DEBUG_LEVEL_HIGH;
@@ -1194,7 +1192,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
         return sb.toString();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0031 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1429,10 +1426,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:135:0x0236  */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x023c  */
-    /* JADX WARN: Removed duplicated region for block: B:140:0x01fb  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0191  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1484,9 +1477,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
         final ImageView imageView3 = (ImageView) itemViewHolder.itemView.findViewById(R.id.smart_reply_trigger_button);
         if (imageView3 != null) {
             imageView3.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelB5$initDetailAdapterItemViewHolder$2$1
-                /* JADX WARN: Type inference failed for: r5v0 */
-                /* JADX WARN: Type inference failed for: r5v2, types: [boolean, int] */
-                /* JADX WARN: Type inference failed for: r5v4 */
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
                     Float f;
@@ -2337,7 +2327,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.SubscreenDeviceModelB5.moveDetailAdapterContentScroll(android.view.View, boolean, boolean, boolean):void");
     }
 
-    /* JADX WARN: Type inference failed for: r8v38, types: [T, java.lang.String] */
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelCommon, com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
     public final void onBindDetailAdapterItemViewHolder(SubscreenNotificationDetailAdapter subscreenNotificationDetailAdapter, SubscreenNotificationDetailAdapter.ItemViewHolder itemViewHolder) {
         int dimensionPixelSize;
@@ -2383,7 +2372,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
                             final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
                             ref$ObjectRef.element = ((SubscreenNotificationInfo.MessagingStyleInfo) itemViewHolder.mInfo.mMessageingStyleInfoArray.get(size - 1)).mContentText;
                             neuralTranslator.refresh().addOnCompleteListener(new OnCompleteListener() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelB5$onBindDetailAdapterItemViewHolder$1
-                                /* JADX WARN: Multi-variable type inference failed */
                                 @Override // com.samsung.android.sdk.scs.base.tasks.OnCompleteListener
                                 public final void onComplete(Task task) {
                                     TaskImpl identifyLanguage = NeuralTranslator.this.identifyLanguage((String) ref$ObjectRef.element);
@@ -2763,12 +2751,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
         dateTimeView.setVisibility(0);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:110:0x014e  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x010e  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x0162  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0240  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0233  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0168  */
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2961,7 +2943,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
         this.mIsStartedReplyActivity = false;
     }
 
-    /* JADX WARN: Type inference failed for: r1v8, types: [T, java.lang.String] */
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
     public final void showAIReply() {
         SubscreenNotificationDetailAdapter.ItemViewHolder itemViewHolder;
@@ -3038,7 +3019,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
                                 }
                                 enableSmartReplyTriggerBtn("", false);
                                 neuralTranslator.refresh().addOnCompleteListener(new OnCompleteListener() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelB5$callAIReply$1
-                                    /* JADX WARN: Multi-variable type inference failed */
                                     @Override // com.samsung.android.sdk.scs.base.tasks.OnCompleteListener
                                     public final void onComplete(Task task) {
                                         TaskImpl identifyLanguage = NeuralTranslator.this.identifyLanguage((String) ref$ObjectRef.element);
@@ -3543,7 +3523,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
         this.currentAccount = account;
         this.isSALoggedIn = account != null;
         ThreadUtils.postOnBackgroundThread(new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelB5$getChildAccount$1
-            /* JADX WARN: Removed duplicated region for block: B:14:0x0069  */
             @Override // java.lang.Runnable
             /*
                 Code decompiled incorrectly, please refer to instructions dump.

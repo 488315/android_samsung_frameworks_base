@@ -17,7 +17,6 @@ final class ColorInversionRepositoryImpl$setIsEnabled$2 extends SuspendLambda im
     int label;
     final /* synthetic */ ColorInversionRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ColorInversionRepositoryImpl$setIsEnabled$2(ColorInversionRepositoryImpl colorInversionRepositoryImpl, boolean z, UserHandle userHandle, Continuation continuation) {
         super(2, continuation);
         this.this$0 = colorInversionRepositoryImpl;

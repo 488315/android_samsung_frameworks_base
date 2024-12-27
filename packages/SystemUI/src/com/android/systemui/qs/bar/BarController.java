@@ -131,8 +131,6 @@ public final class BarController implements Dumpable, PanelScreenShotLogger.LogP
         Log.d("BarController", ">");
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.qs.bar.BarController$1] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.qs.bar.BarController$2] */
     public BarController(Context context, SettingsHelper settingsHelper, DumpManager dumpManager, final BarFactory barFactory, SecQSPanelResourcePicker secQSPanelResourcePicker, KnoxStateMonitor knoxStateMonitor, BarOrderInteractor barOrderInteractor, ColoredBGHelper coloredBGHelper) {
         final boolean z = false;
         final boolean z2 = true;

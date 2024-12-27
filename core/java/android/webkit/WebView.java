@@ -1284,7 +1284,6 @@ public class WebView extends AbsoluteLayout
         return this.mProvider.getViewDelegate().performAccessibilityAction(action, arguments);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public void onDrawVerticalScrollBar(
             Canvas canvas, Drawable scrollBar, int l, int t, int r, int b) {
@@ -1346,7 +1345,6 @@ public class WebView extends AbsoluteLayout
         super.onFocusChanged(focused, direction, previouslyFocusedRect);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public boolean setFrame(int left, int top, int right, int bottom) {
         return this.mProvider.getViewDelegate().setFrame(left, top, right, bottom);

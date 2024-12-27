@@ -280,11 +280,6 @@ public final class SecPowerNotificationWarnings implements SecWarningsUI {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.power.SecPowerNotificationWarnings$4] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.power.SecPowerNotificationWarnings$5] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.systemui.power.SecPowerNotificationWarnings$9] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.systemui.power.SecPowerNotificationWarnings$18] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.systemui.power.SecPowerNotificationWarnings$21] */
     public SecPowerNotificationWarnings(Context context) {
         Receiver receiver = new Receiver(this, 0);
         this.mIsInCall = false;

@@ -30,13 +30,11 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
             new Parcelable.Creator<
                     PrinterCapabilitiesInfo>() { // from class:
                                                  // android.print.PrinterCapabilitiesInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrinterCapabilitiesInfo createFromParcel(Parcel parcel) {
                     return new PrinterCapabilitiesInfo(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrinterCapabilitiesInfo[] newArray(int size) {
                     return new PrinterCapabilitiesInfo[size];
@@ -130,7 +128,6 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
         return builder.build();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void enforceValidMask(int mask, IntConsumer enforceSingle) {
         int current = mask;
         while (current > 0) {

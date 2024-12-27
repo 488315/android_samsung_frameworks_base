@@ -148,7 +148,6 @@ public final class CameraStateMonitor {
                 1000L);
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.wm.CameraStateMonitor$1] */
     public CameraStateMonitor(DisplayContent displayContent, Handler handler) {
         this.mHandler = handler;
         this.mDisplayContent = displayContent;

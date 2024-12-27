@@ -356,8 +356,6 @@ public abstract class AbsAppSnapshotController {
         return this.mIsRunningOnTv || this.mIsRunningOnIoT || !this.mSnapshotEnabled;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00e9 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x00ea  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

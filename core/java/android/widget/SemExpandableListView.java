@@ -689,7 +689,6 @@ public class SemExpandableListView extends ListView {
         canvas.restoreToCount(saveCount);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Drawable getIndicator(SemExpandableListConnector.PositionMetadata positionMetadata) {
         Drawable drawable;
         int[] iArr;
@@ -749,7 +748,6 @@ public class SemExpandableListView extends ListView {
         super.drawDivider(canvas, bounds, flatListPosition);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Drawable getDivider(SemExpandableListConnector.PositionMetadata pos) {
         if (pos.position.type == 1) {
             return this.mChildDivider;
@@ -789,18 +787,15 @@ public class SemExpandableListView extends ListView {
         return this.mAdapter;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isHeaderOrFooterPosition(int position) {
         int footerViewsStart = this.mItemCount - getFooterViewsCount();
         return position < getHeaderViewsCount() || position >= footerViewsStart;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getFlatPositionForConnector(int flatListPosition) {
         return flatListPosition - getHeaderViewsCount();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getAbsoluteFlatPosition(int flatListPosition) {
         return getHeaderViewsCount() + flatListPosition;
     }
@@ -1088,7 +1083,6 @@ public class SemExpandableListView extends ListView {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void resetExpandAnimationState() {
         this.mGhostViews.clear();
         this.mGhostExpandCollapseChildViews.clear();
@@ -1110,8 +1104,6 @@ public class SemExpandableListView extends ListView {
                 .addOnPreDrawListener(
                         new ViewTreeObserver.OnPreDrawListener() { // from class:
                             // android.widget.SemExpandableListView.6
-                            /* JADX WARN: Removed duplicated region for block: B:24:0x00f4  */
-                            /* JADX WARN: Removed duplicated region for block: B:43:0x01bb  */
                             @Override // android.view.ViewTreeObserver.OnPreDrawListener
                             /*
                                 Code decompiled incorrectly, please refer to instructions dump.
@@ -1407,7 +1399,6 @@ public class SemExpandableListView extends ListView {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void resetCollapseAnimationState() {
         this.mCollapsedGroupTopStart = 0;
         this.mCollapsedGroupTopEnd = 0;
@@ -1420,7 +1411,6 @@ public class SemExpandableListView extends ListView {
         this.mBlockTouchEvent = false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Animator getSelectorRectAnim(int offset) {
         Rect newViewBounds = new Rect(this.mSelectorRect);
         Rect oldViewBounds = new Rect(newViewBounds);
@@ -1654,7 +1644,6 @@ public class SemExpandableListView extends ListView {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startIndicatorAnimation(View child, boolean isExpanding, int duration) {
         int startAngle = this.mRotationAngle;
         if (!isExpanding) {
@@ -1683,7 +1672,6 @@ public class SemExpandableListView extends ListView {
                 isExpanding ? this.mDescriptionCollapse : this.mDescriptionExpand);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ObjectAnimator createViewSnapshotAnimationReverse(
             int translationOffset, ViewInfo viewInfo) {
         Rect newViewBounds = new Rect(viewInfo.left, viewInfo.top, viewInfo.right, viewInfo.bottom);
@@ -1699,7 +1687,6 @@ public class SemExpandableListView extends ListView {
         return animBounds;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ObjectAnimator createViewSnapshotAnimation(int translationOffset, ViewInfo viewInfo) {
         Rect oldViewBounds = new Rect(viewInfo.left, viewInfo.top, viewInfo.right, viewInfo.bottom);
         Rect newViewBounds = new Rect(oldViewBounds);
@@ -2011,13 +1998,11 @@ public class SemExpandableListView extends ListView {
                 new Parcelable.Creator<
                         SavedState>() { // from class:
                                         // android.widget.SemExpandableListView.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];
@@ -2226,7 +2211,6 @@ public class SemExpandableListView extends ListView {
                             + sb.toString());
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void printAnimationInfo(Animator animation) {
             if (animation != null) {
                 Log.d(SemExpandableListView.TAG, "printAnimationInfo : animation = " + animation);
@@ -2467,7 +2451,6 @@ public class SemExpandableListView extends ListView {
         return expandedState;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getLastNonFooterPosition() {
         int lastPos = getLastVisiblePosition();
         int lastValidPos = lastPos;

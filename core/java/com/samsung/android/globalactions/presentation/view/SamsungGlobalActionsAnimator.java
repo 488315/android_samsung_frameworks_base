@@ -206,7 +206,6 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
                 .addOnGlobalLayoutListener(this.mViewTreeObserverListener);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startShowConfirmAnimation$0() {
         this.mConfirmationView
                 .getViewTreeObserver()
@@ -256,7 +255,6 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
                 .addOnGlobalLayoutListener(this.mViewTreeObserverListener);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startShowSafeModeAnimation$1() {
         this.mConfirmationView
                 .getViewTreeObserver()
@@ -305,7 +303,6 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
                 .addOnGlobalLayoutListener(this.mViewTreeObserverListener);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startSetSafeModeAnimation$2() {
         this.mConfirmationView
                 .getViewTreeObserver()

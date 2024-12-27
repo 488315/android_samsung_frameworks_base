@@ -17,7 +17,6 @@ final class SystemUIDialogFactoryExtKt$bottomSheetClickable$1$1 extends SuspendL
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SystemUIDialogFactoryExtKt$bottomSheetClickable$1$1(Function0 function0, Continuation continuation) {
         super(2, continuation);
         this.$onClick = function0;

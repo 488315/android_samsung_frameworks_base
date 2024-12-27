@@ -26,7 +26,6 @@ final class TileJavaAdapter$bind$1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Flow $flow;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(Flow flow, Consumer<Object> consumer, Continuation continuation) {
             super(2, continuation);
             this.$flow = flow;
@@ -72,7 +71,6 @@ final class TileJavaAdapter$bind$1 extends SuspendLambda implements Function2 {
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TileJavaAdapter$bind$1(LifecycleOwner lifecycleOwner, Flow flow, Consumer<Object> consumer, Continuation continuation) {
         super(2, continuation);
         this.$lifecycleOwner = lifecycleOwner;

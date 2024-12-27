@@ -80,7 +80,6 @@ public final class DialogKt {
         if ((i & 2) != 0) {
             BackAnimationSpec.Companion companion = BackAnimationSpec.Companion;
             Function0 function0 = new Function0() { // from class: com.android.systemui.util.DialogKt$registerAnimationOnBackInvoked$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -99,7 +98,6 @@ public final class DialogKt {
     public static final void registerAnimationOnBackInvoked(final Dialog dialog, final View view, BackAnimationSpec backAnimationSpec) {
         final OnBackInvokedDispatcher onBackInvokedDispatcher = dialog.getOnBackInvokedDispatcher();
         final OnBackAnimationCallbackExtensionKt$onBackAnimationCallbackFrom$4 onBackAnimationCallbackFrom$default = OnBackAnimationCallbackExtensionKt.onBackAnimationCallbackFrom$default(backAnimationSpec, view.getResources().getDisplayMetrics(), new Function1() { // from class: com.android.systemui.util.DialogKt$registerAnimationOnBackInvoked$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -155,7 +153,6 @@ public final class DialogKt {
                 view2.setScaleY(backTransformation.scale);
             }
         }, new Function0() { // from class: com.android.systemui.util.DialogKt$registerAnimationOnBackInvoked$3
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

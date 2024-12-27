@@ -103,9 +103,6 @@ public final class CarrierHomeLogoViewController extends ViewController implemen
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$deviceProvisionedListener$1] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$quickStarListener$1] */
-    /* JADX WARN: Type inference failed for: r2v15, types: [com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$defaultDataListener$1] */
     public CarrierHomeLogoViewController(View view, BroadcastDispatcher broadcastDispatcher, DumpManager dumpManager, SettingsHelper settingsHelper, ConfigurationController configurationController, CarrierLogoVisibilityManager carrierLogoVisibilityManager, int i, CarrierInfraMediator carrierInfraMediator, DarkIconDispatcher darkIconDispatcher, SlimIndicatorViewMediator slimIndicatorViewMediator, CarrierLogoView carrierLogoView, IndicatorScaleGardener indicatorScaleGardener, SubscriptionManager subscriptionManager, SimCardInfoUtil simCardInfoUtil, CarrierConfigTracker carrierConfigTracker, DeviceProvisionedController deviceProvisionedController) {
         super(view);
         this.dumpManager = dumpManager;
@@ -246,7 +243,6 @@ public final class CarrierHomeLogoViewController extends ViewController implemen
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // com.android.systemui.util.ViewController
     public final void onViewAttached() {
         String str;

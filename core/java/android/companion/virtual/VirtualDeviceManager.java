@@ -412,7 +412,6 @@ public final class VirtualDeviceManager {
             return this.mVirtualDeviceInternal.createVirtualTouchscreen(config);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Deprecated
         public VirtualTouchscreen createVirtualTouchscreen(
                 VirtualDisplay display, String inputDeviceName, int vendorId, int productId) {
@@ -521,7 +520,6 @@ public final class VirtualDeviceManager {
         default void onVirtualDeviceClosed(int deviceId) {}
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class VirtualDeviceListenerDelegate extends IVirtualDeviceListener.Stub {
         private final Executor mExecutor;
         private final VirtualDeviceListener mListener;
@@ -549,7 +547,6 @@ public final class VirtualDeviceManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVirtualDeviceCreated$0(int deviceId) {
             this.mListener.onVirtualDeviceCreated(deviceId);
         }
@@ -572,7 +569,6 @@ public final class VirtualDeviceManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVirtualDeviceClosed$1(int deviceId) {
             this.mListener.onVirtualDeviceClosed(deviceId);
         }

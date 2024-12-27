@@ -1704,7 +1704,6 @@ public class GradientDrawable extends Drawable {
             computeOpacity();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void computeOpacity() {
             boolean z = false;
             this.mOpaqueOverBounds = false;

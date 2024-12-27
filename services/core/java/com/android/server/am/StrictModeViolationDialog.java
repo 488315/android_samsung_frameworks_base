@@ -16,7 +16,6 @@ public final class StrictModeViolationDialog extends BaseErrorDialog {
     public final AppErrorResult mResult;
     public final ActivityManagerService mService;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [android.os.Handler, com.android.server.am.StrictModeViolationDialog$1] */
     public StrictModeViolationDialog(Context context, ActivityManagerService activityManagerService, AppErrorResult appErrorResult, ProcessRecord processRecord) {
         super(context);
         CharSequence applicationLabel;

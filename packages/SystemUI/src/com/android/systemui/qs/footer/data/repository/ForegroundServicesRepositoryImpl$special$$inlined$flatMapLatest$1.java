@@ -23,7 +23,6 @@ public final class ForegroundServicesRepositoryImpl$special$$inlined$flatMapLate
     int label;
     final /* synthetic */ ForegroundServicesRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ForegroundServicesRepositoryImpl$special$$inlined$flatMapLatest$1(Continuation continuation, ForegroundServicesRepositoryImpl foregroundServicesRepositoryImpl, FgsManagerController fgsManagerController) {
         super(3, continuation);
         this.this$0 = foregroundServicesRepositoryImpl;
@@ -82,8 +81,6 @@ public final class ForegroundServicesRepositoryImpl$special$$inlined$flatMapLate
                             this.$fgsManagerController$inlined = fgsManagerController;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.

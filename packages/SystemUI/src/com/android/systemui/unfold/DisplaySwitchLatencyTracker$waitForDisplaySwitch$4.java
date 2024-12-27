@@ -11,7 +11,6 @@ final class DisplaySwitchLatencyTracker$waitForDisplaySwitch$4 extends SuspendLa
     int label;
     final /* synthetic */ DisplaySwitchLatencyTracker this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisplaySwitchLatencyTracker$waitForDisplaySwitch$4(DisplaySwitchLatencyTracker displaySwitchLatencyTracker, Continuation continuation) {
         super(1, continuation);
         this.this$0 = displaySwitchLatencyTracker;

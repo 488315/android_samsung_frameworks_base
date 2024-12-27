@@ -443,11 +443,6 @@ public final class MediaRoute2ProviderServiceProxy extends MediaRoute2Provider {
 
        if (r2.anyMatch(new com.android.server.media.MediaRoute2Provider$SessionCreationOrTransferRequest$$ExternalSyntheticLambda1(r3)) != false) goto L16;
     */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0068  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x008e  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x006f  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0043  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

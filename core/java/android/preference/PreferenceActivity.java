@@ -196,13 +196,11 @@ public abstract class PreferenceActivity extends ListActivity
         public static final Parcelable.Creator<Header> CREATOR =
                 new Parcelable.Creator<
                         Header>() { // from class: android.preference.PreferenceActivity.Header.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Header createFromParcel(Parcel source) {
                         return new Header(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Header[] newArray(int size) {
                         return new Header[size];
@@ -1024,7 +1022,6 @@ public abstract class PreferenceActivity extends ListActivity
 
        if (r7 != 4) goto L77;
     */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x01e9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1408,7 +1405,6 @@ public abstract class PreferenceActivity extends ListActivity
         this.mHandler.obtainMessage(1).sendToTarget();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void bindPreferences() {
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         if (preferenceScreen != null) {

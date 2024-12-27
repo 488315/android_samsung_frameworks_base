@@ -9,13 +9,11 @@ public class SContextSpecificPoseAlert extends SContextEventContext {
     public static final Parcelable.Creator<SContextSpecificPoseAlert> CREATOR =
             new Parcelable.Creator<SContextSpecificPoseAlert>() { // from class:
                 // android.hardware.scontext.SContextSpecificPoseAlert.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextSpecificPoseAlert createFromParcel(Parcel in) {
                     return new SContextSpecificPoseAlert(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextSpecificPoseAlert[] newArray(int size) {
                     return new SContextSpecificPoseAlert[size];

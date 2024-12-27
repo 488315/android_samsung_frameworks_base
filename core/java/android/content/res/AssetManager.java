@@ -67,22 +67,16 @@ public final class AssetManager implements AutoCloseable {
     private static native void nativeApplyStyle(
             long j, long j2, int i, int i2, long j3, int[] iArr, long j4, long j5);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeAssetDestroy(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeAssetGetLength(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeAssetGetRemainingLength(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeAssetRead(long j, byte[] bArr, int i, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeAssetReadChar(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeAssetSeek(long j, long j2, int i);
 
     private static native int[] nativeAttributeResolutionStack(
@@ -164,7 +158,6 @@ public final class AssetManager implements AutoCloseable {
     private static native boolean nativeRetrieveAttributes(
             long j, long j2, int[] iArr, int[] iArr2, int[] iArr3);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetApkAssets(
             long j, ApkAssets[] apkAssetsArr, boolean z, boolean z2);
 
@@ -370,7 +363,6 @@ public final class AssetManager implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateSamsungThemeOverlays() {
         synchronized (this) {
             if (this.mSamsungThemeOverlays.size() > 0) {
@@ -1482,7 +1474,6 @@ public final class AssetManager implements AutoCloseable {
         this.mNumRefs++;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void decRefsLocked(long id) {
         this.mNumRefs--;
         if (this.mNumRefs == 0 && this.mObject != 0) {

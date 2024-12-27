@@ -146,13 +146,6 @@ public class FaceEnrollActivity extends FragmentActivity {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:56:0x0122  */
-        /* JADX WARN: Removed duplicated region for block: B:76:0x01d0  */
-        /* JADX WARN: Removed duplicated region for block: B:82:0x0192  */
-        /* JADX WARN: Removed duplicated region for block: B:83:0x019a  */
-        /* JADX WARN: Removed duplicated region for block: B:84:0x01a2  */
-        /* JADX WARN: Removed duplicated region for block: B:85:0x01aa  */
-        /* JADX WARN: Removed duplicated region for block: B:97:? A[RETURN, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -504,8 +497,6 @@ public class FaceEnrollActivity extends FragmentActivity {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public static final class Pose {
         public static final /* synthetic */ Pose[] $VALUES;
         public static final Pose CENTER;
@@ -676,9 +667,6 @@ public class FaceEnrollActivity extends FragmentActivity {
         super.onBackPressed();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v7, types: [android.view.View$OnAttachStateChangeListener, com.samsung.android.biometrics.app.setting.face.FaceEnrollActivity$2] */
-    /* JADX WARN: Type inference failed for: r4v28, types: [com.samsung.android.biometrics.app.setting.face.FaceEnrollActivity$7] */
     @Override // androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, android.app.Activity
     public final void onCreate(Bundle bundle) {
         Log.d("BSS_FaceEnrollActivity", "onCreate");
@@ -816,8 +804,6 @@ public class FaceEnrollActivity extends FragmentActivity {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x014b  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x016f  */
     @Override // androidx.fragment.app.FragmentActivity, android.app.Activity
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -865,7 +851,6 @@ public class FaceEnrollActivity extends FragmentActivity {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x006d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

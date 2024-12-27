@@ -108,7 +108,6 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.controls.management.SecControlsFavoritingActivity$favoriteControlChangeMainCallback$1] */
     public SecControlsFavoritingActivity(Executor executor, ControlsController controlsController, SecControlsController secControlsController, BroadcastDispatcher broadcastDispatcher, LayoutUtil layoutUtil, ControlsUtil controlsUtil, UserTracker userTracker, AUIFacade aUIFacade, SALogger sALogger) {
         super(broadcastDispatcher, controlsController, userTracker, executor);
         this.executor = executor;
@@ -173,10 +172,6 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
         return "SecControlsFavoritingActivity";
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r0v1 */
-    /* JADX WARN: Type inference failed for: r0v11, types: [java.util.ArrayList] */
     public final void loadForComponent(ControlsController.LoadData loadData, boolean z) {
         List list;
         ControlsControllerKt$createLoadDataObject$1 controlsControllerKt$createLoadDataObject$1 = (ControlsControllerKt$createLoadDataObject$1) loadData;

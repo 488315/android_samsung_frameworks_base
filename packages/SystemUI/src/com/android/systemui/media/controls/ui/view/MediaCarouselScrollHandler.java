@@ -61,7 +61,6 @@ public final class MediaCarouselScrollHandler {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.media.controls.ui.view.MediaCarouselScrollHandler$Companion$CONTENT_TRANSLATION$1] */
     static {
         new Companion(null);
         CONTENT_TRANSLATION = new FloatPropertyCompat() { // from class: com.android.systemui.media.controls.ui.view.MediaCarouselScrollHandler$Companion$CONTENT_TRANSLATION$1

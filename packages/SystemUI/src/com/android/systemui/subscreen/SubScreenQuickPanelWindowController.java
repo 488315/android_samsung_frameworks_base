@@ -104,7 +104,6 @@ public final class SubScreenQuickPanelWindowController implements PanelScreenSho
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.subscreen.SubScreenQuickPanelWindowController$1] */
     public SubScreenQuickPanelWindowController(SubscreenQsPanelController subscreenQsPanelController, CommandQueue commandQueue, RemoteInputQuickSettingsDisabler remoteInputQuickSettingsDisabler, DisplayLifecycle displayLifecycle, DisplayManager displayManager, SysUiState sysUiState, ScreenRecordingStateProvider screenRecordingStateProvider, DelayableExecutor delayableExecutor, Context context, FlingAnimationUtils.Builder builder, DeviceStateManager deviceStateManager, NavigationModeController navigationModeController, SubScreenQuickPanelComponent.Factory factory, SecQSPanelResourcePicker secQSPanelResourcePicker, SubscreenUtil subscreenUtil, WakefulnessLifecycle wakefulnessLifecycle) {
         this.mCoverDisplay = 1;
         this.mSubscreenQsPanelController = subscreenQsPanelController;

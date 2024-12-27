@@ -74,7 +74,6 @@ public final class SecQSImplAnimatorManager extends SecQSImplAnimatorBase implem
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.qs.animator.SecQSImplAnimatorManager$1] */
     public SecQSImplAnimatorManager(QsExpandAnimator qsExpandAnimator, QsOpenAnimator qsOpenAnimator, QsTransitionAnimator qsTransitionAnimator, PanelTransitionAnimator panelTransitionAnimator, PanelSplitOpenAnimator panelSplitOpenAnimator, ImmersiveScrollAnimator immersiveScrollAnimator, QsDetailPopupAnimator qsDetailPopupAnimator, ShadeExpansionStateManager shadeExpansionStateManager, DumpManager dumpManager, ShadeRepository shadeRepository, SecQSDetailController secQSDetailController, SecPanelSplitHelper secPanelSplitHelper, LockscreenShadeTransitionController lockscreenShadeTransitionController) {
         ArrayList arrayList = new ArrayList();
         this.mList = arrayList;

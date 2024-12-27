@@ -550,7 +550,6 @@ public abstract class NotificationListenerService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void maybePopulateRemoteViews(Notification notification) {
         if (getContext().getApplicationInfo().targetSdkVersion < 24) {
             Notification.Builder builder =
@@ -564,7 +563,6 @@ public abstract class NotificationListenerService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void maybePopulatePeople(Notification notification) {
         ArrayList<Person> people;
         if (getContext().getApplicationInfo().targetSdkVersion < 28
@@ -1308,13 +1306,11 @@ public abstract class NotificationListenerService extends Service {
                 new Parcelable.Creator<
                         RankingMap>() { // from class:
                                         // android.service.notification.NotificationListenerService.RankingMap.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RankingMap createFromParcel(Parcel source) {
                         return new RankingMap(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RankingMap[] newArray(int size) {
                         return new RankingMap[size];

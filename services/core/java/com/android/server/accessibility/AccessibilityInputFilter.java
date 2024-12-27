@@ -209,7 +209,6 @@ public final class AccessibilityInputFilter extends InputFilter
         return false;
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AccessibilityInputFilter(
             Context context, AccessibilityManagerService accessibilityManagerService) {
         super(context.getMainLooper());

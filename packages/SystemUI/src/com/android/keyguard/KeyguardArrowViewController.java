@@ -74,8 +74,6 @@ public final class KeyguardArrowViewController extends ViewController implements
         ((KeyguardArrowView) keyguardArrowViewController.mView).announceForAccessibility(keyguardArrowViewController.getContext().getString(z ? isPatternView ? R.string.kg_arrow_move_pattern_area_left : R.string.kg_arrow_move_pin_area_left : isPatternView ? R.string.kg_arrow_move_pattern_area_right : R.string.kg_arrow_move_pin_area_right));
     }
 
-    /* JADX WARN: Type inference failed for: r5v3, types: [com.android.keyguard.KeyguardArrowViewController$1] */
-    /* JADX WARN: Type inference failed for: r5v4, types: [com.android.keyguard.KeyguardArrowViewController$2] */
     public KeyguardArrowViewController(KeyguardArrowView keyguardArrowView, KeyguardArrowViewCallback keyguardArrowViewCallback, ConfigurationController configurationController, KeyguardUpdateMonitor keyguardUpdateMonitor, ViewMediatorCallback viewMediatorCallback) {
         super(keyguardArrowView);
         this.mInterpolator = new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);

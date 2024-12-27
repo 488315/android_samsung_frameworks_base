@@ -36,13 +36,11 @@ public final class Bundle extends BaseBundle implements Cloneable, Parcelable {
         STRIPPED.putInt("STRIPPED", 1);
         CREATOR =
                 new Parcelable.Creator<Bundle>() { // from class: android.os.Bundle.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Bundle createFromParcel(Parcel in) {
                         return in.readBundle();
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Bundle[] newArray(int size) {
                         return new Bundle[size];

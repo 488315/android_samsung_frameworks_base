@@ -16,13 +16,11 @@ public final class StartingWindowInfo implements Parcelable {
     public static final Parcelable.Creator<StartingWindowInfo> CREATOR =
             new Parcelable.Creator<
                     StartingWindowInfo>() { // from class: android.window.StartingWindowInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StartingWindowInfo createFromParcel(Parcel source) {
                     return new StartingWindowInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StartingWindowInfo[] newArray(int size) {
                     return new StartingWindowInfo[size];

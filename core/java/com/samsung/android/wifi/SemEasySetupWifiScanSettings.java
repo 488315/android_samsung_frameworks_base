@@ -12,7 +12,6 @@ public class SemEasySetupWifiScanSettings implements Parcelable {
             new Parcelable.Creator<
                     SemEasySetupWifiScanSettings>() { // from class:
                                                       // com.samsung.android.wifi.SemEasySetupWifiScanSettings.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemEasySetupWifiScanSettings createFromParcel(Parcel in) {
                     SemEasySetupWifiScanSettings settings = new SemEasySetupWifiScanSettings();
@@ -25,7 +24,6 @@ public class SemEasySetupWifiScanSettings implements Parcelable {
                     return settings;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemEasySetupWifiScanSettings[] newArray(int size) {
                     return new SemEasySetupWifiScanSettings[size];

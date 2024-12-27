@@ -78,7 +78,6 @@ public final class OtaDexoptService extends IOtaDexopt.Stub {
         return Integer.MAX_VALUE;
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [android.os.IBinder, com.android.server.pm.OtaDexoptService] */
     public static void main(Context context, PackageManagerService packageManagerService) {
         ?? otaDexoptService = new OtaDexoptService(context, packageManagerService);
         ServiceManager.addService("otadexopt", (IBinder) otaDexoptService);
@@ -282,7 +281,6 @@ public final class OtaDexoptService extends IOtaDexopt.Stub {
         return "(no free space)";
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         new OtaDexoptShellCommand(this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
     }

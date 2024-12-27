@@ -25,7 +25,6 @@ public final class ConnectedDisplayInteractorImpl implements ConnectedDisplayInt
     public final ConnectedDisplayInteractorImpl$special$$inlined$map$3 pendingDisplay;
     public final VirtualDeviceManager virtualDeviceManager;
 
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.display.domain.interactor.ConnectedDisplayInteractorImpl$special$$inlined$map$3] */
     public ConnectedDisplayInteractorImpl(VirtualDeviceManager virtualDeviceManager, KeyguardRepository keyguardRepository, DisplayRepository displayRepository, DeviceStateRepository deviceStateRepository, CoroutineDispatcher coroutineDispatcher) {
         this.virtualDeviceManager = virtualDeviceManager;
         DisplayRepositoryImpl displayRepositoryImpl = (DisplayRepositoryImpl) displayRepository;
@@ -60,8 +59,6 @@ public final class ConnectedDisplayInteractorImpl implements ConnectedDisplayInt
                     this.this$0 = connectedDisplayInteractorImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -219,8 +216,6 @@ public final class ConnectedDisplayInteractorImpl implements ConnectedDisplayInt
                     this.this$0 = connectedDisplayInteractorImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -323,8 +318,6 @@ public final class ConnectedDisplayInteractorImpl implements ConnectedDisplayInt
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -415,8 +408,6 @@ public final class ConnectedDisplayInteractorImpl implements ConnectedDisplayInt
                     this.this$0 = connectedDisplayInteractorImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -513,8 +504,6 @@ public final class ConnectedDisplayInteractorImpl implements ConnectedDisplayInt
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

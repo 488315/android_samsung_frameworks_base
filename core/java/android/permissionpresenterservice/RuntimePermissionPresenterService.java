@@ -64,7 +64,6 @@ public abstract class RuntimePermissionPresenterService extends Service {
         return new AnonymousClass1();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void getAppPermissions(String packageName, RemoteCallback callback) {
         List<RuntimePermissionPresentationInfo> permissions = onGetAppPermissions(packageName);
         if (permissions != null && !permissions.isEmpty()) {

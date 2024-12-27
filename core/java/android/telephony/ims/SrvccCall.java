@@ -10,13 +10,11 @@ import java.util.Objects;
 public final class SrvccCall implements Parcelable {
     public static final Parcelable.Creator<SrvccCall> CREATOR =
             new Parcelable.Creator<SrvccCall>() { // from class: android.telephony.ims.SrvccCall.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SrvccCall createFromParcel(Parcel in) {
                     return new SrvccCall(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SrvccCall[] newArray(int size) {
                     return new SrvccCall[size];

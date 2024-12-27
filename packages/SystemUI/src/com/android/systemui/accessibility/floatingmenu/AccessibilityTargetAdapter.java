@@ -50,7 +50,6 @@ public final class AccessibilityTargetAdapter extends RecyclerView.Adapter {
         this.mTargets = list;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:33:0x009b, code lost:
     
         if (android.provider.Settings.System.getIntForUser(r10.getContentResolver(), r2, 0, -2) == 1) goto L42;

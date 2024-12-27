@@ -2,8 +2,6 @@ package com.android.systemui.statusbar.pipeline.shared.data.model;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class ConnectivitySlot {
     public static final /* synthetic */ ConnectivitySlot[] $VALUES;
     public static final ConnectivitySlot AIRPLANE;

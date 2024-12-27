@@ -36,7 +36,6 @@ public final class WindowTracing {
     public final WindowManagerService mService;
     public final File mTraceFile;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.wm.WindowTracing$$ExternalSyntheticLambda0] */
     public WindowTracing(
             File file, WindowManagerService windowManagerService, Choreographer choreographer) {
         WindowManagerGlobalLock windowManagerGlobalLock = windowManagerService.mGlobalLock;
@@ -115,7 +114,6 @@ public final class WindowTracing {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int onShellCommand(ShellCommand shellCommand) {
         char c;
         PrintWriter outPrintWriter = shellCommand.getOutPrintWriter();

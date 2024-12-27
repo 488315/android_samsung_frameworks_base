@@ -16,13 +16,11 @@ public final class BrightnessInfo implements Parcelable {
     public static final Parcelable.Creator<BrightnessInfo> CREATOR =
             new Parcelable.Creator<
                     BrightnessInfo>() { // from class: android.hardware.display.BrightnessInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BrightnessInfo createFromParcel(Parcel source) {
                     return new BrightnessInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BrightnessInfo[] newArray(int size) {
                     return new BrightnessInfo[size];

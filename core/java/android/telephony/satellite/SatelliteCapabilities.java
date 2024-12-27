@@ -17,13 +17,11 @@ public final class SatelliteCapabilities implements Parcelable {
             new Parcelable.Creator<
                     SatelliteCapabilities>() { // from class:
                                                // android.telephony.satellite.SatelliteCapabilities.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteCapabilities createFromParcel(Parcel in) {
                     return new SatelliteCapabilities(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteCapabilities[] newArray(int size) {
                     return new SatelliteCapabilities[size];

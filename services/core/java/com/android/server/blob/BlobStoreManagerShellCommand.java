@@ -28,8 +28,6 @@ public final class BlobStoreManagerShellCommand extends ShellCommand {
         this.mService = blobStoreManagerService;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Multi-variable type inference failed */
     public final int onCommand(String str) {
         char c;
         int i;
@@ -248,7 +246,6 @@ public final class BlobStoreManagerShellCommand extends ShellCommand {
         outPrintWriter.println();
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int parseOptions(PrintWriter printWriter, ParsedArgs parsedArgs) {
         char c;
         while (true) {

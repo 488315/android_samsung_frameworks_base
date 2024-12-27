@@ -11,7 +11,6 @@ import kotlin.jvm.internal.Lambda;
 final class KeyguardCoordinator$topUnseenSectioner$1$isInSection$1 extends Lambda implements Function1 {
     final /* synthetic */ KeyguardCoordinator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardCoordinator$topUnseenSectioner$1$isInSection$1(KeyguardCoordinator keyguardCoordinator) {
         super(1);
         this.this$0 = keyguardCoordinator;

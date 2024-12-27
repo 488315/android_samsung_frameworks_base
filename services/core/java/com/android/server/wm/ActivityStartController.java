@@ -170,7 +170,6 @@ public final class ActivityStartController {
         return obtain;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final int startActivities(
             IApplicationThread iApplicationThread,
             int i,

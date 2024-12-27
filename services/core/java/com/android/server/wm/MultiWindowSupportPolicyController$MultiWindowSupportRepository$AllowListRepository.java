@@ -110,7 +110,6 @@ class MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListR
                         }
                     };
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.wm.MultiWindowSupportPolicyController$MultiWindowSupportRepository$$ExternalSyntheticLambda0] */
     public MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository(
             int i, ActivityTaskManagerService activityTaskManagerService, String str) {
         this.$r8$classId = i;

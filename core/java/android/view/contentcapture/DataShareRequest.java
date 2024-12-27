@@ -15,13 +15,11 @@ public final class DataShareRequest implements Parcelable {
             new Parcelable.Creator<
                     DataShareRequest>() { // from class:
                                           // android.view.contentcapture.DataShareRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataShareRequest[] newArray(int size) {
                     return new DataShareRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataShareRequest createFromParcel(Parcel in) {
                     return new DataShareRequest(in);

@@ -1031,7 +1031,6 @@ public interface ILauncherApps extends IInterface {
             reply.writeTypedObject(v, 1);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements ILauncherApps {
             private IBinder mRemote;
 

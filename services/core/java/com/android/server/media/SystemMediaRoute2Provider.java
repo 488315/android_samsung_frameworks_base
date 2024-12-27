@@ -564,7 +564,6 @@ public final class SystemMediaRoute2Provider extends MediaRoute2Provider {
         Slog.d("MR2SystemProvider", "Updating system provider info : " + build);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:45:0x010b A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

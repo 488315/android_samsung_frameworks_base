@@ -232,7 +232,6 @@ public class AccessibilityNodeInfo implements Parcelable {
                 new Parcelable.Creator<
                         AccessibilityNodeInfo>() { // from class:
                                                    // android.view.accessibility.AccessibilityNodeInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AccessibilityNodeInfo createFromParcel(Parcel parcel) {
                         AccessibilityNodeInfo info = new AccessibilityNodeInfo();
@@ -240,7 +239,6 @@ public class AccessibilityNodeInfo implements Parcelable {
                         return info;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AccessibilityNodeInfo[] newArray(int size) {
                         return new AccessibilityNodeInfo[size];
@@ -2017,7 +2015,6 @@ public class AccessibilityNodeInfo implements Parcelable {
         this.mExtraRenderingInfo = extraRenderingInfo;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void initFromParcel(Parcel parcel) {
         boolean z;
         ArrayList<String> arrayList;
@@ -2313,7 +2310,6 @@ public class AccessibilityNodeInfo implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String getActionSymbolicName(int action) {
         switch (action) {
             case 1:
@@ -2527,7 +2523,6 @@ public class AccessibilityNodeInfo implements Parcelable {
         return builder.toString();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static AccessibilityNodeInfo getNodeForAccessibilityId(
             int connectionId, int windowId, long accessibilityId) {
         return getNodeForAccessibilityId(connectionId, windowId, accessibilityId, 7);
@@ -2674,13 +2669,11 @@ public class AccessibilityNodeInfo implements Parcelable {
                 new Parcelable.Creator<
                         AccessibilityAction>() { // from class:
                                                  // android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AccessibilityAction createFromParcel(Parcel in) {
                         return new AccessibilityAction(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AccessibilityAction[] newArray(int size) {
                         return new AccessibilityAction[size];
@@ -3160,7 +3153,6 @@ public class AccessibilityNodeInfo implements Parcelable {
                 new Parcelable.Creator<
                         TouchDelegateInfo>() { // from class:
                                                // android.view.accessibility.AccessibilityNodeInfo.TouchDelegateInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TouchDelegateInfo createFromParcel(Parcel parcel) {
                         int size = parcel.readInt();
@@ -3178,7 +3170,6 @@ public class AccessibilityNodeInfo implements Parcelable {
                         return touchDelegateInfo;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TouchDelegateInfo[] newArray(int size) {
                         return new TouchDelegateInfo[size];
@@ -3217,12 +3208,10 @@ public class AccessibilityNodeInfo implements Parcelable {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setConnectionId(int connectionId) {
             this.mConnectionId = connectionId;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setWindowId(int windowId) {
             this.mWindowId = windowId;
         }

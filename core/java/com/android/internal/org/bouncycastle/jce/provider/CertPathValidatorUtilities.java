@@ -594,7 +594,6 @@ class CertPathValidatorUtilities {
         }
     }
 
-    /* JADX WARN: Unreachable blocks removed: 2, instructions: 2 */
     protected static Set getDeltaCRLs(
             Date validityDate,
             X509CRL completeCRL,

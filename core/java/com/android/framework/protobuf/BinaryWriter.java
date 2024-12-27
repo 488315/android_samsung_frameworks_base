@@ -938,7 +938,6 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         return this.alloc.allocateDirectBuffer(Math.max(capacity, this.chunkSize));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static byte computeUInt64SizeNoTag(long value) {
         if (((-128) & value) == 0) {
             return (byte) 1;
@@ -3156,7 +3155,6 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
             nextBuffer();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static boolean isSupported() {
             return UnsafeUtil.hasUnsafeByteBufferOperations();
         }

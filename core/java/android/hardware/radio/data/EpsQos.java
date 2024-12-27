@@ -10,7 +10,6 @@ import java.util.StringJoiner;
 public class EpsQos implements Parcelable {
     public static final Parcelable.Creator<EpsQos> CREATOR =
             new Parcelable.Creator<EpsQos>() { // from class: android.hardware.radio.data.EpsQos.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EpsQos createFromParcel(Parcel _aidl_source) {
                     EpsQos _aidl_out = new EpsQos();
@@ -18,7 +17,6 @@ public class EpsQos implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EpsQos[] newArray(int _aidl_size) {
                     return new EpsQos[_aidl_size];

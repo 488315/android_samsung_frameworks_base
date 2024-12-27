@@ -9,8 +9,6 @@ public final class TurbulenceNoiseController {
 
     public final class Companion {
 
-        /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-        /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
         public final class AnimationState {
             public static final /* synthetic */ AnimationState[] $VALUES;
             public static final AnimationState EASE_IN;

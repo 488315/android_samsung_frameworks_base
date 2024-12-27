@@ -104,7 +104,6 @@ public class GraphicsRendererPolicy {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$init$0() {
         gLogD("start agent policy loading");
         tryScpmRegister();
@@ -120,7 +119,6 @@ public class GraphicsRendererPolicy {
         this.mContext.registerReceiver(this.mScpmPolicyUpdateReceiver, filter, 2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void applyPolicyToChecker() {
         gLogD("applyPolicyToChecker");
         InputStream policyStream = getFdFromStoredPolicy();
@@ -175,18 +173,15 @@ public class GraphicsRendererPolicy {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onReceive$0(Context context) {
             GraphicsRendererPolicy.this.loadScpmPolicy(context);
             GraphicsRendererPolicy.this.applyPolicyToChecker();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onReceive$1() {
             GraphicsRendererPolicy.this.tryScpmRegister();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onReceive$2(Context context) {
             GraphicsRendererPolicy.this.tryScpmRegister();
             GraphicsRendererPolicy.this.loadScpmPolicy(context);
@@ -203,7 +198,6 @@ public class GraphicsRendererPolicy {
         return this.mContext.getContentResolver().call(uri, methodName, "android", extras);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void tryScpmRegister() {
         try {
             this.mScpmToken = registerAndGetScpmToken();
@@ -294,7 +288,6 @@ public class GraphicsRendererPolicy {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void loadScpmPolicy(Context context) {
         gLogD("load policy start");
         if (TextUtils.isEmpty(this.mScpmToken)) {

@@ -1283,7 +1283,6 @@ public class SemTipPopup {
                         + this.mBalloonHeight);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dismissBubble(boolean withAnimation) {
         if (this.mBubblePopup != null) {
             this.mBubblePopup.setUseDismissAnimation(withAnimation);
@@ -1294,7 +1293,6 @@ public class SemTipPopup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void scheduleTimeout() {
         if (mHandler != null) {
             mHandler.removeMessages(0);
@@ -1345,7 +1343,6 @@ public class SemTipPopup {
         this.mBubbleView.startAnimation(animScale);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void animateBounce() {
         float pivotX = 0.0f;
         float pivotY = 0.0f;
@@ -1403,7 +1400,6 @@ public class SemTipPopup {
         this.mBubbleView.startAnimation(animationSet);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void animateScaleUp() {
         float deltaHintY = 0.0f;
         float pivotHintX = 0.0f;
@@ -1686,12 +1682,10 @@ public class SemTipPopup {
             this.mPivotY = 0.0f;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setUseDismissAnimation(boolean useAnimation) {
             this.mIsUsingDismissAnimation = useAnimation;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setPivot(float pivotX, float pivotY) {
             this.mPivotX = pivotX;
             this.mPivotY = pivotY;
@@ -1803,7 +1797,6 @@ public class SemTipPopup {
         return (getLocale().equals("iw_IL") || getLocale().equals("he_IL")) ? false : true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void debugLog(String msg) {
         Log.d(TAG, " #### " + msg);
     }

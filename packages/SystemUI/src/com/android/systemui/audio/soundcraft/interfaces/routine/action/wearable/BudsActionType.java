@@ -3,8 +3,6 @@ package com.android.systemui.audio.soundcraft.interfaces.routine.action.wearable
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public abstract class BudsActionType {
     public static final /* synthetic */ BudsActionType[] $VALUES;
     public static final BudsActionType EQUALIZER;

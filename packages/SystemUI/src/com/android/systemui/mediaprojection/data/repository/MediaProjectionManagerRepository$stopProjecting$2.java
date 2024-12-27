@@ -12,7 +12,6 @@ final class MediaProjectionManagerRepository$stopProjecting$2 extends SuspendLam
     int label;
     final /* synthetic */ MediaProjectionManagerRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaProjectionManagerRepository$stopProjecting$2(MediaProjectionManagerRepository mediaProjectionManagerRepository, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaProjectionManagerRepository;

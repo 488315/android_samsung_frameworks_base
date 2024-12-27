@@ -5,7 +5,6 @@ import java.util.UUID;
 public final class ParcelUuid implements Parcelable {
     public static final Parcelable.Creator<ParcelUuid> CREATOR =
             new Parcelable.Creator<ParcelUuid>() { // from class: android.os.ParcelUuid.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelUuid createFromParcel(Parcel source) {
                     long mostSigBits = source.readLong();
@@ -14,7 +13,6 @@ public final class ParcelUuid implements Parcelable {
                     return new ParcelUuid(uuid);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelUuid[] newArray(int size) {
                     return new ParcelUuid[size];

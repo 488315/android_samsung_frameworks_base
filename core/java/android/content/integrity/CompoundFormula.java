@@ -18,13 +18,11 @@ public final class CompoundFormula extends IntegrityFormula implements Parcelabl
     public static final Parcelable.Creator<CompoundFormula> CREATOR =
             new Parcelable.Creator<
                     CompoundFormula>() { // from class: android.content.integrity.CompoundFormula.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompoundFormula createFromParcel(Parcel in) {
                     return new CompoundFormula(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompoundFormula[] newArray(int size) {
                     return new CompoundFormula[size];

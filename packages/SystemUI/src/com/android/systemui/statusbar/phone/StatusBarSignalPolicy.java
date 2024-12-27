@@ -42,7 +42,6 @@ public final class StatusBarSignalPolicy implements SignalCallback, SecurityCont
         void updateDesktopStatusBarIcons();
     }
 
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.systemui.statusbar.phone.StatusBarSignalPolicy$1] */
     public StatusBarSignalPolicy(Context context, StatusBarIconController statusBarIconController, CarrierConfigTracker carrierConfigTracker, NetworkController networkController, SecurityController securityController, TunerService tunerService, DesktopManager desktopManager, CoverScreenIconController coverScreenIconController) {
         new ArrayList();
         this.mDesktopStatusBarIconUpdateCallback = new DesktopCallback() { // from class: com.android.systemui.statusbar.phone.StatusBarSignalPolicy.1

@@ -33,12 +33,6 @@ public final class MultiPackDispatcher {
             super(looper);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:32:0x0163  */
-        /* JADX WARN: Removed duplicated region for block: B:34:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Type inference failed for: r11v1 */
-        /* JADX WARN: Type inference failed for: r11v2, types: [boolean, int] */
-        /* JADX WARN: Type inference failed for: r11v3 */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -53,8 +47,6 @@ public final class MultiPackDispatcher {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0087 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* renamed from: -$$Nest$mrequestImageWallpaper, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -19,7 +19,6 @@ public class BinderCacheManager<T extends IInterface> {
         T create();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class BinderDeathTracker implements IBinder.DeathRecipient {
         private final T mConnection;
         private final HashMap<Object, Runnable> mListeners = new HashMap<>();
@@ -119,7 +118,6 @@ public class BinderCacheManager<T extends IInterface> {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ BinderDeathTracker lambda$getTracker$0(BinderDeathTracker oldVal) {
         BinderDeathTracker binderDeathTracker = oldVal;
         if (binderDeathTracker == null || !binderDeathTracker.isAlive()) {

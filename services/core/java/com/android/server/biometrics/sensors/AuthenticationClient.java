@@ -146,27 +146,6 @@ public abstract class AuthenticationClient extends AcquisitionClient
         return Utils.isKeyguard(this.mContext, this.mOwner);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x042c  */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x03b1  */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x03d9  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x03e4 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:208:0x0232  */
-    /* JADX WARN: Removed duplicated region for block: B:211:0x0244  */
-    /* JADX WARN: Removed duplicated region for block: B:215:0x0254  */
-    /* JADX WARN: Removed duplicated region for block: B:218:0x02c4  */
-    /* JADX WARN: Removed duplicated region for block: B:220:0x02c8  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0408  */
-    /* JADX WARN: Removed duplicated region for block: B:237:0x02a7  */
-    /* JADX WARN: Removed duplicated region for block: B:238:0x024d  */
-    /* JADX WARN: Removed duplicated region for block: B:239:0x0234  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x042f  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x04f5  */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x038c  */
-    /* JADX WARN: Type inference failed for: r12v0, types: [com.android.server.biometrics.log.BiometricFrameworkStatsLogger$$ExternalSyntheticLambda2] */
-    /* JADX WARN: Type inference failed for: r1v29, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r1v30 */
-    /* JADX WARN: Type inference failed for: r1v31 */
     @Override // com.android.server.biometrics.sensors.AuthenticationConsumer
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -158,7 +158,6 @@ public class AuthCredentialPasswordView extends AuthCredentialView
         return Utils.getRatioHeight(context, f);
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.samsung.android.biometrics.app.setting.prompt.credential.AuthCredentialPasswordView$$ExternalSyntheticLambda0] */
     @Override // com.samsung.android.biometrics.app.setting.prompt.credential.AuthCredentialView,
               // android.view.ViewGroup, android.view.View
     public void onAttachedToWindow() {

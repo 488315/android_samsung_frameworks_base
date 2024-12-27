@@ -77,8 +77,6 @@ public final class WallpaperEventNotifier {
         return keyguardWallpaperColors.getSemWallpaperColors(keyguardWallpaperColors.mSelectedUserId, z);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00b2  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00da  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

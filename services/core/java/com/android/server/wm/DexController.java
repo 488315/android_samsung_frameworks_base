@@ -215,7 +215,6 @@ public final class DexController implements IController {
             super(looper);
         }
 
-        /* JADX WARN: Finally extract failed */
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
             Task rootTask;
@@ -616,7 +615,6 @@ public final class DexController implements IController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.server.wm.DexController$1] */
     public DexController(ActivityTaskManagerService activityTaskManagerService) {
         this.mDexMetaKeyPolicy = null;
         this.mAtm = activityTaskManagerService;

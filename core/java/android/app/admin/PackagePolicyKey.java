@@ -20,13 +20,11 @@ public final class PackagePolicyKey extends PolicyKey {
     public static final Parcelable.Creator<PackagePolicyKey> CREATOR =
             new Parcelable.Creator<
                     PackagePolicyKey>() { // from class: android.app.admin.PackagePolicyKey.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackagePolicyKey createFromParcel(Parcel source) {
                     return new PackagePolicyKey(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackagePolicyKey[] newArray(int size) {
                     return new PackagePolicyKey[size];

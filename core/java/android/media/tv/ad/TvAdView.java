@@ -247,7 +247,6 @@ public class TvAdView extends ViewGroup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void createSessionMediaView() {
         if (this.mSession == null || !isAttachedToWindow() || this.mMediaViewCreated) {
             return;
@@ -266,7 +265,6 @@ public class TvAdView extends ViewGroup {
         this.mMediaViewFrame = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void relayoutSessionMediaView() {
         if (this.mSession == null || !isAttachedToWindow() || !this.mMediaViewCreated) {
             return;
@@ -288,7 +286,6 @@ public class TvAdView extends ViewGroup {
         return frame;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setSessionSurface(Surface surface) {
         if (this.mSession == null) {
             return;
@@ -296,7 +293,6 @@ public class TvAdView extends ViewGroup {
         this.mSession.setSurface(surface);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchSurfaceChanged(int format, int width, int height) {
         if (this.mSession == null) {
             return;
@@ -430,7 +426,6 @@ public class TvAdView extends ViewGroup {
         return this.mSession;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class MySessionCallback extends TvAdManager.SessionCallback {
         final String mServiceId;
 
@@ -513,7 +508,6 @@ public class TvAdView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRequestCurrentVideoBounds$0() {
             synchronized (TvAdView.this.mCallbackLock) {
                 if (TvAdView.this.mCallback != null) {
@@ -543,7 +537,6 @@ public class TvAdView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRequestCurrentChannelUri$1() {
             synchronized (TvAdView.this.mCallbackLock) {
                 if (TvAdView.this.mCallback != null) {
@@ -573,7 +566,6 @@ public class TvAdView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRequestTrackInfoList$2() {
             synchronized (TvAdView.this.mCallbackLock) {
                 if (TvAdView.this.mCallback != null) {
@@ -603,7 +595,6 @@ public class TvAdView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRequestCurrentTvInputId$3() {
             synchronized (TvAdView.this.mCallbackLock) {
                 if (TvAdView.this.mCallback != null) {
@@ -638,7 +629,6 @@ public class TvAdView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRequestSigning$4(
                 String id, String algorithm, String alias, byte[] data) {
             synchronized (TvAdView.this.mCallbackLock) {

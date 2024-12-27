@@ -10,13 +10,11 @@ public final class NotifyingApp implements Parcelable, Comparable<NotifyingApp> 
     public static final Parcelable.Creator<NotifyingApp> CREATOR =
             new Parcelable.Creator<
                     NotifyingApp>() { // from class: android.service.notification.NotifyingApp.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotifyingApp createFromParcel(Parcel in) {
                     return new NotifyingApp(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotifyingApp[] newArray(int size) {
                     return new NotifyingApp[size];

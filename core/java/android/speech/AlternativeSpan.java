@@ -15,13 +15,11 @@ public final class AlternativeSpan implements Parcelable {
     public static final Parcelable.Creator<AlternativeSpan> CREATOR =
             new Parcelable.Creator<
                     AlternativeSpan>() { // from class: android.speech.AlternativeSpan.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AlternativeSpan[] newArray(int size) {
                     return new AlternativeSpan[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AlternativeSpan createFromParcel(Parcel in) {
                     return new AlternativeSpan(in);

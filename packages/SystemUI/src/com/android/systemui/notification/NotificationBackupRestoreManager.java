@@ -32,10 +32,8 @@ public final class NotificationBackupRestoreManager {
     public enum ERR_CODE {
         SUCCESS(0),
         UNKNOWN_ERROR(1),
-        /* JADX INFO: Fake field, exist only in values array */
         STORAGE_FULL(2),
         INVALID_DATA(3),
-        /* JADX INFO: Fake field, exist only in values array */
         PARTIAL_SUCCESS(7);
 
         private int value;
@@ -106,10 +104,6 @@ public final class NotificationBackupRestoreManager {
         new LinkedHashMap();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x012c  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x014c A[Catch: IOException -> 0x0155, TRY_LEAVE, TryCatch #3 {IOException -> 0x0155, blocks: (B:33:0x0134, B:35:0x014c), top: B:32:0x0134 }] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0133  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:63:0x00e9 -> B:26:0x0121). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -142,17 +136,6 @@ public final class NotificationBackupRestoreManager {
     
         if (r3 != null) goto L52;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v11 */
-    /* JADX WARN: Type inference failed for: r2v14 */
-    /* JADX WARN: Type inference failed for: r2v19, types: [java.io.FileOutputStream, java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [java.io.File] */
-    /* JADX WARN: Type inference failed for: r2v3 */
-    /* JADX WARN: Type inference failed for: r2v6, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r3v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r3v1 */
-    /* JADX WARN: Type inference failed for: r3v14, types: [java.io.FileInputStream, java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r3v4, types: [java.io.InputStream] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -197,37 +180,6 @@ public final class NotificationBackupRestoreManager {
     
         if (r1 != 0) goto L50;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [java.io.File] */
-    /* JADX WARN: Type inference failed for: r1v1 */
-    /* JADX WARN: Type inference failed for: r1v10 */
-    /* JADX WARN: Type inference failed for: r1v13 */
-    /* JADX WARN: Type inference failed for: r1v16 */
-    /* JADX WARN: Type inference failed for: r1v2 */
-    /* JADX WARN: Type inference failed for: r1v20 */
-    /* JADX WARN: Type inference failed for: r1v21 */
-    /* JADX WARN: Type inference failed for: r1v3 */
-    /* JADX WARN: Type inference failed for: r1v4 */
-    /* JADX WARN: Type inference failed for: r1v5, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r1v6 */
-    /* JADX WARN: Type inference failed for: r1v7 */
-    /* JADX WARN: Type inference failed for: r1v8, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r1v9 */
-    /* JADX WARN: Type inference failed for: r8v0, types: [int] */
-    /* JADX WARN: Type inference failed for: r8v1 */
-    /* JADX WARN: Type inference failed for: r8v12 */
-    /* JADX WARN: Type inference failed for: r8v15 */
-    /* JADX WARN: Type inference failed for: r8v19 */
-    /* JADX WARN: Type inference failed for: r8v2 */
-    /* JADX WARN: Type inference failed for: r8v26 */
-    /* JADX WARN: Type inference failed for: r8v27 */
-    /* JADX WARN: Type inference failed for: r8v3 */
-    /* JADX WARN: Type inference failed for: r8v4 */
-    /* JADX WARN: Type inference failed for: r8v5, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r8v6, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r8v7 */
-    /* JADX WARN: Type inference failed for: r8v8 */
-    /* JADX WARN: Type inference failed for: r8v9, types: [java.io.OutputStream] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -270,7 +222,6 @@ public final class NotificationBackupRestoreManager {
         return new SecretKeySpec(bArr, "AES");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x006e A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

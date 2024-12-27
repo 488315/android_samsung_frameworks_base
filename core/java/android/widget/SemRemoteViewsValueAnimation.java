@@ -26,13 +26,11 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
             new Parcelable.Creator<
                     SemRemoteViewsValueAnimation>() { // from class:
                                                       // android.widget.SemRemoteViewsValueAnimation.2
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemRemoteViewsValueAnimation createFromParcel(Parcel in) {
                     return new SemRemoteViewsValueAnimation(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemRemoteViewsValueAnimation[] newArray(int size) {
                     return new SemRemoteViewsValueAnimation[size];
@@ -230,12 +228,10 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
         this.mIsExpired = true;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.SemRemoteViewsAnimation
     /* renamed from: endAnimation */
     public void lambda$play$0(View root) {}
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private boolean checkArgumentValidation() {
         char c;
         boolean isValid;
@@ -292,7 +288,6 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
         return isValid;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private ValueAnimator.AnimatorUpdateListener provideAnimatorUpdateListener(
             final View targetView) {
         char c;
@@ -393,7 +388,6 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
         progressBar.setProgress(value);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$provideAnimatorUpdateListener$1(
             ViewGroup.LayoutParams layoutParams, View targetView, ValueAnimator animation) {
         if (layoutParams == null) {
@@ -408,7 +402,6 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
         targetView.setLayoutParams(layoutParams);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$provideAnimatorUpdateListener$2(
             TextView textView, ValueAnimator animation) {
         if (this.mDecimalFormat == null) {
@@ -439,7 +432,6 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
         Log.w(LOG_TAG, "missed value type:" + this.mValueType);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private Animator.AnimatorListener provideAnimatorListener(View targetView) {
         char c;
         String str = this.mAnimationType;

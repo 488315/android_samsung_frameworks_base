@@ -8,7 +8,6 @@ public class AudioPreselectionLabel implements Parcelable {
     public static final Parcelable.Creator<AudioPreselectionLabel> CREATOR =
             new Parcelable.Creator<AudioPreselectionLabel>() { // from class:
                 // android.hardware.tv.tuner.AudioPreselectionLabel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPreselectionLabel createFromParcel(Parcel _aidl_source) {
                     AudioPreselectionLabel _aidl_out = new AudioPreselectionLabel();
@@ -16,7 +15,6 @@ public class AudioPreselectionLabel implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPreselectionLabel[] newArray(int _aidl_size) {
                     return new AudioPreselectionLabel[_aidl_size];

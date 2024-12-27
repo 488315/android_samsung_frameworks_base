@@ -28,7 +28,6 @@ final class PromptIconViewModel$shouldAnimateIconView$1$3 extends SuspendLambda 
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptIconViewModel$shouldAnimateIconView$1$3(PromptIconViewModel promptIconViewModel, Continuation continuation) {
         super(6, continuation);
         this.this$0 = promptIconViewModel;

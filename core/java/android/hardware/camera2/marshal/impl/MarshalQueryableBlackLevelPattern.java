@@ -25,7 +25,6 @@ public class MarshalQueryableBlackLevelPattern implements MarshalQueryable<Black
             }
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public BlackLevelPattern unmarshal(ByteBuffer buffer) {
             int[] channelOffsets = new int[4];

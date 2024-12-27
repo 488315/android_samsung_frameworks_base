@@ -204,47 +204,38 @@ public class MWBixbyController {
         return boolArr[0].booleanValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$changeLayoutOfSplitScreen$1() {
         this.mSplitScreenController.rotateMultiSplitWithTransition();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$exchangePositionOfSplitScreen$0() {
         this.mSplitScreenController.swapTasksInSplitScreenMode();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getMainStagePositionExt$6(int[] iArr) {
         iArr[0] = this.mSplitScreenController.getMainStagePositionExt();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$isSplitScreenVisible$5(Boolean[] boolArr) {
         boolArr[0] = Boolean.valueOf(this.mSplitScreenController.isSplitScreenVisible());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$isVerticalDivision$8(Boolean[] boolArr) {
         boolArr[0] = Boolean.valueOf(this.mSplitScreenController.isVerticalDivision());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void lambda$startIntent$3(Intent intent, UserHandle userHandle, int i, int i2) {
         this.mSplitScreenController.startIntent(intent, userHandle, i, i2, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startIntents$4(Intent intent, Intent intent2, UserHandle userHandle, UserHandle userHandle2, int i, float f, int i2) {
         this.mSplitScreenController.startIntents(intent, intent2, userHandle, userHandle2, i, f, i2, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startTargetTaskToFreeform$2(ActivityManager.RunningTaskInfo runningTaskInfo) {
         this.mSplitScreenController.moveSplitToFreeform(runningTaskInfo.token, null, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startTasks$7(int i, Bundle bundle, int i2, Bundle bundle2, int i3, float f, RemoteTransition remoteTransition) {
         this.mSplitScreenController.startTasks(i, bundle, i2, bundle2, i3, f, remoteTransition);
     }

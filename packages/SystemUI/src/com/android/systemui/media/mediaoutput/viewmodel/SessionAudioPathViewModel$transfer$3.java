@@ -16,7 +16,6 @@ final class SessionAudioPathViewModel$transfer$3 extends SuspendLambda implement
     int label;
     final /* synthetic */ SessionAudioPathViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SessionAudioPathViewModel$transfer$3(SessionAudioPathViewModel sessionAudioPathViewModel, AudioDevice audioDevice, Continuation continuation) {
         super(2, continuation);
         this.this$0 = sessionAudioPathViewModel;

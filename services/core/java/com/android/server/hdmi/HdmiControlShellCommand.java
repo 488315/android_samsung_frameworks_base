@@ -56,12 +56,10 @@ public final class HdmiControlShellCommand extends ShellCommand {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.hdmi.HdmiControlShellCommand$1] */
     public HdmiControlShellCommand(IHdmiControlService.Stub stub) {
         this.mBinderService = stub;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int handleShellCommand(String str) {
         char c;
         char c2;

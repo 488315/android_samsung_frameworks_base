@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public final class MobileIconBinder$bind$2 extends SuspendLambda implements Function3 {
     final /* synthetic */ Ref$BooleanRef $isCollecting;
     final /* synthetic */ MobileViewLogger $logger;
@@ -45,7 +44,6 @@ public final class MobileIconBinder$bind$2 extends SuspendLambda implements Func
             final /* synthetic */ LocationBasedMobileViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02331(LocationBasedMobileViewModel locationBasedMobileViewModel, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = locationBasedMobileViewModel;
@@ -87,7 +85,6 @@ public final class MobileIconBinder$bind$2 extends SuspendLambda implements Func
             final /* synthetic */ LocationBasedMobileViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(LocationBasedMobileViewModel locationBasedMobileViewModel, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = locationBasedMobileViewModel;
@@ -126,7 +123,6 @@ public final class MobileIconBinder$bind$2 extends SuspendLambda implements Func
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(MobileViewLogger mobileViewLogger, ViewGroup viewGroup, LocationBasedMobileViewModel locationBasedMobileViewModel, Ref$BooleanRef ref$BooleanRef, Continuation continuation) {
             super(2, continuation);
             this.$logger = mobileViewLogger;
@@ -178,7 +174,6 @@ public final class MobileIconBinder$bind$2 extends SuspendLambda implements Func
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileIconBinder$bind$2(MobileViewLogger mobileViewLogger, ViewGroup viewGroup, LocationBasedMobileViewModel locationBasedMobileViewModel, Ref$BooleanRef ref$BooleanRef, Continuation continuation) {
         super(3, continuation);
         this.$logger = mobileViewLogger;

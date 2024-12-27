@@ -24,7 +24,6 @@ public final class ScreenshotSoundControllerImpl$special$$inlined$async$1 extend
     int label;
     final /* synthetic */ ScreenshotSoundControllerImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenshotSoundControllerImpl$special$$inlined$async$1(String str, Continuation continuation, ScreenshotSoundControllerImpl screenshotSoundControllerImpl) {
         super(2, continuation);
         this.$spanName = str;

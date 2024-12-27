@@ -3,8 +3,6 @@ package com.android.systemui.volume.panel.component.selector.ui.composable;
 import com.samsung.systemui.splugins.lockstar.PluginLockStar;
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 final class RadioButtonBarComponent {
     public static final /* synthetic */ RadioButtonBarComponent[] $VALUES;
     public static final RadioButtonBarComponent Buttons;

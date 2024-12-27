@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.provider.Settings;
 import com.android.systemui.settings.UserTracker;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public class SecureSettingsImpl implements SecureSettings {
     private final ContentResolver mContentResolver;
     private final UserTracker mUserTracker;

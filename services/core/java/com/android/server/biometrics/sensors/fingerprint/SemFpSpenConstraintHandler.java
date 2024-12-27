@@ -51,7 +51,6 @@ public final class SemFpSpenConstraintHandler
     public SpenGestureManager mSpenGestureManager;
     BroadcastReceiver mTspBrReceiver;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.biometrics.sensors.fingerprint.SemFpSpenConstraintHandler$$ExternalSyntheticLambda0] */
     public SemFpSpenConstraintHandler(Context context, Pair pair, Handler handler) {
         this.mContext = context;
         this.mProvider = pair;

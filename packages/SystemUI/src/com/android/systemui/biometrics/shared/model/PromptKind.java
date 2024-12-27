@@ -10,8 +10,6 @@ public interface PromptKind {
         public final BiometricModalities activeModalities;
         public final PaneType paneType;
 
-        /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-        /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
         public final class PaneType {
             public static final /* synthetic */ PaneType[] $VALUES;
             public static final PaneType ONE_PANE_LARGE_SCREEN_LANDSCAPE;

@@ -64,9 +64,6 @@ public final class MediaResumeListener implements MediaDataManager.Listener, Dum
     public final MediaResumeListener$userTrackerCallback$1 userTrackerCallback;
     public final MediaResumeListener$userUnlockReceiver$1 userUnlockReceiver;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.media.controls.domain.resume.MediaResumeListener$userTrackerCallback$1, com.android.systemui.settings.UserTracker$Callback] */
-    /* JADX WARN: Type inference failed for: r3v7, types: [com.android.systemui.media.controls.domain.resume.MediaResumeListener$mediaBrowserCallback$1] */
     public MediaResumeListener(Context context, BroadcastDispatcher broadcastDispatcher, UserTracker userTracker, Executor executor, Executor executor2, TunerService tunerService, ResumeMediaBrowserFactory resumeMediaBrowserFactory, DumpManager dumpManager, SystemClock systemClock, MediaFlags mediaFlags) {
         this.context = context;
         this.mainExecutor = executor;

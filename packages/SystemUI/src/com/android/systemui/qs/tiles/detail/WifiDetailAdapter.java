@@ -100,13 +100,6 @@ public final class WifiDetailAdapter implements DetailAdapter, AccessPointContro
     
         if (r4.ssid != null) goto L31;
      */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x014d  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0161  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x01b6  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x01c9  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x01b8  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x0180  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0157  */
     @Override // com.android.systemui.plugins.qs.DetailAdapter
     /*
         Code decompiled incorrectly, please refer to instructions dump.

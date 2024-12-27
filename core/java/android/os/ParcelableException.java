@@ -5,13 +5,11 @@ public final class ParcelableException extends RuntimeException implements Parce
     public static final Parcelable.Creator<ParcelableException> CREATOR =
             new Parcelable.Creator<
                     ParcelableException>() { // from class: android.os.ParcelableException.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableException createFromParcel(Parcel source) {
                     return new ParcelableException(ParcelableException.readFromParcel(source));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableException[] newArray(int size) {
                     return new ParcelableException[size];

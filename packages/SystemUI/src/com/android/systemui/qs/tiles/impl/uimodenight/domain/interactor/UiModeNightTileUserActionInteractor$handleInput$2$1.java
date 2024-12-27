@@ -15,7 +15,6 @@ final class UiModeNightTileUserActionInteractor$handleInput$2$1 extends SuspendL
     int label;
     final /* synthetic */ UiModeNightTileUserActionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UiModeNightTileUserActionInteractor$handleInput$2$1(UiModeNightTileUserActionInteractor uiModeNightTileUserActionInteractor, QSTileInput qSTileInput, Continuation continuation) {
         super(2, continuation);
         this.this$0 = uiModeNightTileUserActionInteractor;

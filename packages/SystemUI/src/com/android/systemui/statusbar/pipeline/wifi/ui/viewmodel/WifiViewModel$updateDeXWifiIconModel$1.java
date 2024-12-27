@@ -17,7 +17,6 @@ final class WifiViewModel$updateDeXWifiIconModel$1 extends SuspendLambda impleme
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiViewModel$updateDeXWifiIconModel$1(DesktopManager desktopManager, Continuation continuation) {
         super(3, continuation);
         this.$desktopManager = desktopManager;

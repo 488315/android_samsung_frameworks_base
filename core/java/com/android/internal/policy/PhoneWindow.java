@@ -986,7 +986,6 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void dismissContextMenu() {
         this.mContextMenu = null;
         if (this.mContextMenuHelper != null) {
@@ -1596,7 +1595,6 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         return this.mDecor.superDispatchGenericMotionEvent(event);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     protected boolean onKeyDown(int featureId, int keyCode, KeyEvent event) {
         KeyEvent.DispatcherState dispatcher =
                 this.mDecor != null ? this.mDecor.getKeyDispatcherState() : null;
@@ -1673,7 +1671,6 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         return this.mMediaSessionManager;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     protected boolean onKeyUp(int featureId, int keyCode, KeyEvent event) {
         PanelFeatureState st;
         KeyEvent.DispatcherState dispatcher =
@@ -2645,7 +2642,6 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         return imageView;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void callOnPanelClosed(int featureId, PanelFeatureState panel, Menu menu) {
         Window.Callback cb = getCallback();
         if (cb == null) {
@@ -2749,7 +2745,6 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setMediaController$1(int mode) {
         this.mAudioMode = mode;
     }
@@ -3076,13 +3071,11 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                     new Parcelable.Creator<
                             SavedState>() { // from class:
                                             // com.android.internal.policy.PhoneWindow.PanelFeatureState.SavedState.1
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public SavedState createFromParcel(Parcel in) {
                             return SavedState.readFromParcel(in);
                         }
 
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public SavedState[] newArray(int size) {
                             return new SavedState[size];
@@ -3110,7 +3103,6 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public static SavedState readFromParcel(Parcel source) {
                 SavedState savedState = new SavedState();
                 savedState.featureId = source.readInt();

@@ -71,7 +71,6 @@ public abstract class TemporaryViewDisplayController implements CoreStartable, D
         void onInfoPermanentlyRemoved(String str, String str2);
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.temporarydisplay.TemporaryViewDisplayController$displayScaleListener$1] */
     public TemporaryViewDisplayController(Context context, TemporaryViewLogger temporaryViewLogger, WindowManager windowManager, DelayableExecutor delayableExecutor, AccessibilityManager accessibilityManager, ConfigurationController configurationController, DumpManager dumpManager, PowerManager powerManager, int i, WakeLock.Builder builder, SystemClock systemClock, TemporaryViewUiEventLogger temporaryViewUiEventLogger) {
         this.context = context;
         this.logger = temporaryViewLogger;

@@ -37,8 +37,6 @@ public final class ViewState {
 
        r2 = r17.mPrimaryFillResponse;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r7v3, types: [com.android.server.autofill.ui.AutoFillUI$$ExternalSyntheticLambda9, java.lang.Runnable] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

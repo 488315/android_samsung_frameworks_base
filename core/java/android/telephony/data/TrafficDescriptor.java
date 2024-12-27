@@ -16,13 +16,11 @@ public final class TrafficDescriptor implements Parcelable {
     public static final Parcelable.Creator<TrafficDescriptor> CREATOR =
             new Parcelable.Creator<
                     TrafficDescriptor>() { // from class: android.telephony.data.TrafficDescriptor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TrafficDescriptor createFromParcel(Parcel source) {
                     return new TrafficDescriptor(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TrafficDescriptor[] newArray(int size) {
                     return new TrafficDescriptor[size];

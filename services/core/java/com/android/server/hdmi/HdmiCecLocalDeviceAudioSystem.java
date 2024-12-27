@@ -125,7 +125,6 @@ public final class HdmiCecLocalDeviceAudioSystem extends HdmiCecLocalDeviceSourc
         AUDIO_CODECS_MAP = hashMap;
     }
 
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.server.hdmi.HdmiCecLocalDeviceAudioSystem$1] */
     public HdmiCecLocalDeviceAudioSystem(HdmiControlService hdmiControlService) {
         super(hdmiControlService, 5);
         this.mTvSystemAudioModeSupport = null;
@@ -576,12 +575,6 @@ public final class HdmiCecLocalDeviceAudioSystem extends HdmiCecLocalDeviceSourc
         return -1;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0072  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x011a  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x017d A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x017f  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x0123  */
     @Override // com.android.server.hdmi.HdmiCecLocalDevice
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -19,13 +19,11 @@ public final class DataRemovalRequest implements Parcelable {
             new Parcelable.Creator<
                     DataRemovalRequest>() { // from class:
                                             // android.view.contentcapture.DataRemovalRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataRemovalRequest createFromParcel(Parcel parcel) {
                     return new DataRemovalRequest(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataRemovalRequest[] newArray(int size) {
                     return new DataRemovalRequest[size];

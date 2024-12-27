@@ -154,7 +154,6 @@ public class Layer extends Element implements HierarchyInterface<Item> {
         return this.itemList.indexOf(element);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.vekit.Interface.HierarchyInterface
     public Item getChild(int index) {
         return this.itemList.get(index);

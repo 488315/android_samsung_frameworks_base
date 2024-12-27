@@ -195,8 +195,6 @@ public final class FullScreenMagnificationGestureHandler extends MagnificationGe
         
             if ((r8.mLastDown.getEventTime() - r8.mPreLastDown.getEventTime()) >= r8.mMultiTapMaxDelay) goto L139;
          */
-        /* JADX WARN: Removed duplicated region for block: B:157:0x0317  */
-        /* JADX WARN: Removed duplicated region for block: B:159:0x031b  */
         @Override // com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler.State
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1005,7 +1003,6 @@ public final class FullScreenMagnificationGestureHandler extends MagnificationGe
         MAX_SCALE = MagnificationScaleProvider.MAX_SCALE;
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler$1, java.lang.Object] */
     public FullScreenMagnificationGestureHandler(Context context, FullScreenMagnificationController fullScreenMagnificationController, AccessibilityTraceManager accessibilityTraceManager, MagnificationGestureHandler.Callback callback, boolean z, boolean z2, boolean z3, WindowMagnificationPromptController windowMagnificationPromptController, int i, FullScreenMagnificationVibrationHelper fullScreenMagnificationVibrationHelper, MagnificationLogger magnificationLogger, ViewConfiguration viewConfiguration, OneFingerPanningSettingsProvider oneFingerPanningSettingsProvider) {
         super(i, z, z3, accessibilityTraceManager, callback);
         if (MagnificationGestureHandler.DEBUG_ALL) {

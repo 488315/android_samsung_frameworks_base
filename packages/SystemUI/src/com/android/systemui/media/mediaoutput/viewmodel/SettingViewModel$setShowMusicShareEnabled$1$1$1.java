@@ -15,7 +15,6 @@ final class SettingViewModel$setShowMusicShareEnabled$1$1$1 extends SuspendLambd
     /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SettingViewModel$setShowMusicShareEnabled$1$1$1(Preferences.Key key, int i, Continuation continuation) {
         super(2, continuation);
         this.$key = key;

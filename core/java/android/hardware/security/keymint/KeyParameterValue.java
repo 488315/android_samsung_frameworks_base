@@ -10,13 +10,11 @@ public final class KeyParameterValue implements Parcelable {
     public static final Parcelable.Creator<KeyParameterValue> CREATOR =
             new Parcelable.Creator<KeyParameterValue>() { // from class:
                 // android.hardware.security.keymint.KeyParameterValue.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyParameterValue createFromParcel(Parcel _aidl_source) {
                     return new KeyParameterValue(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyParameterValue[] newArray(int _aidl_size) {
                     return new KeyParameterValue[_aidl_size];

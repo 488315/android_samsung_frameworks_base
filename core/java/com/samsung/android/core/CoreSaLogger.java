@@ -223,7 +223,6 @@ public class CoreSaLogger {
         return setting;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static HashMap<String, String> getSettingMap(String trackingId) {
         char c;
         switch (trackingId.hashCode()) {

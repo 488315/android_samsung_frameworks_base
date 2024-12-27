@@ -10,7 +10,6 @@ final class ChipAnimationController$cancelAnimation$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ ChipAnimationController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ChipAnimationController$cancelAnimation$1(ChipAnimationController chipAnimationController, Continuation continuation) {
         super(continuation);
         this.this$0 = chipAnimationController;

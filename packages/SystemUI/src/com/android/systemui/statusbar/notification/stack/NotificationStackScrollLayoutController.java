@@ -767,15 +767,6 @@ public final class NotificationStackScrollLayoutController implements Dumpable, 
         public TouchHandler() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:104:0x010a  */
-        /* JADX WARN: Removed duplicated region for block: B:35:0x009a  */
-        /* JADX WARN: Removed duplicated region for block: B:55:0x00e4  */
-        /* JADX WARN: Removed duplicated region for block: B:68:0x0108  */
-        /* JADX WARN: Removed duplicated region for block: B:71:0x0111 A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:78:0x0126  */
-        /* JADX WARN: Removed duplicated region for block: B:81:0x012e A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:86:0x0140  */
-        /* JADX WARN: Removed duplicated region for block: B:97:0x0174 A[ADDED_TO_REGION] */
         @Override // com.android.systemui.Gefingerpoken
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -789,15 +780,6 @@ public final class NotificationStackScrollLayoutController implements Dumpable, 
             throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController.TouchHandler.onInterceptTouchEvent(android.view.MotionEvent):boolean");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:100:0x018b A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:107:0x0137  */
-        /* JADX WARN: Removed duplicated region for block: B:121:0x00d6  */
-        /* JADX WARN: Removed duplicated region for block: B:54:0x00c1  */
-        /* JADX WARN: Removed duplicated region for block: B:61:0x00db  */
-        /* JADX WARN: Removed duplicated region for block: B:70:0x00f5  */
-        /* JADX WARN: Removed duplicated region for block: B:82:0x0116  */
-        /* JADX WARN: Removed duplicated region for block: B:87:0x012e  */
-        /* JADX WARN: Removed duplicated region for block: B:89:0x0158  */
         @Override // com.android.systemui.Gefingerpoken
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -830,14 +812,6 @@ public final class NotificationStackScrollLayoutController implements Dumpable, 
         }
     }
 
-    /* JADX WARN: Type inference failed for: r10v2, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r6v12, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$9] */
-    /* JADX WARN: Type inference failed for: r6v13, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$10] */
-    /* JADX WARN: Type inference failed for: r6v15, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$12] */
-    /* JADX WARN: Type inference failed for: r6v16, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$13] */
-    /* JADX WARN: Type inference failed for: r6v4, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$5] */
-    /* JADX WARN: Type inference failed for: r6v5, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$6] */
-    /* JADX WARN: Type inference failed for: r6v6, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$$ExternalSyntheticLambda1] */
     public NotificationStackScrollLayoutController(NotificationStackScrollLayout notificationStackScrollLayout, boolean z, NotificationGutsManager notificationGutsManager, NotificationsController notificationsController, NotificationVisibilityProvider notificationVisibilityProvider, NotificationWakeUpCoordinator notificationWakeUpCoordinator, HeadsUpManager headsUpManager, NotificationRoundnessManager notificationRoundnessManager, TunerService tunerService, DeviceProvisionedController deviceProvisionedController, DynamicPrivacyController dynamicPrivacyController, ConfigurationController configurationController, SysuiStatusBarStateController sysuiStatusBarStateController, KeyguardMediaController keyguardMediaController, KeyguardBypassController keyguardBypassController, PowerInteractor powerInteractor, PrimaryBouncerInteractor primaryBouncerInteractor, KeyguardTransitionRepository keyguardTransitionRepository, ZenModeController zenModeController, NotificationLockscreenUserManager notificationLockscreenUserManager, MetricsLogger metricsLogger, ColorUpdateLogger colorUpdateLogger, DumpManager dumpManager, FalsingCollector falsingCollector, FalsingManager falsingManager, NotificationSwipeHelper.Builder builder, GroupExpansionManager groupExpansionManager, SectionHeaderController sectionHeaderController, NotifPipeline notifPipeline, NotifCollection notifCollection, LockscreenShadeTransitionController lockscreenShadeTransitionController, UiEventLogger uiEventLogger, NotificationRemoteInputManager notificationRemoteInputManager, VisibilityLocationProviderDelegator visibilityLocationProviderDelegator, SeenNotificationsInteractor seenNotificationsInteractor, NotificationListViewBinder notificationListViewBinder, ShadeController shadeController, Provider provider, InteractionJankMonitor interactionJankMonitor, StackStateLogger stackStateLogger, NotificationStackScrollLogger notificationStackScrollLogger, NotificationStackSizeCalculator notificationStackSizeCalculator, NotificationTargetsHelper notificationTargetsHelper, SecureSettings secureSettings, NotificationDismissibilityProvider notificationDismissibilityProvider, ActivityStarter activityStarter, SplitShadeStateController splitShadeStateController, SensitiveNotificationProtectionController sensitiveNotificationProtectionController, NotificationShelfManager notificationShelfManager, LockscreenNotificationManager lockscreenNotificationManager, Lazy lazy, AppLockNotificationController appLockNotificationController) {
         int i = 0;
         this.mNotificationListContainer = new NotificationListContainerImpl(this, i);
@@ -1297,8 +1271,6 @@ public final class NotificationStackScrollLayoutController implements Dumpable, 
     
         if (r3.to.equals(com.android.systemui.keyguard.shared.model.KeyguardState.DOZING) != false) goto L8;
      */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:13:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

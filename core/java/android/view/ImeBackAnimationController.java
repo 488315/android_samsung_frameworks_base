@@ -117,7 +117,6 @@ public class ImeBackAnimationController implements OnBackAnimationCallback {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setPreCommitProgress(float progress) {
         if (!isHideAnimationInProgress() && this.mWindowInsetsAnimationController != null) {
             float hiddenY = this.mWindowInsetsAnimationController.getHiddenStateInsets().bottom;
@@ -134,7 +133,6 @@ public class ImeBackAnimationController implements OnBackAnimationCallback {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startPostCommitAnim(final boolean triggerBack) {
         int targetBottomInset;
         this.mIsPreCommitAnimationInProgress = false;
@@ -189,7 +187,6 @@ public class ImeBackAnimationController implements OnBackAnimationCallback {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startPostCommitAnim$0(ValueAnimator animation) {
         int bottomInset = (int) ((Float) animation.getAnimatedValue()).floatValue();
         if (this.mWindowInsetsAnimationController != null) {
@@ -210,7 +207,6 @@ public class ImeBackAnimationController implements OnBackAnimationCallback {
         this.mInsetsController.onAnimationStateChanged(WindowInsets.Type.ime(), true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void reset() {
         this.mWindowInsetsAnimationController = null;
         resetPostCommitAnimator();
@@ -235,7 +231,6 @@ public class ImeBackAnimationController implements OnBackAnimationCallback {
                 || this.mViewRoot.mAttachInfo.mContentOnApplyWindowInsetsListener == null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isAdjustPan() {
         return (this.mViewRoot.mWindowAttributes.softInputMode & 240) == 32;
     }

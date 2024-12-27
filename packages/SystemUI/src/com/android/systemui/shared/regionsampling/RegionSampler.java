@@ -101,7 +101,6 @@ public final class RegionSampler implements WallpaperManager.LocalWallpaperColor
         this(view, executor, executor2, z, z2, null, function0, 32, null);
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.shared.regionsampling.RegionSampler$layoutChangedListener$1] */
     public RegionSampler(View view, Executor executor, Executor executor2, boolean z, boolean z2, WallpaperManager wallpaperManager, Function0 function0) {
         Display display;
         this.sampledView = view;

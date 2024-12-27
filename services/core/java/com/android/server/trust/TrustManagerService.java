@@ -164,8 +164,6 @@ public final class TrustManagerService extends SystemService {
                     runWithScissors(
                             new Runnable() { // from class:
                                 // com.android.server.trust.TrustManagerService.2.1
-                                /* JADX WARN: Removed duplicated region for block: B:69:0x02cb  */
-                                /* JADX WARN: Removed duplicated region for block: B:75:0x02e4  */
                                 @Override // java.lang.Runnable
                                 /*
                                     Code decompiled incorrectly, please refer to instructions dump.
@@ -562,8 +560,6 @@ public final class TrustManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class TimeoutType {
         public static final /* synthetic */ TimeoutType[] $VALUES;
         public static final TimeoutType TRUSTABLE;
@@ -586,8 +582,6 @@ public final class TrustManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class TrustState {
         public static final /* synthetic */ TrustState[] $VALUES;
         public static final TrustState TRUSTABLE;
@@ -704,7 +698,6 @@ public final class TrustManagerService extends SystemService {
         TRUST_AGENT_INTENT = new Intent("android.service.trust.TrustAgentService");
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.trust.TrustManagerService$3] */
     public TrustManagerService(Context context) {
         super(context);
         this.mActiveAgents = new ArraySet();
@@ -1446,10 +1439,6 @@ public final class TrustManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0076  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00a7  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00bb  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00b2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1962,9 +1951,6 @@ public final class TrustManagerService extends SystemService {
 
        r0 = e;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v140, types: [java.util.List] */
-    /* JADX WARN: Unreachable blocks removed: 2, instructions: 3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2228,33 +2214,10 @@ public final class TrustManagerService extends SystemService {
         updateTrust(i, 0, false, null);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(22:0|1|(1:3)|4|(1:6)|7|(5:10|11|13|14|8)|20|21|(3:25|8c|30)|36|(1:38)|39|(1:(1:42))(3:208|(4:211|(2:213|(9:219|(1:221)|222|44|45|46|47|48|11c))(1:227)|224|209)|228)|43|44|45|46|47|48|11c|(1:(0))) */
     /* JADX WARN: Code restructure failed: missing block: B:207:0x0119, code lost:
 
        r3 = false;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x021f  */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x0262  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x0288  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x0296 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:142:0x02db  */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x0312  */
-    /* JADX WARN: Removed duplicated region for block: B:165:0x0330  */
-    /* JADX WARN: Removed duplicated region for block: B:169:0x028b  */
-    /* JADX WARN: Removed duplicated region for block: B:170:0x0226  */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x01c0  */
-    /* JADX WARN: Removed duplicated region for block: B:197:0x0160  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x011d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x015e  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0165 A[Catch: all -> 0x018a, TryCatch #6 {all -> 0x018a, blocks: (B:51:0x011d, B:54:0x012a, B:58:0x0139, B:64:0x0146, B:68:0x015a, B:71:0x0161, B:73:0x0165, B:76:0x0191, B:83:0x01aa, B:84:0x01b6, B:85:0x01bb, B:196:0x01a5), top: B:50:0x011d }] */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x01aa A[Catch: all -> 0x018a, TryCatch #6 {all -> 0x018a, blocks: (B:51:0x011d, B:54:0x012a, B:58:0x0139, B:64:0x0146, B:68:0x015a, B:71:0x0161, B:73:0x0165, B:76:0x0191, B:83:0x01aa, B:84:0x01b6, B:85:0x01bb, B:196:0x01a5), top: B:50:0x011d }] */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x01be  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x01ca  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x01eb  */
-    /* JADX WARN: Type inference failed for: r10v3 */
-    /* JADX WARN: Type inference failed for: r10v4, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r10v5 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -206,7 +206,6 @@ public class SystemUIEditText extends EditText implements SystemUIWidgetCallback
         this(context, attributeSet, i, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.widget.SystemUIEditText$1] */
     public SystemUIEditText(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mDrawPaint = new Paint();

@@ -18,7 +18,6 @@ final class PluggedInCondition$canRestartNow$1 extends SuspendLambda implements 
     int label;
     final /* synthetic */ PluggedInCondition this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PluggedInCondition$canRestartNow$1(PluggedInCondition pluggedInCondition, Continuation continuation) {
         super(2, continuation);
         this.this$0 = pluggedInCondition;
@@ -36,8 +35,6 @@ final class PluggedInCondition$canRestartNow$1 extends SuspendLambda implements 
         return ((PluggedInCondition$canRestartNow$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.flags.PluggedInCondition$canRestartNow$1$batteryCallback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -55,7 +52,6 @@ final class PluggedInCondition$canRestartNow$1 extends SuspendLambda implements 
             ((ChannelCoroutine) producerScope).mo2552trySendJP2dKIU(Boolean.valueOf(((BatteryControllerImpl) ((BatteryController) this.this$0.batteryControllerLazy.get())).mPluggedIn));
             final PluggedInCondition pluggedInCondition = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.flags.PluggedInCondition$canRestartNow$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

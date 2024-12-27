@@ -59,11 +59,8 @@ public final class SecPanelTouchBlockHelper {
         new Companion(null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.settings.UserTracker$Callback, com.android.systemui.shade.SecPanelTouchBlockHelper$userTrackerCallback$1] */
     public SecPanelTouchBlockHelper(final Context context, UserTracker userTracker, DelayableExecutor delayableExecutor) {
         LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shade.SecPanelTouchBlockHelper$statusBarManager$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

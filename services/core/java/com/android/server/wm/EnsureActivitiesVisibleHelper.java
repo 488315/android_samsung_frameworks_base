@@ -20,10 +20,6 @@ public final class EnsureActivitiesVisibleHelper {
 
        if (r14.getActivity(new com.android.server.wm.PopOverState$$ExternalSyntheticLambda0(1, r13), r12, false, false) != null) goto L78;
     */
-    /* JADX WARN: Removed duplicated region for block: B:172:0x027c  */
-    /* JADX WARN: Removed duplicated region for block: B:177:0x0151  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x0138  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x0175  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

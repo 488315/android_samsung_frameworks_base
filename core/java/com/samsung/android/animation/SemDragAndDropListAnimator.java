@@ -140,8 +140,6 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
         return initDragIfNecessary(position);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00a4 A[ADDED_TO_REGION, RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -245,7 +243,6 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
         return this.mItemLongClickListener;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean initDragIfNecessary(int position) {
         if (isDraggable() && activatedByLongPress() && this.mListView.getCount() > 1) {
             if (position >= 0
@@ -341,7 +338,6 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
         this.mItemAnimator.start();
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0038, code lost:
 
        return true;

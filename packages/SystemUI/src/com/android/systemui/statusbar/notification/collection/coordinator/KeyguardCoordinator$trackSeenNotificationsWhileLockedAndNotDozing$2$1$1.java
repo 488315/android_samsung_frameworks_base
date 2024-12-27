@@ -19,7 +19,6 @@ final class KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2$
     int label;
     final /* synthetic */ KeyguardCoordinator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2$1$1(NotificationEntry notificationEntry, Set<NotificationEntry> set, KeyguardCoordinator keyguardCoordinator, Map<NotificationEntry, Job> map, Continuation continuation) {
         super(2, continuation);
         this.$entry = notificationEntry;

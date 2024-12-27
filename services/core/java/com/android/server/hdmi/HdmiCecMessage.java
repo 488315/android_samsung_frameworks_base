@@ -26,7 +26,6 @@ public class HdmiCecMessage {
         this.mValidationResult = i4;
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -153,12 +152,6 @@ public class HdmiCecMessage {
                 Integer.valueOf(Arrays.hashCode(this.mParams)));
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x01a5  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0206  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0209  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x020c  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x0250  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

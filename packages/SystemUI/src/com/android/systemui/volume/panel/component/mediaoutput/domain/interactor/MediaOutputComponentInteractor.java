@@ -23,7 +23,6 @@ public final class MediaOutputComponentInteractor {
     public final ReadonlyStateFlow mediaOutputModel;
     public final ReadonlyStateFlow sessionWithPlaybackState;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaOutputComponentInteractor$special$$inlined$filter$1] */
     public MediaOutputComponentInteractor(CoroutineScope coroutineScope, MediaDeviceSessionInteractor mediaDeviceSessionInteractor, AudioOutputInteractor audioOutputInteractor, AudioModeInteractor audioModeInteractor, MediaOutputInteractor mediaOutputInteractor) {
         this.mediaDeviceSessionInteractor = mediaDeviceSessionInteractor;
         ResultKt$wrapInResult$$inlined$map$1 resultKt$wrapInResult$$inlined$map$1 = new ResultKt$wrapInResult$$inlined$map$1(FlowKt.transformLatest(ResultKt.filterData(mediaOutputInteractor.defaultActiveMediaSession), new MediaOutputComponentInteractor$special$$inlined$flatMapLatest$1(null, this)));
@@ -60,8 +59,6 @@ public final class MediaOutputComponentInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

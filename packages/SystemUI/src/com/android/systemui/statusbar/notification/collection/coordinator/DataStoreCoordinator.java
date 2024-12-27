@@ -53,7 +53,6 @@ public final class DataStoreCoordinator implements CoreCoordinator {
         return arrayList;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onAfterRenderList(List<? extends ListEntry> list) {
         List<NotificationEntry> flattenedEntryList = flattenedEntryList(list);
         NotifLiveDataStoreImpl notifLiveDataStoreImpl = this.notifLiveDataStoreImpl;

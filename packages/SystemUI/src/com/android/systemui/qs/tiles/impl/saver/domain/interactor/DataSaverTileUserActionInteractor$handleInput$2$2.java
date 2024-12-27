@@ -20,7 +20,6 @@ final class DataSaverTileUserActionInteractor$handleInput$2$2 extends SuspendLam
     int label;
     final /* synthetic */ DataSaverTileUserActionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DataSaverTileUserActionInteractor$handleInput$2$2(DataSaverTileUserActionInteractor dataSaverTileUserActionInteractor, QSTileInput qSTileInput, Continuation continuation) {
         super(2, continuation);
         this.this$0 = dataSaverTileUserActionInteractor;

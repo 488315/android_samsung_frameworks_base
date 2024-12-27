@@ -69,7 +69,6 @@ public final class SystemEventChipAnimationController implements SystemStatusAni
         (frameLayout3 == null ? null : frameLayout3).setClipChildren(false);
         FrameLayout frameLayout4 = this.animationWindowView;
         (frameLayout4 != null ? frameLayout4 : null).addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationController$init$1
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
                 int calculateRightPadding;
@@ -233,7 +232,6 @@ public final class SystemEventChipAnimationController implements SystemStatusAni
         return animatorSet3;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.statusbar.events.SystemStatusAnimationCallback
     public final Animator onSystemEventAnimationFinish(boolean z, boolean z2, boolean z3) {
         AnimatorSet animatorSet;
@@ -408,7 +406,6 @@ public final class SystemEventChipAnimationController implements SystemStatusAni
         return animatorSet;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void prepareChipAnimation(Function1 function1, boolean z) {
         int calculateRightPadding;
         int i;
@@ -522,7 +519,6 @@ public final class SystemEventChipAnimationController implements SystemStatusAni
         this.privacyLogger.logChipCreateRemove(this.chipBounds.width(), true);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void updateChipBounds(BackgroundAnimatableView backgroundAnimatableView, Rect rect) {
         int measuredWidth;
         int i;

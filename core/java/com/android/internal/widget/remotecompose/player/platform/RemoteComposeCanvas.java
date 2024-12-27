@@ -123,7 +123,6 @@ public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachSta
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onViewAttachedToWindow$0(
             CoreDocument.ClickAreaRepresentation area, View view1) {
         this.mDocument.getDocument().performClick(area.getId());

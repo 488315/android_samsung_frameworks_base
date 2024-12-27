@@ -45,7 +45,6 @@ public class ClipboardManager extends android.text.ClipboardManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$dispatchPrimaryClipChanged$0() {
             ClipboardManager.this.reportPrimaryClipChanged();
         }

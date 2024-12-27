@@ -16,7 +16,6 @@ final class MediaOutputDetailAdapter$1$onReceive$1 extends SuspendLambda impleme
     int label;
     final /* synthetic */ MediaOutputDetailAdapter this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaOutputDetailAdapter$1$onReceive$1(MediaOutputDetailAdapter mediaOutputDetailAdapter, Intent intent, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaOutputDetailAdapter;

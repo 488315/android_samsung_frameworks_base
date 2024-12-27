@@ -17,8 +17,6 @@ public final class DesktopAppCompatAspectRatioPolicy {
         this.mAppCompatConfiguration = appCompatConfiguration;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00cc A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00cd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -435,7 +435,6 @@ public abstract class AbstractAccessibilityServiceConnection
 
     public interface SystemSupport {}
 
-    /* JADX WARN: Type inference failed for: r3v6, types: [com.android.server.accessibility.AbstractAccessibilityServiceConnection$1] */
     public AbstractAccessibilityServiceConnection(
             Context context,
             ComponentName componentName,
@@ -1955,7 +1954,6 @@ public abstract class AbstractAccessibilityServiceConnection
         return this.mTrace.isA11yTracingEnabledForTypes(16L);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0051  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2219,11 +2217,6 @@ public abstract class AbstractAccessibilityServiceConnection
         ((ArrayList) this.mOverlays).clear();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00aa A[Catch: all -> 0x0096, TryCatch #1 {all -> 0x0096, blocks: (B:23:0x008b, B:25:0x0093, B:35:0x00aa, B:37:0x00b5, B:39:0x00bd, B:41:0x00c3, B:45:0x00ce), top: B:22:0x008b }] */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x00f5 A[Catch: all -> 0x00fb, RemoteException -> 0x0178, TryCatch #2 {RemoteException -> 0x0178, blocks: (B:51:0x00e3, B:56:0x00f5, B:57:0x00fe, B:59:0x0104, B:61:0x0158, B:66:0x00ee), top: B:50:0x00e3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0104 A[Catch: all -> 0x00fb, RemoteException -> 0x0178, TryCatch #2 {RemoteException -> 0x0178, blocks: (B:51:0x00e3, B:56:0x00f5, B:57:0x00fe, B:59:0x0104, B:61:0x0158, B:66:0x00ee), top: B:50:0x00e3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0155 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x00b3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

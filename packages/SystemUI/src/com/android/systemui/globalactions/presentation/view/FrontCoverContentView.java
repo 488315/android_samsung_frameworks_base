@@ -150,7 +150,6 @@ public final class FrontCoverContentView implements ContentView, ViewStateContro
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.globalactions.presentation.view.FrontCoverContentView$1] */
     public FrontCoverContentView(Context context, ExtendableGlobalActionsView extendableGlobalActionsView, ConditionChecker conditionChecker, ResourceFactory resourceFactory, LogWrapper logWrapper, HandlerUtil handlerUtil, ToastController toastController, SamsungGlobalActionsPresenter samsungGlobalActionsPresenter) {
         this.mContext = context;
         this.mParentView = extendableGlobalActionsView;

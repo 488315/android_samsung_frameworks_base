@@ -25,13 +25,11 @@ public final class SelectionEvent implements Parcelable {
     public static final Parcelable.Creator<SelectionEvent> CREATOR =
             new Parcelable.Creator<
                     SelectionEvent>() { // from class: android.view.textclassifier.SelectionEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SelectionEvent createFromParcel(Parcel in) {
                     return new SelectionEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SelectionEvent[] newArray(int size) {
                     return new SelectionEvent[size];

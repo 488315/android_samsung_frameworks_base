@@ -8,7 +8,6 @@ public class SafeUIState {
     private static final String TAG = "SafeUIState";
     private static int sSafeMode = -1;
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static boolean isSysUiSafeModeEnabled() {
         int i;
         if (sSafeMode == -1) {

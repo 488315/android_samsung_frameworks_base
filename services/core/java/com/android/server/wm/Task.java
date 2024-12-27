@@ -648,7 +648,6 @@ public final class Task extends TaskFragment {
         return WindowContainer.fromBinder(windowContainerToken.asBinder()).asTask();
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:191:0x05c0, code lost:
     
         if (r22 != false) goto L261;
@@ -840,9 +839,6 @@ public final class Task extends TaskFragment {
     
         r6 = r2;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:216:0x06b3  */
-    /* JADX WARN: Removed duplicated region for block: B:219:0x06c1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1087,7 +1083,6 @@ public final class Task extends TaskFragment {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.Task.adjustForMinimalTaskDimensions(android.graphics.Rect, android.graphics.Rect, android.content.res.Configuration):void");
     }
 
-    /* JADX WARN: Type inference failed for: r10v1, types: [com.android.server.wm.Task$$ExternalSyntheticLambda2] */
     @Override // com.android.server.wm.WindowContainer
     public final void applyAnimationUnchecked(WindowManager.LayoutParams layoutParams, boolean z, int i, boolean z2, final ArrayList arrayList) {
         final RecentsAnimationController recentsAnimationController = this.mWmService.mRecentsAnimationController;
@@ -1155,7 +1150,6 @@ public final class Task extends TaskFragment {
         return this;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00bd  */
     @Override // com.android.server.wm.WindowContainer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1720,13 +1714,6 @@ public final class Task extends TaskFragment {
         fillTaskInfo(taskInfo, z, getDisplayArea());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:268:0x0516  */
-    /* JADX WARN: Removed duplicated region for block: B:271:0x0520  */
-    /* JADX WARN: Removed duplicated region for block: B:291:0x0560  */
-    /* JADX WARN: Removed duplicated region for block: B:294:0x056f  */
-    /* JADX WARN: Removed duplicated region for block: B:296:0x0577  */
-    /* JADX WARN: Removed duplicated region for block: B:305:0x0595  */
-    /* JADX WARN: Removed duplicated region for block: B:317:0x0574  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3669,10 +3656,6 @@ public final class Task extends TaskFragment {
         task.positionChildAt(i, this, z);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0132  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x01af A[Catch: all -> 0x0168, TRY_LEAVE, TryCatch #0 {all -> 0x0168, blocks: (B:19:0x0152, B:22:0x015a, B:24:0x0160, B:28:0x0171, B:30:0x0177, B:38:0x018a, B:41:0x0194, B:43:0x01a0, B:45:0x01a8, B:47:0x01af, B:57:0x016b), top: B:18:0x0152 }] */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x01bd  */
-    /* JADX WARN: Removed duplicated region for block: B:64:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4314,10 +4297,6 @@ public final class Task extends TaskFragment {
         return true;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.wm.Task] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.wm.WindowContainer] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.wm.WindowContainer] */
     public final void setHasBeenVisible() {
         Task asTask;
         this.mHasBeenVisible = true;
@@ -4663,7 +4642,6 @@ public final class Task extends TaskFragment {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:78:0x012e A[Catch: all -> 0x0090, TryCatch #0 {all -> 0x0090, blocks: (B:133:0x0088, B:37:0x0093, B:39:0x009b, B:42:0x00a8, B:43:0x00b2, B:45:0x00b8, B:48:0x00bf, B:50:0x00c3, B:52:0x00c9, B:54:0x00d1, B:56:0x00e5, B:58:0x00eb, B:60:0x00f6, B:63:0x00fd, B:65:0x0103, B:67:0x0109, B:69:0x010f, B:72:0x0119, B:74:0x011f, B:76:0x0123, B:78:0x012e, B:79:0x0135, B:82:0x013b, B:83:0x0116, B:86:0x0144, B:87:0x0147, B:89:0x014d, B:90:0x0158, B:92:0x015e, B:94:0x0164, B:97:0x0170, B:100:0x0182, B:107:0x019a, B:109:0x01a2, B:111:0x01ab, B:113:0x01b1, B:115:0x01b5, B:117:0x01c6, B:118:0x01cd, B:131:0x0155), top: B:132:0x0088 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4914,11 +4892,6 @@ public final class Task extends TaskFragment {
         return activity;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0085  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0080  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

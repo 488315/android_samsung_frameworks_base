@@ -78,7 +78,6 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
     public final StatusBarStateControllerImpl statusBarStateControllerImpl;
     public final WakefulnessLifecycle wakefulnessLifecycle;
 
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$animatorDurationScaleObserver$1] */
     public UnlockedScreenOffAnimationController(SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper, Context context, WakefulnessLifecycle wakefulnessLifecycle, StatusBarStateControllerImpl statusBarStateControllerImpl, Lazy lazy, KeyguardStateController keyguardStateController, Lazy lazy2, GlobalSettings globalSettings, Lazy lazy3, InteractionJankMonitor interactionJankMonitor, PowerManager powerManager, Lazy lazy4, Lazy lazy5, Handler handler, Lazy lazy6) {
         this.helper = secUnlockedScreenOffAnimationHelper;
         this.context = context;

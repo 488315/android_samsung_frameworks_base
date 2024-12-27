@@ -119,8 +119,6 @@ public class PackageDexOptimizer {
         return !appHibernationService.mOatArtifactDeletionEnabled;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00e3 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00e4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -192,28 +190,6 @@ public class PackageDexOptimizer {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x0396  */
-    /* JADX WARN: Removed duplicated region for block: B:102:0x039b  */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x03a7  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x03b0  */
-    /* JADX WARN: Removed duplicated region for block: B:111:0x03b7  */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x03be  */
-    /* JADX WARN: Removed duplicated region for block: B:117:0x03c7  */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x03d8 A[Catch: all -> 0x044f, TryCatch #2 {all -> 0x044f, blocks: (B:73:0x033e, B:75:0x0354, B:85:0x0369, B:96:0x0383, B:103:0x039f, B:106:0x03ab, B:109:0x03b4, B:112:0x03bb, B:115:0x03c2, B:118:0x03cb, B:120:0x03d8, B:123:0x03e7), top: B:72:0x033e }] */
-    /* JADX WARN: Removed duplicated region for block: B:148:0x0463  */
-    /* JADX WARN: Removed duplicated region for block: B:151:0x0475 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:154:0x03ca  */
-    /* JADX WARN: Removed duplicated region for block: B:155:0x03c1  */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x03ba  */
-    /* JADX WARN: Removed duplicated region for block: B:157:0x03b3  */
-    /* JADX WARN: Removed duplicated region for block: B:158:0x03aa  */
-    /* JADX WARN: Removed duplicated region for block: B:159:0x039e  */
-    /* JADX WARN: Removed duplicated region for block: B:160:0x0398  */
-    /* JADX WARN: Removed duplicated region for block: B:163:0x0365  */
-    /* JADX WARN: Removed duplicated region for block: B:169:0x047d  */
-    /* JADX WARN: Removed duplicated region for block: B:171:0x0483  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0362  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x0368  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

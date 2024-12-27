@@ -129,12 +129,10 @@ public final class ScreenRecordingCallbacks {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyCallbacks(int state) {
         notifyCallbacks(state, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyCallbacks(final int state, boolean isKnox) {
         synchronized (sLock) {
             boolean notifyClient = needToNotifyClient(state);

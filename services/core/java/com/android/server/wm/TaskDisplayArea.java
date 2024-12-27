@@ -727,8 +727,6 @@ public final class TaskDisplayArea extends DisplayArea {
         return builder.build();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0146  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x014c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

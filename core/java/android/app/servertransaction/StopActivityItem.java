@@ -11,13 +11,11 @@ public class StopActivityItem extends ActivityLifecycleItem {
     public static final Parcelable.Creator<StopActivityItem> CREATOR =
             new Parcelable.Creator<StopActivityItem>() { // from class:
                 // android.app.servertransaction.StopActivityItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StopActivityItem createFromParcel(Parcel in) {
                     return new StopActivityItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StopActivityItem[] newArray(int size) {
                     return new StopActivityItem[size];

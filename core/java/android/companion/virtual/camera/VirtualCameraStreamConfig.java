@@ -11,13 +11,11 @@ public final class VirtualCameraStreamConfig implements Parcelable {
     public static final Parcelable.Creator<VirtualCameraStreamConfig> CREATOR =
             new Parcelable.Creator<VirtualCameraStreamConfig>() { // from class:
                 // android.companion.virtual.camera.VirtualCameraStreamConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualCameraStreamConfig createFromParcel(Parcel in) {
                     return new VirtualCameraStreamConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualCameraStreamConfig[] newArray(int size) {
                     return new VirtualCameraStreamConfig[size];

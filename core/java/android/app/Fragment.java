@@ -107,7 +107,6 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
                         return new SavedState(in, null);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.ClassLoaderCreator
                     public SavedState createFromParcel(Parcel in, ClassLoader loader) {
                         return new SavedState(in, loader);
@@ -1006,7 +1005,6 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void callStartTransitionListener() {
         OnStartEnterTransitionListener listener;
         if (this.mAnimationInfo == null) {

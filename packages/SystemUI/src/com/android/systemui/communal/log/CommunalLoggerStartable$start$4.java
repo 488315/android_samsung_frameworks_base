@@ -13,7 +13,6 @@ final class CommunalLoggerStartable$start$4 extends SuspendLambda implements Fun
     int label;
     final /* synthetic */ CommunalLoggerStartable this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalLoggerStartable$start$4(CommunalLoggerStartable communalLoggerStartable, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalLoggerStartable;

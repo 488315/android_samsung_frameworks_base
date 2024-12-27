@@ -226,7 +226,6 @@ public class SemFingerprintManager {
             return this.mBioCryptoObject.getMac();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public long getOpId() {
             return this.mBioCryptoObject.getOpId();
         }
@@ -235,7 +234,6 @@ public class SemFingerprintManager {
             return this.mFidoResultData;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setFidoResultData(byte[] fidoResultData) {
             this.mFidoResultData = fidoResultData;
         }
@@ -497,7 +495,6 @@ public class SemFingerprintManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: cancelAuthentication, reason: merged with bridge method [inline-methods] */
     public void lambda$authenticate$0(long requestId) {
         if (this.mService != null) {
@@ -524,7 +521,6 @@ public class SemFingerprintManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$handleDefaultError$1(AuthenticationCallback callback) {
         callback.onAuthenticationError(2, FingerprintManager.getErrorString(this.mContext, 2, 0));
     }
@@ -546,7 +542,6 @@ public class SemFingerprintManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendErrorResult(int errMsgId, String errMsg) {
         if (this.mAuthenticationCallback != null) {
             if (errMsg == null) {
@@ -556,14 +551,12 @@ public class SemFingerprintManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendAuthenticatedFailed() {
         if (this.mAuthenticationCallback != null) {
             this.mAuthenticationCallback.onAuthenticationFailed();
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendAcquiredResult(int acquireInfo, int vendor2) {
         if (this.mAuthenticationCallback != null) {
             String helpMsg =
@@ -580,7 +573,6 @@ public class SemFingerprintManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendAuthenticatedSucceeded(Fingerprint fp, int userId, Bundle data) {
         if (this.mAuthenticationCallback != null) {
             if (this.mCryptoObject != null && data != null) {

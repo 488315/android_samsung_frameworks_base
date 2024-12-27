@@ -20,7 +20,6 @@ public class TvStreamConfig implements Parcelable {
     public static final Parcelable.Creator<TvStreamConfig> CREATOR =
             new Parcelable.Creator<
                     TvStreamConfig>() { // from class: android.media.tv.TvStreamConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvStreamConfig createFromParcel(Parcel source) {
                     try {
@@ -40,7 +39,6 @@ public class TvStreamConfig implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvStreamConfig[] newArray(int size) {
                     return new TvStreamConfig[size];

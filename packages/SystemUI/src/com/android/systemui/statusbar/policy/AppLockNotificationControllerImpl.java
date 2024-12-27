@@ -29,7 +29,6 @@ public final class AppLockNotificationControllerImpl implements AppLockNotificat
         public final /* synthetic */ Handler val$mainHandler;
         public final /* synthetic */ SecureSettings val$settings;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(Executor executor, SecureSettings secureSettings, Handler handler) {
             super(executor);
             this.val$settings = secureSettings;
@@ -57,8 +56,6 @@ public final class AppLockNotificationControllerImpl implements AppLockNotificat
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v3, types: [android.database.ContentObserver, com.android.systemui.statusbar.policy.AppLockNotificationControllerImpl$1] */
     public AppLockNotificationControllerImpl(Context context, SecureSettings secureSettings, PackageManager packageManager, Handler handler, Executor executor, Lazy lazy) {
         this.mContext = context;
         this.mActivityManager = (ActivityManager) context.getSystemService("activity");

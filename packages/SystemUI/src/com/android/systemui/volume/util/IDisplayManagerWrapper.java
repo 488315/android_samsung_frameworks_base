@@ -88,8 +88,6 @@ public final class IDisplayManagerWrapper {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.volume.util.IDisplayManagerWrapper$refreshRateLimitOnRunnable$1] */
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.volume.util.IDisplayManagerWrapper$refreshRateLimitOffRunnable$1] */
     public IDisplayManagerWrapper(Context context) {
         this.context = context;
     }

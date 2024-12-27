@@ -104,7 +104,6 @@ public final class CommunalInteractor {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v27, types: [com.android.systemui.communal.domain.interactor.CommunalInteractor$special$$inlined$map$5] */
     public CommunalInteractor(CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, BroadcastDispatcher broadcastDispatcher, CommunalWidgetRepository communalWidgetRepository, CommunalPrefsRepository communalPrefsRepository, CommunalMediaRepository communalMediaRepository, SmartspaceRepository smartspaceRepository, KeyguardInteractor keyguardInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, CommunalSettingsInteractor communalSettingsInteractor, CommunalAppWidgetHost communalAppWidgetHost, EditWidgetsActivityStarter editWidgetsActivityStarter, UserTracker userTracker, ActivityStarter activityStarter, UserManager userManager, CommunalSceneInteractor communalSceneInteractor, SceneInteractor sceneInteractor, LogBuffer logBuffer, TableLogBuffer tableLogBuffer) {
         Flow flow;
         this.bgDispatcher = coroutineDispatcher;
@@ -159,8 +158,6 @@ public final class CommunalInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -251,8 +248,6 @@ public final class CommunalInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -355,8 +350,6 @@ public final class CommunalInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -467,8 +460,6 @@ public final class CommunalInteractor {
                     this.this$0 = communalInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -617,8 +608,6 @@ public final class CommunalInteractor {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -728,8 +717,6 @@ public final class CommunalInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

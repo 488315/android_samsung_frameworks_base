@@ -48,7 +48,6 @@ public class ButtonDispatcher {
         this.mId = i;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void addView(View view) {
         this.mViews.add(view);
         view.setOnClickListener(this.mClickListener);

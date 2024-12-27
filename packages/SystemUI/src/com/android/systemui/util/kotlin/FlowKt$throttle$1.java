@@ -67,7 +67,6 @@ final class FlowKt$throttle$1 extends SuspendLambda implements Function2 {
                     final /* synthetic */ Ref$LongRef $previousEmitTimeMs;
                     int label;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     public C02821(ProducerScope producerScope, Object obj, Ref$LongRef ref$LongRef, SystemClock systemClock, Continuation continuation) {
                         super(2, continuation);
                         this.$$this$channelFlow = producerScope;
@@ -109,7 +108,6 @@ final class FlowKt$throttle$1 extends SuspendLambda implements Function2 {
                     }
                 }
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public C02811(long j, Ref$ObjectRef<Job> ref$ObjectRef, CoroutineScope coroutineScope, ProducerScope producerScope, Object obj, Ref$LongRef ref$LongRef, SystemClock systemClock, Continuation continuation) {
                     super(2, continuation);
                     this.$timeUntilNextEmit = j;
@@ -164,10 +162,6 @@ final class FlowKt$throttle$1 extends SuspendLambda implements Function2 {
                 this.$outerScope = coroutineScope2;
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:21:0x0090  */
-            /* JADX WARN: Removed duplicated region for block: B:22:0x00b1  */
-            /* JADX WARN: Removed duplicated region for block: B:26:0x004d  */
-            /* JADX WARN: Removed duplicated region for block: B:8:0x0027  */
             @Override // kotlinx.coroutines.flow.FlowCollector
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -182,7 +176,6 @@ final class FlowKt$throttle$1 extends SuspendLambda implements Function2 {
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(Flow flow, SystemClock systemClock, long j, ProducerScope producerScope, Continuation continuation) {
             super(2, continuation);
             this.$this_throttle = flow;
@@ -229,7 +222,6 @@ final class FlowKt$throttle$1 extends SuspendLambda implements Function2 {
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FlowKt$throttle$1(Flow flow, SystemClock systemClock, long j, Continuation continuation) {
         super(2, continuation);
         this.$this_throttle = flow;

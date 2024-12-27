@@ -125,7 +125,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ ITestSession lambda$createTestSession$0(
             Context context, int sensorId1, ITestSessionCallback callback) throws RemoteException {
         return this.mService.createTestSession(sensorId1, callback, context.getOpPackageName());
@@ -445,7 +444,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$authenticate$1(FingerprintCallback fingerprintCallback) {
         fingerprintCallback.sendErrorResult(this.mContext, 5, 0);
     }
@@ -544,7 +542,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$enroll$2(FingerprintCallback fingerprintCallback) {
         fingerprintCallback.sendErrorResult(this.mContext, 5, 0);
     }
@@ -844,7 +841,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onPowerPressed$4() {
         try {
             this.mService.onPowerSinglePressed();
@@ -1006,7 +1002,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: sendPowerPressed, reason: merged with bridge method [inline-methods] */
     public void lambda$onPowerPressed$3() {
         try {
@@ -1057,7 +1052,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         return allSensors.get(0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelEnrollment(long requestId) {
         if (this.mService != null) {
             try {
@@ -1068,7 +1062,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelAuthentication(long requestId) {
         if (this.mService != null) {
             try {
@@ -1083,7 +1076,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelFingerprintDetect(long requestId) {
         if (this.mService == null) {
             return;
@@ -1225,7 +1217,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
             this.mFingerprintCallback = fingerprintCallback;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onEnrollResult$0(int remaining) {
             this.mFingerprintCallback.sendEnrollResult(remaining);
         }
@@ -1243,7 +1234,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAcquired$1(int acquireInfo, int vendorCode) {
             this.mFingerprintCallback.sendAcquiredResult(
                     FingerprintManager.this.mContext, acquireInfo, vendorCode);
@@ -1262,7 +1252,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAuthenticationSucceeded$2(
                 Fingerprint fp, int userId, boolean isStrongBiometric) {
             this.mFingerprintCallback.sendAuthenticatedSucceeded(fp, userId, isStrongBiometric);
@@ -1283,7 +1272,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFingerprintDetected$3(
                 int sensorId, int userId, boolean isStrongBiometric) {
             this.mFingerprintCallback.sendFingerprintDetected(sensorId, userId, isStrongBiometric);
@@ -1319,7 +1307,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onError$4(int error, int vendorCode) {
             this.mFingerprintCallback.sendErrorResult(
                     FingerprintManager.this.mContext, error, vendorCode);
@@ -1338,7 +1325,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRemoved$5(Fingerprint fp, int remaining) {
             this.mFingerprintCallback.sendRemovedResult(fp, remaining);
         }
@@ -1356,7 +1342,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onChallengeGenerated$6(
                 long challenge, int sensorId, int userId) {
             this.mFingerprintCallback.sendChallengeGenerated(challenge, sensorId, userId);
@@ -1376,7 +1361,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onUdfpsPointerDown$7(int sensorId) {
             this.mFingerprintCallback.sendUdfpsPointerDown(sensorId);
         }
@@ -1394,7 +1378,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onUdfpsPointerUp$8(int sensorId) {
             this.mFingerprintCallback.sendUdfpsPointerUp(sensorId);
         }
@@ -2178,7 +2161,6 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static String semGetAcquiredString(Context context, int acquireInfo, int vendorCode) {
         try {
         } catch (Exception e) {

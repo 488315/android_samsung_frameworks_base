@@ -15,8 +15,6 @@ public final class FakeHalFactory implements HalFactory {
     public final class AnonymousClass1 extends SoundTriggerHw3Compat {
         public final /* synthetic */ IInjectGlobalEvent val$session;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        /* JADX WARN: Multi-variable type inference failed */
         public AnonymousClass1(
                 FakeSoundTriggerHal fakeSoundTriggerHal,
                 FakeHalFactory$$ExternalSyntheticLambda0 fakeHalFactory$$ExternalSyntheticLambda0,
@@ -71,7 +69,6 @@ public final class FakeHalFactory implements HalFactory {
         this.mInjection = soundTriggerInjection;
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.server.soundtrigger_middleware.FakeHalFactory$$ExternalSyntheticLambda0] */
     @Override // com.android.server.soundtrigger_middleware.HalFactory
     public final ISoundTriggerHal create() {
         FakeSoundTriggerHal fakeSoundTriggerHal =

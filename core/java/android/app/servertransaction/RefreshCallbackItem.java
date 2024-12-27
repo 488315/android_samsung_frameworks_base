@@ -10,13 +10,11 @@ public class RefreshCallbackItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<RefreshCallbackItem> CREATOR =
             new Parcelable.Creator<RefreshCallbackItem>() { // from class:
                 // android.app.servertransaction.RefreshCallbackItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RefreshCallbackItem createFromParcel(Parcel in) {
                     return new RefreshCallbackItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RefreshCallbackItem[] newArray(int size) {
                     return new RefreshCallbackItem[size];

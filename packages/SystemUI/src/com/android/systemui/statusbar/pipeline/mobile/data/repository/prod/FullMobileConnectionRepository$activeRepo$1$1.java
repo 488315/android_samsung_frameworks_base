@@ -13,7 +13,6 @@ final class FullMobileConnectionRepository$activeRepo$1$1 extends SuspendLambda 
     /* synthetic */ boolean Z$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FullMobileConnectionRepository$activeRepo$1$1(FullMobileConnectionRepository fullMobileConnectionRepository, Continuation continuation) {
         super(2, continuation);
         this.$this_run = fullMobileConnectionRepository;

@@ -18,7 +18,6 @@ public final class QSTileViewModelImpl$special$$inlined$flatMapLatest$1 extends 
     int label;
     final /* synthetic */ QSTileViewModelImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QSTileViewModelImpl$special$$inlined$flatMapLatest$1(Continuation continuation, QSTileViewModelImpl qSTileViewModelImpl) {
         super(3, continuation);
         this.this$0 = qSTileViewModelImpl;

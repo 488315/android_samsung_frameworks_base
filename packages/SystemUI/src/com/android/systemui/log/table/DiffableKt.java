@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow;
 public abstract class DiffableKt {
     public static final Flow logDiffsForTable(Flow flow, final TableLogBuffer tableLogBuffer, final String str, final Diffable diffable) {
         return FlowKt.pairwiseBy(flow, (Function1) new DiffableKt$logDiffsForTable$1(new Function0() { // from class: com.android.systemui.log.table.DiffableKt$logDiffsForTable$getInitialValue$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -47,7 +46,6 @@ public abstract class DiffableKt {
 
     public static final Flow logDiffsForTable(Flow flow, final TableLogBuffer tableLogBuffer, final String str, final String str2, final boolean z) {
         return FlowKt.pairwiseBy(flow, (Function1) new DiffableKt$logDiffsForTable$3(new Function0() { // from class: com.android.systemui.log.table.DiffableKt$logDiffsForTable$initialValueFun$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -62,7 +60,6 @@ public abstract class DiffableKt {
 
     public static final Flow logDiffsForTable(Flow flow, final TableLogBuffer tableLogBuffer, final String str, final String str2, final int i) {
         return FlowKt.pairwiseBy(flow, (Function1) new DiffableKt$logDiffsForTable$5(new Function0() { // from class: com.android.systemui.log.table.DiffableKt$logDiffsForTable$initialValueFun$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -78,7 +75,6 @@ public abstract class DiffableKt {
     public static final Flow logDiffsForTable(Flow flow, final TableLogBuffer tableLogBuffer, final String str, final Integer num) {
         final String str2 = "Repo";
         return FlowKt.pairwiseBy(flow, (Function1) new DiffableKt$logDiffsForTable$7(new Function0() { // from class: com.android.systemui.log.table.DiffableKt$logDiffsForTable$initialValueFun$3
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -94,7 +90,6 @@ public abstract class DiffableKt {
     public static final Flow logDiffsForTable(Flow flow, final TableLogBuffer tableLogBuffer, final String str, final String str2) {
         final String str3 = "";
         return FlowKt.pairwiseBy(flow, (Function1) new DiffableKt$logDiffsForTable$9(new Function0() { // from class: com.android.systemui.log.table.DiffableKt$logDiffsForTable$initialValueFun$4
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -109,7 +104,6 @@ public abstract class DiffableKt {
 
     public static final Flow logDiffsForTable(Flow flow, final TableLogBuffer tableLogBuffer, final String str, final String str2, final List list) {
         return FlowKt.pairwiseBy(flow, (Function1) new DiffableKt$logDiffsForTable$11(new Function0() { // from class: com.android.systemui.log.table.DiffableKt$logDiffsForTable$initialValueFun$5
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

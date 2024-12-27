@@ -13,7 +13,6 @@ final class FromPrimaryBouncerTransitionInteractor$dismissPrimaryBouncer$1 exten
     int label;
     final /* synthetic */ FromPrimaryBouncerTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromPrimaryBouncerTransitionInteractor$dismissPrimaryBouncer$1(FromPrimaryBouncerTransitionInteractor fromPrimaryBouncerTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromPrimaryBouncerTransitionInteractor;

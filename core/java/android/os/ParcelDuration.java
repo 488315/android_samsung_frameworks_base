@@ -5,13 +5,11 @@ import java.time.Duration;
 public final class ParcelDuration implements Parcelable {
     public static final Parcelable.Creator<ParcelDuration> CREATOR =
             new Parcelable.Creator<ParcelDuration>() { // from class: android.os.ParcelDuration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelDuration createFromParcel(Parcel source) {
                     return new ParcelDuration(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelDuration[] newArray(int size) {
                     return new ParcelDuration[size];

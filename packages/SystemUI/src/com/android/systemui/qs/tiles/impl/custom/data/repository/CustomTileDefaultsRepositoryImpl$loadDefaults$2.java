@@ -21,7 +21,6 @@ final class CustomTileDefaultsRepositoryImpl$loadDefaults$2 extends SuspendLambd
     int label;
     final /* synthetic */ CustomTileDefaultsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTileDefaultsRepositoryImpl$loadDefaults$2(CustomTileDefaultsRepositoryImpl customTileDefaultsRepositoryImpl, UserHandle userHandle, ComponentName componentName, Continuation continuation) {
         super(2, continuation);
         this.this$0 = customTileDefaultsRepositoryImpl;

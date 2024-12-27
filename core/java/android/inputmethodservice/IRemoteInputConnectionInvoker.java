@@ -70,13 +70,11 @@ final class IRemoteInputConnectionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class IntResultReceiver extends OnceResultReceiver<IntConsumer> {
         IntResultReceiver(Executor executor, IntConsumer consumer) {
             super(executor, consumer);
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.inputmethodservice.IRemoteInputConnectionInvoker.OnceResultReceiver
         public void dispatch(
                 Executor executor, final IntConsumer consumer, final int code, Bundle data) {
@@ -91,14 +89,12 @@ final class IRemoteInputConnectionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class TextBoundsInfoResultReceiver
             extends OnceResultReceiver<Consumer<TextBoundsInfoResult>> {
         TextBoundsInfoResultReceiver(Executor executor, Consumer<TextBoundsInfoResult> consumer) {
             super(executor, consumer);
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.inputmethodservice.IRemoteInputConnectionInvoker.OnceResultReceiver
         public void dispatch(
                 Executor executor,

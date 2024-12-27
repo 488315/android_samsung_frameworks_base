@@ -27,9 +27,6 @@ final class NotificationMemoryMeter$notificationMemoryUse$1 extends Lambda imple
         super(1);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v7, types: [android.view.View] */
-    /* JADX WARN: Type inference failed for: r5v31, types: [android.view.View[]] */
     @Override // kotlin.jvm.functions.Function1
     public final Object invoke(Object obj) {
         int i;

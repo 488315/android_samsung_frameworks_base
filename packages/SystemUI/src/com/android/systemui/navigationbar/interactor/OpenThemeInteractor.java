@@ -25,7 +25,6 @@ public final class OpenThemeInteractor {
         intentFilter.addAction("com.samsung.android.theme.themecenter.THEME_APPLY");
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [android.content.BroadcastReceiver, com.android.systemui.navigationbar.interactor.OpenThemeInteractor$addCallback$2] */
     public final void addCallback(final NavBarStoreImpl$initInteractor$11 navBarStoreImpl$initInteractor$11) {
         OpenThemeInteractor$addCallback$2 openThemeInteractor$addCallback$2 = this.broadcastReceiver;
         if (openThemeInteractor$addCallback$2 != null) {

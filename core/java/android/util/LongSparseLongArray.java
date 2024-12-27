@@ -154,7 +154,6 @@ public class LongSparseLongArray implements Cloneable {
             dest.writeLongArray(array.mValues);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // com.android.internal.util.Parcelling
         public LongSparseLongArray unparcel(Parcel source) {
             int size = source.readInt();

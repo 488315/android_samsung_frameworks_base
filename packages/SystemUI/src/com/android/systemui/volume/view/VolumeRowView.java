@@ -111,7 +111,6 @@ public final class VolumeRowView extends FrameLayout implements VolumeObserver<V
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.volume.view.VolumeRowView$recheckCallback$1] */
     public VolumeRowView(Context context) {
         super(context);
         this.storeInteractor = new StoreInteractor(this, null);
@@ -714,7 +713,6 @@ public final class VolumeRowView extends FrameLayout implements VolumeObserver<V
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.volume.view.VolumeRowView$recheckCallback$1] */
     public VolumeRowView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.storeInteractor = new StoreInteractor(this, null);

@@ -20,16 +20,11 @@ final class UserSwitcherRepositoryImpl$isEnabled$1 extends SuspendLambda impleme
     int label;
     final /* synthetic */ UserSwitcherRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherRepositoryImpl$isEnabled$1(UserSwitcherRepositoryImpl userSwitcherRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userSwitcherRepositoryImpl;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0037  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
-    /* JADX WARN: Type inference failed for: r5v5, types: [kotlinx.coroutines.channels.SendChannel] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -108,7 +103,6 @@ final class UserSwitcherRepositoryImpl$isEnabled$1 extends SuspendLambda impleme
         return ((UserSwitcherRepositoryImpl$isEnabled$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         ProducerScope producerScope;

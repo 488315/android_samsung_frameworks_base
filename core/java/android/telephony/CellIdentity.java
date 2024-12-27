@@ -11,7 +11,6 @@ import java.util.UUID;
 public abstract class CellIdentity implements Parcelable {
     public static final Parcelable.Creator<CellIdentity> CREATOR =
             new Parcelable.Creator<CellIdentity>() { // from class: android.telephony.CellIdentity.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentity createFromParcel(Parcel in) {
                     int type = in.readInt();
@@ -33,7 +32,6 @@ public abstract class CellIdentity implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentity[] newArray(int size) {
                     return new CellIdentity[size];

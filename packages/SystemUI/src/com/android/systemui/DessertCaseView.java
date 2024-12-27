@@ -350,8 +350,6 @@ public final class DessertCaseView extends FrameLayout {
         this(context, attributeSet, 0);
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.DessertCaseView$1] */
     public DessertCaseView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         int i2 = 1;

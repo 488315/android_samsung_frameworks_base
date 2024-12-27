@@ -5,8 +5,6 @@ import com.samsung.android.knox.custom.CustomDeviceManager;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class AssistantInvocationEvent implements UiEventLogger.UiEventEnum {
     public static final /* synthetic */ AssistantInvocationEvent[] $VALUES;
     public static final AssistantInvocationEvent ASSISTANT_INVOCATION_HOME_LONG_PRESS;

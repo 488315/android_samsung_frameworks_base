@@ -570,7 +570,6 @@ public class CaptureResult extends CameraMetadata<Key<?>> {
             return this.mKey;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         Key(CameraMetadataNative.Key<?> key) {
             this.mKey = key;
         }
@@ -651,7 +650,6 @@ public class CaptureResult extends CameraMetadata<Key<?>> {
         return (T) this.mResults.get(key);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.hardware.camera2.CameraMetadata
     public <T> T getProtected(Key<?> key) {
         return (T) this.mResults.get(key);

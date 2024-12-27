@@ -244,7 +244,6 @@ public class PluginLockFaceWidget extends AbstractPluginLockItem {
         return (clockData == null || clockData2 == null || !clockData.equals(clockData2)) ? false : true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void lambda$unregisterClockCallbackRecover$0() {
         ExternalClockProvider externalClockProvider = this.mClockProvider;
         PluginClockProvider.ClockCallback clockCallback = this.mClockCallback;
@@ -342,7 +341,6 @@ public class PluginLockFaceWidget extends AbstractPluginLockItem {
         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateLockStarData(String str, Object obj) {
         if (this.mMediator == null) {
             Log.w(TAG, "updateLockStarData, mediator is null");

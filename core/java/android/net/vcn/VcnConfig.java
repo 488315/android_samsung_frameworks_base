@@ -45,7 +45,6 @@ public final class VcnConfig implements Parcelable {
         RESTRICTED_TRANSPORTS_DEFAULT = Collections.singleton(1);
         CREATOR =
                 new Parcelable.Creator<VcnConfig>() { // from class: android.net.vcn.VcnConfig.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public VcnConfig createFromParcel(Parcel in) {
                         return new VcnConfig(
@@ -53,7 +52,6 @@ public final class VcnConfig implements Parcelable {
                                         in.readParcelable(null, PersistableBundle.class));
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public VcnConfig[] newArray(int size) {
                         return new VcnConfig[size];

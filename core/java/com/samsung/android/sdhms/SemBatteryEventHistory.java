@@ -13,13 +13,11 @@ public class SemBatteryEventHistory implements Cloneable, Parcelable {
             new Parcelable.Creator<
                     SemBatteryEventHistory>() { // from class:
                                                 // com.samsung.android.sdhms.SemBatteryEventHistory.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemBatteryEventHistory createFromParcel(Parcel in) {
                     return new SemBatteryEventHistory(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemBatteryEventHistory[] newArray(int size) {
                     return new SemBatteryEventHistory[size];

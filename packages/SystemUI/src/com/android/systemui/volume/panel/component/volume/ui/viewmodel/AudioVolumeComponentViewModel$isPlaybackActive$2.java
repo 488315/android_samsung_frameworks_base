@@ -12,7 +12,6 @@ final class AudioVolumeComponentViewModel$isPlaybackActive$2 extends SuspendLamb
     int label;
     final /* synthetic */ AudioVolumeComponentViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AudioVolumeComponentViewModel$isPlaybackActive$2(AudioVolumeComponentViewModel audioVolumeComponentViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = audioVolumeComponentViewModel;

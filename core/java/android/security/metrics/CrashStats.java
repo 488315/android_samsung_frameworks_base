@@ -8,7 +8,6 @@ public class CrashStats implements Parcelable {
     public static final Parcelable.Creator<CrashStats> CREATOR =
             new Parcelable.Creator<
                     CrashStats>() { // from class: android.security.metrics.CrashStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CrashStats createFromParcel(Parcel _aidl_source) {
                     CrashStats _aidl_out = new CrashStats();
@@ -16,7 +15,6 @@ public class CrashStats implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CrashStats[] newArray(int _aidl_size) {
                     return new CrashStats[_aidl_size];

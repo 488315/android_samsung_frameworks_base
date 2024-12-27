@@ -21,13 +21,11 @@ public final class IntentFilterPolicyKey extends PolicyKey {
     public static final Parcelable.Creator<IntentFilterPolicyKey> CREATOR =
             new Parcelable.Creator<IntentFilterPolicyKey>() { // from class:
                 // android.app.admin.IntentFilterPolicyKey.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IntentFilterPolicyKey createFromParcel(Parcel source) {
                     return new IntentFilterPolicyKey(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IntentFilterPolicyKey[] newArray(int size) {
                     return new IntentFilterPolicyKey[size];

@@ -56,7 +56,6 @@ public final class PhantomProcessRecord {
     public final long mKnownSince = SystemClock.elapsedRealtime();
     public final ProcessList.KillHandler mKillHandler = ProcessList.sKillHandler;
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.am.PhantomProcessRecord$1] */
     public PhantomProcessRecord(
             String str,
             int i,

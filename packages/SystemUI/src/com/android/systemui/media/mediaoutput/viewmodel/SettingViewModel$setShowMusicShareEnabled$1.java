@@ -19,7 +19,6 @@ final class SettingViewModel$setShowMusicShareEnabled$1 extends SuspendLambda im
     int label;
     final /* synthetic */ SettingViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SettingViewModel$setShowMusicShareEnabled$1(boolean z, SettingViewModel settingViewModel, Continuation continuation) {
         super(2, continuation);
         this.$value = z;

@@ -175,8 +175,6 @@ public class WindowlessWindowManager implements IWindowSession {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x01c2 A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x01c4 A[ORIG_RETURN, RETURN] */
     @Override // android.view.IWindowSession
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -402,7 +400,6 @@ public class WindowlessWindowManager implements IWindowSession {
                 outActiveControls);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0158  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

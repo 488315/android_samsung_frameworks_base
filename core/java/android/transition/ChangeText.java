@@ -63,8 +63,6 @@ public class ChangeText extends Transition {
         captureValues(transitionValues);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:56:0x019c  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x01a1  */
     @Override // android.transition.Transition
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -85,7 +83,6 @@ public class ChangeText extends Transition {
                     + " android.transition.TransitionValues):android.animation.Animator");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setSelection(EditText editText, int start, int end) {
         if (start >= 0 && end >= 0) {
             editText.setSelection(start, end);

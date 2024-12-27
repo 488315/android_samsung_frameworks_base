@@ -35,7 +35,6 @@ public final class LsLogger {
         return logger;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean setLogger(LsLogType type, Logger logger) {
         int id = ArrayUtils.indexOf(LsLogType.LIST, type);
         mLoggers.put(id, logger);
@@ -61,7 +60,6 @@ public final class LsLogger {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void add(String msg) {
             synchronized (mQueueLock) {
                 preventBOFLocked(this.mLogQ);

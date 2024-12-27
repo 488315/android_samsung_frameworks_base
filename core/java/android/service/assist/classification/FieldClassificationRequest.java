@@ -14,13 +14,11 @@ public final class FieldClassificationRequest implements Parcelable {
             new Parcelable.Creator<
                     FieldClassificationRequest>() { // from class:
                                                     // android.service.assist.classification.FieldClassificationRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FieldClassificationRequest[] newArray(int size) {
                     return new FieldClassificationRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FieldClassificationRequest createFromParcel(Parcel in) {
                     return new FieldClassificationRequest(in);

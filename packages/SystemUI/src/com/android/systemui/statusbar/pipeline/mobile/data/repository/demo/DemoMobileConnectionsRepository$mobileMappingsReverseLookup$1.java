@@ -14,7 +14,6 @@ final class DemoMobileConnectionsRepository$mobileMappingsReverseLookup$1 extend
     int label;
     final /* synthetic */ DemoMobileConnectionsRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DemoMobileConnectionsRepository$mobileMappingsReverseLookup$1(DemoMobileConnectionsRepository demoMobileConnectionsRepository, Continuation continuation) {
         super(2, continuation);
         this.this$0 = demoMobileConnectionsRepository;

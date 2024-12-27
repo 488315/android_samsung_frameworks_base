@@ -11,7 +11,6 @@ public class HardwareConfigSim implements Parcelable {
     public static final Parcelable.Creator<HardwareConfigSim> CREATOR =
             new Parcelable.Creator<HardwareConfigSim>() { // from class:
                 // android.hardware.radio.modem.HardwareConfigSim.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HardwareConfigSim createFromParcel(Parcel _aidl_source) {
                     HardwareConfigSim _aidl_out = new HardwareConfigSim();
@@ -19,7 +18,6 @@ public class HardwareConfigSim implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HardwareConfigSim[] newArray(int _aidl_size) {
                     return new HardwareConfigSim[_aidl_size];

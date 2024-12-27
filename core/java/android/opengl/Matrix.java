@@ -3,7 +3,6 @@ package android.opengl;
 public class Matrix {
     private static final ThreadLocal<float[]> ThreadTmp =
             new ThreadLocal() { // from class: android.opengl.Matrix.1
-                /* JADX INFO: Access modifiers changed from: protected */
                 @Override // java.lang.ThreadLocal
                 public float[] initialValue() {
                     return new float[32];

@@ -27,13 +27,11 @@ public final class EpsBearerQosSessionAttributes implements Parcelable, QosSessi
             new Parcelable.Creator<
                     EpsBearerQosSessionAttributes>() { // from class:
                                                        // android.telephony.data.EpsBearerQosSessionAttributes.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EpsBearerQosSessionAttributes createFromParcel(Parcel in) {
                     return new EpsBearerQosSessionAttributes(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EpsBearerQosSessionAttributes[] newArray(int size) {
                     return new EpsBearerQosSessionAttributes[size];

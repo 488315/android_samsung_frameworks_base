@@ -2,8 +2,6 @@ package com.android.systemui.plank.monitor;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class EventType {
     public static final /* synthetic */ EventType[] $VALUES;
     public static final EventType CLICK;

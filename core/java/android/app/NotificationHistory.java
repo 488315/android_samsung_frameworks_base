@@ -28,13 +28,11 @@ public final class NotificationHistory implements Parcelable {
     public static final Parcelable.Creator<NotificationHistory> CREATOR =
             new Parcelable.Creator<
                     NotificationHistory>() { // from class: android.app.NotificationHistory.2
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotificationHistory createFromParcel(Parcel source) {
                     return new NotificationHistory(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotificationHistory[] newArray(int size) {
                     return new NotificationHistory[size];

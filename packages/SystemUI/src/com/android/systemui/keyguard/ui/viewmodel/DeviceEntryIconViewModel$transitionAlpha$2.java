@@ -18,7 +18,6 @@ final class DeviceEntryIconViewModel$transitionAlpha$2 extends SuspendLambda imp
     int label;
     final /* synthetic */ DeviceEntryIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryIconViewModel$transitionAlpha$2(DeviceEntryIconViewModel deviceEntryIconViewModel, KeyguardTransitionInteractor keyguardTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceEntryIconViewModel;

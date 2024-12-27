@@ -232,13 +232,11 @@ public final class DeviceAdminInfo implements Parcelable {
         CREATOR =
                 new Parcelable.Creator<
                         DeviceAdminInfo>() { // from class: android.app.admin.DeviceAdminInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DeviceAdminInfo createFromParcel(Parcel source) {
                         return new DeviceAdminInfo(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DeviceAdminInfo[] newArray(int size) {
                         return new DeviceAdminInfo[size];

@@ -48,7 +48,6 @@ public final class SmartCardController {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.wallpaper.accessory.SmartCardController$settingObserver$1] */
     public SmartCardController(Context context, SettingsHelper settingsHelper, KeyguardUpdateMonitor keyguardUpdateMonitor, PluginWallpaperManager pluginWallpaperManager) {
         this.context = context;
         this.settingsHelper = settingsHelper;

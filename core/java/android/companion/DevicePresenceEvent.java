@@ -12,13 +12,11 @@ public final class DevicePresenceEvent implements Parcelable {
     public static final Parcelable.Creator<DevicePresenceEvent> CREATOR =
             new Parcelable.Creator<
                     DevicePresenceEvent>() { // from class: android.companion.DevicePresenceEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DevicePresenceEvent[] newArray(int size) {
                     return new DevicePresenceEvent[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DevicePresenceEvent createFromParcel(Parcel in) {
                     return new DevicePresenceEvent(in);

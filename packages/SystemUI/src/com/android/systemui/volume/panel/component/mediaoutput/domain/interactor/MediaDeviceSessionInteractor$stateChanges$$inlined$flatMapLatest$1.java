@@ -24,7 +24,6 @@ public final class MediaDeviceSessionInteractor$stateChanges$$inlined$flatMapLat
     int label;
     final /* synthetic */ MediaDeviceSessionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaDeviceSessionInteractor$stateChanges$$inlined$flatMapLatest$1(Continuation continuation, MediaDeviceSessionInteractor mediaDeviceSessionInteractor, MediaDeviceSession mediaDeviceSession, Function3 function3) {
         super(3, continuation);
         this.this$0 = mediaDeviceSessionInteractor;

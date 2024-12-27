@@ -160,7 +160,6 @@ class ConfigurationController {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     void performConfigurationChanged(
             ComponentCallbacks2 componentCallbacks2, Configuration newConfig) {
         Configuration contextThemeWrapperOverrideConfig = null;

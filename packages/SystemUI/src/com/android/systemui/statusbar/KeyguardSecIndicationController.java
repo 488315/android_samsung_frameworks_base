@@ -548,7 +548,6 @@ public final class KeyguardSecIndicationController extends KeyguardIndicationCon
         }
     }
 
-    /* JADX WARN: Type inference failed for: r7v0, types: [com.android.systemui.statusbar.KeyguardSecIndicationController$2] */
     public KeyguardSecIndicationController(Context context, Looper looper, WakeLock.Builder builder, KeyguardStateController keyguardStateController, StatusBarStateController statusBarStateController, KeyguardUpdateMonitor keyguardUpdateMonitor, DockManager dockManager, BroadcastDispatcher broadcastDispatcher, DevicePolicyManager devicePolicyManager, IBatteryStats iBatteryStats, UserManager userManager, DelayableExecutor delayableExecutor, DelayableExecutor delayableExecutor2, FalsingManager falsingManager, AuthController authController, LockPatternUtils lockPatternUtils, ScreenLifecycle screenLifecycle, KeyguardBypassController keyguardBypassController, AccessibilityManager accessibilityManager, FaceHelpMessageDeferralFactory faceHelpMessageDeferralFactory, KeyguardLogger keyguardLogger, AlternateBouncerInteractor alternateBouncerInteractor, AlarmManager alarmManager, UserTracker userTracker, BouncerMessageInteractor bouncerMessageInteractor, FeatureFlags featureFlags, IndicationHelper indicationHelper, KeyguardInteractor keyguardInteractor, BiometricMessageInteractor biometricMessageInteractor, DeviceEntryFingerprintAuthInteractor deviceEntryFingerprintAuthInteractor, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor, SelectedUserInteractor selectedUserInteractor, SecRotationWatcher secRotationWatcher, PluginLockMediator pluginLockMediator, PluginLockData pluginLockData, PluginLockStarManager pluginLockStarManager, KeyguardEditModeController keyguardEditModeController) {
         super(context, looper, builder, keyguardStateController, statusBarStateController, keyguardUpdateMonitor, dockManager, broadcastDispatcher, devicePolicyManager, iBatteryStats, userManager, delayableExecutor, delayableExecutor2, falsingManager, authController, lockPatternUtils, screenLifecycle, keyguardBypassController, accessibilityManager, faceHelpMessageDeferralFactory, keyguardLogger, alternateBouncerInteractor, alarmManager, userTracker, bouncerMessageInteractor, featureFlags, indicationHelper, keyguardInteractor, biometricMessageInteractor, deviceEntryFingerprintAuthInteractor, deviceEntryFaceAuthInteractor);
         this.mIsScreenOn = true;
@@ -688,9 +687,6 @@ public final class KeyguardSecIndicationController extends KeyguardIndicationCon
         addIndicationTimeout(IndicationPosition.DEFAULT, indicationEventType, charSequence, colorStateList, z);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:44:0x038c  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x03d3  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x03e2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

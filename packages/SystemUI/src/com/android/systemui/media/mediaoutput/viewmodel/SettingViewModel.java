@@ -73,7 +73,6 @@ public final class SettingViewModel extends ViewModel {
                         int label;
                         final /* synthetic */ SettingViewModel this$0;
 
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         public C01551(SettingViewModel settingViewModel, Continuation continuation) {
                             super(2, continuation);
                             this.this$0 = settingViewModel;

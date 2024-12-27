@@ -89,7 +89,6 @@ public class PacProxyManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onPacProxyInstalled$1(
                 final Network network, final ProxyInfo proxy) throws Exception {
             this.mExecutor.execute(
@@ -103,7 +102,6 @@ public class PacProxyManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onPacProxyInstalled$0(Network network, ProxyInfo proxy) {
             this.mListener.onPacProxyInstalled(network, proxy);
         }

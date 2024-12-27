@@ -26,7 +26,6 @@ public final class Favorites {
     private Favorites() {
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:50:0x0091  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

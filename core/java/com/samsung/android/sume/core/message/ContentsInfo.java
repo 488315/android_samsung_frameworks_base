@@ -24,13 +24,11 @@ public class ContentsInfo implements Parcelable {
             new Parcelable.Creator<
                     ContentsInfo>() { // from class:
                                       // com.samsung.android.sume.core.message.ContentsInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentsInfo createFromParcel(Parcel in) {
                     return new ContentsInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentsInfo[] newArray(int size) {
                     return new ContentsInfo[size];

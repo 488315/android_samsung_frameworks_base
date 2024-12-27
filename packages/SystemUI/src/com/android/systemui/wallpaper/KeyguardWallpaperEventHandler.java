@@ -159,7 +159,6 @@ public class KeyguardWallpaperEventHandler {
         this.mContext.registerReceiver(this.mBroadcastReceiver, intentFilter, 2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendMessage(int i, Object obj, int i2, int i3) {
         StringBuilder sb = new StringBuilder("sendMessage(), what = ");
         sb.append(i);

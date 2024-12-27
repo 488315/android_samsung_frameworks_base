@@ -402,7 +402,6 @@ public final class LogcatManagerService extends SystemService {
         PENDING_CONFIRMATION_TIMEOUT_MILLIS = Build.IS_DEBUGGABLE ? 70000 : 400000;
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LogcatManagerService(Context context) {
         super(context);
         Injector injector = new Injector();
@@ -481,8 +480,6 @@ public final class LogcatManagerService extends SystemService {
 
        if (com.android.internal.util.ArrayUtils.contains(r0, r3) != false) goto L27;
     */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0061 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0062  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

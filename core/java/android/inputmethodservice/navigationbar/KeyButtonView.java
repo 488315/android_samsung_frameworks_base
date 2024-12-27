@@ -113,7 +113,6 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
         return super.performAccessibilityActionInternal(action, arguments);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:43:0x00c7, code lost:
 
        return true;

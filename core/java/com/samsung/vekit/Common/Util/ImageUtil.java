@@ -56,7 +56,6 @@ public class ImageUtil {
         return info;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static Bitmap decodeImage(String filePath, int targetWidth, int targetHeight) {
         boolean isNewBitmapNeeded;
         Log.e(

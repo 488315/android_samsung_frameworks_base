@@ -13,7 +13,6 @@ final class DeviceEntryRepositoryImpl$isLockscreenEnabled$2 extends SuspendLambd
     int label;
     final /* synthetic */ DeviceEntryRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryRepositoryImpl$isLockscreenEnabled$2(DeviceEntryRepositoryImpl deviceEntryRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceEntryRepositoryImpl;

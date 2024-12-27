@@ -128,10 +128,6 @@ public class AccessibilityCache {
         windows.put(windowId, new AccessibilityWindowInfo(window));
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x010c  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0126  */
-    /* JADX WARN: Removed duplicated region for block: B:30:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

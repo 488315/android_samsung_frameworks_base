@@ -11,7 +11,6 @@ public class RadioConst implements Parcelable {
     public static final Parcelable.Creator<RadioConst> CREATOR =
             new Parcelable.Creator<
                     RadioConst>() { // from class: android.hardware.radio.RadioConst.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RadioConst createFromParcel(Parcel _aidl_source) {
                     RadioConst _aidl_out = new RadioConst();
@@ -19,7 +18,6 @@ public class RadioConst implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RadioConst[] newArray(int _aidl_size) {
                     return new RadioConst[_aidl_size];

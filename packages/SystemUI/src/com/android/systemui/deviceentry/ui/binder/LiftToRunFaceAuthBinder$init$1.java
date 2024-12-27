@@ -16,7 +16,6 @@ final class LiftToRunFaceAuthBinder$init$1 extends SuspendLambda implements Func
     int label;
     final /* synthetic */ LiftToRunFaceAuthBinder this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LiftToRunFaceAuthBinder$init$1(LiftToRunFaceAuthBinder liftToRunFaceAuthBinder, Continuation continuation) {
         super(2, continuation);
         this.this$0 = liftToRunFaceAuthBinder;

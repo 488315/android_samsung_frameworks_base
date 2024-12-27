@@ -204,8 +204,6 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.shade.ShadeHeaderController$insetListener$1] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.shade.ShadeHeaderController$configurationControllerListener$1] */
     public ShadeHeaderController(MotionLayout motionLayout, StatusBarIconController statusBarIconController, TintedIconManager.Factory factory, HeaderPrivacyIconsController headerPrivacyIconsController, StatusBarContentInsetsProvider statusBarContentInsetsProvider, ConfigurationController configurationController, VariableDateViewController$Factory variableDateViewController$Factory, BatteryMeterViewController batteryMeterViewController, DumpManager dumpManager, ShadeCarrierGroupController.Builder builder, CombinedShadeHeadersConstraintManager combinedShadeHeadersConstraintManager, DemoModeController demoModeController, QsBatteryModeController qsBatteryModeController, NextAlarmController nextAlarmController, ActivityStarter activityStarter, StatusOverlayHoverListenerFactory statusOverlayHoverListenerFactory, SecQSPanelResourcePicker secQSPanelResourcePicker, StatusIconContainerController statusIconContainerController, IndicatorScaleGardener indicatorScaleGardener, ShadeHeaderColorPicker shadeHeaderColorPicker, NetspeedViewController netspeedViewController, LockscreenShadeTransitionController lockscreenShadeTransitionController) {
         super(motionLayout);
         this.header = motionLayout;
@@ -319,7 +317,6 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         final int paddingEnd = motionLayout2.getPaddingEnd();
         ((CombinedShadeHeadersConstraintManagerImpl) shadeHeaderController.combinedShadeHeadersConstraintManager).getClass();
         Function1 function1 = new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerImpl$edgesGuidelinesConstraints$change$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -359,7 +356,6 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
                     i4 = R.id.center_left;
                 }
                 plus = constraintsChanges.plus(new ConstraintsChanges(new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerImpl$centerCutoutConstraints$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -377,7 +373,6 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
                         return Unit.INSTANCE;
                     }
                 }, new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerImpl$centerCutoutConstraints$2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -504,8 +499,6 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
                         dialog.dismiss();
                     }
                     privacyDialogController.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.privacy.PrivacyDialogController$showDialog$1
-                        /* JADX WARN: Multi-variable type inference failed */
-                        /* JADX WARN: Type inference failed for: r10v5, types: [java.lang.CharSequence, java.lang.Object] */
                         @Override // java.lang.Runnable
                         public final void run() {
                             PrivacyType privacyType;

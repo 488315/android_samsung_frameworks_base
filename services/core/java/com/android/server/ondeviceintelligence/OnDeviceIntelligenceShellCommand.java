@@ -20,7 +20,6 @@ public final class OnDeviceIntelligenceShellCommand extends ShellCommand {
         this.mService = onDeviceIntelligenceManagerService;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int onCommand(String str) {
         char c;
         if (str == null) {

@@ -30,17 +30,13 @@ class LocalSocketImpl {
     private native Credentials getPeerCredentials_native(FileDescriptor fileDescriptor)
             throws IOException;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native int read_native(FileDescriptor fileDescriptor) throws IOException;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native int readba_native(byte[] bArr, int i, int i2, FileDescriptor fileDescriptor)
             throws IOException;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native void write_native(int i, FileDescriptor fileDescriptor) throws IOException;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native void writeba_native(byte[] bArr, int i, int i2, FileDescriptor fileDescriptor)
             throws IOException;
 

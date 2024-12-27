@@ -203,9 +203,6 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:16:0x007b A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:20:0x004f A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:54:0x00a4 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -905,12 +902,6 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
         return iDumpstate;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:56:0x014b  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0152  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x015b A[Catch: all -> 0x01b9, TryCatch #1 {, blocks: (B:39:0x0103, B:44:0x0116, B:45:0x01b7, B:48:0x0120, B:50:0x0124, B:52:0x012c, B:54:0x0147, B:57:0x014e, B:60:0x0155, B:62:0x015b, B:63:0x0164, B:67:0x0180, B:69:0x0193, B:70:0x019d, B:73:0x01b0, B:75:0x01b4, B:79:0x0135, B:81:0x013d), top: B:38:0x0103, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0164 A[Catch: all -> 0x01b9, TryCatch #1 {, blocks: (B:39:0x0103, B:44:0x0116, B:45:0x01b7, B:48:0x0120, B:50:0x0124, B:52:0x012c, B:54:0x0147, B:57:0x014e, B:60:0x0155, B:62:0x015b, B:63:0x0164, B:67:0x0180, B:69:0x0193, B:70:0x019d, B:73:0x01b0, B:75:0x01b4, B:79:0x0135, B:81:0x013d), top: B:38:0x0103, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0154  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x014d  */
     @Override // android.os.IDumpstate
     /*
         Code decompiled incorrectly, please refer to instructions dump.

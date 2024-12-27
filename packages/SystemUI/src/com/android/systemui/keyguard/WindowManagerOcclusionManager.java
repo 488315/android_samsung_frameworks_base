@@ -45,7 +45,6 @@ public final class WindowManagerOcclusionManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.keyguard.WindowManagerOcclusionManager$occludeAnimationController$1] */
     public WindowManagerOcclusionManager(KeyguardOcclusionInteractor keyguardOcclusionInteractor, ActivityTransitionAnimator activityTransitionAnimator, Lazy lazy, PowerInteractor powerInteractor, Context context, InteractionJankMonitor interactionJankMonitor, Executor executor, DreamingToLockscreenTransitionViewModel dreamingToLockscreenTransitionViewModel, KeyguardOcclusionInteractor keyguardOcclusionInteractor2) {
         this.keyguardOcclusionInteractor = keyguardOcclusionInteractor;
         this.activityTransitionAnimator = activityTransitionAnimator;

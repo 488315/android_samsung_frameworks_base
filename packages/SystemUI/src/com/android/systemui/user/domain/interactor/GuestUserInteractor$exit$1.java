@@ -20,7 +20,6 @@ final class GuestUserInteractor$exit$1 extends SuspendLambda implements Function
     int label;
     final /* synthetic */ GuestUserInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GuestUserInteractor$exit$1(GuestUserInteractor guestUserInteractor, int i, UserInfo userInfo, boolean z, Function1 function1, Function0 function0, Function1 function12, Continuation continuation) {
         super(2, continuation);
         this.this$0 = guestUserInteractor;
@@ -42,8 +41,6 @@ final class GuestUserInteractor$exit$1 extends SuspendLambda implements Function
         return ((GuestUserInteractor$exit$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x006f  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00a6 A[RETURN] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

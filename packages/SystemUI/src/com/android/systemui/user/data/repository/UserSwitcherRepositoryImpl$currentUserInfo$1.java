@@ -23,7 +23,6 @@ final class UserSwitcherRepositoryImpl$currentUserInfo$1 extends SuspendLambda i
     int label;
     final /* synthetic */ UserSwitcherRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherRepositoryImpl$currentUserInfo$1(UserSwitcherRepositoryImpl userSwitcherRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userSwitcherRepositoryImpl;
@@ -61,7 +60,6 @@ final class UserSwitcherRepositoryImpl$currentUserInfo$1 extends SuspendLambda i
                     int label;
                     final /* synthetic */ UserSwitcherRepositoryImpl this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     public AnonymousClass1(ProducerScope producerScope, Drawable drawable, UserSwitcherRepositoryImpl userSwitcherRepositoryImpl, Continuation continuation) {
                         super(2, continuation);
                         this.$$this$conflatedCallbackFlow = producerScope;
@@ -128,7 +126,6 @@ final class UserSwitcherRepositoryImpl$currentUserInfo$1 extends SuspendLambda i
             ((UserInfoControllerImpl) this.this$0.userInfoController).addCallback(onUserInfoChangedListener);
             final UserSwitcherRepositoryImpl userSwitcherRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserInfo$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

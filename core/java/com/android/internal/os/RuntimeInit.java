@@ -63,12 +63,10 @@ public class RuntimeInit {
 
     private static final native void nativeSetExitWithoutCleanup(boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int Clog_e(String tag, String msg, Throwable tr) {
         return Log.printlns(4, 6, tag, msg, tr);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int Mlog_i(String tag, String msg, Throwable tr) {
         return Log.printlns(0, 4, tag, msg, tr);
     }

@@ -37,13 +37,11 @@ public final class PlaybackState implements Parcelable {
     public static final Parcelable.Creator<PlaybackState> CREATOR =
             new Parcelable.Creator<
                     PlaybackState>() { // from class: android.media.session.PlaybackState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PlaybackState createFromParcel(Parcel in) {
                     return new PlaybackState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PlaybackState[] newArray(int size) {
                     return new PlaybackState[size];
@@ -250,13 +248,11 @@ public final class PlaybackState implements Parcelable {
         public static final Parcelable.Creator<CustomAction> CREATOR =
                 new Parcelable.Creator<CustomAction>() { // from class:
                     // android.media.session.PlaybackState.CustomAction.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CustomAction createFromParcel(Parcel p) {
                         return new CustomAction(p);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CustomAction[] newArray(int size) {
                         return new CustomAction[size];

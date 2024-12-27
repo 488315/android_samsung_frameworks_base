@@ -109,8 +109,6 @@ public final class SecMediaControlPanel {
     public final WakefulnessLifecycle mWakefulnessLifecycle;
     public int mWidth;
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.media.SecMediaControlPanel$1] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.media.SecMediaControlPanel$2] */
     public SecMediaControlPanel(Context context, Executor executor, DelayableExecutor delayableExecutor, ActivityStarter activityStarter, SecSeekBarViewModel secSeekBarViewModel, MediaOutputHelper mediaOutputHelper, BroadcastDispatcher broadcastDispatcher, SubScreenManager subScreenManager, MediaLogger mediaLogger, SecQSPanelResourcePicker secQSPanelResourcePicker, SettingsHelper settingsHelper, WakefulnessLifecycle wakefulnessLifecycle) {
         new Rect();
         this.mLastConfigurationState = new ConfigurationState(Arrays.asList(ConfigurationState.ConfigurationField.ORIENTATION, ConfigurationState.ConfigurationField.SCREEN_HEIGHT_DP));
@@ -193,7 +191,6 @@ public final class SecMediaControlPanel {
         transitionDrawable.setLayerSize(i, (int) (f * f5), (int) (f5 * f2));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void bind(final MediaData mediaData, String str) {
         boolean z;
         ImageButton imageButton;
@@ -707,8 +704,6 @@ public final class SecMediaControlPanel {
             ((GradientDrawable) imageView3.getForeground()).setSize(i14, i14);
             final boolean z5 = z;
             this.mBackgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.SecMediaControlPanel$$ExternalSyntheticLambda13
-                /* JADX WARN: Removed duplicated region for block: B:22:0x00e0  */
-                /* JADX WARN: Removed duplicated region for block: B:26:0x00e8  */
                 @Override // java.lang.Runnable
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

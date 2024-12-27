@@ -115,9 +115,6 @@ public final class GentleUpdateHelper {
 
        if (r11 == false) goto L69;
     */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0159  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00c2  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x00d7 A[EDGE_INSN: B:63:0x00d7->B:58:0x00d7 BREAK  A[LOOP:1: B:31:0x0059->B:60:?], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

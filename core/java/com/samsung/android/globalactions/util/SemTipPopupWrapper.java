@@ -74,7 +74,6 @@ public class SemTipPopupWrapper {
         addCount(count);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$show$0(int v) {
         if (v == 2) {
             hideTipPermanently();

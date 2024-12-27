@@ -17,7 +17,6 @@ public final class MARsComponentTracker {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static void sendCTInfo(
             String str, String str2, String str3, int i, String str4, int i2, String str5) {
         boolean z;

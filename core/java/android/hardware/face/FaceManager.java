@@ -61,7 +61,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
         public abstract void onCompleted(boolean z, int i);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class FaceServiceReceiver extends IFaceServiceReceiver.Stub {
         private final FaceCallback mFaceCallback;
 
@@ -69,7 +68,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             this.mFaceCallback = faceCallback;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onEnrollResult$0(int remaining) {
             this.mFaceCallback.sendEnrollResult(remaining);
         }
@@ -84,7 +82,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAcquired$1(int acquireInfo, int vendorCode) {
             this.mFaceCallback.sendAcquiredResult(FaceManager.this.mContext, acquireInfo, vendorCode);
         }
@@ -99,7 +96,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAuthenticationSucceeded$2(Face face, int userId, boolean isStrongBiometric) {
             this.mFaceCallback.sendAuthenticatedSucceeded(face, userId, isStrongBiometric);
         }
@@ -114,7 +110,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFaceDetected$3(int sensorId, int userId, boolean isStrongBiometric) {
             this.mFaceCallback.sendFaceDetected(sensorId, userId, isStrongBiometric);
         }
@@ -142,7 +137,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onError$4(int error, int vendorCode) {
             this.mFaceCallback.sendErrorResult(FaceManager.this.mContext, error, vendorCode);
         }
@@ -157,7 +151,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRemoved$5(Face face, int remaining) {
             this.mFaceCallback.sendRemovedResult(face, remaining);
         }
@@ -175,7 +168,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFeatureSet$6(boolean success, int feature) {
             this.mFaceCallback.sendSetFeatureCompleted(success, feature);
         }
@@ -190,7 +182,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFeatureGet$7(boolean success, int[] features, boolean[] featureState) {
             this.mFaceCallback.sendGetFeatureCompleted(success, features, featureState);
         }
@@ -205,7 +196,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onChallengeGenerated$8(int sensorId, int userId, long challenge) {
             this.mFaceCallback.sendChallengeGenerated(sensorId, userId, challenge);
         }
@@ -220,7 +210,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAuthenticationFrame$9(FaceAuthenticationFrame frame) {
             this.mFaceCallback.sendAuthenticationFrame(FaceManager.this.mContext, frame);
         }
@@ -235,7 +224,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onEnrollmentFrame$10(FaceEnrollFrame frame) {
             this.mFaceCallback.sendEnrollmentFrame(FaceManager.this.mContext, frame);
         }
@@ -250,7 +238,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSemAuthenticationSucceeded$11(Face face, int userId, boolean isStrongBiometric, byte[] fidoResultData) {
             this.mFaceCallback.sendAuthenticatedSucceeded(face, userId, isStrongBiometric, fidoResultData);
         }
@@ -265,7 +252,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSemAuthenticationSucceededWithBundle$12(Face face, int userId, boolean isStrongBiometric, Bundle b) {
             this.mFaceCallback.sendAuthenticatedSucceeded(face, userId, isStrongBiometric, b);
         }
@@ -280,7 +266,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSemImageProcessed$13(byte[] data, int width, int height, int orientation, int imageFormat, Bundle b) {
             this.mFaceCallback.sendImageProcessed(data, width, height, orientation, imageFormat, b);
         }
@@ -342,15 +327,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
         authenticate(crypto, cancel, callback, handler, new FaceAuthenticateOptions.Builder().setUserId(userId).build());
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v1 */
-    /* JADX WARN: Type inference failed for: r5v15 */
-    /* JADX WARN: Type inference failed for: r5v17 */
-    /* JADX WARN: Type inference failed for: r5v2, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r5v20 */
-    /* JADX WARN: Type inference failed for: r5v22 */
-    /* JADX WARN: Type inference failed for: r5v8, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r5v9 */
     public void authenticate(CryptoObject cryptoObject, CancellationSignal cancellationSignal, AuthenticationCallback authenticationCallback, Handler handler, FaceAuthenticateOptions faceAuthenticateOptions) {
         ?? r5;
         Object obj;
@@ -745,7 +721,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelEnrollment(long requestId) {
         if (this.mService != null) {
             try {
@@ -756,7 +731,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelAuthentication(long requestId) {
         if (this.mService != null) {
             try {
@@ -767,7 +741,6 @@ public class FaceManager extends BiometricFaceConstants implements BiometricAuth
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelFaceDetect(long requestId) {
         if (this.mService == null) {
             return;

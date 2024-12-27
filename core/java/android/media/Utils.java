@@ -387,7 +387,6 @@ public class Utils {
                         });
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onEvent$0(
                     Listener listener, int eventCode, Object info) {
                 if (ListenerList.this.mRestrictSingleCallerOnEvent

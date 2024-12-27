@@ -72,8 +72,6 @@ public final class QSPanelHost implements QSHost.Callback {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.qs.QSPanelHost$$ExternalSyntheticLambda15] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.qs.QSPanelHost$$ExternalSyntheticLambda16] */
     public QSPanelHost(int i, View view, QSHost qSHost, MetricsLogger metricsLogger, SecQSPanelResourcePicker secQSPanelResourcePicker) {
         this.mType = i;
         this.mTargetView = (SecQSPanel) view;

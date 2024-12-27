@@ -8,7 +8,6 @@ public class PlaneLayout implements Parcelable {
     public static final Parcelable.Creator<PlaneLayout> CREATOR =
             new Parcelable.Creator<
                     PlaneLayout>() { // from class: android.hardware.graphics.common.PlaneLayout.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PlaneLayout createFromParcel(Parcel _aidl_source) {
                     PlaneLayout _aidl_out = new PlaneLayout();
@@ -16,7 +15,6 @@ public class PlaneLayout implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PlaneLayout[] newArray(int _aidl_size) {
                     return new PlaneLayout[_aidl_size];

@@ -80,7 +80,6 @@ public class ColorExtractor implements WallpaperManager.OnColorsChangedListener 
 
         private LoadWallpaperColors() {}
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public Void doInBackground(WallpaperManager... params) {
             this.mSystemColors = params[0].getWallpaperColors(1);
@@ -88,7 +87,6 @@ public class ColorExtractor implements WallpaperManager.OnColorsChangedListener 
             return null;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onPostExecute(Void b) {
             ColorExtractor.this.mSystemColors = this.mSystemColors;

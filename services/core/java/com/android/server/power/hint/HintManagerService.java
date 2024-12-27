@@ -542,8 +542,6 @@ public final class HintManagerService extends SystemService {
                     Integer.valueOf(Binder.getCallingUid()));
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:26:0x013b A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:60:0x00dc A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

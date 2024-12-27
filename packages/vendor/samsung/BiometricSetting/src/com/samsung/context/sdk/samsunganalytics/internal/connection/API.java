@@ -9,7 +9,6 @@ jadx.core.utils.exceptions.JadxRuntimeException: Init of enum field 'DATA_DELETE
 	at jadx.core.dex.visitors.EnumVisitor.convertToEnum(EnumVisitor.java:151)
 	at jadx.core.dex.visitors.EnumVisitor.visit(EnumVisitor.java:100)
  */
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 public final class API {
     public static final /* synthetic */ API[] $VALUES;
     public static final API DATA_DELETE;

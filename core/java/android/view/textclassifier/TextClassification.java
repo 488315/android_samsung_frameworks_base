@@ -45,13 +45,11 @@ public final class TextClassification implements Parcelable {
             new Parcelable.Creator<
                     TextClassification>() { // from class:
                                             // android.view.textclassifier.TextClassification.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextClassification createFromParcel(Parcel in) {
                     return new TextClassification(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextClassification[] newArray(int size) {
                     return new TextClassification[size];
@@ -288,13 +286,11 @@ public final class TextClassification implements Parcelable {
                 new Parcelable.Creator<
                         Request>() { // from class:
                                      // android.view.textclassifier.TextClassification.Request.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Request createFromParcel(Parcel in) {
                         return Request.readFromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Request[] newArray(int size) {
                         return new Request[size];
@@ -419,7 +415,6 @@ public final class TextClassification implements Parcelable {
             dest.writeParcelable(this.mSystemTcMetadata, flags);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static Request readFromParcel(Parcel in) {
             CharSequence text = in.readCharSequence();
             int startIndex = in.readInt();

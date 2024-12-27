@@ -60,7 +60,6 @@ public abstract class DisplayHashingService extends Service {
         return this.mWrapper;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void verifyDisplayHash(byte[] salt, DisplayHash displayHash, RemoteCallback callback) {
         VerifiedDisplayHash verifiedDisplayHash = onVerifyDisplayHash(salt, displayHash);
         Bundle data = new Bundle();
@@ -68,7 +67,6 @@ public abstract class DisplayHashingService extends Service {
         callback.sendResult(data);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void getDisplayHashAlgorithms(RemoteCallback callback) {
         Map<String, DisplayHashParams> displayHashParams = onGetDisplayHashAlgorithms();
         Bundle data = new Bundle();
@@ -78,7 +76,6 @@ public abstract class DisplayHashingService extends Service {
         callback.sendResult(data);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void getDurationBetweenRequestsMillis(RemoteCallback callback) {
         int durationBetweenRequestMillis = onGetIntervalBetweenRequestsMillis();
         Bundle data = new Bundle();
@@ -86,7 +83,6 @@ public abstract class DisplayHashingService extends Service {
         callback.sendResult(data);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class DisplayHashingServiceWrapper extends IDisplayHashingService.Stub {
         private DisplayHashingServiceWrapper() {}
 

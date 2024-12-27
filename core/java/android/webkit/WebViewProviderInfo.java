@@ -11,13 +11,11 @@ public final class WebViewProviderInfo implements Parcelable {
     public static final Parcelable.Creator<WebViewProviderInfo> CREATOR =
             new Parcelable.Creator<
                     WebViewProviderInfo>() { // from class: android.webkit.WebViewProviderInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WebViewProviderInfo createFromParcel(Parcel in) {
                     return new WebViewProviderInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WebViewProviderInfo[] newArray(int size) {
                     return new WebViewProviderInfo[size];

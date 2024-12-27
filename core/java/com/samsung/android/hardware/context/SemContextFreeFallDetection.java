@@ -9,13 +9,11 @@ public class SemContextFreeFallDetection extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextFreeFallDetection>() { // from class:
                                                      // com.samsung.android.hardware.context.SemContextFreeFallDetection.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextFreeFallDetection createFromParcel(Parcel in) {
                     return new SemContextFreeFallDetection(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextFreeFallDetection[] newArray(int size) {
                     return new SemContextFreeFallDetection[size];

@@ -1,9 +1,7 @@
 package com.android.server.display.config;
 
 public enum PredefinedBrightnessLimitNames {
-    /* JADX INFO: Fake field, exist only in values array */
     EF8("default"),
-    /* JADX INFO: Fake field, exist only in values array */
     EF16("adaptive");
 
     private final String rawName;

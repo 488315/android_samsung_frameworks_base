@@ -136,13 +136,11 @@ public class Presentation extends Dialog {
 
     public void onDisplayChanged() {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDisplayRemoved() {
         onDisplayRemoved();
         cancel();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDisplayChanged() {
         onDisplayChanged();
         if (CoreRune.FW_FLEXIBLE_DUAL_MODE && this.mDisplay.getDisplayId() == 1) {

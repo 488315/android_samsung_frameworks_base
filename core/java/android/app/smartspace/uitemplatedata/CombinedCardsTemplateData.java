@@ -12,13 +12,11 @@ public final class CombinedCardsTemplateData extends BaseTemplateData {
     public static final Parcelable.Creator<CombinedCardsTemplateData> CREATOR =
             new Parcelable.Creator<CombinedCardsTemplateData>() { // from class:
                 // android.app.smartspace.uitemplatedata.CombinedCardsTemplateData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CombinedCardsTemplateData createFromParcel(Parcel in) {
                     return new CombinedCardsTemplateData(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CombinedCardsTemplateData[] newArray(int size) {
                     return new CombinedCardsTemplateData[size];

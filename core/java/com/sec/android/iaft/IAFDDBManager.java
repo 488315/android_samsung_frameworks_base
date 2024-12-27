@@ -155,10 +155,6 @@ public class IAFDDBManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x0299  */
-    /* JADX WARN: Removed duplicated region for block: B:98:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -176,7 +172,6 @@ public class IAFDDBManager {
                     + " java.lang.String):com.sec.android.iaft.IAFDDiagnosis$IAFD_DATA");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void syncDBType() {
         int curDBVer = -1;
         mCurDBIndex = -1;
@@ -190,7 +185,6 @@ public class IAFDDBManager {
         Slog.d(TAG, "syncDBType(): mCurDBIndex=" + mCurDBIndex + ", curDBVer=" + curDBVer);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void initIAFDDBHotfix() {
         IAFDDiagnosis.IAFD_DATA iafddataTmp;
         try {
@@ -221,7 +215,6 @@ public class IAFDDBManager {
 
     private void initARDBHotfix() {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void initTBs() {
         if (this.mContext == null || isDBIniting) {
             return;

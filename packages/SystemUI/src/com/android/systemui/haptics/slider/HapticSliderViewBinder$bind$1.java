@@ -20,7 +20,6 @@ final class HapticSliderViewBinder$bind$1 extends SuspendLambda implements Funct
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HapticSliderViewBinder$bind$1(SeekbarHapticPlugin seekbarHapticPlugin, Continuation continuation) {
         super(3, continuation);
         this.$plugin = seekbarHapticPlugin;

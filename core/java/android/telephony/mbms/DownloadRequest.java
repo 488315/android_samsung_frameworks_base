@@ -26,13 +26,11 @@ public final class DownloadRequest implements Parcelable {
     public static final Parcelable.Creator<DownloadRequest> CREATOR =
             new Parcelable.Creator<
                     DownloadRequest>() { // from class: android.telephony.mbms.DownloadRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DownloadRequest createFromParcel(Parcel in) {
                     return new DownloadRequest(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DownloadRequest[] newArray(int size) {
                     return new DownloadRequest[size];

@@ -372,7 +372,6 @@ public class MetaDataManager {
         private String mUidValue;
         private String mValueRef;
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public Uid(
                 String uidValue,
                 String type,

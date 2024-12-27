@@ -110,8 +110,6 @@ public final class CMFWallpaper {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.samsung.server.wallpaper.CMFWallpaper$1] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.samsung.server.wallpaper.CMFWallpaper$2] */
     public CMFWallpaper(Context context, SemWallpaperManagerService semWallpaperManagerService, SemWallpaperResourcesInfo semWallpaperResourcesInfo) {
         ?? r0 = new Handler(Looper.getMainLooper()) { // from class: com.samsung.server.wallpaper.CMFWallpaper.1
             @Override // android.os.Handler

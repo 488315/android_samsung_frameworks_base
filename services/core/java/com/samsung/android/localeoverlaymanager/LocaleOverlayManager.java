@@ -67,7 +67,6 @@ public final class LocaleOverlayManager extends HandlerThread implements Extract
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:11:0x0055 A[Catch: all -> 0x0032, TRY_LEAVE, TryCatch #0 {all -> 0x0032, blocks: (B:4:0x0004, B:6:0x0029, B:9:0x0044, B:11:0x0055, B:16:0x0034), top: B:3:0x0004 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -134,7 +133,6 @@ public final class LocaleOverlayManager extends HandlerThread implements Extract
             super(looper);
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:131:0x02c9, code lost:
         
             if (r4.equals(r15) == false) goto L71;
@@ -143,13 +141,6 @@ public final class LocaleOverlayManager extends HandlerThread implements Extract
         
             if (r1.equals("init_on_boot") == false) goto L171;
          */
-        /* JADX WARN: Removed duplicated region for block: B:133:0x04b0  */
-        /* JADX WARN: Removed duplicated region for block: B:42:0x0539  */
-        /* JADX WARN: Removed duplicated region for block: B:44:? A[ADDED_TO_REGION, REMOVE, RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:68:0x033f  */
-        /* JADX WARN: Removed duplicated region for block: B:74:0x039d  */
-        /* JADX WARN: Removed duplicated region for block: B:77:0x03a4  */
-        /* JADX WARN: Removed duplicated region for block: B:97:0x0432  */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -285,11 +276,6 @@ public final class LocaleOverlayManager extends HandlerThread implements Extract
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v7, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r3v23, types: [java.util.HashMap] */
-    /* JADX WARN: Type inference failed for: r3v4, types: [java.util.Map] */
-    /* JADX WARN: Type inference failed for: r3v9, types: [java.lang.Object, java.util.Map] */
     public final boolean ensureOverlaysEnabled(ArrayList arrayList) {
         ?? allOverlays;
         String str;

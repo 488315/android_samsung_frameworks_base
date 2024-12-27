@@ -9,12 +9,6 @@ public final class AmbientStatusBarSection {
         this.factory = factory;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0043  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x008d  */
-    /* JADX WARN: Removed duplicated region for block: B:21:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x006c  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0046  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

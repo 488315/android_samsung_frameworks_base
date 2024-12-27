@@ -24,8 +24,6 @@ public final class ControlsRequestReceiver extends BroadcastReceiver {
     public ControlsRequestReceiver() {
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x008d A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x008e  */
     @Override // android.content.BroadcastReceiver
     /*
         Code decompiled incorrectly, please refer to instructions dump.

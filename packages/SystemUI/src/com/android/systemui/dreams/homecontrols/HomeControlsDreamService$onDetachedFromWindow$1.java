@@ -14,7 +14,6 @@ final class HomeControlsDreamService$onDetachedFromWindow$1 extends SuspendLambd
     int label;
     final /* synthetic */ HomeControlsDreamService this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HomeControlsDreamService$onDetachedFromWindow$1(HomeControlsDreamService homeControlsDreamService, Continuation continuation) {
         super(2, continuation);
         this.this$0 = homeControlsDreamService;

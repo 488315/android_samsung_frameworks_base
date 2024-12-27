@@ -144,9 +144,6 @@ public final class ScreenSharingHelper {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.samsung.android.server.audio.ScreenSharingHelper$2] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.android.server.audio.ScreenSharingHelper$3] */
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.samsung.android.server.audio.ScreenSharingHelper$1] */
     public ScreenSharingHelper(Context context, MediaFocusControl mediaFocusControl) {
         this.mContext = context;
         this.mDisplayManager = (DisplayManager) context.getSystemService("display");

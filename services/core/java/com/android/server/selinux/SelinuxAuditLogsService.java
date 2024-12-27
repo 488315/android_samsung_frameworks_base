@@ -115,7 +115,6 @@ public class SelinuxAuditLogsService extends JobService {
             EXECUTOR_SERVICE.execute(
                     new Runnable() { // from class:
                         // com.android.server.selinux.SelinuxAuditLogsService$$ExternalSyntheticLambda0
-                        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                         /* JADX WARN: Code restructure failed: missing block: B:155:0x0361, code lost:
 
                            r14 = r4;
@@ -130,8 +129,6 @@ public class SelinuxAuditLogsService extends JobService {
 
                            com.android.server.utils.Slogf.d("SelinuxAuditLogs", "Written %d logs", java.lang.Integer.valueOf(r11));
                         */
-                        /* JADX WARN: Failed to find 'out' block for switch in B:68:0x017b. Please report as an issue. */
-                        /* JADX WARN: Removed duplicated region for block: B:83:0x029a  */
                         @Override // java.lang.Runnable
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.

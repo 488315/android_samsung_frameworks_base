@@ -22,7 +22,6 @@ public final class FacePropertyRepositoryImpl$special$$inlined$flatMapLatest$1 e
     int label;
     final /* synthetic */ FacePropertyRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FacePropertyRepositoryImpl$special$$inlined$flatMapLatest$1(Continuation continuation, FacePropertyRepositoryImpl facePropertyRepositoryImpl, DisplayStateRepository displayStateRepository, ConfigurationRepository configurationRepository) {
         super(3, continuation);
         this.this$0 = facePropertyRepositoryImpl;

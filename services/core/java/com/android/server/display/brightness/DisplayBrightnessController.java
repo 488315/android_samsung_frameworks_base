@@ -230,8 +230,6 @@ public final class DisplayBrightnessController {
         return z;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x005e  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0065 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -8,7 +8,6 @@ public class BeginResult implements Parcelable {
     public static final Parcelable.Creator<BeginResult> CREATOR =
             new Parcelable.Creator<
                     BeginResult>() { // from class: android.hardware.security.keymint.BeginResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BeginResult createFromParcel(Parcel _aidl_source) {
                     BeginResult _aidl_out = new BeginResult();
@@ -16,7 +15,6 @@ public class BeginResult implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BeginResult[] newArray(int _aidl_size) {
                     return new BeginResult[_aidl_size];

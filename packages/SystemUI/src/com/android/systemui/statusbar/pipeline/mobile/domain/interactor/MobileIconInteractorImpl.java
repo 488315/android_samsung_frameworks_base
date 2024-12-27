@@ -107,8 +107,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
     public final ReadonlyStateFlow voiceNoServiceIcon;
     public final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 wifiConnected;
 
-    /* JADX WARN: Type inference failed for: r3v19, types: [com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$3] */
-    /* JADX WARN: Type inference failed for: r7v30, types: [com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$4] */
     public MobileIconInteractorImpl(CoroutineScope coroutineScope, StateFlow stateFlow, StateFlow stateFlow2, StateFlow stateFlow3, StateFlow stateFlow4, StateFlow stateFlow5, StateFlow stateFlow6, Flow flow, StateFlow stateFlow7, StateFlow stateFlow8, StateFlow stateFlow9, Flow flow2, MobileConnectionRepository mobileConnectionRepository, Context context, UserSetupRepository userSetupRepository, WifiRepository wifiRepository, MobileDataIconResource mobileDataIconResource, MobileSignalIconResource mobileSignalIconResource, MobileRoamingIconResource mobileRoamingIconResource, MobileDisabledDataIconResource mobileDisabledDataIconResource, CarrierInfraMediator carrierInfraMediator, MobileMappingsProxy mobileMappingsProxy, StateFlow stateFlow10, boolean z, Handler handler, MobileIconCarrierIdOverrides mobileIconCarrierIdOverrides) {
         this.alwaysShowDataRatIcon = stateFlow2;
         this.isSingleCarrier = stateFlow4;
@@ -160,7 +158,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                 int label;
                 final /* synthetic */ MobileIconInteractorImpl this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass3(Continuation continuation, MobileIconInteractorImpl mobileIconInteractorImpl) {
                     super(3, continuation);
                     this.this$0 = mobileIconInteractorImpl;
@@ -196,7 +193,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
                 Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$1.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -245,8 +241,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -347,8 +341,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -439,7 +431,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                 int label;
                 final /* synthetic */ MobileIconInteractorImpl this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass3(Continuation continuation, MobileIconInteractorImpl mobileIconInteractorImpl) {
                     super(3, continuation);
                     this.this$0 = mobileIconInteractorImpl;
@@ -487,7 +478,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr3 = flowArr2;
                 Object combineInternal = CombineKt.combineInternal(flowArr3, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$2.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -512,7 +502,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                 int label;
                 final /* synthetic */ MobileIconInteractorImpl this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass3(Continuation continuation, MobileIconInteractorImpl mobileIconInteractorImpl) {
                     super(3, continuation);
                     this.this$0 = mobileIconInteractorImpl;
@@ -566,7 +555,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr4 = flowArr3;
                 Object combineInternal = CombineKt.combineInternal(flowArr4, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$3.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -593,7 +581,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                 int label;
                 final /* synthetic */ MobileIconInteractorImpl this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass3(Continuation continuation, MobileIconInteractorImpl mobileIconInteractorImpl) {
                     super(3, continuation);
                     this.this$0 = mobileIconInteractorImpl;
@@ -607,9 +594,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                     return anonymousClass3.invokeSuspend(Unit.INSTANCE);
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:18:0x01cb A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:67:0x01ab  */
-                /* JADX WARN: Removed duplicated region for block: B:68:0x01b2  */
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -628,7 +612,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr5 = flowArr4;
                 Object combineInternal = CombineKt.combineInternal(flowArr5, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$4.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -672,8 +655,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                     this.this$0 = mobileIconInteractorImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -803,8 +784,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                     this.this$0 = mobileIconInteractorImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

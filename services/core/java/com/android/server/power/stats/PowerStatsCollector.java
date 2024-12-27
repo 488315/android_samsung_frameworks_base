@@ -147,7 +147,6 @@ public abstract class PowerStatsCollector {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.power.stats.PowerStatsCollector$$ExternalSyntheticLambda0] */
     public PowerStatsCollector(BatteryStatsImpl.MyHandler myHandler, long j, PowerStatsUidResolver powerStatsUidResolver, Clock clock) {
         this.mHandler = myHandler;
         this.mThrottlePeriodMs = j;
@@ -175,8 +174,6 @@ public abstract class PowerStatsCollector {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.power.stats.PowerStatsCollector$$ExternalSyntheticLambda1, java.util.function.Consumer] */
     public void collectAndDump(PrintWriter printWriter) {
         Thread currentThread = Thread.currentThread();
         Handler handler = this.mHandler;

@@ -399,7 +399,6 @@ public abstract class AndroidKeyStoreKeyGeneratorSpi extends KeyGeneratorSpi {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$engineGenerateKey$1(List params, Integer blockMode) {
         if (blockMode.intValue() == 32 && this.mKeymasterAlgorithm == 32) {
             params.add(KeyStore2ParameterUtils.makeInt(805306376, 96));

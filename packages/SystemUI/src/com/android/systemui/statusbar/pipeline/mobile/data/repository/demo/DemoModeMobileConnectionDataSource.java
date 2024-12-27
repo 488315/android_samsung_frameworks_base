@@ -48,12 +48,6 @@ public final class DemoModeMobileConnectionDataSource {
                     this.this$0 = demoModeMobileConnectionDataSource;
                 }
 
-                /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-                /* JADX WARN: Multi-variable type inference failed */
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
-                /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.model.FakeNetworkEventModel$Mobile] */
-                /* JADX WARN: Type inference failed for: r4v5, types: [com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.model.FakeNetworkEventModel$MobileDisabled] */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

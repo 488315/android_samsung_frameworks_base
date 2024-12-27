@@ -15,7 +15,6 @@ final class DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1 exten
     int label;
     final /* synthetic */ DeviceEntryFaceAuthRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1(DeviceEntryFaceAuthRepositoryImpl deviceEntryFaceAuthRepositoryImpl, Continuation continuation) {
         super(5, continuation);
         this.this$0 = deviceEntryFaceAuthRepositoryImpl;

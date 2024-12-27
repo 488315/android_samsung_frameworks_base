@@ -13,13 +13,11 @@ public final class SmartspaceSessionId implements Parcelable {
     public static final Parcelable.Creator<SmartspaceSessionId> CREATOR =
             new Parcelable.Creator<SmartspaceSessionId>() { // from class:
                 // android.app.smartspace.SmartspaceSessionId.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmartspaceSessionId createFromParcel(Parcel parcel) {
                     return new SmartspaceSessionId(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmartspaceSessionId[] newArray(int size) {
                     return new SmartspaceSessionId[size];

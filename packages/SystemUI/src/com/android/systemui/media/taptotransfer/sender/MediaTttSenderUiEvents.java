@@ -3,8 +3,6 @@ package com.android.systemui.media.taptotransfer.sender;
 import com.android.internal.logging.UiEventLogger;
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class MediaTttSenderUiEvents implements UiEventLogger.UiEventEnum {
     public static final /* synthetic */ MediaTttSenderUiEvents[] $VALUES;
     public static final MediaTttSenderUiEvents MEDIA_TTT_SENDER_ALMOST_CLOSE_TO_END_CAST;

@@ -24,7 +24,6 @@ final class KeyguardRootViewModel$isNotifIconContainerVisible$2 extends SuspendL
     int label;
     final /* synthetic */ KeyguardRootViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardRootViewModel$isNotifIconContainerVisible$2(KeyguardRootViewModel keyguardRootViewModel, Continuation continuation) {
         super(6, continuation);
         this.this$0 = keyguardRootViewModel;

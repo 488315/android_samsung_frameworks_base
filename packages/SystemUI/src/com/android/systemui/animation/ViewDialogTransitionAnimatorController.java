@@ -59,7 +59,6 @@ public final class ViewDialogTransitionAnimatorController implements DialogTrans
                 return this.$$delegate_0.isLaunching;
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // com.android.systemui.animation.TransitionAnimator.Controller
             public final void onTransitionAnimationEnd(boolean z) {
                 GhostedViewTransitionAnimatorController.this.onTransitionAnimationEnd(z);
@@ -115,7 +114,6 @@ public final class ViewDialogTransitionAnimatorController implements DialogTrans
         return InteractionJankMonitor.Configuration.Builder.withView(dialogCuj.cujType, this.source);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.animation.DialogTransitionAnimator.Controller
     public final void onExitAnimationCancelled() {
         View view = this.source;
@@ -150,7 +148,6 @@ public final class ViewDialogTransitionAnimatorController implements DialogTrans
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.animation.DialogTransitionAnimator.Controller
     public final void stopDrawingInOverlay() {
         View view = this.source;

@@ -42,7 +42,6 @@ public class AsyncPlayer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startSound(Command cmd) {
         try {
             MediaPlayer player = new MediaPlayer();
@@ -186,7 +185,6 @@ public class AsyncPlayer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void releaseWakeLock() {
         if (this.mWakeLock != null) {
             this.mWakeLock.release();

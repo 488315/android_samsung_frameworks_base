@@ -18,7 +18,6 @@ public final class CallAudioState implements Parcelable {
     public static final Parcelable.Creator<CallAudioState> CREATOR =
             new Parcelable.Creator<
                     CallAudioState>() { // from class: android.telecom.CallAudioState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallAudioState createFromParcel(Parcel source) {
                     boolean isMuted = source.readByte() != 0;
@@ -36,7 +35,6 @@ public final class CallAudioState implements Parcelable {
                             isMuted, route, supportedRouteMask, activeBluetoothDevice, arrayList);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallAudioState[] newArray(int size) {
                     return new CallAudioState[size];

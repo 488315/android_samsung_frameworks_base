@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function4;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public final class NotificationIconsInteractor$filteredNotifSet$1 extends SuspendLambda implements Function4 {
     final /* synthetic */ boolean $forceShowHeadsUp;
     final /* synthetic */ boolean $showAmbient;
@@ -29,7 +28,6 @@ public final class NotificationIconsInteractor$filteredNotifSet$1 extends Suspen
     int label;
     final /* synthetic */ NotificationIconsInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationIconsInteractor$filteredNotifSet$1(NotificationIconsInteractor notificationIconsInteractor, boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, Continuation continuation) {
         super(4, continuation);
         this.this$0 = notificationIconsInteractor;
@@ -70,7 +68,6 @@ public final class NotificationIconsInteractor$filteredNotifSet$1 extends Suspen
         final boolean z6 = this.$showRepliedMessages;
         final boolean z7 = this.$showPulsing;
         return SequencesKt___SequencesKt.toSet(SequencesKt___SequencesKt.filter(collectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1, new Function1() { // from class: com.android.systemui.statusbar.notification.icon.domain.interactor.NotificationIconsInteractor$filteredNotifSet$1.1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

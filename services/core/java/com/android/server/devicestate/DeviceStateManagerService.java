@@ -152,7 +152,6 @@ public final class DeviceStateManagerService extends SystemService {
             return deviceStateInfoLocked;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,
@@ -654,7 +653,6 @@ public final class DeviceStateManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     public DeviceStateManagerService(Context context) {
         this(
                 context,

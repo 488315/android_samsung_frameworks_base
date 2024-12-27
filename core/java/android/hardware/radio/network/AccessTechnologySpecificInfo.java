@@ -10,13 +10,11 @@ public final class AccessTechnologySpecificInfo implements Parcelable {
     public static final Parcelable.Creator<AccessTechnologySpecificInfo> CREATOR =
             new Parcelable.Creator<AccessTechnologySpecificInfo>() { // from class:
                 // android.hardware.radio.network.AccessTechnologySpecificInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessTechnologySpecificInfo createFromParcel(Parcel _aidl_source) {
                     return new AccessTechnologySpecificInfo(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessTechnologySpecificInfo[] newArray(int _aidl_size) {
                     return new AccessTechnologySpecificInfo[_aidl_size];

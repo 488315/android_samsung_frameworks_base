@@ -238,7 +238,6 @@ public final class ConversationCoordinator implements Coordinator {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.notification.collection.coordinator.ConversationCoordinator$notificationPromoter$1] */
     public ConversationCoordinator(PeopleNotificationIdentifier peopleNotificationIdentifier, ConversationIconManager conversationIconManager, HighPriorityProvider highPriorityProvider, NodeController nodeController) {
         this.peopleNotificationIdentifier = peopleNotificationIdentifier;
         this.conversationIconManager = conversationIconManager;
@@ -246,7 +245,6 @@ public final class ConversationCoordinator implements Coordinator {
         this.peopleHeaderController = nodeController;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final int getPeopleType(ListEntry listEntry) {
         NotificationEntry representativeEntry = listEntry.getRepresentativeEntry();
         if (representativeEntry != null) {
@@ -255,7 +253,6 @@ public final class ConversationCoordinator implements Coordinator {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean isConversation(ListEntry listEntry) {
         return getPeopleType(listEntry) != 0;
     }

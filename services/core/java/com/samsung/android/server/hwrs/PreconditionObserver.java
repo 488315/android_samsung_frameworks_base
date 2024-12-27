@@ -52,10 +52,6 @@ public final class PreconditionObserver {
         public AnonymousClass2() {}
     }
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.samsung.android.server.hwrs.AbstractPreconditionObserver$1] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.samsung.android.server.hwrs.AbstractPreconditionObserver$2] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.samsung.android.server.hwrs.AbstractPreconditionObserver$3] */
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.samsung.android.server.hwrs.PreconditionObserver$1] */
     public PreconditionObserver(Context context) {
         final Handler handler = new Handler(Looper.getMainLooper());
         this.mSettingObserver =

@@ -80,7 +80,6 @@ public final class FromPrimaryBouncerTransitionInteractor extends TransitionInte
         TO_GONE_SURFACE_BEHIND_VISIBLE_THRESHOLD = 0.5f;
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

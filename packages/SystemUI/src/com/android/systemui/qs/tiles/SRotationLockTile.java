@@ -133,8 +133,6 @@ public final class SRotationLockTile extends SQSTileImpl implements BatteryContr
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.qs.tiles.SRotationLockTile$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.qs.tiles.SRotationLockTile$2] */
     public SRotationLockTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, Resources resources, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, SettingsHelper settingsHelper, RotationLockController rotationLockController, SensorPrivacyManager sensorPrivacyManager, BatteryController batteryController, SecureSettings secureSettings, PluginLockMediator pluginLockMediator) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         QSTileImpl.ResourceIcon.get(R.drawable.ic_star_black_16dp);

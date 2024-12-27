@@ -34,7 +34,6 @@ public final class WifiDisplay implements Parcelable {
     public static final Parcelable.Creator<WifiDisplay> CREATOR =
             new Parcelable.Creator<
                     WifiDisplay>() { // from class: android.hardware.display.WifiDisplay.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiDisplay createFromParcel(Parcel in) {
                     String deviceAddress = in.readString();
@@ -72,7 +71,6 @@ public final class WifiDisplay implements Parcelable {
                     return wifiDisplay;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiDisplay[] newArray(int size) {
                     return size == 0 ? WifiDisplay.EMPTY_ARRAY : new WifiDisplay[size];

@@ -111,7 +111,6 @@ public final class FreecessHandler {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ FreecessHandler this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public FreecessThread(int i) {
             super("FreecessHandler", 0);
             this.$r8$classId = i;
@@ -1055,8 +1054,6 @@ public final class FreecessHandler {
             super("Freecess_NLRCT");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:26:0x010e  */
-        /* JADX WARN: Removed duplicated region for block: B:35:0x011d A[EDGE_INSN: B:35:0x011d->B:36:0x011d BREAK  A[LOOP:0: B:2:0x0007->B:31:0x0007], SYNTHETIC] */
         @Override // java.lang.Thread, java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1300,7 +1297,6 @@ public final class FreecessHandler {
                             + freecessController.cntFailUnfreeze);
             final long uptimeMillis = SystemClock.uptimeMillis();
             new Thread() { // from class: com.android.server.am.FreecessController.3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super("MARsWatchdogUnfreezer");
                 }

@@ -3,7 +3,6 @@ package com.android.systemui.qs.bar;
 import com.android.systemui.QpRune;
 
 public enum BarType {
-    /* JADX INFO: Fake field, exist only in values array */
     DUMMY(BarItemImpl.class, false, false),
     VIDEO_CALL_MIC_MODE(VideoCallMicModeBar.class, false, true),
     TOP_LARGE_TILE(TopLargeTileBar.class, false, true),

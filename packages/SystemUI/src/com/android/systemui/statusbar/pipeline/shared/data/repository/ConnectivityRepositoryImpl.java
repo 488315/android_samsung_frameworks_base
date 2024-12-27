@@ -138,8 +138,6 @@ public final class ConnectivityRepositoryImpl implements ConnectivityRepository,
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -257,8 +255,6 @@ public final class ConnectivityRepositoryImpl implements ConnectivityRepository,
                     this.this$0 = connectivityRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

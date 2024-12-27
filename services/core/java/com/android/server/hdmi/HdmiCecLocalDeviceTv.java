@@ -45,8 +45,6 @@ public final class HdmiCecLocalDeviceTv extends HdmiCecLocalDevice {
     public final AnonymousClass1 mTvInputCallback;
     public final HashMap mTvInputs;
 
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.server.hdmi.HdmiCecLocalDeviceTv$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.hdmi.HdmiCecLocalDeviceTv$1] */
     public HdmiCecLocalDeviceTv(HdmiControlService hdmiControlService) {
         super(hdmiControlService, 0);
         this.mArcEstablished = false;

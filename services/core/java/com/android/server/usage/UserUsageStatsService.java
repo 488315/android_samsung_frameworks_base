@@ -81,9 +81,6 @@ public final class UserUsageStatsService {
 
     public interface StatsUpdatedListener {}
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.usage.UserUsageStatsService$1] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.usage.UserUsageStatsService$1] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.usage.UserUsageStatsService$1] */
     static {
         final int i = 0;
         sUsageStatsCombiner =
@@ -687,7 +684,6 @@ public final class UserUsageStatsService {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final void dumpFile(IndentingPrintWriter indentingPrintWriter, String[] strArr) {
         boolean z;
         int i = 3;
@@ -1651,7 +1647,6 @@ public final class UserUsageStatsService {
         return null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:116:0x035e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

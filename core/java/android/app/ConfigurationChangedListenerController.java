@@ -50,7 +50,6 @@ class ConfigurationChangedListenerController {
         return -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class ListenerContainer {
         private final Consumer<IBinder> mConsumer;
         private final Executor mExecutor;
@@ -64,7 +63,6 @@ class ConfigurationChangedListenerController {
             return this.mConsumer.equals(consumer);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$accept$0(IBinder activityToken) {
             this.mConsumer.accept(activityToken);
         }

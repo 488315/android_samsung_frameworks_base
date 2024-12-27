@@ -17,7 +17,6 @@ public final class CommunalTutorialInteractor$listenForTransitionToUpdateTutoria
     int label;
     final /* synthetic */ CommunalTutorialInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalTutorialInteractor$listenForTransitionToUpdateTutorialState$1$invokeSuspend$$inlined$flatMapLatest$1(Continuation continuation, CommunalTutorialInteractor communalTutorialInteractor) {
         super(3, continuation);
         this.this$0 = communalTutorialInteractor;

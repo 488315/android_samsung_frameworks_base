@@ -45,7 +45,6 @@ final class KnoxStatusBarControlBinder$bind$1 extends SuspendLambda implements F
             final /* synthetic */ KnoxStatusBarControlViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02021(KnoxStatusBarControlViewModel knoxStatusBarControlViewModel, KnoxStatusBarViewControl knoxStatusBarViewControl, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = knoxStatusBarControlViewModel;
@@ -112,7 +111,6 @@ final class KnoxStatusBarControlBinder$bind$1 extends SuspendLambda implements F
             final /* synthetic */ KnoxStatusBarControlViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(KnoxStatusBarControlViewModel knoxStatusBarControlViewModel, KnoxStatusBarViewControl knoxStatusBarViewControl, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = knoxStatusBarControlViewModel;
@@ -200,7 +198,6 @@ final class KnoxStatusBarControlBinder$bind$1 extends SuspendLambda implements F
             final /* synthetic */ KnoxStatusBarControlViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass3(KnoxStatusBarControlViewModel knoxStatusBarControlViewModel, KnoxStatusBarViewControl knoxStatusBarViewControl, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = knoxStatusBarControlViewModel;
@@ -258,7 +255,6 @@ final class KnoxStatusBarControlBinder$bind$1 extends SuspendLambda implements F
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(KnoxStatusBarControlViewModel knoxStatusBarControlViewModel, KnoxStatusBarViewControl knoxStatusBarViewControl, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = knoxStatusBarControlViewModel;
@@ -292,7 +288,6 @@ final class KnoxStatusBarControlBinder$bind$1 extends SuspendLambda implements F
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KnoxStatusBarControlBinder$bind$1(KnoxStatusBarControlViewModel knoxStatusBarControlViewModel, KnoxStatusBarViewControl knoxStatusBarViewControl, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = knoxStatusBarControlViewModel;

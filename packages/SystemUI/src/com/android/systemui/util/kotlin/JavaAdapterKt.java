@@ -34,12 +34,10 @@ public final class JavaAdapterKt {
         return new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(flow, flow2, new JavaAdapterKt$combineFlows$1(function2));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final /* synthetic */ Object combineFlows$suspendConversion0(Function2 function2, Object obj, Object obj2, Continuation continuation) {
         return function2.invoke(obj, obj2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final /* synthetic */ Object combineFlows$suspendConversion0$0(Function3 function3, Object obj, Object obj2, Object obj3, Continuation continuation) {
         return function3.invoke(obj, obj2, obj3);
     }

@@ -372,7 +372,6 @@ public final class SettingsToPropertiesMapper {
                 ContentObserver contentObserver =
                         new ContentObserver() { // from class:
                                                 // com.android.server.am.SettingsToPropertiesMapper.1
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(null);
                             }

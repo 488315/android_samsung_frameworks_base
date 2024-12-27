@@ -387,7 +387,6 @@ public abstract class SliceProvider extends ContentProvider {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0() {
         Process.sendSignal(Process.myPid(), 3);
         Log.wtf(TAG, "Timed out while handling slice callback " + this.mCallback);

@@ -13,7 +13,6 @@ public class KeepaliveStatus implements Parcelable {
     public static final Parcelable.Creator<KeepaliveStatus> CREATOR =
             new Parcelable.Creator<KeepaliveStatus>() { // from class:
                 // android.hardware.radio.data.KeepaliveStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeepaliveStatus createFromParcel(Parcel _aidl_source) {
                     KeepaliveStatus _aidl_out = new KeepaliveStatus();
@@ -21,7 +20,6 @@ public class KeepaliveStatus implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeepaliveStatus[] newArray(int _aidl_size) {
                     return new KeepaliveStatus[_aidl_size];

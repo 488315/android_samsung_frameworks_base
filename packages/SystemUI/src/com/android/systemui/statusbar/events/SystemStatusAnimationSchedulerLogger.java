@@ -21,7 +21,6 @@ public final class SystemStatusAnimationSchedulerLogger {
     public final void logUpdateEvent(StatusEvent statusEvent, final int i) {
         LogLevel logLevel = LogLevel.DEBUG;
         Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerLogger$logUpdateEvent$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

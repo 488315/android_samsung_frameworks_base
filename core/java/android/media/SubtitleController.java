@@ -118,7 +118,6 @@ public class SubtitleController {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doSelectTrack(SubtitleTrack track) {
         this.mTrackIsExplicit = true;
         if (this.mSelectedTrack == track) {
@@ -141,12 +140,6 @@ public class SubtitleController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00a0  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x00a3  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0088  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -165,7 +158,6 @@ public class SubtitleController {
         processOnAnchor(this.mHandler.obtainMessage(4));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doSelectDefaultTrack() {
         if (this.mTrackIsExplicit) {
             if (!this.mVisibilityIsExplicit) {
@@ -239,7 +231,6 @@ public class SubtitleController {
         processOnAnchor(this.mHandler.obtainMessage(1));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doShow() {
         this.mShowing = true;
         this.mVisibilityIsExplicit = true;
@@ -252,7 +243,6 @@ public class SubtitleController {
         processOnAnchor(this.mHandler.obtainMessage(2));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doHide() {
         this.mVisibilityIsExplicit = true;
         if (this.mSelectedTrack != null) {

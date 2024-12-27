@@ -13,7 +13,6 @@ final class WifiInteractorImpl$areNetworksAvailable$1 extends SuspendLambda impl
     int label;
     final /* synthetic */ WifiInteractorImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiInteractorImpl$areNetworksAvailable$1(WifiInteractorImpl wifiInteractorImpl, Continuation continuation) {
         super(3, continuation);
         this.this$0 = wifiInteractorImpl;

@@ -17,13 +17,11 @@ public final class GetCandidateCredentialsResponse implements Parcelable {
     public static final Parcelable.Creator<GetCandidateCredentialsResponse> CREATOR =
             new Parcelable.Creator<GetCandidateCredentialsResponse>() { // from class:
                 // android.credentials.GetCandidateCredentialsResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetCandidateCredentialsResponse createFromParcel(Parcel in) {
                     return new GetCandidateCredentialsResponse(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetCandidateCredentialsResponse[] newArray(int size) {
                     return new GetCandidateCredentialsResponse[size];

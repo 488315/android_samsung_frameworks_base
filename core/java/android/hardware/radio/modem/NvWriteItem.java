@@ -12,7 +12,6 @@ public class NvWriteItem implements Parcelable {
     public static final Parcelable.Creator<NvWriteItem> CREATOR =
             new Parcelable.Creator<
                     NvWriteItem>() { // from class: android.hardware.radio.modem.NvWriteItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NvWriteItem createFromParcel(Parcel _aidl_source) {
                     NvWriteItem _aidl_out = new NvWriteItem();
@@ -20,7 +19,6 @@ public class NvWriteItem implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NvWriteItem[] newArray(int _aidl_size) {
                     return new NvWriteItem[_aidl_size];

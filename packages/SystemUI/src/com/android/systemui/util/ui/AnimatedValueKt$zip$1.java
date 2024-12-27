@@ -9,7 +9,6 @@ public final class AnimatedValueKt$zip$1 extends Lambda implements Function0 {
     final /* synthetic */ AnimatedValue<Object> $valueA;
     final /* synthetic */ AnimatedValue<Object> $valueB;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AnimatedValueKt$zip$1(AnimatedValue<Object> animatedValue, AnimatedValue<Object> animatedValue2) {
         super(0);
         this.$valueA = animatedValue;

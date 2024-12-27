@@ -1,7 +1,6 @@
 package com.android.server.credentials.metrics;
 
 public enum ProviderStatusForMetrics {
-    /* JADX INFO: Fake field, exist only in values array */
     EF0("UNKNOWN"),
     FINAL_FAILURE("FINAL_FAILURE"),
     QUERY_FAILURE("QUERY_FAILURE"),

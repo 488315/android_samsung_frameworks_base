@@ -138,23 +138,10 @@ public class NotificationIconContainer extends ViewGroup {
             }
         };
 
-        /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.phone.NotificationIconContainer$IconState$$ExternalSyntheticLambda0] */
         public IconState(View view) {
             this.mView = view;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:101:0x0137  */
-        /* JADX WARN: Removed duplicated region for block: B:23:0x006a  */
-        /* JADX WARN: Removed duplicated region for block: B:34:0x0087  */
-        /* JADX WARN: Removed duplicated region for block: B:51:0x00e2  */
-        /* JADX WARN: Removed duplicated region for block: B:62:0x0108  */
-        /* JADX WARN: Type inference failed for: r14v0, types: [com.android.systemui.statusbar.notification.stack.ViewState, com.android.systemui.statusbar.phone.NotificationIconContainer$IconState] */
-        /* JADX WARN: Type inference failed for: r1v19 */
-        /* JADX WARN: Type inference failed for: r1v20 */
-        /* JADX WARN: Type inference failed for: r1v27, types: [com.android.systemui.statusbar.notification.stack.AnimationProperties, com.android.systemui.statusbar.phone.NotificationIconContainer$3] */
-        /* JADX WARN: Type inference failed for: r1v29 */
-        /* JADX WARN: Type inference failed for: r1v35 */
         @Override // com.android.systemui.statusbar.notification.stack.ViewState
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -177,10 +164,6 @@ public class NotificationIconContainer extends ViewGroup {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.statusbar.notification.stack.AnimationProperties, com.android.systemui.statusbar.phone.NotificationIconContainer$1] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.statusbar.notification.stack.AnimationProperties, com.android.systemui.statusbar.phone.NotificationIconContainer$4] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.statusbar.notification.stack.AnimationProperties, com.android.systemui.statusbar.phone.NotificationIconContainer$5] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.statusbar.notification.stack.AnimationProperties, com.android.systemui.statusbar.phone.NotificationIconContainer$6] */
     static {
         ?? r0 = new AnimationProperties() { // from class: com.android.systemui.statusbar.phone.NotificationIconContainer.1
             public final AnimationFilter mAnimationFilter;

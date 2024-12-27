@@ -17,13 +17,11 @@ public class AudioProfile implements Parcelable {
     public static final int AUDIO_ENCAPSULATION_TYPE_PCM = 2;
     public static final Parcelable.Creator<AudioProfile> CREATOR =
             new Parcelable.Creator<AudioProfile>() { // from class: android.media.AudioProfile.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioProfile createFromParcel(Parcel p) {
                     return new AudioProfile(p);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioProfile[] newArray(int size) {
                     return new AudioProfile[size];

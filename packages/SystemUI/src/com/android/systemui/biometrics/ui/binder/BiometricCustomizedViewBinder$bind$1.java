@@ -40,7 +40,6 @@ final class BiometricCustomizedViewBinder$bind$1 extends SuspendLambda implement
     /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BiometricCustomizedViewBinder$bind$1(PromptContentView promptContentView, Spaghetti.Callback callback, Continuation continuation) {
         super(3, continuation);
         this.$contentView = promptContentView;
@@ -69,7 +68,6 @@ final class BiometricCustomizedViewBinder$bind$1 extends SuspendLambda implement
         }
         final Spaghetti.Callback callback = this.$legacyCallback;
         final Function1 function1 = new Function1() { // from class: com.android.systemui.biometrics.ui.binder.BiometricCustomizedViewBinder$bind$1.1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

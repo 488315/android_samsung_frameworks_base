@@ -8,7 +8,6 @@ public class KeyCreationResult implements Parcelable {
     public static final Parcelable.Creator<KeyCreationResult> CREATOR =
             new Parcelable.Creator<KeyCreationResult>() { // from class:
                 // android.hardware.security.keymint.KeyCreationResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyCreationResult createFromParcel(Parcel _aidl_source) {
                     KeyCreationResult _aidl_out = new KeyCreationResult();
@@ -16,7 +15,6 @@ public class KeyCreationResult implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyCreationResult[] newArray(int _aidl_size) {
                     return new KeyCreationResult[_aidl_size];

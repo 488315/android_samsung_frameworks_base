@@ -12,7 +12,6 @@ public class AudioMMapPolicyInfo implements Parcelable {
     public static final Parcelable.Creator<AudioMMapPolicyInfo> CREATOR =
             new Parcelable.Creator<AudioMMapPolicyInfo>() { // from class:
                 // android.media.audio.common.AudioMMapPolicyInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioMMapPolicyInfo createFromParcel(Parcel _aidl_source) {
                     AudioMMapPolicyInfo _aidl_out = new AudioMMapPolicyInfo();
@@ -20,7 +19,6 @@ public class AudioMMapPolicyInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioMMapPolicyInfo[] newArray(int _aidl_size) {
                     return new AudioMMapPolicyInfo[_aidl_size];

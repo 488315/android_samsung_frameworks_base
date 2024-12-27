@@ -199,9 +199,6 @@ public final class WifiTile extends SQSTileImpl {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v0, types: [com.android.systemui.qs.tiles.WifiTile$2, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.qs.tiles.WifiTile$1] */
     public WifiTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, NetworkController networkController, AccessPointController accessPointController, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, SettingsHelper settingsHelper, PanelInteractor panelInteractor, BroadcastDispatcher broadcastDispatcher, DisplayLifecycle displayLifecycle, SatelliteModeObserverHelper satelliteModeObserverHelper) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mEnable = new QSTileImpl.AnimationIcon(R.drawable.quick_panel_icon_wifi_on, R.drawable.quick_panel_icon_wifi_on_027);

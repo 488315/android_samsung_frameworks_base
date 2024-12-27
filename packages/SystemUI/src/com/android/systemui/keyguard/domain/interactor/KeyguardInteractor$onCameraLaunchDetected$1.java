@@ -18,7 +18,6 @@ final class KeyguardInteractor$onCameraLaunchDetected$1 extends SuspendLambda im
     int label;
     final /* synthetic */ KeyguardInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardInteractor$onCameraLaunchDetected$1(KeyguardInteractor keyguardInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardInteractor;
@@ -36,8 +35,6 @@ final class KeyguardInteractor$onCameraLaunchDetected$1 extends SuspendLambda im
         return ((KeyguardInteractor$onCameraLaunchDetected$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.keyguard.domain.interactor.KeyguardInteractor$onCameraLaunchDetected$1$callback$1, com.android.systemui.statusbar.CommandQueue$Callbacks] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -59,7 +56,6 @@ final class KeyguardInteractor$onCameraLaunchDetected$1 extends SuspendLambda im
             this.this$0.commandQueue.addCallback((CommandQueue.Callbacks) r1);
             final KeyguardInteractor keyguardInteractor2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardInteractor$onCameraLaunchDetected$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

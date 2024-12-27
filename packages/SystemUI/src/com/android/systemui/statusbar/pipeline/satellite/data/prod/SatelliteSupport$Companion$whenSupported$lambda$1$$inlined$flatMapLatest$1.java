@@ -19,7 +19,6 @@ public final class SatelliteSupport$Companion$whenSupported$lambda$1$$inlined$fl
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SatelliteSupport$Companion$whenSupported$lambda$1$$inlined$flatMapLatest$1(Continuation continuation, Function1 function1, SatelliteSupport satelliteSupport) {
         super(3, continuation);
         this.$supported$inlined = function1;

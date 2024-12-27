@@ -31,7 +31,6 @@ public final class NetworkLoggingHandler extends Handler {
     public boolean mPaused;
     public final int mTargetUserId;
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.server.devicepolicy.NetworkLoggingHandler$1] */
     public NetworkLoggingHandler(
             Looper looper, DevicePolicyManagerService devicePolicyManagerService, long j, int i) {
         super(looper);

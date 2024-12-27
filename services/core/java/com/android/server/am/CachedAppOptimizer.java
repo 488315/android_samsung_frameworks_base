@@ -299,8 +299,6 @@ public final class CachedAppOptimizer {
 
     public final class CachedAppOptimizerReclaimer extends UnifiedMemoryReclaimer.Reclaimer {}
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class CancelCompactReason {
         public static final /* synthetic */ CancelCompactReason[] $VALUES;
         public static final CancelCompactReason OOM_IMPROVEMENT;
@@ -324,8 +322,6 @@ public final class CachedAppOptimizer {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class CompactProfile {
         public static final /* synthetic */ CompactProfile[] $VALUES;
         public static final CompactProfile ANON;
@@ -357,8 +353,6 @@ public final class CachedAppOptimizer {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class CompactSource {
         public static final /* synthetic */ CompactSource[] $VALUES;
         public static final CompactSource APP;
@@ -819,9 +813,6 @@ public final class CachedAppOptimizer {
 
            if ((r15 - r8) < r69.this$0.mCompactThrottleFullFull) goto L104;
         */
-        /* JADX WARN: Finally extract failed */
-        /* JADX WARN: Removed duplicated region for block: B:123:0x0355  */
-        /* JADX WARN: Removed duplicated region for block: B:125:0x0362  */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1057,8 +1048,6 @@ public final class CachedAppOptimizer {
                 sb, cachedAppOptimizer.mFreezerBinderAsyncThreshold, "ActivityManager");
     }
 
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.server.am.CachedAppOptimizer$1] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.am.CachedAppOptimizer$1] */
     public CachedAppOptimizer(
             ActivityManagerService activityManagerService,
             PropertyChangedCallbackForTest propertyChangedCallbackForTest,
@@ -1605,14 +1594,12 @@ public final class CachedAppOptimizer {
 
     private static native void cancelCompaction();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int compactProcess(int i, int i2);
 
     private native void compactSystem();
 
     public static native int freezeBinder(int i, boolean z, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int getBinderFreezeInfo(int i);
 
     public static native double getFreeSwapPercent();
@@ -1672,12 +1659,10 @@ public final class CachedAppOptimizer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long getUsedZramMemory();
 
     private static native boolean isFreezerProfileValid();
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0077 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1772,7 +1757,6 @@ public final class CachedAppOptimizer {
                     + " com.android.server.am.CachedAppOptimizer.isFreezerSupported():boolean");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long threadCpuTimeNs();
 
     public static void traceAppFreeze(int i, int i2, String str) {

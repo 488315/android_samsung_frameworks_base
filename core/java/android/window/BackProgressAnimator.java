@@ -59,7 +59,6 @@ public class BackProgressAnimator implements DynamicAnimation.OnAnimationUpdateL
         void onProgressUpdate(BackEvent backEvent);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(
             DynamicAnimation animation, boolean canceled, float value, float velocity) {
         if (this.mBackCancelledFinishRunnable != null) {
@@ -71,18 +70,15 @@ public class BackProgressAnimator implements DynamicAnimation.OnAnimationUpdateL
         reset();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$1(
             DynamicAnimation animation, float progress, float velocity) {
         updateProgressValue(progress, velocity);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setProgress(float progress) {
         this.mProgress = progress;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public float getProgress() {
         return this.mProgress;
     }

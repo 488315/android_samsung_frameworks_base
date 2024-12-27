@@ -863,7 +863,6 @@ public class LayoutTransition {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean hasListeners() {
         return this.mListeners != null && this.mListeners.size() > 0;
     }

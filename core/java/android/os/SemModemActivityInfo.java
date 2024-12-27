@@ -6,13 +6,11 @@ public class SemModemActivityInfo implements Parcelable {
     public static final Parcelable.Creator<SemModemActivityInfo> CREATOR =
             new Parcelable.Creator<
                     SemModemActivityInfo>() { // from class: android.os.SemModemActivityInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemModemActivityInfo createFromParcel(Parcel in) {
                     return new SemModemActivityInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemModemActivityInfo[] newArray(int size) {
                     return new SemModemActivityInfo[size];
@@ -216,13 +214,11 @@ public class SemModemActivityInfo implements Parcelable {
                 new Parcelable.Creator<
                         MobileActivity>() { // from class:
                                             // android.os.SemModemActivityInfo.MobileActivity.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public MobileActivity createFromParcel(Parcel in) {
                         return new MobileActivity(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public MobileActivity[] newArray(int size) {
                         return new MobileActivity[size];

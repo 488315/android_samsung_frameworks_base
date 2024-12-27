@@ -157,33 +157,6 @@ public final class ServiceKeeper extends DefaultHandler {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v0 */
-    /* JADX WARN: Type inference failed for: r10v1, types: [int] */
-    /* JADX WARN: Type inference failed for: r10v12 */
-    /* JADX WARN: Type inference failed for: r14v0, types: [org.w3c.dom.NodeList] */
-    /* JADX WARN: Type inference failed for: r15v1 */
-    /* JADX WARN: Type inference failed for: r15v2, types: [int] */
-    /* JADX WARN: Type inference failed for: r15v4 */
-    /* JADX WARN: Type inference failed for: r5v4, types: [org.w3c.dom.NodeList] */
-    /* JADX WARN: Type inference failed for: r6v6 */
-    /* JADX WARN: Type inference failed for: r6v7, types: [int] */
-    /* JADX WARN: Type inference failed for: r6v9 */
-    /* JADX WARN: Type inference failed for: r7v10 */
-    /* JADX WARN: Type inference failed for: r7v11 */
-    /* JADX WARN: Type inference failed for: r7v13 */
-    /* JADX WARN: Type inference failed for: r7v14 */
-    /* JADX WARN: Type inference failed for: r7v26 */
-    /* JADX WARN: Type inference failed for: r7v27 */
-    /* JADX WARN: Type inference failed for: r7v4, types: [org.w3c.dom.NodeList] */
-    /* JADX WARN: Type inference failed for: r7v6, types: [org.w3c.dom.NodeList] */
-    /* JADX WARN: Type inference failed for: r7v9, types: [org.w3c.dom.NodeList] */
-    /* JADX WARN: Type inference failed for: r8v11 */
-    /* JADX WARN: Type inference failed for: r8v12 */
-    /* JADX WARN: Type inference failed for: r8v3 */
-    /* JADX WARN: Type inference failed for: r8v4, types: [int] */
-    /* JADX WARN: Type inference failed for: r8v6 */
-    /* JADX WARN: Type inference failed for: r8v7, types: [int] */
     public static boolean createAuthorizationTables(Element element) {
         NodeList nodeList;
         Hashtable hashtable;
@@ -362,9 +335,6 @@ public final class ServiceKeeper extends DefaultHandler {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01b2 A[Catch: Exception -> 0x01ba, TRY_LEAVE, TryCatch #2 {Exception -> 0x01ba, blocks: (B:56:0x01ac, B:58:0x01b2), top: B:55:0x01ac }] */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x01b8 A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x0150 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

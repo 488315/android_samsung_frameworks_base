@@ -145,7 +145,6 @@ public class MediaMetrics {
         public static final String YES = "yes";
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int native_submit_bytebuffer(ByteBuffer byteBuffer, int i);
 
     public static <T> Key<T> createKey(final String name, final Class<T> type) {
@@ -246,7 +245,6 @@ public class MediaMetrics {
             this.mBuffer.putInt(0);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public <T> Item set(Key<T> key, T t) {
             if (t instanceof Integer) {
                 putInt(key.getName(), ((Integer) t).intValue());

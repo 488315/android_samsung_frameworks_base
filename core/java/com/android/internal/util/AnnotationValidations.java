@@ -40,7 +40,6 @@ public class AnnotationValidations {
         validate(annotation, ignored, value, paramName2, param2);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static void validate(
             Class<IntRange> annotation, IntRange ignored, int value, String paramName, long param) {
         char c;
@@ -91,7 +90,6 @@ public class AnnotationValidations {
         validate(annotation, ignored, value, paramName2, param2);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static void validate(
             Class<IntRange> annotation,
             IntRange ignored,
@@ -146,7 +144,6 @@ public class AnnotationValidations {
         validate(annotation, ignored, value, paramName2, param2);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static void validate(
             Class<FloatRange> annotation,
             FloatRange ignored,
@@ -207,7 +204,6 @@ public class AnnotationValidations {
         validate(annotation, ignored, value, paramName2, param2);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static void validate(
             Class<Size> annotation, Size ignored, int value, String paramName, int param) {
         char c;

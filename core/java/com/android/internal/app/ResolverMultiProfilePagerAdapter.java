@@ -133,13 +133,11 @@ public class ResolverMultiProfilePagerAdapter extends AbstractMultiProfilePagerA
         return getAdapterForIndex(1);
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter
     public ResolverListAdapter getCurrentRootAdapter() {
         return getActiveListAdapter();
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter
     public AbsListView getActiveAdapterView() {
         return getListViewForIndex(getCurrentPage());

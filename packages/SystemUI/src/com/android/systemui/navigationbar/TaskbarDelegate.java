@@ -133,9 +133,6 @@ public abstract class TaskbarDelegate implements CommandQueue.Callbacks, Overvie
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.navigationbar.TaskbarDelegate$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.navigationbar.TaskbarDelegate$2] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.navigationbar.TaskbarDelegate$3] */
     public TaskbarDelegate(Context context, LightBarTransitionsController.Factory factory, StatusBarKeyguardViewManager statusBarKeyguardViewManager) {
         this.mLightBarTransitionsControllerFactory = factory;
         this.mContext = context;

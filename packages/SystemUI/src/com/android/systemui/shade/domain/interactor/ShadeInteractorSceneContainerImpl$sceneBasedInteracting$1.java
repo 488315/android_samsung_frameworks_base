@@ -22,7 +22,6 @@ final class ShadeInteractorSceneContainerImpl$sceneBasedInteracting$1 extends Su
     /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ShadeInteractorSceneContainerImpl$sceneBasedInteracting$1(SceneInteractor sceneInteractor, SceneKey sceneKey, Continuation continuation) {
         super(2, continuation);
         this.$sceneInteractor = sceneInteractor;
@@ -86,8 +85,6 @@ final class ShadeInteractorSceneContainerImpl$sceneBasedInteracting$1 extends Su
                     this.$state$inlined = observableTransitionState;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

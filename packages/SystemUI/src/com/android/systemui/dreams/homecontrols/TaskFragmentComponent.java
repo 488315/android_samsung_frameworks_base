@@ -26,7 +26,6 @@ public final class TaskFragmentComponent {
         TaskFragmentComponent create(Activity activity, Function1 function1, Function1 function12, Function0 function0);
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [android.window.TaskFragmentOrganizer, com.android.systemui.dreams.homecontrols.TaskFragmentComponent$organizer$1] */
     public TaskFragmentComponent(Activity activity, Function1 function1, Function1 function12, Function0 function0, final DelayableExecutor delayableExecutor) {
         this.activity = activity;
         this.onCreateCallback = function1;

@@ -1496,7 +1496,6 @@ public final class SensorPrivacyService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,
@@ -1506,7 +1505,6 @@ public final class SensorPrivacyService extends SystemService {
                 ResultReceiver resultReceiver) {
             new ShellCommand() { // from class:
                 // com.android.server.sensorprivacy.SensorPrivacyService.SensorPrivacyServiceImpl.7
-                /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                 /* JADX WARN: Code restructure failed: missing block: B:23:0x0067, code lost:
 
                    if (r10.equals("microphone") == false) goto L26;
@@ -1515,10 +1513,6 @@ public final class SensorPrivacyService extends SystemService {
 
                    if (r8.equals("microphone") == false) goto L41;
                 */
-                /* JADX WARN: Removed duplicated region for block: B:16:0x006d  */
-                /* JADX WARN: Removed duplicated region for block: B:18:0x0071  */
-                /* JADX WARN: Removed duplicated region for block: B:45:0x00d2  */
-                /* JADX WARN: Removed duplicated region for block: B:47:0x00d6  */
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
                     To view partially-correct code enable 'Show inconsistent code' option in preferences

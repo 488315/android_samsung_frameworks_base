@@ -17,7 +17,6 @@ public final class DeviceEntryForegroundViewModel$special$$inlined$flatMapLatest
     int label;
     final /* synthetic */ DeviceEntryForegroundViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryForegroundViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, DeviceEntryForegroundViewModel deviceEntryForegroundViewModel) {
         super(3, continuation);
         this.this$0 = deviceEntryForegroundViewModel;

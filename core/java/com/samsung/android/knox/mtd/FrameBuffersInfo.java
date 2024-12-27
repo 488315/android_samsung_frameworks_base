@@ -10,13 +10,11 @@ public class FrameBuffersInfo implements Parcelable {
             new Parcelable.Creator<
                     FrameBuffersInfo>() { // from class:
                                           // com.samsung.android.knox.mtd.FrameBuffersInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrameBuffersInfo createFromParcel(Parcel in) {
                     return new FrameBuffersInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrameBuffersInfo[] newArray(int size) {
                     return new FrameBuffersInfo[size];

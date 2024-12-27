@@ -138,7 +138,6 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
     @Retention(RetentionPolicy.SOURCE)
     public @interface SurfaceLifecycleStrategy {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ boolean lambda$new$0() {
         this.mHaveFrame = getWidth() > 0 && getHeight() > 0;
         this.mUpdateSurfaceCalledBy = 8;
@@ -166,7 +165,6 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$updateParams$0() {
             if (SurfaceView.this.mParent != null) {
                 SurfaceView.this.mParent.recomputeViewAttributes(SurfaceView.this);
@@ -186,7 +184,6 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$forwardBackKeyToParent$1(KeyEvent keyEvent) {
             ViewRootImpl vri;
             InputManager inputManager;
@@ -430,7 +427,6 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void performDrawFinished() {
         this.mDrawFinished = true;
         if (this.mAttachedToWindow) {
@@ -896,8 +892,6 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         return !respectVisibility && this.mAttachedToWindow;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(68:19|(1:21)|22|(1:24)|25|(1:27)|28|(1:30)(1:358)|31|(1:33)(1:357)|34|(1:36)(1:356)|37|(1:355)(1:41)|42|(1:44)(1:354)|45|(1:353)(1:49)|50|(1:352)(1:54)|55|(1:351)(1:59)|60|(1:62)(1:350)|63|(1:65)(1:349)|66|(1:68)(1:348)|69|(1:71)(1:347)|72|(1:74)|(1:346)(2:77|(2:91|92))|93|(5:95|(1:97)(1:344)|98|(1:100)(1:343)|101)(1:345)|102|103|(5:329|330|331|332|333)(1:105)|106|107|108|109|110|111|112|113|114|(2:319|320)(2:116|(1:118))|(11:(29:129|130|(2:134|(24:136|137|(9:295|296|297|298|299|300|301|302|303)(1:139)|140|141|142|143|144|145|(1:147)(1:287)|(1:149)(1:286)|(1:285)(1:152)|153|(2:(2:(2:162|163)|(2:158|(1:(0))))|173)|175|176|177|(1:281)(14:181|182|(1:(9:266|267|268|(1:270)(1:277)|271|(2:273|274)|276|(8:231|(11:244|245|246|247|248|249|250|251|252|253|254)(1:233)|(2:235|236)|237|238|239|(2:241|242)|243)(1:196)|(6:198|(1:200)|(2:202|203)|207|(2:209|210)(1:225)|211)(1:230))(1:187))(1:280)|188|(0)|231|(0)(0)|(0)|237|238|239|(0)|243|(0)(0))|212|213|(1:217)|218|219|(2:221|222)(1:223)))|316|137|(0)(0)|140|141|142|143|144|145|(0)(0)|(0)(0)|(0)|285|153|(0)|175|176|177|(1:179)|281|212|213|(2:215|217)|218|219|(0)(0))|176|177|(0)|281|212|213|(0)|218|219|(0)(0))|317|130|(3:132|134|(0))|316|137|(0)(0)|140|141|142|143|144|145|(0)(0)|(0)(0)|(0)|285|153|(0)|175) */
-    /* JADX WARN: Can't wrap try/catch for region: R(78:19|(1:21)|22|(1:24)|25|(1:27)|28|(1:30)(1:358)|31|(1:33)(1:357)|34|(1:36)(1:356)|37|(1:355)(1:41)|42|(1:44)(1:354)|45|(1:353)(1:49)|50|(1:352)(1:54)|55|(1:351)(1:59)|60|(1:62)(1:350)|63|(1:65)(1:349)|66|(1:68)(1:348)|69|(1:71)(1:347)|72|(1:74)|(1:346)(2:77|(2:91|92))|93|(5:95|(1:97)(1:344)|98|(1:100)(1:343)|101)(1:345)|102|103|(5:329|330|331|332|333)(1:105)|106|107|108|109|110|111|112|113|114|(2:319|320)(2:116|(1:118))|(29:129|130|(2:134|(24:136|137|(9:295|296|297|298|299|300|301|302|303)(1:139)|140|141|142|143|144|145|(1:147)(1:287)|(1:149)(1:286)|(1:285)(1:152)|153|(2:(2:(2:162|163)|(2:158|(1:(0))))|173)|175|176|177|(1:281)(14:181|182|(1:(9:266|267|268|(1:270)(1:277)|271|(2:273|274)|276|(8:231|(11:244|245|246|247|248|249|250|251|252|253|254)(1:233)|(2:235|236)|237|238|239|(2:241|242)|243)(1:196)|(6:198|(1:200)|(2:202|203)|207|(2:209|210)(1:225)|211)(1:230))(1:187))(1:280)|188|(0)|231|(0)(0)|(0)|237|238|239|(0)|243|(0)(0))|212|213|(1:217)|218|219|(2:221|222)(1:223)))|316|137|(0)(0)|140|141|142|143|144|145|(0)(0)|(0)(0)|(0)|285|153|(0)|175|176|177|(1:179)|281|212|213|(2:215|217)|218|219|(0)(0))|317|130|(3:132|134|(0))|316|137|(0)(0)|140|141|142|143|144|145|(0)(0)|(0)(0)|(0)|285|153|(0)|175|176|177|(0)|281|212|213|(0)|218|219|(0)(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:161:0x0441, code lost:
 
        if (r6 != false) goto L204;
@@ -919,53 +913,6 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
        r5 = " h=";
        r3 = " w=";
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:136:0x0359  */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x03da  */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x041e  */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x0423  */
-    /* JADX WARN: Removed duplicated region for block: B:151:0x0428 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:155:0x0431  */
-    /* JADX WARN: Removed duplicated region for block: B:169:0x06c4 A[Catch: Exception -> 0x06ce, TryCatch #2 {Exception -> 0x06ce, blocks: (B:167:0x06bd, B:169:0x06c4, B:171:0x06c8, B:172:0x06cd, B:213:0x0694, B:215:0x069a, B:217:0x069e), top: B:144:0x0419 }] */
-    /* JADX WARN: Removed duplicated region for block: B:179:0x048f A[Catch: all -> 0x06a4, TryCatch #5 {all -> 0x06a4, blocks: (B:177:0x045b, B:179:0x048f, B:181:0x0497, B:231:0x0583), top: B:176:0x045b }] */
-    /* JADX WARN: Removed duplicated region for block: B:198:0x0643 A[Catch: all -> 0x067b, TRY_ENTER, TRY_LEAVE, TryCatch #21 {all -> 0x067b, blocks: (B:198:0x0643, B:238:0x05e8), top: B:237:0x05e8 }] */
-    /* JADX WARN: Removed duplicated region for block: B:215:0x069a A[Catch: Exception -> 0x06ce, TryCatch #2 {Exception -> 0x06ce, blocks: (B:167:0x06bd, B:169:0x06c4, B:171:0x06c8, B:172:0x06cd, B:213:0x0694, B:215:0x069a, B:217:0x069e), top: B:144:0x0419 }] */
-    /* JADX WARN: Removed duplicated region for block: B:221:0x0761  */
-    /* JADX WARN: Removed duplicated region for block: B:223:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:230:0x0678  */
-    /* JADX WARN: Removed duplicated region for block: B:233:0x05d3  */
-    /* JADX WARN: Removed duplicated region for block: B:235:0x05dd A[Catch: all -> 0x05e3, TRY_LEAVE, TryCatch #4 {all -> 0x05e3, blocks: (B:200:0x0647, B:202:0x0663, B:254:0x05b4, B:235:0x05dd, B:241:0x0635), top: B:253:0x05b4 }] */
-    /* JADX WARN: Removed duplicated region for block: B:241:0x0635 A[Catch: all -> 0x05e3, TRY_ENTER, TRY_LEAVE, TryCatch #4 {all -> 0x05e3, blocks: (B:200:0x0647, B:202:0x0663, B:254:0x05b4, B:235:0x05dd, B:241:0x0635), top: B:253:0x05b4 }] */
-    /* JADX WARN: Removed duplicated region for block: B:244:0x0587 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:286:0x0425  */
-    /* JADX WARN: Removed duplicated region for block: B:287:0x0420  */
-    /* JADX WARN: Removed duplicated region for block: B:295:0x0362 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r3v1 */
-    /* JADX WARN: Type inference failed for: r3v15 */
-    /* JADX WARN: Type inference failed for: r3v16 */
-    /* JADX WARN: Type inference failed for: r3v19 */
-    /* JADX WARN: Type inference failed for: r3v2 */
-    /* JADX WARN: Type inference failed for: r3v20 */
-    /* JADX WARN: Type inference failed for: r3v24 */
-    /* JADX WARN: Type inference failed for: r3v25, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r3v4 */
-    /* JADX WARN: Type inference failed for: r3v5 */
-    /* JADX WARN: Type inference failed for: r3v6 */
-    /* JADX WARN: Type inference failed for: r3v7 */
-    /* JADX WARN: Type inference failed for: r3v9 */
-    /* JADX WARN: Type inference failed for: r5v10 */
-    /* JADX WARN: Type inference failed for: r5v11 */
-    /* JADX WARN: Type inference failed for: r5v12 */
-    /* JADX WARN: Type inference failed for: r5v13 */
-    /* JADX WARN: Type inference failed for: r5v14 */
-    /* JADX WARN: Type inference failed for: r5v15 */
-    /* JADX WARN: Type inference failed for: r5v16 */
-    /* JADX WARN: Type inference failed for: r5v17 */
-    /* JADX WARN: Type inference failed for: r5v18 */
-    /* JADX WARN: Type inference failed for: r5v19, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r5v20 */
-    /* JADX WARN: Type inference failed for: r5v7 */
-    /* JADX WARN: Type inference failed for: r5v8 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1001,7 +948,6 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$handleSyncBufferCallback$1(
             SyncBufferTransactionCallback syncBufferTransactionCallback,
             SurfaceSyncGroup surfaceSyncGroup) {
@@ -1030,7 +976,6 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$handleSyncNoBuffer$2(SurfaceSyncGroup surfaceSyncGroup) {
         synchronized (this.mSyncGroups) {
             this.mSyncGroups.remove(surfaceSyncGroup);
@@ -1060,7 +1005,6 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class SyncBufferTransactionCallback {
         private final CountDownLatch mCountDownLatch;
         private SurfaceControl.Transaction mTransaction;
@@ -1220,7 +1164,6 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         return this.mRTLastReportedPosition;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void applyOrMergeTransaction(SurfaceControl.Transaction t, long frameNumber) {
         ViewRootImpl viewRoot = getViewRootImpl();
         if (viewRoot != null) {
@@ -1528,7 +1471,6 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         return callbacks;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void runOnUiThread(Runnable runnable) {
         Handler handler = getHandler();
         if (handler != null && handler.getLooper() != Looper.myLooper()) {
@@ -1644,7 +1586,6 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         @Deprecated
         public void setType(int type) {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setKeepScreenOn$0(boolean screenOn) {
             SurfaceView.this.setKeepScreenOn(screenOn);
         }

@@ -285,7 +285,6 @@ public interface IGnssMeasurementInterface extends IInterface {
         public static final Parcelable.Creator<Options> CREATOR =
                 new Parcelable.Creator<Options>() { // from class:
                     // android.hardware.gnss.IGnssMeasurementInterface.Options.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Options createFromParcel(Parcel _aidl_source) {
                         Options _aidl_out = new Options();
@@ -293,7 +292,6 @@ public interface IGnssMeasurementInterface extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Options[] newArray(int _aidl_size) {
                         return new Options[_aidl_size];

@@ -16,7 +16,6 @@ public class Mesh {
     @Retention(RetentionPolicy.SOURCE)
     private @interface Mode {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeGetFinalizer();
 
     private static native long nativeMake(

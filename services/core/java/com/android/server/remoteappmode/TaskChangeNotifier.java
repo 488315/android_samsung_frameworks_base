@@ -122,7 +122,6 @@ public final class TaskChangeNotifier {
         return true;
     }
 
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.server.remoteappmode.RemoteAppTaskWatcher$1] */
     public final boolean registerTaskChangeListener(
             ITaskChangeListener iTaskChangeListener, String str, boolean z) {
         boolean linkListenerToDeath;

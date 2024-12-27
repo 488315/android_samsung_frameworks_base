@@ -18,7 +18,6 @@ public final class DeviceEntryIconViewBinder$bind$2$1$invokeSuspend$$inlined$lau
     boolean Z$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryIconViewBinder$bind$2$1$invokeSuspend$$inlined$launch$default$5(String str, Continuation continuation, DeviceEntryIconViewModel deviceEntryIconViewModel, ImageView imageView) {
         super(2, continuation);
         this.$spanName = str;
@@ -38,8 +37,6 @@ public final class DeviceEntryIconViewBinder$bind$2$1$invokeSuspend$$inlined$lau
         return ((DeviceEntryIconViewBinder$bind$2$1$invokeSuspend$$inlined$launch$default$5) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0082  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0087  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

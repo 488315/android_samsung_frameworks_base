@@ -84,7 +84,6 @@ public class FuseAppLoop implements Handler.Callback {
         this.mThread.start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0() {
         native_start(this.mInstance);
         synchronized (this.mLock) {
@@ -162,7 +161,6 @@ public class FuseAppLoop implements Handler.Callback {
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:68)
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.visit(DebugInfoApplyVisitor.java:55)
      */
-    /* JADX WARN: Not initialized variable reg: 20, insn: 0x00c4: MOVE (r14 I:??[long, double] A[D('inode' long)]) = (r20 I:??[long, double] A[D('offset' long)]), block:B:193:0x00bd */
     @Override // android.os.Handler.Callback
     public boolean handleMessage(android.os.Message r26) {
         /*

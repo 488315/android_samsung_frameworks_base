@@ -27,6 +27,5 @@ public final class OomConnection {
         new OomConnectionThread().start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native OomKillRecord[] waitOom();
 }

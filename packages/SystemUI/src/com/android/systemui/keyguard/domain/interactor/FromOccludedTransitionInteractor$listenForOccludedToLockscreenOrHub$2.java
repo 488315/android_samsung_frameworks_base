@@ -18,7 +18,6 @@ final class FromOccludedTransitionInteractor$listenForOccludedToLockscreenOrHub$
     int label;
     final /* synthetic */ FromOccludedTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromOccludedTransitionInteractor$listenForOccludedToLockscreenOrHub$2(FromOccludedTransitionInteractor fromOccludedTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromOccludedTransitionInteractor;

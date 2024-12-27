@@ -13,13 +13,11 @@ public final class VerifiedMotionEvent extends VerifiedInputEvent implements Par
     public static final Parcelable.Creator<VerifiedMotionEvent> CREATOR =
             new Parcelable.Creator<
                     VerifiedMotionEvent>() { // from class: android.view.VerifiedMotionEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VerifiedMotionEvent[] newArray(int size) {
                     return new VerifiedMotionEvent[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VerifiedMotionEvent createFromParcel(Parcel in) {
                     return new VerifiedMotionEvent(in);

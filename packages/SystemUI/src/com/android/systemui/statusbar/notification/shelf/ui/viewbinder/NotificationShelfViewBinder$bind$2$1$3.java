@@ -57,7 +57,6 @@ final class NotificationShelfViewBinder$bind$2$1$3 extends SuspendLambda impleme
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationShelfViewBinder$bind$2$1$3(NotificationShelfViewModel notificationShelfViewModel, NotificationShelf notificationShelf, Continuation continuation) {
         super(2, continuation);
         this.$viewModel = notificationShelfViewModel;

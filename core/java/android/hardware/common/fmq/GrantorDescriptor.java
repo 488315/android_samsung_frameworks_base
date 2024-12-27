@@ -8,7 +8,6 @@ public class GrantorDescriptor implements Parcelable {
     public static final Parcelable.Creator<GrantorDescriptor> CREATOR =
             new Parcelable.Creator<GrantorDescriptor>() { // from class:
                 // android.hardware.common.fmq.GrantorDescriptor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GrantorDescriptor createFromParcel(Parcel _aidl_source) {
                     GrantorDescriptor _aidl_out = new GrantorDescriptor();
@@ -16,7 +15,6 @@ public class GrantorDescriptor implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GrantorDescriptor[] newArray(int _aidl_size) {
                     return new GrantorDescriptor[_aidl_size];

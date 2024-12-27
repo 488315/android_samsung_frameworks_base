@@ -55,7 +55,6 @@ class InteractionMonitorDebugOverlay implements WindowCallbacks {
         Trace.asyncTraceForTrackEnd(4096L, TRACK_NAME, 0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dispose$0() {
         this.mViewRoot.removeWindowCallbacks(this);
     }
@@ -82,7 +81,6 @@ class InteractionMonitorDebugOverlay implements WindowCallbacks {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$attachViewRootIfNeeded$1(
             FrameTracker.ViewRootWrapper viewRoot) {
         viewRoot.addWindowCallbacks(this);
@@ -128,7 +126,6 @@ class InteractionMonitorDebugOverlay implements WindowCallbacks {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$forceRedraw$2() {
         this.mViewRoot.requestInvalidateRootRenderNode();
         this.mViewRoot.getView().invalidate();

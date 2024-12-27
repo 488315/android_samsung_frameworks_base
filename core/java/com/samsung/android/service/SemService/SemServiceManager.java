@@ -550,11 +550,6 @@ public final class SemServiceManager {
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:68)
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.visit(DebugInfoApplyVisitor.java:55)
      */
-    /* JADX WARN: Not initialized variable reg: 17, insn: 0x01ee: MOVE (r4 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r17 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:71:0x01ed */
-    /* JADX WARN: Not initialized variable reg: 17, insn: 0x01f3: MOVE (r4 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r17 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:77:0x01f2 */
-    /* JADX WARN: Not initialized variable reg: 17, insn: 0x01f8: MOVE (r4 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r17 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:80:0x01f7 */
-    /* JADX WARN: Not initialized variable reg: 17, insn: 0x01fe: MOVE (r4 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r17 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:68:0x01fd */
-    /* JADX WARN: Not initialized variable reg: 17, insn: 0x0204: MOVE (r4 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r17 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:74:0x0203 */
     public int addSCRSList(java.lang.String r20, java.util.ArrayList<java.lang.String> r21) {
         /*
             Method dump skipped, instructions count: 707
@@ -605,36 +600,6 @@ public final class SemServiceManager {
                             	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:68)
                             	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.visit(DebugInfoApplyVisitor.java:55)
                              */
-                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c37: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:533:0x0c36 */
-                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c43: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:529:0x0c42 */
-                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c4f: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:531:0x0c4e */
-                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c5b: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:525:0x0c5a */
-                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c67: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:527:0x0c66 */
-                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d4e: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:592:0x0d4d */
-                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d55: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:588:0x0d54 */
-                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d5c: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:590:0x0d5b */
-                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d64: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:584:0x0d63 */
-                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d6c: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:586:0x0d6b */
-                            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c39: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:533:0x0c36 */
-                            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c45: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:529:0x0c42 */
-                            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c51: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:531:0x0c4e */
-                            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c5d: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:525:0x0c5a */
-                            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c69: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:527:0x0c66 */
-                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c3b: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:533:0x0c36 */
-                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c47: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:529:0x0c42 */
-                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c53: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:531:0x0c4e */
-                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c5f: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:525:0x0c5a */
-                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c6b: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:527:0x0c66 */
-                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d50: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:592:0x0d4d */
-                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d57: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:588:0x0d54 */
-                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d5e: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:590:0x0d5b */
-                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d66: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:584:0x0d63 */
-                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d6e: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:586:0x0d6b */
-                            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c3d: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:533:0x0c36 */
-                            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c49: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:529:0x0c42 */
-                            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c55: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:531:0x0c4e */
-                            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c61: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:525:0x0c5a */
-                            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c6d: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:527:0x0c66 */
                             @Override // java.lang.Runnable
                             public void run() {
                                 /*
@@ -650,7 +615,6 @@ public final class SemServiceManager {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int AIDDeactivation(ArrayList<String> AID) {
         int failFlag = 0;
         if (!isSupportSemServiceManager) {
@@ -809,7 +773,6 @@ public final class SemServiceManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ArrayList<String> parseList(byte[] bArr, int respAidLen) {
         if (bArr == 0) {
             Log.e(TAG, "parse list aid null error");

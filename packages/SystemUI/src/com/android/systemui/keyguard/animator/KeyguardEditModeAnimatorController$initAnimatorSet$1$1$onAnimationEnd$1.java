@@ -14,7 +14,6 @@ final class KeyguardEditModeAnimatorController$initAnimatorSet$1$1$onAnimationEn
     int label;
     final /* synthetic */ KeyguardEditModeAnimatorController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardEditModeAnimatorController$initAnimatorSet$1$1$onAnimationEnd$1(KeyguardEditModeAnimatorController keyguardEditModeAnimatorController, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardEditModeAnimatorController;

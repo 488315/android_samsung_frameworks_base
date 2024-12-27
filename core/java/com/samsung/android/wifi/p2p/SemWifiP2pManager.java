@@ -38,7 +38,6 @@ public class SemWifiP2pManager {
         this.mLooper = this.mContext.getMainLooper();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class SemWifiP2pCallbackProxy extends ISemWifiP2pCallback.Stub {
         private final String mActionTag;
         private final Object mCallback;
@@ -67,7 +66,6 @@ public class SemWifiP2pManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSuccess$0() {
             ((ActionListener) this.mCallback).onSuccess();
         }
@@ -90,7 +88,6 @@ public class SemWifiP2pManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFailure$1(int reason) {
             ((ActionListener) this.mCallback).onFailure(reason);
         }

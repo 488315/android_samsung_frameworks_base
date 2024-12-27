@@ -18,8 +18,6 @@ public final class ParcelableMessageNanoCreator<T extends MessageNano>
         this.mClazz = clazz;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r7v4, types: [android.internal.framework.protobuf.nano.MessageNano] */
     @Override // android.os.Parcelable.Creator
     public T createFromParcel(Parcel in) {
         String className = in.readString();

@@ -27,7 +27,6 @@ public final class KeyguardQuickAffordanceBackupHelper extends SharedPreferences
         new Companion(null);
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordanceBackupHelper(Context context, int i) {
         super(context, UserFileManagerImpl.Companion.createFile(i, "quick_affordance_selections").getPath());
         UserFileManagerImpl.Companion.getClass();

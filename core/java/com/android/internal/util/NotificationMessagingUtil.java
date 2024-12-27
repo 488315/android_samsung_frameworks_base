@@ -70,7 +70,6 @@ public class NotificationMessagingUtil {
         return equals;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cacheDefaultSmsApp(int userId) {
         String smsApp =
                 Settings.Secure.getStringForUser(

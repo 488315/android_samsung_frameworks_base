@@ -992,26 +992,6 @@ public final class PackageInstallerService extends IPackageInstaller.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:112:0x027a  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x02a1  */
-    /* JADX WARN: Removed duplicated region for block: B:128:0x02dd  */
-    /* JADX WARN: Removed duplicated region for block: B:145:0x0318  */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x031d  */
-    /* JADX WARN: Removed duplicated region for block: B:154:0x034a  */
-    /* JADX WARN: Removed duplicated region for block: B:166:0x0381  */
-    /* JADX WARN: Removed duplicated region for block: B:254:0x04d3  */
-    /* JADX WARN: Removed duplicated region for block: B:320:0x05c3  */
-    /* JADX WARN: Removed duplicated region for block: B:323:0x05cf  */
-    /* JADX WARN: Removed duplicated region for block: B:326:0x05d7 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:394:0x07a4 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:435:0x05d2  */
-    /* JADX WARN: Removed duplicated region for block: B:436:0x05cb  */
-    /* JADX WARN: Removed duplicated region for block: B:437:0x033b  */
-    /* JADX WARN: Removed duplicated region for block: B:440:0x031a  */
-    /* JADX WARN: Removed duplicated region for block: B:446:0x02d6  */
-    /* JADX WARN: Removed duplicated region for block: B:448:0x028e  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x0197  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x01b4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1488,12 +1468,6 @@ public final class PackageInstallerService extends IPackageInstaller.Stub
                 });
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x002e  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x003d A[Catch: all -> 0x005a, TryCatch #0 {all -> 0x005a, blocks: (B:5:0x0004, B:7:0x000c, B:9:0x001b, B:12:0x0028, B:16:0x003d, B:18:0x0043, B:21:0x0050, B:23:0x0056, B:28:0x004a, B:32:0x002f, B:25:0x005c, B:34:0x0022, B:38:0x005f), top: B:4:0x0004 }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0056 A[Catch: all -> 0x005a, TryCatch #0 {all -> 0x005a, blocks: (B:5:0x0004, B:7:0x000c, B:9:0x001b, B:12:0x0028, B:16:0x003d, B:18:0x0043, B:21:0x0050, B:23:0x0056, B:28:0x004a, B:32:0x002f, B:25:0x005c, B:34:0x0022, B:38:0x005f), top: B:4:0x0004 }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x005c A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x005c A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x002f A[Catch: all -> 0x005a, TryCatch #0 {all -> 0x005a, blocks: (B:5:0x0004, B:7:0x000c, B:9:0x001b, B:12:0x0028, B:16:0x003d, B:18:0x0043, B:21:0x0050, B:23:0x0056, B:28:0x004a, B:32:0x002f, B:25:0x005c, B:34:0x0022, B:38:0x005f), top: B:4:0x0004 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -295,7 +295,6 @@ public class SettingsHelper implements Dumpable {
             this(str, str2, str3, obj, z, false);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public String getKey() {
             return this.mKey;
         }
@@ -545,7 +544,6 @@ public class SettingsHelper implements Dumpable {
         dumpManager.registerNormalDumpable(TAG, this);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void broadcastChange(Uri uri) {
         ArrayList<WeakReference<OnChangedCallback>> arrayList;
         Objects.toString(uri);
@@ -584,13 +582,11 @@ public class SettingsHelper implements Dumpable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0() {
         readSettingsDB();
         lambda$onUserSwitched$1();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: registerSettingsObserver, reason: merged with bridge method [inline-methods] */
     public void lambda$onUserSwitched$1() {
         long uptimeMillis = SystemClock.uptimeMillis();

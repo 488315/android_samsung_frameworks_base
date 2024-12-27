@@ -96,7 +96,6 @@ public class SensorService extends SystemService {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0() {
         TimingsTraceAndSlog newAsyncLog = TimingsTraceAndSlog.newAsyncLog();
         newAsyncLog.traceBegin(START_NATIVE_SENSOR_SERVICE);
@@ -107,10 +106,8 @@ public class SensorService extends SystemService {
         newAsyncLog.traceEnd();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void registerProximityActiveListenerNative(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int registerRuntimeSensorNative(
             long j,
             int i,
@@ -126,7 +123,6 @@ public class SensorService extends SystemService {
             SensorManagerInternal$RuntimeSensorCallback
                     sensorManagerInternal$RuntimeSensorCallback);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native boolean sendRuntimeSensorEventNative(
             long j, int i, int i2, long j2, float[] fArr);
 
@@ -136,7 +132,6 @@ public class SensorService extends SystemService {
 
     private static native void unregisterProximityActiveListenerNative(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void unregisterRuntimeSensorNative(long j, int i);
 
     @Override // com.android.server.SystemService

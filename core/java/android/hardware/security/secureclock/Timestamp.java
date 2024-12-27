@@ -8,7 +8,6 @@ public class Timestamp implements Parcelable {
     public static final Parcelable.Creator<Timestamp> CREATOR =
             new Parcelable.Creator<
                     Timestamp>() { // from class: android.hardware.security.secureclock.Timestamp.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Timestamp createFromParcel(Parcel _aidl_source) {
                     Timestamp _aidl_out = new Timestamp();
@@ -16,7 +15,6 @@ public class Timestamp implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Timestamp[] newArray(int _aidl_size) {
                     return new Timestamp[_aidl_size];

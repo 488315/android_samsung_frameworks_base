@@ -12,7 +12,6 @@ final class TakeScreenshotExecutorImpl$executeScreenshots$1 extends Continuation
     /* synthetic */ Object result;
     final /* synthetic */ TakeScreenshotExecutorImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TakeScreenshotExecutorImpl$executeScreenshots$1(TakeScreenshotExecutorImpl takeScreenshotExecutorImpl, Continuation continuation) {
         super(continuation);
         this.this$0 = takeScreenshotExecutorImpl;

@@ -7,13 +7,11 @@ public class LongParcelable implements Parcelable {
     public static final Parcelable.Creator<LongParcelable> CREATOR =
             new Parcelable.Creator<LongParcelable>() { // from class:
                 // android.hardware.camera2.utils.LongParcelable.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LongParcelable createFromParcel(Parcel in) {
                     return new LongParcelable(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LongParcelable[] newArray(int size) {
                     return new LongParcelable[size];

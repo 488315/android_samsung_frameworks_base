@@ -90,8 +90,6 @@ public final class CryptoServicesRegistrar {
         return (T[]) ((Object[]) lookupProperty.clone());
     }
 
-    /* JADX WARN: Type inference failed for: r3v4, types: [T, com.android.internal.org.bouncycastle.crypto.params.DSAParameters] */
-    /* JADX WARN: Type inference failed for: r3v7, types: [T, com.android.internal.org.bouncycastle.crypto.params.DHParameters] */
     public static <T> T getSizedProperty(Property property, int i) {
         Object[] lookupProperty = lookupProperty(property);
         if (lookupProperty == null) {

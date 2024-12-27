@@ -8,7 +8,6 @@ public class AudioTimestampInternal implements Parcelable {
     public static final Parcelable.Creator<AudioTimestampInternal> CREATOR =
             new Parcelable.Creator<AudioTimestampInternal>() { // from class:
                 // android.media.AudioTimestampInternal.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioTimestampInternal createFromParcel(Parcel _aidl_source) {
                     AudioTimestampInternal _aidl_out = new AudioTimestampInternal();
@@ -16,7 +15,6 @@ public class AudioTimestampInternal implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioTimestampInternal[] newArray(int _aidl_size) {
                     return new AudioTimestampInternal[_aidl_size];

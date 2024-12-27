@@ -203,13 +203,6 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
         return true;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v2 */
-    /* JADX WARN: Type inference failed for: r1v3, types: [android.view.ViewParent] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [android.view.ViewParent] */
-    /* JADX WARN: Type inference failed for: r1v7 */
-    /* JADX WARN: Type inference failed for: r1v8 */
-    /* JADX WARN: Type inference failed for: r5v0, types: [android.view.View, java.lang.Object] */
     protected ArrayList<View> getParentList(View view) {
         View view2;
         ArrayList<View> arrayList = new ArrayList<>();
@@ -318,7 +311,6 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Rect getViewBoundsOnScreen(View view) {
         Rect screenRectOfView = new Rect();
         Point screenPointOfView = getViewLocationOnScreen(view);
@@ -783,10 +775,6 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
         return extractionResult & 255;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v1, types: [android.view.ViewParent] */
-    /* JADX WARN: Type inference failed for: r4v3 */
-    /* JADX WARN: Type inference failed for: r4v4 */
     private Rect adjustMetaAreaRect(View view, Rect rect) {
         Rect viewBoundsOnScreen = getViewBoundsOnScreen(view);
         Rect rect2 = new Rect();
@@ -945,7 +933,6 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0081  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1145,7 +1132,6 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean updateDataElementWithBundle(
             View view, Bundle bundle, SmartClipDataElementImpl resultElement) {
         boolean isElementUpdated = false;
@@ -1320,9 +1306,6 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
         return haveCroppedView;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00e2  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00e6  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00ec  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

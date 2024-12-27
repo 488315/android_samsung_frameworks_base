@@ -53,7 +53,6 @@ public final class RampAnimator {
                 };
         public final Choreographer mChoreographer = Choreographer.getInstance();
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.display.RampAnimator$DualRampAnimator$1] */
         public DualRampAnimator(
                 Object obj,
                 DisplayPowerState.AnonymousClass1 anonymousClass1,
@@ -111,7 +110,6 @@ public final class RampAnimator {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0079  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -31,7 +31,6 @@ public class QSButtonsContainer extends LinearLayout {
         void closeTooltip();
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.qs.buttons.QSButtonsContainer$1] */
     public QSButtonsContainer(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mDismissReceiver = new BroadcastReceiver() { // from class: com.android.systemui.qs.buttons.QSButtonsContainer.1

@@ -8,7 +8,6 @@ public class NanoappBinary implements Parcelable {
     public static final Parcelable.Creator<NanoappBinary> CREATOR =
             new Parcelable.Creator<
                     NanoappBinary>() { // from class: android.hardware.contexthub.NanoappBinary.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoappBinary createFromParcel(Parcel _aidl_source) {
                     NanoappBinary _aidl_out = new NanoappBinary();
@@ -16,7 +15,6 @@ public class NanoappBinary implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoappBinary[] newArray(int _aidl_size) {
                     return new NanoappBinary[_aidl_size];

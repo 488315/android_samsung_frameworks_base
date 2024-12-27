@@ -94,7 +94,6 @@ public class ModemPowerProfile {
         MODEM_NR_FREQUENCY_RANGE_NAMES.put(262144, "MMWAVE");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public void parseFromXml(XmlPullParser parser) throws IOException, XmlPullParserException {
         char c;
         int depth = parser.getDepth();
@@ -153,7 +152,6 @@ public class ModemPowerProfile {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private void parseActivePowerConstantsFromXml(XmlPullParser parser)
             throws IOException, XmlPullParserException {
         int nrfType;

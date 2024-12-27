@@ -180,7 +180,6 @@ public class Spatializer {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CallbackUtil.DispatcherStub
             lambda$addOnHeadTrackerAvailableListener$0() {
         return new SpatializerHeadTrackerAvailableDispatcherStub();
@@ -262,7 +261,6 @@ public class Spatializer {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CallbackUtil.DispatcherStub
             lambda$addOnSpatializerStateChangedListener$1() {
         return new SpatializerInfoDispatcherStub();
@@ -308,7 +306,6 @@ public class Spatializer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class SpatializerInfoDispatcherStub extends ISpatializerCallback.Stub
             implements CallbackUtil.DispatcherStub {
         private SpatializerInfoDispatcherStub() {}
@@ -343,7 +340,6 @@ public class Spatializer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$dispatchSpatializerEnabledChanged$0(
                 boolean enabled, OnSpatializerStateChangedListener listener) {
             listener.onSpatializerEnabledChanged(Spatializer.this, enabled);
@@ -364,7 +360,6 @@ public class Spatializer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$dispatchSpatializerAvailableChanged$1(
                 boolean available, OnSpatializerStateChangedListener listener) {
             listener.onSpatializerAvailableChanged(Spatializer.this, available);
@@ -442,7 +437,6 @@ public class Spatializer {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CallbackUtil.DispatcherStub
             lambda$addOnHeadTrackingModeChangedListener$2() {
         return new SpatializerHeadTrackingDispatcherStub();
@@ -572,7 +566,6 @@ public class Spatializer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class SpatializerHeadTrackingDispatcherStub
             extends ISpatializerHeadTrackingModeCallback.Stub
             implements CallbackUtil.DispatcherStub {
@@ -608,7 +601,6 @@ public class Spatializer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$dispatchSpatializerActualHeadTrackingModeChanged$0(
                 int mode, OnHeadTrackingModeChangedListener listener) {
             listener.onHeadTrackingModeChanged(Spatializer.this, mode);
@@ -629,14 +621,12 @@ public class Spatializer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$dispatchSpatializerDesiredHeadTrackingModeChanged$1(
                 int mode, OnHeadTrackingModeChangedListener listener) {
             listener.onDesiredHeadTrackingModeChanged(Spatializer.this, mode);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class SpatializerHeadTrackerAvailableDispatcherStub
             extends ISpatializerHeadTrackerAvailableCallback.Stub
             implements CallbackUtil.DispatcherStub {
@@ -668,14 +658,12 @@ public class Spatializer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$dispatchSpatializerHeadTrackerAvailable$0(
                 boolean available, OnHeadTrackerAvailableListener listener) {
             listener.onHeadTrackerAvailableChanged(Spatializer.this, available);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class SpatializerPoseDispatcherStub
             extends ISpatializerHeadToSoundStagePoseCallback.Stub {
         private SpatializerPoseDispatcherStub() {}
@@ -715,7 +703,6 @@ public class Spatializer {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$dispatchPoseChanged$0(
                 CallbackUtil.ListenerInfo listener, float[] pose) {
             ((OnHeadToSoundstagePoseUpdatedListener) listener.mListener)
@@ -723,7 +710,6 @@ public class Spatializer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class SpatializerOutputDispatcherStub extends ISpatializerOutputCallback.Stub {
         private SpatializerOutputDispatcherStub() {}
 
@@ -763,7 +749,6 @@ public class Spatializer {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$dispatchSpatializerOutputChanged$0(
                 CallbackUtil.ListenerInfo listener, int output) {
             ((OnSpatializerOutputChangedListener) listener.mListener)

@@ -7,8 +7,6 @@ import kotlin.enums.EnumEntriesKt;
 public final class NoteTaskEventLogger {
     public final UiEventLogger uiEventLogger;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class NoteTaskUiEvent implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ NoteTaskUiEvent[] $VALUES;
         public static final NoteTaskUiEvent NOTE_CLOSED_VIA_STYLUS_TAIL_BUTTON;

@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public final class PointerInputScopeExtKt$observeTaps$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function1 $onTap;
     final /* synthetic */ PointerEventPass $pass;
@@ -30,7 +29,6 @@ public final class PointerInputScopeExtKt$observeTaps$2 extends SuspendLambda im
         private /* synthetic */ Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(PointerEventPass pointerEventPass, boolean z, Function1 function1, Continuation continuation) {
             super(2, continuation);
             this.$pass = pointerEventPass;
@@ -50,7 +48,6 @@ public final class PointerInputScopeExtKt$observeTaps$2 extends SuspendLambda im
             return ((AnonymousClass1) create((AwaitPointerEventScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:8:0x005f  */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -122,7 +119,6 @@ public final class PointerInputScopeExtKt$observeTaps$2 extends SuspendLambda im
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PointerInputScopeExtKt$observeTaps$2(Function1 function1, PointerInputScope pointerInputScope, PointerEventPass pointerEventPass, boolean z, Continuation continuation) {
         super(2, continuation);
         this.$onTap = function1;

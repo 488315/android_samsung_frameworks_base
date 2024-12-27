@@ -278,8 +278,6 @@ public class ActivityManager {
             SystemProperties.getBoolean("debug.force_low_ram", false);
     private static final Singleton<IActivityManager> IActivityManagerSingleton =
             new Singleton<IActivityManager>() { // from class: android.app.ActivityManager.3
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.util.Singleton
                 public IActivityManager create() {
                     IBinder b = ServiceManager.getService("activity");
@@ -759,13 +757,11 @@ public class ActivityManager {
         public static final Parcelable.Creator<TaskDescription> CREATOR =
                 new Parcelable.Creator<TaskDescription>() { // from class:
                     // android.app.ActivityManager.TaskDescription.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TaskDescription createFromParcel(Parcel source) {
                         return new TaskDescription(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TaskDescription[] newArray(int size) {
                         return new TaskDescription[size];
@@ -1482,13 +1478,11 @@ public class ActivityManager {
         public static final Parcelable.Creator<RecentTaskInfo> CREATOR =
                 new Parcelable.Creator<RecentTaskInfo>() { // from class:
                     // android.app.ActivityManager.RecentTaskInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RecentTaskInfo createFromParcel(Parcel source) {
                         return new RecentTaskInfo(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RecentTaskInfo[] newArray(int size) {
                         return new RecentTaskInfo[size];
@@ -1665,13 +1659,11 @@ public class ActivityManager {
         public static final Parcelable.Creator<RunningTaskInfo> CREATOR =
                 new Parcelable.Creator<RunningTaskInfo>() { // from class:
                     // android.app.ActivityManager.RunningTaskInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RunningTaskInfo createFromParcel(Parcel source) {
                         return new RunningTaskInfo(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RunningTaskInfo[] newArray(int size) {
                         return new RunningTaskInfo[size];
@@ -1832,13 +1824,11 @@ public class ActivityManager {
         public static final Parcelable.Creator<RunningServiceInfo> CREATOR =
                 new Parcelable.Creator<RunningServiceInfo>() { // from class:
                     // android.app.ActivityManager.RunningServiceInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RunningServiceInfo createFromParcel(Parcel source) {
                         return new RunningServiceInfo(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RunningServiceInfo[] newArray(int size) {
                         return new RunningServiceInfo[size];
@@ -1932,13 +1922,11 @@ public class ActivityManager {
         public static final Parcelable.Creator<MemoryInfo> CREATOR =
                 new Parcelable.Creator<
                         MemoryInfo>() { // from class: android.app.ActivityManager.MemoryInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public MemoryInfo createFromParcel(Parcel source) {
                         return new MemoryInfo(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public MemoryInfo[] newArray(int size) {
                         return new MemoryInfo[size];
@@ -2030,13 +2018,11 @@ public class ActivityManager {
         public static final Parcelable.Creator<ProcessErrorStateInfo> CREATOR =
                 new Parcelable.Creator<ProcessErrorStateInfo>() { // from class:
                     // android.app.ActivityManager.ProcessErrorStateInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ProcessErrorStateInfo createFromParcel(Parcel source) {
                         return new ProcessErrorStateInfo(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ProcessErrorStateInfo[] newArray(int size) {
                         return new ProcessErrorStateInfo[size];
@@ -2104,13 +2090,11 @@ public class ActivityManager {
         public static final Parcelable.Creator<RunningAppProcessInfo> CREATOR =
                 new Parcelable.Creator<RunningAppProcessInfo>() { // from class:
                     // android.app.ActivityManager.RunningAppProcessInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RunningAppProcessInfo createFromParcel(Parcel source) {
                         return new RunningAppProcessInfo(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RunningAppProcessInfo[] newArray(int size) {
                         return new RunningAppProcessInfo[size];
@@ -2408,7 +2392,6 @@ public class ActivityManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class AppStartInfoCallbackWrapper {
         final Executor mExecutor;
         final Consumer<ApplicationStartInfo> mListener;
@@ -3141,7 +3124,6 @@ public class ActivityManager {
         return IActivityManagerSingleton.get();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static IActivityTaskManager getTaskService() {
         return ActivityTaskManager.getService();
     }
@@ -3735,14 +3717,12 @@ public class ActivityManager {
         public static final Parcelable.Creator<PendingIntentInfo> CREATOR =
                 new Parcelable.Creator<PendingIntentInfo>() { // from class:
                     // android.app.ActivityManager.PendingIntentInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PendingIntentInfo createFromParcel(Parcel in) {
                         return new PendingIntentInfo(
                                 in.readString(), in.readInt(), in.readBoolean(), in.readInt());
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PendingIntentInfo[] newArray(int size) {
                         return new PendingIntentInfo[size];

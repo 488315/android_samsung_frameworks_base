@@ -9,13 +9,11 @@ public class SContextDualDisplayAngle extends SContextEventContext {
     public static final Parcelable.Creator<SContextDualDisplayAngle> CREATOR =
             new Parcelable.Creator<SContextDualDisplayAngle>() { // from class:
                 // android.hardware.scontext.SContextDualDisplayAngle.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextDualDisplayAngle createFromParcel(Parcel in) {
                     return new SContextDualDisplayAngle(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextDualDisplayAngle[] newArray(int size) {
                     return new SContextDualDisplayAngle[size];

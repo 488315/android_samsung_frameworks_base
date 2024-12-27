@@ -12,7 +12,6 @@ final class ClockRegistry$registerListeners$1 extends SuspendLambda implements F
     int label;
     final /* synthetic */ ClockRegistry this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ClockRegistry$registerListeners$1(ClockRegistry clockRegistry, Continuation continuation) {
         super(2, continuation);
         this.this$0 = clockRegistry;

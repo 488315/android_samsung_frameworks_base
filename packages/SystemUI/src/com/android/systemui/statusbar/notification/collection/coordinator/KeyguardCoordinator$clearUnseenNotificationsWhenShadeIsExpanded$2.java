@@ -14,7 +14,6 @@ final class KeyguardCoordinator$clearUnseenNotificationsWhenShadeIsExpanded$2 ex
     int label;
     final /* synthetic */ KeyguardCoordinator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardCoordinator$clearUnseenNotificationsWhenShadeIsExpanded$2(KeyguardCoordinator keyguardCoordinator, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardCoordinator;

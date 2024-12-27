@@ -270,8 +270,6 @@ public final class RollbackManagerServiceImpl extends IRollbackManager.Stub
 
                                        r13 = com.android.server.pm.PackageManagerService.this.mApexManager.getApksInApex(r11).iterator();
                                     */
-                                    /* JADX WARN: Removed duplicated region for block: B:13:0x0374  */
-                                    /* JADX WARN: Removed duplicated region for block: B:9:0x0372  */
                                     @Override // java.lang.Runnable
                                     /*
                                         Code decompiled incorrectly, please refer to instructions dump.

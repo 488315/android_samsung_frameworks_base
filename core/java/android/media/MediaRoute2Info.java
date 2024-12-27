@@ -25,13 +25,11 @@ public final class MediaRoute2Info implements Parcelable {
     public static final Parcelable.Creator<MediaRoute2Info> CREATOR =
             new Parcelable.Creator<
                     MediaRoute2Info>() { // from class: android.media.MediaRoute2Info.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaRoute2Info createFromParcel(Parcel in) {
                     return new MediaRoute2Info(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaRoute2Info[] newArray(int size) {
                     return new MediaRoute2Info[size];

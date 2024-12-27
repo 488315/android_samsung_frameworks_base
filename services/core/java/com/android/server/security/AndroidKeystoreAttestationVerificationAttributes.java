@@ -34,8 +34,6 @@ public final class AndroidKeystoreAttestationVerificationAttributes {
     public Boolean mVerifiedBootLocked;
     public VerifiedBootState mVerifiedBootState;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class SecurityLevel {
         public static final /* synthetic */ SecurityLevel[] $VALUES;
         public static final SecurityLevel SOFTWARE;
@@ -61,8 +59,6 @@ public final class AndroidKeystoreAttestationVerificationAttributes {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class VerifiedBootState {
         public static final /* synthetic */ VerifiedBootState[] $VALUES;
         public static final VerifiedBootState FAILED;

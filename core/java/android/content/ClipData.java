@@ -42,13 +42,11 @@ public class ClipData implements Parcelable {
     static final String[] MIMETYPES_TEXT_INTENT = {ClipDescription.MIMETYPE_TEXT_INTENT};
     public static final Parcelable.Creator<ClipData> CREATOR =
             new Parcelable.Creator<ClipData>() { // from class: android.content.ClipData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClipData createFromParcel(Parcel source) {
                     return new ClipData(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClipData[] newArray(int size) {
                     return new ClipData[size];

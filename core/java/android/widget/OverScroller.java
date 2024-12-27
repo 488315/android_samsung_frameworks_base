@@ -308,8 +308,6 @@ public class OverScroller {
         this.mScrollerY.fling(startY, velocityY2, minY, maxY, overY);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0059  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -770,7 +768,6 @@ public class OverScroller {
                     (INFLEXION * Math.abs(velocity)) / (this.mFlingFriction * this.mPhysicalCoeff));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public double getSplineFlingDistance(int velocity) {
             double l = getSplineDeceleration(velocity);
             double decelMinusOne = DECELERATION_RATE - 1.0d;

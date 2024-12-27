@@ -17,15 +17,6 @@ public final class RequestProcessor implements ScreenshotRequestProcessor {
         this.semCapture = semImageCaptureImpl;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x016b  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0174  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0139 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x013a  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00cf  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x00c2 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00c3  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x006d  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0026  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

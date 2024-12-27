@@ -108,7 +108,6 @@ public final class AppFunctionManagerServiceImpl extends IAppFunctionManager.Stu
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.server.appfunctions.AppFunctionManagerServiceImpl$$ExternalSyntheticLambda3] */
     public AppFunctionManagerServiceImpl(Context context, RemoteServiceCaller remoteServiceCaller, CallerValidator callerValidator, ServiceHelper serviceHelper, ServiceConfig serviceConfig) {
         Objects.requireNonNull(context);
         this.mContext = context;
@@ -349,9 +348,6 @@ public final class AppFunctionManagerServiceImpl extends IAppFunctionManager.Stu
                 }
             }
         }).thenAccept(new Consumer() { // from class: com.android.server.appfunctions.AppFunctionManagerServiceImpl$$ExternalSyntheticLambda11
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r2v4, types: [android.os.IBinder$DeathRecipient, com.android.server.appfunctions.RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda1] */
-            /* JADX WARN: Type inference failed for: r4v1, types: [com.android.server.appfunctions.AppFunctionManagerServiceImpl$2] */
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 AppFunctionManagerServiceImpl appFunctionManagerServiceImpl = AppFunctionManagerServiceImpl.this;

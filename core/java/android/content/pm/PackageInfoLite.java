@@ -7,13 +7,11 @@ public class PackageInfoLite implements Parcelable {
     public static final Parcelable.Creator<PackageInfoLite> CREATOR =
             new Parcelable.Creator<
                     PackageInfoLite>() { // from class: android.content.pm.PackageInfoLite.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackageInfoLite createFromParcel(Parcel source) {
                     return new PackageInfoLite(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackageInfoLite[] newArray(int size) {
                     return new PackageInfoLite[size];

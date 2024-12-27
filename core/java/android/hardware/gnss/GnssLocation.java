@@ -9,7 +9,6 @@ public class GnssLocation implements Parcelable {
     public static final Parcelable.Creator<GnssLocation> CREATOR =
             new Parcelable.Creator<
                     GnssLocation>() { // from class: android.hardware.gnss.GnssLocation.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GnssLocation createFromParcel(Parcel _aidl_source) {
                     GnssLocation _aidl_out = new GnssLocation();
@@ -17,7 +16,6 @@ public class GnssLocation implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GnssLocation[] newArray(int _aidl_size) {
                     return new GnssLocation[_aidl_size];

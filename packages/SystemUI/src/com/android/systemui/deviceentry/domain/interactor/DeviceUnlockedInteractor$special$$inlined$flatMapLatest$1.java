@@ -19,7 +19,6 @@ public final class DeviceUnlockedInteractor$special$$inlined$flatMapLatest$1 ext
     int label;
     final /* synthetic */ DeviceUnlockedInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceUnlockedInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, DeviceUnlockedInteractor deviceUnlockedInteractor) {
         super(3, continuation);
         this.this$0 = deviceUnlockedInteractor;

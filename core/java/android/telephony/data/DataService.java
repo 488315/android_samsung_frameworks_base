@@ -155,28 +155,24 @@ public abstract class DataService extends Service {
             callback.onRequestDataCallListComplete(1, Collections.EMPTY_LIST);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void registerForDataCallListChanged(IDataServiceCallback callback) {
             synchronized (this.mDataCallListChangedCallbacks) {
                 this.mDataCallListChangedCallbacks.add(callback);
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void unregisterForDataCallListChanged(IDataServiceCallback callback) {
             synchronized (this.mDataCallListChangedCallbacks) {
                 this.mDataCallListChangedCallbacks.remove(callback);
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void registerForApnUnthrottled(IDataServiceCallback callback) {
             synchronized (this.mApnUnthrottledCallbacks) {
                 this.mApnUnthrottledCallbacks.add(callback);
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void unregisterForApnUnthrottled(IDataServiceCallback callback) {
             synchronized (this.mApnUnthrottledCallbacks) {
                 this.mApnUnthrottledCallbacks.remove(callback);
@@ -857,7 +853,6 @@ public abstract class DataService extends Service {
         Rlog.d(TAG, s);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void loge(String s) {
         Rlog.e(TAG, s);
     }

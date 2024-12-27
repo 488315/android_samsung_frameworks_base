@@ -623,8 +623,6 @@ public final class SemFpAidlResponseHandler extends ISessionCallback.Stub {
         onLockoutCleared$com$android$server$biometrics$sensors$fingerprint$aidl$AidlResponseHandler();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.biometrics.sensors.fingerprint.aidl.AidlResponseHandler$$ExternalSyntheticLambda8] */
     public final void
             onLockoutCleared$com$android$server$biometrics$sensors$fingerprint$aidl$AidlResponseHandler() {
         handleResponse(

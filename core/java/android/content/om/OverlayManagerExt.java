@@ -202,7 +202,6 @@ public class OverlayManagerExt {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ OverlayInfoExt lambda$replaceOverlays$1(
             OverlayStateChangeRequest request, String path) {
         try {
@@ -278,7 +277,6 @@ public class OverlayManagerExt {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ OverlayInfoExt lambda$addOverlayPaths$3(
             OverlayStateChangeRequest request, String path) {
         try {

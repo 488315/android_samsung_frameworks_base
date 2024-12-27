@@ -17,7 +17,6 @@ final class NamedListenerSet$iterator$1 extends RestrictedSuspendLambda implemen
     int label;
     final /* synthetic */ NamedListenerSet<Object> this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NamedListenerSet$iterator$1(NamedListenerSet<Object> namedListenerSet, Continuation continuation) {
         super(2, continuation);
         this.this$0 = namedListenerSet;

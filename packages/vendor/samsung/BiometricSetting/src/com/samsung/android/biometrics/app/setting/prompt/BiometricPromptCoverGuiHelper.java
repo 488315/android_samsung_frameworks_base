@@ -31,7 +31,6 @@ public final class BiometricPromptCoverGuiHelper extends BiometricPromptGuiHelpe
     public final BiometricPromptCoverGuiHelper$$ExternalSyntheticLambda3 mRunnableClearGuide;
     public long mTimePreviousHelpMessage;
 
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.samsung.android.biometrics.app.setting.prompt.BiometricPromptCoverGuiHelper$$ExternalSyntheticLambda3] */
     public BiometricPromptCoverGuiHelper(
             Context context, Looper looper, View view, PromptConfig promptConfig, int i) {
         super(context, view, promptConfig, null);

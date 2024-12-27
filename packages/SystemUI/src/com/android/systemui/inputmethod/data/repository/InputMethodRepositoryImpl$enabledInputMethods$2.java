@@ -14,7 +14,6 @@ final class InputMethodRepositoryImpl$enabledInputMethods$2 extends SuspendLambd
     int label;
     final /* synthetic */ InputMethodRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InputMethodRepositoryImpl$enabledInputMethods$2(InputMethodRepositoryImpl inputMethodRepositoryImpl, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = inputMethodRepositoryImpl;

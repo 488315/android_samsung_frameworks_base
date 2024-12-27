@@ -17,13 +17,11 @@ public class AudioPolicyConfig implements Parcelable {
     public static final Parcelable.Creator<AudioPolicyConfig> CREATOR =
             new Parcelable.Creator<AudioPolicyConfig>() { // from class:
                 // android.media.audiopolicy.AudioPolicyConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPolicyConfig createFromParcel(Parcel p) {
                     return new AudioPolicyConfig(p);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPolicyConfig[] newArray(int size) {
                     return new AudioPolicyConfig[size];
@@ -288,8 +286,6 @@ public class AudioPolicyConfig implements Parcelable {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Multi-variable type inference failed */
     public /* synthetic */ void lambda$updateMixingRules$0(Pair update) {
         updateMixingRule((AudioMix) update.first, (AudioMixingRule) update.second);
     }

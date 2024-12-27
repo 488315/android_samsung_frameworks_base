@@ -223,7 +223,6 @@ public final class WSMeansQuantizer implements Quantizer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class Distance {
         private final float mDistance;
         private final int mIndex;

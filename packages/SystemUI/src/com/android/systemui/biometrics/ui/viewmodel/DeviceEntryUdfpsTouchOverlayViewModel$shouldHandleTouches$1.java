@@ -15,7 +15,6 @@ final class DeviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1 extends 
     /* synthetic */ boolean Z$2;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1(DeviceEntryIconLogger deviceEntryIconLogger, Continuation continuation) {
         super(4, continuation);
         this.$logger = deviceEntryIconLogger;

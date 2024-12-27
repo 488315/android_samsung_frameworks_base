@@ -18,7 +18,6 @@ final class PrivacyChipRepositoryImpl$privacyItems$1 extends SuspendLambda imple
     int label;
     final /* synthetic */ PrivacyChipRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PrivacyChipRepositoryImpl$privacyItems$1(PrivacyChipRepositoryImpl privacyChipRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = privacyChipRepositoryImpl;
@@ -36,8 +35,6 @@ final class PrivacyChipRepositoryImpl$privacyItems$1 extends SuspendLambda imple
         return ((PrivacyChipRepositoryImpl$privacyItems$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.privacy.PrivacyItemController$Callback, com.android.systemui.shade.data.repository.PrivacyChipRepositoryImpl$privacyItems$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -54,7 +51,6 @@ final class PrivacyChipRepositoryImpl$privacyItems$1 extends SuspendLambda imple
             this.this$0.privacyItemController.addCallback(r1);
             final PrivacyChipRepositoryImpl privacyChipRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.shade.data.repository.PrivacyChipRepositoryImpl$privacyItems$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

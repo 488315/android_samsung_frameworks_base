@@ -20,7 +20,6 @@ final class MusicShareDeviceController$Companion$castEventChanges$1$updateDevice
     final /* synthetic */ LocalBluetoothManager $this_castEventChanges;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MusicShareDeviceController$Companion$castEventChanges$1$updateDevices$1(ProducerScope producerScope, LocalBluetoothManager localBluetoothManager, Continuation continuation) {
         super(2, continuation);
         this.$$this$callbackFlow = producerScope;

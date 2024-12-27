@@ -210,7 +210,6 @@ public final class GroupCoalescer implements Dumpable, PipelineDumpable {
         notifCollection.dispatchEventsAndRebuildList("onNotificationGroupPosted");
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.statusbar.notification.collection.coalescer.GroupCoalescer$1] */
     public GroupCoalescer(DelayableExecutor delayableExecutor, SystemClock systemClock, GroupCoalescerLogger groupCoalescerLogger, long j, long j2) {
         this.mCoalescedEvents = new ArrayMap();
         this.mBatches = new ArrayMap();

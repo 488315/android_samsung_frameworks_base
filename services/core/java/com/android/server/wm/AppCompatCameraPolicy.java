@@ -6,9 +6,6 @@ public final class AppCompatCameraPolicy {
     final CameraStateMonitor mCameraStateMonitor;
     public final DisplayRotationCompatPolicy mDisplayRotationCompatPolicy;
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x004f  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x005a  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0055  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

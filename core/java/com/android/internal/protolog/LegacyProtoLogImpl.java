@@ -333,7 +333,6 @@ public class LegacyProtoLogImpl implements IProtoLog {
         return -1;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public int onShellCommand(ShellCommand shell) {
         char c;
         final PrintWriter pw = shell.getOutPrintWriter();
@@ -500,7 +499,6 @@ public class LegacyProtoLogImpl implements IProtoLog {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public static void logAndPrintln(PrintWriter pw, String msg) {
         Slog.i(TAG, msg);
         if (pw != null) {

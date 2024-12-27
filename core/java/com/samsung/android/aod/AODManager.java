@@ -341,7 +341,6 @@ public class AODManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class AODCallbackDelegate extends IAODCallback.Stub {
         private Handler mHandler;
         private AODListener mListener;
@@ -363,7 +362,6 @@ public class AODManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onScreenTurningOn$0() {
             if (this.mListener != null) {
                 this.mListener.onScreenTurningOn();

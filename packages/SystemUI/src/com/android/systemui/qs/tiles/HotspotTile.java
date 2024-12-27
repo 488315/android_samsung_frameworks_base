@@ -178,7 +178,6 @@ public final class HotspotTile extends SQSTileImpl {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.qs.tiles.HotspotTile$1] */
     public HotspotTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, HotspotController hotspotController, DataSaverController dataSaverController, KnoxStateMonitor knoxStateMonitor, KeyguardStateController keyguardStateController, KeyguardUpdateMonitor keyguardUpdateMonitor, SettingsHelper settingsHelper, SatelliteModeObserverHelper satelliteModeObserverHelper, PanelInteractor panelInteractor) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mIcon = QSTileImpl.ResourceIcon.get(R.drawable.quick_panel_icon_mobile_hotspot);
@@ -457,10 +456,6 @@ public final class HotspotTile extends SQSTileImpl {
     
         if (r4 == false) goto L150;
      */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x02a1  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0254  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

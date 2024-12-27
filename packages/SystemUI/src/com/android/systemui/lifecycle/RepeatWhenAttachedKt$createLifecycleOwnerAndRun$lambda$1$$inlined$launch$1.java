@@ -19,7 +19,6 @@ public final class RepeatWhenAttachedKt$createLifecycleOwnerAndRun$lambda$1$$inl
     boolean Z$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RepeatWhenAttachedKt$createLifecycleOwnerAndRun$lambda$1$$inlined$launch$1(String str, Continuation continuation, Function3 function3, ViewLifecycleOwner viewLifecycleOwner, View view) {
         super(2, continuation);
         this.$spanName = str;
@@ -40,8 +39,6 @@ public final class RepeatWhenAttachedKt$createLifecycleOwnerAndRun$lambda$1$$inl
         return ((RepeatWhenAttachedKt$createLifecycleOwnerAndRun$lambda$1$$inlined$launch$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0087  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x008c  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

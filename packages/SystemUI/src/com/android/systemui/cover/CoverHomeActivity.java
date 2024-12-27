@@ -28,8 +28,6 @@ public class CoverHomeActivity extends Activity {
         pluginCover.onConfigurationChanged(configuration);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00a4  */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0061  */
     @Override // android.app.Activity
     /*
         Code decompiled incorrectly, please refer to instructions dump.

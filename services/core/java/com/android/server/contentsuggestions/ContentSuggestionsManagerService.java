@@ -92,7 +92,6 @@ public final class ContentSuggestionsManagerService extends AbstractMasterSystem
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,

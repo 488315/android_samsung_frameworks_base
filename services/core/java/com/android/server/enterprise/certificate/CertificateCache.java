@@ -30,7 +30,6 @@ public final class CertificateCache {
         this.mUtils = new CertificateUtil(context);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static void addToUserCache(Map map, String str, int i) {
         ArrayList arrayList;
         if (map.containsKey(str)) {

@@ -8,14 +8,12 @@ public final class SectionResponse extends BroadcastInfoResponse implements Parc
     public static final Parcelable.Creator<SectionResponse> CREATOR =
             new Parcelable.Creator<
                     SectionResponse>() { // from class: android.media.tv.SectionResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SectionResponse createFromParcel(Parcel source) {
                     source.readInt();
                     return SectionResponse.createFromParcelBody(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SectionResponse[] newArray(int size) {
                     return new SectionResponse[size];

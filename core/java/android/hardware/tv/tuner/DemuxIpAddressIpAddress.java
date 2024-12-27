@@ -7,13 +7,11 @@ public final class DemuxIpAddressIpAddress implements Parcelable {
     public static final Parcelable.Creator<DemuxIpAddressIpAddress> CREATOR =
             new Parcelable.Creator<DemuxIpAddressIpAddress>() { // from class:
                 // android.hardware.tv.tuner.DemuxIpAddressIpAddress.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxIpAddressIpAddress createFromParcel(Parcel _aidl_source) {
                     return new DemuxIpAddressIpAddress(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxIpAddressIpAddress[] newArray(int _aidl_size) {
                     return new DemuxIpAddressIpAddress[_aidl_size];

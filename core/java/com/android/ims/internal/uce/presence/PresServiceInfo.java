@@ -8,13 +8,11 @@ public class PresServiceInfo implements Parcelable {
             new Parcelable.Creator<
                     PresServiceInfo>() { // from class:
                                          // com.android.ims.internal.uce.presence.PresServiceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PresServiceInfo createFromParcel(Parcel source) {
                     return new PresServiceInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PresServiceInfo[] newArray(int size) {
                     return new PresServiceInfo[size];

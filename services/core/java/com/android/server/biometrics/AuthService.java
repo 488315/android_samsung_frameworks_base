@@ -620,7 +620,6 @@ public final class AuthService extends SystemService {
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AuthService(Context context) {
         super(context);
         Injector injector = new Injector();

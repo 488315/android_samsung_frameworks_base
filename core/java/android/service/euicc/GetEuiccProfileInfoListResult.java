@@ -14,13 +14,11 @@ public final class GetEuiccProfileInfoListResult implements Parcelable {
             new Parcelable.Creator<
                     GetEuiccProfileInfoListResult>() { // from class:
                                                        // android.service.euicc.GetEuiccProfileInfoListResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetEuiccProfileInfoListResult createFromParcel(Parcel in) {
                     return new GetEuiccProfileInfoListResult(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetEuiccProfileInfoListResult[] newArray(int size) {
                     return new GetEuiccProfileInfoListResult[size];

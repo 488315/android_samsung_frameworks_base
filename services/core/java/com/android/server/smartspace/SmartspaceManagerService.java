@@ -67,7 +67,6 @@ public final class SmartspaceManagerService extends AbstractMasterSystemService 
                             smartspaceSessionId, smartspaceTargetEvent, 2));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,

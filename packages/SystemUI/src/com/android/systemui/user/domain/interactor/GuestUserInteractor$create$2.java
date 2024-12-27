@@ -21,7 +21,6 @@ final class GuestUserInteractor$create$2 extends SuspendLambda implements Functi
     int label;
     final /* synthetic */ GuestUserInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GuestUserInteractor$create$2(Function1 function1, GuestUserInteractor guestUserInteractor, Function0 function0, Continuation continuation) {
         super(2, continuation);
         this.$showDialog = function1;

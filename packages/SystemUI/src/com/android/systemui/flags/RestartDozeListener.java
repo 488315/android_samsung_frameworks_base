@@ -46,7 +46,6 @@ public final class RestartDozeListener {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.flags.RestartDozeListener$listener$1] */
     public RestartDozeListener(SecureSettings secureSettings, StatusBarStateController statusBarStateController, PowerManager powerManager, SystemClock systemClock, DelayableExecutor delayableExecutor) {
         this.settings = secureSettings;
         this.statusBarStateController = statusBarStateController;

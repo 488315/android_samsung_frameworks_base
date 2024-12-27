@@ -36,9 +36,6 @@ public class MessagingLinearLayout extends ViewGroup {
         a.recycle();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x01ce  */
-    /* JADX WARN: Removed duplicated region for block: B:68:? A[RETURN, SYNTHETIC] */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -55,7 +52,6 @@ public class MessagingLinearLayout extends ViewGroup {
                     + " int):void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.view.ViewGroup, android.view.View
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         int childLeft;
@@ -133,7 +129,6 @@ public class MessagingLinearLayout extends ViewGroup {
         Trace.setCounter("MessagingLinearLayout#onMeasure_heightMeasureSpecMode", heightMode);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.view.ViewGroup
     protected boolean drawChild(Canvas canvas, View view, long drawingTime) {
         LayoutParams lp = (LayoutParams) view.getLayoutParams();
@@ -158,13 +153,11 @@ public class MessagingLinearLayout extends ViewGroup {
         return new LayoutParams(this.mContext, attrs);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.ViewGroup
     public LayoutParams generateDefaultLayoutParams() {
         return new LayoutParams(-1, -2);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.ViewGroup
     public LayoutParams generateLayoutParams(ViewGroup.LayoutParams lp) {
         LayoutParams copy = new LayoutParams(lp.width, lp.height);
@@ -187,7 +180,6 @@ public class MessagingLinearLayout extends ViewGroup {
         this.mMaxDisplayedLines = numberLines;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public IMessagingLayout getMessagingLayout() {
         View view = this;
         do {

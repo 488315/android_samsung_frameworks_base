@@ -6,7 +6,6 @@ import android.os.Parcelable;
 public final class EventStats implements Parcelable {
     public static final Parcelable.Creator<EventStats> CREATOR =
             new Parcelable.Creator<EventStats>() { // from class: android.app.usage.EventStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EventStats createFromParcel(Parcel in) {
                     EventStats stats = new EventStats();
@@ -19,7 +18,6 @@ public final class EventStats implements Parcelable {
                     return stats;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EventStats[] newArray(int size) {
                     return new EventStats[size];

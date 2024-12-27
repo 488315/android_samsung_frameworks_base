@@ -26,13 +26,11 @@ public class SemImsUri implements Parcelable {
     public static final Parcelable.Creator<SemImsUri> CREATOR =
             new Parcelable.Creator<
                     SemImsUri>() { // from class: com.samsung.android.ims.util.SemImsUri.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemImsUri createFromParcel(Parcel in) {
                     return new SemImsUri(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemImsUri[] newArray(int size) {
                     return new SemImsUri[size];

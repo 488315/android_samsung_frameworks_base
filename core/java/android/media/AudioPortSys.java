@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public class AudioPortSys implements Parcelable {
     public static final Parcelable.Creator<AudioPortSys> CREATOR =
             new Parcelable.Creator<AudioPortSys>() { // from class: android.media.AudioPortSys.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPortSys createFromParcel(Parcel _aidl_source) {
                     AudioPortSys _aidl_out = new AudioPortSys();
@@ -15,7 +14,6 @@ public class AudioPortSys implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPortSys[] newArray(int _aidl_size) {
                     return new AudioPortSys[_aidl_size];

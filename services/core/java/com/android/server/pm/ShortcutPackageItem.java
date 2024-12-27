@@ -54,7 +54,6 @@ public abstract class ShortcutPackageItem {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.pm.ShortcutPackageItem$$ExternalSyntheticLambda0] */
     public ShortcutPackageItem(
             ShortcutUser shortcutUser, int i, String str, ShortcutPackageInfo shortcutPackageInfo) {
         this.mShortcutUser = shortcutUser;

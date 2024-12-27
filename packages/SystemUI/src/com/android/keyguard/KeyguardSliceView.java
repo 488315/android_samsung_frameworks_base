@@ -232,7 +232,6 @@ public class KeyguardSliceView extends LinearLayout {
         updateTextColors();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final Map showSlice(RowContent rowContent, List list) {
         Drawable drawable;
         Trace.beginSection("KeyguardSliceView#showSlice");

@@ -32,28 +32,24 @@ public class SystemProperties {
     @FastNative
     private static native long native_find(String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native String native_get(long j);
 
     @FastNative
     private static native String native_get(String str, String str2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native boolean native_get_boolean(long j, boolean z);
 
     @FastNative
     private static native boolean native_get_boolean(String str, boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native int native_get_int(long j, int i);
 
     @FastNative
     private static native int native_get_int(String str, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
     public static native long native_get_long(long j, long j2);
 
@@ -157,7 +153,6 @@ public class SystemProperties {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void callChangeCallbacks() {
         synchronized (sChangeCallbacks) {
             if (sChangeCallbacks.size() == 0) {

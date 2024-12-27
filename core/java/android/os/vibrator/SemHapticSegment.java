@@ -10,14 +10,12 @@ public final class SemHapticSegment extends VibrationEffectSegment {
     public static final Parcelable.Creator<SemHapticSegment> CREATOR =
             new Parcelable.Creator<
                     SemHapticSegment>() { // from class: android.os.vibrator.SemHapticSegment.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemHapticSegment createFromParcel(Parcel in) {
                     in.readInt();
                     return new SemHapticSegment(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemHapticSegment[] newArray(int size) {
                     return new SemHapticSegment[size];

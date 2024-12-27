@@ -37,7 +37,6 @@ final class Utf8 {
         return processor.partialIsValidUtf8(state, bytes, index, limit);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int incompleteStateFor(int byte1) {
         if (byte1 > -12) {
             return -1;
@@ -45,7 +44,6 @@ final class Utf8 {
         return byte1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int incompleteStateFor(int byte1, int byte2) {
         if (byte1 > -12 || byte2 > -65) {
             return -1;
@@ -53,7 +51,6 @@ final class Utf8 {
         return (byte2 << 8) ^ byte1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int incompleteStateFor(int byte1, int byte2, int byte3) {
         if (byte1 > -12 || byte2 > -65 || byte3 > -65) {
             return -1;
@@ -61,7 +58,6 @@ final class Utf8 {
         return ((byte2 << 8) ^ byte1) ^ (byte3 << 16);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int incompleteStateFor(byte[] bytes, int index, int limit) {
         int byte1 = bytes[index - 1];
         switch (limit - index) {
@@ -76,7 +72,6 @@ final class Utf8 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int incompleteStateFor(ByteBuffer buffer, int byte1, int index, int remaining) {
         switch (remaining) {
             case 0:
@@ -173,7 +168,6 @@ final class Utf8 {
         processor.encodeUtf8(in, out);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int estimateConsecutiveAscii(ByteBuffer buffer, int index, int limit) {
         int i = index;
         int lim = limit - 7;
@@ -1565,27 +1559,22 @@ final class Utf8 {
     private static class DecodeUtil {
         private DecodeUtil() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static boolean isOneByte(byte b) {
             return b >= 0;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static boolean isTwoBytes(byte b) {
             return b < -32;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static boolean isThreeBytes(byte b) {
             return b < -16;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void handleOneByte(byte byte1, char[] resultArr, int resultPos) {
             resultArr[resultPos] = (char) byte1;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void handleTwoBytes(byte byte1, byte byte2, char[] resultArr, int resultPos)
                 throws InvalidProtocolBufferException {
             if (byte1 < -62 || isNotTrailingByte(byte2)) {
@@ -1597,7 +1586,6 @@ final class Utf8 {
                                     | trailingByteValue(byte2));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void handleThreeBytes(
                 byte byte1, byte byte2, byte byte3, char[] resultArr, int resultPos)
                 throws InvalidProtocolBufferException {
@@ -1613,7 +1601,6 @@ final class Utf8 {
                                     | trailingByteValue(byte3));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void handleFourBytes(
                 byte byte1, byte byte2, byte byte3, byte byte4, char[] resultArr, int resultPos)
                 throws InvalidProtocolBufferException {

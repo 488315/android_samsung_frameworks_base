@@ -50,13 +50,11 @@ public final class PreferentialNetworkServiceConfig implements Parcelable {
     public static final Parcelable.Creator<PreferentialNetworkServiceConfig> CREATOR =
             new Parcelable.Creator<PreferentialNetworkServiceConfig>() { // from class:
                 // android.app.admin.PreferentialNetworkServiceConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PreferentialNetworkServiceConfig[] newArray(int size) {
                     return new PreferentialNetworkServiceConfig[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PreferentialNetworkServiceConfig createFromParcel(Parcel in) {
                     return new PreferentialNetworkServiceConfig(in);

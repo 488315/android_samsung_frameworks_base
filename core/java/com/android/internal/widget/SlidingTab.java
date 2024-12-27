@@ -696,7 +696,6 @@ public class SlidingTab extends ViewGroup {
         slider.startAnimation(trans1, trans2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onAnimationDone() {
         resetView();
         this.mAnimating = false;
@@ -711,7 +710,6 @@ public class SlidingTab extends ViewGroup {
         return this.mOrientation == 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void resetView() {
         this.mLeftSlider.reset(false);
         this.mRightSlider.reset(false);

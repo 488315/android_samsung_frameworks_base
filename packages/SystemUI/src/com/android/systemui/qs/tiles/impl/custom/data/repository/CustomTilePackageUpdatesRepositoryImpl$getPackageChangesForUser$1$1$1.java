@@ -14,7 +14,6 @@ final class CustomTilePackageUpdatesRepositoryImpl$getPackageChangesForUser$1$1$
     int label;
     final /* synthetic */ CustomTilePackageUpdatesRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTilePackageUpdatesRepositoryImpl$getPackageChangesForUser$1$1$1(CustomTilePackageUpdatesRepositoryImpl customTilePackageUpdatesRepositoryImpl, UserHandle userHandle, Continuation continuation) {
         super(3, continuation);
         this.this$0 = customTilePackageUpdatesRepositoryImpl;

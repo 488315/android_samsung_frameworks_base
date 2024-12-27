@@ -32,7 +32,6 @@ final class PromptViewModel$showTemporaryError$3 extends SuspendLambda implement
         int label;
         final /* synthetic */ PromptViewModel this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(boolean z, PromptViewModel promptViewModel, String str, Continuation continuation) {
             super(2, continuation);
             this.$authenticateAfterError = z;
@@ -84,7 +83,6 @@ final class PromptViewModel$showTemporaryError$3 extends SuspendLambda implement
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptViewModel$showTemporaryError$3(PromptViewModel promptViewModel, boolean z, BiometricModality biometricModality, Function2 function2, String str, boolean z2, String str2, Continuation continuation) {
         super(2, continuation);
         this.this$0 = promptViewModel;

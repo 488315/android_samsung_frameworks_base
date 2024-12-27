@@ -49,7 +49,6 @@ public final class FrozenPackageInterceptor {
     public final PackageManagerInternal mPMInternal =
             (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.pm.FrozenPackageInterceptor$1] */
     public FrozenPackageInterceptor(Context context) {
         this.mContext = context;
     }

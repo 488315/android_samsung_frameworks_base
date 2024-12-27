@@ -15,13 +15,11 @@ public final class Announcement implements Parcelable {
     public static final Parcelable.Creator<Announcement> CREATOR =
             new Parcelable.Creator<
                     Announcement>() { // from class: android.hardware.radio.Announcement.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Announcement createFromParcel(Parcel in) {
                     return new Announcement(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Announcement[] newArray(int size) {
                     return new Announcement[size];

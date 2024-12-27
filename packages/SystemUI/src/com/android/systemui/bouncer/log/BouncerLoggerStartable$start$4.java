@@ -20,7 +20,6 @@ final class BouncerLoggerStartable$start$4 extends SuspendLambda implements Func
         int label;
         final /* synthetic */ BouncerLoggerStartable this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(BouncerLoggerStartable bouncerLoggerStartable, Continuation continuation) {
             super(2, continuation);
             this.this$0 = bouncerLoggerStartable;
@@ -52,7 +51,6 @@ final class BouncerLoggerStartable$start$4 extends SuspendLambda implements Func
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BouncerLoggerStartable$start$4(BouncerLoggerStartable bouncerLoggerStartable, Continuation continuation) {
         super(2, continuation);
         this.this$0 = bouncerLoggerStartable;

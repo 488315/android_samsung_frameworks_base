@@ -135,7 +135,6 @@ public final class DeviceAudioPathViewModel extends ViewModel implements AudioPa
         this.mediaSdkManager.mediaSdkOperationManager.mediaOutputSelectedOperationImpl.selectMediaOutput(str, ((TvConnectedDevice) audioDevice).id);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
     java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null
     	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.restoreSwitchOverString(SwitchOverStringVisitor.java:109)
@@ -143,8 +142,6 @@ public final class DeviceAudioPathViewModel extends ViewModel implements AudioPa
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
      */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0119  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x011e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -12,13 +12,11 @@ public final class SnapshotData implements Parcelable {
     public static final Parcelable.Creator<SnapshotData> CREATOR =
             new Parcelable.Creator<
                     SnapshotData>() { // from class: android.service.contentcapture.SnapshotData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SnapshotData createFromParcel(Parcel parcel) {
                     return new SnapshotData(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SnapshotData[] newArray(int size) {
                     return new SnapshotData[size];

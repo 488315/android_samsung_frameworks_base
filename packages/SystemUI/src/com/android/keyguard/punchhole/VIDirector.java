@@ -74,7 +74,6 @@ public final class VIDirector {
         return Math.min(bounds.width(), bounds.height());
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final Rect getVIViewLocation(Rect rect, boolean z) {
         char c;
         Rect rect2;

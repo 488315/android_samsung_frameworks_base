@@ -9,13 +9,11 @@ public final class LongPolicyValue extends PolicyValue<Long> {
     public static final Parcelable.Creator<LongPolicyValue> CREATOR =
             new Parcelable.Creator<
                     LongPolicyValue>() { // from class: android.app.admin.LongPolicyValue.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LongPolicyValue createFromParcel(Parcel source) {
                     return new LongPolicyValue(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LongPolicyValue[] newArray(int size) {
                     return new LongPolicyValue[size];

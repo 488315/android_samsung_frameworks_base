@@ -21,7 +21,6 @@ public final class NavBarReflectUtil {
     private NavBarReflectUtil() {
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:19:0x006a, code lost:
     
         if (r0.equals("string") == false) goto L26;

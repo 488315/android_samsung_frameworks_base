@@ -43,7 +43,6 @@ public final class DefaultDeviceEffectsApplier implements DeviceEffectsApplier {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.notification.DefaultDeviceEffectsApplier$1] */
     public DefaultDeviceEffectsApplier(Context context) {
         this.mContext = context;
         this.mColorDisplayManager =

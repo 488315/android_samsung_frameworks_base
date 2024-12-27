@@ -183,8 +183,6 @@ public abstract class ManagedServices {
             ManagedServices.this.mContext.unbindService(this);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:13:0x0077  */
-        /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
         @Override // android.content.ServiceConnection
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1860,8 +1858,6 @@ public abstract class ManagedServices {
         return arrayMap2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0073 A[Catch: all -> 0x008e, TryCatch #0 {all -> 0x008e, blocks: (B:19:0x0049, B:21:0x0054, B:25:0x0073, B:26:0x0093, B:29:0x0077, B:30:0x0060, B:33:0x0067, B:34:0x0090), top: B:17:0x0047 }] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0077 A[Catch: all -> 0x008e, TryCatch #0 {all -> 0x008e, blocks: (B:19:0x0049, B:21:0x0054, B:25:0x0073, B:26:0x0093, B:29:0x0077, B:30:0x0060, B:33:0x0067, B:34:0x0090), top: B:17:0x0047 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

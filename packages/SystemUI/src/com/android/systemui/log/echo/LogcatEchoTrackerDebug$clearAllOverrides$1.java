@@ -15,7 +15,6 @@ final class LogcatEchoTrackerDebug$clearAllOverrides$1 extends SuspendLambda imp
     int label;
     final /* synthetic */ LogcatEchoTrackerDebug this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LogcatEchoTrackerDebug$clearAllOverrides$1(LogcatEchoTrackerDebug logcatEchoTrackerDebug, Continuation continuation) {
         super(2, continuation);
         this.this$0 = logcatEchoTrackerDebug;

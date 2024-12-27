@@ -28,7 +28,6 @@ public final class BroadcastRadioService {
     public final Map mServiceNameToModuleIdMap = new ArrayMap();
     public final Map mModules = new ArrayMap();
 
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.server.broadcastradio.hal2.BroadcastRadioService$2] */
     public BroadcastRadioService(int i) {
         IServiceNotification.Stub stub =
                 new IServiceNotification
@@ -154,7 +153,6 @@ public final class BroadcastRadioService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.broadcastradio.hal2.BroadcastRadioService$2] */
     public BroadcastRadioService(int i, IServiceManager iServiceManager) {
         IServiceNotification.Stub stub =
                 new IServiceNotification

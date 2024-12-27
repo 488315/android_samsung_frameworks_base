@@ -284,14 +284,11 @@ public abstract class WindowContainer extends ConfigurationContainer implements 
         windowContainer.scheduleAnimation();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static WindowContainer fromBinder(IBinder iBinder) {
         int i = RemoteToken.$r8$clinit;
         return (WindowContainer) ((RemoteToken) iBinder).mWeakRef.get();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.wm.ConfigurationContainerListener, com.android.server.wm.WindowContainer$1] */
     public static WindowContainerListener overrideConfigurationPropagation(WindowContainer windowContainer, final WindowContainer windowContainer2, final ConfigurationMerger configurationMerger) {
         final ?? r0 = new ConfigurationContainerListener(windowContainer) { // from class: com.android.server.wm.WindowContainer.1
             public final /* synthetic */ WindowContainer val$receiver;
@@ -538,8 +535,6 @@ public abstract class WindowContainer extends ConfigurationContainer implements 
     
         if (r14 != 30) goto L61;
      */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0094  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0099  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1058,10 +1053,6 @@ public abstract class WindowContainer extends ConfigurationContainer implements 
         return forAllActivities(predicate, windowContainer, z, z2, new boolean[1]);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x003d A[LOOP:0: B:4:0x0012->B:11:0x003d, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x003c A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0072 A[LOOP:1: B:22:0x0047->B:29:0x0072, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0071 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1380,10 +1371,6 @@ public abstract class WindowContainer extends ConfigurationContainer implements 
         return getActivity(predicate, windowContainer, z, z2, new boolean[1]);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0042 A[LOOP:0: B:4:0x0014->B:12:0x0042, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0041 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x007a A[LOOP:1: B:23:0x004c->B:31:0x007a, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0079 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1585,15 +1572,6 @@ public abstract class WindowContainer extends ConfigurationContainer implements 
     
         if (r9 != false) goto L288;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:141:0x08db  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0107  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x010b  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00ec  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00f9  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00fb  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00f3  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x0832  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2024,10 +2002,6 @@ public abstract class WindowContainer extends ConfigurationContainer implements 
         return getTask(predicate, windowContainer, z, z2, new boolean[1]);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0042 A[LOOP:0: B:4:0x0014->B:12:0x0042, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0041 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x007a A[LOOP:1: B:23:0x004c->B:31:0x007a, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0079 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

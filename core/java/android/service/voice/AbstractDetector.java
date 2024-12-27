@@ -134,7 +134,6 @@ abstract class AbstractDetector implements HotwordDetector {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class BinderCallback extends IMicrophoneHotwordDetectionVoiceInteractionCallback.Stub {
         private final HotwordDetector.Callback mCallback;
         private final Executor mExecutor;
@@ -144,7 +143,6 @@ abstract class AbstractDetector implements HotwordDetector {
             this.mExecutor = executor;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDetected$1(
                 final AudioFormat audioFormat, final HotwordDetectedResult hotwordDetectedResult)
                 throws Exception {
@@ -176,7 +174,6 @@ abstract class AbstractDetector implements HotwordDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDetected$0(
                 AudioFormat audioFormat, HotwordDetectedResult hotwordDetectedResult) {
             this.mCallback.onDetected(
@@ -206,7 +203,6 @@ abstract class AbstractDetector implements HotwordDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onHotwordDetectionServiceFailure$3(
                 final HotwordDetectionServiceFailure hotwordDetectionServiceFailure)
                 throws Exception {
@@ -222,7 +218,6 @@ abstract class AbstractDetector implements HotwordDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onHotwordDetectionServiceFailure$2(
                 HotwordDetectionServiceFailure hotwordDetectionServiceFailure) {
             if (hotwordDetectionServiceFailure != null) {
@@ -232,7 +227,6 @@ abstract class AbstractDetector implements HotwordDetector {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRejected$5(final HotwordRejectedResult result)
                 throws Exception {
             this.mExecutor.execute(
@@ -258,7 +252,6 @@ abstract class AbstractDetector implements HotwordDetector {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRejected$4(HotwordRejectedResult result) {
             this.mCallback.onRejected(
                     result != null ? result : new HotwordRejectedResult.Builder().build());

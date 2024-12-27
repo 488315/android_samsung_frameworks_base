@@ -9,13 +9,11 @@ public class SContextPutDownMotion extends SContextEventContext {
     public static final Parcelable.Creator<SContextPutDownMotion> CREATOR =
             new Parcelable.Creator<SContextPutDownMotion>() { // from class:
                 // android.hardware.scontext.SContextPutDownMotion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextPutDownMotion createFromParcel(Parcel in) {
                     return new SContextPutDownMotion(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextPutDownMotion[] newArray(int size) {
                     return new SContextPutDownMotion[size];

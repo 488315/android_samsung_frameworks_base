@@ -212,12 +212,10 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
     private AllShareResponseHandler mAllShareRespHandler =
             new AllShareResponseHandler(ServiceConnector.getMainLooper()) { // from class:
                 // com.samsung.android.allshare.AVPlayerImpl.2
-                /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                 /* JADX WARN: Code restructure failed: missing block: B:99:0x01f9, code lost:
 
                    if (r1.equals(com.sec.android.allshare.iface.message.AllShareAction.ACTION_AV_PLAYER_SET_ASPECT_RATIO) != false) goto L131;
                 */
-                /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
                 @Override // com.samsung.android.allshare.AllShareResponseHandler
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -318,7 +316,6 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
                 bundle.getBoolean(AllShareKey.BUNDLE_BOOLEAN_SUPPORT_GET_CAPTION_STATE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.android.allshare.media.AVPlayer
     public void play(Item item, ContentInfo contentInfo) {
         if (this.mAllShareConnector == null
@@ -470,7 +467,6 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
         return null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.android.allshare.media.AVPlayer
     public void prepare(Item item) {
         if (this.mAllShareConnector == null
@@ -847,7 +843,6 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
         return this.mDeviceImpl.getBundle();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private Bundle extractBundle(Item item) {
         Bundle bundle = new Bundle();
         if (item instanceof IBundleHolder) {

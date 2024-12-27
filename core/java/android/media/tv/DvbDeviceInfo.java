@@ -10,7 +10,6 @@ public final class DvbDeviceInfo implements Parcelable {
     public static final Parcelable.Creator<DvbDeviceInfo> CREATOR =
             new Parcelable.Creator<
                     DvbDeviceInfo>() { // from class: android.media.tv.DvbDeviceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DvbDeviceInfo createFromParcel(Parcel source) {
                     try {
@@ -21,7 +20,6 @@ public final class DvbDeviceInfo implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DvbDeviceInfo[] newArray(int size) {
                     return new DvbDeviceInfo[size];

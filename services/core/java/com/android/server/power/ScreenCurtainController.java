@@ -330,9 +330,6 @@ public final class ScreenCurtainController implements Observer {
                 int i) {}
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.power.ScreenCurtainController$1] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.power.ScreenCurtainController$2] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.power.ScreenCurtainController$3] */
     public ScreenCurtainController(
             Context context,
             Object obj,

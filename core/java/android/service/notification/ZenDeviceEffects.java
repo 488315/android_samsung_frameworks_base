@@ -18,7 +18,6 @@ public final class ZenDeviceEffects implements Parcelable {
             new Parcelable.Creator<
                     ZenDeviceEffects>() { // from class:
                                           // android.service.notification.ZenDeviceEffects.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ZenDeviceEffects createFromParcel(Parcel in) {
                     return new ZenDeviceEffects(
@@ -35,7 +34,6 @@ public final class ZenDeviceEffects implements Parcelable {
                             Set.of(in.readArray(String.class.getClassLoader(), String.class)));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ZenDeviceEffects[] newArray(int size) {
                     return new ZenDeviceEffects[size];

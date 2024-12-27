@@ -17,7 +17,6 @@ final class EditWidgetsActivity$listenForTransitionAndChangeScene$1 extends Susp
     int label;
     final /* synthetic */ EditWidgetsActivity this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public EditWidgetsActivity$listenForTransitionAndChangeScene$1(EditWidgetsActivity editWidgetsActivity, Continuation continuation) {
         super(2, continuation);
         this.this$0 = editWidgetsActivity;
@@ -95,8 +94,6 @@ final class EditWidgetsActivity$listenForTransitionAndChangeScene$1 extends Susp
             this.this$0 = editWidgetsActivity;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:15:0x0033  */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

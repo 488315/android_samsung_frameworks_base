@@ -13,7 +13,6 @@ final class LiftToRunFaceAuthBinder$listenForPickupSensor$1 extends SuspendLambd
     int label;
     final /* synthetic */ LiftToRunFaceAuthBinder this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LiftToRunFaceAuthBinder$listenForPickupSensor$1(LiftToRunFaceAuthBinder liftToRunFaceAuthBinder, Continuation continuation) {
         super(4, continuation);
         this.this$0 = liftToRunFaceAuthBinder;

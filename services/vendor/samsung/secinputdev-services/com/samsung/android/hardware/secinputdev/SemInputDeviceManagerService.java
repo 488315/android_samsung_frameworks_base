@@ -436,7 +436,6 @@ public class SemInputDeviceManagerService extends ISemInputDeviceManager.Stub
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int registerCallbackWithRetries(int retry) {
         for (int ii = 1; ii <= retry; ii++) {
             if (SysinputHALFactory.registerCallback() >= 0) {
@@ -547,7 +546,6 @@ public class SemInputDeviceManagerService extends ISemInputDeviceManager.Stub
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void registerRawdataService() {
         if (!SemInputFeatures.SUPPORT_RAWDATA_FEATURE) {
             return;
@@ -563,7 +561,6 @@ public class SemInputDeviceManagerService extends ISemInputDeviceManager.Stub
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void registerSettingObserver() {
         Log.d(TAG, "registerSettingObserver");
         if (this.settingObserver == null) {
@@ -771,7 +768,6 @@ public class SemInputDeviceManagerService extends ISemInputDeviceManager.Stub
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void registerExternalService() {
         for (Map.Entry<SemInputExternal.Event, String> element :
                 this.externalEventHandler.getSupportList().entrySet()) {
@@ -795,7 +791,6 @@ public class SemInputDeviceManagerService extends ISemInputDeviceManager.Stub
         this.bootingDump.append(this.externalEventHandler.getLog());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setDisplayStateToDevice(
             boolean isEarly, int stateLogical, int statePhysical, int displayType) {
         int stateForDevice;

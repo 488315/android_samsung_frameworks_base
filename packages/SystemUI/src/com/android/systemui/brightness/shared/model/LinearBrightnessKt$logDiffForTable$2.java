@@ -17,7 +17,6 @@ final class LinearBrightnessKt$logDiffForTable$2 extends SuspendLambda implement
     /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LinearBrightnessKt$logDiffForTable$2(TableLogBuffer tableLogBuffer, String str, String str2, Continuation continuation) {
         super(3, continuation);
         this.$tableLogBuffer = tableLogBuffer;

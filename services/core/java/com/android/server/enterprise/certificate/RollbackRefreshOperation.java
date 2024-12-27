@@ -398,9 +398,6 @@ public final class RollbackRefreshOperation {
         this.mContext = context;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x004a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0049 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -522,22 +519,6 @@ public final class RollbackRefreshOperation {
                     new FunctionalUtils
                             .ThrowingRunnable() { // from class:
                                                   // com.android.server.enterprise.certificate.RollbackRefreshOperation$$ExternalSyntheticLambda3
-                        /* JADX WARN: Multi-variable type inference failed */
-                        /* JADX WARN: Type inference failed for: r18v0, types: [com.android.server.enterprise.certificate.RollbackRefreshOperation$$ExternalSyntheticLambda3] */
-                        /* JADX WARN: Type inference failed for: r18v1 */
-                        /* JADX WARN: Type inference failed for: r18v16 */
-                        /* JADX WARN: Type inference failed for: r18v2 */
-                        /* JADX WARN: Type inference failed for: r18v26 */
-                        /* JADX WARN: Type inference failed for: r18v27 */
-                        /* JADX WARN: Type inference failed for: r18v28 */
-                        /* JADX WARN: Type inference failed for: r18v29 */
-                        /* JADX WARN: Type inference failed for: r18v3 */
-                        /* JADX WARN: Type inference failed for: r18v4 */
-                        /* JADX WARN: Type inference failed for: r18v5 */
-                        /* JADX WARN: Type inference failed for: r18v6 */
-                        /* JADX WARN: Type inference failed for: r18v7 */
-                        /* JADX WARN: Type inference failed for: r18v8 */
-                        /* JADX WARN: Type inference failed for: r18v9 */
                         public final void runOrThrow() {
                             String str;
                             Object obj;
@@ -762,12 +743,6 @@ public final class RollbackRefreshOperation {
                     new FunctionalUtils
                             .ThrowingRunnable() { // from class:
                                                   // com.android.server.enterprise.certificate.RollbackRefreshOperation$$ExternalSyntheticLambda4
-                        /* JADX WARN: Multi-variable type inference failed */
-                        /* JADX WARN: Type inference failed for: r20v0, types: [com.android.server.enterprise.certificate.RollbackRefreshOperation$$ExternalSyntheticLambda4] */
-                        /* JADX WARN: Type inference failed for: r20v1 */
-                        /* JADX WARN: Type inference failed for: r20v2 */
-                        /* JADX WARN: Type inference failed for: r20v3 */
-                        /* JADX WARN: Type inference failed for: r20v4 */
                         public final void runOrThrow() {
                             String str;
                             String str2;

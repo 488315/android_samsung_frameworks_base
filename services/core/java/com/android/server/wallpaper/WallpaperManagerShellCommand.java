@@ -11,7 +11,6 @@ public final class WallpaperManagerShellCommand extends ShellCommand {
         this.mService = wallpaperManagerService;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x0039, code lost:
 
        if (r5.equals("dim-with-uid") == false) goto L8;

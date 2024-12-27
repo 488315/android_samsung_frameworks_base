@@ -119,7 +119,6 @@ public final class DragState {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ DragState this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ AnonymousClass1(DragState dragState, int i) {
             super(dragState, 3);
             this.$r8$classId = i;
@@ -1305,7 +1304,6 @@ public final class DragState {
                 createCenteredScaleAnimator(adjustScale, adjustScale2, width, 300L);
         AnimationListener animationListener =
                 new AnimationListener() { // from class: com.android.server.wm.DragState.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(DragState.this, 3);
                     }

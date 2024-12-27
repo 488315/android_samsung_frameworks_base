@@ -139,7 +139,6 @@ public class CbGeoUtils {
             return windingNumber != 0;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         /* renamed from: convertAndScaleLatLng, reason: merged with bridge method [inline-methods] */
         public Point lambda$new$0(LatLng latLng) {
             double x = latLng.lat - this.mOrigin.lat;
@@ -243,7 +242,6 @@ public class CbGeoUtils {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static List<Geometry> parseGeometriesFromString(String str) {
         char c;
         List<Geometry> geometries = new ArrayList<>();
@@ -325,7 +323,6 @@ public class CbGeoUtils {
         return !TextUtils.isEmpty(encodedStr);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String encodeGeometryToString(Geometry geometry) {
         StringBuilder sb = new StringBuilder();
         if (geometry instanceof Polygon) {

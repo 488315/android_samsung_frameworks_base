@@ -12,46 +12,26 @@ public interface NotificationRecordLogger {
 
     public enum NotificationCancelledEvent implements UiEventLogger.UiEventEnum {
         INVALID("INVALID"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF1("NOTIFICATION_CANCEL_CLICK"),
         NOTIFICATION_CANCEL_USER_OTHER("NOTIFICATION_CANCEL_USER_OTHER"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF3("NOTIFICATION_CANCEL_USER_CANCEL_ALL"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF4("NOTIFICATION_CANCEL_ERROR"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF5("NOTIFICATION_CANCEL_PACKAGE_CHANGED"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF6("NOTIFICATION_CANCEL_USER_STOPPED"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF7("NOTIFICATION_CANCEL_PACKAGE_BANNED"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF8("NOTIFICATION_CANCEL_APP_CANCEL"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF9("NOTIFICATION_CANCEL_APP_CANCEL_ALL"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF10("NOTIFICATION_CANCEL_LISTENER_CANCEL"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF11("NOTIFICATION_CANCEL_LISTENER_CANCEL_ALL"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF12("NOTIFICATION_CANCEL_GROUP_SUMMARY_CANCELED"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF13("NOTIFICATION_CANCEL_GROUP_OPTIMIZATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF14("NOTIFICATION_CANCEL_PACKAGE_SUSPENDED"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF15("NOTIFICATION_CANCEL_PROFILE_TURNED_OFF"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF14("NOTIFICATION_CANCEL_UNAUTOBUNDLED"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF15("NOTIFICATION_CANCEL_CHANNEL_BANNED"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF14("NOTIFICATION_CANCEL_SNOOZED"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF15("NOTIFICATION_CANCEL_TIMEOUT"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF14("NOTIFICATION_CANCEL_CHANNEL_REMOVED"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF15("NOTIFICATION_CANCEL_CLEAR_DATA"),
         NOTIFICATION_CANCEL_USER_PEEK("NOTIFICATION_CANCEL_USER_PEEK"),
         NOTIFICATION_CANCEL_USER_AOD("NOTIFICATION_CANCEL_USER_AOD"),
@@ -85,23 +65,14 @@ public interface NotificationRecordLogger {
         NOTIFICATION_DIRECT_REPLIED("NOTIFICATION_DIRECT_REPLIED"),
         NOTIFICATION_SMART_REPLIED("NOTIFICATION_SMART_REPLIED"),
         NOTIFICATION_SMART_REPLY_VISIBLE("NOTIFICATION_SMART_REPLY_VISIBLE"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF171("NOTIFICATION_ACTION_CLICKED_0"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF184("NOTIFICATION_ACTION_CLICKED_1"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF197("NOTIFICATION_ACTION_CLICKED_2"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF210("NOTIFICATION_CONTEXTUAL_ACTION_CLICKED_0"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF223("NOTIFICATION_CONTEXTUAL_ACTION_CLICKED_1"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF236("NOTIFICATION_CONTEXTUAL_ACTION_CLICKED_2"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF249("NOTIFICATION_ASSIST_ACTION_CLICKED_0"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF262("NOTIFICATION_ASSIST_ACTION_CLICKED_1"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF275("NOTIFICATION_ASSIST_ACTION_CLICKED_2");
 
         private final int mId;
@@ -170,7 +141,6 @@ public interface NotificationRecordLogger {
         public final long timeout_millis;
         public final int uid;
 
-        /* JADX WARN: Removed duplicated region for block: B:52:0x017f  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -1793,7 +1793,6 @@ public abstract class CodedOutputStream extends ByteOutput {
             this.totalBytesWritten++;
         }
 
-        /* JADX WARN: Incorrect condition in loop: B:12:0x0047 */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

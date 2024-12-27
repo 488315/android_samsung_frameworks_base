@@ -357,7 +357,6 @@ public final class McfDeviceSyncManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.samsung.android.server.continuity.McfDeviceSyncManager$1] */
     public McfDeviceSyncManager(
             PreconditionObserver preconditionObserver, DeviceSyncManager deviceSyncManager) {
         this.mPreconditionObserver = preconditionObserver;
@@ -368,10 +367,6 @@ public final class McfDeviceSyncManager {
         return this.mHandler;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x006c  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00db A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x003a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

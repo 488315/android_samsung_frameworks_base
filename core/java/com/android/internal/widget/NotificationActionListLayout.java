@@ -71,7 +71,6 @@ public class NotificationActionListLayout extends LinearLayout {
         ta.recycle();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isPriority(View actionView) {
         return (actionView instanceof EmphasizedNotificationButton)
                 && ((EmphasizedNotificationButton) actionView).isPriority();
@@ -471,7 +470,6 @@ public class NotificationActionListLayout extends LinearLayout {
         return Integer.compare(a.mTextLength, b.mTextLength);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class TextViewInfo {
         final boolean mIsPriority;
         final int mTextLength;

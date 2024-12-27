@@ -146,7 +146,6 @@ class GnssVisibilityControl {
         public boolean mIsLocationIconOn;
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda3] */
     public GnssVisibilityControl(
             Context context, Looper looper, GpsNetInitiatedHandler gpsNetInitiatedHandler) {
         this.mContext = context;

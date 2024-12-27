@@ -160,13 +160,11 @@ public interface TextClassifier {
                 new Parcelable.Creator<
                         EntityConfig>() { // from class:
                                           // android.view.textclassifier.TextClassifier.EntityConfig.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public EntityConfig createFromParcel(Parcel in) {
                         return new EntityConfig(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public EntityConfig[] newArray(int size) {
                         return new EntityConfig[size];
@@ -282,9 +280,6 @@ public interface TextClassifier {
                 return this;
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r0v10, types: [java.util.List] */
-            /* JADX WARN: Type inference failed for: r0v9, types: [java.util.List] */
             public EntityConfig build() {
                 ArrayList arrayList;
                 ArrayList arrayList2;
@@ -392,7 +387,6 @@ public interface TextClassifier {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         private static int linkMask(String entityType) {
             char c;
             switch (entityType.hashCode()) {

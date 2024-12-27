@@ -241,8 +241,6 @@ public final class DeviceIdlenessTracker extends BroadcastReceiver implements Id
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0092  */
     @Override // android.content.BroadcastReceiver
     /*
         Code decompiled incorrectly, please refer to instructions dump.

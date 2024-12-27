@@ -636,7 +636,6 @@ public abstract class TvInteractiveAppService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$requestSelectedTrackInfo$0() {
             try {
                 if (this.mSessionCallback != null) {
@@ -659,7 +658,6 @@ public abstract class TvInteractiveAppService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$requestStartRecording$1(
                 String requestId, Uri programUri) {
             try {
@@ -683,7 +681,6 @@ public abstract class TvInteractiveAppService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$requestStopRecording$2(String recordingId) {
             try {
                 if (this.mSessionCallback != null) {
@@ -711,7 +708,6 @@ public abstract class TvInteractiveAppService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$requestScheduleRecording$3(
                 String requestId, String inputId, Uri channelUri, Uri programUri, Bundle params) {
             try {
@@ -749,7 +745,6 @@ public abstract class TvInteractiveAppService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$requestScheduleRecording$4(
                 String requestId,
                 String inputId,
@@ -787,7 +782,6 @@ public abstract class TvInteractiveAppService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setTvRecordingInfo$5(
                 String recordingId, TvRecordingInfo recordingInfo) {
             try {
@@ -811,7 +805,6 @@ public abstract class TvInteractiveAppService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$requestTvRecordingInfo$6(String recordingId) {
             try {
                 if (this.mSessionCallback != null) {
@@ -834,7 +827,6 @@ public abstract class TvInteractiveAppService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$requestTvRecordingInfoList$7(int type) {
             try {
                 if (this.mSessionCallback != null) {
@@ -1239,7 +1231,6 @@ public abstract class TvInteractiveAppService extends Service {
             return 0;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void initialize(ITvInteractiveAppSessionCallback callback) {
             synchronized (this.mLock) {
                 this.mSessionCallback = callback;
@@ -1354,7 +1345,6 @@ public abstract class TvInteractiveAppService extends Service {
     private static final class MediaViewCleanUpTask extends AsyncTask<View, Void, Void> {
         private MediaViewCleanUpTask() {}
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public Void doInBackground(View... views) {
             View mediaViewParent = views[0];

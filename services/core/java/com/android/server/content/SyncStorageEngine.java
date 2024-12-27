@@ -299,12 +299,6 @@ public final class SyncStorageEngine {
 
        android.util.Slog.w("SyncManager", "Unknown stats token: " + r4);
     */
-    /* JADX WARN: Removed duplicated region for block: B:180:0x02c9 A[Catch: all -> 0x02cd, TRY_ENTER, TryCatch #16 {all -> 0x02cd, blocks: (B:180:0x02c9, B:184:0x02d0, B:187:0x02e4), top: B:5:0x00e9 }] */
-    /* JADX WARN: Removed duplicated region for block: B:184:0x02d0 A[Catch: all -> 0x02cd, TRY_LEAVE, TryCatch #16 {all -> 0x02cd, blocks: (B:180:0x02c9, B:184:0x02d0, B:187:0x02e4), top: B:5:0x00e9 }] */
-    /* JADX WARN: Removed duplicated region for block: B:195:0x0448 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x03d4  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x043c A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x03a7 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1020,7 +1014,6 @@ public final class SyncStorageEngine {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final void readStatusInfoLocked(InputStream inputStream) {
         ProtoInputStream protoInputStream = new ProtoInputStream(inputStream);
         while (true) {

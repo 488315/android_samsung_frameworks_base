@@ -46,7 +46,6 @@ public abstract class BaseMenuPresenter implements MenuPresenter {
         return this.mMenuView;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.internal.view.menu.MenuPresenter
     public void updateMenuView(boolean cleared) {
         ViewGroup parent = (ViewGroup) this.mMenuView;
@@ -111,7 +110,6 @@ public abstract class BaseMenuPresenter implements MenuPresenter {
         return (MenuView.ItemView) this.mSystemInflater.inflate(this.mItemLayoutRes, parent, false);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public View getItemView(MenuItemImpl item, View view, ViewGroup parent) {
         MenuView.ItemView itemView;
         if (view instanceof MenuView.ItemView) {

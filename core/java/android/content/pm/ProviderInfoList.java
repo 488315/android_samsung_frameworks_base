@@ -10,13 +10,11 @@ public final class ProviderInfoList implements Parcelable {
     public static final Parcelable.Creator<ProviderInfoList> CREATOR =
             new Parcelable.Creator<
                     ProviderInfoList>() { // from class: android.content.pm.ProviderInfoList.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ProviderInfoList createFromParcel(Parcel source) {
                     return new ProviderInfoList(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ProviderInfoList[] newArray(int size) {
                     return new ProviderInfoList[size];

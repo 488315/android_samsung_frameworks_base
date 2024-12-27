@@ -100,7 +100,6 @@ public class SntpClient {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0189  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

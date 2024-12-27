@@ -24,7 +24,6 @@ public class MarshalQueryableStreamConfiguration implements MarshalQueryable<Str
             byteBuffer.putInt(streamConfiguration.isInput() ? 1 : 0);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public StreamConfiguration unmarshal(ByteBuffer buffer) {
             int format = buffer.getInt();

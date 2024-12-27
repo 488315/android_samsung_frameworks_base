@@ -73,11 +73,6 @@ public abstract class RestoreUtils {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:110:0x0217 A[Catch: Exception -> 0x0215, TRY_LEAVE, TryCatch #8 {Exception -> 0x0215, blocks: (B:110:0x0217, B:118:0x0211, B:113:0x020b), top: B:108:0x0209, inners: #10 }] */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x020b A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00da A[Catch: IOException -> 0x00ec, TryCatch #11 {IOException -> 0x00ec, blocks: (B:50:0x00cd, B:52:0x00da, B:58:0x00f0, B:60:0x00fe, B:63:0x01e2, B:65:0x01e4, B:79:0x0120, B:81:0x0134, B:83:0x0138, B:86:0x0155, B:89:0x017e, B:91:0x0188, B:93:0x018e, B:94:0x01a8, B:95:0x01c3), top: B:49:0x00cd, inners: #5 }] */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x00f0 A[Catch: IOException -> 0x00ec, TryCatch #11 {IOException -> 0x00ec, blocks: (B:50:0x00cd, B:52:0x00da, B:58:0x00f0, B:60:0x00fe, B:63:0x01e2, B:65:0x01e4, B:79:0x0120, B:81:0x0134, B:83:0x0138, B:86:0x0155, B:89:0x017e, B:91:0x0188, B:93:0x018e, B:94:0x01a8, B:95:0x01c3), top: B:49:0x00cd, inners: #5 }] */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x01e2 A[Catch: IOException -> 0x00ec, TryCatch #11 {IOException -> 0x00ec, blocks: (B:50:0x00cd, B:52:0x00da, B:58:0x00f0, B:60:0x00fe, B:63:0x01e2, B:65:0x01e4, B:79:0x0120, B:81:0x0134, B:83:0x0138, B:86:0x0155, B:89:0x017e, B:91:0x0188, B:93:0x018e, B:94:0x01a8, B:95:0x01c3), top: B:49:0x00cd, inners: #5 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -107,7 +102,6 @@ public abstract class RestoreUtils {
                     + " int):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0153 A[Catch: IOException -> 0x005c, TryCatch #6 {IOException -> 0x005c, blocks: (B:3:0x001b, B:9:0x003e, B:11:0x004b, B:18:0x005f, B:20:0x006d, B:24:0x0153, B:25:0x0155, B:30:0x015e, B:34:0x0167, B:38:0x008c, B:40:0x00a0, B:42:0x00a4, B:43:0x00c2, B:46:0x00e9, B:49:0x00f4, B:51:0x00fe, B:53:0x0104, B:56:0x011d, B:59:0x0138, B:75:0x017b, B:76:0x017e, B:27:0x0156, B:28:0x015b, B:5:0x0028, B:8:0x003b, B:72:0x017a, B:71:0x0177, B:66:0x0171, B:7:0x002c), top: B:2:0x001b, inners: #2, #3 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -136,9 +130,6 @@ public abstract class RestoreUtils {
         mPrivilegeApp = z;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r7v2, types: [android.content.pm.PackageInstaller] */
-    /* JADX WARN: Type inference failed for: r7v6, types: [android.content.pm.PackageInstaller$Session] */
     public static boolean writeSession(
             Context context,
             InputStream inputStream,

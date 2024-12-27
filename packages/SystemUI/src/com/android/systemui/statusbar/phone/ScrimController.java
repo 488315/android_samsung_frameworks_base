@@ -246,8 +246,6 @@ public final class ScrimController implements ViewTreeObserver.OnPreDrawListener
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x005a A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x005b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -310,8 +308,6 @@ public final class ScrimController implements ViewTreeObserver.OnPreDrawListener
         this.mScrimStateListener.accept(this.mState, Float.valueOf(f), this.mColors);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0027  */
-    /* JADX WARN: Removed duplicated region for block: B:27:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -800,7 +796,6 @@ public final class ScrimController implements ViewTreeObserver.OnPreDrawListener
         valueAnimator.setCurrentPlayTime(valueAnimator.getCurrentPlayTime());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00d9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

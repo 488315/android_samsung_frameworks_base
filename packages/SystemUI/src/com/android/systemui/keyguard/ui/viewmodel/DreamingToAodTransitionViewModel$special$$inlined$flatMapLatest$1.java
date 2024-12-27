@@ -21,7 +21,6 @@ public final class DreamingToAodTransitionViewModel$special$$inlined$flatMapLate
     int label;
     final /* synthetic */ DreamingToAodTransitionViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DreamingToAodTransitionViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, DreamingToAodTransitionViewModel dreamingToAodTransitionViewModel) {
         super(3, continuation);
         this.this$0 = dreamingToAodTransitionViewModel;

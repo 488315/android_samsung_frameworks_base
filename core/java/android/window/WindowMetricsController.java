@@ -65,7 +65,6 @@ public final class WindowMetricsController {
         return new WindowMetrics(new Rect(bounds), insetsSupplier, density);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ WindowInsets lambda$getWindowMetricsInternal$0(
             IBinder token, Rect bounds, boolean isScreenRound, int activityType) {
         return getWindowInsetsFromServerForDisplay(

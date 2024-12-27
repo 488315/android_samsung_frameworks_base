@@ -8,7 +8,6 @@ public final class PackageFeatureShellCommand {
         PACKAGE_FEATURE_OPTION_FORCE_UPDATE("ForceUpdate"),
         PACKAGE_FEATURE_OPTION_POLICY_RESET("PolicyReset"),
         PACKAGE_FEATURE_OPTION_SHOW_PACKAGE_NAME("ShowPackageName"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF55("-setPolicyDisabled");
 
         String mCommand;

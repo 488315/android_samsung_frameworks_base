@@ -74,7 +74,6 @@ public class TransitionLayoutController {
         transitionLayoutController.setState(transitionViewState, z, z2, (i & 8) != 0 ? 0L : j, (i & 16) != 0 ? 0L : j2, z3);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void updateStateFromAnimation() {
         if (this.animationStartState == null || !this.animator.isRunning()) {
             return;

@@ -41,7 +41,6 @@ public abstract class HandwritingGesture {
         return this.mFallbackText;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final byte[] toByteArray() {
         if (!(this instanceof Parcelable)) {
             throw new UnsupportedOperationException(getClass() + " is not Parcelable");

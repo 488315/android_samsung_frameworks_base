@@ -36,7 +36,6 @@ final class BTTetherUiAdapter$bindGroup$1 extends SuspendLambda implements Funct
             int label;
             final /* synthetic */ BTTetherUiAdapter this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02401(BTTetherUiAdapter bTTetherUiAdapter, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = bTTetherUiAdapter;
@@ -83,7 +82,6 @@ final class BTTetherUiAdapter$bindGroup$1 extends SuspendLambda implements Funct
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(BTTetherUiAdapter bTTetherUiAdapter, Continuation continuation) {
             super(2, continuation);
             this.this$0 = bTTetherUiAdapter;
@@ -113,7 +111,6 @@ final class BTTetherUiAdapter$bindGroup$1 extends SuspendLambda implements Funct
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BTTetherUiAdapter$bindGroup$1(BTTetherUiAdapter bTTetherUiAdapter, Continuation continuation) {
         super(3, continuation);
         this.this$0 = bTTetherUiAdapter;

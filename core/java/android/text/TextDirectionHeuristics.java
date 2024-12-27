@@ -30,7 +30,6 @@ public class TextDirectionHeuristics {
         ANYRTL_LTR = new TextDirectionHeuristicInternal(AnyStrong.INSTANCE_RTL, z);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int isRtlCodePoint(int codePoint) {
         switch (Character.getDirectionality(codePoint)) {
             case -1:

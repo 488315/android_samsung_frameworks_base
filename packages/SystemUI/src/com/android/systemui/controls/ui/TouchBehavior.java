@@ -27,9 +27,6 @@ public final class TouchBehavior implements Behavior, SecBehavior {
         new Companion(null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0084  */
     @Override // com.android.systemui.controls.ui.Behavior
     /*
         Code decompiled incorrectly, please refer to instructions dump.

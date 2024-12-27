@@ -271,7 +271,6 @@ public class LocalServiceProxy implements ServiceProxy, MediaController.OnEventL
         it.signal();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onError(final Response response) {
         final Exception exception = response.getException();
         if (this.exceptionHandler != null) {

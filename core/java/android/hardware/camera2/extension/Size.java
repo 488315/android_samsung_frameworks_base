@@ -8,7 +8,6 @@ public class Size implements Parcelable {
     public static final Parcelable.Creator<Size> CREATOR =
             new Parcelable.Creator<
                     Size>() { // from class: android.hardware.camera2.extension.Size.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Size createFromParcel(Parcel _aidl_source) {
                     Size _aidl_out = new Size();
@@ -16,7 +15,6 @@ public class Size implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Size[] newArray(int _aidl_size) {
                     return new Size[_aidl_size];

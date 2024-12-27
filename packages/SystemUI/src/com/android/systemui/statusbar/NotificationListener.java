@@ -62,7 +62,6 @@ public final class NotificationListener extends NotificationListenerWithPlugins 
     public interface NotificationSettingsListener {
     }
 
-    /* JADX WARN: Type inference failed for: r5v4, types: [com.android.systemui.statusbar.NotificationListener$$ExternalSyntheticLambda0] */
     public NotificationListener(Context context, NotificationManager notificationManager, SilentNotificationStatusIconsVisibilityInteractor silentNotificationStatusIconsVisibilityInteractor, SystemClock systemClock, Executor executor, PluginManager pluginManager) {
         super(pluginManager);
         this.mNotificationHandlers = new ArrayList();

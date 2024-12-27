@@ -172,8 +172,6 @@ public final class DisplayTrackerImpl implements DisplayTracker {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.settings.DisplayTrackerImpl$displayChangedListener$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.settings.DisplayTrackerImpl$displayBrightnessChangedListener$1] */
     public DisplayTrackerImpl(DisplayManager displayManager, Handler handler) {
         this.displayManager = displayManager;
         this.backgroundHandler = handler;

@@ -10,13 +10,11 @@ public final class RemoteDisplayState implements Parcelable {
     public static final Parcelable.Creator<RemoteDisplayState> CREATOR =
             new Parcelable.Creator<
                     RemoteDisplayState>() { // from class: android.media.RemoteDisplayState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteDisplayState createFromParcel(Parcel in) {
                     return new RemoteDisplayState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteDisplayState[] newArray(int size) {
                     return new RemoteDisplayState[size];
@@ -64,13 +62,11 @@ public final class RemoteDisplayState implements Parcelable {
         public static final Parcelable.Creator<RemoteDisplayInfo> CREATOR =
                 new Parcelable.Creator<RemoteDisplayInfo>() { // from class:
                     // android.media.RemoteDisplayState.RemoteDisplayInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RemoteDisplayInfo createFromParcel(Parcel in) {
                         return new RemoteDisplayInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RemoteDisplayInfo[] newArray(int size) {
                         return new RemoteDisplayInfo[size];

@@ -18,13 +18,11 @@ import java.lang.annotation.RetentionPolicy;
 public class TaskSnapshot implements Parcelable {
     public static final Parcelable.Creator<TaskSnapshot> CREATOR =
             new Parcelable.Creator<TaskSnapshot>() { // from class: android.window.TaskSnapshot.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TaskSnapshot createFromParcel(Parcel source) {
                     return new TaskSnapshot(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TaskSnapshot[] newArray(int size) {
                     return new TaskSnapshot[size];

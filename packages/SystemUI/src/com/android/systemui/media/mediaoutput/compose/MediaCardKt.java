@@ -157,8 +157,6 @@ public abstract class MediaCardKt {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -247,8 +245,6 @@ public abstract class MediaCardKt {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -335,7 +331,6 @@ public abstract class MediaCardKt {
             Dp.Companion companion = Dp.Companion;
             arrangement.getClass();
             LazyDslKt.LazyRow(null, null, null, false, Arrangement.m75spacedBy0680j_4(15), null, null, false, new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.MediaCardKt$ControlArea$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -360,7 +355,6 @@ public abstract class MediaCardKt {
                     };
                     int size = list.size();
                     Function1 function1 = anonymousClass1 != null ? new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.MediaCardKt$ControlArea$1$invoke$$inlined$items$default$2
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }
@@ -371,7 +365,6 @@ public abstract class MediaCardKt {
                         }
                     } : null;
                     Function1 function12 = new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.MediaCardKt$ControlArea$1$invoke$$inlined$items$default$3
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }
@@ -382,12 +375,10 @@ public abstract class MediaCardKt {
                         }
                     };
                     ComposableLambdaImpl composableLambdaImpl = new ComposableLambdaImpl(-632812321, true, new Function4() { // from class: com.android.systemui.media.mediaoutput.compose.MediaCardKt$ControlArea$1$invoke$$inlined$items$default$4
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(4);
                         }
 
-                        /* JADX WARN: Type inference failed for: r11v3, types: [com.android.systemui.media.mediaoutput.compose.MediaCardKt$ControlArea$1$2$2, kotlin.jvm.internal.Lambda] */
                         @Override // kotlin.jvm.functions.Function4
                         public final Object invoke(Object obj2, Object obj3, Object obj4, Object obj5) {
                             int i6;
@@ -424,7 +415,6 @@ public abstract class MediaCardKt {
                                 final MediaInteraction mediaInteraction5 = mediaInteraction4;
                                 final State state2 = state;
                                 Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.compose.MediaCardKt$ControlArea$1$2$1
-                                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                                     {
                                         super(0);
                                     }
@@ -477,7 +467,6 @@ public abstract class MediaCardKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.MediaCardKt$ControlArea$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -492,7 +481,6 @@ public abstract class MediaCardKt {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.media.mediaoutput.compose.MediaCardKt$MediaCard$1, kotlin.jvm.internal.Lambda] */
     public static final void MediaCard(final int i, Composer composer) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(-260820118);
@@ -572,7 +560,6 @@ public abstract class MediaCardKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.MediaCardKt$MediaCard$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -623,7 +610,6 @@ public abstract class MediaCardKt {
     
         if (kotlin.jvm.internal.Intrinsics.areEqual(r13.rememberedValue(), java.lang.Integer.valueOf(r6)) == false) goto L41;
      */
-    /* JADX WARN: Type inference failed for: r5v20, types: [com.android.systemui.media.mediaoutput.compose.MediaCardKt$TitleArea$2$1, kotlin.jvm.internal.Lambda] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -636,10 +622,6 @@ public abstract class MediaCardKt {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.compose.MediaCardKt.TitleArea(com.android.systemui.media.mediaoutput.viewmodel.MediaInteraction, androidx.compose.runtime.Composer, int, int):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x010f  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0126  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0146  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x017e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -656,39 +638,6 @@ public abstract class MediaCardKt {
     
         if (r0 != null) goto L119;
      */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0053  */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x0646  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x006a  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x0675  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:195:0x0719  */
-    /* JADX WARN: Removed duplicated region for block: B:197:0x020b  */
-    /* JADX WARN: Removed duplicated region for block: B:198:0x01e9  */
-    /* JADX WARN: Removed duplicated region for block: B:199:0x01d1  */
-    /* JADX WARN: Removed duplicated region for block: B:200:0x01b9  */
-    /* JADX WARN: Removed duplicated region for block: B:202:0x00fc  */
-    /* JADX WARN: Removed duplicated region for block: B:204:0x0102  */
-    /* JADX WARN: Removed duplicated region for block: B:206:0x0105  */
-    /* JADX WARN: Removed duplicated region for block: B:209:0x010a  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00a7  */
-    /* JADX WARN: Removed duplicated region for block: B:210:0x011b  */
-    /* JADX WARN: Removed duplicated region for block: B:211:0x00ff  */
-    /* JADX WARN: Removed duplicated region for block: B:213:0x00bb  */
-    /* JADX WARN: Removed duplicated region for block: B:214:0x008b  */
-    /* JADX WARN: Removed duplicated region for block: B:221:0x006f  */
-    /* JADX WARN: Removed duplicated region for block: B:228:0x0056  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00c7  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00e3  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0135  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x014d  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0165  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x01ab  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x01cb  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x01e6  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x01ec  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x0240  */
-    /* JADX WARN: Type inference failed for: r0v49, types: [com.android.systemui.media.mediaoutput.compose.MediaCardKt$DeviceListItem$3$3$4, kotlin.jvm.internal.Lambda] */
-    /* JADX WARN: Type inference failed for: r7v21, types: [com.android.systemui.media.mediaoutput.compose.MediaCardKt$DeviceListItem$3$2$2, kotlin.jvm.internal.Lambda] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -705,11 +654,6 @@ public abstract class MediaCardKt {
     
         if (r5 != false) goto L54;
      */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x03a4  */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x014a  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00db  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x011b  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x017c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -722,7 +666,6 @@ public abstract class MediaCardKt {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.compose.MediaCardKt.access$MediaControlSection(androidx.compose.ui.Modifier, com.android.systemui.media.mediaoutput.viewmodel.MediaInteraction, androidx.compose.runtime.Composer, int, int):void");
     }
 
-    /* JADX WARN: Type inference failed for: r3v14, types: [com.android.systemui.media.mediaoutput.compose.MediaCardKt$ThumbnailSection$1$1, kotlin.jvm.internal.Lambda] */
     public static final void access$ThumbnailSection(final Modifier modifier, final MediaInteraction mediaInteraction, Composer composer, final int i, final int i2) {
         int i3;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -783,8 +726,6 @@ public abstract class MediaCardKt {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -895,7 +836,6 @@ public abstract class MediaCardKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.MediaCardKt$ThumbnailSection$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -963,7 +903,6 @@ public abstract class MediaCardKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.MediaCardKt$showInAppCastingPopup$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

@@ -111,7 +111,6 @@ public final class StatusBarStateControllerImpl implements SysuiStatusBarStateCo
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.statusbar.StatusBarStateControllerImpl$1] */
     static {
         SystemProperties.getBoolean("persist.debug.immersive_apps", false);
         sComparator = Comparator.comparingInt(new StatusBarStateControllerImpl$$ExternalSyntheticLambda1());

@@ -219,7 +219,6 @@ public final class AccessibilityManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyServicesStateChanged$0(
                 AccessibilityServicesStateChangeListener listener) {
             listener.onAccessibilityServicesStateChanged(AccessibilityManager.this);
@@ -877,7 +876,6 @@ public final class AccessibilityManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setStateLocked(int stateFlags) {
         boolean enabled = (stateFlags & 1) != 0;
         boolean touchExplorationEnabled = (stateFlags & 2) != 0;
@@ -1595,13 +1593,11 @@ public final class AccessibilityManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateUiTimeout(long uiTimeout) {
         this.mInteractiveUiTimeout = IntPair.first(uiTimeout);
         this.mNonInteractiveUiTimeout = IntPair.second(uiTimeout);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateFocusAppearanceLocked(int strokeWidth, int color) {
         if (this.mFocusStrokeWidth == strokeWidth && this.mFocusColor == color) {
             return;

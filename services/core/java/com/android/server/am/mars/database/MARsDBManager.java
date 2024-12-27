@@ -43,7 +43,6 @@ public final class MARsDBManager {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ MARsDBManager this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ SmartManagerFASObserver(
                 MARsDBManager mARsDBManager, MARsDBHandler.MainHandler mainHandler, int i) {
             super(mainHandler);
@@ -323,7 +322,6 @@ public final class MARsDBManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00b9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

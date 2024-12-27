@@ -114,7 +114,6 @@ public class PersistentServiceConnection<T> extends ObservableServiceConnection<
         return bindInternalLocked;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean bindInternalLocked() {
         return super.bind();
     }
@@ -135,7 +134,6 @@ public class PersistentServiceConnection<T> extends ObservableServiceConnection<
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void scheduleConnectionAttemptLocked() {
         cancelPendingConnectionAttemptLocked();
         if (this.mReconnectAttempts >= this.mMaxReconnectAttempts) {

@@ -28,7 +28,6 @@ public class ConfirmationPrompt {
         return this.mProtectedConfirmation;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doCallback(
             int responseCode, byte[] dataThatWasConfirmed, ConfirmationCallback callback) {
         switch (responseCode) {

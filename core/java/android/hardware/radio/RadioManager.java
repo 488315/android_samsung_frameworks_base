@@ -83,13 +83,11 @@ public class RadioManager {
         public static final Parcelable.Creator<ModuleProperties> CREATOR =
                 new Parcelable.Creator<ModuleProperties>() { // from class:
                     // android.hardware.radio.RadioManager.ModuleProperties.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ModuleProperties createFromParcel(Parcel in) {
                         return new ModuleProperties(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ModuleProperties[] newArray(int size) {
                         return new ModuleProperties[size];
@@ -372,7 +370,6 @@ public class RadioManager {
         public static final Parcelable.Creator<BandDescriptor> CREATOR =
                 new Parcelable.Creator<BandDescriptor>() { // from class:
                     // android.hardware.radio.RadioManager.BandDescriptor.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BandDescriptor createFromParcel(Parcel parcel) {
                         int lookupTypeFromParcel = BandDescriptor.lookupTypeFromParcel(parcel);
@@ -390,7 +387,6 @@ public class RadioManager {
                         }
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BandDescriptor[] newArray(int size) {
                         return new BandDescriptor[size];
@@ -449,7 +445,6 @@ public class RadioManager {
             this.mSpacing = in.readInt();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static int lookupTypeFromParcel(Parcel in) {
             int pos = in.dataPosition();
             in.readInt();
@@ -514,13 +509,11 @@ public class RadioManager {
         public static final Parcelable.Creator<FmBandDescriptor> CREATOR =
                 new Parcelable.Creator<FmBandDescriptor>() { // from class:
                     // android.hardware.radio.RadioManager.FmBandDescriptor.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FmBandDescriptor createFromParcel(Parcel in) {
                         return new FmBandDescriptor(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FmBandDescriptor[] newArray(int size) {
                         return new FmBandDescriptor[size];
@@ -645,13 +638,11 @@ public class RadioManager {
         public static final Parcelable.Creator<AmBandDescriptor> CREATOR =
                 new Parcelable.Creator<AmBandDescriptor>() { // from class:
                     // android.hardware.radio.RadioManager.AmBandDescriptor.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AmBandDescriptor createFromParcel(Parcel in) {
                         return new AmBandDescriptor(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AmBandDescriptor[] newArray(int size) {
                         return new AmBandDescriptor[size];
@@ -716,7 +707,6 @@ public class RadioManager {
         public static final Parcelable.Creator<BandConfig> CREATOR =
                 new Parcelable.Creator<BandConfig>() { // from class:
                     // android.hardware.radio.RadioManager.BandConfig.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BandConfig createFromParcel(Parcel parcel) {
                         int lookupTypeFromParcel = BandDescriptor.lookupTypeFromParcel(parcel);
@@ -734,7 +724,6 @@ public class RadioManager {
                         }
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BandConfig[] newArray(int size) {
                         return new BandConfig[size];
@@ -826,13 +815,11 @@ public class RadioManager {
         public static final Parcelable.Creator<FmBandConfig> CREATOR =
                 new Parcelable.Creator<FmBandConfig>() { // from class:
                     // android.hardware.radio.RadioManager.FmBandConfig.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FmBandConfig createFromParcel(Parcel in) {
                         return new FmBandConfig(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FmBandConfig[] newArray(int size) {
                         return new FmBandConfig[size];
@@ -1046,13 +1033,11 @@ public class RadioManager {
         public static final Parcelable.Creator<AmBandConfig> CREATOR =
                 new Parcelable.Creator<AmBandConfig>() { // from class:
                     // android.hardware.radio.RadioManager.AmBandConfig.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AmBandConfig createFromParcel(Parcel in) {
                         return new AmBandConfig(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AmBandConfig[] newArray(int size) {
                         return new AmBandConfig[size];
@@ -1166,13 +1151,11 @@ public class RadioManager {
         public static final Parcelable.Creator<ProgramInfo> CREATOR =
                 new Parcelable.Creator<ProgramInfo>() { // from class:
                     // android.hardware.radio.RadioManager.ProgramInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ProgramInfo createFromParcel(Parcel in) {
                         return new ProgramInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ProgramInfo[] newArray(int size) {
                         return new ProgramInfo[size];

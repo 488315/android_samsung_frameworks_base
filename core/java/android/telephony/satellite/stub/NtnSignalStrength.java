@@ -9,7 +9,6 @@ public class NtnSignalStrength implements Parcelable {
             new Parcelable.Creator<
                     NtnSignalStrength>() { // from class:
                                            // android.telephony.satellite.stub.NtnSignalStrength.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NtnSignalStrength createFromParcel(Parcel _aidl_source) {
                     NtnSignalStrength _aidl_out = new NtnSignalStrength();
@@ -17,7 +16,6 @@ public class NtnSignalStrength implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NtnSignalStrength[] newArray(int _aidl_size) {
                     return new NtnSignalStrength[_aidl_size];

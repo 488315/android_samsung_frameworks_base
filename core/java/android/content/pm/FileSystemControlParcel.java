@@ -10,7 +10,6 @@ public class FileSystemControlParcel implements Parcelable {
     public static final Parcelable.Creator<FileSystemControlParcel> CREATOR =
             new Parcelable.Creator<FileSystemControlParcel>() { // from class:
                 // android.content.pm.FileSystemControlParcel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FileSystemControlParcel createFromParcel(Parcel _aidl_source) {
                     FileSystemControlParcel _aidl_out = new FileSystemControlParcel();
@@ -18,7 +17,6 @@ public class FileSystemControlParcel implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FileSystemControlParcel[] newArray(int _aidl_size) {
                     return new FileSystemControlParcel[_aidl_size];

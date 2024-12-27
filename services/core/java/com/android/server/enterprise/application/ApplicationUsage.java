@@ -204,15 +204,6 @@ public final class ApplicationUsage {
                 "Done Updating Usage Statistics in DB @ " + System.currentTimeMillis());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00a4  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x00f8 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x00fc  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0101  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0105  */
-    /* JADX WARN: Removed duplicated region for block: B:65:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x00cd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

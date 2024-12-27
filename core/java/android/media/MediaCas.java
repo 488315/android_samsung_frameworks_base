@@ -279,7 +279,6 @@ public final class MediaCas implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cleanupAndRethrowIllegalState() {
         this.mICas = null;
         this.mICasHidl = null;
@@ -365,7 +364,6 @@ public final class MediaCas implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ArrayList<Byte> toByteArray(byte[] data, int offset, int length) {
         ArrayList<Byte> byteArray = new ArrayList<>(length);
         for (int i = 0; i < length; i++) {
@@ -374,7 +372,6 @@ public final class MediaCas implements AutoCloseable {
         return byteArray;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ArrayList<Byte> toByteArray(byte[] data) {
         if (data == null) {
             return new ArrayList<>();
@@ -382,7 +379,6 @@ public final class MediaCas implements AutoCloseable {
         return toByteArray(data, 0, data.length);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public byte[] toBytes(ArrayList<Byte> byteArray) {
         byte[] data = null;
         if (byteArray != null) {
@@ -804,7 +800,6 @@ public final class MediaCas implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeSessionFromResourceMap(Session session) {
         synchronized (this.mSessionMap) {
             if (this.mSessionMap.get(session) != null) {

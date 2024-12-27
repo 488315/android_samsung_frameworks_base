@@ -297,7 +297,6 @@ public final class PacProxyService extends IPacProxyManager.Stub {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.connectivity.PacProxyService$1] */
     public PacProxyService(Context context) {
         this.mContext = context;
         HandlerThread handlerThread = new HandlerThread("android.pacproxyservice", 0);

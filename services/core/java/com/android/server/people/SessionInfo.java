@@ -16,7 +16,6 @@ public final class SessionInfo {
     public final AppTargetPredictor mAppTargetPredictor;
     public final RemoteCallbackList mCallbacks = new RemoteCallbackList();
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.server.people.SessionInfo$$ExternalSyntheticLambda0] */
     public SessionInfo(AppPredictionContext appPredictionContext, DataManager dataManager, int i, Context context) {
         ?? r3 = new Consumer() { // from class: com.android.server.people.SessionInfo$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer

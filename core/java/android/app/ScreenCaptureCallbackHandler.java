@@ -17,7 +17,6 @@ public class ScreenCaptureCallbackHandler {
         this.mActivityToken = activityToken;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ScreenCaptureRegistration {
         Activity.ScreenCaptureCallback mCallback;
         Executor mExecutor;
@@ -28,7 +27,6 @@ public class ScreenCaptureCallbackHandler {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ScreenCaptureObserver extends IScreenCaptureObserver.Stub {
         ArrayMap<Activity.ScreenCaptureCallback, ScreenCaptureRegistration> mRegistrations;
 

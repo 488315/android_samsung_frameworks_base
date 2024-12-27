@@ -84,8 +84,6 @@ public final class NetworkWatchlistService extends INetworkWatchlistManager.Stub
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v3, types: [android.os.IBinder, com.android.server.net.watchlist.NetworkWatchlistService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             if (Settings.Global.getInt(getContext().getContentResolver(), "network_watchlist_enabled", 1) == 0) {
@@ -99,7 +97,6 @@ public final class NetworkWatchlistService extends INetworkWatchlistManager.Stub
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.net.watchlist.NetworkWatchlistService$1] */
     public NetworkWatchlistService(Context context) {
         this.mContext = context;
         WatchlistLoggingHandler watchlistLoggingHandler = new WatchlistLoggingHandler(context, Watchdog$$ExternalSyntheticOutline0.m(10, "NetworkWatchlistService", false).getLooper());
@@ -107,7 +104,6 @@ public final class NetworkWatchlistService extends INetworkWatchlistManager.Stub
         watchlistLoggingHandler.sendMessage(watchlistLoggingHandler.obtainMessage(2));
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.net.watchlist.NetworkWatchlistService$1] */
     public NetworkWatchlistService(Context context, ServiceThread serviceThread, WatchlistLoggingHandler watchlistLoggingHandler, IIpConnectivityMetrics iIpConnectivityMetrics) {
         this.mContext = context;
         this.mNetworkWatchlistHandler = watchlistLoggingHandler;
@@ -159,7 +155,6 @@ public final class NetworkWatchlistService extends INetworkWatchlistManager.Stub
         return this.mConfig.getWatchlistConfigHash();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         int callingUid = Binder.getCallingUid();
         if (callingUid == 2000 || callingUid == 0) {

@@ -110,7 +110,6 @@ public final class DexPolicy extends IDexPolicy.Stub implements EnterpriseServic
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.enterprise.dex.DexPolicy$1] */
     public DexPolicy(Context context) {
         Injector injector = new Injector(context);
         this.mEDM = null;
@@ -281,8 +280,6 @@ public final class DexPolicy extends IDexPolicy.Stub implements EnterpriseServic
                 "screenTimeoutChangeAllowed");
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(13:14|15|16|18|19|(8:20|21|23|24|26|27|28|29)|30|31|32|33|34|35|36) */
-    /* JADX WARN: Can't wrap try/catch for region: R(36:58|59|60|(4:63|(1:147)(0)|65|61)|148|149|65|66|(4:69|(1:138)(0)|71|67)|139|140|71|72|(4:75|(1:132)(0)|77|73)|133|134|77|78|(4:81|(1:126)(0)|83|79)|127|128|83|84|(3:87|(1:89)(1:120)|85)|121|122|90|91|92|94|95|96|(3:98|99|100)(1:114)|(1:102)|104|105) */
     /* JADX WARN: Code restructure failed: missing block: B:142:0x0201, code lost:
 
        r0 = move-exception;
@@ -299,9 +296,6 @@ public final class DexPolicy extends IDexPolicy.Stub implements EnterpriseServic
 
        android.util.Log.w("DexPolicyService", "failed to set applyEthernetOnly", r0);
     */
-    /* JADX WARN: Removed duplicated region for block: B:102:0x02f1 A[Catch: all -> 0x02ea, Exception -> 0x02ec, TRY_LEAVE, TryCatch #3 {Exception -> 0x02ec, blocks: (B:100:0x02e6, B:102:0x02f1), top: B:99:0x02e6, outer: #9 }] */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x02ee  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x02e5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

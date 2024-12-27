@@ -77,11 +77,8 @@ public class ScreenshotView extends FrameLayout implements ViewTreeObserver.OnCo
     public UiEventLogger mUiEventLogger;
 
     enum PendingInteraction {
-        /* JADX INFO: Fake field, exist only in values array */
         PREVIEW,
-        /* JADX INFO: Fake field, exist only in values array */
         EDIT,
-        /* JADX INFO: Fake field, exist only in values array */
         SHARE,
         QUICK_SHARE
     }

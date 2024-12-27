@@ -12,13 +12,11 @@ public class OverheatReasonInternal implements Parcelable {
             new Parcelable.Creator<
                     OverheatReasonInternal>() { // from class:
                                                 // com.sec.android.sdhms.OverheatReasonInternal.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OverheatReasonInternal createFromParcel(Parcel in) {
                     return new OverheatReasonInternal(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OverheatReasonInternal[] newArray(int size) {
                     return new OverheatReasonInternal[size];

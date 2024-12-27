@@ -356,10 +356,6 @@ public class ECAlgorithms {
         return implSumOfMultiplies(negs, infos, wnafs);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r12v1 */
-    /* JADX WARN: Type inference failed for: r12v2, types: [int] */
-    /* JADX WARN: Type inference failed for: r12v4 */
     private static ECPoint implSumOfMultiplies(boolean[] zArr, WNafPreCompInfo[] wNafPreCompInfoArr, byte[][] bArr) {
         int i = 0;
         int length = bArr.length;

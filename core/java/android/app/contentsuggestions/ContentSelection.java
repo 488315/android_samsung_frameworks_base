@@ -10,13 +10,11 @@ public final class ContentSelection implements Parcelable {
     public static final Parcelable.Creator<ContentSelection> CREATOR =
             new Parcelable.Creator<ContentSelection>() { // from class:
                 // android.app.contentsuggestions.ContentSelection.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentSelection createFromParcel(Parcel source) {
                     return new ContentSelection(source.readString(), source.readBundle());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentSelection[] newArray(int size) {
                     return new ContentSelection[size];

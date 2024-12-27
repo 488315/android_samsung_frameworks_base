@@ -9,13 +9,11 @@ public class InstallerAllowedByManifestFormula extends IntegrityFormula implemen
     public static final Parcelable.Creator<InstallerAllowedByManifestFormula> CREATOR =
             new Parcelable.Creator<InstallerAllowedByManifestFormula>() { // from class:
                 // android.content.integrity.InstallerAllowedByManifestFormula.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InstallerAllowedByManifestFormula createFromParcel(Parcel in) {
                     return new InstallerAllowedByManifestFormula(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InstallerAllowedByManifestFormula[] newArray(int size) {
                     return new InstallerAllowedByManifestFormula[size];

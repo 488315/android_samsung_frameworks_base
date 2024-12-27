@@ -13,13 +13,11 @@ public final class AccessibilityWindowAttributes implements Parcelable {
             new Parcelable.Creator<
                     AccessibilityWindowAttributes>() { // from class:
                                                        // android.view.accessibility.AccessibilityWindowAttributes.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessibilityWindowAttributes createFromParcel(Parcel in) {
                     return new AccessibilityWindowAttributes(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessibilityWindowAttributes[] newArray(int size) {
                     return new AccessibilityWindowAttributes[size];

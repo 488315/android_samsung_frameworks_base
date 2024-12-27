@@ -111,7 +111,6 @@ public final class BiometricSchedulerOperation {
         handler.postDelayed(this.mCancelWatchdog, 3000L);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final boolean doStart(BiometricScheduler.AnonymousClass1 anonymousClass1) {
         this.mOnStartCallback = anonymousClass1;
         ClientMonitorCompositeCallback wrappedCallback = getWrappedCallback(anonymousClass1);

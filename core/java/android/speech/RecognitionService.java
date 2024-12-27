@@ -84,9 +84,6 @@ public abstract class RecognitionService extends Service {
 
     protected abstract void onStopListening(Callback callback);
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x003c A[Catch: RemoteException -> 0x0086, TryCatch #0 {RemoteException -> 0x0086, blocks: (B:4:0x0011, B:6:0x001d, B:9:0x0028, B:11:0x0030, B:16:0x003c, B:18:0x0057, B:22:0x005d, B:24:0x0064, B:25:0x0076, B:27:0x007c), top: B:2:0x000f }] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0064 A[Catch: RemoteException -> 0x0086, TryCatch #0 {RemoteException -> 0x0086, blocks: (B:4:0x0011, B:6:0x001d, B:9:0x0028, B:11:0x0030, B:16:0x003c, B:18:0x0057, B:22:0x005d, B:24:0x0064, B:25:0x0076, B:27:0x007c), top: B:2:0x000f }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -178,7 +175,6 @@ public abstract class RecognitionService extends Service {
                     + " android.content.AttributionSource):void");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchStopListening(IRecognitionListener listener) {
         SessionState sessionState = this.mSessions.get(listener.asBinder());
         if (sessionState == null) {
@@ -196,7 +192,6 @@ public abstract class RecognitionService extends Service {
         onStopListening(sessionState.mCallback);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchCancel(IRecognitionListener listener) {
         SessionState sessionState = this.mSessions.get(listener.asBinder());
         if (sessionState == null) {
@@ -210,7 +205,6 @@ public abstract class RecognitionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchClearCallback(IRecognitionListener listener) {
         SessionState sessionState = this.mSessions.remove(listener.asBinder());
         if (sessionState != null) {
@@ -219,7 +213,6 @@ public abstract class RecognitionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchCheckRecognitionSupport(
             Intent intent,
             IRecognitionSupportCallback callback,
@@ -227,7 +220,6 @@ public abstract class RecognitionService extends Service {
         onCheckRecognitionSupport(intent, attributionSource, new SupportCallback(callback));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchTriggerModelDownload(
             Intent intent,
             AttributionSource attributionSource,
@@ -395,7 +387,6 @@ public abstract class RecognitionService extends Service {
         return super.createContext(contextParams);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleAttributionContextCreation(AttributionSource attributionSource) {
         for (SessionState sessionState : this.mSessions.values()) {
             Callback currentCallback = sessionState.mCallback;

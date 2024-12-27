@@ -27,7 +27,6 @@ public final class MobileIconBinder {
     private MobileIconBinder() {
     }
 
-    /* JADX WARN: Type inference failed for: r6v3, types: [com.android.systemui.statusbar.pipeline.mobile.ui.binder.MobileIconBinder$bind$3] */
     public static MobileIconBinder$bind$3 bind$default(ViewGroup viewGroup, final LocationBasedMobileViewModel locationBasedMobileViewModel, MobileViewLogger mobileViewLogger, ConfigurationController configurationController) {
         ViewGroup viewGroup2 = (ViewGroup) viewGroup.requireViewById(R.id.mobile_group);
         View requireViewById = viewGroup.requireViewById(R.id.inout_container);

@@ -57,7 +57,6 @@ public final class HardwareBgDrawable extends LayerDrawable {
         this.mPaint.setColorFilter(colorFilter);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

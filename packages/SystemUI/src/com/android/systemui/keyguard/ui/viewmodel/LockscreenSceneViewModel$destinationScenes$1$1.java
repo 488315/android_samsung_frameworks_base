@@ -15,7 +15,6 @@ final class LockscreenSceneViewModel$destinationScenes$1$1 extends SuspendLambda
     int label;
     final /* synthetic */ LockscreenSceneViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LockscreenSceneViewModel$destinationScenes$1$1(LockscreenSceneViewModel lockscreenSceneViewModel, Continuation continuation) {
         super(4, continuation);
         this.this$0 = lockscreenSceneViewModel;

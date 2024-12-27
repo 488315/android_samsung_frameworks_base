@@ -56,7 +56,6 @@ public final class SecPanelSAStatusLogInteractor {
                 int label;
                 final /* synthetic */ SecPanelSAStatusLogInteractor this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass3(Continuation continuation, SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor) {
                     super(3, continuation);
                     this.this$0 = secPanelSAStatusLogInteractor;
@@ -172,7 +171,6 @@ public final class SecPanelSAStatusLogInteractor {
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
                 Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$13$$inlined$combine$1.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

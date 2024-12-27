@@ -70,7 +70,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
         final /* synthetic */ PromptViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(PromptViewModel promptViewModel, View view, ConstraintSet constraintSet, ConstraintSet constraintSet2, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = promptViewModel;
@@ -173,7 +172,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
         final /* synthetic */ PromptViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(PromptViewModel promptViewModel, View view, ConstraintSet constraintSet, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = promptViewModel;
@@ -240,7 +238,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
         final /* synthetic */ WindowManager $windowManager;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(PromptViewModel promptViewModel, WindowManager windowManager, ConstraintSet constraintSet, Guideline guideline, ConstraintSet constraintSet2, Guideline guideline2, Guideline guideline3, Guideline guideline4, View view, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = promptViewModel;
@@ -364,8 +361,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        /* JADX WARN: Multi-variable type inference failed */
         public AnonymousClass4(PromptViewModel promptViewModel, List<? extends View> list, ConstraintSet constraintSet, View view, ConstraintSet constraintSet2, ConstraintSet constraintSet3, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = promptViewModel;
@@ -482,7 +477,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass5(PromptViewModel promptViewModel, ConstraintSet constraintSet, ConstraintSet constraintSet2, ConstraintSet constraintSet3, float f, View view, Ref$ObjectRef<PromptSize> ref$ObjectRef, ConstraintSet constraintSet4, Ref$ObjectRef<PromptPosition> ref$ObjectRef2, View view2, AccessibilityManager accessibilityManager, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = promptViewModel;
@@ -527,9 +521,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
                 final View view2 = this.$panelView;
                 final AccessibilityManager accessibilityManager = this.$accessibilityManager;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.biometrics.ui.binder.BiometricViewSizeBinder.bind.2.1.5.3
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Type inference failed for: r10v2, types: [T, com.android.systemui.biometrics.ui.viewmodel.PromptPosition] */
-                    /* JADX WARN: Type inference failed for: r9v3, types: [T, com.android.systemui.biometrics.ui.viewmodel.PromptSize] */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
                         Pair pair = (Pair) obj2;
@@ -606,8 +597,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Multi-variable type inference failed */
     public BiometricViewSizeBinder$bind$2$1(PromptViewModel promptViewModel, View view, ConstraintSet constraintSet, ConstraintSet constraintSet2, WindowManager windowManager, Guideline guideline, Guideline guideline2, Guideline guideline3, Guideline guideline4, View view2, List<? extends View> list, ConstraintSet constraintSet3, ConstraintSet constraintSet4, float f, Ref$ObjectRef<PromptSize> ref$ObjectRef, Ref$ObjectRef<PromptPosition> ref$ObjectRef2, View view3, AccessibilityManager accessibilityManager, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = promptViewModel;

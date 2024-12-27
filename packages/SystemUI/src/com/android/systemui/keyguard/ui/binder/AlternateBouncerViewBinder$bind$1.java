@@ -41,7 +41,6 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
         private /* synthetic */ Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(AlternateBouncerViewModel alternateBouncerViewModel, SwipeUpAnywhereGestureHandler swipeUpAnywhereGestureHandler, TapGestureDetector tapGestureDetector, AlternateBouncerDependencies alternateBouncerDependencies, ScrimView scrimView, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = alternateBouncerViewModel;
@@ -80,7 +79,6 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
             final SwipeUpAnywhereGestureHandler swipeUpAnywhereGestureHandler2 = this.$swipeUpAnywhereGestureHandler;
             final TapGestureDetector tapGestureDetector2 = this.$tapGestureDetector;
             ((JobSupport) launch$default).invokeOnCompletion(new Function1() { // from class: com.android.systemui.keyguard.ui.binder.AlternateBouncerViewBinder.bind.1.1.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -98,7 +96,6 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AlternateBouncerViewBinder$bind$1(AlternateBouncerViewModel alternateBouncerViewModel, SwipeUpAnywhereGestureHandler swipeUpAnywhereGestureHandler, TapGestureDetector tapGestureDetector, AlternateBouncerDependencies alternateBouncerDependencies, ScrimView scrimView, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = alternateBouncerViewModel;

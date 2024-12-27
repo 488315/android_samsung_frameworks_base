@@ -46,7 +46,6 @@ public class SprObjectShapePath extends SprObjectBase {
         public float y1 = 0.0f;
         public float y2 = 0.0f;
 
-        /* JADX INFO: Access modifiers changed from: protected */
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
         public PathInfo m8817clone() throws CloneNotSupportedException {
             return (PathInfo) super.clone();

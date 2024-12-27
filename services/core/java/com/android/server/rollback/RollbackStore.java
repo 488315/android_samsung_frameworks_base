@@ -30,9 +30,6 @@ public final class RollbackStore {
         this.mRollbackHistoryDir = file2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:14:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0038 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

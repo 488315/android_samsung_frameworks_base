@@ -311,7 +311,6 @@ public final class RuleUpdateForSecurity {
                 VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unexpected value: "));
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:58:0x0032 -> B:15:0x0062). Please report as a decompilation issue!!! */
     public static byte[] readFile(StrictJarFile strictJarFile, ZipEntry zipEntry) {
         BufferedInputStream bufferedInputStream;
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -436,7 +435,6 @@ public final class RuleUpdateForSecurity {
         return z;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(13:17|18|19|20|21|(1:22)|(8:24|25|(2:27|28)(1:(3:228|229|(2:231|(1:233))(1:235))(1:236))|29|30|(28:32|(1:34)|35|36|37|38|39|40|41|(3:43|(3:44|45|(4:47|48|49|51))|194)|201|202|203|204|161|162|59|(2:61|(9:63|64|65|66|67|68|(4:72|(3:75|76|73)|77|78)|80|(1:82)(2:84|85)))|92|(3:94|(3:97|(3:99|(2:101|(2:103|104)(2:106|107))(3:108|109|111)|105)(3:134|(4:136|137|138|(4:141|142|143|(2:145|146)(1:147)))(1:158)|105)|95)|159)|160|114|(2:116|(3:118|(1:120)(1:122)|121)(1:123))|124|(1:(3:127|128|(2:130|131)))(1:133)|132|128|(0))(1:223)|90|91)(1:237)|234|29|30|(0)(0)|90|91) */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x0223, code lost:
 
        if (r7 == null) goto L85;
@@ -445,29 +443,6 @@ public final class RuleUpdateForSecurity {
 
        if (r3 == false) goto L191;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x036d  */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x03d8  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x0412  */
-    /* JADX WARN: Removed duplicated region for block: B:133:0x03dd  */
-    /* JADX WARN: Removed duplicated region for block: B:165:0x021d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:169:0x0218 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:178:0x0430 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:184:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:185:0x0428 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:189:0x0423 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:223:0x0434  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0158  */
-    /* JADX WARN: Type inference failed for: r0v18 */
-    /* JADX WARN: Type inference failed for: r0v30 */
-    /* JADX WARN: Type inference failed for: r0v87 */
-    /* JADX WARN: Type inference failed for: r0v88 */
-    /* JADX WARN: Type inference failed for: r7v14 */
-    /* JADX WARN: Type inference failed for: r7v15, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v24 */
-    /* JADX WARN: Type inference failed for: r9v26 */
-    /* JADX WARN: Type inference failed for: r9v27, types: [int] */
-    /* JADX WARN: Type inference failed for: r9v33 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

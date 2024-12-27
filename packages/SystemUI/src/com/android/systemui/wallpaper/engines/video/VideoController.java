@@ -154,7 +154,6 @@ public final class VideoController {
         public interface Callback {
         }
 
-        /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.wallpaper.engines.video.VideoController$PlayerSession$$ExternalSyntheticLambda0] */
         public PlayerSession(VideoSource videoSource, Handler handler, Callback callback) {
             int i = sNextId;
             this.mId = i;
@@ -482,7 +481,6 @@ public final class VideoController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x011a A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

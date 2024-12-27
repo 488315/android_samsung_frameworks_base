@@ -18,7 +18,6 @@ public final class NoteTaskController$showNoteTaskAsUser$$inlined$launch$default
     int label;
     final /* synthetic */ NoteTaskController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NoteTaskController$showNoteTaskAsUser$$inlined$launch$default$1(String str, Continuation continuation, NoteTaskController noteTaskController, NoteTaskEntryPoint noteTaskEntryPoint, UserHandle userHandle) {
         super(2, continuation);
         this.$spanName = str;
@@ -39,8 +38,6 @@ public final class NoteTaskController$showNoteTaskAsUser$$inlined$launch$default
         return ((NoteTaskController$showNoteTaskAsUser$$inlined$launch$default$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0087  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x008c  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

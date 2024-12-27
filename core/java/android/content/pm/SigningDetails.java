@@ -26,7 +26,6 @@ public final class SigningDetails implements Parcelable {
     public static final Parcelable.Creator<SigningDetails> CREATOR =
             new Parcelable.Creator<
                     SigningDetails>() { // from class: android.content.pm.SigningDetails.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SigningDetails createFromParcel(Parcel source) {
                     if (source.readBoolean()) {
@@ -35,7 +34,6 @@ public final class SigningDetails implements Parcelable {
                     return new SigningDetails(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SigningDetails[] newArray(int size) {
                     return new SigningDetails[size];

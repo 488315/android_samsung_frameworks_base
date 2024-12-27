@@ -259,10 +259,6 @@ public final class BrightLineFalsingManager implements FalsingManager {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0041  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x009c A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0044  */
     @Override // com.android.systemui.plugins.FalsingManager
     /*
         Code decompiled incorrectly, please refer to instructions dump.

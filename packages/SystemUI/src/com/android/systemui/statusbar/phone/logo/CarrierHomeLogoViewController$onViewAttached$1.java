@@ -41,7 +41,6 @@ final class CarrierHomeLogoViewController$onViewAttached$1 extends SuspendLambda
             int label;
             final /* synthetic */ CarrierHomeLogoViewController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02061(CarrierHomeLogoViewController carrierHomeLogoViewController, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = carrierHomeLogoViewController;
@@ -93,7 +92,6 @@ final class CarrierHomeLogoViewController$onViewAttached$1 extends SuspendLambda
             int label;
             final /* synthetic */ CarrierHomeLogoViewController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(CarrierHomeLogoViewController carrierHomeLogoViewController, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = carrierHomeLogoViewController;
@@ -192,7 +190,6 @@ final class CarrierHomeLogoViewController$onViewAttached$1 extends SuspendLambda
             int label;
             final /* synthetic */ CarrierHomeLogoViewController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass3(CarrierHomeLogoViewController carrierHomeLogoViewController, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = carrierHomeLogoViewController;
@@ -239,7 +236,6 @@ final class CarrierHomeLogoViewController$onViewAttached$1 extends SuspendLambda
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(CarrierHomeLogoViewController carrierHomeLogoViewController, Continuation continuation) {
             super(2, continuation);
             this.this$0 = carrierHomeLogoViewController;
@@ -272,7 +268,6 @@ final class CarrierHomeLogoViewController$onViewAttached$1 extends SuspendLambda
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CarrierHomeLogoViewController$onViewAttached$1(CarrierHomeLogoViewController carrierHomeLogoViewController, Continuation continuation) {
         super(3, continuation);
         this.this$0 = carrierHomeLogoViewController;

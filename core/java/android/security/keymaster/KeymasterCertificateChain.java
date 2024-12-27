@@ -11,13 +11,11 @@ public class KeymasterCertificateChain implements Parcelable {
             new Parcelable.Creator<
                     KeymasterCertificateChain>() { // from class:
                                                    // android.security.keymaster.KeymasterCertificateChain.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeymasterCertificateChain createFromParcel(Parcel in) {
                     return new KeymasterCertificateChain(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeymasterCertificateChain[] newArray(int size) {
                     return new KeymasterCertificateChain[size];

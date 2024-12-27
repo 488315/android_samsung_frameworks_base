@@ -266,18 +266,6 @@ public abstract class AdditionalSubtypeUtils {
        r16 = r5;
        r5 = r8;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x01d0  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x01d3  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x01b5 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:87:? A[Catch: IOException | NumberFormatException | XmlPullParserException -> 0x01a4, IOException | NumberFormatException | XmlPullParserException -> 0x01a4, IOException | NumberFormatException | XmlPullParserException -> 0x01a4, SYNTHETIC, TRY_LEAVE, TryCatch #0 {IOException | NumberFormatException | XmlPullParserException -> 0x01a4, blocks: (B:23:0x01a0, B:86:0x01be, B:86:0x01be, B:86:0x01be, B:85:0x01bb, B:85:0x01bb, B:85:0x01bb), top: B:2:0x0009 }] */
-    /* JADX WARN: Type inference failed for: r2v0, types: [android.util.ArrayMap] */
-    /* JADX WARN: Type inference failed for: r2v1 */
-    /* JADX WARN: Type inference failed for: r2v10 */
-    /* JADX WARN: Type inference failed for: r2v2, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r2v3 */
-    /* JADX WARN: Type inference failed for: r2v6, types: [android.util.ArrayMap] */
-    /* JADX WARN: Type inference failed for: r2v8 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

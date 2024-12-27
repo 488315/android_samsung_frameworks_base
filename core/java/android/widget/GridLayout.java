@@ -608,7 +608,6 @@ public class GridLayout extends ViewGroup {
         return (LayoutParams) c.getLayoutParams();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void handleInvalidParams(String msg) {
         throw new IllegalArgumentException(msg + ". ");
     }
@@ -647,7 +646,6 @@ public class GridLayout extends ViewGroup {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.ViewGroup
     public LayoutParams generateDefaultLayoutParams() {
         return new LayoutParams();
@@ -658,7 +656,6 @@ public class GridLayout extends ViewGroup {
         return new LayoutParams(getContext(), attrs);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.ViewGroup
     public LayoutParams generateLayoutParams(ViewGroup.LayoutParams lp) {
         if (sPreserveMarginParamsInLayoutParamConversion) {
@@ -1176,7 +1173,6 @@ public class GridLayout extends ViewGroup {
             return result;
         }
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.widget.GridLayout$Axis$1] */
         private Arc[] topologicalSort(final Arc[] arcs) {
             return new Object() { // from class: android.widget.GridLayout.Axis.1
                 static final /* synthetic */ boolean $assertionsDisabled = false;
@@ -1996,7 +1992,6 @@ public class GridLayout extends ViewGroup {
             this(startDefined, new Interval(start, start + size), alignment, weight);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Alignment getAbsoluteAlignment(boolean horizontal) {
             if (this.alignment != GridLayout.UNDEFINED_ALIGNMENT) {
                 return this.alignment;

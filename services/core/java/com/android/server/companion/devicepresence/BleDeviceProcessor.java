@@ -110,7 +110,6 @@ public final class BleDeviceProcessor implements AssociationStore.OnChangeListen
         SCAN_SETTINGS = builder.build();
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.companion.devicepresence.BleDeviceProcessor$2] */
     public BleDeviceProcessor(
             AssociationStore associationStore, DevicePresenceProcessor devicePresenceProcessor) {
         this.mAssociationStore = associationStore;

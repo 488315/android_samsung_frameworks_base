@@ -36,12 +36,10 @@ public final class StrictJarFile {
 
     private static native ZipEntry nativeFindEntry(long j, String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native ZipEntry nativeNextEntry(long j);
 
     private static native long nativeOpenJarFile(String str, int i) throws IOException;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeStartIteration(long j, String str);
 
     public StrictJarFile(String fileName) throws IOException, SecurityException {

@@ -20,7 +20,6 @@ public class DataConnectionErrorData {
         this.mLogWrapper = logWrapper;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$getPButtonClickListener$0(Context context) {
         Intent intent = new Intent();
         intent.setAction(PopupUIUtil.ACTION_AIRPLANE_MODE_SETTINGS);
@@ -28,12 +27,10 @@ public class DataConnectionErrorData {
         context.startActivity(intent);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$getPButtonClickListener$1(Context context) {
         ((TelephonyManager) context.getSystemService("phone")).setDataEnabled(true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getPButtonClickListener$2(boolean z, PendingIntent pendingIntent) {
         if (!z || pendingIntent == null) {
             return;

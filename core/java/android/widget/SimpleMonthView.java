@@ -259,8 +259,6 @@ class SimpleMonthView extends View {
         return this.mTouchHelper.dispatchHoverEvent(event) || super.dispatchHoverEvent(event);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x003e A[RETURN] */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -317,7 +315,6 @@ class SimpleMonthView extends View {
                     + " android.widget.SimpleMonthView.onTouchEvent(android.view.MotionEvent):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0033  */
     @Override // android.view.View, android.view.KeyEvent.Callback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -669,12 +666,10 @@ class SimpleMonthView extends View {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isDayEnabled(int day) {
         return day >= this.mEnabledDayStart && day <= this.mEnabledDayEnd;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isValidDayOfMonth(int day) {
         return day >= 1 && day <= this.mDaysInMonth;
     }
@@ -833,7 +828,6 @@ class SimpleMonthView extends View {
         return offset;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getDayAtLocation(int x, int y) {
         int headerHeight;
         int paddedY;
@@ -883,7 +877,6 @@ class SimpleMonthView extends View {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean onDayClicked(int day) {
         if (!isValidDayOfMonth(day) || !isDayEnabled(day)) {
             return false;

@@ -16,13 +16,11 @@ public final class MediaProjectionConfig implements Parcelable {
     public static final Parcelable.Creator<MediaProjectionConfig> CREATOR =
             new Parcelable.Creator<MediaProjectionConfig>() { // from class:
                 // android.media.projection.MediaProjectionConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaProjectionConfig[] newArray(int size) {
                     return new MediaProjectionConfig[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaProjectionConfig createFromParcel(Parcel in) {
                     return new MediaProjectionConfig(in);

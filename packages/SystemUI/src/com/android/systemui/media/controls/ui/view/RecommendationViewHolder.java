@@ -60,7 +60,6 @@ public final class RecommendationViewHolder {
         this(view);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private RecommendationViewHolder(View view) {
         this.recommendations = (TransitionLayout) view;
         List listOf = CollectionsKt__CollectionsKt.listOf(view.requireViewById(R.id.media_cover1_container), view.requireViewById(R.id.media_cover2_container), view.requireViewById(R.id.media_cover3_container));

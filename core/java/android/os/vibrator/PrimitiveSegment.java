@@ -13,14 +13,12 @@ public final class PrimitiveSegment extends VibrationEffectSegment {
     public static final Parcelable.Creator<PrimitiveSegment> CREATOR =
             new Parcelable.Creator<
                     PrimitiveSegment>() { // from class: android.os.vibrator.PrimitiveSegment.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrimitiveSegment createFromParcel(Parcel in) {
                     in.readInt();
                     return new PrimitiveSegment(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrimitiveSegment[] newArray(int size) {
                     return new PrimitiveSegment[size];

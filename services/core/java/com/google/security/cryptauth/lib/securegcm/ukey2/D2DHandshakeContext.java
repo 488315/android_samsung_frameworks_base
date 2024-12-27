@@ -3,13 +3,10 @@ package com.google.security.cryptauth.lib.securegcm.ukey2;
 public class D2DHandshakeContext {
     public final long contextPtr;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class NextProtocol {
         public static final /* synthetic */ NextProtocol[] $VALUES;
         public static final NextProtocol AES_256_CBC_HMAC_SHA256;
 
-        /* JADX INFO: Fake field, exist only in values array */
         NextProtocol EF0;
 
         static {
@@ -28,8 +25,6 @@ public class D2DHandshakeContext {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Role {
         public static final /* synthetic */ Role[] $VALUES;
         public static final Role INITIATOR;

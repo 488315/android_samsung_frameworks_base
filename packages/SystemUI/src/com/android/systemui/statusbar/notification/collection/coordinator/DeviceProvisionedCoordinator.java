@@ -50,7 +50,6 @@ public class DeviceProvisionedCoordinator implements Coordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean showNotificationEvenIfUnprovisioned(StatusBarNotification statusBarNotification) {
         return statusBarNotification.getNotification().extras.getBoolean("android.allowDuringSetup");
     }

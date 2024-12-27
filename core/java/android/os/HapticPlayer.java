@@ -209,7 +209,6 @@ public class HapticPlayer implements AutoCloseable {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public VibrationEffect createStepEffect(
             List<StepParameter> parameters, int interval, int amplitude, int freq) {
         if (parameters == null) {
@@ -236,7 +235,6 @@ public class HapticPlayer implements AutoCloseable {
         return VibrationEffect.createWaveform(durations, amplitudes, frequencies, -1);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public List<RampParameter> parseRamp(String json) {
         String str;
         JSONArray patternArray;
@@ -346,7 +344,6 @@ public class HapticPlayer implements AutoCloseable {
         return parameters;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public List<StepParameter> rampToStepParameter(RampParameter parameter) {
         float startAmplitude = parameter.getStartAmplitude();
         float endAmplitude = parameter.getEndAmplitude();

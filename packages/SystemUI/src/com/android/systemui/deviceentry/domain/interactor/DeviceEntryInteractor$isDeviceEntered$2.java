@@ -50,7 +50,6 @@ final class DeviceEntryInteractor$isDeviceEntered$2 extends SuspendLambda implem
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryInteractor$isDeviceEntered$2(DeviceEntryInteractor deviceEntryInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceEntryInteractor;

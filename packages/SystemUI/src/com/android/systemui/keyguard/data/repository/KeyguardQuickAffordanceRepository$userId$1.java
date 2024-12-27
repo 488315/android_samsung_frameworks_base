@@ -20,7 +20,6 @@ final class KeyguardQuickAffordanceRepository$userId$1 extends SuspendLambda imp
     int label;
     final /* synthetic */ KeyguardQuickAffordanceRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordanceRepository$userId$1(KeyguardQuickAffordanceRepository keyguardQuickAffordanceRepository, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardQuickAffordanceRepository;
@@ -38,8 +37,6 @@ final class KeyguardQuickAffordanceRepository$userId$1 extends SuspendLambda imp
         return ((KeyguardQuickAffordanceRepository$userId$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.keyguard.data.repository.KeyguardQuickAffordanceRepository$userId$1$callback$1, com.android.systemui.settings.UserTracker$Callback] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -62,7 +59,6 @@ final class KeyguardQuickAffordanceRepository$userId$1 extends SuspendLambda imp
             ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, producerScope, new Integer(((UserTrackerImpl) this.this$0.userTracker).getUserId()), "KeyguardQuickAffordanceRepository");
             final KeyguardQuickAffordanceRepository keyguardQuickAffordanceRepository = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.KeyguardQuickAffordanceRepository$userId$1.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

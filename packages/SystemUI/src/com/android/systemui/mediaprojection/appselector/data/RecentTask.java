@@ -21,8 +21,6 @@ public final class RecentTask {
     public final int userId;
     public final UserType userType;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class UserType {
         public static final /* synthetic */ UserType[] $VALUES;
         public static final UserType CLONED;
@@ -99,7 +97,6 @@ public final class RecentTask {
         this(recentTaskInfo, z, userType, (i & 8) != 0 ? null : splitBounds);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

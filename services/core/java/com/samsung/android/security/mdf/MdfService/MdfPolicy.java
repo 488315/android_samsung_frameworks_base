@@ -69,24 +69,6 @@ public final class MdfPolicy {
         Log.println(i2, "MdfService", str);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0095  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00a0  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00bd  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00cc  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x010d  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0134  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0145  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0154  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x015a  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x014f  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x013a  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x012e  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0104  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x00c4  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x00a6  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x008b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -327,19 +309,6 @@ public final class MdfPolicy {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00eb A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00ec  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x009e  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00ca  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0060  */
-    /* JADX WARN: Type inference failed for: r4v1, types: [int] */
-    /* JADX WARN: Type inference failed for: r4v4 */
-    /* JADX WARN: Type inference failed for: r4v5 */
-    /* JADX WARN: Type inference failed for: r4v6 */
-    /* JADX WARN: Type inference failed for: r4v8 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

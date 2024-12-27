@@ -20,8 +20,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
 public abstract class SnackbarScaffoldKt {
-    /* JADX WARN: Type inference failed for: r5v1, types: [com.android.systemui.media.mediaoutput.compose.widget.SnackbarScaffoldKt$SnackbarScaffold$1, kotlin.jvm.internal.Lambda] */
-    /* JADX WARN: Type inference failed for: r6v2, types: [com.android.systemui.media.mediaoutput.compose.widget.SnackbarScaffoldKt$SnackbarScaffold$2, kotlin.jvm.internal.Lambda] */
     public static final void SnackbarScaffold(final Function3 function3, Composer composer, final int i) {
         int i2;
         ComposerImpl composerImpl;
@@ -73,7 +71,6 @@ public abstract class SnackbarScaffoldKt {
             Color.Companion.getClass();
             composerImpl = composerImpl2;
             ScaffoldKt.m232ScaffoldTvnljyQ(fillMaxWidth, null, null, rememberComposableLambda, null, 0, Color.Transparent, 0L, null, ComposableLambdaKt.rememberComposableLambda(-476988426, composerImpl2, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SnackbarScaffoldKt$SnackbarScaffold$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(3);
                 }
@@ -82,7 +79,6 @@ public abstract class SnackbarScaffoldKt {
                 
                     if (r0 == androidx.compose.runtime.Composer.Companion.Empty) goto L22;
                  */
-                /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.media.mediaoutput.compose.widget.SnackbarScaffoldKt$SnackbarScaffold$2$1, kotlin.jvm.internal.Lambda] */
                 @Override // kotlin.jvm.functions.Function3
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -171,7 +167,6 @@ public abstract class SnackbarScaffoldKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SnackbarScaffoldKt$SnackbarScaffold$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

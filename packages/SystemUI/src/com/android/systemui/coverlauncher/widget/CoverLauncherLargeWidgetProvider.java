@@ -35,10 +35,6 @@ public final class CoverLauncherLargeWidgetProvider extends AppWidgetProvider {
         sWidgetOptions = new CoverLauncherWidgetOptions(false, null, 0, 7, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:18:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0083  */
     @Override // android.appwidget.AppWidgetProvider
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -16,7 +16,6 @@ final class PromptIconViewModel$iconSize$1 extends SuspendLambda implements Func
     /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptIconViewModel$iconSize$1(PromptViewModel promptViewModel, Continuation continuation) {
         super(5, continuation);
         this.$promptViewModel = promptViewModel;

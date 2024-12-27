@@ -28,8 +28,6 @@ public final class AutoSwitchSettingHelper {
     public boolean mIsRegisterBtStateReceiver;
     public final AnonymousClass1 mReceiver;
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.samsung.android.server.continuity.autoswitch.AutoSwitchSettingHelper$1] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.samsung.android.server.continuity.autoswitch.AutoSwitchSettingHelper$1] */
     public AutoSwitchSettingHelper(
             Context context,
             AbstractPreconditionObserver$$ExternalSyntheticLambda1
@@ -47,7 +45,6 @@ public final class AutoSwitchSettingHelper {
                         this.this$0 = this;
                     }
 
-                    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                     /* JADX WARN: Code restructure failed: missing block: B:29:0x0037, code lost:
 
                        if (r2.equals("com.samsung.intent.action.SETTINGS_WIFI_BLUETOOTH_RESET") == false) goto L9;

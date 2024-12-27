@@ -9,7 +9,6 @@ public class SatelliteVelocityEcef implements Parcelable {
     public static final Parcelable.Creator<SatelliteVelocityEcef> CREATOR =
             new Parcelable.Creator<SatelliteVelocityEcef>() { // from class:
                 // android.hardware.gnss.SatelliteVelocityEcef.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteVelocityEcef createFromParcel(Parcel _aidl_source) {
                     SatelliteVelocityEcef _aidl_out = new SatelliteVelocityEcef();
@@ -17,7 +16,6 @@ public class SatelliteVelocityEcef implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteVelocityEcef[] newArray(int _aidl_size) {
                     return new SatelliteVelocityEcef[_aidl_size];

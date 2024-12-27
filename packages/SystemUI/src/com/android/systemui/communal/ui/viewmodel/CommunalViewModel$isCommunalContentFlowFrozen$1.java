@@ -14,7 +14,6 @@ final class CommunalViewModel$isCommunalContentFlowFrozen$1 extends SuspendLambd
     int label;
     final /* synthetic */ CommunalViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalViewModel$isCommunalContentFlowFrozen$1(CommunalViewModel communalViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalViewModel;

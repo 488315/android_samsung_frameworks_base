@@ -16,7 +16,6 @@ final class MediaControllerCallbackProducer$send$1 extends SuspendLambda impleme
     int label;
     final /* synthetic */ MediaControllerCallbackProducer this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaControllerCallbackProducer$send$1(MediaControllerCallbackProducer mediaControllerCallbackProducer, MediaControllerChangeModel mediaControllerChangeModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaControllerCallbackProducer;

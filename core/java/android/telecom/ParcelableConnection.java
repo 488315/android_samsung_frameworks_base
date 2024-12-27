@@ -14,7 +14,6 @@ public final class ParcelableConnection implements Parcelable {
     public static final Parcelable.Creator<ParcelableConnection> CREATOR =
             new Parcelable.Creator<
                     ParcelableConnection>() { // from class: android.telecom.ParcelableConnection.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableConnection createFromParcel(Parcel source) {
                     ClassLoader classLoader = ParcelableConnection.class.getClassLoader();
@@ -72,7 +71,6 @@ public final class ParcelableConnection implements Parcelable {
                             callerNumberVerificationStatus);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableConnection[] newArray(int size) {
                     return new ParcelableConnection[size];

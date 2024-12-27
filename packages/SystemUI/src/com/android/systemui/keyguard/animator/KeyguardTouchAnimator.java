@@ -157,8 +157,6 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
                 return true;
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:23:0x008d  */
-            /* JADX WARN: Removed duplicated region for block: B:26:? A[RETURN, SYNTHETIC] */
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnDoubleTapListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.

@@ -9,7 +9,6 @@ final class KeyguardQuickAffordanceInteractor$getSlotPickerRepresentations$1 ext
     /* synthetic */ Object result;
     final /* synthetic */ KeyguardQuickAffordanceInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordanceInteractor$getSlotPickerRepresentations$1(KeyguardQuickAffordanceInteractor keyguardQuickAffordanceInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = keyguardQuickAffordanceInteractor;

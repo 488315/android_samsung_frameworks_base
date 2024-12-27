@@ -44,7 +44,6 @@ public class ImsMultiEndpointImplBase {
                     "setListener");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setListener$0(IImsExternalCallStateListener listener) {
             if (ImsMultiEndpointImplBase.this.mListener != null
                     && !ImsMultiEndpointImplBase.this.mListener.asBinder().isBinderAlive()) {
@@ -70,7 +69,6 @@ public class ImsMultiEndpointImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$requestImsExternalCallStateInfo$1() {
             ImsMultiEndpointImplBase.this.requestImsExternalCallStateInfo();
         }

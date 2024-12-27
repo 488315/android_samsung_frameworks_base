@@ -108,7 +108,6 @@ public class Dialog
     final Window mWindow;
     private final WindowManager mWindowManager;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(
             View v,
             int left,
@@ -238,7 +237,6 @@ public class Dialog
         this.mListenersHandler = new ListenersHandler(this);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$1() {
         if (this.mCancelable) {
             cancel();
@@ -401,7 +399,6 @@ public class Dialog
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$semSetAnchor$2() {
         this.mRootView.removeOnLayoutChangeListener(this.mOnLayoutChangeListener);
     }

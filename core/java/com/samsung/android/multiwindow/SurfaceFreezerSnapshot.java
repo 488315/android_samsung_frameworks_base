@@ -12,13 +12,11 @@ public class SurfaceFreezerSnapshot implements Parcelable {
             new Parcelable.Creator<
                     SurfaceFreezerSnapshot>() { // from class:
                                                 // com.samsung.android.multiwindow.SurfaceFreezerSnapshot.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SurfaceFreezerSnapshot createFromParcel(Parcel source) {
                     return new SurfaceFreezerSnapshot(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SurfaceFreezerSnapshot[] newArray(int size) {
                     return new SurfaceFreezerSnapshot[size];

@@ -401,7 +401,6 @@ public class Log {
         return obj == null ? "<null>" : obj.getClass().getSimpleName();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:9:0x005a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

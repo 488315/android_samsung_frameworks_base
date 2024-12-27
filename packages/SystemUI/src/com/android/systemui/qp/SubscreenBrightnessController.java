@@ -61,14 +61,9 @@ public final class SubscreenBrightnessController extends ViewController {
         public final ContentResolver mCr;
         public final AnonymousClass1 mHighBrightnessModeEnterRunnable;
 
-        /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.qp.SubscreenBrightnessController$BrightnessObserver$1] */
         public BrightnessObserver(Handler handler) {
             super(handler);
             this.mHighBrightnessModeEnterRunnable = new Runnable() { // from class: com.android.systemui.qp.SubscreenBrightnessController.BrightnessObserver.1
-                /* JADX WARN: Multi-variable type inference failed */
-                /* JADX WARN: Type inference failed for: r0v5 */
-                /* JADX WARN: Type inference failed for: r0v6, types: [boolean, int] */
-                /* JADX WARN: Type inference failed for: r0v7 */
                 @Override // java.lang.Runnable
                 public final void run() {
                     ?? r0 = Settings.System.getIntForUser(SubscreenBrightnessController.this.mContext.getContentResolver(), "high_brightness_mode_pms_enter", 0, -2) != 0 ? 1 : 0;
@@ -172,10 +167,6 @@ public final class SubscreenBrightnessController extends ViewController {
         subscreenBrightnessController.mSliderAnimator.start();
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.qp.SubscreenBrightnessController$1] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.qp.SubscreenBrightnessController$2] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [android.os.Handler, com.android.systemui.qp.SubscreenBrightnessController$3] */
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.qp.SubscreenBrightnessController$4] */
     public SubscreenBrightnessController(Context context, SubroomBrightnessSettingsView subroomBrightnessSettingsView) {
         super(subroomBrightnessSettingsView);
         this.mBrightnessMin = 0.0f;

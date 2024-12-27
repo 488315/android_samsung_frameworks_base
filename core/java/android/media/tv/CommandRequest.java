@@ -9,14 +9,12 @@ public final class CommandRequest extends BroadcastInfoRequest implements Parcel
     public static final Parcelable.Creator<CommandRequest> CREATOR =
             new Parcelable.Creator<
                     CommandRequest>() { // from class: android.media.tv.CommandRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CommandRequest createFromParcel(Parcel source) {
                     source.readInt();
                     return CommandRequest.createFromParcelBody(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CommandRequest[] newArray(int size) {
                     return new CommandRequest[size];

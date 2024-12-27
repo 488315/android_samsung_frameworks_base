@@ -11,13 +11,11 @@ public class OptionsCmdStatus implements Parcelable {
             new Parcelable.Creator<
                     OptionsCmdStatus>() { // from class:
                                           // com.android.ims.internal.uce.options.OptionsCmdStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OptionsCmdStatus createFromParcel(Parcel source) {
                     return new OptionsCmdStatus(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OptionsCmdStatus[] newArray(int size) {
                     return new OptionsCmdStatus[size];

@@ -8,13 +8,11 @@ public final class WindowContentFrameStats extends FrameStats implements Parcela
             new Parcelable.Creator<
                     WindowContentFrameStats>() { // from class:
                                                  // android.view.WindowContentFrameStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowContentFrameStats createFromParcel(Parcel parcel) {
                     return new WindowContentFrameStats(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowContentFrameStats[] newArray(int size) {
                     return new WindowContentFrameStats[size];

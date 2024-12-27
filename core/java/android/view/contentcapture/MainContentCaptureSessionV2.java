@@ -63,7 +63,6 @@ public final class MainContentCaptureSessionV2 extends ContentCaptureSession {
     private boolean mNextFlushForTextChanged = false;
     private final AtomicInteger mWrongThreadCount = new AtomicInteger(0);
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class SessionStateReceiver extends IResultReceiver.Stub {
         private final WeakReference<MainContentCaptureSessionV2> mMainSession;
 
@@ -162,7 +161,6 @@ public final class MainContentCaptureSessionV2 extends ContentCaptureSession {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: startImpl, reason: merged with bridge method [inline-methods] */
     public void lambda$start$0(
             IBinder token, IBinder shareableActivityToken, ComponentName component, int flags) {
@@ -236,7 +234,6 @@ public final class MainContentCaptureSessionV2 extends ContentCaptureSession {
                 1);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onDestroy$1() {
         try {
             flush(4);
@@ -300,7 +297,6 @@ public final class MainContentCaptureSessionV2 extends ContentCaptureSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onSessionStarted$2() {
         Log.w(TAG, "Keeping session " + this.mId + " when service died");
         this.mState = 1024;
@@ -550,7 +546,6 @@ public final class MainContentCaptureSessionV2 extends ContentCaptureSession {
                 flushFrequencyMs);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: flushIfNeeded, reason: merged with bridge method [inline-methods] */
     public void lambda$scheduleFlush$3(int reason) {
         checkOnContentCaptureThread();
@@ -576,7 +571,6 @@ public final class MainContentCaptureSessionV2 extends ContentCaptureSession {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: flushImpl, reason: merged with bridge method [inline-methods] */
     public void lambda$flush$4(int reason) {
         checkOnContentCaptureThread();
@@ -881,7 +875,6 @@ public final class MainContentCaptureSessionV2 extends ContentCaptureSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$enqueueEvent$5(List batchEvents, ContentCaptureEvent event) {
         for (int i = 0; i < batchEvents.size(); i++) {
             sendEvent((ContentCaptureEvent) batchEvents.get(i));
@@ -903,7 +896,6 @@ public final class MainContentCaptureSessionV2 extends ContentCaptureSession {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$notifyContentCaptureEvents$7(
             final SparseArray contentCaptureEvents) {
         prepareViewStructures(contentCaptureEvents);
@@ -955,7 +947,6 @@ public final class MainContentCaptureSessionV2 extends ContentCaptureSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: notifyContentCaptureEventsImpl, reason: merged with bridge method [inline-methods] */
     public void lambda$notifyContentCaptureEvents$6(
             SparseArray<ArrayList<Object>> contentCaptureEvents) {
@@ -1125,7 +1116,6 @@ public final class MainContentCaptureSessionV2 extends ContentCaptureSession {
                 CONTENT_CAPTURE_WRONG_THREAD_METRIC_ID, this.mWrongThreadCount.getAndSet(0));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void runOnContentCaptureThread(Runnable r) {
         if (!this.mContentCaptureHandler.getLooper().isCurrentThread()) {
             this.mContentCaptureHandler.post(r);

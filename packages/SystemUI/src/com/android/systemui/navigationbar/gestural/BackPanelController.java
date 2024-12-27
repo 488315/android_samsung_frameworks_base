@@ -126,8 +126,6 @@ public final class BackPanelController extends ViewController implements Navigat
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class GestureState {
         public static final /* synthetic */ GestureState[] $VALUES;
         public static final GestureState ACTIVE;
@@ -207,8 +205,6 @@ public final class BackPanelController extends ViewController implements Navigat
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.systemui.navigationbar.gestural.BackPanelController$failsafeRunnable$1] */
-    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.systemui.navigationbar.gestural.BackPanelController$configurationListener$1] */
     public BackPanelController(Context context, WindowManager windowManager, ViewConfiguration viewConfiguration, Handler handler, SystemClock systemClock, VibratorHelper vibratorHelper, ConfigurationController configurationController, LatencyTracker latencyTracker, InteractionJankMonitor interactionJankMonitor) {
         super(BasicRune.NAVBAR_GESTURE ? new SamsungBackPanel(context, latencyTracker, (NavBarStore) Dependency.sDependency.getDependencyInner(NavBarStore.class)) : new BackPanel(context, latencyTracker));
         this.windowManager = windowManager;
@@ -334,7 +330,6 @@ public final class BackPanelController extends ViewController implements Navigat
         }
         if ((i & 4) != 0) {
             function0 = new Function0() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$isPastThresholdToActive$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -1012,18 +1007,6 @@ public final class BackPanelController extends ViewController implements Navigat
         this.minFlingDistance = this.viewConfiguration.getScaledTouchSlop() * 3;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:205:0x02ae  */
-    /* JADX WARN: Removed duplicated region for block: B:207:0x02b4  */
-    /* JADX WARN: Removed duplicated region for block: B:214:0x02ed  */
-    /* JADX WARN: Removed duplicated region for block: B:216:0x02f3  */
-    /* JADX WARN: Removed duplicated region for block: B:223:0x02fc  */
-    /* JADX WARN: Removed duplicated region for block: B:227:0x0304  */
-    /* JADX WARN: Removed duplicated region for block: B:231:0x030c  */
-    /* JADX WARN: Removed duplicated region for block: B:235:0x0314  */
-    /* JADX WARN: Removed duplicated region for block: B:239:0x02be  */
-    /* JADX WARN: Removed duplicated region for block: B:243:0x02c7  */
-    /* JADX WARN: Removed duplicated region for block: B:247:0x02d0  */
-    /* JADX WARN: Removed duplicated region for block: B:251:0x02d9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

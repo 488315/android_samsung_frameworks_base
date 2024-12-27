@@ -80,7 +80,6 @@ public final class ScheduleConditionProvider extends SystemConditionProviderServ
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.notification.ScheduleConditionProvider$1] */
     public ScheduleConditionProvider() {
         DeviceIdleController$$ExternalSyntheticOutline0.m(
                 new StringBuilder("new "), SIMPLE_NAME, "()", "ConditionProviders.SCP");

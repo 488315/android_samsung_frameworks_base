@@ -22,13 +22,11 @@ import java.util.List;
 public final class InputDevice implements Parcelable {
     public static final Parcelable.Creator<InputDevice> CREATOR =
             new Parcelable.Creator<InputDevice>() { // from class: android.view.InputDevice.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputDevice createFromParcel(Parcel in) {
                     return new InputDevice(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputDevice[] newArray(int size) {
                     return new InputDevice[size];
@@ -537,13 +535,11 @@ public final class InputDevice implements Parcelable {
         return this.mViewBehavior;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addMotionRange(
             int axis, int source, float min, float max, float flat, float fuzz, float resolution) {
         this.mMotionRanges.add(new MotionRange(axis, source, min, max, flat, fuzz, resolution));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setShouldSmoothScroll(boolean shouldSmoothScroll) {
         this.mViewBehavior.mShouldSmoothScroll = shouldSmoothScroll;
     }

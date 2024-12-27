@@ -31,13 +31,11 @@ public class VibratorInfo implements Parcelable {
     public static final VibratorInfo EMPTY_VIBRATOR_INFO = new Builder(-1).build();
     public static final Parcelable.Creator<VibratorInfo> CREATOR =
             new Parcelable.Creator<VibratorInfo>() { // from class: android.os.VibratorInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VibratorInfo createFromParcel(Parcel in) {
                     return new VibratorInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VibratorInfo[] newArray(int size) {
                     return new VibratorInfo[size];
@@ -410,13 +408,11 @@ public class VibratorInfo implements Parcelable {
                 new Parcelable.Creator<
                         FrequencyProfile>() { // from class:
                                               // android.os.VibratorInfo.FrequencyProfile.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FrequencyProfile createFromParcel(Parcel in) {
                         return new FrequencyProfile(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FrequencyProfile[] newArray(int size) {
                         return new FrequencyProfile[size];

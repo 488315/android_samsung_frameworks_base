@@ -17,7 +17,6 @@ final class DumpHandler$findAllMatchesInCollection$1 extends RestrictedSuspendLa
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DumpHandler$findAllMatchesInCollection$1(Collection<DumpsysEntry.DumpableEntry> collection, Collection<DumpsysEntry.LogBufferEntry> collection2, Collection<DumpsysEntry.TableLogBufferEntry> collection3, List<String> list, Continuation continuation) {
         super(2, continuation);
         this.$dumpables = collection;
@@ -38,8 +37,6 @@ final class DumpHandler$findAllMatchesInCollection$1 extends RestrictedSuspendLa
         return ((DumpHandler$findAllMatchesInCollection$1) create((SequenceScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00b6  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00d7 A[RETURN] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

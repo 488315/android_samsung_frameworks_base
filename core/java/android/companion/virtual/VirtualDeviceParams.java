@@ -41,13 +41,11 @@ public final class VirtualDeviceParams implements Parcelable {
     public static final Parcelable.Creator<VirtualDeviceParams> CREATOR =
             new Parcelable.Creator<VirtualDeviceParams>() { // from class:
                 // android.companion.virtual.VirtualDeviceParams.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualDeviceParams createFromParcel(Parcel in) {
                     return new VirtualDeviceParams(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualDeviceParams[] newArray(int size) {
                     return new VirtualDeviceParams[size];
@@ -393,7 +391,6 @@ public final class VirtualDeviceParams implements Parcelable {
         private int mAudioRecordingSessionId = 0;
         private final List<VirtualSensorConfig> mVirtualSensorConfigs = new ArrayList();
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class VirtualSensorCallbackDelegate extends IVirtualSensorCallback.Stub {
             private final VirtualSensorCallback mCallback;
             private final VirtualSensorDirectChannelCallback mDirectChannelCallback;
@@ -436,7 +433,6 @@ public final class VirtualDeviceParams implements Parcelable {
                         });
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onConfigurationChanged$0(
                     VirtualSensor sensor,
                     boolean enabled,
@@ -463,7 +459,6 @@ public final class VirtualDeviceParams implements Parcelable {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onDirectChannelCreated$1(
                     int channelHandle, SharedMemory sharedMemory) {
                 this.mDirectChannelCallback.onDirectChannelCreated(channelHandle, sharedMemory);
@@ -484,7 +479,6 @@ public final class VirtualDeviceParams implements Parcelable {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onDirectChannelDestroyed$2(int channelHandle) {
                 this.mDirectChannelCallback.onDirectChannelDestroyed(channelHandle);
             }
@@ -509,7 +503,6 @@ public final class VirtualDeviceParams implements Parcelable {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onDirectChannelConfigured$3(
                     int channelHandle, VirtualSensor sensor, int rateLevel, int reportToken) {
                 this.mDirectChannelCallback.onDirectChannelConfigured(

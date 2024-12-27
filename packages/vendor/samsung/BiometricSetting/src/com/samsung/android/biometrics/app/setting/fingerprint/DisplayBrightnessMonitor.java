@@ -40,8 +40,6 @@ public final class DisplayBrightnessMonitor {
                         new DisplayBrightnessMonitor$sInstanceHolder$$ExternalSyntheticLambda0());
     }
 
-    /* JADX WARN: Type inference failed for: r2v6, types: [com.samsung.android.biometrics.app.setting.fingerprint.DisplayBrightnessMonitor$2] */
-    /* JADX WARN: Type inference failed for: r2v7, types: [com.samsung.android.biometrics.app.setting.fingerprint.DisplayBrightnessMonitor$1] */
     public DisplayBrightnessMonitor(Looper looper, boolean z, Supplier supplier) {
         this.mH = new Handler(looper);
         if ("qcom".equals(Build.HARDWARE)) {

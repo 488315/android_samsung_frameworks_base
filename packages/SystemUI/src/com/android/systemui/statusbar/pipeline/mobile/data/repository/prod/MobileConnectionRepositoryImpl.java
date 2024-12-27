@@ -132,9 +132,6 @@ public final class MobileConnectionRepositoryImpl implements MobileConnectionRep
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x047f  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0564  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0482  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

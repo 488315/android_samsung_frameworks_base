@@ -47,8 +47,6 @@ public final /* synthetic */ class PhoneStatusBarPolicy$$ExternalSyntheticLambda
                     if (userInfo == null || (!userInfo.isUserTypeAppSeparation() && !userInfo.isSecureFolder())) {
                         i = phoneStatusBarPolicy.mUserManager.getUserStatusBarIconResId(lastResumedActivityUserId);
                         phoneStatusBarPolicy.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$$ExternalSyntheticLambda7
-                            /* JADX WARN: Removed duplicated region for block: B:16:0x0053  */
-                            /* JADX WARN: Removed duplicated region for block: B:19:? A[RETURN, SYNTHETIC] */
                             @Override // java.lang.Runnable
                             /*
                                 Code decompiled incorrectly, please refer to instructions dump.

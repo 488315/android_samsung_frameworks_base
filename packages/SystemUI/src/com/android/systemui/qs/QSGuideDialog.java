@@ -68,10 +68,6 @@ public final class QSGuideDialog extends SystemUIDialog implements CoreStartable
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.qs.QSGuideDialog$panelTransitionStateListener$1] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.systemui.qs.QSGuideDialog$stateListener$1] */
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.systemui.qs.QSGuideDialog$shadeExpansionStateListener$1] */
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.systemui.qs.QSGuideDialog$displayListener$1] */
     public QSGuideDialog(Context context, StatusBarStateController statusBarStateController, ShadeExpansionStateManager shadeExpansionStateManager, SecQSPanelResourcePicker secQSPanelResourcePicker, CentralSurfacesCommandQueueCallbacks centralSurfacesCommandQueueCallbacks, SecPanelSplitHelper secPanelSplitHelper, Lazy lazy, Executor executor) {
         super(context, R.style.QSGuideDialog);
         this.statusBarStateController = statusBarStateController;

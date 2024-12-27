@@ -13,13 +13,11 @@ public final class VerifiedKeyEvent extends VerifiedInputEvent implements Parcel
     public static final Parcelable.Creator<VerifiedKeyEvent> CREATOR =
             new Parcelable.Creator<
                     VerifiedKeyEvent>() { // from class: android.view.VerifiedKeyEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VerifiedKeyEvent[] newArray(int size) {
                     return new VerifiedKeyEvent[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VerifiedKeyEvent createFromParcel(Parcel in) {
                     return new VerifiedKeyEvent(in);

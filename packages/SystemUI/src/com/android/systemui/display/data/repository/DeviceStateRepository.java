@@ -4,8 +4,6 @@ import kotlin.enums.EnumEntriesKt;
 
 public interface DeviceStateRepository {
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class DeviceState {
         public static final /* synthetic */ DeviceState[] $VALUES;
         public static final DeviceState CONCURRENT_DISPLAY;

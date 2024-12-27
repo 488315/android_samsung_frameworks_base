@@ -96,7 +96,6 @@ public final class MediaOutputActivity extends ComponentActivity {
                     super(2);
                 }
 
-                /* JADX WARN: Type inference failed for: r9v14, types: [com.android.systemui.media.mediaoutput.activity.MediaOutputActivity$onCreate$1$1, kotlin.jvm.internal.Lambda] */
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     long Color;
@@ -124,7 +123,6 @@ public final class MediaOutputActivity extends ComponentActivity {
                     final Feature feature = builder.getFeature();
                     final MediaOutputActivity mediaOutputActivity = MediaOutputActivity.this;
                     BoxWithConstraintsKt.BoxWithConstraints(null, null, false, ComposableLambdaKt.rememberComposableLambda(-302200681, composerImpl2, new Function3() { // from class: com.android.systemui.media.mediaoutput.activity.MediaOutputActivity$onCreate$1.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(3);
                         }

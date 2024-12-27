@@ -13,13 +13,11 @@ public final class Icon implements Parcelable {
     public static final Parcelable.Creator<Icon> CREATOR =
             new Parcelable.Creator<
                     Icon>() { // from class: android.app.smartspace.uitemplatedata.Icon.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Icon createFromParcel(Parcel in) {
                     return new Icon(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Icon[] newArray(int size) {
                     return new Icon[size];

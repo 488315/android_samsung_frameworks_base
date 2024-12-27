@@ -9,7 +9,6 @@ public class TunerDemuxInfo implements Parcelable {
             new Parcelable.Creator<
                     TunerDemuxInfo>() { // from class:
                                         // android.media.tv.tunerresourcemanager.TunerDemuxInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TunerDemuxInfo createFromParcel(Parcel _aidl_source) {
                     TunerDemuxInfo _aidl_out = new TunerDemuxInfo();
@@ -17,7 +16,6 @@ public class TunerDemuxInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TunerDemuxInfo[] newArray(int _aidl_size) {
                     return new TunerDemuxInfo[_aidl_size];

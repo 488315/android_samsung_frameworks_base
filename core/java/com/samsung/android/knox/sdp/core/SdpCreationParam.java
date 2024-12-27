@@ -11,13 +11,11 @@ public class SdpCreationParam implements Parcelable {
             new Parcelable.Creator<
                     SdpCreationParam>() { // from class:
                                           // com.samsung.android.knox.sdp.core.SdpCreationParam.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SdpCreationParam createFromParcel(Parcel source) {
                     return new SdpCreationParam(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SdpCreationParam[] newArray(int size) {
                     return new SdpCreationParam[size];

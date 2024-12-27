@@ -15,7 +15,6 @@ final class ChargerNowBarView$addOnChargerAnimationEndHandler$1 extends SuspendL
     int label;
     final /* synthetic */ ChargerNowBarView this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ChargerNowBarView$addOnChargerAnimationEndHandler$1(long j, ChargerNowBarView chargerNowBarView, Continuation continuation) {
         super(2, continuation);
         this.$totalDuration = j;

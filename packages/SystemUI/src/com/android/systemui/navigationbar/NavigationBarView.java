@@ -177,8 +177,6 @@ public class NavigationBarView extends FrameLayout {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.navigationbar.NavigationBarView$1] */
-    /* JADX WARN: Type inference failed for: r4v4, types: [com.android.systemui.navigationbar.NavigationBarView$$ExternalSyntheticLambda0] */
     public NavigationBarView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mCurrentView = null;
@@ -594,8 +592,6 @@ public class NavigationBarView extends FrameLayout {
     
         r4 = true;
      */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0029  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x004c  */
     @Override // android.widget.FrameLayout, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.

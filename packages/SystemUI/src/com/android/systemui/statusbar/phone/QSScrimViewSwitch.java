@@ -139,7 +139,6 @@ public final class QSScrimViewSwitch {
                 int label;
                 final /* synthetic */ QSScrimViewSwitch this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass3(Continuation continuation, QSScrimViewSwitch qSScrimViewSwitch) {
                     super(3, continuation);
                     this.this$0 = qSScrimViewSwitch;
@@ -153,8 +152,6 @@ public final class QSScrimViewSwitch {
                     return anonymousClass3.invokeSuspend(Unit.INSTANCE);
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:20:0x00de  */
-                /* JADX WARN: Removed duplicated region for block: B:27:0x016a A[RETURN] */
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -173,7 +170,6 @@ public final class QSScrimViewSwitch {
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
                 Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.phone.QSScrimViewSwitch$special$$inlined$combine$1.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

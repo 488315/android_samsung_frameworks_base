@@ -31,8 +31,6 @@ public final class QSTileState {
     public final CharSequence stateDescription;
     public final Set supportedActions;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class ActivationState {
         public static final /* synthetic */ ActivationState[] $VALUES;
         public static final ActivationState ACTIVE;
@@ -106,7 +104,6 @@ public final class QSTileState {
         public static QSTileState build(Resources resources, Resources.Theme theme, QSTileUIConfig qSTileUIConfig, Function1 function1) {
             final Drawable drawable = resources.getDrawable(qSTileUIConfig.getIconRes(), theme);
             return build(new Function0() { // from class: com.android.systemui.qs.tiles.viewmodel.QSTileState$Companion$build$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -139,8 +136,6 @@ public final class QSTileState {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class EnabledState {
         public static final /* synthetic */ EnabledState[] $VALUES;
         public static final EnabledState DISABLED;
@@ -232,8 +227,6 @@ public final class QSTileState {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class UserAction {
         public static final /* synthetic */ UserAction[] $VALUES;
         public static final UserAction CLICK;

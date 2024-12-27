@@ -774,7 +774,6 @@ public abstract class WallpaperService extends Service {
             setPrimaryWallpaperColors(primaryColors);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setPrimaryWallpaperColors(WallpaperColors colors) {
             if (colors == null) {
                 return;
@@ -804,7 +803,6 @@ public abstract class WallpaperService extends Service {
             Log.w(WallpaperService.TAG, "setSurfaceAlpha mBbqSurfaceControl is null or invalid");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void updateWallpaperDimming(float dimAmount) {
             this.mCustomDimAmount = Math.min(1.0f, dimAmount);
             this.mWallpaperDimAmount =
@@ -959,7 +957,6 @@ public abstract class WallpaperService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void dispatchPointer(MotionEvent event) {
             if (event.isTouchEvent()) {
                 synchronized (this.mLock) {
@@ -989,16 +986,6 @@ public abstract class WallpaperService extends Service {
             event.recycle();
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:104:0x0537 A[Catch: RemoteException -> 0x098a, TryCatch #16 {RemoteException -> 0x098a, blocks: (B:96:0x04e7, B:98:0x04fa, B:101:0x052d, B:104:0x0537, B:106:0x0575, B:108:0x0579, B:109:0x05c2, B:111:0x05d7, B:112:0x05de, B:114:0x05e8, B:115:0x05f5, B:117:0x064d, B:118:0x067c, B:120:0x0680, B:121:0x0684, B:131:0x0693, B:133:0x06ab, B:134:0x06b1, B:137:0x06bd, B:140:0x06ca, B:143:0x06d7, B:145:0x06ef, B:319:0x04c2), top: B:318:0x04c2 }] */
-        /* JADX WARN: Removed duplicated region for block: B:167:0x095f A[Catch: RemoteException -> 0x0986, TryCatch #19 {RemoteException -> 0x0986, blocks: (B:214:0x08f1, B:216:0x08f8, B:218:0x08fc, B:219:0x0904, B:220:0x0917, B:165:0x0957, B:167:0x095f, B:169:0x0963, B:170:0x0969, B:171:0x097a, B:172:0x0985), top: B:148:0x06f7 }] */
-        /* JADX WARN: Removed duplicated region for block: B:310:0x04a4 A[Catch: RemoteException -> 0x0999, TRY_ENTER, TRY_LEAVE, TryCatch #23 {RemoteException -> 0x0999, blocks: (B:89:0x043f, B:92:0x0468, B:310:0x04a4, B:331:0x0460), top: B:88:0x043f }] */
-        /* JADX WARN: Removed duplicated region for block: B:331:0x0460 A[Catch: RemoteException -> 0x0999, TRY_ENTER, TryCatch #23 {RemoteException -> 0x0999, blocks: (B:89:0x043f, B:92:0x0468, B:310:0x04a4, B:331:0x0460), top: B:88:0x043f }] */
-        /* JADX WARN: Removed duplicated region for block: B:335:0x0335 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:81:0x02cd A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:87:0x0431  */
-        /* JADX WARN: Removed duplicated region for block: B:91:0x044b A[Catch: RemoteException -> 0x0457, TRY_ENTER, TRY_LEAVE, TryCatch #25 {RemoteException -> 0x0457, blocks: (B:342:0x038b, B:344:0x03a3, B:346:0x03a9, B:349:0x03b0, B:351:0x03e5, B:353:0x03eb, B:357:0x03f5, B:359:0x03fb, B:360:0x03ff, B:91:0x044b, B:94:0x0474), top: B:341:0x038b }] */
-        /* JADX WARN: Removed duplicated region for block: B:94:0x0474 A[Catch: RemoteException -> 0x0457, TRY_ENTER, TRY_LEAVE, TryCatch #25 {RemoteException -> 0x0457, blocks: (B:342:0x038b, B:344:0x03a3, B:346:0x03a9, B:349:0x03b0, B:351:0x03e5, B:353:0x03eb, B:357:0x03f5, B:359:0x03fb, B:360:0x03ff, B:91:0x044b, B:94:0x0474), top: B:341:0x038b }] */
-        /* JADX WARN: Removed duplicated region for block: B:98:0x04fa A[Catch: RemoteException -> 0x098a, TryCatch #16 {RemoteException -> 0x098a, blocks: (B:96:0x04e7, B:98:0x04fa, B:101:0x052d, B:104:0x0537, B:106:0x0575, B:108:0x0579, B:109:0x05c2, B:111:0x05d7, B:112:0x05de, B:114:0x05e8, B:115:0x05f5, B:117:0x064d, B:118:0x067c, B:120:0x0680, B:121:0x0684, B:131:0x0693, B:133:0x06ab, B:134:0x06b1, B:137:0x06bd, B:140:0x06ca, B:143:0x06d7, B:145:0x06ef, B:319:0x04c2), top: B:318:0x04c2 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1022,7 +1009,6 @@ public abstract class WallpaperService extends Service {
             return (prevWidth == newWidth && prevHeight == newHeight) ? false : true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void resizePreview(Rect position) {
             if (position != null) {
                 this.mSurfaceHolder.setFixedSize(position.width(), position.height());
@@ -1264,7 +1250,6 @@ public abstract class WallpaperService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$processLocalColors$1(long now, long timeToWait) {
             this.mLastProcessLocalColorsTimestamp = now + timeToWait;
             this.mProcessLocalColorsPending.set(false);
@@ -1435,7 +1420,6 @@ public abstract class WallpaperService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$updatePage$2(
                 int pixelCopyCount,
                 EngineWindowPage currentPage,
@@ -1513,7 +1497,6 @@ public abstract class WallpaperService extends Service {
             Trace.endSection();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$updatePageColors$3(RectF area, WallpaperColors color) {
             try {
                 this.mConnection.onLocalWallpaperColorsChanged(
@@ -1579,7 +1562,6 @@ public abstract class WallpaperService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$addLocalColorsAreas$4(List regions) {
             synchronized (this.mLock) {
                 this.mLocalColorsToAdd.addAll(regions);
@@ -1601,7 +1583,6 @@ public abstract class WallpaperService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$removeLocalColorsAreas$5(List regions) {
             synchronized (this.mLock) {
                 float step = this.mPendingXOffsetStep;
@@ -2046,7 +2027,6 @@ public abstract class WallpaperService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public String getWallpaperFlagsString() {
             int which = getWallpaperFlags();
             if (isPreview()) {
@@ -2071,7 +2051,6 @@ public abstract class WallpaperService extends Service {
         return super.getMainLooper();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isValid(RectF area) {
         return area != null
                 && area.bottom > area.top
@@ -2637,7 +2616,6 @@ public abstract class WallpaperService extends Service {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isAodTransitionRequired() {
         boolean isAodEnabled =
                 Settings.System.getInt(getContentResolver(), "aod_show_state", 0) != 0;
@@ -2650,7 +2628,6 @@ public abstract class WallpaperService extends Service {
         return isAodEnabled && isAodShowLockWallpaper;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.app.Service
     public void dump(FileDescriptor fd, PrintWriter out, String[] args) {
         out.print("State of wallpaper ");

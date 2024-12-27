@@ -124,7 +124,6 @@ public final class ContentCaptureManager {
     @Retention(RetentionPolicy.SOURCE)
     public @interface LoggingLevel {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     interface MyRunnable {
         void run(SyncResultReceiver syncResultReceiver) throws RemoteException;
     }
@@ -334,7 +333,6 @@ public final class ContentCaptureManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getContentCaptureConditions$0(SyncResultReceiver r)
             throws RemoteException {
         this.mService.getContentCaptureConditions(this.mContext.getPackageName(), r);
@@ -433,7 +431,6 @@ public final class ContentCaptureManager {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$isContentCaptureFeatureEnabled$1(SyncResultReceiver r)
             throws RemoteException {
         this.mService.isContentCaptureFeatureEnabled(r);
@@ -586,7 +583,6 @@ public final class ContentCaptureManager {
                 ServiceManager.getService(Context.CONTENT_CAPTURE_MANAGER_SERVICE));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class DataShareAdapterDelegate extends IDataShareWriteAdapter.Stub {
         private final WeakReference<LocalDataShareAdapterResourceManager> mResourceManagerReference;
 

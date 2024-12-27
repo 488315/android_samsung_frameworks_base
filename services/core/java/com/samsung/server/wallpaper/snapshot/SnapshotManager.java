@@ -385,8 +385,6 @@ public final class SnapshotManager {
 
        if (r5 != 8) goto L65;
     */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x010b  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0104  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -453,11 +451,6 @@ public final class SnapshotManager {
         return getRepositroy(i).getByKey(i2);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Failed to find 'out' block for switch in B:65:0x0082. Please report as an issue. */
-    /* JADX WARN: Removed duplicated region for block: B:217:0x02ef A[Catch: IndexOutOfBoundsException -> 0x015a, IOException -> 0x0160, XmlPullParserException -> 0x0168, NullPointerException -> 0x0170, FileNotFoundException -> 0x0178, NumberFormatException -> 0x018a, TRY_LEAVE, TryCatch #59 {NumberFormatException -> 0x018a, blocks: (B:35:0x0370, B:98:0x0144, B:103:0x0184, B:107:0x0180, B:111:0x0195, B:113:0x019a, B:117:0x01a2, B:122:0x01ce, B:178:0x025e, B:191:0x02a0, B:195:0x02b9, B:197:0x02c1, B:198:0x02c7, B:200:0x02cd, B:202:0x02d9, B:217:0x02ef, B:25:0x0336, B:27:0x0340, B:29:0x0348, B:62:0x0357), top: B:34:0x0370 }] */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x04ab  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x00eb  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

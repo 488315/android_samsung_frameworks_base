@@ -50,7 +50,6 @@ public class IAFDSocketFdServer {
         executor.shutdown();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void saveFile(String inData) {
         Log.i(TAG, "saveFileing...");
         IAFDFileHexUtils f2h = new IAFDFileHexUtils();

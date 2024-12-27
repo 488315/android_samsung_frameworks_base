@@ -305,12 +305,6 @@ public final class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         keyguardSecUpdateMonitorImpl.mSettingsHelper.setFingerprintSensorPopupDoNotShowAgain(z);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v13, types: [android.content.BroadcastReceiver, com.android.keyguard.KeyguardSecUpdateMonitorImpl$4] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.keyguard.KeyguardSecUpdateMonitorImpl$2] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.keyguard.KeyguardSecUpdateMonitorImpl$3] */
-    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.keyguard.KeyguardSecUpdateMonitorImpl$5] */
-    /* JADX WARN: Type inference failed for: r6v5, types: [com.android.keyguard.KeyguardSecUpdateMonitorImpl$1] */
     public KeyguardSecUpdateMonitorImpl(IBatteryStats iBatteryStats, NotificationManager notificationManager, KeyguardFastBioUnlockController keyguardFastBioUnlockController, BinderCallMonitor binderCallMonitor, LooperSlowLogController looperSlowLogController, SettingsHelper settingsHelper, AlarmManager alarmManager, PowerManager powerManager, Lazy lazy, Lazy lazy2, Lazy lazy3, Lazy lazy4, IWindowManager iWindowManager, Lazy lazy5, Lazy lazy6, DisplayLifecycle displayLifecycle, Context context, UserTracker userTracker, Looper looper, BroadcastDispatcher broadcastDispatcher, SecureSettings secureSettings, DumpManager dumpManager, Executor executor, Executor executor2, StatusBarStateController statusBarStateController, LockPatternUtils lockPatternUtils, AuthController authController, TelephonyListenerManager telephonyListenerManager, InteractionJankMonitor interactionJankMonitor, LatencyTracker latencyTracker, ActiveUnlockConfig activeUnlockConfig, KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger, UiEventLogger uiEventLogger, Provider provider, TrustManager trustManager, SubscriptionManager subscriptionManager, UserManager userManager, IDreamManager iDreamManager, DevicePolicyManager devicePolicyManager, SensorPrivacyManager sensorPrivacyManager, TelephonyManager telephonyManager, PackageManager packageManager, FaceManager faceManager, FingerprintManager fingerprintManager, BiometricManager biometricManager, FaceWakeUpTriggersConfig faceWakeUpTriggersConfig, CarrierConfigManager carrierConfigManager, DevicePostureController devicePostureController, Optional<Object> optional, TaskStackChangeListeners taskStackChangeListeners, SelectedUserInteractor selectedUserInteractor, IActivityTaskManager iActivityTaskManager) {
         super(faceManager, context, userTracker, looper, broadcastDispatcher, dumpManager, executor, executor2, statusBarStateController, lockPatternUtils, authController, telephonyListenerManager, interactionJankMonitor, latencyTracker, activeUnlockConfig, keyguardUpdateMonitorLogger, uiEventLogger, provider, trustManager, subscriptionManager, userManager, iDreamManager, devicePolicyManager, sensorPrivacyManager, telephonyManager, packageManager, fingerprintManager, biometricManager, faceWakeUpTriggersConfig, carrierConfigManager, devicePostureController, optional, taskStackChangeListeners, selectedUserInteractor, iActivityTaskManager);
         this.mCoverState = null;
@@ -1682,8 +1676,6 @@ public final class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         super.handleFingerprintError(i, str);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x01fd  */
-    /* JADX WARN: Removed duplicated region for block: B:23:? A[RETURN, SYNTHETIC] */
     @Override // com.android.keyguard.KeyguardUpdateMonitor
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1782,7 +1774,6 @@ public final class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         ((PluginAODManager) this.mPluginAODManagerLazy.get()).updateAnimateScreenOff();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
     public final void handleSecMessage(Message message) {
         int i;

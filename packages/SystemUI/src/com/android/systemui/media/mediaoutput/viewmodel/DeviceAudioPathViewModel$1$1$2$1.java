@@ -19,7 +19,6 @@ final class DeviceAudioPathViewModel$1$1$2$1 extends SuspendLambda implements Fu
     int label;
     final /* synthetic */ DeviceAudioPathViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceAudioPathViewModel$1$1$2$1(SmartThingsMediaSdkManager smartThingsMediaSdkManager, DeviceAudioPathViewModel deviceAudioPathViewModel, Continuation continuation) {
         super(2, continuation);
         this.$serviceClient = smartThingsMediaSdkManager;
@@ -78,8 +77,6 @@ final class DeviceAudioPathViewModel$1$1$2$1 extends SuspendLambda implements Fu
                         this.this$0 = deviceAudioPathViewModel;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

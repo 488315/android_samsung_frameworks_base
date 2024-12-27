@@ -13,13 +13,11 @@ public final class OverlayInfoExt implements Parcelable {
     public static final Parcelable.Creator<OverlayInfoExt> CREATOR =
             new Parcelable.Creator<
                     OverlayInfoExt>() { // from class: android.content.om.OverlayInfoExt.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OverlayInfoExt createFromParcel(Parcel in) {
                     return new OverlayInfoExt(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OverlayInfoExt[] newArray(int size) {
                     return new OverlayInfoExt[size];

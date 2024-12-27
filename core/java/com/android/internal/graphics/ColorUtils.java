@@ -15,7 +15,6 @@ public final class ColorUtils {
     private static final double XYZ_WHITE_REFERENCE_Y = 100.0d;
     private static final double XYZ_WHITE_REFERENCE_Z = 108.883d;
 
-    /* JADX INFO: Access modifiers changed from: private */
     interface ContrastCalculator {
         double calculateContrast(int i, int i2, int i3);
     }

@@ -14,13 +14,11 @@ public final class DataSpecificRegistrationInfo implements Parcelable {
             new Parcelable.Creator<
                     DataSpecificRegistrationInfo>() { // from class:
                                                       // android.telephony.DataSpecificRegistrationInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataSpecificRegistrationInfo createFromParcel(Parcel source) {
                     return new DataSpecificRegistrationInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataSpecificRegistrationInfo[] newArray(int size) {
                     return new DataSpecificRegistrationInfo[size];

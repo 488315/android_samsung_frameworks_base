@@ -95,7 +95,6 @@ public class LatencyTracker {
         return SLatencyTrackerHolder.sLatencyTracker;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateProperties(DeviceConfig.Properties properties) {
         synchronized (this.mLock) {
             int samplingInterval = properties.getInt("sampling_interval", 5);
@@ -153,7 +152,6 @@ public class LatencyTracker {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startListeningForLatencyTrackerConfigChanges$0(
             Context context) {
         try {
@@ -245,7 +243,6 @@ public class LatencyTracker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String getTraceNameOfAction(int action, String tag) {
         if (TextUtils.isEmpty(tag)) {
             return "L<" + getNameOfAction(STATSD_ACTION[action]) + ">";
@@ -416,7 +413,6 @@ public class LatencyTracker {
                     .postDelayed(this.mTimeoutRunnable, TimeUnit.SECONDS.toMillis(15L));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$begin$0(Runnable timeoutAction) {
             Trace.instantForTrack(4096L, traceName(), "timeout");
             timeoutAction.run();

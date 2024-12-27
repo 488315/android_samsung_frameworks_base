@@ -133,7 +133,6 @@ public final class ConnectionHelper extends Handler {
         return -1;
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.enterprise.plm.impl.ConnectionHelper$2] */
     public ConnectionHelper(
             Context context,
             String str,

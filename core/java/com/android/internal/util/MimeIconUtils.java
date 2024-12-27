@@ -38,7 +38,6 @@ public class MimeIconUtils {
         return new ContentResolver.MimeTypeInfo(Icon.createWithResource(res, iconId), label, label);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static ContentResolver.MimeTypeInfo buildTypeInfo(String mimeType) {
         char c;
         switch (mimeType.hashCode()) {

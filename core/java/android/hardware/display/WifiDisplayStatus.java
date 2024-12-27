@@ -9,7 +9,6 @@ public final class WifiDisplayStatus implements Parcelable {
     public static final Parcelable.Creator<WifiDisplayStatus> CREATOR =
             new Parcelable.Creator<WifiDisplayStatus>() { // from class:
                 // android.hardware.display.WifiDisplayStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiDisplayStatus createFromParcel(Parcel in) {
                     WifiDisplay activeDisplay;
@@ -37,7 +36,6 @@ public final class WifiDisplayStatus implements Parcelable {
                             sessionInfo);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiDisplayStatus[] newArray(int size) {
                     return new WifiDisplayStatus[size];

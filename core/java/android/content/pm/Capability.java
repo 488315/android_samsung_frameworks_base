@@ -8,13 +8,11 @@ import java.util.Objects;
 public final class Capability implements Parcelable {
     public static final Parcelable.Creator<Capability> CREATOR =
             new Parcelable.Creator<Capability>() { // from class: android.content.pm.Capability.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Capability[] newArray(int size) {
                     return new Capability[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Capability createFromParcel(Parcel in) {
                     return new Capability(in);

@@ -1097,7 +1097,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         
             if ((r0 != null ? "com.baidu.carlife".equals(r0) : false) != false) goto L16;
          */
-        /* JADX WARN: Multi-variable type inference failed */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1573,7 +1572,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
             return this.mService.snapshotComputer().getHarmfulAppWarning(str, i);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final IBinder getHoldLockToken() {
             if (!Build.IS_DEBUGGABLE) {
                 throw new SecurityException("getHoldLockToken requires a debuggable build");
@@ -1880,8 +1878,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
             return this.mService.snapshotComputer().getKeySetByAlias(str, str2);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:31:0x0114  */
-        /* JADX WARN: Removed duplicated region for block: B:33:0x011a  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2462,7 +2458,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
             return ((Integer) PackageManagerService.this.mInstallPackageHelper.installExistingPackageAsUser(str, i, i2, i3, null).first).intValue();
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final boolean isAppArchivable(String str, UserHandle userHandle) {
             PackageArchiver packageArchiver = PackageManagerService.this.mInstallerService.mPackageArchiver;
             packageArchiver.getClass();
@@ -2912,7 +2907,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
             PackageManagerService packageManagerService = PackageManagerService.this;
             new PackageManagerShellCommand(this, packageManagerService.mContext, ((DomainVerificationService) packageManagerService.mDomainVerificationManager).mShell).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
@@ -3502,8 +3496,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
             PackageManagerService.sAppCategoryHintHelper.sendAppCategoryBroadcast(i, str);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:20:0x005d  */
-        /* JADX WARN: Removed duplicated region for block: B:33:? A[RETURN, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3846,7 +3838,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
             return true;
         }
 
-        /* JADX WARN: Type inference failed for: r8v0, types: [com.android.server.pm.PackageManagerService$IPackageManagerImpl$$ExternalSyntheticLambda1] */
         public final void setInstallerPackageName(final String str, final String str2) {
             int i = 0;
             final int callingUid = Binder.getCallingUid();
@@ -4404,8 +4395,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class InstallLocaleOverlaysType {
         public static final /* synthetic */ InstallLocaleOverlaysType[] $VALUES;
         public static final InstallLocaleOverlaysType PACKAGE_ENABLE;
@@ -5283,8 +5272,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         packageManagerService.mHandler.sendEmptyMessageDelayed(1, 1000L);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:75:0x01bc A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x01c8 A[SYNTHETIC] */
     /* renamed from: -$$Nest$msetEnabledSettings, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -5321,7 +5308,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         sAppCategoryHintHelper = appCategoryHintHelper;
     }
 
-    /* JADX WARN: Type inference failed for: r4v7, types: [com.android.server.pm.PackageManagerService$1, java.lang.Object] */
     public PackageManagerService(PackageManagerServiceInjector packageManagerServiceInjector, PackageManagerServiceTestParams packageManagerServiceTestParams) {
         this.mOverlayPathsLock = new PackageManagerTracedLock(null);
         final int i = 0;
@@ -5489,18 +5475,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         throw null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r12v4, types: [com.android.server.pm.PackageManagerService$3] */
-    /* JADX WARN: Type inference failed for: r18v1 */
-    /* JADX WARN: Type inference failed for: r18v11 */
-    /* JADX WARN: Type inference failed for: r18v12 */
-    /* JADX WARN: Type inference failed for: r18v13 */
-    /* JADX WARN: Type inference failed for: r18v2, types: [com.android.server.pm.PackageManagerTracedLock] */
-    /* JADX WARN: Type inference failed for: r18v5 */
-    /* JADX WARN: Type inference failed for: r1v115, types: [com.android.server.pm.PackageManagerTracedLock] */
-    /* JADX WARN: Type inference failed for: r1v26, types: [com.android.server.pm.PackageManagerService$1] */
-    /* JADX WARN: Type inference failed for: r8v2, types: [com.android.server.pm.PackageManagerService$$ExternalSyntheticLambda45] */
-    /* JADX WARN: Type inference failed for: r9v8, types: [com.android.server.pm.PackageManagerService$$ExternalSyntheticLambda45] */
     public PackageManagerService(PackageManagerServiceInjector packageManagerServiceInjector, boolean z, String str, boolean z2, boolean z3, int i, String str2) {
         ComputerLocked computerLocked;
         ?? r18;
@@ -6415,8 +6389,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         }
     }
 
-    /* JADX WARN: Type inference failed for: r14v0, types: [com.android.server.pm.PackageManagerService$$ExternalSyntheticLambda30] */
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.server.pm.PackageManagerService$$ExternalSyntheticLambda33] */
     public static PackageManagerService main(final Context context, final Installer installer, final DomainVerificationService domainVerificationService, boolean z) {
         String systemPropertyName;
         int i = 16;
@@ -6788,10 +6760,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00b0 A[EDGE_INSN: B:47:0x00b0->B:48:0x00b0 BREAK  A[LOOP:0: B:5:0x002d->B:11:0x00ac], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00b2  */
-    /* JADX WARN: Removed duplicated region for block: B:52:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0037  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7279,8 +7247,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         return (i2 & 8) != 0 ? new PackageFreezer(this, null) : freezePackage(str, i, str2, 13, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x007f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7443,9 +7409,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         return unflattenFromString.getPackageName();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:59:0x00d0  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x00d3 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x00c9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7574,8 +7537,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         return scanPartition.containsPrivApp(file) ? i | 196608 : 65536 | i;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00ee  */
-    /* JADX WARN: Removed duplicated region for block: B:21:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7749,8 +7710,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0102  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x010b A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8260,8 +8219,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00b8  */
-    /* JADX WARN: Removed duplicated region for block: B:41:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

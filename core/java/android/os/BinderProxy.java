@@ -36,7 +36,6 @@ public final class BinderProxy implements IBinder {
     private List<IBinder.DeathRecipient> mDeathRecipients =
             Collections.synchronizedList(new ArrayList());
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long getNativeFinalizer();
 
     private native void linkToDeathNative(IBinder.DeathRecipient deathRecipient, int i)
@@ -69,7 +68,6 @@ public final class BinderProxy implements IBinder {
         sTransactListener = listener;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class ProxyMap {
         private static final int CRASH_AT_SIZE = 25000;
         private static final int LOG_MAIN_INDEX_SIZE = 8;
@@ -92,7 +90,6 @@ public final class BinderProxy implements IBinder {
             return ((int) ((arg >> 2) ^ (arg >> 10))) & 255;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int size() {
             int size = 0;
             for (ArrayList<WeakReference<BinderProxy>> a : this.mMainIndexValues) {
@@ -226,7 +223,6 @@ public final class BinderProxy implements IBinder {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public InterfaceCount[] getSortedInterfaceCounts(int maxToReturn) {
             if (maxToReturn < 0) {
                 throw new IllegalArgumentException("negative interface count");
@@ -322,7 +318,6 @@ public final class BinderProxy implements IBinder {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void dumpProxyInterfaceCounts() {
             InterfaceCount[] sorted = getSortedInterfaceCounts(10);
             Log.v("Binder", "BinderProxy descriptor histogram (top " + Integer.toString(10) + "):");
@@ -331,7 +326,6 @@ public final class BinderProxy implements IBinder {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void dumpPerUidProxyCounts() {
             SparseIntArray counts = BinderInternal.nGetBinderProxyPerUidCounts();
             if (counts.size() == 0) {

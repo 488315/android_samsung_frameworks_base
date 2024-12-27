@@ -11,13 +11,11 @@ public final class AudioPortExt implements Parcelable {
     public static final Parcelable.Creator<AudioPortExt> CREATOR =
             new Parcelable.Creator<
                     AudioPortExt>() { // from class: android.media.audio.common.AudioPortExt.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPortExt createFromParcel(Parcel _aidl_source) {
                     return new AudioPortExt(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPortExt[] newArray(int _aidl_size) {
                     return new AudioPortExt[_aidl_size];

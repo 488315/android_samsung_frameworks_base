@@ -34,7 +34,6 @@ final class FooterViewBinder$bindWhileAttached$1 extends SuspendLambda implement
         final /* synthetic */ FooterViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(FooterView footerView, FooterViewModel footerViewModel, View.OnClickListener onClickListener, View.OnClickListener onClickListener2, View.OnClickListener onClickListener3, Continuation continuation) {
             super(2, continuation);
             this.$footer = footerView;
@@ -81,7 +80,6 @@ final class FooterViewBinder$bindWhileAttached$1 extends SuspendLambda implement
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FooterViewBinder$bindWhileAttached$1(FooterView footerView, FooterViewModel footerViewModel, View.OnClickListener onClickListener, View.OnClickListener onClickListener2, View.OnClickListener onClickListener3, Continuation continuation) {
         super(3, continuation);
         this.$footer = footerView;

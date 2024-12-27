@@ -178,9 +178,6 @@ public final class CoverStateManager {
         return updateCoverSupportStateLocked;
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.desktopmode.CoverStateManager$1] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.desktopmode.CoverStateManager$2] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.desktopmode.CoverStateManager$3] */
     public CoverStateManager(
             Context context,
             IStateManager iStateManager,

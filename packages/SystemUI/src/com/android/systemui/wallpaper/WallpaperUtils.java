@@ -46,7 +46,6 @@ public final class WallpaperUtils {
         Debug.semIsProductDev();
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(12:0|1|2|3|4|(7:8|9|10|(3:12|13|(1:15))|20|21|22)|34|(1:38)|20|21|22|(1:(0))) */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0086, code lost:
     
         r10 = move-exception;

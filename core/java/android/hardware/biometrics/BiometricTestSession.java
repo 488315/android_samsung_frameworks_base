@@ -165,7 +165,6 @@ public class BiometricTestSession implements AutoCloseable {
         setTestHalEnabled(false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String getTag() {
         return "BiometricTestSession_" + this.mSensorId;
     }

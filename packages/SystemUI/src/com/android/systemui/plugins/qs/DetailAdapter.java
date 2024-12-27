@@ -12,7 +12,6 @@ public interface DetailAdapter {
     public static final UiEventLogger.UiEventEnum INVALID = new DetailAdapter$$ExternalSyntheticLambda0();
     public static final int VERSION = 1;
 
-    /* JADX INFO: Access modifiers changed from: private */
     static /* synthetic */ int lambda$static$0() {
         return 0;
     }

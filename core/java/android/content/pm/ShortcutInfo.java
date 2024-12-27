@@ -53,13 +53,11 @@ public final class ShortcutInfo implements Parcelable {
     public static final Parcelable.Creator<ShortcutInfo> CREATOR =
             new Parcelable.Creator<
                     ShortcutInfo>() { // from class: android.content.pm.ShortcutInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ShortcutInfo createFromParcel(Parcel source) {
                     return new ShortcutInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ShortcutInfo[] newArray(int size) {
                     return new ShortcutInfo[size];
@@ -258,7 +256,6 @@ public final class ShortcutInfo implements Parcelable {
         return ret;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Intent[] cloneIntents(Intent[] intents) {
         if (intents == null) {
             return null;
@@ -285,7 +282,6 @@ public final class ShortcutInfo implements Parcelable {
         return ret;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Person[] clonePersons(Person[] persons) {
         if (persons == null) {
             return null;

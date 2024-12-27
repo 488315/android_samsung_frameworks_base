@@ -18,13 +18,11 @@ public class CapInfo implements Parcelable {
     public static final Parcelable.Creator<CapInfo> CREATOR =
             new Parcelable.Creator<
                     CapInfo>() { // from class: com.android.ims.internal.uce.common.CapInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CapInfo createFromParcel(Parcel source) {
                     return new CapInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CapInfo[] newArray(int size) {
                     return new CapInfo[size];

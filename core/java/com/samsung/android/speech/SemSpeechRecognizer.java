@@ -164,7 +164,6 @@ public class SemSpeechRecognizer {
         start(commandType);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void delayedStartBargeIn(int commandType, Handler stopHandler) {
         Log.i(TAG, "delayedStartBargeIn");
         synchronized (this) {

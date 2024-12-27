@@ -88,17 +88,6 @@ public final class TunerResourceManagerService extends SystemService
     public final class BinderService extends ITunerResourceManager.Stub {
         public BinderService() {}
 
-        /* JADX WARN: Removed duplicated region for block: B:23:0x0053  */
-        /* JADX WARN: Removed duplicated region for block: B:27:0x00a8 A[Catch: all -> 0x003a, InterruptedException -> 0x003d, TryCatch #0 {InterruptedException -> 0x003d, blocks: (B:8:0x0027, B:12:0x0031, B:20:0x0049, B:38:0x006f, B:43:0x0101, B:45:0x010b, B:57:0x0135, B:58:0x0159, B:60:0x015d, B:61:0x0182, B:63:0x0186, B:64:0x01a1, B:27:0x00a8, B:31:0x00b9), top: B:7:0x0027, outer: #1 }] */
-        /* JADX WARN: Removed duplicated region for block: B:37:0x006f A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:43:0x0101 A[Catch: all -> 0x003a, InterruptedException -> 0x003d, TryCatch #0 {InterruptedException -> 0x003d, blocks: (B:8:0x0027, B:12:0x0031, B:20:0x0049, B:38:0x006f, B:43:0x0101, B:45:0x010b, B:57:0x0135, B:58:0x0159, B:60:0x015d, B:61:0x0182, B:63:0x0186, B:64:0x01a1, B:27:0x00a8, B:31:0x00b9), top: B:7:0x0027, outer: #1 }] */
-        /* JADX WARN: Removed duplicated region for block: B:48:0x01aa A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:53:0x01ba A[DONT_GENERATE] */
-        /* JADX WARN: Removed duplicated region for block: B:55:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:57:0x0135 A[Catch: all -> 0x003a, InterruptedException -> 0x003d, TryCatch #0 {InterruptedException -> 0x003d, blocks: (B:8:0x0027, B:12:0x0031, B:20:0x0049, B:38:0x006f, B:43:0x0101, B:45:0x010b, B:57:0x0135, B:58:0x0159, B:60:0x015d, B:61:0x0182, B:63:0x0186, B:64:0x01a1, B:27:0x00a8, B:31:0x00b9), top: B:7:0x0027, outer: #1 }] */
-        /* JADX WARN: Removed duplicated region for block: B:60:0x015d A[Catch: all -> 0x003a, InterruptedException -> 0x003d, TryCatch #0 {InterruptedException -> 0x003d, blocks: (B:8:0x0027, B:12:0x0031, B:20:0x0049, B:38:0x006f, B:43:0x0101, B:45:0x010b, B:57:0x0135, B:58:0x0159, B:60:0x015d, B:61:0x0182, B:63:0x0186, B:64:0x01a1, B:27:0x00a8, B:31:0x00b9), top: B:7:0x0027, outer: #1 }] */
-        /* JADX WARN: Removed duplicated region for block: B:63:0x0186 A[Catch: all -> 0x003a, InterruptedException -> 0x003d, TryCatch #0 {InterruptedException -> 0x003d, blocks: (B:8:0x0027, B:12:0x0031, B:20:0x0049, B:38:0x006f, B:43:0x0101, B:45:0x010b, B:57:0x0135, B:58:0x0159, B:60:0x015d, B:61:0x0182, B:63:0x0186, B:64:0x01a1, B:27:0x00a8, B:31:0x00b9), top: B:7:0x0027, outer: #1 }] */
-        /* JADX WARN: Removed duplicated region for block: B:65:0x0057  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1856,8 +1845,6 @@ public final class TunerResourceManagerService extends SystemService
 
        if (r15 == (r14.mFilterTypes & r15)) goto L23;
     */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x00dc  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x00de A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

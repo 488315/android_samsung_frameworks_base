@@ -10,7 +10,6 @@ public class CdmaT53AudioControlInfoRecord implements Parcelable {
     public static final Parcelable.Creator<CdmaT53AudioControlInfoRecord> CREATOR =
             new Parcelable.Creator<CdmaT53AudioControlInfoRecord>() { // from class:
                 // android.hardware.radio.voice.CdmaT53AudioControlInfoRecord.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CdmaT53AudioControlInfoRecord createFromParcel(Parcel _aidl_source) {
                     CdmaT53AudioControlInfoRecord _aidl_out = new CdmaT53AudioControlInfoRecord();
@@ -18,7 +17,6 @@ public class CdmaT53AudioControlInfoRecord implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CdmaT53AudioControlInfoRecord[] newArray(int _aidl_size) {
                     return new CdmaT53AudioControlInfoRecord[_aidl_size];

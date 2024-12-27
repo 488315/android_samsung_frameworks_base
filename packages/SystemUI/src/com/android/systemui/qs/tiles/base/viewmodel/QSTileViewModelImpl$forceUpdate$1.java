@@ -13,7 +13,6 @@ final class QSTileViewModelImpl$forceUpdate$1 extends SuspendLambda implements F
     int label;
     final /* synthetic */ QSTileViewModelImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QSTileViewModelImpl$forceUpdate$1(QSTileViewModelImpl qSTileViewModelImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = qSTileViewModelImpl;

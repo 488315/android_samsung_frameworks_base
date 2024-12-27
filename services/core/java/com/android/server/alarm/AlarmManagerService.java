@@ -243,7 +243,6 @@ public class AlarmManagerService extends SystemService {
 
         public final void doAlarm(final IAlarmCompleteListener iAlarmCompleteListener) {
             AlarmManagerService.this.mHandler.post(new Runnable() { // from class: com.android.server.alarm.AlarmManagerService$2$$ExternalSyntheticLambda0
-                /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.alarm.AlarmManagerService$2] */
                 @Override // java.lang.Runnable
                 public final void run() {
                     ?? r0 = AlarmManagerService.AnonymousClass2.this;
@@ -365,7 +364,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public class AlarmHandler extends Handler {
         public AlarmHandler() {
             super(Looper.myLooper());
@@ -501,9 +499,6 @@ public class AlarmManagerService extends SystemService {
         
             if (r8 > (-1000)) goto L11;
          */
-        /* JADX WARN: Removed duplicated region for block: B:104:0x02cb  */
-        /* JADX WARN: Removed duplicated region for block: B:12:0x007b A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:37:0x0140  */
         @Override // java.lang.Thread, java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1269,18 +1264,6 @@ public class AlarmManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:18:0x00eb  */
-        /* JADX WARN: Removed duplicated region for block: B:25:0x012e  */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x013e  */
-        /* JADX WARN: Removed duplicated region for block: B:33:0x0145  */
-        /* JADX WARN: Removed duplicated region for block: B:49:0x01aa  */
-        /* JADX WARN: Removed duplicated region for block: B:67:0x024a  */
-        /* JADX WARN: Removed duplicated region for block: B:70:0x025d  */
-        /* JADX WARN: Removed duplicated region for block: B:77:0x0262  */
-        /* JADX WARN: Removed duplicated region for block: B:78:0x024f  */
-        /* JADX WARN: Removed duplicated region for block: B:81:0x0160  */
-        /* JADX WARN: Removed duplicated region for block: B:86:0x0187  */
-        /* JADX WARN: Removed duplicated region for block: B:89:0x0140  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1561,7 +1544,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public class Injector {
         public Context mContext;
         public long mNativeData;
@@ -1672,8 +1654,6 @@ public class AlarmManagerService extends SystemService {
         public ShellCmd() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:16:0x0049  */
-        /* JADX WARN: Removed duplicated region for block: B:24:0x0072 A[Catch: Exception -> 0x002e, TRY_LEAVE, TryCatch #0 {Exception -> 0x002e, blocks: (B:7:0x000c, B:18:0x004d, B:20:0x0052, B:22:0x0062, B:24:0x0072, B:29:0x0023, B:32:0x0030, B:35:0x003b), top: B:6:0x000c }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1839,8 +1819,6 @@ public class AlarmManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:26:0x00cb A[Catch: all -> 0x0043, TryCatch #0 {all -> 0x0043, blocks: (B:17:0x002a, B:18:0x0034, B:22:0x009a, B:26:0x00cb, B:28:0x00ce, B:30:0x00d2, B:32:0x00d6, B:35:0x014b, B:37:0x0156, B:39:0x0166, B:41:0x016c, B:43:0x0173, B:47:0x0176, B:48:0x0130, B:49:0x013a, B:52:0x0142, B:54:0x017a, B:57:0x009e, B:59:0x00a6, B:62:0x00a9, B:63:0x00b0, B:65:0x00b6, B:67:0x00bc, B:68:0x00c3, B:69:0x017d, B:71:0x018c, B:72:0x01a1, B:75:0x01a4, B:76:0x01b9, B:79:0x01bc, B:81:0x01c4, B:82:0x01c9, B:85:0x01cc, B:87:0x01d4, B:88:0x01d9, B:91:0x01db, B:93:0x01e3, B:95:0x020a, B:97:0x0216, B:99:0x021b, B:102:0x021e, B:105:0x0220, B:107:0x0229, B:111:0x0233, B:112:0x0236, B:109:0x0238, B:116:0x023b, B:118:0x0039, B:121:0x0046, B:124:0x0050, B:127:0x005a, B:130:0x0065, B:133:0x006f, B:136:0x0079, B:139:0x0083, B:142:0x008d), top: B:16:0x002a }] */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x00d2 A[Catch: all -> 0x0043, TryCatch #0 {all -> 0x0043, blocks: (B:17:0x002a, B:18:0x0034, B:22:0x009a, B:26:0x00cb, B:28:0x00ce, B:30:0x00d2, B:32:0x00d6, B:35:0x014b, B:37:0x0156, B:39:0x0166, B:41:0x016c, B:43:0x0173, B:47:0x0176, B:48:0x0130, B:49:0x013a, B:52:0x0142, B:54:0x017a, B:57:0x009e, B:59:0x00a6, B:62:0x00a9, B:63:0x00b0, B:65:0x00b6, B:67:0x00bc, B:68:0x00c3, B:69:0x017d, B:71:0x018c, B:72:0x01a1, B:75:0x01a4, B:76:0x01b9, B:79:0x01bc, B:81:0x01c4, B:82:0x01c9, B:85:0x01cc, B:87:0x01d4, B:88:0x01d9, B:91:0x01db, B:93:0x01e3, B:95:0x020a, B:97:0x0216, B:99:0x021b, B:102:0x021e, B:105:0x0220, B:107:0x0229, B:111:0x0233, B:112:0x0236, B:109:0x0238, B:116:0x023b, B:118:0x0039, B:121:0x0046, B:124:0x0050, B:127:0x005a, B:130:0x0065, B:133:0x006f, B:136:0x0079, B:139:0x0083, B:142:0x008d), top: B:16:0x002a }] */
         @Override // android.content.BroadcastReceiver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1988,7 +1966,6 @@ public class AlarmManagerService extends SystemService {
         return getNextAlarm(j, i);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2005,9 +1982,6 @@ public class AlarmManagerService extends SystemService {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.alarm.AlarmManagerService.<init>(android.content.Context):void");
     }
 
-    /* JADX WARN: Type inference failed for: r1v21, types: [com.android.server.alarm.AlarmManagerService$$ExternalSyntheticLambda4] */
-    /* JADX WARN: Type inference failed for: r1v25, types: [com.android.server.alarm.AlarmManagerService$4] */
-    /* JADX WARN: Type inference failed for: r1v26, types: [com.android.server.alarm.AlarmManagerService$7] */
     public AlarmManagerService(Context context, Injector injector) {
         super(context);
         this.mBackgroundIntent = new Intent().addFlags(4);
@@ -2423,7 +2397,6 @@ public class AlarmManagerService extends SystemService {
                 return false;
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
             public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
                 AlarmManagerService.this.new ShellCmd().exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
             }
@@ -2453,20 +2426,6 @@ public class AlarmManagerService extends SystemService {
                 }
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:107:0x01c8  */
-            /* JADX WARN: Removed duplicated region for block: B:108:0x01be  */
-            /* JADX WARN: Removed duplicated region for block: B:109:0x0183  */
-            /* JADX WARN: Removed duplicated region for block: B:131:0x0123  */
-            /* JADX WARN: Removed duplicated region for block: B:146:0x02ac  */
-            /* JADX WARN: Removed duplicated region for block: B:40:0x0121  */
-            /* JADX WARN: Removed duplicated region for block: B:42:0x012f  */
-            /* JADX WARN: Removed duplicated region for block: B:47:0x017e  */
-            /* JADX WARN: Removed duplicated region for block: B:50:0x01b9  */
-            /* JADX WARN: Removed duplicated region for block: B:53:0x01c5  */
-            /* JADX WARN: Removed duplicated region for block: B:56:0x01ce  */
-            /* JADX WARN: Removed duplicated region for block: B:61:0x028b  */
-            /* JADX WARN: Removed duplicated region for block: B:65:0x01ed  */
-            /* JADX WARN: Removed duplicated region for block: B:8:0x0082  */
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
                 To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2794,10 +2753,8 @@ public class AlarmManagerService extends SystemService {
 
     private static native int set(long j, int i, long j2, long j3);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void setBootAlarm(long j, String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int waitForAlarm(long j);
 
     public final boolean adjustDeliveryTimeBasedOnBatterySaver(Alarm alarm) {
@@ -3765,7 +3722,6 @@ public class AlarmManagerService extends SystemService {
         return false;
     }
 
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.server.alarm.AlarmManagerService$$ExternalSyntheticLambda0] */
     @Override // com.android.server.SystemService
     public final void onBootPhase(int i) {
         if (i == 500) {
@@ -4230,7 +4186,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.alarm.AlarmManagerService$1] */
     @Override // com.android.server.SystemService
     public final void onStart() {
         Injector injector = this.mInjector;
@@ -4765,12 +4720,6 @@ public class AlarmManagerService extends SystemService {
     
         if (r8.toString().contains("com.google.android.gms.checkin.EventLogServiceReceiver") != false) goto L115;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:136:0x0113  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x010c  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0123  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x0144  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0209  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

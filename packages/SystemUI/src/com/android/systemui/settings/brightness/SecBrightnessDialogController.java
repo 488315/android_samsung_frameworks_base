@@ -44,7 +44,6 @@ public final class SecBrightnessDialogController {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.settings.brightness.SecBrightnessDialogController$updateMonitorCallback$1] */
     public SecBrightnessDialogController(BrightnessDialog brightnessDialog) {
         this.dialog = brightnessDialog;
     }

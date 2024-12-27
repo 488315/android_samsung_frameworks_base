@@ -18,7 +18,6 @@ final class KeyguardPreviewRenderer$onClockChanged$1 extends SuspendLambda imple
     int label;
     final /* synthetic */ KeyguardPreviewRenderer this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardPreviewRenderer$onClockChanged$1(KeyguardPreviewRenderer keyguardPreviewRenderer, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardPreviewRenderer;

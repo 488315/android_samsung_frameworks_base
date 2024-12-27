@@ -16,7 +16,6 @@ final class UnfoldTraceLogger$start$3 extends SuspendLambda implements Function2
     int label;
     final /* synthetic */ UnfoldTraceLogger this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UnfoldTraceLogger$start$3(UnfoldTraceLogger unfoldTraceLogger, Continuation continuation) {
         super(2, continuation);
         this.this$0 = unfoldTraceLogger;

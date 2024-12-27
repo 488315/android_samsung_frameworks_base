@@ -17,7 +17,6 @@ public final class WifiActivityEnergyInfo implements Parcelable {
             new Parcelable.Creator<
                     WifiActivityEnergyInfo>() { // from class:
                                                 // android.os.connectivity.WifiActivityEnergyInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiActivityEnergyInfo createFromParcel(Parcel in) {
                     long timestamp = in.readLong();
@@ -30,7 +29,6 @@ public final class WifiActivityEnergyInfo implements Parcelable {
                             timestamp, stackState, txTime, rxTime, scanTime, idleTime);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiActivityEnergyInfo[] newArray(int size) {
                     return new WifiActivityEnergyInfo[size];

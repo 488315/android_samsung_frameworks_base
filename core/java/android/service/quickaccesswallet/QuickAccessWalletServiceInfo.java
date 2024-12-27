@@ -144,7 +144,6 @@ class QuickAccessWalletServiceInfo {
         private final CharSequence mShortcutShortLabel;
         private final String mTargetActivity;
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static ServiceMetadata empty() {
             return new ServiceMetadata(null, null, null, null);
         }

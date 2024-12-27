@@ -93,7 +93,6 @@ public abstract class InputEventSender {
         RunnableFuture<Boolean> task =
                 new FutureTask<>(
                         new Callable<Boolean>() { // from class: android.view.InputEventSender.1
-                            /* JADX WARN: Can't rename method to resolve collision */
                             @Override // java.util.concurrent.Callable
                             public Boolean call() throws Exception {
                                 return Boolean.valueOf(
@@ -110,7 +109,6 @@ public abstract class InputEventSender {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean sendInputEventInternal(int seq, InputEvent event) {
         if (event instanceof KeyEvent) {
             return nativeSendKeyEvent(this.mSenderPtr, seq, (KeyEvent) event);

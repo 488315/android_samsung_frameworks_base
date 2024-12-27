@@ -43,7 +43,6 @@ public class CocktailHostView extends FrameLayout {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public void viewDataChanged(int viewId) {
         View v = findViewById(viewId);
         if (v != null && (v instanceof AdapterView)) {

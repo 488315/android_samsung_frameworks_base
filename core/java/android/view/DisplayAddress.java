@@ -20,13 +20,11 @@ public abstract class DisplayAddress implements Parcelable {
         public static final Parcelable.Creator<Physical> CREATOR =
                 new Parcelable.Creator<
                         Physical>() { // from class: android.view.DisplayAddress.Physical.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Physical createFromParcel(Parcel in) {
                         return new Physical(in.readLong());
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Physical[] newArray(int size) {
                         return new Physical[size];
@@ -104,13 +102,11 @@ public abstract class DisplayAddress implements Parcelable {
         public static final Parcelable.Creator<Network> CREATOR =
                 new Parcelable.Creator<
                         Network>() { // from class: android.view.DisplayAddress.Network.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Network createFromParcel(Parcel in) {
                         return new Network(in.readString());
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Network[] newArray(int size) {
                         return new Network[size];

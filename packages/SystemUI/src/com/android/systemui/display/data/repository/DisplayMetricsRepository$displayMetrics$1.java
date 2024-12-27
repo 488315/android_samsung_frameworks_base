@@ -24,7 +24,6 @@ final class DisplayMetricsRepository$displayMetrics$1 extends SuspendLambda impl
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisplayMetricsRepository$displayMetrics$1(ConfigurationController configurationController, Context context, DisplayMetrics displayMetrics, Continuation continuation) {
         super(2, continuation);
         this.$configurationController = configurationController;
@@ -44,8 +43,6 @@ final class DisplayMetricsRepository$displayMetrics$1 extends SuspendLambda impl
         return ((DisplayMetricsRepository$displayMetrics$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.display.data.repository.DisplayMetricsRepository$displayMetrics$1$callback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -68,7 +65,6 @@ final class DisplayMetricsRepository$displayMetrics$1 extends SuspendLambda impl
             ((ConfigurationControllerImpl) this.$configurationController).addCallback(r1);
             final ConfigurationController configurationController = this.$configurationController;
             Function0 function0 = new Function0() { // from class: com.android.systemui.display.data.repository.DisplayMetricsRepository$displayMetrics$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

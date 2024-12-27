@@ -18,13 +18,11 @@ public final class AppTargetEvent implements Parcelable {
     public static final Parcelable.Creator<AppTargetEvent> CREATOR =
             new Parcelable.Creator<
                     AppTargetEvent>() { // from class: android.app.prediction.AppTargetEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppTargetEvent createFromParcel(Parcel parcel) {
                     return new AppTargetEvent(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppTargetEvent[] newArray(int size) {
                     return new AppTargetEvent[size];

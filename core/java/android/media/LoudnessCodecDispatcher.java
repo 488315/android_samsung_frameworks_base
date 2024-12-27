@@ -20,7 +20,6 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
     private static final String TAG = "LoudnessCodecDispatcher";
     private final IAudioService mAudioService;
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class LoudnessCodecUpdatesDispatcherStub
             extends ILoudnessCodecUpdatesDispatcher.Stub {
         private static LoudnessCodecUpdatesDispatcherStub sLoudnessCodecStub;
@@ -64,7 +63,6 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$dispatchLoudnessCodecParameterChange$2(
                 final int sessionId,
                 final PersistableBundle params,

@@ -15,7 +15,6 @@ final class BurnInInteractor$burnIn$2 extends SuspendLambda implements Function3
     int label;
     final /* synthetic */ BurnInInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BurnInInteractor$burnIn$2(BurnInInteractor burnInInteractor, Continuation continuation) {
         super(3, continuation);
         this.this$0 = burnInInteractor;

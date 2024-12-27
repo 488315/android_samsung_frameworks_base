@@ -14,13 +14,11 @@ import java.util.Objects;
 public final class VolumeInfo implements Parcelable {
     public static final Parcelable.Creator<VolumeInfo> CREATOR =
             new Parcelable.Creator<VolumeInfo>() { // from class: android.media.VolumeInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VolumeInfo createFromParcel(Parcel p) {
                     return new VolumeInfo(p);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VolumeInfo[] newArray(int size) {
                     return new VolumeInfo[size];

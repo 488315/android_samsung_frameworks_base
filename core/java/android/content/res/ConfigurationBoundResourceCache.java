@@ -21,13 +21,11 @@ public class ConfigurationBoundResourceCache<T> extends ThemedResourceCache<Cons
         super.onConfigurationChange(i);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.content.res.ThemedResourceCache
     public /* bridge */ /* synthetic */ void put(long j, Resources.Theme theme, Object obj, int i) {
         super.put(j, theme, obj, i);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.content.res.ThemedResourceCache
     public /* bridge */ /* synthetic */ void put(
             long j, Resources.Theme theme, Object obj, int i, boolean z) {

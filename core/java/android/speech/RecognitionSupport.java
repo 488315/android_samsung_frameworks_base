@@ -14,13 +14,11 @@ public final class RecognitionSupport implements Parcelable {
     public static final Parcelable.Creator<RecognitionSupport> CREATOR =
             new Parcelable.Creator<
                     RecognitionSupport>() { // from class: android.speech.RecognitionSupport.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecognitionSupport[] newArray(int size) {
                     return new RecognitionSupport[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecognitionSupport createFromParcel(Parcel in) {
                     return new RecognitionSupport(in);

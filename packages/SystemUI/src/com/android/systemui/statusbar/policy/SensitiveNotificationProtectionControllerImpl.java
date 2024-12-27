@@ -45,7 +45,6 @@ public final class SensitiveNotificationProtectionControllerImpl implements Sens
         public final /* synthetic */ Handler val$mainHandler;
         public final /* synthetic */ GlobalSettings val$settings;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(Executor executor, GlobalSettings globalSettings, Handler handler) {
             super(executor);
             this.val$settings = globalSettings;
@@ -76,8 +75,6 @@ public final class SensitiveNotificationProtectionControllerImpl implements Sens
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v6, types: [android.database.ContentObserver, com.android.systemui.statusbar.policy.SensitiveNotificationProtectionControllerImpl$2] */
     public SensitiveNotificationProtectionControllerImpl(final Context context, GlobalSettings globalSettings, MediaProjectionManager mediaProjectionManager, final IActivityManager iActivityManager, PackageManager packageManager, final TelephonyManager telephonyManager, final Handler handler, Executor executor, SensitiveNotificationProtectionControllerLogger sensitiveNotificationProtectionControllerLogger) {
         MediaProjectionManager.Callback callback = new MediaProjectionManager.Callback() { // from class: com.android.systemui.statusbar.policy.SensitiveNotificationProtectionControllerImpl.1
             public final void onStart(MediaProjectionInfo mediaProjectionInfo) {

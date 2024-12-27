@@ -131,11 +131,6 @@ public final class SaveImageInBackgroundTask extends AsyncTask {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:50:0x027b  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0298  */
-    /* JADX WARN: Removed duplicated region for block: B:58:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0284  */
-    /* JADX WARN: Type inference failed for: r8v2, types: [com.samsung.android.app.smartcapture.screenshot.lib.RemoteScreenshotInterface$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -197,10 +192,6 @@ public final class SaveImageInBackgroundTask extends AsyncTask {
         return new Notification.Action.Builder(action.getIcon(), action.title, PendingIntent.getBroadcast(this.mContext, this.mRandom.nextInt(), addFlags, 335544320)).setContextual(true).addExtras(extras).build();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:42:0x02b4  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0311  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x034e  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0357  */
     @Override // android.os.AsyncTask
     /*
         Code decompiled incorrectly, please refer to instructions dump.

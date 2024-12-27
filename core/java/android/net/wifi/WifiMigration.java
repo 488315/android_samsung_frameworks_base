@@ -126,7 +126,6 @@ public final class WifiMigration {
                 new Parcelable.Creator<
                         SettingsMigrationData>() { // from class:
                                                    // android.net.wifi.WifiMigration.SettingsMigrationData.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SettingsMigrationData createFromParcel(Parcel in) {
                         boolean scanAlwaysAvailable = in.readBoolean();
@@ -146,7 +145,6 @@ public final class WifiMigration {
                                 verboseLoggingEnabled);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SettingsMigrationData[] newArray(int size) {
                         return new SettingsMigrationData[size];

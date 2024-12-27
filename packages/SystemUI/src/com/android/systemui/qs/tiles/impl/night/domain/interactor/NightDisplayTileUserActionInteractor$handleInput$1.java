@@ -10,7 +10,6 @@ final class NightDisplayTileUserActionInteractor$handleInput$1 extends Continuat
     /* synthetic */ Object result;
     final /* synthetic */ NightDisplayTileUserActionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NightDisplayTileUserActionInteractor$handleInput$1(NightDisplayTileUserActionInteractor nightDisplayTileUserActionInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = nightDisplayTileUserActionInteractor;

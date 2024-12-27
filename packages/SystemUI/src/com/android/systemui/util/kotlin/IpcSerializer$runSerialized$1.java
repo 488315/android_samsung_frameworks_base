@@ -11,7 +11,6 @@ final class IpcSerializer$runSerialized$1<R> extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ IpcSerializer this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public IpcSerializer$runSerialized$1(IpcSerializer ipcSerializer, Continuation continuation) {
         super(continuation);
         this.this$0 = ipcSerializer;

@@ -71,7 +71,6 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
         return this.firstTarget;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public Animation<?> setTarget(Element target) {
         this.firstTarget = target;
         return this;
@@ -81,7 +80,6 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
         this.listener = listener;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public Animation<?> setInterpolationType(InterpolationType interpolationType) {
         Iterator<KeyFrame<T>> it = this.keyFrameList.iterator();
         while (it.hasNext()) {
@@ -91,7 +89,6 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
         return this;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public Animation<?> setBezierControlPoint(
             float controlPointX1,
             float controlPointY1,
@@ -118,7 +115,6 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
         return this.startTime;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public Animation<?> setStartTime(long startTime) {
         this.startTime = startTime;
         return this;
@@ -158,7 +154,6 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
 
     public void updateTargetValue(Object interpolatedValue) {}
 
-    /* JADX WARN: Multi-variable type inference failed */
     public Animation<?> setRepeat(int fromLoop, int toLoop, int repeatCount) {
         this.fromLoop = Math.max(fromLoop, 0);
         this.toLoop = Math.min(toLoop, getKeyFrameCount() - 1);
@@ -215,7 +210,6 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
         return this.keyFrameList.get(size - 1);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public Animation<?> setKeyFrameList(ArrayList<KeyFrame<T>> keyFrameList) {
         this.keyFrameList.clear();
         this.keyFrameList.addAll(keyFrameList);
@@ -224,7 +218,6 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
         return this;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public Animation<?> setKeyFrame(KeyFrame<T> firstKeyFrame, KeyFrame<T> secondKeyFrame) {
         this.keyFrameList.clear();
         this.keyFrameList.add(firstKeyFrame);
@@ -234,7 +227,6 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
         return this;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public Animation<?> addKeyFrame(KeyFrame<T> keyFrame) {
         this.keyFrameList.add(keyFrame);
         sortKeyFrameList();
@@ -311,7 +303,6 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
         return null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Deprecated
     public Animation<?> setFrom(T from) {
         return this;
@@ -322,19 +313,16 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
         return null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Deprecated
     public Animation<?> setTo(T to) {
         return this;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Deprecated
     public Animation<?> setDuration(long duration) {
         return this;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Deprecated
     public Animation<?> setKeyFrame(KeyFrame<T> keyFrame) {
         return this;

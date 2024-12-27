@@ -237,8 +237,6 @@ public class Notifier {
 
     public final class RealInjector {}
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.power.Notifier$3] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.power.Notifier$3] */
     public Notifier(
             Looper looper,
             Context context,

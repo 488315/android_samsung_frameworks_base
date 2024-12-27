@@ -4,13 +4,11 @@ package android.os;
 public final class DynamicEffect extends VibrationEffect implements Parcelable {
     public static final Parcelable.Creator<DynamicEffect> CREATOR =
             new Parcelable.Creator<DynamicEffect>() { // from class: android.os.DynamicEffect.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DynamicEffect createFromParcel(Parcel in) {
                     return new DynamicEffect(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DynamicEffect[] newArray(int size) {
                     return new DynamicEffect[size];

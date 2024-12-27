@@ -6,13 +6,11 @@ import android.annotation.SystemApi;
 public final class RemoteCallback implements Parcelable {
     public static final Parcelable.Creator<RemoteCallback> CREATOR =
             new Parcelable.Creator<RemoteCallback>() { // from class: android.os.RemoteCallback.3
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteCallback createFromParcel(Parcel parcel) {
                     return new RemoteCallback(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteCallback[] newArray(int size) {
                     return new RemoteCallback[size];

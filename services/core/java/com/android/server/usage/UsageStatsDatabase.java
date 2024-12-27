@@ -501,10 +501,6 @@ public final class UsageStatsDatabase {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r13v3 */
-    /* JADX WARN: Type inference failed for: r13v4, types: [int] */
-    /* JADX WARN: Type inference failed for: r13v6 */
     public final void checkVersionAndBuildLocked() {
         int i;
         int i2;

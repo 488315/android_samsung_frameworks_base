@@ -11,13 +11,11 @@ import java.util.List;
 public final class BlobInfo implements Parcelable {
     public static final Parcelable.Creator<BlobInfo> CREATOR =
             new Parcelable.Creator<BlobInfo>() { // from class: android.app.blob.BlobInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BlobInfo createFromParcel(Parcel source) {
                     return new BlobInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BlobInfo[] newArray(int size) {
                     return new BlobInfo[size];

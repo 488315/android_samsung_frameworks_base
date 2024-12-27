@@ -126,14 +126,6 @@ public final class CoverLauncherRemoteViewsFactory implements RemoteViewsService
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0203  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0207  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x020b  */
-    /* JADX WARN: Type inference failed for: r2v12 */
-    /* JADX WARN: Type inference failed for: r2v16 */
-    /* JADX WARN: Type inference failed for: r2v9, types: [int] */
-    /* JADX WARN: Type inference failed for: r9v6, types: [android.database.Cursor, java.io.Closeable] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

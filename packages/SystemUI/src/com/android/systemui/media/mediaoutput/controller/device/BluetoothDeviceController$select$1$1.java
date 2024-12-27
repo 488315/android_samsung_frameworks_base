@@ -17,7 +17,6 @@ final class BluetoothDeviceController$select$1$1 extends SuspendLambda implement
     int label;
     final /* synthetic */ BluetoothDeviceController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BluetoothDeviceController$select$1$1(BluetoothDeviceController bluetoothDeviceController, LocalBluetoothManager localBluetoothManager, Continuation continuation) {
         super(2, continuation);
         this.this$0 = bluetoothDeviceController;

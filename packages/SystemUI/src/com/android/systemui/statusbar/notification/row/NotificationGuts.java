@@ -81,8 +81,6 @@ public class NotificationGuts extends FrameLayout {
         void onHeightChanged();
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.notification.row.NotificationGuts$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.notification.row.NotificationGuts$2] */
     public NotificationGuts(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mGutsContentAccessibilityDelegate = new View.AccessibilityDelegate() { // from class: com.android.systemui.statusbar.notification.row.NotificationGuts.1

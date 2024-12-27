@@ -15,7 +15,6 @@ final class InputMethodRepositoryImpl$enabledInputMethodSubtypes$2 extends Suspe
     int label;
     final /* synthetic */ InputMethodRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InputMethodRepositoryImpl$enabledInputMethodSubtypes$2(InputMethodRepositoryImpl inputMethodRepositoryImpl, InputMethodInfo inputMethodInfo, boolean z, Continuation continuation) {
         super(2, continuation);
         this.this$0 = inputMethodRepositoryImpl;

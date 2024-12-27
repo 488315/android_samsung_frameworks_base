@@ -60,13 +60,11 @@ public final class DomainVerificationRequest implements Parcelable {
         CREATOR =
                 new Parcelable.Creator<DomainVerificationRequest>() { // from class:
                     // android.content.pm.verify.domain.DomainVerificationRequest.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DomainVerificationRequest[] newArray(int size) {
                         return new DomainVerificationRequest[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DomainVerificationRequest createFromParcel(Parcel in) {
                         return new DomainVerificationRequest(in);

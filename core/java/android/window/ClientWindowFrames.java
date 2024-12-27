@@ -10,13 +10,11 @@ public class ClientWindowFrames implements Parcelable {
     public static final Parcelable.Creator<ClientWindowFrames> CREATOR =
             new Parcelable.Creator<
                     ClientWindowFrames>() { // from class: android.window.ClientWindowFrames.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClientWindowFrames createFromParcel(Parcel in) {
                     return new ClientWindowFrames(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClientWindowFrames[] newArray(int size) {
                     return new ClientWindowFrames[size];

@@ -52,7 +52,6 @@ public final class MultiResolutionManager {
                 public final /* synthetic */ int $r8$classId;
                 public final /* synthetic */ MultiResolutionManager this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super("resolution_user_setting");
                     this.$r8$classId = r2;
@@ -149,7 +148,6 @@ public final class MultiResolutionManager {
                 public final /* synthetic */ int $r8$classId;
                 public final /* synthetic */ MultiResolutionManager this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super("resolution_user_setting");
                     this.$r8$classId = r2;
@@ -246,7 +244,6 @@ public final class MultiResolutionManager {
                 public final /* synthetic */ int $r8$classId;
                 public final /* synthetic */ MultiResolutionManager this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super("resolution_user_setting");
                     this.$r8$classId = r2;
@@ -683,9 +680,6 @@ public final class MultiResolutionManager {
         linkedHashMap.put("HD", resolution8);
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.desktopmode.MultiResolutionManager$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.desktopmode.MultiResolutionManager$1] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.desktopmode.MultiResolutionManager$1] */
     public MultiResolutionManager(
             Context context,
             IStateManager iStateManager,

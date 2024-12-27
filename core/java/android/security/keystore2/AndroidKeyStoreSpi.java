@@ -256,7 +256,6 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
         return specBuilder.build();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void setPrivateKeyEntry(
             String alias,
             PrivateKey privateKey,
@@ -1021,7 +1020,6 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public KeyDescriptor[] getAliasesBatch(String startPastAlias) {
         try {
             StrictMode.noteDiskRead();

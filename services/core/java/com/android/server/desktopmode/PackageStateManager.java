@@ -99,7 +99,6 @@ public final class PackageStateManager extends PackageMonitor {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public PackageStateManager(
             Context context,
             IStateManager iStateManager,

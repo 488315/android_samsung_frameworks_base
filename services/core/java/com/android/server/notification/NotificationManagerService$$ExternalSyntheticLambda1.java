@@ -21,7 +21,6 @@ public final /* synthetic */ class NotificationManagerService$$ExternalSynthetic
         this.f$0 = notificationManagerService;
     }
 
-    /* JADX INFO: Infinite loop detected, blocks: 8, insns: 0 */
     @Override // java.lang.Runnable
     public final void run() {
         switch (this.$r8$classId) {

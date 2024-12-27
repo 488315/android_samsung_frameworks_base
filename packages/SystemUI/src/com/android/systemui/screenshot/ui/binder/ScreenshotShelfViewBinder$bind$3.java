@@ -91,7 +91,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 int label;
                 final /* synthetic */ ScreenshotShelfViewBinder this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public C01691(ScreenshotViewModel screenshotViewModel, ScreenshotShelfViewBinder screenshotShelfViewBinder, ImageView imageView, ImageView imageView2, View view, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = screenshotViewModel;
@@ -160,7 +159,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 final /* synthetic */ ScreenshotViewModel $viewModel;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass2(ScreenshotViewModel screenshotViewModel, ImageView imageView, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = screenshotViewModel;
@@ -219,7 +217,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 int label;
                 final /* synthetic */ ScreenshotShelfViewBinder this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass3(ScreenshotViewModel screenshotViewModel, ScreenshotShelfViewBinder screenshotShelfViewBinder, ImageView imageView, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = screenshotViewModel;
@@ -294,7 +291,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 final /* synthetic */ ScreenshotViewModel $viewModel;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass4(ScreenshotViewModel screenshotViewModel, ImageView imageView, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = screenshotViewModel;
@@ -348,7 +344,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 final /* synthetic */ ScreenshotViewModel $viewModel;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass5(ScreenshotViewModel screenshotViewModel, ImageView imageView, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = screenshotViewModel;
@@ -413,7 +408,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 final /* synthetic */ ScreenshotViewModel $viewModel;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass6(ScreenshotViewModel screenshotViewModel, ImageView imageView, LinearLayout linearLayout, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = screenshotViewModel;
@@ -474,7 +468,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 int label;
                 final /* synthetic */ ScreenshotShelfViewBinder this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass7(ScreenshotViewModel screenshotViewModel, ScreenshotShelfViewBinder screenshotShelfViewBinder, ScreenshotShelfView screenshotShelfView, LayoutInflater layoutInflater, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = screenshotViewModel;
@@ -535,7 +528,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 int label;
                 final /* synthetic */ ScreenshotShelfViewBinder this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass8(ScreenshotViewModel screenshotViewModel, ScreenshotShelfViewBinder screenshotShelfViewBinder, ScreenshotShelfView screenshotShelfView, LayoutInflater layoutInflater, Continuation continuation) {
                     super(2, continuation);
                     this.$viewModel = screenshotViewModel;
@@ -588,7 +580,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 }
             }
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C01681(ScreenshotViewModel screenshotViewModel, ScreenshotShelfViewBinder screenshotShelfViewBinder, ImageView imageView, ImageView imageView2, View view, ImageView imageView3, ImageView imageView4, ImageView imageView5, LinearLayout linearLayout, ScreenshotShelfView screenshotShelfView, LayoutInflater layoutInflater, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = screenshotViewModel;
@@ -636,7 +627,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(LifecycleOwner lifecycleOwner, ScreenshotViewModel screenshotViewModel, ScreenshotShelfViewBinder screenshotShelfViewBinder, ImageView imageView, ImageView imageView2, View view, ImageView imageView3, ImageView imageView4, ImageView imageView5, LinearLayout linearLayout, ScreenshotShelfView screenshotShelfView, LayoutInflater layoutInflater, Continuation continuation) {
             super(2, continuation);
             this.$$this$repeatWhenAttached = lifecycleOwner;
@@ -686,7 +676,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenshotShelfViewBinder$bind$3(ScreenshotViewModel screenshotViewModel, ScreenshotShelfViewBinder screenshotShelfViewBinder, ImageView imageView, ImageView imageView2, View view, ImageView imageView3, ImageView imageView4, ImageView imageView5, LinearLayout linearLayout, ScreenshotShelfView screenshotShelfView, LayoutInflater layoutInflater, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = screenshotViewModel;

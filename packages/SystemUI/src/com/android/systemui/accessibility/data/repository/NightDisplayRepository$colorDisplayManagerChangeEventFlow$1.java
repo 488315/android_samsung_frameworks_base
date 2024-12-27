@@ -22,7 +22,6 @@ final class NightDisplayRepository$colorDisplayManagerChangeEventFlow$1 extends 
     int label;
     final /* synthetic */ NightDisplayRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NightDisplayRepository$colorDisplayManagerChangeEventFlow$1(NightDisplayRepository nightDisplayRepository, UserHandle userHandle, Continuation continuation) {
         super(2, continuation);
         this.this$0 = nightDisplayRepository;
@@ -69,7 +68,6 @@ final class NightDisplayRepository$colorDisplayManagerChangeEventFlow$1 extends 
                 }
             });
             Function0 function0 = new Function0() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$colorDisplayManagerChangeEventFlow$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

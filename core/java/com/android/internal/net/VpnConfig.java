@@ -66,7 +66,6 @@ public class VpnConfig implements Parcelable {
     public static final Parcelable.Creator<VpnConfig> CREATOR =
             new Parcelable.Creator<
                     VpnConfig>() { // from class: com.android.internal.net.VpnConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VpnConfig createFromParcel(Parcel in) {
                     VpnConfig config = new VpnConfig();
@@ -103,7 +102,6 @@ public class VpnConfig implements Parcelable {
                     return config;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VpnConfig[] newArray(int size) {
                     return new VpnConfig[size];

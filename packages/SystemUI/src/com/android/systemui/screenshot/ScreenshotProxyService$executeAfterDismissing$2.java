@@ -16,7 +16,6 @@ final class ScreenshotProxyService$executeAfterDismissing$2 extends SuspendLambd
     int label;
     final /* synthetic */ ScreenshotProxyService this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenshotProxyService$executeAfterDismissing$2(ScreenshotProxyService screenshotProxyService, IOnDoneCallback iOnDoneCallback, Continuation continuation) {
         super(2, continuation);
         this.this$0 = screenshotProxyService;

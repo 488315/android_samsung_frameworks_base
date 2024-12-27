@@ -59,7 +59,6 @@ public final class NavigationModeController implements Dumpable {
     public enum ModeOverlayReason {
         UPDATE_INTERACTION_MODE_AS_OWNER_USER,
         UPDATE_INTERACTION_MODE_DEVICE_PROVISIONED_COMPLETE,
-        /* JADX INFO: Fake field, exist only in values array */
         UPDATE_INTERACTION_MODE_BY_SPLUGIN,
         UPDATE_INTERACTION_MODE_SIMPLIFIED_GESTURE,
         UPDATE_INTERACTION_MODE_GESTURE_BY_DEFAULT
@@ -259,10 +258,6 @@ public final class NavigationModeController implements Dumpable {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00b4  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00e7 A[Catch: Exception -> 0x0083, TryCatch #1 {Exception -> 0x0083, blocks: (B:12:0x003a, B:14:0x007e, B:15:0x0086, B:17:0x0091, B:21:0x00a5, B:24:0x00b8, B:26:0x00d4, B:28:0x00da, B:30:0x00e7, B:32:0x00ef, B:34:0x00f7, B:36:0x0133, B:38:0x00ff, B:41:0x0127), top: B:11:0x003a }] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0156  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00b7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

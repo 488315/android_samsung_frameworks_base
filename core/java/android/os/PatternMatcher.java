@@ -34,13 +34,11 @@ public class PatternMatcher implements Parcelable {
     private static final int[] sParsedPatternScratch = new int[2048];
     public static final Parcelable.Creator<PatternMatcher> CREATOR =
             new Parcelable.Creator<PatternMatcher>() { // from class: android.os.PatternMatcher.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PatternMatcher createFromParcel(Parcel source) {
                     return new PatternMatcher(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PatternMatcher[] newArray(int size) {
                     return new PatternMatcher[size];
@@ -209,8 +207,6 @@ public class PatternMatcher implements Parcelable {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x014d  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x010e A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

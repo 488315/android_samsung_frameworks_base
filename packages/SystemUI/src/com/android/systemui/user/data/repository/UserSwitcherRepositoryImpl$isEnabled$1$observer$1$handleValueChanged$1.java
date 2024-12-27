@@ -14,7 +14,6 @@ final class UserSwitcherRepositoryImpl$isEnabled$1$observer$1$handleValueChanged
     int label;
     final /* synthetic */ UserSwitcherRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherRepositoryImpl$isEnabled$1$observer$1$handleValueChanged$1(ProducerScope producerScope, UserSwitcherRepositoryImpl userSwitcherRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.$$this$conflatedCallbackFlow = producerScope;

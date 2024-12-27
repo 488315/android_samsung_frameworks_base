@@ -68,7 +68,6 @@ public abstract class HomeVisibilityListener {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$refreshHomeVisibility$1() throws Exception {
             HomeVisibilityListener.this.mExecutor.execute(
                     new Runnable() { // from class:
@@ -81,14 +80,12 @@ public abstract class HomeVisibilityListener {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$refreshHomeVisibility$0() {
             HomeVisibilityListener.this.onHomeVisibilityChanged(
                     HomeVisibilityListener.this.mIsHomeActivityVisible);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isHomeActivityVisible() {
         List<ActivityManager.RunningTaskInfo> tasksTopToBottom =
                 this.mActivityTaskManager.getTasks(

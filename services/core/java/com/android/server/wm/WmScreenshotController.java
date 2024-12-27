@@ -290,13 +290,6 @@ public final class WmScreenshotController {
                         this.this$0 = this;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:45:0x0124  */
-                    /* JADX WARN: Removed duplicated region for block: B:48:0x0129  */
-                    /* JADX WARN: Removed duplicated region for block: B:49:0x012c  */
-                    /* JADX WARN: Removed duplicated region for block: B:50:0x012f  */
-                    /* JADX WARN: Removed duplicated region for block: B:51:0x0132  */
-                    /* JADX WARN: Removed duplicated region for block: B:52:0x0135  */
-                    /* JADX WARN: Removed duplicated region for block: B:53:0x0138  */
                     @Override // android.content.BroadcastReceiver
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -696,12 +689,6 @@ public final class WmScreenshotController {
         handler.post(takeScreenshotRunnable);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0141  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0151 A[Catch: all -> 0x015f, TryCatch #2 {all -> 0x015f, blocks: (B:3:0x0066, B:4:0x006d, B:35:0x0144, B:37:0x0151, B:39:0x0156, B:42:0x0170, B:43:0x0173, B:55:0x0162, B:57:0x0166, B:74:0x01c6, B:75:0x01c9, B:6:0x006e, B:8:0x0079, B:9:0x007e, B:16:0x00c9, B:18:0x00cf, B:24:0x00e6, B:27:0x0113, B:29:0x0119, B:31:0x0124, B:34:0x0143, B:64:0x00f2, B:66:0x00f8, B:69:0x0101, B:70:0x0108), top: B:2:0x0066, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x016e A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0187 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0198 A[Catch: all -> 0x01ca, TRY_LEAVE, TryCatch #1 {all -> 0x01ca, blocks: (B:47:0x0189, B:52:0x0198), top: B:46:0x0189 }] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0142  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

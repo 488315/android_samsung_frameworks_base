@@ -23,13 +23,11 @@ public final class SipMessage implements Parcelable {
     private static final boolean IS_DEBUGGING = Build.IS_ENG;
     public static final Parcelable.Creator<SipMessage> CREATOR =
             new Parcelable.Creator<SipMessage>() { // from class: android.telephony.ims.SipMessage.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SipMessage createFromParcel(Parcel source) {
                     return new SipMessage(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SipMessage[] newArray(int size) {
                     return new SipMessage[size];

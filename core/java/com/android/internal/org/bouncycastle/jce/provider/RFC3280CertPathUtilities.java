@@ -875,7 +875,6 @@ class RFC3280CertPathUtilities {
         }
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:101:0x012f */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1164,7 +1163,6 @@ class RFC3280CertPathUtilities {
         }
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:5:0x002d */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

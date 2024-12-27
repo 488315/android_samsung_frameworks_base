@@ -22,8 +22,6 @@ public class SerialService extends ISerialManager.Stub {
             super(context);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.SerialService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? serialService = new SerialService(getContext());
@@ -33,7 +31,6 @@ public class SerialService extends ISerialManager.Stub {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.SerialService$1] */
     public SerialService(Context context) {
         super(PermissionEnforcer.fromContext(context));
         LinkedHashMap linkedHashMap = new LinkedHashMap();
@@ -73,7 +70,6 @@ public class SerialService extends ISerialManager.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native ParcelFileDescriptor native_open(String str);
 
     public final String[] getSerialPorts() {

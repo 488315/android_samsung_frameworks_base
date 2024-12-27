@@ -7,13 +7,11 @@ public final class DemuxFilterScIndexMask implements Parcelable {
     public static final Parcelable.Creator<DemuxFilterScIndexMask> CREATOR =
             new Parcelable.Creator<DemuxFilterScIndexMask>() { // from class:
                 // android.hardware.tv.tuner.DemuxFilterScIndexMask.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterScIndexMask createFromParcel(Parcel _aidl_source) {
                     return new DemuxFilterScIndexMask(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterScIndexMask[] newArray(int _aidl_size) {
                     return new DemuxFilterScIndexMask[_aidl_size];

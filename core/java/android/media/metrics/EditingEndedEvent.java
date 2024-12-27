@@ -14,13 +14,11 @@ public final class EditingEndedEvent extends Event implements Parcelable {
     public static final Parcelable.Creator<EditingEndedEvent> CREATOR =
             new Parcelable.Creator<
                     EditingEndedEvent>() { // from class: android.media.metrics.EditingEndedEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EditingEndedEvent[] newArray(int size) {
                     return new EditingEndedEvent[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EditingEndedEvent createFromParcel(Parcel in) {
                     return new EditingEndedEvent(in);

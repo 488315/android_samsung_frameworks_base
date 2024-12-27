@@ -19,13 +19,11 @@ public final class TranslationContext implements Parcelable {
             new Parcelable.Creator<
                     TranslationContext>() { // from class:
                                             // android.view.translation.TranslationContext.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TranslationContext[] newArray(int size) {
                     return new TranslationContext[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TranslationContext createFromParcel(Parcel in) {
                     return new TranslationContext(in);
@@ -42,12 +40,10 @@ public final class TranslationContext implements Parcelable {
     @Retention(RetentionPolicy.SOURCE)
     public @interface TranslationFlag {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultTranslationFlags() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ActivityId defaultActivityId() {
         return null;
     }

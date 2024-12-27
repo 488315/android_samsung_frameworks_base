@@ -16,7 +16,6 @@ final class DragAndDropTargetState$onMoved$1$1 extends SuspendLambda implements 
     int label;
     final /* synthetic */ DragAndDropTargetState this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DragAndDropTargetState$onMoved$1$1(DragAndDropTargetState dragAndDropTargetState, Ref$ObjectRef<Integer> ref$ObjectRef, Ref$ObjectRef<Integer> ref$ObjectRef2, Continuation continuation) {
         super(2, continuation);
         this.this$0 = dragAndDropTargetState;

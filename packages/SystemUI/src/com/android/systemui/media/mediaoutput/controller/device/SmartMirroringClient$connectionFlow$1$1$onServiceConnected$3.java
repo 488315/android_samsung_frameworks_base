@@ -15,7 +15,6 @@ final class SmartMirroringClient$connectionFlow$1$1$onServiceConnected$3 extends
     final /* synthetic */ ProducerScope $$this$callbackFlow;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SmartMirroringClient$connectionFlow$1$1$onServiceConnected$3(ProducerScope producerScope, Continuation continuation) {
         super(2, continuation);
         this.$$this$callbackFlow = producerScope;

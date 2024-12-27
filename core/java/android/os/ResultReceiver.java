@@ -5,13 +5,11 @@ import com.android.internal.os.IResultReceiver;
 public class ResultReceiver implements Parcelable {
     public static final Parcelable.Creator<ResultReceiver> CREATOR =
             new Parcelable.Creator<ResultReceiver>() { // from class: android.os.ResultReceiver.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ResultReceiver createFromParcel(Parcel in) {
                     return new ResultReceiver(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ResultReceiver[] newArray(int size) {
                     return new ResultReceiver[size];

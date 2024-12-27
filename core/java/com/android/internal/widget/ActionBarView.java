@@ -468,7 +468,6 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
         setHomeButtonEnabled(enable, true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setHomeButtonEnabled(boolean enable, boolean recordState) {
         if (recordState) {
             this.mWasHomeEnabled = enable;
@@ -729,7 +728,6 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void initTitle() {
         if (this.mTitleLayout == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -787,14 +785,6 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:107:0x02f0  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x0300  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x0326  */
-    /* JADX WARN: Removed duplicated region for block: B:131:0x031b  */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x02d3  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x021c  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0219  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x022a  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -810,16 +800,6 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
                     + " int):void");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x0256  */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x012d  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00e9  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0109  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x012a  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x013b  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x025c  */
-    /* JADX WARN: Removed duplicated region for block: B:82:? A[RETURN, SYNTHETIC] */
     @Override // android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -934,13 +914,11 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
                 new Parcelable.Creator<
                         SavedState>() { // from class:
                                         // com.android.internal.widget.ActionBarView.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];

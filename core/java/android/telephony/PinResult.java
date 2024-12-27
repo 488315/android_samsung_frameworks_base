@@ -19,13 +19,11 @@ public final class PinResult implements Parcelable {
     private static final PinResult sFailedResult = new PinResult(2, -1);
     public static final Parcelable.Creator<PinResult> CREATOR =
             new Parcelable.Creator<PinResult>() { // from class: android.telephony.PinResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PinResult createFromParcel(Parcel in) {
                     return new PinResult(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PinResult[] newArray(int size) {
                     return new PinResult[size];

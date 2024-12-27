@@ -699,7 +699,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
             boolean z;
@@ -1739,7 +1738,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
             throw new UnsupportedOperationException("Method not decompiled: com.android.server.audio.AudioService.AudioPolicyProxy.hasMixRoutedToDevices(int[], java.lang.String[]):boolean");
         }
 
-        /* JADX WARN: Finally extract failed */
         public final void release() {
             if (this.mIsFocusPolicy) {
                 MediaFocusControl mediaFocusControl = AudioService.this.mMediaFocusControl;
@@ -1997,7 +1995,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
 
         /* JADX WARN: Removed duplicated region for block: B:22:0x002e A[Catch: all -> 0x0017, LOOP:0: B:22:0x002e->B:26:0x0042, LOOP_START, PHI: r3
           0x002e: PHI (r3v1 int) = (r3v0 int), (r3v2 int) binds: [B:21:0x002c, B:26:0x0042] A[DONT_GENERATE, DONT_INLINE], TryCatch #0 {all -> 0x0017, blocks: (B:8:0x000b, B:10:0x0011, B:11:0x0050, B:12:0x005e, B:15:0x0019, B:17:0x0021, B:22:0x002e, B:24:0x0035, B:30:0x0048, B:26:0x0042), top: B:7:0x000b }] */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x0048 A[Catch: all -> 0x0017, TryCatch #0 {all -> 0x0017, blocks: (B:8:0x000b, B:10:0x0011, B:11:0x0050, B:12:0x005e, B:15:0x0019, B:17:0x0021, B:22:0x002e, B:24:0x0035, B:30:0x0048, B:26:0x0042), top: B:7:0x000b }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2081,7 +2078,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
 
         /* JADX WARN: Removed duplicated region for block: B:19:0x0029 A[Catch: all -> 0x0012, LOOP:0: B:19:0x0029->B:23:0x003d, LOOP_START, PHI: r2
           0x0029: PHI (r2v1 int) = (r2v0 int), (r2v2 int) binds: [B:18:0x0027, B:23:0x003d] A[DONT_GENERATE, DONT_INLINE], TryCatch #0 {all -> 0x0012, blocks: (B:4:0x0005, B:6:0x000b, B:7:0x004b, B:12:0x0014, B:14:0x001c, B:19:0x0029, B:21:0x0030, B:27:0x0043, B:23:0x003d), top: B:3:0x0005 }] */
-        /* JADX WARN: Removed duplicated region for block: B:27:0x0043 A[Catch: all -> 0x0012, TryCatch #0 {all -> 0x0012, blocks: (B:4:0x0005, B:6:0x000b, B:7:0x004b, B:12:0x0014, B:14:0x001c, B:19:0x0029, B:21:0x0030, B:27:0x0043, B:23:0x003d), top: B:3:0x0005 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2258,8 +2254,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class BypassReason {
         public static final /* synthetic */ BypassReason[] $VALUES;
         public static final BypassReason ALL_SOUND_MUTE;
@@ -2514,7 +2508,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
     public final class MediaVolumeStreamState extends VolumeStreamState {
         public final /* synthetic */ AudioService this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public MediaVolumeStreamState(int i, AudioService audioService, String str) {
             super(i, audioService, str);
             this.this$0 = audioService;
@@ -2897,7 +2890,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
             this.this$0 = audioService;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public void handleIntent(Context context, Intent intent) {
             MediaFocusControl mediaFocusControl;
             String str;
@@ -3723,7 +3715,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ AudioService this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public SettingsObserver(AudioService audioService, int i) {
             super(new Handler());
             this.$r8$classId = i;
@@ -4601,8 +4592,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
             return mute;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:17:0x0060 A[Catch: all -> 0x002a, TryCatch #0 {all -> 0x002a, blocks: (B:4:0x0007, B:8:0x0012, B:10:0x0018, B:12:0x0020, B:15:0x0052, B:17:0x0060, B:19:0x006d, B:20:0x009f, B:22:0x00a3, B:23:0x002d, B:25:0x0031, B:29:0x0038, B:30:0x0050, B:33:0x00a6), top: B:3:0x0007 }] */
-        /* JADX WARN: Removed duplicated region for block: B:22:0x00a3 A[Catch: all -> 0x002a, TryCatch #0 {all -> 0x002a, blocks: (B:4:0x0007, B:8:0x0012, B:10:0x0018, B:12:0x0020, B:15:0x0052, B:17:0x0060, B:19:0x006d, B:20:0x009f, B:22:0x00a3, B:23:0x002d, B:25:0x0031, B:29:0x0038, B:30:0x0050, B:33:0x00a6), top: B:3:0x0007 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4907,10 +4896,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x005e  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0073 A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x004f  */
     /* renamed from: -$$Nest$mapplyDeviceAlias, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -5665,12 +5650,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         VOLUME_LIMIT_INDEX_EFFECT_ON = new int[]{6, 7, 8, 9, 11, 13, 13};
     }
 
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.server.audio.AudioService$1] */
-    /* JADX WARN: Type inference failed for: r8v19, types: [com.android.server.audio.AudioService$3] */
-    /* JADX WARN: Type inference failed for: r8v20, types: [com.android.server.audio.AudioService$4] */
-    /* JADX WARN: Type inference failed for: r8v23, types: [com.android.server.audio.AudioService$5] */
-    /* JADX WARN: Type inference failed for: r8v24, types: [com.android.server.audio.AudioService$6] */
-    /* JADX WARN: Type inference failed for: r8v38, types: [com.android.server.audio.AudioService$10] */
     public AudioService(Context context, AudioSystemAdapter audioSystemAdapter, SystemServerAdapter systemServerAdapter, SettingsAdapter settingsAdapter, AudioVolumeGroupHelper audioVolumeGroupHelper, DefaultAudioPolicyFacade defaultAudioPolicyFacade, AppOpsManager appOpsManager, PermissionEnforcer permissionEnforcer) {
         super(permissionEnforcer);
         AudioHandler audioHandler;
@@ -6650,39 +6629,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
     
         if (r4 == 100) goto L236;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x02af  */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x0413  */
-    /* JADX WARN: Removed duplicated region for block: B:150:0x041f  */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x0436 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:178:0x046c  */
-    /* JADX WARN: Removed duplicated region for block: B:185:0x047d  */
-    /* JADX WARN: Removed duplicated region for block: B:189:0x0493  */
-    /* JADX WARN: Removed duplicated region for block: B:205:0x04d6 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:220:0x064e  */
-    /* JADX WARN: Removed duplicated region for block: B:227:0x0692  */
-    /* JADX WARN: Removed duplicated region for block: B:234:0x06b4  */
-    /* JADX WARN: Removed duplicated region for block: B:239:0x06e3  */
-    /* JADX WARN: Removed duplicated region for block: B:266:0x078a A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:273:0x07ab  */
-    /* JADX WARN: Removed duplicated region for block: B:293:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:310:0x0745 A[Catch: all -> 0x06fc, TRY_LEAVE, TryCatch #6 {all -> 0x06fc, all -> 0x0769, blocks: (B:242:0x06e6, B:244:0x06ea, B:248:0x06f4, B:251:0x0700, B:253:0x0704, B:255:0x0708, B:257:0x070e, B:268:0x078e, B:269:0x0793, B:294:0x0720, B:310:0x0745, B:319:0x077d, B:326:0x0782, B:327:0x0785, B:317:0x0751, B:321:0x076b, B:322:0x0770, B:323:0x0775), top: B:241:0x06e6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:340:0x0797  */
-    /* JADX WARN: Removed duplicated region for block: B:343:0x0677  */
-    /* JADX WARN: Removed duplicated region for block: B:431:0x02f3  */
-    /* JADX WARN: Removed duplicated region for block: B:438:0x030e  */
-    /* JADX WARN: Removed duplicated region for block: B:447:0x03d7  */
-    /* JADX WARN: Removed duplicated region for block: B:458:0x03fe  */
-    /* JADX WARN: Removed duplicated region for block: B:461:0x0405  */
-    /* JADX WARN: Removed duplicated region for block: B:464:0x040b  */
-    /* JADX WARN: Removed duplicated region for block: B:465:0x0400  */
-    /* JADX WARN: Removed duplicated region for block: B:505:0x03aa  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x01b7 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x01b8  */
-    /* JADX WARN: Type inference failed for: r2v60 */
-    /* JADX WARN: Type inference failed for: r2v61 */
-    /* JADX WARN: Type inference failed for: r2v62, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r2v93 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6731,7 +6677,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         this.mMediaSessionManager.dispatchAdjustVolume(i2, i, i3);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00e6 A[Catch: all -> 0x00c9, TryCatch #0 {all -> 0x00c9, blocks: (B:25:0x00c1, B:27:0x00c5, B:29:0x00ec, B:33:0x00cb, B:38:0x00d6, B:40:0x00e6, B:43:0x00e0), top: B:24:0x00c1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7344,11 +7289,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         audioHandler.sendMessageAtTime(obtainMessage, uptimeMillis);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00bc A[Catch: IndexOutOfBoundsException | NumberFormatException -> 0x01b9, IndexOutOfBoundsException | NumberFormatException -> 0x01b9, TryCatch #6 {IndexOutOfBoundsException | NumberFormatException -> 0x01b9, blocks: (B:11:0x0025, B:14:0x0036, B:14:0x0036, B:24:0x006f, B:24:0x006f, B:26:0x0074, B:26:0x0074, B:28:0x0079, B:28:0x0079, B:37:0x009e, B:37:0x009e, B:39:0x00bc, B:39:0x00bc, B:41:0x00cb, B:41:0x00cb, B:43:0x00e4, B:43:0x00e4, B:45:0x0087, B:45:0x0087, B:48:0x008f, B:48:0x008f, B:51:0x0100, B:51:0x0100, B:60:0x0125, B:60:0x0125, B:61:0x012c, B:61:0x012c, B:70:0x0163, B:70:0x0163, B:72:0x0169, B:72:0x0169, B:73:0x0179, B:73:0x0179, B:77:0x0183, B:77:0x0183, B:83:0x0197, B:83:0x0197, B:86:0x0130, B:86:0x0130, B:89:0x013a, B:89:0x013a, B:92:0x0144, B:92:0x0144, B:95:0x014e, B:95:0x014e, B:98:0x0198, B:98:0x0198, B:99:0x01a1, B:99:0x01a1, B:102:0x01a3, B:102:0x01a3, B:107:0x01b8, B:107:0x01b8, B:108:0x010e, B:108:0x010e, B:111:0x0116, B:111:0x0116, B:114:0x003e, B:114:0x003e, B:117:0x0046, B:117:0x0046, B:120:0x0050, B:120:0x0050), top: B:10:0x0025 }] */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0121  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x0198 A[Catch: IndexOutOfBoundsException | NumberFormatException -> 0x01b9, IndexOutOfBoundsException | NumberFormatException -> 0x01b9, TryCatch #6 {IndexOutOfBoundsException | NumberFormatException -> 0x01b9, blocks: (B:11:0x0025, B:14:0x0036, B:14:0x0036, B:24:0x006f, B:24:0x006f, B:26:0x0074, B:26:0x0074, B:28:0x0079, B:28:0x0079, B:37:0x009e, B:37:0x009e, B:39:0x00bc, B:39:0x00bc, B:41:0x00cb, B:41:0x00cb, B:43:0x00e4, B:43:0x00e4, B:45:0x0087, B:45:0x0087, B:48:0x008f, B:48:0x008f, B:51:0x0100, B:51:0x0100, B:60:0x0125, B:60:0x0125, B:61:0x012c, B:61:0x012c, B:70:0x0163, B:70:0x0163, B:72:0x0169, B:72:0x0169, B:73:0x0179, B:73:0x0179, B:77:0x0183, B:77:0x0183, B:83:0x0197, B:83:0x0197, B:86:0x0130, B:86:0x0130, B:89:0x013a, B:89:0x013a, B:92:0x0144, B:92:0x0144, B:95:0x014e, B:95:0x014e, B:98:0x0198, B:98:0x0198, B:99:0x01a1, B:99:0x01a1, B:102:0x01a3, B:102:0x01a3, B:107:0x01b8, B:107:0x01b8, B:108:0x010e, B:108:0x010e, B:111:0x0116, B:111:0x0116, B:114:0x003e, B:114:0x003e, B:117:0x0046, B:117:0x0046, B:120:0x0050, B:120:0x0050), top: B:10:0x0025 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7435,8 +7375,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v3, types: [android.os.IBinder$DeathRecipient, com.android.server.audio.MediaFocusControl$2] */
     public final boolean enterAudioFocusFreezeForTest(IBinder iBinder, int[] iArr) {
         enterAudioFocusFreezeForTest_enforcePermission();
         Objects.requireNonNull(iArr);
@@ -7525,7 +7463,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
     
         r4.mICallback.unlinkToDeath(r4, 0);
      */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00bd A[Catch: all -> 0x0065, TryCatch #1 {all -> 0x0065, blocks: (B:13:0x001f, B:14:0x0025, B:16:0x002b, B:21:0x00bd, B:22:0x00cc, B:27:0x003b, B:29:0x0049, B:31:0x004d, B:32:0x0067, B:33:0x006d, B:34:0x0073, B:36:0x0079, B:39:0x0087, B:40:0x0096, B:42:0x009f, B:44:0x00a4, B:47:0x008e), top: B:11:0x001d, inners: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7928,7 +7865,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
     
         if (r9.mDeviceBroker.checkDeviceConnected(8) != false) goto L273;
      */
-    /* JADX WARN: Removed duplicated region for block: B:317:0x0568  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -10384,7 +10320,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         if (this.mContext.checkCallingOrSelfPermission("android.permission.MANAGE_AUDIO_POLICY") != 0) {
             throw new SecurityException("Missing MANAGE_AUDIO_POLICY permission");
@@ -10392,15 +10327,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         new AudioManagerShellCommand(this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:136:0x0095  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00ab  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00fa  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x0160  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0169  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x017b  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0188  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x01bb A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -10418,14 +10344,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         updateDefaultStreamOverrideDelay(z);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x013c A[Catch: all -> 0x00fa, TryCatch #1 {all -> 0x00fa, blocks: (B:112:0x00e9, B:116:0x00f1, B:120:0x0118, B:123:0x011e, B:124:0x0131, B:30:0x0138, B:32:0x013c, B:34:0x0140, B:35:0x0143, B:125:0x00ff), top: B:111:0x00e9 }] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0151  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x0355  */
-    /* JADX WARN: Type inference failed for: r11v4 */
-    /* JADX WARN: Type inference failed for: r11v5, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r11v7 */
-    /* JADX WARN: Type inference failed for: r11v8 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -12083,9 +12001,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v74 */
-    /* JADX WARN: Type inference failed for: r0v75, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r0v78 */
     public final void setAudioServiceConfig(String str) {
         String str2;
         float f;
@@ -12878,7 +12793,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         setStreamVolumeWithAttributionInt(volumeInfo.getStreamType(), volumeIndex, 0, audioDeviceAttributes, str, null, false);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0032 A[Catch: all -> 0x001c, TryCatch #0 {all -> 0x001c, blocks: (B:4:0x0003, B:6:0x000c, B:8:0x0012, B:12:0x001f, B:14:0x0032, B:16:0x0036, B:18:0x003c, B:20:0x0042, B:22:0x0048, B:24:0x004e, B:26:0x0054, B:27:0x005b, B:30:0x006a, B:32:0x0071, B:38:0x0074), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -14274,10 +14188,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:168:0x0335 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x01bd  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x01d5 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x01d6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -14578,10 +14488,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
     
         if (r21 != 1) goto L157;
      */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x03c9  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x03f4 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0183  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x018b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -15209,10 +15115,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v0 */
-    /* JADX WARN: Type inference failed for: r3v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r3v2 */
     public final void updateMasterMono(ContentResolver contentResolver) {
         this.mSettings.getClass();
         ?? r3 = Settings.System.getIntForUser(contentResolver, "master_mono", 0, -2) != 1 ? 0 : 1;
@@ -15252,13 +15154,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0082  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00a8 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0079  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0064  */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0062  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0076  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

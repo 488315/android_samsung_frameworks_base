@@ -11,7 +11,6 @@ public class EutranRegistrationInfo implements Parcelable {
     public static final Parcelable.Creator<EutranRegistrationInfo> CREATOR =
             new Parcelable.Creator<EutranRegistrationInfo>() { // from class:
                 // android.hardware.radio.network.EutranRegistrationInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EutranRegistrationInfo createFromParcel(Parcel _aidl_source) {
                     EutranRegistrationInfo _aidl_out = new EutranRegistrationInfo();
@@ -19,7 +18,6 @@ public class EutranRegistrationInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EutranRegistrationInfo[] newArray(int _aidl_size) {
                     return new EutranRegistrationInfo[_aidl_size];

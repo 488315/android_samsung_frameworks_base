@@ -113,7 +113,6 @@ public class NetworkStackClient {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$fetchIpMemoryStore$3(
             IIpMemoryStoreCallbacks iIpMemoryStoreCallbacks,
             INetworkStackConnector iNetworkStackConnector) {
@@ -124,7 +123,6 @@ public class NetworkStackClient {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$makeDhcpServer$0(
             String str,
             DhcpServingParamsParcel dhcpServingParamsParcel,
@@ -138,7 +136,6 @@ public class NetworkStackClient {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$makeIpClient$1(
             String str,
             IIpClientCallbacks iIpClientCallbacks,
@@ -150,7 +147,6 @@ public class NetworkStackClient {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$makeNetworkMonitor$2(
             Network network,
             String str,
@@ -177,12 +173,10 @@ public class NetworkStackClient {
         Log.e(TAG, str, th);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void logi(String str) {
         Log.i(TAG, str);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void registerNetworkStackService(IBinder iBinder) {
         ArrayList arrayList;
         INetworkStackConnector asInterface = INetworkStackConnector.Stub.asInterface(iBinder);

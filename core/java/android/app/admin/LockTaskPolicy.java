@@ -14,13 +14,11 @@ public final class LockTaskPolicy extends PolicyValue<LockTaskPolicy> {
     public static final Parcelable.Creator<LockTaskPolicy> CREATOR =
             new Parcelable.Creator<
                     LockTaskPolicy>() { // from class: android.app.admin.LockTaskPolicy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LockTaskPolicy createFromParcel(Parcel source) {
                     return new LockTaskPolicy(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LockTaskPolicy[] newArray(int size) {
                     return new LockTaskPolicy[size];
@@ -38,7 +36,6 @@ public final class LockTaskPolicy extends PolicyValue<LockTaskPolicy> {
         return this.mFlags;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.app.admin.PolicyValue
     public LockTaskPolicy getValue() {
         return this;

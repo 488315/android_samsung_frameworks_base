@@ -35,7 +35,6 @@ public class MbmsUtils {
         return new ComponentName(ci.packageName, ci.name);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static ComponentName getOverrideServiceName(Context context, String serviceAction) {
         char c;
         String serviceComponent;

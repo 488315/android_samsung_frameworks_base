@@ -29,7 +29,6 @@ public final class NotifPipelineChoreographerImpl implements NotifPipelineChoreo
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.notification.collection.NotifPipelineChoreographerImpl$frameCallback$1] */
     public NotifPipelineChoreographerImpl(Choreographer choreographer, DelayableExecutor delayableExecutor) {
         this.viewChoreographer = choreographer;
         this.executor = delayableExecutor;

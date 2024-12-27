@@ -51,7 +51,6 @@ public final class NoSessionController extends SessionController {
         super(context, null, 2, null);
         this.audioManager = audioManager;
         this.semSoundAssistantManager$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.media.NoSessionController$semSoundAssistantManager$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

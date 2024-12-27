@@ -10,7 +10,6 @@ import com.android.internal.util.Preconditions;
 public final class CrateInfo implements Parcelable {
     public static final Parcelable.Creator<CrateInfo> CREATOR =
             new Parcelable.Creator<CrateInfo>() { // from class: android.os.storage.CrateInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CrateInfo createFromParcel(Parcel in) {
                     CrateInfo crateInfo = new CrateInfo();
@@ -18,7 +17,6 @@ public final class CrateInfo implements Parcelable {
                     return crateInfo;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CrateInfo[] newArray(int size) {
                     return new CrateInfo[size];

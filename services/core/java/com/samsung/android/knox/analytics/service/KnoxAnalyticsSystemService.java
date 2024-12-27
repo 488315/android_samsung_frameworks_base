@@ -427,8 +427,6 @@ public final class KnoxAnalyticsSystemService extends SystemService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v3, types: [android.os.IBinder, com.samsung.android.knox.analytics.service.KnoxAnalyticsServiceImpl] */
     public final void startSystemService() {
         String str = TAG;
         Log.d(str, "startSystemService()");

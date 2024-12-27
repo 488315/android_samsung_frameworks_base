@@ -21,7 +21,6 @@ public final class CredentialPasswordView extends LinearLayout implements Creden
     public CredentialPasswordView(final Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.biometrics.ui.CredentialPasswordView$accessibilityManager$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

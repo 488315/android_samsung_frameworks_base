@@ -11,13 +11,11 @@ import java.lang.annotation.RetentionPolicy;
 public class AODToast implements Parcelable {
     public static final Parcelable.Creator<AODToast> CREATOR =
             new Parcelable.Creator<AODToast>() { // from class: com.samsung.android.aod.AODToast.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AODToast createFromParcel(Parcel in) {
                     return new AODToast(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AODToast[] newArray(int size) {
                     return new AODToast[size];

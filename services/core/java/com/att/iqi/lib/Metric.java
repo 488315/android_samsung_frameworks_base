@@ -185,7 +185,6 @@ public abstract class Metric implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Metric maybeLoadAndInstantiate(String str, Parcel parcel) {
         try {
             Map map = sLoadedClasses;

@@ -525,34 +525,6 @@ public final class ActivityMetricsLogger {
             handler.post(
                     new Runnable() { // from class:
                         // com.android.server.wm.ActivityMetricsLogger$$ExternalSyntheticLambda0
-                        /* JADX WARN: Multi-variable type inference failed */
-                        /* JADX WARN: Removed duplicated region for block: B:108:0x044b  */
-                        /* JADX WARN: Removed duplicated region for block: B:114:0x0466  */
-                        /* JADX WARN: Removed duplicated region for block: B:119:0x0481  */
-                        /* JADX WARN: Removed duplicated region for block: B:121:0x048c  */
-                        /* JADX WARN: Removed duplicated region for block: B:124:0x04a3  */
-                        /* JADX WARN: Removed duplicated region for block: B:127:0x04ac  */
-                        /* JADX WARN: Removed duplicated region for block: B:130:0x04b9  */
-                        /* JADX WARN: Removed duplicated region for block: B:144:0x0581  */
-                        /* JADX WARN: Removed duplicated region for block: B:201:0x073e  */
-                        /* JADX WARN: Removed duplicated region for block: B:204:0x0750 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-                        /* JADX WARN: Removed duplicated region for block: B:219:0x082c  */
-                        /* JADX WARN: Removed duplicated region for block: B:226:0x0889  */
-                        /* JADX WARN: Removed duplicated region for block: B:235:0x08eb  */
-                        /* JADX WARN: Removed duplicated region for block: B:238:0x0903 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-                        /* JADX WARN: Removed duplicated region for block: B:264:? A[RETURN, SYNTHETIC] */
-                        /* JADX WARN: Removed duplicated region for block: B:265:0x08ef  */
-                        /* JADX WARN: Removed duplicated region for block: B:266:0x0891  */
-                        /* JADX WARN: Removed duplicated region for block: B:267:0x0854  */
-                        /* JADX WARN: Removed duplicated region for block: B:285:0x04af  */
-                        /* JADX WARN: Removed duplicated region for block: B:286:0x04a5  */
-                        /* JADX WARN: Removed duplicated region for block: B:64:0x0277  */
-                        /* JADX WARN: Removed duplicated region for block: B:79:0x02b5  */
-                        /* JADX WARN: Removed duplicated region for block: B:81:0x02c6  */
-                        /* JADX WARN: Type inference failed for: r7v21, types: [boolean, int] */
-                        /* JADX WARN: Type inference failed for: r7v63 */
-                        /* JADX WARN: Type inference failed for: r7v66 */
-                        /* JADX WARN: Type inference failed for: r7v67 */
                         @Override // java.lang.Runnable
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.

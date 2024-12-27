@@ -31,7 +31,6 @@ public final class GlobalActions {
             };
     public final Handler mHandler = new Handler();
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.policy.GlobalActions$1] */
     public GlobalActions(
             Context context, WindowManagerPolicy.WindowManagerFuncs windowManagerFuncs) {
         this.mContext = context;
@@ -51,7 +50,6 @@ public final class GlobalActions {
         onGlobalActionsAvailableChanged(statusBarManagerService.mBar != null);
     }
 
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.server.policy.GlobalActions$$ExternalSyntheticLambda0] */
     public final void ensureLegacyCreated() {
         if (this.mSamsungGlobalActions != null) {
             return;

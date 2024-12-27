@@ -186,7 +186,6 @@ public class InteractionJankMonitor {
     private int mTraceThresholdMissedFrames = 3;
     private int mTraceThresholdFrameTimeMillis = 64;
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FunctionalInterface
     interface TimeFunction {
         void invoke(long j, long j2, long j3);
@@ -236,7 +235,6 @@ public class InteractionJankMonitor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(Context context) {
         try {
             updateProperties(DeviceConfig.getProperties("interaction_jank_monitor", new String[0]));
@@ -312,7 +310,6 @@ public class InteractionJankMonitor {
                     InteractionJankMonitor.EXECUTOR_TASK_TIMEOUT);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCujEvents$0(
                 Configuration config, FrameTracker tracker, String action, int reason) {
             InteractionJankMonitor.this.handleCujEvents(config.mCujType, tracker, action, reason);
@@ -332,7 +329,6 @@ public class InteractionJankMonitor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleCujEvents(int cuj, FrameTracker tracker, String action, int reason) {
         if (needRemoveTasks(action, reason)) {
             removeTrackerIfCurrent(cuj, tracker, reason);
@@ -405,7 +401,6 @@ public class InteractionJankMonitor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$begin$2(TrackerResult result, Configuration config) {
         result.mResult = beginInternal(config);
     }
@@ -438,7 +433,6 @@ public class InteractionJankMonitor {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ RunningTracker lambda$beginInternal$4(
             Configuration conf, final int cujType) {
         return new RunningTracker(
@@ -453,7 +447,6 @@ public class InteractionJankMonitor {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$beginInternal$3(int cujType) {
         cancel(cujType, 19);
     }
@@ -505,7 +498,6 @@ public class InteractionJankMonitor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$end$6(TrackerResult result, RunningTracker tracker) {
         result.mResult = endInternal(tracker);
     }
@@ -561,7 +553,6 @@ public class InteractionJankMonitor {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$cancel$8(
             TrackerResult result, RunningTracker tracker, int reason) {
         result.mResult = cancelInternal(tracker, reason);
@@ -619,7 +610,6 @@ public class InteractionJankMonitor {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public void updateProperties(DeviceConfig.Properties properties) {
         char c;
         for (String property : properties.getKeyset()) {
@@ -738,7 +728,6 @@ public class InteractionJankMonitor {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class TrackerResult {
         private boolean mResult;
 

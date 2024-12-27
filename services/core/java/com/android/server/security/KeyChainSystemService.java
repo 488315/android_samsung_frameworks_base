@@ -18,7 +18,6 @@ import com.android.server.SystemService;
 public final class KeyChainSystemService extends SystemService {
     public final AnonymousClass1 mPackageReceiver;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.security.KeyChainSystemService$1] */
     public KeyChainSystemService(Context context) {
         super(context);
         this.mPackageReceiver =

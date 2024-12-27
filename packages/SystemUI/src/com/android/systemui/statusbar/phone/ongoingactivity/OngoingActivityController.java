@@ -125,12 +125,6 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$containerOnLayoutChangeListener$1] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$userChangedListener$1] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$notifListener$1] */
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$statusBarStateListener$1] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$configurationListener$1] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$ongoingCallListener$1] */
     public OngoingActivityController(Context context, CommonNotifCollection commonNotifCollection, ActivityStarter activityStarter, StatusBarStateController statusBarStateController, IndicatorGardenPresenter indicatorGardenPresenter, HeadsUpManager headsUpManager, OngoingCallController ongoingCallController, ConfigurationController configurationController, BroadcastDispatcher broadcastDispatcher, TaskStackChangeListeners taskStackChangeListeners, IndicatorScaleGardener indicatorScaleGardener, NotifCollection notifCollection, NotificationLockscreenUserManager notificationLockscreenUserManager, NotificationRemoteInputManager notificationRemoteInputManager, StatusBarWindowStateController statusBarWindowStateController) {
         this.mContext = context;
         this.commonNotifCollection = commonNotifCollection;

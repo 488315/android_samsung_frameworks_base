@@ -643,7 +643,6 @@ public class SlidingDrawer extends ViewGroup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doAnimation() {
         if (this.mAnimating) {
             incrementAnimation();

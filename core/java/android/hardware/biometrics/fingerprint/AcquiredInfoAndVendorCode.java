@@ -7,13 +7,11 @@ public final class AcquiredInfoAndVendorCode implements Parcelable {
     public static final Parcelable.Creator<AcquiredInfoAndVendorCode> CREATOR =
             new Parcelable.Creator<AcquiredInfoAndVendorCode>() { // from class:
                 // android.hardware.biometrics.fingerprint.AcquiredInfoAndVendorCode.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AcquiredInfoAndVendorCode createFromParcel(Parcel _aidl_source) {
                     return new AcquiredInfoAndVendorCode(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AcquiredInfoAndVendorCode[] newArray(int _aidl_size) {
                     return new AcquiredInfoAndVendorCode[_aidl_size];

@@ -7,7 +7,6 @@ public final class ParcelableUsbPort implements Parcelable {
     public static final Parcelable.Creator<ParcelableUsbPort> CREATOR =
             new Parcelable.Creator<
                     ParcelableUsbPort>() { // from class: android.hardware.usb.ParcelableUsbPort.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableUsbPort createFromParcel(Parcel in) {
                     String id = in.readString();
@@ -27,7 +26,6 @@ public final class ParcelableUsbPort implements Parcelable {
                             supportedAltModesMask);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableUsbPort[] newArray(int size) {
                     return new ParcelableUsbPort[size];

@@ -50,7 +50,6 @@ abstract class GenericEvaluator<T extends Comparable<T>> implements Evaluator, P
         return this.value.getClass();
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // java.lang.Comparable
     public int compareTo(Evaluator other) {
         if (other instanceof GenericEvaluator) {

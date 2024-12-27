@@ -105,12 +105,10 @@ public final class AccessibilityInteractionController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isShown(View view) {
         return view != null && view.getWindowVisibility() == 0 && view.isShown();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isVisibleToAccessibilityService(View view) {
         return view != null
                 && (this.mA11yManager.isRequestFromAccessibilityTool()
@@ -208,7 +206,6 @@ public final class AccessibilityInteractionController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void prepareForExtraDataRequestUiThread(Message message) {
         SomeArgs args = (SomeArgs) message.obj;
         int virtualDescendantId = args.argi1;
@@ -230,7 +227,6 @@ public final class AccessibilityInteractionController {
         this.mMessagesWaitingForRequestPreparer.add(messageHolder);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void requestPreparerDoneUiThread(Message message) {
         synchronized (this.mLock) {
             if (message.arg1 != this.mActiveRequestPreparerId) {
@@ -245,7 +241,6 @@ public final class AccessibilityInteractionController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void requestPreparerTimeoutUiThread() {
         synchronized (this.mLock) {
             Slog.e(LOG_TAG, "AccessibilityRequestPreparer timed out");
@@ -277,9 +272,6 @@ public final class AccessibilityInteractionController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00d3  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00fe  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -343,7 +335,6 @@ public final class AccessibilityInteractionController {
         scheduleMessage(message, interrogatingPid, interrogatingTid, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void findAccessibilityNodeInfosByViewIdUiThread(Message message) {
         List<AccessibilityNodeInfo> infos;
         if (this.mViewRootImpl.mView == null || this.mViewRootImpl.mAttachInfo == null) {
@@ -428,7 +419,6 @@ public final class AccessibilityInteractionController {
         scheduleMessage(message, interrogatingPid, interrogatingTid, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void findAccessibilityNodeInfosByTextUiThread(Message message) {
         int interactionId;
         Throwable th;
@@ -559,7 +549,6 @@ public final class AccessibilityInteractionController {
         this.mHandler.sendMessage(message);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void takeScreenshotOfWindowUiThread(
             int interactionId,
             ScreenCapture.ScreenCaptureListener listener,
@@ -609,7 +598,6 @@ public final class AccessibilityInteractionController {
         scheduleMessage(message, interrogatingPid, interrogatingTid, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void findFocusUiThread(Message message) {
         AccessibilityNodeInfo focused;
         if (this.mViewRootImpl.mView == null || this.mViewRootImpl.mAttachInfo == null) {
@@ -728,7 +716,6 @@ public final class AccessibilityInteractionController {
         scheduleMessage(message, interrogatingPid, interrogatingTid, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void focusSearchUiThread(Message message) {
         View nextView;
         if (this.mViewRootImpl.mView == null || this.mViewRootImpl.mAttachInfo == null) {
@@ -786,7 +773,6 @@ public final class AccessibilityInteractionController {
         scheduleMessage(message, interrogatingPid, interrogatingTid, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void performAccessibilityActionUiThread(Message message) {
         if (this.mViewRootImpl.mView == null
                 || this.mViewRootImpl.mAttachInfo == null
@@ -847,7 +833,6 @@ public final class AccessibilityInteractionController {
         scheduleMessage(message, 0, 0L, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void clearAccessibilityFocusUiThread() {
         if (this.mViewRootImpl.mView == null || this.mViewRootImpl.mAttachInfo == null) {
             return;
@@ -891,7 +876,6 @@ public final class AccessibilityInteractionController {
         scheduleMessage(message, 0, 0L, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyOutsideTouchUiThread() {
         View root;
         if (this.mViewRootImpl.mView != null
@@ -1940,7 +1924,6 @@ public final class AccessibilityInteractionController {
                         callback));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void attachAccessibilityOverlayToWindowUiThread(
             SurfaceControl sc,
             int interactionId,

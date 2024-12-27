@@ -21,11 +21,6 @@ public final class ViewHierarchyAnimator$Companion$createListener$1 implements V
         this.$onAnimationEnd = runnable;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00f6  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x00fc  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0101  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0103  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0108  */
     @Override // android.view.View.OnLayoutChangeListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.

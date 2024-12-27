@@ -507,14 +507,12 @@ public class KeyEvent extends InputEvent implements Parcelable {
     private static final Object gRecyclerLock = new Object();
     public static final Parcelable.Creator<KeyEvent> CREATOR =
             new Parcelable.Creator<KeyEvent>() { // from class: android.view.KeyEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyEvent createFromParcel(Parcel in) {
                     in.readInt();
                     return KeyEvent.createFromParcelBody(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyEvent[] newArray(int size) {
                     return new KeyEvent[size];

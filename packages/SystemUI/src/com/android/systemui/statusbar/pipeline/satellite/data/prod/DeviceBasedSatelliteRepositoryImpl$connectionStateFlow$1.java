@@ -28,7 +28,6 @@ final class DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1 extends Sus
     int label;
     final /* synthetic */ DeviceBasedSatelliteRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1(SatelliteManager satelliteManager, DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.$sm = satelliteManager;
@@ -61,7 +60,6 @@ final class DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1 extends Sus
                     DeviceBasedSatelliteRepositoryImpl.Companion companion = DeviceBasedSatelliteRepositoryImpl.Companion;
                     LogBuffer logBuffer = DeviceBasedSatelliteRepositoryImpl.this.logBuffer;
                     Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1$cb$1.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }
@@ -115,7 +113,6 @@ final class DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1 extends Sus
             }
             final SatelliteManager satelliteManager = this.$sm;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

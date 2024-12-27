@@ -15,7 +15,6 @@ public class ResolverAppPredictorCallback {
         this.mCallback = callback;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyCallback(List<AppTarget> list) {
         Consumer<List<AppTarget>> callback = this.mCallback;
         if (callback != null) {

@@ -102,7 +102,6 @@ public abstract class BackupAgent extends ContextWrapper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void waitForSharedPrefs() {
         Handler h = getHandler();
         SharedPrefsSynchronizer s = new SharedPrefsSynchronizer();
@@ -357,7 +356,6 @@ public abstract class BackupAgent extends ContextWrapper {
 
     public void onQuotaExceeded(long backupDataBytes, long quotaBytes) {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getBackupUserId() {
         return this.mUser == null ? super.getUserId() : this.mUser.getIdentifier();
     }
@@ -403,8 +401,6 @@ public abstract class BackupAgent extends ContextWrapper {
         return (transportFlags & includeFlags) == includeFlags;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0119  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0123  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -711,8 +707,6 @@ public abstract class BackupAgent extends ContextWrapper {
 
         private BackupServiceBinder() {}
 
-        /* JADX WARN: Removed duplicated region for block: B:34:0x00cf  */
-        /* JADX WARN: Removed duplicated region for block: B:36:? A[SYNTHETIC] */
         @Override // android.app.IBackupAgent
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -867,11 +861,6 @@ public abstract class BackupAgent extends ContextWrapper {
             doRestoreInternal(data, appVersionCode, newState, token, callbackBinder, excludedKeys);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:43:0x00e8  */
-        /* JADX WARN: Removed duplicated region for block: B:45:? A[SYNTHETIC] */
-        /* JADX WARN: Type inference failed for: r4v0, types: [java.util.Collection] */
-        /* JADX WARN: Type inference failed for: r4v1 */
-        /* JADX WARN: Type inference failed for: r4v6 */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -895,8 +884,6 @@ public abstract class BackupAgent extends ContextWrapper {
                         + " android.app.backup.IBackupManager, java.util.List):void");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:42:0x00fa  */
-        /* JADX WARN: Removed duplicated region for block: B:44:? A[SYNTHETIC] */
         @Override // android.app.IBackupAgent
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -918,8 +905,6 @@ public abstract class BackupAgent extends ContextWrapper {
                         + " long, int, android.app.backup.IBackupManager, int):void");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:45:0x0103  */
-        /* JADX WARN: Removed duplicated region for block: B:47:? A[SYNTHETIC] */
         @Override // android.app.IBackupAgent
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1182,12 +1167,10 @@ public abstract class BackupAgent extends ContextWrapper {
             return new IncludeExcludeRules(Collections.emptyMap(), new ArraySet());
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>> getIncludeMap() {
             return this.mManifestIncludeMap;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Set<FullBackup.BackupScheme.PathWithRequiredFlags> getExcludeSet() {
             return this.mManifestExcludeSet;
         }

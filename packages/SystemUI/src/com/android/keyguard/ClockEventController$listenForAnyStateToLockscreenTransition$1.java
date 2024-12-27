@@ -17,7 +17,6 @@ final class ClockEventController$listenForAnyStateToLockscreenTransition$1 exten
     int label;
     final /* synthetic */ ClockEventController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ClockEventController$listenForAnyStateToLockscreenTransition$1(ClockEventController clockEventController, Continuation continuation) {
         super(2, continuation);
         this.this$0 = clockEventController;
@@ -69,8 +68,6 @@ final class ClockEventController$listenForAnyStateToLockscreenTransition$1 exten
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -162,8 +159,6 @@ final class ClockEventController$listenForAnyStateToLockscreenTransition$1 exten
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

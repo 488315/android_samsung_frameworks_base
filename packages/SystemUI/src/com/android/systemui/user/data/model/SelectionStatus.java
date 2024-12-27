@@ -2,8 +2,6 @@ package com.android.systemui.user.data.model;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class SelectionStatus {
     public static final /* synthetic */ SelectionStatus[] $VALUES;
     public static final SelectionStatus SELECTION_COMPLETE;

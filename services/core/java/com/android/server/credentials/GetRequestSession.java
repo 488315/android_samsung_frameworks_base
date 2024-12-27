@@ -33,7 +33,6 @@ public class GetRequestSession extends RequestSession
         implements ProviderSession.ProviderInternalCallback {
     public final Set mPrimaryProviders;
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

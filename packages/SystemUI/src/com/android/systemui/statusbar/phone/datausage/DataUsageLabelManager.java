@@ -241,7 +241,6 @@ public final class DataUsageLabelManager {
         dataUsageLabelView.setTextColor(i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00a4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

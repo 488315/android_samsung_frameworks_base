@@ -84,11 +84,6 @@ public final class SoundPlayer implements PlayerInterface {
         return soundThread != null && soundThread.running;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x013e  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0143  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x01e6  */
-    /* JADX WARN: Type inference failed for: r11v1, types: [boolean] */
     @Override // com.android.server.power.shutdown.PlayerInterface
     /*
         Code decompiled incorrectly, please refer to instructions dump.

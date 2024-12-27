@@ -23,7 +23,6 @@ public final class QSPreferencesRepository$special$$inlined$flatMapLatest$1 exte
     int label;
     final /* synthetic */ QSPreferencesRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QSPreferencesRepository$special$$inlined$flatMapLatest$1(Continuation continuation, QSPreferencesRepository qSPreferencesRepository) {
         super(3, continuation);
         this.this$0 = qSPreferencesRepository;
@@ -80,8 +79,6 @@ public final class QSPreferencesRepository$special$$inlined$flatMapLatest$1 exte
                         this.$prefs$inlined = sharedPreferences;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

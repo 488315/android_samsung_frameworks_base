@@ -300,7 +300,6 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                 map2);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final ArrayList collectSharedLibraryInfos(
             List list,
             long[] jArr,
@@ -520,7 +519,6 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public void commitSharedLibraryInfoLPw(SharedLibraryInfo sharedLibraryInfo) {
         String name = sharedLibraryInfo.getName();
         WatchedArrayMap watchedArrayMap = this.mSharedLibraries;

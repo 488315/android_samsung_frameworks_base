@@ -469,7 +469,6 @@ public class SearchDialog extends Dialog {
         cancel();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean onClosePressed() {
         if (isEmpty(this.mSearchAutoComplete)) {
             dismiss();

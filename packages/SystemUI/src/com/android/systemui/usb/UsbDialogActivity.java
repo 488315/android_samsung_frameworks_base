@@ -82,7 +82,6 @@ public abstract class UsbDialogActivity extends AlertActivity implements DialogI
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public void onPause() {
         UsbDisconnectedReceiver usbDisconnectedReceiver;
         UsbDialogHelper usbDialogHelper = this.mDialogHelper;
@@ -96,7 +95,6 @@ public abstract class UsbDialogActivity extends AlertActivity implements DialogI
         super.onPause();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public void onResume() {
         super.onResume();
         UsbDialogHelper usbDialogHelper = this.mDialogHelper;

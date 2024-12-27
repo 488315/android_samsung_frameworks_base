@@ -35,7 +35,6 @@ public final class NativeScanResult implements Parcelable {
     public static final Parcelable.Creator<NativeScanResult> CREATOR =
             new Parcelable.Creator<
                     NativeScanResult>() { // from class: android.net.wifi.nl80211.NativeScanResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NativeScanResult createFromParcel(Parcel in) {
                     NativeScanResult result = new NativeScanResult();
@@ -61,7 +60,6 @@ public final class NativeScanResult implements Parcelable {
                     return result;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NativeScanResult[] newArray(int size) {
                     return new NativeScanResult[size];

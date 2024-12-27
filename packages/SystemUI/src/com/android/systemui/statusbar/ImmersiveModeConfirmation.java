@@ -105,9 +105,6 @@ public final class ImmersiveModeConfirmation implements CoreStartable, CommandQu
         public final AnonymousClass3 mReceiver;
         public final AnonymousClass1 mUpdateLayoutRunnable;
 
-        /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.statusbar.ImmersiveModeConfirmation$ClingWindowView$1] */
-        /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.statusbar.ImmersiveModeConfirmation$ClingWindowView$2] */
-        /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.statusbar.ImmersiveModeConfirmation$ClingWindowView$3] */
         public ClingWindowView(Context context, Runnable runnable) {
             super(context);
             ColorDrawable colorDrawable = new ColorDrawable(0);
@@ -269,7 +266,6 @@ public final class ImmersiveModeConfirmation implements CoreStartable, CommandQu
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.systemui.statusbar.ImmersiveModeConfirmation$3] */
     public ImmersiveModeConfirmation(Context context, CommandQueue commandQueue, SecureSettings secureSettings) {
         this.mSysUiContext = context;
         Display display = context.getDisplay();
@@ -366,8 +362,6 @@ public final class ImmersiveModeConfirmation implements CoreStartable, CommandQu
         this.mLockTaskState = i;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v2, types: [android.database.ContentObserver, com.android.systemui.statusbar.ImmersiveModeConfirmation$1] */
     @Override // com.android.systemui.CoreStartable
     public final void start() {
         AnonymousClass2 anonymousClass2 = this.mVrStateCallbacks;

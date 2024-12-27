@@ -343,7 +343,6 @@ public class SystemVibrator extends Vibrator {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVibrating$0(int vibratorIdx, boolean vibrating) {
             boolean isAnyVibrating;
             int allInitializedMask;

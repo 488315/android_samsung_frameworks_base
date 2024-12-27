@@ -61,7 +61,6 @@ public class TileLayout extends ViewGroup implements SecQSPanel.QSTileLayout {
         ((QSTileImpl) qSTile).saveTileIconAsImage();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public void addTileView$1(SecQSPanelControllerBase.TileRecord tileRecord) {
         QSTileView qSTileView = tileRecord.tileView;
         if (qSTileView instanceof HeightOverrideable) {

@@ -65,32 +65,6 @@ public final class StackScrollAlgorithm {
         initView(context);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r11v5, types: [java.util.ArrayList] */
-    /* JADX WARN: Type inference failed for: r17v0 */
-    /* JADX WARN: Type inference failed for: r17v1, types: [int] */
-    /* JADX WARN: Type inference failed for: r17v2 */
-    /* JADX WARN: Type inference failed for: r17v3 */
-    /* JADX WARN: Type inference failed for: r2v18 */
-    /* JADX WARN: Type inference failed for: r2v19 */
-    /* JADX WARN: Type inference failed for: r2v3, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v10 */
-    /* JADX WARN: Type inference failed for: r7v17, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v18, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v19, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v2 */
-    /* JADX WARN: Type inference failed for: r7v20, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v21 */
-    /* JADX WARN: Type inference failed for: r7v22 */
-    /* JADX WARN: Type inference failed for: r7v23, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v28, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v29 */
-    /* JADX WARN: Type inference failed for: r7v3 */
-    /* JADX WARN: Type inference failed for: r7v31, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v32, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v4, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v5, types: [int] */
-    /* JADX WARN: Type inference failed for: r7v6 */
     public static void getNotificationChildrenStates(StackScrollAlgorithmState stackScrollAlgorithmState) {
         int i;
         boolean z;

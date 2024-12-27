@@ -84,9 +84,6 @@ public final class SBluetoothTile extends SQSTileImpl {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.qs.tiles.SBluetoothTile$1] */
-    /* JADX WARN: Type inference failed for: r9v1, types: [com.android.systemui.qs.tiles.SBluetoothTile$2, java.lang.Object] */
     public SBluetoothTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, SettingsHelper settingsHelper, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, SBluetoothController sBluetoothController, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, PanelInteractor panelInteractor, SatelliteModeObserverHelper satelliteModeObserverHelper, DisplayLifecycle displayLifecycle, BroadcastDispatcher broadcastDispatcher) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mDoStopScan = true;
@@ -374,11 +371,6 @@ public final class SBluetoothTile extends SQSTileImpl {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00cb  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0242  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x025b  */
-    /* JADX WARN: Removed duplicated region for block: B:46:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00ed  */
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

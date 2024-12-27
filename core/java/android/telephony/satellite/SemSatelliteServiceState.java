@@ -12,13 +12,11 @@ public final class SemSatelliteServiceState implements Parcelable {
             new Parcelable.Creator<
                     SemSatelliteServiceState>() { // from class:
                                                   // android.telephony.satellite.SemSatelliteServiceState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSatelliteServiceState createFromParcel(Parcel source) {
                     return new SemSatelliteServiceState(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSatelliteServiceState[] newArray(int size) {
                     return new SemSatelliteServiceState[size];

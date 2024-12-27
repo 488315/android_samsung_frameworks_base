@@ -16,13 +16,11 @@ public final class DataProfile implements Parcelable {
     public static final Parcelable.Creator<DataProfile> CREATOR =
             new Parcelable.Creator<
                     DataProfile>() { // from class: android.telephony.data.DataProfile.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataProfile createFromParcel(Parcel source) {
                     return new DataProfile(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataProfile[] newArray(int size) {
                     return new DataProfile[size];

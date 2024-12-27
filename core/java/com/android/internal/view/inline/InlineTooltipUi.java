@@ -149,7 +149,6 @@ public final class InlineTooltipUi extends PopupWindow implements AutoCloseable 
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateInner(View anchor) {
         if (this.mHasEverDetached) {
             return;
@@ -262,7 +261,6 @@ public final class InlineTooltipUi extends PopupWindow implements AutoCloseable 
         super.dismiss();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void adjustPosition() {
         View anchor = getAnchor();
         if (anchor == null) {

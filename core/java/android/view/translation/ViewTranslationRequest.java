@@ -21,13 +21,11 @@ public final class ViewTranslationRequest implements Parcelable {
             new Parcelable.Creator<
                     ViewTranslationRequest>() { // from class:
                                                 // android.view.translation.ViewTranslationRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ViewTranslationRequest[] newArray(int size) {
                     return new ViewTranslationRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ViewTranslationRequest createFromParcel(Parcel in) {
                     return new ViewTranslationRequest(in);
@@ -57,7 +55,6 @@ public final class ViewTranslationRequest implements Parcelable {
         return this.mAutofillId;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Map<String, TranslationRequestValue> defaultTranslationRequestValues() {
         return Collections.emptyMap();
     }

@@ -43,7 +43,6 @@ final class CommunalTutorialIndicatorViewBinder$bind$disposableHandle$1 extends 
             final /* synthetic */ CommunalTutorialIndicatorViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C00721(CommunalTutorialIndicatorViewModel communalTutorialIndicatorViewModel, boolean z, TextView textView, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = communalTutorialIndicatorViewModel;
@@ -103,7 +102,6 @@ final class CommunalTutorialIndicatorViewBinder$bind$disposableHandle$1 extends 
             final /* synthetic */ CommunalTutorialIndicatorViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(CommunalTutorialIndicatorViewModel communalTutorialIndicatorViewModel, TextView textView, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = communalTutorialIndicatorViewModel;
@@ -149,7 +147,6 @@ final class CommunalTutorialIndicatorViewBinder$bind$disposableHandle$1 extends 
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(CommunalTutorialIndicatorViewModel communalTutorialIndicatorViewModel, boolean z, TextView textView, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = communalTutorialIndicatorViewModel;
@@ -183,7 +180,6 @@ final class CommunalTutorialIndicatorViewBinder$bind$disposableHandle$1 extends 
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalTutorialIndicatorViewBinder$bind$disposableHandle$1(CommunalTutorialIndicatorViewModel communalTutorialIndicatorViewModel, boolean z, TextView textView, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = communalTutorialIndicatorViewModel;

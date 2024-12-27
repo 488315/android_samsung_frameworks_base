@@ -15,7 +15,6 @@ final class ShadeInteractorImpl$isShadeTouchable$2 extends SuspendLambda impleme
     /* synthetic */ boolean Z$2;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ShadeInteractorImpl$isShadeTouchable$2(DozeParameters dozeParameters, Continuation continuation) {
         super(4, continuation);
         this.$dozeParams = dozeParameters;

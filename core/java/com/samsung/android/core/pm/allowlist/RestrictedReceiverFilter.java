@@ -187,7 +187,6 @@ public class RestrictedReceiverFilter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getViolationLog$0(
             StringBuilder sb, String packageName, List actions) {
         sb.append(NavigationBarInflaterView.SIZE_MOD_START + packageName + "]\n");

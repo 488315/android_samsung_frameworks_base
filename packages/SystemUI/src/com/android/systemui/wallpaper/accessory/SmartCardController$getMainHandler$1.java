@@ -7,7 +7,6 @@ import android.os.Message;
 public final class SmartCardController$getMainHandler$1 extends Handler {
     public final /* synthetic */ SmartCardController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SmartCardController$getMainHandler$1(SmartCardController smartCardController, Looper looper) {
         super(looper);
         this.this$0 = smartCardController;

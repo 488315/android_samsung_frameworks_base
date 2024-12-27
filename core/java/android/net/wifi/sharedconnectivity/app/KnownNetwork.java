@@ -19,13 +19,11 @@ public final class KnownNetwork implements Parcelable {
             new Parcelable.Creator<
                     KnownNetwork>() { // from class:
                                       // android.net.wifi.sharedconnectivity.app.KnownNetwork.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KnownNetwork createFromParcel(Parcel in) {
                     return KnownNetwork.readFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KnownNetwork[] newArray(int size) {
                     return new KnownNetwork[size];

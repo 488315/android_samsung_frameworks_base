@@ -363,7 +363,6 @@ public class ViewPropertyAnimator {
                 : true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startAnimation() {
         this.mView.setHasTransientState(true);
         ValueAnimator animator = ValueAnimator.ofFloat(1.0f);
@@ -443,7 +442,6 @@ public class ViewPropertyAnimator {
         this.mView.postOnAnimation(this.mAnimationStarter);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setValue(int propertyConstant, float value) {
         RenderNode renderNode = this.mView.mRenderNode;
         switch (propertyConstant) {

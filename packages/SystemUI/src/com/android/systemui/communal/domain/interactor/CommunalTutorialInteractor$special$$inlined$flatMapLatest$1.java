@@ -20,7 +20,6 @@ public final class CommunalTutorialInteractor$special$$inlined$flatMapLatest$1 e
     int label;
     final /* synthetic */ CommunalTutorialInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalTutorialInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, CommunalInteractor communalInteractor, CommunalTutorialInteractor communalTutorialInteractor) {
         super(3, continuation);
         this.$communalInteractor$inlined = communalInteractor;
@@ -81,8 +80,6 @@ public final class CommunalTutorialInteractor$special$$inlined$flatMapLatest$1 e
                             this.$tutorialSettingState$inlined = i;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.

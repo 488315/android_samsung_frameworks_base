@@ -357,14 +357,6 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$occludeAnimationRunner$1] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$unoccluedAnimationRunner$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$aodAppearAnimationRunner$1] */
-    /* JADX WARN: Type inference failed for: r2v83, types: [com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$delayedDrawnRunnable$1] */
-    /* JADX WARN: Type inference failed for: r2v88, types: [com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$remoteLockMonitorCallback$1] */
-    /* JADX WARN: Type inference failed for: r2v89, types: [com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$localReceiver$1] */
-    /* JADX WARN: Type inference failed for: r2v90, types: [com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$broadcastReceiver$1] */
-    /* JADX WARN: Type inference failed for: r2v92, types: [com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$knoxStateCallback$1] */
     public KeyguardViewMediatorHelperImpl(Context context, BroadcastDispatcher broadcastDispatcher, Executor executor, Executor executor2, dagger.Lazy lazy, dagger.Lazy lazy2, dagger.Lazy lazy3, dagger.Lazy lazy4, dagger.Lazy lazy5, dagger.Lazy lazy6, dagger.Lazy lazy7, dagger.Lazy lazy8, KeyguardFastBioUnlockController keyguardFastBioUnlockController, KeyguardDisplayManager keyguardDisplayManager, InteractionJankMonitor interactionJankMonitor, KeyguardUpdateMonitor keyguardUpdateMonitor, SettingsHelper settingsHelper, KeyguardSysDumpTrigger keyguardSysDumpTrigger, UserTracker userTracker, SelectedUserInteractor selectedUserInteractor, ActivityManager activityManager, KnoxStateMonitor knoxStateMonitor, DesktopManager desktopManager, PickupController pickupController, LockPatternUtils lockPatternUtils, KeyguardStateController keyguardStateController, DismissCallbackRegistry dismissCallbackRegistry, SysuiStatusBarStateController sysuiStatusBarStateController, UnlockedScreenOffAnimationController unlockedScreenOffAnimationController, SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper, PowerManager powerManager, dagger.Lazy lazy9, dagger.Lazy lazy10, AODAmbientWallpaperHelper aODAmbientWallpaperHelper, LooperSlowLogController looperSlowLogController, SamsungServiceLogger samsungServiceLogger, AudioManager audioManager, SamsungServiceLogger samsungServiceLogger2, BootAnimationFinishedTrigger bootAnimationFinishedTrigger, BinderCallMonitor binderCallMonitor, SubScreenManager subScreenManager, KeyguardFoldControllerImpl keyguardFoldControllerImpl, KeyguardFixedRotationMonitor keyguardFixedRotationMonitor, KeyguardVisibilityMonitor keyguardVisibilityMonitor, dagger.Lazy lazy11, dagger.Lazy lazy12, KeyguardEditModeController keyguardEditModeController, CarLifeManager carLifeManager, CommandQueue commandQueue, dagger.Lazy lazy13, CoroutineScope coroutineScope, KeyguardTransitionInteractor keyguardTransitionInteractor, DozeParameters dozeParameters) {
         this.context = context;
         this.broadcastDispatcher = broadcastDispatcher;
@@ -1062,7 +1054,6 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                 KeyguardViewMediatorHelperImpl.logD("Unocclude animation cancelled.");
             }
 
-            /* JADX WARN: Type inference failed for: r9v8, types: [T, android.view.SurfaceControl$Transaction] */
             public final void onAnimationStart(int i, RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, RemoteAnimationTarget[] remoteAnimationTargetArr3, final IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback) {
                 ComponentName componentName;
                 ActivityManager.RunningTaskInfo runningTaskInfo;
@@ -1135,7 +1126,6 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                 long j = (keyguardEditModeController2 == null || !((KeyguardEditModeControllerImpl) keyguardEditModeController2).isEditMode) ? 50L : 250L;
                 KeyguardViewMediatorHelperImpl.logD("keepSurfaceDuration=" + j);
                 KeyguardViewMediatorHelperImpl.this.getHandler$1().postDelayed(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$unoccluedAnimationRunner$1$onAnimationStart$5
-                    /* JADX WARN: Multi-variable type inference failed */
                     @Override // java.lang.Runnable
                     public final void run() {
                         iRemoteAnimationFinishedCallback.onAnimationFinished();
@@ -1157,7 +1147,6 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                 }
             }
 
-            /* JADX WARN: Type inference failed for: r10v1, types: [T, android.view.RemoteAnimationTarget] */
             public final void onAnimationStart(int i, RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, RemoteAnimationTarget[] remoteAnimationTargetArr3, final IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback) {
                 final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
                 keyguardViewMediatorHelperImpl.getClass();
@@ -1419,11 +1408,6 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
     
         if (r6 != false) goto L377;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:439:0x0809  */
-    /* JADX WARN: Removed duplicated region for block: B:442:0x0816  */
-    /* JADX WARN: Removed duplicated region for block: B:445:0x0811  */
-    /* JADX WARN: Type inference failed for: r2v68, types: [com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$showForegroundImmediatelyIfNeeded$1$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1650,7 +1634,6 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
             } else {
                 logD("needPendingGoingAway: fastWakeAndUnlock and different orientation");
                 keyguardFastBioUnlockController.reservedKeyguardGoingAway = new Function0() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$keyguardGoingAway$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -2208,7 +2191,6 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
     
         if (r5.lockPatternUtils.isLockScreenDisabled(r10) == false) goto L39;
      */
-    /* JADX WARN: Multi-variable type inference failed */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

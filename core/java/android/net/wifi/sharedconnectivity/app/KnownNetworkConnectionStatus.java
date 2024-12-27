@@ -19,13 +19,11 @@ public final class KnownNetworkConnectionStatus implements Parcelable {
             new Parcelable.Creator<
                     KnownNetworkConnectionStatus>() { // from class:
                                                       // android.net.wifi.sharedconnectivity.app.KnownNetworkConnectionStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KnownNetworkConnectionStatus createFromParcel(Parcel in) {
                     return KnownNetworkConnectionStatus.readFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KnownNetworkConnectionStatus[] newArray(int size) {
                     return new KnownNetworkConnectionStatus[size];

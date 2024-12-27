@@ -8,7 +8,6 @@ public class SmartClipDataExtractionResponse implements Parcelable {
             new Parcelable.Creator<
                     SmartClipDataExtractionResponse>() { // from class:
                                                          // com.samsung.android.content.smartclip.SmartClipDataExtractionResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmartClipDataExtractionResponse createFromParcel(Parcel in) {
                     SmartClipDataExtractionResponse data =
@@ -17,7 +16,6 @@ public class SmartClipDataExtractionResponse implements Parcelable {
                     return data;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmartClipDataExtractionResponse[] newArray(int size) {
                     return new SmartClipDataExtractionResponse[size];

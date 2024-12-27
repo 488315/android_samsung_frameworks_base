@@ -13,7 +13,6 @@ public final /* synthetic */ class KeyguardKnoxGuardViewController$$ExternalSynt
         this.f$1 = obj;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00ce  */
     @Override // android.view.View.OnClickListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.

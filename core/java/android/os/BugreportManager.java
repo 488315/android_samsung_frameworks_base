@@ -56,7 +56,6 @@ public final class BugreportManager {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(12:2|3|(1:5)(1:33)|(8:9|(2:11|12)(1:31)|13|14|15|(1:20)|17|18)|32|(0)(0)|13|14|15|(0)|17|18) */
     /* JADX WARN: Code restructure failed: missing block: B:22:0x0070, code lost:
 
        r0 = e;
@@ -85,10 +84,6 @@ public final class BugreportManager {
 
        return;
     */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0026 A[Catch: all -> 0x0072, FileNotFoundException -> 0x0076, RemoteException -> 0x0088, TRY_LEAVE, TryCatch #4 {RemoteException -> 0x0088, FileNotFoundException -> 0x0076, all -> 0x0072, blocks: (B:3:0x0002, B:11:0x0026), top: B:2:0x0002 }] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0087 A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0096  */
     @android.annotation.SystemApi
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -270,7 +265,6 @@ public final class BugreportManager {
                 .requestBugReportWithDescription(title, description, params.getMode());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class DumpstateListener extends IDumpstateListener.Stub {
         private final BugreportCallback mCallback;
         private final Executor mExecutor;
@@ -306,7 +300,6 @@ public final class BugreportManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onProgress$0(int progress) {
             this.mCallback.onProgress(progress);
         }
@@ -328,7 +321,6 @@ public final class BugreportManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onError$1(int errorCode) {
             this.mCallback.onError(errorCode);
         }
@@ -362,12 +354,10 @@ public final class BugreportManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFinished$2(String bugreportFile) {
             this.mCallback.onFinished(bugreportFile);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFinished$3() {
             this.mCallback.onFinished();
         }
@@ -389,7 +379,6 @@ public final class BugreportManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onScreenshotTaken$4(boolean success) {
             int message;
             if (success) {
@@ -418,7 +407,6 @@ public final class BugreportManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onUiIntensiveBugreportDumpsFinished$5() {
             this.mCallback.onEarlyReportFinished();
         }

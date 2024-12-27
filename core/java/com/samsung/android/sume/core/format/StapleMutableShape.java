@@ -14,13 +14,11 @@ class StapleMutableShape implements MutableShape {
             new Parcelable.Creator<
                     StapleMutableShape>() { // from class:
                                             // com.samsung.android.sume.core.format.StapleMutableShape.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StapleMutableShape createFromParcel(Parcel in) {
                     return new StapleMutableShape(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StapleMutableShape[] newArray(int size) {
                     return new StapleMutableShape[size];
@@ -77,7 +75,6 @@ class StapleMutableShape implements MutableShape {
         dest.writeInt(this.channels);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.format.Copyable
     public Shape copy() {
         try {

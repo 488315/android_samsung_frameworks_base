@@ -30,7 +30,6 @@ public class ParcelFileDescriptor implements Parcelable, Closeable {
     public static final Parcelable.Creator<ParcelFileDescriptor> CREATOR =
             new Parcelable.Creator<
                     ParcelFileDescriptor>() { // from class: android.os.ParcelFileDescriptor.2
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelFileDescriptor createFromParcel(Parcel in) {
                     int hasCommChannel = in.readInt();
@@ -42,7 +41,6 @@ public class ParcelFileDescriptor implements Parcelable, Closeable {
                     return new ParcelFileDescriptor(fd, commChannel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelFileDescriptor[] newArray(int size) {
                     return new ParcelFileDescriptor[size];
@@ -72,15 +70,12 @@ public class ParcelFileDescriptor implements Parcelable, Closeable {
         void onClose(IOException iOException);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void native_close$ravenwood(FileDescriptor fileDescriptor);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int native_getFdInt$ravenwood(FileDescriptor fileDescriptor);
 
     private static native FileDescriptor native_open$ravenwood(File file, int i) throws IOException;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void native_setFdInt$ravenwood(FileDescriptor fileDescriptor, int i);
 
     public ParcelFileDescriptor(ParcelFileDescriptor wrapped) {
@@ -222,7 +217,6 @@ public class ParcelFileDescriptor implements Parcelable, Closeable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void closeInternal(FileDescriptor fd) {
         IoUtils.closeQuietly(fd);
     }
@@ -559,7 +553,6 @@ public class ParcelFileDescriptor implements Parcelable, Closeable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Status readCommStatus(FileDescriptor comm, byte[] buf) {
         try {
             int n = Os.read(comm, buf, 0, buf.length);

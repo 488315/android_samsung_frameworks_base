@@ -17,7 +17,6 @@ public abstract class NetworkStackClientBase {
     private INetworkStackConnector mConnector;
     private final ArrayList mPendingNetStackRequests = new ArrayList();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$fetchIpMemoryStore$3(
             IIpMemoryStoreCallbacks iIpMemoryStoreCallbacks,
             INetworkStackConnector iNetworkStackConnector) {
@@ -28,7 +27,6 @@ public abstract class NetworkStackClientBase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$makeDhcpServer$0(
             String str,
             DhcpServingParamsParcel dhcpServingParamsParcel,
@@ -42,7 +40,6 @@ public abstract class NetworkStackClientBase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$makeIpClient$1(
             String str,
             IIpClientCallbacks iIpClientCallbacks,
@@ -54,7 +51,6 @@ public abstract class NetworkStackClientBase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$makeNetworkMonitor$2(
             Network network,
             String str,

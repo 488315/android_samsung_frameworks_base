@@ -145,16 +145,6 @@ public class PasswordTextView extends BaseSecPasswordTextView {
             this.textAnimationIsGrowing = false;
         }
 
-        /* JADX WARN: Type inference failed for: r1v10, types: [com.android.keyguard.PasswordTextView$CharState$9] */
-        /* JADX WARN: Type inference failed for: r1v11, types: [com.android.keyguard.PasswordTextView$CharState$10] */
-        /* JADX WARN: Type inference failed for: r1v2, types: [com.android.keyguard.PasswordTextView$CharState$1] */
-        /* JADX WARN: Type inference failed for: r1v3, types: [com.android.keyguard.PasswordTextView$CharState$2] */
-        /* JADX WARN: Type inference failed for: r1v4, types: [com.android.keyguard.PasswordTextView$CharState$3] */
-        /* JADX WARN: Type inference failed for: r1v5, types: [com.android.keyguard.PasswordTextView$CharState$4] */
-        /* JADX WARN: Type inference failed for: r1v6, types: [com.android.keyguard.PasswordTextView$CharState$5] */
-        /* JADX WARN: Type inference failed for: r1v7, types: [com.android.keyguard.PasswordTextView$CharState$6] */
-        /* JADX WARN: Type inference failed for: r1v8, types: [com.android.keyguard.PasswordTextView$CharState$7] */
-        /* JADX WARN: Type inference failed for: r1v9, types: [com.android.keyguard.PasswordTextView$CharState$8] */
         private CharState() {
             this.currentTextTranslationY = 1.0f;
             this.removeEndListener = new AnimatorListenerAdapter() { // from class: com.android.keyguard.PasswordTextView.CharState.1

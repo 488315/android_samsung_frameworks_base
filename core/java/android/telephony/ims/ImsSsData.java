@@ -69,13 +69,11 @@ public final class ImsSsData implements Parcelable {
     private static final String TAG = ImsSsData.class.getCanonicalName();
     public static final Parcelable.Creator<ImsSsData> CREATOR =
             new Parcelable.Creator<ImsSsData>() { // from class: android.telephony.ims.ImsSsData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsSsData createFromParcel(Parcel in) {
                     return new ImsSsData(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsSsData[] newArray(int size) {
                     return new ImsSsData[size];

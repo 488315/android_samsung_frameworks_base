@@ -14,7 +14,6 @@ final class UnfoldTransitionInteractor$unfoldTranslationX$2 extends SuspendLambd
     /* synthetic */ int I$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UnfoldTransitionInteractor$unfoldTranslationX$2(boolean z, Continuation continuation) {
         super(4, continuation);
         this.$isOnStartSide = z;

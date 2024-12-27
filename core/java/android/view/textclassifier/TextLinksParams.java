@@ -128,7 +128,6 @@ public final class TextLinksParams {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int checkApplyStrategy(int applyStrategy) {
         if (applyStrategy != 0 && applyStrategy != 1) {
             throw new IllegalArgumentException(

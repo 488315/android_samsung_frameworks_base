@@ -65,12 +65,6 @@ public final class AudioEffectBoxViewModel extends BaseViewModel {
         this.isVoiceBoostEnable = new MutableLiveData(bool);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00cf  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00e2  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00f5  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00d9  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0067  */
     @Override // com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseViewModel
     /*
         Code decompiled incorrectly, please refer to instructions dump.

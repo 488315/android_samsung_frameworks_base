@@ -330,12 +330,6 @@ public class Chronometer extends TextView {
         updateRunning();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x009d A[Catch: all -> 0x013e, TryCatch #1 {, blocks: (B:4:0x0005, B:6:0x000b, B:7:0x0013, B:9:0x001b, B:10:0x0020, B:12:0x0029, B:15:0x002e, B:18:0x0038, B:20:0x0040, B:21:0x006e, B:23:0x0073, B:25:0x007b, B:26:0x0098, B:28:0x009d, B:30:0x00a6, B:32:0x00b9, B:34:0x00c2, B:38:0x00d4, B:40:0x00d8, B:41:0x00ae, B:42:0x00f4, B:44:0x00f8, B:47:0x00fe, B:48:0x0107, B:50:0x010b, B:55:0x0110, B:57:0x0116, B:62:0x0125, B:64:0x0128, B:69:0x0134, B:71:0x0139, B:73:0x0104, B:76:0x005e, B:77:0x000f), top: B:3:0x0005, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x010b A[Catch: all -> 0x013e, TryCatch #1 {, blocks: (B:4:0x0005, B:6:0x000b, B:7:0x0013, B:9:0x001b, B:10:0x0020, B:12:0x0029, B:15:0x002e, B:18:0x0038, B:20:0x0040, B:21:0x006e, B:23:0x0073, B:25:0x007b, B:26:0x0098, B:28:0x009d, B:30:0x00a6, B:32:0x00b9, B:34:0x00c2, B:38:0x00d4, B:40:0x00d8, B:41:0x00ae, B:42:0x00f4, B:44:0x00f8, B:47:0x00fe, B:48:0x0107, B:50:0x010b, B:55:0x0110, B:57:0x0116, B:62:0x0125, B:64:0x0128, B:69:0x0134, B:71:0x0139, B:73:0x0104, B:76:0x005e, B:77:0x000f), top: B:3:0x0005, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0116 A[Catch: all -> 0x013e, TryCatch #1 {, blocks: (B:4:0x0005, B:6:0x000b, B:7:0x0013, B:9:0x001b, B:10:0x0020, B:12:0x0029, B:15:0x002e, B:18:0x0038, B:20:0x0040, B:21:0x006e, B:23:0x0073, B:25:0x007b, B:26:0x0098, B:28:0x009d, B:30:0x00a6, B:32:0x00b9, B:34:0x00c2, B:38:0x00d4, B:40:0x00d8, B:41:0x00ae, B:42:0x00f4, B:44:0x00f8, B:47:0x00fe, B:48:0x0107, B:50:0x010b, B:55:0x0110, B:57:0x0116, B:62:0x0125, B:64:0x0128, B:69:0x0134, B:71:0x0139, B:73:0x0104, B:76:0x005e, B:77:0x000f), top: B:3:0x0005, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x012c  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0139 A[Catch: all -> 0x013e, TRY_LEAVE, TryCatch #1 {, blocks: (B:4:0x0005, B:6:0x000b, B:7:0x0013, B:9:0x001b, B:10:0x0020, B:12:0x0029, B:15:0x002e, B:18:0x0038, B:20:0x0040, B:21:0x006e, B:23:0x0073, B:25:0x007b, B:26:0x0098, B:28:0x009d, B:30:0x00a6, B:32:0x00b9, B:34:0x00c2, B:38:0x00d4, B:40:0x00d8, B:41:0x00ae, B:42:0x00f4, B:44:0x00f8, B:47:0x00fe, B:48:0x0107, B:50:0x010b, B:55:0x0110, B:57:0x0116, B:62:0x0125, B:64:0x0128, B:69:0x0134, B:71:0x0139, B:73:0x0104, B:76:0x005e, B:77:0x000f), top: B:3:0x0005, inners: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -433,7 +427,6 @@ public class Chronometer extends TextView {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postTickOnNextSecond() {
         long delayMillis;
         long nowMillis = this.mNow;
@@ -501,7 +494,6 @@ public class Chronometer extends TextView {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     void drawTrack(Canvas canvas) {
         Drawable drawable = this.mCurrentDrawable;
         if (drawable != 0) {
@@ -656,7 +648,6 @@ public class Chronometer extends TextView {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void doRefreshProgress(
             int id, int progress, boolean callBackToApp, boolean animate) {
         int range = this.mMaxProgress - this.mMinProgress;

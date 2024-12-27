@@ -11,13 +11,11 @@ import java.util.Objects;
 public final class SyncNotedAppOp implements Parcelable {
     public static final Parcelable.Creator<SyncNotedAppOp> CREATOR =
             new Parcelable.Creator<SyncNotedAppOp>() { // from class: android.app.SyncNotedAppOp.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncNotedAppOp[] newArray(int size) {
                     return new SyncNotedAppOp[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncNotedAppOp createFromParcel(Parcel in) {
                     return new SyncNotedAppOp(in);

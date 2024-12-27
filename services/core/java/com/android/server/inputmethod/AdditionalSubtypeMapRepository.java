@@ -23,7 +23,6 @@ public abstract class AdditionalSubtypeMapRepository {
         public final IntArray mRemovedUsers;
         public final AnonymousClass1 mWriterThread;
 
-        /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.inputmethod.AdditionalSubtypeMapRepository$SingleThreadedBackgroundWriter$1] */
         public SingleThreadedBackgroundWriter() {
             ReentrantLock reentrantLock = new ReentrantLock();
             this.mLock = reentrantLock;

@@ -204,8 +204,6 @@ public final class SemWallpaperManagerService {
         public final File mWallpaperLockDir;
         public final File mWallpaperLockFile;
 
-        /* JADX WARN: Type inference failed for: r0v12, types: [com.samsung.server.wallpaper.SemWallpaperManagerService$SemWallpaperObserver$1] */
-        /* JADX WARN: Type inference failed for: r4v2, types: [com.samsung.server.wallpaper.SemWallpaperManagerService$SemWallpaperObserver$1] */
         public SemWallpaperObserver(
                 File file, File file2, WallpaperManagerService.SemCallback semCallback) {
             this.mWallpaperFileObserver = null;
@@ -339,7 +337,6 @@ public final class SemWallpaperManagerService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.samsung.server.wallpaper.SemWallpaperManagerService$4] */
     public SemWallpaperManagerService(
             Context context,
             WallpaperManagerService.SemCallback semCallback,

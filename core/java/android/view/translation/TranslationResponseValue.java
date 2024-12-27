@@ -17,13 +17,11 @@ public final class TranslationResponseValue implements Parcelable {
             new Parcelable.Creator<
                     TranslationResponseValue>() { // from class:
                                                   // android.view.translation.TranslationResponseValue.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TranslationResponseValue[] newArray(int size) {
                     return new TranslationResponseValue[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TranslationResponseValue createFromParcel(Parcel in) {
                     return new TranslationResponseValue(in);
@@ -44,12 +42,10 @@ public final class TranslationResponseValue implements Parcelable {
         return new TranslationResponseValue(1, null, Bundle.EMPTY, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static CharSequence defaultText() {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Bundle defaultExtras() {
         return Bundle.EMPTY;
     }
@@ -58,7 +54,6 @@ public final class TranslationResponseValue implements Parcelable {
         return Objects.equals(this.mExtras, other) || (this.mExtras.isEmpty() && other.isEmpty());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static CharSequence defaultTransliteration() {
         return null;
     }

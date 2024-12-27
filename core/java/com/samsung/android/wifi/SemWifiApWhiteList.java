@@ -70,7 +70,6 @@ public class SemWifiApWhiteList {
         return uniqueInstance;
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x0034 -> B:11:0x0037). Please report as a decompilation issue!!! */
     private void createOrChangePermission() {
         File file = new File("/data/misc/wifi_hostapd/hostapd.accept");
         if (!file.exists()) {

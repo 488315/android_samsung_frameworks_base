@@ -9,13 +9,11 @@ public class SContextPedometer extends SContextEventContext {
     public static final Parcelable.Creator<SContextPedometer> CREATOR =
             new Parcelable.Creator<SContextPedometer>() { // from class:
                 // android.hardware.scontext.SContextPedometer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextPedometer createFromParcel(Parcel in) {
                     return new SContextPedometer(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextPedometer[] newArray(int size) {
                     return new SContextPedometer[size];

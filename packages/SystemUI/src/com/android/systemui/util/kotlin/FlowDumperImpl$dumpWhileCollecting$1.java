@@ -18,7 +18,6 @@ final class FlowDumperImpl$dumpWhileCollecting$1 extends SuspendLambda implement
     int label;
     final /* synthetic */ FlowDumperImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FlowDumperImpl$dumpWhileCollecting$1(String str, FlowDumperImpl flowDumperImpl, Flow flow, Continuation continuation) {
         super(2, continuation);
         this.$dumpName = str;

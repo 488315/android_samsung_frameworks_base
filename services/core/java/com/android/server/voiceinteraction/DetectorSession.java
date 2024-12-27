@@ -65,7 +65,6 @@ public abstract class DetectorSession {
     public final Executor mAudioCopyExecutor = Executors.newCachedThreadPool();
     public final AtomicBoolean mUpdateStateAfterStartFinished = new AtomicBoolean(false);
 
-    /* JADX WARN: Type inference failed for: r5v0, types: [android.attention.AttentionManagerInternal$ProximityUpdateCallbackInternal, com.android.server.voiceinteraction.DetectorSession$$ExternalSyntheticLambda0] */
     public DetectorSession(HotwordDetectionConnection.ServiceConnection serviceConnection, Object obj, Context context, IBinder iBinder, IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallback, int i, Identity identity, ScheduledExecutorService scheduledExecutorService, boolean z, VoiceInteractionManagerServiceImpl$$ExternalSyntheticLambda1 voiceInteractionManagerServiceImpl$$ExternalSyntheticLambda1, int i2) {
         this.mAttentionManagerInternal = null;
         ?? r5 = new AttentionManagerInternal.ProximityUpdateCallbackInternal() { // from class: com.android.server.voiceinteraction.DetectorSession$$ExternalSyntheticLambda0

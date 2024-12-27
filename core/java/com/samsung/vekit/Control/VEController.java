@@ -198,7 +198,6 @@ public class VEController extends Element {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleError(int errorType, Object extension) {
         Log.e(
                 this.TAG,
@@ -216,7 +215,6 @@ public class VEController extends Element {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleItemError(int errorType, int elementType, int elementId) {
         ElementType type = ElementType.values()[elementType];
         switch (type) {
@@ -253,7 +251,6 @@ public class VEController extends Element {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleAudioPcmUpdate(int elementId, HashMap<String, PcmInfo> data) {
         Item item = this.context.getItemManager().get(elementId);
         if (item == null) {

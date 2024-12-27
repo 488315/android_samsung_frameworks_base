@@ -97,8 +97,6 @@ public final class ImageSource implements WallpaperSource {
         return this.mWallpaperManagerSupplier;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00f9  */
-    /* JADX WARN: Removed duplicated region for block: B:50:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -260,10 +260,6 @@ public final class WindowMagnificationSettings implements MagnificationGestureDe
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.accessibility.WindowMagnificationSettings$2] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.accessibility.WindowMagnificationSettings$3] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.accessibility.WindowMagnificationSettings$4] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.accessibility.WindowMagnificationSettings$5] */
     public WindowMagnificationSettings(Context context, WindowMagnificationSettingsCallback windowMagnificationSettingsCallback, SfVsyncFrameCallbackProvider sfVsyncFrameCallbackProvider, SecureSettings secureSettings) {
         this.mAllowDiagonalScrolling = false;
         this.mContext = context;

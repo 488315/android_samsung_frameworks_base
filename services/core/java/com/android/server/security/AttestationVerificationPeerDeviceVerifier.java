@@ -332,8 +332,6 @@ public final class AttestationVerificationPeerDeviceVerifier {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00fe  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

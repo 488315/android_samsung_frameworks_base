@@ -94,13 +94,11 @@ public final class FieldClassification {
             return string.append(", score=").append(this.mScore).toString();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void writeToParcel(Parcel parcel) {
             parcel.writeString(this.mCategoryId);
             parcel.writeFloat(this.mScore);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static Match readFromParcel(Parcel parcel) {
             return new Match(parcel.readString(), parcel.readFloat());
         }

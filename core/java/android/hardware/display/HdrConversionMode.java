@@ -11,13 +11,11 @@ public final class HdrConversionMode implements Parcelable {
     public static final Parcelable.Creator<HdrConversionMode> CREATOR =
             new Parcelable.Creator<HdrConversionMode>() { // from class:
                 // android.hardware.display.HdrConversionMode.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HdrConversionMode createFromParcel(Parcel source) {
                     return new HdrConversionMode(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HdrConversionMode[] newArray(int size) {
                     return new HdrConversionMode[size];

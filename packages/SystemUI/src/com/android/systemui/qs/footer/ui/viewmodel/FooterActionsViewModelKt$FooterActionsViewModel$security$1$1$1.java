@@ -14,7 +14,6 @@ final /* synthetic */ class FooterActionsViewModelKt$FooterActionsViewModel$secu
     final /* synthetic */ FalsingManager $falsingManager;
     final /* synthetic */ FooterActionsInteractor $footerActionsInteractor;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FooterActionsViewModelKt$FooterActionsViewModel$security$1$1$1(FalsingManager falsingManager, FooterActionsInteractor footerActionsInteractor) {
         super(2, Intrinsics.Kotlin.class, "onSecurityButtonClicked", "FooterActionsViewModel$onSecurityButtonClicked(Lcom/android/systemui/plugins/FalsingManager;Lcom/android/systemui/qs/footer/domain/interactor/FooterActionsInteractor;Landroid/content/Context;Lcom/android/systemui/animation/Expandable;)V", 0);
         this.$falsingManager = falsingManager;

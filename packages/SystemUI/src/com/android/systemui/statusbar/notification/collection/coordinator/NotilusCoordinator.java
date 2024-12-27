@@ -51,7 +51,6 @@ public final class NotilusCoordinator extends Invalidator implements Coordinator
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onAfterRenderList(List<? extends ListEntry> list, NotifStackController notifStackController) {
         boolean isEnabled = Trace.isEnabled();
         if (isEnabled) {

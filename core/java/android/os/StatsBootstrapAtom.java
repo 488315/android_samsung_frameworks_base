@@ -5,7 +5,6 @@ public class StatsBootstrapAtom implements Parcelable {
     public static final Parcelable.Creator<StatsBootstrapAtom> CREATOR =
             new Parcelable.Creator<
                     StatsBootstrapAtom>() { // from class: android.os.StatsBootstrapAtom.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StatsBootstrapAtom createFromParcel(Parcel _aidl_source) {
                     StatsBootstrapAtom _aidl_out = new StatsBootstrapAtom();
@@ -13,7 +12,6 @@ public class StatsBootstrapAtom implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StatsBootstrapAtom[] newArray(int _aidl_size) {
                     return new StatsBootstrapAtom[_aidl_size];

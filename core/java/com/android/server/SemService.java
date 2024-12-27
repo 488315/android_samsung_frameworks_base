@@ -316,7 +316,6 @@ public final class SemService extends ISemService.Stub {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void releaseSpiUsage() {
         if (this.spiOpenPackageName == null) {
             Log.w(TAG, "SPI is currently not in use");
@@ -1757,8 +1756,6 @@ public final class SemService extends ISemService.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:37:0x015b  */
-    /* JADX WARN: Removed duplicated region for block: B:39:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

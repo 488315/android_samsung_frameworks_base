@@ -13,13 +13,11 @@ public final class InputMethodInfoSafeList implements Parcelable {
             new Parcelable.Creator<
                     InputMethodInfoSafeList>() { // from class:
                                                  // com.android.internal.inputmethod.InputMethodInfoSafeList.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputMethodInfoSafeList createFromParcel(Parcel in) {
                     return new InputMethodInfoSafeList(in.readBlob());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputMethodInfoSafeList[] newArray(int size) {
                     return new InputMethodInfoSafeList[size];

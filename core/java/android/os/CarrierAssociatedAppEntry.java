@@ -6,13 +6,11 @@ public final class CarrierAssociatedAppEntry implements Parcelable {
             new Parcelable.Creator<
                     CarrierAssociatedAppEntry>() { // from class:
                                                    // android.os.CarrierAssociatedAppEntry.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarrierAssociatedAppEntry createFromParcel(Parcel source) {
                     return new CarrierAssociatedAppEntry(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarrierAssociatedAppEntry[] newArray(int size) {
                     return new CarrierAssociatedAppEntry[size];

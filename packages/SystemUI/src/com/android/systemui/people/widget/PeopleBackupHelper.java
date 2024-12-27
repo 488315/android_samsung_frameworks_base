@@ -194,8 +194,6 @@ public final class PeopleBackupHelper extends SharedPreferencesBackupHelper {
         super.performBackup(parcelFileDescriptor, backupDataOutput, parcelFileDescriptor2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x00fc A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0031 A[SYNTHETIC] */
     @Override // android.app.backup.SharedPreferencesBackupHelper, android.app.backup.BackupHelper
     /*
         Code decompiled incorrectly, please refer to instructions dump.

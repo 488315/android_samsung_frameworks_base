@@ -13,13 +13,11 @@ public final class CreateCredentialProviderData extends ProviderData implements 
     public static final Parcelable.Creator<CreateCredentialProviderData> CREATOR =
             new Parcelable.Creator<CreateCredentialProviderData>() { // from class:
                 // android.credentials.selection.CreateCredentialProviderData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CreateCredentialProviderData createFromParcel(Parcel in) {
                     return new CreateCredentialProviderData(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CreateCredentialProviderData[] newArray(int size) {
                     return new CreateCredentialProviderData[size];

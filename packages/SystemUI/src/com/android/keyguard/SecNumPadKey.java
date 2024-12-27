@@ -233,7 +233,6 @@ public class SecNumPadKey extends NumPadKey {
         this(context, attributeSet, i, R.layout.keyguard_sec_num_pad_key);
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.keyguard.SecNumPadKey$1] */
     private SecNumPadKey(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i);
         this.mAccessibilityDelegate = new View.AccessibilityDelegate(this) { // from class: com.android.keyguard.SecNumPadKey.1

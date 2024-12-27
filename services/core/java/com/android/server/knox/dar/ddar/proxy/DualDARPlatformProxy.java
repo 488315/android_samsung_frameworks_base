@@ -36,8 +36,6 @@ public final class DualDARPlatformProxy extends IProxyAgentService {
 
        if (r6.equals("SET_CLIENT_INFO") != false) goto L17;
     */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0079 A[Catch: Exception -> 0x0036, TryCatch #0 {Exception -> 0x0036, blocks: (B:3:0x0003, B:12:0x004c, B:14:0x0050, B:15:0x005a, B:19:0x0079, B:21:0x007d, B:22:0x0087, B:24:0x002c, B:27:0x0038), top: B:2:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

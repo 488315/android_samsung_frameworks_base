@@ -143,7 +143,6 @@ public interface ChooserActivityLogger {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     default int typeFromIntentString(String intent) {
         char c;
         if (intent == null) {

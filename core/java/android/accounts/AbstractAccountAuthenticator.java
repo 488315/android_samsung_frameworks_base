@@ -473,7 +473,6 @@ public abstract class AbstractAccountAuthenticator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleException(
             IAccountAuthenticatorResponse response, String method, String data, Exception e)
             throws RemoteException {

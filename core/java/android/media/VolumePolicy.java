@@ -16,14 +16,12 @@ public final class VolumePolicy implements Parcelable {
     public static final VolumePolicy DEFAULT = new VolumePolicy(false, false, false, 400);
     public static final Parcelable.Creator<VolumePolicy> CREATOR =
             new Parcelable.Creator<VolumePolicy>() { // from class: android.media.VolumePolicy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VolumePolicy createFromParcel(Parcel p) {
                     return new VolumePolicy(
                             p.readInt() != 0, p.readInt() != 0, p.readInt() != 0, p.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VolumePolicy[] newArray(int size) {
                     return new VolumePolicy[size];

@@ -24,7 +24,6 @@ final class KeyguardQuickAffordanceLegacySettingSyncer$startSyncing$3 extends Su
     int label;
     final /* synthetic */ KeyguardQuickAffordanceLegacySettingSyncer this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordanceLegacySettingSyncer$startSyncing$3(KeyguardQuickAffordanceLegacySettingSyncer keyguardQuickAffordanceLegacySettingSyncer, KeyguardQuickAffordanceLegacySettingSyncer.Binding binding, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardQuickAffordanceLegacySettingSyncer;

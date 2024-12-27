@@ -295,7 +295,6 @@ public abstract class PreferenceFragment extends Fragment
         this.mHandler.obtainMessage(1).sendToTarget();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void bindPreferences() {
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         if (preferenceScreen != null) {

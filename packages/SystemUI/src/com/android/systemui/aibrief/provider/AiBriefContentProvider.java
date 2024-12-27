@@ -28,7 +28,6 @@ public final class AiBriefContentProvider extends ContentProvider {
         }
     }
 
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     @Override // android.content.ContentProvider
     public Bundle call(String str, String str2, Bundle bundle) {
         AiBriefManager aiBriefManager;

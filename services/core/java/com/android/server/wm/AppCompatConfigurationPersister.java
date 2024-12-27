@@ -109,7 +109,6 @@ public final class AppCompatConfigurationPersister {
         this.mPersisterQueue = persisterQueue;
         Runnable runnable = new Runnable() { // from class:
                     // com.android.server.wm.AppCompatConfigurationPersister$$ExternalSyntheticLambda0
-                    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:14:0x0036 -> B:10:0x004d). Please report as a decompilation issue!!! */
                     @Override // java.lang.Runnable
                     public final void run() {
                         AppCompatConfigurationPersister appCompatConfigurationPersister =

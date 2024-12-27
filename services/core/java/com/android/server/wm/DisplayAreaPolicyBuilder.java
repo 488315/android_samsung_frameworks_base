@@ -194,7 +194,6 @@ class DisplayAreaPolicyBuilder {
             this.mRoot = rootDisplayArea;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void build(List list) {
             RootDisplayArea rootDisplayArea = this.mRoot;
             rootDisplayArea.mWmService.mPolicy.getClass();

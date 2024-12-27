@@ -14,7 +14,6 @@ public interface Describable {
         indentingPrintWriter.println();
         if (getDescription() != null) {
             ParseableCommandKt.indented(indentingPrintWriter, new Function0() { // from class: com.android.systemui.statusbar.commandline.Describable$describe$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

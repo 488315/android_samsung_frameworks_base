@@ -21,13 +21,11 @@ public class AppWidgetProviderInfo implements Parcelable {
     public static final Parcelable.Creator<AppWidgetProviderInfo> CREATOR =
             new Parcelable.Creator<AppWidgetProviderInfo>() { // from class:
                 // android.appwidget.AppWidgetProviderInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppWidgetProviderInfo createFromParcel(Parcel parcel) {
                     return new AppWidgetProviderInfo(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppWidgetProviderInfo[] newArray(int size) {
                     return new AppWidgetProviderInfo[size];

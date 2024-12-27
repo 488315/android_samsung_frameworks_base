@@ -72,19 +72,16 @@ public class PluginLockUtils {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$addDump$0(String str, String str2) {
         synchronized (this) {
             this.mDumpUtils.addEvent(str, str2);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ Thread lambda$getExecutor$1(Runnable runnable) {
         return new Thread(runnable, TAG);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$requestSafeMode$2() {
         this.mDumpUtils.addEvent(TAG, "call dls_safe_mode, level:" + getRescuePartyLevel());
         callProvider("dls_safe_mode", null, null);

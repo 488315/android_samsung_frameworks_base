@@ -18,8 +18,6 @@ final class DisplaySwitchLatencyTracker$start$1$2$1 extends SuspendLambda implem
     int label;
     final /* synthetic */ DisplaySwitchLatencyTracker this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Multi-variable type inference failed */
     public DisplaySwitchLatencyTracker$start$1$2$1(DisplaySwitchLatencyTracker displaySwitchLatencyTracker, WithPrev<? extends DeviceStateRepository.DeviceState, ? extends DeviceStateRepository.DeviceState> withPrev, Continuation continuation) {
         super(2, continuation);
         this.this$0 = displaySwitchLatencyTracker;
@@ -38,10 +36,6 @@ final class DisplaySwitchLatencyTracker$start$1$2$1 extends SuspendLambda implem
         return ((DisplaySwitchLatencyTracker$start$1$2$1) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00f4  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0121  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x014c A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0109  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

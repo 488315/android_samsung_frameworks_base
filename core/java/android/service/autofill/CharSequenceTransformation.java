@@ -18,7 +18,6 @@ import java.util.regex.Pattern;
 
 public final class CharSequenceTransformation extends InternalTransformation implements Transformation, Parcelable {
     public static final Parcelable.Creator<CharSequenceTransformation> CREATOR = new Parcelable.Creator<CharSequenceTransformation>() { // from class: android.service.autofill.CharSequenceTransformation.1
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public CharSequenceTransformation createFromParcel(Parcel parcel) {
             AutofillId[] ids = (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
@@ -32,7 +31,6 @@ public final class CharSequenceTransformation extends InternalTransformation imp
             return builder.build();
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public CharSequenceTransformation[] newArray(int size) {
             return new CharSequenceTransformation[size];
@@ -117,8 +115,6 @@ public final class CharSequenceTransformation extends InternalTransformation imp
         return 0;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v0, types: [java.io.Serializable, java.util.regex.Pattern[]] */
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
         int size = this.mFields.size();

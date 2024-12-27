@@ -17,7 +17,6 @@ public abstract class SnapshotCache extends Watcher {
             this.$r8$classId = 1;
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ Auto(Object obj, Watchable watchable, String str, int i) {
             super(obj, watchable, str);
             this.$r8$classId = i;

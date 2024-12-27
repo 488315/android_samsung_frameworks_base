@@ -38,7 +38,6 @@ public final class SubscreenQsPanelControllerBase extends ViewController impleme
     public final ArrayList mSubscreenRecords;
     public final UiEventLogger mUiEventLogger;
 
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.qp.SubscreenQsPanelControllerBase$$ExternalSyntheticLambda0] */
     public SubscreenQsPanelControllerBase(SubroomQuickSettingsQSPanelBaseView subroomQuickSettingsQSPanelBaseView, QSTileHost qSTileHost) {
         super(subroomQuickSettingsQSPanelBaseView);
         this.mSubscreenRecords = new ArrayList();

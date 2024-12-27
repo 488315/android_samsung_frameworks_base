@@ -162,8 +162,6 @@ public final class TvInputHardwareManager implements TvInputHal.Callback {
             return null;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:17:0x00b3 A[Catch: all -> 0x004d, TryCatch #0 {all -> 0x004d, blocks: (B:15:0x009f, B:17:0x00b3, B:18:0x00c0, B:20:0x00b7, B:21:0x0021, B:23:0x0035, B:24:0x004b, B:26:0x0050, B:28:0x005c, B:30:0x0070, B:31:0x0086, B:34:0x008a, B:36:0x0094, B:37:0x00c2, B:38:0x00d8), top: B:8:0x0014 }] */
-        /* JADX WARN: Removed duplicated region for block: B:20:0x00b7 A[Catch: all -> 0x004d, TryCatch #0 {all -> 0x004d, blocks: (B:15:0x009f, B:17:0x00b3, B:18:0x00c0, B:20:0x00b7, B:21:0x0021, B:23:0x0035, B:24:0x004b, B:26:0x0050, B:28:0x005c, B:30:0x0070, B:31:0x0086, B:34:0x008a, B:36:0x0094, B:37:0x00c2, B:38:0x00d8), top: B:8:0x0014 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -380,8 +378,6 @@ public final class TvInputHardwareManager implements TvInputHal.Callback {
             return z;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r1v0, types: [android.media.AudioManager$OnAudioPortUpdateListener, com.android.server.tv.TvInputHardwareManager$TvInputHardwareImpl$1] */
         public TvInputHardwareImpl(TvInputHardwareInfo tvInputHardwareInfo) {
             Object obj = new Object();
             this.mImplLock = obj;
@@ -561,18 +557,6 @@ public final class TvInputHardwareManager implements TvInputHal.Callback {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:101:0x01ce  */
-        /* JADX WARN: Removed duplicated region for block: B:113:0x0265  */
-        /* JADX WARN: Removed duplicated region for block: B:115:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:36:0x0139  */
-        /* JADX WARN: Removed duplicated region for block: B:72:0x0220  */
-        /* JADX WARN: Removed duplicated region for block: B:81:0x0257  */
-        /* JADX WARN: Removed duplicated region for block: B:84:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:87:0x01c8  */
-        /* JADX WARN: Removed duplicated region for block: B:90:0x01ec  */
-        /* JADX WARN: Removed duplicated region for block: B:96:0x0211  */
-        /* JADX WARN: Removed duplicated region for block: B:98:0x0216  */
-        /* JADX WARN: Removed duplicated region for block: B:99:0x0200 A[SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -596,7 +580,6 @@ public final class TvInputHardwareManager implements TvInputHal.Callback {
         return false;
     }
 
-    /* JADX WARN: Type inference failed for: r1v11, types: [com.android.server.tv.TvInputHardwareManager$1] */
     public TvInputHardwareManager(Context context, TvInputManagerService.HardwareListener hardwareListener) {
         TvInputHal tvInputHal = new TvInputHal(this);
         this.mHal = tvInputHal;

@@ -543,8 +543,6 @@ public final class PermissionPolicyService extends SystemService {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:46:0x00e0  */
-        /* JADX WARN: Removed duplicated region for block: B:50:0x00f1  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -658,7 +656,6 @@ public final class PermissionPolicyService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.server.policy.PermissionPolicyService$4] */
     public PermissionPolicyService(Context context) {
         super(context);
         this.mLock = new Object();
@@ -768,8 +765,6 @@ public final class PermissionPolicyService extends SystemService {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.server.policy.PermissionPolicyService$2] */
     @Override // com.android.server.SystemService
     public final void onStart() {
         char c;
@@ -976,8 +971,6 @@ public final class PermissionPolicyService extends SystemService {
                             public final List mUserSetupUids = new ArrayList(200);
                             public final Map mPermControllerManagers = new HashMap();
 
-                            /* JADX WARN: Removed duplicated region for block: B:10:0x002e  */
-                            /* JADX WARN: Removed duplicated region for block: B:8:0x002d A[RETURN] */
                             @Override // android.content.BroadcastReceiver
                             /*
                                 Code decompiled incorrectly, please refer to instructions dump.

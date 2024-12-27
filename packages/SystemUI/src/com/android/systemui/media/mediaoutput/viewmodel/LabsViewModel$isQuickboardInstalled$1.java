@@ -16,7 +16,6 @@ final class LabsViewModel$isQuickboardInstalled$1 extends SuspendLambda implemen
     int label;
     final /* synthetic */ LabsViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LabsViewModel$isQuickboardInstalled$1(LabsViewModel labsViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = labsViewModel;

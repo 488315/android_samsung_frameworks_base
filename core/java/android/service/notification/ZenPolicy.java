@@ -31,7 +31,6 @@ public final class ZenPolicy implements Parcelable {
     public static final Parcelable.Creator<ZenPolicy> CREATOR =
             new Parcelable.Creator<
                     ZenPolicy>() { // from class: android.service.notification.ZenPolicy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ZenPolicy createFromParcel(Parcel source) {
                     ZenPolicy policy;
@@ -77,7 +76,6 @@ public final class ZenPolicy implements Parcelable {
                     return policy;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ZenPolicy[] newArray(int size) {
                     return new ZenPolicy[size];
@@ -506,7 +504,6 @@ public final class ZenPolicy implements Parcelable {
             return this;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:8:0x001c, code lost:
 
            return r0;
@@ -626,7 +623,6 @@ public final class ZenPolicy implements Parcelable {
             return this;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:9:0x0020, code lost:
 
            return r0;
@@ -801,7 +797,6 @@ public final class ZenPolicy implements Parcelable {
         return "{" + String.join(",", modified) + "}";
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ArrayList<Integer> trimList(ArrayList<Integer> list, int maxLength) {
         if (list == null || list.size() <= maxLength) {
             return list;

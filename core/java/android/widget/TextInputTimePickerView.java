@@ -200,7 +200,6 @@ public class TextInputTimePickerView extends RelativeLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean parseAndSetHourInternal(String input) {
         try {
             int hour = Integer.parseInt(input);
@@ -219,7 +218,6 @@ public class TextInputTimePickerView extends RelativeLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean parseAndSetMinuteInternal(String input) {
         try {
             int minutes = Integer.parseInt(input);

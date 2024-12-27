@@ -7,13 +7,11 @@ public final class FrontendTransmissionMode implements Parcelable {
     public static final Parcelable.Creator<FrontendTransmissionMode> CREATOR =
             new Parcelable.Creator<FrontendTransmissionMode>() { // from class:
                 // android.hardware.tv.tuner.FrontendTransmissionMode.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendTransmissionMode createFromParcel(Parcel _aidl_source) {
                     return new FrontendTransmissionMode(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendTransmissionMode[] newArray(int _aidl_size) {
                     return new FrontendTransmissionMode[_aidl_size];

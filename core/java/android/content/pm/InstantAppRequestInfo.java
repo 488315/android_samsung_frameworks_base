@@ -14,13 +14,11 @@ public final class InstantAppRequestInfo implements Parcelable {
     public static final Parcelable.Creator<InstantAppRequestInfo> CREATOR =
             new Parcelable.Creator<InstantAppRequestInfo>() { // from class:
                 // android.content.pm.InstantAppRequestInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InstantAppRequestInfo[] newArray(int size) {
                     return new InstantAppRequestInfo[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InstantAppRequestInfo createFromParcel(Parcel in) {
                     return new InstantAppRequestInfo(in);

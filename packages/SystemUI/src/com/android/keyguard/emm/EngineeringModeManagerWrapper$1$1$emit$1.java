@@ -10,7 +10,6 @@ final class EngineeringModeManagerWrapper$1$1$emit$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ EngineeringModeManagerWrapper.AnonymousClass1.C00231 this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public EngineeringModeManagerWrapper$1$1$emit$1(EngineeringModeManagerWrapper.AnonymousClass1.C00231 c00231, Continuation continuation) {
         super(continuation);
         this.this$0 = c00231;

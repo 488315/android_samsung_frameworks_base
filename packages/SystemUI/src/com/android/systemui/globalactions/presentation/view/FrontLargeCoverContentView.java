@@ -208,7 +208,6 @@ public final class FrontLargeCoverContentView implements ContentView, ViewStateC
         }
     }
 
-    /* JADX WARN: Type inference failed for: r5v4, types: [com.android.systemui.globalactions.presentation.view.FrontLargeCoverContentView$1] */
     public FrontLargeCoverContentView(Context context, ExtendableGlobalActionsView extendableGlobalActionsView, FeatureFactory featureFactory, ConditionChecker conditionChecker, ResourceFactory resourceFactory, LogWrapper logWrapper, HandlerUtil handlerUtil, ToastController toastController, SamsungGlobalActionsPresenter samsungGlobalActionsPresenter) {
         DisplayManager displayManager = (DisplayManager) context.getSystemService("display");
         Display display = displayManager.getDisplay(1);

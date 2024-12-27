@@ -15,7 +15,6 @@ final class MediaDeviceViewModel$Companion$mediaChanged$1$mediaDeviceControlCall
     final /* synthetic */ ProducerScope $$this$callbackFlow;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaDeviceViewModel$Companion$mediaChanged$1$mediaDeviceControlCallback$1$onMuteChanged$1(ProducerScope producerScope, Continuation continuation) {
         super(2, continuation);
         this.$$this$callbackFlow = producerScope;

@@ -21,7 +21,6 @@ public final class VisualVoicemailSmsFilterSettings implements Parcelable {
             new Parcelable.Creator<
                     VisualVoicemailSmsFilterSettings>() { // from class:
                                                           // android.telephony.VisualVoicemailSmsFilterSettings.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VisualVoicemailSmsFilterSettings createFromParcel(Parcel in) {
                     Builder builder = new Builder();
@@ -32,7 +31,6 @@ public final class VisualVoicemailSmsFilterSettings implements Parcelable {
                     return builder.build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VisualVoicemailSmsFilterSettings[] newArray(int size) {
                     return new VisualVoicemailSmsFilterSettings[size];

@@ -15,13 +15,11 @@ public final class SignalingDataInfo implements Parcelable {
     public static final Parcelable.Creator<SignalingDataInfo> CREATOR =
             new Parcelable.Creator<
                     SignalingDataInfo>() { // from class: android.media.tv.SignalingDataInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignalingDataInfo[] newArray(int size) {
                     return new SignalingDataInfo[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignalingDataInfo createFromParcel(Parcel in) {
                     return new SignalingDataInfo(in);

@@ -8,7 +8,6 @@ public class DemuxFilterIpPayloadEvent implements Parcelable {
     public static final Parcelable.Creator<DemuxFilterIpPayloadEvent> CREATOR =
             new Parcelable.Creator<DemuxFilterIpPayloadEvent>() { // from class:
                 // android.hardware.tv.tuner.DemuxFilterIpPayloadEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterIpPayloadEvent createFromParcel(Parcel _aidl_source) {
                     DemuxFilterIpPayloadEvent _aidl_out = new DemuxFilterIpPayloadEvent();
@@ -16,7 +15,6 @@ public class DemuxFilterIpPayloadEvent implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterIpPayloadEvent[] newArray(int _aidl_size) {
                     return new DemuxFilterIpPayloadEvent[_aidl_size];

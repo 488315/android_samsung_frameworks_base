@@ -12,7 +12,6 @@ final class RefreshUsersScheduler$unpauseAndRefresh$1 extends SuspendLambda impl
     int label;
     final /* synthetic */ RefreshUsersScheduler this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RefreshUsersScheduler$unpauseAndRefresh$1(RefreshUsersScheduler refreshUsersScheduler, Continuation continuation) {
         super(2, continuation);
         this.this$0 = refreshUsersScheduler;

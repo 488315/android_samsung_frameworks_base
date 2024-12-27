@@ -9,7 +9,6 @@ import com.android.systemui.util.concurrency.Execution;
 import com.android.systemui.util.sensors.ThresholdSensor;
 import java.util.HashSet;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public class PostureDependentProximitySensor extends ProximitySensorImpl {
     private final DevicePostureController.Callback mDevicePostureCallback;
     private final DevicePostureController mDevicePostureController;
@@ -72,7 +71,6 @@ public class PostureDependentProximitySensor extends ProximitySensorImpl {
         Log.e("PostureDependProxSensor", "unsupported devicePosture=" + this.mDevicePosture);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(int i) {
         if (this.mDevicePosture == i) {
             return;

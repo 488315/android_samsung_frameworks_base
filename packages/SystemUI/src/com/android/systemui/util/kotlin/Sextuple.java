@@ -20,7 +20,6 @@ public final class Sextuple<A, B, C, D, E, F> {
         this.sixth = f;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static /* synthetic */ Sextuple copy$default(Sextuple sextuple, Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6, int i, Object obj7) {
         A a = obj;
         if ((i & 1) != 0) {

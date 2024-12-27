@@ -52,13 +52,11 @@ public class VerifierDeviceIdentity implements Parcelable {
     public static final Parcelable.Creator<VerifierDeviceIdentity> CREATOR =
             new Parcelable.Creator<VerifierDeviceIdentity>() { // from class:
                 // android.content.pm.VerifierDeviceIdentity.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VerifierDeviceIdentity createFromParcel(Parcel source) {
                     return new VerifierDeviceIdentity(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VerifierDeviceIdentity[] newArray(int size) {
                     return new VerifierDeviceIdentity[size];

@@ -16,7 +16,6 @@ public class SemBaseInputConnectionUtil {
         return text;
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:28:0x005c */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

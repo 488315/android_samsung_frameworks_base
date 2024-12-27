@@ -15,7 +15,6 @@ public final class FromAodTransitionInteractor$listenForAodToPrimaryBouncer$$inl
     int label;
     final /* synthetic */ FromAodTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromAodTransitionInteractor$listenForAodToPrimaryBouncer$$inlined$launch$default$1(String str, Continuation continuation, FromAodTransitionInteractor fromAodTransitionInteractor) {
         super(2, continuation);
         this.$spanName = str;
@@ -34,8 +33,6 @@ public final class FromAodTransitionInteractor$listenForAodToPrimaryBouncer$$inl
         return ((FromAodTransitionInteractor$listenForAodToPrimaryBouncer$$inlined$launch$default$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x009f  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

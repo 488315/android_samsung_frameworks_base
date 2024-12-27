@@ -130,7 +130,6 @@ public class UiModeManager {
     @Retention(RetentionPolicy.SOURCE)
     public @interface ProjectionType {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class Globals extends IUiModeManagerCallback.Stub {
         private float mContrast;
         private final IUiModeManager mService;
@@ -149,7 +148,6 @@ public class UiModeManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public float getContrast() {
             float f;
             synchronized (this.mGlobalsLock) {
@@ -158,14 +156,12 @@ public class UiModeManager {
             return f;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addContrastChangeListener(ContrastChangeListener listener, Executor executor) {
             synchronized (this.mGlobalsLock) {
                 this.mContrastChangeListeners.put(listener, executor);
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void removeContrastChangeListener(ContrastChangeListener listener) {
             synchronized (this.mGlobalsLock) {
                 this.mContrastChangeListeners.remove(listener);
@@ -420,7 +416,6 @@ public class UiModeManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Integer getNightModeFromServer() {
         try {
             if (sGlobals != null) {

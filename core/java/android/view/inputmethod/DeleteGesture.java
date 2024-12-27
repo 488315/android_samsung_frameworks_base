@@ -10,13 +10,11 @@ public final class DeleteGesture extends PreviewableHandwritingGesture implement
     public static final Parcelable.Creator<DeleteGesture> CREATOR =
             new Parcelable.Creator<
                     DeleteGesture>() { // from class: android.view.inputmethod.DeleteGesture.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DeleteGesture createFromParcel(Parcel source) {
                     return new DeleteGesture(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DeleteGesture[] newArray(int size) {
                     return new DeleteGesture[size];

@@ -2,8 +2,6 @@ package com.android.systemui.statusbar.phone;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class CutoutType {
     public static final /* synthetic */ CutoutType[] $VALUES;
     public static final CutoutType CENTER_CUTOUT;

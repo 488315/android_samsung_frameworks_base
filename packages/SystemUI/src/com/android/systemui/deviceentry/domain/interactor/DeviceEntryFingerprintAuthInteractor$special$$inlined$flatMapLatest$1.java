@@ -17,7 +17,6 @@ public final class DeviceEntryFingerprintAuthInteractor$special$$inlined$flatMap
     int label;
     final /* synthetic */ DeviceEntryFingerprintAuthInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryFingerprintAuthInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, DeviceEntryFingerprintAuthInteractor deviceEntryFingerprintAuthInteractor) {
         super(3, continuation);
         this.this$0 = deviceEntryFingerprintAuthInteractor;

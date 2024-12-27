@@ -192,7 +192,6 @@ public class ResourcesManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ActivityResource {
         public final Configuration overrideConfig;
         public Integer overrideDisplayId;
@@ -586,7 +585,6 @@ public class ResourcesManager {
         return impl;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ResourcesImpl findOrCreateResourcesImplForKeyLocked(ResourcesKey key) {
         return findOrCreateResourcesImplForKeyLocked(key, null);
     }
@@ -662,7 +660,6 @@ public class ResourcesManager {
         return newKey;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ResourcesKey findKeyForResourceImplLocked(ResourcesImpl resourceImpl) {
         int refCount = this.mResourceImpls.size();
         for (int i = 0; i < refCount; i++) {
@@ -1593,7 +1590,6 @@ public class ResourcesManager {
         return (String[]) paths.toArray(new String[0]);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void redirectResourcesToNewImplLocked(
             ArrayMap<ResourcesImpl, ResourcesKey> updatedResourceKeys) {
         ResourcesKey key;

@@ -66,7 +66,6 @@ public final class BatterySaverStateMachine {
     public final BatterySaverStateMachine$$ExternalSyntheticLambda0 mThresholdChangeLogger = new BatterySaverStateMachine$$ExternalSyntheticLambda0(this, 2);
     public int mState = 1;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.power.batterysaver.BatterySaverStateMachine$1] */
     public BatterySaverStateMachine(Object obj, Context context, BatterySaverController batterySaverController) {
         this.mLock = obj;
         this.mContext = context;
@@ -261,10 +260,6 @@ public final class BatterySaverStateMachine {
         enableBatterySaverLocked(str, z, z2, i);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v7 */
-    /* JADX WARN: Type inference failed for: r4v8, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r4v9 */
     public final void enableBatterySaverLocked(String str, boolean z, boolean z2, int i) {
         boolean z3;
         Slog.d("BatterySaverStateMachine", ActiveServices$$ExternalSyntheticOutline0.m(i, str, "(", ")", FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("enableBatterySaver: enable=", z, " manual=", z2, " reason=")));

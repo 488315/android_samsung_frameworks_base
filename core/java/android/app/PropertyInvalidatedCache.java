@@ -550,7 +550,6 @@ public class PropertyInvalidatedCache<Query, Result> {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void handleMessage(Message msg) {
             synchronized (this.mLock) {
                 if (this.mUncorkDeadlineMs < 0) {

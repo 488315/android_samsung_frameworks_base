@@ -456,18 +456,6 @@ public final class StorageNotification implements CoreStartable {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.systemui.usb.StorageNotification$6] */
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.systemui.usb.StorageNotification$7] */
-    /* JADX WARN: Type inference failed for: r0v12, types: [com.android.systemui.usb.StorageNotification$8] */
-    /* JADX WARN: Type inference failed for: r0v13, types: [com.android.systemui.usb.StorageNotification$9] */
-    /* JADX WARN: Type inference failed for: r0v14, types: [com.android.systemui.usb.StorageNotification$10] */
-    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.systemui.usb.StorageNotification$11] */
-    /* JADX WARN: Type inference failed for: r0v16, types: [com.android.systemui.usb.StorageNotification$12] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.usb.StorageNotification$1] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.systemui.usb.StorageNotification$2] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.systemui.usb.StorageNotification$3] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.systemui.usb.StorageNotification$4] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.systemui.usb.StorageNotification$5] */
     public StorageNotification(Context context, BroadcastDispatcher broadcastDispatcher, NotificationManager notificationManager, StorageManager storageManager) {
         this.mContext = context;
         this.mBroadcastDispatcher = broadcastDispatcher;
@@ -555,10 +543,6 @@ public final class StorageNotification implements CoreStartable {
         this.mNotificationManager.notifyAsUser(diskInfo.getId(), 1396986699, showWhen2.build(), UserHandle.ALL);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x03a2 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x03ec  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x04e7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

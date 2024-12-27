@@ -61,13 +61,11 @@ public class ParsedUsesPermissionImpl implements ParsedUsesPermission, Parcelabl
                 new Parcelable.Creator<
                         ParsedUsesPermissionImpl>() { // from class:
                                                       // com.android.internal.pm.pkg.component.ParsedUsesPermissionImpl.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ParsedUsesPermissionImpl[] newArray(int size) {
                         return new ParsedUsesPermissionImpl[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ParsedUsesPermissionImpl createFromParcel(Parcel in) {
                         return new ParsedUsesPermissionImpl(in);

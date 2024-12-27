@@ -58,9 +58,6 @@ public final class OemLockService extends SystemService {
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.server.oemlock.OemLockService$2] */
     public OemLockService(Context context) {
         super(context);
         PersistentDataBlockLock persistentDataBlockLock;

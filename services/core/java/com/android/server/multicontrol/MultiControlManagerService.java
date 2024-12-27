@@ -68,8 +68,6 @@ public final class MultiControlManagerService extends IMultiControlManager.Stub 
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.multicontrol.MultiControlManagerService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? multiControlManagerService = new MultiControlManagerService(getContext());

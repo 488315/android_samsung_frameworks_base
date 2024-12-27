@@ -2,8 +2,6 @@ package com.android.systemui.volume.util;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class BroadcastReceiverType {
     public static final /* synthetic */ BroadcastReceiverType[] $VALUES;
     public static final BroadcastReceiverType A2DP_ACTIVE_DEVICE_CHANGE;

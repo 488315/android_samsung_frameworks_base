@@ -50,11 +50,6 @@ public final class WallpaperDataParser {
 
        if ("kwp".equals(r6) != false) goto L32;
     */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x019b  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x01a6  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0204  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0221  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x019d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -90,15 +85,6 @@ public final class WallpaperDataParser {
                 new Pair(3, "SquareLandscape"));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x037b  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x02c3  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x02e0  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0321  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0329  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x033a  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x034b  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x03a7  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x03d3 A[ORIG_RETURN, RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -139,21 +125,6 @@ public final class WallpaperDataParser {
 
        if (r4 != null) goto L75;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r1v1 */
-    /* JADX WARN: Type inference failed for: r1v11 */
-    /* JADX WARN: Type inference failed for: r1v15 */
-    /* JADX WARN: Type inference failed for: r1v29 */
-    /* JADX WARN: Type inference failed for: r1v30 */
-    /* JADX WARN: Type inference failed for: r1v5, types: [java.io.FileOutputStream, java.lang.AutoCloseable] */
-    /* JADX WARN: Type inference failed for: r4v0 */
-    /* JADX WARN: Type inference failed for: r4v1 */
-    /* JADX WARN: Type inference failed for: r4v11 */
-    /* JADX WARN: Type inference failed for: r4v15 */
-    /* JADX WARN: Type inference failed for: r4v20 */
-    /* JADX WARN: Type inference failed for: r4v29 */
-    /* JADX WARN: Type inference failed for: r4v5, types: [java.io.FileOutputStream, java.lang.AutoCloseable] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -169,19 +140,6 @@ public final class WallpaperDataParser {
                     + " com.android.server.wallpaper.WallpaperDataParser.restoreNamedResourceLocked(com.android.server.wallpaper.WallpaperData):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:103:0x036c  */
-    /* JADX WARN: Removed duplicated region for block: B:133:0x03d1  */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x0285  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x01b5  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x01ec  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x02a9  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x02b4  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x02c2  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x02cd  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x02d8  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x02e3  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0311  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x035b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -17,7 +17,6 @@ public class NotificationControlActionCoordinator implements Coordinator {
         this.mNotificationController = notificationController;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onAfterRenderList(List<ListEntry> list, NotifStackController notifStackController) {
         this.mNotificationController.setNotificationEntries(list);
     }

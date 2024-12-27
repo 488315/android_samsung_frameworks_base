@@ -1053,8 +1053,6 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.am.AppBatteryTracker$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.am.AppBatteryTracker$$ExternalSyntheticLambda0] */
     public AppBatteryTracker(Context context, AppRestrictionController appRestrictionController) {
         super(context, appRestrictionController);
         final int i = 0;

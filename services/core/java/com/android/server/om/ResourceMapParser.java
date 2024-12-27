@@ -23,8 +23,6 @@ import java.util.Iterator;
 public abstract class ResourceMapParser {
     public static final boolean DEBUG = "eng".equals(Build.TYPE);
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class ResourceType {
         public static final /* synthetic */ ResourceType[] $VALUES;
         public static final ResourceType COLOR;

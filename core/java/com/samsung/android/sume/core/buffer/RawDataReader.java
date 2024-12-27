@@ -15,7 +15,6 @@ public class RawDataReader implements MediaBufferReader<Number> {
     private final Supplier<?> pixelRead;
     private final Function<Integer, ?> pixelReadByIndex;
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.buffer.MediaBufferReader
     public Number get() {
         return (Number) this.pixelRead.get();

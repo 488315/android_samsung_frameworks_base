@@ -76,7 +76,6 @@ public final class VcnCellUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
         validateMatchCriteria(this.mOpportunisticMatchCriteria, OPPORTUNISTIC_MATCH_KEY);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void validatePlmnIds(Set<String> matchingOperatorPlmnIds) {
         Objects.requireNonNull(matchingOperatorPlmnIds, "matchingOperatorPlmnIds is null");
         for (String id : matchingOperatorPlmnIds) {

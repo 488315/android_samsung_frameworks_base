@@ -18,13 +18,11 @@ public final class TranslationCapability implements Parcelable {
             new Parcelable.Creator<
                     TranslationCapability>() { // from class:
                                                // android.view.translation.TranslationCapability.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TranslationCapability[] newArray(int size) {
                     return new TranslationCapability[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TranslationCapability createFromParcel(Parcel in) {
                     return new TranslationCapability(in);

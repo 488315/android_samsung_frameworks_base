@@ -12,13 +12,11 @@ public final class TimeCapabilities implements Parcelable {
     public static final Parcelable.Creator<TimeCapabilities> CREATOR =
             new Parcelable.Creator<
                     TimeCapabilities>() { // from class: android.app.time.TimeCapabilities.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeCapabilities createFromParcel(Parcel in) {
                     return TimeCapabilities.createFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeCapabilities[] newArray(int size) {
                     return new TimeCapabilities[size];
@@ -35,7 +33,6 @@ public final class TimeCapabilities implements Parcelable {
         this.mSetManualTimeCapability = builder.mSetManualTimeCapability;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static TimeCapabilities createFromParcel(Parcel in) {
         UserHandle userHandle = UserHandle.readFromParcel(in);
         return new Builder(userHandle)

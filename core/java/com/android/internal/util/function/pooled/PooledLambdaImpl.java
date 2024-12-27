@@ -110,9 +110,6 @@ final class PooledLambdaImpl<R>
         pool.release(this);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0093  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00d4  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00d8  */
     @Override // com.android.internal.util.function.pooled.OmniFunction
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -720,12 +717,10 @@ final class PooledLambdaImpl<R>
         this.mFlags |= mask(mask, value);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int mask(int mask, int value) {
         return (value << Integer.numberOfTrailingZeros(mask)) & mask;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int unmask(int mask, int bits) {
         return (bits & mask) / (1 << Integer.numberOfTrailingZeros(mask));
     }

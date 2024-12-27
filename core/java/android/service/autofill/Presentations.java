@@ -8,22 +8,18 @@ public final class Presentations {
     private InlinePresentation mInlineTooltipPresentation;
     private RemoteViews mMenuPresentation;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static RemoteViews defaultMenuPresentation() {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static InlinePresentation defaultInlinePresentation() {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static RemoteViews defaultDialogPresentation() {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static InlinePresentation defaultInlineTooltipPresentation() {
         return null;
     }

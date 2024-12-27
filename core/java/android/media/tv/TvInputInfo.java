@@ -46,13 +46,11 @@ import java.util.Set;
 public final class TvInputInfo implements Parcelable {
     public static final Parcelable.Creator<TvInputInfo> CREATOR =
             new Parcelable.Creator<TvInputInfo>() { // from class: android.media.tv.TvInputInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvInputInfo createFromParcel(Parcel in) {
                     return new TvInputInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvInputInfo[] newArray(int size) {
                     return new TvInputInfo[size];
@@ -754,12 +752,10 @@ public final class TvInputInfo implements Parcelable {
 
         private TvInputSettings() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static boolean isHidden(Context context, String inputId, int userId) {
             return getHiddenTvInputIds(context, userId).contains(inputId);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static String getCustomLabel(Context context, String inputId, int userId) {
             return getCustomLabels(context, userId).get(inputId);
         }

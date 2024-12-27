@@ -42,8 +42,6 @@ public final class DLCLogSender extends BaseLogSender {
                                           // com.samsung.context.sdk.samsunganalytics.internal.sender.DLC.DLCBinder.1
                     public AnonymousClass1() {}
 
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Type inference failed for: r1v3, types: [com.sec.spp.push.dlc.api.IDlcService] */
                     @Override // android.content.ServiceConnection
                     public final void onServiceConnected(
                             ComponentName componentName, IBinder iBinder) {

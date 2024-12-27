@@ -283,7 +283,6 @@ public class LongSparseArray<E> implements Cloneable {
                                     ((LongSparseArray) array).mValues, 0, size, String[].class));
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // com.android.internal.util.Parcelling
         public LongSparseArray<String> unparcel(Parcel source) {
             int size = source.readInt();

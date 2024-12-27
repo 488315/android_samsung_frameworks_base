@@ -171,7 +171,6 @@ public final class TileAdapter extends RecyclerView.Adapter {
         tileAdapter.notifyDataSetChanged();
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [androidx.recyclerview.widget.GridLayoutManager$SpanSizeLookup, com.android.systemui.qs.customize.TileAdapter$4] */
     public TileAdapter(Context context, QSHost qSHost, UiEventLogger uiEventLogger, FeatureFlags featureFlags) {
         int i = 0;
         ?? r1 = new GridLayoutManager.SpanSizeLookup() { // from class: com.android.systemui.qs.customize.TileAdapter.4

@@ -152,9 +152,6 @@ public final class PerformAdbRestoreTask implements Runnable {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00fb  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0107  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00db  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -183,8 +180,6 @@ public final class PerformAdbRestoreTask implements Runnable {
         return sb.toString();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:122:0x0250 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x02a1 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

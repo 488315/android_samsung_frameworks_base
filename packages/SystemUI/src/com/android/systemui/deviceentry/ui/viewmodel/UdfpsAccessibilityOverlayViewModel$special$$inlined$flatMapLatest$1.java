@@ -17,7 +17,6 @@ public final class UdfpsAccessibilityOverlayViewModel$special$$inlined$flatMapLa
     int label;
     final /* synthetic */ UdfpsAccessibilityOverlayViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UdfpsAccessibilityOverlayViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, UdfpsAccessibilityOverlayViewModel udfpsAccessibilityOverlayViewModel) {
         super(3, continuation);
         this.this$0 = udfpsAccessibilityOverlayViewModel;

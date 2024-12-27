@@ -54,8 +54,6 @@ public final class SensitiveContentCoordinatorImpl extends Invalidator implement
     private final SettingsHelper settingsHelper;
     private final StatusBarStateController statusBarStateController;
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl$keyguardUpdateMonitorCallback$1] */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl$screenshareSecretFilter$1] */
     public SensitiveContentCoordinatorImpl(DynamicPrivacyController dynamicPrivacyController, NotificationLockscreenUserManager notificationLockscreenUserManager, KeyguardUpdateMonitor keyguardUpdateMonitor, StatusBarStateController statusBarStateController, KeyguardStateController keyguardStateController, SelectedUserInteractor selectedUserInteractor, SensitiveNotificationProtectionController sensitiveNotificationProtectionController, SettingsHelper settingsHelper, AppLockNotificationController appLockNotificationController) {
         super("SensitiveContentInvalidator");
         this.dynamicPrivacyController = dynamicPrivacyController;

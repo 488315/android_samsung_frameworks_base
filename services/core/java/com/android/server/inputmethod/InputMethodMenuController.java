@@ -70,8 +70,6 @@ public final class InputMethodMenuController {
             this.mSemImcUtil = new SemInputMethodMenuControllerUtil();
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:19:0x023d  */
-        /* JADX WARN: Removed duplicated region for block: B:45:0x0204 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         @Override // android.widget.ArrayAdapter, android.widget.Adapter
         /*
             Code decompiled incorrectly, please refer to instructions dump.

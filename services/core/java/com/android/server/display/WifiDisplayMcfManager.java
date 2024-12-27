@@ -314,11 +314,6 @@ public final class WifiDisplayMcfManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.display.WifiDisplayMcfManager$1] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.display.WifiDisplayMcfManager$2] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.display.WifiDisplayMcfManager$3] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.display.WifiDisplayMcfManager$4] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.display.WifiDisplayMcfManager$5] */
     public WifiDisplayMcfManager(
             Context context, Handler handler, PersistentDataStore persistentDataStore) {
         this.mContext = context;

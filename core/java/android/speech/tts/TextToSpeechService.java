@@ -440,17 +440,14 @@ public abstract class TextToSpeechService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getDefaultSpeechRate() {
         return getSecureSettingInt(Settings.Secure.TTS_DEFAULT_RATE, 100);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getDefaultPitch() {
         return getSecureSettingInt(Settings.Secure.TTS_DEFAULT_PITCH, 100);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String[] getSettingsLocale() {
         Locale locale = this.mEngineHelper.getLocalePrefForEngine(this.mPackageName);
         return TtsEngines.toOldLocaleStringFormat(locale);
@@ -511,7 +508,6 @@ public abstract class TextToSpeechService extends Service {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void endFlushingSpeechItems(Object callerIdentity) {
             synchronized (this.mFlushedObjects) {
                 if (callerIdentity == null) {
@@ -536,7 +532,6 @@ public abstract class TextToSpeechService extends Service {
             return this.mCurrentSpeechItem;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public synchronized boolean setCurrentSpeechItem(SpeechItem speechItem) {
             if (speechItem != null) {
                 if (isFlushed(speechItem)) {
@@ -547,7 +542,6 @@ public abstract class TextToSpeechService extends Service {
             return true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public synchronized SpeechItem removeCurrentSpeechItem() {
             SpeechItem current;
             current = this.mCurrentSpeechItem;
@@ -577,7 +571,6 @@ public abstract class TextToSpeechService extends Service {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public int enqueueSpeechItem(int queueMode, final SpeechItem speechItem) {
             UtteranceProgressDispatcher utterenceProgress = null;
             if (speechItem instanceof UtteranceProgressDispatcher) {

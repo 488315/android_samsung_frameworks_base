@@ -94,7 +94,6 @@ public class WifiDebuggingActivity extends AlertActivity implements DialogInterf
         finish();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onCreate(Bundle bundle) {
         Window window = getWindow();
         window.addSystemFlags(524288);

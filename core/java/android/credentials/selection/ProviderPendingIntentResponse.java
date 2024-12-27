@@ -10,13 +10,11 @@ public final class ProviderPendingIntentResponse implements Parcelable {
     public static final Parcelable.Creator<ProviderPendingIntentResponse> CREATOR =
             new Parcelable.Creator<ProviderPendingIntentResponse>() { // from class:
                 // android.credentials.selection.ProviderPendingIntentResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ProviderPendingIntentResponse createFromParcel(Parcel in) {
                     return new ProviderPendingIntentResponse(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ProviderPendingIntentResponse[] newArray(int size) {
                     return new ProviderPendingIntentResponse[size];

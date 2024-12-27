@@ -15,8 +15,6 @@ public abstract class DemoModeAvailabilityTracker {
     public boolean isInDemoMode;
     public final DemoModeAvailabilityTracker$onObserver$1 onObserver;
 
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.demomode.DemoModeAvailabilityTracker$allowedObserver$1] */
-    /* JADX WARN: Type inference failed for: r4v4, types: [com.android.systemui.demomode.DemoModeAvailabilityTracker$onObserver$1] */
     public DemoModeAvailabilityTracker(Context context, GlobalSettings globalSettings) {
         this.context = context;
         this.globalSettings = globalSettings;

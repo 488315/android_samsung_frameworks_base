@@ -72,7 +72,6 @@ public final class GrammaticalInflectionService extends SystemService {
                             + " does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.");
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,

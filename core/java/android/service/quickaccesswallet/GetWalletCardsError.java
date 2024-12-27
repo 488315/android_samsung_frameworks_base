@@ -10,13 +10,11 @@ public final class GetWalletCardsError implements Parcelable {
             new Parcelable.Creator<
                     GetWalletCardsError>() { // from class:
                                              // android.service.quickaccesswallet.GetWalletCardsError.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetWalletCardsError createFromParcel(Parcel source) {
                     return GetWalletCardsError.readFromParcel(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetWalletCardsError[] newArray(int size) {
                     return new GetWalletCardsError[size];
@@ -46,7 +44,6 @@ public final class GetWalletCardsError implements Parcelable {
         TextUtils.writeToParcel(this.mMessage, dest, flags);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static GetWalletCardsError readFromParcel(Parcel source) {
         Icon icon = source.readByte() == 0 ? null : Icon.CREATOR.createFromParcel(source);
         CharSequence message = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);

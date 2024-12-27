@@ -7,13 +7,11 @@ import com.android.internal.os.IShellCallback;
 public class ShellCallback implements Parcelable {
     public static final Parcelable.Creator<ShellCallback> CREATOR =
             new Parcelable.Creator<ShellCallback>() { // from class: android.os.ShellCallback.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ShellCallback createFromParcel(Parcel in) {
                     return new ShellCallback(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ShellCallback[] newArray(int size) {
                     return new ShellCallback[size];

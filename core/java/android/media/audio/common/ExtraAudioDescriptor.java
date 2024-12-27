@@ -12,7 +12,6 @@ public class ExtraAudioDescriptor implements Parcelable {
     public static final Parcelable.Creator<ExtraAudioDescriptor> CREATOR =
             new Parcelable.Creator<ExtraAudioDescriptor>() { // from class:
                 // android.media.audio.common.ExtraAudioDescriptor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExtraAudioDescriptor createFromParcel(Parcel _aidl_source) {
                     ExtraAudioDescriptor _aidl_out = new ExtraAudioDescriptor();
@@ -20,7 +19,6 @@ public class ExtraAudioDescriptor implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExtraAudioDescriptor[] newArray(int _aidl_size) {
                     return new ExtraAudioDescriptor[_aidl_size];
@@ -118,7 +116,6 @@ public class ExtraAudioDescriptor implements Parcelable {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
         return Arrays.deepHashCode(
                 Arrays.asList(

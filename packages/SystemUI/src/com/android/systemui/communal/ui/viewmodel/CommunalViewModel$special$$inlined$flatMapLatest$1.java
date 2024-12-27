@@ -19,7 +19,6 @@ public final class CommunalViewModel$special$$inlined$flatMapLatest$1 extends Su
     int label;
     final /* synthetic */ CommunalViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, CommunalViewModel communalViewModel) {
         super(3, continuation);
         this.this$0 = communalViewModel;

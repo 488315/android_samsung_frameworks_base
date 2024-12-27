@@ -7,13 +7,11 @@ public final class FaceAuthenticationFrame implements Parcelable {
     public static final Parcelable.Creator<FaceAuthenticationFrame> CREATOR =
             new Parcelable.Creator<FaceAuthenticationFrame>() { // from class:
                 // android.hardware.face.FaceAuthenticationFrame.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceAuthenticationFrame createFromParcel(Parcel source) {
                     return new FaceAuthenticationFrame(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceAuthenticationFrame[] newArray(int size) {
                     return new FaceAuthenticationFrame[size];

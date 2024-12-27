@@ -62,7 +62,6 @@ public class GraphEdge {
         this.node = new Pair<>(startNode, endNode);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ String lambda$getBeginNode$0(Pair it) {
         return (String) it.first;
     }
@@ -81,7 +80,6 @@ public class GraphEdge {
                         .orElse("n/a");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ String lambda$getEndNode$1(Pair it) {
         return (String) it.second;
     }

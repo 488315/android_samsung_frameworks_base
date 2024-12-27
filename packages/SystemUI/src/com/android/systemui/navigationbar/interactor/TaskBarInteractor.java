@@ -54,8 +54,6 @@ public final class TaskBarInteractor {
         logWrapper.d("TaskBarInteractor", "init userUnlocked=" + this.userUnlocked + " for userid=" + ActivityManager.getCurrentUser());
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [android.content.BroadcastReceiver, com.android.systemui.navigationbar.interactor.TaskBarInteractor$addCallback$2] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.navigationbar.interactor.TaskBarInteractor$addCallback$7] */
     public final void addCallback(final NavBarStoreImpl$initInteractor$7 navBarStoreImpl$initInteractor$7) {
         TaskBarInteractor$addCallback$2 taskBarInteractor$addCallback$2 = this.broadcastReceiver;
         if (taskBarInteractor$addCallback$2 != null) {

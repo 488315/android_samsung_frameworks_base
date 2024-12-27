@@ -180,7 +180,6 @@ final class SmartSelectSprite {
             return this.mRoundRatio;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setStartBoundary(float startBoundary) {
             if (this.mInverted) {
                 this.mRightBoundary = this.mBoundingWidth - startBoundary;
@@ -189,7 +188,6 @@ final class SmartSelectSprite {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setEndBoundary(float endBoundary) {
             if (this.mInverted) {
                 this.mLeftBoundary = this.mBoundingWidth - endBoundary;
@@ -206,7 +204,6 @@ final class SmartSelectSprite {
             return getCornerRadius() * this.mRoundRatio;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public float getBoundingWidth() {
             return (int) (this.mBoundingRectangle.width() + getCornerRadius());
         }
@@ -269,7 +266,6 @@ final class SmartSelectSprite {
             this.mDisplayType = displayType;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getTotalWidth() {
             int sum = 0;
             for (RoundedRectangleShape rectangle : this.mRectangles) {
@@ -376,7 +372,6 @@ final class SmartSelectSprite {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startAnimation$2(ValueAnimator valueAnimator) {
         this.mInvalidator.run();
     }

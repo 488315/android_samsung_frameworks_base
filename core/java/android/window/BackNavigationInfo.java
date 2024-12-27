@@ -13,13 +13,11 @@ public final class BackNavigationInfo implements Parcelable {
     public static final Parcelable.Creator<BackNavigationInfo> CREATOR =
             new Parcelable.Creator<
                     BackNavigationInfo>() { // from class: android.window.BackNavigationInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BackNavigationInfo createFromParcel(Parcel in) {
                     return new BackNavigationInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BackNavigationInfo[] newArray(int size) {
                     return new BackNavigationInfo[size];
@@ -189,13 +187,11 @@ public final class BackNavigationInfo implements Parcelable {
                 new Parcelable.Creator<
                         CustomAnimationInfo>() { // from class:
                                                  // android.window.BackNavigationInfo.CustomAnimationInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CustomAnimationInfo createFromParcel(Parcel in) {
                         return new CustomAnimationInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CustomAnimationInfo[] newArray(int size) {
                         return new CustomAnimationInfo[size];

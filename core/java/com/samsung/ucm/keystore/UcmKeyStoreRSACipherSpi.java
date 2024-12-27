@@ -26,7 +26,6 @@ public class UcmKeyStoreRSACipherSpi extends UcmKeyStoreGenericCipher {
         return KeyProperties.DIGEST_NONE.equals(mode) || KeyProperties.BLOCK_MODE_ECB.equals(mode);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // com.samsung.ucm.keystore.UcmKeyStoreGenericCipher
     public int isPaddingSupported(String padding) {
         boolean z;

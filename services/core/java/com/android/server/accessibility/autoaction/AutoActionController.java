@@ -260,9 +260,6 @@ public final class AutoActionController extends BaseEventStreamTransformation {
         super.onKeyEvent(keyEvent, i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00de  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00eb  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00f8  */
     @Override // com.android.server.accessibility.EventStreamTransformation
     /*
         Code decompiled incorrectly, please refer to instructions dump.

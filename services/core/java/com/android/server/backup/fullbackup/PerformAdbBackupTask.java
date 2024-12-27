@@ -215,9 +215,6 @@ public final class PerformAdbBackupTask extends FullBackupTask implements Backup
     	at jadx.core.dex.attributes.nodes.NotificationAttrNode.addError(NotificationAttrNode.java:19)
     	at jadx.core.dex.visitors.typeinference.TypeInferenceVisitor.visit(TypeInferenceVisitor.java:77)
     */
-    /* JADX WARN: Unreachable blocks removed: 1, instructions: 4 */
-    /* JADX WARN: Unreachable blocks removed: 2, instructions: 5 */
-    /* JADX WARN: Unreachable blocks removed: 2, instructions: 6 */
     @Override // java.lang.Runnable
     public final void run() {
         /*

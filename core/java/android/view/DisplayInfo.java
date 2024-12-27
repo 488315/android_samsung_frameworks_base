@@ -25,13 +25,11 @@ import java.util.Objects;
 public final class DisplayInfo implements Parcelable {
     public static final Parcelable.Creator<DisplayInfo> CREATOR =
             new Parcelable.Creator<DisplayInfo>() { // from class: android.view.DisplayInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisplayInfo createFromParcel(Parcel source) {
                     return new DisplayInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisplayInfo[] newArray(int size) {
                     return new DisplayInfo[size];

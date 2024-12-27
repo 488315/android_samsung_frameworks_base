@@ -271,7 +271,6 @@ public abstract class EuiccService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class IEuiccServiceWrapper extends IEuiccService.Stub {
         private IEuiccServiceWrapper() {}
 
@@ -352,7 +351,6 @@ public abstract class EuiccService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$getAvailableMemoryInBytes$0(
                 int slotId, IGetAvailableMemoryInBytesCallback callback) {
             long availableMemoryInBytes = -1;

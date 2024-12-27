@@ -12,7 +12,6 @@ final class UserRepositoryImpl$refreshUsers$1$mainUser$1 extends SuspendLambda i
     int label;
     final /* synthetic */ UserRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserRepositoryImpl$refreshUsers$1$mainUser$1(UserRepositoryImpl userRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userRepositoryImpl;

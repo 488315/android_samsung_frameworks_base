@@ -418,7 +418,6 @@ public class VideoView extends SurfaceView
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void openVideo() {
         if (this.mUri == null || this.mSurfaceHolder == null) {
             return;
@@ -515,7 +514,6 @@ public class VideoView extends SurfaceView
         this.mOnInfoListener = l;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void release(boolean cleartargetstate) {
         if (this.mMediaPlayer != null) {
             this.mMediaPlayer.reset();

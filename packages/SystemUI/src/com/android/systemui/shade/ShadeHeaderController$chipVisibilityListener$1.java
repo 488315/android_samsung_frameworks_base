@@ -19,7 +19,6 @@ public final class ShadeHeaderController$chipVisibilityListener$1 {
         ((CombinedShadeHeadersConstraintManagerImpl) shadeHeaderController.combinedShadeHeadersConstraintManager).getClass();
         final float f = z ? 0.0f : 1.0f;
         ConstraintsChanges constraintsChanges = new ConstraintsChanges(new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerImpl$privacyChipVisibilityConstraints$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

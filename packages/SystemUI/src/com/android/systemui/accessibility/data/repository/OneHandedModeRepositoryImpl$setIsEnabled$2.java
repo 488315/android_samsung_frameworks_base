@@ -16,7 +16,6 @@ final class OneHandedModeRepositoryImpl$setIsEnabled$2 extends SuspendLambda imp
     int label;
     final /* synthetic */ OneHandedModeRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public OneHandedModeRepositoryImpl$setIsEnabled$2(OneHandedModeRepositoryImpl oneHandedModeRepositoryImpl, boolean z, UserHandle userHandle, Continuation continuation) {
         super(2, continuation);
         this.this$0 = oneHandedModeRepositoryImpl;

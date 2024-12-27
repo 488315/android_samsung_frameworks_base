@@ -17,7 +17,6 @@ public final class FingerprintRevokeChallengeClient extends RevokeChallengeClien
     public final long mChallenge;
     public final FingerprintRevokeChallengeClient$$ExternalSyntheticLambda0 mRevokeWatchdog;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintRevokeChallengeClient$$ExternalSyntheticLambda0] */
     public FingerprintRevokeChallengeClient(
             Context context,
             Supplier supplier,

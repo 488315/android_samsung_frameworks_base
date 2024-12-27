@@ -16,7 +16,6 @@ public class StringParceledListSlice extends BaseParceledListSlice<String> {
                     return new StringParceledListSlice(parcel, null);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.ClassLoaderCreator
                 public StringParceledListSlice createFromParcel(Parcel in, ClassLoader loader) {
                     return new StringParceledListSlice(in, loader);
@@ -60,13 +59,11 @@ public class StringParceledListSlice extends BaseParceledListSlice<String> {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // com.android.modules.utils.BaseParceledListSlice
     public void writeElement(String parcelable, Parcel reply, int callFlags) {
         reply.writeString(parcelable);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // com.android.modules.utils.BaseParceledListSlice
     public void writeParcelableCreator(String parcelable, Parcel dest) {}
 

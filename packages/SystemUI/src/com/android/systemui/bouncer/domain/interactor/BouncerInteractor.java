@@ -41,7 +41,6 @@ public final class BouncerInteractor {
     public final SessionTracker sessionTracker;
     public final UiEventLogger uiEventLogger;
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.bouncer.domain.interactor.BouncerInteractor$special$$inlined$map$2] */
     public BouncerInteractor(CoroutineScope coroutineScope, BouncerRepository bouncerRepository, AuthenticationInteractor authenticationInteractor, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor, FalsingInteractor falsingInteractor, PowerInteractor powerInteractor, UiEventLogger uiEventLogger, SessionTracker sessionTracker, SceneBackInteractor sceneBackInteractor) {
         this.repository = bouncerRepository;
         this.authenticationInteractor = authenticationInteractor;
@@ -86,8 +85,6 @@ public final class BouncerInteractor {
                     this.this$0 = bouncerInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -194,8 +191,6 @@ public final class BouncerInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -286,8 +281,6 @@ public final class BouncerInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -379,8 +372,6 @@ public final class BouncerInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

@@ -1538,8 +1538,6 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x004c A[Catch: all -> 0x002e, Exception -> 0x0030, TryCatch #0 {Exception -> 0x0030, blocks: (B:3:0x000b, B:4:0x0014, B:6:0x0021, B:9:0x0033, B:12:0x0040, B:14:0x004c, B:15:0x0057, B:19:0x005f, B:21:0x0064, B:24:0x006b, B:26:0x0071), top: B:2:0x000b, outer: #1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2157,7 +2155,6 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                     + " java.lang.String):com.samsung.android.knox.net.wifi.WifiAdminProfile");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x003c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2447,7 +2444,6 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
 
        if (0 == 0) goto L40;
     */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x006c  */
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -3547,26 +3543,6 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         }
     }
 
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Removed duplicated region for block: B:160:0x02c2  */
-    /* JADX WARN: Removed duplicated region for block: B:201:0x0391  */
-    /* JADX WARN: Removed duplicated region for block: B:203:0x0399  */
-    /* JADX WARN: Removed duplicated region for block: B:211:0x03d9  */
-    /* JADX WARN: Removed duplicated region for block: B:215:0x03eb  */
-    /* JADX WARN: Removed duplicated region for block: B:249:0x0464  */
-    /* JADX WARN: Removed duplicated region for block: B:295:0x050f  */
-    /* JADX WARN: Removed duplicated region for block: B:310:0x056e  */
-    /* JADX WARN: Removed duplicated region for block: B:311:0x0575  */
-    /* JADX WARN: Removed duplicated region for block: B:375:0x06fb  */
-    /* JADX WARN: Removed duplicated region for block: B:376:0x06fd  */
-    /* JADX WARN: Removed duplicated region for block: B:380:0x0716  */
-    /* JADX WARN: Removed duplicated region for block: B:382:0x071d  */
-    /* JADX WARN: Removed duplicated region for block: B:473:0x0a30  */
-    /* JADX WARN: Removed duplicated region for block: B:476:0x0a99  */
-    /* JADX WARN: Removed duplicated region for block: B:479:0x0b89  */
-    /* JADX WARN: Removed duplicated region for block: B:481:0x0b90  */
-    /* JADX WARN: Removed duplicated region for block: B:499:0x0aa1  */
-    /* JADX WARN: Removed duplicated region for block: B:592:0x0540  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3668,17 +3644,6 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
 
        if (r5 != null) goto L81;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:111:0x0222  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x02ef  */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.enterprise.proxy.LocalProxyManager] */
-    /* JADX WARN: Type inference failed for: r2v1, types: [android.util.ArrayMap] */
-    /* JADX WARN: Type inference failed for: r2v15, types: [java.util.Map] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [java.util.Map] */
-    /* JADX WARN: Type inference failed for: r3v3, types: [java.lang.String[]] */
-    /* JADX WARN: Type inference failed for: r5v11, types: [java.lang.String[]] */
-    /* JADX WARN: Type inference failed for: r5v6, types: [com.android.server.enterprise.storage.EdmStorageProvider, com.android.server.enterprise.storage.EdmStorageProviderBase] */
-    /* JADX WARN: Type inference failed for: r6v4, types: [com.android.server.enterprise.storage.EdmStorageProvider, com.android.server.enterprise.storage.EdmStorageProviderBase] */
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     /*
         Code decompiled incorrectly, please refer to instructions dump.

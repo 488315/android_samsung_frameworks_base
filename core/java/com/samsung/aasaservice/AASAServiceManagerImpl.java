@@ -44,7 +44,6 @@ public class AASAServiceManagerImpl implements AASAServiceManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$initialize$0() {
         initialize(this.context);
     }
@@ -80,7 +79,6 @@ public class AASAServiceManagerImpl implements AASAServiceManager {
                 4);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void bindService() {
         Slog.i(TAG, "bind to AASAService");
         synchronized (lock) {
@@ -131,7 +129,6 @@ public class AASAServiceManagerImpl implements AASAServiceManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createServiceConnection$1() {
         mainThreadHandler.post(new AASAServiceManagerImpl$$ExternalSyntheticLambda3(this));
     }
@@ -144,7 +141,6 @@ public class AASAServiceManagerImpl implements AASAServiceManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyReady() {
         Slog.i(TAG, "notify service ready");
         if (this.callback == null) {

@@ -16,7 +16,6 @@ public final class AlternateBouncerToAodTransitionViewModel$special$$inlined$fla
     int label;
     final /* synthetic */ AlternateBouncerToAodTransitionViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AlternateBouncerToAodTransitionViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, AlternateBouncerToAodTransitionViewModel alternateBouncerToAodTransitionViewModel) {
         super(3, continuation);
         this.this$0 = alternateBouncerToAodTransitionViewModel;

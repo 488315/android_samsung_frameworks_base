@@ -26,7 +26,6 @@ public class QSFooterView extends FrameLayout {
     public View mEditButton;
     public PageIndicator mPageIndicator;
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.qs.QSFooterView$1] */
     public QSFooterView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mDeveloperSettingsObserver = new ContentObserver(new Handler(((FrameLayout) this).mContext.getMainLooper())) { // from class: com.android.systemui.qs.QSFooterView.1
@@ -69,7 +68,6 @@ public class QSFooterView extends FrameLayout {
         setBuildText();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void setBuildText() {
         EnterpriseDeviceManager enterpriseDeviceManager;
         if (this.mBuildText == null) {

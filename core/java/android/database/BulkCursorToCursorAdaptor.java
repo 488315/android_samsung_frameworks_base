@@ -39,8 +39,6 @@ public final class BulkCursorToCursorAdaptor extends AbstractWindowedCursor {
         return this.mCount;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0038 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0039 A[RETURN] */
     @Override // android.database.AbstractCursor, android.database.CrossProcessCursor
     /*
         Code decompiled incorrectly, please refer to instructions dump.

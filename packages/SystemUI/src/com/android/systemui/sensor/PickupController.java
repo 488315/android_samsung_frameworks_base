@@ -41,8 +41,6 @@ public final class PickupController extends SensorController implements Dumpable
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.sensor.PickupController$baseSensorListener$1] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.systemui.sensor.PickupController$registerRunnable$1] */
     public PickupController(final KeyguardUpdateMonitor keyguardUpdateMonitor, StatusBarStateController statusBarStateController, SettingsHelper settingsHelper, PowerManager powerManager, Handler handler, SensorManager sensorManager) {
         super(sensorManager);
         this.settingsHelper = settingsHelper;

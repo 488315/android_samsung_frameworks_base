@@ -29,7 +29,6 @@ final class DeviceEntryIconViewBinder$bind$4 extends SuspendLambda implements Fu
         private /* synthetic */ Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(DeviceEntryBackgroundViewModel deviceEntryBackgroundViewModel, ImageView imageView, Continuation continuation) {
             super(2, continuation);
             this.$bgViewModel = deviceEntryBackgroundViewModel;
@@ -65,7 +64,6 @@ final class DeviceEntryIconViewBinder$bind$4 extends SuspendLambda implements Fu
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryIconViewBinder$bind$4(DeviceEntryBackgroundViewModel deviceEntryBackgroundViewModel, ImageView imageView, Continuation continuation) {
         super(3, continuation);
         this.$bgViewModel = deviceEntryBackgroundViewModel;

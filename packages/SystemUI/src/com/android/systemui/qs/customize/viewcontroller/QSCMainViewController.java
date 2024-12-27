@@ -83,7 +83,6 @@ public final class QSCMainViewController extends ViewControllerBase {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v16, types: [com.android.systemui.qs.customize.viewcontroller.QSCMainViewController$accessibilityDelegate$1] */
     public QSCMainViewController(QSCMainView qSCMainView, Context context, SecQSSettingEditResources secQSSettingEditResources, SecQSPanelResourcePicker secQSPanelResourcePicker, BarOrderInteractor barOrderInteractor, QSCPopupButtonController qSCPopupButtonController, SettingsHelper settingsHelper) {
         super(qSCMainView);
         this.editResources = secQSSettingEditResources;

@@ -320,18 +320,6 @@ public final class KeyguardStatusBarViewController extends ViewController implem
         KEYGUARD_HUN_PROPERTIES = animationProperties;
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Type inference failed for: r9v13, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$7] */
-    /* JADX WARN: Type inference failed for: r9v14, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$8] */
-    /* JADX WARN: Type inference failed for: r9v15, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$9] */
-    /* JADX WARN: Type inference failed for: r9v16, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$12] */
-    /* JADX WARN: Type inference failed for: r9v18, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$13] */
-    /* JADX WARN: Type inference failed for: r9v2, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$2] */
-    /* JADX WARN: Type inference failed for: r9v3, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$3] */
-    /* JADX WARN: Type inference failed for: r9v4, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda8] */
-    /* JADX WARN: Type inference failed for: r9v5, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda9] */
-    /* JADX WARN: Type inference failed for: r9v7, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$5] */
-    /* JADX WARN: Type inference failed for: r9v8, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda10] */
     public KeyguardStatusBarViewController(KeyguardStatusBarView keyguardStatusBarView, CarrierTextController carrierTextController, ConfigurationController configurationController, SystemStatusAnimationScheduler systemStatusAnimationScheduler, BatteryController batteryController, UserInfoController userInfoController, StatusBarIconController statusBarIconController, TintedIconManager.Factory factory, BatteryMeterViewController batteryMeterViewController, ShadeViewStateProvider shadeViewStateProvider, KeyguardStateController keyguardStateController, KeyguardBypassController keyguardBypassController, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStatusBarViewModel keyguardStatusBarViewModel, BiometricUnlockController biometricUnlockController, SysuiStatusBarStateController sysuiStatusBarStateController, StatusBarContentInsetsProvider statusBarContentInsetsProvider, UserManager userManager, StatusBarUserChipViewModel statusBarUserChipViewModel, SecureSettings secureSettings, CommandQueue commandQueue, Executor executor, Executor executor2, KeyguardLogger keyguardLogger, StatusOverlayHoverListenerFactory statusOverlayHoverListenerFactory, CommunalSceneInteractor communalSceneInteractor, IndicatorGardenPresenter indicatorGardenPresenter, IndicatorScaleGardener indicatorScaleGardener, StatusIconContainerController statusIconContainerController, OngoingCallController ongoingCallController, KeyguardStatusBarWallpaperHelper keyguardStatusBarWallpaperHelper, DumpManager dumpManager, DesktopManager desktopManager, IndicatorCutoutUtil indicatorCutoutUtil, TwoPhoneModeIconController twoPhoneModeIconController, KnoxStatusBarControlViewModel knoxStatusBarControlViewModel, NetspeedViewController netspeedViewController, SlimIndicatorKeyguardCarrierTextHelper slimIndicatorKeyguardCarrierTextHelper, NotificationIconAreaController notificationIconAreaController, PluginLockMediator pluginLockMediator, SlimIndicatorViewMediator slimIndicatorViewMediator, PluginLockStarManager pluginLockStarManager) {
         super(keyguardStatusBarView);
         int i = 2;
@@ -756,7 +744,6 @@ public final class KeyguardStatusBarViewController extends ViewController implem
         ((KeyguardStatusBarView) this.mView).onThemeChanged(this.mTintedIconManager);
     }
 
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarView$$ExternalSyntheticLambda0] */
     @Override // com.android.systemui.util.ViewController
     public final void onViewAttached() {
         OngoingCallChronometer ongoingCallChronometer;

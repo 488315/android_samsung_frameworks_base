@@ -7,13 +7,11 @@ public final class FrontendInterleaveMode implements Parcelable {
     public static final Parcelable.Creator<FrontendInterleaveMode> CREATOR =
             new Parcelable.Creator<FrontendInterleaveMode>() { // from class:
                 // android.hardware.tv.tuner.FrontendInterleaveMode.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendInterleaveMode createFromParcel(Parcel _aidl_source) {
                     return new FrontendInterleaveMode(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendInterleaveMode[] newArray(int _aidl_size) {
                     return new FrontendInterleaveMode[_aidl_size];

@@ -71,7 +71,6 @@ public final class SpatialAudioPopup {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.spatialaudio.ui.composable.SpatialAudioPopup$Title$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -109,7 +108,6 @@ public final class SpatialAudioPopup {
             RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
             if (endRestartGroup != null) {
                 endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.spatialaudio.ui.composable.SpatialAudioPopup$Content$2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(2);
                     }
@@ -131,7 +129,6 @@ public final class SpatialAudioPopup {
             RecomposeScopeImpl endRestartGroup2 = composerImpl.endRestartGroup();
             if (endRestartGroup2 != null) {
                 endRestartGroup2.block = new Function2() { // from class: com.android.systemui.volume.panel.component.spatialaudio.ui.composable.SpatialAudioPopup$Content$3
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(2);
                     }
@@ -148,7 +145,6 @@ public final class SpatialAudioPopup {
             return;
         }
         VolumePanelRadioButtonsKt.m2367VolumePanelRadioButtonBarcjTkxnM(null, 0.0f, 0.0f, 0.0f, null, null, null, new Function1() { // from class: com.android.systemui.volume.panel.component.spatialaudio.ui.composable.SpatialAudioPopup$Content$4
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -161,7 +157,6 @@ public final class SpatialAudioPopup {
                     boolean z = spatialAudioButtonViewModel.button.isActive;
                     final SpatialAudioPopup spatialAudioPopup = this;
                     Function0 function0 = new Function0() { // from class: com.android.systemui.volume.panel.component.spatialaudio.ui.composable.SpatialAudioPopup$Content$4.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(0);
                         }
@@ -193,7 +188,6 @@ public final class SpatialAudioPopup {
                         }
                     });
                     ComposableLambdaImpl composableLambdaImpl2 = new ComposableLambdaImpl(2005226806, true, new Function3() { // from class: com.android.systemui.volume.panel.component.spatialaudio.ui.composable.SpatialAudioPopup$Content$4.3
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(3);
                         }
@@ -234,7 +228,6 @@ public final class SpatialAudioPopup {
         RecomposeScopeImpl endRestartGroup3 = composerImpl.endRestartGroup();
         if (endRestartGroup3 != null) {
             endRestartGroup3.block = new Function2() { // from class: com.android.systemui.volume.panel.component.spatialaudio.ui.composable.SpatialAudioPopup$Content$5
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

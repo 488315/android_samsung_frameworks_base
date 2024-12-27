@@ -56,7 +56,6 @@ public abstract class ExternalStorageService extends Service {
         return this.mWrapper;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class ExternalStorageServiceWrapper extends IExternalStorageService.Stub {
         private ExternalStorageServiceWrapper() {}
 
@@ -82,7 +81,6 @@ public abstract class ExternalStorageService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$startSession$0(
                 String sessionId,
                 int flag,
@@ -113,7 +111,6 @@ public abstract class ExternalStorageService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyVolumeStateChanged$1(
                 StorageVolume vol, String sessionId, RemoteCallback callback) {
             try {
@@ -141,7 +138,6 @@ public abstract class ExternalStorageService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$freeCache$2(
                 String volumeUuid, long bytes, String sessionId, RemoteCallback callback) {
             try {
@@ -166,7 +162,6 @@ public abstract class ExternalStorageService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$endSession$3(String sessionId, RemoteCallback callback) {
             try {
                 ExternalStorageService.this.onEndSession(sessionId);
@@ -191,7 +186,6 @@ public abstract class ExternalStorageService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyAnrDelayStarted$4(
                 String packageName, int uid, int tid, int reason) {
             try {

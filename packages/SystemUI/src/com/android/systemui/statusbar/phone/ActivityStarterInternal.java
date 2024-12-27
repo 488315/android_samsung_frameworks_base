@@ -86,7 +86,6 @@ public interface ActivityStarterInternal {
                     final Intent intent3 = intent;
                     final UserHandle userHandle4 = userHandle3;
                     Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startActivityDismissingKeyguard$runnable$1.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }

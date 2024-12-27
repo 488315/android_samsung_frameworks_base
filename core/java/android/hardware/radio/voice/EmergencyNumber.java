@@ -12,7 +12,6 @@ public class EmergencyNumber implements Parcelable {
     public static final Parcelable.Creator<EmergencyNumber> CREATOR =
             new Parcelable.Creator<EmergencyNumber>() { // from class:
                 // android.hardware.radio.voice.EmergencyNumber.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EmergencyNumber createFromParcel(Parcel _aidl_source) {
                     EmergencyNumber _aidl_out = new EmergencyNumber();
@@ -20,7 +19,6 @@ public class EmergencyNumber implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EmergencyNumber[] newArray(int _aidl_size) {
                     return new EmergencyNumber[_aidl_size];

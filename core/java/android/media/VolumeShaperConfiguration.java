@@ -9,7 +9,6 @@ public class VolumeShaperConfiguration implements Parcelable {
     public static final Parcelable.Creator<VolumeShaperConfiguration> CREATOR =
             new Parcelable.Creator<VolumeShaperConfiguration>() { // from class:
                 // android.media.VolumeShaperConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VolumeShaperConfiguration createFromParcel(Parcel _aidl_source) {
                     VolumeShaperConfiguration _aidl_out = new VolumeShaperConfiguration();
@@ -17,7 +16,6 @@ public class VolumeShaperConfiguration implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VolumeShaperConfiguration[] newArray(int _aidl_size) {
                     return new VolumeShaperConfiguration[_aidl_size];

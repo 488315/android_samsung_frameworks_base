@@ -8,7 +8,6 @@ public class RecordClientInfo implements Parcelable {
     public static final Parcelable.Creator<RecordClientInfo> CREATOR =
             new Parcelable.Creator<
                     RecordClientInfo>() { // from class: android.media.RecordClientInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecordClientInfo createFromParcel(Parcel _aidl_source) {
                     RecordClientInfo _aidl_out = new RecordClientInfo();
@@ -16,7 +15,6 @@ public class RecordClientInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecordClientInfo[] newArray(int _aidl_size) {
                     return new RecordClientInfo[_aidl_size];

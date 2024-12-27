@@ -25,7 +25,6 @@ final class SparseArrayMapWrapper<T> implements Map<Integer, T>, KMappedMarker {
             this.value = t;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public static /* synthetic */ Entry copy$default(Entry entry, int i, Object obj, int i2, Object obj2) {
             if ((i2 & 1) != 0) {
                 i = entry.key;
@@ -60,7 +59,6 @@ final class SparseArrayMapWrapper<T> implements Map<Integer, T>, KMappedMarker {
             return this.key == entry.key && Intrinsics.areEqual(this.value, entry.value);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // java.util.Map.Entry
         public Integer getKey() {
             return Integer.valueOf(this.key);

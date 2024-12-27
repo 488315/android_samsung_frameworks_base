@@ -32,8 +32,6 @@ public final class ScpmControllerImpl extends BroadcastReceiver implements ScpmC
     public final Object mLock = new Object();
     public int mRetryNumber = 3;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.samsung.android.server.corescpm.ScpmControllerImpl$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.samsung.android.server.corescpm.ScpmControllerImpl$$ExternalSyntheticLambda0] */
     public ScpmControllerImpl(PackageFeatureManagerService.ScpmConsumerInfo scpmConsumerInfo) {
         final int i = 0;
         this.mOnLazyBootCompletedTimeout =

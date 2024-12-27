@@ -4263,7 +4263,6 @@ public final class TvInteractiveAppManagerService extends SystemService {
 
        if (r6 == null) goto L20;
     */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0039  */
     /* renamed from: -$$Nest$mreleaseAdSessionLocked, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -4328,7 +4327,6 @@ public final class TvInteractiveAppManagerService extends SystemService {
 
        if (r6 == null) goto L20;
     */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0039  */
     /* renamed from: -$$Nest$mreleaseSessionLocked, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.

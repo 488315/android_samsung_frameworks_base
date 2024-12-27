@@ -974,7 +974,6 @@ public final class PrintManagerService extends SystemService {
             throw new SecurityException("PrintService does not share UID with caller.");
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,

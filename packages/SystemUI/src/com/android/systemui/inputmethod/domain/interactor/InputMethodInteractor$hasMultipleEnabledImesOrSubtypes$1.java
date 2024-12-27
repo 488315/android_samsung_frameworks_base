@@ -9,7 +9,6 @@ final class InputMethodInteractor$hasMultipleEnabledImesOrSubtypes$1 extends Con
     /* synthetic */ Object result;
     final /* synthetic */ InputMethodInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InputMethodInteractor$hasMultipleEnabledImesOrSubtypes$1(InputMethodInteractor inputMethodInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = inputMethodInteractor;

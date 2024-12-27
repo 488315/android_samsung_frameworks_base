@@ -36,7 +36,6 @@ public final class BrightnessConfiguration implements Parcelable {
     public static final Parcelable.Creator<BrightnessConfiguration> CREATOR =
             new Parcelable.Creator<BrightnessConfiguration>() { // from class:
                 // android.hardware.display.BrightnessConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BrightnessConfiguration createFromParcel(Parcel in) {
                     float[] lux = in.createFloatArray();
@@ -66,7 +65,6 @@ public final class BrightnessConfiguration implements Parcelable {
                     return builder.build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BrightnessConfiguration[] newArray(int size) {
                     return new BrightnessConfiguration[size];

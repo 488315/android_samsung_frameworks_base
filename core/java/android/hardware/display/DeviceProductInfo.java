@@ -15,13 +15,11 @@ public final class DeviceProductInfo implements Parcelable {
     public static final Parcelable.Creator<DeviceProductInfo> CREATOR =
             new Parcelable.Creator<DeviceProductInfo>() { // from class:
                 // android.hardware.display.DeviceProductInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DeviceProductInfo createFromParcel(Parcel in) {
                     return new DeviceProductInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DeviceProductInfo[] newArray(int size) {
                     return new DeviceProductInfo[size];
@@ -180,13 +178,11 @@ public final class DeviceProductInfo implements Parcelable {
         public static final Parcelable.Creator<ManufactureDate> CREATOR =
                 new Parcelable.Creator<ManufactureDate>() { // from class:
                     // android.hardware.display.DeviceProductInfo.ManufactureDate.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ManufactureDate createFromParcel(Parcel in) {
                         return new ManufactureDate(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ManufactureDate[] newArray(int size) {
                         return new ManufactureDate[size];

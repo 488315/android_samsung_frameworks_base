@@ -166,12 +166,6 @@ public final class ActivityManagerPerformance {
     public boolean mIsScreenOn = true;
     public final AnonymousClass2 mIntentReceiver = new BroadcastReceiver() { // from class:
                 // com.android.server.wm.ActivityManagerPerformance.2
-                /* JADX WARN: Removed duplicated region for block: B:71:0x01e5 A[Catch: Exception -> 0x01af, TryCatch #1 {Exception -> 0x01af, blocks: (B:53:0x0164, B:55:0x017a, B:61:0x018e, B:64:0x0195, B:68:0x01dd, B:71:0x01e5, B:73:0x01eb, B:75:0x01f4, B:83:0x01b8, B:85:0x01bd), top: B:52:0x0164 }] */
-                /* JADX WARN: Removed duplicated region for block: B:75:0x01f4 A[Catch: Exception -> 0x01af, TRY_LEAVE, TryCatch #1 {Exception -> 0x01af, blocks: (B:53:0x0164, B:55:0x017a, B:61:0x018e, B:64:0x0195, B:68:0x01dd, B:71:0x01e5, B:73:0x01eb, B:75:0x01f4, B:83:0x01b8, B:85:0x01bd), top: B:52:0x0164 }] */
-                /* JADX WARN: Removed duplicated region for block: B:78:0x020f A[SYNTHETIC] */
-                /* JADX WARN: Removed duplicated region for block: B:80:0x020f A[ADDED_TO_REGION, SYNTHETIC] */
-                /* JADX WARN: Removed duplicated region for block: B:94:0x02b0  */
-                /* JADX WARN: Removed duplicated region for block: B:97:0x025f A[EXC_TOP_SPLITTER, SYNTHETIC] */
                 @Override // android.content.BroadcastReceiver
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -429,8 +423,6 @@ public final class ActivityManagerPerformance {
             this.mBuildVersion = null;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:69:0x017b A[Catch: JSONException -> 0x019c, TRY_LEAVE, TryCatch #5 {JSONException -> 0x019c, blocks: (B:67:0x0177, B:69:0x017b), top: B:66:0x0177 }] */
-        /* JADX WARN: Removed duplicated region for block: B:92:0x019f  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -465,25 +457,15 @@ public final class ActivityManagerPerformance {
     }
 
     public enum LaunchTimeRange {
-        /* JADX INFO: Fake field, exist only in values array */
         EF7("UNDER_500"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF17("UNDER_1000"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF27("UNDER_1500"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF37("UNDER_2000"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF47("UNDER_2500"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF57("UNDER_3000"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF67("UNDER_4000"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF77("UNDER_5000"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF88("UNDER_10000"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF98("OVER_THAN_10000");
 
         private final int threshold;
@@ -502,14 +484,10 @@ public final class ActivityManagerPerformance {
             super(looper, null, true);
         }
 
-        /* JADX WARN: Can't wrap try/catch for region: R(11:211|(1:213)(1:246)|214|(8:241|242|217|(2:219|(2:221|222))|226|227|228|(1:237)(2:232|(2:234|235)(1:236)))|216|217|(0)|226|227|228|(2:230|237)(1:238)) */
         /* JADX WARN: Code restructure failed: missing block: B:240:0x046d, code lost:
 
            r4 = null;
         */
-        /* JADX WARN: Removed duplicated region for block: B:18:0x0039  */
-        /* JADX WARN: Removed duplicated region for block: B:219:0x03ef  */
-        /* JADX WARN: Removed duplicated region for block: B:269:0x04e0  */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -541,9 +519,7 @@ public final class ActivityManagerPerformance {
     }
 
     public enum TransitionLaunchType {
-        /* JADX INFO: Fake field, exist only in values array */
         EF0("COLD", "cold"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF1("WARM", "warm"),
         HOT("HOT", "hot"),
         UNKNOWN("UNKNOWN", "unknown");
@@ -672,8 +648,6 @@ public final class ActivityManagerPerformance {
                 };
     }
 
-    /* JADX WARN: Type inference failed for: r5v1, types: [com.android.server.wm.ActivityManagerPerformance$1] */
-    /* JADX WARN: Type inference failed for: r6v1, types: [com.android.server.wm.ActivityManagerPerformance$2] */
     public ActivityManagerPerformance(
             Context context, ActivityTaskManagerService activityTaskManagerService) {
         long j;
@@ -1251,17 +1225,6 @@ public final class ActivityManagerPerformance {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0089 A[Catch: Exception -> 0x00ad, TryCatch #1 {Exception -> 0x00ad, blocks: (B:23:0x007d, B:25:0x0089, B:27:0x0099, B:29:0x00a5, B:30:0x0303, B:32:0x030b, B:37:0x0319, B:39:0x031d, B:41:0x0329, B:45:0x0334, B:46:0x0340, B:48:0x037c, B:49:0x0399, B:51:0x03a7, B:52:0x03c4, B:55:0x03dc, B:57:0x03e2, B:59:0x03e6, B:64:0x03b0, B:66:0x03bc, B:67:0x0385, B:69:0x0391, B:43:0x0339, B:34:0x0314, B:74:0x0317, B:75:0x00b0, B:77:0x016d, B:78:0x0233), top: B:22:0x007d }] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x030b A[Catch: Exception -> 0x00ad, TryCatch #1 {Exception -> 0x00ad, blocks: (B:23:0x007d, B:25:0x0089, B:27:0x0099, B:29:0x00a5, B:30:0x0303, B:32:0x030b, B:37:0x0319, B:39:0x031d, B:41:0x0329, B:45:0x0334, B:46:0x0340, B:48:0x037c, B:49:0x0399, B:51:0x03a7, B:52:0x03c4, B:55:0x03dc, B:57:0x03e2, B:59:0x03e6, B:64:0x03b0, B:66:0x03bc, B:67:0x0385, B:69:0x0391, B:43:0x0339, B:34:0x0314, B:74:0x0317, B:75:0x00b0, B:77:0x016d, B:78:0x0233), top: B:22:0x007d }] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x031d A[Catch: Exception -> 0x00ad, TryCatch #1 {Exception -> 0x00ad, blocks: (B:23:0x007d, B:25:0x0089, B:27:0x0099, B:29:0x00a5, B:30:0x0303, B:32:0x030b, B:37:0x0319, B:39:0x031d, B:41:0x0329, B:45:0x0334, B:46:0x0340, B:48:0x037c, B:49:0x0399, B:51:0x03a7, B:52:0x03c4, B:55:0x03dc, B:57:0x03e2, B:59:0x03e6, B:64:0x03b0, B:66:0x03bc, B:67:0x0385, B:69:0x0391, B:43:0x0339, B:34:0x0314, B:74:0x0317, B:75:0x00b0, B:77:0x016d, B:78:0x0233), top: B:22:0x007d }] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x03dc A[Catch: Exception -> 0x00ad, TryCatch #1 {Exception -> 0x00ad, blocks: (B:23:0x007d, B:25:0x0089, B:27:0x0099, B:29:0x00a5, B:30:0x0303, B:32:0x030b, B:37:0x0319, B:39:0x031d, B:41:0x0329, B:45:0x0334, B:46:0x0340, B:48:0x037c, B:49:0x0399, B:51:0x03a7, B:52:0x03c4, B:55:0x03dc, B:57:0x03e2, B:59:0x03e6, B:64:0x03b0, B:66:0x03bc, B:67:0x0385, B:69:0x0391, B:43:0x0339, B:34:0x0314, B:74:0x0317, B:75:0x00b0, B:77:0x016d, B:78:0x0233), top: B:22:0x007d }] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x03e6 A[Catch: Exception -> 0x00ad, TRY_LEAVE, TryCatch #1 {Exception -> 0x00ad, blocks: (B:23:0x007d, B:25:0x0089, B:27:0x0099, B:29:0x00a5, B:30:0x0303, B:32:0x030b, B:37:0x0319, B:39:0x031d, B:41:0x0329, B:45:0x0334, B:46:0x0340, B:48:0x037c, B:49:0x0399, B:51:0x03a7, B:52:0x03c4, B:55:0x03dc, B:57:0x03e2, B:59:0x03e6, B:64:0x03b0, B:66:0x03bc, B:67:0x0385, B:69:0x0391, B:43:0x0339, B:34:0x0314, B:74:0x0317, B:75:0x00b0, B:77:0x016d, B:78:0x0233), top: B:22:0x007d }] */
-    /* JADX WARN: Removed duplicated region for block: B:63:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x03d7  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0317 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0233 A[Catch: Exception -> 0x00ad, TryCatch #1 {Exception -> 0x00ad, blocks: (B:23:0x007d, B:25:0x0089, B:27:0x0099, B:29:0x00a5, B:30:0x0303, B:32:0x030b, B:37:0x0319, B:39:0x031d, B:41:0x0329, B:45:0x0334, B:46:0x0340, B:48:0x037c, B:49:0x0399, B:51:0x03a7, B:52:0x03c4, B:55:0x03dc, B:57:0x03e2, B:59:0x03e6, B:64:0x03b0, B:66:0x03bc, B:67:0x0385, B:69:0x0391, B:43:0x0339, B:34:0x0314, B:74:0x0317, B:75:0x00b0, B:77:0x016d, B:78:0x0233), top: B:22:0x007d }] */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x007b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1697,7 +1660,6 @@ public final class ActivityManagerPerformance {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x005c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1713,7 +1675,6 @@ public final class ActivityManagerPerformance {
                     + " com.android.server.wm.ActivityRecord):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0056  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1729,7 +1690,6 @@ public final class ActivityManagerPerformance {
                     + " com.android.server.wm.ActivityRecord):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0064  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

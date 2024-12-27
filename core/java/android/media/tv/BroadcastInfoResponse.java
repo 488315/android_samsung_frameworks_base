@@ -10,7 +10,6 @@ public abstract class BroadcastInfoResponse implements Parcelable {
     public static final Parcelable.Creator<BroadcastInfoResponse> CREATOR =
             new Parcelable.Creator<BroadcastInfoResponse>() { // from class:
                 // android.media.tv.BroadcastInfoResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BroadcastInfoResponse createFromParcel(Parcel source) {
                     int type = source.readInt();
@@ -41,7 +40,6 @@ public abstract class BroadcastInfoResponse implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BroadcastInfoResponse[] newArray(int size) {
                     return new BroadcastInfoResponse[size];

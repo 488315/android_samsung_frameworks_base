@@ -11,13 +11,11 @@ import java.util.Map;
 public class CertInfo implements Parcelable {
     public static final Parcelable.Creator<CertInfo> CREATOR =
             new Parcelable.Creator<CertInfo>() { // from class: android.spay.CertInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CertInfo createFromParcel(Parcel in) {
                     return new CertInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CertInfo[] newArray(int size) {
                     return new CertInfo[size];

@@ -50,7 +50,6 @@ public final class DeadZone {
     };
     public final NavigationBarController mNavBarController = (NavigationBarController) Dependency.sDependency.getDependencyInner(NavigationBarController.class);
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.navigationbar.buttons.DeadZone$2] */
     public DeadZone(NavigationBarView navigationBarView) {
         this.mUseDeadZone = navigationBarView.getResources().getBoolean(R.bool.config_useDeadZone);
         this.mNavigationBarView = navigationBarView;

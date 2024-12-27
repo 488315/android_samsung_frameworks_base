@@ -95,7 +95,6 @@ public class SemLocationManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void _handleMessage(Message msg) {
             switch (msg.what) {
                 case 2:

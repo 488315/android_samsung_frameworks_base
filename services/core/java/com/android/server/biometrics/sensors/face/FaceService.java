@@ -305,7 +305,6 @@ public class FaceService extends SystemService {
             return incrementAndGet;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:60:0x0176 A[Catch: all -> 0x0027, TryCatch #0 {all -> 0x0027, blocks: (B:7:0x001c, B:9:0x0022, B:12:0x008a, B:15:0x008f, B:17:0x0097, B:19:0x00a1, B:20:0x00b2, B:22:0x00b8, B:23:0x00c8, B:25:0x00ce, B:28:0x00da, B:31:0x00df, B:33:0x00e2, B:35:0x00ea, B:36:0x00f6, B:38:0x00fc, B:39:0x010c, B:41:0x0112, B:44:0x011b, B:46:0x011e, B:48:0x0128, B:49:0x0134, B:51:0x013a, B:52:0x014a, B:54:0x0150, B:57:0x0164, B:58:0x0170, B:60:0x0176, B:61:0x0186, B:63:0x018c, B:66:0x002a, B:68:0x002e, B:70:0x0038, B:73:0x0045, B:76:0x0069, B:78:0x0074), top: B:6:0x001c }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -556,7 +555,6 @@ public class FaceService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
             new FaceShellCommand(FaceService.this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
         }
@@ -597,7 +595,6 @@ public class FaceService extends SystemService {
             }
         }
 
-        /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.biometrics.sensors.face.FaceService$FaceServiceWrapper$$ExternalSyntheticLambda2] */
         public final void registerAuthenticators(final FaceSensorConfigurations faceSensorConfigurations) {
             registerAuthenticators_enforcePermission();
             if (!faceSensorConfigurations.hasSensorConfigurations()) {
@@ -1079,7 +1076,6 @@ public class FaceService extends SystemService {
         }
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

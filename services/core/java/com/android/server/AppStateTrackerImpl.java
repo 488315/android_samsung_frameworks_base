@@ -92,7 +92,6 @@ public final class AppStateTrackerImpl implements AppStateTracker {
             };
     public final AnonymousClass3 mReceiver =
             new BroadcastReceiver() { // from class: com.android.server.AppStateTrackerImpl.3
-                /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                 @Override // android.content.BroadcastReceiver
                 public final void onReceive(Context context, Intent intent) {
                     char c;
@@ -172,8 +171,6 @@ public final class AppStateTrackerImpl implements AppStateTracker {
     public final class AppOpsWatcher extends IAppOpsCallback.Stub {
         public AppOpsWatcher() {}
 
-        /* JADX WARN: Removed duplicated region for block: B:10:0x001e A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -591,8 +588,6 @@ public final class AppStateTrackerImpl implements AppStateTracker {
         return listenerArr;
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.server.AppStateTrackerImpl$3] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.server.AppStateTrackerImpl$2] */
     public AppStateTrackerImpl(Context context, Looper looper) {
         int[] iArr = new int[0];
         this.mPowerExemptAllAppIds = iArr;

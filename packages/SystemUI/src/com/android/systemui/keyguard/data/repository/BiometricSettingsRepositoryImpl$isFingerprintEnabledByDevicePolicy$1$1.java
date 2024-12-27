@@ -15,7 +15,6 @@ final class BiometricSettingsRepositoryImpl$isFingerprintEnabledByDevicePolicy$1
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BiometricSettingsRepositoryImpl$isFingerprintEnabledByDevicePolicy$1$1(DevicePolicyManager devicePolicyManager, int i, Continuation continuation) {
         super(3, continuation);
         this.$devicePolicyManager = devicePolicyManager;

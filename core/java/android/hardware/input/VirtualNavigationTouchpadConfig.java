@@ -11,13 +11,11 @@ public final class VirtualNavigationTouchpadConfig extends VirtualInputDeviceCon
     public static final Parcelable.Creator<VirtualNavigationTouchpadConfig> CREATOR =
             new Parcelable.Creator<VirtualNavigationTouchpadConfig>() { // from class:
                 // android.hardware.input.VirtualNavigationTouchpadConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualNavigationTouchpadConfig createFromParcel(Parcel in) {
                     return new VirtualNavigationTouchpadConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualNavigationTouchpadConfig[] newArray(int size) {
                     return new VirtualNavigationTouchpadConfig[size];

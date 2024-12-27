@@ -4,13 +4,11 @@ package android.os;
 public class CpuStatsInfo implements Parcelable {
     public static final Parcelable.Creator<CpuStatsInfo> CREATOR =
             new Parcelable.Creator<CpuStatsInfo>() { // from class: android.os.CpuStatsInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CpuStatsInfo createFromParcel(Parcel in) {
                     return new CpuStatsInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CpuStatsInfo[] newArray(int size) {
                     return new CpuStatsInfo[size];

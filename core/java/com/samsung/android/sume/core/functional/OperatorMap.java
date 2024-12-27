@@ -326,7 +326,6 @@ public class OperatorMap implements Operator {
         return obuf;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ void lambda$run$0(
             MutableMediaFormat ifmt,
             MutableMediaBuffer obuf,
@@ -360,7 +359,6 @@ public class OperatorMap implements Operator {
                         });
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ OpPriorityComputable lambda$config$1(Operator operator) {
         return (OpPriorityComputable) operator;
     }

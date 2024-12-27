@@ -167,8 +167,6 @@ public final class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardV
         return !safeUIStatusBarKeyguardViewManager.needsFullscreenBouncer() && safeUIStatusBarKeyguardViewManager.mIsBackAnimationEnabled;
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.systemui.statusbar.phone.SafeUIStatusBarKeyguardViewManager$1] */
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.statusbar.phone.SafeUIStatusBarKeyguardViewManager$2] */
     public SafeUIStatusBarKeyguardViewManager(Context context, ViewMediatorCallback viewMediatorCallback, LockPatternUtils lockPatternUtils, SysuiStatusBarStateController sysuiStatusBarStateController, ConfigurationController configurationController, KeyguardUpdateMonitor keyguardUpdateMonitor, DreamOverlayStateController dreamOverlayStateController, NavigationModeController navigationModeController, DockManager dockManager, NotificationShadeWindowController notificationShadeWindowController, KeyguardStateController keyguardStateController, KeyguardMessageAreaController.Factory factory, Optional<SysUIUnfoldComponent> optional, Lazy lazy, LatencyTracker latencyTracker, KeyguardSecurityModel keyguardSecurityModel, PrimaryBouncerCallbackInteractor primaryBouncerCallbackInteractor, PrimaryBouncerInteractor primaryBouncerInteractor, BouncerView bouncerView, AlternateBouncerInteractor alternateBouncerInteractor, UdfpsOverlayInteractor udfpsOverlayInteractor, ActivityStarter activityStarter, KeyguardTransitionInteractor keyguardTransitionInteractor, CoroutineDispatcher coroutineDispatcher, Lazy lazy2, Lazy lazy3, SelectedUserInteractor selectedUserInteractor, JavaAdapter javaAdapter, Lazy lazy4, StatusBarKeyguardViewManagerInteractor statusBarKeyguardViewManagerInteractor, Lazy lazy5) {
         super(context, viewMediatorCallback, lockPatternUtils, sysuiStatusBarStateController, configurationController, keyguardUpdateMonitor, dreamOverlayStateController, navigationModeController, dockManager, notificationShadeWindowController, keyguardStateController, factory, optional, lazy, latencyTracker, keyguardSecurityModel, primaryBouncerCallbackInteractor, primaryBouncerInteractor, bouncerView, alternateBouncerInteractor, udfpsOverlayInteractor, activityStarter, keyguardTransitionInteractor, coroutineDispatcher, lazy2, lazy3, selectedUserInteractor, javaAdapter, lazy4, statusBarKeyguardViewManagerInteractor);
         this.mListenForCanShowAlternateBouncer = null;
@@ -983,7 +981,6 @@ public final class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardV
         keyguardBouncerRepositoryImpl._resourceUpdateRequests.updateState(null, Boolean.TRUE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager
     public final void updateStates() {
         KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) this.mKeyguardStateController;

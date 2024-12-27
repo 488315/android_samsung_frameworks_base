@@ -54,7 +54,6 @@ public final class BouncerMessageViewModel {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$special$$inlined$map$1] */
     public BouncerMessageViewModel(Context context, CoroutineScope coroutineScope, BouncerInteractor bouncerInteractor, SimBouncerInteractor simBouncerInteractor, AuthenticationInteractor authenticationInteractor, Flow flow, SystemClock systemClock, BiometricMessageInteractor biometricMessageInteractor, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor, DeviceEntryInteractor deviceEntryInteractor, DeviceEntryFingerprintAuthInteractor deviceEntryFingerprintAuthInteractor, ComposeBouncerFlags composeBouncerFlags) {
         this.clock = systemClock;
         final StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(null);
@@ -86,8 +85,6 @@ public final class BouncerMessageViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

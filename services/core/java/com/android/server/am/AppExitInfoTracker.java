@@ -1453,7 +1453,6 @@ public final class AppExitInfoTracker {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0053 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1764,7 +1763,6 @@ public final class AppExitInfoTracker {
 
        if (r6.intValue() == 3) goto L26;
     */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0060  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

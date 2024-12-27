@@ -16,21 +16,16 @@ jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r15v0 com
 	at jadx.core.dex.visitors.EnumVisitor.convertToEnum(EnumVisitor.java:180)
 	at jadx.core.dex.visitors.EnumVisitor.visit(EnumVisitor.java:100)
  */
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 public final class ApiName {
     UNKNOWN("UNKNOWN"),
     GET_CREDENTIAL("GET_CREDENTIAL"),
     GET_CREDENTIAL_VIA_REGISTRY("GET_CREDENTIAL_VIA_REGISTRY"),
-    /* JADX INFO: Fake field, exist only in values array */
     EF15("CREATE_CREDENTIAL"),
-    /* JADX INFO: Fake field, exist only in values array */
     EF8("CLEAR_CREDENTIAL"),
     IS_ENABLED_CREDENTIAL_PROVIDER_SERVICE("IS_ENABLED_CREDENTIAL_PROVIDER_SERVICE"),
     SET_ENABLED_PROVIDERS("SET_ENABLED_PROVIDERS"),
     GET_CREDENTIAL_PROVIDER_SERVICES("GET_CREDENTIAL_PROVIDER_SERVICES"),
-    /* JADX INFO: Fake field, exist only in values array */
     EF84("REGISTER_CREDENTIAL_DESCRIPTION"),
-    /* JADX INFO: Fake field, exist only in values array */
     EF91("UNREGISTER_CREDENTIAL_DESCRIPTION");
 
     public static final Map sRequestInfoToMetric;

@@ -8,7 +8,6 @@ public class VideoInfoParcel implements Parcelable {
     public static final Parcelable.Creator<VideoInfoParcel> CREATOR =
             new Parcelable.Creator<
                     VideoInfoParcel>() { // from class: com.samsung.android.media.VideoInfoParcel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VideoInfoParcel createFromParcel(Parcel _aidl_source) {
                     VideoInfoParcel _aidl_out = new VideoInfoParcel();
@@ -16,7 +15,6 @@ public class VideoInfoParcel implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VideoInfoParcel[] newArray(int _aidl_size) {
                     return new VideoInfoParcel[_aidl_size];

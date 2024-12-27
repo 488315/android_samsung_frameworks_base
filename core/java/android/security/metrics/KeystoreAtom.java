@@ -8,7 +8,6 @@ public class KeystoreAtom implements Parcelable {
     public static final Parcelable.Creator<KeystoreAtom> CREATOR =
             new Parcelable.Creator<
                     KeystoreAtom>() { // from class: android.security.metrics.KeystoreAtom.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeystoreAtom createFromParcel(Parcel _aidl_source) {
                     KeystoreAtom _aidl_out = new KeystoreAtom();
@@ -16,7 +15,6 @@ public class KeystoreAtom implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeystoreAtom[] newArray(int _aidl_size) {
                     return new KeystoreAtom[_aidl_size];

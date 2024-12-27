@@ -54,7 +54,6 @@ public final class NotificationsQSContainerController extends ViewController imp
     public final SplitShadeStateController splitShadeStateController;
     public final NotificationsQSContainerController$taskbarVisibilityListener$1 taskbarVisibilityListener;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.shade.NotificationsQSContainerController$taskbarVisibilityListener$1] */
     public NotificationsQSContainerController(NotificationsQuickSettingsContainer notificationsQuickSettingsContainer, NavigationModeController navigationModeController, OverviewProxyService overviewProxyService, ShadeHeaderController shadeHeaderController, ShadeInteractor shadeInteractor, FragmentService fragmentService, DelayableExecutor delayableExecutor, NotificationStackScrollLayoutController notificationStackScrollLayoutController, SplitShadeStateController splitShadeStateController, Lazy lazy, Lazy lazy2) {
         super(notificationsQuickSettingsContainer);
         this.navigationModeController = navigationModeController;

@@ -28,7 +28,6 @@ public class SemSmartClipDataRepository implements Parcelable {
             new Parcelable.Creator<
                     SemSmartClipDataRepository>() { // from class:
                                                     // com.samsung.android.content.smartclip.SemSmartClipDataRepository.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSmartClipDataRepository createFromParcel(Parcel in) {
                     Log.d(
@@ -39,7 +38,6 @@ public class SemSmartClipDataRepository implements Parcelable {
                     return data;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSmartClipDataRepository[] newArray(int size) {
                     return new SemSmartClipDataRepository[size];
@@ -73,7 +71,6 @@ public class SemSmartClipDataRepository implements Parcelable {
     protected int mTargetWindowLayer;
     private Rect mWinFrameRect;
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     public SemSmartClipDataRepository() {
         this((SemSmartClipDataCropper) null);
     }

@@ -15,13 +15,11 @@ public final class FingerprintAuthenticateOptions implements AuthenticateOptions
     public static final Parcelable.Creator<FingerprintAuthenticateOptions> CREATOR =
             new Parcelable.Creator<FingerprintAuthenticateOptions>() { // from class:
                 // android.hardware.fingerprint.FingerprintAuthenticateOptions.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FingerprintAuthenticateOptions[] newArray(int size) {
                     return new FingerprintAuthenticateOptions[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FingerprintAuthenticateOptions createFromParcel(Parcel in) {
                     return new FingerprintAuthenticateOptions(in);
@@ -36,37 +34,30 @@ public final class FingerprintAuthenticateOptions implements AuthenticateOptions
     private final int mUserId;
     private AuthenticateReason.Vendor mVendorReason;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultUserId() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultSensorId() {
         return -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean defaultIgnoreEnrollmentState() {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultDisplayState() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String defaultOpPackageName() {
         return "";
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String defaultAttributionTag() {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static AuthenticateReason.Vendor defaultVendorReason() {
         return null;
     }

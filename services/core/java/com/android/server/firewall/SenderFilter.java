@@ -47,10 +47,6 @@ public abstract class SenderFilter {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.firewall.SenderFilter$2] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.firewall.SenderFilter$2] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.firewall.SenderFilter$2] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.firewall.SenderFilter$2] */
     static {
         final int i = 0;
         SIGNATURE =

@@ -321,7 +321,6 @@ public class DateTimeView extends TextView {
         return android.text.format.DateFormat.getTimeFormat(getContext());
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public void clearFormatAndUpdate() {
         this.mLastFormat = null;
         update();
@@ -396,7 +395,6 @@ public class DateTimeView extends TextView {
         ri.setHandler(handler);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ReceiverInfo {
         private final ArrayList<DateTimeView> mAttachedViews;
         private Handler mHandler;

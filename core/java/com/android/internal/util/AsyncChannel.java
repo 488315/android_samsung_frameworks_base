@@ -368,7 +368,6 @@ public class AsyncChannel {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static Message sendMessageSynchronously(Messenger dstMessenger, Message msg) {
             SyncMessenger sm = obtain();
             Message resultMsg = null;
@@ -396,7 +395,6 @@ public class AsyncChannel {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void replyHalfConnected(int status) {
         Message msg = this.mSrcHandler.obtainMessage(69632);
         msg.arg1 = status;
@@ -422,7 +420,6 @@ public class AsyncChannel {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void replyDisconnected(int status) {
         if (this.mSrcHandler == null) {
             return;

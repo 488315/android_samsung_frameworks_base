@@ -172,7 +172,6 @@ public class AndroidPaintContext extends PaintContext {
         this.mCanvas.drawPath(getPath(path1Id, path2Id, tween, start, end), this.mPaint);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static PorterDuff.Mode origamiToPorterDuffMode(int mode) {
         switch (mode) {
             case 0:
@@ -526,12 +525,10 @@ public class AndroidPaintContext extends PaintContext {
         return path;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String getText(int id) {
         return (String) this.mContext.mRemoteComposeState.getFromId(id);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ShaderData getShaderData(int id) {
         return (ShaderData) this.mContext.mRemoteComposeState.getFromId(id);
     }

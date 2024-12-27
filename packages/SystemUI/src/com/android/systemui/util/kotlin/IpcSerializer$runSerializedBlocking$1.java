@@ -14,7 +14,6 @@ final class IpcSerializer$runSerializedBlocking$1 extends SuspendLambda implemen
     int label;
     final /* synthetic */ IpcSerializer this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public IpcSerializer$runSerializedBlocking$1(IpcSerializer ipcSerializer, Function1 function1, Continuation continuation) {
         super(2, continuation);
         this.this$0 = ipcSerializer;

@@ -15,7 +15,6 @@ public final class FromLockscreenTransitionInteractor$dismissKeyguard$$inlined$l
     int label;
     final /* synthetic */ FromLockscreenTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromLockscreenTransitionInteractor$dismissKeyguard$$inlined$launch$default$1(String str, Continuation continuation, FromLockscreenTransitionInteractor fromLockscreenTransitionInteractor) {
         super(2, continuation);
         this.$spanName = str;
@@ -34,8 +33,6 @@ public final class FromLockscreenTransitionInteractor$dismissKeyguard$$inlined$l
         return ((FromLockscreenTransitionInteractor$dismissKeyguard$$inlined$launch$default$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x008b  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0090  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

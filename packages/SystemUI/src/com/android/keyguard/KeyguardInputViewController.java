@@ -168,8 +168,6 @@ public abstract class KeyguardInputViewController extends ViewController impleme
         }
     }
 
-    /* JADX WARN: Type inference failed for: r6v1, types: [com.android.keyguard.KeyguardInputViewController$1] */
-    /* JADX WARN: Type inference failed for: r6v2, types: [com.android.keyguard.KeyguardInputViewController$$ExternalSyntheticLambda1] */
     public KeyguardInputViewController(KeyguardInputView keyguardInputView, KeyguardSecurityModel.SecurityMode securityMode, KeyguardSecurityCallback keyguardSecurityCallback, EmergencyButtonController emergencyButtonController, KeyguardMessageAreaController.Factory factory, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor) {
         super(keyguardInputView);
         this.mNullCallback = new KeyguardSecurityCallback(this) { // from class: com.android.keyguard.KeyguardInputViewController.1

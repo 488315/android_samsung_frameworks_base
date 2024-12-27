@@ -10,7 +10,6 @@ public final class MessagePdu implements Parcelable {
     public static final Parcelable.Creator<MessagePdu> CREATOR =
             new Parcelable.Creator<
                     MessagePdu>() { // from class: android.service.carrier.MessagePdu.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MessagePdu createFromParcel(Parcel source) {
                     List<byte[]> pduList;
@@ -26,7 +25,6 @@ public final class MessagePdu implements Parcelable {
                     return new MessagePdu(pduList);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MessagePdu[] newArray(int size) {
                     return new MessagePdu[size];

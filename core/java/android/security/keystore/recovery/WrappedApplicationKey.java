@@ -12,13 +12,11 @@ public final class WrappedApplicationKey implements Parcelable {
             new Parcelable.Creator<
                     WrappedApplicationKey>() { // from class:
                                                // android.security.keystore.recovery.WrappedApplicationKey.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WrappedApplicationKey createFromParcel(Parcel in) {
                     return new WrappedApplicationKey(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WrappedApplicationKey[] newArray(int length) {
                     return new WrappedApplicationKey[length];

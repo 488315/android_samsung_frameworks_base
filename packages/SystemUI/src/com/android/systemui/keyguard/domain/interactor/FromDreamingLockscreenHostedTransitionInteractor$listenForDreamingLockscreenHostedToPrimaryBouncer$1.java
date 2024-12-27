@@ -15,7 +15,6 @@ final class FromDreamingLockscreenHostedTransitionInteractor$listenForDreamingLo
     int label;
     final /* synthetic */ FromDreamingLockscreenHostedTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromDreamingLockscreenHostedTransitionInteractor$listenForDreamingLockscreenHostedToPrimaryBouncer$1(FromDreamingLockscreenHostedTransitionInteractor fromDreamingLockscreenHostedTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromDreamingLockscreenHostedTransitionInteractor;

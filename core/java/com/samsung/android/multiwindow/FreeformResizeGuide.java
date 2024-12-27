@@ -524,7 +524,6 @@ public class FreeformResizeGuide {
             reset();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void reset() {
             this.mAnimationDuration = 0L;
             this.mInterpolator = null;

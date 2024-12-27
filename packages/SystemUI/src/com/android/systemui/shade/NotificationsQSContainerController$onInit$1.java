@@ -28,7 +28,6 @@ final class NotificationsQSContainerController$onInit$1 extends SuspendLambda im
         int label;
         final /* synthetic */ NotificationsQSContainerController this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(NotificationsQSContainerController notificationsQSContainerController, Continuation continuation) {
             super(2, continuation);
             this.this$0 = notificationsQSContainerController;
@@ -76,7 +75,6 @@ final class NotificationsQSContainerController$onInit$1 extends SuspendLambda im
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationsQSContainerController$onInit$1(NotificationsQSContainerController notificationsQSContainerController, Continuation continuation) {
         super(3, continuation);
         this.this$0 = notificationsQSContainerController;

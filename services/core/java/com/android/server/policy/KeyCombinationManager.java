@@ -116,7 +116,6 @@ public final class KeyCombinationManager {
         throw new IllegalArgumentException("Rule : " + twoKeysCombinationRule + " already exists.");
     }
 
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.server.policy.KeyCombinationManager$$ExternalSyntheticLambda2] */
     public final boolean interceptKeyLocked(final KeyEvent keyEvent, final boolean z) {
         boolean z2 = keyEvent.getAction() == 0;
         final int keyCode = keyEvent.getKeyCode();

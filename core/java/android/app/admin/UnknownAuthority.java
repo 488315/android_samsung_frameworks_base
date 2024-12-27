@@ -10,13 +10,11 @@ public final class UnknownAuthority extends Authority {
     public static final Parcelable.Creator<UnknownAuthority> CREATOR =
             new Parcelable.Creator<
                     UnknownAuthority>() { // from class: android.app.admin.UnknownAuthority.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UnknownAuthority createFromParcel(Parcel source) {
                     return UnknownAuthority.UNKNOWN_AUTHORITY;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UnknownAuthority[] newArray(int size) {
                     return new UnknownAuthority[size];

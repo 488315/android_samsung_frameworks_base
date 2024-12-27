@@ -47,7 +47,6 @@ public final class VolumeDialogComponent implements VolumeComponent, TunerServic
         }
     };
 
-    /* JADX WARN: Type inference failed for: r9v2, types: [com.android.systemui.volume.VolumeDialogComponent$1] */
     public VolumeDialogComponent(Context context, KeyguardViewMediator keyguardViewMediator, ActivityStarter activityStarter, VolumeDialogControllerImpl volumeDialogControllerImpl, DemoModeController demoModeController, PluginDependencyProvider pluginDependencyProvider, ExtensionController extensionController, TunerService tunerService, final VolumeDialog volumeDialog, SamsungVolumeDialogImpl samsungVolumeDialogImpl) {
         this.mContext = context;
         this.mKeyguardViewMediator = keyguardViewMediator;

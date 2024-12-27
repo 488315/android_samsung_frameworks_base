@@ -628,7 +628,6 @@ public interface IOverlayManager extends IInterface {
             reply.writeTypedList(v, 1);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements IOverlayManager {
             private IBinder mRemote;
 

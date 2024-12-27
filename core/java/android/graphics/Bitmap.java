@@ -50,7 +50,6 @@ public final class Bitmap implements Parcelable {
     private static DumpData dumpData = null;
     public static final Parcelable.Creator<Bitmap> CREATOR =
             new Parcelable.Creator<Bitmap>() { // from class: android.graphics.Bitmap.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Bitmap createFromParcel(Parcel p) {
                     Bitmap bm = Bitmap.nativeCreateFromParcel(p);
@@ -63,7 +62,6 @@ public final class Bitmap implements Parcelable {
                     return bm;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Bitmap[] newArray(int size) {
                     return new Bitmap[size];
@@ -92,7 +90,6 @@ public final class Bitmap implements Parcelable {
     private static native Bitmap nativeCreate(
             int[] iArr, int i, int i2, int i3, int i4, int i5, boolean z, long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native Bitmap nativeCreateFromParcel(Parcel parcel);
 
     private static native void nativeErase(long j, int i);
@@ -522,10 +519,6 @@ public final class Bitmap implements Parcelable {
         return createBitmap(source, x, y, width, height, (Matrix) null, false);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0156  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0183  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x018a A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x017b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

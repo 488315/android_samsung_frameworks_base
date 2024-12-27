@@ -25,13 +25,11 @@ public final class CellSignalStrengthGsm extends CellSignalStrength implements P
             new Parcelable.Creator<
                     CellSignalStrengthGsm>() { // from class:
                                                // android.telephony.CellSignalStrengthGsm.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellSignalStrengthGsm createFromParcel(Parcel in) {
                     return new CellSignalStrengthGsm(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellSignalStrengthGsm[] newArray(int size) {
                     return new CellSignalStrengthGsm[size];

@@ -114,7 +114,6 @@ public class SemListSortAnimator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startFadeInTranslateAnim() {
         int childCount = this.mListView.getChildCount();
         int childHeight = 0;

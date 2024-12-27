@@ -55,7 +55,6 @@ public final class ExynosDisplayColor {
     public String[] whitepoint_array;
 
     enum eColortempMethod {
-        /* JADX INFO: Fake field, exist only in values array */
         Bradford(
                 new float[][] {
                     new float[] {0.8951f, 0.2664f, -0.1614f},
@@ -67,7 +66,6 @@ public final class ExynosDisplayColor {
                     new float[] {0.4323053f, 0.5183603f, 0.0492912f},
                     new float[] {-0.0085287f, 0.0400428f, 0.9684867f}
                 }),
-        /* JADX INFO: Fake field, exist only in values array */
         VonKries(
                 new float[][] {
                     new float[] {0.40024f, 0.707608f, -0.080811f},
@@ -87,7 +85,6 @@ public final class ExynosDisplayColor {
                         1.0890636f
                     }
                 }),
-        /* JADX INFO: Fake field, exist only in values array */
         XYZScaling(
                 new float[][] {
                     new float[] {
@@ -142,7 +139,6 @@ public final class ExynosDisplayColor {
     }
 
     enum eRGBXYZTransform {
-        /* JADX INFO: Fake field, exist only in values array */
         sRGB(
                 new float[][] {
                     new float[] {3.24097f, -1.53738f, -0.49861f},

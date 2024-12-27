@@ -9,13 +9,11 @@ public class SemContextActivityCalibration extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextActivityCalibration>() { // from class:
                                                        // com.samsung.android.hardware.context.SemContextActivityCalibration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextActivityCalibration createFromParcel(Parcel in) {
                     return new SemContextActivityCalibration(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextActivityCalibration[] newArray(int size) {
                     return new SemContextActivityCalibration[size];

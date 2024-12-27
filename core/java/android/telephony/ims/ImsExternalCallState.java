@@ -18,13 +18,11 @@ public final class ImsExternalCallState implements Parcelable {
             new Parcelable.Creator<
                     ImsExternalCallState>() { // from class:
                                               // android.telephony.ims.ImsExternalCallState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsExternalCallState createFromParcel(Parcel in) {
                     return new ImsExternalCallState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsExternalCallState[] newArray(int size) {
                     return new ImsExternalCallState[size];

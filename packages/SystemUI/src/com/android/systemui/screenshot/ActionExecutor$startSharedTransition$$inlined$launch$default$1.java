@@ -22,7 +22,6 @@ public final class ActionExecutor$startSharedTransition$$inlined$launch$default$
     int label;
     final /* synthetic */ ActionExecutor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ActionExecutor$startSharedTransition$$inlined$launch$default$1(String str, Continuation continuation, ActionExecutor actionExecutor, Intent intent, UserHandle userHandle, boolean z, Pair pair) {
         super(2, continuation);
         this.$spanName = str;
@@ -45,8 +44,6 @@ public final class ActionExecutor$startSharedTransition$$inlined$launch$default$
         return ((ActionExecutor$startSharedTransition$$inlined$launch$default$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x009c  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -52,11 +52,6 @@ public final class TimeZoneDetectorShellCommand extends ShellCommand {
                         this.f$0 = this;
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Type inference failed for: r5v10, types: [java.util.List] */
-                    /* JADX WARN: Type inference failed for: r5v12 */
-                    /* JADX WARN: Type inference failed for: r5v8, types: [java.util.ArrayList] */
-                    /* JADX WARN: Type inference failed for: r5v9, types: [java.util.List] */
                     @Override // java.util.function.Supplier
                     public final Object get() {
                         ?? arrayList;
@@ -192,11 +187,6 @@ public final class TimeZoneDetectorShellCommand extends ShellCommand {
                         this.f$0 = this;
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Type inference failed for: r5v10, types: [java.util.List] */
-                    /* JADX WARN: Type inference failed for: r5v12 */
-                    /* JADX WARN: Type inference failed for: r5v8, types: [java.util.ArrayList] */
-                    /* JADX WARN: Type inference failed for: r5v9, types: [java.util.List] */
                     @Override // java.util.function.Supplier
                     public final Object get() {
                         ?? arrayList;
@@ -296,11 +286,6 @@ public final class TimeZoneDetectorShellCommand extends ShellCommand {
                         this.f$0 = this;
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Type inference failed for: r5v10, types: [java.util.List] */
-                    /* JADX WARN: Type inference failed for: r5v12 */
-                    /* JADX WARN: Type inference failed for: r5v8, types: [java.util.ArrayList] */
-                    /* JADX WARN: Type inference failed for: r5v9, types: [java.util.List] */
                     @Override // java.util.function.Supplier
                     public final Object get() {
                         ?? arrayList;

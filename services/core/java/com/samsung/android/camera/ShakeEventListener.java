@@ -25,7 +25,6 @@ public final class ShakeEventListener extends BroadcastReceiver implements Senso
     public final AnonymousClass1 mShakeOffRunnable;
     public final PowerManager.WakeLock mWakeLock;
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.samsung.android.camera.ShakeEventListener$1] */
     public ShakeEventListener(
             CameraServiceWorker cameraServiceWorker, Context context, Handler handler) {
         new ArrayList();
@@ -68,8 +67,6 @@ public final class ShakeEventListener extends BroadcastReceiver implements Senso
     @Override // android.hardware.SensorEventListener
     public final void onAccuracyChanged(Sensor sensor, int i) {}
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0035 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0036 A[Catch: all -> 0x0026, TryCatch #0 {all -> 0x0026, blocks: (B:4:0x0003, B:9:0x000b, B:19:0x0036, B:26:0x0056, B:28:0x005a, B:29:0x0060, B:31:0x0064, B:32:0x001c, B:35:0x0028), top: B:3:0x0003 }] */
     @Override // android.content.BroadcastReceiver
     /*
         Code decompiled incorrectly, please refer to instructions dump.

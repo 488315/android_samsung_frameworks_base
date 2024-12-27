@@ -13,7 +13,6 @@ public final class QuickAccessWalletKeyguardQuickAffordanceConfig$special$$inlin
     int label;
     final /* synthetic */ QuickAccessWalletKeyguardQuickAffordanceConfig this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QuickAccessWalletKeyguardQuickAffordanceConfig$special$$inlined$flatMapLatest$1(Continuation continuation, QuickAccessWalletKeyguardQuickAffordanceConfig quickAccessWalletKeyguardQuickAffordanceConfig) {
         super(3, continuation);
         this.this$0 = quickAccessWalletKeyguardQuickAffordanceConfig;
@@ -27,7 +26,6 @@ public final class QuickAccessWalletKeyguardQuickAffordanceConfig$special$$inlin
         return quickAccessWalletKeyguardQuickAffordanceConfig$special$$inlined$flatMapLatest$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00a0 A[RETURN] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -8,13 +8,11 @@ public final class SemCompanionDeviceBatteryInfo implements Parcelable {
             new Parcelable.Creator<
                     SemCompanionDeviceBatteryInfo>() { // from class:
                                                        // com.samsung.android.os.SemCompanionDeviceBatteryInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemCompanionDeviceBatteryInfo createFromParcel(Parcel in) {
                     return new SemCompanionDeviceBatteryInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemCompanionDeviceBatteryInfo[] newArray(int size) {
                     return new SemCompanionDeviceBatteryInfo[size];

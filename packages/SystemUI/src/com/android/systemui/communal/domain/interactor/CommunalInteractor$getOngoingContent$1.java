@@ -31,7 +31,6 @@ final class CommunalInteractor$getOngoingContent$1 extends SuspendLambda impleme
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalInteractor$getOngoingContent$1(boolean z, Continuation continuation) {
         super(3, continuation);
         this.$mediaHostVisible = z;

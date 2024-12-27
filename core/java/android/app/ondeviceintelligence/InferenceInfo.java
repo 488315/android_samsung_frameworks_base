@@ -7,13 +7,11 @@ public class InferenceInfo implements Parcelable {
     public static final Parcelable.Creator<InferenceInfo> CREATOR =
             new Parcelable.Creator<InferenceInfo>() { // from class:
                 // android.app.ondeviceintelligence.InferenceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InferenceInfo[] newArray(int size) {
                     return new InferenceInfo[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InferenceInfo createFromParcel(Parcel in) {
                     return new InferenceInfo(in);

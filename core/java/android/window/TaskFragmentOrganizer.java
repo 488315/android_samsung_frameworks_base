@@ -142,7 +142,6 @@ public class TaskFragmentOrganizer extends WindowOrganizer {
     class AnonymousClass1 extends ITaskFragmentOrganizer.Stub {
         AnonymousClass1() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onTransactionReady$0(
                 TaskFragmentTransaction transaction) {
             TaskFragmentOrganizer.this.onTransactionReady(transaction);

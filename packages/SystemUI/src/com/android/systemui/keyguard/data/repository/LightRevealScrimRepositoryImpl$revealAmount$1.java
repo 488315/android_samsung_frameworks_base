@@ -20,7 +20,6 @@ final class LightRevealScrimRepositoryImpl$revealAmount$1 extends SuspendLambda 
     int label;
     final /* synthetic */ LightRevealScrimRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LightRevealScrimRepositoryImpl$revealAmount$1(LightRevealScrimRepositoryImpl lightRevealScrimRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = lightRevealScrimRepositoryImpl;
@@ -62,7 +61,6 @@ final class LightRevealScrimRepositoryImpl$revealAmount$1 extends SuspendLambda 
             this.this$0.revealAmountAnimator.addUpdateListener(animatorUpdateListener);
             final LightRevealScrimRepositoryImpl lightRevealScrimRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.LightRevealScrimRepositoryImpl$revealAmount$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

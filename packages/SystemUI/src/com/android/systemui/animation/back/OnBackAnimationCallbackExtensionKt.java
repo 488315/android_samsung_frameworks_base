@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
 public abstract class OnBackAnimationCallbackExtensionKt {
-    /* JADX WARN: Type inference failed for: r7v0, types: [com.android.systemui.animation.back.OnBackAnimationCallbackExtensionKt$onBackAnimationCallbackFrom$4] */
     public static OnBackAnimationCallbackExtensionKt$onBackAnimationCallbackFrom$4 onBackAnimationCallbackFrom$default(final BackAnimationSpec backAnimationSpec, final DisplayMetrics displayMetrics, final Function1 function1, final Function0 function0) {
         final OnBackAnimationCallbackExtensionKt$onBackAnimationCallbackFrom$1 onBackAnimationCallbackExtensionKt$onBackAnimationCallbackFrom$1 = new Function1() { // from class: com.android.systemui.animation.back.OnBackAnimationCallbackExtensionKt$onBackAnimationCallbackFrom$1
             @Override // kotlin.jvm.functions.Function1

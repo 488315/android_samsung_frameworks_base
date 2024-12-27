@@ -23,7 +23,6 @@ public final class DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLat
     int label;
     final /* synthetic */ DeviceBasedSatelliteViewModelImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLatest$2(Continuation continuation, DeviceBasedSatelliteViewModelImpl deviceBasedSatelliteViewModelImpl, DeviceBasedSatelliteInteractor deviceBasedSatelliteInteractor, AirplaneModeRepository airplaneModeRepository) {
         super(3, continuation);
         this.this$0 = deviceBasedSatelliteViewModelImpl;

@@ -102,10 +102,6 @@ public final class KeyguardBiometricViewController extends ViewController implem
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v30, types: [com.android.keyguard.biometrics.KeyguardBiometricViewController$lockStarCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v32, types: [com.android.keyguard.biometrics.KeyguardBiometricViewController$configurationListener$1] */
-    /* JADX WARN: Type inference failed for: r1v33, types: [com.android.keyguard.biometrics.KeyguardBiometricViewController$mDisplayLifeCycleObserver$1] */
-    /* JADX WARN: Type inference failed for: r1v34, types: [com.android.keyguard.biometrics.KeyguardBiometricViewController$keyguardUpdateMonitorCallback$1] */
     public KeyguardBiometricViewController(KeyguardBiometricView keyguardBiometricView, KeyguardUpdateMonitor keyguardUpdateMonitor, AccessibilityManager accessibilityManager, PowerManager powerManager, ConfigurationController configurationController, DisplayLifecycle displayLifecycle, VibrationUtil vibrationUtil, PluginLockStarManager pluginLockStarManager) {
         super(keyguardBiometricView);
         this.keyguardUpdateMonitor = keyguardUpdateMonitor;

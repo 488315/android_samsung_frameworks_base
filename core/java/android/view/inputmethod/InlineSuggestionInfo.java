@@ -18,13 +18,11 @@ public final class InlineSuggestionInfo implements Parcelable {
             new Parcelable.Creator<
                     InlineSuggestionInfo>() { // from class:
                                               // android.view.inputmethod.InlineSuggestionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InlineSuggestionInfo[] newArray(int size) {
                     return new InlineSuggestionInfo[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InlineSuggestionInfo createFromParcel(Parcel in) {
                     return new InlineSuggestionInfo(in);

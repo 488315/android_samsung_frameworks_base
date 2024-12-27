@@ -211,7 +211,6 @@ public final class AssistDisclosure {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.assist.AssistDisclosure$1] */
     public AssistDisclosure(Context context, Handler handler) {
         this.mContext = context;
         this.mHandler = handler;

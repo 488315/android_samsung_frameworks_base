@@ -13,14 +13,12 @@ public class SemContextActivityNotificationForLocationAttribute extends SemConte
                     new Parcelable.Creator<
                             SemContextActivityNotificationForLocationAttribute>() { // from class:
                                                                                     // com.samsung.android.hardware.context.SemContextActivityNotificationForLocationAttribute.1
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public SemContextActivityNotificationForLocationAttribute createFromParcel(
                                 Parcel in) {
                             return new SemContextActivityNotificationForLocationAttribute(in);
                         }
 
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public SemContextActivityNotificationForLocationAttribute[] newArray(
                                 int size) {

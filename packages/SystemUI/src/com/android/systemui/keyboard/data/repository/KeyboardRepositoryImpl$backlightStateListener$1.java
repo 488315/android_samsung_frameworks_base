@@ -18,7 +18,6 @@ final class KeyboardRepositoryImpl$backlightStateListener$1 extends SuspendLambd
     int label;
     final /* synthetic */ KeyboardRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyboardRepositoryImpl$backlightStateListener$1(KeyboardRepositoryImpl keyboardRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyboardRepositoryImpl;
@@ -59,7 +58,6 @@ final class KeyboardRepositoryImpl$backlightStateListener$1 extends SuspendLambd
             }, keyboardBacklightListener);
             final KeyboardRepositoryImpl keyboardRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyboard.data.repository.KeyboardRepositoryImpl$backlightStateListener$1.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

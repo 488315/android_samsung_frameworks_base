@@ -11,7 +11,6 @@ public class ParcelableParcel implements Parcelable {
                     return new ParcelableParcel(in, null);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.ClassLoaderCreator
                 public ParcelableParcel createFromParcel(Parcel in, ClassLoader loader) {
                     return new ParcelableParcel(in, loader);

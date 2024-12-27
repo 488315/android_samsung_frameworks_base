@@ -345,15 +345,6 @@ public final class SoundTriggerHw2Compat implements ISoundTriggerHal {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v11, types: [android.hardware.soundtrigger.V2_1.ISoundTriggerHw$Proxy, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r0v12 */
-    /* JADX WARN: Type inference failed for: r0v13, types: [android.hardware.soundtrigger.V2_0.ISoundTriggerHw, android.hardware.soundtrigger.V2_1.ISoundTriggerHw] */
-    /* JADX WARN: Type inference failed for: r0v14, types: [android.hardware.soundtrigger.V2_1.ISoundTriggerHw] */
-    /* JADX WARN: Type inference failed for: r0v15, types: [android.hardware.soundtrigger.V2_2.ISoundTriggerHw] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [android.hardware.soundtrigger.V2_2.ISoundTriggerHw$Proxy, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r0v8 */
-    /* JADX WARN: Type inference failed for: r0v9, types: [android.hardware.soundtrigger.V2_0.ISoundTriggerHw, android.hardware.soundtrigger.V2_1.ISoundTriggerHw, android.hardware.soundtrigger.V2_2.ISoundTriggerHw] */
     public SoundTriggerHw2Compat(IHwBinder iHwBinder, Runnable runnable) {
         ISoundTriggerHw$Proxy iSoundTriggerHw$Proxy;
         ?? proxy;

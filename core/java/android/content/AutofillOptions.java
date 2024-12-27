@@ -23,7 +23,6 @@ public final class AutofillOptions implements Parcelable {
     public static final Parcelable.Creator<AutofillOptions> CREATOR =
             new Parcelable.Creator<
                     AutofillOptions>() { // from class: android.content.AutofillOptions.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AutofillOptions createFromParcel(Parcel parcel) {
                     int loggingLevel = parcel.readInt();
@@ -43,7 +42,6 @@ public final class AutofillOptions implements Parcelable {
                     return options;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AutofillOptions[] newArray(int size) {
                     return new AutofillOptions[size];

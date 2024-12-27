@@ -272,8 +272,6 @@ public class GestureDetector {
         return this.mIsLongpressEnabled;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:158:0x044c  */
-    /* JADX WARN: Removed duplicated region for block: B:161:0x04a7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -303,7 +301,6 @@ public class GestureDetector {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public boolean onGenericMotionEvent(MotionEvent ev) {
         if (this.mInputEventConsistencyVerifier != null) {
             this.mInputEventConsistencyVerifier.onGenericMotionEvent(ev, 0);
@@ -380,7 +377,6 @@ public class GestureDetector {
         return (deltaX * deltaX) + (deltaY * deltaY) < slopSquare;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchLongPress() {
         this.mHandler.removeMessages(3);
         this.mDeferConfirmSingleTap = false;
@@ -388,7 +384,6 @@ public class GestureDetector {
         this.mListener.onLongPress(this.mCurrentDownEvent);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void recordGestureClassification(int classification) {
         if (this.mHasRecordedClassification || classification == 0) {
             return;

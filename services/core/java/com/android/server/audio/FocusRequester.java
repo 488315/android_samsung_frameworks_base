@@ -333,9 +333,6 @@ public final class FocusRequester {
        com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(r11, "focusLossForGainRequest() for invalid focus request ", "FocusRequester");
        r6 = 0;
     */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:22:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x003e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

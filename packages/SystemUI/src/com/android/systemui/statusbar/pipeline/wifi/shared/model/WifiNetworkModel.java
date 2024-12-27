@@ -30,8 +30,6 @@ public abstract class WifiNetworkModel implements Diffable {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class HotspotDeviceType {
         public static final /* synthetic */ HotspotDeviceType[] $VALUES;
         public static final HotspotDeviceType AUTO;
@@ -201,8 +199,6 @@ public abstract class WifiNetworkModel implements Diffable {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class WifiNetworkType {
         public static final /* synthetic */ WifiNetworkType[] $VALUES;
         public static final WifiNetworkType FIVEG;
@@ -425,7 +421,6 @@ public abstract class WifiNetworkModel implements Diffable {
         public final int numberOfLevels;
         public final int subscriptionId;
 
-        /* JADX WARN: Illegal instructions before constructor call */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

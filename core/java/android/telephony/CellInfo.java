@@ -14,7 +14,6 @@ public abstract class CellInfo implements Parcelable {
     public static final int CONNECTION_UNKNOWN = Integer.MAX_VALUE;
     public static final Parcelable.Creator<CellInfo> CREATOR =
             new Parcelable.Creator<CellInfo>() { // from class: android.telephony.CellInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellInfo createFromParcel(Parcel in) {
                     int type = in.readInt();
@@ -36,7 +35,6 @@ public abstract class CellInfo implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellInfo[] newArray(int size) {
                     return new CellInfo[size];

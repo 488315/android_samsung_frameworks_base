@@ -65,7 +65,6 @@ public class PrivacyDotViewController {
     public interface ShowingListener {
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.events.PrivacyDotViewController$systemStatusAnimationCallback$1] */
     public PrivacyDotViewController(Executor executor, CoroutineScope coroutineScope, StatusBarStateController statusBarStateController, ConfigurationController configurationController, StatusBarContentInsetsProvider statusBarContentInsetsProvider, SystemStatusAnimationScheduler systemStatusAnimationScheduler, ShadeInteractor shadeInteractor, IndicatorScaleGardener indicatorScaleGardener, PrivacyLogger privacyLogger, SecPanelExpansionStateInteractor secPanelExpansionStateInteractor) {
         this.mainExecutor = executor;
         this.stateController = statusBarStateController;
@@ -630,11 +629,6 @@ public class PrivacyDotViewController {
         DelayableExecutor delayableExecutor = this.uiExecutor;
         if (delayableExecutor != null) {
             runnable = delayableExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.events.PrivacyDotViewController$scheduleUpdate$1
-                /* JADX WARN: Removed duplicated region for block: B:19:0x006e  */
-                /* JADX WARN: Removed duplicated region for block: B:26:0x0090  */
-                /* JADX WARN: Removed duplicated region for block: B:41:0x00f1  */
-                /* JADX WARN: Removed duplicated region for block: B:53:0x014c  */
-                /* JADX WARN: Removed duplicated region for block: B:57:0x00d3  */
                 @Override // java.lang.Runnable
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

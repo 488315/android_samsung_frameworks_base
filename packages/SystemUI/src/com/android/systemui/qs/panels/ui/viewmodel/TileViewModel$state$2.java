@@ -14,7 +14,6 @@ final class TileViewModel$state$2 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ TileViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TileViewModel$state$2(TileViewModel tileViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = tileViewModel;

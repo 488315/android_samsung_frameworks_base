@@ -80,7 +80,6 @@ public abstract class AbsEdgeLightingMaskView extends DrawEdgeLayout {
         return true;
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.edgelighting.effect.view.AbsEdgeLightingMaskView$3] */
     @Override // android.view.ViewGroup, android.view.View
     public final void onAttachedToWindow() {
         super.onAttachedToWindow();

@@ -153,8 +153,6 @@ public class BitmapFactory {
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:68)
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.visit(DebugInfoApplyVisitor.java:55)
      */
-    /* JADX WARN: Not initialized variable reg: 16, insn: 0x0107: MOVE (r3 I:??[OBJECT, ARRAY]) = (r16 I:??[OBJECT, ARRAY] A[D('bm' android.graphics.Bitmap)]), block:B:59:0x0106 */
-    /* JADX WARN: Not initialized variable reg: 16, insn: 0x010b: MOVE (r3 I:??[OBJECT, ARRAY]) = (r16 I:??[OBJECT, ARRAY] A[D('bm' android.graphics.Bitmap)]), block:B:57:0x010b */
     public static android.graphics.Bitmap decodeFile(
             java.lang.String r17, android.graphics.BitmapFactory.Options r18) {
         /*
@@ -193,7 +191,6 @@ public class BitmapFactory {
         return decodeStream(is, pad, opts);
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:18:0x001b -> B:7:0x0030). Please report as a decompilation issue!!! */
     public static Bitmap decodeResource(Resources res, int id, Options opts) {
         Options.validate(opts);
         Bitmap bm = null;

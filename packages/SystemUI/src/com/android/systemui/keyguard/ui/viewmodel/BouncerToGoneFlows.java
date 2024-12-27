@@ -76,8 +76,6 @@ public final class BouncerToGoneFlows {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -165,7 +163,6 @@ public final class BouncerToGoneFlows {
                 return Float.valueOf(Ref$BooleanRef.this.element ? 1.0f : 0.0f);
             }
         }, 0L, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.BouncerToGoneFlows$showAllNotifications$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -214,8 +211,6 @@ public final class BouncerToGoneFlows {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

@@ -295,7 +295,6 @@ public abstract class SemInputMotion {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$registerInputReceiver$1(
             Context context, SemInputMotionEventDispatcher.SemInputMotionEventListener listener) {
         this.dispatcher = SemInputMotionEventDispatcher.getInstance(context);
@@ -323,7 +322,6 @@ public abstract class SemInputMotion {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$unregisterInputReceiver$2(
             SemInputMotionEventDispatcher.SemInputMotionEventListener listener) {
         if (this.dispatcher != null) {

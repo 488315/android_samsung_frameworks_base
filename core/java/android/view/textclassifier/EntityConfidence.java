@@ -16,13 +16,11 @@ final class EntityConfidence implements Parcelable {
             new Parcelable.Creator<
                     EntityConfidence>() { // from class:
                                           // android.view.textclassifier.EntityConfidence.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EntityConfidence createFromParcel(Parcel in) {
                     return new EntityConfidence(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EntityConfidence[] newArray(int size) {
                     return new EntityConfidence[size];
@@ -121,7 +119,6 @@ final class EntityConfidence implements Parcelable {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$resetSortedEntitiesFromMap$0(String e1, String e2) {
         float score1 = this.mEntityConfidence.get(e1).floatValue();
         float score2 = this.mEntityConfidence.get(e2).floatValue();

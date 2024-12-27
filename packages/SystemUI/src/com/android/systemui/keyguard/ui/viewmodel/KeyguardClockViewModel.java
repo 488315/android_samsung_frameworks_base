@@ -42,8 +42,6 @@ public final class KeyguardClockViewModel {
     public final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 smallClockTopMargin;
     public final SystemBarUtilsProxy systemBarUtils;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class ClockLayout {
         public static final /* synthetic */ ClockLayout[] $VALUES;
         public static final ClockLayout LARGE_CLOCK;
@@ -123,8 +121,6 @@ public final class KeyguardClockViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -230,8 +226,6 @@ public final class KeyguardClockViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -330,8 +324,6 @@ public final class KeyguardClockViewModel {
                     this.this$0 = keyguardClockViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

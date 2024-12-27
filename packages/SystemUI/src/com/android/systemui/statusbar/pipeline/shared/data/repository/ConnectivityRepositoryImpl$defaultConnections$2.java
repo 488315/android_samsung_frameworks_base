@@ -14,7 +14,6 @@ final class ConnectivityRepositoryImpl$defaultConnections$2 extends SuspendLambd
     /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ConnectivityRepositoryImpl$defaultConnections$2(ConnectivityInputLogger connectivityInputLogger, Continuation continuation) {
         super(2, continuation);
         this.$logger = connectivityInputLogger;

@@ -36,7 +36,6 @@ public final class LongPressHandlingView extends View {
                 }
             }
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

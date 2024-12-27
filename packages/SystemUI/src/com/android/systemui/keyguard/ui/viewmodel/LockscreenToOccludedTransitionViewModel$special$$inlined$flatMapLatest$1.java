@@ -23,7 +23,6 @@ public final class LockscreenToOccludedTransitionViewModel$special$$inlined$flat
     int label;
     final /* synthetic */ LockscreenToOccludedTransitionViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LockscreenToOccludedTransitionViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, LockscreenToOccludedTransitionViewModel lockscreenToOccludedTransitionViewModel) {
         super(3, continuation);
         this.this$0 = lockscreenToOccludedTransitionViewModel;
@@ -50,7 +49,6 @@ public final class LockscreenToOccludedTransitionViewModel$special$$inlined$flat
             long j = FromLockscreenTransitionInteractor.TO_OCCLUDED_DURATION;
             Interpolator interpolator = Interpolators.EMPHASIZED_ACCELERATE;
             Function1 function1 = new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToOccludedTransitionViewModel$lockscreenTranslationY$1$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }

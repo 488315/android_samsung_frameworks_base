@@ -318,7 +318,6 @@ public interface IAGnssRil extends IInterface {
         public static final Parcelable.Creator<AGnssRefLocationCellID> CREATOR =
                 new Parcelable.Creator<AGnssRefLocationCellID>() { // from class:
                     // android.hardware.gnss.IAGnssRil.AGnssRefLocationCellID.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AGnssRefLocationCellID createFromParcel(Parcel _aidl_source) {
                         AGnssRefLocationCellID _aidl_out = new AGnssRefLocationCellID();
@@ -326,7 +325,6 @@ public interface IAGnssRil extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AGnssRefLocationCellID[] newArray(int _aidl_size) {
                         return new AGnssRefLocationCellID[_aidl_size];
@@ -458,7 +456,6 @@ public interface IAGnssRil extends IInterface {
         public static final Parcelable.Creator<AGnssRefLocation> CREATOR =
                 new Parcelable.Creator<AGnssRefLocation>() { // from class:
                     // android.hardware.gnss.IAGnssRil.AGnssRefLocation.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AGnssRefLocation createFromParcel(Parcel _aidl_source) {
                         AGnssRefLocation _aidl_out = new AGnssRefLocation();
@@ -466,7 +463,6 @@ public interface IAGnssRil extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AGnssRefLocation[] newArray(int _aidl_size) {
                         return new AGnssRefLocation[_aidl_size];
@@ -548,7 +544,6 @@ public interface IAGnssRil extends IInterface {
         public static final Parcelable.Creator<NetworkAttributes> CREATOR =
                 new Parcelable.Creator<NetworkAttributes>() { // from class:
                     // android.hardware.gnss.IAGnssRil.NetworkAttributes.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public NetworkAttributes createFromParcel(Parcel _aidl_source) {
                         NetworkAttributes _aidl_out = new NetworkAttributes();
@@ -556,7 +551,6 @@ public interface IAGnssRil extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public NetworkAttributes[] newArray(int _aidl_size) {
                         return new NetworkAttributes[_aidl_size];

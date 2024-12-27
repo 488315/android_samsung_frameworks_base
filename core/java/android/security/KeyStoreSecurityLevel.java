@@ -145,7 +145,6 @@ public class KeyStoreSecurityLevel {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ KeyMetadata lambda$generateKey$0(
             KeyDescriptor descriptor,
             KeyDescriptor attestationKey,
@@ -184,7 +183,6 @@ public class KeyStoreSecurityLevel {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ KeyMetadata lambda$importKey$1(
             KeyDescriptor descriptor,
             KeyDescriptor attestationKey,
@@ -233,7 +231,6 @@ public class KeyStoreSecurityLevel {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ KeyMetadata lambda$importWrappedKey$2(
             KeyDescriptor keyDescriptor,
             KeyDescriptor wrappingKeyDescriptor,

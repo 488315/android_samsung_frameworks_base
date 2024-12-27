@@ -17,7 +17,6 @@ public final class PrimaryBouncerToDozingTransitionViewModel$special$$inlined$fl
     int label;
     final /* synthetic */ PrimaryBouncerToDozingTransitionViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PrimaryBouncerToDozingTransitionViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, PrimaryBouncerToDozingTransitionViewModel primaryBouncerToDozingTransitionViewModel) {
         super(3, continuation);
         this.this$0 = primaryBouncerToDozingTransitionViewModel;

@@ -3,8 +3,6 @@ package com.android.systemui.clipboardoverlay;
 import com.sec.ims.settings.ImsSettings;
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class ClipboardModel$Type {
     public static final /* synthetic */ ClipboardModel$Type[] $VALUES;
     public static final ClipboardModel$Type IMAGE;

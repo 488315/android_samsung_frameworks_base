@@ -302,7 +302,6 @@ public final class DarManagerService extends IDarManagerService.Stub {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.knox.dar.DarManagerService$1] */
     public DarManagerService(Injector injector) {
         this.mKeyProtector = null;
         this.mUserManager = null;
@@ -787,14 +786,6 @@ public final class DarManagerService extends IDarManagerService.Stub {
 
        if (r2 == null) goto L37;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0090  */
-    /* JADX WARN: Type inference failed for: r2v13 */
-    /* JADX WARN: Type inference failed for: r2v14 */
-    /* JADX WARN: Type inference failed for: r2v15 */
-    /* JADX WARN: Type inference failed for: r2v3, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r2v4 */
-    /* JADX WARN: Type inference failed for: r2v9, types: [java.io.FileInputStream] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

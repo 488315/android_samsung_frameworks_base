@@ -11,13 +11,11 @@ public class SensorPropertiesInternal implements Parcelable {
     public static final Parcelable.Creator<SensorPropertiesInternal> CREATOR =
             new Parcelable.Creator<SensorPropertiesInternal>() { // from class:
                 // android.hardware.biometrics.SensorPropertiesInternal.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SensorPropertiesInternal createFromParcel(Parcel in) {
                     return new SensorPropertiesInternal(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SensorPropertiesInternal[] newArray(int size) {
                     return new SensorPropertiesInternal[size];

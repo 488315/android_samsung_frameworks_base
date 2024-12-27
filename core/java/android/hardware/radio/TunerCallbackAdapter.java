@@ -69,7 +69,6 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setProgramListObserver$0(
             ProgramList programList, ProgramList.OnCloseListener closeListener) {
         synchronized (this.mLock) {
@@ -82,7 +81,6 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setProgramListObserver$1(ProgramList programList) {
         synchronized (this.mLock) {
             if (this.mProgramList != programList) {
@@ -126,7 +124,6 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         return isConnected;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onError$2(int status) {
         this.mCallback.onError(status);
     }
@@ -143,12 +140,10 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onTuneFailed$3(int status, ProgramSelector selector) {
         this.mCallback.onTuneFailed(status, selector);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.hardware.radio.ITunerCallback
     public void onTuneFailed(final int status, final ProgramSelector selector) {
         final int errorCode;
@@ -198,12 +193,10 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onTuneFailed$4(int errorCode) {
         this.mCallback.onError(errorCode);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onConfigurationChanged$5(RadioManager.BandConfig config) {
         this.mCallback.onConfigurationChanged(config);
     }
@@ -239,7 +232,6 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onCurrentProgramInfoChanged$6(
             RadioManager.ProgramInfo info) {
         this.mCallback.onProgramInfoChanged(info);
@@ -249,7 +241,6 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onTrafficAnnouncement$7(boolean active) {
         this.mCallback.onTrafficAnnouncement(active);
     }
@@ -266,7 +257,6 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onEmergencyAnnouncement$8(boolean active) {
         this.mCallback.onEmergencyAnnouncement(active);
     }
@@ -298,12 +288,10 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onAntennaState$9(boolean connected) {
         this.mCallback.onAntennaState(connected);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onBackgroundScanAvailabilityChange$10(boolean isAvailable) {
         this.mCallback.onBackgroundScanAvailabilityChange(isAvailable);
     }
@@ -333,7 +321,6 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$sendBackgroundScanCompleteLocked$11() {
         this.mCallback.onBackgroundScanComplete();
     }
@@ -353,7 +340,6 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onProgramListChanged$12() {
         this.mCallback.onProgramListChanged();
     }
@@ -382,7 +368,6 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onProgramListUpdated$13(ProgramList.Chunk chunk) {
         synchronized (this.mLock) {
             if (this.mProgramList == null) {
@@ -393,7 +378,6 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onConfigFlagUpdated$14(int flag, boolean value) {
         this.mCallback.onConfigFlagUpdated(flag, value);
     }
@@ -410,7 +394,6 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onParametersUpdated$15(Map parameters) {
         this.mCallback.onParametersUpdated(parameters);
     }

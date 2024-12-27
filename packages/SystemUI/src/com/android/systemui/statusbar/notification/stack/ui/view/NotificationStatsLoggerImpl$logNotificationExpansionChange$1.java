@@ -24,7 +24,6 @@ final class NotificationStatsLoggerImpl$logNotificationExpansionChange$1 extends
         int label;
         final /* synthetic */ NotificationStatsLoggerImpl this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(NotificationStatsLoggerImpl notificationStatsLoggerImpl, NotificationStatsLoggerImpl.ExpansionState expansionState, Continuation continuation) {
             super(2, continuation);
             this.this$0 = notificationStatsLoggerImpl;
@@ -59,7 +58,6 @@ final class NotificationStatsLoggerImpl$logNotificationExpansionChange$1 extends
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationStatsLoggerImpl$logNotificationExpansionChange$1(NotificationStatsLoggerImpl notificationStatsLoggerImpl, NotificationStatsLoggerImpl.ExpansionState expansionState, Continuation continuation) {
         super(2, continuation);
         this.this$0 = notificationStatsLoggerImpl;

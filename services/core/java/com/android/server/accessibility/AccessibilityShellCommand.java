@@ -39,7 +39,6 @@ public final class AccessibilityShellCommand extends ShellCommand {
         return false;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:229:0x0408, code lost:
 
        if (r1.equals("write") == false) goto L224;

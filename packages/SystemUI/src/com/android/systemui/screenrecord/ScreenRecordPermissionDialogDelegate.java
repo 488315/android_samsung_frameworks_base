@@ -75,7 +75,6 @@ public final class ScreenRecordPermissionDialogDelegate extends BaseMediaProject
         ScreenRecordPermissionDialogDelegate create(RecordingController recordingController, UserHandle userHandle, int i, Runnable runnable);
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenRecordPermissionDialogDelegate(UserHandle userHandle, int i, RecordingController recordingController, ActivityStarter activityStarter, UserContextProvider userContextProvider, Runnable runnable, MediaProjectionMetricsLogger mediaProjectionMetricsLogger, SystemUIDialog.Factory factory, int i2, int i3, Context context) {
         super(CollectionsKt__CollectionsKt.listOf(new ScreenShareOption(0, R.string.screen_share_permission_dialog_option_single_app, R.string.screenrecord_permission_dialog_warning_single_app, null, 8, null), new ScreenShareOption(1, R.string.screen_share_permission_dialog_option_entire_screen, R.string.screenrecord_permission_dialog_warning_entire_screen, null, 8, null)), null, i, mediaProjectionMetricsLogger, Integer.valueOf(R.drawable.ic_screenrecord), Integer.valueOf(R.color.screenrecord_icon_color), i2);
         Companion.getClass();
@@ -90,9 +89,6 @@ public final class ScreenRecordPermissionDialogDelegate extends BaseMediaProject
         this.context = context;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0022  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0029  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0036  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -312,7 +308,6 @@ public final class ScreenRecordPermissionDialogDelegate extends BaseMediaProject
         (spinner4 != null ? spinner4 : null).setLongClickable(false);
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     public ScreenRecordPermissionDialogDelegate(UserHandle userHandle, int i, RecordingController recordingController, ActivityStarter activityStarter, UserContextProvider userContextProvider, Runnable runnable, MediaProjectionMetricsLogger mediaProjectionMetricsLogger, SystemUIDialog.Factory factory, Context context) {
         this(userHandle, i, recordingController, activityStarter, userContextProvider, runnable, mediaProjectionMetricsLogger, factory, 0, R.style.Theme_SystemUI_Dialog, context);
         int i2 = SystemUIDialog.$r8$clinit;

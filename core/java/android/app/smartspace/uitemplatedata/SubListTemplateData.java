@@ -12,13 +12,11 @@ public final class SubListTemplateData extends BaseTemplateData {
     public static final Parcelable.Creator<SubListTemplateData> CREATOR =
             new Parcelable.Creator<SubListTemplateData>() { // from class:
                 // android.app.smartspace.uitemplatedata.SubListTemplateData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SubListTemplateData createFromParcel(Parcel in) {
                     return new SubListTemplateData(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SubListTemplateData[] newArray(int size) {
                     return new SubListTemplateData[size];

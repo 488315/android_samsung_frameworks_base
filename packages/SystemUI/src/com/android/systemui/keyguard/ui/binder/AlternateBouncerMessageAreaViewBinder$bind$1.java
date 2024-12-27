@@ -29,7 +29,6 @@ final class AlternateBouncerMessageAreaViewBinder$bind$1 extends SuspendLambda i
         private /* synthetic */ Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(AlternateBouncerMessageAreaViewModel alternateBouncerMessageAreaViewModel, AuthKeyguardMessageArea authKeyguardMessageArea, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = alternateBouncerMessageAreaViewModel;
@@ -60,7 +59,6 @@ final class AlternateBouncerMessageAreaViewBinder$bind$1 extends SuspendLambda i
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AlternateBouncerMessageAreaViewBinder$bind$1(AlternateBouncerMessageAreaViewModel alternateBouncerMessageAreaViewModel, AuthKeyguardMessageArea authKeyguardMessageArea, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = alternateBouncerMessageAreaViewModel;

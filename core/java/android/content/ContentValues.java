@@ -16,13 +16,11 @@ import java.util.Set;
 public final class ContentValues implements Parcelable {
     public static final Parcelable.Creator<ContentValues> CREATOR =
             new Parcelable.Creator<ContentValues>() { // from class: android.content.ContentValues.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentValues createFromParcel(Parcel in) {
                     return new ContentValues(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentValues[] newArray(int size) {
                     return new ContentValues[size];

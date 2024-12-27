@@ -788,7 +788,6 @@ public final class CompanionDeviceManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class AssociationRequestCallbackProxy extends IAssociationRequestCallback.Stub {
         private final Callback mCallback;
         private final Executor mExecutor;
@@ -876,7 +875,6 @@ public final class CompanionDeviceManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class OnAssociationsChangedListenerProxy extends IOnAssociationsChangedListener.Stub {
         private final Executor mExecutor;
         private final OnAssociationsChangedListener mListener;
@@ -887,7 +885,6 @@ public final class CompanionDeviceManager {
             this.mListener = listener;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAssociationsChanged$0(List associations) {
             this.mListener.onAssociationsChanged(associations);
         }
@@ -906,7 +903,6 @@ public final class CompanionDeviceManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class OnTransportsChangedListenerProxy extends IOnTransportsChangedListener.Stub {
         private final Executor mExecutor;
         private final Consumer<List<AssociationInfo>> mListener;
@@ -917,7 +913,6 @@ public final class CompanionDeviceManager {
             this.mListener = listener;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onTransportsChanged$0(List associations) {
             this.mListener.accept(associations);
         }
@@ -936,7 +931,6 @@ public final class CompanionDeviceManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class OnMessageReceivedListenerProxy extends IOnMessageReceivedListener.Stub {
         private final Executor mExecutor;
         private final BiConsumer<Integer, byte[]> mListener;
@@ -947,7 +941,6 @@ public final class CompanionDeviceManager {
             this.mListener = listener;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onMessageReceived$0(int associationId, byte[] data) {
             this.mListener.accept(Integer.valueOf(associationId), data);
         }
@@ -966,7 +959,6 @@ public final class CompanionDeviceManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class SystemDataTransferCallbackProxy extends ISystemDataTransferCallback.Stub {
         private final OutcomeReceiver<Void, CompanionException> mCallback;
         private final Executor mExecutor;
@@ -977,7 +969,6 @@ public final class CompanionDeviceManager {
             this.mCallback = callback;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onResult$0() {
             this.mCallback.onResult(null);
         }
@@ -995,7 +986,6 @@ public final class CompanionDeviceManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onError$1(String error) {
             this.mCallback.onError(new CompanionException(error));
         }
@@ -1014,7 +1004,6 @@ public final class CompanionDeviceManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class Transport {
         private final int mAssociationId;
         private InputStream mLocalIn;
@@ -1070,7 +1059,6 @@ public final class CompanionDeviceManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$start$0() {
             try {
                 copyWithFlushing(this.mLocalIn, this.mRemoteOut);
@@ -1082,7 +1070,6 @@ public final class CompanionDeviceManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$start$1() {
             try {
                 copyWithFlushing(this.mRemoteIn, this.mLocalOut);

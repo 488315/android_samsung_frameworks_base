@@ -24,7 +24,6 @@ final class ClockEventController$registerListeners$1 extends SuspendLambda imple
         int label;
         final /* synthetic */ ClockEventController this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(ClockEventController clockEventController, Continuation continuation) {
             super(2, continuation);
             this.this$0 = clockEventController;
@@ -57,7 +56,6 @@ final class ClockEventController$registerListeners$1 extends SuspendLambda imple
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ClockEventController$registerListeners$1(ClockEventController clockEventController, Continuation continuation) {
         super(3, continuation);
         this.this$0 = clockEventController;

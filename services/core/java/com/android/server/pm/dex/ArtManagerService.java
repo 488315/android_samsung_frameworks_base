@@ -36,63 +36,6 @@ public final class ArtManagerService extends IArtManager.Stub {
         	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
         	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
          */
-        /* JADX WARN: Removed duplicated region for block: B:100:0x0251  */
-        /* JADX WARN: Removed duplicated region for block: B:103:0x025e  */
-        /* JADX WARN: Removed duplicated region for block: B:106:0x026a  */
-        /* JADX WARN: Removed duplicated region for block: B:109:0x0276  */
-        /* JADX WARN: Removed duplicated region for block: B:113:0x0284  */
-        /* JADX WARN: Removed duplicated region for block: B:114:0x0288  */
-        /* JADX WARN: Removed duplicated region for block: B:115:0x028c  */
-        /* JADX WARN: Removed duplicated region for block: B:116:0x0290  */
-        /* JADX WARN: Removed duplicated region for block: B:117:0x0293  */
-        /* JADX WARN: Removed duplicated region for block: B:118:0x0296  */
-        /* JADX WARN: Removed duplicated region for block: B:119:0x0298  */
-        /* JADX WARN: Removed duplicated region for block: B:120:0x029b  */
-        /* JADX WARN: Removed duplicated region for block: B:121:0x029e  */
-        /* JADX WARN: Removed duplicated region for block: B:122:0x02a1  */
-        /* JADX WARN: Removed duplicated region for block: B:123:0x02a3  */
-        /* JADX WARN: Removed duplicated region for block: B:124:0x02a6  */
-        /* JADX WARN: Removed duplicated region for block: B:125:0x02a9  */
-        /* JADX WARN: Removed duplicated region for block: B:126:0x02ab  */
-        /* JADX WARN: Removed duplicated region for block: B:127:0x02ad  */
-        /* JADX WARN: Removed duplicated region for block: B:128:0x02b0  */
-        /* JADX WARN: Removed duplicated region for block: B:129:0x02b3  */
-        /* JADX WARN: Removed duplicated region for block: B:130:0x02b6  */
-        /* JADX WARN: Removed duplicated region for block: B:131:0x02b9  */
-        /* JADX WARN: Removed duplicated region for block: B:132:0x02bc  */
-        /* JADX WARN: Removed duplicated region for block: B:133:0x02bf  */
-        /* JADX WARN: Removed duplicated region for block: B:134:0x02c1  */
-        /* JADX WARN: Removed duplicated region for block: B:135:0x02c4  */
-        /* JADX WARN: Removed duplicated region for block: B:136:0x02c7  */
-        /* JADX WARN: Removed duplicated region for block: B:137:0x02ca  */
-        /* JADX WARN: Removed duplicated region for block: B:138:0x02cc  */
-        /* JADX WARN: Removed duplicated region for block: B:139:0x02cf  */
-        /* JADX WARN: Removed duplicated region for block: B:13:0x00a2 A[Catch: IOException -> 0x00b3, TryCatch #1 {IOException -> 0x00b3, blocks: (B:11:0x0098, B:13:0x00a2, B:16:0x00b7, B:19:0x00c3, B:21:0x00c9), top: B:10:0x0098 }] */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x00c3 A[Catch: IOException -> 0x00b3, TryCatch #1 {IOException -> 0x00b3, blocks: (B:11:0x0098, B:13:0x00a2, B:16:0x00b7, B:19:0x00c3, B:21:0x00c9), top: B:10:0x0098 }] */
-        /* JADX WARN: Removed duplicated region for block: B:28:0x00fb  */
-        /* JADX WARN: Removed duplicated region for block: B:31:0x010e  */
-        /* JADX WARN: Removed duplicated region for block: B:34:0x011d  */
-        /* JADX WARN: Removed duplicated region for block: B:37:0x012c  */
-        /* JADX WARN: Removed duplicated region for block: B:40:0x013b  */
-        /* JADX WARN: Removed duplicated region for block: B:43:0x014a  */
-        /* JADX WARN: Removed duplicated region for block: B:46:0x0159  */
-        /* JADX WARN: Removed duplicated region for block: B:49:0x0167  */
-        /* JADX WARN: Removed duplicated region for block: B:52:0x0176  */
-        /* JADX WARN: Removed duplicated region for block: B:55:0x0184  */
-        /* JADX WARN: Removed duplicated region for block: B:58:0x0192  */
-        /* JADX WARN: Removed duplicated region for block: B:61:0x01a1  */
-        /* JADX WARN: Removed duplicated region for block: B:64:0x01b0  */
-        /* JADX WARN: Removed duplicated region for block: B:67:0x01bf  */
-        /* JADX WARN: Removed duplicated region for block: B:70:0x01ce  */
-        /* JADX WARN: Removed duplicated region for block: B:73:0x01da  */
-        /* JADX WARN: Removed duplicated region for block: B:76:0x01e7  */
-        /* JADX WARN: Removed duplicated region for block: B:79:0x01f5  */
-        /* JADX WARN: Removed duplicated region for block: B:82:0x0203  */
-        /* JADX WARN: Removed duplicated region for block: B:85:0x0211  */
-        /* JADX WARN: Removed duplicated region for block: B:88:0x021f  */
-        /* JADX WARN: Removed duplicated region for block: B:91:0x022c  */
-        /* JADX WARN: Removed duplicated region for block: B:94:0x0239  */
-        /* JADX WARN: Removed duplicated region for block: B:97:0x0245  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -324,11 +267,6 @@ public final class ArtManagerService extends IArtManager.Stub {
 
        if ((r2.applicationInfo.flags & 2) != 2) goto L21;
     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x004a  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x004f  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x005b  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0111  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x004c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

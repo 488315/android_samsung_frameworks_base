@@ -77,7 +77,6 @@ public final class ForegroundPackageObserver extends Observable {
     public final ActivityManagerInternal mActivityManagerInternal =
             (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.power.ForegroundPackageObserver$1] */
     public ForegroundPackageObserver(
             ActivityManager activityManager, IActivityManager iActivityManager) {
         this.mActivityManager = activityManager;

@@ -148,7 +148,6 @@ public final class LauncherAppsService extends SystemService {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public class LauncherAppsImpl extends ILauncherApps.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final ActivityManagerInternal mActivityManagerInternal;
@@ -564,7 +563,6 @@ public final class LauncherAppsService extends SystemService {
             public final String mPackageName;
             public final UserHandle mUser;
 
-            /* JADX WARN: Type inference failed for: r0v0, types: [android.content.pm.PackageManagerInternal$InstalledLoadingProgressCallback$LoadingProgressCallbackBinder] */
             public PackageLoadingProgressCallback(String str, UserHandle userHandle) {
                 Handler handler = LauncherAppsImpl.this.mCallbackHandler;
                 this.mBinder = new IPackageLoadingProgressCallback.Stub() { // from class: android.content.pm.PackageManagerInternal$InstalledLoadingProgressCallback$LoadingProgressCallbackBinder
@@ -672,7 +670,6 @@ public final class LauncherAppsService extends SystemService {
                 this.mUserManagerInternal = userManagerInternal;
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
             public final void onShortcutEvent(String str, List list, UserHandle userHandle, boolean z) {
                 int i;
                 int beginBroadcast = this.mCallbacks.beginBroadcast();
@@ -993,10 +990,6 @@ public final class LauncherAppsService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r1v2 */
-        /* JADX WARN: Type inference failed for: r1v4, types: [java.util.List] */
-        /* JADX WARN: Type inference failed for: r1v6, types: [java.util.ArrayList] */
         public final List generateLauncherActivitiesForArchivedApp(String str, UserHandle userHandle) {
             ?? of;
             if (!canAccessProfile(userHandle.getIdentifier(), "Cannot retrieve activities")) {
@@ -1123,8 +1116,6 @@ public final class LauncherAppsService extends SystemService {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:21:0x0076 A[Catch: all -> 0x0022, TRY_LEAVE, TryCatch #0 {all -> 0x0022, blocks: (B:8:0x001a, B:12:0x0025, B:16:0x0041, B:19:0x0050, B:21:0x0076, B:24:0x007e, B:29:0x008d, B:30:0x0095, B:33:0x002f, B:36:0x0035), top: B:6:0x0018, inners: #1 }] */
-        /* JADX WARN: Removed duplicated region for block: B:24:0x007e A[Catch: all -> 0x0022, TRY_ENTER, TryCatch #0 {all -> 0x0022, blocks: (B:8:0x001a, B:12:0x0025, B:16:0x0041, B:19:0x0050, B:21:0x0076, B:24:0x007e, B:29:0x008d, B:30:0x0095, B:33:0x002f, B:36:0x0035), top: B:6:0x0018, inners: #1 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1984,7 +1975,6 @@ public final class LauncherAppsService extends SystemService {
             return !this.mPackageManagerInternal.filterAppAccess(broadcastCookie.callingUid, userHandle.getIdentifier(), str, false);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
             int injectBinderCallingUid = injectBinderCallingUid();
             if (injectBinderCallingUid != 2000 && injectBinderCallingUid != 0) {
@@ -2384,8 +2374,6 @@ public final class LauncherAppsService extends SystemService {
         this.mLauncherAppsImpl = new LauncherAppsImpl(context);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [android.os.IBinder, com.android.server.pm.LauncherAppsService$LauncherAppsImpl] */
     @Override // com.android.server.SystemService
     public final void onStart() {
         final ?? r1 = this.mLauncherAppsImpl;

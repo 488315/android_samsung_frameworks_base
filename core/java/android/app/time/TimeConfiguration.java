@@ -14,13 +14,11 @@ public final class TimeConfiguration implements Parcelable {
     public static final Parcelable.Creator<TimeConfiguration> CREATOR =
             new Parcelable.Creator<
                     TimeConfiguration>() { // from class: android.app.time.TimeConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeConfiguration createFromParcel(Parcel source) {
                     return TimeConfiguration.readFromParcel(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeConfiguration[] newArray(int size) {
                     return new TimeConfiguration[size];
@@ -36,7 +34,6 @@ public final class TimeConfiguration implements Parcelable {
         this.mBundle = builder.mBundle;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static TimeConfiguration readFromParcel(Parcel in) {
         return new Builder().setPropertyBundleInternal(in.readBundle()).build();
     }

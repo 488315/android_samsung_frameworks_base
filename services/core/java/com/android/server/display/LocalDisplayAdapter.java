@@ -324,9 +324,6 @@ public final class LocalDisplayAdapter extends DisplayAdapter {
                 }
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:43:0x0139  */
-            /* JADX WARN: Removed duplicated region for block: B:46:0x014e  */
-            /* JADX WARN: Removed duplicated region for block: B:48:? A[RETURN, SYNTHETIC] */
             @Override // java.lang.Runnable
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -897,13 +894,6 @@ public final class LocalDisplayAdapter extends DisplayAdapter {
             return findMode(findMatchingModeIdLocked(this.mActiveSfDisplayModeAtStartId));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:31:0x0185  */
-        /* JADX WARN: Removed duplicated region for block: B:35:0x018e  */
-        /* JADX WARN: Removed duplicated region for block: B:46:0x01c7  */
-        /* JADX WARN: Type inference failed for: r11v16 */
-        /* JADX WARN: Type inference failed for: r11v4 */
-        /* JADX WARN: Type inference failed for: r11v5 */
         @Override // com.android.server.display.DisplayDevice
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1221,8 +1211,6 @@ public final class LocalDisplayAdapter extends DisplayAdapter {
             return requestDisplayStateLocked(i, f, f2, displayOffloadSessionImpl, 0, null);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:24:0x004c  */
-        /* JADX WARN: Removed duplicated region for block: B:26:0x0053  */
         @Override // com.android.server.display.DisplayDevice
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1523,22 +1511,6 @@ public final class LocalDisplayAdapter extends DisplayAdapter {
             LocalDisplayAdapter.this.sendDisplayDeviceEventLocked(this, 2);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:120:0x02aa  */
-        /* JADX WARN: Removed duplicated region for block: B:126:0x0348  */
-        /* JADX WARN: Removed duplicated region for block: B:129:0x0354  */
-        /* JADX WARN: Removed duplicated region for block: B:132:0x0360  */
-        /* JADX WARN: Removed duplicated region for block: B:135:0x0368  */
-        /* JADX WARN: Removed duplicated region for block: B:138:0x0362  */
-        /* JADX WARN: Removed duplicated region for block: B:139:0x0356  */
-        /* JADX WARN: Removed duplicated region for block: B:140:0x034a  */
-        /* JADX WARN: Removed duplicated region for block: B:141:0x02bb  */
-        /* JADX WARN: Removed duplicated region for block: B:164:0x02ac  */
-        /* JADX WARN: Removed duplicated region for block: B:169:0x01fc A[LOOP:8: B:167:0x01f6->B:169:0x01fc, LOOP_END] */
-        /* JADX WARN: Removed duplicated region for block: B:173:0x0212  */
-        /* JADX WARN: Removed duplicated region for block: B:176:0x0264  */
-        /* JADX WARN: Removed duplicated region for block: B:182:0x027c  */
-        /* JADX WARN: Removed duplicated region for block: B:185:0x028c  */
-        /* JADX WARN: Removed duplicated region for block: B:193:0x0223  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

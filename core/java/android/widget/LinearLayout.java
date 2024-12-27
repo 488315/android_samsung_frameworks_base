@@ -629,12 +629,6 @@ public class LinearLayout extends ViewGroup {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:124:0x046b  */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x0471  */
-    /* JADX WARN: Removed duplicated region for block: B:158:0x03df  */
-    /* JADX WARN: Removed duplicated region for block: B:168:0x03e2  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0190  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x019c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -665,10 +659,6 @@ public class LinearLayout extends ViewGroup {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:148:0x0683  */
-    /* JADX WARN: Removed duplicated region for block: B:151:0x0689  */
-    /* JADX WARN: Removed duplicated region for block: B:197:0x058a  */
-    /* JADX WARN: Removed duplicated region for block: B:207:0x05c2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -823,14 +813,6 @@ public class LinearLayout extends ViewGroup {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00ba  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00c5  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0103  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x010d  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00ca  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00e3  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00f3  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00be  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -901,7 +883,6 @@ public class LinearLayout extends ViewGroup {
         return new LayoutParams(getContext(), attrs);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.ViewGroup
     public LayoutParams generateDefaultLayoutParams() {
         if (this.mOrientation == 0) {
@@ -913,7 +894,6 @@ public class LinearLayout extends ViewGroup {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.ViewGroup
     public LayoutParams generateLayoutParams(ViewGroup.LayoutParams lp) {
         if (sPreserveMarginParamsInLayoutParamConversion) {

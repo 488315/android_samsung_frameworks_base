@@ -15,7 +15,6 @@ final class MediaCardKt$AudioPathSection$2$1 extends SuspendLambda implements Fu
     final /* synthetic */ State $isGroupSpeakerDefaultExpanded$delegate;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaCardKt$AudioPathSection$2$1(State state, MutableState mutableState, Continuation continuation) {
         super(2, continuation);
         this.$isGroupSpeakerDefaultExpanded$delegate = state;

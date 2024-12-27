@@ -52,7 +52,6 @@ public final class QSClockQuickStarHelper implements SlimIndicatorViewSubscriber
         }
     };
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.statusbar.policy.QSClockQuickStarHelper$1] */
     public QSClockQuickStarHelper(SlimIndicatorViewMediator slimIndicatorViewMediator, Runnable runnable, Context context, SettingsHelper settingsHelper) {
         this.mSlimIndicatorViewMediator = slimIndicatorViewMediator;
         this.mRingBellOfTowerRunnable = runnable;

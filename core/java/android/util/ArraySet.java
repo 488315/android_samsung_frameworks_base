@@ -199,7 +199,6 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
         this.mSize = 0;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public ArraySet(ArraySet<E> arraySet) {
         this();
         if (arraySet != 0) {
@@ -508,8 +507,6 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
         return result;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v7, types: [java.lang.Object[]] */
     @Override // java.util.Collection, java.util.Set
     public <T> T[] toArray(T[] array) {
         if (array.length < this.mSize) {

@@ -91,7 +91,6 @@ public final class TimeSuggestionHelper {
         dest.writeList(this.mDebugInfo);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static TimeSuggestionHelper handleParseCommandLineArg(
             Class<?> helpedClass, ShellCommand cmd) throws IllegalArgumentException {
         char c;

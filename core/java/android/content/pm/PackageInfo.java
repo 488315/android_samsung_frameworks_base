@@ -6,13 +6,11 @@ import android.os.Parcelable;
 public class PackageInfo implements Parcelable {
     public static final Parcelable.Creator<PackageInfo> CREATOR =
             new Parcelable.Creator<PackageInfo>() { // from class: android.content.pm.PackageInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackageInfo createFromParcel(Parcel source) {
                     return new PackageInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackageInfo[] newArray(int size) {
                     return new PackageInfo[size];

@@ -187,7 +187,6 @@ public final class SemBioAnalyticsManager {
             return sb2;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:6:0x0035  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -444,8 +443,6 @@ public final class SemBioAnalyticsManager {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:33:0x0088 A[Catch: Exception -> 0x0091, TryCatch #1 {Exception -> 0x0091, blocks: (B:31:0x0082, B:33:0x0088, B:34:0x0096, B:38:0x0093), top: B:30:0x0082 }] */
-        /* JADX WARN: Removed duplicated region for block: B:38:0x0093 A[Catch: Exception -> 0x0091, TryCatch #1 {Exception -> 0x0091, blocks: (B:31:0x0082, B:33:0x0088, B:34:0x0096, B:38:0x0093), top: B:30:0x0082 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

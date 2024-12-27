@@ -340,7 +340,6 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
         return this.mCallback.minimizeSoftInput(iInputMethodClient, i);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(
             FileDescriptor fileDescriptor,
             FileDescriptor fileDescriptor2,

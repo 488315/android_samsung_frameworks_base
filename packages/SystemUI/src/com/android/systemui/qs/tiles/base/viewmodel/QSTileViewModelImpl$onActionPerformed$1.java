@@ -15,7 +15,6 @@ final class QSTileViewModelImpl$onActionPerformed$1 extends SuspendLambda implem
     int label;
     final /* synthetic */ QSTileViewModelImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QSTileViewModelImpl$onActionPerformed$1(QSTileViewModelImpl qSTileViewModelImpl, QSTileUserAction qSTileUserAction, Continuation continuation) {
         super(2, continuation);
         this.this$0 = qSTileViewModelImpl;

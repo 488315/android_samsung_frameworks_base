@@ -46,9 +46,6 @@ final class FlowKt$sample$1 extends SuspendLambda implements Function2 {
                 this.$transform = function3;
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:19:0x0066 A[RETURN] */
-            /* JADX WARN: Removed duplicated region for block: B:20:0x003a  */
-            /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
             @Override // kotlinx.coroutines.flow.FlowCollector
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -126,7 +123,6 @@ final class FlowKt$sample$1 extends SuspendLambda implements Function2 {
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(Flow flow, Flow flow2, FlowCollector flowCollector, Function3 function3, Continuation continuation) {
             super(2, continuation);
             this.$this_sample = flow;
@@ -178,7 +174,6 @@ final class FlowKt$sample$1 extends SuspendLambda implements Function2 {
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FlowKt$sample$1(Flow flow, Flow flow2, Function3 function3, Continuation continuation) {
         super(2, continuation);
         this.$this_sample = flow;

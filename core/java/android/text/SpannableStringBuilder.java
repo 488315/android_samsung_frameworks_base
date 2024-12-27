@@ -621,9 +621,6 @@ public class SpannableStringBuilder
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0075  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x005a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -860,9 +857,6 @@ public class SpannableStringBuilder
         return count;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0047 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0048  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

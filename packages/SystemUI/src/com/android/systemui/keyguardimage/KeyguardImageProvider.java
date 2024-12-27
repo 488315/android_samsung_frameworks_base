@@ -76,9 +76,6 @@ public class KeyguardImageProvider extends ContentProvider {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:126:0x01eb  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x019c  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x01a1  */
     @Override // android.content.ContentProvider
     /*
         Code decompiled incorrectly, please refer to instructions dump.

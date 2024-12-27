@@ -12,7 +12,6 @@ final class KeyguardClockRepositoryImpl$selectedClockSize$2$1 extends SuspendLam
     int label;
     final /* synthetic */ KeyguardClockRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardClockRepositoryImpl$selectedClockSize$2$1(KeyguardClockRepositoryImpl keyguardClockRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardClockRepositoryImpl;

@@ -573,7 +573,6 @@ public final class MediaSessionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$addOnMediaKeyEventSessionChangedListener$0(
             OnMediaKeyEventSessionChangedListener listener) {
         listener.onMediaKeyEventSessionChanged(
@@ -699,7 +698,6 @@ public final class MediaSessionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class SessionsChangedWrapper {
         private Context mContext;
         private Executor mExecutor;
@@ -733,13 +731,11 @@ public final class MediaSessionManager {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onActiveSessionsChanged$0(List tokens) {
                 SessionsChangedWrapper.this.callOnActiveSessionsChangedListener(tokens);
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void callOnActiveSessionsChangedListener(List<MediaSession.Token> tokens) {
             Context context = this.mContext;
             if (context != null) {
@@ -755,7 +751,6 @@ public final class MediaSessionManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void release() {
             this.mListener = null;
             this.mContext = null;
@@ -763,7 +758,6 @@ public final class MediaSessionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class Session2TokensChangedWrapper {
         private final Executor mExecutor;
         private final OnSession2TokensChangedListener mListener;
@@ -773,7 +767,6 @@ public final class MediaSessionManager {
         class AnonymousClass1 extends ISession2TokensListener.Stub {
             AnonymousClass1() {}
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onSession2TokensChanged$0(List tokens) {
                 Session2TokensChangedWrapper.this.mListener.onSession2TokensChanged(tokens);
             }
@@ -870,7 +863,6 @@ public final class MediaSessionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class OnMediaKeyEventDispatchedListenerStub
             extends IOnMediaKeyEventDispatchedListener.Stub {
         private OnMediaKeyEventDispatchedListenerStub() {}
@@ -900,7 +892,6 @@ public final class MediaSessionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class OnMediaKeyEventSessionChangedListenerStub
             extends IOnMediaKeyEventSessionChangedListener.Stub {
         private OnMediaKeyEventSessionChangedListenerStub() {}
@@ -931,7 +922,6 @@ public final class MediaSessionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class RemoteSessionCallbackStub extends IRemoteSessionCallback.Stub {
         private RemoteSessionCallbackStub() {}
 

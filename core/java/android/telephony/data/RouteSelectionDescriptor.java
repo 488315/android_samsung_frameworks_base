@@ -14,13 +14,11 @@ public final class RouteSelectionDescriptor implements Parcelable {
             new Parcelable.Creator<
                     RouteSelectionDescriptor>() { // from class:
                                                   // android.telephony.data.RouteSelectionDescriptor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RouteSelectionDescriptor createFromParcel(Parcel source) {
                     return new RouteSelectionDescriptor(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RouteSelectionDescriptor[] newArray(int size) {
                     return new RouteSelectionDescriptor[size];

@@ -28,7 +28,6 @@ public final class StatusBarBoundsProvider {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.statusbar.phone.StatusBarBoundsProvider$layoutListener$1] */
     public StatusBarBoundsProvider(View view, View view2) {
         this.startSideContent = view;
         this.endSideContent = view2;

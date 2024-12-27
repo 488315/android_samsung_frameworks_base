@@ -51,13 +51,11 @@ public final class SmsCbCmasInfo implements Parcelable {
     public static final Parcelable.Creator<SmsCbCmasInfo> CREATOR =
             new Parcelable.Creator<
                     SmsCbCmasInfo>() { // from class: android.telephony.SmsCbCmasInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmsCbCmasInfo createFromParcel(Parcel in) {
                     return new SmsCbCmasInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmsCbCmasInfo[] newArray(int size) {
                     return new SmsCbCmasInfo[size];

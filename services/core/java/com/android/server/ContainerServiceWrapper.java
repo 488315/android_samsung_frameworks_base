@@ -137,8 +137,6 @@ public final class ContainerServiceWrapper {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.ContainerServiceWrapper$1] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.ContainerServiceWrapper$2] */
     public ContainerServiceWrapper(
             Context context,
             PersonaServiceProxy personaServiceProxy,

@@ -9,7 +9,6 @@ public class AccessControlProfileParcel implements Parcelable {
             new Parcelable.Creator<
                     AccessControlProfileParcel>() { // from class:
                                                     // android.security.identity.AccessControlProfileParcel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessControlProfileParcel createFromParcel(Parcel _aidl_source) {
                     AccessControlProfileParcel _aidl_out = new AccessControlProfileParcel();
@@ -17,7 +16,6 @@ public class AccessControlProfileParcel implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessControlProfileParcel[] newArray(int _aidl_size) {
                     return new AccessControlProfileParcel[_aidl_size];

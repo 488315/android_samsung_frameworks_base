@@ -12,7 +12,6 @@ public class Properties implements Parcelable {
     public static final Parcelable.Creator<Properties> CREATOR =
             new Parcelable.Creator<
                     Properties>() { // from class: android.media.soundtrigger.Properties.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Properties createFromParcel(Parcel _aidl_source) {
                     Properties _aidl_out = new Properties();
@@ -20,7 +19,6 @@ public class Properties implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Properties[] newArray(int _aidl_size) {
                     return new Properties[_aidl_size];

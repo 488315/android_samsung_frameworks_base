@@ -749,13 +749,11 @@ public class AlarmManager {
         public static final Parcelable.Creator<AlarmClockInfo> CREATOR =
                 new Parcelable.Creator<
                         AlarmClockInfo>() { // from class: android.app.AlarmManager.AlarmClockInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AlarmClockInfo createFromParcel(Parcel in) {
                         return new AlarmClockInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AlarmClockInfo[] newArray(int size) {
                         return new AlarmClockInfo[size];

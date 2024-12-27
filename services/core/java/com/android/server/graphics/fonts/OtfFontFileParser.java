@@ -20,7 +20,6 @@ import java.nio.NioUtils;
 import java.nio.channels.FileChannel;
 
 public final class OtfFontFileParser {
-    /* JADX WARN: Finally extract failed */
     public static String buildFontFileName(File file) {
         ByteBuffer mmap = mmap(file);
         try {

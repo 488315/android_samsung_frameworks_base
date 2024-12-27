@@ -17,7 +17,6 @@ final class SharedPreferencesExt$observe$1 extends SuspendLambda implements Func
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SharedPreferencesExt$observe$1(SharedPreferences sharedPreferences, Continuation continuation) {
         super(2, continuation);
         this.$this_observe = sharedPreferences;
@@ -46,7 +45,6 @@ final class SharedPreferencesExt$observe$1 extends SuspendLambda implements Func
             this.$this_observe.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
             final SharedPreferences sharedPreferences = this.$this_observe;
             Function0 function0 = new Function0() { // from class: com.android.systemui.util.kotlin.SharedPreferencesExt$observe$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

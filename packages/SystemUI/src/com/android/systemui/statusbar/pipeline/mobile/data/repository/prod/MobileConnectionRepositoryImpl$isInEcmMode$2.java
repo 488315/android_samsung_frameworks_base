@@ -12,7 +12,6 @@ final class MobileConnectionRepositoryImpl$isInEcmMode$2 extends SuspendLambda i
     int label;
     final /* synthetic */ MobileConnectionRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileConnectionRepositoryImpl$isInEcmMode$2(MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mobileConnectionRepositoryImpl;

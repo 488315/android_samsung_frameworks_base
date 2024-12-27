@@ -92,7 +92,6 @@ public final class LockSettingsShellCommand extends ShellCommand {
                                 : LockscreenCredential.createPassword(this.mOld);
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:18:0x0085 -> B:14:0x0086). Please report as a decompilation issue!!! */
     public final boolean isNewCredentialSufficient(LockscreenCredential lockscreenCredential) {
         boolean z;
         KnoxContainerManager knoxContainerManager;
@@ -147,8 +146,6 @@ public final class LockSettingsShellCommand extends ShellCommand {
         return false;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     public final int onCommand(String str) {
         char c;
         boolean z;

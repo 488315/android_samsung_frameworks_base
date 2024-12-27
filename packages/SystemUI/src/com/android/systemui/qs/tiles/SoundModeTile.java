@@ -182,7 +182,6 @@ public final class SoundModeTile extends SQSTileImpl {
         return SecStatusBarAudioManagerHelper.getInstance(this.mContext).getRingerMode(false);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleClick(Expandable expandable) {
         if (((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isSoundModeTileBlocked()) {

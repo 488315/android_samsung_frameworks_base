@@ -9,14 +9,12 @@ public final class TelephonyTimeZoneAlgorithmStatus implements Parcelable {
     public static final Parcelable.Creator<TelephonyTimeZoneAlgorithmStatus> CREATOR =
             new Parcelable.Creator<TelephonyTimeZoneAlgorithmStatus>() { // from class:
                 // android.app.time.TelephonyTimeZoneAlgorithmStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TelephonyTimeZoneAlgorithmStatus createFromParcel(Parcel in) {
                     int algorithmStatus = in.readInt();
                     return new TelephonyTimeZoneAlgorithmStatus(algorithmStatus);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TelephonyTimeZoneAlgorithmStatus[] newArray(int size) {
                     return new TelephonyTimeZoneAlgorithmStatus[size];

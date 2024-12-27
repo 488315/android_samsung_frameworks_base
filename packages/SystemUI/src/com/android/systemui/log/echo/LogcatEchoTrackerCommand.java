@@ -75,8 +75,6 @@ public final class LogcatEchoTrackerCommand extends ParseableCommand {
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
      */
-    /* JADX WARN: Type inference failed for: r0v6, types: [kotlin.text.MatcherMatchResult$groupValues$1] */
-    /* JADX WARN: Type inference failed for: r1v23, types: [kotlin.text.MatcherMatchResult$groupValues$1] */
     public static Outcome parseTagStructure(String str, EchoOverrideType echoOverrideType) {
         final MatcherMatchResult matchEntire = LogcatEchoTrackerCommandKt.OVERRIDE_PATTERN.matchEntire(str);
         if (matchEntire == null) {

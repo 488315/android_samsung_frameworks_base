@@ -304,7 +304,6 @@ public final class NotifCollection implements Dumpable, PipelineDumpable {
         TimeUnit.SECONDS.toMillis(5L);
     }
 
-    /* JADX WARN: Type inference failed for: r3v9, types: [com.android.systemui.statusbar.notification.collection.NotifCollection$$ExternalSyntheticLambda1] */
     public NotifCollection(IStatusBarService iStatusBarService, SystemClock systemClock, NotifPipelineFlags notifPipelineFlags, NotifCollectionLogger notifCollectionLogger, Handler handler, Executor executor, LogBufferEulogizer logBufferEulogizer, DumpManager dumpManager, NotificationDismissibilityProvider notificationDismissibilityProvider) {
         ArrayMap arrayMap = new ArrayMap();
         this.mNotificationSet = arrayMap;

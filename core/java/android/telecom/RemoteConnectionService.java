@@ -731,12 +731,10 @@ final class RemoteConnectionService {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean hasConnection(String callId) {
         return this.mConnectionById.containsKey(callId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public RemoteConnection findConnectionForAction(String callId, String action) {
         if (this.mConnectionById.containsKey(callId)) {
             return this.mConnectionById.get(callId);
@@ -745,7 +743,6 @@ final class RemoteConnectionService {
         return NULL_CONNECTION;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public RemoteConference findConferenceForAction(String callId, String action) {
         if (this.mConferenceById.containsKey(callId)) {
             return this.mConferenceById.get(callId);
@@ -754,7 +751,6 @@ final class RemoteConnectionService {
         return NULL_CONFERENCE;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void maybeDisconnectAdapter() {
         if (this.mConnectionById.isEmpty() && this.mConferenceById.isEmpty()) {
             try {

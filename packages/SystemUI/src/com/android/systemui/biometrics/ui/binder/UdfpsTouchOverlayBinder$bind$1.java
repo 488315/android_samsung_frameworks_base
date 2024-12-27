@@ -44,7 +44,6 @@ final class UdfpsTouchOverlayBinder$bind$1 extends SuspendLambda implements Func
             final /* synthetic */ UdfpsTouchOverlayViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C00501(UdfpsTouchOverlayViewModel udfpsTouchOverlayViewModel, UdfpsTouchOverlay udfpsTouchOverlay, UdfpsOverlayInteractor udfpsOverlayInteractor, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = udfpsTouchOverlayViewModel;
@@ -100,7 +99,6 @@ final class UdfpsTouchOverlayBinder$bind$1 extends SuspendLambda implements Func
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(UdfpsTouchOverlayViewModel udfpsTouchOverlayViewModel, UdfpsTouchOverlay udfpsTouchOverlay, UdfpsOverlayInteractor udfpsOverlayInteractor, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = udfpsTouchOverlayViewModel;
@@ -131,7 +129,6 @@ final class UdfpsTouchOverlayBinder$bind$1 extends SuspendLambda implements Func
             final UdfpsTouchOverlay udfpsTouchOverlay = this.$view;
             final UdfpsOverlayInteractor udfpsOverlayInteractor = this.$udfpsOverlayInteractor;
             ((JobSupport) launch$default).invokeOnCompletion(new Function1() { // from class: com.android.systemui.biometrics.ui.binder.UdfpsTouchOverlayBinder.bind.1.1.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -147,7 +144,6 @@ final class UdfpsTouchOverlayBinder$bind$1 extends SuspendLambda implements Func
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UdfpsTouchOverlayBinder$bind$1(UdfpsTouchOverlayViewModel udfpsTouchOverlayViewModel, UdfpsTouchOverlay udfpsTouchOverlay, UdfpsOverlayInteractor udfpsOverlayInteractor, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = udfpsTouchOverlayViewModel;

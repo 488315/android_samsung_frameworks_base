@@ -13,7 +13,6 @@ public final class DisplayPortAltModeInfo implements Parcelable {
     public static final Parcelable.Creator<DisplayPortAltModeInfo> CREATOR =
             new Parcelable.Creator<DisplayPortAltModeInfo>() { // from class:
                 // android.hardware.usb.DisplayPortAltModeInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisplayPortAltModeInfo createFromParcel(Parcel in) {
                     int partnerSinkStatus = in.readInt();
@@ -29,7 +28,6 @@ public final class DisplayPortAltModeInfo implements Parcelable {
                             linkTrainingStatus);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisplayPortAltModeInfo[] newArray(int size) {
                     return new DisplayPortAltModeInfo[size];

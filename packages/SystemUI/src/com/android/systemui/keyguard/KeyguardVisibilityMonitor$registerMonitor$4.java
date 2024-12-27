@@ -15,7 +15,6 @@ final class KeyguardVisibilityMonitor$registerMonitor$4 extends SuspendLambda im
     int label;
     final /* synthetic */ KeyguardVisibilityMonitor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardVisibilityMonitor$registerMonitor$4(KeyguardVisibilityMonitor keyguardVisibilityMonitor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardVisibilityMonitor;

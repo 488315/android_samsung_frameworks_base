@@ -18,7 +18,6 @@ final class CommunalWidgetRepositoryImpl$addWidget$1 extends SuspendLambda imple
     int label;
     final /* synthetic */ CommunalWidgetRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalWidgetRepositoryImpl$addWidget$1(CommunalWidgetRepositoryImpl communalWidgetRepositoryImpl, ComponentName componentName, UserHandle userHandle, WidgetConfigurator widgetConfigurator, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalWidgetRepositoryImpl;
@@ -38,10 +37,6 @@ final class CommunalWidgetRepositoryImpl$addWidget$1 extends SuspendLambda imple
         return ((CommunalWidgetRepositoryImpl$addWidget$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x011a  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00cc  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00ce  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x00f1  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

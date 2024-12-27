@@ -9,7 +9,6 @@ public final class BluetoothProfileConnectionInfo implements Parcelable {
     public static final Parcelable.Creator<BluetoothProfileConnectionInfo> CREATOR =
             new Parcelable.Creator<BluetoothProfileConnectionInfo>() { // from class:
                 // android.media.BluetoothProfileConnectionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BluetoothProfileConnectionInfo createFromParcel(Parcel source) {
                     return new BluetoothProfileConnectionInfo(
@@ -19,7 +18,6 @@ public final class BluetoothProfileConnectionInfo implements Parcelable {
                             source.readBoolean());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BluetoothProfileConnectionInfo[] newArray(int size) {
                     return new BluetoothProfileConnectionInfo[size];

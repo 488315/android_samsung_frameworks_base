@@ -142,7 +142,6 @@ public class NearestTouchFrame extends FrameLayout {
         this.mIsVertical = z;
     }
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.navigationbar.buttons.NearestTouchFrame$$ExternalSyntheticLambda0] */
     public NearestTouchFrame(Context context, AttributeSet attributeSet, Configuration configuration) {
         super(context, attributeSet);
         this.mClickableChildren = new ArrayList();

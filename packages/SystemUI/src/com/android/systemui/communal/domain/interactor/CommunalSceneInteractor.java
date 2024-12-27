@@ -25,7 +25,6 @@ public final class CommunalSceneInteractor {
     public final ReadonlyStateFlow isIdleOnCommunal;
     public final StateFlow transitionState;
 
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.communal.domain.interactor.CommunalSceneInteractor$special$$inlined$map$2] */
     public CommunalSceneInteractor(CoroutineScope coroutineScope, CommunalSceneRepository communalSceneRepository) {
         this.communalSceneRepository = communalSceneRepository;
         CommunalSceneRepositoryImpl communalSceneRepositoryImpl = (CommunalSceneRepositoryImpl) communalSceneRepository;
@@ -63,8 +62,6 @@ public final class CommunalSceneInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -166,8 +163,6 @@ public final class CommunalSceneInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

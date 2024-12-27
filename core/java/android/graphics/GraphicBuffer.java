@@ -8,7 +8,6 @@ public class GraphicBuffer implements Parcelable {
     public static final Parcelable.Creator<GraphicBuffer> CREATOR =
             new Parcelable.Creator<
                     GraphicBuffer>() { // from class: android.graphics.GraphicBuffer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GraphicBuffer createFromParcel(Parcel in) {
                     int width = in.readInt();
@@ -22,7 +21,6 @@ public class GraphicBuffer implements Parcelable {
                     return null;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GraphicBuffer[] newArray(int size) {
                     return new GraphicBuffer[size];
@@ -61,7 +59,6 @@ public class GraphicBuffer implements Parcelable {
 
     private static native boolean nLockCanvas(long j, Canvas canvas, Rect rect);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nReadGraphicBufferFromParcel(Parcel parcel);
 
     private static native boolean nUnlockCanvasAndPost(long j, Canvas canvas);

@@ -220,8 +220,6 @@ public final class Firewall extends IFirewall.Stub implements EnterpriseServiceC
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class DownloadBlockStatus {
         public static final /* synthetic */ DownloadBlockStatus[] $VALUES;
         public static final DownloadBlockStatus BLOCKED_BY_BLACKLIST_RULE;
@@ -1292,7 +1290,6 @@ public final class Firewall extends IFirewall.Stub implements EnterpriseServiceC
         return false;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(24:5|6|(22:70|(1:(1:73)(1:74))(1:75)|9|(19:62|(1:(1:(1:66)(1:67))(1:68))(1:69)|12|13|14|(14:52|(1:(1:(1:56)(1:57))(1:58))(1:59)|17|18|(10:43|(1:(1:(1:47)(1:48))(1:49))(1:50)|21|22|23|(5:31|(1:(1:(2:35|(1:37)(1:38))(1:39))(1:40))|26|27|29)|25|26|27|29)|20|21|22|23|(0)|25|26|27|29)|16|17|18|(0)|20|21|22|23|(0)|25|26|27|29)|11|12|13|14|(0)|16|17|18|(0)|20|21|22|23|(0)|25|26|27|29)|8|9|(0)|11|12|13|14|(0)|16|17|18|(0)|20|21|22|23|(0)|25|26|27|29) */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x00e0, code lost:
 
        r11 = move-exception;
@@ -1309,10 +1306,6 @@ public final class Firewall extends IFirewall.Stub implements EnterpriseServiceC
 
        android.util.Log.e("Firewall", "Failed to put parameter in json: " + r3.getMessage());
     */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00c5 A[Catch: JSONException -> 0x0081, UnsupportedOperationException -> 0x00e0, TryCatch #2 {UnsupportedOperationException -> 0x00e0, blocks: (B:23:0x00ba, B:26:0x00dc, B:31:0x00c5), top: B:22:0x00ba, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00a3 A[Catch: JSONException -> 0x0081, TryCatch #0 {JSONException -> 0x0081, blocks: (B:6:0x0007, B:9:0x0038, B:12:0x005b, B:14:0x005e, B:17:0x007d, B:18:0x0098, B:21:0x00b7, B:23:0x00ba, B:26:0x00dc, B:27:0x00f4, B:31:0x00c5, B:42:0x00e1, B:43:0x00a3, B:52:0x0069, B:61:0x0085, B:62:0x0047, B:70:0x0028), top: B:5:0x0007, inners: #1, #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0069 A[Catch: JSONException -> 0x0081, UnsupportedOperationException -> 0x0084, TryCatch #1 {UnsupportedOperationException -> 0x0084, blocks: (B:14:0x005e, B:17:0x007d, B:52:0x0069), top: B:13:0x005e, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x0047 A[Catch: JSONException -> 0x0081, TryCatch #0 {JSONException -> 0x0081, blocks: (B:6:0x0007, B:9:0x0038, B:12:0x005b, B:14:0x005e, B:17:0x007d, B:18:0x0098, B:21:0x00b7, B:23:0x00ba, B:26:0x00dc, B:27:0x00f4, B:31:0x00c5, B:42:0x00e1, B:43:0x00a3, B:52:0x0069, B:61:0x0085, B:62:0x0047, B:70:0x0028), top: B:5:0x0007, inners: #1, #2 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

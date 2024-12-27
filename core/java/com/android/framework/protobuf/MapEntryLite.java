@@ -133,7 +133,6 @@ public class MapEntryLite<K, V> {
         return new AbstractMap.SimpleImmutableEntry(obj, obj2);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public void parseInto(
             MapFieldLite<K, V> mapFieldLite,
             CodedInputStream input,

@@ -678,14 +678,6 @@ public final class TaskPersister implements PersisterQueue.Listener {
         this.mPersisterQueue.yieldIfQueueTooDeep();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0 */
-    /* JADX WARN: Type inference failed for: r1v1 */
-    /* JADX WARN: Type inference failed for: r1v12 */
-    /* JADX WARN: Type inference failed for: r1v13 */
-    /* JADX WARN: Type inference failed for: r1v2, types: [java.lang.AutoCloseable] */
-    /* JADX WARN: Type inference failed for: r1v4 */
-    /* JADX WARN: Type inference failed for: r1v5 */
     public void writePersistedTaskIdsForUser(SparseBooleanArray sparseBooleanArray, int i) {
         int size;
         if (i < 0) {

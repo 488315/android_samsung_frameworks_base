@@ -18,13 +18,11 @@ public class VolumeRecord implements Parcelable {
     public static final Parcelable.Creator<VolumeRecord> CREATOR =
             new Parcelable.Creator<
                     VolumeRecord>() { // from class: android.os.storage.VolumeRecord.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VolumeRecord createFromParcel(Parcel in) {
                     return new VolumeRecord(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VolumeRecord[] newArray(int size) {
                     return new VolumeRecord[size];

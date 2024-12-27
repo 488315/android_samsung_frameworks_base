@@ -12,8 +12,6 @@ import java.io.PrintWriter;
 public final class AODManagerShellCommand extends ShellCommand {
     public Context mContext;
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0036  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0048 A[Catch: Exception -> 0x0026, TRY_LEAVE, TryCatch #0 {Exception -> 0x0026, blocks: (B:8:0x000a, B:16:0x0038, B:18:0x0044, B:19:0x0048, B:20:0x001b, B:23:0x0028), top: B:7:0x000a }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

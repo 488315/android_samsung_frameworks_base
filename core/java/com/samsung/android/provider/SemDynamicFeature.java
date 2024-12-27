@@ -78,7 +78,6 @@ public final class SemDynamicFeature {
         return isAllowed;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static DynamicFeatureManager getService(Context context) {
         if (dfManager != null) {
             return dfManager;
@@ -115,13 +114,11 @@ public final class SemDynamicFeature {
                 new Parcelable.Creator<
                         Properties>() { // from class:
                                         // com.samsung.android.provider.SemDynamicFeature.Properties.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Properties createFromParcel(Parcel source) {
                         return new Properties(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Properties[] newArray(int size) {
                         return new Properties[size];

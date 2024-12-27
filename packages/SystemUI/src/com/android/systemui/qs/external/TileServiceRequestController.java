@@ -108,7 +108,6 @@ public final class TileServiceRequestController {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.qs.external.TileServiceRequestController$commandQueueCallback$1] */
     public TileServiceRequestController(QSHost qSHost, CommandQueue commandQueue, CommandRegistry commandRegistry, TileRequestDialogEventLogger tileRequestDialogEventLogger, IUriGrantsManager iUriGrantsManager, Function0 function0) {
         this.qsHost = qSHost;
         this.commandQueue = commandQueue;
@@ -255,7 +254,6 @@ public final class TileServiceRequestController {
                 tileRequestDialog.setNegativeButton(R.string.sec_qs_tile_request_dialog_cancel, onClickListener);
                 final SystemUIDialog systemUIDialog = (SystemUIDialog) invoke;
                 this.dialogCanceller = new Function1() { // from class: com.android.systemui.qs.external.TileServiceRequestController$requestTileAdd$1$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -310,7 +308,6 @@ public final class TileServiceRequestController {
         tileRequestDialog.setNegativeButton(R.string.sec_qs_tile_request_dialog_cancel, onClickListener);
         final SystemUIDialog systemUIDialog2 = (SystemUIDialog) invoke;
         this.dialogCanceller = new Function1() { // from class: com.android.systemui.qs.external.TileServiceRequestController$requestTileAdd$1$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

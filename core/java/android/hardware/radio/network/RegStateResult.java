@@ -12,7 +12,6 @@ public class RegStateResult implements Parcelable {
     public static final Parcelable.Creator<RegStateResult> CREATOR =
             new Parcelable.Creator<RegStateResult>() { // from class:
                 // android.hardware.radio.network.RegStateResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RegStateResult createFromParcel(Parcel _aidl_source) {
                     RegStateResult _aidl_out = new RegStateResult();
@@ -20,7 +19,6 @@ public class RegStateResult implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RegStateResult[] newArray(int _aidl_size) {
                     return new RegStateResult[_aidl_size];

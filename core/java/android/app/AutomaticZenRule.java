@@ -18,13 +18,11 @@ public final class AutomaticZenRule implements Parcelable {
     public static final Parcelable.Creator<AutomaticZenRule> CREATOR =
             new Parcelable.Creator<
                     AutomaticZenRule>() { // from class: android.app.AutomaticZenRule.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AutomaticZenRule createFromParcel(Parcel source) {
                     return new AutomaticZenRule(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AutomaticZenRule[] newArray(int size) {
                     return new AutomaticZenRule[size];
@@ -263,7 +261,6 @@ public final class AutomaticZenRule implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int checkValidType(int type) {
         Preconditions.checkArgument(
                 type >= -1 && type <= 7,

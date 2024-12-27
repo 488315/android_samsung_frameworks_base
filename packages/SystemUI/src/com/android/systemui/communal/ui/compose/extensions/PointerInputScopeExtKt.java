@@ -9,12 +9,6 @@ import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.CoroutineScopeKt;
 
 public abstract class PointerInputScopeExtKt {
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0058 A[LOOP:0: B:11:0x0056->B:12:0x0058, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x006c  */
-    /* JADX WARN: Removed duplicated region for block: B:22:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:19:0x0049 -> B:10:0x004c). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

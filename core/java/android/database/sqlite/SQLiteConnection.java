@@ -125,7 +125,6 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
     private static native long nativeOpen(
             String str, int i, String str2, boolean z, boolean z2, int i2, int i3);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativePrepareStatement(long j, String str);
 
     private static native void nativeRegisterCustomAggregateFunction(
@@ -579,7 +578,6 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static String canonicalizeSyncMode(String value) {
         char c;
         switch (value.hashCode()) {
@@ -1160,7 +1158,6 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:59:0x01a3 A[Catch: all -> 0x01db, TryCatch #14 {all -> 0x01db, blocks: (B:39:0x00b4, B:57:0x0197, B:59:0x01a3, B:60:0x01da), top: B:8:0x002d }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1196,7 +1193,6 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         nativeExportDB(this.mConnectionPtr, attachedDB);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void printQueryPlan(String sql) {
         long result;
         if (this.mIsOpen) {
@@ -1278,7 +1274,6 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String analyzeSql(String sql) {
         synchronized (this) {
             if (!this.mIsOpen) {
@@ -1391,7 +1386,6 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         releasePreparedStatementLI(statement);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void finalizePreparedStatement(PreparedStatement statement) {
         nativeFinalizeStatement(this.mConnectionPtr, statement.mStatementPtr);
         recyclePreparedStatement(statement);
@@ -1537,7 +1531,6 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         return this.mRecentOperations.describeCurrentOperation();
     }
 
-    /* JADX WARN: Unreachable blocks removed: 2, instructions: 2 */
     void collectDbStats(ArrayList<SQLiteDebug.DbStats> dbStatsList) {
         long pageCount;
         long pageSize;
@@ -1673,7 +1666,6 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         this.mPreparedStatementPool = statement;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String trimSqlForDisplay(String sql) {
         return sql.replaceAll("[\\s]*\\n+[\\s]*", " ");
     }
@@ -1725,7 +1717,6 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     SQLiteConnection.this.mConnectionPtr, sql);
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.util.LruCache
         public void entryRemoved(
                 boolean evicted,
@@ -2117,7 +2108,6 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             return "running";
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public String getTraceMethodName() {
             String methodName = this.mKind + " " + this.mSql;
             if (methodName.length() > 256) {

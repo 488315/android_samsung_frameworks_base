@@ -87,7 +87,6 @@ public class MagnifierView extends View implements CropView.CropInteractionListe
         this.mCheckerboard = path3;
     }
 
-    /* JADX WARN: Type inference failed for: r5v3, types: [com.android.systemui.screenshot.scroll.MagnifierView$1] */
     public MagnifierView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.mCheckerboardBoxSize = 40.0f;

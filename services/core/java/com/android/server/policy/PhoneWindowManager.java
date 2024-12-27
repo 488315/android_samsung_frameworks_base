@@ -520,8 +520,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
                     }
                 };
 
-        /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.policy.WakeGestureListener$1] */
-        /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.policy.WakeGestureListener$2] */
         public MyWakeGestureListener(Context context, PolicyHandler policyHandler) {
             SensorManager sensorManager = (SensorManager) context.getSystemService("sensor");
             this.mSensorManager = sensorManager;
@@ -954,7 +952,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ PhoneWindowManager this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public PowerKeyRule(PhoneWindowManager phoneWindowManager, int i) {
             super(26);
             this.$r8$classId = i;
@@ -1751,10 +1748,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.policy.PhoneWindowManager$13] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.policy.PhoneWindowManager$13] */
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.server.policy.PhoneWindowManager$3] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.server.policy.PhoneWindowManager$2] */
     public PhoneWindowManager() {
         new LogDecelerateInterpolator(100, 0);
         this.mDeferredKeyActionExecutor = new DeferredKeyActionExecutor();
@@ -2036,8 +2029,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:72:0x00d7  */
-    /* JADX WARN: Removed duplicated region for block: B:74:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3268,16 +3259,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:180:0x009f  */
-    /* JADX WARN: Removed duplicated region for block: B:207:0x0083  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00eb  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00f3  */
-    /* JADX WARN: Type inference failed for: r0v31 */
-    /* JADX WARN: Type inference failed for: r0v6 */
-    /* JADX WARN: Type inference failed for: r0v7, types: [boolean, int] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3802,7 +3783,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
                             public final /* synthetic */ int $r8$classId;
                             public final /* synthetic */ PhoneWindowManagerExt this$0;
 
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             public AnonymousClass5(
                                     final PhoneWindowManagerExt phoneWindowManagerExt2,
                                     final int i2) {
@@ -3957,7 +3937,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
                             public final /* synthetic */ int $r8$classId;
                             public final /* synthetic */ PhoneWindowManagerExt this$0;
 
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             public AnonymousClass5(
                                     final PhoneWindowManagerExt phoneWindowManagerExt2,
                                     final int i22) {
@@ -4109,7 +4088,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
                         public final /* synthetic */ int $r8$classId;
                         public final /* synthetic */ PhoneWindowManager this$0;
 
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(26, 264);
                             this.$r8$classId = r2;
@@ -4406,7 +4384,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
                             public final /* synthetic */ int $r8$classId;
                             public final /* synthetic */ PhoneWindowManager this$0;
 
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(26, 264);
                                 this.$r8$classId = r2;
@@ -4718,7 +4695,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
                     public final /* synthetic */ int $r8$classId;
                     public final /* synthetic */ PhoneWindowManager this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(26, 264);
                         this.$r8$classId = r2;
@@ -4996,7 +4972,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
                         public final /* synthetic */ int $r8$classId;
                         public final /* synthetic */ PhoneWindowManager this$0;
 
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(26, 264);
                             this.$r8$classId = r2;
@@ -5291,7 +5266,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
                         public final /* synthetic */ int $r8$classId;
                         public final /* synthetic */ PhoneWindowManager this$0;
 
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(26, 264);
                             this.$r8$classId = r2;
@@ -5587,16 +5561,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
 
        if (r5 == null) goto L36;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0072 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r5v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r5v10 */
-    /* JADX WARN: Type inference failed for: r5v11 */
-    /* JADX WARN: Type inference failed for: r5v12 */
-    /* JADX WARN: Type inference failed for: r5v13 */
-    /* JADX WARN: Type inference failed for: r5v14 */
-    /* JADX WARN: Type inference failed for: r5v5 */
-    /* JADX WARN: Type inference failed for: r5v8, types: [java.io.FileReader] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5734,73 +5698,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
 
        if (r0.isExternal() == false) goto L173;
     */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x0375  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x0b2f  */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x0b3c  */
-    /* JADX WARN: Removed duplicated region for block: B:127:0x0b97  */
-    /* JADX WARN: Removed duplicated region for block: B:158:0x0bf0  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00d4 A[Catch: all -> 0x009b, TryCatch #14 {all -> 0x009b, blocks: (B:16:0x00d4, B:26:0x008f, B:28:0x0099, B:30:0x009d, B:31:0x00a3, B:33:0x00a9, B:35:0x00b7, B:40:0x00c2, B:41:0x00cf), top: B:25:0x008f }] */
-    /* JADX WARN: Removed duplicated region for block: B:171:0x0b91  */
-    /* JADX WARN: Removed duplicated region for block: B:173:0x0379  */
-    /* JADX WARN: Removed duplicated region for block: B:179:0x039d  */
-    /* JADX WARN: Removed duplicated region for block: B:182:0x03ab  */
-    /* JADX WARN: Removed duplicated region for block: B:183:0x03b5  */
-    /* JADX WARN: Removed duplicated region for block: B:186:0x03bf  */
-    /* JADX WARN: Removed duplicated region for block: B:189:0x03d6  */
-    /* JADX WARN: Removed duplicated region for block: B:192:0x03ed  */
-    /* JADX WARN: Removed duplicated region for block: B:193:0x03f7  */
-    /* JADX WARN: Removed duplicated region for block: B:196:0x0415  */
-    /* JADX WARN: Removed duplicated region for block: B:202:0x0497  */
-    /* JADX WARN: Removed duplicated region for block: B:220:0x049c  */
-    /* JADX WARN: Removed duplicated region for block: B:221:0x04a7  */
-    /* JADX WARN: Removed duplicated region for block: B:245:0x0543  */
-    /* JADX WARN: Removed duplicated region for block: B:246:0x054e  */
-    /* JADX WARN: Removed duplicated region for block: B:249:0x0559  */
-    /* JADX WARN: Removed duplicated region for block: B:275:0x05bb  */
-    /* JADX WARN: Removed duplicated region for block: B:282:0x05db  */
-    /* JADX WARN: Removed duplicated region for block: B:299:0x063b  */
-    /* JADX WARN: Removed duplicated region for block: B:302:0x0646  */
-    /* JADX WARN: Removed duplicated region for block: B:313:0x066b  */
-    /* JADX WARN: Removed duplicated region for block: B:319:0x0af7  */
-    /* JADX WARN: Removed duplicated region for block: B:328:0x0b15 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:332:0x066f  */
-    /* JADX WARN: Removed duplicated region for block: B:347:0x06c4  */
-    /* JADX WARN: Removed duplicated region for block: B:350:0x06d3  */
-    /* JADX WARN: Removed duplicated region for block: B:360:0x0700  */
-    /* JADX WARN: Removed duplicated region for block: B:375:0x0745  */
-    /* JADX WARN: Removed duplicated region for block: B:417:0x0808  */
-    /* JADX WARN: Removed duplicated region for block: B:438:0x0870  */
-    /* JADX WARN: Removed duplicated region for block: B:456:0x08a7  */
-    /* JADX WARN: Removed duplicated region for block: B:471:0x08ea  */
-    /* JADX WARN: Removed duplicated region for block: B:476:0x08ff  */
-    /* JADX WARN: Removed duplicated region for block: B:484:0x0926  */
-    /* JADX WARN: Removed duplicated region for block: B:500:0x0966  */
-    /* JADX WARN: Removed duplicated region for block: B:508:0x0998  */
-    /* JADX WARN: Removed duplicated region for block: B:542:0x0a21  */
-    /* JADX WARN: Removed duplicated region for block: B:570:0x0a6d  */
-    /* JADX WARN: Removed duplicated region for block: B:599:0x0ac7  */
-    /* JADX WARN: Removed duplicated region for block: B:614:0x0af3  */
-    /* JADX WARN: Removed duplicated region for block: B:615:0x0b1f  */
-    /* JADX WARN: Removed duplicated region for block: B:623:0x034c  */
-    /* JADX WARN: Removed duplicated region for block: B:639:0x024d  */
-    /* JADX WARN: Removed duplicated region for block: B:645:0x029c  */
-    /* JADX WARN: Removed duplicated region for block: B:648:0x0308  */
-    /* JADX WARN: Removed duplicated region for block: B:651:0x0313  */
-    /* JADX WARN: Removed duplicated region for block: B:654:0x031e  */
-    /* JADX WARN: Removed duplicated region for block: B:657:0x032a  */
-    /* JADX WARN: Removed duplicated region for block: B:660:0x0337 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:665:0x020b  */
-    /* JADX WARN: Removed duplicated region for block: B:668:0x0216  */
-    /* JADX WARN: Removed duplicated region for block: B:675:0x0234  */
-    /* JADX WARN: Removed duplicated region for block: B:677:0x0247  */
-    /* JADX WARN: Removed duplicated region for block: B:678:0x023d  */
-    /* JADX WARN: Removed duplicated region for block: B:679:0x021d  */
-    /* JADX WARN: Removed duplicated region for block: B:680:0x020e  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0c18  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x0c43  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x0c5f  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x0c61  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x0c56  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5817,7 +5714,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
                     + " android.view.KeyEvent, int):long");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:137:0x0316, code lost:
 
        if (((android.util.ArraySet) com.android.server.policy.PhoneWindowManagerExt.KEYCODE_DEBUG_LOG_ALLOWLIST).contains(java.lang.Integer.valueOf(r8)) != false) goto L221;
@@ -5862,28 +5758,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
 
        if (r9 == false) goto L84;
     */
-    /* JADX WARN: Failed to find 'out' block for switch in B:170:0x0394. Please report as an issue. */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x0231  */
-    /* JADX WARN: Removed duplicated region for block: B:175:0x05aa  */
-    /* JADX WARN: Removed duplicated region for block: B:177:0x05b1  */
-    /* JADX WARN: Removed duplicated region for block: B:194:0x05f8  */
-    /* JADX WARN: Removed duplicated region for block: B:231:0x0af4  */
-    /* JADX WARN: Removed duplicated region for block: B:236:0x0b09  */
-    /* JADX WARN: Removed duplicated region for block: B:252:0x0b47  */
-    /* JADX WARN: Removed duplicated region for block: B:261:0x0646 A[FALL_THROUGH] */
-    /* JADX WARN: Removed duplicated region for block: B:435:0x098c  */
-    /* JADX WARN: Removed duplicated region for block: B:438:0x09a8  */
-    /* JADX WARN: Removed duplicated region for block: B:509:0x0ac9  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x013e  */
-    /* JADX WARN: Removed duplicated region for block: B:574:0x044e  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0150  */
-    /* JADX WARN: Removed duplicated region for block: B:659:0x01ba  */
-    /* JADX WARN: Removed duplicated region for block: B:666:0x017e  */
-    /* JADX WARN: Removed duplicated region for block: B:678:0x0140  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x01b7  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x01c9  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x01ea  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6200,8 +6074,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0028 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0029  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6391,8 +6263,6 @@ public final class PhoneWindowManager implements WindowManagerPolicy {
                         this, KeyEvent.obtain(keyEvent), 0));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:101:0x0183  */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x018a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

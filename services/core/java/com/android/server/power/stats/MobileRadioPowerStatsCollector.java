@@ -47,7 +47,6 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
     public volatile TelephonyManager mTelephonyManager;
     public BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda0 mVoltageSupplier;
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -100,8 +99,6 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
         return 0;
     }
 
-    /* JADX WARN: Type inference failed for: r9v4, types: [com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r9v5, types: [com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda3] */
     @Override // com.android.server.power.stats.PowerStatsCollector
     public final PowerStats collectStats() {
         ModemActivityInfo modemActivityInfo = null;

@@ -12,13 +12,11 @@ public class EnterpriseLDAPAccount implements Parcelable {
             new Parcelable.Creator<
                     EnterpriseLDAPAccount>() { // from class:
                                                // android.sec.enterprise.email.EnterpriseLDAPAccount.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EnterpriseLDAPAccount createFromParcel(Parcel in) {
                     return new EnterpriseLDAPAccount(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EnterpriseLDAPAccount[] newArray(int size) {
                     return new EnterpriseLDAPAccount[size];

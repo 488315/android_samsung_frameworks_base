@@ -17,7 +17,6 @@ public final class AlternateBouncerMessageAreaViewModel$special$$inlined$flatMap
     int label;
     final /* synthetic */ AlternateBouncerMessageAreaViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AlternateBouncerMessageAreaViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, AlternateBouncerMessageAreaViewModel alternateBouncerMessageAreaViewModel) {
         super(3, continuation);
         this.this$0 = alternateBouncerMessageAreaViewModel;

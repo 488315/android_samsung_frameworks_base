@@ -368,7 +368,6 @@ public interface ISoundDose extends IInterface {
         public static final Parcelable.Creator<AudioDeviceCategory> CREATOR =
                 new Parcelable.Creator<AudioDeviceCategory>() { // from class:
                     // android.media.ISoundDose.AudioDeviceCategory.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AudioDeviceCategory createFromParcel(Parcel _aidl_source) {
                         AudioDeviceCategory _aidl_out = new AudioDeviceCategory();
@@ -376,7 +375,6 @@ public interface ISoundDose extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AudioDeviceCategory[] newArray(int _aidl_size) {
                         return new AudioDeviceCategory[_aidl_size];

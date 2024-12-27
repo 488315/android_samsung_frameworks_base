@@ -60,7 +60,6 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
                 final /* synthetic */ MutableStateFlow $visibilityState;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public C02471(MutableStateFlow mutableStateFlow, SingleBindableStatusBarIconView singleBindableStatusBarIconView, Continuation continuation) {
                     super(2, continuation);
                     this.$visibilityState = mutableStateFlow;
@@ -122,7 +121,6 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
                 final /* synthetic */ SingleBindableStatusBarIconView $view;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass2(MutableStateFlow mutableStateFlow, SingleBindableStatusBarIconView singleBindableStatusBarIconView, Continuation continuation) {
                     super(2, continuation);
                     this.$iconTint = mutableStateFlow;
@@ -183,7 +181,6 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
                 final /* synthetic */ SingleBindableStatusBarIconView $view;
                 int label;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass3(MutableStateFlow mutableStateFlow, SingleBindableStatusBarIconView singleBindableStatusBarIconView, Continuation continuation) {
                     super(2, continuation);
                     this.$decorTint = mutableStateFlow;
@@ -234,7 +231,6 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
                 }
             }
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02461(Ref$BooleanRef ref$BooleanRef, MutableStateFlow mutableStateFlow, SingleBindableStatusBarIconView singleBindableStatusBarIconView, MutableStateFlow mutableStateFlow2, MutableStateFlow mutableStateFlow3, Continuation continuation) {
                 super(2, continuation);
                 this.$isCollecting = ref$BooleanRef;
@@ -285,7 +281,6 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(LifecycleOwner lifecycleOwner, Ref$BooleanRef ref$BooleanRef, MutableStateFlow mutableStateFlow, SingleBindableStatusBarIconView singleBindableStatusBarIconView, MutableStateFlow mutableStateFlow2, MutableStateFlow mutableStateFlow3, Continuation continuation) {
             super(2, continuation);
             this.$$this$repeatWhenAttached = lifecycleOwner;
@@ -329,7 +324,6 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SingleBindableStatusBarIconView$Companion$withDefaultBinding$1(Function3 function3, SingleBindableStatusBarIconView singleBindableStatusBarIconView, Ref$BooleanRef ref$BooleanRef, MutableStateFlow mutableStateFlow, MutableStateFlow mutableStateFlow2, MutableStateFlow mutableStateFlow3, Continuation continuation) {
         super(3, continuation);
         this.$block = function3;

@@ -126,10 +126,6 @@ public final class SecQuickSettingsAffordanceInteractor {
         MAX_PANEL_AFFORDANCE_SHOW = "user".equals(Build.TYPE) ? 10 : 100;
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.shade.domain.interactor.SecQuickSettingsAffordanceInteractor$broadcastReceiver$1] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.shade.domain.interactor.SecQuickSettingsAffordanceInteractor$statusBarStateListener$1] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.shade.domain.interactor.SecQuickSettingsAffordanceInteractor$updateMonitorCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.shade.domain.interactor.SecQuickSettingsAffordanceInteractor$transitionCallback$1] */
     public SecQuickSettingsAffordanceInteractor(Context context, BroadcastDispatcher broadcastDispatcher, StatusBarStateController statusBarStateController, ConfigurationController configurationController, LockscreenShadeTransitionController lockscreenShadeTransitionController) {
         this.context = context;
         this.broadcastDispatcher = broadcastDispatcher;

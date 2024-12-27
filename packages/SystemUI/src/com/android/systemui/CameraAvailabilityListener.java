@@ -80,7 +80,6 @@ public final class CameraAvailabilityListener {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.CameraAvailabilityListener$cameraDeviceStateCallback$1] */
     public CameraAvailabilityListener(CameraManager cameraManager, List<CameraProtectionInfo> list, String str, Executor executor, Handler handler) {
         this.cameraManager = cameraManager;
         this.cameraProtectionInfoList = list;

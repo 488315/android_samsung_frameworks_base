@@ -864,7 +864,6 @@ public abstract class IContextHubWrapper {
         public final /* synthetic */ int $r8$classId;
         public Object mHub;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ ContextHubWrapperV1_0(IContexthub iContexthub, int i) {
             super(iContexthub);
             this.$r8$classId = i;

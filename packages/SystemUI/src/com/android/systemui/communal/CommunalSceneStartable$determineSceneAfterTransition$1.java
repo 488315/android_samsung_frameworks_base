@@ -8,7 +8,6 @@ final class CommunalSceneStartable$determineSceneAfterTransition$1 extends Conti
     /* synthetic */ Object result;
     final /* synthetic */ CommunalSceneStartable this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalSceneStartable$determineSceneAfterTransition$1(CommunalSceneStartable communalSceneStartable, Continuation continuation) {
         super(continuation);
         this.this$0 = communalSceneStartable;

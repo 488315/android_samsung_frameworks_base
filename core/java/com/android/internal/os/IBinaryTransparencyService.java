@@ -263,7 +263,6 @@ public interface IBinaryTransparencyService extends IInterface {
                 new Parcelable.Creator<
                         ApexInfo>() { // from class:
                                       // com.android.internal.os.IBinaryTransparencyService.ApexInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ApexInfo createFromParcel(Parcel _aidl_source) {
                         ApexInfo _aidl_out = new ApexInfo();
@@ -271,7 +270,6 @@ public interface IBinaryTransparencyService extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ApexInfo[] newArray(int _aidl_size) {
                         return new ApexInfo[_aidl_size];
@@ -379,7 +377,6 @@ public interface IBinaryTransparencyService extends IInterface {
                 new Parcelable.Creator<
                         AppInfo>() { // from class:
                                      // com.android.internal.os.IBinaryTransparencyService.AppInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AppInfo createFromParcel(Parcel _aidl_source) {
                         AppInfo _aidl_out = new AppInfo();
@@ -387,7 +384,6 @@ public interface IBinaryTransparencyService extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AppInfo[] newArray(int _aidl_size) {
                         return new AppInfo[_aidl_size];

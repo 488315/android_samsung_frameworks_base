@@ -18,8 +18,6 @@ public final class MdmImageSupplier implements ImageSource.ImageSupplier {
         return "";
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0031  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x002f  */
     @Override // com.android.systemui.wallpaper.engines.image.ImageSource.ImageSupplier
     /*
         Code decompiled incorrectly, please refer to instructions dump.

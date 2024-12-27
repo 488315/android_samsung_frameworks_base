@@ -77,7 +77,6 @@ public final class HdrClamper {
 
     public final class Injector {}
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.server.display.brightness.clamper.HdrClamper$$ExternalSyntheticLambda0] */
     public HdrClamper(
             BrightnessClamperController.ClamperChangeListener clamperChangeListener,
             Handler handler,

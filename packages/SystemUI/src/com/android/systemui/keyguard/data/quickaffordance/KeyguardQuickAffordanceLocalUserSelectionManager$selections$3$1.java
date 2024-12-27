@@ -21,7 +21,6 @@ final class KeyguardQuickAffordanceLocalUserSelectionManager$selections$3$1 exte
     int label;
     final /* synthetic */ KeyguardQuickAffordanceLocalUserSelectionManager this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordanceLocalUserSelectionManager$selections$3$1(KeyguardQuickAffordanceLocalUserSelectionManager keyguardQuickAffordanceLocalUserSelectionManager, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardQuickAffordanceLocalUserSelectionManager;
@@ -39,7 +38,6 @@ final class KeyguardQuickAffordanceLocalUserSelectionManager$selections$3$1 exte
         return ((KeyguardQuickAffordanceLocalUserSelectionManager$selections$3$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         final SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener;
@@ -82,7 +80,6 @@ final class KeyguardQuickAffordanceLocalUserSelectionManager$selections$3$1 exte
         }
         final KeyguardQuickAffordanceLocalUserSelectionManager keyguardQuickAffordanceLocalUserSelectionManager3 = this.this$0;
         Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceLocalUserSelectionManager$selections$3$1.1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

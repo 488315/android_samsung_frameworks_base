@@ -21,13 +21,11 @@ public final class SessionConfiguration implements Parcelable {
     public static final Parcelable.Creator<SessionConfiguration> CREATOR =
             new Parcelable.Creator<SessionConfiguration>() { // from class:
                 // android.hardware.camera2.params.SessionConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SessionConfiguration createFromParcel(Parcel source) {
                     return new SessionConfiguration(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SessionConfiguration[] newArray(int size) {
                     return new SessionConfiguration[size];

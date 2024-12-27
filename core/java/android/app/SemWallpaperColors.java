@@ -53,13 +53,11 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
     public static final Parcelable.Creator<SemWallpaperColors> CREATOR =
             new Parcelable.Creator<
                     SemWallpaperColors>() { // from class: android.app.SemWallpaperColors.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWallpaperColors createFromParcel(Parcel in) {
                     return new SemWallpaperColors(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWallpaperColors[] newArray(int size) {
                     return new SemWallpaperColors[size];
@@ -947,7 +945,6 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         return result;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private void xmlParser(String xml) {
         XmlPullParser parser;
         int eventType;
@@ -1067,7 +1064,6 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         }
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:29:0x0030 -> B:10:0x0040). Please report as a decompilation issue!!! */
     private static void saveBitmaptoJpeg(Bitmap bitmap, String path) {
         Log.d(TAG, "saveBitmaptoJpeg " + path);
         if (path == null) {
@@ -1515,27 +1511,22 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             this.mLegibilityResult = legibilityResult;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setFontColor(int fontColor) {
             this.mFontColor = fontColor;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setFontColorRgb(int fontColorRgb) {
             this.mFontColorRgb = fontColorRgb;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setShadowSize(float shadowSize) {
             this.mShadowSize = shadowSize;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setShadowOpacity(float shadowOpacity) {
             this.mShadowOpacity = shadowOpacity;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setHSV(float[] hsv) {
             this.mHSV = hsv;
         }
@@ -1567,17 +1558,14 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             return new float[] {this.mHSV[0], this.mHSV[1], this.mHSV[2]};
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public LegibilityLogic.LegibilityResult getLegibilityResult() {
             return this.mLegibilityResult;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public LegibilityLogic.LegibilityResult getLeftLegibilityResult() {
             return this.mLeftLegibilityResult;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public LegibilityLogic.LegibilityResult getRightLegibilityResult() {
             return this.mRightLegibilityResult;
         }

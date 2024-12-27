@@ -177,13 +177,11 @@ public class SContext implements Parcelable {
     };
     public static final Parcelable.Creator<SContext> CREATOR =
             new Parcelable.Creator<SContext>() { // from class: android.hardware.scontext.SContext.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContext createFromParcel(Parcel in) {
                     return new SContext(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContext[] newArray(int size) {
                     return new SContext[size];

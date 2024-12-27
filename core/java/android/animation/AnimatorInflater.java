@@ -78,7 +78,6 @@ public class AnimatorInflater {
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:68)
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.visit(DebugInfoApplyVisitor.java:55)
      */
-    /* JADX WARN: Not initialized variable reg: 10, insn: 0x00a7: MOVE (r1 I:??[OBJECT, ARRAY]) = (r10 I:??[OBJECT, ARRAY] A[D('animator' android.animation.Animator)]), block:B:44:0x00a7 */
     public static android.animation.Animator loadAnimator(
             android.content.res.Resources r12,
             android.content.res.Resources.Theme r13,
@@ -232,7 +231,6 @@ public class AnimatorInflater {
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:68)
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.visit(DebugInfoApplyVisitor.java:55)
      */
-    /* JADX WARN: Not initialized variable reg: 12, insn: 0x00b6: MOVE (r2 I:??[OBJECT, ARRAY]) = (r12 I:??[OBJECT, ARRAY] A[D('animator' android.animation.StateListAnimator)]), block:B:44:0x00b6 */
     public static android.animation.StateListAnimator loadStateListAnimator(
             android.content.Context r14, int r15)
             throws android.content.res.Resources.NotFoundException {

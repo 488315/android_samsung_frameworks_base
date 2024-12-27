@@ -8,13 +8,11 @@ public final class DisplayAreaInfo implements Parcelable {
     public static final Parcelable.Creator<DisplayAreaInfo> CREATOR =
             new Parcelable.Creator<
                     DisplayAreaInfo>() { // from class: android.window.DisplayAreaInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisplayAreaInfo createFromParcel(Parcel in) {
                     return new DisplayAreaInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisplayAreaInfo[] newArray(int size) {
                     return new DisplayAreaInfo[size];

@@ -4,8 +4,6 @@ import kotlin.enums.EnumEntriesKt;
 
 public interface CarrierInfraMediator {
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Conditions {
         public static final /* synthetic */ Conditions[] $VALUES;
         public static final Conditions CARRIER_LOGO_ON_HOME_SCREEN;
@@ -163,8 +161,6 @@ public interface CarrierInfraMediator {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Values {
         public static final /* synthetic */ Values[] $VALUES;
         public static final Values EXTRA_SYSTEM_ICON_LIST;

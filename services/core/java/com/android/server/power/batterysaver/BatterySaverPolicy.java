@@ -434,7 +434,6 @@ public final class BatterySaverPolicy extends ContentObserver
         DEFAULT_ADAPTIVE_POLICY = policy;
     }
 
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.server.power.batterysaver.BatterySaverPolicy$$ExternalSyntheticLambda1] */
     public BatterySaverPolicy(Object obj, Context context, BatterySavingStats batterySavingStats) {
         super(BackgroundThread.getHandler());
         this.mAccessibilityEnabled = new PolicyBoolean("accessibility");
@@ -784,8 +783,6 @@ public final class BatterySaverPolicy extends ContentObserver
         return z;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x005b A[Catch: all -> 0x0025, DONT_GENERATE, TryCatch #0 {all -> 0x0025, blocks: (B:4:0x0005, B:6:0x001b, B:9:0x0035, B:11:0x005b, B:15:0x005d, B:18:0x0027), top: B:3:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x005d A[Catch: all -> 0x0025, DONT_GENERATE, TRY_LEAVE, TryCatch #0 {all -> 0x0025, blocks: (B:4:0x0005, B:6:0x001b, B:9:0x0035, B:11:0x005b, B:15:0x005d, B:18:0x0027), top: B:3:0x0005 }] */
     @Override // android.database.ContentObserver
     /*
         Code decompiled incorrectly, please refer to instructions dump.

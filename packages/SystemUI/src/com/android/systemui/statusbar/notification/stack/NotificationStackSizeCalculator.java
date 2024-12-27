@@ -87,8 +87,6 @@ public final class NotificationStackSizeCalculator {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class FitResult {
         public static final /* synthetic */ FitResult[] $VALUES;
         public static final FitResult FIT;
@@ -273,7 +271,6 @@ public final class NotificationStackSizeCalculator {
             z = false;
         }
         Iterator it = new TakeWhileSequence(sequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1, new Function1() { // from class: com.android.systemui.statusbar.notification.stack.NotificationStackSizeCalculator$computeMaxKeyguardNotifications$maxNotifWithoutSavingSpace$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -295,7 +292,6 @@ public final class NotificationStackSizeCalculator {
                 if (i2 < (z ? 2 : 1)) {
                     this.saveSpaceOnLockscreen = true;
                     Iterator it2 = new TakeWhileSequence(sequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1, new Function1() { // from class: com.android.systemui.statusbar.notification.stack.NotificationStackSizeCalculator$computeMaxKeyguardNotifications$10
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }

@@ -50,7 +50,6 @@ public final class InstantAppResolverConnection implements IBinder.DeathRecipien
     public final class GetInstantAppResolveInfoCaller extends TimedRemoteCaller {
         public final AnonymousClass1 mCallback;
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.pm.InstantAppResolverConnection$GetInstantAppResolveInfoCaller$1] */
         public GetInstantAppResolveInfoCaller() {
             super(InstantAppResolverConnection.CALL_SERVICE_TIMEOUT_MS);
             this.mCallback =
@@ -127,7 +126,6 @@ public final class InstantAppResolverConnection implements IBinder.DeathRecipien
                         .setComponent(componentName);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:45:0x012a A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

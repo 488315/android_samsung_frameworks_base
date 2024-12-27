@@ -65,18 +65,6 @@ public final class MARsTrigger {
     public abstract class MARsTriggerHolder {
         public static final MARsTrigger INSTANCE;
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.am.MARsTrigger$1] */
-        /* JADX WARN: Type inference failed for: r1v10, types: [com.android.server.am.MARsTrigger$5] */
-        /* JADX WARN: Type inference failed for: r1v11, types: [com.android.server.am.MARsTrigger$1] */
-        /* JADX WARN: Type inference failed for: r1v12, types: [com.android.server.am.MARsTrigger$5] */
-        /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.am.MARsTrigger$1] */
-        /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.am.MARsTrigger$1] */
-        /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.am.MARsTrigger$1] */
-        /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.am.MARsTrigger$5] */
-        /* JADX WARN: Type inference failed for: r1v6, types: [com.android.server.am.MARsTrigger$1] */
-        /* JADX WARN: Type inference failed for: r1v7, types: [com.android.server.am.MARsTrigger$1] */
-        /* JADX WARN: Type inference failed for: r1v8, types: [com.android.server.am.MARsTrigger$5] */
-        /* JADX WARN: Type inference failed for: r1v9, types: [com.android.server.am.MARsTrigger$1] */
         static {
             final MARsTrigger mARsTrigger = new MARsTrigger();
             mARsTrigger.mReceiverRegistered = false;

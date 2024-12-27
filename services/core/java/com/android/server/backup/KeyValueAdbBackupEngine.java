@@ -227,11 +227,6 @@ public final class KeyValueAdbBackupEngine {
         this.mNewState = ParcelFileDescriptor.open(this.mNewStateName, 1006632960);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r15v1 */
-    /* JADX WARN: Type inference failed for: r15v13 */
-    /* JADX WARN: Type inference failed for: r15v14 */
-    /* JADX WARN: Type inference failed for: r15v9, types: [java.lang.AutoCloseable] */
     public final void writeBackupData() {
         UserBackupManagerService userBackupManagerService = this.mBackupManagerService;
         int generateRandomIntegerToken = userBackupManagerService.generateRandomIntegerToken();

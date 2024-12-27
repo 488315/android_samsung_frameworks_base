@@ -376,10 +376,6 @@ public final class EdgeLightingManager {
         this.mEdgeLightingClientManager.startEdgeLightingInternal(str, semEdgeLightingInfo, i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:127:0x035b  */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x0360  */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x0379  */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x0374  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

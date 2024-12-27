@@ -247,7 +247,6 @@ public abstract class Animator implements Cloneable {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     <T, A> void callOnList(
             ArrayList<T> list, AnimatorCaller<T, A> animatorCaller, A animator, boolean isReverse) {
         int size = list == null ? 0 : list.size();
@@ -300,7 +299,6 @@ public abstract class Animator implements Cloneable {
             return this.mChangingConf;
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.content.res.ConstantState
         public Animator newInstance() {
             Animator clone = this.mAnimator.mo77clone();

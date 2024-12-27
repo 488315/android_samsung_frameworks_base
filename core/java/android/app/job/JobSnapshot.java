@@ -6,13 +6,11 @@ import android.os.Parcelable;
 public class JobSnapshot implements Parcelable {
     public static final Parcelable.Creator<JobSnapshot> CREATOR =
             new Parcelable.Creator<JobSnapshot>() { // from class: android.app.job.JobSnapshot.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public JobSnapshot createFromParcel(Parcel in) {
                     return new JobSnapshot(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public JobSnapshot[] newArray(int size) {
                     return new JobSnapshot[size];

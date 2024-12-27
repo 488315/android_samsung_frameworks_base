@@ -258,7 +258,6 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
         }
         String str = controlWithState.ci.controlId;
         Function0 function0 = new Function0() { // from class: com.android.systemui.controls.ui.ControlActionCoordinatorImpl$setValue$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

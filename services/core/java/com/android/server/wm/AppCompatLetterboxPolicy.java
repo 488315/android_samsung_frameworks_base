@@ -145,7 +145,6 @@ public final class AppCompatLetterboxPolicy {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.wm.AppCompatLetterboxPolicy$$ExternalSyntheticLambda1] */
     public AppCompatLetterboxPolicy(ActivityRecord activityRecord, AppCompatConfiguration appCompatConfiguration) {
         this.mActivityRecord = activityRecord;
         this.mAppCompatRoundedCorners = new AppCompatRoundedCorners(activityRecord, new Predicate() { // from class: com.android.server.wm.AppCompatLetterboxPolicy$$ExternalSyntheticLambda1
@@ -197,8 +196,6 @@ public final class AppCompatLetterboxPolicy {
         return z;
     }
 
-    /* JADX WARN: Type inference failed for: r11v0, types: [com.android.server.wm.AppCompatLetterboxPolicy$LetterboxPolicyState$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r7v0, types: [com.android.server.wm.AppCompatLetterboxPolicy$LetterboxPolicyState$$ExternalSyntheticLambda1] */
     public final void start(final WindowState windowState) {
         final DisplayContent displayContent;
         MultiTaskingAppCompatConfiguration.BlackLetterboxConfig blackLetterboxConfig;

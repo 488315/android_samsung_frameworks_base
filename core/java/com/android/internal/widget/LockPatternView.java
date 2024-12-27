@@ -571,7 +571,6 @@ public class LockPatternView extends View {
         return handled | this.mExploreByTouchHelper.dispatchHoverEvent(event);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void resetPattern() {
         if (this.mKeepDotActivated && !this.mPattern.isEmpty()) {
             resetLastActivatedCellProgress();
@@ -746,7 +745,6 @@ public class LockPatternView extends View {
         return valueAnimator;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createFadePatternAnimation$0(ValueAnimator animation) {
         this.mFadeAnimationAlpha = ((Integer) animation.getAnimatedValue()).intValue();
         invalidate();
@@ -831,7 +829,6 @@ public class LockPatternView extends View {
         return set;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createDotActivationColorAnimation$1(
             CellState cellState, ValueAnimator valueAnimator) {
         cellState.activationAnimationProgress =
@@ -861,7 +858,6 @@ public class LockPatternView extends View {
         return valueAnimator;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createLineEndAnimation$2(
             CellState state,
             float startX,
@@ -892,7 +888,6 @@ public class LockPatternView extends View {
         return valueAnimator;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createLineDisappearingAnimation$3(ValueAnimator animation) {
         invalidate();
     }
@@ -923,7 +918,6 @@ public class LockPatternView extends View {
         return set;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createDotRadiusAnimation$4(
             CellState state, ValueAnimator animation) {
         state.radius = ((Float) animation.getAnimatedValue()).floatValue();
@@ -939,7 +933,6 @@ public class LockPatternView extends View {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Cell detectCellHit(float x, float y) {
         float hitRadiusSquared;
         for (int row = 0; row < 3; row++) {
@@ -1474,7 +1467,6 @@ public class LockPatternView extends View {
         canvas.restore();
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
@@ -1491,7 +1483,6 @@ public class LockPatternView extends View {
                 this.mInStealthMode);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public void onRestoreInstanceState(Parcelable state) {
         SavedState ss = (SavedState) state;
@@ -1514,13 +1505,11 @@ public class LockPatternView extends View {
                 new Parcelable.Creator<
                         SavedState>() { // from class:
                                         // com.android.internal.widget.LockPatternView.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];

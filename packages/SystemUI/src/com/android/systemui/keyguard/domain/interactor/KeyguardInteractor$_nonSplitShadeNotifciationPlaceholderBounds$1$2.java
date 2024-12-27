@@ -14,7 +14,6 @@ final class KeyguardInteractor$_nonSplitShadeNotifciationPlaceholderBounds$1$2 e
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardInteractor$_nonSplitShadeNotifciationPlaceholderBounds$1$2(NotificationContainerBounds notificationContainerBounds, Continuation continuation) {
         super(2, continuation);
         this.$newBounds = notificationContainerBounds;

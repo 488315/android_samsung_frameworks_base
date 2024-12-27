@@ -174,12 +174,10 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
             });
         }
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.controls.controller.ControlsBindingControllerImpl$LoadSubscriber$onSubscribe$1, kotlin.jvm.internal.Lambda] */
         public final void onSubscribe(IBinder iBinder, IControlsSubscription iControlsSubscription) {
             this.subscription = iControlsSubscription;
             final ControlsBindingControllerImpl controlsBindingControllerImpl = ControlsBindingControllerImpl.this;
             this._loadCancelInternal = new Function0() { // from class: com.android.systemui.controls.controller.ControlsBindingControllerImpl$LoadSubscriber$onSubscribe$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -421,7 +419,6 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.controls.controller.ControlsBindingControllerImpl$Companion$emptyCallback$1] */
     static {
         new Companion(null);
         emptyCallback = new ControlsBindingController.LoadCallback() { // from class: com.android.systemui.controls.controller.ControlsBindingControllerImpl$Companion$emptyCallback$1
@@ -435,7 +432,6 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
         };
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.controls.controller.ControlsBindingControllerImpl$actionCallbackService$1] */
     public ControlsBindingControllerImpl(Context context, DelayableExecutor delayableExecutor, Lazy lazy, PackageUpdateMonitor.Factory factory, UserTracker userTracker, ControlsUtil controlsUtil) {
         this.context = context;
         this.backgroundExecutor = delayableExecutor;

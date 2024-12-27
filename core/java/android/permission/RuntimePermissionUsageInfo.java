@@ -12,13 +12,11 @@ public final class RuntimePermissionUsageInfo implements Parcelable {
             new Parcelable.Creator<
                     RuntimePermissionUsageInfo>() { // from class:
                                                     // android.permission.RuntimePermissionUsageInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RuntimePermissionUsageInfo createFromParcel(Parcel source) {
                     return new RuntimePermissionUsageInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RuntimePermissionUsageInfo[] newArray(int size) {
                     return new RuntimePermissionUsageInfo[size];

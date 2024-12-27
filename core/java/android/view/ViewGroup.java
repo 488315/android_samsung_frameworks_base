@@ -3757,7 +3757,6 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
         super.dispatchRestoreInstanceState(container);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Deprecated
     public void setChildrenDrawingCacheEnabled(boolean enabled) {
         if (enabled || (this.mPersistentDrawingCache & 3) != 3) {
@@ -3859,7 +3858,6 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
         drawCorner(canvas, paint, x2, y2, -lineLength, -lineLength, lineWidth);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void fillDifference(
             Canvas canvas,
             int x2,
@@ -4111,7 +4109,6 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
         return this.mPreSortedChildren;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyAnimationListener() {
         this.mGroupFlags &= -513;
         this.mGroupFlags |= 16;
@@ -4954,7 +4951,6 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public void removeDetachedView(View child, boolean animate) {
         if (this.mTransition != null) {
             this.mTransition.removeChild(this, child);
@@ -4983,7 +4979,6 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
         dispatchViewRemoved(child);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public void attachViewToParent(View child, int index, LayoutParams params) {
         child.mLayoutParams = params;
         if (index < 0) {
@@ -5011,7 +5006,6 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
         removeFromArray(indexOfChild(child));
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public void detachViewFromParent(int index) {
         if (index >= 0 && index < this.mChildrenCount) {
             this.mChildren[index].setDetached(true);
@@ -5590,7 +5584,6 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
         return (this.mGroupFlags & 32768) == 32768;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Deprecated
     public void setChildrenDrawnWithCacheEnabled(boolean enabled) {
         setBooleanFlag(32768, enabled);

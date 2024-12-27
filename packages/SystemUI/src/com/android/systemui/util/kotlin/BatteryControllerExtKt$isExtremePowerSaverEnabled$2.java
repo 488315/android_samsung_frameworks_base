@@ -14,7 +14,6 @@ final class BatteryControllerExtKt$isExtremePowerSaverEnabled$2 extends SuspendL
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BatteryControllerExtKt$isExtremePowerSaverEnabled$2(BatteryController batteryController, Continuation continuation) {
         super(2, continuation);
         this.$this_isExtremePowerSaverEnabled = batteryController;

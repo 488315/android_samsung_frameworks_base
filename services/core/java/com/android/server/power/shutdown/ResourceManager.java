@@ -17,7 +17,6 @@ public final class ResourceManager {
     public final List subImages;
     public final File subLoopImage;
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x005a, code lost:
 
        if (r0.equals("310120") == false) goto L15;
@@ -36,14 +35,6 @@ public final class ResourceManager {
 
        if (addToPlaylistIfExists(r8.toString(), r0) != false) goto L90;
     */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x0211 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:28:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x00f5  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x01b9  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0135  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x0140  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x0174  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x01af  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -66,8 +57,6 @@ public final class ResourceManager {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0038 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0039  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

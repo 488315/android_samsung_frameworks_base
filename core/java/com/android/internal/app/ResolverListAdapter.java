@@ -338,7 +338,6 @@ public class ResolverListAdapter extends BaseAdapter {
                         ResolverActivity
                                 .ResolvedComponentInfo>>() { // from class:
                                                              // com.android.internal.app.ResolverListAdapter.1
-            /* JADX INFO: Access modifiers changed from: protected */
             @Override // android.os.AsyncTask
             public List<ResolverActivity.ResolvedComponentInfo> doInBackground(
                     List<ResolverActivity.ResolvedComponentInfo>... params) {
@@ -360,7 +359,6 @@ public class ResolverListAdapter extends BaseAdapter {
                 return params[0];
             }
 
-            /* JADX INFO: Access modifiers changed from: protected */
             @Override // android.os.AsyncTask
             public void onPostExecute(
                     List<ResolverActivity.ResolvedComponentInfo> sortedComponents) {
@@ -785,7 +783,6 @@ public class ResolverListAdapter extends BaseAdapter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ColorMatrixColorFilter getSuspendedColorMatrix() {
         if (sSuspendedMatrixColorFilter == null) {
             ColorMatrix tempBrightnessMatrix = new ColorMatrix();
@@ -832,14 +829,12 @@ public class ResolverListAdapter extends BaseAdapter {
                     Void,
                     Void,
                     Drawable>() { // from class: com.android.internal.app.ResolverListAdapter.3
-                /* JADX INFO: Access modifiers changed from: protected */
                 @Override // android.os.AsyncTask
                 public Drawable doInBackground(Void... params) {
                     return ResolverListAdapter.this.loadIconForResolveInfo(
                             iconInfo.getResolveInfo());
                 }
 
-                /* JADX INFO: Access modifiers changed from: protected */
                 @Override // android.os.AsyncTask
                 public void onPostExecute(Drawable d) {
                     iconView.setImageDrawable(d);
@@ -1030,7 +1025,6 @@ public class ResolverListAdapter extends BaseAdapter {
             this.mDisplayResolveInfo = dri;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public CharSequence[] doInBackground(Void... voids) {
             ResolveInfoPresentationGetter pg =
@@ -1059,7 +1053,6 @@ public class ResolverListAdapter extends BaseAdapter {
             return new CharSequence[] {pg.getLabel(), pg.getSubLabel()};
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onPostExecute(CharSequence[] result) {
             if (this.mDisplayResolveInfo.hasDisplayLabel()) {
@@ -1111,14 +1104,11 @@ public class ResolverListAdapter extends BaseAdapter {
             this.mResolveInfo = dri.getResolveInfo();
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public Drawable doInBackground(Void... params) {
             return ResolverListAdapter.this.loadIconForResolveInfo(this.mResolveInfo);
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.AsyncTask
         public void onPostExecute(Drawable d) {
             if (ResolverListAdapter.this.getOtherProfile() == this.mDisplayResolveInfo) {
@@ -1172,7 +1162,6 @@ public class ResolverListAdapter extends BaseAdapter {
             return this.mRi.getComponentInfo().loadLabel(this.mPm).toString();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Drawable getKnoxIcon() {
             Drawable dr = this.mRi.loadIcon(this.mPm);
             return (dr == null

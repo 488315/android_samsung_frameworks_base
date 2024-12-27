@@ -358,8 +358,6 @@ public final class AppIdPermissionPolicy extends SchemePolicy {
 
        if (r0.equals(r7.permissionInfo.group) == false) goto L117;
     */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x02de  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x02f1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -461,34 +459,6 @@ public final class AppIdPermissionPolicy extends SchemePolicy {
 
        if (r12 != false) goto L284;
     */
-    /* JADX WARN: Removed duplicated region for block: B:100:0x0828  */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x09af  */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x09cc A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x09e0 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x09e9  */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x0a11 A[LOOP:5: B:115:0x09e7->B:124:0x0a11, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x0a1b A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x0836  */
-    /* JADX WARN: Removed duplicated region for block: B:203:0x0993  */
-    /* JADX WARN: Removed duplicated region for block: B:204:0x0996  */
-    /* JADX WARN: Removed duplicated region for block: B:264:0x0317 A[LOOP:8: B:258:0x01a9->B:264:0x0317, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:265:0x0315 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:271:0x0342  */
-    /* JADX WARN: Removed duplicated region for block: B:273:0x0347  */
-    /* JADX WARN: Removed duplicated region for block: B:364:0x0532  */
-    /* JADX WARN: Removed duplicated region for block: B:374:0x075d A[LOOP:10: B:363:0x0530->B:374:0x075d, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:375:0x075b A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:378:0x0764 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00c7  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00e0  */
-    /* JADX WARN: Removed duplicated region for block: B:450:0x0761 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:461:0x0344  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x015a  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x015f  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x013e A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x00d8 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x07fe  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x080a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1841,9 +1811,6 @@ public final class AppIdPermissionPolicy extends SchemePolicy {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x006d  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x015f A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0160  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1914,9 +1881,6 @@ public final class AppIdPermissionPolicy extends SchemePolicy {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0185  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x01d2  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x023d A[ORIG_RETURN, RETURN] */
     @Override // com.android.server.permission.access.SchemePolicy
     /*
         Code decompiled incorrectly, please refer to instructions dump.

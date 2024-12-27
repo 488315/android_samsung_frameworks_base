@@ -9,14 +9,12 @@ public final class CellInfoWcdma extends CellInfo implements Parcelable {
     public static final Parcelable.Creator<CellInfoWcdma> CREATOR =
             new Parcelable.Creator<
                     CellInfoWcdma>() { // from class: android.telephony.CellInfoWcdma.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellInfoWcdma createFromParcel(Parcel in) {
                     in.readInt();
                     return CellInfoWcdma.createFromParcelBody(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellInfoWcdma[] newArray(int size) {
                     return new CellInfoWcdma[size];

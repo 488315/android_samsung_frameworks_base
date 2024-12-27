@@ -8,13 +8,11 @@ public class AudioRoutesInfo implements Parcelable {
     public static final Parcelable.Creator<AudioRoutesInfo> CREATOR =
             new Parcelable.Creator<
                     AudioRoutesInfo>() { // from class: android.media.AudioRoutesInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioRoutesInfo createFromParcel(Parcel in) {
                     return new AudioRoutesInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioRoutesInfo[] newArray(int size) {
                     return new AudioRoutesInfo[size];

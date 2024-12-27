@@ -627,7 +627,6 @@ public class RippleDrawable extends LayerDrawable {
         this.mBackgroundAnimation.start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startBackgroundAnimation$0(ValueAnimator update) {
         this.mBackgroundOpacity = ((Float) update.getAnimatedValue()).floatValue();
         invalidateSelf(false);
@@ -738,12 +737,10 @@ public class RippleDrawable extends LayerDrawable {
         canvas.restoreToCount(saveCount);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$drawPatterned$1() {
         invalidateSelf(false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$drawPatterned$2(RippleAnimationSession session) {
         this.mRunningAnimations.remove(session);
     }
@@ -1066,7 +1063,6 @@ public class RippleDrawable extends LayerDrawable {
         return this;
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // android.graphics.drawable.LayerDrawable
     public RippleState createConstantState(LayerDrawable.LayerState state, Resources res) {
         return new RippleState(state, this, res);

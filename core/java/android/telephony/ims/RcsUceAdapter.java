@@ -123,7 +123,6 @@ public class RcsUceAdapter {
     public static class PublishStateCallbackAdapter {
         private final PublishStateBinder mBinder;
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class PublishStateBinder extends IRcsUcePublishStateCallback.Stub {
             private final Executor mExecutor;
             private final OnPublishStateChangedListener mPublishStateChangeListener;
@@ -155,7 +154,6 @@ public class RcsUceAdapter {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onPublishUpdated$0(PublishAttributes attributes) {
                 this.mPublishStateChangeListener.onPublishStateChange(attributes);
             }

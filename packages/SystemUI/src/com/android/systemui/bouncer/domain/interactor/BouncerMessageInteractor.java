@@ -128,8 +128,6 @@ public final class BouncerMessageInteractor {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r8v2, types: [com.android.keyguard.KeyguardUpdateMonitorCallback, com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor$kumCallback$1] */
     public BouncerMessageInteractor(BouncerMessageRepository bouncerMessageRepository, UserRepository userRepository, CountDownTimerUtil countDownTimerUtil, KeyguardUpdateMonitor keyguardUpdateMonitor, final TrustRepository trustRepository, final BiometricSettingsRepository biometricSettingsRepository, SystemPropertiesHelper systemPropertiesHelper, PrimaryBouncerInteractor primaryBouncerInteractor, CoroutineScope coroutineScope, FacePropertyRepository facePropertyRepository, DeviceEntryFingerprintAuthInteractor deviceEntryFingerprintAuthInteractor, DeviceEntryFaceAuthRepository deviceEntryFaceAuthRepository, KeyguardSecurityModel keyguardSecurityModel) {
         this.repository = bouncerMessageRepository;
         this.userRepository = userRepository;
@@ -277,7 +275,6 @@ public final class BouncerMessageInteractor {
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
                 Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor$special$$inlined$combine$1.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -324,8 +321,6 @@ public final class BouncerMessageInteractor {
                     this.$biometricSettingsRepository$inlined = biometricSettingsRepository;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

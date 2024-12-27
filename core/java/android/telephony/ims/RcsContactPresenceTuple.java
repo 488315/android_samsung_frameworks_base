@@ -24,13 +24,11 @@ public final class RcsContactPresenceTuple implements Parcelable {
             new Parcelable.Creator<
                     RcsContactPresenceTuple>() { // from class:
                                                  // android.telephony.ims.RcsContactPresenceTuple.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RcsContactPresenceTuple createFromParcel(Parcel in) {
                     return new RcsContactPresenceTuple(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RcsContactPresenceTuple[] newArray(int size) {
                     return new RcsContactPresenceTuple[size];
@@ -84,13 +82,11 @@ public final class RcsContactPresenceTuple implements Parcelable {
                 new Parcelable.Creator<
                         ServiceCapabilities>() { // from class:
                                                  // android.telephony.ims.RcsContactPresenceTuple.ServiceCapabilities.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ServiceCapabilities createFromParcel(Parcel in) {
                         return new ServiceCapabilities(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ServiceCapabilities[] newArray(int size) {
                         return new ServiceCapabilities[size];

@@ -496,7 +496,6 @@ public class ImageWriter implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void abortImage(Image image) {
         if (image == null) {
             throw new IllegalArgumentException("image shouldn't be null");
@@ -755,7 +754,6 @@ public class ImageWriter implements AutoCloseable {
             return false;
         }
 
-        /* JADX INFO: Access modifiers changed from: package-private */
         @Override // android.media.Image
         public ImageWriter getOwner() {
             throwISEIfImageIsInvalid();
@@ -785,7 +783,6 @@ public class ImageWriter implements AutoCloseable {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void clearSurfacePlanes() {
             if (this.mIsImageValid && this.mPlanes != null) {
                 for (int i = 0; i < this.mPlanes.length; i++) {
@@ -827,7 +824,6 @@ public class ImageWriter implements AutoCloseable {
                 return this.mBuffer;
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public void clearBuffer() {
                 if (this.mBuffer == null) {
                     return;

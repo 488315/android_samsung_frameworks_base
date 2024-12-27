@@ -21,7 +21,6 @@ public abstract class AsyncQueryHandler extends Handler {
     final WeakReference<ContentResolver> mResolver;
     private Handler mWorkerThreadHandler;
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public static final class WorkerArgs {
         public Object cookie;
         public Handler handler;
@@ -36,7 +35,6 @@ public abstract class AsyncQueryHandler extends Handler {
         protected WorkerArgs() {}
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public class WorkerHandler extends Handler {
         public WorkerHandler(Looper looper) {
             super(looper);

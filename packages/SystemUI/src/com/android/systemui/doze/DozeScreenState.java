@@ -38,8 +38,6 @@ public final class DozeScreenState implements DozeMachine.Part {
     public final DozeScreenState$$ExternalSyntheticLambda0 mApplyPendingScreenState = new DozeScreenState$$ExternalSyntheticLambda0(this, 0);
     public int mPendingScreenState = 0;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.biometrics.AuthController$Callback, com.android.systemui.doze.DozeScreenState$1] */
     public DozeScreenState(DozeMachine.Service service, Handler handler, DozeHost dozeHost, DozeParameters dozeParameters, WakeLock wakeLock, AuthController authController, Provider provider, DozeLog dozeLog, DozeScreenBrightness dozeScreenBrightness, SelectedUserInteractor selectedUserInteractor) {
         ?? r0 = new AuthController.Callback() { // from class: com.android.systemui.doze.DozeScreenState.1
             @Override // com.android.systemui.biometrics.AuthController.Callback
@@ -113,7 +111,6 @@ public final class DozeScreenState implements DozeMachine.Part {
         this.mAuthController.removeCallback(this.mAuthControllerCallback);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0027, code lost:
     
         if (r6.mControlScreenOffAnimation != false) goto L15;
@@ -122,8 +119,6 @@ public final class DozeScreenState implements DozeMachine.Part {
     
         if (r6.getDisplayNeedsBlanking() != false) goto L12;
      */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x0151  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0177  */
     @Override // com.android.systemui.doze.DozeMachine.Part
     /*
         Code decompiled incorrectly, please refer to instructions dump.

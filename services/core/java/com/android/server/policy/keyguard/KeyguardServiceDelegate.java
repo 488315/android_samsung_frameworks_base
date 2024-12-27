@@ -86,8 +86,6 @@ public final class KeyguardServiceDelegate {
         public boolean systemIsReady;
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.policy.keyguard.KeyguardServiceDelegate$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.policy.keyguard.KeyguardServiceDelegate$2] */
     public KeyguardServiceDelegate(
             Context context, PhoneWindowManager.AnonymousClass1 anonymousClass1) {
         KeyguardState keyguardState = new KeyguardState();

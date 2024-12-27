@@ -164,7 +164,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$scheduleInvalidateInput$0(int nextSessionId) {
         TextSnapshot textSnapshot;
         try {
@@ -230,7 +229,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$deactivate$1() {
         Trace.traceBegin(4L, "InputConnection#closeConnection");
         try {
@@ -288,7 +286,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$cancelCancellationSignal$2(IBinder token) {
         this.mBeamer.cancel(token);
     }
@@ -308,7 +305,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$forgetCancellationSignal$3(IBinder token) {
         this.mBeamer.forget(token);
     }
@@ -342,7 +338,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dispatchReportFullscreenMode$4(boolean enabled) {
         InputConnection ic = getInputConnection();
         if (ic == null || this.mDeactivateRequested.get()) {
@@ -386,7 +381,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                         : null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CharSequence lambda$getTextAfterCursor$5(
             InputConnectionCommandHeader header, int length, int flags) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -439,7 +433,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                         : null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CharSequence lambda$getTextBeforeCursor$7(
             InputConnectionCommandHeader header, int length, int flags) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -489,7 +482,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                         : null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ CharSequence lambda$getSelectedText$9(
             InputConnectionCommandHeader header, int flags) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -546,7 +538,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                         : null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ SurroundingText lambda$getSurroundingText$11(
             InputConnectionCommandHeader header, int beforeLength, int afterLength, int flags) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -606,7 +597,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                         : null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Integer lambda$getCursorCapsMode$13(
             InputConnectionCommandHeader header, int reqModes) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -657,7 +647,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                         : null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ ExtractedText lambda$getExtractedText$15(
             InputConnectionCommandHeader header, ExtractedTextRequest request, int flags) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -688,7 +677,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$commitText$17(
             InputConnectionCommandHeader header, CharSequence text, int newCursorPosition) {
         if (!isInjectionFromKcap(header.mSessionId)
@@ -725,7 +713,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$commitTextWithTextAttribute$18(
             InputConnectionCommandHeader header,
             CharSequence text,
@@ -756,7 +743,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$commitCompletion$19(
             InputConnectionCommandHeader header, CompletionInfo text) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -784,7 +770,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$commitCorrection$20(
             InputConnectionCommandHeader header, CorrectionInfo info) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -815,7 +800,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setSelection$21(
             InputConnectionCommandHeader header, int start, int end) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -842,7 +826,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$performEditorAction$22(
             InputConnectionCommandHeader header, int id) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -870,7 +853,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$performContextMenuAction$23(
             InputConnectionCommandHeader header, int id) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -899,7 +881,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setComposingRegion$24(
             InputConnectionCommandHeader header, int start, int end) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -935,7 +916,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setComposingRegionWithTextAttribute$25(
             InputConnectionCommandHeader header, int start, int end, TextAttribute textAttribute) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -966,7 +946,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setComposingText$26(
             InputConnectionCommandHeader header, CharSequence text, int newCursorPosition) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -998,7 +977,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setComposingTextWithTextAttribute$27(
             InputConnectionCommandHeader header,
             CharSequence text,
@@ -1029,7 +1007,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$finishComposingTextFromImm$28(int currentSessionId) {
         if (isFinished() || currentSessionId != this.mCurrentSessionId.get()) {
             return;
@@ -1055,7 +1032,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$finishComposingText$29(InputConnectionCommandHeader header) {
         if (isFinished() || header.mSessionId != this.mCurrentSessionId.get()) {
             return;
@@ -1081,7 +1057,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$sendKeyEvent$30(
             InputConnectionCommandHeader header, KeyEvent event) {
         if (!isInjectionFromKcap(header.mSessionId)
@@ -1109,7 +1084,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$clearMetaKeyStates$31(
             InputConnectionCommandHeader header, int states) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -1140,7 +1114,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$deleteSurroundingText$32(
             InputConnectionCommandHeader header, int beforeLength, int afterLength) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -1171,7 +1144,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$deleteSurroundingTextInCodePoints$33(
             InputConnectionCommandHeader header, int beforeLength, int afterLength) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -1201,7 +1173,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$beginBatchEdit$34(InputConnectionCommandHeader header) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
             return;
@@ -1227,7 +1198,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$endBatchEdit$35(InputConnectionCommandHeader header) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
             return;
@@ -1253,7 +1223,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$performSpellCheck$36(InputConnectionCommandHeader header) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
             return;
@@ -1281,7 +1250,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$performPrivateCommand$37(
             String action, InputConnectionCommandHeader header, Bundle data) {
         if (ViewRune.SUPPORT_WRITING_TOOLKIT
@@ -1332,7 +1300,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$performHandwritingGesture$39(
             InputConnectionCommandHeader header,
             final ResultReceiver resultReceiver,
@@ -1390,7 +1357,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$previewHandwritingGesture$40(
             InputConnectionCommandHeader header,
             CancellationSignal cancellationSignal,
@@ -1438,7 +1404,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Boolean lambda$requestCursorUpdates$41(
             InputConnectionCommandHeader header, int cursorUpdateMode, int imeDisplayId) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -1474,7 +1439,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Boolean lambda$requestCursorUpdatesWithFilter$42(
             InputConnectionCommandHeader header,
             int cursorUpdateMode,
@@ -1542,7 +1506,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$requestTextBoundsInfo$44(
             InputConnectionCommandHeader header,
             final ResultReceiver resultReceiver,
@@ -1601,7 +1564,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Boolean lambda$commitContent$45(
             InputContentInfo inputContentInfo,
             int imeUid,
@@ -1655,7 +1617,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setImeConsumesInput$46(
             InputConnectionCommandHeader header, boolean imeConsumesInput) {
         if (header.mSessionId != this.mCurrentSessionId.get()) {
@@ -1689,7 +1650,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$replaceText$47(
             InputConnectionCommandHeader header,
             int start,
@@ -1730,7 +1690,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$commitText$0(
                 InputConnectionCommandHeader header,
                 CharSequence text,
@@ -1765,7 +1724,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setSelection$1(
                 InputConnectionCommandHeader header, int start, int end) {
             if (header.mSessionId != RemoteInputConnectionImpl.this.mCurrentSessionId.get()) {
@@ -1819,7 +1777,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                             : null);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ SurroundingText lambda$getSurroundingText$2(
                 InputConnectionCommandHeader header, int beforeLength, int afterLength, int flags) {
             if (header.mSessionId != RemoteInputConnectionImpl.this.mCurrentSessionId.get()) {
@@ -1867,7 +1824,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$deleteSurroundingText$4(
                 InputConnectionCommandHeader header, int beforeLength, int afterLength) {
             if (header.mSessionId != RemoteInputConnectionImpl.this.mCurrentSessionId.get()) {
@@ -1897,7 +1853,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$sendKeyEvent$5(
                 InputConnectionCommandHeader header, KeyEvent event) {
             if (header.mSessionId != RemoteInputConnectionImpl.this.mCurrentSessionId.get()) {
@@ -1925,7 +1880,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$performEditorAction$6(
                 InputConnectionCommandHeader header, int id) {
             if (header.mSessionId != RemoteInputConnectionImpl.this.mCurrentSessionId.get()) {
@@ -1956,7 +1910,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$performContextMenuAction$7(
                 InputConnectionCommandHeader header, int id) {
             if (header.mSessionId != RemoteInputConnectionImpl.this.mCurrentSessionId.get()) {
@@ -2006,7 +1959,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                             : null);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$getCursorCapsMode$8(
                 InputConnectionCommandHeader header, int reqModes) {
             if (header.mSessionId != RemoteInputConnectionImpl.this.mCurrentSessionId.get()) {
@@ -2037,7 +1989,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$clearMetaKeyStates$10(
                 InputConnectionCommandHeader header, int states) {
             if (header.mSessionId != RemoteInputConnectionImpl.this.mCurrentSessionId.get()) {
@@ -2066,7 +2017,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchWithTracing(final String methodName, final Runnable runnable) {
         Runnable actualRunnable;
         if (Trace.isTagEnabled(4L)) {
@@ -2100,7 +2050,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
         dispatchWithTracing(methodName, untypedFuture, supplier, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public <T> void dispatchWithTracing(
             final String methodName,
             final AndroidFuture untypedFuture,
@@ -2118,7 +2067,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dispatchWithTracing$49(
             Supplier supplier,
             AndroidFuture future,
@@ -2141,7 +2089,6 @@ final class RemoteInputConnectionImpl extends IRemoteInputConnection.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean useImeTracing() {
         return ImeTracing.getInstance().isEnabled();
     }

@@ -26,7 +26,6 @@ final class NewTilesAvailabilityInteractor$newTilesAvailable$2 extends SuspendLa
     int label;
     final /* synthetic */ NewTilesAvailabilityInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NewTilesAvailabilityInteractor$newTilesAvailable$2(NewTilesAvailabilityInteractor newTilesAvailabilityInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = newTilesAvailabilityInteractor;
@@ -90,8 +89,6 @@ final class NewTilesAvailabilityInteractor$newTilesAvailable$2 extends SuspendLa
                         this.$spec$inlined = str;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -205,7 +202,6 @@ final class NewTilesAvailabilityInteractor$newTilesAvailable$2 extends SuspendLa
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
                 Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.qs.panels.domain.interactor.NewTilesAvailabilityInteractor$newTilesAvailable$2$invokeSuspend$$inlined$combine$1.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

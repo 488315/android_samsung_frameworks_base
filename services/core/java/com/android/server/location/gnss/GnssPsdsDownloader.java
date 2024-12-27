@@ -59,11 +59,6 @@ public final class GnssPsdsDownloader {
         strArr2[3] = property5;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00b4  */
-    /* JADX WARN: Type inference failed for: r1v1 */
-    /* JADX WARN: Type inference failed for: r1v2, types: [java.net.HttpURLConnection] */
-    /* JADX WARN: Type inference failed for: r1v3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -607,7 +607,6 @@ public final class MediaRouter2 {
         return routeListingPreference;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean updateDiscoveryPreferenceIfNeededLocked() {
         RouteDiscoveryPreference newDiscoveryPreference =
                 new RouteDiscoveryPreference.Builder(
@@ -744,7 +743,6 @@ public final class MediaRouter2 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public RoutingController getCurrentController() {
         List<RoutingController> controllers = getControllers();
         return controllers.get(controllers.size() - 1);
@@ -1099,7 +1097,6 @@ public final class MediaRouter2 {
         return filteredRoutes;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public List<MediaRoute2Info> getRoutesWithIds(List<String> routeIds) {
         List<MediaRoute2Info> list;
         synchronized (this.mLock) {
@@ -1193,7 +1190,6 @@ public final class MediaRouter2 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyPreferredFeaturesChanged(final List<String> features) {
         Iterator<RouteCallbackRecord> it = this.mRouteCallbackRecords.iterator();
         while (it.hasNext()) {
@@ -1210,7 +1206,6 @@ public final class MediaRouter2 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyRouteListingPreferenceUpdated(final RouteListingPreference preference) {
         Iterator<RouteListingPreferenceCallbackRecord> it =
                 this.mListingPreferenceCallbackRecords.iterator();
@@ -1228,7 +1223,6 @@ public final class MediaRouter2 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyTransfer(
             final RoutingController oldController, final RoutingController newController) {
         Iterator<TransferCallbackRecord> it = this.mTransferCallbackRecords.iterator();
@@ -1246,7 +1240,6 @@ public final class MediaRouter2 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyTransferFailure(final MediaRoute2Info route) {
         Iterator<TransferCallbackRecord> it = this.mTransferCallbackRecords.iterator();
         while (it.hasNext()) {
@@ -1263,7 +1256,6 @@ public final class MediaRouter2 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyRequestFailed(final int reason) {
         Iterator<TransferCallbackRecord> it = this.mTransferCallbackRecords.iterator();
         while (it.hasNext()) {
@@ -1280,7 +1272,6 @@ public final class MediaRouter2 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyStop(final RoutingController controller) {
         Iterator<TransferCallbackRecord> it = this.mTransferCallbackRecords.iterator();
         while (it.hasNext()) {
@@ -1297,7 +1288,6 @@ public final class MediaRouter2 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyControllerUpdated(final RoutingController controller) {
         Iterator<ControllerCallbackRecord> it = this.mControllerCallbackRecords.iterator();
         while (it.hasNext()) {
@@ -1314,7 +1304,6 @@ public final class MediaRouter2 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static RoutingSessionInfo ensureClientPackageNameForSystemSession(
             RoutingSessionInfo sessionInfo, String packageName) {
         if (!sessionInfo.isSystemSession()
@@ -1754,7 +1743,6 @@ public final class MediaRouter2 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class RouteListingPreferenceCallbackRecord {
         public final Executor mExecutor;
         public final Consumer<RouteListingPreference> mRouteListingPreferenceCallback;
@@ -1951,7 +1939,6 @@ public final class MediaRouter2 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class ProxyMediaRouter2Impl implements MediaRouter2Impl {
         private final String mClientPackageName;
         private final UserHandle mClientUser;
@@ -2359,7 +2346,6 @@ public final class MediaRouter2 {
             return requestId;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void handleTransferTimeout(MediaRouter2Manager.TransferRequest request) {
             boolean removed = this.mTransferRequests.remove(request);
             if (removed) {
@@ -2439,7 +2425,6 @@ public final class MediaRouter2 {
                     || TextUtils.equals(getClientPackageName(), session.getClientPackageName());
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onSessionCreatedOnHandler(int requestId, RoutingSessionInfo sessionInfo) {
             MediaRouter2Manager.TransferRequest matchingRequest = null;
             Iterator<MediaRouter2Manager.TransferRequest> it = this.mTransferRequests.iterator();
@@ -2483,7 +2468,6 @@ public final class MediaRouter2 {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onSessionUpdatedOnHandler(RoutingSessionInfo updatedSession) {
             Iterator<MediaRouter2Manager.TransferRequest> it = this.mTransferRequests.iterator();
             while (true) {
@@ -2503,7 +2487,6 @@ public final class MediaRouter2 {
             onSessionUpdated(updatedSession);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onSessionReleasedOnHandler(RoutingSessionInfo session) {
             if (session.isSystemSession()) {
                 Log.e(
@@ -2517,7 +2500,6 @@ public final class MediaRouter2 {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onDiscoveryPreferenceChangedOnHandler(
                 String packageName, RouteDiscoveryPreference preference) {
             if (!TextUtils.equals(getClientPackageName(), packageName) || preference == null) {
@@ -2533,7 +2515,6 @@ public final class MediaRouter2 {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onRouteListingPreferenceChangedOnHandler(
                 String packageName, RouteListingPreference routeListingPreference) {
             if (!TextUtils.equals(getClientPackageName(), packageName)) {
@@ -2549,7 +2530,6 @@ public final class MediaRouter2 {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onRequestFailedOnHandler(int requestId, int reason) {
             MediaRouter2Manager.TransferRequest matchingRequest = null;
             Iterator<MediaRouter2Manager.TransferRequest> it = this.mTransferRequests.iterator();
@@ -2571,7 +2551,6 @@ public final class MediaRouter2 {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onInvalidateInstanceOnHandler() {
             Log.w(
                     MediaRouter2.TAG,
@@ -2593,7 +2572,6 @@ public final class MediaRouter2 {
             MediaRouter2.this.mTransferCallbackRecords.clear();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         class Client extends IMediaRouter2Manager.Stub {
             private Client() {}
 
@@ -2735,7 +2713,6 @@ public final class MediaRouter2 {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class LocalMediaRouter2Impl implements MediaRouter2Impl {
         private final String mPackageName;
 

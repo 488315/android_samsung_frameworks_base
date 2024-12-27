@@ -104,7 +104,6 @@ public class AppControlActionInteractor implements ActionInteractor {
         return Action.close_all_application.toString().equals(str) || Action.close_foreground_application.toString().equals(str) || Action.open_recentsapp.toString().equals(str) || Action.close_all_application_except_currentapp.toString().equals(str);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$matchAction$0(String str, String str2) {
         return str2.equals(str);
     }
@@ -275,8 +274,6 @@ public class AppControlActionInteractor implements ActionInteractor {
     
         if (r12.mAppController.removeNavigationApp(r12.mContext, r14) != false) goto L101;
      */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x01f9  */
-    /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
     @Override // com.android.systemui.bixby2.interactor.ActionInteractor
     /*
         Code decompiled incorrectly, please refer to instructions dump.

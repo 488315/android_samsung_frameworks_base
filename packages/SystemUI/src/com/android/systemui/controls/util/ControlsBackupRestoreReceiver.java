@@ -84,8 +84,6 @@ public final class ControlsBackupRestoreReceiver extends BroadcastReceiver {
         Log.d("ControlsBackupRestoreManager", "send response");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:53:0x01ac  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x01b5  */
     @Override // android.content.BroadcastReceiver
     /*
         Code decompiled incorrectly, please refer to instructions dump.

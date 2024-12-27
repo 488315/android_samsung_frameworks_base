@@ -12,13 +12,11 @@ public final class VirtualKeyboardConfig extends VirtualInputDeviceConfig implem
     public static final Parcelable.Creator<VirtualKeyboardConfig> CREATOR =
             new Parcelable.Creator<VirtualKeyboardConfig>() { // from class:
                 // android.hardware.input.VirtualKeyboardConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualKeyboardConfig createFromParcel(Parcel in) {
                     return new VirtualKeyboardConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualKeyboardConfig[] newArray(int size) {
                     return new VirtualKeyboardConfig[size];

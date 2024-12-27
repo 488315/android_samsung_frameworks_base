@@ -10,7 +10,6 @@ abstract class BooleanFlagBase implements Flag<Boolean> {
     private final String mName;
     private final String mNamespace;
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.flags.Flag
     public abstract Boolean getDefault();
 
@@ -30,7 +29,6 @@ abstract class BooleanFlagBase implements Flag<Boolean> {
         return this.mName;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.flags.Flag
     public Flag<Boolean> defineMetaData(String label, String description, String categoryName) {
         this.mLabel = label;

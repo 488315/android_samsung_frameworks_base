@@ -38,8 +38,6 @@ public final class SecDeviceControlsTile extends QSTileImpl {
     public final SecControlsUiController mSecControlsUiController;
     public final SecDeviceControlsController mSecDeviceControlsController;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.controls.management.ControlsListingController$ControlsListingCallback, com.android.systemui.qs.tiles.SecDeviceControlsTile$$ExternalSyntheticLambda1] */
     public SecDeviceControlsTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, SecDeviceControlsController secDeviceControlsController, ControlsComponent controlsComponent) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mHasControlsApps = new AtomicBoolean(false);

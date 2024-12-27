@@ -16,13 +16,11 @@ public final class CellularIdentifierDisclosure implements Parcelable {
             new Parcelable.Creator<
                     CellularIdentifierDisclosure>() { // from class:
                                                       // android.telephony.CellularIdentifierDisclosure.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellularIdentifierDisclosure createFromParcel(Parcel in) {
                     return new CellularIdentifierDisclosure(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellularIdentifierDisclosure[] newArray(int size) {
                     return new CellularIdentifierDisclosure[size];

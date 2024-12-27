@@ -816,8 +816,6 @@ public final class AccessibilityFloatingMenuView extends FrameLayout implements 
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v0, types: [com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$4] */
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$5] */
     public AccessibilityFloatingMenuView(Context context, Position position, RecyclerView recyclerView) {
         super(context);
         this.mIsDragging = false;

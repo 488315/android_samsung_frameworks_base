@@ -12,13 +12,11 @@ public final class NetworkSliceInfo implements Parcelable {
     public static final Parcelable.Creator<NetworkSliceInfo> CREATOR =
             new Parcelable.Creator<
                     NetworkSliceInfo>() { // from class: android.telephony.data.NetworkSliceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkSliceInfo createFromParcel(Parcel source) {
                     return new NetworkSliceInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkSliceInfo[] newArray(int size) {
                     return new NetworkSliceInfo[size];

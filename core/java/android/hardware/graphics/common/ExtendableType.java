@@ -8,7 +8,6 @@ public class ExtendableType implements Parcelable {
     public static final Parcelable.Creator<ExtendableType> CREATOR =
             new Parcelable.Creator<ExtendableType>() { // from class:
                 // android.hardware.graphics.common.ExtendableType.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExtendableType createFromParcel(Parcel _aidl_source) {
                     ExtendableType _aidl_out = new ExtendableType();
@@ -16,7 +15,6 @@ public class ExtendableType implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExtendableType[] newArray(int _aidl_size) {
                     return new ExtendableType[_aidl_size];

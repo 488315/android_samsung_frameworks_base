@@ -66,7 +66,6 @@ public final class ALSProbe {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.biometrics.log.ALSProbe$1] */
     public ALSProbe(SensorManager sensorManager, Handler handler, long j) {
         this.mMaxSubscriptionTime = -1L;
         this.mDestroyed = false;

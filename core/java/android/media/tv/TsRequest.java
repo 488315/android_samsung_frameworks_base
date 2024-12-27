@@ -6,14 +6,12 @@ import android.os.Parcelable;
 public final class TsRequest extends BroadcastInfoRequest implements Parcelable {
     public static final Parcelable.Creator<TsRequest> CREATOR =
             new Parcelable.Creator<TsRequest>() { // from class: android.media.tv.TsRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TsRequest createFromParcel(Parcel source) {
                     source.readInt();
                     return TsRequest.createFromParcelBody(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TsRequest[] newArray(int size) {
                     return new TsRequest[size];

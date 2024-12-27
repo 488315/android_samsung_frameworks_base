@@ -9,7 +9,6 @@ public class GetGeoidHeightResponse implements Parcelable {
     public static final Parcelable.Creator<GetGeoidHeightResponse> CREATOR =
             new Parcelable.Creator<GetGeoidHeightResponse>() { // from class:
                 // android.frameworks.location.altitude.GetGeoidHeightResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetGeoidHeightResponse createFromParcel(Parcel _aidl_source) {
                     GetGeoidHeightResponse _aidl_out = new GetGeoidHeightResponse();
@@ -17,7 +16,6 @@ public class GetGeoidHeightResponse implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetGeoidHeightResponse[] newArray(int _aidl_size) {
                     return new GetGeoidHeightResponse[_aidl_size];

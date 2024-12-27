@@ -31,7 +31,6 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$1 extends 
     int label;
     final /* synthetic */ PromptIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptIconViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, PromptIconViewModel promptIconViewModel, PromptSelectorInteractor promptSelectorInteractor, PromptViewModel promptViewModel) {
         super(3, continuation);
         this.this$0 = promptIconViewModel;
@@ -74,7 +73,6 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$1 extends 
                         int label;
                         final /* synthetic */ PromptIconViewModel this$0;
 
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         public AnonymousClass3(Continuation continuation, PromptIconViewModel promptIconViewModel) {
                             super(3, continuation);
                             this.this$0 = promptIconViewModel;
@@ -148,7 +146,6 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$1 extends 
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
                         final Flow[] flowArr2 = flowArr;
                         Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$1.2
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(0);
                             }
@@ -184,7 +181,6 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$1 extends 
                         int label;
                         final /* synthetic */ PromptIconViewModel this$0;
 
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         public AnonymousClass3(Continuation continuation, PromptIconViewModel promptIconViewModel) {
                             super(3, continuation);
                             this.this$0 = promptIconViewModel;
@@ -267,7 +263,6 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$1 extends 
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
                         final Flow[] flowArr3 = flowArr2;
                         Object combineInternal = CombineKt.combineInternal(flowArr3, new Function0() { // from class: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$2.2
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(0);
                             }

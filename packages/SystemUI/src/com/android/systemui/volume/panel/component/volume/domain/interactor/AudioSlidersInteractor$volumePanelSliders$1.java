@@ -31,7 +31,6 @@ final class AudioSlidersInteractor$volumePanelSliders$1 extends SuspendLambda im
         int label;
         final /* synthetic */ AudioSlidersInteractor this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(FlowCollector flowCollector, MediaDeviceSession mediaDeviceSession, MediaDeviceSessions mediaDeviceSessions, AudioSlidersInteractor audioSlidersInteractor, AudioDeviceInfo audioDeviceInfo, Continuation continuation) {
             super(2, continuation);
             this.$$this$combineTransform = flowCollector;
@@ -51,7 +50,6 @@ final class AudioSlidersInteractor$volumePanelSliders$1 extends SuspendLambda im
             return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:29:0x008f A[RETURN] */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -144,7 +142,6 @@ final class AudioSlidersInteractor$volumePanelSliders$1 extends SuspendLambda im
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AudioSlidersInteractor$volumePanelSliders$1(AudioSlidersInteractor audioSlidersInteractor, Continuation continuation) {
         super(5, continuation);
         this.this$0 = audioSlidersInteractor;

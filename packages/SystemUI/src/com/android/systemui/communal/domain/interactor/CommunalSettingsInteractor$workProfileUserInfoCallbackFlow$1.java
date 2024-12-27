@@ -21,13 +21,11 @@ final class CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1 extends
     int label;
     final /* synthetic */ CommunalSettingsInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1(CommunalSettingsInteractor communalSettingsInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalSettingsInteractor;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static final void invokeSuspend$send(ProducerScope producerScope, List list) {
         Object obj;
         Iterator it = list.iterator();
@@ -57,8 +55,6 @@ final class CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1 extends
         return ((CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.communal.domain.interactor.CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1$callback$1, com.android.systemui.settings.UserTracker$Callback] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -77,7 +73,6 @@ final class CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1 extends
             invokeSuspend$send(producerScope, ((UserTrackerImpl) this.this$0.userTracker).getUserProfiles());
             final CommunalSettingsInteractor communalSettingsInteractor2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.communal.domain.interactor.CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

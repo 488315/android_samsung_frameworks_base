@@ -1117,7 +1117,6 @@ public class Toolbar extends ViewGroup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void ensureCollapseButtonView() {
         CharSequence descriptionText =
                 getContext().getResources().getString(R.string.action_bar_up_description);
@@ -1169,7 +1168,6 @@ public class Toolbar extends ViewGroup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public Parcelable onSaveInstanceState() {
         SavedState state = new SavedState(super.onSaveInstanceState());
@@ -1181,7 +1179,6 @@ public class Toolbar extends ViewGroup {
         return state;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public void onRestoreInstanceState(Parcelable state) {
         MenuItem item;
@@ -1560,11 +1557,6 @@ public class Toolbar extends ViewGroup {
 
        if (r13.getMeasuredWidth() <= 0) goto L57;
     */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x0196  */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x01a7  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0179  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x01d9  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x0259  */
     @Override // android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1729,7 +1721,6 @@ public class Toolbar extends ViewGroup {
         return new LayoutParams(getContext(), attrs);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.ViewGroup
     public LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
         if (p instanceof LayoutParams) {
@@ -1744,7 +1735,6 @@ public class Toolbar extends ViewGroup {
         return new LayoutParams(p);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.ViewGroup
     public LayoutParams generateDefaultLayoutParams() {
         return new LayoutParams(-2, -2);
@@ -1871,13 +1861,11 @@ public class Toolbar extends ViewGroup {
         public static final Parcelable.Creator<SavedState> CREATOR =
                 new Parcelable.Creator<
                         SavedState>() { // from class: android.widget.Toolbar.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel source) {
                         return new SavedState(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];

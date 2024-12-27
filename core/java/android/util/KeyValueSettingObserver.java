@@ -32,7 +32,6 @@ public abstract class KeyValueSettingObserver {
         this.mResolver.unregisterContentObserver(this.mObserver);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setParserValue() {
         String setting = getSettingValue(this.mResolver);
         try {

@@ -27,7 +27,6 @@ public class MarshalQueryableHighSpeedVideoConfiguration
             buffer.putInt(value.getBatchSizeMax());
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public HighSpeedVideoConfiguration unmarshal(ByteBuffer buffer) {
             int width = buffer.getInt();

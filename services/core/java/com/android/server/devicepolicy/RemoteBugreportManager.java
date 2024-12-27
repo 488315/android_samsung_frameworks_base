@@ -68,9 +68,6 @@ public final class RemoteBugreportManager {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.devicepolicy.RemoteBugreportManager$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.devicepolicy.RemoteBugreportManager$1] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.devicepolicy.RemoteBugreportManager$1] */
     public RemoteBugreportManager(
             DevicePolicyManagerService devicePolicyManagerService,
             DevicePolicyManagerService.Injector injector) {

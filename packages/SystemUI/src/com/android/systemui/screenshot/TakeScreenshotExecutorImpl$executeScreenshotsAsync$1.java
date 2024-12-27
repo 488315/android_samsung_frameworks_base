@@ -20,7 +20,6 @@ final class TakeScreenshotExecutorImpl$executeScreenshotsAsync$1 extends Suspend
     int label;
     final /* synthetic */ TakeScreenshotExecutorImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TakeScreenshotExecutorImpl$executeScreenshotsAsync$1(TakeScreenshotExecutorImpl takeScreenshotExecutorImpl, ScreenshotRequest screenshotRequest, TakeScreenshotService.RequestCallback requestCallback, Consumer<Uri> consumer, Continuation continuation) {
         super(2, continuation);
         this.this$0 = takeScreenshotExecutorImpl;
@@ -49,7 +48,6 @@ final class TakeScreenshotExecutorImpl$executeScreenshotsAsync$1 extends Suspend
             ScreenshotRequest screenshotRequest = this.$screenshotRequest;
             final Consumer<Uri> consumer = this.$onSaved;
             Function1 function1 = new Function1() { // from class: com.android.systemui.screenshot.TakeScreenshotExecutorImpl$executeScreenshotsAsync$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }

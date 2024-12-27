@@ -22,7 +22,6 @@ public abstract class SafetyWarningDialog extends SystemUIDialog implements Dial
     public final AnonymousClass1 mReceiver;
     public long mShowTime;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.volume.SafetyWarningDialog$1] */
     public SafetyWarningDialog(Context context, AudioManager audioManager) {
         super(context);
         this.mReceiver = new BroadcastReceiver() { // from class: com.android.systemui.volume.SafetyWarningDialog.1

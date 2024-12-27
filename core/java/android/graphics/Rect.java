@@ -16,7 +16,6 @@ import java.util.regex.Pattern;
 public final class Rect implements Parcelable {
     public static final Parcelable.Creator<Rect> CREATOR =
             new Parcelable.Creator<Rect>() { // from class: android.graphics.Rect.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Rect createFromParcel(Parcel in) {
                     Rect r = new Rect();
@@ -24,7 +23,6 @@ public final class Rect implements Parcelable {
                     return r;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Rect[] newArray(int size) {
                     return new Rect[size];

@@ -46,7 +46,6 @@ public final class AodToLockscreenTransitionViewModel implements DeviceEntryIcon
                 return Float.valueOf(floatValue);
             }
         }, 0L, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.AodToLockscreenTransitionViewModel$notificationAlpha$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

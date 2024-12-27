@@ -11,7 +11,6 @@ import java.util.StringJoiner;
 public class Long implements Parcelable {
     public static final Parcelable.Creator<Long> CREATOR =
             new Parcelable.Creator<Long>() { // from class: android.media.audio.common.Long.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Long createFromParcel(Parcel _aidl_source) {
                     Long _aidl_out = new Long();
@@ -19,7 +18,6 @@ public class Long implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Long[] newArray(int _aidl_size) {
                     return new Long[_aidl_size];

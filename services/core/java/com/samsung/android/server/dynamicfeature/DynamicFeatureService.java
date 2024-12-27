@@ -270,7 +270,6 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
             this.this$0 = dynamicFeatureService;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:62:0x007f, code lost:
 
            if (r2.equals("com.samsung.feature.FORCE_START") == false) goto L20;
@@ -674,16 +673,6 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
         Dlog.event("disableService");
     }
 
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x03c4  */
-    /* JADX WARN: Removed duplicated region for block: B:142:0x03c8  */
-    /* JADX WARN: Removed duplicated region for block: B:204:0x05c2 A[LOOP:3: B:202:0x05bc->B:204:0x05c2, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:208:0x06c4  */
-    /* JADX WARN: Removed duplicated region for block: B:212:0x06cd  */
-    /* JADX WARN: Removed duplicated region for block: B:215:0x06d3  */
-    /* JADX WARN: Removed duplicated region for block: B:216:0x05e7 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x02c8 A[LOOP:0: B:93:0x02c2->B:95:0x02c8, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x02d4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -786,10 +775,6 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x01a3  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x01ad  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x0162 A[LOOP:2: B:66:0x00f0->B:85:0x0162, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x008a A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -881,8 +866,6 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
         ee("   ##### testVerifyIntent: properties failed " + properties);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:0x004f  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0064  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -991,7 +974,6 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                                                 .submit(
                                                         new Callable() { // from class:
                                                             // com.samsung.android.server.dynamicfeature.network.HttpConnector$$ExternalSyntheticLambda0
-                                                            /* JADX WARN: Can't wrap try/catch for region: R(16:16|17|18|(4:21|(5:26|27|(1:29)|30|31)|32|19)|37|38|(1:40)|41|42|43|(2:45|(5:47|48|49|50|(3:52|53|55)(1:59)))(6:65|66|67|(3:68|69|(1:71)(1:72))|73|74)|64|48|49|50|(0)(0)) */
                                                             /* JADX WARN: Code restructure failed: missing block: B:61:0x01ee, code lost:
 
                                                                r0 = move-exception;
@@ -1000,27 +982,6 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
 
                                                                com.android.server.BootReceiver$$ExternalSyntheticOutline0.m("Cannot close handle : ", r0, "dynamicfeature_HttpConnector");
                                                             */
-                                                            /* JADX WARN: Multi-variable type inference failed */
-                                                            /* JADX WARN: Removed duplicated region for block: B:52:0x01f8 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-                                                            /* JADX WARN: Removed duplicated region for block: B:59:? A[RETURN, SYNTHETIC] */
-                                                            /* JADX WARN: Type inference failed for: r0v0, types: [java.lang.String] */
-                                                            /* JADX WARN: Type inference failed for: r0v1 */
-                                                            /* JADX WARN: Type inference failed for: r0v11, types: [java.io.InputStreamReader] */
-                                                            /* JADX WARN: Type inference failed for: r0v14 */
-                                                            /* JADX WARN: Type inference failed for: r0v15 */
-                                                            /* JADX WARN: Type inference failed for: r0v16 */
-                                                            /* JADX WARN: Type inference failed for: r0v19 */
-                                                            /* JADX WARN: Type inference failed for: r0v2 */
-                                                            /* JADX WARN: Type inference failed for: r0v21 */
-                                                            /* JADX WARN: Type inference failed for: r0v23 */
-                                                            /* JADX WARN: Type inference failed for: r0v3 */
-                                                            /* JADX WARN: Type inference failed for: r0v4 */
-                                                            /* JADX WARN: Type inference failed for: r0v5, types: [java.io.InputStreamReader] */
-                                                            /* JADX WARN: Type inference failed for: r0v7, types: [java.io.InputStreamReader] */
-                                                            /* JADX WARN: Type inference failed for: r0v8 */
-                                                            /* JADX WARN: Type inference failed for: r3v13, types: [java.lang.String] */
-                                                            /* JADX WARN: Type inference failed for: r3v9, types: [java.lang.String] */
-                                                            /* JADX WARN: Type inference failed for: r4v5, types: [org.json.JSONObject] */
                                                             @Override // java.util.concurrent.Callable
                                                             /*
                                                                 Code decompiled incorrectly, please refer to instructions dump.

@@ -67,8 +67,6 @@ public final class BrightnessSliderController extends ViewController implements 
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.settings.brightness.BrightnessSliderController$1] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [android.widget.SeekBar$OnSeekBarChangeListener, com.android.systemui.settings.brightness.BrightnessSliderController$2] */
     public BrightnessSliderController(BrightnessSliderView brightnessSliderView, FalsingManager falsingManager, UiEventLogger uiEventLogger, SeekbarHapticPlugin seekbarHapticPlugin, ActivityStarter activityStarter) {
         super(brightnessSliderView);
         this.mOnInterceptListener = new Gefingerpoken() { // from class: com.android.systemui.settings.brightness.BrightnessSliderController.1

@@ -19,7 +19,6 @@ public class ClipAnimation extends Animation<Integer> {
         this.clipType = ClipType.VERTICAL_FROM_CENTER;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.vekit.Animation.Animation
     public void rollback() {
         if (isEnableRollback()) {

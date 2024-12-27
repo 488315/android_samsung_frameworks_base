@@ -21,7 +21,6 @@ public final class KeyguardPreviewSmartspaceViewBinder$bind$1$1$invokeSuspend$$i
     boolean Z$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardPreviewSmartspaceViewBinder$bind$1$1$invokeSuspend$$inlined$launch$default$1(String str, Continuation continuation, KeyguardPreviewSmartspaceViewModel keyguardPreviewSmartspaceViewModel, boolean z, Context context, View view) {
         super(2, continuation);
         this.$spanName = str;
@@ -43,8 +42,6 @@ public final class KeyguardPreviewSmartspaceViewBinder$bind$1$1$invokeSuspend$$i
         return ((KeyguardPreviewSmartspaceViewBinder$bind$1$1$invokeSuspend$$inlined$launch$default$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x008f  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0094  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

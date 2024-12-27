@@ -12,7 +12,6 @@ final class CommunalSceneStartable$start$3 extends SuspendLambda implements Func
     int label;
     final /* synthetic */ CommunalSceneStartable this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalSceneStartable$start$3(CommunalSceneStartable communalSceneStartable, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalSceneStartable;

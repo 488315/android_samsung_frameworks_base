@@ -113,9 +113,6 @@ public final class ClockRegistry {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.systemui.shared.clocks.ClockRegistry$pluginListener$1] */
-    /* JADX WARN: Type inference failed for: r1v11, types: [com.android.systemui.shared.clocks.ClockRegistry$userSwitchObserver$1] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.shared.clocks.ClockRegistry$settingObserver$1] */
     public ClockRegistry(Context context, PluginManager pluginManager, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, CoroutineDispatcher coroutineDispatcher2, boolean z, boolean z2, ClockProvider clockProvider, String str, ClockMessageBuffers clockMessageBuffers, boolean z3, String str2, boolean z4, ThreadAssert threadAssert) {
         MessageBuffer infraMessageBuffer;
         this.context = context;
@@ -146,7 +143,6 @@ public final class ClockRegistry {
             }
         };
         this.pluginListener = new PluginListener() { // from class: com.android.systemui.shared.clocks.ClockRegistry$pluginListener$1
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // com.android.systemui.plugins.PluginListener
             public final boolean onPluginAttached(PluginLifecycleManager pluginLifecycleManager) {
                 final ClockRegistry clockRegistry = ClockRegistry.this;
@@ -197,7 +193,6 @@ public final class ClockRegistry {
                     ConcurrentHashMap concurrentHashMap = clockRegistry.availableClocks;
                     ClockRegistry.ClockInfo clockInfo = new ClockRegistry.ClockInfo(clockMetadata, null, pluginLifecycleManager);
                     Function1 function1 = new Function1() { // from class: com.android.systemui.shared.clocks.ClockRegistry$pluginListener$1$onPluginAttached$info$1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }
@@ -251,12 +246,10 @@ public final class ClockRegistry {
                 final ArrayList<ClockRegistry.ClockInfo> arrayList = new ArrayList();
                 ClockRegistry clockRegistry = ClockRegistry.this;
                 CollectionsKt__MutableCollectionsKt.filterInPlace$CollectionsKt__MutableCollectionsKt(clockRegistry.availableClocks.entrySet(), new Function1() { // from class: com.android.systemui.shared.clocks.ClockRegistry$pluginListener$1$onPluginDetached$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
                     @Override // kotlin.jvm.functions.Function1
                     public final Object invoke(Object obj) {
                         Map.Entry entry = (Map.Entry) obj;
@@ -287,7 +280,6 @@ public final class ClockRegistry {
                 }
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // com.android.systemui.plugins.PluginListener
             public final void onPluginLoaded(Plugin plugin, Context context2, PluginLifecycleManager pluginLifecycleManager) {
                 ClockProviderPlugin clockProviderPlugin = (ClockProviderPlugin) plugin;
@@ -300,7 +292,6 @@ public final class ClockRegistry {
                         ConcurrentHashMap concurrentHashMap = clockRegistry.availableClocks;
                         ClockRegistry.ClockInfo clockInfo = new ClockRegistry.ClockInfo(clockMetadata, clockProviderPlugin, pluginLifecycleManager);
                         Function1 function1 = new Function1() { // from class: com.android.systemui.shared.clocks.ClockRegistry$pluginListener$1$onPluginLoaded$info$1
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(1);
                             }

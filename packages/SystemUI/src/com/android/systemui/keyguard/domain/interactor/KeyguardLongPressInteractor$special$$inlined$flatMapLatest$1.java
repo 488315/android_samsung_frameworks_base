@@ -18,7 +18,6 @@ public final class KeyguardLongPressInteractor$special$$inlined$flatMapLatest$1 
     int label;
     final /* synthetic */ KeyguardLongPressInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardLongPressInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, KeyguardLongPressInteractor keyguardLongPressInteractor) {
         super(3, continuation);
         this.this$0 = keyguardLongPressInteractor;

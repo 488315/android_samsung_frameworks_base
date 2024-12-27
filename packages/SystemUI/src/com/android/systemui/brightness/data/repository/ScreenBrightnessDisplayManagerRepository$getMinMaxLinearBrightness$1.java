@@ -8,7 +8,6 @@ final class ScreenBrightnessDisplayManagerRepository$getMinMaxLinearBrightness$1
     /* synthetic */ Object result;
     final /* synthetic */ ScreenBrightnessDisplayManagerRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenBrightnessDisplayManagerRepository$getMinMaxLinearBrightness$1(ScreenBrightnessDisplayManagerRepository screenBrightnessDisplayManagerRepository, Continuation continuation) {
         super(continuation);
         this.this$0 = screenBrightnessDisplayManagerRepository;

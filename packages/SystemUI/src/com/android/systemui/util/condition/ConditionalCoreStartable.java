@@ -17,7 +17,6 @@ public abstract class ConditionalCoreStartable implements CoreStartable {
         this(monitor, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void lambda$onBootCompleted$1(boolean z) {
         if (z) {
             Monitor monitor = this.mMonitor;
@@ -27,7 +26,6 @@ public abstract class ConditionalCoreStartable implements CoreStartable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void lambda$start$0(boolean z) {
         if (z) {
             Monitor monitor = this.mMonitor;

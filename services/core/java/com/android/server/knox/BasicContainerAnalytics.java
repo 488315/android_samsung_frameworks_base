@@ -56,7 +56,6 @@ public final class BasicContainerAnalytics {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void logActivityChange(int i, int i2, String str) {
         IKnoxAnalyticsContainerImpl iKnoxAnalyticsContainerImpl = this.ifKnoxAnalyticsContainer;
         if (iKnoxAnalyticsContainerImpl.isLoggingAllowedForUser(i)) {
@@ -90,7 +89,6 @@ public final class BasicContainerAnalytics {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v4, types: [java.io.Serializable, java.lang.String[]] */
     public final void logEvent(Bundle bundle, String str) {
         IKnoxAnalyticsContainerImpl iKnoxAnalyticsContainerImpl = this.ifKnoxAnalyticsContainer;
         if (iKnoxAnalyticsContainerImpl.personaManagerService.getAppSeparationId() > 0) {

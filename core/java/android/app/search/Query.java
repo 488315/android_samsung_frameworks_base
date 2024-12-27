@@ -9,13 +9,11 @@ import android.os.Parcelable;
 public final class Query implements Parcelable {
     public static final Parcelable.Creator<Query> CREATOR =
             new Parcelable.Creator<Query>() { // from class: android.app.search.Query.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Query createFromParcel(Parcel parcel) {
                     return new Query(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Query[] newArray(int size) {
                     return new Query[size];

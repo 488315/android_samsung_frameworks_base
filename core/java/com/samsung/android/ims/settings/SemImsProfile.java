@@ -16,13 +16,11 @@ public class SemImsProfile implements Parcelable {
             new Parcelable.Creator<
                     SemImsProfile>() { // from class:
                                        // com.samsung.android.ims.settings.SemImsProfile.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemImsProfile createFromParcel(Parcel in) {
                     return new SemImsProfile(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemImsProfile[] newArray(int size) {
                     return new SemImsProfile[size];

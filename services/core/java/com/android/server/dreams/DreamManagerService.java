@@ -343,7 +343,6 @@ public final class DreamManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,
@@ -1092,10 +1091,6 @@ public final class DreamManagerService extends SystemService {
         this(context, new DreamHandler(FgThread.get().getLooper(), null, true));
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.dreams.DreamManagerService$1] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.dreams.DreamManagerService$2] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.dreams.DreamManagerService$2] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.dreams.DreamManagerService$6] */
     public DreamManagerService(Context context, Handler handler) {
         super(context);
         this.mLock = new Object();
@@ -1455,7 +1450,6 @@ public final class DreamManagerService extends SystemService {
         this.mPowerManagerInternal.nap(uptimeMillis, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0031 A[Catch: all -> 0x0039, TryCatch #0 {all -> 0x0039, blocks: (B:6:0x000a, B:11:0x0031, B:12:0x003b, B:16:0x001d, B:19:0x0022, B:21:0x0028, B:23:0x002b), top: B:4:0x0008 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

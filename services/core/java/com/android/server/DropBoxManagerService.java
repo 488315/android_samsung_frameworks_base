@@ -202,9 +202,6 @@ public final class DropBoxManagerService extends SystemService {
             this.blocks = 0;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0065 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:6:0x006e  */
-        /* JADX WARN: Removed duplicated region for block: B:9:0x008d  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -538,7 +535,6 @@ public final class DropBoxManagerService extends SystemService {
         this(context, new File("/data/system/dropbox"), FgThread.get().getLooper());
     }
 
-    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.server.DropBoxManagerService$2] */
     public DropBoxManagerService(Context context, File file, Looper looper) {
         super(context);
         this.mAllFiles = null;
@@ -574,12 +570,6 @@ public final class DropBoxManagerService extends SystemService {
                 }
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Removed duplicated region for block: B:123:0x0323 A[Catch: all -> 0x0097, TryCatch #8 {all -> 0x0097, blocks: (B:4:0x000b, B:10:0x001a, B:11:0x001d, B:14:0x002e, B:16:0x0031, B:18:0x003b, B:21:0x0047, B:23:0x0051, B:26:0x005c, B:31:0x0068, B:33:0x0072, B:35:0x007d, B:37:0x0087, B:39:0x009a, B:43:0x00a0, B:54:0x00d1, B:57:0x00d7, B:59:0x011f, B:60:0x0128, B:62:0x012e, B:64:0x013d, B:65:0x0142, B:66:0x0150, B:68:0x0156, B:71:0x0163, B:73:0x0167, B:74:0x016c, B:77:0x0180, B:79:0x018b, B:84:0x0195, B:86:0x019a, B:87:0x01a0, B:89:0x01ab, B:90:0x01b1, B:93:0x01be, B:96:0x01d6, B:98:0x01ef, B:120:0x02c7, B:125:0x02cc, B:123:0x0323, B:141:0x030c, B:143:0x0311, B:147:0x0318, B:151:0x031d, B:149:0x0320, B:220:0x01de, B:221:0x01e3, B:228:0x032f, B:230:0x0336, B:232:0x0345, B:236:0x033b, B:237:0x0340, B:242:0x0350), top: B:3:0x000b, inners: #4 }] */
-            /* JADX WARN: Removed duplicated region for block: B:141:0x030c A[Catch: all -> 0x0097, TRY_ENTER, TRY_LEAVE, TryCatch #8 {all -> 0x0097, blocks: (B:4:0x000b, B:10:0x001a, B:11:0x001d, B:14:0x002e, B:16:0x0031, B:18:0x003b, B:21:0x0047, B:23:0x0051, B:26:0x005c, B:31:0x0068, B:33:0x0072, B:35:0x007d, B:37:0x0087, B:39:0x009a, B:43:0x00a0, B:54:0x00d1, B:57:0x00d7, B:59:0x011f, B:60:0x0128, B:62:0x012e, B:64:0x013d, B:65:0x0142, B:66:0x0150, B:68:0x0156, B:71:0x0163, B:73:0x0167, B:74:0x016c, B:77:0x0180, B:79:0x018b, B:84:0x0195, B:86:0x019a, B:87:0x01a0, B:89:0x01ab, B:90:0x01b1, B:93:0x01be, B:96:0x01d6, B:98:0x01ef, B:120:0x02c7, B:125:0x02cc, B:123:0x0323, B:141:0x030c, B:143:0x0311, B:147:0x0318, B:151:0x031d, B:149:0x0320, B:220:0x01de, B:221:0x01e3, B:228:0x032f, B:230:0x0336, B:232:0x0345, B:236:0x033b, B:237:0x0340, B:242:0x0350), top: B:3:0x000b, inners: #4 }] */
-            /* JADX WARN: Removed duplicated region for block: B:143:0x0311 A[Catch: all -> 0x0097, IOException -> 0x0321, TRY_ENTER, TRY_LEAVE, TryCatch #8 {all -> 0x0097, blocks: (B:4:0x000b, B:10:0x001a, B:11:0x001d, B:14:0x002e, B:16:0x0031, B:18:0x003b, B:21:0x0047, B:23:0x0051, B:26:0x005c, B:31:0x0068, B:33:0x0072, B:35:0x007d, B:37:0x0087, B:39:0x009a, B:43:0x00a0, B:54:0x00d1, B:57:0x00d7, B:59:0x011f, B:60:0x0128, B:62:0x012e, B:64:0x013d, B:65:0x0142, B:66:0x0150, B:68:0x0156, B:71:0x0163, B:73:0x0167, B:74:0x016c, B:77:0x0180, B:79:0x018b, B:84:0x0195, B:86:0x019a, B:87:0x01a0, B:89:0x01ab, B:90:0x01b1, B:93:0x01be, B:96:0x01d6, B:98:0x01ef, B:120:0x02c7, B:125:0x02cc, B:123:0x0323, B:141:0x030c, B:143:0x0311, B:147:0x0318, B:151:0x031d, B:149:0x0320, B:220:0x01de, B:221:0x01e3, B:228:0x032f, B:230:0x0336, B:232:0x0345, B:236:0x033b, B:237:0x0340, B:242:0x0350), top: B:3:0x000b, inners: #4 }] */
-            /* JADX WARN: Removed duplicated region for block: B:147:0x0318 A[Catch: all -> 0x0097, TRY_ENTER, TRY_LEAVE, TryCatch #8 {all -> 0x0097, blocks: (B:4:0x000b, B:10:0x001a, B:11:0x001d, B:14:0x002e, B:16:0x0031, B:18:0x003b, B:21:0x0047, B:23:0x0051, B:26:0x005c, B:31:0x0068, B:33:0x0072, B:35:0x007d, B:37:0x0087, B:39:0x009a, B:43:0x00a0, B:54:0x00d1, B:57:0x00d7, B:59:0x011f, B:60:0x0128, B:62:0x012e, B:64:0x013d, B:65:0x0142, B:66:0x0150, B:68:0x0156, B:71:0x0163, B:73:0x0167, B:74:0x016c, B:77:0x0180, B:79:0x018b, B:84:0x0195, B:86:0x019a, B:87:0x01a0, B:89:0x01ab, B:90:0x01b1, B:93:0x01be, B:96:0x01d6, B:98:0x01ef, B:120:0x02c7, B:125:0x02cc, B:123:0x0323, B:141:0x030c, B:143:0x0311, B:147:0x0318, B:151:0x031d, B:149:0x0320, B:220:0x01de, B:221:0x01e3, B:228:0x032f, B:230:0x0336, B:232:0x0345, B:236:0x033b, B:237:0x0340, B:242:0x0350), top: B:3:0x000b, inners: #4 }] */
-            /* JADX WARN: Removed duplicated region for block: B:150:0x031d A[EXC_TOP_SPLITTER, SYNTHETIC] */
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
                 To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -637,7 +627,6 @@ public final class DropBoxManagerService extends SystemService {
                 return DropBoxManagerService.this.isTagEnabled(str);
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
             public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
                 DropBoxManagerService.this.new ShellCmd().exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
             }
@@ -659,11 +648,6 @@ public final class DropBoxManagerService extends SystemService {
         return z;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r6v1 */
-    /* JADX WARN: Type inference failed for: r6v2 */
-    /* JADX WARN: Type inference failed for: r6v3, types: [java.io.File] */
     public final void addEntry(String str, DropBoxManagerInternal$EntrySource dropBoxManagerInternal$EntrySource, int i) {
         File file;
         ?? r6 = "Dropping: ";

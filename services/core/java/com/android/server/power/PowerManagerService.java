@@ -632,7 +632,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
             try {
                 PowerManagerService.this.getClass();
                 Thread thread = new Thread() { // from class: com.android.server.power.PowerManagerService.5
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super("PowerManagerService.crash()");
                     }
@@ -1310,7 +1309,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
             this.mShellCommand.exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
         }
@@ -3319,7 +3317,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         public PowerManagerHandlerCallback() {
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         @Override // android.os.Handler.Callback
         public final boolean handleMessage(Message message) {
             int i = 0;
@@ -3443,7 +3440,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ PowerManagerService this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ SettingsObserver(PowerManagerService powerManagerService, Handler handler, int i) {
             super(handler);
             this.$r8$classId = i;
@@ -4914,15 +4910,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         this(context, new Injector());
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.power.PowerManagerService$6] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.power.PowerManagerService$6] */
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.server.power.PowerManagerService$3] */
-    /* JADX WARN: Type inference failed for: r1v11, types: [com.android.server.power.PowerManagerService$6] */
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.server.power.PowerManagerService$6] */
-    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.server.power.PowerManagerService$10] */
-    /* JADX WARN: Type inference failed for: r3v6, types: [com.android.server.power.PowerManagerService$6] */
-    /* JADX WARN: Type inference failed for: r3v7, types: [com.android.server.power.PowerManagerService$6] */
-    /* JADX WARN: Type inference failed for: r3v8, types: [com.android.server.power.PowerManagerService$6] */
     public PowerManagerService(Context context, Injector injector) {
         super(context);
         boolean z;
@@ -6387,28 +6374,20 @@ public final class PowerManagerService extends SystemService implements Watchdog
         android.util.Slog.wtf("PowerManagerService", "Unexpected return from lowLevelReboot!");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeAcquireSuspendBlocker(String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native boolean nativeForceSuspend();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native void nativeInit();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeReleaseSuspendBlocker(String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetAutoSuspend(boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetInteractiveAsync(boolean z, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetPowerBoost(int i, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native boolean nativeSetPowerMode(int i, boolean z);
 
     public final void addPowerGroupsForNonDefaultDisplayGroupLocked() {
@@ -6432,10 +6411,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         this.mDirty |= EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00f7  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00fd  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0190  */
-    /* JADX WARN: Removed duplicated region for block: B:61:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7984,8 +7959,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0036  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8360,25 +8333,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         sparseArray.put(i, new ProfilePowerState(i, 0, intForUser, SystemClock.uptimeMillis()));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:100:0x0213  */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x0225  */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x0283  */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x02ce A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:151:0x02a6  */
-    /* JADX WARN: Removed duplicated region for block: B:152:0x0230  */
-    /* JADX WARN: Removed duplicated region for block: B:153:0x0215  */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x0165  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00fb  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0185  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0194  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x019f  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x01bc  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x01cb  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x01fd  */
-    /* JADX WARN: Type inference failed for: r5v0 */
-    /* JADX WARN: Type inference failed for: r5v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r5v7 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8482,7 +8436,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* JADX WARN: Type inference failed for: r6v0, types: [com.android.server.power.PowerManagerService$$ExternalSyntheticLambda16] */
     public final void updateQuickTilesSettingsLocked() {
         String string = Settings.Secure.getString(this.mContext.getContentResolver(), "sysui_qs_tiles");
         String string2 = Settings.Secure.getString(this.mContext.getContentResolver(), "sysui_quick_qs_tiles");
@@ -8651,8 +8604,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
     
         if (r8 != false) goto L54;
      */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x00b6  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x00c1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8669,20 +8620,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
     
         if (r3 != 4) goto L147;
      */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x0213  */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x0205  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x01b3  */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x0155  */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00cc  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00f5 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x010c  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x01af  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x01b9 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x01d8  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x01da  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x0203  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0210  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8727,9 +8664,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
     
         if (r9 == false) goto L48;
      */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00b2  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00bc  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x00b8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8970,11 +8904,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(18:29|(3:34|35|(17:43|44|45|46|(1:48)(1:74)|49|50|(1:52)(1:72)|53|(1:57)|58|(1:62)|63|64|65|66|67))|78|45|46|(0)(0)|49|50|(0)(0)|53|(2:55|57)|58|(2:60|62)|63|64|65|66|67) */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0082  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00d2  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x00d7  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0085  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

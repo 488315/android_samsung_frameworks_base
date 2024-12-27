@@ -1043,7 +1043,6 @@ public class AccountManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void ensureNotOnMainThread() {
         Looper looper = Looper.myLooper();
         if (looper != null && looper == this.mContext.getMainLooper()) {
@@ -1060,7 +1059,6 @@ public class AccountManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postToHandler(
             Handler handler,
             final AccountManagerCallback<Bundle> callback,
@@ -1075,7 +1073,6 @@ public class AccountManager {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postToHandler(
             Handler handler, final OnAccountsUpdateListener listener, Account[] accounts) {
         final Account[] accountsCopy = new Account[accounts.length];
@@ -1132,7 +1129,6 @@ public class AccountManager {
             super(
                     new Callable<
                             Bundle>() { // from class: android.accounts.AccountManager.AmsTask.1
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // java.util.concurrent.Callable
                         public Bundle call() throws Exception {
                             throw new IllegalStateException("this should never be called");
@@ -1153,7 +1149,6 @@ public class AccountManager {
             return this;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // java.util.concurrent.FutureTask
         public void set(Bundle bundle) {
             if (bundle == null) {
@@ -1198,14 +1193,12 @@ public class AccountManager {
             }
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.accounts.AccountManagerFuture
         public Bundle getResult()
                 throws OperationCanceledException, IOException, AuthenticatorException {
             return internalGetResult(null, null);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.accounts.AccountManagerFuture
         public Bundle getResult(long timeout, TimeUnit unit)
                 throws OperationCanceledException, IOException, AuthenticatorException {
@@ -1400,7 +1393,6 @@ public class AccountManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Exception convertErrorToException(int code, String message) {
         if (code == 3) {
             return new IOException(message);
@@ -1417,7 +1409,6 @@ public class AccountManager {
         return new AuthenticatorException(message);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void getAccountByTypeAndFeatures(
             final String accountType,
             final String[] features,

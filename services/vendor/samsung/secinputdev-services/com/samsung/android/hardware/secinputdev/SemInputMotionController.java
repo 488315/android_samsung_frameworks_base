@@ -89,7 +89,6 @@ public class SemInputMotionController {
         this.rawdataService = service;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean enableRawdataService(SemInputConstants.MotionType motionType) {
         if (this.rawdataService != null) {
             boolean result = this.rawdataService.enableService(2, 1 << motionType.toInt());
@@ -103,7 +102,6 @@ public class SemInputMotionController {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean disableRawdataService(SemInputConstants.MotionType motionType) {
         if (this.rawdataService != null) {
             return this.rawdataService.disableService(2, 1 << motionType.toInt());
@@ -419,7 +417,6 @@ public class SemInputMotionController {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getClientsSize() {
             int size;
             synchronized (this.clients) {
@@ -436,7 +433,6 @@ public class SemInputMotionController {
             return contains;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void printClients(PrintWriter pw) {
             synchronized (this.clients) {
                 Iterator<String> it = this.clients.iterator();

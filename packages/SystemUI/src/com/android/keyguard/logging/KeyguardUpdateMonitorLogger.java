@@ -143,7 +143,6 @@ public final class KeyguardUpdateMonitorLogger {
     public final void logException(final String str, Exception exc) {
         LogLevel logLevel = LogLevel.ERROR;
         Function1 function1 = new Function1() { // from class: com.android.keyguard.logging.KeyguardUpdateMonitorLogger$logException$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

@@ -52,7 +52,6 @@ public final class BroadcastResponseStatsTracker {
                     };
     public final BroadcastResponseStatsLogger mLogger = new BroadcastResponseStatsLogger();
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.usage.BroadcastResponseStatsTracker$$ExternalSyntheticLambda0] */
     public BroadcastResponseStatsTracker(AppStandbyInternal appStandbyInternal, Context context) {
         this.mAppStandby = appStandbyInternal;
         this.mContext = context;

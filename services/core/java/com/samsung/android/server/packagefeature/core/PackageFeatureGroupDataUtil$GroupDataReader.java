@@ -24,7 +24,6 @@ public final class PackageFeatureGroupDataUtil$GroupDataReader implements AutoCl
         SAFE_LOGGABLE = CoreRune.IS_DEBUG_LEVEL_MID || CoreRune.IS_DEBUG_LEVEL_HIGH;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:9:0x003a A[Catch: all -> 0x0042, TRY_ENTER, TRY_LEAVE, TryCatch #1 {all -> 0x0042, blocks: (B:3:0x0003, B:5:0x0007, B:9:0x003a, B:10:0x0022, B:21:0x0041, B:12:0x0023, B:14:0x002b, B:16:0x002f, B:17:0x0036), top: B:2:0x0003, inners: #2 }] */
     @Override // java.lang.AutoCloseable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

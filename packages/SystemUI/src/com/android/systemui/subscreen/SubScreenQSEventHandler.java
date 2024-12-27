@@ -366,7 +366,6 @@ public class SubScreenQSEventHandler implements PanelScreenShotLogger.LogProvide
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.subscreen.SubScreenQSEventHandler.onCommonTouchEvent(android.view.MotionEvent):boolean");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onPocketModeChanged() {
         int i;
         SubScreenQuickPanelWindowView subScreenQuickPanelWindowView = this.mSubScreenQsWindowViewSupplier.get();

@@ -11,7 +11,6 @@ public final class ExecuteAppFunctionRequest implements Parcelable {
     public static final Parcelable.Creator<ExecuteAppFunctionRequest> CREATOR =
             new Parcelable.Creator<ExecuteAppFunctionRequest>() { // from class:
                 // android.app.appfunctions.ExecuteAppFunctionRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExecuteAppFunctionRequest createFromParcel(Parcel parcel) {
                     String targetPackageName = parcel.readString8();
@@ -23,7 +22,6 @@ public final class ExecuteAppFunctionRequest implements Parcelable {
                             targetPackageName, functionIdentifier, extras, parameters);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExecuteAppFunctionRequest[] newArray(int size) {
                     return new ExecuteAppFunctionRequest[size];

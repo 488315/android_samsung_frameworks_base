@@ -192,8 +192,6 @@ public final class PowerUI implements CoreStartable, ConfigurationController.Con
     public interface WarningsUI {
     }
 
-    /* JADX WARN: Type inference failed for: r7v11, types: [com.android.systemui.power.PowerUI$3] */
-    /* JADX WARN: Type inference failed for: r7v9, types: [com.android.systemui.power.PowerUI$1] */
     public PowerUI(Context context, BroadcastDispatcher broadcastDispatcher, CommandQueue commandQueue, IVrManager iVrManager, WarningsUI warningsUI, EnhancedEstimates enhancedEstimates, WakefulnessLifecycle wakefulnessLifecycle, PowerManager powerManager, UserTracker userTracker) {
         this.mContext = context;
         this.mBroadcastDispatcher = broadcastDispatcher;

@@ -10,13 +10,11 @@ public class StatusBarIcon implements Parcelable {
     public static final Parcelable.Creator<StatusBarIcon> CREATOR =
             new Parcelable.Creator<
                     StatusBarIcon>() { // from class: com.android.internal.statusbar.StatusBarIcon.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StatusBarIcon createFromParcel(Parcel parcel) {
                     return new StatusBarIcon(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StatusBarIcon[] newArray(int size) {
                     return new StatusBarIcon[size];

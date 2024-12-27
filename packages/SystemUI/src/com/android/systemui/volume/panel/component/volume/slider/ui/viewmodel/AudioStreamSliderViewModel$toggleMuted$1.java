@@ -15,7 +15,6 @@ final class AudioStreamSliderViewModel$toggleMuted$1 extends SuspendLambda imple
     int label;
     final /* synthetic */ AudioStreamSliderViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AudioStreamSliderViewModel$toggleMuted$1(AudioStreamSliderViewModel audioStreamSliderViewModel, AudioStreamSliderViewModel.State state, Continuation continuation) {
         super(2, continuation);
         this.this$0 = audioStreamSliderViewModel;

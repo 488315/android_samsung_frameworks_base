@@ -26,7 +26,6 @@ final class KeyguardBottomAreaViewModel$button$1$1 extends SuspendLambda impleme
     int label;
     final /* synthetic */ KeyguardBottomAreaViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardBottomAreaViewModel$button$1$1(KeyguardQuickAffordancePosition keyguardQuickAffordancePosition, KeyguardBottomAreaViewModel keyguardBottomAreaViewModel, KeyguardBottomAreaViewModel.PreviewMode previewMode, Continuation continuation) {
         super(6, continuation);
         this.$position = keyguardQuickAffordancePosition;

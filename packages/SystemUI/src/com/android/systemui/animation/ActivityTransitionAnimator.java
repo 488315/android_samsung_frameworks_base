@@ -94,7 +94,6 @@ public final class ActivityTransitionAnimator {
             this(executor, controller, callback, listener, transitionAnimator, false, 32, null);
         }
 
-        /* JADX WARN: Type inference failed for: r1v11, types: [com.android.systemui.animation.ActivityTransitionAnimator$AnimationDelegate$onTimeout$1] */
         public AnimationDelegate(Executor executor, Controller controller, Callback callback, Listener listener, TransitionAnimator transitionAnimator, boolean z) {
             this.mainExecutor = executor;
             this.controller = controller;
@@ -308,8 +307,6 @@ public final class ActivityTransitionAnimator {
     
         if (r3 != false) goto L37;
      */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x009d  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00bd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -576,7 +573,6 @@ public final class ActivityTransitionAnimator {
         this(executor, shellTransitions, transitionAnimator, transitionAnimator2, false, 16, (DefaultConstructorMarker) null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.animation.ActivityTransitionAnimator$lifecycleListener$1] */
     public ActivityTransitionAnimator(Executor executor, TransitionRegister transitionRegister, TransitionAnimator transitionAnimator, TransitionAnimator transitionAnimator2, boolean z) {
         this.mainExecutor = executor;
         this.transitionAnimator = transitionAnimator;
@@ -619,7 +615,6 @@ public final class ActivityTransitionAnimator {
         new HashMap();
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -720,7 +715,6 @@ public final class ActivityTransitionAnimator {
         }
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -757,13 +751,11 @@ public final class ActivityTransitionAnimator {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.animation.ActivityTransitionAnimator.<init>(java.util.concurrent.Executor, com.android.wm.shell.shared.ShellTransitions, com.android.systemui.animation.TransitionAnimator, com.android.systemui.animation.TransitionAnimator, boolean, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     public ActivityTransitionAnimator(Executor executor, ShellTransitions shellTransitions, TransitionAnimator transitionAnimator, TransitionAnimator transitionAnimator2, boolean z) {
         this(executor, new TransitionRegister(shellTransitions, null, 2, 0 == true ? 1 : 0), transitionAnimator, transitionAnimator2, z);
         TransitionRegister.Companion.getClass();
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -800,7 +792,6 @@ public final class ActivityTransitionAnimator {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.animation.ActivityTransitionAnimator.<init>(java.util.concurrent.Executor, com.android.wm.shell.shared.IShellTransitions, com.android.systemui.animation.TransitionAnimator, com.android.systemui.animation.TransitionAnimator, boolean, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     public ActivityTransitionAnimator(Executor executor, IShellTransitions iShellTransitions, TransitionAnimator transitionAnimator, TransitionAnimator transitionAnimator2, boolean z) {
         this(executor, new TransitionRegister(null, iShellTransitions, 1, 0 == true ? 1 : 0), transitionAnimator, transitionAnimator2, z);
         TransitionRegister.Companion.getClass();

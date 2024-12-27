@@ -18,7 +18,6 @@ public final class PackageChangeInteractor$packageChanged$$inlined$flatMapLatest
     int label;
     final /* synthetic */ PackageChangeInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PackageChangeInteractor$packageChanged$$inlined$flatMapLatest$1(Continuation continuation, PackageChangeInteractor packageChangeInteractor, String str) {
         super(3, continuation);
         this.this$0 = packageChangeInteractor;

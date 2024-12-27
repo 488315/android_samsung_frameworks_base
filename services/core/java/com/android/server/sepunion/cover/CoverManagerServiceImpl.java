@@ -158,7 +158,6 @@ public final class CoverManagerServiceImpl
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.server.sepunion.cover.CoverManagerServiceImpl$1] */
     public CoverManagerServiceImpl(Context context) {
         Runnable runnable =
                 new Runnable() { // from class:
@@ -1122,8 +1121,6 @@ public final class CoverManagerServiceImpl
 
        if (r11 != 14) goto L47;
     */
-    /* JADX WARN: Type inference failed for: r11v14, types: [com.android.server.sepunion.cover.CoverManagerServiceImpl$7] */
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.server.sepunion.cover.CoverManagerServiceImpl$7] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -151,8 +151,6 @@ public final class DeviceStateProviderImpl implements Dumpable, InputManagerInte
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.policy.DeviceStateProviderImpl$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.policy.DeviceStateProviderImpl$$ExternalSyntheticLambda0] */
     static {
         final int i = 0;
         TRUE_BOOLEAN_SUPPLIER = new BooleanSupplier() { // from class: com.android.server.policy.DeviceStateProviderImpl$$ExternalSyntheticLambda0
@@ -342,7 +340,6 @@ public final class DeviceStateProviderImpl implements Dumpable, InputManagerInte
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static DeviceStateProviderImpl createFromConfig(Context context, ReadableConfig readableConfig) {
         DeviceStateConfig deviceStateConfig;
         int i;

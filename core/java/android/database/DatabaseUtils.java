@@ -279,13 +279,6 @@ public class DatabaseUtils {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0047  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0067  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00ac  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0073 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1178,7 +1171,6 @@ public class DatabaseUtils {
         return sql.substring(n, eos).toUpperCase(Locale.ROOT);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static int categorizeStatement(String prefix, String sql) {
         char c;
         if (prefix == null) {

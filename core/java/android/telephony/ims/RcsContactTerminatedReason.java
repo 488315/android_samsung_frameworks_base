@@ -9,13 +9,11 @@ public final class RcsContactTerminatedReason implements Parcelable {
             new Parcelable.Creator<
                     RcsContactTerminatedReason>() { // from class:
                                                     // android.telephony.ims.RcsContactTerminatedReason.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RcsContactTerminatedReason createFromParcel(Parcel in) {
                     return new RcsContactTerminatedReason(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RcsContactTerminatedReason[] newArray(int size) {
                     return new RcsContactTerminatedReason[size];

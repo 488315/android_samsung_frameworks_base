@@ -17,13 +17,11 @@ public final class RotationResolutionRequest implements Parcelable {
             new Parcelable.Creator<
                     RotationResolutionRequest>() { // from class:
                                                    // android.service.rotationresolver.RotationResolutionRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RotationResolutionRequest[] newArray(int size) {
                     return new RotationResolutionRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RotationResolutionRequest createFromParcel(Parcel in) {
                     return new RotationResolutionRequest(in);

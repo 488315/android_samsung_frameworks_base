@@ -200,8 +200,6 @@ public final class ScreenshotController implements ScreenshotHandler {
         public Uri uri;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v30, types: [android.content.BroadcastReceiver, com.android.systemui.screenshot.ScreenshotController$1] */
     public ScreenshotController(Context context, WindowManager windowManager, FeatureFlags featureFlags, ScreenshotViewProxy.Factory factory, ScreenshotSmartActions screenshotSmartActions, ScreenshotNotificationsController.Factory factory2, UiEventLogger uiEventLogger, ImageExporter imageExporter, ImageCapture imageCapture, SemImageCaptureImpl semImageCaptureImpl, ScreenshotDetectionController screenshotDetectionController, Executor executor, ScrollCaptureExecutor scrollCaptureExecutor, TimeoutHandler timeoutHandler, BroadcastSender broadcastSender, BroadcastDispatcher broadcastDispatcher, ScreenshotNotificationSmartActionsProvider screenshotNotificationSmartActionsProvider, ScreenshotActionsController.Factory factory3, ActionIntentExecutor actionIntentExecutor, ActionExecutor.Factory factory4, UserManager userManager, AssistContentRequester assistContentRequester, MessageContainerController messageContainerController, Provider provider, AnnouncementResolver announcementResolver, Display display, boolean z) {
         InterestingConfigChanges interestingConfigChanges = new InterestingConfigChanges(-2147474556);
         this.mNotifiedApps = new ArrayList();
@@ -369,7 +367,6 @@ public final class ScreenshotController implements ScreenshotHandler {
         this.mScreenshotHandler.removeMessages(2);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(29:123|(2:125|(30:129|130|(1:208)(1:134)|135|136|(3:138|139|140)|143|(4:145|(2:147|(2:149|150))|205|150)(1:206)|151|(1:153)|154|155|156|157|158|160|161|162|163|(1:165)(1:195)|166|167|(2:169|(1:171)(2:172|(1:174)))|175|176|(1:178)(1:191)|179|(1:181)(1:190)|182|(2:184|(2:186|187)(1:188))(1:189)))(1:213)|212|136|(0)|143|(0)(0)|151|(0)|154|155|156|157|158|160|161|162|163|(0)(0)|166|167|(0)|175|176|(0)(0)|179|(0)(0)|182|(0)(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:194:0x022f, code lost:
     
         android.util.Log.i(r7, "RemoteException is occurred.");
@@ -396,25 +393,6 @@ public final class ScreenshotController implements ScreenshotHandler {
         r1 = null;
         r2 = null;
      */
-    /* JADX WARN: Removed duplicated region for block: B:138:0x00ea  */
-    /* JADX WARN: Removed duplicated region for block: B:145:0x011c  */
-    /* JADX WARN: Removed duplicated region for block: B:153:0x018c  */
-    /* JADX WARN: Removed duplicated region for block: B:165:0x01d8  */
-    /* JADX WARN: Removed duplicated region for block: B:169:0x0206 A[Catch: RemoteException -> 0x022f, TryCatch #1 {RemoteException -> 0x022f, blocks: (B:167:0x01db, B:169:0x0206, B:171:0x0210, B:172:0x0217, B:174:0x021f), top: B:166:0x01db }] */
-    /* JADX WARN: Removed duplicated region for block: B:178:0x023c  */
-    /* JADX WARN: Removed duplicated region for block: B:181:0x024f  */
-    /* JADX WARN: Removed duplicated region for block: B:184:0x0266  */
-    /* JADX WARN: Removed duplicated region for block: B:189:0x027a  */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x025c  */
-    /* JADX WARN: Removed duplicated region for block: B:191:0x0241  */
-    /* JADX WARN: Removed duplicated region for block: B:195:0x01da  */
-    /* JADX WARN: Removed duplicated region for block: B:206:0x0182  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x03d3  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0454  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x04c7  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x04ef  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0502  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0458  */
     @Override // com.android.systemui.screenshot.ScreenshotHandler
     /*
         Code decompiled incorrectly, please refer to instructions dump.

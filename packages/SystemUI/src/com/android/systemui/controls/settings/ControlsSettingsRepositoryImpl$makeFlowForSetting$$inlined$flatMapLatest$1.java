@@ -20,7 +20,6 @@ public final class ControlsSettingsRepositoryImpl$makeFlowForSetting$$inlined$fl
     int label;
     final /* synthetic */ ControlsSettingsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ControlsSettingsRepositoryImpl$makeFlowForSetting$$inlined$flatMapLatest$1(Continuation continuation, ControlsSettingsRepositoryImpl controlsSettingsRepositoryImpl, String str) {
         super(3, continuation);
         this.this$0 = controlsSettingsRepositoryImpl;

@@ -22,8 +22,6 @@ public final class AirplaneModeInteractor {
     public final AirplaneModeInteractor$special$$inlined$map$1 isForceHidden;
     public final MobileConnectionsRepository mobileConnectionsRepository;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class SetResult {
         public static final /* synthetic */ SetResult[] $VALUES;
         public static final SetResult BLOCKED_BY_ECM;
@@ -51,7 +49,6 @@ public final class AirplaneModeInteractor {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.pipeline.airplane.domain.interactor.AirplaneModeInteractor$special$$inlined$map$1] */
     public AirplaneModeInteractor(AirplaneModeRepository airplaneModeRepository, ConnectivityRepository connectivityRepository, MobileConnectionsRepository mobileConnectionsRepository) {
         this.airplaneModeRepository = airplaneModeRepository;
         this.mobileConnectionsRepository = mobileConnectionsRepository;
@@ -85,8 +82,6 @@ public final class AirplaneModeInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -150,10 +145,6 @@ public final class AirplaneModeInteractor {
         };
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0056  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0059  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x003c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

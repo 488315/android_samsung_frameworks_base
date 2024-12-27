@@ -32,7 +32,6 @@ final class BadgedAppIconLoader$loadIcon$2 extends SuspendLambda implements Func
     int label;
     final /* synthetic */ BadgedAppIconLoader this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BadgedAppIconLoader$loadIcon$2(BadgedAppIconLoader badgedAppIconLoader, int i, ComponentName componentName, RecentTask.UserType userType, Continuation continuation) {
         super(2, continuation);
         this.this$0 = badgedAppIconLoader;

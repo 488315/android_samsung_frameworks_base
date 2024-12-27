@@ -950,7 +950,6 @@ public final class AppFGSTracker extends BaseAppStateDurationsTracker
         }
     }
 
-    /* JADX WARN: Type inference failed for: r9v4, types: [com.android.server.am.AppFGSTracker$1] */
     public AppFGSTracker(Context context, AppRestrictionController appRestrictionController) {
         super(context, appRestrictionController);
         this.mFGSNotificationIDs = new UidProcessMap();

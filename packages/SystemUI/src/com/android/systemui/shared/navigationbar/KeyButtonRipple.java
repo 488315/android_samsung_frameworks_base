@@ -103,7 +103,6 @@ public class KeyButtonRipple extends Drawable {
         ROUNDED_RECT
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.systemui.shared.navigationbar.KeyButtonRipple$1] */
     public KeyButtonRipple(Context context, View view, int i) {
         this.GLOW_MAX_SCALE_FACTOR = 1.35f;
         this.mGlowAlpha = 0.0f;

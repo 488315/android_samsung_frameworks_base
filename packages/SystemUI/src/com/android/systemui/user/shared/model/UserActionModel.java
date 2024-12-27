@@ -2,8 +2,6 @@ package com.android.systemui.user.shared.model;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class UserActionModel {
     public static final /* synthetic */ UserActionModel[] $VALUES;
     public static final UserActionModel ADD_SUPERVISED_USER;

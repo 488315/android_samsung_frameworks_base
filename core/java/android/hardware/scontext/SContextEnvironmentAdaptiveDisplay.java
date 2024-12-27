@@ -10,13 +10,11 @@ public class SContextEnvironmentAdaptiveDisplay extends SContextEventContext {
     public static final Parcelable.Creator<SContextEnvironmentAdaptiveDisplay> CREATOR =
             new Parcelable.Creator<SContextEnvironmentAdaptiveDisplay>() { // from class:
                 // android.hardware.scontext.SContextEnvironmentAdaptiveDisplay.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextEnvironmentAdaptiveDisplay createFromParcel(Parcel in) {
                     return new SContextEnvironmentAdaptiveDisplay(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextEnvironmentAdaptiveDisplay[] newArray(int size) {
                     return new SContextEnvironmentAdaptiveDisplay[size];

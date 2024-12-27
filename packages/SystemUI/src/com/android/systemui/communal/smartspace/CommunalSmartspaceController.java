@@ -42,7 +42,6 @@ public final class CommunalSmartspaceController {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.systemui.communal.smartspace.CommunalSmartspaceController$sessionListener$1] */
     public CommunalSmartspaceController(Context context, SmartspaceManager smartspaceManager, Execution execution, Executor executor, SmartspacePrecondition smartspacePrecondition, Optional<Object> optional, Optional<BcSmartspaceDataPlugin> optional2) {
         this.context = context;
         this.smartspaceManager = smartspaceManager;

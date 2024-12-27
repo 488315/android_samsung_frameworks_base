@@ -48,7 +48,6 @@ final class ButtonDispatcher {
                 }
             };
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(ValueAnimator animation) {
         setAlpha(((Float) animation.getAnimatedValue()).floatValue(), false, false);
     }
@@ -61,7 +60,6 @@ final class ButtonDispatcher {
         this.mViews.clear();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public void addView(View view) {
         this.mViews.add(view);
         view.setOnClickListener(this.mClickListener);

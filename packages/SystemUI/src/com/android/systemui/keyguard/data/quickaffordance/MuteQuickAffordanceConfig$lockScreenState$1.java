@@ -13,7 +13,6 @@ final class MuteQuickAffordanceConfig$lockScreenState$1 extends SuspendLambda im
     int label;
     final /* synthetic */ MuteQuickAffordanceConfig this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MuteQuickAffordanceConfig$lockScreenState$1(MuteQuickAffordanceConfig muteQuickAffordanceConfig, Continuation continuation) {
         super(2, continuation);
         this.this$0 = muteQuickAffordanceConfig;

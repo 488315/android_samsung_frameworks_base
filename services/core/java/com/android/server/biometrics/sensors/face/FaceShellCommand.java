@@ -52,8 +52,6 @@ public final class FaceShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0046  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0075 A[Catch: Exception -> 0x002b, TRY_LEAVE, TryCatch #0 {Exception -> 0x002b, blocks: (B:8:0x000a, B:19:0x004a, B:21:0x0056, B:23:0x005a, B:26:0x0071, B:28:0x006e, B:29:0x0075, B:31:0x0020, B:34:0x002d, B:37:0x0038), top: B:7:0x000a }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

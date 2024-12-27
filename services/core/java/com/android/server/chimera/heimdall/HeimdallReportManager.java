@@ -342,8 +342,6 @@ public final class HeimdallReportManager {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:18:0x00a6 A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:21:0x0000 A[SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -512,8 +510,6 @@ public final class HeimdallReportManager {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(26:7|(2:8|9)|10|(1:12)(14:308|309|310|(1:312)(1:347)|313|314|316|317|318|319|320|321|322|323)|13|(4:14|15|(1:17)(1:304)|(6:18|19|21|22|(14:236|237|238|239|240|241|242|243|(3:244|245|(1:247)(1:248))|249|250|251|252|253)|24))|25|(1:27)(15:191|192|193|(1:195)(1:232)|196|197|198|199|200|201|(2:203|204)|206|207|208|209)|28|(5:29|30|(1:32)(1:187)|(6:33|34|35|36|(2:168|169)|(1:39))|40)|41|(3:42|43|(2:44|45))|(20:113|114|115|116|117|118|(20:121|122|123|124|125|126|(16:129|130|131|132|48|49|50|(1:52)(1:109)|53|54|55|(1:57)(14:67|68|69|70|71|72|73|74|75|76|77|59|60|62)|66|59|60|62)|128|48|49|50|(0)(0)|53|54|55|(0)(0)|66|59|60|62)|120|48|49|50|(0)(0)|53|54|55|(0)(0)|66|59|60|62)|47|48|49|50|(0)(0)|53|54|55|(0)(0)|66|59|60|62) */
-    /* JADX WARN: Can't wrap try/catch for region: R(40:7|(2:8|9)|10|(1:12)(14:308|309|310|(1:312)(1:347)|313|314|316|317|318|319|320|321|322|323)|13|14|15|(1:17)(1:304)|18|19|21|22|(14:236|237|238|239|240|241|242|243|(3:244|245|(1:247)(1:248))|249|250|251|252|253)|24|25|(1:27)(15:191|192|193|(1:195)(1:232)|196|197|198|199|200|201|(2:203|204)|206|207|208|209)|28|29|30|(1:32)(1:187)|(6:33|34|35|36|(2:168|169)|(1:39))|40|41|42|43|(2:44|45)|(20:113|114|115|116|117|118|(20:121|122|123|124|125|126|(16:129|130|131|132|48|49|50|(1:52)(1:109)|53|54|55|(1:57)(14:67|68|69|70|71|72|73|74|75|76|77|59|60|62)|66|59|60|62)|128|48|49|50|(0)(0)|53|54|55|(0)(0)|66|59|60|62)|120|48|49|50|(0)(0)|53|54|55|(0)(0)|66|59|60|62)|47|48|49|50|(0)(0)|53|54|55|(0)(0)|66|59|60|62) */
     /* JADX WARN: Code restructure failed: missing block: B:107:0x0594, code lost:
 
        r0 = move-exception;
@@ -534,26 +530,6 @@ public final class HeimdallReportManager {
 
        if (r4 != null) goto L250;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x0569 A[Catch: IOException | SecurityException -> 0x0566, TRY_LEAVE, TryCatch #46 {IOException | SecurityException -> 0x0566, blocks: (B:50:0x054d, B:52:0x0556, B:109:0x0569), top: B:49:0x054d }] */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x042a  */
-    /* JADX WARN: Removed duplicated region for block: B:168:0x037f A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0165 A[Catch: IOException | SecurityException -> 0x0175, TryCatch #21 {IOException | SecurityException -> 0x0175, blocks: (B:15:0x015c, B:17:0x0165, B:304:0x0178), top: B:14:0x015c }] */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x035d A[Catch: IOException | SecurityException -> 0x035b, TRY_LEAVE, TryCatch #31 {IOException | SecurityException -> 0x035b, blocks: (B:30:0x0342, B:32:0x034b, B:187:0x035d), top: B:29:0x0342 }] */
-    /* JADX WARN: Removed duplicated region for block: B:191:0x0276  */
-    /* JADX WARN: Removed duplicated region for block: B:236:0x0197 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x026f  */
-    /* JADX WARN: Removed duplicated region for block: B:304:0x0178 A[Catch: IOException | SecurityException -> 0x0175, TRY_LEAVE, TryCatch #21 {IOException | SecurityException -> 0x0175, blocks: (B:15:0x015c, B:17:0x0165, B:304:0x0178), top: B:14:0x015c }] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x034b A[Catch: IOException | SecurityException -> 0x035b, TryCatch #31 {IOException | SecurityException -> 0x035b, blocks: (B:30:0x0342, B:32:0x034b, B:187:0x035d), top: B:29:0x0342 }] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0394 A[Catch: IOException -> 0x0398, TRY_ENTER, TRY_LEAVE, TryCatch #8 {IOException -> 0x0398, blocks: (B:34:0x036c, B:39:0x0394, B:183:0x03a5, B:182:0x03a2, B:177:0x039c, B:36:0x0370, B:169:0x037f, B:172:0x038b), top: B:33:0x036c, inners: #0, #35 }] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0556 A[Catch: IOException | SecurityException -> 0x0566, TryCatch #46 {IOException | SecurityException -> 0x0566, blocks: (B:50:0x054d, B:52:0x0556, B:109:0x0569), top: B:49:0x054d }] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x057e A[Catch: all -> 0x0597, TRY_ENTER, TRY_LEAVE, TryCatch #47 {all -> 0x0597, blocks: (B:57:0x057e, B:67:0x059b, B:70:0x05ad, B:73:0x05bd, B:75:0x05c0, B:80:0x05c9, B:83:0x05d8, B:85:0x05f3, B:87:0x05f9, B:90:0x0600), top: B:55:0x057c, outer: #10, inners: #22 }] */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x059b A[Catch: all -> 0x0597, TRY_ENTER, TRY_LEAVE, TryCatch #47 {all -> 0x0597, blocks: (B:57:0x057e, B:67:0x059b, B:70:0x05ad, B:73:0x05bd, B:75:0x05c0, B:80:0x05c9, B:83:0x05d8, B:85:0x05f3, B:87:0x05f9, B:90:0x0600), top: B:55:0x057c, outer: #10, inners: #22 }] */
-    /* JADX WARN: Type inference failed for: r6v15, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r6v21 */
-    /* JADX WARN: Type inference failed for: r6v22 */
-    /* JADX WARN: Type inference failed for: r6v23 */
-    /* JADX WARN: Type inference failed for: r6v3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

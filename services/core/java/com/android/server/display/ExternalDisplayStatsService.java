@@ -169,8 +169,6 @@ public final class ExternalDisplayStatsService {
         public final ExternalDisplayStatsService$1$$ExternalSyntheticLambda0
                 mLogStateAfterAudioSinkEnabled;
 
-        /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.display.ExternalDisplayStatsService$1$$ExternalSyntheticLambda0] */
-        /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.display.ExternalDisplayStatsService$1$$ExternalSyntheticLambda0] */
         public AnonymousClass1() {
             final int i = 0;
             this.mLogStateAfterAudioSinkEnabled =
@@ -234,11 +232,6 @@ public final class ExternalDisplayStatsService {
                     };
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:22:0x00c0  */
-        /* JADX WARN: Removed duplicated region for block: B:25:0x00f6  */
-        /* JADX WARN: Removed duplicated region for block: B:27:0x00fd  */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x0109  */
-        /* JADX WARN: Removed duplicated region for block: B:32:0x00f9  */
         @Override // android.media.AudioManager.AudioPlaybackCallback
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -295,7 +288,6 @@ public final class ExternalDisplayStatsService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.display.ExternalDisplayStatsService$2] */
     public ExternalDisplayStatsService(Injector injector) {
         this.mInjector = injector;
     }

@@ -111,7 +111,6 @@ public final class VideoEngine extends WallpaperEngine {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.wallpaper.engines.video.VideoEngine$$ExternalSyntheticLambda0] */
     public VideoEngine(VideoSource videoSource, WallpaperEngineCallback wallpaperEngineCallback, KeyguardUpdateMonitor keyguardUpdateMonitor) {
         super(wallpaperEngineCallback);
         this.TAG = "ImageWallpaper";
@@ -519,10 +518,6 @@ public final class VideoEngine extends WallpaperEngine {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x005d  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00ce  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00dc  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x005e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

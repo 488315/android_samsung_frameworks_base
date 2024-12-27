@@ -8,13 +8,11 @@ public class PresPublishTriggerType implements Parcelable {
             new Parcelable.Creator<
                     PresPublishTriggerType>() { // from class:
                                                 // com.android.ims.internal.uce.presence.PresPublishTriggerType.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PresPublishTriggerType createFromParcel(Parcel source) {
                     return new PresPublishTriggerType(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PresPublishTriggerType[] newArray(int size) {
                     return new PresPublishTriggerType[size];

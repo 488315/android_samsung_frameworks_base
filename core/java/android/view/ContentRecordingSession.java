@@ -14,13 +14,11 @@ public final class ContentRecordingSession implements Parcelable {
             new Parcelable.Creator<
                     ContentRecordingSession>() { // from class:
                                                  // android.view.ContentRecordingSession.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentRecordingSession[] newArray(int size) {
                     return new ContentRecordingSession[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentRecordingSession createFromParcel(Parcel in) {
                     return new ContentRecordingSession(in);

@@ -26,7 +26,6 @@ public final class DisplayShape implements Parcelable {
     public static final DisplayShape NONE = new DisplayShape("", 0, 0, 0.0f, 0);
     public static final Parcelable.Creator<DisplayShape> CREATOR =
             new Parcelable.Creator<DisplayShape>() { // from class: android.view.DisplayShape.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisplayShape createFromParcel(Parcel in) {
                     String spec = in.readString8();
@@ -48,7 +47,6 @@ public final class DisplayShape implements Parcelable {
                             scale);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DisplayShape[] newArray(int size) {
                     return new DisplayShape[size];

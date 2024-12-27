@@ -12,13 +12,11 @@ public final class MostRestrictive<V> extends ResolutionMechanism<V> {
     public static final Parcelable.Creator<MostRestrictive<?>> CREATOR =
             new Parcelable.Creator<
                     MostRestrictive<?>>() { // from class: android.app.admin.MostRestrictive.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MostRestrictive<?> createFromParcel(Parcel source) {
                     return new MostRestrictive<>(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MostRestrictive<?>[] newArray(int size) {
                     return new MostRestrictive[size];

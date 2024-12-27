@@ -9,7 +9,6 @@ public class HardwareAuthToken implements Parcelable {
     public static final Parcelable.Creator<HardwareAuthToken> CREATOR =
             new Parcelable.Creator<HardwareAuthToken>() { // from class:
                 // android.hardware.security.keymint.HardwareAuthToken.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HardwareAuthToken createFromParcel(Parcel _aidl_source) {
                     HardwareAuthToken _aidl_out = new HardwareAuthToken();
@@ -17,7 +16,6 @@ public class HardwareAuthToken implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HardwareAuthToken[] newArray(int _aidl_size) {
                     return new HardwareAuthToken[_aidl_size];

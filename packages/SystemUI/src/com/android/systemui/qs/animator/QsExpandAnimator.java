@@ -117,7 +117,6 @@ public final class QsExpandAnimator extends SecQSImplAnimatorBase implements QSH
     };
     public final QsExpandAnimator$$ExternalSyntheticLambda0 mUpdateAnimators = new QsExpandAnimator$$ExternalSyntheticLambda0(this);
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.qs.animator.QsExpandAnimator$1] */
     public QsExpandAnimator(Context context, SecQSPanelController secQSPanelController, BarController barController, ShadeHeaderController shadeHeaderController, SecQSPanelResourcePicker secQSPanelResourcePicker, KeyguardEditModeController keyguardEditModeController, HeadsUpManager headsUpManager) {
         this.mContext = context;
         this.mBarController = barController;

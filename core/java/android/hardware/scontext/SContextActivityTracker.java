@@ -9,13 +9,11 @@ public class SContextActivityTracker extends SContextEventContext {
     public static final Parcelable.Creator<SContextActivityTracker> CREATOR =
             new Parcelable.Creator<SContextActivityTracker>() { // from class:
                 // android.hardware.scontext.SContextActivityTracker.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextActivityTracker createFromParcel(Parcel in) {
                     return new SContextActivityTracker(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextActivityTracker[] newArray(int size) {
                     return new SContextActivityTracker[size];

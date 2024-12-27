@@ -330,7 +330,6 @@ final class TunerAdapter extends RadioTuner {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getDynamicProgramList$1() {
         try {
             this.mTuner.stopProgramListUpdates();

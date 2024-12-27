@@ -117,7 +117,6 @@ public final class VibratorFrameworkStatsLogger {
                     };
     public final Queue mVibrationStatsQueue = new ArrayDeque();
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.vibrator.VibratorFrameworkStatsLogger$$ExternalSyntheticLambda0] */
     public VibratorFrameworkStatsLogger(Handler handler, int i, int i2) {
         this.mHandler = handler;
         this.mVibrationReportedLogIntervalMillis = i;

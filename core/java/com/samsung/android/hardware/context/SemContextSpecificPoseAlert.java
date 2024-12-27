@@ -10,13 +10,11 @@ public class SemContextSpecificPoseAlert extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextSpecificPoseAlert>() { // from class:
                                                      // com.samsung.android.hardware.context.SemContextSpecificPoseAlert.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextSpecificPoseAlert createFromParcel(Parcel in) {
                     return new SemContextSpecificPoseAlert(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextSpecificPoseAlert[] newArray(int size) {
                     return new SemContextSpecificPoseAlert[size];

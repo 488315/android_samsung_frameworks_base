@@ -24,7 +24,6 @@ final class MobileConnectionRepositoryImpl$semSatelliteEnabled$1 extends Suspend
     int label;
     final /* synthetic */ MobileConnectionRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileConnectionRepositoryImpl$semSatelliteEnabled$1(MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl, MobileInputLogger mobileInputLogger, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mobileConnectionRepositoryImpl;
@@ -77,7 +76,6 @@ final class MobileConnectionRepositoryImpl$semSatelliteEnabled$1 extends Suspend
             settingsHelper.registerCallback(onChangedCallback, Settings.Global.getUriFor(SettingsHelper.INDEX_STATUS_SATELLITE_MODE_ENABLED));
             final MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$semSatelliteEnabled$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

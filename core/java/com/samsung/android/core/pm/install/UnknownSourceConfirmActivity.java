@@ -145,7 +145,6 @@ public class UnknownSourceConfirmActivity extends AlertActivity
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$initAlertParams$0(
             int installType, DialogInterface dialogInterface, int i) {
         this.mButtonClicked = true;

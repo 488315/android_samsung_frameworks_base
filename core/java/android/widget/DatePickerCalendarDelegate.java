@@ -199,7 +199,6 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
         return (dstAlpha << 24) | srcRgb;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(View v) {
         tryVibrate();
         switch (v.getId()) {
@@ -237,7 +236,6 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setCurrentView(int viewIndex) {
         switch (viewIndex) {
             case 0:
@@ -272,7 +270,6 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setCurrentView$1() {
         this.mYearPickerView.requestFocus();
         View selected = this.mYearPickerView.getSelectedView();
@@ -302,7 +299,6 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
         resetAutofilledValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onDateChanged(boolean fromUser, boolean callbackToClient) {
         int year = this.mCurrentDate.get(1);
         if (callbackToClient
@@ -502,7 +498,6 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
         return DatePicker.class.getName();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int getDaysInMonth(int month, int year) {
         switch (month) {
             case 0:

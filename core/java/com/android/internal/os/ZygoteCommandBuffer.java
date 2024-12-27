@@ -34,7 +34,6 @@ class ZygoteCommandBuffer implements AutoCloseable {
         this.mNativeBuffer = getNativeBuffer(this.mNativeSocket);
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     ZygoteCommandBuffer(String[] args) {
         this((LocalSocket) null);
         setCommand(args);

@@ -41,7 +41,6 @@ public final class FragmentHostManager {
         public ExtensionFragmentManager() {
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final Fragment instantiate(Context context, String str, Bundle bundle) {
             Context context2 = (Context) this.mExtensionLookup.get(str);
             if (context2 == null) {
@@ -99,7 +98,6 @@ public final class FragmentHostManager {
         fragmentListener.onFragmentViewCreated(findFragmentByTag);
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.fragments.FragmentHostManager$1] */
     public final void createFragmentHost(Parcelable parcelable) {
         FragmentController createController = FragmentController.createController(new HostCallbacks());
         this.mFragments = createController;

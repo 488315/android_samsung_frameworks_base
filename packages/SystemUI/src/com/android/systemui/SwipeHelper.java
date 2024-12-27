@@ -271,9 +271,6 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
     
         if (r7 >= (r0 == 1 ? r2 * r11.mTouchSlopMultiplier : r2)) goto L50;
      */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x008e  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0094  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x015f  */
     @Override // com.android.systemui.Gefingerpoken
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -469,11 +466,6 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
                 this.mCancelled = true;
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:16:0x0096  */
-            /* JADX WARN: Removed duplicated region for block: B:22:0x006b  */
-            /* JADX WARN: Removed duplicated region for block: B:30:0x0089  */
-            /* JADX WARN: Removed duplicated region for block: B:32:0x008f  */
-            /* JADX WARN: Removed duplicated region for block: B:33:0x008c  */
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.

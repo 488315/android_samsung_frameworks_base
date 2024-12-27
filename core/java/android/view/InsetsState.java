@@ -15,13 +15,11 @@ import java.util.StringJoiner;
 public class InsetsState implements Parcelable {
     public static final Parcelable.Creator<InsetsState> CREATOR =
             new Parcelable.Creator<InsetsState>() { // from class: android.view.InsetsState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InsetsState createFromParcel(Parcel in) {
                     return new InsetsState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InsetsState[] newArray(int size) {
                     return new InsetsState[size];

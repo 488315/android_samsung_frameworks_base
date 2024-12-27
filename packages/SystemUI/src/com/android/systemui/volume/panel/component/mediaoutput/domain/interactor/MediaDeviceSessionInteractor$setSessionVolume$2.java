@@ -18,7 +18,6 @@ final class MediaDeviceSessionInteractor$setSessionVolume$2 extends SuspendLambd
     int label;
     final /* synthetic */ MediaDeviceSessionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaDeviceSessionInteractor$setSessionVolume$2(MediaDeviceSessionInteractor mediaDeviceSessionInteractor, MediaDeviceSession mediaDeviceSession, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaDeviceSessionInteractor;

@@ -339,7 +339,6 @@ public final class Magnifier {
         this.mPrevShowWindowCoords.y = magnifierCenterY3;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$show$0(
             InternalPopupWindow currentWindowInstance, Point windowCoords) {
         synchronized (this.mLock) {
@@ -677,7 +676,6 @@ public final class Magnifier {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$performPixelCopy$1(
             InternalPopupWindow currentWindowInstance,
             boolean updateWindowPosition,
@@ -729,7 +727,6 @@ public final class Magnifier {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onPixelCopyFailed$2() {
         dismiss();
         if (this.mCallback != null) {
@@ -791,7 +788,6 @@ public final class Magnifier {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class InternalPopupWindow {
         private static final int SURFACE_Z = 5;
         private final BLASTBufferQueue mBBQ;
@@ -923,7 +919,6 @@ public final class Magnifier {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void updateContentFactors(int contentHeight, float zoom) {
             if (this.mContentHeight == contentHeight && this.mZoom == zoom) {
                 return;
@@ -1061,7 +1056,6 @@ public final class Magnifier {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void drawOverlay() {
             RecordingCanvas canvas =
                     this.mOverlayRenderNode.beginRecording(this.mContentWidth, this.mContentHeight);
@@ -1114,9 +1108,6 @@ public final class Magnifier {
             this.mOverlay.setCallback(null);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
-        /* JADX WARN: Removed duplicated region for block: B:26:0x00f4  */
-        /* JADX WARN: Removed duplicated region for block: B:28:? A[RETURN, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1131,7 +1122,6 @@ public final class Magnifier {
                         + " android.widget.Magnifier.InternalPopupWindow.doDraw():void");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$doDraw$0(
                 boolean updateWindowPosition,
                 int pendingX,
@@ -1150,7 +1140,6 @@ public final class Magnifier {
             this.mBBQ.mergeWithNextTransaction(this.mTransaction, frame);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void updateCurrentContentForTesting() {
             Canvas canvas = new Canvas(this.mCurrentContent);
             Rect bounds = new Rect(0, 0, this.mContentWidth, this.mContentHeight);

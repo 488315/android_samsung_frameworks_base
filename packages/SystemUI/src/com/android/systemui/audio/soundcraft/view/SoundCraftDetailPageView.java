@@ -125,7 +125,6 @@ public final class SoundCraftDetailPageView extends LinearLayout implements Soun
             }
         });
         this.keyguardManager$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.audio.soundcraft.view.SoundCraftDetailPageView$keyguardManager$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

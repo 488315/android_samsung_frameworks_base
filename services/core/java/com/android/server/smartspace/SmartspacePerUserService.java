@@ -114,7 +114,6 @@ public final class SmartspacePerUserService extends AbstractPerUserSystemService
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.smartspace.SmartspacePerUserService$$ExternalSyntheticLambda3] */
     public final void onCreateSmartspaceSessionLocked(
             SmartspaceConfig smartspaceConfig,
             final SmartspaceSessionId smartspaceSessionId,

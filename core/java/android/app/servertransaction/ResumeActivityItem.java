@@ -12,13 +12,11 @@ public class ResumeActivityItem extends ActivityLifecycleItem {
     public static final Parcelable.Creator<ResumeActivityItem> CREATOR =
             new Parcelable.Creator<ResumeActivityItem>() { // from class:
                 // android.app.servertransaction.ResumeActivityItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ResumeActivityItem createFromParcel(Parcel in) {
                     return new ResumeActivityItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ResumeActivityItem[] newArray(int size) {
                     return new ResumeActivityItem[size];

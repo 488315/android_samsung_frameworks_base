@@ -31,13 +31,11 @@ public final class AudioRecordingConfiguration implements Parcelable {
     public static final Parcelable.Creator<AudioRecordingConfiguration> CREATOR =
             new Parcelable.Creator<AudioRecordingConfiguration>() { // from class:
                 // android.media.AudioRecordingConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioRecordingConfiguration createFromParcel(Parcel p) {
                     return new AudioRecordingConfiguration(p);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioRecordingConfiguration[] newArray(int size) {
                     return new AudioRecordingConfiguration[size];

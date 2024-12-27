@@ -505,7 +505,6 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
         Binder.restoreCallingIdentity(clearCallingIdentity);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(12:3|(2:4|5)|(7:10|11|12|13|(1:15)(1:35)|16|17)|39|(1:41)(1:43)|42|11|12|13|(0)(0)|16|17) */
     /* JADX WARN: Code restructure failed: missing block: B:36:0x0081, code lost:
 
        r3 = move-exception;
@@ -514,9 +513,6 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
 
        com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(r3, "getHashedUniqueNumber failed: ", "HDM - HdmSakManager");
     */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x007a A[Catch: Exception -> 0x0081, TryCatch #1 {Exception -> 0x0081, blocks: (B:13:0x0074, B:15:0x007a, B:16:0x0084), top: B:12:0x0074 }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0083  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00c5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

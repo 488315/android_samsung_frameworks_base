@@ -429,8 +429,6 @@ public final class DevicePermissionPolicy extends SchemePolicy {
         binaryXmlSerializer.endTag(str, "app-id-device-permissions");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v8, types: [com.android.server.permission.access.immutable.Immutable] */
     public final boolean setPermissionFlags(
             int i, int i2, int i3, MutateStateScope mutateStateScope, String str, String str2) {
         if (!mutateStateScope.newState.getUserStates().array.contains(i2)) {

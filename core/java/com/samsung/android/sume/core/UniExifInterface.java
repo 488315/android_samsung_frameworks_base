@@ -186,7 +186,6 @@ public class UniExifInterface extends ExifInterface {
                         .orElse(null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private static ByteBuffer parseJpegExif(File file) {
         ByteBuffer byteBuffer = null;
         try {

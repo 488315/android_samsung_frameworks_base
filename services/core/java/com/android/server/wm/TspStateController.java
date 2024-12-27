@@ -299,7 +299,6 @@ public final class TspStateController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r5v0, types: [com.android.server.wm.TspStateController$$ExternalSyntheticLambda1] */
     public TspStateController(Context context) {
         boolean z = CoreRune.IS_TABLET_DEVICE;
         this.mDeviceDefaultTspCommand = new TspGripCommand(z ? 3 : 1);
@@ -407,7 +406,6 @@ public final class TspStateController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x004d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

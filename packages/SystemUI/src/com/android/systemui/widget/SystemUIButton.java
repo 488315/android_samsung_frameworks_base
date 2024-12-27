@@ -312,7 +312,6 @@ public class SystemUIButton extends Button implements SystemUIWidgetCallback {
         this(context, attributeSet, i, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.systemui.widget.SystemUIButton$1] */
     public SystemUIButton(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mResData = new ResData(0);

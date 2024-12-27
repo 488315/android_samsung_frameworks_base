@@ -10,13 +10,11 @@ public final class CellIdentity implements Parcelable {
     public static final Parcelable.Creator<CellIdentity> CREATOR =
             new Parcelable.Creator<
                     CellIdentity>() { // from class: android.hardware.radio.network.CellIdentity.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentity createFromParcel(Parcel _aidl_source) {
                     return new CellIdentity(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentity[] newArray(int _aidl_size) {
                     return new CellIdentity[_aidl_size];

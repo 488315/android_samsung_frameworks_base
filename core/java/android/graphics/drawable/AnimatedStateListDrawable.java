@@ -396,7 +396,6 @@ public class AnimatedStateListDrawable extends StateListDrawable {
         return this;
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // android.graphics.drawable.StateListDrawable,
     // android.graphics.drawable.DrawableContainer
     public AnimatedStateListState cloneConstantState() {

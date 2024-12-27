@@ -125,7 +125,6 @@ public final class LightBarTransitionsController implements Dumpable {
         LightBarTransitionsController create(DarkIntensityApplier darkIntensityApplier);
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.statusbar.phone.LightBarTransitionsController$1] */
     public LightBarTransitionsController(Context context, Handler handler, DarkIntensityApplier darkIntensityApplier, CommandQueue commandQueue, KeyguardStateController keyguardStateController, StatusBarStateController statusBarStateController) {
         this.mApplier = darkIntensityApplier;
         Handler handler2 = new Handler();

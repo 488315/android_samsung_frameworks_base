@@ -106,7 +106,6 @@ public class PlatLogoActivity extends Activity {
     double mPressureMin = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
     double mPressureMax = -1.0d;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0() {
         stopWarp();
         launchNextStage(false);
@@ -156,7 +155,6 @@ public class PlatLogoActivity extends Activity {
             this.mVibeThread.quit();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void rumble(float warpFrac) {
             if (this.mVibeThread.isAlive()) {
                 Message msg = Message.obtain();
@@ -248,7 +246,6 @@ public class PlatLogoActivity extends Activity {
         return super.onKeyUp(keyCode, event);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startWarp() {
         stopWarp();
         this.mWarpAnim =
@@ -257,7 +254,6 @@ public class PlatLogoActivity extends Activity {
         this.mLogo.postDelayed(this.mLaunchNextStage, 6000L);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void stopWarp() {
         if (this.mWarpAnim != null) {
             this.mWarpAnim.cancel();
@@ -309,7 +305,6 @@ public class PlatLogoActivity extends Activity {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void measureTouchPressure(MotionEvent event) {
         float pressure = event.getPressure();
         switch (event.getActionMasked()) {

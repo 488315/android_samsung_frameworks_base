@@ -13,13 +13,11 @@ public final class RtpHeaderExtensionType implements Parcelable {
             new Parcelable.Creator<
                     RtpHeaderExtensionType>() { // from class:
                                                 // android.telephony.ims.RtpHeaderExtensionType.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RtpHeaderExtensionType createFromParcel(Parcel in) {
                     return new RtpHeaderExtensionType(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RtpHeaderExtensionType[] newArray(int size) {
                     return new RtpHeaderExtensionType[size];

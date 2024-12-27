@@ -21,7 +21,6 @@ final class InWindowLauncherAnimationViewBinder$bind$2 extends SuspendLambda imp
     final /* synthetic */ InWindowLauncherAnimationViewModel $viewModel;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InWindowLauncherAnimationViewBinder$bind$2(InWindowLauncherAnimationViewModel inWindowLauncherAnimationViewModel, InWindowLauncherUnlockAnimationManager inWindowLauncherUnlockAnimationManager, Continuation continuation) {
         super(2, continuation);
         this.$viewModel = inWindowLauncherAnimationViewModel;

@@ -9,8 +9,6 @@ public final class LatinNetworkNameProviderImpl$broadcastReceiver$1 extends Broa
         this.this$0 = latinNetworkNameProviderImpl;
     }
 
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x01f0  */
     @Override // android.content.BroadcastReceiver
     /*
         Code decompiled incorrectly, please refer to instructions dump.

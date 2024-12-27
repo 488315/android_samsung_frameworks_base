@@ -134,7 +134,6 @@ public final class MiniSViewCoverViewAnimator implements GlobalActionsAnimator {
         this.mViewStateController.setState(ViewAnimationState.IDLE);
     }
 
-    /* JADX WARN: Type inference failed for: r0v17, types: [com.android.systemui.globalactions.presentation.view.MiniSViewCoverViewAnimator$$ExternalSyntheticLambda0] */
     public final void startShowConfirmAnimation() {
         MiniSViewCoverContentView miniSViewCoverContentView = MiniSViewCoverContentView.this;
         MiniSViewCoverContentItemView miniSViewCoverContentItemView = new MiniSViewCoverContentItemView(miniSViewCoverContentView.mDialog.getContext(), miniSViewCoverContentView.mSelectedViewModel, miniSViewCoverContentView.mConfirmView, miniSViewCoverContentView.mResourceFactory);

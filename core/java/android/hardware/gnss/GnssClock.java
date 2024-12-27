@@ -8,7 +8,6 @@ import android.os.Parcelable;
 public class GnssClock implements Parcelable {
     public static final Parcelable.Creator<GnssClock> CREATOR =
             new Parcelable.Creator<GnssClock>() { // from class: android.hardware.gnss.GnssClock.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GnssClock createFromParcel(Parcel _aidl_source) {
                     GnssClock _aidl_out = new GnssClock();
@@ -16,7 +15,6 @@ public class GnssClock implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GnssClock[] newArray(int _aidl_size) {
                     return new GnssClock[_aidl_size];

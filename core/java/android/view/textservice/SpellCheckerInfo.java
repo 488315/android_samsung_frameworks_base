@@ -34,13 +34,11 @@ public final class SpellCheckerInfo implements Parcelable {
     public static final Parcelable.Creator<SpellCheckerInfo> CREATOR =
             new Parcelable.Creator<
                     SpellCheckerInfo>() { // from class: android.view.textservice.SpellCheckerInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SpellCheckerInfo createFromParcel(Parcel source) {
                     return new SpellCheckerInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SpellCheckerInfo[] newArray(int size) {
                     return new SpellCheckerInfo[size];

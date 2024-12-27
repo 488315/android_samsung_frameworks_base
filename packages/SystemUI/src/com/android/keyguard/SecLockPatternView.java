@@ -231,13 +231,6 @@ public class SecLockPatternView extends LockPatternView {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0056  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0061  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00fa  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0103  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0065  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

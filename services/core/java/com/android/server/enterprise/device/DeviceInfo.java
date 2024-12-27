@@ -81,7 +81,6 @@ public final class DeviceInfo extends IDeviceInfo.Stub implements EnterpriseServ
     public long mDataCallLogLastValue = 0;
     public boolean mDataCallConnected = false;
 
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.server.enterprise.device.DeviceInfo$3] */
     public DeviceInfo(Context context) {
         this.mEdmStorageProvider = null;
         final int i = 0;
@@ -1225,7 +1224,6 @@ public final class DeviceInfo extends IDeviceInfo.Stub implements EnterpriseServ
         return null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0039 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1298,7 +1296,6 @@ public final class DeviceInfo extends IDeviceInfo.Stub implements EnterpriseServ
 
        r4.printStackTrace();
     */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0045 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1484,8 +1481,6 @@ public final class DeviceInfo extends IDeviceInfo.Stub implements EnterpriseServ
         return arrayList;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0055  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x006d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

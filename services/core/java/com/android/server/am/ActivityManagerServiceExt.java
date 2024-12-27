@@ -344,7 +344,6 @@ public final class ActivityManagerServiceExt {
                     metaDataCollector.mLoadRunnable, 1000L);
         }
 
-        /* JADX WARN: Type inference failed for: r2v9, types: [com.android.server.am.ActivityManagerServiceExt$MetaDataCollector$2] */
         public MetaDataCollector() {}
 
         public final void loadMetaDataOnceLocked(ApplicationInfo applicationInfo) {
@@ -735,10 +734,6 @@ public final class ActivityManagerServiceExt {
 
        if ("force-keep-alive".equals(r9.mAdjType) == false) goto L22;
     */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0108 A[Catch: all -> 0x00cf, TryCatch #5 {all -> 0x00cf, blocks: (B:20:0x0085, B:25:0x0143, B:29:0x00a4, B:30:0x00ac, B:32:0x00b2, B:38:0x00d6, B:40:0x00dc, B:43:0x00fa, B:45:0x0108, B:46:0x0110, B:48:0x0114, B:53:0x0120, B:56:0x0128, B:60:0x0132, B:62:0x013d, B:66:0x00ea, B:81:0x014f, B:76:0x01ae, B:84:0x0160, B:86:0x0169, B:88:0x019e), top: B:19:0x0085 }] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0114 A[Catch: all -> 0x00cf, TryCatch #5 {all -> 0x00cf, blocks: (B:20:0x0085, B:25:0x0143, B:29:0x00a4, B:30:0x00ac, B:32:0x00b2, B:38:0x00d6, B:40:0x00dc, B:43:0x00fa, B:45:0x0108, B:46:0x0110, B:48:0x0114, B:53:0x0120, B:56:0x0128, B:60:0x0132, B:62:0x013d, B:66:0x00ea, B:81:0x014f, B:76:0x01ae, B:84:0x0160, B:86:0x0169, B:88:0x019e), top: B:19:0x0085 }] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x010f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

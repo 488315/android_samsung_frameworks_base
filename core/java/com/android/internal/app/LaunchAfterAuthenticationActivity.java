@@ -67,7 +67,6 @@ public class LaunchAfterAuthenticationActivity extends Activity {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onUnlocked(IntentSender targetIntent) {
         try {
             targetIntent.sendIntent(this, 0, null, null, null);

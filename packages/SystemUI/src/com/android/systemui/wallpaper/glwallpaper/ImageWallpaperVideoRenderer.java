@@ -45,7 +45,6 @@ public class ImageWallpaperVideoRenderer {
         this.mVideoLayer.setLooping(true);
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.wallpaper.glwallpaper.ImageWallpaperVideoRenderer$$ExternalSyntheticLambda0] */
     public ImageWallpaperVideoRenderer(Context context, HandlerThread handlerThread, Rect rect) {
         final int i = 0;
         this.mDraw = new Runnable(this) { // from class: com.android.systemui.wallpaper.glwallpaper.ImageWallpaperVideoRenderer$$ExternalSyntheticLambda0
@@ -55,8 +54,6 @@ public class ImageWallpaperVideoRenderer {
                 this.f$0 = this;
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:59:0x0153  */
-            /* JADX WARN: Removed duplicated region for block: B:77:0x01db  */
             @Override // java.lang.Runnable
             /*
                 Code decompiled incorrectly, please refer to instructions dump.

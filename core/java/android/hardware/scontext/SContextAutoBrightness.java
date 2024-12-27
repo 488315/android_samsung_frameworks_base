@@ -9,13 +9,11 @@ public class SContextAutoBrightness extends SContextEventContext {
     public static final Parcelable.Creator<SContextAutoBrightness> CREATOR =
             new Parcelable.Creator<SContextAutoBrightness>() { // from class:
                 // android.hardware.scontext.SContextAutoBrightness.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextAutoBrightness createFromParcel(Parcel in) {
                     return new SContextAutoBrightness(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextAutoBrightness[] newArray(int size) {
                     return new SContextAutoBrightness[size];

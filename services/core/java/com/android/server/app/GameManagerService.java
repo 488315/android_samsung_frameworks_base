@@ -145,8 +145,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
             this.this$0 = gameManagerService;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:21:0x0055  */
-        /* JADX WARN: Removed duplicated region for block: B:51:0x00b3 A[Catch: NullPointerException -> 0x00bd, TRY_LEAVE, TryCatch #2 {NullPointerException -> 0x00bd, blocks: (B:5:0x0009, B:10:0x0015, B:12:0x0019, B:14:0x0029, B:24:0x0058, B:26:0x0060, B:27:0x0064, B:31:0x006d, B:32:0x0071, B:45:0x00af, B:49:0x00b2, B:51:0x00b3, B:53:0x003e, B:56:0x0048, B:29:0x0065, B:30:0x006c, B:34:0x0072, B:36:0x0080, B:37:0x009b, B:38:0x00ac), top: B:4:0x0009, inners: #0, #3 }] */
         @Override // android.content.BroadcastReceiver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -447,7 +445,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
                     : z ? new int[] {3} : this.mPerfModeOverridden ? new int[] {2} : new int[0];
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:23:0x007e A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -923,8 +920,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
             super(looper);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:76:0x01b1  */
-        /* JADX WARN: Removed duplicated region for block: B:95:0x0230 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1199,10 +1194,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
                 : gamePackageConfiguration.copyAndApplyOverride(gamePackageConfiguration2);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(8:5|(2:7|(6:11|12|13|(1:15)|16|(3:(3:19|(1:21)(1:(1:24)(1:(1:26)))|22)|27|28)(4:29|(3:31|(1:33)(1:(1:36)(1:(1:38)))|34)|39|40)))|43|12|13|(0)|16|(0)(0)) */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0054  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0064  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x007d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1583,7 +1574,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
                 "Game Default Frame Rate : " + this.mGameDefaultFrameRateValue);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(
             FileDescriptor fileDescriptor,
             FileDescriptor fileDescriptor2,

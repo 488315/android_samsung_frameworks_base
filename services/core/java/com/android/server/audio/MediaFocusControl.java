@@ -225,7 +225,6 @@ public final class MediaFocusControl implements PlayerFocusEnforcer {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r6v4, types: [com.android.server.audio.MediaFocusControl$4] */
     public MediaFocusControl(Context context, PlaybackActivityMonitor playbackActivityMonitor, AudioService audioService) {
         this.mMultiAudioFocusEnabled = false;
         this.mFocusEnforcer = playbackActivityMonitor;
@@ -350,10 +349,6 @@ public final class MediaFocusControl implements PlayerFocusEnforcer {
         return focusRequester.hasSameClient("AudioFocus_For_Phone_Ring_And_Calls") || (focusRequester.mGrantFlags & 4) != 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:89:0x023a A[Catch: all -> 0x008b, TryCatch #1 {all -> 0x008b, blocks: (B:6:0x0070, B:9:0x0084, B:11:0x0088, B:13:0x0090, B:15:0x009c, B:16:0x00a1, B:19:0x00ab, B:21:0x00b1, B:23:0x00ef, B:26:0x00f5, B:27:0x0103, B:29:0x0109, B:32:0x0115, B:36:0x011c, B:38:0x012f, B:39:0x0131, B:41:0x0135, B:43:0x013d, B:45:0x0145, B:47:0x0153, B:48:0x015f, B:50:0x0163, B:52:0x0187, B:55:0x018b, B:57:0x0190, B:59:0x0194, B:62:0x01a0, B:63:0x01a6, B:65:0x01ac, B:76:0x01b8, B:68:0x01dc, B:71:0x01e0, B:79:0x01fc, B:80:0x021b, B:83:0x0221, B:84:0x0226, B:86:0x022c, B:87:0x0234, B:89:0x023a, B:90:0x0243, B:100:0x00b8, B:101:0x00c2, B:103:0x00ca, B:105:0x00da, B:109:0x00ec, B:110:0x00e9), top: B:5:0x0070, outer: #0 }] */
-    /* JADX WARN: Type inference failed for: r1v13 */
-    /* JADX WARN: Type inference failed for: r1v14, types: [android.os.IBinder, com.android.server.audio.FocusRequester] */
-    /* JADX WARN: Type inference failed for: r1v20 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -531,7 +526,6 @@ public final class MediaFocusControl implements PlayerFocusEnforcer {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(10:0|1|22|6|(4:(5:8|(1:20)|12|13|14)|12|13|14)|21|22|23|24|(1:(0))) */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -801,23 +795,6 @@ public final class MediaFocusControl implements PlayerFocusEnforcer {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v1 */
-    /* JADX WARN: Type inference failed for: r13v1 */
-    /* JADX WARN: Type inference failed for: r13v2, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r13v6 */
-    /* JADX WARN: Type inference failed for: r14v1 */
-    /* JADX WARN: Type inference failed for: r14v2, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r14v3 */
-    /* JADX WARN: Type inference failed for: r19v0 */
-    /* JADX WARN: Type inference failed for: r19v1 */
-    /* JADX WARN: Type inference failed for: r19v2 */
-    /* JADX WARN: Type inference failed for: r23v0, types: [com.android.server.audio.MediaFocusControl] */
-    /* JADX WARN: Type inference failed for: r26v0, types: [android.os.IBinder, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r2v23, types: [com.android.server.audio.FocusRequester] */
-    /* JADX WARN: Type inference failed for: r9v2 */
-    /* JADX WARN: Type inference failed for: r9v3, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r9v5 */
     public final int requestAudioFocus(AudioAttributes audioAttributes, int i, IBinder iBinder, IAudioFocusDispatcher iAudioFocusDispatcher, String str, String str2, int i2, int i3, boolean z, int i4) {
         int i5;
         ?? r13;
@@ -1186,9 +1163,6 @@ public final class MediaFocusControl implements PlayerFocusEnforcer {
         final boolean isPlaybackActiveForUid = this.mAudioService.isPlaybackActiveForUid(i);
         synchronized (mAudioFocusLock) {
             this.mMultiFocusStack.getFocusRequester(i, true).forEach(new Consumer() { // from class: com.android.server.audio.MediaFocusControl$$ExternalSyntheticLambda1
-                /* JADX WARN: Removed duplicated region for block: B:19:0x0082 A[Catch: all -> 0x002f, TryCatch #0 {all -> 0x002f, blocks: (B:32:0x0023, B:35:0x0028, B:5:0x0038, B:10:0x0044, B:11:0x0056, B:14:0x006f, B:16:0x0074, B:17:0x007d, B:19:0x0082, B:21:0x0087, B:22:0x008a, B:4:0x0031), top: B:31:0x0023 }] */
-                /* JADX WARN: Removed duplicated region for block: B:21:0x0087 A[Catch: all -> 0x002f, TryCatch #0 {all -> 0x002f, blocks: (B:32:0x0023, B:35:0x0028, B:5:0x0038, B:10:0x0044, B:11:0x0056, B:14:0x006f, B:16:0x0074, B:17:0x007d, B:19:0x0082, B:21:0x0087, B:22:0x008a, B:4:0x0031), top: B:31:0x0023 }] */
-                /* JADX WARN: Removed duplicated region for block: B:7:0x003f  */
                 @Override // java.util.function.Consumer
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

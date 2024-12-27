@@ -11,13 +11,11 @@ public class RestrictionEntry implements Parcelable {
     public static final Parcelable.Creator<RestrictionEntry> CREATOR =
             new Parcelable.Creator<
                     RestrictionEntry>() { // from class: android.content.RestrictionEntry.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RestrictionEntry createFromParcel(Parcel source) {
                     return new RestrictionEntry(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RestrictionEntry[] newArray(int size) {
                     return new RestrictionEntry[size];

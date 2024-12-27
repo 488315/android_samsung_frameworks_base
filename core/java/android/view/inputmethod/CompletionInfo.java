@@ -8,13 +8,11 @@ public final class CompletionInfo implements Parcelable {
     public static final Parcelable.Creator<CompletionInfo> CREATOR =
             new Parcelable.Creator<
                     CompletionInfo>() { // from class: android.view.inputmethod.CompletionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompletionInfo createFromParcel(Parcel source) {
                     return new CompletionInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompletionInfo[] newArray(int size) {
                     return new CompletionInfo[size];

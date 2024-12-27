@@ -9,13 +9,11 @@ public class SContextWakeUpVoice extends SContextEventContext {
     public static final Parcelable.Creator<SContextWakeUpVoice> CREATOR =
             new Parcelable.Creator<SContextWakeUpVoice>() { // from class:
                 // android.hardware.scontext.SContextWakeUpVoice.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextWakeUpVoice createFromParcel(Parcel in) {
                     return new SContextWakeUpVoice(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextWakeUpVoice[] newArray(int size) {
                     return new SContextWakeUpVoice[size];

@@ -1333,7 +1333,6 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
         return this.mTotalDuration;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Node getNodeForAnimation(Animator anim) {
         Node node = this.mNodeMap.get(anim);
         if (node == null) {

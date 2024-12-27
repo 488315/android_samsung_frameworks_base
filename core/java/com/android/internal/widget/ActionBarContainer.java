@@ -314,7 +314,6 @@ public class ActionBarContainer extends FrameLayout {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isCollapsed(View view) {
         return view == null || view.getVisibility() == 8 || view.getMeasuredHeight() == 0;
     }

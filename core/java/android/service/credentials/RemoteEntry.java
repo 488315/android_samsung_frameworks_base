@@ -11,13 +11,11 @@ public final class RemoteEntry implements Parcelable {
     public static final Parcelable.Creator<RemoteEntry> CREATOR =
             new Parcelable.Creator<
                     RemoteEntry>() { // from class: android.service.credentials.RemoteEntry.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteEntry createFromParcel(Parcel in) {
                     return new RemoteEntry(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteEntry[] newArray(int size) {
                     return new RemoteEntry[size];

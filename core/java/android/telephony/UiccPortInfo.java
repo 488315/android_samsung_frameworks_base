@@ -9,13 +9,11 @@ import java.util.Objects;
 public final class UiccPortInfo implements Parcelable {
     public static final Parcelable.Creator<UiccPortInfo> CREATOR =
             new Parcelable.Creator<UiccPortInfo>() { // from class: android.telephony.UiccPortInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UiccPortInfo createFromParcel(Parcel in) {
                     return new UiccPortInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UiccPortInfo[] newArray(int size) {
                     return new UiccPortInfo[size];

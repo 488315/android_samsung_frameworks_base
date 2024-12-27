@@ -204,7 +204,6 @@ public final class CoverScreenManager implements PluginListener, ScreenLifecycle
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.cover.CoverScreenManager$2] */
     public CoverScreenManager(Context context, CoverHost coverHost, KeyguardUpdateMonitor keyguardUpdateMonitor, Lazy lazy, Lazy lazy2, PluginManager pluginManager, DisplayManager displayManager, DelayableExecutor delayableExecutor, PowerManager powerManager, SettingsHelper settingsHelper, DumpManager dumpManager, ScreenLifecycle screenLifecycle, WakefulnessLifecycle wakefulnessLifecycle, CoverWindowDelegate coverWindowDelegate) {
         this.mContext = context;
         this.mCoverHost = coverHost;

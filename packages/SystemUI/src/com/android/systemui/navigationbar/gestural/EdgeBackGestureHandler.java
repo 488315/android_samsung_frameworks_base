@@ -531,11 +531,6 @@ public final class EdgeBackGestureHandler implements PluginListener {
         MAX_LONG_PRESS_TIMEOUT = BasicRune.NAVBAR_GESTURE ? 200 : SystemProperties.getInt("gestures.back_timeout", IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend);
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$2] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$3] */
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$4] */
-    /* JADX WARN: Type inference failed for: r5v6, types: [com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$5] */
-    /* JADX WARN: Type inference failed for: r5v7, types: [com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$6] */
     public EdgeBackGestureHandler(Context context, OverviewProxyService overviewProxyService, SysUiState sysUiState, PluginManager pluginManager, @BackPanelUiThread UiThreadContext uiThreadContext, Executor executor, Handler handler, UserTracker userTracker, NavigationModeController navigationModeController, BackPanelController.Factory factory, ViewConfiguration viewConfiguration, WindowManager windowManager, IWindowManager iWindowManager, InputManager inputManager, Optional<Pip> optional, Optional<DesktopMode> optional2, FalsingManager falsingManager, Provider provider, Provider provider2) {
         Configuration configuration = new Configuration();
         this.mLastReportedConfig = configuration;
@@ -969,9 +964,6 @@ public final class EdgeBackGestureHandler implements PluginListener {
         return i <= (this.mEdgeWidthLeft + this.mLeftInset) * 2 || i >= point.x - ((this.mEdgeWidthRight + this.mRightInset) * 2);
     }
 
-    /* JADX WARN: Type inference failed for: r7v2 */
-    /* JADX WARN: Type inference failed for: r7v3, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r7v8 */
     public final boolean isWithinTouchRegion(int i, int i2) {
         boolean z = this.mIsInPip && this.mPipExcludedBounds.contains(i, i2);
         boolean contains = this.mDesktopModeExcludeRegion.contains(i, i2);

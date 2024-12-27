@@ -265,7 +265,6 @@ public abstract class SpellCheckerService extends Service {
             this.mWordIterator = new WordIterator(locale);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public SentenceTextInfoParams getSplitWords(TextInfo originalTextInfo) {
             int beginning;
             WordIterator wordIterator = this.mWordIterator;

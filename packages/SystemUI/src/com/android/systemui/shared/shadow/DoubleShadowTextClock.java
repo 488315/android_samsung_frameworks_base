@@ -75,7 +75,6 @@ public final class DoubleShadowTextClock extends TextClock {
         DoubleShadowTextHelper.ShadowInfo shadowInfo2 = this.mAmbientShadowInfo;
         DoubleShadowTextHelper.ShadowInfo shadowInfo3 = shadowInfo2 != null ? shadowInfo2 : null;
         Function0 function0 = new Function0() { // from class: com.android.systemui.shared.shadow.DoubleShadowTextClock$onDraw$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

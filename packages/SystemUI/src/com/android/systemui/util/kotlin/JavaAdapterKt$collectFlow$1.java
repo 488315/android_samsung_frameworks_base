@@ -29,7 +29,6 @@ final class JavaAdapterKt$collectFlow$1 extends SuspendLambda implements Functio
         final /* synthetic */ Flow $flow;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(Flow flow, Consumer<Object> consumer, Continuation continuation) {
             super(2, continuation);
             this.$flow = flow;
@@ -75,7 +74,6 @@ final class JavaAdapterKt$collectFlow$1 extends SuspendLambda implements Functio
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public JavaAdapterKt$collectFlow$1(Lifecycle.State state, Flow flow, Consumer<Object> consumer, Continuation continuation) {
         super(3, continuation);
         this.$state = state;

@@ -118,7 +118,6 @@ public final class AODManagerService extends SystemService {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ Object this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ AnonymousClass2(Object obj, Looper looper, int i) {
             super(looper);
             this.$r8$classId = i;
@@ -399,7 +398,6 @@ public final class AODManagerService extends SystemService {
             return false;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
             int callingUid = Binder.getCallingUid();
             if (callingUid != 2000 && callingUid != 0) {
@@ -734,11 +732,6 @@ public final class AODManagerService extends SystemService {
         
             if (r3 == null) goto L37;
          */
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x0070  */
-        /* JADX WARN: Type inference failed for: r11v13 */
-        /* JADX WARN: Type inference failed for: r11v14, types: [boolean, int] */
-        /* JADX WARN: Type inference failed for: r11v15 */
         @Override // android.database.ContentObserver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1102,32 +1095,6 @@ public final class AODManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00c8 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r7v10, types: [java.io.IOException, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r7v12, types: [java.io.FileNotFoundException, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r7v18, types: [java.io.IOException] */
-    /* JADX WARN: Type inference failed for: r7v19, types: [java.io.FileNotFoundException] */
-    /* JADX WARN: Type inference failed for: r7v5 */
-    /* JADX WARN: Type inference failed for: r7v7 */
-    /* JADX WARN: Type inference failed for: r8v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r8v10 */
-    /* JADX WARN: Type inference failed for: r8v11, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r8v13, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r8v16 */
-    /* JADX WARN: Type inference failed for: r8v2 */
-    /* JADX WARN: Type inference failed for: r8v21, types: [java.io.FileOutputStream, java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r8v23 */
-    /* JADX WARN: Type inference failed for: r8v24 */
-    /* JADX WARN: Type inference failed for: r8v25 */
-    /* JADX WARN: Type inference failed for: r8v26 */
-    /* JADX WARN: Type inference failed for: r8v27 */
-    /* JADX WARN: Type inference failed for: r8v4 */
-    /* JADX WARN: Type inference failed for: r8v6 */
-    /* JADX WARN: Type inference failed for: r8v7, types: [java.io.OutputStream] */
-    /* JADX WARN: Type inference failed for: r9v2, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r9v4, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:14:0x00c5 -> B:16:0x00c5). Please report as a decompilation issue!!! */
     /* renamed from: -$$Nest$mwriteAODCommandInternal, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1256,7 +1223,6 @@ public final class AODManagerService extends SystemService {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.aod.AODManagerService.m225$$Nest$mwriteAODCommandInternal(com.android.server.aod.AODManagerService, java.lang.String, java.lang.String):void");
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.aod.AODManagerService$1] */
     public AODManagerService(Context context) {
         super(context);
         this.mListeners = new ArrayList();
@@ -1524,8 +1490,6 @@ public final class AODManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v5, types: [android.database.ContentObserver, com.android.server.aod.AODManagerService$4] */
     public final void registerAODClockContentObserver() {
         ContentResolver contentResolver = this.mContext.getContentResolver();
         if (this.mContentObserver != null) {
@@ -1591,8 +1555,6 @@ public final class AODManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v11, types: [java.lang.String] */
     public final void updateAODTspState$1() {
         StringBuilder sb;
         if (FactoryTest.isFactoryBinary()) {
@@ -1753,7 +1715,6 @@ public final class AODManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(14:(3:62|63|(2:77|(1:79))(2:66|(1:68)))|80|81|82|83|84|85|86|(1:88)(1:94)|(1:93)|63|(0)|77|(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:100:0x013f, code lost:
     
         r0 = e;
@@ -1770,11 +1731,6 @@ public final class AODManagerService extends SystemService {
     
         android.util.Log.d("AODManagerService", "updateAODChargingMode : doze_always_on doesn't exist. " + r0.toString());
      */
-    /* JADX WARN: Removed duplicated region for block: B:102:0x026d  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x00fd  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0170 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x0271 A[Catch: all -> 0x00da, TryCatch #2 {all -> 0x00da, blocks: (B:4:0x000e, B:7:0x0022, B:10:0x0038, B:13:0x0048, B:16:0x0059, B:19:0x0069, B:22:0x0079, B:25:0x0089, B:28:0x0099, B:31:0x00ab, B:33:0x00c7, B:35:0x00cb, B:37:0x00cf, B:39:0x00d3, B:44:0x00e0, B:46:0x00e4, B:48:0x00e8, B:50:0x00ec, B:52:0x00f0, B:54:0x00f4, B:59:0x00ff, B:63:0x015a, B:66:0x0176, B:68:0x01ec, B:70:0x0271, B:71:0x02ef, B:77:0x01f2, B:79:0x0268, B:80:0x0107, B:82:0x0110, B:85:0x0118, B:90:0x0124, B:93:0x012f, B:98:0x0142, B:112:0x002d), top: B:3:0x000e }] */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0268 A[Catch: all -> 0x00da, TryCatch #2 {all -> 0x00da, blocks: (B:4:0x000e, B:7:0x0022, B:10:0x0038, B:13:0x0048, B:16:0x0059, B:19:0x0069, B:22:0x0079, B:25:0x0089, B:28:0x0099, B:31:0x00ab, B:33:0x00c7, B:35:0x00cb, B:37:0x00cf, B:39:0x00d3, B:44:0x00e0, B:46:0x00e4, B:48:0x00e8, B:50:0x00ec, B:52:0x00f0, B:54:0x00f4, B:59:0x00ff, B:63:0x015a, B:66:0x0176, B:68:0x01ec, B:70:0x0271, B:71:0x02ef, B:77:0x01f2, B:79:0x0268, B:80:0x0107, B:82:0x0110, B:85:0x0118, B:90:0x0124, B:93:0x012f, B:98:0x0142, B:112:0x002d), top: B:3:0x000e }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

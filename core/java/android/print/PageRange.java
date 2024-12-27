@@ -9,13 +9,11 @@ public final class PageRange implements Parcelable {
     public static final PageRange[] ALL_PAGES_ARRAY = {ALL_PAGES};
     public static final Parcelable.Creator<PageRange> CREATOR =
             new Parcelable.Creator<PageRange>() { // from class: android.print.PageRange.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PageRange createFromParcel(Parcel parcel) {
                     return new PageRange(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PageRange[] newArray(int size) {
                     return new PageRange[size];

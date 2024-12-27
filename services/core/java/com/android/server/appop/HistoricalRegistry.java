@@ -133,12 +133,6 @@ public final class HistoricalRegistry {
             return file2.lastModified();
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:105:0x023e  */
-        /* JADX WARN: Removed duplicated region for block: B:32:0x02f0  */
-        /* JADX WARN: Removed duplicated region for block: B:35:0x02f3  */
-        /* JADX WARN: Removed duplicated region for block: B:53:0x02ca  */
-        /* JADX WARN: Removed duplicated region for block: B:67:0x029c  */
-        /* JADX WARN: Removed duplicated region for block: B:87:0x026c  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -466,9 +460,6 @@ public final class HistoricalRegistry {
             return new File(file, Long.toString(j * this.mBaseSnapshotInterval) + ".xml");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:26:0x00ee  */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x00fa  */
-        /* JADX WARN: Removed duplicated region for block: B:35:0x0104 A[SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

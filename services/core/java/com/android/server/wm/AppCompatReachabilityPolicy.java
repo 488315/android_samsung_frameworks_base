@@ -53,7 +53,6 @@ public final class AppCompatReachabilityPolicy {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.wm.AppCompatReachabilityPolicy$$ExternalSyntheticLambda0] */
     public AppCompatReachabilityPolicy(
             ActivityRecord activityRecord, AppCompatConfiguration appCompatConfiguration) {
         this.mActivityRecord = activityRecord;

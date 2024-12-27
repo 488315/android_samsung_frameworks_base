@@ -16,7 +16,6 @@ final class AudioModeLoggerStartable$start$1 extends SuspendLambda implements Fu
     int label;
     final /* synthetic */ AudioModeLoggerStartable this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AudioModeLoggerStartable$start$1(AudioModeLoggerStartable audioModeLoggerStartable, Continuation continuation) {
         super(2, continuation);
         this.this$0 = audioModeLoggerStartable;

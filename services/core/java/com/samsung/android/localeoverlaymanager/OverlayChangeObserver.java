@@ -37,7 +37,6 @@ public abstract class OverlayChangeObserver {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.android.localeoverlaymanager.OverlayChangeObserver$1] */
     public OverlayChangeObserver(int i, int i2) {
         this.mToken = i;
         this.mUserId = i2;

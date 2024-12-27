@@ -19,7 +19,6 @@ final class ConfigurationRepositoryImpl$onAnyConfigurationChange$1 extends Suspe
     int label;
     final /* synthetic */ ConfigurationRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ConfigurationRepositoryImpl$onAnyConfigurationChange$1(ConfigurationRepositoryImpl configurationRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = configurationRepositoryImpl;
@@ -37,8 +36,6 @@ final class ConfigurationRepositoryImpl$onAnyConfigurationChange$1 extends Suspe
         return ((ConfigurationRepositoryImpl$onAnyConfigurationChange$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.common.ui.data.repository.ConfigurationRepositoryImpl$onAnyConfigurationChange$1$callback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -65,7 +62,6 @@ final class ConfigurationRepositoryImpl$onAnyConfigurationChange$1 extends Suspe
             ((ConfigurationControllerImpl) this.this$0.configurationController).addCallback(r1);
             final ConfigurationRepositoryImpl configurationRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.common.ui.data.repository.ConfigurationRepositoryImpl$onAnyConfigurationChange$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

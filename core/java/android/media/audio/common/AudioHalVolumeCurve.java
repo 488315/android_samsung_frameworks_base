@@ -12,7 +12,6 @@ public class AudioHalVolumeCurve implements Parcelable {
     public static final Parcelable.Creator<AudioHalVolumeCurve> CREATOR =
             new Parcelable.Creator<AudioHalVolumeCurve>() { // from class:
                 // android.media.audio.common.AudioHalVolumeCurve.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioHalVolumeCurve createFromParcel(Parcel _aidl_source) {
                     AudioHalVolumeCurve _aidl_out = new AudioHalVolumeCurve();
@@ -20,7 +19,6 @@ public class AudioHalVolumeCurve implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioHalVolumeCurve[] newArray(int _aidl_size) {
                     return new AudioHalVolumeCurve[_aidl_size];
@@ -114,7 +112,6 @@ public class AudioHalVolumeCurve implements Parcelable {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
         return Arrays.deepHashCode(
                 Arrays.asList(java.lang.Byte.valueOf(this.deviceCategory), this.curvePoints)
@@ -148,7 +145,6 @@ public class AudioHalVolumeCurve implements Parcelable {
         public static final Parcelable.Creator<CurvePoint> CREATOR =
                 new Parcelable.Creator<CurvePoint>() { // from class:
                     // android.media.audio.common.AudioHalVolumeCurve.CurvePoint.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CurvePoint createFromParcel(Parcel _aidl_source) {
                         CurvePoint _aidl_out = new CurvePoint();
@@ -156,7 +152,6 @@ public class AudioHalVolumeCurve implements Parcelable {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CurvePoint[] newArray(int _aidl_size) {
                         return new CurvePoint[_aidl_size];

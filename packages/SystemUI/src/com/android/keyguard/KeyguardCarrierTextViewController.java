@@ -34,7 +34,6 @@ public final class KeyguardCarrierTextViewController extends ViewController impl
         return ((CarrierText) ((KeyguardCarrierTextView) keyguardCarrierTextViewController.mView).findViewById(R.id.bouncer_carrier_text)).onApplyWindowInsets(windowInsets);
     }
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.keyguard.KeyguardCarrierTextViewController$2] */
     public KeyguardCarrierTextViewController(KeyguardCarrierTextView keyguardCarrierTextView, KeyguardUpdateMonitor keyguardUpdateMonitor, CarrierTextController carrierTextController, IndicatorGardenPresenter indicatorGardenPresenter) {
         super(keyguardCarrierTextView);
         this.mKeyguardUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.keyguard.KeyguardCarrierTextViewController.1

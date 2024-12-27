@@ -22,7 +22,6 @@ final class QuickAccessWalletKeyguardQuickAffordanceConfig$queryCards$2 extends 
     int label;
     final /* synthetic */ QuickAccessWalletKeyguardQuickAffordanceConfig this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QuickAccessWalletKeyguardQuickAffordanceConfig$queryCards$2(QuickAccessWalletKeyguardQuickAffordanceConfig quickAccessWalletKeyguardQuickAffordanceConfig, Continuation continuation) {
         super(2, continuation);
         this.this$0 = quickAccessWalletKeyguardQuickAffordanceConfig;

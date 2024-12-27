@@ -24,13 +24,11 @@ public final class CellSignalStrengthTdscdma extends CellSignalStrength implemen
             new Parcelable.Creator<
                     CellSignalStrengthTdscdma>() { // from class:
                                                    // android.telephony.CellSignalStrengthTdscdma.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellSignalStrengthTdscdma createFromParcel(Parcel in) {
                     return new CellSignalStrengthTdscdma(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellSignalStrengthTdscdma[] newArray(int size) {
                     return new CellSignalStrengthTdscdma[size];

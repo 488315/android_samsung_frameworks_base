@@ -20,7 +20,6 @@ final class MediaArtworkHelper$getWallpaperColor$2 extends SuspendLambda impleme
     final /* synthetic */ String $tag;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaArtworkHelper$getWallpaperColor$2(Icon icon, Context context, String str, Continuation continuation) {
         super(2, continuation);
         this.$artworkIcon = icon;

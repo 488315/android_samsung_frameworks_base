@@ -350,7 +350,6 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
         initialize(currentHour, currentMinute, this.mIs24Hour, 0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void toggleRadialPickerMode() {
         if (this.mRadialPickerModeEnabled) {
             this.mRadialTimePickerView.setVisibility(8);
@@ -391,9 +390,6 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
         v.setMinimumWidth(minWidth);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0074 A[LOOP:1: B:29:0x0070->B:31:0x0074, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0055  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -646,7 +642,6 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
         setHourInternal(hour, 0, true, true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setHourInternal(int hour, int source, boolean announce, boolean notify) {
         if (this.mCurrentHour == hour) {
             return;
@@ -685,7 +680,6 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
         setMinuteInternal(minute, 0, true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setMinuteInternal(int minute, int source, boolean notify) {
         if (this.mCurrentMinute == minute) {
             return;
@@ -821,7 +815,6 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void tryVibrate() {
         this.mDelegator.performHapticFeedback(4);
     }
@@ -835,7 +828,6 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
         this.mPmLabel.setChecked(isPm);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getLocalizedHour(int hourOfDay) {
         if (!this.mIs24Hour) {
             hourOfDay %= 12;
@@ -923,7 +915,6 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setCurrentItemShowing(int index, boolean animateCircle, boolean announce) {
         this.mRadialTimePickerView.setCurrentItemShowing(index, animateCircle);
         if (index == 0) {
@@ -937,7 +928,6 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
         this.mMinuteView.setActivated(index == 1);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setAmOrPm(int amOrPm) {
         updateAmPmLabelStates(amOrPm);
         if (this.mRadialTimePickerView.setAmOrPm(amOrPm)) {

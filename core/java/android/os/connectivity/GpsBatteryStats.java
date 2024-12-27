@@ -9,13 +9,11 @@ public final class GpsBatteryStats implements Parcelable {
     public static final Parcelable.Creator<GpsBatteryStats> CREATOR =
             new Parcelable.Creator<
                     GpsBatteryStats>() { // from class: android.os.connectivity.GpsBatteryStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GpsBatteryStats createFromParcel(Parcel in) {
                     return new GpsBatteryStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GpsBatteryStats[] newArray(int size) {
                     return new GpsBatteryStats[size];

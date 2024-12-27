@@ -546,7 +546,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:32:0x007d  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -677,14 +676,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0 */
-        /* JADX WARN: Type inference failed for: r0v1 */
-        /* JADX WARN: Type inference failed for: r0v2, types: [int] */
-        /* JADX WARN: Type inference failed for: r0v4 */
-        /* JADX WARN: Type inference failed for: r0v5, types: [boolean] */
-        /* JADX WARN: Type inference failed for: r0v6 */
-        /* JADX WARN: Type inference failed for: r0v7 */
         public final void isServiceEnabled(int i, String str, IResultReceiver iResultReceiver) {
             int i2;
             ?? r0 = 0;
@@ -741,7 +732,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
             new AutofillManagerServiceShellCommand(AutofillManagerService.this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
         }
@@ -764,7 +754,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void restoreSession(int i, IBinder iBinder, IBinder iBinder2, IResultReceiver iResultReceiver) {
             int callingUserId = UserHandle.getCallingUserId();
             int i2 = 0;
@@ -817,7 +806,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
         
             if (r9 == false) goto L18;
          */
-        /* JADX WARN: Removed duplicated region for block: B:34:0x007b  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1329,7 +1317,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
         send(iResultReceiver, SyncResultReceiver.bundleFor(str));
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AutofillManagerService(Context context) {
         super(context, new SecureSettingsServiceNameResolver(context, "autofill_service", false), "no_autofill", 4);
         int i = 0;
@@ -1824,7 +1811,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0050 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

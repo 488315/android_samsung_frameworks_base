@@ -93,7 +93,6 @@ public abstract class VoiceInteractionSessionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.app.Service
     public void dump(FileDescriptor fd, PrintWriter writer, String[] args) {
         if (this.mSession == null) {

@@ -85,13 +85,11 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
                 new Parcelable.Creator<
                         EmergencyNumber>() { // from class:
                                              // android.telephony.emergency.EmergencyNumber.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public EmergencyNumber createFromParcel(Parcel in) {
                         return new EmergencyNumber(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public EmergencyNumber[] newArray(int size) {
                         return new EmergencyNumber[size];

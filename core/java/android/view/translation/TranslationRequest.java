@@ -20,13 +20,11 @@ public final class TranslationRequest implements Parcelable {
             new Parcelable.Creator<
                     TranslationRequest>() { // from class:
                                             // android.view.translation.TranslationRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TranslationRequest[] newArray(int size) {
                     return new TranslationRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TranslationRequest createFromParcel(Parcel in) {
                     return new TranslationRequest(in);
@@ -43,17 +41,14 @@ public final class TranslationRequest implements Parcelable {
     @Retention(RetentionPolicy.SOURCE)
     public @interface RequestFlags {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultFlags() {
         return 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static List<TranslationRequestValue> defaultTranslationRequestValues() {
         return Collections.emptyList();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static List<ViewTranslationRequest> defaultViewTranslationRequests() {
         return Collections.emptyList();
     }

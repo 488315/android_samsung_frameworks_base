@@ -444,33 +444,28 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
                 this.mKeyPaint = keyPaint;
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public Builder setStartPoint(float left, float top) {
                 this.mLeft = left;
                 this.mTop = top;
                 return this;
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public Builder setTopWidth(float width) {
                 this.mTopWidth = width;
                 return this;
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public Builder setBottomWidth(float width) {
                 this.mBottomWidth = width;
                 return this;
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public Builder setVerticalEdges(float leftHeight, float rightHeight) {
                 this.mLeftHeight = leftHeight;
                 this.mRightHeight = rightHeight;
                 return this;
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public IsoEnterKey build() {
                 Path enterKey = new Path();
                 RectF oval =
@@ -657,7 +652,6 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
             this.mBackgroundPaint = KeyboardLayoutPreviewDrawable.createFillPaint(backgroundColor);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void calculateBestTextSizeForKey(float keyHeight) {
             int textSize = (int) (this.mSpToPxMultiplier * 10.0f);
             while (true) {
@@ -681,58 +675,47 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
             this.mPrimaryGlyphPaint.getFontMetrics(this.mFontMetrics);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Paint getBackgroundPaint() {
             return this.mBackgroundPaint;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Paint getTypingKeyPaint() {
             return this.mTypingKeyPaint;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Paint getSpecialKeyPaint() {
             return this.mSpecialKeyPaint;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Paint getPrimaryGlyphPaint() {
             return this.mPrimaryGlyphPaint;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Paint getSecondaryGlyphPaint() {
             return this.mSecondaryGlyphPaint;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getKeyPadding() {
             return this.mKeyPadding;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getKeyboardPadding() {
             return this.mKeyboardPadding;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public float getTextPadding() {
             return this.mTextPadding;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public float getKeyRadius() {
             return this.mKeyRadius;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public float getBackgroundRadius() {
             return this.mBackgroundRadius;
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Paint createTextPaint(int textColor, float textSize, Typeface typeface) {
         Paint paint = new Paint();
         paint.setColor(textColor);
@@ -742,7 +725,6 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
         return paint;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Paint createFillPaint(int color) {
         Paint paint = new Paint();
         paint.setColor(color);
@@ -750,7 +732,6 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
         return paint;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Paint createGreyedOutPaint(Paint paint) {
         Paint result = new Paint(paint);
         result.setAlpha(100);

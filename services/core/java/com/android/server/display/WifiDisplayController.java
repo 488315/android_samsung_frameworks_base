@@ -711,11 +711,6 @@ public final class WifiDisplayController implements DumpUtils.Dump {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.server.display.WifiDisplayController$36] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.server.display.WifiDisplayController$32] */
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.server.display.WifiDisplayController$20] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.server.display.WifiDisplayController$20] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.server.display.WifiDisplayController$35] */
     public WifiDisplayController(Context context, Handler handler, WifiDisplayAdapter.AnonymousClass14 anonymousClass14, PersistentDataStore persistentDataStore) {
         final int i = 0;
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver(this) { // from class: com.android.server.display.WifiDisplayController.20
@@ -2393,8 +2388,6 @@ public final class WifiDisplayController implements DumpUtils.Dump {
         return wifiP2pConfig;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0089 A[Catch: Exception -> 0x00a0, TryCatch #0 {Exception -> 0x00a0, blocks: (B:11:0x004f, B:13:0x0055, B:16:0x005c, B:21:0x006b, B:25:0x007c, B:27:0x0086, B:29:0x0089, B:33:0x008f, B:35:0x0094, B:36:0x00a2, B:39:0x0083), top: B:10:0x004f, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00c7 A[EDGE_INSN: B:37:0x00c7->B:43:0x00c7 BREAK  A[LOOP:1: B:27:0x0086->B:31:0x00ae], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2831,8 +2824,6 @@ public final class WifiDisplayController implements DumpUtils.Dump {
         advertiseDisplay(null, null, 0, 0, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r7v3, types: [com.android.server.display.WifiDisplayController$13] */
-    /* JADX WARN: Type inference failed for: r9v4, types: [com.android.server.display.WifiDisplayController$13] */
     public final void updateConnection() {
         WifiP2pDevice wifiP2pDevice;
         if (this.mWifiDisplayConfig.getConnectionType() != 1) {

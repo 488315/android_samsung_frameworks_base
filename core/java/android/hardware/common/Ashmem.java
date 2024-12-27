@@ -8,7 +8,6 @@ import android.os.Parcelable;
 public class Ashmem implements Parcelable {
     public static final Parcelable.Creator<Ashmem> CREATOR =
             new Parcelable.Creator<Ashmem>() { // from class: android.hardware.common.Ashmem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Ashmem createFromParcel(Parcel _aidl_source) {
                     Ashmem _aidl_out = new Ashmem();
@@ -16,7 +15,6 @@ public class Ashmem implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Ashmem[] newArray(int _aidl_size) {
                     return new Ashmem[_aidl_size];

@@ -39,7 +39,6 @@ public class DragEvent implements Parcelable {
     private static DragEvent gRecyclerTop = null;
     public static final Parcelable.Creator<DragEvent> CREATOR =
             new Parcelable.Creator<DragEvent>() { // from class: android.view.DragEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DragEvent createFromParcel(Parcel in) {
                     DragEvent event = DragEvent.obtain();
@@ -69,7 +68,6 @@ public class DragEvent implements Parcelable {
                     return event;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DragEvent[] newArray(int size) {
                     return new DragEvent[size];

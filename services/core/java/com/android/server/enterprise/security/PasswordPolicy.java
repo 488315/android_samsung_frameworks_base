@@ -194,7 +194,6 @@ public final class PasswordPolicy extends IPasswordPolicy.Stub implements Enterp
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.enterprise.security.PasswordPolicy$2] */
     public PasswordPolicy(Context context) {
         Injector injector = new Injector(context);
         this.mLicenseService = null;
@@ -2645,7 +2644,6 @@ public final class PasswordPolicy extends IPasswordPolicy.Stub implements Enterp
         return ((Bundle) Binder.withCleanCallingIdentity(throwingSupplier)).getInt("android.intent.extra.RETURN_RESULT") == 0;
     }
 
-    /* JADX WARN: Type inference failed for: r1v12, types: [boolean, int] */
     public final void updateSystemUIMonitor$9(int i) {
         boolean z;
         int i2;

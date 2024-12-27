@@ -156,8 +156,6 @@ public final class RemovePackageHelper {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0055 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0056  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -503,16 +501,6 @@ public final class RemovePackageHelper {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:103:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x003e  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0046  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00c3  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00c8 A[Catch: all -> 0x007a, TryCatch #1 {all -> 0x007a, blocks: (B:17:0x0052, B:19:0x006a, B:21:0x0074, B:23:0x0081, B:25:0x008c, B:28:0x009a, B:30:0x00a8, B:32:0x00ae, B:38:0x00c8, B:40:0x00b5, B:44:0x007c, B:45:0x00cb, B:46:0x00d6), top: B:16:0x0052 }] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00c5  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x014a  */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0029  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x00dc  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0032  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

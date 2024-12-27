@@ -114,7 +114,6 @@ public class NetworkStatsDataMigrationUtils {
         return list;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static NetworkStatsCollection readPlatformCollection(String prefix, long bucketDuration)
             throws IOException {
         char c;

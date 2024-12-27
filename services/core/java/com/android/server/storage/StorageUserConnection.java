@@ -129,7 +129,6 @@ public final class StorageUserConnection {
             }
         }
 
-        /* JADX WARN: Type inference failed for: r10v0, types: [com.android.server.storage.StorageUserConnection$ActiveConnection$1] */
         public final void waitForAsyncVoid(final AsyncStorageServiceCall asyncStorageServiceCall) {
             final CompletableFuture completableFuture;
             final CompletableFuture completableFuture2 = new CompletableFuture();

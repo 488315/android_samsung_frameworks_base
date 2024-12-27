@@ -24,7 +24,6 @@ final class TaskSwitcherNotificationViewModel$uiState$2 extends SuspendLambda im
         return taskSwitcherNotificationViewModel$uiState$2.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0085 A[RETURN] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

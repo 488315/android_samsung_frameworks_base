@@ -90,7 +90,6 @@ public final class CrossWindowBlurListeners {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyListener(
             final Consumer<Boolean> listener, Executor executor, final boolean enabled) {
         executor.execute(

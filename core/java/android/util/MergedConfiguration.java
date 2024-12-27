@@ -10,13 +10,11 @@ public class MergedConfiguration implements Parcelable {
     public static final Parcelable.Creator<MergedConfiguration> CREATOR =
             new Parcelable.Creator<
                     MergedConfiguration>() { // from class: android.util.MergedConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MergedConfiguration createFromParcel(Parcel in) {
                     return new MergedConfiguration(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MergedConfiguration[] newArray(int size) {
                     return new MergedConfiguration[size];

@@ -11,7 +11,6 @@ public final class TimestampedValue<T> implements Parcelable {
                     return createFromParcel(source, (ClassLoader) null);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.ClassLoaderCreator
                 public TimestampedValue<?> createFromParcel(
                         Parcel source, ClassLoader classLoader) {

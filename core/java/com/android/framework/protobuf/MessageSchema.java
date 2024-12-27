@@ -567,7 +567,6 @@ final class MessageSchema<T> implements Schema<T> {
         }
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:34:0x0087 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1249,7 +1248,6 @@ final class MessageSchema<T> implements Schema<T> {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void mergeMessage(T targetParent, T sourceParent, int pos) {
         if (!isFieldPresent(sourceParent, pos)) {
             return;
@@ -1282,7 +1280,6 @@ final class MessageSchema<T> implements Schema<T> {
         messageFieldSchema.mergeFrom(target, source);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void mergeOneofMessage(T targetParent, T sourceParent, int pos) {
         int number = numberAt(pos);
         if (!isOneofPresent(sourceParent, number, pos)) {
@@ -3778,11 +3775,6 @@ final class MessageSchema<T> implements Schema<T> {
     
         return;
      */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x077b A[LOOP:2: B:40:0x0777->B:42:0x077b, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0791  */
-    /* JADX WARN: Removed duplicated region for block: B:47:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x06fa A[Catch: all -> 0x0764, TRY_LEAVE, TryCatch #2 {all -> 0x0764, blocks: (B:18:0x06b6, B:51:0x06f4, B:53:0x06fa, B:69:0x0730, B:70:0x0735, B:188:0x014a, B:90:0x0160, B:92:0x0176, B:93:0x018c, B:94:0x01a2, B:96:0x01ac, B:99:0x01b3, B:100:0x01bd, B:101:0x01ce, B:102:0x01e4, B:103:0x01f5, B:104:0x020a, B:105:0x0213, B:106:0x0229, B:107:0x023f, B:108:0x0255, B:109:0x026b, B:110:0x0281, B:111:0x0297, B:112:0x02ad, B:179:0x0136), top: B:17:0x06b6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x072c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3931,7 +3923,6 @@ final class MessageSchema<T> implements Schema<T> {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private <K, V> int decodeMapEntry(byte[] data, int position, int limit, MapEntryLite.Metadata<K, V> metadata, Map<K, V> map, ArrayDecoders.Registers registers) throws IOException {
         int tag;
         int position2;
@@ -4369,7 +4360,6 @@ final class MessageSchema<T> implements Schema<T> {
         return (Internal.EnumVerifier) this.objects[((pos / 3) * 2) + 1];
     }
 
-    /* JADX WARN: Failed to find 'out' block for switch in B:111:0x0097. Please report as an issue. */
     int parseProto2Message(T message, byte[] data, int position, int limit, int endGroup, ArrayDecoders.Registers registers) throws IOException {
         Unsafe unsafe;
         int i;
@@ -5068,7 +5058,6 @@ final class MessageSchema<T> implements Schema<T> {
         return position2;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private Object mutableMessageFieldForMerge(T message, int pos) {
         Schema messageFieldSchema = getMessageFieldSchema(pos);
         long offset = offset(typeAndOffsetAt(pos));
@@ -5091,7 +5080,6 @@ final class MessageSchema<T> implements Schema<T> {
         setFieldPresent(message, pos);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private Object mutableOneofMessageFieldForMerge(T message, int fieldNumber, int pos) {
         Schema messageFieldSchema = getMessageFieldSchema(pos);
         if (!isOneofPresent(message, fieldNumber, pos)) {
@@ -5610,7 +5598,6 @@ final class MessageSchema<T> implements Schema<T> {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.framework.protobuf.Schema
     public void makeImmutable(T t) {
         if (!isMutable(t)) {
@@ -5794,7 +5781,6 @@ final class MessageSchema<T> implements Schema<T> {
         return !this.hasExtensions || this.extensionSchema.getExtensions(message).isInitialized();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private static boolean isInitialized(Object message, int typeAndOffset, Schema schema) {
         Object nested = UnsafeUtil.getObject(message, offset(typeAndOffset));
         return schema.isInitialized(nested);
@@ -5815,12 +5801,6 @@ final class MessageSchema<T> implements Schema<T> {
         return true;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v2 */
-    /* JADX WARN: Type inference failed for: r4v3 */
-    /* JADX WARN: Type inference failed for: r4v4, types: [com.android.framework.protobuf.Schema] */
-    /* JADX WARN: Type inference failed for: r4v6 */
-    /* JADX WARN: Type inference failed for: r4v7 */
     private boolean isMapInitialized(T t, int i, int i2) {
         Map<?, ?> forMapData = this.mapFieldSchema.forMapData(UnsafeUtil.getObject(t, offset(i)));
         if (forMapData.isEmpty()) {

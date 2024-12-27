@@ -19,13 +19,11 @@ public class ClientTransaction implements Parcelable, ObjectPoolItem {
     public static final Parcelable.Creator<ClientTransaction> CREATOR =
             new Parcelable.Creator<ClientTransaction>() { // from class:
                 // android.app.servertransaction.ClientTransaction.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClientTransaction createFromParcel(Parcel in) {
                     return new ClientTransaction(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClientTransaction[] newArray(int size) {
                     return new ClientTransaction[size];

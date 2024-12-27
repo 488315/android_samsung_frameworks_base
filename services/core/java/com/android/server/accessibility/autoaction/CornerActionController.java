@@ -169,8 +169,6 @@ public final class CornerActionController {
                         this.mContext.createDisplayContext(display), this.mContext.getTheme());
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Multi-variable type inference failed */
     public final int performCornerAction(int i, final int i2, String str) {
         int i3;
         char c;

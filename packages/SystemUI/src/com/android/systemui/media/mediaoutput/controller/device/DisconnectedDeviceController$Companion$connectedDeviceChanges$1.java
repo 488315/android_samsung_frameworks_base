@@ -26,7 +26,6 @@ final class DisconnectedDeviceController$Companion$connectedDeviceChanges$1 exte
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisconnectedDeviceController$Companion$connectedDeviceChanges$1(LocalBluetoothManager localBluetoothManager, Continuation continuation) {
         super(2, continuation);
         this.$this_connectedDeviceChanges = localBluetoothManager;
@@ -48,8 +47,6 @@ final class DisconnectedDeviceController$Companion$connectedDeviceChanges$1 exte
         return ((DisconnectedDeviceController$Companion$connectedDeviceChanges$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.settingslib.bluetooth.BluetoothCallback, com.android.systemui.media.mediaoutput.controller.device.DisconnectedDeviceController$Companion$connectedDeviceChanges$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -134,7 +131,6 @@ final class DisconnectedDeviceController$Companion$connectedDeviceChanges$1 exte
             this.$this_connectedDeviceChanges.mEventManager.registerCallback(r1);
             final LocalBluetoothManager localBluetoothManager2 = this.$this_connectedDeviceChanges;
             Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.device.DisconnectedDeviceController$Companion$connectedDeviceChanges$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

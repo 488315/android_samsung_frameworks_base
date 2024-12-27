@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public class SubSample implements Parcelable {
     public static final Parcelable.Creator<SubSample> CREATOR =
             new Parcelable.Creator<SubSample>() { // from class: android.hardware.cas.SubSample.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SubSample createFromParcel(Parcel _aidl_source) {
                     SubSample _aidl_out = new SubSample();
@@ -15,7 +14,6 @@ public class SubSample implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SubSample[] newArray(int _aidl_size) {
                     return new SubSample[_aidl_size];

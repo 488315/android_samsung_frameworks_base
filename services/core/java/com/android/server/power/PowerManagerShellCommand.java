@@ -223,7 +223,6 @@ public final class PowerManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runSetProx() {
         char c;
         boolean z;

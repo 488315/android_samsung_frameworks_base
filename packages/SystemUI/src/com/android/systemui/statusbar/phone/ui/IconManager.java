@@ -69,8 +69,6 @@ public class IconManager implements DemoModeCommandReceiver {
         arrayList.add(context.getString(17043119));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v3, types: [com.android.systemui.statusbar.StatusIconDisplayable] */
     public final StatusIconDisplayable addHolder(int i, String str, boolean z, StatusBarIconHolder statusBarIconHolder) {
         View constructAndBind;
         if (this.mBlockList.contains(str)) {

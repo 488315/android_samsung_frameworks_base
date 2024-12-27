@@ -75,7 +75,6 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
         this.devicePolicyManager = devicePolicyManager;
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getAllowedByDevicePolicy$$inlined$map$1] */
     public final CommunalSettingsRepositoryImpl$getAllowedByDevicePolicy$$inlined$map$1 getAllowedByDevicePolicy(final UserInfo userInfo) {
         final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new FlowKt$emitOnStart$1(null), BroadcastDispatcher.broadcastFlow$default(this.broadcastDispatcher, new IntentFilter("android.app.action.DEVICE_POLICY_MANAGER_STATE_CHANGED"), userInfo.getUserHandle(), 0, null, 12));
         return new Flow() { // from class: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getAllowedByDevicePolicy$$inlined$map$1
@@ -110,8 +109,6 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
                     this.$user$inlined = userInfo;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -226,8 +223,6 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
                     this.$user$inlined = userInfo;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -330,8 +325,6 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
                     this.$reason$inlined = disabledReason;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -536,7 +529,6 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
                 Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getEnabledState$$inlined$combine$1.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -577,8 +569,6 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -674,8 +664,6 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -772,8 +760,6 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
                     this.$user$inlined = userInfo;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

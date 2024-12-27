@@ -151,7 +151,6 @@ public class SliceQuery {
                         return items.size() != 0;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // java.util.Iterator
                     public SliceItem next() {
                         SliceItem item = (SliceItem) items.poll();

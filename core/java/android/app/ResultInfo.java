@@ -10,13 +10,11 @@ import java.util.Objects;
 public class ResultInfo implements Parcelable {
     public static final Parcelable.Creator<ResultInfo> CREATOR =
             new Parcelable.Creator<ResultInfo>() { // from class: android.app.ResultInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ResultInfo createFromParcel(Parcel in) {
                     return new ResultInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ResultInfo[] newArray(int size) {
                     return new ResultInfo[size];

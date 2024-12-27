@@ -35,8 +35,6 @@ public final class ActiveUnlockConfig implements Dumpable {
     public final Set wakeupsConsideredUnlockIntents = new LinkedHashSet();
     public final Set wakeupsToForceDismissKeyguard = new LinkedHashSet();
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class ActiveUnlockRequestOrigin {
         public static final /* synthetic */ ActiveUnlockRequestOrigin[] $VALUES;
         public static final ActiveUnlockRequestOrigin ASSISTANT;
@@ -73,8 +71,6 @@ public final class ActiveUnlockConfig implements Dumpable {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class BiometricType {
         public static final /* synthetic */ BiometricType[] $VALUES;
         public static final BiometricType ANY_FACE;

@@ -9,7 +9,6 @@ public class SatelliteClockInfo implements Parcelable {
     public static final Parcelable.Creator<SatelliteClockInfo> CREATOR =
             new Parcelable.Creator<SatelliteClockInfo>() { // from class:
                 // android.hardware.gnss.SatelliteClockInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteClockInfo createFromParcel(Parcel _aidl_source) {
                     SatelliteClockInfo _aidl_out = new SatelliteClockInfo();
@@ -17,7 +16,6 @@ public class SatelliteClockInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteClockInfo[] newArray(int _aidl_size) {
                     return new SatelliteClockInfo[_aidl_size];

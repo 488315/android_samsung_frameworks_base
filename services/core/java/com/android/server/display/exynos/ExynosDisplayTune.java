@@ -118,8 +118,6 @@ public final class ExynosDisplayTune {
                 "enableTuneTimer: enable=", "ExynosDisplayTune", z);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x005a A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x005b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

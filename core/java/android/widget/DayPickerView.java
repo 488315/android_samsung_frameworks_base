@@ -174,7 +174,6 @@ class DayPickerView extends ViewGroup {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateButtonVisibility(int position) {
         boolean hasPrev = position > 0;
         boolean hasNext = position < this.mAdapter.getCount() - 1;

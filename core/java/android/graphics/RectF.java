@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 public class RectF implements Parcelable {
     public static final Parcelable.Creator<RectF> CREATOR =
             new Parcelable.Creator<RectF>() { // from class: android.graphics.RectF.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RectF createFromParcel(Parcel in) {
                     RectF r = new RectF();
@@ -19,7 +18,6 @@ public class RectF implements Parcelable {
                     return r;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RectF[] newArray(int size) {
                     return new RectF[size];

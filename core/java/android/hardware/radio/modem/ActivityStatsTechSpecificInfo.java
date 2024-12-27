@@ -12,7 +12,6 @@ public class ActivityStatsTechSpecificInfo implements Parcelable {
     public static final Parcelable.Creator<ActivityStatsTechSpecificInfo> CREATOR =
             new Parcelable.Creator<ActivityStatsTechSpecificInfo>() { // from class:
                 // android.hardware.radio.modem.ActivityStatsTechSpecificInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityStatsTechSpecificInfo createFromParcel(Parcel _aidl_source) {
                     ActivityStatsTechSpecificInfo _aidl_out = new ActivityStatsTechSpecificInfo();
@@ -20,7 +19,6 @@ public class ActivityStatsTechSpecificInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityStatsTechSpecificInfo[] newArray(int _aidl_size) {
                     return new ActivityStatsTechSpecificInfo[_aidl_size];

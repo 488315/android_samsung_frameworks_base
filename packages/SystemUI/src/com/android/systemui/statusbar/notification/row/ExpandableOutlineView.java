@@ -29,8 +29,6 @@ public abstract class ExpandableOutlineView extends ExpandableView {
     public final float[] mTmpCornerRadii;
     public final Path mTmpPath;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v7, types: [android.view.ViewOutlineProvider, com.android.systemui.statusbar.notification.row.ExpandableOutlineView$1] */
     public ExpandableOutlineView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mOutlineRect = new Rect();

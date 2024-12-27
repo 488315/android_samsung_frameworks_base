@@ -41,9 +41,6 @@ public final class ActivityTaskManagerTasksRepository implements TasksRepository
         this.foregroundTask = FlowKt.shareIn(conflatedCallbackFlow2, coroutineScope, SharingStarted.Companion.Lazily, 1);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -111,8 +108,6 @@ public final class ActivityTaskManagerTasksRepository implements TasksRepository
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.mediaprojection.taskswitcher.data.repository.ActivityTaskManagerTasksRepository.findRunningTaskFromWindowContainerToken(android.os.IBinder, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

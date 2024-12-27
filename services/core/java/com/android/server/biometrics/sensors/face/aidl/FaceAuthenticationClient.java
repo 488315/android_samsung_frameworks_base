@@ -81,7 +81,6 @@ public final class FaceAuthenticationClient extends AuthenticationClient
     public final SensorPrivacyManager mSensorPrivacyManager;
     public final UsageStats mUsageStats;
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.biometrics.sensors.face.aidl.FaceAuthenticationClient$2] */
     public FaceAuthenticationClient(
             Context context,
             Supplier supplier,
@@ -335,7 +334,6 @@ public final class FaceAuthenticationClient extends AuthenticationClient
         onError(7, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r5v19, types: [com.android.server.biometrics.sensors.face.aidl.FaceAuthenticationClient$1] */
     public final void semDoAuthenticate() {
         Parcel obtain;
         Parcel obtain2;

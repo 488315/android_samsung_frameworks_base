@@ -31,10 +31,6 @@ final class FlowKt$pairwiseBy$1 extends SuspendLambda implements Function2 {
             this.$transform = function3;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0082 A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:20:0x0083  */
-        /* JADX WARN: Removed duplicated region for block: B:21:0x0049  */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
         @Override // kotlinx.coroutines.flow.FlowCollector
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -131,7 +127,6 @@ final class FlowKt$pairwiseBy$1 extends SuspendLambda implements Function2 {
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FlowKt$pairwiseBy$1(Flow flow, Function3 function3, Continuation continuation) {
         super(2, continuation);
         this.$this_pairwiseBy = flow;
@@ -145,7 +140,6 @@ final class FlowKt$pairwiseBy$1 extends SuspendLambda implements Function2 {
         return flowKt$pairwiseBy$1;
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [T, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;

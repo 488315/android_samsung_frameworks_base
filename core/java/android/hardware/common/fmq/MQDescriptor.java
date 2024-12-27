@@ -9,7 +9,6 @@ public class MQDescriptor<T, Flavor> implements Parcelable {
     public static final Parcelable.Creator<MQDescriptor> CREATOR =
             new Parcelable.Creator<
                     MQDescriptor>() { // from class: android.hardware.common.fmq.MQDescriptor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MQDescriptor createFromParcel(Parcel _aidl_source) {
                     MQDescriptor _aidl_out = new MQDescriptor();
@@ -17,7 +16,6 @@ public class MQDescriptor<T, Flavor> implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MQDescriptor[] newArray(int _aidl_size) {
                     return new MQDescriptor[_aidl_size];

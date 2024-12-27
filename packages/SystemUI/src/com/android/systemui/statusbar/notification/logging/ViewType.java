@@ -2,8 +2,6 @@ package com.android.systemui.statusbar.notification.logging;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class ViewType {
     public static final /* synthetic */ ViewType[] $VALUES;
     public static final ViewType PRIVATE_CONTRACTED_VIEW;

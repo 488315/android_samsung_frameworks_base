@@ -291,7 +291,6 @@ public final class GmsAlarmManager {
             super(looper);
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:329:0x0657, code lost:
 
            if (r0 == false) goto L271;

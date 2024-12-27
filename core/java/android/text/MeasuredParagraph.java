@@ -370,13 +370,6 @@ public class MeasuredParagraph {
         return mt;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v38 */
-    /* JADX WARN: Type inference failed for: r5v39 */
-    /* JADX WARN: Type inference failed for: r5v40 */
-    /* JADX WARN: Type inference failed for: r5v41 */
-    /* JADX WARN: Type inference failed for: r5v42 */
-    /* JADX WARN: Type inference failed for: r5v52 */
     private void resetAndAnalyzeBidi(
             CharSequence charSequence,
             int i,

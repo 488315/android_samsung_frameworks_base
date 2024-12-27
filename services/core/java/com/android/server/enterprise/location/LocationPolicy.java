@@ -137,9 +137,6 @@ public final class LocationPolicy extends ILocationPolicy.Stub
         return true;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [long] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [java.lang.StringBuilder] */
     public final boolean isGPSOn(int i) {
         boolean z;
         long clearCallingIdentity = Binder.clearCallingIdentity();

@@ -344,7 +344,6 @@ public abstract class SourceStampVerifier {
         return digests;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ Integer lambda$getApkDigests$0(Pair pair) {
         return (Integer) pair.first;
     }

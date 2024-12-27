@@ -162,7 +162,6 @@ public class Translator {
         return this.mManager.getAvailableRequestId().getAndIncrement();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setServiceBinder(IBinder binder) {
         synchronized (this.mLock) {
             if (this.mDirectServiceBinder != null) {
@@ -273,7 +272,6 @@ public class Translator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class TranslationResponseCallbackImpl extends ITranslationCallback.Stub {
         private final Consumer<TranslationResponse> mCallback;
         private final Executor mExecutor;
@@ -306,7 +304,6 @@ public class Translator {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onTranslationResponse$0(TranslationResponse response) {
             this.mCallback.accept(response);
         }

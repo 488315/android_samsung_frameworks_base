@@ -11,13 +11,11 @@ import java.util.StringJoiner;
 public final class VpnProfileState implements Parcelable {
     public static final Parcelable.Creator<VpnProfileState> CREATOR =
             new Parcelable.Creator<VpnProfileState>() { // from class: android.net.VpnProfileState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VpnProfileState createFromParcel(Parcel in) {
                     return new VpnProfileState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VpnProfileState[] newArray(int size) {
                     return new VpnProfileState[size];

@@ -13,7 +13,6 @@ final class GuestUserInteractor$exit$1$info$1 extends SuspendLambda implements F
     int label;
     final /* synthetic */ GuestUserInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GuestUserInteractor$exit$1$info$1(GuestUserInteractor guestUserInteractor, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = guestUserInteractor;

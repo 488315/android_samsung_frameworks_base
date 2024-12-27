@@ -50,7 +50,6 @@ public abstract class UdfpsAnimationViewController extends ViewController implem
             int label;
             final /* synthetic */ UdfpsAnimationViewController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C00261(UdfpsAnimationViewController udfpsAnimationViewController, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = udfpsAnimationViewController;
@@ -124,7 +123,6 @@ public abstract class UdfpsAnimationViewController extends ViewController implem
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.biometrics.UdfpsAnimationViewController$dialogListener$1] */
     public UdfpsAnimationViewController(UdfpsAnimationView udfpsAnimationView, StatusBarStateController statusBarStateController, ShadeInteractor shadeInteractor, SystemUIDialogManager systemUIDialogManager, DumpManager dumpManager, UdfpsOverlayInteractor udfpsOverlayInteractor) {
         super(udfpsAnimationView);
         this.statusBarStateController = statusBarStateController;

@@ -40,7 +40,6 @@ public class ImsEcbmImplBase {
                     "setListener");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setListener$0(IImsEcbmListener listener) {
             if (ImsEcbmImplBase.this.mListener != null
                     && !ImsEcbmImplBase.this.mListener.asBinder().isBinderAlive()) {
@@ -65,7 +64,6 @@ public class ImsEcbmImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$exitEmergencyCallbackMode$1() {
             ImsEcbmImplBase.this.exitEmergencyCallbackMode();
         }

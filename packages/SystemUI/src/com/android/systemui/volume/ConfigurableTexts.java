@@ -41,7 +41,6 @@ public final class ConfigurableTexts {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.volume.ConfigurableTexts$2] */
     public ConfigurableTexts(Context context) {
         this.mContext = context;
     }

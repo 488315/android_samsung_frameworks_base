@@ -35,7 +35,6 @@ public final class ModemActivityInfo implements Parcelable {
     public static final Parcelable.Creator<ModemActivityInfo> CREATOR =
             new Parcelable.Creator<
                     ModemActivityInfo>() { // from class: android.telephony.ModemActivityInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ModemActivityInfo createFromParcel(Parcel in) {
                     long timestamp = in.readLong();
@@ -54,7 +53,6 @@ public final class ModemActivityInfo implements Parcelable {
                             timestamp, sleepTimeMs, idleTimeMs, activityStatsTechSpecificInfo);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ModemActivityInfo[] newArray(int size) {
                     return new ModemActivityInfo[size];

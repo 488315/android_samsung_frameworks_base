@@ -12,13 +12,11 @@ public final class PackageSetPolicyValue extends PolicyValue<Set<String>> {
     public static final Parcelable.Creator<PackageSetPolicyValue> CREATOR =
             new Parcelable.Creator<PackageSetPolicyValue>() { // from class:
                 // android.app.admin.PackageSetPolicyValue.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackageSetPolicyValue createFromParcel(Parcel source) {
                     return new PackageSetPolicyValue(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackageSetPolicyValue[] newArray(int size) {
                     return new PackageSetPolicyValue[size];

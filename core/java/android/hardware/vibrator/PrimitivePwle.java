@@ -7,13 +7,11 @@ public final class PrimitivePwle implements Parcelable {
     public static final Parcelable.Creator<PrimitivePwle> CREATOR =
             new Parcelable.Creator<
                     PrimitivePwle>() { // from class: android.hardware.vibrator.PrimitivePwle.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrimitivePwle createFromParcel(Parcel _aidl_source) {
                     return new PrimitivePwle(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrimitivePwle[] newArray(int _aidl_size) {
                     return new PrimitivePwle[_aidl_size];

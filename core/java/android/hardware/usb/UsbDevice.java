@@ -13,7 +13,6 @@ import java.util.Objects;
 public class UsbDevice implements Parcelable {
     public static final Parcelable.Creator<UsbDevice> CREATOR =
             new Parcelable.Creator<UsbDevice>() { // from class: android.hardware.usb.UsbDevice.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsbDevice createFromParcel(Parcel in) {
                     String name = in.readString();
@@ -58,7 +57,6 @@ public class UsbDevice implements Parcelable {
                     return device;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsbDevice[] newArray(int size) {
                     return new UsbDevice[size];

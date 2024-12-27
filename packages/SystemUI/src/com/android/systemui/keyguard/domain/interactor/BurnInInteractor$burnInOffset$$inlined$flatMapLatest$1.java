@@ -18,7 +18,6 @@ public final class BurnInInteractor$burnInOffset$$inlined$flatMapLatest$1 extend
     int label;
     final /* synthetic */ BurnInInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BurnInInteractor$burnInOffset$$inlined$flatMapLatest$1(Continuation continuation, BurnInInteractor burnInInteractor, int i, boolean z) {
         super(3, continuation);
         this.this$0 = burnInInteractor;

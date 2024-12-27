@@ -17,13 +17,11 @@ public class SignalStrength implements Parcelable {
     public static final Parcelable.Creator<SignalStrength> CREATOR =
             new Parcelable.Creator<
                     SignalStrength>() { // from class: android.telephony.SignalStrength.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignalStrength createFromParcel(Parcel in) {
                     return new SignalStrength(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SignalStrength[] newArray(int size) {
                     return new SignalStrength[size];

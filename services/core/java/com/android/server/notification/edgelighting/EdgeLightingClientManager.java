@@ -52,7 +52,6 @@ public final class EdgeLightingClientManager {
         public final /* synthetic */ int $r8$classId = 1;
         public final /* synthetic */ Object this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(EdgeLightingHost edgeLightingHost, Looper looper) {
             super(looper);
             this.this$0 = edgeLightingHost;

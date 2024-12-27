@@ -21,13 +21,11 @@ import java.util.Objects;
 public final class Slice implements Parcelable {
     public static final Parcelable.Creator<Slice> CREATOR =
             new Parcelable.Creator<Slice>() { // from class: android.app.slice.Slice.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Slice createFromParcel(Parcel in) {
                     return new Slice(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Slice[] newArray(int size) {
                     return new Slice[size];

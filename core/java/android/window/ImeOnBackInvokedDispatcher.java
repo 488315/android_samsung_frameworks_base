@@ -19,13 +19,11 @@ public class ImeOnBackInvokedDispatcher implements OnBackInvokedDispatcher, Parc
             new Parcelable.Creator<
                     ImeOnBackInvokedDispatcher>() { // from class:
                                                     // android.window.ImeOnBackInvokedDispatcher.2
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImeOnBackInvokedDispatcher createFromParcel(Parcel in) {
                     return new ImeOnBackInvokedDispatcher(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImeOnBackInvokedDispatcher[] newArray(int size) {
                     return new ImeOnBackInvokedDispatcher[size];
@@ -96,7 +94,6 @@ public class ImeOnBackInvokedDispatcher implements OnBackInvokedDispatcher, Parc
         dest.writeTypedObject(this.mResultReceiver, flags);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void receive(
             int resultCode, Bundle resultData, WindowOnBackInvokedDispatcher receivingDispatcher) {
         if (resultCode == 0) {
@@ -243,7 +240,6 @@ public class ImeOnBackInvokedDispatcher implements OnBackInvokedDispatcher, Parc
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getId() {
             return this.mId;
         }
@@ -276,7 +272,6 @@ public class ImeOnBackInvokedDispatcher implements OnBackInvokedDispatcher, Parc
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class ImeOnBackInvokedCallbackWrapper extends IOnBackInvokedCallback.Stub {
         private final OnBackInvokedCallback mCallback;
 
@@ -351,7 +346,6 @@ public class ImeOnBackInvokedDispatcher implements OnBackInvokedDispatcher, Parc
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$maybeRunOnAnimationCallback$2(Consumer block) {
             block.accept((OnBackAnimationCallback) this.mCallback);
         }

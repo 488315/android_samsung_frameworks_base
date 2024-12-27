@@ -13,7 +13,6 @@ public final class PnoSettings implements Parcelable {
     public static final Parcelable.Creator<PnoSettings> CREATOR =
             new Parcelable.Creator<
                     PnoSettings>() { // from class: android.net.wifi.nl80211.PnoSettings.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PnoSettings createFromParcel(Parcel in) {
                     PnoSettings result = new PnoSettings();
@@ -28,7 +27,6 @@ public final class PnoSettings implements Parcelable {
                     return result;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PnoSettings[] newArray(int size) {
                     return new PnoSettings[size];

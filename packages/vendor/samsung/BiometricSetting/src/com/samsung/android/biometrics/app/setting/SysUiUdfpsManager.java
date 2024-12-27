@@ -75,7 +75,6 @@ public class SysUiUdfpsManager extends SysUiManager implements AodStatusMonitor.
         return createClient;
     }
 
-    /* JADX WARN: Type inference failed for: r8v0, types: [com.samsung.android.biometrics.app.setting.SysUiUdfpsManager$$ExternalSyntheticLambda4] */
     @Override // com.samsung.android.biometrics.app.setting.SysUiManager
     public final SysUiClientFactoryImpl createClientFactory() {
         Context context = this.mContext;
@@ -214,9 +213,6 @@ public class SysUiUdfpsManager extends SysUiManager implements AodStatusMonitor.
         BackgroundThread.sHandler.post(sysUiUdfpsManager$$ExternalSyntheticLambda8);
     }
 
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.samsung.android.biometrics.app.setting.fingerprint.UdfpsFodHandler$1] */
-    /* JADX WARN: Type inference failed for: r4v0, types: [com.samsung.android.biometrics.app.setting.SysUiUdfpsManager$$ExternalSyntheticLambda5] */
-    /* JADX WARN: Type inference failed for: r5v0, types: [com.samsung.android.biometrics.app.setting.SysUiUdfpsManager$$ExternalSyntheticLambda5] */
     @Override // com.samsung.android.biometrics.app.setting.SysUiManager
     public void init() {
         super.init();
@@ -291,7 +287,6 @@ public class SysUiUdfpsManager extends SysUiManager implements AodStatusMonitor.
                     final UdfpsFodHandler udfpsFodHandler2 = UdfpsFodHandler.this;
                     udfpsFodHandler2.getClass();
                     udfpsFodHandler2.mMainHandler.post(new Runnable() { // from class: com.samsung.android.biometrics.app.setting.fingerprint.UdfpsFodHandler$$ExternalSyntheticLambda1
-                        /* JADX WARN: Type inference failed for: r1v11, types: [com.samsung.android.biometrics.app.setting.fingerprint.UdfpsFodHandler$$ExternalSyntheticLambda3] */
                         @Override // java.lang.Runnable
                         public final void run() {
                             final float f;

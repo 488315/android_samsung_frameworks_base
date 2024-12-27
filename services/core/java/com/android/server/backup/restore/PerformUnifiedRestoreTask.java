@@ -147,10 +147,6 @@ public final class PerformUnifiedRestoreTask implements BackupRestoreTask {
         @Override // com.android.server.backup.BackupRestoreTask
         public final void operationComplete(long j) {}
 
-        /* JADX WARN: Removed duplicated region for block: B:20:0x02f1  */
-        /* JADX WARN: Removed duplicated region for block: B:23:0x0324  */
-        /* JADX WARN: Removed duplicated region for block: B:27:0x02f8 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:37:0x02f3  */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.

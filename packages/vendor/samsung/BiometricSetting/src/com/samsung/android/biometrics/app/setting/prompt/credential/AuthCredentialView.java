@@ -566,7 +566,6 @@ public abstract class AuthCredentialView extends LinearLayout implements View.On
     
         if (android.text.TextUtils.equals(r0, r5.mDefaultUnlockGuide) == false) goto L23;
      */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0072  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -722,7 +721,6 @@ public abstract class AuthCredentialView extends LinearLayout implements View.On
         showError(getResources().getString(R.string.sec_lockpassword_need_to_unlock_wrong));
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [android.os.CountDownTimer, com.samsung.android.biometrics.app.setting.prompt.credential.LockoutTimer$1] */
     public final void startLockoutTimer(long j) {
         if (j == 0) {
             return;

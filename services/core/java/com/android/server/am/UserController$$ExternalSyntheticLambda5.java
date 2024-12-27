@@ -11,8 +11,6 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda5 impl
         this.f$1 = i;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00e8  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x00ff  */
     @Override // java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

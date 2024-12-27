@@ -19,13 +19,11 @@ public final class RouteListingPreference implements Parcelable {
     public static final Parcelable.Creator<RouteListingPreference> CREATOR =
             new Parcelable.Creator<RouteListingPreference>() { // from class:
                 // android.media.RouteListingPreference.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RouteListingPreference createFromParcel(Parcel in) {
                     return new RouteListingPreference(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RouteListingPreference[] newArray(int size) {
                     return new RouteListingPreference[size];
@@ -123,13 +121,11 @@ public final class RouteListingPreference implements Parcelable {
         public static final Parcelable.Creator<Item> CREATOR =
                 new Parcelable.Creator<
                         Item>() { // from class: android.media.RouteListingPreference.Item.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Item createFromParcel(Parcel in) {
                         return new Item(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Item[] newArray(int size) {
                         return new Item[size];

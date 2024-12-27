@@ -14,7 +14,6 @@ final class QSTileViewModelAdapter$setListening$1$2 extends SuspendLambda implem
     int label;
     final /* synthetic */ QSTileViewModelAdapter this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QSTileViewModelAdapter$setListening$1$2(QSTileViewModelAdapter qSTileViewModelAdapter, Continuation continuation) {
         super(2, continuation);
         this.this$0 = qSTileViewModelAdapter;

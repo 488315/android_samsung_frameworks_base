@@ -338,10 +338,6 @@ public final class PersistentDataStore {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v2, types: [java.util.HashMap] */
-    /* JADX WARN: Type inference failed for: r2v3, types: [java.lang.AutoCloseable] */
-    /* JADX WARN: Type inference failed for: r2v6, types: [java.io.FileInputStream, java.io.InputStream, java.lang.AutoCloseable] */
     public final void loadIfNeeded() {
         if (this.mLoaded) {
             return;

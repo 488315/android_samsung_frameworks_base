@@ -40,7 +40,6 @@ final class DeviceEntryIconViewBinder$bind$2 extends SuspendLambda implements Fu
         private /* synthetic */ Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(DeviceEntryIconViewModel deviceEntryIconViewModel, LongPressHandlingView longPressHandlingView, DeviceEntryIconView deviceEntryIconView, VibratorHelper vibratorHelper, CoroutineScope coroutineScope, ImageView imageView, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = deviceEntryIconViewModel;
@@ -86,7 +85,6 @@ final class DeviceEntryIconViewBinder$bind$2 extends SuspendLambda implements Fu
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryIconViewBinder$bind$2(DeviceEntryIconViewModel deviceEntryIconViewModel, LongPressHandlingView longPressHandlingView, DeviceEntryIconView deviceEntryIconView, VibratorHelper vibratorHelper, CoroutineScope coroutineScope, ImageView imageView, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = deviceEntryIconViewModel;

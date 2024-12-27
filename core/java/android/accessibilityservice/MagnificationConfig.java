@@ -10,13 +10,11 @@ public final class MagnificationConfig implements Parcelable {
     public static final Parcelable.Creator<MagnificationConfig> CREATOR =
             new Parcelable.Creator<MagnificationConfig>() { // from class:
                 // android.accessibilityservice.MagnificationConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MagnificationConfig createFromParcel(Parcel parcel) {
                     return new MagnificationConfig(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MagnificationConfig[] newArray(int size) {
                     return new MagnificationConfig[size];

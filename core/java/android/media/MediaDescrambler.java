@@ -35,7 +35,6 @@ public final class MediaDescrambler implements AutoCloseable {
         void setMediaCasSession(byte[] bArr) throws RemoteException;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final native int native_descramble(
             byte b,
             byte b2,
@@ -52,10 +51,8 @@ public final class MediaDescrambler implements AutoCloseable {
 
     private static final native void native_init();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final native void native_release();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final native void native_setup(IHwBinder iHwBinder);
 
     private class AidlDescrambler implements DescramblerWrapper {
@@ -171,7 +168,6 @@ public final class MediaDescrambler implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void cleanupAndRethrowIllegalState() {
         this.mIDescrambler = null;
         throw new IllegalStateException();

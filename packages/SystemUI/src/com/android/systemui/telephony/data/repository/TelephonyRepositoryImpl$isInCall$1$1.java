@@ -12,7 +12,6 @@ final class TelephonyRepositoryImpl$isInCall$1$1 extends SuspendLambda implement
     int label;
     final /* synthetic */ TelephonyRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TelephonyRepositoryImpl$isInCall$1$1(TelephonyRepositoryImpl telephonyRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = telephonyRepositoryImpl;

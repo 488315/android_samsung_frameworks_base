@@ -77,19 +77,6 @@ public final class DiskStatsService extends Binder {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:110:0x017b  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x00d2 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:132:0x00a8  */
-    /* JADX WARN: Removed duplicated region for block: B:135:0x0073 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0064  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0076  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0102 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x016c  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x01b4  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x03a1  */
-    /* JADX WARN: Removed duplicated region for block: B:68:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x02ce  */
     @Override // android.os.Binder
     /*
         Code decompiled incorrectly, please refer to instructions dump.

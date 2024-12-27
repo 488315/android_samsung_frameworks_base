@@ -143,7 +143,6 @@ public final class WindowInsets {
                 src.mFrameHeight);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static DisplayCutout displayCutoutCopyConstructorArgument(WindowInsets w) {
         if (w.mDisplayCutoutConsumed) {
             return null;
@@ -169,7 +168,6 @@ public final class WindowInsets {
         return result == null ? Insets.NONE : result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void setInsets(Insets[] typeInsetsMap, int typeMask, Insets insets) {
         for (int i = 1; i <= 512; i <<= 1) {
             if ((typeMask & i) != 0) {

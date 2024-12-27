@@ -73,7 +73,6 @@ public abstract class SharedConnectivityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$registerCallback$0(
                 ISharedConnectivityCallback callback) {
             SharedConnectivityService.this.onRegisterCallback(callback);
@@ -93,7 +92,6 @@ public abstract class SharedConnectivityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$unregisterCallback$1(
                 ISharedConnectivityCallback callback) {
             SharedConnectivityService.this.onUnregisterCallback(callback);
@@ -113,7 +111,6 @@ public abstract class SharedConnectivityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$connectHotspotNetwork$2(HotspotNetwork network) {
             SharedConnectivityService.this.onConnectHotspotNetwork(network);
         }
@@ -132,7 +129,6 @@ public abstract class SharedConnectivityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$disconnectHotspotNetwork$3(HotspotNetwork network) {
             SharedConnectivityService.this.onDisconnectHotspotNetwork(network);
         }
@@ -151,7 +147,6 @@ public abstract class SharedConnectivityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$connectKnownNetwork$4(KnownNetwork network) {
             SharedConnectivityService.this.onConnectKnownNetwork(network);
         }
@@ -170,7 +165,6 @@ public abstract class SharedConnectivityService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$forgetKnownNetwork$5(KnownNetwork network) {
             SharedConnectivityService.this.onForgetKnownNetwork(network);
         }
@@ -232,7 +226,6 @@ public abstract class SharedConnectivityService extends Service {
         this.mCountDownLatch = latch;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onRegisterCallback(ISharedConnectivityCallback callback) {
         this.mRemoteCallbackList.register(callback);
         try {
@@ -245,7 +238,6 @@ public abstract class SharedConnectivityService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onUnregisterCallback(ISharedConnectivityCallback callback) {
         this.mRemoteCallbackList.unregister(callback);
         if (this.mCountDownLatch != null) {

@@ -6,7 +6,6 @@ import kotlin.jvm.internal.Lambda;
 final class NavBarIconResourceMapper$supportLargeCover$1 extends Lambda implements Function0 {
     final /* synthetic */ NavBarIconResourceMapper this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NavBarIconResourceMapper$supportLargeCover$1(NavBarIconResourceMapper navBarIconResourceMapper) {
         super(0);
         this.this$0 = navBarIconResourceMapper;

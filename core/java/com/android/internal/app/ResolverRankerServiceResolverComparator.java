@@ -451,7 +451,6 @@ class ResolverRankerServiceResolverComparator extends AbstractResolverComparator
                 : true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ResolverRankerServiceComparatorModel buildUpdatedModel() {
         return new ResolverRankerServiceComparatorModel(
                 this.mStatsPerUser,
@@ -510,7 +509,6 @@ class ResolverRankerServiceResolverComparator extends AbstractResolverComparator
             };
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ int lambda$getComparator$0(ResolveInfo lhs, ResolveInfo rhs) {
             int selectProbabilityDiff;
             ResolverTarget lhsTarget =

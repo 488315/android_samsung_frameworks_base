@@ -275,20 +275,6 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
 
        if (r5 == 0) goto L48;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v12 */
-    /* JADX WARN: Type inference failed for: r2v13 */
-    /* JADX WARN: Type inference failed for: r2v14, types: [java.io.ByteArrayInputStream, java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r2v15, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r2v16 */
-    /* JADX WARN: Type inference failed for: r2v17 */
-    /* JADX WARN: Type inference failed for: r2v18 */
-    /* JADX WARN: Type inference failed for: r2v19 */
-    /* JADX WARN: Type inference failed for: r2v20 */
-    /* JADX WARN: Type inference failed for: r2v21 */
-    /* JADX WARN: Type inference failed for: r2v9 */
-    /* JADX WARN: Type inference failed for: r5v10, types: [java.io.ObjectInputStream] */
-    /* JADX WARN: Type inference failed for: r5v16, types: [java.io.ObjectInputStream] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1386,7 +1372,6 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         return intResult;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0066 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

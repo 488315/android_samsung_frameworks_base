@@ -52,13 +52,11 @@ public final class WallpaperColors implements Parcelable {
             SystemProperties.getInt("persist.wallpapercolors.max_dark_area", 5) / 100.0f;
     public static final Parcelable.Creator<WallpaperColors> CREATOR =
             new Parcelable.Creator<WallpaperColors>() { // from class: android.app.WallpaperColors.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WallpaperColors createFromParcel(Parcel in) {
                     return new WallpaperColors(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WallpaperColors[] newArray(int size) {
                     return new WallpaperColors[size];

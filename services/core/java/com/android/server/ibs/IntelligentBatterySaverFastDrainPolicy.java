@@ -125,10 +125,6 @@ public final class IntelligentBatterySaverFastDrainPolicy {
         public final AnonymousClass2 mobiledataCallBack;
         public final AnonymousClass2 wifiCallBack;
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.ibs.IntelligentBatterySaverFastDrainPolicy$IntelligentBatterySaverFastDrainAction$1] */
-        /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.ibs.IntelligentBatterySaverFastDrainPolicy$IntelligentBatterySaverFastDrainAction$2] */
-        /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.ibs.IntelligentBatterySaverFastDrainPolicy$IntelligentBatterySaverFastDrainAction$2] */
-        /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.ibs.IntelligentBatterySaverFastDrainPolicy$IntelligentBatterySaverFastDrainAction$1] */
         public IntelligentBatterySaverFastDrainAction(Context context) {
             this.mContext = context;
             final int i = 0;
@@ -1545,10 +1541,6 @@ public final class IntelligentBatterySaverFastDrainPolicy {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.ibs.IntelligentBatterySaverFastDrainPolicy$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.ibs.IntelligentBatterySaverFastDrainPolicy$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.ibs.IntelligentBatterySaverFastDrainPolicy$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.ibs.IntelligentBatterySaverFastDrainPolicy$$ExternalSyntheticLambda0] */
     public IntelligentBatterySaverFastDrainPolicy(
             Context context,
             HandlerThread handlerThread,

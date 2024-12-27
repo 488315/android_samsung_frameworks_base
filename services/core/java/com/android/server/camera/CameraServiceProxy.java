@@ -96,8 +96,6 @@ public final class CameraServiceProxy extends SystemService
     public final class CameraFeatureCombinationQueryEvent implements CameraEvent {
         public CameraFeatureCombinationStats mFeatureCombinationStats;
 
-        /* JADX WARN: Removed duplicated region for block: B:12:0x0027  */
-        /* JADX WARN: Removed duplicated region for block: B:9:0x0016  */
         @Override // com.android.server.camera.CameraServiceProxy.CameraEvent
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -421,8 +419,6 @@ public final class CameraServiceProxy extends SystemService
                 };
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.camera.CameraServiceProxy$1] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.camera.CameraServiceProxy$2] */
     public CameraServiceProxy(Context context) {
         super(context);
         this.mLock = new Object();
@@ -567,10 +563,6 @@ public final class CameraServiceProxy extends SystemService
 
                        if (r9.getPackageManager().getPackageInfo(r10, 0).applicationInfo.targetSdkVersion <= 23) goto L55;
                     */
-                    /* JADX WARN: Removed duplicated region for block: B:57:0x0152  */
-                    /* JADX WARN: Removed duplicated region for block: B:65:0x017f  */
-                    /* JADX WARN: Removed duplicated region for block: B:77:? A[RETURN, SYNTHETIC] */
-                    /* JADX WARN: Removed duplicated region for block: B:80:0x0164  */
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
                         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -938,7 +930,6 @@ public final class CameraServiceProxy extends SystemService
                         }
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
                     public final void onShellCommand(
                             FileDescriptor fileDescriptor,
                             FileDescriptor fileDescriptor2,

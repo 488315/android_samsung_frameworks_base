@@ -14,7 +14,6 @@ public final class RcsClientConfiguration implements Parcelable {
             new Parcelable.Creator<
                     RcsClientConfiguration>() { // from class:
                                                 // android.telephony.ims.RcsClientConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RcsClientConfiguration createFromParcel(Parcel in) {
                     String rcsVersion = in.readString();
@@ -30,7 +29,6 @@ public final class RcsClientConfiguration implements Parcelable {
                             rcsEnabledByUser.booleanValue());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RcsClientConfiguration[] newArray(int size) {
                     return new RcsClientConfiguration[size];

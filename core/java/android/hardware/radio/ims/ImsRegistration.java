@@ -11,7 +11,6 @@ public class ImsRegistration implements Parcelable {
     public static final Parcelable.Creator<ImsRegistration> CREATOR =
             new Parcelable.Creator<
                     ImsRegistration>() { // from class: android.hardware.radio.ims.ImsRegistration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsRegistration createFromParcel(Parcel _aidl_source) {
                     ImsRegistration _aidl_out = new ImsRegistration();
@@ -19,7 +18,6 @@ public class ImsRegistration implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsRegistration[] newArray(int _aidl_size) {
                     return new ImsRegistration[_aidl_size];

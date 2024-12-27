@@ -20,13 +20,11 @@ public final class ConversationActions implements Parcelable {
             new Parcelable.Creator<
                     ConversationActions>() { // from class:
                                              // android.view.textclassifier.ConversationActions.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConversationActions createFromParcel(Parcel in) {
                     return new ConversationActions(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConversationActions[] newArray(int size) {
                     return new ConversationActions[size];
@@ -83,13 +81,11 @@ public final class ConversationActions implements Parcelable {
                 new Parcelable.Creator<
                         Message>() { // from class:
                                      // android.view.textclassifier.ConversationActions.Message.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Message createFromParcel(Parcel in) {
                         return new Message(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Message[] newArray(int size) {
                         return new Message[size];
@@ -188,13 +184,11 @@ public final class ConversationActions implements Parcelable {
                 new Parcelable.Creator<
                         Request>() { // from class:
                                      // android.view.textclassifier.ConversationActions.Request.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Request createFromParcel(Parcel in) {
                         return Request.readFromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Request[] newArray(int size) {
                         return new Request[size];
@@ -225,7 +219,6 @@ public final class ConversationActions implements Parcelable {
             this.mExtras = extras;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static Request readFromParcel(Parcel in) {
             ArrayList arrayList = new ArrayList();
             in.readParcelableList(arrayList, null, Message.class);

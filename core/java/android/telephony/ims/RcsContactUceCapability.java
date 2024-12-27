@@ -22,13 +22,11 @@ public final class RcsContactUceCapability implements Parcelable {
             new Parcelable.Creator<
                     RcsContactUceCapability>() { // from class:
                                                  // android.telephony.ims.RcsContactUceCapability.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RcsContactUceCapability createFromParcel(Parcel in) {
                     return new RcsContactUceCapability(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RcsContactUceCapability[] newArray(int size) {
                     return new RcsContactUceCapability[size];

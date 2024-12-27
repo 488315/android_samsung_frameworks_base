@@ -14,13 +14,11 @@ final class AudioItemImpl extends Item implements IBundleHolder, Parcelable {
     public static final Parcelable.Creator<AudioItemImpl> CREATOR =
             new Parcelable.Creator<
                     AudioItemImpl>() { // from class: com.samsung.android.allshare.AudioItemImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioItemImpl createFromParcel(Parcel src) {
                     return new AudioItemImpl(src);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioItemImpl[] newArray(int size) {
                     return new AudioItemImpl[size];

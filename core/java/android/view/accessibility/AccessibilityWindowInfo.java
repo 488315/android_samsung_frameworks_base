@@ -46,7 +46,6 @@ public final class AccessibilityWindowInfo implements Parcelable {
             new Parcelable.Creator<
                     AccessibilityWindowInfo>() { // from class:
                                                  // android.view.accessibility.AccessibilityWindowInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessibilityWindowInfo createFromParcel(Parcel parcel) {
                     AccessibilityWindowInfo info = AccessibilityWindowInfo.obtain();
@@ -54,7 +53,6 @@ public final class AccessibilityWindowInfo implements Parcelable {
                     return info;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessibilityWindowInfo[] newArray(int size) {
                     return new AccessibilityWindowInfo[size];
@@ -375,7 +373,6 @@ public final class AccessibilityWindowInfo implements Parcelable {
         this.mRawType = other.mRawType;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void initFromParcel(Parcel parcel) {
         this.mDisplayId = parcel.readInt();
         this.mType = parcel.readInt();
@@ -542,7 +539,6 @@ public final class AccessibilityWindowInfo implements Parcelable {
                 new Parcelable.Creator<
                         WindowListSparseArray>() { // from class:
                                                    // android.view.accessibility.AccessibilityWindowInfo.WindowListSparseArray.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public WindowListSparseArray createFromParcel(Parcel source) {
                         WindowListSparseArray array = new WindowListSparseArray();
@@ -557,7 +553,6 @@ public final class AccessibilityWindowInfo implements Parcelable {
                         return array;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public WindowListSparseArray[] newArray(int size) {
                         return new WindowListSparseArray[size];

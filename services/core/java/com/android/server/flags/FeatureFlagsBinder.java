@@ -44,7 +44,6 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
         this.mPermissionsChecker = permissionsChecker;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @SystemApi
     public int handleShellCommand(
             ParcelFileDescriptor parcelFileDescriptor,

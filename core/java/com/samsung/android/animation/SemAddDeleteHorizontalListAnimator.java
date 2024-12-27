@@ -143,10 +143,6 @@ public class SemAddDeleteHorizontalListAnimator extends SemAbsAddDeleteAnimator 
         this.mDeleteRunnable =
                 new Runnable() { // from class:
                     // com.samsung.android.animation.SemAddDeleteHorizontalListAnimator.2
-                    /* JADX WARN: Removed duplicated region for block: B:53:0x020d  */
-                    /* JADX WARN: Removed duplicated region for block: B:56:0x027a  */
-                    /* JADX WARN: Removed duplicated region for block: B:59:0x0282 A[SYNTHETIC] */
-                    /* JADX WARN: Removed duplicated region for block: B:60:0x024a  */
                     @Override // java.lang.Runnable
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -227,7 +223,6 @@ public class SemAddDeleteHorizontalListAnimator extends SemAbsAddDeleteAnimator 
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getChildMaxWidth() {
         int width;
         int childCount = this.mHorizontalListView.getChildCount();

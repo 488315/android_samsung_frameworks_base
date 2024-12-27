@@ -161,7 +161,6 @@ public interface HeavyHitterSketch<T> {
             return result;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ int lambda$getTopHeavyHitters$0(Integer a, Integer b) {
             return this.mFrequencies.valueAt(b.intValue())
                     - this.mFrequencies.valueAt(a.intValue());

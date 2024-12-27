@@ -11,7 +11,6 @@ public class DataProfileInfo implements Parcelable {
     public static final Parcelable.Creator<DataProfileInfo> CREATOR =
             new Parcelable.Creator<DataProfileInfo>() { // from class:
                 // android.hardware.radio.data.DataProfileInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataProfileInfo createFromParcel(Parcel _aidl_source) {
                     DataProfileInfo _aidl_out = new DataProfileInfo();
@@ -19,7 +18,6 @@ public class DataProfileInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataProfileInfo[] newArray(int _aidl_size) {
                     return new DataProfileInfo[_aidl_size];

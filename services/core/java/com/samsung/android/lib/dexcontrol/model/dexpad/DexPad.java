@@ -43,7 +43,6 @@ public final class DexPad extends FanControlModel {
     public boolean mIsFastChargingEnabled;
     public int reTryPowerChargerInfoRequestCount;
 
-    /* JADX WARN: Type inference failed for: r6v4, types: [com.samsung.android.lib.dexcontrol.model.dexpad.DexPad$2] */
     public DexPad(Context context, DockManager.AnonymousClass3 anonymousClass3) {
         super(context, 41001, false);
         this.mCharger_Power_Value = 0;

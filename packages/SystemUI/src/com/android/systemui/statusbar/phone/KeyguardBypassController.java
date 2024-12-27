@@ -109,7 +109,6 @@ public final class KeyguardBypassController implements Dumpable, StackScrollAlgo
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.systemui.statusbar.phone.KeyguardBypassController$faceAuthEnabledChangedCallback$1] */
     public KeyguardBypassController(Resources resources, PackageManager packageManager, CoroutineScope coroutineScope, TunerService tunerService, StatusBarStateController statusBarStateController, NotificationLockscreenUserManager notificationLockscreenUserManager, KeyguardStateController keyguardStateController, Lazy lazy, DevicePostureController devicePostureController, KeyguardTransitionInteractor keyguardTransitionInteractor, DumpManager dumpManager, SettingsHelper settingsHelper) {
         this.applicationScope = coroutineScope;
         this.statusBarStateController = statusBarStateController;
@@ -228,7 +227,6 @@ public final class KeyguardBypassController implements Dumpable, StackScrollAlgo
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.statusbar.phone.KeyguardBypassController$notifyListeners$$inlined$forEachTraced$1] */
     public final void notifyListeners$1$1() {
         ListenersTracing listenersTracing = ListenersTracing.INSTANCE;
         for (final Object obj : this.listeners) {

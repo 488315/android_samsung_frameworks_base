@@ -8,13 +8,11 @@ public final class InvalidForegroundServiceTypeException extends ForegroundServi
     public static final Parcelable.Creator<InvalidForegroundServiceTypeException> CREATOR =
             new Parcelable.Creator<InvalidForegroundServiceTypeException>() { // from class:
                 // android.app.InvalidForegroundServiceTypeException.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InvalidForegroundServiceTypeException createFromParcel(Parcel source) {
                     return new InvalidForegroundServiceTypeException(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InvalidForegroundServiceTypeException[] newArray(int size) {
                     return new InvalidForegroundServiceTypeException[size];

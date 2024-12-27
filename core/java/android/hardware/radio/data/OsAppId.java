@@ -10,7 +10,6 @@ import java.util.StringJoiner;
 public class OsAppId implements Parcelable {
     public static final Parcelable.Creator<OsAppId> CREATOR =
             new Parcelable.Creator<OsAppId>() { // from class: android.hardware.radio.data.OsAppId.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OsAppId createFromParcel(Parcel _aidl_source) {
                     OsAppId _aidl_out = new OsAppId();
@@ -18,7 +17,6 @@ public class OsAppId implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OsAppId[] newArray(int _aidl_size) {
                     return new OsAppId[_aidl_size];

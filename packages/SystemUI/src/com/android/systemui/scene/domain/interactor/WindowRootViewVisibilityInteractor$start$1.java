@@ -15,7 +15,6 @@ final class WindowRootViewVisibilityInteractor$start$1 extends SuspendLambda imp
     int label;
     final /* synthetic */ WindowRootViewVisibilityInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WindowRootViewVisibilityInteractor$start$1(WindowRootViewVisibilityInteractor windowRootViewVisibilityInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = windowRootViewVisibilityInteractor;

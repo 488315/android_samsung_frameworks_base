@@ -14,7 +14,6 @@ final class CommunalViewModel$_isMediaHostVisible$2 extends SuspendLambda implem
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalViewModel$_isMediaHostVisible$2(MediaHost mediaHost, Continuation continuation) {
         super(2, continuation);
         this.$mediaHost = mediaHost;

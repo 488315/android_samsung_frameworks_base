@@ -96,7 +96,6 @@ public class SnapshotDrawerUtils {
             this.mSystemBarBackgroundPainter.setInsets(systemBarInsets);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void drawSnapshot(boolean releaseAfterDraw) {
             Log.v(
                     SnapshotDrawerUtils.TAG,
@@ -267,7 +266,6 @@ public class SnapshotDrawerUtils {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isAspectRatioMatch(Rect frame, int w, int h) {
         return !frame.isEmpty()
                 && Math.abs(
@@ -276,7 +274,6 @@ public class SnapshotDrawerUtils {
                         <= 0.01f;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isAspectRatioMatch(Rect frame1, Rect frame2) {
         return (frame1.isEmpty()
                         || frame2.isEmpty()

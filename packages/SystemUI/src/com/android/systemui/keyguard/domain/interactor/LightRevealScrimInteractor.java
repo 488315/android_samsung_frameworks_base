@@ -101,7 +101,6 @@ public final class LightRevealScrimInteractor {
         TAG = simpleName;
     }
 
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.systemui.keyguard.domain.interactor.LightRevealScrimInteractor$special$$inlined$filter$1] */
     public LightRevealScrimInteractor(KeyguardTransitionInteractor keyguardTransitionInteractor, LightRevealScrimRepository lightRevealScrimRepository, CoroutineScope coroutineScope, ScrimLogger scrimLogger, Lazy lazy) {
         this.transitionInteractor = keyguardTransitionInteractor;
         this.lightRevealScrimRepository = lightRevealScrimRepository;
@@ -142,8 +141,6 @@ public final class LightRevealScrimInteractor {
                     this.this$0 = lightRevealScrimInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

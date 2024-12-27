@@ -30,7 +30,6 @@ public abstract class AsyncTaskLoader<D> extends Loader<D> {
 
         LoadTask() {}
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public D doInBackground(Void... voidArr) {
             try {

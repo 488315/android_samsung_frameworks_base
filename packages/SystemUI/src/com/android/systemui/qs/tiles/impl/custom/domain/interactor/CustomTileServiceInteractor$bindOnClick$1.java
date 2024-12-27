@@ -10,7 +10,6 @@ final class CustomTileServiceInteractor$bindOnClick$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ CustomTileServiceInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTileServiceInteractor$bindOnClick$1(CustomTileServiceInteractor customTileServiceInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = customTileServiceInteractor;

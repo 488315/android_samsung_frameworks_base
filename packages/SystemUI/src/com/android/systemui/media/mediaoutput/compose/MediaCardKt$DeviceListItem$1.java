@@ -16,7 +16,6 @@ final class MediaCardKt$DeviceListItem$1 extends SuspendLambda implements Functi
     final /* synthetic */ MutableFloatState $volume$delegate;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaCardKt$DeviceListItem$1(AudioDevice audioDevice, MutableFloatState mutableFloatState, Continuation continuation) {
         super(2, continuation);
         this.$device = audioDevice;

@@ -216,7 +216,6 @@ final class HidlHalService implements XidlHalService, IHwBinder.DeathRecipient {
         return this.mResultBytes;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$execute$0(boolean ret, ArrayList response) {
         AuthenticatorLog.i(TAG, "ret: " + ret + ", " + (response == null ? -1 : response.size()));
         if (response != null && response.size() > 0) {

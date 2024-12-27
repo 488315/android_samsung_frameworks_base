@@ -268,7 +268,6 @@ public final class KnoxAnalyticsContainer {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:41:0x010f A[Catch: JSONException -> 0x0137, TryCatch #0 {JSONException -> 0x0137, blocks: (B:39:0x0109, B:41:0x010f, B:42:0x0115, B:44:0x011b, B:47:0x013b, B:48:0x014d), top: B:38:0x0109 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -343,7 +342,6 @@ public final class KnoxAnalyticsContainer {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v5, types: [java.io.Serializable, java.lang.String[]] */
     public final void logEvent(Bundle bundle) {
         IKnoxAnalyticsContainerImpl iKnoxAnalyticsContainerImpl = this.ifKnoxAnalyticsContainer;
         if (iKnoxAnalyticsContainerImpl.personaManagerService.getAppSeparationId() > 0) {

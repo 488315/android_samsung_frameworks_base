@@ -65,7 +65,6 @@ public final class DreamingToLockscreenTransitionViewModel implements DeviceEntr
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 dreamOverlayTranslationY(final int i) {
         FromDreamingTransitionInteractor.Companion.getClass();
         return KeyguardTransitionAnimationFlow.FlowBuilder.m1962sharedFlow74qcysc$default(this.transitionAnimation, FromDreamingTransitionInteractor.TO_LOCKSCREEN_DURATION, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.DreamingToLockscreenTransitionViewModel$dreamOverlayTranslationY$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -87,7 +86,6 @@ public final class DreamingToLockscreenTransitionViewModel implements DeviceEntr
         long j = FromDreamingTransitionInteractor.TO_LOCKSCREEN_DURATION;
         Interpolator interpolator = Interpolators.EMPHASIZED;
         Function1 function1 = new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.DreamingToLockscreenTransitionViewModel$lockscreenTranslationY$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

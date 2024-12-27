@@ -33,8 +33,6 @@ public final class ScreenCaptureTile extends SQSTileImpl {
     public boolean mNeedDoScreenCapture;
     public final AnonymousClass1 mReceiver;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v2, types: [android.content.BroadcastReceiver, com.android.systemui.qs.tiles.ScreenCaptureTile$1] */
     public ScreenCaptureTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, BroadcastDispatcher broadcastDispatcher, PanelInteractor panelInteractor) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mNeedDoScreenCapture = false;

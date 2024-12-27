@@ -11,7 +11,6 @@ final class Spaghetti$onError$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ Spaghetti this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public Spaghetti$onError$1(Spaghetti spaghetti, String str, Continuation continuation) {
         super(2, continuation);
         this.this$0 = spaghetti;
@@ -28,7 +27,6 @@ final class Spaghetti$onError$1 extends SuspendLambda implements Function2 {
         return ((Spaghetti$onError$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0054  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

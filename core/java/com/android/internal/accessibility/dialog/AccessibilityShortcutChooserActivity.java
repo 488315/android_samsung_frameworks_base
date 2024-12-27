@@ -58,7 +58,6 @@ public class AccessibilityShortcutChooserActivity extends Activity {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onCreate$0(DialogInterface dialog) {
         updateDialogListeners();
     }
@@ -77,7 +76,6 @@ public class AccessibilityShortcutChooserActivity extends Activity {
                 KEY_ACCESSIBILITY_SHORTCUT_MENU_MODE, this.mTargetAdapter.getShortcutMenuMode());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onTargetSelected(AdapterView<?> parent, View view, int position, long id) {
         AccessibilityTarget target = this.mTargets.get(position);
         if (((target instanceof AccessibilityServiceTarget)
@@ -89,7 +87,6 @@ public class AccessibilityShortcutChooserActivity extends Activity {
         this.mMenuDialog.dismiss();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onTargetChecked(AdapterView<?> parent, View view, int position, long id) {
         AccessibilityTarget target = this.mTargets.get(position);
         if (target instanceof AccessibilityServiceTarget) {
@@ -185,7 +182,6 @@ public class AccessibilityShortcutChooserActivity extends Activity {
         this.mPermissionDialog.show();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showPermissionDialogIfNeeded$1(
             AccessibilityServiceTarget serviceTarget, ShortcutTargetAdapter targetAdapter, View v) {
         serviceTarget.onCheckedChanged(true);
@@ -193,14 +189,12 @@ public class AccessibilityShortcutChooserActivity extends Activity {
         this.mPermissionDialog.dismiss();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showPermissionDialogIfNeeded$2(
             AccessibilityServiceTarget serviceTarget, View v) {
         serviceTarget.onCheckedChanged(false);
         this.mPermissionDialog.dismiss();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showPermissionDialogIfNeeded$3(
             int position,
             Context context,
@@ -215,7 +209,6 @@ public class AccessibilityShortcutChooserActivity extends Activity {
         this.mPermissionDialog.dismiss();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showPermissionDialogIfNeeded$4(DialogInterface dialog) {
         this.mPermissionDialog = null;
     }
@@ -309,12 +302,10 @@ public class AccessibilityShortcutChooserActivity extends Activity {
                                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updateDialogListeners$5(View view) {
         onDoneButtonClicked();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updateDialogListeners$6(View view) {
         onEditButtonClicked();
     }
@@ -364,7 +355,6 @@ public class AccessibilityShortcutChooserActivity extends Activity {
         return dialog;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createMenuDialog$7(DialogInterface dialog) {
         finish();
     }

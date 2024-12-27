@@ -18,7 +18,6 @@ final class GuestUserInteractor$createAndSwitchTo$1 extends SuspendLambda implem
     int label;
     final /* synthetic */ GuestUserInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GuestUserInteractor$createAndSwitchTo$1(GuestUserInteractor guestUserInteractor, Function1 function1, Function0 function0, Function1 function12, Continuation continuation) {
         super(2, continuation);
         this.this$0 = guestUserInteractor;

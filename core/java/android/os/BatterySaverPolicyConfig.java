@@ -14,13 +14,11 @@ public final class BatterySaverPolicyConfig implements Parcelable {
             new Parcelable.Creator<
                     BatterySaverPolicyConfig>() { // from class:
                                                   // android.os.BatterySaverPolicyConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BatterySaverPolicyConfig createFromParcel(Parcel in) {
                     return new BatterySaverPolicyConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BatterySaverPolicyConfig[] newArray(int size) {
                     return new BatterySaverPolicyConfig[size];

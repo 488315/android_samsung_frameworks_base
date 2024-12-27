@@ -144,7 +144,6 @@ public final class SubscreenNotificationDetailAdapter extends SubscreenParentAda
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.statusbar.notification.SubscreenNotificationDetailAdapter$1] */
     private SubscreenNotificationDetailAdapter() {
     }
 

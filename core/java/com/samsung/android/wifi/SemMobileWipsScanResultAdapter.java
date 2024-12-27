@@ -28,7 +28,6 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
             new Parcelable.Creator<
                     SemMobileWipsScanResultAdapter>() { // from class:
                                                         // com.samsung.android.wifi.SemMobileWipsScanResultAdapter.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemMobileWipsScanResultAdapter createFromParcel(Parcel in) {
                     SemMobileWipsWifiSsid wifiSsid = null;
@@ -100,7 +99,6 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
                     return sr;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemMobileWipsScanResultAdapter[] newArray(int size) {
                     return new SemMobileWipsScanResultAdapter[size];
@@ -614,7 +612,6 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
                 new Parcelable.Creator<
                         InformationElement>() { // from class:
                                                 // com.samsung.android.wifi.SemMobileWipsScanResultAdapter.InformationElement.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public InformationElement createFromParcel(Parcel in) {
                         InformationElement informationElement = new InformationElement();
@@ -624,7 +621,6 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
                         return informationElement;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public InformationElement[] newArray(int size) {
                         return new InformationElement[size];

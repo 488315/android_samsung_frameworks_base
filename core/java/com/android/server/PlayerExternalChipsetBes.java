@@ -77,7 +77,6 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
         return this.mCurrentRssi;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public byte[] queryInfo() {
         int ret;
         byte[] buffer = new byte[12];

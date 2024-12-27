@@ -12,7 +12,6 @@ final class CustomizationProvider$deleteSelection$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ CustomizationProvider this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomizationProvider$deleteSelection$1(CustomizationProvider customizationProvider, Continuation continuation) {
         super(continuation);
         this.this$0 = customizationProvider;

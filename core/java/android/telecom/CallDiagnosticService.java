@@ -58,7 +58,6 @@ public abstract class CallDiagnosticService extends Service {
     /* renamed from: onRemoveCallDiagnostics, reason: merged with bridge method [inline-methods] */
     public abstract void lambda$handleCallRemoved$2(CallDiagnostics callDiagnostics);
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class CallDiagnosticServiceBinder extends ICallDiagnosticService.Stub {
         private CallDiagnosticServiceBinder() {}
 
@@ -82,7 +81,6 @@ public abstract class CallDiagnosticService extends Service {
             CallDiagnosticService.this.handleCallRemoved(callId);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$updateCallAudioState$0(CallAudioState callAudioState) {
             CallDiagnosticService.this.onCallAudioStateChanged(callAudioState);
         }
@@ -137,12 +135,10 @@ public abstract class CallDiagnosticService extends Service {
         return new HandlerExecutor(Handler.createAsync(getMainLooper()));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleSetAdapter(ICallDiagnosticServiceAdapter adapter) {
         this.mAdapter = adapter;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleCallAdded(ParcelableCall parcelableCall) {
         final String telecomCallId = parcelableCall.getId();
         Log.i(this, "handleCallAdded: callId=%s - added", telecomCallId);
@@ -162,7 +158,6 @@ public abstract class CallDiagnosticService extends Service {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$handleCallAdded$0(
             Call.Details newCallDetails, String telecomCallId) {
         CallDiagnostics callDiagnostics = onInitializeCallDiagnostics(newCallDetails);
@@ -176,7 +171,6 @@ public abstract class CallDiagnosticService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleCallUpdated(ParcelableCall parcelableCall) {
         String telecomCallId = parcelableCall.getId();
         Log.i(this, "handleCallUpdated: callId=%s - updated", telecomCallId);
@@ -200,7 +194,6 @@ public abstract class CallDiagnosticService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleCallRemoved(String telecomCallId) {
         final CallDiagnostics callDiagnostics;
         Log.i(this, "handleCallRemoved: callId=%s - removed", telecomCallId);
@@ -228,7 +221,6 @@ public abstract class CallDiagnosticService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleReceivedD2DMessage(String callId, final int message, final int value) {
         final CallDiagnostics callDiagnostics;
         Log.i(
@@ -254,7 +246,6 @@ public abstract class CallDiagnosticService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleCallDisconnected(String callId, DisconnectCause disconnectCause) {
         CallDiagnostics callDiagnostics;
         CharSequence message;
@@ -282,7 +273,6 @@ public abstract class CallDiagnosticService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleBluetoothCallQualityReport(final BluetoothCallQualityReport qualityReport) {
         Log.i(this, "handleBluetoothCallQualityReport; report=%s", qualityReport);
         getExecutor()
@@ -297,7 +287,6 @@ public abstract class CallDiagnosticService extends Service {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleCallQualityChanged(String callId, CallQuality callQuality) {
         CallDiagnostics callDiagnostics;
         Log.i(this, "handleCallQualityChanged; call=%s, cq=%s", callId, callQuality);
@@ -309,7 +298,6 @@ public abstract class CallDiagnosticService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleSendDeviceToDeviceMessage(
             CallDiagnostics callDiagnostics, int message, int value) {
         String callId = callDiagnostics.getCallId();
@@ -332,7 +320,6 @@ public abstract class CallDiagnosticService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDisplayDiagnosticMessage(
             CallDiagnostics callDiagnostics, int messageId, CharSequence message) {
         String callId = callDiagnostics.getCallId();
@@ -355,7 +342,6 @@ public abstract class CallDiagnosticService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleClearDiagnosticMessage(CallDiagnostics callDiagnostics, int messageId) {
         String callId = callDiagnostics.getCallId();
         try {

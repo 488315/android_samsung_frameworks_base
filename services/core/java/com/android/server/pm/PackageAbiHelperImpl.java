@@ -207,7 +207,6 @@ public final class PackageAbiHelperImpl implements PackageAbiHelper {
 
        throw new com.android.server.pm.PackageManagerException(-110, "Shared library with native libs must be multiarch");
     */
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.server.pm.PackageAbiHelper
     /*
         Code decompiled incorrectly, please refer to instructions dump.

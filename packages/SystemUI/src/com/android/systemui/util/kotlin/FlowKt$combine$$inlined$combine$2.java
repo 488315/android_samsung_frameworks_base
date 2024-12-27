@@ -24,7 +24,6 @@ public final class FlowKt$combine$$inlined$combine$2 implements Flow {
     public final class AnonymousClass2 extends Lambda implements Function0 {
         final /* synthetic */ Flow[] $flows;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(Flow[] flowArr) {
             super(0);
             this.$flows = flowArr;
@@ -43,13 +42,11 @@ public final class FlowKt$combine$$inlined$combine$2 implements Flow {
         /* synthetic */ Object L$1;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(Continuation continuation, Function9 function9) {
             super(3, continuation);
             this.$transform$inlined = function9;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         public final Object invokeSuspend(Object obj) {
             FlowCollector flowCollector;
@@ -97,7 +94,6 @@ public final class FlowKt$combine$$inlined$combine$2 implements Flow {
             return Unit.INSTANCE;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final Object invokeSuspend$$forInline(Object obj) {
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             Object[] objArr = (Object[]) this.L$1;

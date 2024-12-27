@@ -11,7 +11,6 @@ public class IInputDeviceBatteryState implements Parcelable {
     public static final Parcelable.Creator<IInputDeviceBatteryState> CREATOR =
             new Parcelable.Creator<IInputDeviceBatteryState>() { // from class:
                 // android.hardware.input.IInputDeviceBatteryState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IInputDeviceBatteryState createFromParcel(Parcel _aidl_source) {
                     IInputDeviceBatteryState _aidl_out = new IInputDeviceBatteryState();
@@ -19,7 +18,6 @@ public class IInputDeviceBatteryState implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IInputDeviceBatteryState[] newArray(int _aidl_size) {
                     return new IInputDeviceBatteryState[_aidl_size];

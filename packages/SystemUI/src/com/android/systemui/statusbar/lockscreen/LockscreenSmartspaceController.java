@@ -137,8 +137,6 @@ public final class LockscreenSmartspaceController implements Dumpable {
             this.keyguardUpdateMonitor = keyguardUpdateMonitor;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v1, types: [com.android.keyguard.KeyguardUpdateMonitorCallback, com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$SmartspaceTimeChangedDelegate$register$1] */
         @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.TimeChangedDelegate
         public final void register(final Runnable runnable) {
             if (this.keyguardUpdateMonitorCallback != null) {
@@ -166,15 +164,6 @@ public final class LockscreenSmartspaceController implements Dumpable {
         new Companion(null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v23, types: [com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$stateChangeListener$1] */
-    /* JADX WARN: Type inference failed for: r2v24, types: [com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$sessionListener$1] */
-    /* JADX WARN: Type inference failed for: r2v25, types: [com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$userTrackerCallback$1] */
-    /* JADX WARN: Type inference failed for: r2v26, types: [com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$settingsObserver$1] */
-    /* JADX WARN: Type inference failed for: r2v27, types: [com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$configChangeListener$1] */
-    /* JADX WARN: Type inference failed for: r2v29, types: [com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$deviceProvisionedListener$1, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r3v11, types: [com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$bypassStateChangedListener$1] */
-    /* JADX WARN: Type inference failed for: r3v12, types: [com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$wakefulnessLifecycleObserver$1] */
     public LockscreenSmartspaceController(Context context, FeatureFlags featureFlags, SmartspaceManager smartspaceManager, ActivityStarter activityStarter, FalsingManager falsingManager, SystemClock systemClock, SecureSettings secureSettings, UserTracker userTracker, ContentResolver contentResolver, ConfigurationController configurationController, StatusBarStateController statusBarStateController, DeviceProvisionedController deviceProvisionedController, KeyguardBypassController keyguardBypassController, KeyguardUpdateMonitor keyguardUpdateMonitor, WakefulnessLifecycle wakefulnessLifecycle, SmartspaceViewModel.Factory factory, DumpManager dumpManager, Execution execution, Executor executor, Executor executor2, final Handler handler, Optional<BcSmartspaceDataPlugin> optional, Optional<BcSmartspaceDataPlugin> optional2, Optional<BcSmartspaceDataPlugin> optional3, Optional<BcSmartspaceConfigPlugin> optional4) {
         this.context = context;
         this.smartspaceManager = smartspaceManager;
@@ -199,7 +188,6 @@ public final class LockscreenSmartspaceController implements Dumpable {
         this.configPlugin = optional4.orElse(null);
         Flags.INSTANCE.getClass();
         this.stateChangeListener = new View.OnAttachStateChangeListener() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$stateChangeListener$1
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewAttachedToWindow(View view) {
                 BcSmartspaceDataPlugin.SmartspaceView smartspaceView = (BcSmartspaceDataPlugin.SmartspaceView) view;
@@ -217,7 +205,6 @@ public final class LockscreenSmartspaceController implements Dumpable {
                 LockscreenSmartspaceController.this.getClass();
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewDetachedFromWindow(View view) {
                 BcSmartspaceDataPlugin.SmartspaceView smartspaceView = (BcSmartspaceDataPlugin.SmartspaceView) view;
@@ -269,7 +256,6 @@ public final class LockscreenSmartspaceController implements Dumpable {
                     if (baseAction != null && (extras = baseAction.getExtras()) != null) {
                         final LockscreenSmartspaceController lockscreenSmartspaceController = LockscreenSmartspaceController.this;
                         weatherData = WeatherData.Companion.fromBundle(extras, new Function1() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$sessionListener$1$weatherData$1$1
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(1);
                             }
@@ -428,7 +414,6 @@ public final class LockscreenSmartspaceController implements Dumpable {
         return buildView;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final View buildView(ViewGroup viewGroup, BcSmartspaceDataPlugin bcSmartspaceDataPlugin, BcSmartspaceConfigPlugin bcSmartspaceConfigPlugin) {
         if (bcSmartspaceDataPlugin == null) {
             return null;

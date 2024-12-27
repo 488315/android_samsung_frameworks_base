@@ -86,7 +86,6 @@ public final class SurfaceAnimationRunner {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.wm.SurfaceAnimationRunner$$ExternalSyntheticLambda0] */
     public SurfaceAnimationRunner(
             AnimationHandler.AnimationFrameCallbackProvider animationFrameCallbackProvider,
             AnimatorFactory animatorFactory,

@@ -92,7 +92,6 @@ public final class SquigglyProgress extends Drawable {
         float f4 = (-this.phaseOffset) - (this.waveLength / 2.0f);
         float f5 = this.transitionEnabled ? width : f3;
         Function2 function2 = new Function2() { // from class: com.android.systemui.media.controls.ui.drawable.SquigglyProgress$drawTraced$computeAmplitude$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
             }

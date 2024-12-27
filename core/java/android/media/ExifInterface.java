@@ -872,7 +872,6 @@ public class ExifInterface {
                     + NavigationBarInflaterView.KEY_CODE_END;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Object getValue(ByteOrder byteOrder) {
             int ch;
             try {
@@ -1245,7 +1244,6 @@ public class ExifInterface {
         loadAttributes(inputStream);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static boolean isSupportedMimeType(String mimeType) {
         char c;
         if (mimeType == null) {
@@ -1826,7 +1824,6 @@ public class ExifInterface {
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public void saveAttributes() throws IOException {
         if (!isSupportedFormatForSavingAttributes()) {
             throw new IOException(
@@ -3394,8 +3391,6 @@ public class ExifInterface {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0150  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0155  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -746,60 +746,51 @@ public abstract class BatteryConsumer {
             return setConsumedPower(componentId, componentPower, 1);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public T setConsumedPower(int componentId, double componentPower, int powerModel) {
             this.mPowerComponentsBuilder.setConsumedPower(
                     getKey(componentId, 0), componentPower, powerModel);
             return this;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public T addConsumedPower(int componentId, double componentPower, int powerModel) {
             this.mPowerComponentsBuilder.addConsumedPower(
                     getKey(componentId, 0), componentPower, powerModel);
             return this;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public T setConsumedPower(Key key, double componentPower, int powerModel) {
             this.mPowerComponentsBuilder.setConsumedPower(key, componentPower, powerModel);
             return this;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public T addConsumedPower(Key key, double componentPower, int powerModel) {
             this.mPowerComponentsBuilder.addConsumedPower(key, componentPower, powerModel);
             return this;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public T setConsumedPowerForCustomComponent(int componentId, double componentPower) {
             this.mPowerComponentsBuilder.setConsumedPowerForCustomComponent(
                     componentId, componentPower);
             return this;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public T addConsumedPowerForCustomComponent(int componentId, double componentPower) {
             this.mPowerComponentsBuilder.addConsumedPowerForCustomComponent(
                     componentId, componentPower);
             return this;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public T setUsageDurationMillis(int componentId, long componentUsageTimeMillis) {
             this.mPowerComponentsBuilder.setUsageDurationMillis(
                     getKey(componentId, 0), componentUsageTimeMillis);
             return this;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public T setUsageDurationMillis(Key key, long componentUsageTimeMillis) {
             this.mPowerComponentsBuilder.setUsageDurationMillis(key, componentUsageTimeMillis);
             return this;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public T setUsageDurationForCustomComponentMillis(
                 int componentId, long componentUsageTimeMillis) {
             this.mPowerComponentsBuilder.setUsageDurationForCustomComponentMillis(

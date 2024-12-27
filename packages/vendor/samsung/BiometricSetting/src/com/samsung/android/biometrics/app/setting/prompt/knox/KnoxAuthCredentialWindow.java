@@ -22,7 +22,6 @@ public final class KnoxAuthCredentialWindow extends FocusableWindow {
     public final PromptConfig mPromptConfig;
     public AnonymousClass1 mScreenOffBR;
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x007d A[Catch: Exception -> 0x0039, TryCatch #0 {Exception -> 0x0039, blocks: (B:3:0x0013, B:11:0x0033, B:12:0x003b, B:13:0x004c, B:15:0x004d, B:16:0x0064, B:18:0x007d, B:19:0x0084, B:21:0x0059), top: B:2:0x0013 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -120,7 +119,6 @@ public final class KnoxAuthCredentialWindow extends FocusableWindow {
                     + " com.samsung.android.biometrics.app.setting.prompt.knox.KnoxSysUiClientHelper):void");
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.samsung.android.biometrics.app.setting.prompt.knox.KnoxAuthCredentialWindow$1] */
     @Override // com.samsung.android.biometrics.app.setting.FocusableWindow,
               // com.samsung.android.biometrics.app.setting.SysUiWindow
     public final void addView() {

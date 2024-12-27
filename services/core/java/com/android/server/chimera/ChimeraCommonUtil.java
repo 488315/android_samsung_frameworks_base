@@ -56,10 +56,8 @@ public abstract class ChimeraCommonUtil {
     }
 
     public enum PsiFileType {
-        /* JADX INFO: Fake field, exist only in values array */
         EF0("/proc/pressure/io"),
         MEMORY("/proc/pressure/memory"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF29("/proc/pressure/cpu");
 
         private String mPath;

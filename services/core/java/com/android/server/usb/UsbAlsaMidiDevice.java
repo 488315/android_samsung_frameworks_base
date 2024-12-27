@@ -240,7 +240,6 @@ public final class UsbAlsaMidiDevice implements Closeable {
         final MidiReceiver[] outputPortReceivers = this.mServer.getOutputPortReceivers();
         if (i > 0) {
             new Thread() { // from class: com.android.server.usb.UsbAlsaMidiDevice.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super("UsbAlsaMidiDevice input thread");
                 }

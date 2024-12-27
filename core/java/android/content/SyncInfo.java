@@ -12,13 +12,11 @@ public class SyncInfo implements Parcelable {
     private static final Account REDACTED_ACCOUNT = new Account("*****", "*****");
     public static final Parcelable.Creator<SyncInfo> CREATOR =
             new Parcelable.Creator<SyncInfo>() { // from class: android.content.SyncInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncInfo createFromParcel(Parcel in) {
                     return new SyncInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncInfo[] newArray(int size) {
                     return new SyncInfo[size];

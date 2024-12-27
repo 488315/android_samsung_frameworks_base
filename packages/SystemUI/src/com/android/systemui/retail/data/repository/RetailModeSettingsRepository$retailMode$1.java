@@ -18,7 +18,6 @@ final class RetailModeSettingsRepository$retailMode$1 extends SuspendLambda impl
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RetailModeSettingsRepository$retailMode$1(GlobalSettings globalSettings, Continuation continuation) {
         super(2, continuation);
         this.$globalSettings = globalSettings;
@@ -36,8 +35,6 @@ final class RetailModeSettingsRepository$retailMode$1 extends SuspendLambda impl
         return ((RetailModeSettingsRepository$retailMode$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.database.ContentObserver, com.android.systemui.retail.data.repository.RetailModeSettingsRepository$retailMode$1$observer$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -58,7 +55,6 @@ final class RetailModeSettingsRepository$retailMode$1 extends SuspendLambda impl
             this.$globalSettings.registerContentObserverSync("device_demo_mode", (ContentObserver) r1);
             final GlobalSettings globalSettings = this.$globalSettings;
             Function0 function0 = new Function0() { // from class: com.android.systemui.retail.data.repository.RetailModeSettingsRepository$retailMode$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

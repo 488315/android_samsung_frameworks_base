@@ -314,13 +314,6 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes
         return this.mSeekFreq;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00a1 A[Catch: all -> 0x00f0, TryCatch #0 {, blocks: (B:6:0x000c, B:7:0x0019, B:9:0x001d, B:10:0x0022, B:12:0x002a, B:17:0x0032, B:19:0x0036, B:20:0x003d, B:21:0x009c, B:23:0x00a1, B:26:0x00ac, B:28:0x00b0, B:29:0x00b3, B:32:0x00c7, B:34:0x00d4, B:36:0x00da, B:37:0x00e2, B:40:0x00e8, B:41:0x00eb, B:45:0x00e0, B:50:0x0011), top: B:4:0x000a }] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00c0  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00d4 A[Catch: all -> 0x00f0, TryCatch #0 {, blocks: (B:6:0x000c, B:7:0x0019, B:9:0x001d, B:10:0x0022, B:12:0x002a, B:17:0x0032, B:19:0x0036, B:20:0x003d, B:21:0x009c, B:23:0x00a1, B:26:0x00ac, B:28:0x00b0, B:29:0x00b3, B:32:0x00c7, B:34:0x00d4, B:36:0x00da, B:37:0x00e2, B:40:0x00e8, B:41:0x00eb, B:45:0x00e0, B:50:0x0011), top: B:4:0x000a }] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00e6  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00e0 A[Catch: all -> 0x00f0, TryCatch #0 {, blocks: (B:6:0x000c, B:7:0x0019, B:9:0x001d, B:10:0x0022, B:12:0x002a, B:17:0x0032, B:19:0x0036, B:20:0x003d, B:21:0x009c, B:23:0x00a1, B:26:0x00ac, B:28:0x00b0, B:29:0x00b3, B:32:0x00c7, B:34:0x00d4, B:36:0x00da, B:37:0x00e2, B:40:0x00e8, B:41:0x00eb, B:45:0x00e0, B:50:0x0011), top: B:4:0x000a }] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00c4  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00b3 A[EDGE_INSN: B:48:0x00b3->B:29:0x00b3 BREAK  A[LOOP:0: B:21:0x009c->B:47:?], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

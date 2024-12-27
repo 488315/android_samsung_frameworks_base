@@ -306,7 +306,6 @@ public class Keyboard {
         loadKeyboard(context, context.getResources().getXml(xmlLayoutResId));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public Keyboard(
             Context context,
             int layoutTemplateResId,

@@ -13,13 +13,11 @@ public final class TvContentRatingSystemInfo implements Parcelable {
             new Parcelable.Creator<
                     TvContentRatingSystemInfo>() { // from class:
                                                    // android.media.tv.TvContentRatingSystemInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvContentRatingSystemInfo createFromParcel(Parcel in) {
                     return new TvContentRatingSystemInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvContentRatingSystemInfo[] newArray(int size) {
                     return new TvContentRatingSystemInfo[size];

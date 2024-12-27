@@ -75,8 +75,6 @@ public final class LockScreenFilter implements IFilter {
         return (str3 == null || !str3.equals(str)) ? 0 : 13;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0036 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0043  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -138,8 +136,6 @@ public final class LockScreenFilter implements IFilter {
                     + " com.android.server.am.mars.filter.filter.LockScreenFilter.getLockClockFace():void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0036 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0043  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -201,8 +197,6 @@ public final class LockScreenFilter implements IFilter {
                     + " com.android.server.am.mars.filter.filter.LockScreenFilter.getLockClockFaceSub():void");
     }
 
-    /* JADX WARN: Type inference failed for: r4v8, types: [com.android.server.am.mars.filter.filter.LockScreenFilter$1] */
-    /* JADX WARN: Type inference failed for: r4v9, types: [com.android.server.am.mars.filter.filter.LockScreenFilter$1] */
     @Override // com.android.server.am.mars.filter.IFilter
     public final void init(Context context) {
         this.mContext = context;

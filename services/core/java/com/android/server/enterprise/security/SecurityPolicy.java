@@ -239,7 +239,6 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.server.enterprise.security.SecurityPolicy$1] */
     public SecurityPolicy(Context context) {
         Injector injector = new Injector(context);
         this.mMediaFormatRet = false;
@@ -547,11 +546,6 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0162 A[Catch: all -> 0x011b, TRY_ENTER, TRY_LEAVE, TryCatch #20 {all -> 0x011b, blocks: (B:35:0x0112, B:38:0x0162, B:54:0x0195, B:51:0x0191, B:52:0x0194, B:57:0x0198, B:59:0x019c, B:60:0x01a7, B:62:0x01ab, B:63:0x01b5, B:56:0x0168, B:43:0x0173, B:48:0x017c), top: B:34:0x0112, inners: #8 }] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x019c A[Catch: all -> 0x011b, TryCatch #20 {all -> 0x011b, blocks: (B:35:0x0112, B:38:0x0162, B:54:0x0195, B:51:0x0191, B:52:0x0194, B:57:0x0198, B:59:0x019c, B:60:0x01a7, B:62:0x01ab, B:63:0x01b5, B:56:0x0168, B:43:0x0173, B:48:0x017c), top: B:34:0x0112, inners: #8 }] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x01ab A[Catch: all -> 0x011b, TryCatch #20 {all -> 0x011b, blocks: (B:35:0x0112, B:38:0x0162, B:54:0x0195, B:51:0x0191, B:52:0x0194, B:57:0x0198, B:59:0x019c, B:60:0x01a7, B:62:0x01ab, B:63:0x01b5, B:56:0x0168, B:43:0x0173, B:48:0x017c), top: B:34:0x0112, inners: #8 }] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x01c3  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x01c8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1693,9 +1687,6 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00a9  */
-    /* JADX WARN: Type inference failed for: r6v5, types: [java.util.List] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2087,15 +2078,10 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub
         Log.d("SecurityPolicy", "systemReady()");
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(20:0|1|(4:4|(3:15|16|17)|18|2)|23|24|(6:(8:55|56|57|(8:37|38|(1:42)|43|(1:45)|46|(1:48)(1:51)|49)|30|(1:33)|34|35)(2:60|61)|53|30|(1:33)|34|35)|27|(0)|37|38|(2:40|42)|43|(0)|46|(0)(0)|49|30|(0)|34|35) */
     /* JADX WARN: Code restructure failed: missing block: B:52:0x008c, code lost:
 
        r1 = r5;
     */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0113 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0093 A[Catch: Exception -> 0x008c, TryCatch #1 {Exception -> 0x008c, blocks: (B:38:0x006c, B:40:0x007b, B:42:0x0088, B:43:0x008f, B:45:0x0093, B:46:0x009a, B:48:0x00cc, B:49:0x00d2), top: B:37:0x006c }] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00cc A[Catch: Exception -> 0x008c, TryCatch #1 {Exception -> 0x008c, blocks: (B:38:0x006c, B:40:0x007b, B:42:0x0088, B:43:0x008f, B:45:0x0093, B:46:0x009a, B:48:0x00cc, B:49:0x00d2), top: B:37:0x006c }] */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00cf  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

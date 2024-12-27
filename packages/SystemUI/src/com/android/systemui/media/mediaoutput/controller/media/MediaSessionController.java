@@ -65,7 +65,6 @@ public final class MediaSessionController extends SessionController {
             int label;
             final /* synthetic */ MediaSessionController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C01491(MediaSessionController mediaSessionController, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = mediaSessionController;
@@ -169,7 +168,6 @@ public final class MediaSessionController extends SessionController {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r2v7, types: [com.android.systemui.media.mediaoutput.controller.media.MediaSessionController$callback$1] */
     public MediaSessionController(final Context context, MediaController mediaController) {
         super(context, mediaController.getSessionToken());
         ImageVector imageVector;
@@ -201,7 +199,6 @@ public final class MediaSessionController extends SessionController {
             }
         });
         this.appName$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.media.MediaSessionController$appName$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -212,7 +209,6 @@ public final class MediaSessionController extends SessionController {
             }
         });
         this.resources$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.media.MediaSessionController$resources$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -310,9 +306,6 @@ public final class MediaSessionController extends SessionController {
         MediaOutputLogging.sendEventCDLog(screenId, event, mapOf);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v5, types: [T, android.media.MediaMetadata] */
-    /* JADX WARN: Type inference failed for: r10v7, types: [T, android.media.session.PlaybackState] */
     public static void update$default(MediaSessionController mediaSessionController, MediaMetadata mediaMetadata, PlaybackState playbackState, Pair pair, Pair pair2, int i) {
         T t = mediaMetadata;
         if ((i & 1) != 0) {

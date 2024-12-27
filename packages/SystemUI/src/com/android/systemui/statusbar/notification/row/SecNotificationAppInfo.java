@@ -113,7 +113,6 @@ public class SecNotificationAppInfo extends FrameLayout implements NotificationG
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.notification.row.SecNotificationAppInfo$$ExternalSyntheticLambda1] */
     public SecNotificationAppInfo(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mSkipPost = false;

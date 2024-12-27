@@ -17,13 +17,11 @@ public final class NanoAppMessage implements Parcelable {
     public static final Parcelable.Creator<NanoAppMessage> CREATOR =
             new Parcelable.Creator<
                     NanoAppMessage>() { // from class: android.hardware.location.NanoAppMessage.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoAppMessage createFromParcel(Parcel in) {
                     return new NanoAppMessage(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoAppMessage[] newArray(int size) {
                     return new NanoAppMessage[size];

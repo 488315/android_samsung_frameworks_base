@@ -13,13 +13,11 @@ public final class AssociatedDevice implements Parcelable {
     public static final Parcelable.Creator<AssociatedDevice> CREATOR =
             new Parcelable.Creator<
                     AssociatedDevice>() { // from class: android.companion.AssociatedDevice.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AssociatedDevice[] newArray(int size) {
                     return new AssociatedDevice[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AssociatedDevice createFromParcel(Parcel in) {
                     return new AssociatedDevice(in);

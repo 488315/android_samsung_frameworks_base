@@ -115,7 +115,6 @@ public class SemGridSortAnimator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startFadeInTranslateAnim() {
         int childCount = this.mGridView.getChildCount();
         int columnCount = this.mGridView.getNumColumns();

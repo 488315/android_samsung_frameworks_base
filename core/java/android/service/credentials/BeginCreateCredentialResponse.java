@@ -17,13 +17,11 @@ public final class BeginCreateCredentialResponse implements Parcelable {
             new Parcelable.Creator<
                     BeginCreateCredentialResponse>() { // from class:
                                                        // android.service.credentials.BeginCreateCredentialResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BeginCreateCredentialResponse createFromParcel(Parcel in) {
                     return new BeginCreateCredentialResponse(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BeginCreateCredentialResponse[] newArray(int size) {
                     return new BeginCreateCredentialResponse[size];

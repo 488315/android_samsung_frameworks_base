@@ -18,13 +18,11 @@ public class ActivityResultItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<ActivityResultItem> CREATOR =
             new Parcelable.Creator<ActivityResultItem>() { // from class:
                 // android.app.servertransaction.ActivityResultItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityResultItem createFromParcel(Parcel in) {
                     return new ActivityResultItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityResultItem[] newArray(int size) {
                     return new ActivityResultItem[size];

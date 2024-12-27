@@ -23,8 +23,6 @@ public final class SysUIKeyEventHandler {
         this.keyguardKeyEventInteractor = keyguardKeyEventInteractor;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x007a A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x007b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

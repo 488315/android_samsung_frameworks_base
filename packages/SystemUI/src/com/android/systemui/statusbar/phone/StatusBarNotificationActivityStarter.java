@@ -387,8 +387,6 @@ public final class StatusBarNotificationActivityStarter implements NotificationA
                 logBuffer2.commit(obtain2);
                 final ExpandableNotificationRow expandableNotificationRow2 = expandableNotificationRow;
                 Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.StatusBarNotificationActivityStarter$$ExternalSyntheticLambda3
-                    /* JADX WARN: Can't wrap try/catch for region: R(25:65|(1:66)|(1:120)(2:69|(2:71|72)(22:119|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|(1:97)))|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|(2:95|97)) */
-                    /* JADX WARN: Can't wrap try/catch for region: R(25:65|66|(1:120)(2:69|(2:71|72)(22:119|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|(1:97)))|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|(2:95|97)) */
                     /* JADX WARN: Code restructure failed: missing block: B:100:0x020c, code lost:
                     
                         r4 = r25;
@@ -466,10 +464,6 @@ public final class StatusBarNotificationActivityStarter implements NotificationA
                     
                         r0 = e;
                      */
-                    /* JADX WARN: Removed duplicated region for block: B:50:0x0237 A[ADDED_TO_REGION] */
-                    /* JADX WARN: Removed duplicated region for block: B:53:0x024e  */
-                    /* JADX WARN: Removed duplicated region for block: B:61:0x027e  */
-                    /* JADX WARN: Removed duplicated region for block: B:95:0x0228  */
                     @Override // java.lang.Runnable
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -500,8 +494,6 @@ public final class StatusBarNotificationActivityStarter implements NotificationA
         });
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00f6  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00fc  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

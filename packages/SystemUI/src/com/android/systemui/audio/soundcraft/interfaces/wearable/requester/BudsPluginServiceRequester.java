@@ -59,7 +59,6 @@ public abstract class BudsPluginServiceRequester {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.audio.soundcraft.interfaces.wearable.requester.BudsPluginServiceRequester$serviceConnection$1] */
     public BudsPluginServiceRequester(Context context, String str) {
         this.context = context;
         this.budsPluginPackageName = str;

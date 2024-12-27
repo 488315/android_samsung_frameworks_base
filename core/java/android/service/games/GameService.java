@@ -81,7 +81,6 @@ public class GameService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0() {
         Log.w(TAG, "System service binder died. Shutting down");
         Handler.getMain()
@@ -98,7 +97,6 @@ public class GameService extends Service {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doOnConnected(IGameServiceController gameServiceController) {
         this.mGameManagerService =
                 IGameManagerService.Stub.asInterface(

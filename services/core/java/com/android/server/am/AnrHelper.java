@@ -145,8 +145,6 @@ public final class AnrHelper {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.am.AnrHelper$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.am.AnrHelper$$ExternalSyntheticLambda0] */
     static {
         TimeUnit timeUnit = TimeUnit.MINUTES;
         CONSECUTIVE_ANR_TIME_MS = timeUnit.toMillis(2L);
@@ -181,7 +179,6 @@ public final class AnrHelper {
                 };
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -239,7 +236,6 @@ public final class AnrHelper {
         appNotResponding(processRecord, null, null, null, null, false, timeoutRecord, false);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:43:0x012e A[Catch: all -> 0x011e, TRY_LEAVE, TryCatch #3 {all -> 0x011e, blocks: (B:52:0x010d, B:54:0x0113, B:41:0x0124, B:43:0x012e), top: B:51:0x010d }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

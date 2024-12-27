@@ -765,7 +765,6 @@ final class CodedInputStreamReader implements Reader {
         readMessageList(target, schema, extensionRegistry);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.framework.protobuf.Reader
     public <T> void readMessageList(
             List<T> list, Schema<T> schema, ExtensionRegistryLite extensionRegistry)
@@ -795,7 +794,6 @@ final class CodedInputStreamReader implements Reader {
         readGroupList(target, schema, extensionRegistry);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.framework.protobuf.Reader
     @Deprecated
     public <T> void readGroupList(
@@ -1184,7 +1182,6 @@ final class CodedInputStreamReader implements Reader {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.framework.protobuf.Reader
     public <K, V> void readMap(
             Map<K, V> map,

@@ -27,7 +27,6 @@ public final class VerifyCredentialResponse implements Parcelable {
             new Parcelable.Creator<
                     VerifyCredentialResponse>() { // from class:
                                                   // com.android.internal.widget.VerifyCredentialResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VerifyCredentialResponse createFromParcel(Parcel source) {
                     int responseCode = source.readInt();
@@ -38,7 +37,6 @@ public final class VerifyCredentialResponse implements Parcelable {
                             responseCode, timeout, gatekeeperHAT, gatekeeperPasswordHandle);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VerifyCredentialResponse[] newArray(int size) {
                     return new VerifyCredentialResponse[size];

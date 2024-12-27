@@ -107,7 +107,6 @@ public final class KeyguardPreviewRenderer {
         final /* synthetic */ DisplayManager $displayManager;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(DisplayManager displayManager, Continuation continuation) {
             super(2, continuation);
             this.$displayManager = displayManager;
@@ -209,10 +208,6 @@ public final class KeyguardPreviewRenderer {
         BuildersKt.runBlocking(coroutineDispatcher, new AnonymousClass2(displayManager, null));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00a3  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0042  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -324,8 +319,6 @@ public final class KeyguardPreviewRenderer {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer.access$updateClockAppearance(com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer, com.android.systemui.plugins.clocks.ClockController, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

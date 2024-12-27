@@ -217,7 +217,6 @@ public final class MediaHost implements MediaHostState {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.media.controls.ui.view.MediaHost$listener$1] */
     public MediaHost(MediaHostStateHolder mediaHostStateHolder, MediaHierarchyManager mediaHierarchyManager, MediaDataManager mediaDataManager, MediaHostStatesManager mediaHostStatesManager, MediaCarouselController mediaCarouselController) {
         this.state = mediaHostStateHolder;
         this.mediaHierarchyManager = mediaHierarchyManager;
@@ -360,7 +359,6 @@ public final class MediaHost implements MediaHostState {
             }
         });
         this.state.changedListener = new Function0() { // from class: com.android.systemui.media.controls.ui.view.MediaHost$init$3
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -423,11 +421,6 @@ public final class MediaHost implements MediaHostState {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0046  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0055  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0079 A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0038  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -206,8 +206,6 @@ public final class WifiDisplayDeviceController extends DeviceController {
                             this.this$0 = wifiDisplayDeviceController;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
@@ -314,8 +312,6 @@ public final class WifiDisplayDeviceController extends DeviceController {
         BuildersKt.launch$default(getControllerScope(), null, null, new AnonymousClass3(null), 3);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0036  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

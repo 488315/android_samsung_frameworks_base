@@ -25,7 +25,6 @@ public class ScreenCapture {
     private static final int SCREENSHOT_WAIT_TIME_S = Build.HW_TIMEOUT_MULTIPLIER * 4;
     private static final String TAG = "ScreenCapture";
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long getNativeListenerFinalizer();
 
     private static native int nativeCaptureDisplay(DisplayCaptureArgs displayCaptureArgs, long j);
@@ -33,14 +32,11 @@ public class ScreenCapture {
     private static native int nativeCaptureLayers(
             LayerCaptureArgs layerCaptureArgs, long j, boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeCreateScreenCaptureListener(
             ObjIntConsumer<ScreenshotHardwareBuffer> objIntConsumer);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeReadListenerFromParcel(Parcel parcel);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeWriteListenerToParcel(long j, Parcel parcel);
 
     public static int captureDisplay(
@@ -184,13 +180,11 @@ public class ScreenCapture {
         public static final Parcelable.Creator<CaptureArgs> CREATOR =
                 new Parcelable.Creator<
                         CaptureArgs>() { // from class: android.window.ScreenCapture.CaptureArgs.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CaptureArgs createFromParcel(Parcel in) {
                         return new CaptureArgs(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CaptureArgs[] newArray(int size) {
                         return new CaptureArgs[size];
@@ -443,7 +437,6 @@ public class ScreenCapture {
                 return this;
             }
 
-            /* JADX INFO: Access modifiers changed from: package-private */
             @Override // android.window.ScreenCapture.CaptureArgs.Builder
             public Builder getThis() {
                 return this;
@@ -500,7 +493,6 @@ public class ScreenCapture {
                 return this;
             }
 
-            /* JADX INFO: Access modifiers changed from: package-private */
             @Override // android.window.ScreenCapture.CaptureArgs.Builder
             public Builder getThis() {
                 return this;
@@ -518,13 +510,11 @@ public class ScreenCapture {
                 new Parcelable.Creator<
                         ScreenCaptureListener>() { // from class:
                                                    // android.window.ScreenCapture.ScreenCaptureListener.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ScreenCaptureListener createFromParcel(Parcel in) {
                         return new ScreenCaptureListener(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ScreenCaptureListener[] newArray(int size) {
                         return new ScreenCaptureListener[0];

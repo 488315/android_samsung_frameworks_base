@@ -631,8 +631,6 @@ public final class MediaProjectionManagerService extends SystemService implement
             this.mTaskId = i;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r1v4, types: [android.os.IBinder$DeathRecipient, com.android.server.media.projection.MediaProjectionManagerService$MediaProjection$$ExternalSyntheticLambda1] */
         public final void start(final IMediaProjectionCallback iMediaProjectionCallback) {
             if (iMediaProjectionCallback == null) {
                 throw new IllegalArgumentException("callback must not be null");

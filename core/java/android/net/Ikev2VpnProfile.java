@@ -167,7 +167,6 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         validateAllowedAlgorithms(this.mAllowedAlgorithms);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void validateAllowedAlgorithms(List<String> algorithmNames) {
         if (algorithmNames.contains("hmac(md5)") || algorithmNames.contains("hmac(sha1)")) {
             throw new IllegalArgumentException("Algorithm not supported for IKEv2 VPN profiles");
@@ -519,7 +518,6 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         return keyFactory.generatePrivate(privateKeySpec);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void checkCert(X509Certificate cert) {
         try {
             certificateToPemString(cert);
@@ -528,12 +526,10 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static <T> T checkNotNull(T t, String str, Object... objArr) {
         return (T) Objects.requireNonNull(t, String.format(str, objArr));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void checkBuilderSetter(boolean constructedFromIkeTunConParams, String field) {
         if (constructedFromIkeTunConParams) {
             throw new IllegalArgumentException(

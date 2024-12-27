@@ -14,13 +14,11 @@ public final class PublishAttributes implements Parcelable {
     public static final Parcelable.Creator<PublishAttributes> CREATOR =
             new Parcelable.Creator<
                     PublishAttributes>() { // from class: android.telephony.ims.PublishAttributes.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PublishAttributes createFromParcel(Parcel source) {
                     return new PublishAttributes(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PublishAttributes[] newArray(int size) {
                     return new PublishAttributes[size];

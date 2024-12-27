@@ -59,7 +59,6 @@ public final class ContextualSearchManagerService extends SystemService {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ Object this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ AnonymousClass2(Object obj, Looper looper, int i) {
             super(looper, null, true);
             this.$r8$classId = i;
@@ -206,7 +205,6 @@ public final class ContextualSearchManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,
@@ -241,14 +239,6 @@ public final class ContextualSearchManagerService extends SystemService {
                 Binder.withCleanCallingIdentity(
                         new FunctionalUtils.ThrowingRunnable() { // from class:
                             // com.android.server.contextualsearch.ContextualSearchManagerService$ContextualSearchManagerStub$$ExternalSyntheticLambda1
-                            /* JADX WARN: Removed duplicated region for block: B:12:0x013c  */
-                            /* JADX WARN: Removed duplicated region for block: B:15:? A[RETURN, SYNTHETIC] */
-                            /* JADX WARN: Removed duplicated region for block: B:38:0x00ee  */
-                            /* JADX WARN: Removed duplicated region for block: B:40:0x0112  */
-                            /* JADX WARN: Removed duplicated region for block: B:42:0x011a  */
-                            /* JADX WARN: Removed duplicated region for block: B:47:0x0135  */
-                            /* JADX WARN: Removed duplicated region for block: B:48:0x0117  */
-                            /* JADX WARN: Removed duplicated region for block: B:49:0x010f  */
                             /*
                                 Code decompiled incorrectly, please refer to instructions dump.
                                 To view partially-correct code enable 'Show inconsistent code' option in preferences

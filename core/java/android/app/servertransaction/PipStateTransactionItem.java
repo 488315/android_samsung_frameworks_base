@@ -13,13 +13,11 @@ public final class PipStateTransactionItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<PipStateTransactionItem> CREATOR =
             new Parcelable.Creator<PipStateTransactionItem>() { // from class:
                 // android.app.servertransaction.PipStateTransactionItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PipStateTransactionItem createFromParcel(Parcel in) {
                     return new PipStateTransactionItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PipStateTransactionItem[] newArray(int size) {
                     return new PipStateTransactionItem[size];

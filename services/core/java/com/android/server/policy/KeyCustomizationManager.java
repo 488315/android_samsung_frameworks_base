@@ -813,8 +813,6 @@ public final class KeyCustomizationManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:143:0x0131  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0107  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -901,7 +899,6 @@ public final class KeyCustomizationManager {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:156:0x0199, code lost:
 
        r1 = true;
@@ -910,10 +907,6 @@ public final class KeyCustomizationManager {
 
        if (r18 == false) goto L129;
     */
-    /* JADX WARN: Removed duplicated region for block: B:162:0x01a1  */
-    /* JADX WARN: Removed duplicated region for block: B:178:0x01cf  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0209  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0221  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -34,13 +34,11 @@ public final class SpellCheckerSubtype implements Parcelable {
             new Parcelable.Creator<
                     SpellCheckerSubtype>() { // from class:
                                              // android.view.textservice.SpellCheckerSubtype.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SpellCheckerSubtype createFromParcel(Parcel source) {
                     return new SpellCheckerSubtype(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SpellCheckerSubtype[] newArray(int size) {
                     return new SpellCheckerSubtype[size];

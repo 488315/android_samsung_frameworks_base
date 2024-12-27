@@ -8,13 +8,11 @@ public class DataConnectionRealTimeInfo implements Parcelable {
             new Parcelable.Creator<
                     DataConnectionRealTimeInfo>() { // from class:
                                                     // android.telephony.DataConnectionRealTimeInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataConnectionRealTimeInfo createFromParcel(Parcel in) {
                     return new DataConnectionRealTimeInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataConnectionRealTimeInfo[] newArray(int size) {
                     return new DataConnectionRealTimeInfo[size];

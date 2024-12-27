@@ -16,13 +16,11 @@ public class KnoxAnalyticsData implements Parcelable {
             new Parcelable.Creator<
                     KnoxAnalyticsData>() { // from class:
                                            // com.samsung.android.knox.knoxanalyticsproxy.KnoxAnalyticsData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KnoxAnalyticsData createFromParcel(Parcel in) {
                     return new KnoxAnalyticsData(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KnoxAnalyticsData[] newArray(int size) {
                     return new KnoxAnalyticsData[size];

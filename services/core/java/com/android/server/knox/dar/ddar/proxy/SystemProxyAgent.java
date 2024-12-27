@@ -27,8 +27,6 @@ public final class SystemProxyAgent extends KnoxProxyAgent {
         return systemProxyAgent;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x003d  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0056 A[Catch: Exception -> 0x0029, TRY_LEAVE, TryCatch #0 {Exception -> 0x0029, blocks: (B:3:0x000f, B:12:0x003f, B:15:0x0044, B:18:0x0056, B:19:0x001f, B:22:0x002b), top: B:2:0x000f }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

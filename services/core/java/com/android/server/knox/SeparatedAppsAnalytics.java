@@ -17,7 +17,6 @@ public final class SeparatedAppsAnalytics {
         this.ifKnoxAnalyticsContainer = iKnoxAnalyticsContainerImpl;
     }
 
-    /* JADX WARN: Type inference failed for: r2v6, types: [java.io.Serializable, java.lang.String[]] */
     public final void logEvent(Bundle bundle, String str) {
         long j;
         IKnoxAnalyticsContainerImpl iKnoxAnalyticsContainerImpl = this.ifKnoxAnalyticsContainer;

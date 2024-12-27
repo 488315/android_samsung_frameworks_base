@@ -92,7 +92,6 @@ public final class DeviceStorageMonitorService extends SystemService {
     public final class Shell extends ShellCommand {
         public Shell() {}
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public final int onCommand(String str) {
             char c;
             DeviceStorageMonitorService deviceStorageMonitorService =
@@ -250,8 +249,6 @@ public final class DeviceStorageMonitorService extends SystemService {
         mRomTotalBytes = 0L;
     }
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.storage.DeviceStorageMonitorService$3] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.storage.DeviceStorageMonitorService$1] */
     public DeviceStorageMonitorService(Context context) {
         super(context);
         this.mSeq = new AtomicInteger(1);
@@ -438,42 +435,6 @@ public final class DeviceStorageMonitorService extends SystemService {
         this.mHandler =
                 new Handler(handlerThread.getLooper()) { // from class:
                     // com.android.server.storage.DeviceStorageMonitorService.1
-                    /* JADX WARN: Removed duplicated region for block: B:100:0x032b  */
-                    /* JADX WARN: Removed duplicated region for block: B:103:0x035f  */
-                    /* JADX WARN: Removed duplicated region for block: B:107:0x038b A[ADDED_TO_REGION] */
-                    /* JADX WARN: Removed duplicated region for block: B:111:0x03ed  */
-                    /* JADX WARN: Removed duplicated region for block: B:114:0x0733  */
-                    /* JADX WARN: Removed duplicated region for block: B:118:0x0758  */
-                    /* JADX WARN: Removed duplicated region for block: B:121:0x0770  */
-                    /* JADX WARN: Removed duplicated region for block: B:124:0x0786  */
-                    /* JADX WARN: Removed duplicated region for block: B:127:0x079e  */
-                    /* JADX WARN: Removed duplicated region for block: B:130:0x07c9 A[ADDED_TO_REGION] */
-                    /* JADX WARN: Removed duplicated region for block: B:136:0x07d4  */
-                    /* JADX WARN: Removed duplicated region for block: B:141:0x08b0  */
-                    /* JADX WARN: Removed duplicated region for block: B:153:0x0852  */
-                    /* JADX WARN: Removed duplicated region for block: B:159:0x078b  */
-                    /* JADX WARN: Removed duplicated region for block: B:166:0x077e  */
-                    /* JADX WARN: Removed duplicated region for block: B:167:0x073b  */
-                    /* JADX WARN: Removed duplicated region for block: B:168:0x03f8  */
-                    /* JADX WARN: Removed duplicated region for block: B:174:0x04e4  */
-                    /* JADX WARN: Removed duplicated region for block: B:177:0x058c  */
-                    /* JADX WARN: Removed duplicated region for block: B:180:0x0654  */
-                    /* JADX WARN: Removed duplicated region for block: B:183:0x06a1  */
-                    /* JADX WARN: Removed duplicated region for block: B:186:0x05c5  */
-                    /* JADX WARN: Removed duplicated region for block: B:189:0x051e  */
-                    /* JADX WARN: Removed duplicated region for block: B:196:0x037b  */
-                    /* JADX WARN: Removed duplicated region for block: B:197:0x032f  */
-                    /* JADX WARN: Removed duplicated region for block: B:216:0x0318  */
-                    /* JADX WARN: Removed duplicated region for block: B:232:0x027b  */
-                    /* JADX WARN: Removed duplicated region for block: B:239:0x0252  */
-                    /* JADX WARN: Removed duplicated region for block: B:240:0x018c  */
-                    /* JADX WARN: Removed duplicated region for block: B:57:0x0185  */
-                    /* JADX WARN: Removed duplicated region for block: B:60:0x0215  */
-                    /* JADX WARN: Removed duplicated region for block: B:68:0x0266  */
-                    /* JADX WARN: Removed duplicated region for block: B:71:0x0291  */
-                    /* JADX WARN: Removed duplicated region for block: B:76:0x029f  */
-                    /* JADX WARN: Removed duplicated region for block: B:81:0x02b0  */
-                    /* JADX WARN: Removed duplicated region for block: B:95:0x030a  */
                     @Override // android.os.Handler
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

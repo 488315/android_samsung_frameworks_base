@@ -161,9 +161,6 @@ public final class MultiTaskingAppCompatOrientationPolicy {
 
        if (r12 != 4) goto L36;
     */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x012e  */
-    /* JADX WARN: Removed duplicated region for block: B:108:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0119  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -57,8 +57,6 @@ public class ParsedProcessUtils {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Failed to find 'out' block for switch in B:38:0x00bf. Please report as an issue. */
     private static ParseResult<ParsedProcess> parseProcess(
             Set<String> perms,
             String[] separateProcesses,
@@ -168,7 +166,6 @@ public class ParsedProcessUtils {
         return input.success(proc);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:11:0x0102, code lost:
 
        return r20.success(r1);

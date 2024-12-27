@@ -243,11 +243,6 @@ public final class RoleServicePlatformHelperImpl implements RoleServicePlatformH
 
        if (android.text.TextUtils.isEmpty(r1) == false) goto L33;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00b4 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0057  */
-    /* JADX WARN: Type inference failed for: r4v7, types: [java.util.Map] */
     @Override // com.android.server.role.RoleServicePlatformHelper
     /*
         Code decompiled incorrectly, please refer to instructions dump.

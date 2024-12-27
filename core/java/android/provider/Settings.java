@@ -831,7 +831,6 @@ public final class Settings {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void maybeCloseGenerationArray(MemoryIntArray array) {
         if (array == null) {
             return;
@@ -879,7 +878,6 @@ public final class Settings {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class NameValueCache {
         private static final boolean DEBUG = false;
         private static final String NAME_EQ_PLACEHOLDER = "name=?";
@@ -907,7 +905,6 @@ public final class Settings {
             SELECT_VALUE_PROJECTION = new String[] {"value"};
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$new$0(String name) {
             synchronized (this) {
                 Log.e(Settings.TAG, "Error accessing generation tracker - removing");
@@ -1479,7 +1476,6 @@ public final class Settings {
         	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
         	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
         */
-        /* JADX INFO: Access modifiers changed from: private */
         /* JADX WARN: Failed to apply debug info
         java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
         	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
@@ -1497,7 +1493,6 @@ public final class Settings {
         	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:68)
         	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.visit(DebugInfoApplyVisitor.java:55)
          */
-        /* JADX WARN: Not initialized variable reg: 22, insn: 0x01dd: MOVE (r12 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('currentGeneration' int)]), block:B:86:0x01dd */
         public java.util.Map<java.lang.String, java.lang.String> getStringsForPrefixStripPrefix(
                 android.content.ContentResolver r26,
                 java.lang.String r27,
@@ -1529,7 +1524,6 @@ public final class Settings {
                 || context.checkSelfPermission(Manifest.permission.SYSTEM_APPLICATION_OVERLAY) == 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static <T extends NameValueTable> void getPublicSettingsForClass(
             Class<T> callerClass,
             Set<String> allKeys,
@@ -1559,7 +1553,6 @@ public final class Settings {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float parseFloatSetting(String settingValue, String settingName)
             throws SettingNotFoundException {
         if (settingValue == null) {
@@ -1572,7 +1565,6 @@ public final class Settings {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float parseFloatSettingWithDefault(String settingValue, float defaultValue) {
         if (settingValue == null) {
             return defaultValue;
@@ -1584,7 +1576,6 @@ public final class Settings {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int parseIntSetting(String settingValue, String settingName)
             throws SettingNotFoundException {
         if (settingValue == null) {
@@ -1597,7 +1588,6 @@ public final class Settings {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int parseIntSettingWithDefault(String settingValue, int defaultValue) {
         if (settingValue == null) {
             return defaultValue;
@@ -1609,7 +1599,6 @@ public final class Settings {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static long parseLongSetting(String settingValue, String settingName)
             throws SettingNotFoundException {
         if (settingValue == null) {
@@ -1622,7 +1611,6 @@ public final class Settings {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static long parseLongSettingWithDefault(String settingValue, long defaultValue) {
         if (settingValue == null) {
             return defaultValue;
@@ -3284,7 +3272,6 @@ public final class Settings {
                     resolver, name, value, null, false, userHandle, overrideableByRestore);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static boolean putStringForUser(
                 ContentResolver resolver,
                 String name,
@@ -9187,8 +9174,6 @@ public final class Settings {
             sNameValueCache.clearGenerationTrackerForTest();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public static void handleMonitorCallback(
                 Bundle result,
                 Executor executor,

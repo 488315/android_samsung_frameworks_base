@@ -414,8 +414,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
             this.this$0 = activityTaskManagerService;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:45:0x012e A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:76:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
         @Override // android.content.BroadcastReceiver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -571,8 +569,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
             this.mService = new ActivityTaskManagerService(context);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r1v0, types: [android.os.IBinder, com.android.server.wm.ActivityTaskManagerService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? r1 = this.mService;
@@ -859,14 +855,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
             r14.println();
             r9 = false;
          */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0060 A[Catch: all -> 0x002a, TryCatch #0 {all -> 0x002a, blocks: (B:4:0x0016, B:7:0x001f, B:11:0x002f, B:12:0x0036, B:13:0x004c, B:16:0x0054, B:19:0x0060, B:20:0x0064, B:22:0x0079, B:25:0x0081, B:27:0x008b, B:28:0x00a1, B:31:0x00a9, B:34:0x00b5, B:35:0x00b9, B:37:0x00ce, B:40:0x00ed, B:43:0x00f9, B:44:0x010a, B:46:0x0116, B:47:0x0125, B:49:0x012b, B:51:0x0143, B:55:0x014c, B:56:0x0152, B:65:0x0171, B:67:0x01a9, B:68:0x01d9, B:69:0x022b, B:71:0x0231, B:72:0x0236, B:75:0x0242, B:77:0x024c, B:78:0x0257, B:81:0x025f, B:85:0x0276, B:87:0x027c, B:88:0x0282, B:90:0x02b5, B:94:0x02b8, B:97:0x02bf, B:99:0x02c5, B:100:0x02e9, B:101:0x031d), top: B:3:0x0016 }] */
-        /* JADX WARN: Removed duplicated region for block: B:34:0x00b5 A[Catch: all -> 0x002a, TryCatch #0 {all -> 0x002a, blocks: (B:4:0x0016, B:7:0x001f, B:11:0x002f, B:12:0x0036, B:13:0x004c, B:16:0x0054, B:19:0x0060, B:20:0x0064, B:22:0x0079, B:25:0x0081, B:27:0x008b, B:28:0x00a1, B:31:0x00a9, B:34:0x00b5, B:35:0x00b9, B:37:0x00ce, B:40:0x00ed, B:43:0x00f9, B:44:0x010a, B:46:0x0116, B:47:0x0125, B:49:0x012b, B:51:0x0143, B:55:0x014c, B:56:0x0152, B:65:0x0171, B:67:0x01a9, B:68:0x01d9, B:69:0x022b, B:71:0x0231, B:72:0x0236, B:75:0x0242, B:77:0x024c, B:78:0x0257, B:81:0x025f, B:85:0x0276, B:87:0x027c, B:88:0x0282, B:90:0x02b5, B:94:0x02b8, B:97:0x02bf, B:99:0x02c5, B:100:0x02e9, B:101:0x031d), top: B:3:0x0016 }] */
-        /* JADX WARN: Removed duplicated region for block: B:37:0x00ce A[Catch: all -> 0x002a, TryCatch #0 {all -> 0x002a, blocks: (B:4:0x0016, B:7:0x001f, B:11:0x002f, B:12:0x0036, B:13:0x004c, B:16:0x0054, B:19:0x0060, B:20:0x0064, B:22:0x0079, B:25:0x0081, B:27:0x008b, B:28:0x00a1, B:31:0x00a9, B:34:0x00b5, B:35:0x00b9, B:37:0x00ce, B:40:0x00ed, B:43:0x00f9, B:44:0x010a, B:46:0x0116, B:47:0x0125, B:49:0x012b, B:51:0x0143, B:55:0x014c, B:56:0x0152, B:65:0x0171, B:67:0x01a9, B:68:0x01d9, B:69:0x022b, B:71:0x0231, B:72:0x0236, B:75:0x0242, B:77:0x024c, B:78:0x0257, B:81:0x025f, B:85:0x0276, B:87:0x027c, B:88:0x0282, B:90:0x02b5, B:94:0x02b8, B:97:0x02bf, B:99:0x02c5, B:100:0x02e9, B:101:0x031d), top: B:3:0x0016 }] */
-        /* JADX WARN: Removed duplicated region for block: B:40:0x00ed A[Catch: all -> 0x002a, TryCatch #0 {all -> 0x002a, blocks: (B:4:0x0016, B:7:0x001f, B:11:0x002f, B:12:0x0036, B:13:0x004c, B:16:0x0054, B:19:0x0060, B:20:0x0064, B:22:0x0079, B:25:0x0081, B:27:0x008b, B:28:0x00a1, B:31:0x00a9, B:34:0x00b5, B:35:0x00b9, B:37:0x00ce, B:40:0x00ed, B:43:0x00f9, B:44:0x010a, B:46:0x0116, B:47:0x0125, B:49:0x012b, B:51:0x0143, B:55:0x014c, B:56:0x0152, B:65:0x0171, B:67:0x01a9, B:68:0x01d9, B:69:0x022b, B:71:0x0231, B:72:0x0236, B:75:0x0242, B:77:0x024c, B:78:0x0257, B:81:0x025f, B:85:0x0276, B:87:0x027c, B:88:0x0282, B:90:0x02b5, B:94:0x02b8, B:97:0x02bf, B:99:0x02c5, B:100:0x02e9, B:101:0x031d), top: B:3:0x0016 }] */
-        /* JADX WARN: Removed duplicated region for block: B:65:0x0171 A[Catch: all -> 0x002a, TryCatch #0 {all -> 0x002a, blocks: (B:4:0x0016, B:7:0x001f, B:11:0x002f, B:12:0x0036, B:13:0x004c, B:16:0x0054, B:19:0x0060, B:20:0x0064, B:22:0x0079, B:25:0x0081, B:27:0x008b, B:28:0x00a1, B:31:0x00a9, B:34:0x00b5, B:35:0x00b9, B:37:0x00ce, B:40:0x00ed, B:43:0x00f9, B:44:0x010a, B:46:0x0116, B:47:0x0125, B:49:0x012b, B:51:0x0143, B:55:0x014c, B:56:0x0152, B:65:0x0171, B:67:0x01a9, B:68:0x01d9, B:69:0x022b, B:71:0x0231, B:72:0x0236, B:75:0x0242, B:77:0x024c, B:78:0x0257, B:81:0x025f, B:85:0x0276, B:87:0x027c, B:88:0x0282, B:90:0x02b5, B:94:0x02b8, B:97:0x02bf, B:99:0x02c5, B:100:0x02e9, B:101:0x031d), top: B:3:0x0016 }] */
-        /* JADX WARN: Removed duplicated region for block: B:71:0x0231 A[Catch: all -> 0x002a, TryCatch #0 {all -> 0x002a, blocks: (B:4:0x0016, B:7:0x001f, B:11:0x002f, B:12:0x0036, B:13:0x004c, B:16:0x0054, B:19:0x0060, B:20:0x0064, B:22:0x0079, B:25:0x0081, B:27:0x008b, B:28:0x00a1, B:31:0x00a9, B:34:0x00b5, B:35:0x00b9, B:37:0x00ce, B:40:0x00ed, B:43:0x00f9, B:44:0x010a, B:46:0x0116, B:47:0x0125, B:49:0x012b, B:51:0x0143, B:55:0x014c, B:56:0x0152, B:65:0x0171, B:67:0x01a9, B:68:0x01d9, B:69:0x022b, B:71:0x0231, B:72:0x0236, B:75:0x0242, B:77:0x024c, B:78:0x0257, B:81:0x025f, B:85:0x0276, B:87:0x027c, B:88:0x0282, B:90:0x02b5, B:94:0x02b8, B:97:0x02bf, B:99:0x02c5, B:100:0x02e9, B:101:0x031d), top: B:3:0x0016 }] */
-        /* JADX WARN: Removed duplicated region for block: B:74:0x0240  */
-        /* JADX WARN: Removed duplicated region for block: B:97:0x02bf A[Catch: all -> 0x002a, TryCatch #0 {all -> 0x002a, blocks: (B:4:0x0016, B:7:0x001f, B:11:0x002f, B:12:0x0036, B:13:0x004c, B:16:0x0054, B:19:0x0060, B:20:0x0064, B:22:0x0079, B:25:0x0081, B:27:0x008b, B:28:0x00a1, B:31:0x00a9, B:34:0x00b5, B:35:0x00b9, B:37:0x00ce, B:40:0x00ed, B:43:0x00f9, B:44:0x010a, B:46:0x0116, B:47:0x0125, B:49:0x012b, B:51:0x0143, B:55:0x014c, B:56:0x0152, B:65:0x0171, B:67:0x01a9, B:68:0x01d9, B:69:0x022b, B:71:0x0231, B:72:0x0236, B:75:0x0242, B:77:0x024c, B:78:0x0257, B:81:0x025f, B:85:0x0276, B:87:0x027c, B:88:0x0282, B:90:0x02b5, B:94:0x02b8, B:97:0x02bf, B:99:0x02c5, B:100:0x02e9, B:101:0x031d), top: B:3:0x0016 }] */
         @Override // com.android.server.wm.ActivityTaskManagerInternal
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1533,7 +1521,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
             return z;
         }
 
-        /* JADX WARN: Finally extract failed */
         @Override // com.android.server.wm.ActivityTaskManagerInternal
         public final int startActivitiesAsPackage(String str, String str2, int i, Intent[] intentArr, Bundle bundle) {
             ActivityTaskManagerService activityTaskManagerService = ActivityTaskManagerService.this;
@@ -2056,7 +2043,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
         protoOutputStream.end(start);
     }
 
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.server.wm.ActivityTaskManagerService$2] */
     public ActivityTaskManagerService(Context context) {
         WindowManagerGlobalLock windowManagerGlobalLock = new WindowManagerGlobalLock();
         this.mGlobalLock = windowManagerGlobalLock;
@@ -3228,7 +3214,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
         return ensureActivityConfiguration;
     }
 
-    /* JADX WARN: Type inference failed for: r11v0, types: [com.android.server.wm.ActivityTaskManagerService$$ExternalSyntheticLambda22] */
     public final boolean enterPictureInPictureMode(final ActivityRecord activityRecord, final PictureInPictureParams pictureInPictureParams, boolean z, final boolean z2) {
         if (activityRecord.inPinnedWindowingMode()) {
             return true;
@@ -3343,7 +3328,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
         WindowManagerService.resetPriorityAfterLockedSection();
     }
 
-    /* JADX WARN: Finally extract failed */
     public final void focusTopTask(int i) {
         enforceTaskPermission("focusTopTask()");
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -3674,7 +3658,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
         return configurationInfo;
     }
 
-    /* JADX WARN: Finally extract failed */
     public final ActivityTaskManager.RootTaskInfo getFocusedRootTaskInfo() {
         ActivityTaskManager.RootTaskInfo rootTaskInfo;
         enforceTaskPermission("getFocusedRootTaskInfo()");
@@ -5251,7 +5234,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final void resizeTask(int i, final Rect rect, final int i2) {
         enforceTaskPermission("resizeTask()");
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -5730,22 +5712,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
                 try {
                     Trace.traceBegin(32L, "setLockScreenShown");
                     this.mRootWindowContainer.forAllDisplays(new Consumer() { // from class: com.android.server.wm.ActivityTaskManagerService$$ExternalSyntheticLambda1
-                        /* JADX WARN: Multi-variable type inference failed */
-                        /* JADX WARN: Type inference failed for: r0v17 */
-                        /* JADX WARN: Type inference failed for: r14v0 */
-                        /* JADX WARN: Type inference failed for: r14v1 */
-                        /* JADX WARN: Type inference failed for: r14v2 */
-                        /* JADX WARN: Type inference failed for: r15v0 */
-                        /* JADX WARN: Type inference failed for: r15v1 */
-                        /* JADX WARN: Type inference failed for: r15v2 */
-                        /* JADX WARN: Type inference failed for: r16v0 */
-                        /* JADX WARN: Type inference failed for: r16v1 */
-                        /* JADX WARN: Type inference failed for: r16v2 */
-                        /* JADX WARN: Type inference failed for: r2v20 */
-                        /* JADX WARN: Type inference failed for: r2v27 */
-                        /* JADX WARN: Type inference failed for: r2v6 */
-                        /* JADX WARN: Type inference failed for: r2v7 */
-                        /* JADX WARN: Type inference failed for: r8v1 */
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
                             ActivityRecord activityRecord;
@@ -6325,10 +6291,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
         return startActivityAsUser(iApplicationThread, str, str2, intent, str3, iBinder, str4, i, i2, profilerInfo, bundle, i3, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0191  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x01e2  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0237  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x01da  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6585,8 +6547,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0117 A[Catch: all -> 0x002e, TRY_ENTER, TryCatch #3 {all -> 0x002e, blocks: (B:11:0x001f, B:13:0x0026, B:14:0x0029, B:17:0x0031, B:19:0x0037, B:20:0x003a, B:23:0x003f, B:26:0x0066, B:28:0x006a, B:30:0x007f, B:33:0x0088, B:35:0x009a, B:38:0x00a8, B:40:0x00ab, B:72:0x00b7, B:75:0x0105, B:77:0x00ed, B:43:0x0117, B:45:0x011c, B:46:0x0123, B:49:0x0128, B:51:0x014f, B:52:0x0152, B:60:0x01ad, B:61:0x01b0, B:67:0x01b5, B:68:0x01b8, B:70:0x0160, B:54:0x016c, B:56:0x0185, B:57:0x0187), top: B:10:0x001f, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0128 A[Catch: all -> 0x002e, TRY_ENTER, TryCatch #3 {all -> 0x002e, blocks: (B:11:0x001f, B:13:0x0026, B:14:0x0029, B:17:0x0031, B:19:0x0037, B:20:0x003a, B:23:0x003f, B:26:0x0066, B:28:0x006a, B:30:0x007f, B:33:0x0088, B:35:0x009a, B:38:0x00a8, B:40:0x00ab, B:72:0x00b7, B:75:0x0105, B:77:0x00ed, B:43:0x0117, B:45:0x011c, B:46:0x0123, B:49:0x0128, B:51:0x014f, B:52:0x0152, B:60:0x01ad, B:61:0x01b0, B:67:0x01b5, B:68:0x01b8, B:70:0x0160, B:54:0x016c, B:56:0x0185, B:57:0x0187), top: B:10:0x001f, inners: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6848,7 +6808,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
         WindowManagerService.resetPriorityAfterLockedSection();
     }
 
-    /* JADX WARN: Finally extract failed */
     public final TaskSnapshot takeTaskSnapshot(int i, boolean z) {
         TaskSnapshot snapshot;
         this.mAmInternal.enforceCallingPermission("android.permission.READ_FRAME_BUFFER", "takeTaskSnapshot()");
@@ -6952,7 +6911,6 @@ public final class ActivityTaskManagerService extends IActivityTaskManager.Stub 
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final void updateActiveRecents(int i) {
         DisplayContent displayContent;
         if (CoreRune.FW_SHELL_TRANSITION_RECENTS_BUG_FIX) {

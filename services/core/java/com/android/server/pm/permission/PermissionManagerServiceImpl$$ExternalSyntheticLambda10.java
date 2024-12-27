@@ -23,9 +23,6 @@ public final /* synthetic */ class PermissionManagerServiceImpl$$ExternalSynthet
         this.f$1 = obj;
     }
 
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v16, types: [int] */
     @Override // java.util.function.Consumer
     public final void accept(Object obj) {
         LegacyPermissionState legacyPermissionState;

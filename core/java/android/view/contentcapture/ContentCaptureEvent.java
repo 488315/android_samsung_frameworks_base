@@ -56,7 +56,6 @@ public final class ContentCaptureEvent implements Parcelable {
             new Parcelable.Creator<
                     ContentCaptureEvent>() { // from class:
                                              // android.view.contentcapture.ContentCaptureEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentCaptureEvent createFromParcel(Parcel parcel) {
                     int sessionId = parcel.readInt();
@@ -99,7 +98,6 @@ public final class ContentCaptureEvent implements Parcelable {
                     return event;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentCaptureEvent[] newArray(int size) {
                     return new ContentCaptureEvent[size];
@@ -223,7 +221,6 @@ public final class ContentCaptureEvent implements Parcelable {
         return this.mSelectionEndIndex;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void restoreComposingSpan() {
         if (this.mComposingStart <= -1 || this.mComposingEnd <= -1) {
             return;
@@ -236,7 +233,6 @@ public final class ContentCaptureEvent implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void restoreSelectionSpans() {
         if (this.mSelectionStartIndex <= -1 || this.mSelectionEndIndex <= -1) {
             return;

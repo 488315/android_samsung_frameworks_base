@@ -207,7 +207,6 @@ public final class SearchSession implements AutoCloseable {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onResult$0(List list) {
             this.mCallback.accept(list);
         }

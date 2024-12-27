@@ -254,8 +254,6 @@ public final class ServiceWatcherImpl implements ServiceWatcher$ServiceChangedLi
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.servicewatcher.ServiceWatcherImpl$1] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.servicewatcher.ServiceWatcherImpl$2] */
     public ServiceWatcherImpl(
             Context context,
             Handler handler,

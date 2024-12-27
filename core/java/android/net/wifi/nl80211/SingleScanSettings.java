@@ -13,7 +13,6 @@ public class SingleScanSettings implements Parcelable {
             new Parcelable.Creator<
                     SingleScanSettings>() { // from class:
                                             // android.net.wifi.nl80211.SingleScanSettings.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SingleScanSettings createFromParcel(Parcel in) {
                     SingleScanSettings result = new SingleScanSettings();
@@ -36,7 +35,6 @@ public class SingleScanSettings implements Parcelable {
                     return result;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SingleScanSettings[] newArray(int size) {
                     return new SingleScanSettings[size];
@@ -78,7 +76,6 @@ public class SingleScanSettings implements Parcelable {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isValidScanType(int scanType) {
         return scanType == 0 || scanType == 1 || scanType == 2;
     }

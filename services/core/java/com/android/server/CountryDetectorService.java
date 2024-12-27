@@ -111,7 +111,6 @@ public final class CountryDetectorService extends ICountryDetector.Stub {
         return this.mCountryDetector;
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.CountryDetectorService$$ExternalSyntheticLambda0] */
     public void initialize() {
         CountryDetectorBase countryDetectorBase;
         String string = this.mContext.getString(R.string.data_usage_mobile_limit_title);

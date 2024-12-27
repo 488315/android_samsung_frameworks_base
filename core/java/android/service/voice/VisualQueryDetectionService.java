@@ -156,7 +156,6 @@ public abstract class VisualQueryDetectionService extends Service
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onUpdateStateInternal(
             PersistableBundle options, SharedMemory sharedMemory, IRemoteCallback callback) {
         IntConsumer intConsumer =

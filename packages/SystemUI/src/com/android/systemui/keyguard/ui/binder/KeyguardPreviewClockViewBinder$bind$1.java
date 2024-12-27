@@ -29,7 +29,6 @@ final class KeyguardPreviewClockViewBinder$bind$1 extends SuspendLambda implemen
         private /* synthetic */ Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(KeyguardPreviewClockViewModel keyguardPreviewClockViewModel, View view, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = keyguardPreviewClockViewModel;
@@ -60,7 +59,6 @@ final class KeyguardPreviewClockViewBinder$bind$1 extends SuspendLambda implemen
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardPreviewClockViewBinder$bind$1(KeyguardPreviewClockViewModel keyguardPreviewClockViewModel, View view, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = keyguardPreviewClockViewModel;

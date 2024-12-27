@@ -9,13 +9,11 @@ public class SContextCaptureMotion extends SContextEventContext {
     public static final Parcelable.Creator<SContextCaptureMotion> CREATOR =
             new Parcelable.Creator<SContextCaptureMotion>() { // from class:
                 // android.hardware.scontext.SContextCaptureMotion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextCaptureMotion createFromParcel(Parcel in) {
                     return new SContextCaptureMotion(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextCaptureMotion[] newArray(int size) {
                     return new SContextCaptureMotion[size];

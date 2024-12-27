@@ -201,19 +201,16 @@ public class CustomNamedCurves {
     static final Hashtable oidToName = new Hashtable();
     static final Vector names = new Vector();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static X9ECPoint configureBasepoint(ECCurve curve, String encoding) {
         X9ECPoint G = new X9ECPoint(curve, Hex.decodeStrict(encoding));
         WNafUtil.configureBasepoint(G.getPoint());
         return G;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ECCurve configureCurve(ECCurve curve) {
         return curve;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ECCurve configureCurveGLV(ECCurve c, GLVTypeBParameters p) {
         return c.configure().setEndomorphism(new GLVTypeBEndomorphism(c, p)).create();
     }

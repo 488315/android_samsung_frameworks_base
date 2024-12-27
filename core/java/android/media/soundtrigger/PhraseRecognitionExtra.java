@@ -12,7 +12,6 @@ public class PhraseRecognitionExtra implements Parcelable {
     public static final Parcelable.Creator<PhraseRecognitionExtra> CREATOR =
             new Parcelable.Creator<PhraseRecognitionExtra>() { // from class:
                 // android.media.soundtrigger.PhraseRecognitionExtra.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhraseRecognitionExtra createFromParcel(Parcel _aidl_source) {
                     PhraseRecognitionExtra _aidl_out = new PhraseRecognitionExtra();
@@ -20,7 +19,6 @@ public class PhraseRecognitionExtra implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhraseRecognitionExtra[] newArray(int _aidl_size) {
                     return new PhraseRecognitionExtra[_aidl_size];
@@ -133,7 +131,6 @@ public class PhraseRecognitionExtra implements Parcelable {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
         return Arrays.deepHashCode(
                 Arrays.asList(

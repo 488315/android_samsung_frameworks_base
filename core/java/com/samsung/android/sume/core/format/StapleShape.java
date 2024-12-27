@@ -8,13 +8,11 @@ class StapleShape implements Shape {
             new Parcelable.Creator<
                     StapleShape>() { // from class:
                                      // com.samsung.android.sume.core.format.StapleShape.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StapleShape createFromParcel(Parcel in) {
                     return new StapleShape(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StapleShape[] newArray(int size) {
                     return new StapleShape[size];
@@ -76,13 +74,11 @@ class StapleShape implements Shape {
         dest.writeParcelable(this.impl, flags);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.format.Copyable
     public Shape copy() {
         return new StapleShape((MutableShape) this.impl.copy());
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.format.Copyable
     /* renamed from: deepCopy */
     public Shape deepCopy2() {

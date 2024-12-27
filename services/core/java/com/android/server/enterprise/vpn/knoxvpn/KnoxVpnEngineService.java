@@ -305,8 +305,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
             super(looper);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:112:0x01d0 A[Catch: all -> 0x0384, TryCatch #2 {all -> 0x0384, blocks: (B:85:0x0158, B:89:0x0165, B:91:0x0173, B:92:0x0180, B:94:0x0186, B:95:0x0198, B:97:0x019e, B:102:0x01b1, B:109:0x01c3, B:110:0x01c7, B:112:0x01d0, B:114:0x01fa, B:115:0x0207, B:116:0x020d, B:118:0x0213, B:120:0x0200, B:122:0x0229, B:123:0x0233, B:125:0x0239, B:127:0x0255, B:129:0x025e, B:132:0x0268, B:134:0x0277, B:137:0x0281, B:138:0x02a6, B:140:0x02ac, B:141:0x02be, B:143:0x02c4, B:148:0x02d7, B:151:0x02e6, B:153:0x02eb, B:155:0x0318, B:157:0x0322, B:158:0x0328, B:159:0x032f, B:160:0x0335, B:162:0x033b, B:172:0x035e, B:173:0x0362, B:175:0x0368), top: B:84:0x0158 }] */
-        /* JADX WARN: Removed duplicated region for block: B:121:0x0229 A[SYNTHETIC] */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -668,8 +666,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         knoxVpnEngineService.stopVpnConnectionAfterAdminRemoval(i2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0068 A[Catch: all -> 0x004b, TryCatch #0 {all -> 0x004b, blocks: (B:4:0x0004, B:6:0x0017, B:8:0x001b, B:10:0x0027, B:11:0x0033, B:13:0x003a, B:15:0x0044, B:18:0x0064, B:20:0x0068, B:22:0x0072, B:24:0x004e, B:26:0x008f, B:27:0x009b, B:29:0x00a1, B:32:0x00ab, B:33:0x00b0, B:34:0x00bd, B:36:0x00c3, B:37:0x00d5, B:39:0x00db, B:44:0x00ee), top: B:3:0x0004 }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0072 A[SYNTHETIC] */
     /* renamed from: -$$Nest$mhandleActionLockBootCompleted, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2078,7 +2074,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService$1] */
     public KnoxVpnEngineService(Context context) {
         KnoxVpnApiValidation knoxVpnApiValidation;
         KnoxVpnProcessManager knoxVpnProcessManager;
@@ -2336,10 +2331,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         return uidRangeParcelArr;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0019  */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0042  */
-    /* JADX WARN: Removed duplicated region for block: B:31:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2415,7 +2406,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
                     + " int):boolean");
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(9:30|(1:31)|(4:145|146|(1:148)|(3:150|151|152)(4:153|154|155|(4:157|158|159|160)(29:161|(1:165)|166|(4:169|170|171|167)|175|176|177|178|179|(2:181|(1:183)(1:258))(1:259)|184|(4:187|188|189|185)|190|191|192|193|194|195|196|(4:199|(5:211|212|(3:214|(1:216)|217)|218|(4:222|223|224|225)(2:220|221))(3:201|202|(3:208|209|210)(3:204|205|206))|207|197)|226|227|(2:229|(3:231|232|233)(1:234))(1:254)|(2:236|(1:238)(2:239|(1:241)(1:(3:243|244|245))))|246|247|248|249|250)))(2:33|(4:46|47|(1:49)|(8:51|52|53|54|55|56|57|58)(24:65|(4:68|69|70|66)|71|72|(5:75|76|77|78|73)|81|82|(2:83|(3:85|(3:91|92|(4:96|97|(1:99)|100)(2:94|95))(3:87|88|89)|90)(2:140|141))|101|102|103|104|(1:137)|108|109|(3:118|(1:120)|(3:122|(3:124|125|126)(3:129|130|131)|(1:128))(3:132|133|134))|113|114|115|36|37|(1:39)|41|42)))|35|36|37|(0)|41|42) */
     /* JADX WARN: Code restructure failed: missing block: B:43:0x0653, code lost:
 
        r0 = move-exception;
@@ -2424,8 +2414,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
 
        android.util.Log.e("KnoxVpnEngineService", "Exception = " + android.util.Log.getStackTraceString(r0));
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0634 A[Catch: all -> 0x0059, Exception -> 0x0653, TRY_LEAVE, TryCatch #4 {Exception -> 0x0653, blocks: (B:37:0x0628, B:39:0x0634), top: B:36:0x0628, outer: #9 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2446,8 +2434,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
                     + " boolean):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0128  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0148  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2646,12 +2632,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         return enterpriseResponseData;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x00e6  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00ff  */
-    /* JADX WARN: Type inference failed for: r5v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r5v1, types: [int] */
-    /* JADX WARN: Type inference failed for: r5v2, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r5v3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4844,8 +4824,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         return arrayList;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x00d0 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00d1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4944,8 +4922,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         return enterpriseResponseData;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x008f A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0090  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5718,8 +5694,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         return strArr;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x006c  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x006f A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5799,8 +5773,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
                     + " java.lang.String[]):java.lang.String[]");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x007d A[Catch: Exception -> 0x0094, TryCatch #0 {Exception -> 0x0094, blocks: (B:7:0x003e, B:12:0x007d, B:14:0x0096, B:17:0x009f, B:19:0x00a4, B:21:0x00af, B:23:0x00b5, B:25:0x00c5, B:38:0x0070, B:41:0x0064, B:28:0x0047, B:31:0x004c, B:34:0x0057), top: B:6:0x003e, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0096 A[Catch: Exception -> 0x0094, TryCatch #0 {Exception -> 0x0094, blocks: (B:7:0x003e, B:12:0x007d, B:14:0x0096, B:17:0x009f, B:19:0x00a4, B:21:0x00af, B:23:0x00b5, B:25:0x00c5, B:38:0x0070, B:41:0x0064, B:28:0x0047, B:31:0x004c, B:34:0x0057), top: B:6:0x003e, inners: #1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6019,8 +5991,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x002a A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x002c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6748,8 +6718,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         return z;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0277 A[Catch: all -> 0x002c, Exception -> 0x0030, TryCatch #0 {Exception -> 0x0030, blocks: (B:7:0x000c, B:9:0x001f, B:11:0x0023, B:12:0x0034, B:14:0x003e, B:15:0x0046, B:16:0x004b, B:18:0x0051, B:21:0x00ae, B:23:0x0131, B:25:0x0177, B:27:0x0182, B:28:0x018e, B:31:0x0197, B:36:0x019b, B:37:0x019c, B:40:0x019d, B:43:0x01a7, B:48:0x01b3, B:49:0x01bb, B:51:0x0204, B:53:0x0212, B:55:0x0218, B:57:0x021c, B:58:0x021f, B:60:0x0226, B:62:0x022c, B:65:0x0233, B:67:0x026e, B:69:0x0277, B:70:0x0288, B:72:0x0282, B:73:0x023a, B:74:0x020b, B:80:0x0093), top: B:6:0x000c, outer: #4 }] */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0282 A[Catch: all -> 0x002c, Exception -> 0x0030, TryCatch #0 {Exception -> 0x0030, blocks: (B:7:0x000c, B:9:0x001f, B:11:0x0023, B:12:0x0034, B:14:0x003e, B:15:0x0046, B:16:0x004b, B:18:0x0051, B:21:0x00ae, B:23:0x0131, B:25:0x0177, B:27:0x0182, B:28:0x018e, B:31:0x0197, B:36:0x019b, B:37:0x019c, B:40:0x019d, B:43:0x01a7, B:48:0x01b3, B:49:0x01bb, B:51:0x0204, B:53:0x0212, B:55:0x0218, B:57:0x021c, B:58:0x021f, B:60:0x0226, B:62:0x022c, B:65:0x0233, B:67:0x026e, B:69:0x0277, B:70:0x0288, B:72:0x0282, B:73:0x023a, B:74:0x020b, B:80:0x0093), top: B:6:0x000c, outer: #4 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7114,8 +7082,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
 
        if (r8.personaId != r14) goto L33;
     */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x00ea  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x010b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7712,11 +7678,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0083 A[Catch: Exception -> 0x0046, TryCatch #1 {Exception -> 0x0046, blocks: (B:7:0x001c, B:9:0x0021, B:11:0x002e, B:13:0x003f, B:16:0x006a, B:18:0x0083, B:20:0x0090, B:21:0x009f, B:22:0x0098, B:23:0x00a4, B:24:0x00aa, B:26:0x00b0, B:28:0x00eb, B:30:0x0145, B:31:0x0158, B:33:0x015c, B:34:0x0171, B:37:0x017e, B:38:0x0183, B:40:0x0186, B:41:0x019b, B:43:0x01a9, B:44:0x01e5, B:46:0x01eb, B:48:0x01fd, B:51:0x0208, B:52:0x0217, B:53:0x0231, B:55:0x0237, B:57:0x024b, B:59:0x0269, B:61:0x0277, B:64:0x0287, B:65:0x0290, B:69:0x028c, B:70:0x028f, B:75:0x0298, B:76:0x029b, B:80:0x0190, B:82:0x019a, B:85:0x029d, B:86:0x029e, B:89:0x02a0, B:90:0x02a3, B:91:0x0049, B:97:0x0026, B:63:0x0280, B:78:0x0188, B:81:0x0192, B:50:0x0201, B:72:0x020f, B:36:0x0175), top: B:6:0x001c, inners: #2, #3, #4, #6, #7 }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00b0 A[Catch: Exception -> 0x0046, LOOP:0: B:24:0x00aa->B:26:0x00b0, LOOP_END, TryCatch #1 {Exception -> 0x0046, blocks: (B:7:0x001c, B:9:0x0021, B:11:0x002e, B:13:0x003f, B:16:0x006a, B:18:0x0083, B:20:0x0090, B:21:0x009f, B:22:0x0098, B:23:0x00a4, B:24:0x00aa, B:26:0x00b0, B:28:0x00eb, B:30:0x0145, B:31:0x0158, B:33:0x015c, B:34:0x0171, B:37:0x017e, B:38:0x0183, B:40:0x0186, B:41:0x019b, B:43:0x01a9, B:44:0x01e5, B:46:0x01eb, B:48:0x01fd, B:51:0x0208, B:52:0x0217, B:53:0x0231, B:55:0x0237, B:57:0x024b, B:59:0x0269, B:61:0x0277, B:64:0x0287, B:65:0x0290, B:69:0x028c, B:70:0x028f, B:75:0x0298, B:76:0x029b, B:80:0x0190, B:82:0x019a, B:85:0x029d, B:86:0x029e, B:89:0x02a0, B:90:0x02a3, B:91:0x0049, B:97:0x0026, B:63:0x0280, B:78:0x0188, B:81:0x0192, B:50:0x0201, B:72:0x020f, B:36:0x0175), top: B:6:0x001c, inners: #2, #3, #4, #6, #7 }] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0145 A[Catch: Exception -> 0x0046, TryCatch #1 {Exception -> 0x0046, blocks: (B:7:0x001c, B:9:0x0021, B:11:0x002e, B:13:0x003f, B:16:0x006a, B:18:0x0083, B:20:0x0090, B:21:0x009f, B:22:0x0098, B:23:0x00a4, B:24:0x00aa, B:26:0x00b0, B:28:0x00eb, B:30:0x0145, B:31:0x0158, B:33:0x015c, B:34:0x0171, B:37:0x017e, B:38:0x0183, B:40:0x0186, B:41:0x019b, B:43:0x01a9, B:44:0x01e5, B:46:0x01eb, B:48:0x01fd, B:51:0x0208, B:52:0x0217, B:53:0x0231, B:55:0x0237, B:57:0x024b, B:59:0x0269, B:61:0x0277, B:64:0x0287, B:65:0x0290, B:69:0x028c, B:70:0x028f, B:75:0x0298, B:76:0x029b, B:80:0x0190, B:82:0x019a, B:85:0x029d, B:86:0x029e, B:89:0x02a0, B:90:0x02a3, B:91:0x0049, B:97:0x0026, B:63:0x0280, B:78:0x0188, B:81:0x0192, B:50:0x0201, B:72:0x020f, B:36:0x0175), top: B:6:0x001c, inners: #2, #3, #4, #6, #7 }] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x015c A[Catch: Exception -> 0x0046, TryCatch #1 {Exception -> 0x0046, blocks: (B:7:0x001c, B:9:0x0021, B:11:0x002e, B:13:0x003f, B:16:0x006a, B:18:0x0083, B:20:0x0090, B:21:0x009f, B:22:0x0098, B:23:0x00a4, B:24:0x00aa, B:26:0x00b0, B:28:0x00eb, B:30:0x0145, B:31:0x0158, B:33:0x015c, B:34:0x0171, B:37:0x017e, B:38:0x0183, B:40:0x0186, B:41:0x019b, B:43:0x01a9, B:44:0x01e5, B:46:0x01eb, B:48:0x01fd, B:51:0x0208, B:52:0x0217, B:53:0x0231, B:55:0x0237, B:57:0x024b, B:59:0x0269, B:61:0x0277, B:64:0x0287, B:65:0x0290, B:69:0x028c, B:70:0x028f, B:75:0x0298, B:76:0x029b, B:80:0x0190, B:82:0x019a, B:85:0x029d, B:86:0x029e, B:89:0x02a0, B:90:0x02a3, B:91:0x0049, B:97:0x0026, B:63:0x0280, B:78:0x0188, B:81:0x0192, B:50:0x0201, B:72:0x020f, B:36:0x0175), top: B:6:0x001c, inners: #2, #3, #4, #6, #7 }] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0184  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -9185,8 +9146,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0032  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -9550,8 +9509,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         Log.d("KnoxVpnEngineService", "Show EULA Toast for ONS - END");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00de A[Catch: all -> 0x0058, Exception -> 0x00d8, TRY_LEAVE, TryCatch #0 {Exception -> 0x00d8, blocks: (B:59:0x00ce, B:43:0x00de, B:46:0x0123, B:48:0x0127, B:54:0x0144, B:56:0x0155, B:57:0x0175), top: B:58:0x00ce }] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0123 A[Catch: all -> 0x0058, Exception -> 0x00d8, TRY_ENTER, TryCatch #0 {Exception -> 0x00d8, blocks: (B:59:0x00ce, B:43:0x00de, B:46:0x0123, B:48:0x0127, B:54:0x0144, B:56:0x0155, B:57:0x0175), top: B:58:0x00ce }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -9728,8 +9685,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(15:40|41|(1:96)(1:45)|(9:95|48|(1:50)(1:93)|51|(3:87|88|89)(1:53)|(1:86)(1:56)|(1:85)|59|(3:61|62|63)(6:(1:65)|(1:(3:70|71|72))|73|74|75|(3:77|78|79)(3:80|71|72)))|47|48|(0)(0)|51|(0)(0)|(0)|86|(0)|85|59|(0)(0)) */
-    /* JADX WARN: Can't wrap try/catch for region: R(6:(1:65)|(1:(3:70|71|72))|73|74|75|(3:77|78|79)(3:80|71|72)) */
     /* JADX WARN: Code restructure failed: missing block: B:46:0x0112, code lost:
 
        if (r10 == (-1)) goto L57;
@@ -9742,13 +9697,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
 
        r0 = e;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x011f  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0134  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x014a A[Catch: all -> 0x0036, Exception -> 0x0167, TRY_ENTER, TRY_LEAVE, TryCatch #1 {all -> 0x0036, blocks: (B:4:0x0020, B:6:0x0024, B:7:0x0039, B:13:0x0045, B:16:0x0049, B:19:0x0079, B:21:0x007f, B:24:0x00a6, B:26:0x00af, B:28:0x00b5, B:31:0x00cd, B:33:0x00d5, B:36:0x00f7, B:38:0x00fe, B:40:0x0104, B:41:0x0108, B:88:0x0126, B:61:0x014a, B:65:0x016c, B:73:0x0190, B:75:0x0194, B:77:0x01a7, B:80:0x01cc, B:82:0x01f3), top: B:3:0x0020 }] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x016a  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x0126 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0122  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -9826,7 +9774,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00e2 A[Catch: all -> 0x012a, Exception -> 0x0179, TRY_LEAVE, TryCatch #0 {Exception -> 0x0179, blocks: (B:6:0x000c, B:8:0x003b, B:9:0x0040, B:11:0x0046, B:14:0x007e, B:28:0x00e2, B:39:0x0166, B:40:0x017c, B:16:0x019f, B:18:0x01a7, B:19:0x01ac, B:43:0x00d6, B:48:0x01b4, B:51:0x01bc, B:53:0x01cc, B:55:0x01d6, B:56:0x01df, B:58:0x01f2, B:60:0x01f6, B:62:0x0200), top: B:5:0x000c, outer: #3 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -10035,8 +9982,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:145:0x01b6  */
-    /* JADX WARN: Removed duplicated region for block: B:147:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

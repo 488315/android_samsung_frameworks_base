@@ -561,7 +561,6 @@ public class TwoFingerSwipeGestureDetector
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Boolean lambda$onInputEvent$0(Integer x, Integer y) {
         return Boolean.valueOf(
                 getPosition(x.intValue(), y.intValue(), this.mThresholdsForOneFinger) == 0);

@@ -74,7 +74,6 @@ public abstract class QuotaTracker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public class Injector {}
 
     public QuotaTracker(Context context, Categorizer categorizer, Injector injector) {

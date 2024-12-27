@@ -3,8 +3,6 @@ package com.android.systemui.keyguard.shared.quickaffordance;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class KeyguardQuickAffordancePosition {
     public static final /* synthetic */ KeyguardQuickAffordancePosition[] $VALUES;
     public static final KeyguardQuickAffordancePosition BOTTOM_END;

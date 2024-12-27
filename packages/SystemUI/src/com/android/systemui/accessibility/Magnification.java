@@ -208,7 +208,6 @@ public final class Magnification implements CoreStartable, CommandQueue.Callback
         });
     }
 
-    /* JADX WARN: Type inference failed for: r11v0, types: [android.os.Handler, com.android.systemui.accessibility.Magnification$1] */
     public Magnification(Context context, Looper looper, Executor executor, CommandQueue commandQueue, ModeSwitchesController modeSwitchesController, SysUiState sysUiState, OverviewProxyService overviewProxyService, SecureSettings secureSettings, DisplayTracker displayTracker, DisplayManager displayManager, AccessibilityLogger accessibilityLogger, IWindowManager iWindowManager) {
         this.mUsersScales = new SparseArray<>();
         AnonymousClass3 anonymousClass3 = new AnonymousClass3();

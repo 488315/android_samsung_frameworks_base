@@ -254,10 +254,6 @@ public final class ChimeraRecentAppManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0075  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0094  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00cb A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00a4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

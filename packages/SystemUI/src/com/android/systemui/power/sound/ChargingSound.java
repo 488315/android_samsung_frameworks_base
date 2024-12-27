@@ -15,7 +15,6 @@ import java.util.HashSet;
 public final class ChargingSound extends PowerUiSound {
     public final AnonymousClass1 mChargingSoundVibrationHandler;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.power.sound.ChargingSound$1] */
     public ChargingSound(Context context, int i) {
         super(context, i);
         this.mChargingSoundVibrationHandler = new Handler(Looper.getMainLooper()) { // from class: com.android.systemui.power.sound.ChargingSound.1

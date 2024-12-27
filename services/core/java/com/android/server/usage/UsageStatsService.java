@@ -865,7 +865,6 @@ public final class UsageStatsService extends SystemService
             return i;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final int handleShellCommand(
                 ParcelFileDescriptor parcelFileDescriptor,
                 ParcelFileDescriptor parcelFileDescriptor2,
@@ -1151,23 +1150,6 @@ public final class UsageStatsService extends SystemService
             return queryEventsHelper(i, j, j2, str, EmptyArray.INT, null);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:15:0x0057 A[Catch: all -> 0x008d, TryCatch #0 {all -> 0x008d, blocks: (B:3:0x0018, B:5:0x001e, B:6:0x0028, B:8:0x002d, B:9:0x003a, B:11:0x0041, B:13:0x0053, B:15:0x0057, B:17:0x006c, B:19:0x0070, B:21:0x0074, B:22:0x0079, B:28:0x005b, B:33:0x0046), top: B:2:0x0018 }] */
-        /* JADX WARN: Removed duplicated region for block: B:17:0x006c A[Catch: all -> 0x008d, TryCatch #0 {all -> 0x008d, blocks: (B:3:0x0018, B:5:0x001e, B:6:0x0028, B:8:0x002d, B:9:0x003a, B:11:0x0041, B:13:0x0053, B:15:0x0057, B:17:0x006c, B:19:0x0070, B:21:0x0074, B:22:0x0079, B:28:0x005b, B:33:0x0046), top: B:2:0x0018 }] */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0070 A[Catch: all -> 0x008d, TryCatch #0 {all -> 0x008d, blocks: (B:3:0x0018, B:5:0x001e, B:6:0x0028, B:8:0x002d, B:9:0x003a, B:11:0x0041, B:13:0x0053, B:15:0x0057, B:17:0x006c, B:19:0x0070, B:21:0x0074, B:22:0x0079, B:28:0x005b, B:33:0x0046), top: B:2:0x0018 }] */
-        /* JADX WARN: Removed duplicated region for block: B:21:0x0074 A[Catch: all -> 0x008d, TryCatch #0 {all -> 0x008d, blocks: (B:3:0x0018, B:5:0x001e, B:6:0x0028, B:8:0x002d, B:9:0x003a, B:11:0x0041, B:13:0x0053, B:15:0x0057, B:17:0x006c, B:19:0x0070, B:21:0x0074, B:22:0x0079, B:28:0x005b, B:33:0x0046), top: B:2:0x0018 }] */
-        /* JADX WARN: Removed duplicated region for block: B:27:0x0078  */
-        /* JADX WARN: Removed duplicated region for block: B:28:0x005b A[Catch: all -> 0x008d, TryCatch #0 {all -> 0x008d, blocks: (B:3:0x0018, B:5:0x001e, B:6:0x0028, B:8:0x002d, B:9:0x003a, B:11:0x0041, B:13:0x0053, B:15:0x0057, B:17:0x006c, B:19:0x0070, B:21:0x0074, B:22:0x0079, B:28:0x005b, B:33:0x0046), top: B:2:0x0018 }] */
-        /* JADX WARN: Type inference failed for: r3v1, types: [boolean] */
-        /* JADX WARN: Type inference failed for: r3v2 */
-        /* JADX WARN: Type inference failed for: r3v3 */
-        /* JADX WARN: Type inference failed for: r3v4 */
-        /* JADX WARN: Type inference failed for: r3v5 */
-        /* JADX WARN: Type inference failed for: r3v6 */
-        /* JADX WARN: Type inference failed for: r3v7 */
-        /* JADX WARN: Type inference failed for: r8v3 */
-        /* JADX WARN: Type inference failed for: r8v4 */
-        /* JADX WARN: Type inference failed for: r8v6 */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2407,9 +2389,6 @@ public final class UsageStatsService extends SystemService
         this(context, new Injector());
     }
 
-    /* JADX WARN: Type inference failed for: r1v16, types: [com.android.server.usage.UsageStatsService$1] */
-    /* JADX WARN: Type inference failed for: r1v17, types: [com.android.server.usage.UsageStatsService$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v18, types: [com.android.server.usage.UsageStatsService$3] */
     public UsageStatsService(Context context, Injector injector) {
         super(context);
         this.mLock = new Object();
@@ -2445,7 +2424,6 @@ public final class UsageStatsService extends SystemService
                 new Handler
                         .Callback() { // from class:
                                       // com.android.server.usage.UsageStatsService$$ExternalSyntheticLambda0
-                    /* JADX WARN: Multi-variable type inference failed */
                     @Override // android.os.Handler.Callback
                     public final boolean handleMessage(Message message) {
                         UsageEvents usageEvents;
@@ -3598,8 +3576,6 @@ public final class UsageStatsService extends SystemService
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:49:0x024b A[Catch: all -> 0x0090, DONT_GENERATE, TryCatch #1 {all -> 0x0090, blocks: (B:24:0x0044, B:26:0x0050, B:27:0x008e, B:29:0x0093, B:47:0x0245, B:49:0x024b, B:51:0x024d, B:52:0x0250, B:55:0x017f, B:56:0x00b8, B:57:0x00ba, B:59:0x00c6, B:60:0x00fc, B:62:0x00fe, B:64:0x0102, B:65:0x0107, B:66:0x0109, B:71:0x0117, B:90:0x0150, B:91:0x0151, B:93:0x0155, B:95:0x015d, B:98:0x0167, B:102:0x0172, B:103:0x0173, B:104:0x017a, B:105:0x0193, B:107:0x019f, B:109:0x01a3, B:111:0x01a8, B:112:0x01b6, B:113:0x01cd, B:115:0x01d3, B:118:0x01af, B:119:0x01a6, B:120:0x01c8, B:121:0x01dc, B:124:0x01f0, B:126:0x01f4, B:128:0x01f9, B:129:0x0207, B:131:0x0229, B:133:0x0231, B:135:0x0240, B:138:0x0200, B:139:0x01f7, B:68:0x010a, B:69:0x0114, B:73:0x0118, B:75:0x011f, B:77:0x0125, B:80:0x014a, B:82:0x0134, B:85:0x014d), top: B:23:0x0044, inners: #0, #3, #4, #5, #6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x024d A[Catch: all -> 0x0090, TryCatch #1 {all -> 0x0090, blocks: (B:24:0x0044, B:26:0x0050, B:27:0x008e, B:29:0x0093, B:47:0x0245, B:49:0x024b, B:51:0x024d, B:52:0x0250, B:55:0x017f, B:56:0x00b8, B:57:0x00ba, B:59:0x00c6, B:60:0x00fc, B:62:0x00fe, B:64:0x0102, B:65:0x0107, B:66:0x0109, B:71:0x0117, B:90:0x0150, B:91:0x0151, B:93:0x0155, B:95:0x015d, B:98:0x0167, B:102:0x0172, B:103:0x0173, B:104:0x017a, B:105:0x0193, B:107:0x019f, B:109:0x01a3, B:111:0x01a8, B:112:0x01b6, B:113:0x01cd, B:115:0x01d3, B:118:0x01af, B:119:0x01a6, B:120:0x01c8, B:121:0x01dc, B:124:0x01f0, B:126:0x01f4, B:128:0x01f9, B:129:0x0207, B:131:0x0229, B:133:0x0231, B:135:0x0240, B:138:0x0200, B:139:0x01f7, B:68:0x010a, B:69:0x0114, B:73:0x0118, B:75:0x011f, B:77:0x0125, B:80:0x014a, B:82:0x0134, B:85:0x014d), top: B:23:0x0044, inners: #0, #3, #4, #5, #6 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

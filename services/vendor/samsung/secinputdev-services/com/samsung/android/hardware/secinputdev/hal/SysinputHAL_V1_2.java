@@ -215,7 +215,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getKeyState$0(
             int keycode, ArrayList list, int ret, String buff) {
         String buff2 = buff.trim();
@@ -277,7 +276,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$runTspCmd$1(
             int devid, ArrayList list, int ret, String buff) {
         String buff2 = buff.trim();
@@ -424,7 +422,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getTspScrubPosition$2(
             int devid, ArrayList list, int ret, String buff) {
         String buff2 = buff.trim();
@@ -469,7 +466,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getTspSupportFeature$3(
             int devid, ArrayList list, int ret, String buff) {
         String buff2 = buff.trim();
@@ -518,7 +514,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getTspCommandList$4(
             int devid, ArrayList list, int ret, String buff) {
         Log.d(
@@ -560,7 +555,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getTspAodActiveArea$5(
             int devid, ArrayList list, int ret, String buff) {
         String buff2 = buff.trim();
@@ -605,7 +599,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getTspFodInformation$6(
             int devid, ArrayList list, int ret, String buff) {
         String buff2 = buff.trim();
@@ -650,7 +643,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getTspFodPosition$7(
             int devid, ArrayList list, int ret, String buff) {
         String buff2 = buff.trim();
@@ -742,7 +734,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$runSpenCmd$8(ArrayList list, int ret, String buff) {
         String buff2 = buff.trim();
         Log.d(this.TAG, "runSpenCmd: " + buff2 + " ret=" + ret);
@@ -795,7 +786,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getSpenPosition$9(ArrayList list, int ret, String buff) {
         String buff2 = buff.trim();
         Log.d(this.TAG, "getSpenPosition: " + buff2 + " ret=" + ret);
@@ -830,7 +820,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getSpenCommandList$10(ArrayList list, int ret, String buff) {
         Log.d(this.TAG, "getSpenCommandList: ret=" + ret);
         list.add(buff.trim());
@@ -887,7 +876,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         return result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$streamRawdata$11(
             ArrayList maxlist, int devid, int mode, int ret, ArrayList list) {
         maxlist.add(Short.valueOf((short) ret));
@@ -930,7 +918,6 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         return list.get(0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$readTaas$12(ArrayList list, int ret, String buff) {
         Log.d(this.TAG, "readTaas: ret=" + ret);
         list.add(buff);

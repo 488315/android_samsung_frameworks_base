@@ -10,7 +10,6 @@ public class SessionInfo implements Parcelable {
     public static final Parcelable.Creator<SessionInfo> CREATOR =
             new Parcelable.Creator<
                     SessionInfo>() { // from class: android.hardware.radio.sim.SessionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SessionInfo createFromParcel(Parcel _aidl_source) {
                     SessionInfo _aidl_out = new SessionInfo();
@@ -18,7 +17,6 @@ public class SessionInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SessionInfo[] newArray(int _aidl_size) {
                     return new SessionInfo[_aidl_size];

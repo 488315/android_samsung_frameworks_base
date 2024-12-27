@@ -35,7 +35,6 @@ public final class CarrierMessagingClientServiceFinder {
                         }
                     };
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.server.appbinding.finders.CarrierMessagingClientServiceFinder$$ExternalSyntheticLambda0] */
     public CarrierMessagingClientServiceFinder(
             Context context,
             AppBindingService$$ExternalSyntheticLambda0

@@ -62,10 +62,6 @@ public final class UiThreadMonitor implements Dumpable {
         public final Object invoke() {
             final UiThreadMonitor uiThreadMonitor = UiThreadMonitor.this;
             Thread thread = new Thread(new Runnable() { // from class: com.android.systemui.uithreadmonitor.UiThreadMonitor$monitorThread$2.1
-                /* JADX WARN: Finally extract failed */
-                /* JADX WARN: Removed duplicated region for block: B:40:0x01d0  */
-                /* JADX WARN: Removed duplicated region for block: B:42:0x01db A[LOOP:0: B:2:0x0018->B:42:0x01db, LOOP_END] */
-                /* JADX WARN: Removed duplicated region for block: B:43:0x01d7 A[SYNTHETIC] */
                 @Override // java.lang.Runnable
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -163,8 +159,6 @@ public final class UiThreadMonitor implements Dumpable {
         ENABLE_PAUSE = "user".equals(Build.TYPE) && !Debug.semIsProductDev();
     }
 
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.systemui.uithreadmonitor.UiThreadMonitor$runnable$1] */
-    /* JADX WARN: Type inference failed for: r1v11, types: [com.android.systemui.uithreadmonitor.UiThreadMonitor$asyncRunnable$1] */
     public UiThreadMonitor(Handler handler, Handler handler2, DisplayManager displayManager, DumpManager dumpManager, LooperSlowLogController looperSlowLogController) {
         this.handler = handler;
         this.bgHandler = handler2;

@@ -159,7 +159,6 @@ public final class ContentSuggestionsManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class SelectionsCallbackWrapper extends ISelectionsCallback.Stub {
         private final SelectionsCallback mCallback;
         private final Executor mExecutor;
@@ -189,14 +188,12 @@ public final class ContentSuggestionsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onContentSelectionsAvailable$0(
                 int statusCode, List selections) {
             this.mCallback.onContentSelectionsAvailable(statusCode, selections);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class ClassificationsCallbackWrapper extends IClassificationsCallback.Stub {
         private final ClassificationsCallback mCallback;
         private final Executor mExecutor;
@@ -226,7 +223,6 @@ public final class ContentSuggestionsManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onContentClassificationsAvailable$0(
                 int statusCode, List classifications) {
             this.mCallback.onContentClassificationsAvailable(statusCode, classifications);

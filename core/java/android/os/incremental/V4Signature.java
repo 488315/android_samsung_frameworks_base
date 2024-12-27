@@ -275,7 +275,6 @@ public class V4Signature {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static byte[] readBytes(ByteBuffer buffer) throws IOException {
         if (buffer.remaining() < 4) {
             throw new EOFException();

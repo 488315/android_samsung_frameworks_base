@@ -62,7 +62,6 @@ public abstract class AbstractThreadedSyncAdapter {
         return this.mContext;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Account toSyncKey(Account account) {
         if (this.mAllowParallelSyncs) {
             return account;
@@ -70,7 +69,6 @@ public abstract class AbstractThreadedSyncAdapter {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class ISyncAdapterImpl extends ISyncAdapter.Stub {
         private ISyncAdapterImpl() {}
 
@@ -105,7 +103,6 @@ public abstract class AbstractThreadedSyncAdapter {
                                     cb));
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:64:0x012e  */
         @Override // android.content.ISyncAdapter
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -335,7 +332,6 @@ public abstract class AbstractThreadedSyncAdapter {
         return this.mISyncAdapterImpl.asBinder();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleOnUnsyncableAccount(ISyncAdapterUnsyncableAccountCallback cb) {
         boolean doSync;
         try {

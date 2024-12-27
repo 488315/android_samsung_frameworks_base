@@ -10,13 +10,11 @@ public class PresCmdStatus implements Parcelable {
             new Parcelable.Creator<
                     PresCmdStatus>() { // from class:
                                        // com.android.ims.internal.uce.presence.PresCmdStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PresCmdStatus createFromParcel(Parcel source) {
                     return new PresCmdStatus(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PresCmdStatus[] newArray(int size) {
                     return new PresCmdStatus[size];

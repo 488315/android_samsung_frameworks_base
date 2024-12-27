@@ -291,39 +291,6 @@ public final class SecPowerUI implements CoreStartable, ConfigurationController.
         
             if (r3 == 6) goto L280;
          */
-        /* JADX WARN: Removed duplicated region for block: B:102:0x056c  */
-        /* JADX WARN: Removed duplicated region for block: B:105:0x05ac  */
-        /* JADX WARN: Removed duplicated region for block: B:108:0x05b4  */
-        /* JADX WARN: Removed duplicated region for block: B:111:0x05c2  */
-        /* JADX WARN: Removed duplicated region for block: B:118:0x0614  */
-        /* JADX WARN: Removed duplicated region for block: B:139:0x06c3  */
-        /* JADX WARN: Removed duplicated region for block: B:151:0x0833  */
-        /* JADX WARN: Removed duplicated region for block: B:163:0x085d  */
-        /* JADX WARN: Removed duplicated region for block: B:174:0x088a  */
-        /* JADX WARN: Removed duplicated region for block: B:188:0x08bf  */
-        /* JADX WARN: Removed duplicated region for block: B:207:0x0926  */
-        /* JADX WARN: Removed duplicated region for block: B:212:0x0956  */
-        /* JADX WARN: Removed duplicated region for block: B:215:0x095f  */
-        /* JADX WARN: Removed duplicated region for block: B:228:0x09b4  */
-        /* JADX WARN: Removed duplicated region for block: B:231:0x09c7  */
-        /* JADX WARN: Removed duplicated region for block: B:234:0x09d0  */
-        /* JADX WARN: Removed duplicated region for block: B:237:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:238:0x09ba  */
-        /* JADX WARN: Removed duplicated region for block: B:242:0x093e  */
-        /* JADX WARN: Removed duplicated region for block: B:254:0x070e  */
-        /* JADX WARN: Removed duplicated region for block: B:261:0x07d9  */
-        /* JADX WARN: Removed duplicated region for block: B:265:0x07f4  */
-        /* JADX WARN: Removed duplicated region for block: B:269:0x07fe  */
-        /* JADX WARN: Removed duplicated region for block: B:290:0x0736  */
-        /* JADX WARN: Removed duplicated region for block: B:310:0x0785  */
-        /* JADX WARN: Removed duplicated region for block: B:345:0x060a  */
-        /* JADX WARN: Removed duplicated region for block: B:346:0x05b6  */
-        /* JADX WARN: Removed duplicated region for block: B:347:0x05ae  */
-        /* JADX WARN: Removed duplicated region for block: B:348:0x0581  */
-        /* JADX WARN: Removed duplicated region for block: B:91:0x052e  */
-        /* JADX WARN: Type inference failed for: r5v28 */
-        /* JADX WARN: Type inference failed for: r5v29, types: [com.android.systemui.power.ChargerAnimationListener, java.util.ArrayList] */
-        /* JADX WARN: Type inference failed for: r5v30 */
         @Override // android.content.BroadcastReceiver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -338,8 +305,6 @@ public final class SecPowerUI implements CoreStartable, ConfigurationController.
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:22:? A[RETURN, SYNTHETIC] */
     /* renamed from: -$$Nest$mcheckBatteryProtectionTipsNotification, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -549,8 +514,6 @@ public final class SecPowerUI implements CoreStartable, ConfigurationController.
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x016b  */
-    /* JADX WARN: Removed duplicated region for block: B:45:? A[RETURN, SYNTHETIC] */
     /* renamed from: -$$Nest$mcheckTipsNotification, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -721,13 +684,6 @@ public final class SecPowerUI implements CoreStartable, ConfigurationController.
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.systemui.power.SecPowerUI$5] */
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.systemui.power.SecPowerUI$6] */
-    /* JADX WARN: Type inference failed for: r0v13, types: [com.android.systemui.power.SecPowerUI$8] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.systemui.power.SecPowerUI$1] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.systemui.power.SecPowerUI$2] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.systemui.power.SecPowerUI$3] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.systemui.power.SecPowerUI$4] */
     public SecPowerUI(Context context, BroadcastDispatcher broadcastDispatcher, CommandQueue commandQueue, SecWarningsUI secWarningsUI, WakefulnessLifecycle wakefulnessLifecycle, PowerManager powerManager, UserTracker userTracker, DozeChargingHelper dozeChargingHelper, FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper, SystemEventCoordinator systemEventCoordinator) {
         this.mContext = context;
         this.mBroadcastDispatcher = broadcastDispatcher;

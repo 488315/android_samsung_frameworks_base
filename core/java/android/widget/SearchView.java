@@ -965,7 +965,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         post(this.mUpdateDrawableStateRunnable);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateFocusedState() {
         boolean focused = this.mSearchSrcTextView.hasFocus();
         int[] stateSet = focused ? FOCUSED_STATE_SET : EMPTY_STATE_SET;
@@ -1007,7 +1006,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         return super.onKeyDown(keyCode, event);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean onSuggestionsKey(View v, int keyCode, KeyEvent event) {
         SearchableInfo.ActionKeyInfo actionKey;
         int position;
@@ -1122,7 +1120,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         this.mVoiceButton.setVisibility(visibility);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onTextChanged(CharSequence newText) {
         CharSequence text = this.mSearchSrcTextView.getText();
         this.mUserQuery = text;
@@ -1139,7 +1136,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onSubmitQuery() {
         CharSequence query = this.mSearchSrcTextView.getText();
         if (query != null && TextUtils.getTrimmedLength(query) > 0) {
@@ -1158,7 +1154,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         this.mSearchSrcTextView.dismissDropDown();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onCloseClicked() {
         CharSequence text = this.mSearchSrcTextView.getText();
         if (TextUtils.isEmpty(text)) {
@@ -1198,7 +1193,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         return (mKeyboard == 0 || mShowImeWithHardKeyboard == 1) ? false : true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onSearchClicked() {
         updateViewsVisibility(false);
         this.mSearchSrcTextView.requestFocus();
@@ -1212,7 +1206,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onVoiceClicked() {
         if (this.mSearchable == null) {
             return;
@@ -1305,13 +1298,11 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         public static final Parcelable.Creator<SavedState> CREATOR =
                 new Parcelable.Creator<
                         SavedState>() { // from class: android.widget.SearchView.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];
@@ -1344,7 +1335,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
@@ -1353,7 +1343,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         return ss;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public void onRestoreInstanceState(Parcelable state) {
         SavedState ss = (SavedState) state;
@@ -1367,7 +1356,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         return SearchView.class.getName();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void adjustDropDownSizeAndPosition() {
         int iconOffset;
         int offset;
@@ -1407,7 +1395,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean onItemClicked(int position, int actionKey, String actionMsg) {
         if (this.mOnSuggestionListener != null
                 && this.mOnSuggestionListener.onSuggestionClick(position)) {
@@ -1419,7 +1406,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean onItemSelected(int position) {
         if (this.mOnSuggestionListener == null
                 || !this.mOnSuggestionListener.onSuggestionSelect(position)) {
@@ -1474,7 +1460,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         this.mSearchSrcTextView.setSelection(TextUtils.isEmpty(query) ? 0 : query.length());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void launchQuerySearch(int actionKey, String actionMsg, String query) {
         Intent intent = createIntent(Intent.ACTION_SEARCH, null, null, query, actionKey, actionMsg);
         getContext().startActivity(intent);
@@ -1607,7 +1592,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void forceSuggestionQuery() {
         this.mSearchSrcTextView.doBeforeTextChanged();
         this.mSearchSrcTextView.doAfterTextChanged();
@@ -1759,7 +1743,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
             this.mThreshold = threshold;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isEmpty() {
             return TextUtils.getTrimmedLength(getText()) == 0;
         }
@@ -1839,7 +1822,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
             return view == this.mSearchView;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         /* renamed from: showSoftInputIfNecessary, reason: merged with bridge method [inline-methods] */
         public void lambda$new$0() {
             if (this.mHasPendingShowSoftInputRequest) {
@@ -1851,7 +1833,6 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setImeVisibility(boolean visible) {
             InputMethodManager imm =
                     (InputMethodManager) getContext().getSystemService(InputMethodManager.class);

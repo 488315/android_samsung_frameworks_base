@@ -76,13 +76,9 @@ public final class BrightnessClamperController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public class Injector {
     }
 
-    /* JADX WARN: Type inference failed for: r1v15, types: [android.provider.DeviceConfig$OnPropertiesChangedListener, com.android.server.display.brightness.clamper.BrightnessClamperController$$ExternalSyntheticLambda7] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.display.brightness.clamper.BrightnessClamperController$1] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.server.display.brightness.clamper.BrightnessClamperController$$ExternalSyntheticLambda5] */
     public BrightnessClamperController(Injector injector, Handler handler, ClamperChangeListener clamperChangeListener, DisplayDeviceData displayDeviceData, Context context, DisplayManagerFlags displayManagerFlags, SensorManager sensorManager) {
         Resources resources;
         DisplayDeviceConfig displayDeviceConfig;

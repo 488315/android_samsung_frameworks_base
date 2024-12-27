@@ -212,7 +212,6 @@ public final class AssistManager {
         ((ArrayList) list).forEach(consumer);
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.assist.AssistManager$1] */
     public AssistManager(DeviceProvisionedController deviceProvisionedController, Context context, AssistUtils assistUtils, CommandQueue commandQueue, PhoneStateMonitor phoneStateMonitor, OverviewProxyService overviewProxyService, Lazy lazy, DefaultUiController defaultUiController, AssistLogger assistLogger, Handler handler, UserTracker userTracker, DisplayTracker displayTracker, SecureSettings secureSettings, SelectedUserInteractor selectedUserInteractor, ActivityManager activityManager, AssistInteractor assistInteractor) {
         this.mContext = context;
         this.mDeviceProvisionedController = deviceProvisionedController;
@@ -673,7 +672,6 @@ public final class AssistManager {
         handler.post(assistDisclosure.mShowRunnable);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void startAssist(Bundle bundle) {
         final Intent assistIntent;
         if (bundle == null) {

@@ -8,13 +8,11 @@ public class NetworkQuotaInfo implements Parcelable {
     public static final Parcelable.Creator<NetworkQuotaInfo> CREATOR =
             new Parcelable.Creator<
                     NetworkQuotaInfo>() { // from class: android.net.NetworkQuotaInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkQuotaInfo createFromParcel(Parcel in) {
                     return new NetworkQuotaInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkQuotaInfo[] newArray(int size) {
                     return new NetworkQuotaInfo[size];

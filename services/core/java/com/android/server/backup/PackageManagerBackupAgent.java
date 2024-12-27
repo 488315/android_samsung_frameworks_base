@@ -177,13 +177,6 @@ public final class PackageManagerBackupAgent extends BackupAgent {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x012d A[Catch: IOException -> 0x028d, TryCatch #3 {IOException -> 0x028d, blocks: (B:13:0x0125, B:15:0x012d, B:17:0x0167, B:19:0x0172, B:20:0x018e, B:21:0x0194, B:23:0x019a, B:26:0x01a9, B:29:0x01b3, B:31:0x01bb, B:33:0x01c2, B:36:0x01d5, B:52:0x01d9, B:39:0x01f3, B:41:0x01fa, B:42:0x020a, B:43:0x021d, B:45:0x0223, B:47:0x0231, B:50:0x0205, B:59:0x023f, B:63:0x0246, B:66:0x0250, B:67:0x0256, B:69:0x025c, B:71:0x0280, B:76:0x0189, B:77:0x0143, B:79:0x0147, B:80:0x0161), top: B:12:0x0125, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0172 A[Catch: IOException -> 0x028d, TryCatch #3 {IOException -> 0x028d, blocks: (B:13:0x0125, B:15:0x012d, B:17:0x0167, B:19:0x0172, B:20:0x018e, B:21:0x0194, B:23:0x019a, B:26:0x01a9, B:29:0x01b3, B:31:0x01bb, B:33:0x01c2, B:36:0x01d5, B:52:0x01d9, B:39:0x01f3, B:41:0x01fa, B:42:0x020a, B:43:0x021d, B:45:0x0223, B:47:0x0231, B:50:0x0205, B:59:0x023f, B:63:0x0246, B:66:0x0250, B:67:0x0256, B:69:0x025c, B:71:0x0280, B:76:0x0189, B:77:0x0143, B:79:0x0147, B:80:0x0161), top: B:12:0x0125, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x019a A[Catch: IOException -> 0x028d, TRY_LEAVE, TryCatch #3 {IOException -> 0x028d, blocks: (B:13:0x0125, B:15:0x012d, B:17:0x0167, B:19:0x0172, B:20:0x018e, B:21:0x0194, B:23:0x019a, B:26:0x01a9, B:29:0x01b3, B:31:0x01bb, B:33:0x01c2, B:36:0x01d5, B:52:0x01d9, B:39:0x01f3, B:41:0x01fa, B:42:0x020a, B:43:0x021d, B:45:0x0223, B:47:0x0231, B:50:0x0205, B:59:0x023f, B:63:0x0246, B:66:0x0250, B:67:0x0256, B:69:0x025c, B:71:0x0280, B:76:0x0189, B:77:0x0143, B:79:0x0147, B:80:0x0161), top: B:12:0x0125, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x024e A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x025c A[Catch: IOException -> 0x028d, LOOP:2: B:67:0x0256->B:69:0x025c, LOOP_END, TryCatch #3 {IOException -> 0x028d, blocks: (B:13:0x0125, B:15:0x012d, B:17:0x0167, B:19:0x0172, B:20:0x018e, B:21:0x0194, B:23:0x019a, B:26:0x01a9, B:29:0x01b3, B:31:0x01bb, B:33:0x01c2, B:36:0x01d5, B:52:0x01d9, B:39:0x01f3, B:41:0x01fa, B:42:0x020a, B:43:0x021d, B:45:0x0223, B:47:0x0231, B:50:0x0205, B:59:0x023f, B:63:0x0246, B:66:0x0250, B:67:0x0256, B:69:0x025c, B:71:0x0280, B:76:0x0189, B:77:0x0143, B:79:0x0147, B:80:0x0161), top: B:12:0x0125, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0189 A[Catch: IOException -> 0x028d, TryCatch #3 {IOException -> 0x028d, blocks: (B:13:0x0125, B:15:0x012d, B:17:0x0167, B:19:0x0172, B:20:0x018e, B:21:0x0194, B:23:0x019a, B:26:0x01a9, B:29:0x01b3, B:31:0x01bb, B:33:0x01c2, B:36:0x01d5, B:52:0x01d9, B:39:0x01f3, B:41:0x01fa, B:42:0x020a, B:43:0x021d, B:45:0x0223, B:47:0x0231, B:50:0x0205, B:59:0x023f, B:63:0x0246, B:66:0x0250, B:67:0x0256, B:69:0x025c, B:71:0x0280, B:76:0x0189, B:77:0x0143, B:79:0x0147, B:80:0x0161), top: B:12:0x0125, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0143 A[Catch: IOException -> 0x028d, TryCatch #3 {IOException -> 0x028d, blocks: (B:13:0x0125, B:15:0x012d, B:17:0x0167, B:19:0x0172, B:20:0x018e, B:21:0x0194, B:23:0x019a, B:26:0x01a9, B:29:0x01b3, B:31:0x01bb, B:33:0x01c2, B:36:0x01d5, B:52:0x01d9, B:39:0x01f3, B:41:0x01fa, B:42:0x020a, B:43:0x021d, B:45:0x0223, B:47:0x0231, B:50:0x0205, B:59:0x023f, B:63:0x0246, B:66:0x0250, B:67:0x0256, B:69:0x025c, B:71:0x0280, B:76:0x0189, B:77:0x0143, B:79:0x0147, B:80:0x0161), top: B:12:0x0125, inners: #2 }] */
     @Override // android.app.backup.BackupAgent
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -204,10 +197,6 @@ public final class PackageManagerBackupAgent extends BackupAgent {
                     + " android.os.ParcelFileDescriptor):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x0043  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0031  */
     @Override // android.app.backup.BackupAgent
     /*
         Code decompiled incorrectly, please refer to instructions dump.

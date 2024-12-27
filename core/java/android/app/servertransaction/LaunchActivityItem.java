@@ -31,13 +31,11 @@ public class LaunchActivityItem extends ClientTransactionItem {
     public static final Parcelable.Creator<LaunchActivityItem> CREATOR =
             new Parcelable.Creator<LaunchActivityItem>() { // from class:
                 // android.app.servertransaction.LaunchActivityItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LaunchActivityItem createFromParcel(Parcel in) {
                     return new LaunchActivityItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LaunchActivityItem[] newArray(int size) {
                     return new LaunchActivityItem[size];

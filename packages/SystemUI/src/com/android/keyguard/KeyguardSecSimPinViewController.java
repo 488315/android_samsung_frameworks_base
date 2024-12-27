@@ -132,7 +132,6 @@ public final class KeyguardSecSimPinViewController extends KeyguardSimPinViewCon
         public final /* synthetic */ KeyguardSecurityCallback val$keyguardSecurityCallback;
         public final /* synthetic */ int val$subId;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(String str, int i, int i2, KeyguardSecurityCallback keyguardSecurityCallback) {
             super(str, i);
             this.val$subId = i2;
@@ -236,7 +235,6 @@ public final class KeyguardSecSimPinViewController extends KeyguardSimPinViewCon
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.keyguard.KeyguardSecSimPinViewController$1] */
     public KeyguardSecSimPinViewController(KeyguardSecSimPinView keyguardSecSimPinView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, LiftToActivateListener liftToActivateListener, TelephonyManager telephonyManager, FalsingCollector falsingCollector, EmergencyButtonController emergencyButtonController, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, KeyguardKeyboardInteractor keyguardKeyboardInteractor, InputMethodManager inputMethodManager) {
         super(keyguardSecSimPinView, configurationController, vibrationUtil, accessibilityManager, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, liftToActivateListener, telephonyManager, falsingCollector, emergencyButtonController, featureFlags, selectedUserInteractor, keyguardKeyboardInteractor);
         this.mOrientation = 1;
@@ -319,10 +317,6 @@ public final class KeyguardSecSimPinViewController extends KeyguardSimPinViewCon
         this.mSettingsHelper.unregisterCallback(this.mSettingsListener);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00b5  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x0184  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x016b  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0170  */
     @Override // com.android.keyguard.KeyguardSecPinBasedInputViewController, com.android.keyguard.KeyguardPinBasedInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController
     /*
         Code decompiled incorrectly, please refer to instructions dump.

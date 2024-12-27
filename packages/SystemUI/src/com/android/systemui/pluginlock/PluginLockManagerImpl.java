@@ -161,7 +161,6 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void disableByMode() {
         for (int i : this.mScreenList) {
             if (isEnabledFromSettingHelper(i)) {
@@ -273,12 +272,10 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
         return str.startsWith("com.samsung.android.dynamiclock") || str.startsWith("com.samsung.android.mateagent");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$handleEnableStateChanged$1(int i) {
         updatePluginLockMode(i, isEnabledFromSettingHelper(i), false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(Uri uri) {
         Log.d(TAG, "SettingHelper changed uri: " + uri);
         if (uri == null) {
@@ -302,20 +299,17 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onUserSwitchComplete$2() {
         Log.d(TAG, "onUserSwitchComplete for owner");
         setLatestPluginInstance(false);
         this.mIsSwitchingToSub = false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onUserSwitchComplete$3(int i) {
         ListPopupWindow$$ExternalSyntheticOutline0.m(i, "onUserSwitchComplete for ", TAG);
         this.mIsSwitchingToSub = false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setPluginInstanceState$4() {
         this.mPluginWallpaperManager.onLockWallpaperChanged(0);
     }
@@ -767,7 +761,6 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
         this.mMediator.registerStateCallback(state);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0070  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -805,8 +798,6 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
         this.mMediator.resetDynamicLock();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:69:0x01a4  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x01ad  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

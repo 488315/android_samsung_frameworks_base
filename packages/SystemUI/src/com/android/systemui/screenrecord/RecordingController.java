@@ -70,7 +70,6 @@ public final class RecordingController implements CallbackController {
     public final class AnonymousClass3 extends CountDownTimer {
         public final /* synthetic */ PendingIntent val$startIntent;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(long j, long j2, PendingIntent pendingIntent) {
             super(j, j2);
             this.val$startIntent = pendingIntent;

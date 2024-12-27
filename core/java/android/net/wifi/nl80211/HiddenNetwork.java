@@ -9,7 +9,6 @@ public class HiddenNetwork implements Parcelable {
     public static final Parcelable.Creator<HiddenNetwork> CREATOR =
             new Parcelable.Creator<
                     HiddenNetwork>() { // from class: android.net.wifi.nl80211.HiddenNetwork.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HiddenNetwork createFromParcel(Parcel in) {
                     HiddenNetwork result = new HiddenNetwork();
@@ -17,7 +16,6 @@ public class HiddenNetwork implements Parcelable {
                     return result;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HiddenNetwork[] newArray(int size) {
                     return new HiddenNetwork[size];

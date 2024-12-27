@@ -7,13 +7,11 @@ import android.os.Parcelable;
 public class Voicemail implements Parcelable {
     public static final Parcelable.Creator<Voicemail> CREATOR =
             new Parcelable.Creator<Voicemail>() { // from class: android.telecom.Voicemail.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Voicemail createFromParcel(Parcel in) {
                     return new Voicemail(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Voicemail[] newArray(int size) {
                     return new Voicemail[size];

@@ -4492,8 +4492,6 @@ public final class DaggerReferenceGlobalRootComponent {
                 this.id = i;
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r0v8, types: [T, android.view.View, com.android.keyguard.KeyguardSecSecurityContainer, java.lang.Object] */
             @Override // javax.inject.Provider
             public final T get() {
                 switch (this.id) {
@@ -5970,7 +5968,6 @@ public final class DaggerReferenceGlobalRootComponent {
             this.qSButtonsContainerControllerProvider = DoubleCheck.provider(new SwitchingProvider(this.referenceGlobalRootComponentImpl, this.referenceSysUIComponentImpl, this.qSSceneComponentImpl, 37));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public VolumeBar injectVolumeBar(VolumeBar volumeBar) {
             volumeBar.mVolumeSeekBar = volumeSeekBar();
             volumeBar.mVolumeSeekBarForEditMode = volumeSeekBar();
@@ -5991,7 +5988,6 @@ public final class DaggerReferenceGlobalRootComponent {
             return QSScopeModule_ProvideThemedContextFactory.provideThemedContext(this.rootView);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public LayoutInflater qSThemedContextLayoutInflater() {
             Context provideThemedContext = QSScopeModule_ProvideThemedContextFactory.provideThemedContext(this.rootView);
             QSScopeModule.Companion.getClass();
@@ -6308,8 +6304,6 @@ public final class DaggerReferenceGlobalRootComponent {
                 throw new AssertionError(this.id);
             }
 
-            /* JADX WARN: Type inference failed for: r12v123, types: [T, com.android.internal.jank.InteractionJankMonitor] */
-            /* JADX WARN: Type inference failed for: r1v17, types: [T, android.hardware.devicestate.DeviceStateManager$DeviceStateCallback, android.hardware.devicestate.DeviceStateManager$FoldStateListener] */
             public final T get0() {
                 switch (this.id) {
                     case 0:
@@ -6779,7 +6773,6 @@ public final class DaggerReferenceGlobalRootComponent {
                 }
             }
 
-            /* JADX WARN: Type inference failed for: r2v62, types: [T, android.permission.PermissionManager, java.lang.Object] */
             public final T get1() {
                 switch (this.id) {
                     case 100:
@@ -9280,9 +9273,6 @@ public final class DaggerReferenceGlobalRootComponent {
                 this.id = i;
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r0v40, types: [T, com.android.systemui.log.echo.LogcatEchoTrackerDebug] */
-            /* JADX WARN: Type inference failed for: r3v103, types: [T, com.android.systemui.Dumpable, com.android.systemui.model.SysUiState] */
             private T get0() {
                 int i = 0;
                 switch (this.id) {
@@ -10370,7 +10360,6 @@ public final class DaggerReferenceGlobalRootComponent {
                 }
             }
 
-            /* JADX WARN: Type inference failed for: r1v19, types: [T, com.android.systemui.audio.soundcraft.SoundCraftNowBarView] */
             public final T get11() {
                 int i = 0;
                 switch (this.id) {
@@ -10603,8 +10592,6 @@ public final class DaggerReferenceGlobalRootComponent {
                 }
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r1v197, types: [T, android.hardware.SensorPrivacyManager$OnAllSensorPrivacyChangedListener, com.android.systemui.statusbar.policy.SensorPrivacyControllerImpl] */
             public final T get12() {
                 int i = 0;
                 switch (this.id) {
@@ -11654,7 +11641,6 @@ public final class DaggerReferenceGlobalRootComponent {
                 }
             }
 
-            /* JADX WARN: Type inference failed for: r4v1, types: [T, java.util.ArrayList] */
             public final T get16() {
                 int i = 0;
                 switch (this.id) {
@@ -11952,9 +11938,6 @@ public final class DaggerReferenceGlobalRootComponent {
                 }
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r0v253, types: [T, com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl] */
-            /* JADX WARN: Type inference failed for: r4v46, types: [T, com.android.systemui.statusbar.connectivity.AccessPointControllerImpl, com.android.wifitrackerlib.WifiPickerTracker$WifiPickerTrackerCallback] */
             public final T get2() {
                 switch (this.id) {
                     case 200:
@@ -13070,7 +13053,6 @@ public final class DaggerReferenceGlobalRootComponent {
                 }
             }
 
-            /* JADX WARN: Type inference failed for: r1v166, types: [T, com.android.systemui.statusbar.LightRevealScrim] */
             public final T get6() {
                 switch (this.id) {
                     case VolteConstants.ErrorCode.BUSY_EVERYWHERE /* 600 */:
@@ -17740,7 +17722,6 @@ public final class DaggerReferenceGlobalRootComponent {
             return new MinimumTilesInteractor((MinimumTilesRepository) this.minimumTilesResourceRepositoryProvider.get());
         }
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.display.ui.view.MirroringConfirmationDialogDelegate$Factory] */
         public final MirroringConfirmationDialogDelegate$Factory mirroringConfirmationDialogDelegateFactory() {
             final Context context = (Context) this.referenceGlobalRootComponentImpl.provideApplicationContextProvider.get();
             final SystemUIBottomSheetDialog$Factory systemUIBottomSheetDialogFactory = systemUIBottomSheetDialogFactory();
@@ -18091,7 +18072,6 @@ public final class DaggerReferenceGlobalRootComponent {
             return headerController;
         }
 
-        /* JADX WARN: Type inference failed for: r9v0, types: [com.android.systemui.statusbar.OperatorNameViewController$Factory] */
         public final OperatorNameViewController$Factory operatorNameViewControllerFactory() {
             final DarkIconDispatcher darkIconDispatcher = (DarkIconDispatcher) this.darkIconDispatcherImplProvider.get();
             final TunerService tunerService = (TunerService) this.tunerServiceImplProvider.get();
@@ -19061,7 +19041,6 @@ public final class DaggerReferenceGlobalRootComponent {
             return SystemSettingsImpl_Factory.newInstance((ContentResolver) this.referenceGlobalRootComponentImpl.provideContentResolverProvider.get(), (UserTracker) this.provideUserTrackerProvider.get());
         }
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.statusbar.phone.SystemUIBottomSheetDialog$Factory] */
         public final SystemUIBottomSheetDialog$Factory systemUIBottomSheetDialogFactory() {
             final Context context = (Context) this.referenceGlobalRootComponentImpl.provideApplicationContextProvider.get();
             final CoroutineScope coroutineScope = (CoroutineScope) this.referenceGlobalRootComponentImpl.applicationScopeProvider.get();
@@ -19130,7 +19109,6 @@ public final class DaggerReferenceGlobalRootComponent {
             return new UserSetupInteractor((UserSetupRepository) this.userSetupRepositoryImplProvider.get());
         }
 
-        /* JADX WARN: Type inference failed for: r6v0, types: [com.android.systemui.statusbar.policy.VariableDateViewController$Factory] */
         public final VariableDateViewController$Factory variableDateViewControllerFactory() {
             final SystemClock systemClock = (SystemClock) this.bindSystemClockProvider.get();
             final BroadcastDispatcher broadcastDispatcher = (BroadcastDispatcher) this.broadcastDispatcherProvider.get();
@@ -19616,7 +19594,6 @@ public final class DaggerReferenceGlobalRootComponent {
                 this.id = i;
             }
 
-            /* JADX WARN: Type inference failed for: r0v65, types: [T, android.view.View] */
             @Override // javax.inject.Provider
             public final T get() {
                 switch (this.id) {

@@ -17,7 +17,6 @@ final class CommunalHubKt$WidgetContent$1$1 extends SuspendLambda implements Fun
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalHubKt$WidgetContent$1$1(BaseCommunalViewModel baseCommunalViewModel, Continuation continuation) {
         super(2, continuation);
         this.$viewModel = baseCommunalViewModel;

@@ -101,7 +101,6 @@ public final class DeviceIdleJobsController extends StateController {
         DEBUG = JobSchedulerService.DEBUG || Log.isLoggable("JobScheduler.DeviceIdle", 3);
     }
 
-    /* JADX WARN: Type inference failed for: r7v2, types: [com.android.server.job.controllers.DeviceIdleJobsController$$ExternalSyntheticLambda0] */
     public DeviceIdleJobsController(JobSchedulerService jobSchedulerService) {
         super(jobSchedulerService);
         this.mForegroundUids = new SparseBooleanArray();

@@ -61,7 +61,6 @@ final class FromAlternateBouncerTransitionInteractor$listenForAlternateBouncerTo
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromAlternateBouncerTransitionInteractor$listenForAlternateBouncerToLockscreenHubAodOrDozing$1(FromAlternateBouncerTransitionInteractor fromAlternateBouncerTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromAlternateBouncerTransitionInteractor;

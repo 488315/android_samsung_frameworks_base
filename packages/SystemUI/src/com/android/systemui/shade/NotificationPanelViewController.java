@@ -1802,11 +1802,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             return !notificationPanelViewController27.mGestureWaitForTouchSlop || notificationPanelViewController27.isTracking();
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:144:0x031f  */
-        /* JADX WARN: Removed duplicated region for block: B:323:0x05a7  */
-        /* JADX WARN: Removed duplicated region for block: B:326:0x05d4  */
-        /* JADX WARN: Removed duplicated region for block: B:330:0x05de  */
-        /* JADX WARN: Removed duplicated region for block: B:350:0x061b  */
         @Override // com.android.systemui.Gefingerpoken
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -2551,7 +2546,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         
             if (r16.this$0.mPulseExpansionHandler.isExpanding != false) goto L178;
          */
-        /* JADX WARN: Removed duplicated region for block: B:338:0x07d3  */
         @Override // com.android.systemui.Gefingerpoken
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -2576,9 +2570,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         motionEvent.offsetLocation(-rawX, -rawY);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0131  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0205  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x01ec  */
     /* renamed from: -$$Nest$mendMotionEvent, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2682,11 +2673,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* JADX WARN: Type inference failed for: r10v19, types: [com.android.systemui.shade.NotificationPanelViewController$17] */
-    /* JADX WARN: Type inference failed for: r11v17, types: [com.android.systemui.shade.NotificationPanelViewController$2] */
-    /* JADX WARN: Type inference failed for: r11v18, types: [com.android.systemui.shade.NotificationPanelViewController$16] */
-    /* JADX WARN: Type inference failed for: r13v2, types: [com.android.systemui.shade.NotificationPanelViewController$1] */
-    /* JADX WARN: Type inference failed for: r15v5, types: [com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda17] */
     public NotificationPanelViewController(DcmMascotViewContainer dcmMascotViewContainer, PluginLockMediator pluginLockMediator, NotificationPanelView notificationPanelView, KeyguardTouchAnimator keyguardTouchAnimator, Lazy lazy, Handler handler, LayoutInflater layoutInflater, FeatureFlags featureFlags, NotificationWakeUpCoordinator notificationWakeUpCoordinator, PulseExpansionHandler pulseExpansionHandler, DynamicPrivacyController dynamicPrivacyController, KeyguardBypassController keyguardBypassController, FalsingManager falsingManager, FalsingCollector falsingCollector, KeyguardStateController keyguardStateController, StatusBarStateController statusBarStateController, StatusBarWindowStateController statusBarWindowStateController, NotificationShadeWindowController notificationShadeWindowController, DozeLog dozeLog, DozeParameters dozeParameters, CommandQueue commandQueue, VibratorHelper vibratorHelper, LatencyTracker latencyTracker, AccessibilityManager accessibilityManager, int i, KeyguardUpdateMonitor keyguardUpdateMonitor, MetricsLogger metricsLogger, ShadeLogger shadeLogger, ConfigurationController configurationController, Provider provider, StatusBarTouchableRegionManager statusBarTouchableRegionManager, ConversationNotificationManager conversationNotificationManager, MediaHierarchyManager mediaHierarchyManager, StatusBarKeyguardViewManager statusBarKeyguardViewManager, NotificationGutsManager notificationGutsManager, NotificationsQSContainerController notificationsQSContainerController, NotificationStackScrollLayoutController notificationStackScrollLayoutController, KeyguardStatusViewComponent.Factory factory, KeyguardQsUserSwitchComponent.Factory factory2, KeyguardUserSwitcherComponent.Factory factory3, KeyguardStatusBarViewComponent.Factory factory4, LockscreenShadeTransitionController lockscreenShadeTransitionController, AuthController authController, ScrimController scrimController, UserManager userManager, MediaDataManager mediaDataManager, NotificationShadeDepthController notificationShadeDepthController, AmbientState ambientState, SecLockIconViewController secLockIconViewController, KeyguardMediaController keyguardMediaController, TapAgainViewController tapAgainViewController, NavigationModeController navigationModeController, NavigationBarController navigationBarController, QuickSettingsControllerImpl quickSettingsControllerImpl, FragmentService fragmentService, IStatusBarService iStatusBarService, ContentResolver contentResolver, ShadeHeaderController shadeHeaderController, ScreenOffAnimationController screenOffAnimationController, LockscreenGestureLogger lockscreenGestureLogger, ShadeExpansionStateManager shadeExpansionStateManager, ShadeRepository shadeRepository, Optional<SysUIUnfoldComponent> optional, SysUiState sysUiState, Provider provider2, KeyguardWallpaperController keyguardWallpaperController, WallpaperImageInjectCreator wallpaperImageInjectCreator, EmergencyButtonController.Factory factory5, KeyguardUnlockAnimationController keyguardUnlockAnimationController, KeyguardIndicationController keyguardIndicationController, NotificationListContainer notificationListContainer, NotificationStackSizeCalculator notificationStackSizeCalculator, UnlockedScreenOffAnimationController unlockedScreenOffAnimationController, SystemClock systemClock, KeyguardBottomAreaViewModel keyguardBottomAreaViewModel, KeyguardBottomAreaInteractor keyguardBottomAreaInteractor, KeyguardClockInteractor keyguardClockInteractor, AlternateBouncerInteractor alternateBouncerInteractor, DreamingToLockscreenTransitionViewModel dreamingToLockscreenTransitionViewModel, OccludedToLockscreenTransitionViewModel occludedToLockscreenTransitionViewModel, LockscreenToDreamingTransitionViewModel lockscreenToDreamingTransitionViewModel, GoneToDreamingTransitionViewModel goneToDreamingTransitionViewModel, GoneToDreamingLockscreenHostedTransitionViewModel goneToDreamingLockscreenHostedTransitionViewModel, LockscreenToOccludedTransitionViewModel lockscreenToOccludedTransitionViewModel, PrimaryBouncerToGoneTransitionViewModel primaryBouncerToGoneTransitionViewModel, CoroutineDispatcher coroutineDispatcher, KeyguardTransitionInteractor keyguardTransitionInteractor, DumpManager dumpManager, KeyguardLongPressViewModel keyguardLongPressViewModel, KeyguardInteractor keyguardInteractor, ActivityStarter activityStarter, SharedNotificationContainerInteractor sharedNotificationContainerInteractor, ActiveNotificationsInteractor activeNotificationsInteractor, HeadsUpNotificationInteractor headsUpNotificationInteractor, Lazy lazy2, Lazy lazy3, ShadeAnimationInteractor shadeAnimationInteractor, KeyguardViewConfigurator keyguardViewConfigurator, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor, SplitShadeStateController splitShadeStateController, PowerInteractor powerInteractor, KeyguardClockPositionAlgorithm keyguardClockPositionAlgorithm, NaturalScrollingSettingObserver naturalScrollingSettingObserver, PrivacyDialogController privacyDialogController, KeyguardPunchHoleVIViewController.Factory factory6, NotificationShelfManager notificationShelfManager, KeyguardEditModeController keyguardEditModeController, KeyguardClickController keyguardClickController, PluginLockData pluginLockData, Lazy lazy4, IndicatorTouchHandler indicatorTouchHandler, LockscreenNotificationManager lockscreenNotificationManager, LockscreenNotificationIconsOnlyController lockscreenNotificationIconsOnlyController, Lazy lazy5, QsStatusEventLog qsStatusEventLog, SelectedUserInteractor selectedUserInteractor) {
         int i2 = 0;
         this.mKeyguardAffordanceHelperCallback = new KeyguardAffordanceHelperCallback(this, i2);
@@ -3972,10 +3958,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         fling(f, 1.0f, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:55:0x014a  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x019b  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x01cd  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x0167  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6584,8 +6566,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         keyguardUserSwitcherController.setAlpha(f);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:57:0x01ab  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x01e4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7035,8 +7015,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         this.mKeyguardQsUserSwitchEnabled = z;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0096  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

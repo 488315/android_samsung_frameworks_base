@@ -20,7 +20,6 @@ final class UserSwitcherInteractor$switchUser$1 extends SuspendLambda implements
         final /* synthetic */ Runnable $runnable;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(Runnable runnable, Continuation continuation) {
             super(2, continuation);
             this.$runnable = runnable;
@@ -48,7 +47,6 @@ final class UserSwitcherInteractor$switchUser$1 extends SuspendLambda implements
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherInteractor$switchUser$1(UserSwitcherInteractor userSwitcherInteractor, Runnable runnable, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userSwitcherInteractor;

@@ -12,8 +12,6 @@ public final class ActivatableNotificationViewBinder {
     private ActivatableNotificationViewBinder() {
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

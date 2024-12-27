@@ -10,14 +10,12 @@ public final class GameSessionViewHostConfiguration implements Parcelable {
             new Parcelable.Creator<
                     GameSessionViewHostConfiguration>() { // from class:
                                                           // android.service.games.GameSessionViewHostConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GameSessionViewHostConfiguration createFromParcel(Parcel source) {
                     return new GameSessionViewHostConfiguration(
                             source.readInt(), source.readInt(), source.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GameSessionViewHostConfiguration[] newArray(int size) {
                     return new GameSessionViewHostConfiguration[0];

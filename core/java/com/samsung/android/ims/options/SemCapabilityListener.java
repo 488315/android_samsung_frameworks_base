@@ -61,7 +61,6 @@ public class SemCapabilityListener {
         this.callback.mToken = token;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class SemCapabilityServiceEventListenerDelegate extends SemCapabilityServiceEventListener.Stub {
         String mToken;
 

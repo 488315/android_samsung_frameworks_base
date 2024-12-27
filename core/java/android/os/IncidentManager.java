@@ -206,7 +206,6 @@ public class IncidentManager {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onReportApproved$0() {
                 AuthListener.this.onReportApproved();
             }
@@ -228,7 +227,6 @@ public class IncidentManager {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onReportDenied$1() {
                 AuthListener.this.onReportDenied();
             }
@@ -267,7 +265,6 @@ public class IncidentManager {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onDumpSection$0(ParcelFileDescriptor pfd) {
                 DumpCallback.this.onDumpSection(
                         DumpCallback.this.mId, new ParcelFileDescriptor.AutoCloseOutputStream(pfd));
@@ -490,7 +487,6 @@ public class IncidentManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getIIncidentManagerLocked$0() {
         synchronized (this.mLock) {
             this.mIncidentService = null;
@@ -526,7 +522,6 @@ public class IncidentManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getCompanionServiceLocked$1() {
         synchronized (this.mLock) {
             this.mCompanionService = null;

@@ -42,7 +42,6 @@ public abstract class RemoteAnimationRunnerCompat extends IRemoteAnimationRunner
             runnable.run();
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:89:0x0279 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

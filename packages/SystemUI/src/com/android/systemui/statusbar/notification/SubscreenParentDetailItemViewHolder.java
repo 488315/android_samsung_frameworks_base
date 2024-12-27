@@ -40,7 +40,6 @@ public class SubscreenParentDetailItemViewHolder extends RecyclerView.ViewHolder
     public final TextView mTitle;
     public final ImageView mTwoPhoneIcon;
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.statusbar.notification.SubscreenParentDetailItemViewHolder$2] */
     public SubscreenParentDetailItemViewHolder(View view) {
         super(view);
         this.mHandler = new Handler();

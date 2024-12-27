@@ -739,9 +739,6 @@ public final class VolumeDialogImpl implements VolumeDialog, Dumpable, Configura
         Trace.endSection();
     }
 
-    /* JADX WARN: Type inference failed for: r1v18, types: [com.android.systemui.volume.VolumeDialogImpl$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r4v5, types: [com.android.systemui.volume.VolumeDialogImpl$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r6v2, types: [com.android.systemui.volume.VolumeDialogImpl$7] */
     public VolumeDialogImpl(Context context, VolumeDialogController volumeDialogController, AccessibilityManagerWrapper accessibilityManagerWrapper, DeviceProvisionedController deviceProvisionedController, ConfigurationController configurationController, MediaOutputDialogManager mediaOutputDialogManager, InteractionJankMonitor interactionJankMonitor, VolumePanelNavigationInteractor volumePanelNavigationInteractor, VolumeNavigator volumeNavigator, boolean z, CsdWarningDialog.Factory factory, DevicePostureController devicePostureController, Looper looper, VolumePanelFlag volumePanelFlag, DumpManager dumpManager, Lazy lazy, VibratorHelper vibratorHelper, SystemClock systemClock, VolumeDialogInteractor volumeDialogInteractor) {
         boolean z2 = true;
         ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, R.style.volume_dialog_theme);

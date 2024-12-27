@@ -85,7 +85,6 @@ public final class TranslationManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createOnDeviceTranslator$4(
             final Executor executor,
             final Consumer callback,
@@ -354,7 +353,6 @@ public final class TranslationManager {
         return atomicInteger;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class TranslationCapabilityRemoteCallback extends IRemoteCallback.Stub {
         private final Executor mExecutor;
         private final Consumer<TranslationCapability> mListener;
@@ -379,7 +377,6 @@ public final class TranslationManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$sendResult$1(final Bundle bundle) throws Exception {
             this.mExecutor.execute(
                     new Runnable() { // from class:
@@ -392,7 +389,6 @@ public final class TranslationManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         /* renamed from: onTranslationCapabilityUpdate, reason: merged with bridge method [inline-methods] */
         public void lambda$sendResult$0(Bundle bundle) {
             TranslationCapability capability =

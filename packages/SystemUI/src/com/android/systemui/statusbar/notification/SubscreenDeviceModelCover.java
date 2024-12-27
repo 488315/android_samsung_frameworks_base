@@ -54,7 +54,6 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
     public int mTopPopupHeight;
     public final SubscreenDeviceModelCover$mUpdateMonitorCallback$1 mUpdateMonitorCallback;
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.statusbar.notification.SubscreenDeviceModelCover$mUpdateMonitorCallback$1] */
     public SubscreenDeviceModelCover(Context context, KeyguardUpdateMonitor keyguardUpdateMonitor, SettingsHelper settingsHelper, UserContextProvider userContextProvider, SubscreenNotificationController subscreenNotificationController, Lazy lazy, CommonNotifCollection commonNotifCollection, LogBuffer logBuffer, NotificationInterruptStateProvider notificationInterruptStateProvider, Lazy lazy2, Lazy lazy3, NotificationVisibilityProvider notificationVisibilityProvider, BindEventManager bindEventManager, NotificationController notificationController, UserManager userManager, ConversationNotificationManager conversationNotificationManager) {
         super(context, keyguardUpdateMonitor, settingsHelper, userContextProvider, subscreenNotificationController, lazy, commonNotifCollection, logBuffer, notificationInterruptStateProvider, lazy2, lazy3, notificationVisibilityProvider, bindEventManager, notificationController, userManager, conversationNotificationManager);
         this.mUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelCover$mUpdateMonitorCallback$1

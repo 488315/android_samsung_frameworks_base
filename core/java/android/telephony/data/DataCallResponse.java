@@ -24,13 +24,11 @@ public final class DataCallResponse implements Parcelable {
     public static final Parcelable.Creator<DataCallResponse> CREATOR =
             new Parcelable.Creator<
                     DataCallResponse>() { // from class: android.telephony.data.DataCallResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataCallResponse createFromParcel(Parcel source) {
                     return new DataCallResponse(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DataCallResponse[] newArray(int size) {
                     return new DataCallResponse[size];

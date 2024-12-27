@@ -288,8 +288,6 @@ public final class OngoingActivityData {
         this((i11 & 1) != 0 ? "" : str, pendingIntent, icon, remoteViews, (i11 & 16) != 0 ? 0 : i, (i11 & 32) != 0 ? -1 : i2, (i11 & 64) != 0 ? -1 : i3, arrayList, arrayList2, icon2, num, str2, str3, remoteViews2, (i11 & 16384) != 0 ? Boolean.TRUE : bool, charSequence, remoteViews3, (131072 & i11) != 0 ? 0 : i4, str4, i5, i6, (i11 & QuickStepContract.SYSUI_STATE_DEVICE_DOZING) != 0 ? false : z, icon3, icon4, remoteViews4, remoteViews5, remoteViews6, remoteViews7, parcelableArr, icon5, i7, str5, icon6, icon7, str6, str7, i8, str8, l, icon8, str9, notificationEntry, i9, i10);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0194  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -302,7 +300,6 @@ public final class OngoingActivityData {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityData.<init>(com.android.systemui.statusbar.notification.collection.NotificationEntry, android.service.notification.StatusBarNotification, android.content.Context):void");
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

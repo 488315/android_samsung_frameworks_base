@@ -43,7 +43,6 @@ public final class WirelessChargingAnimation {
             }
         }
 
-        /* JADX WARN: Type inference failed for: r8v8, types: [com.android.systemui.charging.WirelessChargingAnimation$WirelessChargingView$1] */
         public WirelessChargingView(Context context, Looper looper, int i, int i2, Callback callback, boolean z, RippleShader.RippleShape rippleShape, UiEventLogger uiEventLogger) {
             WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
             this.mParams = layoutParams;

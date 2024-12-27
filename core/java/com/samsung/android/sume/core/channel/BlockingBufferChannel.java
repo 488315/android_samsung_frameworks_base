@@ -23,7 +23,6 @@ public class BlockingBufferChannel implements BufferChannel {
         }
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.channel.Channel
     public MediaBuffer receive() {
         try {

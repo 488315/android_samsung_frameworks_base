@@ -78,8 +78,6 @@ public class QSPanel extends LinearLayout implements TunerService.Tunable {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.plugins.qs.QSTile$Callback, com.android.systemui.qs.QSPanel$1] */
     public final void addTile(final QSPanelControllerBase$TileRecord qSPanelControllerBase$TileRecord) {
         ?? r0 = new SQSTile.SCallback() { // from class: com.android.systemui.qs.QSPanel.1
             @Override // com.android.systemui.plugins.qs.QSTile.Callback

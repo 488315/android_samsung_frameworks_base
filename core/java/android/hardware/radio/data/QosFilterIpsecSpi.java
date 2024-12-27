@@ -8,13 +8,11 @@ public final class QosFilterIpsecSpi implements Parcelable {
     public static final Parcelable.Creator<QosFilterIpsecSpi> CREATOR =
             new Parcelable.Creator<QosFilterIpsecSpi>() { // from class:
                 // android.hardware.radio.data.QosFilterIpsecSpi.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public QosFilterIpsecSpi createFromParcel(Parcel _aidl_source) {
                     return new QosFilterIpsecSpi(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public QosFilterIpsecSpi[] newArray(int _aidl_size) {
                     return new QosFilterIpsecSpi[_aidl_size];

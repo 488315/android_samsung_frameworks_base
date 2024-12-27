@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 public class VideoProfile implements Parcelable {
     public static final Parcelable.Creator<VideoProfile> CREATOR =
             new Parcelable.Creator<VideoProfile>() { // from class: android.telecom.VideoProfile.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VideoProfile createFromParcel(Parcel source) {
                     int state = source.readInt();
@@ -19,7 +18,6 @@ public class VideoProfile implements Parcelable {
                     return new VideoProfile(state, quality);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VideoProfile[] newArray(int size) {
                     return new VideoProfile[size];
@@ -132,7 +130,6 @@ public class VideoProfile implements Parcelable {
                 new Parcelable.Creator<
                         CameraCapabilities>() { // from class:
                                                 // android.telecom.VideoProfile.CameraCapabilities.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CameraCapabilities createFromParcel(Parcel source) {
                         int width = source.readInt();
@@ -142,7 +139,6 @@ public class VideoProfile implements Parcelable {
                         return new CameraCapabilities(width, height, supportsZoom, maxZoom);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public CameraCapabilities[] newArray(int size) {
                         return new CameraCapabilities[size];

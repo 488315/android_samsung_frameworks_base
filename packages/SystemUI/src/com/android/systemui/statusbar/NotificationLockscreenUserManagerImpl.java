@@ -191,8 +191,6 @@ public final class NotificationLockscreenUserManagerImpl implements Dumpable, No
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v0, types: [com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl$1] */
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl$2] */
     public NotificationLockscreenUserManagerImpl(Context context, BroadcastDispatcher broadcastDispatcher, DevicePolicyManager devicePolicyManager, UserManager userManager, UserTracker userTracker, Lazy lazy, Lazy lazy2, NotificationClickNotifier notificationClickNotifier, Lazy lazy3, KeyguardManager keyguardManager, StatusBarStateController statusBarStateController, Executor executor, Executor executor2, DeviceProvisionedController deviceProvisionedController, KeyguardStateController keyguardStateController, SecureSettings secureSettings, DumpManager dumpManager, LockPatternUtils lockPatternUtils, FeatureFlagsClassic featureFlagsClassic, Lazy lazy4) {
         ArrayList arrayList = new ArrayList();
         this.mLockScreenUris = arrayList;

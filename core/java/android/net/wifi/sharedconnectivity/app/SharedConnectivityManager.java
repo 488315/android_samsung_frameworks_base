@@ -52,7 +52,6 @@ public class SharedConnectivityManager {
                 }
             };
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class SharedConnectivityCallbackProxy extends ISharedConnectivityCallback.Stub {
         private final SharedConnectivityClientCallback mCallback;
         private final Executor mExecutor;
@@ -83,7 +82,6 @@ public class SharedConnectivityManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onServiceConnected$0() {
             this.mCallback.onServiceConnected();
         }
@@ -108,7 +106,6 @@ public class SharedConnectivityManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onHotspotNetworksUpdated$1(List networks) {
             this.mCallback.onHotspotNetworksUpdated(networks);
         }
@@ -133,7 +130,6 @@ public class SharedConnectivityManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onKnownNetworksUpdated$2(List networks) {
             this.mCallback.onKnownNetworksUpdated(networks);
         }
@@ -159,7 +155,6 @@ public class SharedConnectivityManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSharedConnectivitySettingsChanged$3(
                 SharedConnectivitySettingsState state) {
             this.mCallback.onSharedConnectivitySettingsChanged(state);
@@ -187,7 +182,6 @@ public class SharedConnectivityManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onHotspotNetworkConnectionStatusChanged$4(
                 HotspotNetworkConnectionStatus status) {
             this.mCallback.onHotspotNetworkConnectionStatusChanged(status);
@@ -214,7 +208,6 @@ public class SharedConnectivityManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onKnownNetworkConnectionStatusChanged$5(
                 KnownNetworkConnectionStatus status) {
             this.mCallback.onKnownNetworkConnectionStatusChanged(status);
@@ -287,7 +280,6 @@ public class SharedConnectivityManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onServiceConnected$0(
                 SharedConnectivityClientCallback callback) {
             SharedConnectivityManager.this.registerCallbackInternal(
@@ -334,7 +326,6 @@ public class SharedConnectivityManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void bind() {
         this.mServiceConnection = new AnonymousClass1();
         boolean result =
@@ -378,7 +369,6 @@ public class SharedConnectivityManager {
         return this.mBroadcastReceiver;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void registerCallbackInternal(
             SharedConnectivityClientCallback callback, SharedConnectivityCallbackProxy proxy) {
         try {

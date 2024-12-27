@@ -145,7 +145,6 @@ public final class DreamOverlayContainerViewController extends ViewController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.dreams.DreamOverlayContainerViewController$2] */
     public DreamOverlayContainerViewController(DreamOverlayContainerView dreamOverlayContainerView, ComplicationHostViewController complicationHostViewController, ViewGroup viewGroup, View view, AmbientStatusBarViewController ambientStatusBarViewController, LowLightTransitionCoordinator lowLightTransitionCoordinator, TouchInsetManager.TouchInsetSession touchInsetSession, BlurUtils blurUtils, Handler handler, CoroutineDispatcher coroutineDispatcher, Resources resources, int i, long j, long j2, PrimaryBouncerCallbackInteractor primaryBouncerCallbackInteractor, DreamOverlayAnimationsController dreamOverlayAnimationsController, DreamOverlayStateController dreamOverlayStateController, BouncerlessScrimController bouncerlessScrimController, KeyguardTransitionInteractor keyguardTransitionInteractor, ShadeInteractor shadeInteractor, CommunalInteractor communalInteractor, DreamManager dreamManager) {
         super(dreamOverlayContainerView);
         this.mBouncerlessExpansionCallback = new AnonymousClass1();

@@ -10,13 +10,11 @@ import java.io.PrintWriter;
 public final class ComponentName implements Parcelable, Cloneable, Comparable<ComponentName> {
     public static final Parcelable.Creator<ComponentName> CREATOR =
             new Parcelable.Creator<ComponentName>() { // from class: android.content.ComponentName.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ComponentName createFromParcel(Parcel in) {
                     return new ComponentName(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ComponentName[] newArray(int size) {
                     return new ComponentName[size];

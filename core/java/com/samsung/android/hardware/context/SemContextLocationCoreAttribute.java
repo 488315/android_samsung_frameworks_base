@@ -12,13 +12,11 @@ public class SemContextLocationCoreAttribute extends SemContextAttribute {
             new Parcelable.Creator<
                     SemContextLocationCoreAttribute>() { // from class:
                                                          // com.samsung.android.hardware.context.SemContextLocationCoreAttribute.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextLocationCoreAttribute createFromParcel(Parcel in) {
                     return new SemContextLocationCoreAttribute(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextLocationCoreAttribute[] newArray(int size) {
                     return new SemContextLocationCoreAttribute[size];

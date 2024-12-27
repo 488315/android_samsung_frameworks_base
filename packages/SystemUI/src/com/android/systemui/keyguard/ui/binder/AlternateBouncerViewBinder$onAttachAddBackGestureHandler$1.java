@@ -14,7 +14,6 @@ public final class AlternateBouncerViewBinder$onAttachAddBackGestureHandler$1 im
     };
     public final /* synthetic */ AlternateBouncerViewBinder this$0;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.keyguard.ui.binder.AlternateBouncerViewBinder$onAttachAddBackGestureHandler$1$onBackInvokedCallback$1] */
     public AlternateBouncerViewBinder$onAttachAddBackGestureHandler$1(AlternateBouncerViewBinder alternateBouncerViewBinder) {
         this.this$0 = alternateBouncerViewBinder;
     }

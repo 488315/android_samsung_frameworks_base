@@ -19,7 +19,6 @@ final class PromptIconViewModel$contentDescriptionId$1$1 extends SuspendLambda i
     int label;
     final /* synthetic */ PromptIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptIconViewModel$contentDescriptionId$1$1(PromptIconViewModel promptIconViewModel, Continuation continuation) {
         super(6, continuation);
         this.this$0 = promptIconViewModel;

@@ -79,7 +79,6 @@ public abstract class RemoteService extends ServiceStub
         return super.onUnbind(intent);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // com.samsung.android.sume.core.service.ServiceStub,
               // com.samsung.android.sume.core.service.ServiceController
     public ResponseHolder request(int id, Request request) {

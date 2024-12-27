@@ -1,7 +1,5 @@
 package com.android.server.backup.restore;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class UnifiedRestoreState {
     public static final /* synthetic */ UnifiedRestoreState[] $VALUES;
     public static final UnifiedRestoreState FINAL;

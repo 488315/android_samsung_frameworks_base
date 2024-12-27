@@ -279,7 +279,6 @@ public interface ISessionProcessorImpl extends IInterface {
             _arg2.put(k, v);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements ISessionProcessorImpl {
             private IBinder mRemote;
 

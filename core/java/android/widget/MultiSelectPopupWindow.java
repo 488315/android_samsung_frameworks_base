@@ -135,7 +135,6 @@ public class MultiSelectPopupWindow {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateFloatingToolbarVisibility(MotionEvent event) {
         if (sTextActionMode != null) {
             switch (event.getActionMasked()) {
@@ -331,7 +330,6 @@ public class MultiSelectPopupWindow {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isSelectAllEnable() {
         CharSequence text = sTextView.getTextForMultiSelection();
         if (text != null) {
@@ -344,7 +342,6 @@ public class MultiSelectPopupWindow {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isShareViaEnable() {
         if (isEmergencyMode()) {
             return false;
@@ -377,7 +374,6 @@ public class MultiSelectPopupWindow {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isEmergencyMode() {
         boolean isEmergencyMode =
                 Settings.System.getInt(
@@ -398,7 +394,6 @@ public class MultiSelectPopupWindow {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public PositionListener getPositionListener() {
         if (this.mPositionListener == null) {
             this.mPositionListener = new PositionListener();
@@ -556,7 +551,6 @@ public class MultiSelectPopupWindow {
             initHandles();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void initDrawables() {
             if (MultiSelectPopupWindow.this.mSelectHandleLeft == null) {
                 MultiSelectPopupWindow.this.mSelectHandleLeft =
@@ -576,7 +570,6 @@ public class MultiSelectPopupWindow {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void initHandles() {
             if (this.mStartHandle == null) {
                 this.mStartHandle =
@@ -995,7 +988,6 @@ public class MultiSelectPopupWindow {
             this.mDrawable.draw(c);
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:25:0x00fc, code lost:
 
            return true;

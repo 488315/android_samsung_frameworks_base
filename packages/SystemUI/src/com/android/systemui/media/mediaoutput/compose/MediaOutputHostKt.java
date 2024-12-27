@@ -37,7 +37,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 
 public abstract class MediaOutputHostKt {
-    /* JADX WARN: Type inference failed for: r2v8, types: [com.android.systemui.media.mediaoutput.compose.MediaOutputHostKt$MediaOutputHost$1, kotlin.jvm.internal.Lambda] */
     public static final void MediaOutputHost(final LabsViewModel labsViewModel, Composer composer, final int i, final int i2) {
         Object failure;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -85,12 +84,10 @@ public abstract class MediaOutputHostKt {
             final MutableState collectAsState = SnapshotStateKt.collectAsState(labsViewModel.isCloseOnTouchOutside, Boolean.TRUE, null, composerImpl, 56, 2);
             final MutableState collectAsState2 = SnapshotStateKt.collectAsState(labsViewModel.isSupportMultipleMediaSession, Boolean.FALSE, null, composerImpl, 56, 2);
             ThemeKt.SeslTheme(false, null, ComposableLambdaKt.rememberComposableLambda(-767531723, composerImpl, new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.MediaOutputHostKt$MediaOutputHost$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
 
-                /* JADX WARN: Type inference failed for: r7v1, types: [com.android.systemui.media.mediaoutput.compose.MediaOutputHostKt$MediaOutputHost$1$2, kotlin.jvm.internal.Lambda] */
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     Composer composer2 = (Composer) obj;
@@ -110,7 +107,6 @@ public abstract class MediaOutputHostKt {
                     Modifier fillMaxWidth = SizeKt.fillMaxWidth(Modifier.Companion, 1.0f);
                     final State state = State.this;
                     Modifier m30clickableO2vRcR0$default = ClickableKt.m30clickableO2vRcR0$default(fillMaxWidth, null, null, false, null, new Function0() { // from class: com.android.systemui.media.mediaoutput.compose.MediaOutputHostKt$MediaOutputHost$1.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(0);
                         }
@@ -129,7 +125,6 @@ public abstract class MediaOutputHostKt {
                     long j2 = MaterialTheme.getColorScheme(composerImpl3).onSurfaceVariant;
                     final State state2 = collectAsState2;
                     SurfaceKt.m248SurfaceT9BRK9s(m30clickableO2vRcR0$default, null, j, j2, 0.0f, 0.0f, null, ComposableLambdaKt.rememberComposableLambda(-1098278342, composerImpl3, new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.MediaOutputHostKt$MediaOutputHost$1.2
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(2);
                         }
@@ -162,7 +157,6 @@ public abstract class MediaOutputHostKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.MediaOutputHostKt$MediaOutputHost$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

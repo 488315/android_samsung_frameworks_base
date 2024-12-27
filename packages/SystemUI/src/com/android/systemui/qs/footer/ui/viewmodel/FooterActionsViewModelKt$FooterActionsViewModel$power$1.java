@@ -15,7 +15,6 @@ final /* synthetic */ class FooterActionsViewModelKt$FooterActionsViewModel$powe
     final /* synthetic */ FooterActionsInteractor $footerActionsInteractor;
     final /* synthetic */ GlobalActionsDialogLite $globalActionsDialogLite;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FooterActionsViewModelKt$FooterActionsViewModel$power$1(FalsingManager falsingManager, FooterActionsInteractor footerActionsInteractor, GlobalActionsDialogLite globalActionsDialogLite) {
         super(1, Intrinsics.Kotlin.class, "onPowerButtonClicked", "FooterActionsViewModel$onPowerButtonClicked(Lcom/android/systemui/plugins/FalsingManager;Lcom/android/systemui/qs/footer/domain/interactor/FooterActionsInteractor;Lcom/android/systemui/globalactions/GlobalActionsDialogLite;Lcom/android/systemui/animation/Expandable;)V", 0);
         this.$falsingManager = falsingManager;

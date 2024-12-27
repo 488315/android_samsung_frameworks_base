@@ -24,7 +24,6 @@ final class TrustRepositoryImpl$trust$1 extends SuspendLambda implements Functio
     int label;
     final /* synthetic */ TrustRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TrustRepositoryImpl$trust$1(TrustRepositoryImpl trustRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = trustRepositoryImpl;
@@ -42,7 +41,6 @@ final class TrustRepositoryImpl$trust$1 extends SuspendLambda implements Functio
         return ((TrustRepositoryImpl$trust$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.app.trust.TrustManager$TrustListener, com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$trust$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -90,7 +88,6 @@ final class TrustRepositoryImpl$trust$1 extends SuspendLambda implements Functio
             trustRepositoryLogger.logBuffer.log("TrustRepositoryLog", LogLevel.VERBOSE, "TrustRepository#registerTrustListener", null);
             final TrustRepositoryImpl trustRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$trust$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

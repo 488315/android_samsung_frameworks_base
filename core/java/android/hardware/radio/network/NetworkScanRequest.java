@@ -11,7 +11,6 @@ public class NetworkScanRequest implements Parcelable {
     public static final Parcelable.Creator<NetworkScanRequest> CREATOR =
             new Parcelable.Creator<NetworkScanRequest>() { // from class:
                 // android.hardware.radio.network.NetworkScanRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkScanRequest createFromParcel(Parcel _aidl_source) {
                     NetworkScanRequest _aidl_out = new NetworkScanRequest();
@@ -19,7 +18,6 @@ public class NetworkScanRequest implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkScanRequest[] newArray(int _aidl_size) {
                     return new NetworkScanRequest[_aidl_size];

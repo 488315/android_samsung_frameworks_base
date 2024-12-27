@@ -10,7 +10,6 @@ public class WcdmaSignalStrength implements Parcelable {
     public static final Parcelable.Creator<WcdmaSignalStrength> CREATOR =
             new Parcelable.Creator<WcdmaSignalStrength>() { // from class:
                 // android.hardware.radio.network.WcdmaSignalStrength.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WcdmaSignalStrength createFromParcel(Parcel _aidl_source) {
                     WcdmaSignalStrength _aidl_out = new WcdmaSignalStrength();
@@ -18,7 +17,6 @@ public class WcdmaSignalStrength implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WcdmaSignalStrength[] newArray(int _aidl_size) {
                     return new WcdmaSignalStrength[_aidl_size];

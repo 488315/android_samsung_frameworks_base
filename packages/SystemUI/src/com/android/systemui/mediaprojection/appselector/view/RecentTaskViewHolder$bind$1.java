@@ -26,7 +26,6 @@ final class RecentTaskViewHolder$bind$1 extends SuspendLambda implements Functio
         int label;
         final /* synthetic */ RecentTaskViewHolder this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(RecentTaskViewHolder recentTaskViewHolder, RecentTask recentTask, Continuation continuation) {
             super(2, continuation);
             this.this$0 = recentTaskViewHolder;
@@ -67,7 +66,6 @@ final class RecentTaskViewHolder$bind$1 extends SuspendLambda implements Functio
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RecentTaskViewHolder$bind$1(RecentTask recentTask, RecentTaskViewHolder recentTaskViewHolder, Continuation continuation) {
         super(2, continuation);
         this.$task = recentTask;

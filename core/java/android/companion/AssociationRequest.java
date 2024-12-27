@@ -20,13 +20,11 @@ public final class AssociationRequest implements Parcelable {
     public static final Parcelable.Creator<AssociationRequest> CREATOR =
             new Parcelable.Creator<
                     AssociationRequest>() { // from class: android.companion.AssociationRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AssociationRequest[] newArray(int size) {
                     return new AssociationRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AssociationRequest createFromParcel(Parcel in) {
                     return new AssociationRequest(in);
@@ -168,7 +166,6 @@ public final class AssociationRequest implements Parcelable {
             return this;
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.provider.OneTimeUseBuilder
         public AssociationRequest build() {
             markUsed();

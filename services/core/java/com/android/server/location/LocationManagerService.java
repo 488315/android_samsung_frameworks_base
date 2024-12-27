@@ -1001,7 +1001,6 @@ public final class LocationManagerService extends ILocationManager.Stub
                                                    // com.android.server.location.gnss.GnssLocationProvider.3
                                     public final /* synthetic */ GnssLocationProvider this$0;
 
-                                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                                     public AnonymousClass3(
                                             final GnssLocationProviderSec gnssLocationProviderSec2,
                                             final Handler handler2) {
@@ -2446,11 +2445,6 @@ public final class LocationManagerService extends ILocationManager.Stub
                         : providers.contains("network") ? "network" : (String) providers.get(0);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x007f  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x009e A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x008e  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x005a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2900,7 +2894,6 @@ public final class LocationManagerService extends ILocationManager.Stub
         return arrayList;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final int handleShellCommand(
             ParcelFileDescriptor parcelFileDescriptor,
             ParcelFileDescriptor parcelFileDescriptor2,
@@ -3191,7 +3184,6 @@ public final class LocationManagerService extends ILocationManager.Stub
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void refreshAppOpsRestrictions(int i) {
         PackageTagsList packageTagsList;
         if (i == -1) {
@@ -3272,9 +3264,6 @@ public final class LocationManagerService extends ILocationManager.Stub
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00a1 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x0076  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3403,10 +3392,6 @@ public final class LocationManagerService extends ILocationManager.Stub
                     + " java.lang.String, java.lang.String, java.lang.String):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00a6  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00d4  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00e3 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x00a8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

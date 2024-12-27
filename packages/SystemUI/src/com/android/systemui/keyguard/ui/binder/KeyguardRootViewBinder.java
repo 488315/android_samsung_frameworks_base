@@ -117,7 +117,6 @@ public final class KeyguardRootViewBinder {
         Flags.keyguardBottomAreaRefactor();
         final StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(new BurnInParameters(0, 0, null, 7, null));
         KeyguardRootViewBinder$bind$2 keyguardRootViewBinder$bind$2 = new KeyguardRootViewBinder$bind$2(viewGroup, interactionJankMonitor, deviceEntryHapticsInteractor, vibratorHelper, occludingAppDeviceEntryMessageViewModel, chipbarCoordinator, keyguardRootViewModel, new ViewStateAccessor(new Function0() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardRootViewBinder$bind$viewState$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

@@ -43,7 +43,6 @@ public class NNFWFilterGroup extends NNFWFilter implements MediaFilterGroup {
         super(descriptor);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: loadModel, reason: merged with bridge method [inline-methods] */
     public ModelSelector.Item m9147xd3f4c5ae(MediaBuffer mediaBuffer) {
         final ModelSelector.Item found = this.modelSelector.select(mediaBuffer);

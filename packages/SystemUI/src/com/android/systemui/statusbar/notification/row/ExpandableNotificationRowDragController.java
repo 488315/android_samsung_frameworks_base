@@ -50,16 +50,6 @@ public final class ExpandableNotificationRowDragController {
         context.getResources().getDimensionPixelSize(R.dimen.drag_and_drop_icon_size);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v1, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r7v14 */
-    /* JADX WARN: Type inference failed for: r7v16 */
-    /* JADX WARN: Type inference failed for: r7v17 */
-    /* JADX WARN: Type inference failed for: r7v3, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r7v4, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r7v6, types: [android.graphics.drawable.Drawable] */
-    /* JADX WARN: Type inference failed for: r7v7, types: [android.graphics.drawable.Drawable] */
-    /* JADX WARN: Type inference failed for: r9v1, types: [android.content.pm.PackageManager] */
     public void startDragAndDrop(View view) {
         ExpandableNotificationRow expandableNotificationRow = view instanceof ExpandableNotificationRow ? (ExpandableNotificationRow) view : null;
         Notification notification2 = expandableNotificationRow.mEntry.mSbn.getNotification();

@@ -80,11 +80,6 @@ public class AfterimageCompensationService {
         public AfcThread() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:361:0x02ba A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:365:0x01ba A[Catch: all -> 0x0023, Exception -> 0x0027, TryCatch #19 {Exception -> 0x0027, blocks: (B:4:0x0002, B:6:0x0008, B:8:0x000f, B:11:0x0017, B:14:0x0038, B:16:0x0040, B:18:0x0051, B:20:0x0062, B:21:0x006b, B:23:0x0073, B:25:0x007b, B:55:0x0083, B:57:0x0089, B:59:0x0099, B:61:0x00a1, B:62:0x00d6, B:64:0x00dd, B:66:0x00f0, B:69:0x0103, B:71:0x0115, B:73:0x011d, B:74:0x0127, B:76:0x012f, B:77:0x015e, B:79:0x0164, B:84:0x0174, B:85:0x0177, B:86:0x017a, B:87:0x017d, B:88:0x0180, B:89:0x0182, B:91:0x0194, B:363:0x01a8, B:365:0x01ba, B:367:0x0215, B:370:0x021f, B:371:0x0225, B:382:0x0235, B:385:0x0236, B:95:0x023a, B:97:0x0295, B:100:0x029f, B:101:0x02a5, B:112:0x02b5, B:115:0x02b6, B:391:0x0139, B:393:0x0141, B:394:0x014c, B:396:0x0154, B:118:0x02ba, B:120:0x02c6, B:122:0x02cd, B:124:0x02d9, B:126:0x02fa, B:127:0x0335, B:131:0x031a, B:132:0x033c, B:134:0x0345, B:136:0x0351, B:138:0x0372, B:139:0x03ad, B:141:0x03ba, B:143:0x03cc, B:145:0x03d8, B:147:0x03f9, B:151:0x0449, B:152:0x0464, B:156:0x0392, B:157:0x046b, B:159:0x0475, B:161:0x0481, B:163:0x053c, B:165:0x0544, B:167:0x0550, B:169:0x0564, B:171:0x056e, B:175:0x05bf, B:176:0x05da, B:177:0x05e1, B:179:0x05e9, B:181:0x05f5, B:183:0x06ab, B:185:0x06ba, B:187:0x06d3, B:189:0x06e7, B:191:0x06f1, B:195:0x0742, B:196:0x075d, B:197:0x0764, B:199:0x0774, B:201:0x0780, B:203:0x0834, B:205:0x083e, B:207:0x0857, B:209:0x086b, B:211:0x0875, B:215:0x08c6, B:216:0x08e1, B:217:0x08e8, B:219:0x08f1, B:221:0x08fd, B:223:0x09b1, B:225:0x09bb, B:227:0x09d0, B:229:0x09e4, B:231:0x09ee, B:235:0x0a3f, B:236:0x0a5a, B:237:0x0a61, B:239:0x0a6b, B:241:0x0a77, B:243:0x0b2e, B:245:0x0b36, B:247:0x0b42, B:249:0x0b57, B:251:0x0b6b, B:253:0x0b75, B:257:0x0bc7, B:258:0x0c9d, B:259:0x0be4, B:261:0x0bee, B:263:0x0bfa, B:265:0x0c13, B:267:0x0c27, B:269:0x0c31, B:273:0x0c82, B:274:0x0ca4, B:276:0x0cae, B:279:0x0cba, B:281:0x0cc2, B:283:0x0cce, B:285:0x0d84, B:287:0x0d90, B:289:0x0da9, B:291:0x0dbd, B:293:0x0dc7, B:297:0x0e18, B:298:0x0e33, B:299:0x0e3a, B:301:0x0e44, B:303:0x0e50, B:305:0x0f06, B:307:0x0f12, B:309:0x0f2b, B:311:0x0f3f, B:313:0x0f49, B:317:0x0f9a, B:318:0x0fb5, B:319:0x0fbc, B:321:0x0fc8, B:323:0x107e, B:325:0x108a, B:327:0x109f, B:329:0x10b3, B:331:0x10bd, B:335:0x110e, B:336:0x1129, B:337:0x112e, B:339:0x113a, B:341:0x1142, B:343:0x114c, B:345:0x1158, B:347:0x1205, B:349:0x120d, B:351:0x1218, B:353:0x122c, B:355:0x1234, B:359:0x1283, B:360:0x129e, B:399:0x00aa, B:401:0x00c8, B:403:0x00d0, B:405:0x0067, B:28:0x12a3, B:31:0x12ab, B:34:0x12b3, B:35:0x12b9, B:47:0x12c9, B:51:0x12ca, B:407:0x002b, B:410:0x002e, B:412:0x0036), top: B:3:0x0002, outer: #2 }] */
-        /* JADX WARN: Removed duplicated region for block: B:389:0x02ba A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:79:0x0164 A[Catch: all -> 0x0023, Exception -> 0x0027, TryCatch #19 {Exception -> 0x0027, blocks: (B:4:0x0002, B:6:0x0008, B:8:0x000f, B:11:0x0017, B:14:0x0038, B:16:0x0040, B:18:0x0051, B:20:0x0062, B:21:0x006b, B:23:0x0073, B:25:0x007b, B:55:0x0083, B:57:0x0089, B:59:0x0099, B:61:0x00a1, B:62:0x00d6, B:64:0x00dd, B:66:0x00f0, B:69:0x0103, B:71:0x0115, B:73:0x011d, B:74:0x0127, B:76:0x012f, B:77:0x015e, B:79:0x0164, B:84:0x0174, B:85:0x0177, B:86:0x017a, B:87:0x017d, B:88:0x0180, B:89:0x0182, B:91:0x0194, B:363:0x01a8, B:365:0x01ba, B:367:0x0215, B:370:0x021f, B:371:0x0225, B:382:0x0235, B:385:0x0236, B:95:0x023a, B:97:0x0295, B:100:0x029f, B:101:0x02a5, B:112:0x02b5, B:115:0x02b6, B:391:0x0139, B:393:0x0141, B:394:0x014c, B:396:0x0154, B:118:0x02ba, B:120:0x02c6, B:122:0x02cd, B:124:0x02d9, B:126:0x02fa, B:127:0x0335, B:131:0x031a, B:132:0x033c, B:134:0x0345, B:136:0x0351, B:138:0x0372, B:139:0x03ad, B:141:0x03ba, B:143:0x03cc, B:145:0x03d8, B:147:0x03f9, B:151:0x0449, B:152:0x0464, B:156:0x0392, B:157:0x046b, B:159:0x0475, B:161:0x0481, B:163:0x053c, B:165:0x0544, B:167:0x0550, B:169:0x0564, B:171:0x056e, B:175:0x05bf, B:176:0x05da, B:177:0x05e1, B:179:0x05e9, B:181:0x05f5, B:183:0x06ab, B:185:0x06ba, B:187:0x06d3, B:189:0x06e7, B:191:0x06f1, B:195:0x0742, B:196:0x075d, B:197:0x0764, B:199:0x0774, B:201:0x0780, B:203:0x0834, B:205:0x083e, B:207:0x0857, B:209:0x086b, B:211:0x0875, B:215:0x08c6, B:216:0x08e1, B:217:0x08e8, B:219:0x08f1, B:221:0x08fd, B:223:0x09b1, B:225:0x09bb, B:227:0x09d0, B:229:0x09e4, B:231:0x09ee, B:235:0x0a3f, B:236:0x0a5a, B:237:0x0a61, B:239:0x0a6b, B:241:0x0a77, B:243:0x0b2e, B:245:0x0b36, B:247:0x0b42, B:249:0x0b57, B:251:0x0b6b, B:253:0x0b75, B:257:0x0bc7, B:258:0x0c9d, B:259:0x0be4, B:261:0x0bee, B:263:0x0bfa, B:265:0x0c13, B:267:0x0c27, B:269:0x0c31, B:273:0x0c82, B:274:0x0ca4, B:276:0x0cae, B:279:0x0cba, B:281:0x0cc2, B:283:0x0cce, B:285:0x0d84, B:287:0x0d90, B:289:0x0da9, B:291:0x0dbd, B:293:0x0dc7, B:297:0x0e18, B:298:0x0e33, B:299:0x0e3a, B:301:0x0e44, B:303:0x0e50, B:305:0x0f06, B:307:0x0f12, B:309:0x0f2b, B:311:0x0f3f, B:313:0x0f49, B:317:0x0f9a, B:318:0x0fb5, B:319:0x0fbc, B:321:0x0fc8, B:323:0x107e, B:325:0x108a, B:327:0x109f, B:329:0x10b3, B:331:0x10bd, B:335:0x110e, B:336:0x1129, B:337:0x112e, B:339:0x113a, B:341:0x1142, B:343:0x114c, B:345:0x1158, B:347:0x1205, B:349:0x120d, B:351:0x1218, B:353:0x122c, B:355:0x1234, B:359:0x1283, B:360:0x129e, B:399:0x00aa, B:401:0x00c8, B:403:0x00d0, B:405:0x0067, B:28:0x12a3, B:31:0x12ab, B:34:0x12b3, B:35:0x12b9, B:47:0x12c9, B:51:0x12ca, B:407:0x002b, B:410:0x002e, B:412:0x0036), top: B:3:0x0002, outer: #2 }] */
-        /* JADX WARN: Removed duplicated region for block: B:97:0x0295 A[Catch: all -> 0x0023, Exception -> 0x0027, TRY_LEAVE, TryCatch #19 {Exception -> 0x0027, blocks: (B:4:0x0002, B:6:0x0008, B:8:0x000f, B:11:0x0017, B:14:0x0038, B:16:0x0040, B:18:0x0051, B:20:0x0062, B:21:0x006b, B:23:0x0073, B:25:0x007b, B:55:0x0083, B:57:0x0089, B:59:0x0099, B:61:0x00a1, B:62:0x00d6, B:64:0x00dd, B:66:0x00f0, B:69:0x0103, B:71:0x0115, B:73:0x011d, B:74:0x0127, B:76:0x012f, B:77:0x015e, B:79:0x0164, B:84:0x0174, B:85:0x0177, B:86:0x017a, B:87:0x017d, B:88:0x0180, B:89:0x0182, B:91:0x0194, B:363:0x01a8, B:365:0x01ba, B:367:0x0215, B:370:0x021f, B:371:0x0225, B:382:0x0235, B:385:0x0236, B:95:0x023a, B:97:0x0295, B:100:0x029f, B:101:0x02a5, B:112:0x02b5, B:115:0x02b6, B:391:0x0139, B:393:0x0141, B:394:0x014c, B:396:0x0154, B:118:0x02ba, B:120:0x02c6, B:122:0x02cd, B:124:0x02d9, B:126:0x02fa, B:127:0x0335, B:131:0x031a, B:132:0x033c, B:134:0x0345, B:136:0x0351, B:138:0x0372, B:139:0x03ad, B:141:0x03ba, B:143:0x03cc, B:145:0x03d8, B:147:0x03f9, B:151:0x0449, B:152:0x0464, B:156:0x0392, B:157:0x046b, B:159:0x0475, B:161:0x0481, B:163:0x053c, B:165:0x0544, B:167:0x0550, B:169:0x0564, B:171:0x056e, B:175:0x05bf, B:176:0x05da, B:177:0x05e1, B:179:0x05e9, B:181:0x05f5, B:183:0x06ab, B:185:0x06ba, B:187:0x06d3, B:189:0x06e7, B:191:0x06f1, B:195:0x0742, B:196:0x075d, B:197:0x0764, B:199:0x0774, B:201:0x0780, B:203:0x0834, B:205:0x083e, B:207:0x0857, B:209:0x086b, B:211:0x0875, B:215:0x08c6, B:216:0x08e1, B:217:0x08e8, B:219:0x08f1, B:221:0x08fd, B:223:0x09b1, B:225:0x09bb, B:227:0x09d0, B:229:0x09e4, B:231:0x09ee, B:235:0x0a3f, B:236:0x0a5a, B:237:0x0a61, B:239:0x0a6b, B:241:0x0a77, B:243:0x0b2e, B:245:0x0b36, B:247:0x0b42, B:249:0x0b57, B:251:0x0b6b, B:253:0x0b75, B:257:0x0bc7, B:258:0x0c9d, B:259:0x0be4, B:261:0x0bee, B:263:0x0bfa, B:265:0x0c13, B:267:0x0c27, B:269:0x0c31, B:273:0x0c82, B:274:0x0ca4, B:276:0x0cae, B:279:0x0cba, B:281:0x0cc2, B:283:0x0cce, B:285:0x0d84, B:287:0x0d90, B:289:0x0da9, B:291:0x0dbd, B:293:0x0dc7, B:297:0x0e18, B:298:0x0e33, B:299:0x0e3a, B:301:0x0e44, B:303:0x0e50, B:305:0x0f06, B:307:0x0f12, B:309:0x0f2b, B:311:0x0f3f, B:313:0x0f49, B:317:0x0f9a, B:318:0x0fb5, B:319:0x0fbc, B:321:0x0fc8, B:323:0x107e, B:325:0x108a, B:327:0x109f, B:329:0x10b3, B:331:0x10bd, B:335:0x110e, B:336:0x1129, B:337:0x112e, B:339:0x113a, B:341:0x1142, B:343:0x114c, B:345:0x1158, B:347:0x1205, B:349:0x120d, B:351:0x1218, B:353:0x122c, B:355:0x1234, B:359:0x1283, B:360:0x129e, B:399:0x00aa, B:401:0x00c8, B:403:0x00d0, B:405:0x0067, B:28:0x12a3, B:31:0x12ab, B:34:0x12b3, B:35:0x12b9, B:47:0x12c9, B:51:0x12ca, B:407:0x002b, B:410:0x002e, B:412:0x0036), top: B:3:0x0002, outer: #2 }] */
         @Override // java.lang.Thread, java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -270,9 +265,6 @@ public class AfterimageCompensationService {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00a7  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00b0  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00cd  */
     /* renamed from: -$$Nest$mupdateHWParam, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -379,43 +371,6 @@ public class AfterimageCompensationService {
         throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.hardware.display.AfterimageCompensationService.m1196$$Nest$mupdateHWParam(com.samsung.android.hardware.display.AfterimageCompensationService):void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x0670  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x06ee A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x06fb  */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x0733  */
-    /* JADX WARN: Removed duplicated region for block: B:133:0x0753 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:136:0x0764  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x0798  */
-    /* JADX WARN: Removed duplicated region for block: B:153:0x07f6  */
-    /* JADX WARN: Removed duplicated region for block: B:165:0x083f  */
-    /* JADX WARN: Removed duplicated region for block: B:171:0x0857  */
-    /* JADX WARN: Removed duplicated region for block: B:197:0x06ea  */
-    /* JADX WARN: Removed duplicated region for block: B:238:0x0653  */
-    /* JADX WARN: Removed duplicated region for block: B:239:0x048c A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x02ea  */
-    /* JADX WARN: Removed duplicated region for block: B:301:0x0465  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x0564  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x05ba  */
-    /* JADX WARN: Type inference failed for: r9v10 */
-    /* JADX WARN: Type inference failed for: r9v11 */
-    /* JADX WARN: Type inference failed for: r9v12 */
-    /* JADX WARN: Type inference failed for: r9v13 */
-    /* JADX WARN: Type inference failed for: r9v14 */
-    /* JADX WARN: Type inference failed for: r9v15 */
-    /* JADX WARN: Type inference failed for: r9v3 */
-    /* JADX WARN: Type inference failed for: r9v34 */
-    /* JADX WARN: Type inference failed for: r9v35 */
-    /* JADX WARN: Type inference failed for: r9v36 */
-    /* JADX WARN: Type inference failed for: r9v37 */
-    /* JADX WARN: Type inference failed for: r9v38 */
-    /* JADX WARN: Type inference failed for: r9v39 */
-    /* JADX WARN: Type inference failed for: r9v40 */
-    /* JADX WARN: Type inference failed for: r9v45 */
-    /* JADX WARN: Type inference failed for: r9v6 */
-    /* JADX WARN: Type inference failed for: r9v7 */
-    /* JADX WARN: Type inference failed for: r9v8 */
-    /* JADX WARN: Type inference failed for: r9v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -428,10 +383,6 @@ public class AfterimageCompensationService {
         throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.hardware.display.AfterimageCompensationService.<init>(android.content.Context):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0075 A[Catch: IOException -> 0x0071, TryCatch #4 {IOException -> 0x0071, blocks: (B:44:0x006d, B:33:0x0075, B:35:0x007a, B:37:0x007f), top: B:43:0x006d }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x007a A[Catch: IOException -> 0x0071, TryCatch #4 {IOException -> 0x0071, blocks: (B:44:0x006d, B:33:0x0075, B:35:0x007a, B:37:0x007f), top: B:43:0x006d }] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x007f A[Catch: IOException -> 0x0071, TRY_LEAVE, TryCatch #4 {IOException -> 0x0071, blocks: (B:44:0x006d, B:33:0x0075, B:35:0x007a, B:37:0x007f), top: B:43:0x006d }] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x006d A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -541,15 +492,6 @@ public class AfterimageCompensationService {
         throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.hardware.display.AfterimageCompensationService.fileCopy():void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v11, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r2v12 */
-    /* JADX WARN: Type inference failed for: r2v15 */
-    /* JADX WARN: Type inference failed for: r2v16 */
-    /* JADX WARN: Type inference failed for: r2v17 */
-    /* JADX WARN: Type inference failed for: r2v4, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r2v7 */
-    /* JADX WARN: Type inference failed for: r2v9 */
     public static String getStringFromFile(String str) {
         byte[] bArr = new byte[128];
         for (int i = 0; i < 128; i++) {
@@ -624,7 +566,6 @@ public class AfterimageCompensationService {
 
     private static native int nativeDataApply(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native float nativeDataEvaluate();
 
     private static native int nativeDataInit(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
@@ -633,93 +574,54 @@ public class AfterimageCompensationService {
 
     private static native int nativeDataOff();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeDataRead(int i, int i2, int i3, boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native double nativeDataReadAvgLum();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native double nativeDataReadAvgLumSub();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native double nativeDataReadEffAvgLum();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native double nativeDataReadEffAvgLumSub();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native double nativeDataReadEffMaxBDI();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native double nativeDataReadEffMaxBDISub();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native double nativeDataReadEffNBDI();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native double nativeDataReadEffNBDISub();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native double nativeDataReadMaxBDI();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native double nativeDataReadMaxBDISub();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native double nativeDataReadNBDI();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native double nativeDataReadNBDISub();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeDataReadSub(int i, int i2, int i3, boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeDataSave(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeDataSaveSub(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeDataTerminate(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeDataTerminateSub(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeDataUpdate(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeDataUpdateSub(int i);
 
     private static native int nativeDataVerify();
 
     private static native int nativeDataWrite(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int nativeDataWriteV2(int i);
 
     private static native int nativeMdnieBlockVerify(boolean z);
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r7v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r7v17 */
-    /* JADX WARN: Type inference failed for: r7v2 */
-    /* JADX WARN: Type inference failed for: r7v23 */
-    /* JADX WARN: Type inference failed for: r7v28 */
-    /* JADX WARN: Type inference failed for: r7v30 */
-    /* JADX WARN: Type inference failed for: r7v37 */
-    /* JADX WARN: Type inference failed for: r7v39 */
-    /* JADX WARN: Type inference failed for: r7v40 */
-    /* JADX WARN: Type inference failed for: r7v41 */
-    /* JADX WARN: Type inference failed for: r7v42 */
-    /* JADX WARN: Type inference failed for: r7v43 */
-    /* JADX WARN: Type inference failed for: r7v44 */
-    /* JADX WARN: Type inference failed for: r7v45 */
-    /* JADX WARN: Type inference failed for: r7v46 */
-    /* JADX WARN: Type inference failed for: r7v5 */
-    /* JADX WARN: Type inference failed for: r7v6, types: [java.io.BufferedReader] */
     public static String readStrFromFile(String str) {
         FileReader fileReader;
         Throwable th;

@@ -11,7 +11,6 @@ final class RequestProcessor$process$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ RequestProcessor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RequestProcessor$process$1(RequestProcessor requestProcessor, Continuation continuation) {
         super(continuation);
         this.this$0 = requestProcessor;

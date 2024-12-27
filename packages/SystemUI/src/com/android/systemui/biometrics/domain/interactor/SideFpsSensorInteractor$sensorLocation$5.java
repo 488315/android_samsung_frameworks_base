@@ -13,7 +13,6 @@ final class SideFpsSensorInteractor$sensorLocation$5 extends SuspendLambda imple
     int label;
     final /* synthetic */ SideFpsSensorInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SideFpsSensorInteractor$sensorLocation$5(SideFpsSensorInteractor sideFpsSensorInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = sideFpsSensorInteractor;

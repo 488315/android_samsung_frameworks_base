@@ -43,8 +43,6 @@ public final class DexStation extends FanControlModel {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v1, types: [android.content.BroadcastReceiver, com.samsung.android.lib.dexcontrol.model.dexstation.DexStation$3] */
     public DexStation(Context context) {
         super(context, 40992, true);
         this.preFanLevel = -999;

@@ -14,7 +14,6 @@ final class KeyguardTransitionInteractor$isInTransitionWhere$3 extends SuspendLa
     /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardTransitionInteractor$isInTransitionWhere$3(Function2 function2, Continuation continuation) {
         super(2, continuation);
         this.$fromToStatePredicate = function2;

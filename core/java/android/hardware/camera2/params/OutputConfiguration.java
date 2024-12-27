@@ -80,13 +80,11 @@ public final class OutputConfiguration implements Parcelable {
     public static final Parcelable.Creator<OutputConfiguration> CREATOR =
             new Parcelable.Creator<OutputConfiguration>() { // from class:
                 // android.hardware.camera2.params.OutputConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OutputConfiguration createFromParcel(Parcel source) {
                     return new OutputConfiguration(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OutputConfiguration[] newArray(int size) {
                     return new OutputConfiguration[size];

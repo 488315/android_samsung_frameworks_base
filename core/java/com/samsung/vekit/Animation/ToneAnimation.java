@@ -17,7 +17,6 @@ public class ToneAnimation extends Animation<ToneInfo> {
         super(context, AnimationType.TONE, id, name);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.vekit.Animation.Animation
     public void rollback() {
         int index = 0;

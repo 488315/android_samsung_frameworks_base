@@ -32,7 +32,6 @@ public final class SemDeviceInfoTestModeUtils {
         void onDeviceInfoTestModeChanged();
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.sepunion.SemDeviceInfoTestModeUtils$1] */
     public SemDeviceInfoTestModeUtils(
             Context context, OnDeviceInfoTestModeChanged onDeviceInfoTestModeChanged) {
         if (SHIPPED) {

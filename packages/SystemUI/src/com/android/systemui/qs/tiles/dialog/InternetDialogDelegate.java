@@ -272,10 +272,6 @@ public final class InternetDialogDelegate implements SystemUIDialog.Delegate, In
         final int i4 = 1;
         final int i5 = 1;
         Stream map = ((Stream) supplier.get()).map(new Function() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogController$$ExternalSyntheticLambda9
-            /* JADX WARN: Removed duplicated region for block: B:10:0x003e  */
-            /* JADX WARN: Removed duplicated region for block: B:15:0x0057  */
-            /* JADX WARN: Removed duplicated region for block: B:18:0x005c  */
-            /* JADX WARN: Removed duplicated region for block: B:19:0x004f  */
             @Override // java.util.function.Function
             /*
                 Code decompiled incorrectly, please refer to instructions dump.

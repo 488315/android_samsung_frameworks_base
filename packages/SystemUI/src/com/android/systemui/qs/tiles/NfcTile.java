@@ -27,7 +27,6 @@ public final class NfcTile extends QSTileImpl {
     public final QSTile.Icon mIcon;
     public final AnonymousClass1 mNfcReceiver;
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.qs.tiles.NfcTile$1] */
     public NfcTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, BroadcastDispatcher broadcastDispatcher) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mIcon = QSTileImpl.ResourceIcon.get(R.drawable.ic_qs_nfc);

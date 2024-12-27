@@ -39,7 +39,6 @@ public class PluginDependencyProvider extends PluginDependency.DependencyProvide
         return t;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <T> void allowPluginDependency(Class<T> cls) {
         allowPluginDependency(cls, Dependency.sDependency.getDependencyInner(cls));
     }

@@ -22,13 +22,11 @@ public final class SubscriptionPlan implements Parcelable {
     public static final Parcelable.Creator<SubscriptionPlan> CREATOR =
             new Parcelable.Creator<
                     SubscriptionPlan>() { // from class: android.telephony.SubscriptionPlan.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SubscriptionPlan createFromParcel(Parcel source) {
                     return new SubscriptionPlan(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SubscriptionPlan[] newArray(int size) {
                     return new SubscriptionPlan[size];

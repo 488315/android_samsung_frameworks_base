@@ -10,7 +10,6 @@ import java.util.StringJoiner;
 public class SimApdu implements Parcelable {
     public static final Parcelable.Creator<SimApdu> CREATOR =
             new Parcelable.Creator<SimApdu>() { // from class: android.hardware.radio.sim.SimApdu.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SimApdu createFromParcel(Parcel _aidl_source) {
                     SimApdu _aidl_out = new SimApdu();
@@ -18,7 +17,6 @@ public class SimApdu implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SimApdu[] newArray(int _aidl_size) {
                     return new SimApdu[_aidl_size];

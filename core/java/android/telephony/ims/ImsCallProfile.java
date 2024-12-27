@@ -46,13 +46,11 @@ public final class ImsCallProfile implements Parcelable {
     public static final Parcelable.Creator<ImsCallProfile> CREATOR =
             new Parcelable.Creator<
                     ImsCallProfile>() { // from class: android.telephony.ims.ImsCallProfile.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsCallProfile createFromParcel(Parcel in) {
                     return new ImsCallProfile(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsCallProfile[] newArray(int size) {
                     return new ImsCallProfile[size];

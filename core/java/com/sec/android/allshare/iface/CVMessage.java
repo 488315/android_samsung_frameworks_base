@@ -9,13 +9,11 @@ public class CVMessage implements Parcelable {
     public static final Parcelable.Creator<CVMessage> CREATOR =
             new Parcelable.Creator<
                     CVMessage>() { // from class: com.sec.android.allshare.iface.CVMessage.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CVMessage createFromParcel(Parcel src) {
                     return new CVMessage(src);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CVMessage[] newArray(int size) {
                     return new CVMessage[size];

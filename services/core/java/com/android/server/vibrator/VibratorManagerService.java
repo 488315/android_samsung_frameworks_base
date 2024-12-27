@@ -702,8 +702,6 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.vibrator.VibratorManagerService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? vibratorManagerService = new VibratorManagerService(getContext(), new Injector());
@@ -1101,7 +1099,6 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
             return startComposition.compose();
         }
 
-        /* JADX WARN: Type inference failed for: r7v3, types: [android.os.IBinder, com.android.server.vibrator.VibratorManagerService] */
         public final int onCommand(String str) {
             Trace.traceBegin(8388608L, "onCommand " + str);
             try {
@@ -2100,8 +2097,6 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x008b A[Catch: all -> 0x003c, TRY_ENTER, TryCatch #0 {all -> 0x003c, blocks: (B:3:0x0008, B:5:0x000e, B:6:0x0020, B:8:0x0028, B:10:0x0049, B:11:0x004f, B:13:0x0055, B:15:0x005f, B:17:0x006c, B:19:0x007a, B:31:0x0080, B:21:0x008b, B:23:0x0099, B:25:0x00a3, B:27:0x00a6, B:37:0x00a9, B:43:0x003f, B:45:0x0043), top: B:2:0x0008 }] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0080 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2499,22 +2494,14 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         Slog.d("VibratorManagerService", "vibrator motor type is : " + VibratorHelper.getMotorTypeToString(VibratorHelper.sMotorType));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         new VibratorManagerShellCommand(shellCallback.getShellCallbackBinder()).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void performHapticFeedback(int i, int i2, String str, int i3, boolean z, String str2, boolean z2) {
         performHapticFeedbackInternal(i, i2, str, i3, z, str2, this, z2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00d7  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00df  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00e8  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x00dc  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x00bd  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x00c3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -18,7 +18,6 @@ public final class KeyguardQuickAffordanceLocalUserSelectionManager$special$$inl
     int label;
     final /* synthetic */ KeyguardQuickAffordanceLocalUserSelectionManager this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordanceLocalUserSelectionManager$special$$inlined$flatMapLatest$1(Continuation continuation, KeyguardQuickAffordanceLocalUserSelectionManager keyguardQuickAffordanceLocalUserSelectionManager) {
         super(3, continuation);
         this.this$0 = keyguardQuickAffordanceLocalUserSelectionManager;

@@ -138,7 +138,6 @@ public abstract class GameSession {
         moveToState(LifecycleState.CREATED);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doDestroy() {
         this.mSurfaceControlViewHost.release();
         moveToState(LifecycleState.DESTROYED);
@@ -274,7 +273,6 @@ public abstract class GameSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: handleScreenshotResult, reason: merged with bridge method [inline-methods] */
     public void lambda$takeScreenshot$0(
             ScreenshotCallback callback, GameScreenshotResult result, Throwable error) {

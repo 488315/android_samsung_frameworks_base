@@ -15,7 +15,6 @@ public abstract class CombinedVibration implements Parcelable {
     public static final Parcelable.Creator<CombinedVibration> CREATOR =
             new Parcelable.Creator<
                     CombinedVibration>() { // from class: android.os.CombinedVibration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CombinedVibration createFromParcel(Parcel in) {
                     int token = in.readInt();
@@ -32,7 +31,6 @@ public abstract class CombinedVibration implements Parcelable {
                             "Unexpected combined vibration event type token in parcel.");
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CombinedVibration[] newArray(int size) {
                     return new CombinedVibration[size];
@@ -157,14 +155,12 @@ public abstract class CombinedVibration implements Parcelable {
     public static final class Mono extends CombinedVibration {
         public static final Parcelable.Creator<Mono> CREATOR =
                 new Parcelable.Creator<Mono>() { // from class: android.os.CombinedVibration.Mono.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Mono createFromParcel(Parcel in) {
                         in.readInt();
                         return new Mono(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Mono[] newArray(int size) {
                         return new Mono[size];
@@ -269,14 +265,12 @@ public abstract class CombinedVibration implements Parcelable {
         public static final Parcelable.Creator<Stereo> CREATOR =
                 new Parcelable.Creator<
                         Stereo>() { // from class: android.os.CombinedVibration.Stereo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Stereo createFromParcel(Parcel in) {
                         in.readInt();
                         return new Stereo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Stereo[] newArray(int size) {
                         return new Stereo[size];
@@ -443,14 +437,12 @@ public abstract class CombinedVibration implements Parcelable {
         public static final Parcelable.Creator<Sequential> CREATOR =
                 new Parcelable.Creator<
                         Sequential>() { // from class: android.os.CombinedVibration.Sequential.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Sequential createFromParcel(Parcel in) {
                         in.readInt();
                         return new Sequential(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Sequential[] newArray(int size) {
                         return new Sequential[size];

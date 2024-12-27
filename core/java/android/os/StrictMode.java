@@ -147,7 +147,6 @@ public final class StrictMode {
             };
     private static final ThreadLocal<ArrayList<ViolationInfo>> gatheredViolations =
             new ThreadLocal<ArrayList<ViolationInfo>>() { // from class: android.os.StrictMode.1
-                /* JADX INFO: Access modifiers changed from: protected */
                 @Override // java.lang.ThreadLocal
                 public ArrayList<ViolationInfo> initialValue() {
                     return null;
@@ -155,7 +154,6 @@ public final class StrictMode {
             };
     private static final ThreadLocal<ArrayList<ViolationInfo>> violationsBeingTimed =
             new ThreadLocal<ArrayList<ViolationInfo>>() { // from class: android.os.StrictMode.2
-                /* JADX INFO: Access modifiers changed from: protected */
                 @Override // java.lang.ThreadLocal
                 public ArrayList<ViolationInfo> initialValue() {
                     return new ArrayList<>();
@@ -163,8 +161,6 @@ public final class StrictMode {
             };
     private static final ThreadLocal<Handler> THREAD_HANDLER =
             new ThreadLocal<Handler>() { // from class: android.os.StrictMode.3
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // java.lang.ThreadLocal
                 public Handler initialValue() {
                     return new Handler();
@@ -172,8 +168,6 @@ public final class StrictMode {
             };
     private static final ThreadLocal<AndroidBlockGuardPolicy> THREAD_ANDROID_POLICY =
             new ThreadLocal<AndroidBlockGuardPolicy>() { // from class: android.os.StrictMode.4
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // java.lang.ThreadLocal
                 public AndroidBlockGuardPolicy initialValue() {
                     return new AndroidBlockGuardPolicy(0);
@@ -234,8 +228,6 @@ public final class StrictMode {
             };
     private static final ThreadLocal<ThreadSpanState> sThisThreadSpanState =
             new ThreadLocal<ThreadSpanState>() { // from class: android.os.StrictMode.8
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // java.lang.ThreadLocal
                 public ThreadSpanState initialValue() {
                     return new ThreadSpanState();
@@ -243,8 +235,6 @@ public final class StrictMode {
             };
     private static Singleton<IWindowManager> sWindowManager =
             new Singleton<IWindowManager>() { // from class: android.os.StrictMode.9
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.util.Singleton
                 public IWindowManager create() {
                     return IWindowManager.Stub.asInterface(
@@ -880,12 +870,10 @@ public final class StrictMode {
                         sVmPolicy.mCallbackExecutor);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean tooManyViolationsThisLoop() {
         return violationsBeingTimed.get().size() >= 10;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class AndroidBlockGuardPolicy implements BlockGuard.Policy {
         private ArrayMap<Integer, Long> mLastViolationTime;
         private SparseLongArray mRealLastViolationTime;
@@ -1012,7 +1000,6 @@ public final class StrictMode {
                             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$handleViolationWithTimingAttempt$0(
                 IWindowManager windowManager, ArrayList records) {
             long loopFinishTime = SystemClock.uptimeMillis();
@@ -1140,7 +1127,6 @@ public final class StrictMode {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void dropboxViolationAsync(final int penaltyMask, final ViolationInfo info) {
         int outstanding = sDropboxCallsInFlight.incrementAndGet();
         if (outstanding > 20) {
@@ -1170,7 +1156,6 @@ public final class StrictMode {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void handleApplicationStrictModeViolation(int penaltyMask, ViolationInfo info) {
         int oldMask = getThreadPolicyMask();
         try {
@@ -1473,7 +1458,6 @@ public final class StrictMode {
         onVmPolicyViolation(new UnsafeIntentLaunchViolation(intent));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void onUnsafeIntentLaunch(int type, Intent intent) {
         String msg;
         switch (type) {
@@ -1512,7 +1496,6 @@ public final class StrictMode {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void onCredentialProtectedPathAccess(String path, int userId) {
         if (userId == UserHandle.myUserId()) {
             if (sCeStorageUnlocked) {
@@ -1534,7 +1517,6 @@ public final class StrictMode {
                                 + " was locked"));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void clampViolationTimeMap(SparseLongArray violationTime, long retainSince) {
         int i = 0;
         while (i < violationTime.size()) {
@@ -1815,10 +1797,6 @@ public final class StrictMode {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x002c A[Catch: all -> 0x0060, TryCatch #0 {, blocks: (B:7:0x0006, B:9:0x000e, B:11:0x0010, B:13:0x001b, B:16:0x0022, B:18:0x002c, B:19:0x003b, B:20:0x003d, B:29:0x0032), top: B:6:0x0006 }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0044 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0045  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0032 A[Catch: all -> 0x0060, TryCatch #0 {, blocks: (B:7:0x0006, B:9:0x000e, B:11:0x0010, B:13:0x001b, B:16:0x0022, B:18:0x002c, B:19:0x003b, B:20:0x003d, B:29:0x0032), top: B:6:0x0006 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1893,13 +1871,11 @@ public final class StrictMode {
         public static final Parcelable.Creator<ViolationInfo> CREATOR =
                 new Parcelable.Creator<
                         ViolationInfo>() { // from class: android.os.StrictMode.ViolationInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ViolationInfo createFromParcel(Parcel in) {
                         return new ViolationInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ViolationInfo[] newArray(int size) {
                         return new ViolationInfo[size];

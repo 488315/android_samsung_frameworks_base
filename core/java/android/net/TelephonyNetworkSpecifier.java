@@ -9,14 +9,12 @@ public final class TelephonyNetworkSpecifier extends NetworkSpecifier implements
             new Parcelable.Creator<
                     TelephonyNetworkSpecifier>() { // from class:
                                                    // android.net.TelephonyNetworkSpecifier.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TelephonyNetworkSpecifier createFromParcel(Parcel in) {
                     int subId = in.readInt();
                     return new TelephonyNetworkSpecifier(subId);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TelephonyNetworkSpecifier[] newArray(int size) {
                     return new TelephonyNetworkSpecifier[size];

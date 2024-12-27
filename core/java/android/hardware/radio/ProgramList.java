@@ -308,13 +308,11 @@ public final class ProgramList implements AutoCloseable {
         public static final Parcelable.Creator<Filter> CREATOR =
                 new Parcelable.Creator<
                         Filter>() { // from class: android.hardware.radio.ProgramList.Filter.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Filter createFromParcel(Parcel in) {
                         return new Filter(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Filter[] newArray(int size) {
                         return new Filter[size];
@@ -435,13 +433,11 @@ public final class ProgramList implements AutoCloseable {
         public static final Parcelable.Creator<Chunk> CREATOR =
                 new Parcelable.Creator<
                         Chunk>() { // from class: android.hardware.radio.ProgramList.Chunk.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Chunk createFromParcel(Parcel in) {
                         return new Chunk(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Chunk[] newArray(int size) {
                         return new Chunk[size];

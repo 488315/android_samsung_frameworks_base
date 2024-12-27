@@ -79,7 +79,6 @@ public class SemPerfManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void sendCommand(String type, String value) {
         try {
             if (sCfmsService == null || sdhmservice == null) {

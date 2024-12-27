@@ -34,8 +34,6 @@ public final class NewDexController implements IController {
         this.mWm = windowManagerService;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0090 A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:24:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

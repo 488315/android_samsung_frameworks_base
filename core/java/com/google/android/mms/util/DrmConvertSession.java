@@ -24,13 +24,6 @@ public class DrmConvertSession {
         this.mConvertSessionId = convertSessionId;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r0v10 */
-    /* JADX WARN: Type inference failed for: r0v11 */
-    /* JADX WARN: Type inference failed for: r0v12 */
-    /* JADX WARN: Type inference failed for: r0v8 */
-    /* JADX WARN: Type inference failed for: r0v9, types: [int] */
     public static DrmConvertSession open(Context context, String str) {
         String str2 = TAG;
         DrmManagerClient drmManagerClient = null;

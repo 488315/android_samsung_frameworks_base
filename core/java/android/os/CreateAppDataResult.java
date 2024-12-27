@@ -5,7 +5,6 @@ public class CreateAppDataResult implements Parcelable {
     public static final Parcelable.Creator<CreateAppDataResult> CREATOR =
             new Parcelable.Creator<
                     CreateAppDataResult>() { // from class: android.os.CreateAppDataResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CreateAppDataResult createFromParcel(Parcel _aidl_source) {
                     CreateAppDataResult _aidl_out = new CreateAppDataResult();
@@ -13,7 +12,6 @@ public class CreateAppDataResult implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CreateAppDataResult[] newArray(int _aidl_size) {
                     return new CreateAppDataResult[_aidl_size];

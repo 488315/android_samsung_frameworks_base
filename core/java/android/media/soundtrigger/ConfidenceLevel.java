@@ -12,7 +12,6 @@ public class ConfidenceLevel implements Parcelable {
     public static final Parcelable.Creator<ConfidenceLevel> CREATOR =
             new Parcelable.Creator<
                     ConfidenceLevel>() { // from class: android.media.soundtrigger.ConfidenceLevel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConfidenceLevel createFromParcel(Parcel _aidl_source) {
                     ConfidenceLevel _aidl_out = new ConfidenceLevel();
@@ -20,7 +19,6 @@ public class ConfidenceLevel implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConfidenceLevel[] newArray(int _aidl_size) {
                     return new ConfidenceLevel[_aidl_size];

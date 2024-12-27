@@ -67,7 +67,6 @@ public class ImsService extends Service {
         return this.mFeaturesBySlot.get(slotId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public IImsMMTelFeature createEmergencyMMTelFeatureInternal(int slotId) {
         MMTelFeature f = onCreateEmergencyMMTelImsFeature(slotId);
         if (f != null) {
@@ -77,7 +76,6 @@ public class ImsService extends Service {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public IImsMMTelFeature createMMTelFeatureInternal(int slotId) {
         MMTelFeature f = onCreateMMTelImsFeature(slotId);
         if (f != null) {
@@ -87,7 +85,6 @@ public class ImsService extends Service {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public IImsRcsFeature createRcsFeatureInternal(int slotId) {
         RcsFeature f = onCreateRcsFeature(slotId);
         if (f != null) {
@@ -115,7 +112,6 @@ public class ImsService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addImsFeatureStatusCallback(
             int slotId, int featureType, IImsFeatureStatusCallback c) {
         synchronized (this.mFeaturesBySlot) {
@@ -134,7 +130,6 @@ public class ImsService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeImsFeatureStatusCallback(
             int slotId, int featureType, IImsFeatureStatusCallback c) {
         synchronized (this.mFeaturesBySlot) {
@@ -153,7 +148,6 @@ public class ImsService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeImsFeature(int slotId, int featureType) {
         synchronized (this.mFeaturesBySlot) {
             SparseArray<ImsFeature> features = this.mFeaturesBySlot.get(slotId);

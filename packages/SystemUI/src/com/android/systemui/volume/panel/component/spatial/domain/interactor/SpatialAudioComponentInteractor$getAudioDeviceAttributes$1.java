@@ -11,7 +11,6 @@ final class SpatialAudioComponentInteractor$getAudioDeviceAttributes$1 extends C
     /* synthetic */ Object result;
     final /* synthetic */ SpatialAudioComponentInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SpatialAudioComponentInteractor$getAudioDeviceAttributes$1(SpatialAudioComponentInteractor spatialAudioComponentInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = spatialAudioComponentInteractor;

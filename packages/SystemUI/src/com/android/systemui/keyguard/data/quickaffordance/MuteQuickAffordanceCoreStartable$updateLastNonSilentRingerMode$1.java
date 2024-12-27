@@ -15,7 +15,6 @@ final class MuteQuickAffordanceCoreStartable$updateLastNonSilentRingerMode$1 ext
     int label;
     final /* synthetic */ MuteQuickAffordanceCoreStartable this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MuteQuickAffordanceCoreStartable$updateLastNonSilentRingerMode$1(int i, MuteQuickAffordanceCoreStartable muteQuickAffordanceCoreStartable, Continuation continuation) {
         super(2, continuation);
         this.$lastRingerMode = i;

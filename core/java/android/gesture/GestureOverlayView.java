@@ -393,7 +393,6 @@ public class GestureOverlayView extends FrameLayout {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setPaintAlpha(int alpha) {
         int baseAlpha = this.mCurrentColor >>> 24;
         int useAlpha = (baseAlpha * (alpha + (alpha >> 7))) >> 8;
@@ -498,7 +497,6 @@ public class GestureOverlayView extends FrameLayout {
         return cancelDispatch2;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private boolean processEvent(MotionEvent event) {
         switch (event.getAction()) {
             case 0:
@@ -690,7 +688,6 @@ public class GestureOverlayView extends FrameLayout {
         clear(false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void fireOnGesturePerformed() {
         ArrayList<OnGesturePerformedListener> actionListeners = this.mOnGesturePerformedListeners;
         int count = actionListeners.size();

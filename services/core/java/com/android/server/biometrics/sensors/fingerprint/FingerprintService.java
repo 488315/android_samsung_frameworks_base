@@ -539,7 +539,6 @@ public final class FingerprintService extends SystemService {
             FingerprintService.this.mHandler.post(new FingerprintService$1$$ExternalSyntheticLambda0(this, 0));
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
             FingerprintService.this.getContext();
             new FingerprintShellCommand(FingerprintService.this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
@@ -592,7 +591,6 @@ public final class FingerprintService extends SystemService {
             }
         }
 
-        /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.biometrics.sensors.fingerprint.FingerprintService$1$$ExternalSyntheticLambda2] */
         public final void registerAuthenticators(final FingerprintSensorConfigurations fingerprintSensorConfigurations) {
             registerAuthenticators_enforcePermission();
             if (!fingerprintSensorConfigurations.hasSensorConfigurations()) {
@@ -827,7 +825,6 @@ public final class FingerprintService extends SystemService {
             return iBinder;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final long semAuthenticate(IBinder iBinder, long j, IFingerprintServiceReceiver iFingerprintServiceReceiver, FingerprintAuthenticateOptions fingerprintAuthenticateOptions, Bundle bundle) {
             boolean z;
             Pair pair;
@@ -961,29 +958,6 @@ public final class FingerprintService extends SystemService {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r10v1 */
-        /* JADX WARN: Type inference failed for: r10v10 */
-        /* JADX WARN: Type inference failed for: r10v11 */
-        /* JADX WARN: Type inference failed for: r10v12 */
-        /* JADX WARN: Type inference failed for: r10v13 */
-        /* JADX WARN: Type inference failed for: r10v14 */
-        /* JADX WARN: Type inference failed for: r10v15 */
-        /* JADX WARN: Type inference failed for: r10v16 */
-        /* JADX WARN: Type inference failed for: r10v17 */
-        /* JADX WARN: Type inference failed for: r10v18 */
-        /* JADX WARN: Type inference failed for: r10v19 */
-        /* JADX WARN: Type inference failed for: r10v20 */
-        /* JADX WARN: Type inference failed for: r10v21 */
-        /* JADX WARN: Type inference failed for: r10v22 */
-        /* JADX WARN: Type inference failed for: r10v3, types: [boolean] */
-        /* JADX WARN: Type inference failed for: r10v4 */
-        /* JADX WARN: Type inference failed for: r10v5 */
-        /* JADX WARN: Type inference failed for: r10v6 */
-        /* JADX WARN: Type inference failed for: r10v7 */
-        /* JADX WARN: Type inference failed for: r10v8 */
-        /* JADX WARN: Type inference failed for: r10v9 */
         public final int semBioSysUiRequest(int i, int i2, long j, String str) {
             boolean z = true;
             semBioSysUiRequest_enforcePermission();
@@ -1684,10 +1658,6 @@ public final class FingerprintService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r5v1 */
-        /* JADX WARN: Type inference failed for: r5v2, types: [boolean, int] */
-        /* JADX WARN: Type inference failed for: r5v3 */
         public final int semSetScreenStatus(int i) {
             semSetScreenStatus_enforcePermission();
             SemFingerprintServiceExtImpl semFingerprintServiceExtImpl = FingerprintService.this.mServiceExtImpl;
@@ -1805,11 +1775,6 @@ public final class FingerprintService extends SystemService {
                                 this.mCallback.onClientFinished(this, i2 == this.mSuccessValue);
                             }
 
-                            /* JADX WARN: Multi-variable type inference failed */
-                            /* JADX WARN: Type inference failed for: r0v10, types: [boolean] */
-                            /* JADX WARN: Type inference failed for: r0v12, types: [java.lang.StringBuilder] */
-                            /* JADX WARN: Type inference failed for: r0v6, types: [java.nio.ByteBuffer] */
-                            /* JADX WARN: Type inference failed for: r0v7, types: [java.lang.String] */
                             @Override // com.android.server.biometrics.sensors.BaseClientMonitor
                             public final void start(ClientMonitorCallback clientMonitorCallback) {
                                 FileInputStream fileInputStream;
@@ -2012,7 +1977,6 @@ public final class FingerprintService extends SystemService {
         return FingerprintUtils.getInstance(intValue).getBiometricsForUser(fingerprintProvider.mContext, i);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2132,9 +2096,6 @@ public final class FingerprintService extends SystemService {
     public final void onBootPhase(final int i) {
         super.onBootPhase(i);
         this.mHandler.post(new Runnable() { // from class: com.android.server.biometrics.sensors.fingerprint.FingerprintService$$ExternalSyntheticLambda3
-            /* JADX WARN: Removed duplicated region for block: B:115:0x044f A[Catch: Exception -> 0x0420, TryCatch #0 {Exception -> 0x0420, blocks: (B:125:0x0414, B:127:0x0417, B:128:0x0422, B:130:0x0426, B:131:0x042a, B:133:0x042e, B:134:0x0432, B:136:0x0436, B:115:0x044f, B:117:0x046a, B:118:0x046c), top: B:124:0x0414 }] */
-            /* JADX WARN: Removed duplicated region for block: B:121:0x0482  */
-            /* JADX WARN: Removed duplicated region for block: B:124:0x0414 A[EXC_TOP_SPLITTER, SYNTHETIC] */
             @Override // java.lang.Runnable
             /*
                 Code decompiled incorrectly, please refer to instructions dump.

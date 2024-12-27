@@ -55,7 +55,6 @@ public class BrightnessDetailSliderView extends FrameLayout implements ToggleSli
     public SystemUIDialog mUsingHighBrightnessDialog;
     public boolean mUsingHighBrightnessDialogEnabled;
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.settings.brightness.BrightnessDetailSliderView$2] */
     public BrightnessDetailSliderView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mSliderEnabled = true;
@@ -221,11 +220,6 @@ public class BrightnessDetailSliderView extends FrameLayout implements ToggleSli
         this.mSlider.setOnSeekBarChangeListener(null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v15, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r0v16 */
-    /* JADX WARN: Type inference failed for: r0v48, types: [java.lang.CharSequence] */
-    /* JADX WARN: Type inference failed for: r4v6, types: [android.content.pm.PackageManager] */
     @Override // android.view.View
     public final void onFinishInflate() {
         ApplicationInfo applicationInfo;

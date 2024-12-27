@@ -255,7 +255,6 @@ public class MbmsStreamingSession implements AutoCloseable {
                 this.mContext, MBMS_STREAMING_SERVICE_ACTION, this.mServiceConnection);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendErrorToApp(int errorCode, String message) {
         try {
             this.mInternalCallback.onError(errorCode, message);

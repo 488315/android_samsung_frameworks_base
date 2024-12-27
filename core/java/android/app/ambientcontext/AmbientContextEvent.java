@@ -50,32 +50,26 @@ public final class AmbientContextEvent implements Parcelable {
     @Retention(RetentionPolicy.SOURCE)
     public @interface LevelValue {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultEventType() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Instant defaultStartTime() {
         return Instant.MIN;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Instant defaultEndTime() {
         return Instant.MAX;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultConfidenceLevel() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultDensityLevel() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static PersistableBundle defaultVendorData() {
         return new PersistableBundle();
     }
@@ -199,13 +193,11 @@ public final class AmbientContextEvent implements Parcelable {
         CREATOR =
                 new Parcelable.Creator<AmbientContextEvent>() { // from class:
                     // android.app.ambientcontext.AmbientContextEvent.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AmbientContextEvent[] newArray(int size) {
                         return new AmbientContextEvent[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AmbientContextEvent createFromParcel(Parcel in) {
                         return new AmbientContextEvent(in);

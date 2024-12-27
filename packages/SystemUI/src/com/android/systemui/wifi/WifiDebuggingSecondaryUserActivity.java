@@ -55,7 +55,6 @@ public class WifiDebuggingSecondaryUserActivity extends AlertActivity implements
         finish();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         this.mWifiManager = (WifiManager) getSystemService(ImsProfile.PDN_WIFI);

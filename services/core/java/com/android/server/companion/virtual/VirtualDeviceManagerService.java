@@ -317,9 +317,6 @@ public final class VirtualDeviceManagerService extends SystemService {
 
         public VirtualDeviceManagerImpl() {}
 
-        /* JADX WARN: Removed duplicated region for block: B:28:0x012b  */
-        /* JADX WARN: Removed duplicated region for block: B:31:0x0136 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Type inference failed for: r2v6, types: [com.android.server.companion.virtual.VirtualDeviceManagerService$VirtualDeviceManagerImpl$$ExternalSyntheticLambda0] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -673,8 +670,6 @@ public final class VirtualDeviceManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.server.companion.virtual.VirtualDeviceManagerService$1] */
-    /* JADX WARN: Type inference failed for: r2v9, types: [com.android.server.companion.virtual.VirtualDeviceManagerService$2] */
     public VirtualDeviceManagerService(Context context) {
         super(context);
         this.mVirtualDeviceManagerLock = new Object();

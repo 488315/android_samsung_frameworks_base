@@ -140,7 +140,6 @@ public final class PeopleManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ConversationListenerProxy extends IConversationListener.Stub {
         private final Executor mExecutor;
         private final ConversationListener mListener;
@@ -167,7 +166,6 @@ public final class PeopleManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onConversationUpdate$0(
                 ConversationChannel conversation) {
             this.mListener.onConversationUpdate(conversation);

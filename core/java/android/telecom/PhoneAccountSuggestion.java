@@ -12,13 +12,11 @@ public final class PhoneAccountSuggestion implements Parcelable {
             new Parcelable.Creator<
                     PhoneAccountSuggestion>() { // from class:
                                                 // android.telecom.PhoneAccountSuggestion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhoneAccountSuggestion createFromParcel(Parcel in) {
                     return new PhoneAccountSuggestion(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhoneAccountSuggestion[] newArray(int size) {
                     return new PhoneAccountSuggestion[size];

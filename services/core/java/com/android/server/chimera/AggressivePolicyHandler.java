@@ -20,8 +20,6 @@ public final class AggressivePolicyHandler extends PolicyHandler {
     public boolean mIsHeavyLaunchOn;
     public int mPkgKillIntervalDefault;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class ProtectLevel {
         public static final /* synthetic */ ProtectLevel[] $VALUES;
         public static final ProtectLevel HEAVY;
@@ -191,18 +189,6 @@ public final class AggressivePolicyHandler extends PolicyHandler {
 
        if (r6 != 0) goto L124;
     */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x0567  */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x056a  */
-    /* JADX WARN: Removed duplicated region for block: B:133:0x05e6  */
-    /* JADX WARN: Removed duplicated region for block: B:138:0x0693 A[LOOP:9: B:136:0x068d->B:138:0x0693, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:154:0x06f4 A[EDGE_INSN: B:154:0x06f4->B:155:0x06f4 BREAK  A[LOOP:5: B:64:0x0464->B:72:0x062b], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:167:0x062b A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:168:0x06db  */
-    /* JADX WARN: Removed duplicated region for block: B:172:0x062b A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:173:0x0628  */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x0630  */
-    /* JADX WARN: Removed duplicated region for block: B:304:0x020b  */
-    /* JADX WARN: Removed duplicated region for block: B:305:0x0212  */
     @Override // com.android.server.chimera.PolicyHandler
     /*
         Code decompiled incorrectly, please refer to instructions dump.

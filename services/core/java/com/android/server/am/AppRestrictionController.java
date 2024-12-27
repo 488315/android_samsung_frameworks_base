@@ -127,7 +127,6 @@ public final class AppRestrictionController {
             this.this$0 = obj;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             char c;
@@ -546,7 +545,6 @@ public final class AppRestrictionController {
             this.mDefaultBgPromptAbusiveAppToBgRestricted = context.getResources().getBoolean(R.bool.config_bluetooth_address_validation);
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public final void onPropertiesChanged(DeviceConfig.Properties properties) {
             String str;
             char c;
@@ -1143,7 +1141,6 @@ public final class AppRestrictionController {
             appRestrictionController.mRestrictionSettingsXmlLoaded.set(true);
         }
 
-        /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
         public final void loadOneFromXml(TypedXmlPullParser typedXmlPullParser, long j, long[] jArr, boolean z) {
             char c;
             char c2;
@@ -1394,10 +1391,6 @@ public final class AppRestrictionController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v10, types: [com.android.server.am.AppRestrictionController$4] */
-    /* JADX WARN: Type inference failed for: r4v11, types: [com.android.server.am.AppRestrictionController$5] */
-    /* JADX WARN: Type inference failed for: r4v9, types: [com.android.server.am.AppRestrictionController$3] */
-    /* JADX WARN: Type inference failed for: r5v6, types: [com.android.server.am.AppRestrictionController$$ExternalSyntheticLambda1] */
     public AppRestrictionController(Context context, ActivityManagerService activityManagerService) {
         Injector injector = new Injector(context);
         ArrayList arrayList = new ArrayList();
@@ -1519,10 +1512,6 @@ public final class AppRestrictionController {
         this.mAppStateTrackers.add(baseAppStateTracker);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r17v0 */
-    /* JADX WARN: Type inference failed for: r17v1 */
-    /* JADX WARN: Type inference failed for: r17v2 */
     public final void applyRestrictionLevel(final String str, final int i, final int i2, TrackerInfo trackerInfo, int i3, boolean z, int i4, int i5) {
         int i6;
         int i7;
@@ -1787,8 +1776,6 @@ public final class AppRestrictionController {
         return uidProcessState <= 1 ? 11 : -1;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:81:0x0075 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0056 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -133,8 +133,6 @@ public final class KeyguardRemotePreviewManager {
                 }
                 this.activePreviews.put(create.id, previewLifecycleObserver);
                 create.mainHandler.post(new Runnable() { // from class: com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$render$1
-                    /* JADX WARN: Type inference failed for: r4v37, types: [com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$setUpClock$clockChangeListener$1, java.lang.Object] */
-                    /* JADX WARN: Type inference failed for: r4v40, types: [android.content.BroadcastReceiver, com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$setUpClock$receiver$1] */
                     @Override // java.lang.Runnable
                     public final void run() {
                         DisplayInfo displayInfo;

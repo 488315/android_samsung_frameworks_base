@@ -87,7 +87,6 @@ public class MediaScannerConnection implements ServiceConnection {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$scanFile$0(String path) {
         Uri uri = scanFileQuietly(this.mProvider, new File(path));
         runCallBack(this.mContext, this.mClient, path, uri);

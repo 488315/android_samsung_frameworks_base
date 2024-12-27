@@ -56,13 +56,11 @@ public class EnterpriseExchangeAccount implements Parcelable {
             new Parcelable.Creator<
                     EnterpriseExchangeAccount>() { // from class:
                                                    // android.sec.enterprise.email.EnterpriseExchangeAccount.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EnterpriseExchangeAccount createFromParcel(Parcel in) {
                     return new EnterpriseExchangeAccount(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EnterpriseExchangeAccount[] newArray(int size) {
                     return new EnterpriseExchangeAccount[size];

@@ -19,7 +19,6 @@ public final class UserAwareSecureSettingsRepositoryImpl$boolSettingForActiveUse
     int label;
     final /* synthetic */ UserAwareSecureSettingsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserAwareSecureSettingsRepositoryImpl$boolSettingForActiveUser$$inlined$flatMapLatest$1(Continuation continuation, UserAwareSecureSettingsRepositoryImpl userAwareSecureSettingsRepositoryImpl, String str, boolean z) {
         super(3, continuation);
         this.this$0 = userAwareSecureSettingsRepositoryImpl;

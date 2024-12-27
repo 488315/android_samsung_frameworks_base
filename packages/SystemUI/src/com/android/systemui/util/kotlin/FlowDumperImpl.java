@@ -37,12 +37,10 @@ public class FlowDumperImpl implements FlowDumper {
         this.registered = new AtomicBoolean(false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final String getIdString(Object obj) {
         return Integer.toHexString(System.identityHashCode(obj));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void updateRegistration(boolean z) {
         if (this.dumpManager == null) {
             return;
@@ -91,14 +89,12 @@ public class FlowDumperImpl implements FlowDumper {
                 }
                 indentingPrintWriter.decreaseIndent();
                 final Comparator comparator = new Comparator() { // from class: com.android.systemui.util.kotlin.FlowDumperImpl$dumpFlows$$inlined$compareBy$1
-                    /* JADX WARN: Multi-variable type inference failed */
                     @Override // java.util.Comparator
                     public final int compare(T t, T t2) {
                         return ComparisonsKt__ComparisonsKt.compareValues((Comparable) ((Pair) t).getFirst(), (Comparable) ((Pair) t2).getFirst());
                     }
                 };
                 Comparator comparator2 = new Comparator() { // from class: com.android.systemui.util.kotlin.FlowDumperImpl$dumpFlows$$inlined$thenBy$1
-                    /* JADX WARN: Multi-variable type inference failed */
                     @Override // java.util.Comparator
                     public final int compare(T t, T t2) {
                         int compare = comparator.compare(t, t2);

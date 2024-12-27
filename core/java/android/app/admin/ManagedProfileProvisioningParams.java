@@ -15,7 +15,6 @@ public final class ManagedProfileProvisioningParams implements Parcelable {
     public static final Parcelable.Creator<ManagedProfileProvisioningParams> CREATOR =
             new Parcelable.Creator<ManagedProfileProvisioningParams>() { // from class:
                 // android.app.admin.ManagedProfileProvisioningParams.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ManagedProfileProvisioningParams createFromParcel(Parcel in) {
                     ComponentName componentName =
@@ -38,7 +37,6 @@ public final class ManagedProfileProvisioningParams implements Parcelable {
                             adminExtras);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ManagedProfileProvisioningParams[] newArray(int size) {
                     return new ManagedProfileProvisioningParams[size];

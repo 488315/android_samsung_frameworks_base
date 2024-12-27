@@ -96,7 +96,6 @@ public class CutoutSpecification {
         return this.mInsets.toRect();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int decideWhichEdge(
             boolean isTopEdgeShortEdge, boolean isShortEdge, boolean isStart) {
         return isTopEdgeShortEdge

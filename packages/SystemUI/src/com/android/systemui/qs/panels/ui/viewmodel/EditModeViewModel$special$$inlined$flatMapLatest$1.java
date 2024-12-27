@@ -12,7 +12,6 @@ public final class EditModeViewModel$special$$inlined$flatMapLatest$1 extends Su
     int label;
     final /* synthetic */ EditModeViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public EditModeViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, EditModeViewModel editModeViewModel) {
         super(3, continuation);
         this.this$0 = editModeViewModel;
@@ -26,7 +25,6 @@ public final class EditModeViewModel$special$$inlined$flatMapLatest$1 extends Su
         return editModeViewModel$special$$inlined$flatMapLatest$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00f0 A[RETURN] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

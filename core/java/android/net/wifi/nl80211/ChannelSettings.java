@@ -10,7 +10,6 @@ public class ChannelSettings implements Parcelable {
     public static final Parcelable.Creator<ChannelSettings> CREATOR =
             new Parcelable.Creator<
                     ChannelSettings>() { // from class: android.net.wifi.nl80211.ChannelSettings.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ChannelSettings createFromParcel(Parcel in) {
                     ChannelSettings result = new ChannelSettings();
@@ -21,7 +20,6 @@ public class ChannelSettings implements Parcelable {
                     return result;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ChannelSettings[] newArray(int size) {
                     return new ChannelSettings[size];

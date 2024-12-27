@@ -14,7 +14,6 @@ public final class CachedDeviceStateService extends SystemService {
     public final AnonymousClass1 mBroadcastReceiver;
     public final CachedDeviceState mDeviceState;
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.CachedDeviceStateService$1] */
     public CachedDeviceStateService(Context context) {
         super(context);
         this.mDeviceState = new CachedDeviceState();

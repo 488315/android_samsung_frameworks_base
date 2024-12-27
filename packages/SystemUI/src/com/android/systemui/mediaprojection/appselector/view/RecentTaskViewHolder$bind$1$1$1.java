@@ -18,7 +18,6 @@ final class RecentTaskViewHolder$bind$1$1$1 extends SuspendLambda implements Fun
     int label;
     final /* synthetic */ RecentTaskViewHolder this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RecentTaskViewHolder$bind$1$1$1(RecentTaskViewHolder recentTaskViewHolder, RecentTask recentTask, ComponentName componentName, Continuation continuation) {
         super(2, continuation);
         this.this$0 = recentTaskViewHolder;

@@ -20,7 +20,6 @@ public final class KeyguardTransitionBootInteractor implements CoreStartable {
     public final CoroutineScope scope;
     public final KeyguardTransitionBootInteractor$special$$inlined$map$1 showLockscreenOnBoot;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.keyguard.domain.interactor.KeyguardTransitionBootInteractor$special$$inlined$map$1] */
     public KeyguardTransitionBootInteractor(CoroutineScope coroutineScope, DeviceEntryInteractor deviceEntryInteractor, DeviceProvisioningInteractor deviceProvisioningInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, KeyguardTransitionRepository keyguardTransitionRepository) {
         this.scope = coroutineScope;
         this.deviceEntryInteractor = deviceEntryInteractor;
@@ -58,12 +57,6 @@ public final class KeyguardTransitionBootInteractor implements CoreStartable {
                     this.this$0 = keyguardTransitionBootInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:21:0x00a0 A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:25:0x0076  */
-                /* JADX WARN: Removed duplicated region for block: B:28:0x008d A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:29:0x008e  */
-                /* JADX WARN: Removed duplicated region for block: B:30:0x004f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

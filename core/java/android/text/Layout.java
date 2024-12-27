@@ -360,8 +360,6 @@ public abstract class Layout {
         draw(canvas, null, null, selectionHighlight, selectionHighlightPaint, cursorOffsetVertical);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x002f A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0030  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -567,7 +565,6 @@ public abstract class Layout {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isHighContrastTextDark(int color) {
         if (Flags.highContrastTextLuminance()) {
             double[] lab = new double[3];
@@ -676,11 +673,6 @@ public abstract class Layout {
         return (right - left) - indentWidth;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:103:0x00c4 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00dd  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x011d  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x010f A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x00ae  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -953,8 +945,6 @@ public abstract class Layout {
         return getHeight();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x004f  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0057  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1163,7 +1153,6 @@ public abstract class Layout {
         return getHorizontal(offset, !trailing, clamped);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public float getHorizontal(int offset, boolean primary) {
         return primary ? getPrimaryHorizontal(offset) : getSecondaryHorizontal(offset);
     }
@@ -1235,10 +1224,6 @@ public abstract class Layout {
         return getLineStartPos(line, left2, right2) + wid;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x006d  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00b1 A[LOOP:2: B:28:0x00ae->B:30:0x00b1, LOOP_END] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1615,8 +1600,6 @@ public abstract class Layout {
         return (signedExtent >= 0.0f ? signedExtent : -signedExtent) + margin;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0041 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0043  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1815,10 +1798,6 @@ public abstract class Layout {
         return getOffsetForHorizontal(line, horiz, true);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r17v1 */
-    /* JADX WARN: Type inference failed for: r17v2 */
-    /* JADX WARN: Type inference failed for: r17v8 */
     public int getOffsetForHorizontal(int line, float horiz, boolean primary) {
         TextLine tl;
         int max;
@@ -2502,7 +2481,6 @@ public abstract class Layout {
        r17 = true;
        r18 = null;
     */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00fd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2619,7 +2597,6 @@ public abstract class Layout {
         return (T[]) spanned.getSpans(i, i2, cls);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void ellipsize(
             int start, int end, int line, char[] dest, int destoff, TextUtils.TruncateAt method) {
         char c;
@@ -3065,7 +3042,6 @@ public abstract class Layout {
         return this.mMinimumFontMetrics;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     interface CharacterBoundsListener {
         void onCharacterBounds(int i, int i2, float f, float f2, float f3, float f4);
 

@@ -15,7 +15,6 @@ final class StrongAuthTracker$currentUserAuthFlags$1$3 extends SuspendLambda imp
     int label;
     final /* synthetic */ StrongAuthTracker this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public StrongAuthTracker$currentUserAuthFlags$1$3(int i, StrongAuthTracker strongAuthTracker, Continuation continuation) {
         super(2, continuation);
         this.$userId = i;

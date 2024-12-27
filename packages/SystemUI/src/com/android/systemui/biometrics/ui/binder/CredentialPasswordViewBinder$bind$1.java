@@ -26,7 +26,6 @@ import kotlinx.coroutines.JobSupport;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.ReadonlySharedFlow;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ CredentialView.Host $host;
     final /* synthetic */ InputMethodManager $imeManager;
@@ -59,7 +58,6 @@ public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda imp
             final /* synthetic */ CredentialViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass1(CredentialViewModel credentialViewModel, InputMethodManager inputMethodManager, CredentialPasswordView credentialPasswordView, CredentialView.Host host, ImeAwareEditText imeAwareEditText, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = credentialViewModel;
@@ -125,7 +123,6 @@ public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda imp
             final /* synthetic */ OnBackInvokedDispatcher $onBackInvokedDispatcher;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(OnBackInvokedDispatcher onBackInvokedDispatcher, OnBackInvokedCallback onBackInvokedCallback, Continuation continuation) {
                 super(2, continuation);
                 this.$onBackInvokedDispatcher = onBackInvokedDispatcher;
@@ -163,7 +160,6 @@ public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda imp
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(CredentialPasswordView credentialPasswordView, CredentialViewModel credentialViewModel, InputMethodManager inputMethodManager, CredentialView.Host host, ImeAwareEditText imeAwareEditText, OnBackInvokedCallback onBackInvokedCallback, Continuation continuation) {
             super(2, continuation);
             this.$view = credentialPasswordView;
@@ -200,7 +196,6 @@ public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda imp
                 Job launch$default = BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass2(findOnBackInvokedDispatcher, this.$onBackInvokedCallback, null), 3);
                 final OnBackInvokedCallback onBackInvokedCallback = this.$onBackInvokedCallback;
                 ((JobSupport) launch$default).invokeOnCompletion(new Function1() { // from class: com.android.systemui.biometrics.ui.binder.CredentialPasswordViewBinder.bind.1.3.3
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -216,7 +211,6 @@ public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda imp
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CredentialPasswordViewBinder$bind$1(CredentialViewModel credentialViewModel, ImeAwareEditText imeAwareEditText, boolean z, OnBackInvokedCallback onBackInvokedCallback, CredentialPasswordView credentialPasswordView, InputMethodManager inputMethodManager, CredentialView.Host host, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = credentialViewModel;
@@ -235,9 +229,6 @@ public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda imp
         return credentialPasswordViewBinder$bind$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00d2 A[RETURN] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

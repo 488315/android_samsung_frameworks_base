@@ -474,7 +474,6 @@ public class ExpandableNotificationRow extends ActivatableNotificationView imple
         ((NotificationGutsManager) expandableNotificationRowController$$ExternalSyntheticLambda0.f$0).openGuts(expandableNotificationRow, view.getWidth() / 2, view.getHeight() / 2, feedbackMenuItem);
     }
 
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.systemui.statusbar.notification.row.ExpandableNotificationRow$2] */
     static {
         SystemProperties.getInt("persist.notifications.extra_measure_delay_ms", 150);
         TRANSLATE_CONTENT = new FloatProperty("translate") { // from class: com.android.systemui.statusbar.notification.row.ExpandableNotificationRow.2
@@ -1243,8 +1242,6 @@ public class ExpandableNotificationRow extends ActivatableNotificationView imple
         return !z;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x004f  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0055  */
     @Override // com.android.systemui.statusbar.notification.row.ExpandableView
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -3293,11 +3290,6 @@ public class ExpandableNotificationRow extends ActivatableNotificationView imple
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0029  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0037  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0050 A[LOOP:0: B:19:0x0047->B:21:0x0050, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x009c A[EDGE_INSN: B:22:0x009c->B:23:0x009c BREAK  A[LOOP:0: B:19:0x0047->B:21:0x0050], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x003a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3621,7 +3613,6 @@ public class ExpandableNotificationRow extends ActivatableNotificationView imple
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.statusbar.notification.row.ExpandableNotificationRow$$ExternalSyntheticLambda0] */
     private ExpandableNotificationRow(Context context, AttributeSet attributeSet, Context context2) {
         super(context, attributeSet);
         this.mShowPublicExpander = true;

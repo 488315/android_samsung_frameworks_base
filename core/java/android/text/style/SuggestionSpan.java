@@ -23,13 +23,11 @@ public class SuggestionSpan extends CharacterStyle implements ParcelableSpan {
     public static final Parcelable.Creator<SuggestionSpan> CREATOR =
             new Parcelable.Creator<
                     SuggestionSpan>() { // from class: android.text.style.SuggestionSpan.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SuggestionSpan createFromParcel(Parcel source) {
                     return new SuggestionSpan(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SuggestionSpan[] newArray(int size) {
                     return new SuggestionSpan[size];

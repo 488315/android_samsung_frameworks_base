@@ -42,8 +42,6 @@ public final class LegacyMediaDataFilterImpl implements MediaDataManager.Listene
     public final LinkedHashMap userEntries = new LinkedHashMap();
     public SmartspaceMediaData smartspaceMediaData = LegacyMediaDataManagerImplKt.EMPTY_SMARTSPACE_MEDIA_DATA;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataFilterImpl$userTrackerCallback$1, com.android.systemui.settings.UserTracker$Callback] */
     public LegacyMediaDataFilterImpl(Context context, UserTracker userTracker, BroadcastSender broadcastSender, NotificationLockscreenUserManager notificationLockscreenUserManager, Executor executor, SystemClock systemClock, MediaUiEventLogger mediaUiEventLogger, MediaFlags mediaFlags) {
         this.context = context;
         this.broadcastSender = broadcastSender;

@@ -20,7 +20,6 @@ public final class SatelliteSupport$Companion$whenSupported$$inlined$flatMapLate
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SatelliteSupport$Companion$whenSupported$$inlined$flatMapLatest$1(Continuation continuation, Flow flow, Flow flow2, Function1 function1) {
         super(3, continuation);
         this.$retrySignal$inlined = flow;

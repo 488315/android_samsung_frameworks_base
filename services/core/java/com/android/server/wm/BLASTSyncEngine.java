@@ -140,7 +140,6 @@ public final class BLASTSyncEngine {
             }
         }
 
-        /* JADX WARN: Type inference failed for: r2v5, types: [com.android.server.wm.BLASTSyncEngine$SyncGroup$$ExternalSyntheticLambda2] */
         public SyncGroup(TransactionReadyListener transactionReadyListener, int i, String str) {
             this.mSyncId = i;
             this.mSyncName = str;

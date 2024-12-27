@@ -9,13 +9,11 @@ public class SContextAbnormalPressure extends SContextEventContext {
     public static final Parcelable.Creator<SContextAbnormalPressure> CREATOR =
             new Parcelable.Creator<SContextAbnormalPressure>() { // from class:
                 // android.hardware.scontext.SContextAbnormalPressure.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextAbnormalPressure createFromParcel(Parcel in) {
                     return new SContextAbnormalPressure(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextAbnormalPressure[] newArray(int size) {
                     return new SContextAbnormalPressure[size];

@@ -65,12 +65,6 @@ public final class QuickAccessWalletKeyguardQuickAffordanceConfig implements Key
         return this.pickerIconResourceId;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00af  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
     @Override // com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig
     /*
         Code decompiled incorrectly, please refer to instructions dump.

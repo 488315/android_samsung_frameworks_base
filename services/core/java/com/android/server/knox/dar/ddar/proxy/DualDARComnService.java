@@ -121,9 +121,6 @@ public final class DualDARComnService extends IProxyService.Stub implements Ente
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.knox.dar.ddar.proxy.DualDARComnService$3] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.knox.dar.ddar.proxy.DualDARComnService$1] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.knox.dar.ddar.proxy.DualDARComnService$1] */
     public DualDARComnService(Context context) {
         this.mBackgroundHandler = null;
         this.mHandler = null;

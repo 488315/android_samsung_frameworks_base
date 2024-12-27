@@ -250,9 +250,6 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
         MSG_USER_ACTIVITY_TIMEOUT_CHANGED = 101;
     }
 
-    /* JADX WARN: Type inference failed for: r1v21, types: [com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl$handler$1] */
-    /* JADX WARN: Type inference failed for: r1v22, types: [com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl$pluginLockListener$1] */
-    /* JADX WARN: Type inference failed for: r1v23, types: [com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl$pluginLockStarCallback$1] */
     public SecNotificationShadeWindowControllerHelperImpl(Context context, PowerManager powerManager, WindowManager windowManager, DisplayLifecycle displayLifecycle, KeyguardStateController keyguardStateController, KeyguardUpdateMonitor keyguardUpdateMonitor, SettingsHelper settingsHelper, IActivityManager iActivityManager, KeyguardFoldController keyguardFoldController, KeyguardFastBioUnlockController keyguardFastBioUnlockController, KeyguardVisibilityMonitor keyguardVisibilityMonitor, EngineeringModeManagerWrapper engineeringModeManagerWrapper, Lazy lazy, PluginLockMediator pluginLockMediator, KeyguardWallpaper keyguardWallpaper, KeyguardTransitionInteractor keyguardTransitionInteractor, CoroutineScope coroutineScope, AODAmbientWallpaperHelper aODAmbientWallpaperHelper, Lazy lazy2, Lazy lazy3, KeyguardViewMediatorHelper keyguardViewMediatorHelper) {
         this.context = context;
         this.powerManager = powerManager;

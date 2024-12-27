@@ -313,8 +313,6 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
         indentingPrintWriter.decreaseIndent();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0098  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00ad A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -560,12 +558,6 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00a0  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00c0  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x011e  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00b0  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00a2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

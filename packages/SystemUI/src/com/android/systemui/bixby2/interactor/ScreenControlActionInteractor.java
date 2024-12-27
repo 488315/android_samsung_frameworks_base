@@ -46,7 +46,6 @@ public class ScreenControlActionInteractor implements ActionInteractor {
         this.mScreenController = screenController;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$matchAction$0(String str, String str2) {
         return str2.equals(str);
     }

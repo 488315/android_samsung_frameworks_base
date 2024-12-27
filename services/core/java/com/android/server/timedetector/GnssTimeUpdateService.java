@@ -134,12 +134,9 @@ public final class GnssTimeUpdateService extends Binder {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.timedetector.GnssTimeUpdateService$$ExternalSyntheticLambda0] */
     public final void startGnssListeningLocked() {
         logDebug("startGnssListeningLocked()");
         this.mLocationListener = new LocationListener() { // from class: com.android.server.timedetector.GnssTimeUpdateService$$ExternalSyntheticLambda0
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r9v0, types: [android.app.AlarmManager$OnAlarmListener, com.android.server.timedetector.GnssTimeUpdateService$$ExternalSyntheticLambda1] */
             @Override // android.location.LocationListener
             public final void onLocationChanged(Location location) {
                 final GnssTimeUpdateService gnssTimeUpdateService = GnssTimeUpdateService.this;

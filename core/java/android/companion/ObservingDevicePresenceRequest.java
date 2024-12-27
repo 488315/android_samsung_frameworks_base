@@ -11,13 +11,11 @@ public final class ObservingDevicePresenceRequest implements Parcelable {
     public static final Parcelable.Creator<ObservingDevicePresenceRequest> CREATOR =
             new Parcelable.Creator<ObservingDevicePresenceRequest>() { // from class:
                 // android.companion.ObservingDevicePresenceRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ObservingDevicePresenceRequest[] newArray(int size) {
                     return new ObservingDevicePresenceRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ObservingDevicePresenceRequest createFromParcel(Parcel in) {
                     return new ObservingDevicePresenceRequest(in);
@@ -105,7 +103,6 @@ public final class ObservingDevicePresenceRequest implements Parcelable {
             return this;
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.provider.OneTimeUseBuilder
         public ObservingDevicePresenceRequest build() {
             markUsed();

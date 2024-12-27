@@ -48,7 +48,6 @@ public class HdmiDeviceInfo implements Parcelable {
     public static final Parcelable.Creator<HdmiDeviceInfo> CREATOR =
             new Parcelable.Creator<
                     HdmiDeviceInfo>() { // from class: android.hardware.hdmi.HdmiDeviceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HdmiDeviceInfo createFromParcel(Parcel source) {
                     int hdmiDeviceType = source.readInt();
@@ -86,7 +85,6 @@ public class HdmiDeviceInfo implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HdmiDeviceInfo[] newArray(int size) {
                     return new HdmiDeviceInfo[size];

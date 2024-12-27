@@ -9,13 +9,11 @@ public class SContextApproach extends SContextEventContext {
     public static final Parcelable.Creator<SContextApproach> CREATOR =
             new Parcelable.Creator<SContextApproach>() { // from class:
                 // android.hardware.scontext.SContextApproach.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextApproach createFromParcel(Parcel in) {
                     return new SContextApproach(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextApproach[] newArray(int size) {
                     return new SContextApproach[size];

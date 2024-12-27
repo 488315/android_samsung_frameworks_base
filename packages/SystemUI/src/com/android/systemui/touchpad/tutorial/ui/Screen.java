@@ -2,8 +2,6 @@ package com.android.systemui.touchpad.tutorial.ui;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class Screen {
     public static final /* synthetic */ Screen[] $VALUES;
     public static final Screen BACK_GESTURE;

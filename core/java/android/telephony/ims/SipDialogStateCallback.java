@@ -26,7 +26,6 @@ public abstract class SipDialogStateCallback {
         this.mCallback = new CallbackBinder(executor);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class CallbackBinder extends ISipDialogStateCallback.Stub {
         private Executor mExecutor;
         private WeakReference<SipDialogStateCallback> mSipDialogStateCallbackWeakRef;
@@ -58,7 +57,6 @@ public abstract class SipDialogStateCallback {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onActiveSipDialogsChanged$1(
                 final SipDialogStateCallback callback, final List dialogs) throws Exception {
             this.mExecutor.execute(

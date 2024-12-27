@@ -12,7 +12,6 @@ public class SetupDataCallResult implements Parcelable {
     public static final Parcelable.Creator<SetupDataCallResult> CREATOR =
             new Parcelable.Creator<SetupDataCallResult>() { // from class:
                 // android.hardware.radio.data.SetupDataCallResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SetupDataCallResult createFromParcel(Parcel _aidl_source) {
                     SetupDataCallResult _aidl_out = new SetupDataCallResult();
@@ -20,7 +19,6 @@ public class SetupDataCallResult implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SetupDataCallResult[] newArray(int _aidl_size) {
                     return new SetupDataCallResult[_aidl_size];

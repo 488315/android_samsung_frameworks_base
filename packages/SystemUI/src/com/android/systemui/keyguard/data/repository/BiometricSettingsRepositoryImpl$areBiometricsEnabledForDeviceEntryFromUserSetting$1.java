@@ -19,7 +19,6 @@ final class BiometricSettingsRepositoryImpl$areBiometricsEnabledForDeviceEntryFr
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BiometricSettingsRepositoryImpl$areBiometricsEnabledForDeviceEntryFromUserSetting$1(BiometricManager biometricManager, Continuation continuation) {
         super(2, continuation);
         this.$biometricManager = biometricManager;

@@ -36,7 +36,6 @@ public abstract class SoundTriggerDetectionService extends Service {
         this.mHandler = new Handler(base.getMainLooper());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setClient(UUID uuid, Bundle params, ISoundTriggerDetectionServiceClient client) {
         synchronized (this.mLock) {
             this.mClients.put(uuid, client);
@@ -44,7 +43,6 @@ public abstract class SoundTriggerDetectionService extends Service {
         onConnected(uuid, params);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeClient(UUID uuid, Bundle params) {
         synchronized (this.mLock) {
             this.mClients.remove(uuid);

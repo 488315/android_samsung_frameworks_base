@@ -8,7 +8,6 @@ final class InputMethodRepositoryImpl$enabledInputMethodSubtypes$1 extends Conti
     /* synthetic */ Object result;
     final /* synthetic */ InputMethodRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InputMethodRepositoryImpl$enabledInputMethodSubtypes$1(InputMethodRepositoryImpl inputMethodRepositoryImpl, Continuation continuation) {
         super(continuation);
         this.this$0 = inputMethodRepositoryImpl;

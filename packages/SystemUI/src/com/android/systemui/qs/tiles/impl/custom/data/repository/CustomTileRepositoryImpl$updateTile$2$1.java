@@ -20,7 +20,6 @@ final class CustomTileRepositoryImpl$updateTile$2$1 extends SuspendLambda implem
     int label;
     final /* synthetic */ CustomTileRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTileRepositoryImpl$updateTile$2$1(CustomTileRepositoryImpl customTileRepositoryImpl, UserHandle userHandle, Tile tile, Continuation continuation) {
         super(2, continuation);
         this.this$0 = customTileRepositoryImpl;

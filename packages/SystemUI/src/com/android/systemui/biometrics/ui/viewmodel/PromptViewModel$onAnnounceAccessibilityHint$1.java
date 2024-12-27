@@ -11,7 +11,6 @@ final class PromptViewModel$onAnnounceAccessibilityHint$1 extends ContinuationIm
     /* synthetic */ Object result;
     final /* synthetic */ PromptViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptViewModel$onAnnounceAccessibilityHint$1(PromptViewModel promptViewModel, Continuation continuation) {
         super(continuation);
         this.this$0 = promptViewModel;

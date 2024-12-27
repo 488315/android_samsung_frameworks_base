@@ -15,7 +15,6 @@ public final class DeviceStateInfo implements Parcelable {
     public static final Parcelable.Creator<DeviceStateInfo> CREATOR =
             new Parcelable.Creator<DeviceStateInfo>() { // from class:
                 // android.hardware.devicestate.DeviceStateInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DeviceStateInfo createFromParcel(Parcel source) {
                     int numberOfSupportedStates = source.readInt();
@@ -40,7 +39,6 @@ public final class DeviceStateInfo implements Parcelable {
                     return new DeviceStateInfo(supportedStates, baseState, currentState);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DeviceStateInfo[] newArray(int size) {
                     return new DeviceStateInfo[size];

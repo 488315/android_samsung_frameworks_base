@@ -216,7 +216,6 @@ public final class SideCoverContentView implements ContentView, ViewStateControl
         this.mViewAnimatorFSM = new CoverViewAnimatorFSM(sideCoverViewAnimator, this.mLogWrapper, this);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x00fb  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -32,8 +32,6 @@ public final class SystemDeviceIdleHelper {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v2, types: [android.content.BroadcastReceiver, com.android.server.location.injector.SystemDeviceIdleHelper$1] */
     public final void onRegistrationStateChanged() {
         AnonymousClass1 anonymousClass1;
         if (this.mSystemReady) {

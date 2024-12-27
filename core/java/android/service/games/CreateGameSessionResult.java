@@ -9,7 +9,6 @@ public final class CreateGameSessionResult implements Parcelable {
             new Parcelable.Creator<
                     CreateGameSessionResult>() { // from class:
                                                  // android.service.games.CreateGameSessionResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CreateGameSessionResult createFromParcel(Parcel source) {
                     return new CreateGameSessionResult(
@@ -21,7 +20,6 @@ public final class CreateGameSessionResult implements Parcelable {
                                             SurfaceControlViewHost.SurfacePackage.class));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CreateGameSessionResult[] newArray(int size) {
                     return new CreateGameSessionResult[0];

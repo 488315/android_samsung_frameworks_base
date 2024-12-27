@@ -409,9 +409,6 @@ public final class ShutdownThread extends Thread {
         shutdownInner(context);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(16:9|(2:10|11)|(10:(23:13|(1:15)|16|17|(1:19)|20|(1:22)(1:167)|23|(1:25)(1:166)|26|(3:28|(2:30|(1:32))|33)|34|35|36|37|38|39|40|41|42|43|44|1ca)|37|38|39|40|41|42|43|44|1ca)|(3:173|174|175)|16|17|(0)|20|(0)(0)|23|(0)(0)|26|(0)|34|35|36) */
-    /* JADX WARN: Can't wrap try/catch for region: R(25:9|(2:10|11)|(23:13|(1:15)|16|17|(1:19)|20|(1:22)(1:167)|23|(1:25)(1:166)|26|(3:28|(2:30|(1:32))|33)|34|35|36|37|38|39|40|41|42|43|44|1ca)|(3:173|174|175)|16|17|(0)|20|(0)(0)|23|(0)(0)|26|(0)|34|35|36|37|38|39|40|41|42|43|44|1ca) */
-    /* JADX WARN: Can't wrap try/catch for region: R(26:9|10|11|(23:13|(1:15)|16|17|(1:19)|20|(1:22)(1:167)|23|(1:25)(1:166)|26|(3:28|(2:30|(1:32))|33)|34|35|36|37|38|39|40|41|42|43|44|1ca)|(3:173|174|175)|16|17|(0)|20|(0)(0)|23|(0)(0)|26|(0)|34|35|36|37|38|39|40|41|42|43|44|1ca) */
     /* JADX WARN: Code restructure failed: missing block: B:142:0x0192, code lost:
     
         r15 = move-exception;
@@ -456,14 +453,6 @@ public final class ShutdownThread extends Thread {
     
         r15 = th;
      */
-    /* JADX WARN: Removed duplicated region for block: B:155:0x043c A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:166:0x00a0  */
-    /* JADX WARN: Removed duplicated region for block: B:167:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0068  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0095  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x009c  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00e0  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x01cb A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -510,9 +499,6 @@ public final class ShutdownThread extends Thread {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0043  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0048  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -582,7 +568,6 @@ public final class ShutdownThread extends Thread {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.ShutdownThread.playShutdownVibration(android.content.Context):void");
     }
 
-    /* JADX WARN: Type inference failed for: r0v73, types: [com.android.server.power.ShutdownThread$6] */
     @Override // java.lang.Thread, java.lang.Runnable
     public final void run() {
         SoundPlayer soundPlayer;

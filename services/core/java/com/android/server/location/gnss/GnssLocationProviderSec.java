@@ -180,7 +180,6 @@ public final class GnssLocationProviderSec extends GnssLocationProvider {
         public int mSlotId;
     }
 
-    /* JADX WARN: Type inference failed for: r11v3, types: [com.android.server.location.gnss.GnssLocationProviderSec$1] */
     public GnssLocationProviderSec(Context context, GnssNative gnssNative, GnssMetrics gnssMetrics) {
         super(context, gnssNative, gnssMetrics);
         this.mIsSKApplicationFramework = false;
@@ -196,7 +195,6 @@ public final class GnssLocationProviderSec extends GnssLocationProvider {
         this.mEquipmentTestModeEnabled = false;
         this.prevLocationElapsedRealtimeNs = 0L;
         this.mBroadcastReceiverSec = new BroadcastReceiver() { // from class: com.android.server.location.gnss.GnssLocationProviderSec.1
-            /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
                 char c;
@@ -468,9 +466,6 @@ public final class GnssLocationProviderSec extends GnssLocationProvider {
         this.mTelephonyManager = (TelephonyManager) context.getSystemService("phone");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r11v14, types: [com.android.server.location.gnss.GnssLocationProviderSec$2] */
-    /* JADX WARN: Type inference failed for: r13v2, types: [android.content.BroadcastReceiver, com.android.server.location.gnss.GnssLocationProviderSec$1] */
     public GnssLocationProviderSec(Context context, Injector injector, GnssNative gnssNative, GnssMetrics gnssMetrics) {
         super(context, injector, gnssNative, gnssMetrics);
         this.mIsSKApplicationFramework = false;
@@ -486,7 +481,6 @@ public final class GnssLocationProviderSec extends GnssLocationProvider {
         this.mEquipmentTestModeEnabled = false;
         this.prevLocationElapsedRealtimeNs = 0L;
         ?? r13 = new BroadcastReceiver() { // from class: com.android.server.location.gnss.GnssLocationProviderSec.1
-            /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
                 char c;
@@ -804,8 +798,6 @@ public final class GnssLocationProviderSec extends GnssLocationProvider {
             }
         }
         this.mCellInfoCb = new TelephonyManager.CellInfoCallback() { // from class: com.android.server.location.gnss.GnssLocationProviderSec.2
-            /* JADX WARN: Removed duplicated region for block: B:18:0x008a A[RETURN] */
-            /* JADX WARN: Removed duplicated region for block: B:19:0x008b  */
             @Override // android.telephony.TelephonyManager.CellInfoCallback
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -865,8 +857,6 @@ public final class GnssLocationProviderSec extends GnssLocationProvider {
         return file;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0044  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1078,17 +1068,6 @@ public final class GnssLocationProviderSec extends GnssLocationProvider {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x01ef  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x032a  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x0348  */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x0357  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x036c  */
-    /* JADX WARN: Removed duplicated region for block: B:134:0x0381  */
-    /* JADX WARN: Removed duplicated region for block: B:162:0x0392  */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x0427  */
-    /* JADX WARN: Removed duplicated region for block: B:200:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x01c4  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x01e0  */
     @Override // com.android.server.location.gnss.GnssLocationProvider
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1675,8 +1654,6 @@ public final class GnssLocationProviderSec extends GnssLocationProvider {
         this.mNSConnectionHelper.onGnssEventUpdated(XmlUtils$$ExternalSyntheticOutline0.m("G,", new SimpleDateFormat("MM-dd-yyyy HH:mm:ss", Locale.getDefault()).format(new Date(System.currentTimeMillis())), ",UNKNOWN,UNKNOWN,UNKNOWN,", str, ";git_hash=115098c;"));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x008a  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x008c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1713,7 +1690,6 @@ public final class GnssLocationProviderSec extends GnssLocationProvider {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [boolean] */
     public final void setCpAgpsProfile(int i) {
         if (this.mCarrierConfig.isUSAMarket() || this.mCarrierConfig.isCanadaMarket()) {
             return;

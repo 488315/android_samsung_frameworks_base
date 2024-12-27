@@ -8,7 +8,6 @@ public class FrontendDvbtCapabilities implements Parcelable {
     public static final Parcelable.Creator<FrontendDvbtCapabilities> CREATOR =
             new Parcelable.Creator<FrontendDvbtCapabilities>() { // from class:
                 // android.hardware.tv.tuner.FrontendDvbtCapabilities.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendDvbtCapabilities createFromParcel(Parcel _aidl_source) {
                     FrontendDvbtCapabilities _aidl_out = new FrontendDvbtCapabilities();
@@ -16,7 +15,6 @@ public class FrontendDvbtCapabilities implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendDvbtCapabilities[] newArray(int _aidl_size) {
                     return new FrontendDvbtCapabilities[_aidl_size];

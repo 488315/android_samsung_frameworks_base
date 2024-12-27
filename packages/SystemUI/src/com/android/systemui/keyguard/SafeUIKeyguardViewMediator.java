@@ -469,8 +469,6 @@ public final class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
         
             if (r2.mWallpaperSupportsAmbientMode != false) goto L14;
          */
-        /* JADX WARN: Removed duplicated region for block: B:14:0x005e  */
-        /* JADX WARN: Removed duplicated region for block: B:17:0x0073  */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1137,7 +1135,6 @@ public final class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
         Trace.endSection();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x006c A[Catch: all -> 0x0048, TryCatch #0 {all -> 0x0048, blocks: (B:11:0x003a, B:13:0x003e, B:14:0x0045, B:18:0x004b, B:20:0x005e, B:25:0x006c, B:26:0x0092, B:27:0x00c7), top: B:10:0x003a }] */
     /* renamed from: -$$Nest$mhandleShow, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1256,10 +1253,6 @@ public final class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.SafeUIKeyguardViewMediator.m1959$$Nest$mhandleShow(com.android.systemui.keyguard.SafeUIKeyguardViewMediator, android.os.Bundle):void");
     }
 
-    /* JADX WARN: Type inference failed for: r8v5, types: [com.android.systemui.keyguard.SafeUIKeyguardViewMediator$8] */
-    /* JADX WARN: Type inference failed for: r9v0, types: [com.android.systemui.keyguard.SafeUIKeyguardViewMediator$6] */
-    /* JADX WARN: Type inference failed for: r9v2, types: [com.android.systemui.keyguard.SafeUIKeyguardViewMediator$10] */
-    /* JADX WARN: Type inference failed for: r9v3, types: [com.android.systemui.keyguard.SafeUIKeyguardViewMediator$11] */
     public SafeUIKeyguardViewMediator(KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl, Context context, UiEventLogger uiEventLogger, SessionTracker sessionTracker, UserTracker userTracker, FalsingCollector falsingCollector, LockPatternUtils lockPatternUtils, BroadcastDispatcher broadcastDispatcher, Lazy lazy, DismissCallbackRegistry dismissCallbackRegistry, KeyguardUpdateMonitor keyguardUpdateMonitor, DumpManager dumpManager, Executor executor, PowerManager powerManager, TrustManager trustManager, UserSwitcherController userSwitcherController, DeviceConfigProxy deviceConfigProxy, NavigationModeController navigationModeController, KeyguardDisplayManager keyguardDisplayManager, DozeParameters dozeParameters, SysuiStatusBarStateController sysuiStatusBarStateController, KeyguardStateController keyguardStateController, Lazy lazy2, ScreenOffAnimationController screenOffAnimationController, Lazy lazy3, ScreenOnCoordinator screenOnCoordinator, KeyguardTransitions keyguardTransitions, InteractionJankMonitor interactionJankMonitor, DreamOverlayStateController dreamOverlayStateController, JavaAdapter javaAdapter, WallpaperRepository wallpaperRepository, Lazy lazy4, Lazy lazy5, Lazy lazy6, Lazy lazy7, IActivityTaskManager iActivityTaskManager, FeatureFlags featureFlags, SecureSettings secureSettings, SystemSettings systemSettings, SystemClock systemClock, CoroutineDispatcher coroutineDispatcher, Lazy lazy8, Lazy lazy9, SystemPropertiesHelper systemPropertiesHelper, Lazy lazy10, SelectedUserInteractor selectedUserInteractor, KeyguardInteractor keyguardInteractor, WindowManagerOcclusionManager windowManagerOcclusionManager) {
         super(keyguardViewMediatorHelperImpl, context, uiEventLogger, sessionTracker, userTracker, falsingCollector, lockPatternUtils, broadcastDispatcher, lazy, dismissCallbackRegistry, keyguardUpdateMonitor, dumpManager, executor, powerManager, trustManager, userSwitcherController, deviceConfigProxy, navigationModeController, keyguardDisplayManager, dozeParameters, sysuiStatusBarStateController, keyguardStateController, lazy2, screenOffAnimationController, lazy3, screenOnCoordinator, keyguardTransitions, interactionJankMonitor, dreamOverlayStateController, javaAdapter, wallpaperRepository, lazy4, lazy5, lazy6, lazy7, iActivityTaskManager, featureFlags, secureSettings, systemSettings, systemClock, coroutineDispatcher, lazy8, lazy9, systemPropertiesHelper, lazy10, selectedUserInteractor, keyguardInteractor, windowManagerOcclusionManager);
         this.mStatusBarDisableToken = new Binder();
@@ -2068,8 +2061,6 @@ public final class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
         this.mUpdateMonitor.mHandler.sendEmptyMessage(CustomDeviceManager.DESTINATION_ADDRESS);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x006d A[Catch: all -> 0x002b, TryCatch #0 {all -> 0x002b, blocks: (B:5:0x000b, B:7:0x0020, B:11:0x002f, B:13:0x003f, B:15:0x0047, B:16:0x0069, B:18:0x006d, B:19:0x0072, B:28:0x0058, B:32:0x005e, B:34:0x0066), top: B:4:0x000b }] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0066 A[Catch: all -> 0x002b, TryCatch #0 {all -> 0x002b, blocks: (B:5:0x000b, B:7:0x0020, B:11:0x002f, B:13:0x003f, B:15:0x0047, B:16:0x0069, B:18:0x006d, B:19:0x0072, B:28:0x0058, B:32:0x005e, B:34:0x0066), top: B:4:0x000b }] */
     @Override // com.android.systemui.keyguard.KeyguardViewMediator
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -296,8 +296,6 @@ public final class VDCObserverService extends IVDCObserverService.Stub
         Log.w("VDCObserverService", "registerUsageStatsWatcher: fail");
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.sepunion.VDCObserverService$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.sepunion.VDCObserverService$3] */
     public VDCObserverService(Context context) {
         this.mContext = context;
     }

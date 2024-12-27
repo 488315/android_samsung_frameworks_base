@@ -10,13 +10,11 @@ import java.util.Collection;
 public final class SigningInfo implements Parcelable {
     public static final Parcelable.Creator<SigningInfo> CREATOR =
             new Parcelable.Creator<SigningInfo>() { // from class: android.content.pm.SigningInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SigningInfo createFromParcel(Parcel source) {
                     return new SigningInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SigningInfo[] newArray(int size) {
                     return new SigningInfo[size];

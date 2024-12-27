@@ -134,11 +134,9 @@ public final class MediaDrm implements AutoCloseable {
 
     private native void closeSessionNative(byte[] bArr);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final native byte[] decryptNative(
             MediaDrm mediaDrm, byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final native byte[] encryptNative(
             MediaDrm mediaDrm, byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4);
 
@@ -165,25 +163,20 @@ public final class MediaDrm implements AutoCloseable {
     private native Certificate provideProvisionResponseNative(byte[] bArr)
             throws DeniedByServerException;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final native void setCipherAlgorithmNative(
             MediaDrm mediaDrm, byte[] bArr, String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final native void setMacAlgorithmNative(
             MediaDrm mediaDrm, byte[] bArr, String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native void setPlaybackId(byte[] bArr, String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final native byte[] signNative(
             MediaDrm mediaDrm, byte[] bArr, byte[] bArr2, byte[] bArr3);
 
     private static final native byte[] signRSANative(
             MediaDrm mediaDrm, byte[] bArr, String str, byte[] bArr2, byte[] bArr3);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final native boolean verifyNative(
             MediaDrm mediaDrm, byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4);
 
@@ -580,7 +573,6 @@ public final class MediaDrm implements AutoCloseable {
         this.mListenerMap.remove(Integer.valueOf(what));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Consumer<ListenerArgs> createOnEventListener(final OnEventListener listener) {
         return new Consumer() { // from class: android.media.MediaDrm$$ExternalSyntheticLambda4
             @Override // java.util.function.Consumer
@@ -590,7 +582,6 @@ public final class MediaDrm implements AutoCloseable {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createOnEventListener$0(
             OnEventListener listener, ListenerArgs args) {
         byte[] data;
@@ -614,7 +605,6 @@ public final class MediaDrm implements AutoCloseable {
         listener.onEvent(this, sessionId, args.arg1, args.arg2, data);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Consumer<ListenerArgs> createOnKeyStatusChangeListener(
             final OnKeyStatusChangeListener listener) {
         return new Consumer() { // from class: android.media.MediaDrm$$ExternalSyntheticLambda2
@@ -626,7 +616,6 @@ public final class MediaDrm implements AutoCloseable {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createOnKeyStatusChangeListener$1(
             OnKeyStatusChangeListener listener, ListenerArgs args) {
         byte[] sessionId = args.sessionId;
@@ -638,7 +627,6 @@ public final class MediaDrm implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Consumer<ListenerArgs> createOnExpirationUpdateListener(
             final OnExpirationUpdateListener listener) {
         return new Consumer() { // from class: android.media.MediaDrm$$ExternalSyntheticLambda6
@@ -650,7 +638,6 @@ public final class MediaDrm implements AutoCloseable {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createOnExpirationUpdateListener$2(
             OnExpirationUpdateListener listener, ListenerArgs args) {
         byte[] sessionId = args.sessionId;
@@ -661,7 +648,6 @@ public final class MediaDrm implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Consumer<ListenerArgs> createOnSessionLostStateListener(
             final OnSessionLostStateListener listener) {
         return new Consumer() { // from class: android.media.MediaDrm$$ExternalSyntheticLambda7
@@ -673,7 +659,6 @@ public final class MediaDrm implements AutoCloseable {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createOnSessionLostStateListener$3(
             OnSessionLostStateListener listener, ListenerArgs args) {
         byte[] sessionId = args.sessionId;
@@ -681,7 +666,6 @@ public final class MediaDrm implements AutoCloseable {
         listener.onSessionLostState(this, sessionId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ListenerArgs {
         private final int arg1;
         private final int arg2;
@@ -709,7 +693,6 @@ public final class MediaDrm implements AutoCloseable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ListenerWithExecutor {
         private final Consumer<ListenerArgs> mConsumer;
         private final Executor mExecutor;

@@ -66,7 +66,6 @@ public class ATCommandAttribute {
         return this.mAutoBlockerOpen;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x013a, code lost:
 
        android.util.Slog.e("ATCommands", "#### Error Command Convention, Must check AT Command List File");
@@ -77,16 +76,6 @@ public class ATCommandAttribute {
        android.util.Slog.e("ATCommands", "#### Error Command Convention, Must check AT Command List File");
        android.util.Slog.e("ATCommands", "#### And This command can't operate with attribute");
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v11 */
-    /* JADX WARN: Type inference failed for: r10v14 */
-    /* JADX WARN: Type inference failed for: r10v17 */
-    /* JADX WARN: Type inference failed for: r10v20 */
-    /* JADX WARN: Type inference failed for: r10v23 */
-    /* JADX WARN: Type inference failed for: r10v24 */
-    /* JADX WARN: Type inference failed for: r10v41 */
-    /* JADX WARN: Type inference failed for: r10v5 */
-    /* JADX WARN: Type inference failed for: r10v8 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

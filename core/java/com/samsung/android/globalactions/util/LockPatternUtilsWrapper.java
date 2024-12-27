@@ -73,7 +73,6 @@ public class LockPatternUtilsWrapper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: lockProfiles, reason: merged with bridge method [inline-methods] */
     public void lambda$lockDown$0() {
         UserManager um = (UserManager) this.mContext.getSystemService("user");

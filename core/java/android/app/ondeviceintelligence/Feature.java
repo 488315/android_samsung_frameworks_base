@@ -15,13 +15,11 @@ public final class Feature implements Parcelable {
     public static final Parcelable.Creator<Feature> CREATOR =
             new Parcelable.Creator<
                     Feature>() { // from class: android.app.ondeviceintelligence.Feature.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Feature[] newArray(int size) {
                     return new Feature[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Feature createFromParcel(Parcel in) {
                     return new Feature(in);

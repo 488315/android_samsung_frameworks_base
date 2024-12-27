@@ -12,13 +12,11 @@ public final class AppFunctionException extends Exception implements Parcelable 
     public static final Parcelable.Creator<AppFunctionException> CREATOR =
             new Parcelable.Creator<AppFunctionException>() { // from class:
                 // android.app.appfunctions.AppFunctionException.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppFunctionException createFromParcel(Parcel in) {
                     return new AppFunctionException(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppFunctionException[] newArray(int size) {
                     return new AppFunctionException[size];

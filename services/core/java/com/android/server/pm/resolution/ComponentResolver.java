@@ -533,7 +533,6 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
         public final /* synthetic */ int $r8$classId;
         public final Object mServices;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public ServiceIntentResolver(UserManagerService userManagerService, int i) {
             super(userManagerService);
             this.$r8$classId = i;
@@ -548,7 +547,6 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public ServiceIntentResolver(
                 ServiceIntentResolver serviceIntentResolver,
                 UserManagerService userManagerService) {
@@ -559,7 +557,6 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             hashMap.putAll((HashMap) serviceIntentResolver.mServices);
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public ServiceIntentResolver(
                 ServiceIntentResolver serviceIntentResolver,
                 UserManagerService userManagerService,
@@ -870,7 +867,6 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
         RESOLVE_PRIORITY_SORTER = new ComponentResolver$$ExternalSyntheticLambda0();
     }
 
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.server.pm.resolution.ComponentResolver$1] */
     public ComponentResolver(
             UserManagerService userManagerService,
             final UserNeedsBadgingCache userNeedsBadgingCache) {

@@ -218,8 +218,6 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00c5 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0098 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -304,10 +302,6 @@ public final class ShortcutPackage extends ShortcutPackageItem {
 
        r2.add(r0);
     */
-    /* JADX WARN: Failed to find 'out' block for switch in B:44:0x014a. Please report as an issue. */
-    /* JADX WARN: Removed duplicated region for block: B:102:0x030f A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x02b2  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x02c4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -942,10 +936,6 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         refreshPinnedFlags();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x00b9  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00d9  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00d0  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x00a5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1132,17 +1122,6 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:114:0x01ef  */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x00f6  */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x00bb  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x008e  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00b8  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00f4  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0109  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x014d  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x021c  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x018a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

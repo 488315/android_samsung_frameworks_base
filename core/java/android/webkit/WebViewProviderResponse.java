@@ -14,13 +14,11 @@ public final class WebViewProviderResponse implements Parcelable {
             new Parcelable.Creator<
                     WebViewProviderResponse>() { // from class:
                                                  // android.webkit.WebViewProviderResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WebViewProviderResponse createFromParcel(Parcel in) {
                     return new WebViewProviderResponse(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WebViewProviderResponse[] newArray(int size) {
                     return new WebViewProviderResponse[size];

@@ -159,7 +159,6 @@ public class PreferenceStore {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ Iterator lambda$iterable$4(final NodeList nodeList) {
         return IntStream.range(0, nodeList.getLength())
                 .mapToObj(
@@ -173,28 +172,14 @@ public class PreferenceStore {
                 .iterator();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setBoolean$0(String str, boolean z) {
         lambda$setString$2(str, Boolean.valueOf(z));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setInteger$1(String str, int i) {
         lambda$setString$2(str, Integer.valueOf(i));
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00ca A[Catch: all -> 0x005e, Exception -> 0x0061, TRY_ENTER, TryCatch #4 {Exception -> 0x0061, blocks: (B:12:0x001d, B:75:0x0043, B:77:0x0049, B:79:0x0053, B:28:0x00bb, B:31:0x00ca, B:38:0x00f2, B:40:0x0107, B:41:0x010d, B:42:0x011b, B:43:0x0129, B:44:0x00d2, B:47:0x00da, B:50:0x00e1, B:54:0x0138, B:58:0x0064, B:60:0x006a, B:62:0x0076, B:65:0x007f, B:69:0x0098, B:19:0x00a0, B:22:0x00ad), top: B:11:0x001d, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00ec  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0129 A[Catch: all -> 0x005e, Exception -> 0x0061, TryCatch #4 {Exception -> 0x0061, blocks: (B:12:0x001d, B:75:0x0043, B:77:0x0049, B:79:0x0053, B:28:0x00bb, B:31:0x00ca, B:38:0x00f2, B:40:0x0107, B:41:0x010d, B:42:0x011b, B:43:0x0129, B:44:0x00d2, B:47:0x00da, B:50:0x00e1, B:54:0x0138, B:58:0x0064, B:60:0x006a, B:62:0x0076, B:65:0x007f, B:69:0x0098, B:19:0x00a0, B:22:0x00ad), top: B:11:0x001d, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00d2 A[Catch: all -> 0x005e, Exception -> 0x0061, TryCatch #4 {Exception -> 0x0061, blocks: (B:12:0x001d, B:75:0x0043, B:77:0x0049, B:79:0x0053, B:28:0x00bb, B:31:0x00ca, B:38:0x00f2, B:40:0x0107, B:41:0x010d, B:42:0x011b, B:43:0x0129, B:44:0x00d2, B:47:0x00da, B:50:0x00e1, B:54:0x0138, B:58:0x0064, B:60:0x006a, B:62:0x0076, B:65:0x007f, B:69:0x0098, B:19:0x00a0, B:22:0x00ad), top: B:11:0x001d, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00da A[Catch: all -> 0x005e, Exception -> 0x0061, TryCatch #4 {Exception -> 0x0061, blocks: (B:12:0x001d, B:75:0x0043, B:77:0x0049, B:79:0x0053, B:28:0x00bb, B:31:0x00ca, B:38:0x00f2, B:40:0x0107, B:41:0x010d, B:42:0x011b, B:43:0x0129, B:44:0x00d2, B:47:0x00da, B:50:0x00e1, B:54:0x0138, B:58:0x0064, B:60:0x006a, B:62:0x0076, B:65:0x007f, B:69:0x0098, B:19:0x00a0, B:22:0x00ad), top: B:11:0x001d, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00e1 A[Catch: all -> 0x005e, Exception -> 0x0061, TryCatch #4 {Exception -> 0x0061, blocks: (B:12:0x001d, B:75:0x0043, B:77:0x0049, B:79:0x0053, B:28:0x00bb, B:31:0x00ca, B:38:0x00f2, B:40:0x0107, B:41:0x010d, B:42:0x011b, B:43:0x0129, B:44:0x00d2, B:47:0x00da, B:50:0x00e1, B:54:0x0138, B:58:0x0064, B:60:0x006a, B:62:0x0076, B:65:0x007f, B:69:0x0098, B:19:0x00a0, B:22:0x00ad), top: B:11:0x001d, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x00e9  */
-    /* JADX WARN: Type inference failed for: r1v2, types: [java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r1v6 */
-    /* JADX WARN: Type inference failed for: r1v7 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -209,7 +194,6 @@ public class PreferenceStore {
                     + " com.att.iqi.libs.PreferenceStore.loadPrefsFromFileLocked():void");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: updatePreference, reason: merged with bridge method [inline-methods] */
     public void lambda$setString$2(String str, Object obj) {
         String str2;

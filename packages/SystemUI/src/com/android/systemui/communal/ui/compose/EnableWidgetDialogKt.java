@@ -78,7 +78,6 @@ public abstract class EnableWidgetDialogKt {
         composerImpl.end(false);
         final Context context = ((View) composerImpl.consume(AndroidCompositionLocals_androidKt.LocalView)).getContext();
         EffectsKt.DisposableEffect(Boolean.valueOf(z), new Function1() { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$EnableWidgetDialog$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -94,7 +93,6 @@ public abstract class EnableWidgetDialogKt {
                     final Function0 function03 = function0;
                     final Function0 function04 = function02;
                     mutableState2.setValue(SystemUIDialogFactoryExtKt.create$default(systemUIDialogFactory2, context2, 0, null, new ComposableLambdaImpl(-1476030410, true, new Function3() { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$EnableWidgetDialog$1.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(3);
                         }
@@ -138,7 +136,6 @@ public abstract class EnableWidgetDialogKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$EnableWidgetDialog$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -153,7 +150,6 @@ public abstract class EnableWidgetDialogKt {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$DialogComposable$1$1$2$1$1, kotlin.jvm.internal.Lambda] */
     public static final void access$DialogComposable(final String str, final String str2, final Function0 function0, final Function0 function02, Composer composer, final int i) {
         int i2;
         Function2 function2;
@@ -313,7 +309,6 @@ public abstract class EnableWidgetDialogKt {
             ComposableSingletons$EnableWidgetDialogKt.INSTANCE.getClass();
             ButtonKt.TextButton(function02, null, false, null, null, null, null, m99PaddingValues0680j_4, null, ComposableSingletons$EnableWidgetDialogKt.f35lambda1, composerImpl, ((i2 >> 9) & 14) | 817889280, VolteConstants.ErrorCode.ALTERNATIVE_SERVICES_EMERGENCY_CSFB);
             ButtonKt.TextButton(function0, null, false, null, null, null, null, PaddingKt.m99PaddingValues0680j_4(f), null, ComposableLambdaKt.rememberComposableLambda(-1297407490, composerImpl, new Function3() { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$DialogComposable$1$1$2$1$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(3);
                 }
@@ -341,7 +336,6 @@ public abstract class EnableWidgetDialogKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$DialogComposable$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

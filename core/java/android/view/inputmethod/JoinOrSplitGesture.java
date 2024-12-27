@@ -11,13 +11,11 @@ public final class JoinOrSplitGesture extends HandwritingGesture implements Parc
             new Parcelable.Creator<
                     JoinOrSplitGesture>() { // from class:
                                             // android.view.inputmethod.JoinOrSplitGesture.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public JoinOrSplitGesture createFromParcel(Parcel source) {
                     return new JoinOrSplitGesture(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public JoinOrSplitGesture[] newArray(int size) {
                     return new JoinOrSplitGesture[size];

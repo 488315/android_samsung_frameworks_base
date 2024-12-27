@@ -358,7 +358,6 @@ public final class SoundEffectsHelper {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:(3:141|142|(11:144|25|26|(4:(2:28|(3:30|(3:71|72|(3:74|75|76)(1:77))(3:32|33|(8:35|36|37|39|40|(1:42)|43|(3:48|49|50))(1:56))|51)(2:78|79))|57|(1:59)(1:70)|(3:62|(1:65)|(1:68)))|80|81|(1:83)(1:114)|84|(6:87|(4:89|(1:106)(1:93)|94|(1:96))(1:107)|97|(3:103|104|105)(3:99|100|101)|102|85)|108|(2:110|111)(2:112|113)))|25|26|(0)|80|81|(0)(0)|84|(1:85)|108|(0)(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:119:0x0203, code lost:
 
        if (r5 != null) goto L81;
@@ -398,13 +397,6 @@ public final class SoundEffectsHelper {
 
        if (((java.util.ArrayList) r14.mResources).isEmpty() == false) goto L88;
     */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x02ea  */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x02f5  */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x0226  */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x01fc  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00da A[Catch: all -> 0x0113, IOException -> 0x0117, XmlPullParserException -> 0x011c, NotFoundException -> 0x0121, LOOP:0: B:28:0x00da->B:51:0x00da, LOOP_START, TryCatch #3 {all -> 0x0113, blocks: (B:26:0x00c0, B:28:0x00da, B:57:0x01b1, B:62:0x01ce, B:65:0x01dc, B:68:0x01e3, B:30:0x00e5, B:72:0x00ee, B:75:0x00fe, B:33:0x0126, B:35:0x012f, B:37:0x013d, B:40:0x014b, B:42:0x0167, B:43:0x017b, B:46:0x0185, B:49:0x018b, B:54:0x019b), top: B:25:0x00c0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x021e  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x0238  */
     /* renamed from: -$$Nest$monLoadSoundEffects, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -443,7 +435,6 @@ public final class SoundEffectsHelper {
 
        if (r1 == null) goto L71;
     */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0155 A[EXC_TOP_SPLITTER, LOOP:2: B:72:0x0155->B:79:0x0155, LOOP_START, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

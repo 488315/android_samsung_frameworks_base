@@ -17,7 +17,6 @@ final class CredentialViewModel$errorMessage$1 extends SuspendLambda implements 
     int label;
     final /* synthetic */ CredentialViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CredentialViewModel$errorMessage$1(CredentialViewModel credentialViewModel, Continuation continuation) {
         super(3, continuation);
         this.this$0 = credentialViewModel;

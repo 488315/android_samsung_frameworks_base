@@ -83,8 +83,6 @@ public final class BleSpenManager {
         Log.e("BleSpenManager", "saveBleSpenLogFile : failed to set executable");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0057  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x005e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

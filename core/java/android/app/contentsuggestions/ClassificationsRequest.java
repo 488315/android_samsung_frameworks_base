@@ -12,7 +12,6 @@ public final class ClassificationsRequest implements Parcelable {
     public static final Parcelable.Creator<ClassificationsRequest> CREATOR =
             new Parcelable.Creator<ClassificationsRequest>() { // from class:
                 // android.app.contentsuggestions.ClassificationsRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClassificationsRequest createFromParcel(Parcel source) {
                     return new ClassificationsRequest(
@@ -20,7 +19,6 @@ public final class ClassificationsRequest implements Parcelable {
                             source.readBundle());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClassificationsRequest[] newArray(int size) {
                     return new ClassificationsRequest[size];

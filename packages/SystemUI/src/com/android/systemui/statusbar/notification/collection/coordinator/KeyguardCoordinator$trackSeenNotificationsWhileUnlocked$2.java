@@ -19,7 +19,6 @@ final class KeyguardCoordinator$trackSeenNotificationsWhileUnlocked$2 extends Su
         int label;
         final /* synthetic */ KeyguardCoordinator this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(KeyguardCoordinator keyguardCoordinator, Continuation continuation) {
             super(2, continuation);
             this.this$0 = keyguardCoordinator;
@@ -63,7 +62,6 @@ final class KeyguardCoordinator$trackSeenNotificationsWhileUnlocked$2 extends Su
         int label;
         final /* synthetic */ KeyguardCoordinator this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(KeyguardCoordinator keyguardCoordinator, Continuation continuation) {
             super(2, continuation);
             this.this$0 = keyguardCoordinator;
@@ -102,7 +100,6 @@ final class KeyguardCoordinator$trackSeenNotificationsWhileUnlocked$2 extends Su
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardCoordinator$trackSeenNotificationsWhileUnlocked$2(KeyguardCoordinator keyguardCoordinator, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardCoordinator;

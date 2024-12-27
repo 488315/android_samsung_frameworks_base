@@ -207,7 +207,6 @@ public final class MediaTimeoutListener implements MediaDataManager.Listener {
                 mediaTimeoutLogger2.getClass();
                 LogLevel logLevel2 = LogLevel.VERBOSE;
                 Function1 function1 = new Function1() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaTimeoutLogger$logStateCallback$2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }

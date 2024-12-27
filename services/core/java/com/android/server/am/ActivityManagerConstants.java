@@ -197,7 +197,6 @@ public final class ActivityManagerConstants extends ContentObserver {
             this.this$0 = activityManagerConstants;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public final void onPropertiesChanged(DeviceConfig.Properties properties) {
             String str;
             char c;

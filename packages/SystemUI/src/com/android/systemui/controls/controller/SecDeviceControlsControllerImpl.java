@@ -136,7 +136,6 @@ public final class SecDeviceControlsControllerImpl implements SecDeviceControlsC
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.controls.controller.SecDeviceControlsControllerImpl$listingCallback$1] */
     public SecDeviceControlsControllerImpl(Context context, ControlsComponent controlsComponent, UserContextProvider userContextProvider, SecureSettings secureSettings, ControlsActivityStarter controlsActivityStarter, SALogger sALogger, KeyguardUpdateMonitor keyguardUpdateMonitor) {
         this.context = context;
         this.controlsComponent = controlsComponent;

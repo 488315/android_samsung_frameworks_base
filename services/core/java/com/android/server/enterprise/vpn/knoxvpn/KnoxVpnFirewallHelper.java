@@ -64,8 +64,6 @@ public class KnoxVpnFirewallHelper {
     public static final String TETHER_TAG = "KnoxVpnTetherAuthentication";
     public static KnoxVpnFirewallHelper mInstance = null;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class IpRestoreActionType {
         public static final /* synthetic */ IpRestoreActionType[] $VALUES;
         public static final IpRestoreActionType APPEND;

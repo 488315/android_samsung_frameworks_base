@@ -99,7 +99,6 @@ public abstract class PeopleScreenKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.people.ui.compose.PeopleScreenKt$ConversationList$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -114,7 +113,6 @@ public abstract class PeopleScreenKt {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r7v1, types: [com.android.systemui.people.ui.compose.PeopleScreenKt$PeopleScreen$2, kotlin.jvm.internal.Lambda] */
     public static final void PeopleScreen(final PeopleViewModel peopleViewModel, final Function1 function1, Composer composer, final int i) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(825885692);
@@ -128,7 +126,6 @@ public abstract class PeopleScreenKt {
         FillElement fillElement = SizeKt.FillWholeMaxSize;
         companion.then(fillElement);
         SurfaceKt.m248SurfaceT9BRK9s(fillElement, null, j, deprecatedValues.textColorPrimary, 0.0f, 0.0f, null, ComposableLambdaKt.rememberComposableLambda(899692247, composerImpl, new Function2() { // from class: com.android.systemui.people.ui.compose.PeopleScreenKt$PeopleScreen$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
             }
@@ -163,7 +160,6 @@ public abstract class PeopleScreenKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.people.ui.compose.PeopleScreenKt$PeopleScreen$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -178,7 +174,6 @@ public abstract class PeopleScreenKt {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.people.ui.compose.PeopleScreenKt$Tile$1, kotlin.jvm.internal.Lambda] */
     public static final void Tile(final PeopleTileViewModel peopleTileViewModel, final Function1 function1, final boolean z, final boolean z2, Composer composer, final int i) {
         float f;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -197,7 +192,6 @@ public abstract class PeopleScreenKt {
             Dp.Companion companion2 = Dp.Companion;
         }
         SurfaceKt.m248SurfaceT9BRK9s(null, RoundedCornerShapeKt.m152RoundedCornerShapea9UjIt4(f, f, dimensionResource, dimensionResource), deprecatedValues.colorSurface, deprecatedValues.textColorPrimary, 0.0f, 0.0f, null, ComposableLambdaKt.rememberComposableLambda(-486400838, composerImpl, new Function2() { // from class: com.android.systemui.people.ui.compose.PeopleScreenKt$Tile$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
             }
@@ -219,7 +213,6 @@ public abstract class PeopleScreenKt {
                 final PeopleTileViewModel peopleTileViewModel2 = peopleTileViewModel;
                 Dp.Companion companion4 = Dp.Companion;
                 Modifier m102padding3ABfNKs = PaddingKt.m102padding3ABfNKs(ClickableKt.m31clickableXHw0xAI$default(fillMaxWidth, false, null, new Function0() { // from class: com.android.systemui.people.ui.compose.PeopleScreenKt$Tile$1.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -274,7 +267,6 @@ public abstract class PeopleScreenKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.people.ui.compose.PeopleScreenKt$Tile$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

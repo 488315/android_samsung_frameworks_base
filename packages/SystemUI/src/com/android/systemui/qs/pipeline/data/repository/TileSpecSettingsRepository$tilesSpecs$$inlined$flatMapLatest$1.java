@@ -19,7 +19,6 @@ public final class TileSpecSettingsRepository$tilesSpecs$$inlined$flatMapLatest$
     int label;
     final /* synthetic */ TileSpecSettingsRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TileSpecSettingsRepository$tilesSpecs$$inlined$flatMapLatest$1(Continuation continuation, TileSpecSettingsRepository tileSpecSettingsRepository, Flow flow) {
         super(3, continuation);
         this.this$0 = tileSpecSettingsRepository;

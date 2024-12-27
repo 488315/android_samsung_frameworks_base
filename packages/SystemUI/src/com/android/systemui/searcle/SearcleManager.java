@@ -98,8 +98,6 @@ public final class SearcleManager {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class CTSPackageState {
         public static final /* synthetic */ CTSPackageState[] $VALUES;
         public static final CTSPackageState INSTALLED;
@@ -143,7 +141,6 @@ public final class SearcleManager {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r5v5, types: [com.android.systemui.searcle.SearcleManager$ctsBroadcastReceiver$1] */
     public SearcleManager(Context context) {
         this.context = context;
         Object systemService = context.getSystemService("desktopmode");
@@ -217,9 +214,6 @@ public final class SearcleManager {
     
         if (com.android.systemui.searcle.OmniAPI.mIsOmniPackageEnabled == false) goto L109;
      */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x01ef  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0220  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0242  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

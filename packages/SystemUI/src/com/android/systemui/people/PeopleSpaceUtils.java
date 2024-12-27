@@ -140,8 +140,6 @@ public final class PeopleSpaceUtils {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.people.PeopleSpaceUtils.getContactLookupKeysWithBirthdaysToday(android.content.Context):java.util.List");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00b9  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00ce A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

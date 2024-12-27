@@ -25,7 +25,6 @@ public final class DomainFilterNapCommon {
     public volatile boolean mNapEnabled;
     public volatile boolean mNetworksUpdated;
 
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.server.enterprise.firewall.DomainFilterNapCommon$1] */
     public static DomainFilterNapCommon getInstance(Context context) {
         DomainFilterNapCommon domainFilterNapCommon = sInstance;
         if (domainFilterNapCommon == null) {

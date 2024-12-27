@@ -17,7 +17,6 @@ final class DiffableKt$logDiffsForTable$8 extends SuspendLambda implements Funct
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DiffableKt$logDiffsForTable$8(TableLogBuffer tableLogBuffer, String str, String str2, Continuation continuation) {
         super(3, continuation);
         this.$tableLogBuffer = tableLogBuffer;

@@ -30,12 +30,10 @@ public final class NotifHeaderCoordinator implements Coordinator {
         this.lockscreenUserManager = notificationLockscreenUserManager;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final Sequence extractAllRepresentativeEntries(List<? extends ListEntry> list) {
         return SequencesKt___SequencesKt.flatMap(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new NotifHeaderCoordinator$extractAllRepresentativeEntries$1(this));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onBeforeRenderListListener(List<? extends ListEntry> list) {
         NotificationHeaderView notificationHeaderView;
         FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(extractAllRepresentativeEntries(list), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.NotifHeaderCoordinator$onBeforeRenderListListener$1
@@ -86,7 +84,6 @@ public final class NotifHeaderCoordinator implements Coordinator {
         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final Sequence extractAllRepresentativeEntries(ListEntry listEntry) {
         return new SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1(new NotifHeaderCoordinator$extractAllRepresentativeEntries$2(listEntry, this, null));
     }

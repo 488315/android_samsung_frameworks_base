@@ -30,7 +30,6 @@ public final class ColorInversionTileMapper implements QSTileDataToStateMapper {
         Resources resources = this.resources;
         Resources.Theme theme = this.theme;
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.inversion.domain.ColorInversionTileMapper$map$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -50,7 +49,6 @@ public final class ColorInversionTileMapper implements QSTileDataToStateMapper {
                 }
                 final ColorInversionTileMapper colorInversionTileMapper = ColorInversionTileMapper.this;
                 builder.icon = new Function0() { // from class: com.android.systemui.qs.tiles.impl.inversion.domain.ColorInversionTileMapper$map$1.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }

@@ -29,7 +29,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.ReadonlySharedFlow;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ CredentialView.Host $host;
     final /* synthetic */ LockPatternView $lockPatternView;
@@ -52,7 +51,6 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
             private /* synthetic */ Object L$0;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C00341(CredentialViewModel credentialViewModel, LockPatternView lockPatternView, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = credentialViewModel;
@@ -97,7 +95,6 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
                                     final /* synthetic */ CredentialViewModel $viewModel;
                                     int label;
 
-                                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                                     public C00371(CredentialViewModel credentialViewModel, List<LockPatternView.Cell> list, CredentialHeaderViewModel credentialHeaderViewModel, Continuation continuation) {
                                         super(2, continuation);
                                         this.$viewModel = credentialViewModel;
@@ -138,7 +135,6 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
                                     }
                                 }
 
-                                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                                 {
                                     super(1);
                                 }
@@ -179,7 +175,6 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
             final /* synthetic */ CredentialViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(CredentialViewModel credentialViewModel, LockPatternView lockPatternView, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = credentialViewModel;
@@ -232,7 +227,6 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
             final /* synthetic */ CredentialViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass3(CredentialViewModel credentialViewModel, LockPatternView lockPatternView, CredentialView.Host host, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = credentialViewModel;
@@ -288,7 +282,6 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(CredentialViewModel credentialViewModel, LockPatternView lockPatternView, CredentialView.Host host, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = credentialViewModel;
@@ -323,7 +316,6 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CredentialPatternViewBinder$bind$1(CredentialViewModel credentialViewModel, LockPatternView lockPatternView, CredentialView.Host host, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = credentialViewModel;

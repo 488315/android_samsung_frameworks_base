@@ -18,7 +18,6 @@ final class RouteDeviceController$Companion$routeDeviceChanges$1$updateRoutes$1 
     final /* synthetic */ MediaRouter2Manager $this_routeDeviceChanges;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RouteDeviceController$Companion$routeDeviceChanges$1$updateRoutes$1(ProducerScope producerScope, MediaRouter2Manager mediaRouter2Manager, Continuation continuation) {
         super(2, continuation);
         this.$$this$callbackFlow = producerScope;

@@ -292,7 +292,6 @@ public final class NotificationReminder {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0068 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* renamed from: -$$Nest$misRemindNeeded, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -445,7 +444,6 @@ public final class NotificationReminder {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v0, types: [android.os.Handler, com.android.server.notification.NotificationReminder$2] */
     public NotificationReminder(Context context, Looper looper, PreferencesHelper preferencesHelper, AlarmManager alarmManager) {
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.notification.NotificationReminder.1
 

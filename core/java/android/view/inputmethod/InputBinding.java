@@ -8,13 +8,11 @@ public final class InputBinding implements Parcelable {
     public static final Parcelable.Creator<InputBinding> CREATOR =
             new Parcelable.Creator<
                     InputBinding>() { // from class: android.view.inputmethod.InputBinding.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputBinding createFromParcel(Parcel source) {
                     return new InputBinding(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputBinding[] newArray(int size) {
                     return new InputBinding[size];

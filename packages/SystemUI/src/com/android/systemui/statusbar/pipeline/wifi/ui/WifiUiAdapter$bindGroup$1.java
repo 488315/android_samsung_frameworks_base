@@ -39,7 +39,6 @@ final class WifiUiAdapter$bindGroup$1 extends SuspendLambda implements Function3
             int label;
             final /* synthetic */ WifiUiAdapter this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02511(LocationBasedWifiViewModel locationBasedWifiViewModel, WifiUiAdapter wifiUiAdapter, Continuation continuation) {
                 super(2, continuation);
                 this.$locationViewModel = locationBasedWifiViewModel;
@@ -94,7 +93,6 @@ final class WifiUiAdapter$bindGroup$1 extends SuspendLambda implements Function3
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(LocationBasedWifiViewModel locationBasedWifiViewModel, WifiUiAdapter wifiUiAdapter, Continuation continuation) {
             super(2, continuation);
             this.$locationViewModel = locationBasedWifiViewModel;
@@ -125,7 +123,6 @@ final class WifiUiAdapter$bindGroup$1 extends SuspendLambda implements Function3
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiUiAdapter$bindGroup$1(LocationBasedWifiViewModel locationBasedWifiViewModel, WifiUiAdapter wifiUiAdapter, Continuation continuation) {
         super(3, continuation);
         this.$locationViewModel = locationBasedWifiViewModel;

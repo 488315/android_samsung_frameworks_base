@@ -910,11 +910,6 @@ public final class DisplayPowerController
         MAX_AUTO_BRIGHTNESS_TRANSITION_TIME = 60000;
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.display.DisplayPowerController$2] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.display.DisplayPowerController$3] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.display.DisplayPowerController$$ExternalSyntheticLambda2] */
-    /* JADX WARN: Type inference failed for: r6v5, types: [com.android.server.display.DisplayPowerController$$ExternalSyntheticLambda2] */
-    /* JADX WARN: Type inference failed for: r7v0, types: [com.android.server.display.DisplayPowerController$$ExternalSyntheticLambda2] */
     public DisplayPowerController(
             Context context,
             DisplayManagerInternal.DisplayPowerCallbacks displayPowerCallbacks,
@@ -2773,12 +2768,6 @@ public final class DisplayPowerController
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:66:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r14v0 */
-    /* JADX WARN: Type inference failed for: r14v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r14v2 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2825,8 +2814,6 @@ public final class DisplayPowerController
         final String str4 = displayDevice.mUniqueId;
         Runnable runnable = new Runnable() { // from class:
                     // com.android.server.display.DisplayPowerController$$ExternalSyntheticLambda1
-                    /* JADX WARN: Removed duplicated region for block: B:20:0x0126  */
-                    /* JADX WARN: Removed duplicated region for block: B:23:? A[RETURN, SYNTHETIC] */
                     @Override // java.lang.Runnable
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -2933,7 +2920,6 @@ public final class DisplayPowerController
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0072 A[Catch: all -> 0x002a, TryCatch #0 {all -> 0x002a, blocks: (B:7:0x0023, B:9:0x0028, B:12:0x002c, B:13:0x0030, B:18:0x0041, B:20:0x0045, B:22:0x005a, B:24:0x005e, B:26:0x0062, B:27:0x0065, B:29:0x0069, B:31:0x006d, B:33:0x0072, B:35:0x0078, B:36:0x007d, B:37:0x007f, B:39:0x004e, B:41:0x0054, B:46:0x0082, B:48:0x0034, B:50:0x0038, B:51:0x003a, B:16:0x003f), top: B:6:0x0023, inners: #1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3767,73 +3753,6 @@ public final class DisplayPowerController
 
        if (r42.mWaitingAutoBrightnessFromDoze == false) goto L341;
     */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x040b  */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x0415  */
-    /* JADX WARN: Removed duplicated region for block: B:205:0x049b  */
-    /* JADX WARN: Removed duplicated region for block: B:219:0x04ec  */
-    /* JADX WARN: Removed duplicated region for block: B:231:0x0522  */
-    /* JADX WARN: Removed duplicated region for block: B:236:0x0536  */
-    /* JADX WARN: Removed duplicated region for block: B:260:0x057a  */
-    /* JADX WARN: Removed duplicated region for block: B:271:0x05c3  */
-    /* JADX WARN: Removed duplicated region for block: B:276:0x05f2  */
-    /* JADX WARN: Removed duplicated region for block: B:280:0x05ff A[LOOP:0: B:278:0x05f9->B:280:0x05ff, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:284:0x0619  */
-    /* JADX WARN: Removed duplicated region for block: B:287:0x065b  */
-    /* JADX WARN: Removed duplicated region for block: B:289:0x065f  */
-    /* JADX WARN: Removed duplicated region for block: B:294:0x0689  */
-    /* JADX WARN: Removed duplicated region for block: B:297:0x06a6  */
-    /* JADX WARN: Removed duplicated region for block: B:302:0x06b8  */
-    /* JADX WARN: Removed duplicated region for block: B:331:0x072e  */
-    /* JADX WARN: Removed duplicated region for block: B:352:0x07d3  */
-    /* JADX WARN: Removed duplicated region for block: B:361:0x0800  */
-    /* JADX WARN: Removed duplicated region for block: B:364:0x0807 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:368:0x082a  */
-    /* JADX WARN: Removed duplicated region for block: B:373:0x083b  */
-    /* JADX WARN: Removed duplicated region for block: B:406:0x0973 A[LOOP:1: B:404:0x096d->B:406:0x0973, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:410:0x098b  */
-    /* JADX WARN: Removed duplicated region for block: B:415:0x09b0 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:417:0x09c2 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:425:0x09f8 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:429:0x0a07 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:437:0x0aba  */
-    /* JADX WARN: Removed duplicated region for block: B:440:0x0aec  */
-    /* JADX WARN: Removed duplicated region for block: B:445:0x0b03  */
-    /* JADX WARN: Removed duplicated region for block: B:448:0x0b0f  */
-    /* JADX WARN: Removed duplicated region for block: B:450:0x0b14  */
-    /* JADX WARN: Removed duplicated region for block: B:453:0x0b1d A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:468:0x0b71  */
-    /* JADX WARN: Removed duplicated region for block: B:482:0x0b9c  */
-    /* JADX WARN: Removed duplicated region for block: B:486:0x0ba9  */
-    /* JADX WARN: Removed duplicated region for block: B:492:0x0bc1  */
-    /* JADX WARN: Removed duplicated region for block: B:495:0x0bcf  */
-    /* JADX WARN: Removed duplicated region for block: B:501:0x0bdd A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:514:0x0c04  */
-    /* JADX WARN: Removed duplicated region for block: B:516:0x0c0c  */
-    /* JADX WARN: Removed duplicated region for block: B:519:0x0c19  */
-    /* JADX WARN: Removed duplicated region for block: B:521:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:522:0x0c0e  */
-    /* JADX WARN: Removed duplicated region for block: B:538:0x0b16  */
-    /* JADX WARN: Removed duplicated region for block: B:539:0x0b11  */
-    /* JADX WARN: Removed duplicated region for block: B:540:0x0b06  */
-    /* JADX WARN: Removed duplicated region for block: B:542:0x0abd  */
-    /* JADX WARN: Removed duplicated region for block: B:550:0x09bd  */
-    /* JADX WARN: Removed duplicated region for block: B:568:0x091f  */
-    /* JADX WARN: Removed duplicated region for block: B:570:0x092a  */
-    /* JADX WARN: Removed duplicated region for block: B:572:0x092f  */
-    /* JADX WARN: Removed duplicated region for block: B:576:0x0938  */
-    /* JADX WARN: Removed duplicated region for block: B:580:0x0941  */
-    /* JADX WARN: Removed duplicated region for block: B:583:0x0954  */
-    /* JADX WARN: Removed duplicated region for block: B:585:0x0963  */
-    /* JADX WARN: Removed duplicated region for block: B:586:0x0949  */
-    /* JADX WARN: Removed duplicated region for block: B:587:0x0926  */
-    /* JADX WARN: Removed duplicated region for block: B:608:0x0802  */
-    /* JADX WARN: Removed duplicated region for block: B:615:0x07c2  */
-    /* JADX WARN: Removed duplicated region for block: B:622:0x09dc  */
-    /* JADX WARN: Removed duplicated region for block: B:625:0x05f4  */
-    /* JADX WARN: Removed duplicated region for block: B:630:0x059d  */
-    /* JADX WARN: Removed duplicated region for block: B:634:0x05ac  */
-    /* JADX WARN: Removed duplicated region for block: B:636:0x05b9  */
-    /* JADX WARN: Removed duplicated region for block: B:656:0x0491  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

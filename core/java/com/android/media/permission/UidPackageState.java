@@ -14,7 +14,6 @@ public class UidPackageState implements Parcelable {
             new Parcelable.Creator<
                     UidPackageState>() { // from class:
                                          // com.android.media.permission.UidPackageState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UidPackageState createFromParcel(Parcel _aidl_source) {
                     UidPackageState _aidl_out = new UidPackageState();
@@ -22,7 +21,6 @@ public class UidPackageState implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UidPackageState[] newArray(int _aidl_size) {
                     return new UidPackageState[_aidl_size];

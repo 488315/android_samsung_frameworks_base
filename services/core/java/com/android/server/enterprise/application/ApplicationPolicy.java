@@ -494,73 +494,39 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     }
 
     enum AppControlStateEnum {
-        /* JADX INFO: Fake field, exist only in values array */
         EF11("PKGNAME_DISABLED_LIST", "PackageNameDisabledList", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF25("PKGNAME_INSTALLATION_BLACKLIST", "PackageNameInstallationBlacklist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF40("PKGNAME_INSTALLATION_WHITELIST", "PackageNameInstallationWhitelist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF54("PERMISSION_INSTALLATION_BLACKLIST", "PermissionInstallationBlacklist", "APPLICATION_PERMISSION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF69("SIGNATURE_INSTALLATION_BLACKLIST", "SignatureInstallationBlacklist", "signature"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF84("SIGNATURE_INSTALLATION_WHITELIST", "SignatureInstallationWhitelist", "signature"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF99("PKGNAME_STOP_BLACKLIST", "PackageNameStopBlacklist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF114("PKGNAME_STOP_WHITELIST", "PackageNameStopWhitelist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF130("PKGNAME_WIDGET_WHITELIST", "PackageNameWidgetWhitelist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF147("PKGNAME_WIDGET_BLACKLIST", "PackageNameWidgetBlacklist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF163("PKGNAME_NOTIFICATION_BLACKLIST", "PackageNameNotificationBlacklist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF180("PKGNAME_NOTIFICATION_WHITELIST", "PackageNameNotificationWhitelist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF196("PKGNAME_CLEARDATA_BLACKLIST", "PackageNameClearDataBlacklist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF213("PKGNAME_CLEARDATA_WHITELIST", "PackageNameClearDataWhitelist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF231("PKGNAME_CLEARCACHE_BLACKLIST", "PackageNameClearCacheBlacklist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF248("PKGNAME_CLEARCACHE_WHITELIST", "PackageNameClearCacheWhitelist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF265("PKGNAME_START_BLACKLIST", "PackageNameStartBlacklist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF282("PKGNAME_START_WHITELIST", "PackageNameStartWhitelist", "INVALID_TABLE"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF299("PKGNAME_CLIPBOARD_BLACKLIST", "PackageNameDisableClipboardBlackList", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF316("PKGNAME_CLIPBOARD_WHITELIST", "PackageNameDisableClipboardWhitelist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF333("PKGNAME_FOCUSMONITORING_LIST", "PackageNameFocusMonitoringList", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF350("PKGNAME_FOCUSMONITORING_WHITELIST", "PackageNameFocusMonitoringWhiteList", "INVALID_TABLE"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF367("PKGNAME_DOZEMODE_WHITELIST", "PackageNameDozeModeWhiteList", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF384("PKGNAME_AVR_WHITELIST", "PackageNameAvrWhitelist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF401("PKGNAME_REVOCATION_CHECK", "RevocationCheck", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF418("PKGNAME_OCSP_CHECK", "OcspCheck", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF435("PKGNAME_UPDATE_WHITELIST", "PackageNameUpdateWhitelist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF452("PKGNAME_UPDATE_BLACKLIST", "PackageNameUpdateBlacklist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF469("UNINSTALLATION_BLACKLIST", "UninstallationBlacklist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF486("UNINSTALLATION_WHITELIST", "UninstallationWhitelist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF503("PKGNAME_INSTALLER_WHITELIST", "PackageNameInstallerWhiteList", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF520("PKGNAME_INSTALLER_BLACKLIST", "PackageNameInstallerBlackList", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF537("PKGNAME_CAMERA_ALLOWLIST", "PackageNameCameraAllowlist", "APPLICATION"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF555("SIGNATURE_CAMERA_ALLOWLIST", "SignatureCameraAllowlist", "signature");
 
         public static final Map sAppApiMaskToKey = new HashMap();
@@ -1111,8 +1077,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r1 == null) goto L44;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x02c3 A[DONT_GENERATE] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1670,20 +1634,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r10 == 0) goto L39;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x009c A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:60:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0097 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r10v1 */
-    /* JADX WARN: Type inference failed for: r10v13 */
-    /* JADX WARN: Type inference failed for: r10v14 */
-    /* JADX WARN: Type inference failed for: r10v15 */
-    /* JADX WARN: Type inference failed for: r10v2 */
-    /* JADX WARN: Type inference failed for: r10v3 */
-    /* JADX WARN: Type inference failed for: r10v4, types: [java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r10v5 */
-    /* JADX WARN: Type inference failed for: r10v6, types: [java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r10v7 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1874,7 +1824,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         return contentValues;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static void updateAppControlState(int i, int i2, long j, String str, boolean z) {
         long clearCallingIdentity;
         createAdminMap(j);
@@ -2854,8 +2803,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         return addApplicationStateList;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0122 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00ad A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2953,10 +2900,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r14 != null) goto L58;
      */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x01f3  */
-    /* JADX WARN: Removed duplicated region for block: B:30:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00ba A[Catch: all -> 0x006d, Exception -> 0x0071, TRY_ENTER, TryCatch #6 {all -> 0x006d, blocks: (B:57:0x0063, B:35:0x0094, B:37:0x009a, B:40:0x00a6, B:43:0x00ba, B:49:0x00e1, B:53:0x0077, B:34:0x007a), top: B:56:0x0063 }] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00e1 A[Catch: all -> 0x006d, Exception -> 0x0071, TRY_LEAVE, TryCatch #6 {all -> 0x006d, blocks: (B:57:0x0063, B:35:0x0094, B:37:0x009a, B:40:0x00a6, B:43:0x00ba, B:49:0x00e1, B:53:0x0077, B:34:0x007a), top: B:56:0x0063 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2977,9 +2920,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (0 < r5.insert("ApplicationIcon", null, r9)) goto L64;
      */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x018d  */
-    /* JADX WARN: Removed duplicated region for block: B:33:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0240  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3473,9 +3413,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r5 == null) goto L85;
      */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0066 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0067 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0036  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3565,10 +3502,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v0 */
-    /* JADX WARN: Type inference failed for: r2v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r2v2 */
     public final int getAppInstallationMode(ContextInfo contextInfo) {
         Log.d("ApplicationPolicy", "getAppInstallationMode :  mode start: ");
         int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(contextInfo);
@@ -3651,7 +3584,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r7 == null) goto L32;
      */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0083  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3944,11 +3876,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r5 == null) goto L34;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0087  */
-    /* JADX WARN: Type inference failed for: r1v11 */
-    /* JADX WARN: Type inference failed for: r1v2, types: [android.database.Cursor] */
-    /* JADX WARN: Type inference failed for: r1v3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4034,8 +3961,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         return isApplicationInstallationEnabledInternal(Utils.getCallingOrCurrentUserId(contextInfo), str, null, null, false);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:9:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4173,11 +4098,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r5 == null) goto L38;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x009c  */
-    /* JADX WARN: Type inference failed for: r1v11 */
-    /* JADX WARN: Type inference failed for: r1v2, types: [android.database.Cursor] */
-    /* JADX WARN: Type inference failed for: r1v3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4503,10 +4423,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         return true;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v0 */
-    /* JADX WARN: Type inference failed for: r2v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r2v2 */
     public final int getApplicationUninstallationMode(ContextInfo contextInfo) {
         Log.d("ApplicationPolicy", "getApplicationUninstallationMode");
         int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(contextInfo);
@@ -4607,7 +4523,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r11 == null) goto L37;
      */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x010f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4905,20 +4820,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r14 == null) goto L191;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x02d6 A[LOOP:1: B:99:0x01c2->B:110:0x02d6, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:111:0x02d5 A[EDGE_INSN: B:111:0x02d5->B:112:0x02d5 BREAK  A[LOOP:1: B:99:0x01c2->B:110:0x02d6], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x028e A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x03a9  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x03d1  */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x02c7 A[Catch: all -> 0x0294, SQLException -> 0x02cb, TRY_ENTER, TryCatch #13 {all -> 0x0294, blocks: (B:97:0x01bc, B:99:0x01c2, B:114:0x028e, B:108:0x02cf, B:61:0x0359, B:90:0x0386, B:91:0x0389, B:156:0x02c7, B:160:0x02e5, B:161:0x02e8, B:54:0x02ed), top: B:96:0x01bc }] */
-    /* JADX WARN: Removed duplicated region for block: B:160:0x02e5 A[Catch: all -> 0x0294, SQLException -> 0x02cb, TryCatch #13 {all -> 0x0294, blocks: (B:97:0x01bc, B:99:0x01c2, B:114:0x028e, B:108:0x02cf, B:61:0x0359, B:90:0x0386, B:91:0x0389, B:156:0x02c7, B:160:0x02e5, B:161:0x02e8, B:54:0x02ed), top: B:96:0x01bc }] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0309 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x0386 A[Catch: all -> 0x0294, SQLException -> 0x02cb, TRY_ENTER, TryCatch #13 {all -> 0x0294, blocks: (B:97:0x01bc, B:99:0x01c2, B:114:0x028e, B:108:0x02cf, B:61:0x0359, B:90:0x0386, B:91:0x0389, B:156:0x02c7, B:160:0x02e5, B:161:0x02e8, B:54:0x02ed), top: B:96:0x01bc }] */
-    /* JADX WARN: Type inference failed for: r14v21, types: [android.content.ContentResolver] */
-    /* JADX WARN: Type inference failed for: r14v22 */
-    /* JADX WARN: Type inference failed for: r14v24, types: [android.database.Cursor] */
-    /* JADX WARN: Unreachable blocks removed: 2, instructions: 3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4978,10 +4879,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r2 != null) goto L42;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00ac  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x00e2  */
-    /* JADX WARN: Type inference failed for: r2v0, types: [int] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5542,8 +5439,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         return arrayList;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0116 A[LOOP:1: B:19:0x00a9->B:32:0x0116, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x011c A[EDGE_INSN: B:33:0x011c->B:34:0x011c BREAK  A[LOOP:1: B:19:0x00a9->B:32:0x0116], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5768,11 +5663,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r4 != (-1)) goto L96;
      */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x01ac  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01da  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0187 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x01d5  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0217 A[ADDED_TO_REGION] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6048,10 +5938,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         return true;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:214:0x04b0  */
-    /* JADX WARN: Removed duplicated region for block: B:215:0x04cb  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0468  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6256,13 +6142,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (com.android.server.enterprise.utils.KpuHelper.isKpuPermissionGranted(android.os.UserHandle.getUserId(r17), com.android.server.enterprise.utils.KpuHelper.getInstance(r16.mContext).mContext.getPackageManager().getNameForUid(r17)) != false) goto L12;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0045 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:159:0x015f A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0169  */
-    /* JADX WARN: Type inference failed for: r11v2 */
-    /* JADX WARN: Type inference failed for: r11v3, types: [int] */
-    /* JADX WARN: Type inference failed for: r11v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6622,8 +6501,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r11 == null) goto L110;
      */
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Unreachable blocks removed: 1, instructions: 1 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6655,17 +6532,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         KnoxsdkFileLog.d("ApplicationPolicy", sb.toString());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:131:0x0303  */
-    /* JADX WARN: Removed duplicated region for block: B:138:0x0310 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x018a A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:152:0x013b  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x0123 A[Catch: all -> 0x0072, Exception -> 0x0075, TryCatch #2 {Exception -> 0x0075, blocks: (B:3:0x003b, B:5:0x0052, B:6:0x0056, B:8:0x005c, B:10:0x0064, B:12:0x006e, B:16:0x0078, B:18:0x0089, B:22:0x008e, B:24:0x0094, B:29:0x00a1, B:31:0x00a7, B:157:0x00b0, B:33:0x00bc, B:38:0x00d7, B:155:0x00f3, B:40:0x00fb, B:42:0x0105, B:44:0x0117, B:45:0x011d, B:47:0x0123, B:49:0x0136, B:50:0x013f, B:51:0x0168, B:53:0x016e, B:55:0x017a, B:58:0x0180, B:64:0x0184, B:150:0x018a, B:66:0x0193, B:67:0x0195, B:85:0x01d7, B:87:0x01e1, B:89:0x01f4, B:91:0x01fe, B:92:0x01fa, B:96:0x0203, B:97:0x0207, B:99:0x020d, B:101:0x0235, B:105:0x024a, B:107:0x0253, B:109:0x0257, B:110:0x0264, B:112:0x0268, B:114:0x026f, B:115:0x0281, B:117:0x0289, B:123:0x02c4, B:125:0x02dc, B:128:0x02f5, B:133:0x0305, B:136:0x0309, B:148:0x031b), top: B:2:0x003b, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x016e A[Catch: all -> 0x0072, Exception -> 0x0075, TryCatch #2 {Exception -> 0x0075, blocks: (B:3:0x003b, B:5:0x0052, B:6:0x0056, B:8:0x005c, B:10:0x0064, B:12:0x006e, B:16:0x0078, B:18:0x0089, B:22:0x008e, B:24:0x0094, B:29:0x00a1, B:31:0x00a7, B:157:0x00b0, B:33:0x00bc, B:38:0x00d7, B:155:0x00f3, B:40:0x00fb, B:42:0x0105, B:44:0x0117, B:45:0x011d, B:47:0x0123, B:49:0x0136, B:50:0x013f, B:51:0x0168, B:53:0x016e, B:55:0x017a, B:58:0x0180, B:64:0x0184, B:150:0x018a, B:66:0x0193, B:67:0x0195, B:85:0x01d7, B:87:0x01e1, B:89:0x01f4, B:91:0x01fe, B:92:0x01fa, B:96:0x0203, B:97:0x0207, B:99:0x020d, B:101:0x0235, B:105:0x024a, B:107:0x0253, B:109:0x0257, B:110:0x0264, B:112:0x0268, B:114:0x026f, B:115:0x0281, B:117:0x0289, B:123:0x02c4, B:125:0x02dc, B:128:0x02f5, B:133:0x0305, B:136:0x0309, B:148:0x031b), top: B:2:0x003b, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0193 A[Catch: all -> 0x0072, Exception -> 0x0075, TryCatch #2 {Exception -> 0x0075, blocks: (B:3:0x003b, B:5:0x0052, B:6:0x0056, B:8:0x005c, B:10:0x0064, B:12:0x006e, B:16:0x0078, B:18:0x0089, B:22:0x008e, B:24:0x0094, B:29:0x00a1, B:31:0x00a7, B:157:0x00b0, B:33:0x00bc, B:38:0x00d7, B:155:0x00f3, B:40:0x00fb, B:42:0x0105, B:44:0x0117, B:45:0x011d, B:47:0x0123, B:49:0x0136, B:50:0x013f, B:51:0x0168, B:53:0x016e, B:55:0x017a, B:58:0x0180, B:64:0x0184, B:150:0x018a, B:66:0x0193, B:67:0x0195, B:85:0x01d7, B:87:0x01e1, B:89:0x01f4, B:91:0x01fe, B:92:0x01fa, B:96:0x0203, B:97:0x0207, B:99:0x020d, B:101:0x0235, B:105:0x024a, B:107:0x0253, B:109:0x0257, B:110:0x0264, B:112:0x0268, B:114:0x026f, B:115:0x0281, B:117:0x0289, B:123:0x02c4, B:125:0x02dc, B:128:0x02f5, B:133:0x0305, B:136:0x0309, B:148:0x031b), top: B:2:0x003b, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x01c1 A[Catch: all -> 0x01cf, TRY_ENTER, TryCatch #6 {all -> 0x01cf, blocks: (B:70:0x0197, B:73:0x01a9, B:76:0x01b3, B:78:0x01c1, B:80:0x01c9, B:82:0x01d2, B:83:0x01d4), top: B:69:0x0197 }] */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x01c9 A[Catch: all -> 0x01cf, TryCatch #6 {all -> 0x01cf, blocks: (B:70:0x0197, B:73:0x01a9, B:76:0x01b3, B:78:0x01c1, B:80:0x01c9, B:82:0x01d2, B:83:0x01d4), top: B:69:0x0197 }] */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x01d7 A[Catch: all -> 0x0072, Exception -> 0x0075, TRY_ENTER, TRY_LEAVE, TryCatch #2 {Exception -> 0x0075, blocks: (B:3:0x003b, B:5:0x0052, B:6:0x0056, B:8:0x005c, B:10:0x0064, B:12:0x006e, B:16:0x0078, B:18:0x0089, B:22:0x008e, B:24:0x0094, B:29:0x00a1, B:31:0x00a7, B:157:0x00b0, B:33:0x00bc, B:38:0x00d7, B:155:0x00f3, B:40:0x00fb, B:42:0x0105, B:44:0x0117, B:45:0x011d, B:47:0x0123, B:49:0x0136, B:50:0x013f, B:51:0x0168, B:53:0x016e, B:55:0x017a, B:58:0x0180, B:64:0x0184, B:150:0x018a, B:66:0x0193, B:67:0x0195, B:85:0x01d7, B:87:0x01e1, B:89:0x01f4, B:91:0x01fe, B:92:0x01fa, B:96:0x0203, B:97:0x0207, B:99:0x020d, B:101:0x0235, B:105:0x024a, B:107:0x0253, B:109:0x0257, B:110:0x0264, B:112:0x0268, B:114:0x026f, B:115:0x0281, B:117:0x0289, B:123:0x02c4, B:125:0x02dc, B:128:0x02f5, B:133:0x0305, B:136:0x0309, B:148:0x031b), top: B:2:0x003b, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x020d A[Catch: all -> 0x0072, Exception -> 0x0075, TryCatch #2 {Exception -> 0x0075, blocks: (B:3:0x003b, B:5:0x0052, B:6:0x0056, B:8:0x005c, B:10:0x0064, B:12:0x006e, B:16:0x0078, B:18:0x0089, B:22:0x008e, B:24:0x0094, B:29:0x00a1, B:31:0x00a7, B:157:0x00b0, B:33:0x00bc, B:38:0x00d7, B:155:0x00f3, B:40:0x00fb, B:42:0x0105, B:44:0x0117, B:45:0x011d, B:47:0x0123, B:49:0x0136, B:50:0x013f, B:51:0x0168, B:53:0x016e, B:55:0x017a, B:58:0x0180, B:64:0x0184, B:150:0x018a, B:66:0x0193, B:67:0x0195, B:85:0x01d7, B:87:0x01e1, B:89:0x01f4, B:91:0x01fe, B:92:0x01fa, B:96:0x0203, B:97:0x0207, B:99:0x020d, B:101:0x0235, B:105:0x024a, B:107:0x0253, B:109:0x0257, B:110:0x0264, B:112:0x0268, B:114:0x026f, B:115:0x0281, B:117:0x0289, B:123:0x02c4, B:125:0x02dc, B:128:0x02f5, B:133:0x0305, B:136:0x0309, B:148:0x031b), top: B:2:0x003b, outer: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6734,9 +6600,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     public final void onAdminAdded(int i) {
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00a3  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00e5  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0105 A[ORIG_RETURN, RETURN] */
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -6862,8 +6725,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     
         if (r8 != null) goto L35;
      */
-    /* JADX WARN: Not initialized variable reg: 8, insn: 0x006c: MOVE (r7 I:??[OBJECT, ARRAY]) = (r8 I:??[OBJECT, ARRAY]), block:B:83:0x006c */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x014d A[DONT_GENERATE] */
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -8309,9 +8170,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x00c5  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00f4 A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x00ae  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8827,28 +8685,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         this.mEdmStorageProvider.putValuesForAdminAndField(i, contentValues, "APPLICATION", "packageName", str);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0183 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0192  */
-    /* JADX WARN: Type inference failed for: r5v1 */
-    /* JADX WARN: Type inference failed for: r5v10 */
-    /* JADX WARN: Type inference failed for: r5v11 */
-    /* JADX WARN: Type inference failed for: r5v12 */
-    /* JADX WARN: Type inference failed for: r5v15 */
-    /* JADX WARN: Type inference failed for: r5v16 */
-    /* JADX WARN: Type inference failed for: r5v17 */
-    /* JADX WARN: Type inference failed for: r5v18 */
-    /* JADX WARN: Type inference failed for: r5v19 */
-    /* JADX WARN: Type inference failed for: r5v2, types: [android.database.sqlite.SQLiteDatabase] */
-    /* JADX WARN: Type inference failed for: r5v20 */
-    /* JADX WARN: Type inference failed for: r5v21 */
-    /* JADX WARN: Type inference failed for: r5v3, types: [android.database.sqlite.SQLiteDatabase] */
-    /* JADX WARN: Type inference failed for: r5v4 */
-    /* JADX WARN: Type inference failed for: r5v5, types: [android.database.sqlite.SQLiteDatabase] */
-    /* JADX WARN: Type inference failed for: r5v6 */
-    /* JADX WARN: Type inference failed for: r5v7 */
-    /* JADX WARN: Type inference failed for: r5v8 */
-    /* JADX WARN: Type inference failed for: r5v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

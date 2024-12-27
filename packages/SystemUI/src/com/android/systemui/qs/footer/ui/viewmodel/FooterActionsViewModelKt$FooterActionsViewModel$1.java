@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 final /* synthetic */ class FooterActionsViewModelKt$FooterActionsViewModel$1 extends FunctionReferenceImpl implements Function2 {
     final /* synthetic */ FooterActionsInteractor $footerActionsInteractor;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FooterActionsViewModelKt$FooterActionsViewModel$1(FooterActionsInteractor footerActionsInteractor) {
         super(2, Intrinsics.Kotlin.class, "observeDeviceMonitoringDialogRequests", "FooterActionsViewModel$observeDeviceMonitoringDialogRequests(Lcom/android/systemui/qs/footer/domain/interactor/FooterActionsInteractor;Landroid/content/Context;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;", 0);
         this.$footerActionsInteractor = footerActionsInteractor;

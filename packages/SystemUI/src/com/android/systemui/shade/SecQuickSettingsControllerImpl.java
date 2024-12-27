@@ -88,8 +88,6 @@ public final class SecQuickSettingsControllerImpl {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.systemui.shade.SecQuickSettingsControllerImpl$modeChangedListener$1] */
-    /* JADX WARN: Type inference failed for: r10v0, types: [com.android.systemui.shade.SecQuickSettingsControllerImpl$logProvider$1] */
     public SecQuickSettingsControllerImpl(final AmbientState ambientState, final Function<Float, Integer> function, final Function<Integer, Integer> function2, final DoubleSupplier doubleSupplier, Context context, final DoubleSupplier doubleSupplier2, final BooleanSupplier booleanSupplier, DoubleSupplier doubleSupplier3, final DoubleSupplier doubleSupplier4, ShadeHeaderController shadeHeaderController, BooleanSupplier booleanSupplier2, BooleanSupplier booleanSupplier3, DoubleSupplier doubleSupplier5, DoubleSupplier doubleSupplier6, NotificationStackScrollLayoutController notificationStackScrollLayoutController, dagger.Lazy lazy, BooleanSupplier booleanSupplier4, Supplier<FrameLayout> supplier, Supplier<QS> supplier2, Runnable runnable, DoubleSupplier doubleSupplier7, DoubleConsumer doubleConsumer, DoubleSupplier doubleSupplier8, DoubleConsumer doubleConsumer2, DoubleSupplier doubleSupplier9, Runnable runnable2, Consumer<MotionEvent> consumer, IntConsumer intConsumer, IntSupplier intSupplier, Consumer<Boolean> consumer2) {
         this.maxExpansionHeightSupplier = doubleSupplier5;
         this.minExpansionHeightSupplier = doubleSupplier6;

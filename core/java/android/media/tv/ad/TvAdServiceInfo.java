@@ -26,13 +26,11 @@ public final class TvAdServiceInfo implements Parcelable {
     public static final Parcelable.Creator<TvAdServiceInfo> CREATOR =
             new Parcelable.Creator<
                     TvAdServiceInfo>() { // from class: android.media.tv.ad.TvAdServiceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvAdServiceInfo createFromParcel(Parcel in) {
                     return new TvAdServiceInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvAdServiceInfo[] newArray(int size) {
                     return new TvAdServiceInfo[size];

@@ -76,9 +76,6 @@ public final class DualDARDaemonProxy extends IProxyAgentService
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00cc A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:59:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x00bc A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -366,7 +363,6 @@ public final class DualDARDaemonProxy extends IProxyAgentService
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:69:0x0211, code lost:
 
        return r11;
@@ -430,7 +426,6 @@ public final class DualDARDaemonProxy extends IProxyAgentService
         return true;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void setDualDARPolicyForManagedDevice(Bundle bundle, Bundle bundle2) {
         int i;
         ApplicationInfo applicationInfo;

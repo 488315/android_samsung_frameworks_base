@@ -26,7 +26,6 @@ public final class VibrationXmlParser {
     public static final int FLAG_ALLOW_HIDDEN_APIS = 1;
     private static final String TAG = "VibrationXmlParser";
 
-    /* JADX INFO: Access modifiers changed from: private */
     interface ElementParser<T> {
         T parse(TypedXmlPullParser typedXmlPullParser, int i)
                 throws IOException, XmlParserException;
@@ -115,8 +114,6 @@ public final class VibrationXmlParser {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static ParsedVibration parseElementInternal(TypedXmlPullParser parser, int flags)
             throws IOException, XmlParserException {
         char c;
@@ -164,7 +161,6 @@ public final class VibrationXmlParser {
         return new ParsedVibration(effects);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static VibrationEffect parseVibrationEffectInternal(TypedXmlPullParser parser, int flags)
             throws IOException, XmlParserException {
         int parserFlags = 0;

@@ -232,7 +232,6 @@ public final class Palette {
                     Void,
                     Palette>() { // from class:
                                  // com.android.internal.graphics.palette.Palette.Builder.1
-                /* JADX INFO: Access modifiers changed from: protected */
                 @Override // android.os.AsyncTask
                 public Palette doInBackground(Bitmap... params) {
                     try {
@@ -243,7 +242,6 @@ public final class Palette {
                     }
                 }
 
-                /* JADX INFO: Access modifiers changed from: protected */
                 @Override // android.os.AsyncTask
                 public void onPostExecute(Palette colorExtractor) {
                     listener.onGenerated(colorExtractor);

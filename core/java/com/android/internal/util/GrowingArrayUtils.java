@@ -3,8 +3,6 @@ package com.android.internal.util;
 public final class GrowingArrayUtils {
     static final /* synthetic */ boolean $assertionsDisabled = false;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v3, types: [java.lang.Object, java.lang.Object[]] */
     public static <T> T[] append(T[] array, int currentSize, T element) {
         if (currentSize + 1 > array.length) {
             ?? newUnpaddedArray = ArrayUtils.newUnpaddedArray(array.getClass().getComponentType(), growSize(currentSize));

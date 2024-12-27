@@ -17,13 +17,11 @@ import java.util.Objects;
 public class NetworkKey implements Parcelable {
     public static final Parcelable.Creator<NetworkKey> CREATOR =
             new Parcelable.Creator<NetworkKey>() { // from class: android.net.NetworkKey.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkKey createFromParcel(Parcel in) {
                     return new NetworkKey(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkKey[] newArray(int size) {
                     return new NetworkKey[size];

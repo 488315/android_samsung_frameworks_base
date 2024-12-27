@@ -99,7 +99,6 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         MediaRouterService$AudioPlayerActiveStateChangedListenerImpl$$ExternalSyntheticLambda0
                 mRestoreBluetoothA2dpRunnable;
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.media.MediaRouterService$AudioPlayerActiveStateChangedListenerImpl$$ExternalSyntheticLambda0] */
         public AudioPlayerActiveStateChangedListenerImpl() {
             this.mRestoreBluetoothA2dpRunnable =
                     new Runnable() { // from class:
@@ -341,7 +340,6 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                 return "Provider " + this.mProvider.mComponentName.flattenToShortString();
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:30:0x00b3 A[LOOP:2: B:29:0x00b1->B:30:0x00b3, LOOP_END] */
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
                 To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -587,9 +585,6 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
 
            if (r0 != 6) goto L22;
         */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0034 A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:24:0x004d A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:25:0x004e  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

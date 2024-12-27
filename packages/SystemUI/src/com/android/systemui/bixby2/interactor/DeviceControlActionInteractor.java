@@ -35,7 +35,6 @@ public class DeviceControlActionInteractor implements ActionInteractor {
         this.mDeviceController = deviceController;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$matchAction$0(String str, String str2) {
         return str2.equals(str);
     }
@@ -118,8 +117,6 @@ public class DeviceControlActionInteractor implements ActionInteractor {
         return statefulBuilder8.build();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0088  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0098  */
     @Override // com.android.systemui.bixby2.interactor.ActionInteractor
     /*
         Code decompiled incorrectly, please refer to instructions dump.

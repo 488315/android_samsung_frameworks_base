@@ -221,11 +221,6 @@ public final class SecFlashlightControllerImpl {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v1, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r2v2 */
-    /* JADX WARN: Type inference failed for: r2v6, types: [java.lang.CharSequence] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [android.content.pm.PackageManager] */
     public final void showUnavailableMessage() {
         ApplicationInfo applicationInfo;
         if (isFlashlightBlinking()) {

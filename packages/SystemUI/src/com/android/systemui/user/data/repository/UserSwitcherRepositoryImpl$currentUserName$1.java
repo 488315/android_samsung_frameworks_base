@@ -20,16 +20,11 @@ final class UserSwitcherRepositoryImpl$currentUserName$1 extends SuspendLambda i
     int label;
     final /* synthetic */ UserSwitcherRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherRepositoryImpl$currentUserName$1(UserSwitcherRepositoryImpl userSwitcherRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userSwitcherRepositoryImpl;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0037  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
-    /* JADX WARN: Type inference failed for: r5v5, types: [kotlinx.coroutines.channels.SendChannel] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -126,7 +121,6 @@ final class UserSwitcherRepositoryImpl$currentUserName$1 extends SuspendLambda i
                     int label;
                     final /* synthetic */ UserSwitcherRepositoryImpl this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     public AnonymousClass1(ProducerScope producerScope, UserSwitcherRepositoryImpl userSwitcherRepositoryImpl, Continuation continuation) {
                         super(2, continuation);
                         this.$$this$conflatedCallbackFlow = producerScope;
@@ -194,7 +188,6 @@ final class UserSwitcherRepositoryImpl$currentUserName$1 extends SuspendLambda i
         }
         final UserSwitcherRepositoryImpl userSwitcherRepositoryImpl3 = this.this$0;
         Function0 function0 = new Function0() { // from class: com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserName$1.1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

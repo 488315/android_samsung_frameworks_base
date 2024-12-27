@@ -38,13 +38,11 @@ public final class CellSignalStrengthNr extends CellSignalStrength implements Pa
             new Parcelable.Creator<
                     CellSignalStrengthNr>() { // from class:
                                               // android.telephony.CellSignalStrengthNr.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellSignalStrengthNr createFromParcel(Parcel in) {
                     return new CellSignalStrengthNr(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellSignalStrengthNr[] newArray(int size) {
                     return new CellSignalStrengthNr[size];

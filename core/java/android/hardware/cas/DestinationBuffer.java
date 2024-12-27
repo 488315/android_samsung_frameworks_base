@@ -8,13 +8,11 @@ public final class DestinationBuffer implements Parcelable {
     public static final Parcelable.Creator<DestinationBuffer> CREATOR =
             new Parcelable.Creator<
                     DestinationBuffer>() { // from class: android.hardware.cas.DestinationBuffer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DestinationBuffer createFromParcel(Parcel _aidl_source) {
                     return new DestinationBuffer(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DestinationBuffer[] newArray(int _aidl_size) {
                     return new DestinationBuffer[_aidl_size];

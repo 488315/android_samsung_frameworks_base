@@ -1296,7 +1296,6 @@ public final class DisplayManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
             DisplayManagerService displayManagerService = DisplayManagerService.this;
             new DisplayManagerShellCommand(displayManagerService, displayManagerService.mFlags).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
@@ -2589,17 +2588,11 @@ public final class DisplayManagerService extends SystemService {
     }
 
     enum DisplayStatePriority {
-        /* JADX INFO: Fake field, exist only in values array */
         EF6("ON"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF15("ON_SUSPEND"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF23("VR"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF31("DOZE"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF39("DOZE_SUSPEND"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF46("OFF");
 
         private final int displayState;
@@ -3007,7 +3000,6 @@ public final class DisplayManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:34:0x0069  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3715,11 +3707,6 @@ public final class DisplayManagerService extends SystemService {
     
         if (r26.canProjectVideo() != false) goto L68;
      */
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Removed duplicated region for block: B:175:0x02f5 A[Catch: all -> 0x023c, RemoteException -> 0x0314, TRY_LEAVE, TryCatch #7 {RemoteException -> 0x0314, blocks: (B:173:0x02eb, B:175:0x02f5, B:179:0x0318), top: B:172:0x02eb, outer: #6 }] */
-    /* JADX WARN: Removed duplicated region for block: B:178:0x0316  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x012d  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0169  */
     /* renamed from: -$$Nest$mcreateVirtualDisplayInternal, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -4197,7 +4184,6 @@ public final class DisplayManagerService extends SystemService {
     
         r9.sendDisplayHbmBrightnessEventLocked(r10, r9.mIsHbmEnabled);
      */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x007d A[Catch: all -> 0x003c, TryCatch #0 {all -> 0x003c, blocks: (B:7:0x0012, B:11:0x0026, B:13:0x002e, B:15:0x0034, B:18:0x003f, B:22:0x004c, B:25:0x0056, B:27:0x005c, B:30:0x0065, B:32:0x0069, B:36:0x007d, B:37:0x0083, B:39:0x0089, B:41:0x0075, B:45:0x0095, B:48:0x009e, B:50:0x00a2, B:52:0x00a6, B:55:0x00ac, B:56:0x00b9, B:57:0x00c5, B:58:0x00ca, B:60:0x00d2, B:61:0x0106, B:63:0x010f, B:64:0x0144, B:67:0x0159, B:71:0x015b, B:73:0x0167, B:74:0x017c, B:79:0x0183, B:81:0x001c), top: B:6:0x0012 }] */
     /* renamed from: -$$Nest$mrequestDisplayStateInternal, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -4593,8 +4579,6 @@ public final class DisplayManagerService extends SystemService {
         return Optional.empty();
     }
 
-    /* JADX WARN: Type inference failed for: r10v0, types: [com.android.server.display.DisplayManagerService$$ExternalSyntheticLambda23] */
-    /* JADX WARN: Type inference failed for: r13v0, types: [com.android.server.display.DisplayManagerService$$ExternalSyntheticLambda23] */
     public final DisplayPowerController addDisplayPowerControllerLocked(final LogicalDisplay logicalDisplay) {
         if (this.mPowerHandler == null) {
             return null;
@@ -4745,16 +4729,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:105:0x0287  */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x028b  */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x02a5  */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x02dc  */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x036c  */
-    /* JADX WARN: Removed duplicated region for block: B:171:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:174:0x031b  */
-    /* JADX WARN: Removed duplicated region for block: B:177:0x032b  */
-    /* JADX WARN: Removed duplicated region for block: B:179:0x02e7  */
-    /* JADX WARN: Removed duplicated region for block: B:180:0x02af  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4794,8 +4768,6 @@ public final class DisplayManagerService extends SystemService {
         displayDevice.setUserPreferredDisplayModeLocked(builder.build());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00c8  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x00d1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5625,7 +5597,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     public final void setBrightnessConfigurationForDisplayInternal(BrightnessConfiguration brightnessConfiguration, String str, int i, String str2) {
         validateBrightnessConfiguration(brightnessConfiguration);
         int userSerialNumber = getUserManager().getUserSerialNumber(i);

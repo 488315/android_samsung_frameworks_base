@@ -79,7 +79,6 @@ public final class PersistentDataStore {
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.tv.PersistentDataStore$1] */
     public PersistentDataStore(Context context, int i) {
         this.mContext = context;
         File userSystemDirectory = Environment.getUserSystemDirectory(i);

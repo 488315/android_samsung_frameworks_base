@@ -86,7 +86,6 @@ public final class CommunalViewModel extends BaseCommunalViewModel {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r4v5, types: [com.android.systemui.communal.ui.viewmodel.CommunalViewModel$widgetAccessibilityDelegate$1] */
     public CommunalViewModel(CoroutineDispatcher coroutineDispatcher, CoroutineScope coroutineScope, Resources resources, KeyguardTransitionInteractor keyguardTransitionInteractor, KeyguardInteractor keyguardInteractor, CommunalSceneInteractor communalSceneInteractor, CommunalInteractor communalInteractor, CommunalSettingsInteractor communalSettingsInteractor, CommunalTutorialInteractor communalTutorialInteractor, ShadeInteractor shadeInteractor, MediaHost mediaHost, LogBuffer logBuffer) {
         super(communalSceneInteractor, communalInteractor, mediaHost);
         this.scope = coroutineScope;
@@ -130,8 +129,6 @@ public final class CommunalViewModel extends BaseCommunalViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

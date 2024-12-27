@@ -19,13 +19,11 @@ public final class BluetoothDeviceFilter implements DeviceFilter<BluetoothDevice
     public static final Parcelable.Creator<BluetoothDeviceFilter> CREATOR =
             new Parcelable.Creator<BluetoothDeviceFilter>() { // from class:
                 // android.companion.BluetoothDeviceFilter.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BluetoothDeviceFilter createFromParcel(Parcel in) {
                     return new BluetoothDeviceFilter(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BluetoothDeviceFilter[] newArray(int size) {
                     return new BluetoothDeviceFilter[size];
@@ -167,7 +165,6 @@ public final class BluetoothDeviceFilter implements DeviceFilter<BluetoothDevice
             return this;
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.provider.OneTimeUseBuilder
         public BluetoothDeviceFilter build() {
             markUsed();

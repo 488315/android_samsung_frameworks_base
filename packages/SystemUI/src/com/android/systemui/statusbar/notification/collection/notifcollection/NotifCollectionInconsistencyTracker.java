@@ -50,7 +50,6 @@ public final class NotifCollectionInconsistencyTracker {
         Function0 function02 = this.coalescedKeySetAccessor;
         final Set set2 = (Set) (function02 != null ? function02 : null).invoke();
         Set<String> set3 = SequencesKt___SequencesKt.toSet(SequencesKt___SequencesKt.filter(SequencesKt___SequencesKt.filter(ArraysKt___ArraysKt.asSequence(rankingMap.getOrderedKeys()), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionInconsistencyTracker$logNewMissingNotifications$newMissingNotifications$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
@@ -60,7 +59,6 @@ public final class NotifCollectionInconsistencyTracker {
                 return Boolean.valueOf(!set.contains((String) obj));
             }
         }), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionInconsistencyTracker$logNewMissingNotifications$newMissingNotifications$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

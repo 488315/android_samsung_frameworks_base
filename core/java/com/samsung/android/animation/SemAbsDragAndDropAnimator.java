@@ -191,7 +191,6 @@ public abstract class SemAbsDragAndDropAnimator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setDndModeInternal(boolean dndMode) {
         this.mDndMode = dndMode;
         if (!dndMode) {
@@ -312,7 +311,6 @@ public abstract class SemAbsDragAndDropAnimator {
         this.mRetainFirstDragViewPos = -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class AutoScrollRunnable implements Runnable {
         private AutoScrollRunnable() {}
 

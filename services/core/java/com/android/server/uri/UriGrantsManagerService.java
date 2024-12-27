@@ -217,8 +217,6 @@ public class UriGrantsManagerService extends IUriGrantsManager.Stub implements U
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.uri.UriGrantsManagerService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? r0 = this.mService;

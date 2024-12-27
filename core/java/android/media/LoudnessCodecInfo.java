@@ -12,7 +12,6 @@ public class LoudnessCodecInfo implements Parcelable {
     public static final Parcelable.Creator<LoudnessCodecInfo> CREATOR =
             new Parcelable.Creator<
                     LoudnessCodecInfo>() { // from class: android.media.LoudnessCodecInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LoudnessCodecInfo createFromParcel(Parcel _aidl_source) {
                     LoudnessCodecInfo _aidl_out = new LoudnessCodecInfo();
@@ -20,7 +19,6 @@ public class LoudnessCodecInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LoudnessCodecInfo[] newArray(int _aidl_size) {
                     return new LoudnessCodecInfo[_aidl_size];

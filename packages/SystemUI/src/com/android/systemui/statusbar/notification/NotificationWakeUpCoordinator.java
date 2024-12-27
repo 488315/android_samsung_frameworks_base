@@ -160,7 +160,6 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.statusbar.notification.NotificationWakeUpCoordinator$Companion$notificationVisibility$1] */
     static {
         new Companion(null);
         notificationVisibility = new FloatProperty() { // from class: com.android.systemui.statusbar.notification.NotificationWakeUpCoordinator$Companion$notificationVisibility$1

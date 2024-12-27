@@ -7,7 +7,6 @@ public final class FlushMetrics implements Parcelable {
     public static final Parcelable.Creator<FlushMetrics> CREATOR =
             new Parcelable.Creator<
                     FlushMetrics>() { // from class: android.service.contentcapture.FlushMetrics.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FlushMetrics createFromParcel(Parcel in) {
                     FlushMetrics flushMetrics = new FlushMetrics();
@@ -19,7 +18,6 @@ public final class FlushMetrics implements Parcelable {
                     return flushMetrics;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FlushMetrics[] newArray(int size) {
                     return new FlushMetrics[size];

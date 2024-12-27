@@ -7,7 +7,6 @@ public final class FeatureGroupInfo implements Parcelable {
     public static final Parcelable.Creator<FeatureGroupInfo> CREATOR =
             new Parcelable.Creator<
                     FeatureGroupInfo>() { // from class: android.content.pm.FeatureGroupInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FeatureGroupInfo createFromParcel(Parcel source) {
                     FeatureGroupInfo group = new FeatureGroupInfo();
@@ -15,7 +14,6 @@ public final class FeatureGroupInfo implements Parcelable {
                     return group;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FeatureGroupInfo[] newArray(int size) {
                     return new FeatureGroupInfo[size];

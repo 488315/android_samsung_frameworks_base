@@ -46,7 +46,6 @@ public final class DismissibilityCoordinator implements Coordinator {
         return z2;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onBeforeRenderListListener(List<? extends ListEntry> list) {
         boolean z = !this.keyguardStateController.isUnlocked();
         LinkedHashSet linkedHashSet = new LinkedHashSet();

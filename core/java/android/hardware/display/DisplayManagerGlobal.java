@@ -385,7 +385,6 @@ public final class DisplayManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDisplayEvent(int displayId, int event, boolean forceUpdate) {
         DisplayInfo info;
         DisplayInfo display;
@@ -1227,7 +1226,6 @@ public final class DisplayManagerGlobal {
         return -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDisplayVolumeEvent(int event, Bundle data) {
         synchronized (this.mLock) {
             if (this.mDisplayVolumeListeners != null) {
@@ -1239,7 +1237,6 @@ public final class DisplayManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDisplayVolumeKeyEvent(int event) {
         synchronized (this.mLock) {
             if (this.mDisplayVolumeKeyListeners != null) {
@@ -1251,7 +1248,6 @@ public final class DisplayManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleWifiDisplayParameterEvent(
             int event, List<SemWifiDisplayParameter> parameters) {
         synchronized (this.mLock) {
@@ -1355,7 +1351,6 @@ public final class DisplayManagerGlobal {
         return -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDeviceEvent(Bundle msg, int event) {
         synchronized (this.mLock) {
             if (this.mDeviceListeners != null) {
@@ -1459,7 +1454,6 @@ public final class DisplayManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class DisplayListenerDelegate {
         public volatile long mEventsMask;
         private final Executor mExecutor;
@@ -1502,7 +1496,6 @@ public final class DisplayManagerGlobal {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$sendDisplayEvent$0(
                 long generationId,
                 int displayId,
@@ -1714,7 +1707,6 @@ public final class DisplayManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String eventToString(int event) {
         switch (event) {
             case 1:
@@ -1746,7 +1738,6 @@ public final class DisplayManagerGlobal {
         return sExtraDisplayListenerLogging;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean extraLogging() {
         return sExtraDisplayListenerLogging;
     }

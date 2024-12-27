@@ -29,7 +29,6 @@ final class FingerprintPropertyRepositoryImpl$props$1 extends SuspendLambda impl
         int label;
         final /* synthetic */ FingerprintPropertyRepositoryImpl this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(FingerprintPropertyRepositoryImpl fingerprintPropertyRepositoryImpl, FingerprintPropertyRepositoryImpl$props$1$callback$1 fingerprintPropertyRepositoryImpl$props$1$callback$1, Continuation continuation) {
             super(2, continuation);
             this.this$0 = fingerprintPropertyRepositoryImpl;
@@ -62,7 +61,6 @@ final class FingerprintPropertyRepositoryImpl$props$1 extends SuspendLambda impl
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FingerprintPropertyRepositoryImpl$props$1(FingerprintPropertyRepositoryImpl fingerprintPropertyRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fingerprintPropertyRepositoryImpl;
@@ -80,7 +78,6 @@ final class FingerprintPropertyRepositoryImpl$props$1 extends SuspendLambda impl
         return ((FingerprintPropertyRepositoryImpl$props$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Type inference failed for: r9v2, types: [com.android.systemui.biometrics.data.repository.FingerprintPropertyRepositoryImpl$props$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         final ProducerScope producerScope;

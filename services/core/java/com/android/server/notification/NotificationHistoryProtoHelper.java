@@ -76,8 +76,6 @@ public abstract class NotificationHistoryProtoHelper {
         }
     }
 
-    /* JADX WARN: Failed to find 'out' block for switch in B:3:0x0018. Please report as an issue. */
-    /* JADX WARN: Failed to find 'out' block for switch in B:42:0x00b0. Please report as an issue. */
     public static NotificationHistory.HistoricalNotification readNotification(
             ProtoInputStream protoInputStream, List list) {
         String str;

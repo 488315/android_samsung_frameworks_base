@@ -10,13 +10,11 @@ public final class IncidentReportArgs implements Parcelable {
     public static final Parcelable.Creator<IncidentReportArgs> CREATOR =
             new Parcelable.Creator<
                     IncidentReportArgs>() { // from class: android.os.IncidentReportArgs.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IncidentReportArgs createFromParcel(Parcel in) {
                     return new IncidentReportArgs(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IncidentReportArgs[] newArray(int size) {
                     return new IncidentReportArgs[size];

@@ -168,7 +168,6 @@ public class StateListDrawable extends DrawableContainer {
         return this;
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // android.graphics.drawable.DrawableContainer
     public StateListState cloneConstantState() {
         return new StateListState(this.mStateListState, this, null);

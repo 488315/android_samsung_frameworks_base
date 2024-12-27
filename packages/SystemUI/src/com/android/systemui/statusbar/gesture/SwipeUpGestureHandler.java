@@ -17,7 +17,6 @@ public abstract class SwipeUpGestureHandler extends GenericGestureDetector {
     public float startY;
     public final int swipeDistanceThreshold;
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

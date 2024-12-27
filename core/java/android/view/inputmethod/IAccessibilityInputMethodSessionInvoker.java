@@ -58,7 +58,6 @@ final class IAccessibilityInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void finishInputInternal() {
         try {
             this.mSession.finishInput();
@@ -95,7 +94,6 @@ final class IAccessibilityInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: updateSelectionInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$updateSelection$0(
             int oldSelStart,
@@ -112,7 +110,6 @@ final class IAccessibilityInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public void invalidateInput(
             final EditorInfo editorInfo,
             final IRemoteAccessibilityInputConnection connection,
@@ -132,7 +129,6 @@ final class IAccessibilityInputMethodSessionInvoker {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: invalidateInputInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$invalidateInput$1(
             EditorInfo editorInfo, IRemoteAccessibilityInputConnection connection, int sessionId) {

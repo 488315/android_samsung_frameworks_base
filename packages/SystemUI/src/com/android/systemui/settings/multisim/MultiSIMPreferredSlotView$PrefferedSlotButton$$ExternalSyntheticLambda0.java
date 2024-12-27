@@ -11,7 +11,6 @@ public final /* synthetic */ class MultiSIMPreferredSlotView$PrefferedSlotButton
         this.f$0 = obj;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:107:0x04ae  */
     @Override // android.view.View.OnClickListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.

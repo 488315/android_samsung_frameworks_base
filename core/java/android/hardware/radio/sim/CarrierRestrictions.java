@@ -11,7 +11,6 @@ public class CarrierRestrictions implements Parcelable {
     public static final Parcelable.Creator<CarrierRestrictions> CREATOR =
             new Parcelable.Creator<CarrierRestrictions>() { // from class:
                 // android.hardware.radio.sim.CarrierRestrictions.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarrierRestrictions createFromParcel(Parcel _aidl_source) {
                     CarrierRestrictions _aidl_out = new CarrierRestrictions();
@@ -19,7 +18,6 @@ public class CarrierRestrictions implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarrierRestrictions[] newArray(int _aidl_size) {
                     return new CarrierRestrictions[_aidl_size];

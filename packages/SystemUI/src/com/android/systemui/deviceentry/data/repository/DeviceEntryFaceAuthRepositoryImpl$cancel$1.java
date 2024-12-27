@@ -16,7 +16,6 @@ final class DeviceEntryFaceAuthRepositoryImpl$cancel$1 extends SuspendLambda imp
     int label;
     final /* synthetic */ DeviceEntryFaceAuthRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryFaceAuthRepositoryImpl$cancel$1(DeviceEntryFaceAuthRepositoryImpl deviceEntryFaceAuthRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceEntryFaceAuthRepositoryImpl;

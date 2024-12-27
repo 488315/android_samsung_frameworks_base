@@ -11,13 +11,11 @@ public class WindowContextWindowRemovalItem extends ClientTransactionItem {
     public static final Parcelable.Creator<WindowContextWindowRemovalItem> CREATOR =
             new Parcelable.Creator<WindowContextWindowRemovalItem>() { // from class:
                 // android.app.servertransaction.WindowContextWindowRemovalItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowContextWindowRemovalItem createFromParcel(Parcel in) {
                     return new WindowContextWindowRemovalItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowContextWindowRemovalItem[] newArray(int size) {
                     return new WindowContextWindowRemovalItem[size];

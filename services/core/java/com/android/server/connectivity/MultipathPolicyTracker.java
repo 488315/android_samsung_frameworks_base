@@ -102,7 +102,6 @@ public final class MultipathPolicyTracker {
         public final Network network;
         public final String subscriberId;
 
-        /* JADX WARN: Type inference failed for: r5v9, types: [com.android.server.connectivity.MultipathPolicyTracker$MultipathTracker$1] */
         public MultipathTracker(Network network, NetworkCapabilities networkCapabilities) {
             this.network = network;
             this.mNetworkCapabilities = new NetworkCapabilities(networkCapabilities);

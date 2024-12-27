@@ -19,7 +19,6 @@ final class CustomizationProviderClientImpl$observeUri$1 extends SuspendLambda i
     int label;
     final /* synthetic */ CustomizationProviderClientImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomizationProviderClientImpl$observeUri$1(CustomizationProviderClientImpl customizationProviderClientImpl, Uri uri, Continuation continuation) {
         super(2, continuation);
         this.this$0 = customizationProviderClientImpl;
@@ -38,8 +37,6 @@ final class CustomizationProviderClientImpl$observeUri$1 extends SuspendLambda i
         return ((CustomizationProviderClientImpl$observeUri$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.database.ContentObserver, com.android.systemui.shared.customization.data.content.CustomizationProviderClientImpl$observeUri$1$observer$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -60,7 +57,6 @@ final class CustomizationProviderClientImpl$observeUri$1 extends SuspendLambda i
             this.this$0.context.getContentResolver().registerContentObserver(this.$uri, true, r1);
             final CustomizationProviderClientImpl customizationProviderClientImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.shared.customization.data.content.CustomizationProviderClientImpl$observeUri$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

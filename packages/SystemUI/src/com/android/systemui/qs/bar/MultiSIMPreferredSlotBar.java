@@ -44,8 +44,6 @@ public final class MultiSIMPreferredSlotBar extends BarItemImpl implements Tuner
     public boolean mIsMultiSIMBarShowOnQSPanel;
     private SettingsHelper.OnChangedCallback mSettingsListener;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v0, types: [android.content.BroadcastReceiver, com.android.systemui.qs.bar.MultiSIMPreferredSlotBar$1] */
     public MultiSIMPreferredSlotBar(Context context, BroadcastDispatcher broadcastDispatcher) {
         super(context);
         this.mIsMultiSIMBarShowOnQSPanel = true;

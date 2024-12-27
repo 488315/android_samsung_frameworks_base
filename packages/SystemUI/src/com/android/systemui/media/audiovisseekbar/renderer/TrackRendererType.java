@@ -2,8 +2,6 @@ package com.android.systemui.media.audiovisseekbar.renderer;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class TrackRendererType {
     public static final /* synthetic */ TrackRendererType[] $VALUES;
     public static final TrackRendererType WAVE_MULTI_AREA_AUTO;

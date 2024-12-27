@@ -29,13 +29,11 @@ public final class SynchronousResultReceiver<T> implements Parcelable {
                     SynchronousResultReceiver<
                             ?>>() { // from class:
                                     // com.android.modules.utils.SynchronousResultReceiver.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SynchronousResultReceiver<?> createFromParcel(Parcel in) {
                     return new SynchronousResultReceiver<>(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SynchronousResultReceiver<?>[] newArray(int size) {
                     return new SynchronousResultReceiver[size];
@@ -72,7 +70,6 @@ public final class SynchronousResultReceiver<T> implements Parcelable {
         this.mIsCompleted = false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public CompletableFuture<Result<T>> getFuture() {
         CompletableFuture<Result<T>> completableFuture;
         synchronized (sLock) {

@@ -81,8 +81,6 @@ public final class DisplayWindowSettingsProvider {
 
            com.android.server.wm.DisplayWindowSettingsProvider.readDisplay(r3, r2);
         */
-        /* JADX WARN: Removed duplicated region for block: B:48:0x012e  */
-        /* JADX WARN: Removed duplicated region for block: B:51:? A[RETURN, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

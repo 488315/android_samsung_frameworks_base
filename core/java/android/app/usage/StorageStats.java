@@ -15,13 +15,11 @@ public final class StorageStats implements Parcelable {
     public static final int APP_DATA_TYPE_LIB = 5;
     public static final Parcelable.Creator<StorageStats> CREATOR =
             new Parcelable.Creator<StorageStats>() { // from class: android.app.usage.StorageStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StorageStats createFromParcel(Parcel in) {
                     return new StorageStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StorageStats[] newArray(int size) {
                     return new StorageStats[size];

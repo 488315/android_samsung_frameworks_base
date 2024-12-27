@@ -31,7 +31,6 @@ public final class CommunalWidgetRepositoryImpl$special$$inlined$flatMapLatest$1
     int label;
     final /* synthetic */ CommunalWidgetRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalWidgetRepositoryImpl$special$$inlined$flatMapLatest$1(Continuation continuation, PackageChangeRepository packageChangeRepository, CommunalWidgetRepositoryImpl communalWidgetRepositoryImpl) {
         super(3, continuation);
         this.$packageChangeRepository$inlined = packageChangeRepository;
@@ -94,10 +93,6 @@ public final class CommunalWidgetRepositoryImpl$special$$inlined$flatMapLatest$1
                                     this.this$0 = communalWidgetRepositoryImpl;
                                 }
 
-                                /* JADX WARN: Multi-variable type inference failed */
-                                /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
-                                /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
-                                /* JADX WARN: Type inference failed for: r8v6, types: [com.android.systemui.communal.shared.model.CommunalWidgetContentModel$Pending] */
                                 @Override // kotlinx.coroutines.flow.FlowCollector
                                 /*
                                     Code decompiled incorrectly, please refer to instructions dump.

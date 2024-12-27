@@ -1167,13 +1167,11 @@ public final class Display {
         public static final Mode[] EMPTY_ARRAY = new Mode[0];
         public static final Parcelable.Creator<Mode> CREATOR =
                 new Parcelable.Creator<Mode>() { // from class: android.view.Display.Mode.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Mode createFromParcel(Parcel in) {
                         return new Mode(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Mode[] newArray(int size) {
                         return new Mode[size];
@@ -1437,13 +1435,11 @@ public final class Display {
         public static final Parcelable.Creator<HdrCapabilities> CREATOR =
                 new Parcelable.Creator<
                         HdrCapabilities>() { // from class: android.view.Display.HdrCapabilities.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HdrCapabilities createFromParcel(Parcel source) {
                         return new HdrCapabilities(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public HdrCapabilities[] newArray(int size) {
                         return new HdrCapabilities[size];

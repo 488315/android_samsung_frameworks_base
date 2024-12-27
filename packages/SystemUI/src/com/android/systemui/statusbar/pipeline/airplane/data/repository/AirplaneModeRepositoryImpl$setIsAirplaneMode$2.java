@@ -13,7 +13,6 @@ final class AirplaneModeRepositoryImpl$setIsAirplaneMode$2 extends SuspendLambda
     int label;
     final /* synthetic */ AirplaneModeRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AirplaneModeRepositoryImpl$setIsAirplaneMode$2(AirplaneModeRepositoryImpl airplaneModeRepositoryImpl, boolean z, Continuation continuation) {
         super(2, continuation);
         this.this$0 = airplaneModeRepositoryImpl;

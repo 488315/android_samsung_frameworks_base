@@ -10,13 +10,11 @@ public class SemContextFlipCoverAction extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextFlipCoverAction>() { // from class:
                                                    // com.samsung.android.hardware.context.SemContextFlipCoverAction.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextFlipCoverAction createFromParcel(Parcel in) {
                     return new SemContextFlipCoverAction(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextFlipCoverAction[] newArray(int size) {
                     return new SemContextFlipCoverAction[size];

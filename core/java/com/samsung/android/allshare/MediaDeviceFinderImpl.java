@@ -293,7 +293,6 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
         return getDeviceFromMap(req_bundle, deviceType);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeDeviceFromMap(Bundle bundle, Device.DeviceType type) {
         if (bundle == null) {
             DLog.w_api(TAG_CLASS, "removeDeviceFromMap : bundle is null");
@@ -356,7 +355,6 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Device getDeviceFromMap(Bundle bundle, Device.DeviceType type) {
         DeviceImpl deviceImpl;
         if (bundle == null) {

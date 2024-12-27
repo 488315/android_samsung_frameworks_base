@@ -12,8 +12,6 @@ public final class SemHwrsServiceImpl extends AbstractSemHwrsServiceImpl {
     public final AnonymousClass1 mBrReceiver;
     public UserHandle mCurrentUserHandle;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [android.content.BroadcastReceiver, com.samsung.android.server.hwrs.SemHwrsServiceImpl$1] */
     public SemHwrsServiceImpl(Context context, PreconditionObserver preconditionObserver) {
         super(context, preconditionObserver);
         ?? r1 = new BroadcastReceiver() { // from class: com.samsung.android.server.hwrs.SemHwrsServiceImpl.1

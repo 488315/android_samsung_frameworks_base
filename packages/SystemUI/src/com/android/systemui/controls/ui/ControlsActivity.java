@@ -68,7 +68,6 @@ public final class ControlsActivity extends ComponentActivity {
         this.lastConfiguration.setTo(configuration);
     }
 
-    /* JADX WARN: Type inference failed for: r10v8, types: [com.android.systemui.controls.ui.ControlsActivity$initBroadcastReceiver$1] */
     @Override // androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
     public final void onCreate(Bundle bundle) {
         super.onCreate(bundle);

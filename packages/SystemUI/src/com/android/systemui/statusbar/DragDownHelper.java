@@ -208,7 +208,6 @@ public final class DragDownHelper implements Gefingerpoken {
                 lSShadeTransitionLogger.logDraggedDown(expandableView, i);
                 if (!lockscreenShadeTransitionController.ambientState.mDozing || expandableView != null) {
                     lockscreenShadeTransitionController.goToLockedShadeInternal(expandableView, new Function1() { // from class: com.android.systemui.statusbar.LockscreenShadeTransitionController$onDraggedDown$animationHandler$1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }
@@ -265,8 +264,6 @@ public final class DragDownHelper implements Gefingerpoken {
         ((ShadeRepositoryImpl) this.shadeRepository).legacyLockscreenShadeTracking.updateState(null, Boolean.FALSE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:100:0x01f8  */
     @Override // com.android.systemui.Gefingerpoken
     /*
         Code decompiled incorrectly, please refer to instructions dump.

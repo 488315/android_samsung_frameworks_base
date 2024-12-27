@@ -150,8 +150,6 @@ public final class DisplayDeviceConfig {
     public int mAmbientHorizonLong = 2500;
     public int mAmbientHorizonShort = 600;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class BrightnessLimitMapType {
         public static final /* synthetic */ BrightnessLimitMapType[] $VALUES;
         public static final BrightnessLimitMapType ADAPTIVE;
@@ -855,15 +853,6 @@ public final class DisplayDeviceConfig {
         return this.mRefreshRateZoneProfiles;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:47:0x0113 A[Catch: all -> 0x006f, TryCatch #2 {all -> 0x006f, blocks: (B:12:0x0033, B:14:0x0039, B:16:0x0044, B:17:0x004e, B:19:0x0059, B:21:0x0068, B:22:0x0072, B:24:0x0085, B:26:0x008b, B:27:0x0092, B:28:0x0099, B:30:0x00a6, B:31:0x00ba, B:33:0x00c0, B:34:0x00ca, B:38:0x00e2, B:40:0x00ec, B:44:0x00f6, B:45:0x0101, B:47:0x0113, B:48:0x0119, B:50:0x011d, B:51:0x0123, B:54:0x0160, B:56:0x0164, B:57:0x0175, B:59:0x0181, B:60:0x019b, B:63:0x01a7, B:67:0x01a3, B:68:0x0188, B:69:0x0131, B:71:0x0135, B:72:0x013c, B:73:0x0149, B:75:0x014f, B:78:0x00fc, B:79:0x00c5, B:80:0x00ab, B:81:0x004b, B:82:0x01aa), top: B:11:0x0033 }] */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x011d A[Catch: all -> 0x006f, TryCatch #2 {all -> 0x006f, blocks: (B:12:0x0033, B:14:0x0039, B:16:0x0044, B:17:0x004e, B:19:0x0059, B:21:0x0068, B:22:0x0072, B:24:0x0085, B:26:0x008b, B:27:0x0092, B:28:0x0099, B:30:0x00a6, B:31:0x00ba, B:33:0x00c0, B:34:0x00ca, B:38:0x00e2, B:40:0x00ec, B:44:0x00f6, B:45:0x0101, B:47:0x0113, B:48:0x0119, B:50:0x011d, B:51:0x0123, B:54:0x0160, B:56:0x0164, B:57:0x0175, B:59:0x0181, B:60:0x019b, B:63:0x01a7, B:67:0x01a3, B:68:0x0188, B:69:0x0131, B:71:0x0135, B:72:0x013c, B:73:0x0149, B:75:0x014f, B:78:0x00fc, B:79:0x00c5, B:80:0x00ab, B:81:0x004b, B:82:0x01aa), top: B:11:0x0033 }] */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0130  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0164 A[Catch: all -> 0x006f, TryCatch #2 {all -> 0x006f, blocks: (B:12:0x0033, B:14:0x0039, B:16:0x0044, B:17:0x004e, B:19:0x0059, B:21:0x0068, B:22:0x0072, B:24:0x0085, B:26:0x008b, B:27:0x0092, B:28:0x0099, B:30:0x00a6, B:31:0x00ba, B:33:0x00c0, B:34:0x00ca, B:38:0x00e2, B:40:0x00ec, B:44:0x00f6, B:45:0x0101, B:47:0x0113, B:48:0x0119, B:50:0x011d, B:51:0x0123, B:54:0x0160, B:56:0x0164, B:57:0x0175, B:59:0x0181, B:60:0x019b, B:63:0x01a7, B:67:0x01a3, B:68:0x0188, B:69:0x0131, B:71:0x0135, B:72:0x013c, B:73:0x0149, B:75:0x014f, B:78:0x00fc, B:79:0x00c5, B:80:0x00ab, B:81:0x004b, B:82:0x01aa), top: B:11:0x0033 }] */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0181 A[Catch: all -> 0x006f, TryCatch #2 {all -> 0x006f, blocks: (B:12:0x0033, B:14:0x0039, B:16:0x0044, B:17:0x004e, B:19:0x0059, B:21:0x0068, B:22:0x0072, B:24:0x0085, B:26:0x008b, B:27:0x0092, B:28:0x0099, B:30:0x00a6, B:31:0x00ba, B:33:0x00c0, B:34:0x00ca, B:38:0x00e2, B:40:0x00ec, B:44:0x00f6, B:45:0x0101, B:47:0x0113, B:48:0x0119, B:50:0x011d, B:51:0x0123, B:54:0x0160, B:56:0x0164, B:57:0x0175, B:59:0x0181, B:60:0x019b, B:63:0x01a7, B:67:0x01a3, B:68:0x0188, B:69:0x0131, B:71:0x0135, B:72:0x013c, B:73:0x0149, B:75:0x014f, B:78:0x00fc, B:79:0x00c5, B:80:0x00ab, B:81:0x004b, B:82:0x01aa), top: B:11:0x0033 }] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x01a2  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x01a3 A[Catch: all -> 0x006f, TryCatch #2 {all -> 0x006f, blocks: (B:12:0x0033, B:14:0x0039, B:16:0x0044, B:17:0x004e, B:19:0x0059, B:21:0x0068, B:22:0x0072, B:24:0x0085, B:26:0x008b, B:27:0x0092, B:28:0x0099, B:30:0x00a6, B:31:0x00ba, B:33:0x00c0, B:34:0x00ca, B:38:0x00e2, B:40:0x00ec, B:44:0x00f6, B:45:0x0101, B:47:0x0113, B:48:0x0119, B:50:0x011d, B:51:0x0123, B:54:0x0160, B:56:0x0164, B:57:0x0175, B:59:0x0181, B:60:0x019b, B:63:0x01a7, B:67:0x01a3, B:68:0x0188, B:69:0x0131, B:71:0x0135, B:72:0x013c, B:73:0x0149, B:75:0x014f, B:78:0x00fc, B:79:0x00c5, B:80:0x00ab, B:81:0x004b, B:82:0x01aa), top: B:11:0x0033 }] */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0188 A[Catch: all -> 0x006f, TryCatch #2 {all -> 0x006f, blocks: (B:12:0x0033, B:14:0x0039, B:16:0x0044, B:17:0x004e, B:19:0x0059, B:21:0x0068, B:22:0x0072, B:24:0x0085, B:26:0x008b, B:27:0x0092, B:28:0x0099, B:30:0x00a6, B:31:0x00ba, B:33:0x00c0, B:34:0x00ca, B:38:0x00e2, B:40:0x00ec, B:44:0x00f6, B:45:0x0101, B:47:0x0113, B:48:0x0119, B:50:0x011d, B:51:0x0123, B:54:0x0160, B:56:0x0164, B:57:0x0175, B:59:0x0181, B:60:0x019b, B:63:0x01a7, B:67:0x01a3, B:68:0x0188, B:69:0x0131, B:71:0x0135, B:72:0x013c, B:73:0x0149, B:75:0x014f, B:78:0x00fc, B:79:0x00c5, B:80:0x00ab, B:81:0x004b, B:82:0x01aa), top: B:11:0x0033 }] */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0131 A[Catch: all -> 0x006f, TryCatch #2 {all -> 0x006f, blocks: (B:12:0x0033, B:14:0x0039, B:16:0x0044, B:17:0x004e, B:19:0x0059, B:21:0x0068, B:22:0x0072, B:24:0x0085, B:26:0x008b, B:27:0x0092, B:28:0x0099, B:30:0x00a6, B:31:0x00ba, B:33:0x00c0, B:34:0x00ca, B:38:0x00e2, B:40:0x00ec, B:44:0x00f6, B:45:0x0101, B:47:0x0113, B:48:0x0119, B:50:0x011d, B:51:0x0123, B:54:0x0160, B:56:0x0164, B:57:0x0175, B:59:0x0181, B:60:0x019b, B:63:0x01a7, B:67:0x01a3, B:68:0x0188, B:69:0x0131, B:71:0x0135, B:72:0x013c, B:73:0x0149, B:75:0x014f, B:78:0x00fc, B:79:0x00c5, B:80:0x00ab, B:81:0x004b, B:82:0x01aa), top: B:11:0x0033 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1030,7 +1019,6 @@ public final class DisplayDeviceConfig {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0055  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1747,8 +1735,6 @@ public final class DisplayDeviceConfig {
         return Spline.createLinearSpline(floatArray, floatArray2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00b2  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00bd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

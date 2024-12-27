@@ -33,8 +33,6 @@ public final class ConfigurationState {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public abstract class ConfigurationField {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ ConfigurationField[] $VALUES;
@@ -382,7 +380,6 @@ public final class ConfigurationState {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public ConfigurationState(List<? extends ConfigurationField> list) {
         this.fields = list;
         EnumEntries entries = ConfigurationField.getEntries();
@@ -434,7 +431,6 @@ public final class ConfigurationState {
 
     public final String toCompareString(final Configuration configuration) {
         return configuration == null ? "" : CollectionsKt___CollectionsKt.joinToString$default(this.fields, ", ", null, null, new Function1() { // from class: com.android.systemui.util.ConfigurationState$toCompareString$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

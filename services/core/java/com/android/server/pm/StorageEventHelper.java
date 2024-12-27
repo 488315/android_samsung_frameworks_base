@@ -100,8 +100,6 @@ public final class StorageEventHelper extends StorageEventListener {
                                 this.f$0 = this;
                             }
 
-                            /* JADX WARN: Can't wrap try/catch for region: R(8:(2:78|(2:80|81)(2:82|58))(2:44|45)|51|52|54|55|56|57|58) */
-                            /* JADX WARN: Can't wrap try/catch for region: R(8:40|(8:(2:78|(2:80|81)(2:82|58))(2:44|45)|51|52|54|55|56|57|58)|46|47|48|49|50|38) */
                             /* JADX WARN: Code restructure failed: missing block: B:59:0x0163, code lost:
 
                                r0 = e;
@@ -144,7 +142,6 @@ public final class StorageEventHelper extends StorageEventListener {
                                             + " com.android.server.pm.StorageEventHelper$$ExternalSyntheticLambda0.run$com$android$server$pm$StorageEventHelper$$ExternalSyntheticLambda0():void");
                             }
 
-                            /* JADX WARN: Finally extract failed */
                             @Override // java.lang.Runnable
                             public final void run() {
                                 int i5;
@@ -294,7 +291,6 @@ public final class StorageEventHelper extends StorageEventListener {
                                             + " com.android.server.pm.StorageEventHelper$$ExternalSyntheticLambda0.run$com$android$server$pm$StorageEventHelper$$ExternalSyntheticLambda0():void");
                             }
 
-                            /* JADX WARN: Finally extract failed */
                             @Override // java.lang.Runnable
                             public final void run() {
                                 int i52;

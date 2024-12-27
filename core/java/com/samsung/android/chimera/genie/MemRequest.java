@@ -7,13 +7,11 @@ public final class MemRequest implements Parcelable {
     public static final Parcelable.Creator<MemRequest> CREATOR =
             new Parcelable.Creator<
                     MemRequest>() { // from class: com.samsung.android.chimera.genie.MemRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MemRequest createFromParcel(Parcel in) {
                     return new MemRequest(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MemRequest[] newArray(int size) {
                     return new MemRequest[size];

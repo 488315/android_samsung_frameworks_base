@@ -9,13 +9,11 @@ public class SContextAirMotion extends SContextEventContext {
     public static final Parcelable.Creator<SContextAirMotion> CREATOR =
             new Parcelable.Creator<SContextAirMotion>() { // from class:
                 // android.hardware.scontext.SContextAirMotion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextAirMotion createFromParcel(Parcel in) {
                     return new SContextAirMotion(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextAirMotion[] newArray(int size) {
                     return new SContextAirMotion[size];

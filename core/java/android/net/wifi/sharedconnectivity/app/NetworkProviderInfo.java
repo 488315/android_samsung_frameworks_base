@@ -16,13 +16,11 @@ public final class NetworkProviderInfo implements Parcelable {
             new Parcelable.Creator<
                     NetworkProviderInfo>() { // from class:
                                              // android.net.wifi.sharedconnectivity.app.NetworkProviderInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkProviderInfo createFromParcel(Parcel in) {
                     return NetworkProviderInfo.readFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkProviderInfo[] newArray(int size) {
                     return new NetworkProviderInfo[size];

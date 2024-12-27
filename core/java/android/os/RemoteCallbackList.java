@@ -56,7 +56,6 @@ public class RemoteCallbackList<E extends IInterface> {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [E extends android.os.IInterface, android.os.IInterface] */
     public boolean unregister(E callback) {
         synchronized (this.mCallbacks) {
             RemoteCallbackList<E>.Callback cb = this.mCallbacks.remove(callback.asBinder());
@@ -68,7 +67,6 @@ public class RemoteCallbackList<E extends IInterface> {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v0, types: [E extends android.os.IInterface, android.os.IInterface] */
     public void kill() {
         synchronized (this.mCallbacks) {
             for (int cbi = this.mCallbacks.size() - 1; cbi >= 0; cbi--) {
@@ -145,7 +143,6 @@ public class RemoteCallbackList<E extends IInterface> {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <C> void broadcastForEachCookie(Consumer<C> consumer) {
         int itemCount = beginBroadcast();
         for (int i = 0; i < itemCount; i++) {
@@ -157,7 +154,6 @@ public class RemoteCallbackList<E extends IInterface> {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <C> void broadcast(BiConsumer<E, C> biConsumer) {
         int itemCount = beginBroadcast();
         for (int i = 0; i < itemCount; i++) {

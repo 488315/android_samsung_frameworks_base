@@ -127,7 +127,6 @@ public final class EditWidgetsActivity extends ComponentActivity {
                 super(2);
             }
 
-            /* JADX WARN: Type inference failed for: r4v5, types: [com.android.systemui.communal.widgets.EditWidgetsActivity$onCreate$1$1, kotlin.jvm.internal.Lambda] */
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 Composer composer = (Composer) obj;

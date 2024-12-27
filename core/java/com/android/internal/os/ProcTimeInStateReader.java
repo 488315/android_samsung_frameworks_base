@@ -39,7 +39,6 @@ public class ProcTimeInStateReader {
         return this.mFrequenciesKhz;
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:3:0x0014 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -17,7 +17,6 @@ public final class CustomizationProvider$query$$inlined$runBlocking$1 extends Su
     int label;
     final /* synthetic */ CustomizationProvider this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomizationProvider$query$$inlined$runBlocking$1(String str, Continuation continuation, CustomizationProvider customizationProvider, Uri uri) {
         super(2, continuation);
         this.$spanName = str;
@@ -37,12 +36,6 @@ public final class CustomizationProvider$query$$inlined$runBlocking$1 extends Su
         return ((CustomizationProvider$query$$inlined$runBlocking$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0119  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x011e  */
-    /* JADX WARN: Type inference failed for: r0v0, types: [java.lang.Object, kotlin.coroutines.intrinsics.CoroutineSingletons] */
-    /* JADX WARN: Type inference failed for: r0v2 */
-    /* JADX WARN: Type inference failed for: r11v2 */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

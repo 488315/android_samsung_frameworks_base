@@ -12,7 +12,6 @@ final class WifiRepositorySwitcher$activeRepo$1 extends SuspendLambda implements
     int label;
     final /* synthetic */ WifiRepositorySwitcher this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiRepositorySwitcher$activeRepo$1(WifiRepositorySwitcher wifiRepositorySwitcher, Continuation continuation) {
         super(2, continuation);
         this.this$0 = wifiRepositorySwitcher;

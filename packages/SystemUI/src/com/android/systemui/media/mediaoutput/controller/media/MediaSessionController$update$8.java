@@ -21,8 +21,6 @@ final class MediaSessionController$update$8 extends SuspendLambda implements Fun
     int label;
     final /* synthetic */ MediaSessionController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Multi-variable type inference failed */
     public MediaSessionController$update$8(MediaSessionController mediaSessionController, Ref$ObjectRef<MediaMetadata> ref$ObjectRef, Ref$ObjectRef<PlaybackState> ref$ObjectRef2, Pair<? extends ImageBitmap, ? extends ColorScheme> pair, Pair<? extends Painter, ? extends ColorScheme> pair2, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaSessionController;

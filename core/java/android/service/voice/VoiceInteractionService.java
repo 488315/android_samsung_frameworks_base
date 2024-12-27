@@ -214,7 +214,6 @@ public class VoiceInteractionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onDetectorRemoteException(final IBinder token, final int detectorType) {
         Log.d(
                 TAG,
@@ -318,7 +317,6 @@ public class VoiceInteractionService extends Service {
         this.mKeyphraseEnrollmentInfo = new KeyphraseEnrollmentInfo(getPackageManager());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$1() {
         Log.e(TAG, "system service binder died shutting down");
         Handler.getMain()
@@ -334,7 +332,6 @@ public class VoiceInteractionService extends Service {
                                 this));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onShutdownInternal() {
         onShutdown();
         safelyShutdownAllHotwordDetectors(true);
@@ -342,7 +339,6 @@ public class VoiceInteractionService extends Service {
 
     public void onShutdown() {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onSoundModelsChangedInternal() {
         synchronized (this) {
             this.mActiveDetectors.forEach(
@@ -363,7 +359,6 @@ public class VoiceInteractionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onHandleVoiceActionCheck(
             List<String> voiceActions, IVoiceActionCheckCallback callback) {
         if (callback != null) {
@@ -737,7 +732,6 @@ public class VoiceInteractionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$safelyShutdownAllHotwordDetectors$4(
             boolean shouldShutDownVisualQueryDetector, HotwordDetector detector) {
         try {
@@ -751,7 +745,6 @@ public class VoiceInteractionService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onHotwordDetectorDestroyed(HotwordDetector detector) {
         synchronized (this.mLock) {
             if (this.mActiveVisualQueryDetector != null

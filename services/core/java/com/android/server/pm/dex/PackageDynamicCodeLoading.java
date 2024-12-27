@@ -190,7 +190,6 @@ public final class PackageDynamicCodeLoading extends AbstractStatsBase {
                     + " com.android.server.pm.dex.PackageDynamicCodeLoading.read(java.io.InputStream):void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.server.pm.AbstractStatsBase
     public final void readInternal(WatchedArrayMap watchedArrayMap) {
         FileInputStream fileInputStream = null;

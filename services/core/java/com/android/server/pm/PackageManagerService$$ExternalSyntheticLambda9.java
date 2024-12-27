@@ -37,10 +37,6 @@ public final /* synthetic */ class PackageManagerService$$ExternalSyntheticLambd
         this.$r8$classId = i;
     }
 
-    /* JADX WARN: Type inference failed for: r11v10, types: [android.os.IBinder, com.android.server.pm.permission.LegacyPermissionManagerService] */
-    /* JADX WARN: Type inference failed for: r11v19, types: [com.android.server.pm.PackageManagerService$$ExternalSyntheticLambda68] */
-    /* JADX WARN: Type inference failed for: r1v11, types: [com.android.server.pm.PackageManagerService$$ExternalSyntheticLambda68] */
-    /* JADX WARN: Type inference failed for: r2v8, types: [com.android.server.pm.PackageManagerService$$ExternalSyntheticLambda68] */
     @Override // com.android.server.pm.PackageManagerServiceInjector.Producer
     public Object produce(PackageManagerService packageManagerService, PackageManagerServiceInjector packageManagerServiceInjector) {
         String[] stringArray;

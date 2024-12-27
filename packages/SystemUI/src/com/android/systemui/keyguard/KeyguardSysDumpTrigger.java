@@ -136,7 +136,6 @@ public final class KeyguardSysDumpTrigger {
         Toast.makeText(keyguardSysDumpTrigger.context, "dump in progress", 0).show();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void sendIssueReportIntent(final int i, final long j) {
         if (isEnabled()) {
             final int selectedUserId = this.selectedUserInteractor.getSelectedUserId(false);

@@ -9,7 +9,6 @@ public class SemSmartClipExtendedMetaTag extends SemSmartClipMetaTag implements 
             new Parcelable.Creator<
                     SemSmartClipExtendedMetaTag>() { // from class:
                                                      // com.samsung.android.content.smartclip.SemSmartClipExtendedMetaTag.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSmartClipExtendedMetaTag createFromParcel(Parcel in) {
                     Log.d(
@@ -20,7 +19,6 @@ public class SemSmartClipExtendedMetaTag extends SemSmartClipMetaTag implements 
                     return data;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSmartClipExtendedMetaTag[] newArray(int size) {
                     return new SemSmartClipExtendedMetaTag[size];

@@ -16,13 +16,11 @@ public final class VirtualStylusMotionEvent implements Parcelable {
     public static final Parcelable.Creator<VirtualStylusMotionEvent> CREATOR =
             new Parcelable.Creator<VirtualStylusMotionEvent>() { // from class:
                 // android.hardware.input.VirtualStylusMotionEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualStylusMotionEvent createFromParcel(Parcel source) {
                     return new VirtualStylusMotionEvent(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualStylusMotionEvent[] newArray(int size) {
                     return new VirtualStylusMotionEvent[size];

@@ -513,11 +513,6 @@ public final class AccessibilityController {
                     DisplayMagnifier.this.mService.scheduleAnimationLocked();
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:27:0x0055 A[Catch: all -> 0x002f, TryCatch #1 {all -> 0x002f, blocks: (B:4:0x000c, B:6:0x0016, B:8:0x001e, B:9:0x0032, B:13:0x0038, B:15:0x003c, B:19:0x0043, B:21:0x004a, B:27:0x0055, B:29:0x0064, B:30:0x006b, B:31:0x007f), top: B:3:0x000c }] */
-                /* JADX WARN: Removed duplicated region for block: B:35:0x00aa  */
-                /* JADX WARN: Removed duplicated region for block: B:48:0x00ac  */
-                /* JADX WARN: Removed duplicated region for block: B:49:0x0085 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-                /* JADX WARN: Removed duplicated region for block: B:56:0x007d  */
                 @Override // java.lang.Runnable
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -602,7 +597,6 @@ public final class AccessibilityController {
             public final /* synthetic */ int $r8$classId;
             public final /* synthetic */ Object this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public MyHandler(
                     WindowsForAccessibilityObserver windowsForAccessibilityObserver,
                     Looper looper) {
@@ -611,7 +605,6 @@ public final class AccessibilityController {
                 this.this$0 = windowsForAccessibilityObserver;
             }
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public /* synthetic */ MyHandler(Object obj, Looper looper, int i) {
                 super(looper);
                 this.$r8$classId = i;

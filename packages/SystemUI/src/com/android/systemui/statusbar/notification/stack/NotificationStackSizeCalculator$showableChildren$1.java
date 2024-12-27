@@ -7,7 +7,6 @@ import kotlin.jvm.internal.Lambda;
 final class NotificationStackSizeCalculator$showableChildren$1 extends Lambda implements Function1 {
     final /* synthetic */ NotificationStackSizeCalculator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationStackSizeCalculator$showableChildren$1(NotificationStackSizeCalculator notificationStackSizeCalculator) {
         super(1);
         this.this$0 = notificationStackSizeCalculator;

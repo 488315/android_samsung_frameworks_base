@@ -20,7 +20,6 @@ public final /* synthetic */ class InternetDialogDelegate$$ExternalSyntheticLamb
         this.f$0 = internetDialogDelegate;
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.qs.tiles.dialog.InternetDialogDelegate$$ExternalSyntheticLambda25] */
     @Override // android.view.View.OnClickListener
     public final void onClick(View view) {
         int i = this.$r8$classId;

@@ -349,14 +349,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v13, types: [android.os.Handler, com.android.keyguard.KeyguardUpdateMonitor$16] */
-    /* JADX WARN: Type inference failed for: r2v13, types: [com.android.keyguard.KeyguardUpdateMonitor$17] */
-    /* JADX WARN: Type inference failed for: r4v20, types: [com.android.keyguard.KeyguardUpdateMonitor$5] */
-    /* JADX WARN: Type inference failed for: r4v21, types: [com.android.keyguard.KeyguardUpdateMonitor$6] */
-    /* JADX WARN: Type inference failed for: r4v25, types: [com.android.keyguard.KeyguardUpdateMonitor$10] */
-    /* JADX WARN: Type inference failed for: r4v26, types: [com.android.keyguard.KeyguardUpdateMonitor$11] */
-    /* JADX WARN: Type inference failed for: r4v28, types: [com.android.keyguard.KeyguardUpdateMonitor$13] */
-    /* JADX WARN: Type inference failed for: r4v34, types: [com.android.keyguard.KeyguardUpdateMonitor$23] */
     public KeyguardUpdateMonitor(FaceManager faceManager, Context context, UserTracker userTracker, Looper looper, BroadcastDispatcher broadcastDispatcher, DumpManager dumpManager, Executor executor, Executor executor2, StatusBarStateController statusBarStateController, LockPatternUtils lockPatternUtils, AuthController authController, TelephonyListenerManager telephonyListenerManager, InteractionJankMonitor interactionJankMonitor, LatencyTracker latencyTracker, ActiveUnlockConfig activeUnlockConfig, KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger, UiEventLogger uiEventLogger, Provider provider, TrustManager trustManager, SubscriptionManager subscriptionManager, UserManager userManager, IDreamManager iDreamManager, DevicePolicyManager devicePolicyManager, SensorPrivacyManager sensorPrivacyManager, TelephonyManager telephonyManager, PackageManager packageManager, FingerprintManager fingerprintManager, BiometricManager biometricManager, FaceWakeUpTriggersConfig faceWakeUpTriggersConfig, CarrierConfigManager carrierConfigManager, DevicePostureController devicePostureController, Optional<Object> optional, TaskStackChangeListeners taskStackChangeListeners, SelectedUserInteractor selectedUserInteractor, IActivityTaskManager iActivityTaskManager) {
         StatusBarStateController.StateListener stateListener = new StatusBarStateController.StateListener() { // from class: com.android.keyguard.KeyguardUpdateMonitor.1
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
@@ -1651,11 +1643,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00a2  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00d8  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00b1  */
-    /* JADX WARN: Type inference failed for: r0v18, types: [com.android.keyguard.KeyguardUpdateMonitor$$ExternalSyntheticLambda9] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2520,7 +2507,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         return z;
     }
 
-    /* JADX WARN: Type inference failed for: r0v31, types: [com.android.keyguard.KeyguardUpdateMonitor$22] */
     @Override // com.android.systemui.CoreStartable
     public final void start() {
         if (!this.mDeviceProvisioned) {

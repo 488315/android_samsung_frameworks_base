@@ -434,9 +434,6 @@ public abstract class RescueParty {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x001d  */
-    /* JADX WARN: Removed duplicated region for block: B:4:0x0010  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0012  */
     /* renamed from: -$$Nest$smmapRescueLevelToUserImpact, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -564,9 +561,6 @@ public abstract class RescueParty {
     	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
     	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
     */
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x00f9  */
-    /* JADX WARN: Removed duplicated region for block: B:65:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

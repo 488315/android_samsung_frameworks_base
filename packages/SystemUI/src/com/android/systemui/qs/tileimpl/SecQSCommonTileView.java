@@ -144,15 +144,6 @@ public final class SecQSCommonTileView {
         return this.labelContainer;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00fc  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0173  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x01b1  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x01bd  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x0191  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x01aa  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x0184  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -201,7 +192,6 @@ public final class SecQSCommonTileView {
         }
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

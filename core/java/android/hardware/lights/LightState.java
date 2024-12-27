@@ -8,13 +8,11 @@ public final class LightState implements Parcelable {
     public static final Parcelable.Creator<LightState> CREATOR =
             new Parcelable.Creator<
                     LightState>() { // from class: android.hardware.lights.LightState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LightState createFromParcel(Parcel in) {
                     return new LightState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LightState[] newArray(int size) {
                     return new LightState[size];

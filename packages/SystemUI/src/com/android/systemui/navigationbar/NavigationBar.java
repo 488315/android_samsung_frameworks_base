@@ -371,18 +371,6 @@ public final class NavigationBar extends ViewController implements CommandQueue.
         return navigationBar.mSamplingBounds;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v6, types: [com.android.systemui.navigationbar.NavigationBar$$ExternalSyntheticLambda16] */
-    /* JADX WARN: Type inference failed for: r6v1, types: [com.android.systemui.navigationbar.NavigationBar$8] */
-    /* JADX WARN: Type inference failed for: r6v2, types: [com.android.systemui.navigationbar.NavigationBar$9] */
-    /* JADX WARN: Type inference failed for: r6v4, types: [com.android.systemui.navigationbar.NavigationBar$12, com.android.systemui.navigationbar.NavigationModeController$ModeChangedListener] */
-    /* JADX WARN: Type inference failed for: r8v10, types: [com.android.systemui.navigationbar.NavigationBar$5] */
-    /* JADX WARN: Type inference failed for: r8v12, types: [com.android.systemui.navigationbar.NavigationBar$7] */
-    /* JADX WARN: Type inference failed for: r8v13, types: [com.android.systemui.navigationbar.NavigationBar$13] */
-    /* JADX WARN: Type inference failed for: r8v3, types: [com.android.systemui.navigationbar.NavigationBar$1] */
-    /* JADX WARN: Type inference failed for: r8v4, types: [com.android.systemui.navigationbar.NavigationBar$2] */
-    /* JADX WARN: Type inference failed for: r8v5, types: [com.android.systemui.navigationbar.NavigationBar$3] */
-    /* JADX WARN: Type inference failed for: r8v6, types: [com.android.systemui.navigationbar.NavigationBar$4] */
     public NavigationBar(NavigationBarView navigationBarView, NavigationBarFrame navigationBarFrame, Bundle bundle, Context context, WindowManager windowManager, Lazy lazy, AccessibilityManager accessibilityManager, DeviceProvisionedController deviceProvisionedController, MetricsLogger metricsLogger, OverviewProxyService overviewProxyService, NavigationModeController navigationModeController, StatusBarStateController statusBarStateController, StatusBarKeyguardViewManager statusBarKeyguardViewManager, SysUiState sysUiState, UserTracker userTracker, CommandQueue commandQueue, Optional<Pip> optional, Optional<Recents> optional2, Lazy lazy2, KeyguardStateController keyguardStateController, ShadeViewController shadeViewController, PanelExpansionInteractor panelExpansionInteractor, NotificationRemoteInputManager notificationRemoteInputManager, NotificationShadeDepthController notificationShadeDepthController, Handler handler, Executor executor, Executor executor2, UiEventLogger uiEventLogger, NavBarHelper navBarHelper, LightBarController lightBarController, LightBarController.Factory factory, AutoHideController autoHideController, AutoHideController.Factory factory2, Optional<TelecomManager> optional3, InputMethodManager inputMethodManager, DeadZone deadZone, DeviceConfigProxy deviceConfigProxy, NavigationBarTransitions navigationBarTransitions, Optional<BackAnimationController.BackAnimationImpl> optional4, UserContextProvider userContextProvider, WakefulnessLifecycle wakefulnessLifecycle, TaskStackChangeListeners taskStackChangeListeners, DisplayTracker displayTracker, NavBarButtonClickLogger navBarButtonClickLogger, NavbarOrientationTrackingLogger navbarOrientationTrackingLogger, LogWrapper logWrapper) {
         super(navigationBarView);
         this.mNavigationBarWindowState = 0;
@@ -1061,14 +1049,6 @@ public final class NavigationBar extends ViewController implements CommandQueue.
         return barLayoutParamsForRotation;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00e6  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x02cb  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x02e9  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x02d5  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x01f7  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0085  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x009a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1141,7 +1121,6 @@ public final class NavigationBar extends ViewController implements CommandQueue.
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.systemui.navigationbar.NavigationBar$$ExternalSyntheticLambda19] */
     public final void initSecondaryHomeHandleForRotation() {
         if (this.mNavBarMode != 2) {
             return;
@@ -1523,9 +1502,6 @@ public final class NavigationBar extends ViewController implements CommandQueue.
     
         if (r18 != 3) goto L117;
      */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x019f A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x01c0  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x01c3  */
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1799,9 +1775,6 @@ public final class NavigationBar extends ViewController implements CommandQueue.
         lightBarController.mObserver.mList.remove(((NavigationBarView) this.mView).mBarTransitions.mLightTransitionsController);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00bb  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00d3  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00be  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -15,7 +15,6 @@ final class CameraAutoRotateRepositoryImpl$isCameraAutoRotateSettingEnabled$1$2 
     int label;
     final /* synthetic */ CameraAutoRotateRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CameraAutoRotateRepositoryImpl$isCameraAutoRotateSettingEnabled$1$2(CameraAutoRotateRepositoryImpl cameraAutoRotateRepositoryImpl, UserHandle userHandle, Continuation continuation) {
         super(2, continuation);
         this.this$0 = cameraAutoRotateRepositoryImpl;

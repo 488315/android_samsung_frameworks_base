@@ -102,13 +102,6 @@ public class UCMAuthCredentialPasswordView extends UCMAuthCredentialView
 
            if (r0.trim().length() > 0) goto L41;
         */
-        /* JADX WARN: Removed duplicated region for block: B:103:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:54:0x00e7  */
-        /* JADX WARN: Removed duplicated region for block: B:55:0x00f5  */
-        /* JADX WARN: Removed duplicated region for block: B:64:0x0288  */
-        /* JADX WARN: Removed duplicated region for block: B:70:0x02a0  */
-        /* JADX WARN: Removed duplicated region for block: B:79:0x02e7  */
-        /* JADX WARN: Removed duplicated region for block: B:81:? A[RETURN, SYNTHETIC] */
         @Override // android.os.AsyncTask
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -138,9 +131,6 @@ public class UCMAuthCredentialPasswordView extends UCMAuthCredentialView
                                     Integer.valueOf(i));
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:41:0x0067  */
-        /* JADX WARN: Removed duplicated region for block: B:43:0x007a  */
-        /* JADX WARN: Removed duplicated region for block: B:45:? A[RETURN, SYNTHETIC] */
         @Override // android.os.AsyncTask
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -384,7 +374,6 @@ public class UCMAuthCredentialPasswordView extends UCMAuthCredentialView
                         ((LinearLayout) this).mContext.getSystemService(InputMethodManager.class);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public IUcmService getUCMService() {
         IUcmService asInterface =
                 IUcmService.Stub.asInterface(
@@ -395,13 +384,6 @@ public class UCMAuthCredentialPasswordView extends UCMAuthCredentialView
         return asInterface;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x006b A[Catch: Exception -> 0x004a, TryCatch #0 {Exception -> 0x004a, blocks: (B:10:0x001a, B:13:0x0023, B:15:0x002d, B:18:0x0034, B:20:0x0038, B:21:0x0056, B:23:0x0060, B:26:0x0067, B:28:0x006b, B:29:0x0086, B:31:0x0090, B:34:0x0097, B:36:0x009b, B:39:0x00ad, B:41:0x00b1, B:44:0x007d, B:46:0x0081, B:47:0x004d, B:49:0x0051), top: B:9:0x001a }] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0090 A[Catch: Exception -> 0x004a, TryCatch #0 {Exception -> 0x004a, blocks: (B:10:0x001a, B:13:0x0023, B:15:0x002d, B:18:0x0034, B:20:0x0038, B:21:0x0056, B:23:0x0060, B:26:0x0067, B:28:0x006b, B:29:0x0086, B:31:0x0090, B:34:0x0097, B:36:0x009b, B:39:0x00ad, B:41:0x00b1, B:44:0x007d, B:46:0x0081, B:47:0x004d, B:49:0x0051), top: B:9:0x001a }] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x009b A[Catch: Exception -> 0x004a, TryCatch #0 {Exception -> 0x004a, blocks: (B:10:0x001a, B:13:0x0023, B:15:0x002d, B:18:0x0034, B:20:0x0038, B:21:0x0056, B:23:0x0060, B:26:0x0067, B:28:0x006b, B:29:0x0086, B:31:0x0090, B:34:0x0097, B:36:0x009b, B:39:0x00ad, B:41:0x00b1, B:44:0x007d, B:46:0x0081, B:47:0x004d, B:49:0x0051), top: B:9:0x001a }] */
-    /* JADX WARN: Removed duplicated region for block: B:38:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00b1 A[Catch: Exception -> 0x004a, TRY_LEAVE, TryCatch #0 {Exception -> 0x004a, blocks: (B:10:0x001a, B:13:0x0023, B:15:0x002d, B:18:0x0034, B:20:0x0038, B:21:0x0056, B:23:0x0060, B:26:0x0067, B:28:0x006b, B:29:0x0086, B:31:0x0090, B:34:0x0097, B:36:0x009b, B:39:0x00ad, B:41:0x00b1, B:44:0x007d, B:46:0x0081, B:47:0x004d, B:49:0x0051), top: B:9:0x001a }] */
-    /* JADX WARN: Removed duplicated region for block: B:43:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0081 A[Catch: Exception -> 0x004a, TryCatch #0 {Exception -> 0x004a, blocks: (B:10:0x001a, B:13:0x0023, B:15:0x002d, B:18:0x0034, B:20:0x0038, B:21:0x0056, B:23:0x0060, B:26:0x0067, B:28:0x006b, B:29:0x0086, B:31:0x0090, B:34:0x0097, B:36:0x009b, B:39:0x00ad, B:41:0x00b1, B:44:0x007d, B:46:0x0081, B:47:0x004d, B:49:0x0051), top: B:9:0x001a }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -544,7 +526,6 @@ public class UCMAuthCredentialPasswordView extends UCMAuthCredentialView
         new UCMAsyncTask(mCsNameUri, 1).execute("");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.widget.TextView.OnEditorActionListener
     public final boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
         String[] strArr;

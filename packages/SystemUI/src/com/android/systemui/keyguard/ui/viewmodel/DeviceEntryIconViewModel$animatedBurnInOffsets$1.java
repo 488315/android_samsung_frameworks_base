@@ -13,7 +13,6 @@ final class DeviceEntryIconViewModel$animatedBurnInOffsets$1 extends SuspendLamb
     int label;
     final /* synthetic */ DeviceEntryIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryIconViewModel$animatedBurnInOffsets$1(DeviceEntryIconViewModel deviceEntryIconViewModel, Continuation continuation) {
         super(3, continuation);
         this.this$0 = deviceEntryIconViewModel;

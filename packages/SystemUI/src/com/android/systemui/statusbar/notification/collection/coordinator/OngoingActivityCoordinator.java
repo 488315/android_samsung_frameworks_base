@@ -45,7 +45,6 @@ public final class OngoingActivityCoordinator implements Coordinator {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.notification.collection.coordinator.OngoingActivityCoordinator$ongoingActivitySectioner$1] */
     public OngoingActivityCoordinator(Context context, NotifTimeSortCoordnator notifTimeSortCoordnator, NodeController nodeController) {
         this.context = context;
         this.timeSortCoordnator = notifTimeSortCoordnator;

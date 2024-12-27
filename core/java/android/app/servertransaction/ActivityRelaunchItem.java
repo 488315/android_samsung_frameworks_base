@@ -21,13 +21,11 @@ public class ActivityRelaunchItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<ActivityRelaunchItem> CREATOR =
             new Parcelable.Creator<ActivityRelaunchItem>() { // from class:
                 // android.app.servertransaction.ActivityRelaunchItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityRelaunchItem createFromParcel(Parcel in) {
                     return new ActivityRelaunchItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityRelaunchItem[] newArray(int size) {
                     return new ActivityRelaunchItem[size];

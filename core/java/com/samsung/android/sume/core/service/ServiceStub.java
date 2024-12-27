@@ -87,7 +87,6 @@ public abstract class ServiceStub extends Service
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:16:0x007a, code lost:
 
        return r0;

@@ -429,7 +429,6 @@ public abstract class OnDeviceIntelligenceService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public OutcomeReceiver<Feature, OnDeviceIntelligenceException> wrapFeatureCallback(
             final IFeatureCallback featureCallback) {
         return new OutcomeReceiver<
@@ -459,7 +458,6 @@ public abstract class OnDeviceIntelligenceService extends Service {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public OutcomeReceiver<List<Feature>, OnDeviceIntelligenceException> wrapListFeaturesCallback(
             final IListFeaturesCallback listFeaturesCallback) {
         return new OutcomeReceiver<
@@ -489,7 +487,6 @@ public abstract class OnDeviceIntelligenceService extends Service {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public OutcomeReceiver<FeatureDetails, OnDeviceIntelligenceException>
             wrapFeatureDetailsCallback(final IFeatureDetailsCallback featureStatusCallback) {
         return new OutcomeReceiver<
@@ -519,7 +516,6 @@ public abstract class OnDeviceIntelligenceService extends Service {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public DownloadCallback wrapDownloadCallback(final IDownloadCallback downloadCallback) {
         return new DownloadCallback() { // from class:
                                         // android.service.ondeviceintelligence.OnDeviceIntelligenceService.6
@@ -562,7 +558,6 @@ public abstract class OnDeviceIntelligenceService extends Service {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void tryClosePfds(Collection<ParcelFileDescriptor> pfds) {
         pfds.forEach(
                 new Consumer() { // from class:
@@ -583,7 +578,6 @@ public abstract class OnDeviceIntelligenceService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onGetReadOnlyFileDescriptor(
             final String fileName, final AndroidFuture<ParcelFileDescriptor> future) {
         Slog.v(TAG, "onGetReadOnlyFileDescriptor " + fileName);
@@ -599,7 +593,6 @@ public abstract class OnDeviceIntelligenceService extends Service {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onGetReadOnlyFileDescriptor$1(
             String fileName, AndroidFuture future) throws Exception {
         Slog.v(TAG, "onGetReadOnlyFileDescriptor: " + fileName + " under internal app storage.");

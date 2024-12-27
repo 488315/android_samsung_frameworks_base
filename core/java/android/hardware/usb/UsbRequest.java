@@ -140,7 +140,6 @@ public class UsbRequest {
         return connection.queueRequest(this, buffer);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x006e A[Catch: all -> 0x00ad, TryCatch #0 {, blocks: (B:14:0x0032, B:16:0x0037, B:17:0x00a3, B:23:0x003e, B:25:0x004c, B:26:0x0057, B:31:0x0063, B:33:0x006e, B:35:0x007c, B:36:0x0092, B:37:0x0095), top: B:13:0x0032 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -505,7 +505,6 @@ public final class NotificationUsageStats {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [android.os.Handler, com.android.server.notification.NotificationUsageStats$1] */
     public NotificationUsageStats(Context context) {
         this.mContext = context;
         ?? r0 = new Handler(context.getMainLooper()) { // from class: com.android.server.notification.NotificationUsageStats.1

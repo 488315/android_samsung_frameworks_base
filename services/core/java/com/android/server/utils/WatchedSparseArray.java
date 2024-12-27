@@ -7,7 +7,6 @@ public final class WatchedSparseArray extends WatchableImpl implements Snappable
     public final SparseArray mStorage;
     public volatile boolean mWatching;
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedSparseArray$1] */
     public WatchedSparseArray() {
         this.mWatching = false;
         this.mObserver =
@@ -20,7 +19,6 @@ public final class WatchedSparseArray extends WatchableImpl implements Snappable
         this.mStorage = new SparseArray();
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedSparseArray$1] */
     public WatchedSparseArray(int i) {
         this.mWatching = false;
         this.mObserver =
@@ -33,7 +31,6 @@ public final class WatchedSparseArray extends WatchableImpl implements Snappable
         this.mStorage = new SparseArray(i);
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedSparseArray$1] */
     public WatchedSparseArray(WatchedSparseArray watchedSparseArray) {
         this.mWatching = false;
         this.mObserver =

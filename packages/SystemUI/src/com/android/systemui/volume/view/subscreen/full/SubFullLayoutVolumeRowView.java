@@ -109,7 +109,6 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeRowView$recheckCallback$1] */
     public SubFullLayoutVolumeRowView(Context context) {
         super(context);
         this.storeInteractor = new StoreInteractor(this, null);
@@ -221,27 +220,6 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
         return super.dispatchTouchEvent(motionEvent);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x0367  */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x0375  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x039d  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x042f  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x043e  */
-    /* JADX WARN: Removed duplicated region for block: B:133:0x03e3  */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x038a  */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x0336  */
-    /* JADX WARN: Removed duplicated region for block: B:150:0x02ff  */
-    /* JADX WARN: Removed duplicated region for block: B:157:0x00fc  */
-    /* JADX WARN: Removed duplicated region for block: B:158:0x0102 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00aa  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00b6  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00c2  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00ce  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x01a7  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x022b  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0236  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0261  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x02bb  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0327  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -551,7 +529,6 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeRowView$recheckCallback$1] */
     public SubFullLayoutVolumeRowView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.storeInteractor = new StoreInteractor(this, null);

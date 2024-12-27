@@ -10,7 +10,6 @@ public class WindowAnimationState implements Parcelable {
     public static final Parcelable.Creator<WindowAnimationState> CREATOR =
             new Parcelable.Creator<
                     WindowAnimationState>() { // from class: android.window.WindowAnimationState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowAnimationState createFromParcel(Parcel _aidl_source) {
                     WindowAnimationState _aidl_out = new WindowAnimationState();
@@ -18,7 +17,6 @@ public class WindowAnimationState implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowAnimationState[] newArray(int _aidl_size) {
                     return new WindowAnimationState[_aidl_size];

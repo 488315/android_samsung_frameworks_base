@@ -21,7 +21,6 @@ import java.util.Objects;
 public final class SaveInfo implements Parcelable {
     public static final Parcelable.Creator<SaveInfo> CREATOR =
             new Parcelable.Creator<SaveInfo>() { // from class: android.service.autofill.SaveInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SaveInfo createFromParcel(Parcel parcel) {
                     Builder builder;
@@ -84,7 +83,6 @@ public final class SaveInfo implements Parcelable {
                     return builder.build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SaveInfo[] newArray(int size) {
                     return new SaveInfo[size];

@@ -15,7 +15,6 @@ final class VolumePanelViewModel$volumePanelState$1 extends SuspendLambda implem
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public VolumePanelViewModel$volumePanelState$1(Resources resources, Continuation continuation) {
         super(2, continuation);
         this.$resources = resources;

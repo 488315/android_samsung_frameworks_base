@@ -21,10 +21,6 @@ public final class ClockImageCreator implements ImageCreator {
         this.mCoverScreenManager = LsRune.COVER_SUPPORTED ? (CoverScreenManager) Dependency.sDependency.getDependencyInner(CoverScreenManager.class) : null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:128:0x00d6  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x00de  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x006c  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0074  */
     @Override // com.android.systemui.keyguardimage.ImageCreator
     /*
         Code decompiled incorrectly, please refer to instructions dump.

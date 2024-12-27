@@ -20,7 +20,6 @@ final class KeyguardTransitionBootInteractor$start$1 extends SuspendLambda imple
     int label;
     final /* synthetic */ KeyguardTransitionBootInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardTransitionBootInteractor$start$1(KeyguardTransitionBootInteractor keyguardTransitionBootInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardTransitionBootInteractor;

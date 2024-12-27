@@ -8,13 +8,11 @@ public class CompatChangeablePackageInfo implements Parcelable {
             new Parcelable.Creator<
                     CompatChangeablePackageInfo>() { // from class:
                                                      // com.samsung.android.core.CompatChangeablePackageInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompatChangeablePackageInfo createFromParcel(Parcel in) {
                     return new CompatChangeablePackageInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompatChangeablePackageInfo[] newArray(int size) {
                     return new CompatChangeablePackageInfo[size];

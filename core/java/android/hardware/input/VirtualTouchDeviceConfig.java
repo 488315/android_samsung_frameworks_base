@@ -27,7 +27,6 @@ abstract class VirtualTouchDeviceConfig extends VirtualInputDeviceConfig {
         return this.mHeight;
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // android.hardware.input.VirtualInputDeviceConfig, android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);

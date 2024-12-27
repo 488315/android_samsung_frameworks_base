@@ -25,7 +25,6 @@ public class MessageRouterImpl implements MessageRouter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: onMessage, reason: merged with bridge method [inline-methods] */
     public void lambda$sendMessageDelayed$0(int i) {
         synchronized (this.mSimpleMessageListenerMap) {
@@ -169,7 +168,6 @@ public class MessageRouterImpl implements MessageRouter {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: onMessage, reason: merged with bridge method [inline-methods] */
     public void lambda$sendMessageDelayed$1(Object obj) {
         synchronized (this.mDataMessageListenerMap) {

@@ -113,7 +113,6 @@ public final class KeyguardTransitionAnimationFlow {
         public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 immediatelyTransitionTo(final float f) {
             Duration.Companion companion = Duration.Companion;
             return m1962sharedFlow74qcysc$default(this, DurationKt.toDuration(1, DurationUnit.MILLISECONDS), new Function1() { // from class: com.android.systemui.keyguard.ui.KeyguardTransitionAnimationFlow$FlowBuilder$immediatelyTransitionTo$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -124,7 +123,6 @@ public final class KeyguardTransitionAnimationFlow {
                     return Float.valueOf(f);
                 }
             }, 0L, null, null, new Function0() { // from class: com.android.systemui.keyguard.ui.KeyguardTransitionAnimationFlow$FlowBuilder$immediatelyTransitionTo$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -216,8 +214,6 @@ public final class KeyguardTransitionAnimationFlow {
                         this.$name$inlined = str;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

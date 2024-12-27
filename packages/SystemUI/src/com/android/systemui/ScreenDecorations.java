@@ -282,7 +282,6 @@ public final class ScreenDecorations implements ConfigurationController.Configur
             invalidate();
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:44:0x008a  */
         @Override // com.android.systemui.DisplayCutoutBaseView
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -841,10 +840,6 @@ public final class ScreenDecorations implements ConfigurationController.Configur
     
         if (r10 != 1) goto L122;
      */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x0280  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x02b8  */
-    /* JADX WARN: Removed duplicated region for block: B:111:0x02bc  */
-    /* JADX WARN: Type inference failed for: r0v33, types: [com.android.systemui.ScreenDecorations$6] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -861,9 +856,6 @@ public final class ScreenDecorations implements ConfigurationController.Configur
         return this.mDebug ? this.mHwcScreenDecorationSupport != null ? this.mDebugCutoutFactory.getHasProviders() || this.mDebugCutoutFactory.isCameraProtectionEnabled : this.mDebugCutoutFactory.getHasProviders() : this.mCutoutFactory.getHasProviders();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0027  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0043  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x004c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

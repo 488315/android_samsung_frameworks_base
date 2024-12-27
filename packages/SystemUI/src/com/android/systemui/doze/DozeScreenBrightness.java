@@ -136,7 +136,6 @@ public class DozeScreenBrightness extends BroadcastReceiver implements DozeMachi
         SystemProperties.getBoolean("debug.aod_brightness", false);
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.doze.DozeScreenBrightness$1] */
     public DozeScreenBrightness(Context context, DozeMachine.Service service, AsyncSensorManager asyncSensorManager, Optional<Sensor>[] optionalArr, DozeHost dozeHost, Handler handler, AlwaysOnDisplayPolicy alwaysOnDisplayPolicy, WakefulnessLifecycle wakefulnessLifecycle, DozeParameters dozeParameters, DevicePostureController devicePostureController, DozeLog dozeLog, SystemSettings systemSettings) {
         this.mDozeService = service;
         this.mSensorManager = asyncSensorManager;
@@ -336,13 +335,6 @@ public class DozeScreenBrightness extends BroadcastReceiver implements DozeMachi
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0021  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0026  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0062  */
-    /* JADX WARN: Removed duplicated region for block: B:30:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0054  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0023  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

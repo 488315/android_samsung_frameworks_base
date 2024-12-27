@@ -21,7 +21,6 @@ final class CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUs
     int label;
     final /* synthetic */ CustomTilePackageUpdatesRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUser$1(CustomTilePackageUpdatesRepositoryImpl customTilePackageUpdatesRepositoryImpl, UserHandle userHandle, Continuation continuation) {
         super(2, continuation);
         this.this$0 = customTilePackageUpdatesRepositoryImpl;
@@ -40,8 +39,6 @@ final class CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUs
         return ((CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUser$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.content.BroadcastReceiver, com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUser$1$receiver$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -62,7 +59,6 @@ final class CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUs
             context.registerReceiverAsUser(r1, userHandle, CustomTilePackageUpdatesRepositoryImpl.INTENT_FILTER, null, null);
             final CustomTilePackageUpdatesRepositoryImpl customTilePackageUpdatesRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUser$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

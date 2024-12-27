@@ -9,7 +9,6 @@ public class ElapsedRealtime implements Parcelable {
     public static final Parcelable.Creator<ElapsedRealtime> CREATOR =
             new Parcelable.Creator<
                     ElapsedRealtime>() { // from class: android.hardware.gnss.ElapsedRealtime.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ElapsedRealtime createFromParcel(Parcel _aidl_source) {
                     ElapsedRealtime _aidl_out = new ElapsedRealtime();
@@ -17,7 +16,6 @@ public class ElapsedRealtime implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ElapsedRealtime[] newArray(int _aidl_size) {
                     return new ElapsedRealtime[_aidl_size];

@@ -104,7 +104,6 @@ public final class UsbAlsaManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.usb.UsbAlsaManager$1] */
     public UsbAlsaManager(Context context) {
         this.mContext = context;
         this.mHasMidiFeature =

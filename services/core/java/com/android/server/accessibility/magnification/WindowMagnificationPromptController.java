@@ -74,8 +74,6 @@ public final class WindowMagnificationPromptController {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v3, types: [android.database.ContentObserver, com.android.server.accessibility.magnification.WindowMagnificationPromptController$1] */
     public WindowMagnificationPromptController(Context context, int i) {
         this.mContext = context;
         this.mNotificationManager = (NotificationManager) context.getSystemService(NotificationManager.class);

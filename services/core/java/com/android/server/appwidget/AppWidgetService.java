@@ -71,8 +71,6 @@ public final class AppWidgetService extends SystemService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [android.app.admin.DevicePolicyManagerInternal$OnCrossProfileWidgetProvidersChangeListener, android.os.IBinder, com.android.server.WidgetBackupProvider, com.android.server.appwidget.AppWidgetServiceImpl] */
     @Override // com.android.server.SystemService
     public final void onStart() {
         final ?? r0 = this.mImpl;

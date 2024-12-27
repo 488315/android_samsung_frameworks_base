@@ -8,13 +8,11 @@ import java.util.Objects;
 public final class NrQos extends Qos implements Parcelable {
     public static final Parcelable.Creator<NrQos> CREATOR =
             new Parcelable.Creator<NrQos>() { // from class: android.telephony.data.NrQos.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NrQos createFromParcel(Parcel source) {
                     return new NrQos(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NrQos[] newArray(int size) {
                     return new NrQos[size];

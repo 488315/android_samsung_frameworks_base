@@ -9,13 +9,11 @@ import java.util.List;
 public final class LeaseInfo implements Parcelable {
     public static final Parcelable.Creator<LeaseInfo> CREATOR =
             new Parcelable.Creator<LeaseInfo>() { // from class: android.app.blob.LeaseInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LeaseInfo createFromParcel(Parcel source) {
                     return new LeaseInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LeaseInfo[] newArray(int size) {
                     return new LeaseInfo[size];

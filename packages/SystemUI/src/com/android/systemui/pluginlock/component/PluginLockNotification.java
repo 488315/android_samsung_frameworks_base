@@ -55,7 +55,6 @@ public class PluginLockNotification extends AbstractPluginLockItem {
         return i;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(Uri uri) {
         Log.d(TAG, "onChange() uri: " + uri);
         if (uri != null) {

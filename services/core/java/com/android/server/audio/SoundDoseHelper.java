@@ -644,7 +644,6 @@ public final class SoundDoseHelper {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00eb A[Catch: all -> 0x0089, TryCatch #2 {all -> 0x0089, blocks: (B:28:0x0077, B:30:0x007f, B:31:0x008b, B:33:0x009b, B:35:0x00ba, B:38:0x00c1, B:40:0x00eb, B:42:0x00f3), top: B:27:0x0077 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

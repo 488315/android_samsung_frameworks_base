@@ -151,10 +151,6 @@ public class SemAddDeleteListAnimator extends SemAbsAddDeleteAnimator {
         this.mDeleteRunnable =
                 new Runnable() { // from class:
                     // com.samsung.android.animation.SemAddDeleteListAnimator.3
-                    /* JADX WARN: Removed duplicated region for block: B:44:0x01c8  */
-                    /* JADX WARN: Removed duplicated region for block: B:47:0x0235  */
-                    /* JADX WARN: Removed duplicated region for block: B:50:0x023d A[SYNTHETIC] */
-                    /* JADX WARN: Removed duplicated region for block: B:51:0x0205  */
                     @Override // java.lang.Runnable
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -228,7 +224,6 @@ public class SemAddDeleteListAnimator extends SemAbsAddDeleteAnimator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getChildMaxHeight() {
         int height;
         int childCount = this.mListView.getChildCount();

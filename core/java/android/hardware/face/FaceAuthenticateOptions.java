@@ -29,13 +29,11 @@ public class FaceAuthenticateOptions implements AuthenticateOptions, Parcelable 
     public static final Parcelable.Creator<FaceAuthenticateOptions> CREATOR =
             new Parcelable.Creator<FaceAuthenticateOptions>() { // from class:
                 // android.hardware.face.FaceAuthenticateOptions.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceAuthenticateOptions[] newArray(int size) {
                     return new FaceAuthenticateOptions[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceAuthenticateOptions createFromParcel(Parcel in) {
                     return new FaceAuthenticateOptions(in);
@@ -53,37 +51,30 @@ public class FaceAuthenticateOptions implements AuthenticateOptions, Parcelable 
     @Retention(RetentionPolicy.SOURCE)
     public @interface AuthenticateReason {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultUserId() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultSensorId() {
         return -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultDisplayState() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultAuthenticateReason() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultWakeReason() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String defaultOpPackageName() {
         return "";
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String defaultAttributionTag() {
         return null;
     }

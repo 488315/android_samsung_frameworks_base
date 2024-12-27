@@ -22,13 +22,11 @@ public final class SystemUpdateInfo implements Parcelable {
     public static final Parcelable.Creator<SystemUpdateInfo> CREATOR =
             new Parcelable.Creator<
                     SystemUpdateInfo>() { // from class: android.app.admin.SystemUpdateInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SystemUpdateInfo createFromParcel(Parcel in) {
                     return new SystemUpdateInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SystemUpdateInfo[] newArray(int size) {
                     return new SystemUpdateInfo[size];

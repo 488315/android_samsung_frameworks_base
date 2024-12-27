@@ -16,13 +16,11 @@ public class WindowStateInsetsControlChangeItem extends WindowStateTransactionIt
     public static final Parcelable.Creator<WindowStateInsetsControlChangeItem> CREATOR =
             new Parcelable.Creator<WindowStateInsetsControlChangeItem>() { // from class:
                 // android.app.servertransaction.WindowStateInsetsControlChangeItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowStateInsetsControlChangeItem createFromParcel(Parcel in) {
                     return new WindowStateInsetsControlChangeItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowStateInsetsControlChangeItem[] newArray(int size) {
                     return new WindowStateInsetsControlChangeItem[size];

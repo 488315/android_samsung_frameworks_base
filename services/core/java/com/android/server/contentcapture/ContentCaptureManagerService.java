@@ -283,7 +283,6 @@ public final class ContentCaptureManagerService extends AbstractMasterSystemServ
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0034  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -379,7 +378,6 @@ public final class ContentCaptureManagerService extends AbstractMasterSystemServ
                     });
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,
@@ -675,7 +673,6 @@ public final class ContentCaptureManagerService extends AbstractMasterSystemServ
                 this.mParentService.mDataShareExecutor.execute(
                         new Runnable() { // from class:
                             // com.android.server.contentcapture.ContentCaptureManagerService$DataShareCallbackDelegate$$ExternalSyntheticLambda0
-                            /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:121:0x0068 -> B:34:0x00f0). Please report as a decompilation issue!!! */
                             @Override // java.lang.Runnable
                             public final void run() {
                                 ParcelFileDescriptor.AutoCloseInputStream autoCloseInputStream;
@@ -1095,7 +1092,6 @@ public final class ContentCaptureManagerService extends AbstractMasterSystemServ
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:46:0x00f7 A[Catch: all -> 0x0111, TryCatch #0 {all -> 0x0111, blocks: (B:38:0x00ab, B:44:0x00c6, B:46:0x00f7, B:47:0x0113), top: B:37:0x00ab }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1124,8 +1120,6 @@ public final class ContentCaptureManagerService extends AbstractMasterSystemServ
 
            if (r5 != 2) goto L27;
         */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x0071  */
-        /* JADX WARN: Removed duplicated region for block: B:45:0x0082 A[ORIG_RETURN, RETURN] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1826,8 +1820,6 @@ public final class ContentCaptureManagerService extends AbstractMasterSystemServ
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00a4  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00a7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

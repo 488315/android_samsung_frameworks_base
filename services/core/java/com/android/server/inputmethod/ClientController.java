@@ -24,8 +24,6 @@ public final class ClientController {
         this.mPackageManagerInternal = packageManagerInternal;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v0, types: [android.os.IBinder$DeathRecipient, com.android.server.inputmethod.ClientController$$ExternalSyntheticLambda0] */
     public final void addClient(final IInputMethodClientInvoker iInputMethodClientInvoker, IRemoteInputConnection iRemoteInputConnection, int i, int i2, int i3) {
         ?? r6 = new IBinder.DeathRecipient() { // from class: com.android.server.inputmethod.ClientController$$ExternalSyntheticLambda0
             @Override // android.os.IBinder.DeathRecipient

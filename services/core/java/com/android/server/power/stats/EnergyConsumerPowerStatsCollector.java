@@ -27,7 +27,6 @@ public class EnergyConsumerPowerStatsCollector extends PowerStatsCollector {
     public PowerStats mPowerStats;
     public BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda0 mVoltageSupplier;
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -71,7 +70,6 @@ public class EnergyConsumerPowerStatsCollector extends PowerStatsCollector {
                     + " com.android.server.power.stats.BinaryStatePowerStatsLayout):void");
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

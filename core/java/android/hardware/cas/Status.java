@@ -8,7 +8,6 @@ public class Status implements Parcelable {
     public static final int BAD_VALUE = 6;
     public static final Parcelable.Creator<Status> CREATOR =
             new Parcelable.Creator<Status>() { // from class: android.hardware.cas.Status.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Status createFromParcel(Parcel _aidl_source) {
                     Status _aidl_out = new Status();
@@ -16,7 +15,6 @@ public class Status implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Status[] newArray(int _aidl_size) {
                     return new Status[_aidl_size];

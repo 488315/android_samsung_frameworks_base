@@ -15,13 +15,11 @@ public class PromptInfo implements Parcelable {
     public static final Parcelable.Creator<PromptInfo> CREATOR =
             new Parcelable.Creator<
                     PromptInfo>() { // from class: android.hardware.biometrics.PromptInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PromptInfo createFromParcel(Parcel in) {
                     return new PromptInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PromptInfo[] newArray(int size) {
                     return new PromptInfo[size];

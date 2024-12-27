@@ -12,7 +12,6 @@ public class RuntimeShader extends Shader {
 
     private static native long nativeCreateShader(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeGetFinalizer();
 
     private static native void nativeUpdateShader(long j, String str, long j2);

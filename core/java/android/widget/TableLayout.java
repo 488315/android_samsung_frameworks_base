@@ -160,7 +160,6 @@ public class TableLayout extends LinearLayout {
         return this.mShrinkAllColumns || this.mShrinkableColumns.get(columnIndex);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void trackCollapsedColumns(View child) {
         if (child instanceof TableRow) {
             TableRow row = (TableRow) child;
@@ -355,7 +354,6 @@ public class TableLayout extends LinearLayout {
         return new LayoutParams(getContext(), attrs);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.LinearLayout, android.view.ViewGroup
     public LinearLayout.LayoutParams generateDefaultLayoutParams() {
         return new LayoutParams();
@@ -366,7 +364,6 @@ public class TableLayout extends LinearLayout {
         return p instanceof LayoutParams;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.LinearLayout, android.view.ViewGroup
     public LinearLayout.LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
         return new LayoutParams(p);

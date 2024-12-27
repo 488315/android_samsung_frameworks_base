@@ -286,8 +286,6 @@ public final class NetworkPolicyLogger {
                 i3 != 0 ? i3 != 1 ? i3 != 2 ? String.valueOf(i3) : "deny" : "allow" : "default");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0031 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0032 A[Catch: all -> 0x000c, TryCatch #0 {all -> 0x000c, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x0029, B:12:0x0043, B:16:0x0032, B:17:0x000e), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -343,8 +341,6 @@ public final class NetworkPolicyLogger {
                     + " boolean):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0031 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0032 A[Catch: all -> 0x000c, TryCatch #0 {all -> 0x000c, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x0029, B:12:0x0043, B:16:0x0032, B:17:0x000e), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -400,8 +396,6 @@ public final class NetworkPolicyLogger {
                     + " boolean):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x002a A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x002b A[Catch: all -> 0x000d, TryCatch #0 {all -> 0x000d, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x0022, B:12:0x0039, B:16:0x002b, B:17:0x000f), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -473,8 +467,6 @@ public final class NetworkPolicyLogger {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0036 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0037 A[Catch: all -> 0x000d, TryCatch #0 {all -> 0x000d, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x002e, B:12:0x0048, B:16:0x0037, B:17:0x000f), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -532,8 +524,6 @@ public final class NetworkPolicyLogger {
                     + " boolean):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0046 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0047 A[Catch: all -> 0x0037, TryCatch #0 {all -> 0x0037, blocks: (B:4:0x0005, B:6:0x0031, B:9:0x003e, B:12:0x0052, B:16:0x0047, B:17:0x0039), top: B:3:0x0005 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -593,8 +583,6 @@ public final class NetworkPolicyLogger {
                     + " int[]):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x003a A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x003b A[Catch: all -> 0x000d, TryCatch #0 {all -> 0x000d, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x002e, B:12:0x0049, B:16:0x003b, B:17:0x000f), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -651,8 +639,6 @@ public final class NetworkPolicyLogger {
                     + " android.util.ArraySet):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0032 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0033 A[Catch: all -> 0x000c, TryCatch #0 {all -> 0x000c, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x002a, B:12:0x0044, B:16:0x0033, B:17:0x000e), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -708,8 +694,6 @@ public final class NetworkPolicyLogger {
                     + " boolean):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0032 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0033 A[Catch: all -> 0x000c, TryCatch #0 {all -> 0x000c, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x002a, B:12:0x0044, B:16:0x0033, B:17:0x000e), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -765,8 +749,6 @@ public final class NetworkPolicyLogger {
                     + " boolean):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x002a A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x002b A[Catch: all -> 0x001b, TryCatch #0 {all -> 0x001b, blocks: (B:4:0x0005, B:6:0x0015, B:9:0x0022, B:12:0x0036, B:16:0x002b, B:17:0x001d), top: B:3:0x0005 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -816,8 +798,6 @@ public final class NetworkPolicyLogger {
                     + " com.android.server.net.NetworkPolicyLogger.meteredRestrictedPkgsChanged(java.util.Set):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0032 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0033 A[Catch: all -> 0x000d, TryCatch #0 {all -> 0x000d, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x002a, B:12:0x0043, B:16:0x0033, B:17:0x000f), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -874,8 +854,6 @@ public final class NetworkPolicyLogger {
                     + " boolean):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x002d A[Catch: all -> 0x000e, TryCatch #0 {all -> 0x000e, blocks: (B:4:0x0005, B:6:0x0009, B:11:0x002d, B:14:0x006b, B:18:0x0036, B:19:0x004a, B:22:0x0059, B:23:0x0010), top: B:3:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x004a A[Catch: all -> 0x000e, TryCatch #0 {all -> 0x000e, blocks: (B:4:0x0005, B:6:0x0009, B:11:0x002d, B:14:0x006b, B:18:0x0036, B:19:0x004a, B:22:0x0059, B:23:0x0010), top: B:3:0x0005 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -954,8 +932,6 @@ public final class NetworkPolicyLogger {
                     + " com.android.server.net.NetworkPolicyManagerService$UidBlockedState):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x002a A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x002b A[Catch: all -> 0x000d, TryCatch #0 {all -> 0x000d, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x0022, B:12:0x003a, B:16:0x002b, B:17:0x000f), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1007,8 +983,6 @@ public final class NetworkPolicyLogger {
                     + " com.android.server.net.NetworkPolicyLogger.paroleStateChanged(boolean):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0032 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0033 A[Catch: all -> 0x000d, TryCatch #0 {all -> 0x000d, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x002a, B:12:0x0043, B:16:0x0033, B:17:0x000f), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1065,8 +1039,6 @@ public final class NetworkPolicyLogger {
                     + " boolean):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0032 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0033 A[Catch: all -> 0x000d, TryCatch #0 {all -> 0x000d, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x002a, B:12:0x0044, B:16:0x0033, B:17:0x000f), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1123,8 +1095,6 @@ public final class NetworkPolicyLogger {
                     + " boolean):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0023 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0024 A[Catch: all -> 0x0010, TryCatch #0 {all -> 0x0010, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x001b, B:12:0x0036, B:16:0x0024, B:17:0x0012), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1174,8 +1144,6 @@ public final class NetworkPolicyLogger {
                     + " java.lang.String, boolean):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x001f A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0020 A[Catch: all -> 0x000c, TryCatch #0 {all -> 0x000c, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x0017, B:12:0x0033, B:16:0x0020, B:17:0x000e), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1225,8 +1193,6 @@ public final class NetworkPolicyLogger {
                     + " int):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x001f A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0020 A[Catch: all -> 0x000c, TryCatch #0 {all -> 0x000c, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x0017, B:12:0x0032, B:16:0x0020, B:17:0x000e), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1276,8 +1242,6 @@ public final class NetworkPolicyLogger {
                     + " int):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0049 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x004a A[Catch: all -> 0x000c, TryCatch #0 {all -> 0x000c, blocks: (B:4:0x0003, B:6:0x0007, B:9:0x0041, B:12:0x005e, B:16:0x004a, B:17:0x000e), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

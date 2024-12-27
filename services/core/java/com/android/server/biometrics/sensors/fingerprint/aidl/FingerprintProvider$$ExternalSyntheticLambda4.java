@@ -24,7 +24,6 @@ public final /* synthetic */ class FingerprintProvider$$ExternalSyntheticLambda4
         this.f$0 = obj;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // java.lang.Runnable
     public final void run() {
         int i = this.$r8$classId;

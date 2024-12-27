@@ -56,8 +56,6 @@ public class ActivityTaskManager {
     private static int sMaxRecentTasks = -1;
     private static final Singleton<ActivityTaskManager> sInstance =
             new Singleton<ActivityTaskManager>() { // from class: android.app.ActivityTaskManager.1
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.util.Singleton
                 public ActivityTaskManager create() {
                     return new ActivityTaskManager();
@@ -65,8 +63,6 @@ public class ActivityTaskManager {
             };
     private static final Singleton<IActivityTaskManager> IActivityTaskManagerSingleton =
             new Singleton<IActivityTaskManager>() { // from class: android.app.ActivityTaskManager.2
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.util.Singleton
                 public IActivityTaskManager create() {
                     IBinder b = ServiceManager.getService(Context.ACTIVITY_TASK_SERVICE);
@@ -350,13 +346,11 @@ public class ActivityTaskManager {
         public static final Parcelable.Creator<RootTaskInfo> CREATOR =
                 new Parcelable.Creator<RootTaskInfo>() { // from class:
                     // android.app.ActivityTaskManager.RootTaskInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RootTaskInfo createFromParcel(Parcel source) {
                         return new RootTaskInfo(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RootTaskInfo[] newArray(int size) {
                         return new RootTaskInfo[size];

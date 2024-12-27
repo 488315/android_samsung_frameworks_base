@@ -15,7 +15,6 @@ public abstract class GammaBrightnessKt {
         final String str2 = "brightness";
         final GammaBrightness gammaBrightness = null;
         return FlowKt.pairwiseBy((Flow) flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1, (Function1) new GammaBrightnessKt$logDiffForTable$1(new Function0() { // from class: com.android.systemui.brightness.shared.model.GammaBrightnessKt$logDiffForTable$initialValueFun$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

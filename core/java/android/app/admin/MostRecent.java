@@ -7,13 +7,11 @@ public final class MostRecent<V> extends ResolutionMechanism<V> {
     public static final MostRecent<?> MOST_RECENT = new MostRecent<>();
     public static final Parcelable.Creator<MostRecent<?>> CREATOR =
             new Parcelable.Creator<MostRecent<?>>() { // from class: android.app.admin.MostRecent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MostRecent<?> createFromParcel(Parcel source) {
                     return new MostRecent<>();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MostRecent<?>[] newArray(int size) {
                     return new MostRecent[size];

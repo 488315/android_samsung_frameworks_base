@@ -9,13 +9,11 @@ public class SContextFlipCoverAction extends SContextEventContext {
     public static final Parcelable.Creator<SContextFlipCoverAction> CREATOR =
             new Parcelable.Creator<SContextFlipCoverAction>() { // from class:
                 // android.hardware.scontext.SContextFlipCoverAction.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextFlipCoverAction createFromParcel(Parcel in) {
                     return new SContextFlipCoverAction(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextFlipCoverAction[] newArray(int size) {
                     return new SContextFlipCoverAction[size];

@@ -1329,7 +1329,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Configuration getConfiguration() {
         return this.mContext.getResources().getConfiguration();
     }
@@ -1348,10 +1347,6 @@ public final class ViewRootImpl
         setView(view, attrs, panelParentView, UserHandle.myUserId());
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:158:0x04fb A[Catch: all -> 0x0685, TryCatch #3 {all -> 0x0685, blocks: (B:13:0x002d, B:15:0x0066, B:17:0x006c, B:19:0x0072, B:20:0x007a, B:22:0x008a, B:24:0x0097, B:25:0x00aa, B:27:0x00af, B:29:0x00b6, B:31:0x00bc, B:33:0x00c2, B:34:0x00d4, B:36:0x00e8, B:39:0x00f4, B:41:0x00f8, B:43:0x00fd, B:45:0x0102, B:46:0x0112, B:48:0x0116, B:49:0x012e, B:52:0x0141, B:55:0x0151, B:57:0x0155, B:58:0x015d, B:60:0x016a, B:61:0x0170, B:64:0x017b, B:66:0x0183, B:68:0x018d, B:69:0x0192, B:71:0x0198, B:103:0x0240, B:104:0x0243, B:107:0x024c, B:109:0x02b8, B:111:0x02d4, B:112:0x02e6, B:113:0x02e9, B:114:0x043c, B:115:0x0452, B:116:0x02ed, B:117:0x030d, B:118:0x030e, B:119:0x032e, B:120:0x032f, B:121:0x034f, B:122:0x0350, B:123:0x0370, B:124:0x0371, B:126:0x0373, B:127:0x03a1, B:128:0x03a2, B:129:0x03ca, B:130:0x03cb, B:131:0x03eb, B:132:0x03ec, B:133:0x041a, B:134:0x041b, B:135:0x043b, B:136:0x0453, B:138:0x0464, B:139:0x0491, B:141:0x0495, B:143:0x04a0, B:145:0x04a4, B:146:0x04b2, B:148:0x04ca, B:153:0x04d4, B:155:0x04d8, B:156:0x04f5, B:158:0x04fb, B:159:0x0515, B:161:0x051b, B:164:0x0525, B:167:0x052e, B:169:0x0534, B:172:0x053a, B:173:0x053c, B:175:0x0544, B:176:0x054c, B:178:0x0552, B:179:0x0556, B:181:0x055a, B:182:0x0565, B:184:0x0636, B:186:0x067c, B:188:0x063a, B:95:0x0672, B:96:0x0676, B:207:0x014d, B:213:0x0683), top: B:3:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x0672 A[Catch: all -> 0x0685, TRY_ENTER, TryCatch #3 {all -> 0x0685, blocks: (B:13:0x002d, B:15:0x0066, B:17:0x006c, B:19:0x0072, B:20:0x007a, B:22:0x008a, B:24:0x0097, B:25:0x00aa, B:27:0x00af, B:29:0x00b6, B:31:0x00bc, B:33:0x00c2, B:34:0x00d4, B:36:0x00e8, B:39:0x00f4, B:41:0x00f8, B:43:0x00fd, B:45:0x0102, B:46:0x0112, B:48:0x0116, B:49:0x012e, B:52:0x0141, B:55:0x0151, B:57:0x0155, B:58:0x015d, B:60:0x016a, B:61:0x0170, B:64:0x017b, B:66:0x0183, B:68:0x018d, B:69:0x0192, B:71:0x0198, B:103:0x0240, B:104:0x0243, B:107:0x024c, B:109:0x02b8, B:111:0x02d4, B:112:0x02e6, B:113:0x02e9, B:114:0x043c, B:115:0x0452, B:116:0x02ed, B:117:0x030d, B:118:0x030e, B:119:0x032e, B:120:0x032f, B:121:0x034f, B:122:0x0350, B:123:0x0370, B:124:0x0371, B:126:0x0373, B:127:0x03a1, B:128:0x03a2, B:129:0x03ca, B:130:0x03cb, B:131:0x03eb, B:132:0x03ec, B:133:0x041a, B:134:0x041b, B:135:0x043b, B:136:0x0453, B:138:0x0464, B:139:0x0491, B:141:0x0495, B:143:0x04a0, B:145:0x04a4, B:146:0x04b2, B:148:0x04ca, B:153:0x04d4, B:155:0x04d8, B:156:0x04f5, B:158:0x04fb, B:159:0x0515, B:161:0x051b, B:164:0x0525, B:167:0x052e, B:169:0x0534, B:172:0x053a, B:173:0x053c, B:175:0x0544, B:176:0x054c, B:178:0x0552, B:179:0x0556, B:181:0x055a, B:182:0x0565, B:184:0x0636, B:186:0x067c, B:188:0x063a, B:95:0x0672, B:96:0x0676, B:207:0x014d, B:213:0x0683), top: B:3:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:98:? A[Catch: all -> 0x0685, SYNTHETIC, TryCatch #3 {all -> 0x0685, blocks: (B:13:0x002d, B:15:0x0066, B:17:0x006c, B:19:0x0072, B:20:0x007a, B:22:0x008a, B:24:0x0097, B:25:0x00aa, B:27:0x00af, B:29:0x00b6, B:31:0x00bc, B:33:0x00c2, B:34:0x00d4, B:36:0x00e8, B:39:0x00f4, B:41:0x00f8, B:43:0x00fd, B:45:0x0102, B:46:0x0112, B:48:0x0116, B:49:0x012e, B:52:0x0141, B:55:0x0151, B:57:0x0155, B:58:0x015d, B:60:0x016a, B:61:0x0170, B:64:0x017b, B:66:0x0183, B:68:0x018d, B:69:0x0192, B:71:0x0198, B:103:0x0240, B:104:0x0243, B:107:0x024c, B:109:0x02b8, B:111:0x02d4, B:112:0x02e6, B:113:0x02e9, B:114:0x043c, B:115:0x0452, B:116:0x02ed, B:117:0x030d, B:118:0x030e, B:119:0x032e, B:120:0x032f, B:121:0x034f, B:122:0x0350, B:123:0x0370, B:124:0x0371, B:126:0x0373, B:127:0x03a1, B:128:0x03a2, B:129:0x03ca, B:130:0x03cb, B:131:0x03eb, B:132:0x03ec, B:133:0x041a, B:134:0x041b, B:135:0x043b, B:136:0x0453, B:138:0x0464, B:139:0x0491, B:141:0x0495, B:143:0x04a0, B:145:0x04a4, B:146:0x04b2, B:148:0x04ca, B:153:0x04d4, B:155:0x04d8, B:156:0x04f5, B:158:0x04fb, B:159:0x0515, B:161:0x051b, B:164:0x0525, B:167:0x052e, B:169:0x0534, B:172:0x053a, B:173:0x053c, B:175:0x0544, B:176:0x054c, B:178:0x0552, B:179:0x0556, B:181:0x055a, B:182:0x0565, B:184:0x0636, B:186:0x067c, B:188:0x063a, B:95:0x0672, B:96:0x0676, B:207:0x014d, B:213:0x0683), top: B:3:0x0005 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1370,7 +1365,6 @@ public final class ViewRootImpl
                     + " android.view.WindowManager$LayoutParams, android.view.View, int):void");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setAccessibilityWindowAttributesIfNeeded() {
         boolean registered = this.mAttachInfo.mAccessibilityWindowId != -1;
         if (registered) {
@@ -1393,7 +1387,6 @@ public final class ViewRootImpl
         return this.mForceInvertEnabled == 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void reloadForceInvertEnabled() {
         if (android.view.accessibility.Flags.forceInvertColor()) {
             this.mForceInvertEnabled =
@@ -1637,7 +1630,6 @@ public final class ViewRootImpl
         return useAutoDark ? 1 : 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateForceDarkMode() {
         if (this.mAttachInfo.mThreadedRenderer != null
                 && this.mAttachInfo.mThreadedRenderer.setForceDark(determineForceDarkType())) {
@@ -1815,7 +1807,6 @@ public final class ViewRootImpl
         scheduleTraversals();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleResized(
             ClientWindowFrames frames,
             boolean reportDraw,
@@ -1949,7 +1940,6 @@ public final class ViewRootImpl
         requestLayout();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleInsetsControlChanged(
             InsetsState insetsState, InsetsSourceControl.Array activeControls) {
         InsetsSourceControl[] controls = activeControls.get();
@@ -2185,7 +2175,6 @@ public final class ViewRootImpl
         this.mIsAmbientMode = ambient;
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public void setWindowStopped(boolean stopped) {
         Log.i(this.mTag, "stopped(" + stopped + ") old = " + this.mStopped);
         checkThread();
@@ -2656,7 +2645,6 @@ public final class ViewRootImpl
         info.localChanges &= ~systemUiFlag;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void clearLowProfileModeIfNeeded(int showTypes, boolean fromIme) {
         SystemUiVisibilityInfo info = this.mCompatibleVisibilityInfo;
         if ((WindowInsets.Type.systemBars() & showTypes) != 0
@@ -2675,7 +2663,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDispatchSystemUiVisibilityChanged() {
         if (this.mView == null) {
             return;
@@ -3077,7 +3064,6 @@ public final class ViewRootImpl
         return (int) ((displayMetrics.density * dip) + 0.5f);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(196:22|(1:1044)(1:30)|31|(4:33|(1:35)(1:1042)|(1:37)(1:1041)|(188:39|40|(6:42|(1:44)(2:1027|(1:1032)(1:1031))|45|(1:47)|48|(1:52))(2:1033|(3:1037|(1:1039)|1040))|53|(5:55|(2:(1:58)(1:60)|59)|(1:68)|64|(1:67))|69|(1:71)|72|(1:74)|75|(1:1026)(1:81)|82|(3:84|(1:1024)(2:90|(1:92)(1:1023))|93)(1:1025)|94|(1:96)|97|(1:99)|100|(2:1006|(6:1008|(3:1010|(2:1012|1013)(1:1015)|1014)|1016|(1:1018)|1019|(1:1021))(1:1022))(1:104)|105|(2:107|(1:109)(1:1004))(1:1005)|(1:111)|(1:1003)(159:114|(1:1002)(2:118|(2:994|(2:996|(1:998))(1:1001))(1:124))|125|126|(1:993)(1:130)|131|(1:992)(1:135)|136|(1:138)(1:991)|139|(1:141)(1:990)|(4:143|(1:147)|148|(1:150))(1:989)|151|(1:988)(2:156|(1:158)(47:987|366|(1:368)|369|(1:682)(4:373|374|(1:376)|378)|(1:679)|(1:678)(1:392)|(1:677)(1:396)|(2:398|(8:400|(1:674)|404|(1:406)|407|(1:409)|410|(2:412|(1:414)))(1:675))(1:676)|415|(1:417)(1:(1:671)(1:(1:673)))|(1:419)|(1:421)|422|(3:424|(5:660|(1:662)(1:668)|663|(1:665)(1:667)|666)(1:428)|429)(1:669)|430|(1:659)(1:434)|435|(7:437|(4:439|(1:441)|442|(1:444))(1:647)|(1:446)(1:646)|(1:448)|(1:450)(1:(1:645))|451|452)(2:648|(3:652|653|654))|453|(1:637)(8:455|(4:630|(1:634)|473|(1:475))|460|(1:462)|463|(2:465|(2:467|(1:469))(2:470|(1:472)))|473|(0))|(2:627|(20:629|(1:482)|483|(1:626)(1:486)|487|(1:489)|(1:625)(1:492)|493|(1:624)(1:498)|(1:623)(4:500|(1:502)(1:622)|503|(1:507))|(1:621)|511|(1:515)|(5:517|(1:519)(1:581)|520|(4:524|(2:527|525)|528|529)|530)(2:582|(4:584|(3:586|(1:592)(1:590)|591)|(1:594)(1:596)|595)(8:597|(1:599)|600|(1:602)|603|(4:607|(2:610|608)|611|612)|613|(1:615)))|531|(1:533)|534|(4:536|(1:538)(1:542)|539|(1:541))|543|(14:545|(1:549)|550|(1:575)(1:556)|557|(1:559)(1:574)|560|(1:562)(1:573)|563|(1:565)(1:572)|566|(1:568)(1:571)|569|570)(2:576|(2:578|579)(1:580))))(1:479)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(1:496)|624|(0)(0)|(0)|616|621|511|(2:513|515)|(0)(0)|531|(0)|534|(0)|543|(0)(0)))|159|(3:161|(1:163)(1:985)|164)(1:986)|165|(1:984)(1:169)|170|(1:172)|173|174|175|(9:177|178|179|180|181|182|183|184|185)(1:978)|186|187|(1:958)|190|191|(1:193)(1:956)|194|195|196|197|198|199|200|201|202|(5:935|936|(1:938)|939|(1:941))|204|(1:206)(1:934)|207|(7:898|899|(1:903)|(1:905)|(1:928)(4:914|915|916|917)|918|(3:922|(1:924)(1:926)|925))(1:209)|210|211|(1:213)|214|(1:893)(1:218)|219|(1:891)(9:222|223|(1:225)(1:886)|226|(1:228)(1:880)|229|(4:231|232|233|234)(1:879)|235|236)|237|238|(2:240|241)|242|(1:244)(1:869)|245|(1:868)(1:249)|250|(2:252|(97:254|255|256|(2:862|(93:864|260|(6:262|263|264|265|266|267)(1:861)|(2:269|270)(1:851)|(3:840|841|(1:843))|272|273|274|275|276|(4:278|279|280|(89:721|722|723|724|725|726|727|728|729|730|731|732|733|734|735|736|(1:740)|742|284|(1:(5:287|(1:297)(1:291)|292|(1:294)(1:296)|295)(1:298))|299|(1:(1:302)(1:303))|304|(1:306)|307|308|(1:310)|311|(1:720)|315|(6:317|(1:319)|320|(2:322|(3:324|(1:326)|327))|(2:707|(3:709|(4:711|(1:713)|714|715)(1:717)|716)(1:718))(1:332)|(4:334|335|336|337))(1:719)|342|(3:353|(1:359)(1:357)|358)|360|(8:689|(1:691)|692|(1:694)(1:706)|695|(1:697)|(1:705)(3:699|(1:701)(1:704)|702)|703)(1:364)|365|366|(0)|369|(1:371)|682|(0)|679|(2:388|390)|678|(1:394)|677|(0)(0)|415|(0)(0)|(0)|(0)|422|(0)(0)|430|(1:432)|659|435|(0)(0)|453|(0)(0)|(1:477)|627|(0)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(0)|624|(0)(0)|(0)|616|621|511|(0)|(0)(0)|531|(0)|534|(0)|543|(0)(0))(1:282))(3:791|792|(8:794|(1:796)|797|(1:799)|800|(1:802)|803|(1:805))(1:(3:815|816|817)))|283|284|(0)|299|(0)|304|(0)|307|308|(0)|311|(1:313)|720|315|(0)(0)|342|(5:344|353|(1:355)|359|358)|360|(1:362)|683|689|(0)|692|(0)(0)|695|(0)|(0)(0)|703|365|366|(0)|369|(0)|682|(0)|679|(0)|678|(0)|677|(0)(0)|415|(0)(0)|(0)|(0)|422|(0)(0)|430|(0)|659|435|(0)(0)|453|(0)(0)|(0)|627|(0)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(0)|624|(0)(0)|(0)|616|621|511|(0)|(0)(0)|531|(0)|534|(0)|543|(0)(0)))|259|260|(0)(0)|(0)(0)|(0)|272|273|274|275|276|(0)(0)|283|284|(0)|299|(0)|304|(0)|307|308|(0)|311|(0)|720|315|(0)(0)|342|(0)|360|(0)|683|689|(0)|692|(0)(0)|695|(0)|(0)(0)|703|365|366|(0)|369|(0)|682|(0)|679|(0)|678|(0)|677|(0)(0)|415|(0)(0)|(0)|(0)|422|(0)(0)|430|(0)|659|435|(0)(0)|453|(0)(0)|(0)|627|(0)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(0)|624|(0)(0)|(0)|616|621|511|(0)|(0)(0)|531|(0)|534|(0)|543|(0)(0)))|867|255|256|(0)|862|(0)|259|260|(0)(0)|(0)(0)|(0)|272|273|274|275|276|(0)(0)|283|284|(0)|299|(0)|304|(0)|307|308|(0)|311|(0)|720|315|(0)(0)|342|(0)|360|(0)|683|689|(0)|692|(0)(0)|695|(0)|(0)(0)|703|365|366|(0)|369|(0)|682|(0)|679|(0)|678|(0)|677|(0)(0)|415|(0)(0)|(0)|(0)|422|(0)(0)|430|(0)|659|435|(0)(0)|453|(0)(0)|(0)|627|(0)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(0)|624|(0)(0)|(0)|616|621|511|(0)|(0)(0)|531|(0)|534|(0)|543|(0)(0))|1000|126|(1:128)|993|131|(1:133)|992|136|(0)(0)|139|(0)(0)|(0)(0)|151|(0)|988|159|(0)(0)|165|(1:167)|984|170|(0)|173|174|175|(0)(0)|186|187|(0)|958|190|191|(0)(0)|194|195|196|197|198|199|200|201|202|(0)|204|(0)(0)|207|(0)(0)|210|211|(0)|214|(1:216)|893|219|(0)|891|237|238|(0)|242|(0)(0)|245|(1:247)|868|250|(0)|867|255|256|(0)|862|(0)|259|260|(0)(0)|(0)(0)|(0)|272|273|274|275|276|(0)(0)|283|284|(0)|299|(0)|304|(0)|307|308|(0)|311|(0)|720|315|(0)(0)|342|(0)|360|(0)|683|689|(0)|692|(0)(0)|695|(0)|(0)(0)|703|365|366|(0)|369|(0)|682|(0)|679|(0)|678|(0)|677|(0)(0)|415|(0)(0)|(0)|(0)|422|(0)(0)|430|(0)|659|435|(0)(0)|453|(0)(0)|(0)|627|(0)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(0)|624|(0)(0)|(0)|616|621|511|(0)|(0)(0)|531|(0)|534|(0)|543|(0)(0)))|1043|40|(0)(0)|53|(0)|69|(0)|72|(0)|75|(2:77|79)|1026|82|(0)(0)|94|(0)|97|(0)|100|(1:102)|1006|(0)(0)|105|(0)(0)|(0)|(0)|1003|1000|126|(0)|993|131|(0)|992|136|(0)(0)|139|(0)(0)|(0)(0)|151|(0)|988|159|(0)(0)|165|(0)|984|170|(0)|173|174|175|(0)(0)|186|187|(0)|958|190|191|(0)(0)|194|195|196|197|198|199|200|201|202|(0)|204|(0)(0)|207|(0)(0)|210|211|(0)|214|(0)|893|219|(0)|891|237|238|(0)|242|(0)(0)|245|(0)|868|250|(0)|867|255|256|(0)|862|(0)|259|260|(0)(0)|(0)(0)|(0)|272|273|274|275|276|(0)(0)|283|284|(0)|299|(0)|304|(0)|307|308|(0)|311|(0)|720|315|(0)(0)|342|(0)|360|(0)|683|689|(0)|692|(0)(0)|695|(0)|(0)(0)|703|365|366|(0)|369|(0)|682|(0)|679|(0)|678|(0)|677|(0)(0)|415|(0)(0)|(0)|(0)|422|(0)(0)|430|(0)|659|435|(0)(0)|453|(0)(0)|(0)|627|(0)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(0)|624|(0)(0)|(0)|616|621|511|(0)|(0)(0)|531|(0)|534|(0)|543|(0)(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:832:0x0ab4, code lost:
 
        r6 = r25;
@@ -3242,114 +3228,6 @@ public final class ViewRootImpl
 
        if (r30.height() != r61.mHeight) goto L171;
     */
-    /* JADX WARN: Removed duplicated region for block: B:1005:0x02d6  */
-    /* JADX WARN: Removed duplicated region for block: B:1008:0x0272  */
-    /* JADX WARN: Removed duplicated region for block: B:1022:0x02a8  */
-    /* JADX WARN: Removed duplicated region for block: B:1025:0x023a  */
-    /* JADX WARN: Removed duplicated region for block: B:1033:0x0131  */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x02ae  */
-    /* JADX WARN: Removed duplicated region for block: B:111:0x02dc  */
-    /* JADX WARN: Removed duplicated region for block: B:128:0x0334  */
-    /* JADX WARN: Removed duplicated region for block: B:133:0x0346  */
-    /* JADX WARN: Removed duplicated region for block: B:138:0x035f  */
-    /* JADX WARN: Removed duplicated region for block: B:141:0x0374  */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x0384  */
-    /* JADX WARN: Removed duplicated region for block: B:153:0x03c9 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:161:0x03f5  */
-    /* JADX WARN: Removed duplicated region for block: B:167:0x0433  */
-    /* JADX WARN: Removed duplicated region for block: B:172:0x0440  */
-    /* JADX WARN: Removed duplicated region for block: B:177:0x0458  */
-    /* JADX WARN: Removed duplicated region for block: B:189:0x0525 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:193:0x053b  */
-    /* JADX WARN: Removed duplicated region for block: B:206:0x058e  */
-    /* JADX WARN: Removed duplicated region for block: B:209:0x0611  */
-    /* JADX WARN: Removed duplicated region for block: B:213:0x0617 A[Catch: all -> 0x0641, RemoteException -> 0x0651, TRY_ENTER, TRY_LEAVE, TryCatch #51 {RemoteException -> 0x0651, all -> 0x0641, blocks: (B:917:0x05c2, B:918:0x05cc, B:922:0x05d6, B:925:0x05e0, B:213:0x0617, B:216:0x066c, B:225:0x0684), top: B:916:0x05c2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:216:0x066c A[Catch: all -> 0x0641, RemoteException -> 0x0651, TRY_ENTER, TRY_LEAVE, TryCatch #51 {RemoteException -> 0x0651, all -> 0x0641, blocks: (B:917:0x05c2, B:918:0x05cc, B:922:0x05d6, B:925:0x05e0, B:213:0x0617, B:216:0x066c, B:225:0x0684), top: B:916:0x05c2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:221:0x067e A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:240:0x0708  */
-    /* JADX WARN: Removed duplicated region for block: B:244:0x0745  */
-    /* JADX WARN: Removed duplicated region for block: B:247:0x0755 A[Catch: all -> 0x0718, RemoteException -> 0x072a, TRY_ENTER, TryCatch #56 {RemoteException -> 0x072a, all -> 0x0718, blocks: (B:234:0x06bd, B:235:0x06c6, B:241:0x070a, B:247:0x0755, B:252:0x0764), top: B:233:0x06bd }] */
-    /* JADX WARN: Removed duplicated region for block: B:252:0x0764 A[Catch: all -> 0x0718, RemoteException -> 0x072a, TRY_LEAVE, TryCatch #56 {RemoteException -> 0x072a, all -> 0x0718, blocks: (B:234:0x06bd, B:235:0x06c6, B:241:0x070a, B:247:0x0755, B:252:0x0764), top: B:233:0x06bd }] */
-    /* JADX WARN: Removed duplicated region for block: B:258:0x0779 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:262:0x078a  */
-    /* JADX WARN: Removed duplicated region for block: B:269:0x07d0 A[Catch: all -> 0x07d8, RemoteException -> 0x07e6, TRY_LEAVE, TryCatch #44 {RemoteException -> 0x07e6, all -> 0x07d8, blocks: (B:267:0x07a1, B:269:0x07d0), top: B:266:0x07a1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:278:0x0831  */
-    /* JADX WARN: Removed duplicated region for block: B:286:0x0a47  */
-    /* JADX WARN: Removed duplicated region for block: B:301:0x0a82  */
-    /* JADX WARN: Removed duplicated region for block: B:306:0x0a9e  */
-    /* JADX WARN: Removed duplicated region for block: B:310:0x0c18  */
-    /* JADX WARN: Removed duplicated region for block: B:313:0x0c50  */
-    /* JADX WARN: Removed duplicated region for block: B:317:0x0c68  */
-    /* JADX WARN: Removed duplicated region for block: B:344:0x0d49  */
-    /* JADX WARN: Removed duplicated region for block: B:362:0x0da7  */
-    /* JADX WARN: Removed duplicated region for block: B:368:0x0ea6  */
-    /* JADX WARN: Removed duplicated region for block: B:371:0x0ebf  */
-    /* JADX WARN: Removed duplicated region for block: B:380:0x0ef8 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:388:0x0f13  */
-    /* JADX WARN: Removed duplicated region for block: B:394:0x0f20  */
-    /* JADX WARN: Removed duplicated region for block: B:398:0x0f2c  */
-    /* JADX WARN: Removed duplicated region for block: B:417:0x0fe8  */
-    /* JADX WARN: Removed duplicated region for block: B:419:0x0fff  */
-    /* JADX WARN: Removed duplicated region for block: B:421:0x1006  */
-    /* JADX WARN: Removed duplicated region for block: B:424:0x101b  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00a8  */
-    /* JADX WARN: Removed duplicated region for block: B:432:0x10a0  */
-    /* JADX WARN: Removed duplicated region for block: B:437:0x10aa  */
-    /* JADX WARN: Removed duplicated region for block: B:455:0x112e  */
-    /* JADX WARN: Removed duplicated region for block: B:475:0x11db  */
-    /* JADX WARN: Removed duplicated region for block: B:477:0x11e5  */
-    /* JADX WARN: Removed duplicated region for block: B:482:0x11f6  */
-    /* JADX WARN: Removed duplicated region for block: B:485:0x120c A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:489:0x1220  */
-    /* JADX WARN: Removed duplicated region for block: B:491:0x1227 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:495:0x1239 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:500:0x1245  */
-    /* JADX WARN: Removed duplicated region for block: B:509:0x1274 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:513:0x12b6  */
-    /* JADX WARN: Removed duplicated region for block: B:517:0x12e4  */
-    /* JADX WARN: Removed duplicated region for block: B:533:0x1408  */
-    /* JADX WARN: Removed duplicated region for block: B:536:0x1412  */
-    /* JADX WARN: Removed duplicated region for block: B:545:0x143d  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0171  */
-    /* JADX WARN: Removed duplicated region for block: B:576:0x14cf  */
-    /* JADX WARN: Removed duplicated region for block: B:582:0x1345  */
-    /* JADX WARN: Removed duplicated region for block: B:623:0x1270  */
-    /* JADX WARN: Removed duplicated region for block: B:629:0x11f1  */
-    /* JADX WARN: Removed duplicated region for block: B:637:0x11e1  */
-    /* JADX WARN: Removed duplicated region for block: B:648:0x1110  */
-    /* JADX WARN: Removed duplicated region for block: B:669:0x108c  */
-    /* JADX WARN: Removed duplicated region for block: B:670:0x0fef  */
-    /* JADX WARN: Removed duplicated region for block: B:676:0x0fdf  */
-    /* JADX WARN: Removed duplicated region for block: B:691:0x0ddc  */
-    /* JADX WARN: Removed duplicated region for block: B:694:0x0e3e  */
-    /* JADX WARN: Removed duplicated region for block: B:697:0x0e5a  */
-    /* JADX WARN: Removed duplicated region for block: B:699:0x0e6c  */
-    /* JADX WARN: Removed duplicated region for block: B:705:0x0e9b  */
-    /* JADX WARN: Removed duplicated region for block: B:706:0x0e51  */
-    /* JADX WARN: Removed duplicated region for block: B:719:0x0d41  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x01a6  */
-    /* JADX WARN: Removed duplicated region for block: B:747:0x0c10  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x01b8  */
-    /* JADX WARN: Removed duplicated region for block: B:761:0x0bf1  */
-    /* JADX WARN: Removed duplicated region for block: B:763:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:791:0x096f  */
-    /* JADX WARN: Removed duplicated region for block: B:840:0x07f9 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x01d9  */
-    /* JADX WARN: Removed duplicated region for block: B:851:0x07f5  */
-    /* JADX WARN: Removed duplicated region for block: B:861:0x07ca  */
-    /* JADX WARN: Removed duplicated region for block: B:864:0x0783  */
-    /* JADX WARN: Removed duplicated region for block: B:869:0x0747  */
-    /* JADX WARN: Removed duplicated region for block: B:898:0x0599 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:934:0x0590  */
-    /* JADX WARN: Removed duplicated region for block: B:935:0x054d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:956:0x053d  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x024c  */
-    /* JADX WARN: Removed duplicated region for block: B:978:0x051b  */
-    /* JADX WARN: Removed duplicated region for block: B:986:0x042a  */
-    /* JADX WARN: Removed duplicated region for block: B:989:0x03c1  */
-    /* JADX WARN: Removed duplicated region for block: B:990:0x037e  */
-    /* JADX WARN: Removed duplicated region for block: B:991:0x0362  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x0254  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3409,7 +3287,6 @@ public final class ViewRootImpl
         this.mWmsRequestSyncGroup.add(this, (Runnable) null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createSyncIfNeeded$4(
             final int seqId, SurfaceControl.Transaction t) {
         if (CoreRune.FW_SURFACE_DEBUG_APPLY && t != null && !TextUtils.isEmpty(t.mDebugName)) {
@@ -3432,7 +3309,6 @@ public final class ViewRootImpl
         lambda$createSyncIfNeeded$3(t, seqId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void maybeSendAppStartTimes() {
         if (this.mAppStartTimestampsSent.get()) {
             return;
@@ -3491,7 +3367,6 @@ public final class ViewRootImpl
         applyTransactionOnDraw(t);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$removeSensitiveContentAppProtection$5() {
         if (this.mAttachInfo.mSensitiveViewsCount == 0) {
             applySensitiveContentAppProtection(false);
@@ -3524,7 +3399,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void maybeHandleWindowMove(Rect frame) {
         boolean windowMoved =
                 (this.mAttachInfo.mWindowLeft == frame.left
@@ -3544,7 +3418,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleWindowFocusChanged() {
         boolean z;
         synchronized (this) {
@@ -3664,7 +3537,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleWindowTouchModeChanged() {
         boolean inTouchMode;
         synchronized (this) {
@@ -3972,7 +3844,6 @@ public final class ViewRootImpl
         view.mRenderNode.output();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void profileRendering(boolean enabled) {
         if (this.mProfileRendering) {
             this.mRenderProfilingEnabled = enabled;
@@ -4060,7 +3931,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: reportDrawFinished, reason: merged with bridge method [inline-methods] */
     public void lambda$createSyncIfNeeded$3(SurfaceControl.Transaction t, int seqId) {
         logAndTrace("reportDrawFinished seqId=" + seqId);
@@ -4122,7 +3992,6 @@ public final class ViewRootImpl
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$addFrameCommitCallbackIfNeeded$7(
             final ArrayList commitCallbacks, boolean didProduceBuffer) {
         Log.d(this.mTag, "Received frameCommitCallback didProduceBuffer=" + didProduceBuffer);
@@ -4177,7 +4046,6 @@ public final class ViewRootImpl
             };
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFrameDraw$0(long frame, boolean didProduceBuffer) {
             if (!didProduceBuffer && ViewRootImpl.this.mBlastBufferQueue != null) {
                 ViewRootImpl.this.mBlastBufferQueue.applyPendingTransactions(frame);
@@ -4307,7 +4175,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$performDraw$8(
             SurfaceSyncGroup surfaceSyncGroup, SurfaceControl.Transaction pendingTransaction) {
         handleSyncRequestWhenNoAsyncDraw(
@@ -5202,7 +5069,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handlePointerCaptureChanged(boolean hasCapture) {
         if (this.mPointerCapture == hasCapture) {
             return;
@@ -5325,7 +5191,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$recomputeViewAttributes$9() {
         this.mAttachInfo.mRecomputeGlobalAttributes = true;
     }
@@ -5388,7 +5253,6 @@ public final class ViewRootImpl
         this.mIsDetached = true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void performConfigurationChange(
             MergedConfiguration mergedConfiguration,
             boolean force,
@@ -5954,7 +5818,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$10(Runnable r) {
         this.mHandler.post(r);
     }
@@ -6445,7 +6308,6 @@ public final class ViewRootImpl
             return 0;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         private int doOnBackKeyEvent(KeyEvent keyEvent) {
             WindowOnBackInvokedDispatcher dispatcher =
                     ViewRootImpl.this.getOnBackInvokedDispatcher();
@@ -7048,7 +6910,6 @@ public final class ViewRootImpl
         return this.mDesktopModeStandAlone;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void windowFocusInTaskChanged(boolean hasFocus) {
         synchronized (this) {
             this.mWindowFocusInTaskChanged = true;
@@ -7059,7 +6920,6 @@ public final class ViewRootImpl
         this.mHandler.sendMessage(msg);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleWindowFocusInTaskChanged() {
         synchronized (this) {
             if (this.mWindowFocusInTaskChanged) {
@@ -7072,12 +6932,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0115  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0126 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0127  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x011d  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00f1 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7092,7 +6946,6 @@ public final class ViewRootImpl
                     + " android.view.ViewRootImpl.updatePointerIcon(android.view.MotionEvent):boolean");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void maybeUpdateTooltip(MotionEvent event) {
         if (event.getPointerCount() != 1) {
             return;
@@ -7580,7 +7433,6 @@ public final class ViewRootImpl
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void cancel() {
             removeMessages(1);
             removeMessages(2);
@@ -7812,12 +7664,10 @@ public final class ViewRootImpl
             this.mGestureDetector.onTouchEvent(event);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void dispatchTap(long time) {
             dispatchEvent(time, 23);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void dispatchFling(float x, float y, long time) {
             if (Math.abs(x) > Math.abs(y)) {
                 dispatchEvent(time, x > 0.0f ? 22 : 21);
@@ -7911,7 +7761,6 @@ public final class ViewRootImpl
         return keyEvent.getUnicodeChar() > 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean checkForLeavingTouchModeAndConsume(KeyEvent event) {
         if (!this.mAttachInfo.mInTouchMode) {
             return false;
@@ -7934,7 +7783,6 @@ public final class ViewRootImpl
         this.mLocalDragState = obj;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDragEvent(DragEvent event) {
         if (this.mView != null && this.mAdded) {
             int what = event.mAction;
@@ -8161,7 +8009,6 @@ public final class ViewRootImpl
         return this.mAudioManager;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public AutofillManager getAutofillManager() {
         if (this.mView instanceof ViewGroup) {
             ViewGroup decorView = (ViewGroup) this.mView;
@@ -8177,7 +8024,6 @@ public final class ViewRootImpl
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isAutofillUiShowing() {
         AutofillManager afm = getAutofillManager();
         if (afm == null) {
@@ -8226,24 +8072,6 @@ public final class ViewRootImpl
                 && imeSource.isVisible();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0200  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x03ab  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x03df  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x03e9  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0412  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x045d  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0484  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x04c6  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x04cf  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x04ec  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x05d9  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x05db  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x04a3  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x0409  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x03e1  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x03ad  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x0238  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8283,7 +8111,6 @@ public final class ViewRootImpl
         this.mIsSurfaceOpaque = opaque;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setFrame(Rect frame, boolean withinRelayout) {
         Rect rect;
         boolean changed = !this.mWinFrame.equals(frame);
@@ -8350,7 +8177,6 @@ public final class ViewRootImpl
         applyViewBoundsSandboxingIfNeeded(inOutRect, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void applyViewBoundsSandboxingIfNeeded(Rect inOutRect, boolean inverse) {
         if (this.mViewBoundsSandboxingEnabled) {
             Rect bounds = getConfiguration().windowConfiguration.getBounds();
@@ -8377,8 +8203,6 @@ public final class ViewRootImpl
                 this.mLastReportedMergedConfiguration.getMergedConfiguration(), outLocation);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0035 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0038 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -8795,7 +8619,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchResized(
             ClientWindowFrames clientWindowFrames,
             boolean z,
@@ -8837,7 +8660,6 @@ public final class ViewRootImpl
         this.mHandler.sendMessage(obtainMessage);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchInsetsControlChanged(
             InsetsState insetsState, InsetsSourceControl.Array activeControls) {
         SomeArgs args = SomeArgs.obtain();
@@ -8846,12 +8668,10 @@ public final class ViewRootImpl
         this.mHandler.obtainMessage(29, args).sendToTarget();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void showInsets(int i, boolean z, ImeTracker.Token token) {
         this.mHandler.obtainMessage(31, i, z ? 1 : 0, token).sendToTarget();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void hideInsets(int i, boolean z, ImeTracker.Token token) {
         this.mHandler.obtainMessage(32, i, z ? 1 : 0, token).sendToTarget();
     }
@@ -9092,7 +8912,6 @@ public final class ViewRootImpl
                     + " android.view.ViewRootImpl.deliverInputEvent(android.view.ViewRootImpl$QueuedInputEvent):void");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void finishInputEvent(QueuedInputEvent q) {
         Trace.asyncTraceEnd(8L, "deliverInputEvent", q.mEvent.getId());
         if (q.mReceiver != null) {
@@ -9624,7 +9443,6 @@ public final class ViewRootImpl
         this.mHandler.obtainMessage(26, deviceId, 0, receiver).sendToTarget();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchPointerCaptureChanged(boolean z) {
         this.mHandler.removeMessages(28);
         Message obtainMessage = this.mHandler.obtainMessage(28);
@@ -9846,7 +9664,6 @@ public final class ViewRootImpl
         return 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public View getCommonPredecessor(View first, View second) {
         if (this.mTempHashSet == null) {
             this.mTempHashSet = new HashSet<>();
@@ -10048,7 +9865,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: dispatchScrollCaptureSearchResponse, reason: merged with bridge method [inline-methods] */
     public void lambda$handleScrollCaptureRequest$11(
             IScrollCaptureResponseListener listener, ScrollCaptureSearchResults results) {
@@ -10763,7 +10579,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doRelayoutForHCT(boolean isNotFromHandler) {
         if (this.mThread == Thread.currentThread()) {
             destroyHardwareResources();
@@ -11470,7 +11285,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$registerCompatOnBackInvokedCallback$12() {
         try {
             processingBackKey(true);
@@ -11591,7 +11405,6 @@ public final class ViewRootImpl
             };
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFrameDraw$2(
                 SurfaceSyncGroup surfaceSyncGroup, SurfaceControl.Transaction transaction) {
             if (CoreRune.FW_SURFACE_DEBUG_APPLY) {
@@ -11626,19 +11439,16 @@ public final class ViewRootImpl
             surfaceSyncGroup.markSyncReady();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFrameDraw$0() {
             Log.e(
                     ViewRootImpl.this.mTag,
                     "Failed to submit the sync transaction after 4s. Likely to ANR soon");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFrameDraw$1(Runnable timeoutRunnable) {
             ViewRootImpl.this.mHandler.removeCallbacks(timeoutRunnable);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFrameDraw$3(
                 long frame,
                 SurfaceSyncGroup surfaceSyncGroup,
@@ -11696,7 +11506,6 @@ public final class ViewRootImpl
         activeSurfaceSyncGroup.addTransaction(t);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$safeguardOverlappingSyncs$14(SurfaceSyncGroup safeguardSsg) {
         safeguardSsg.markSyncReady();
         synchronized (this.mPreviousSyncSafeguardLock) {
@@ -11740,7 +11549,6 @@ public final class ViewRootImpl
         return this.mActiveSurfaceSyncGroup;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getOrCreateSurfaceSyncGroup$16() {
         Runnable runnable =
                 new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda14
@@ -11756,7 +11564,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getOrCreateSurfaceSyncGroup$15() {
         if (this.mNumPausedForSync > 0) {
             this.mNumPausedForSync--;
@@ -11831,14 +11638,12 @@ public final class ViewRootImpl
         return this.mIsWindowOpaque;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchLetterboxDirectionChanged(int direction) {
         this.mHandler.removeMessages(104);
         Message msg = this.mHandler.obtainMessage(104, direction, 0);
         this.mHandler.sendMessage(msg);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDispatchLetterboxDirectionChanged(int direction) {
         this.mRequestedLetterboxDirection = direction;
         if (updateAppliedLetterboxDirection(this.mRequestedLetterboxDirection)
@@ -11872,7 +11677,6 @@ public final class ViewRootImpl
         EventLog.writeEvent(60004, this.mTag, msg);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateFrameRateFromThreadedRendererViews() {
         ArrayList<View> views = this.mThreadedRendererViews;
         for (int i = views.size() - 1; i >= 0; i--) {
@@ -11914,7 +11718,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0054, code lost:
 
        if (r11.mSurfaceReplaced != false) goto L35;
@@ -11987,7 +11790,6 @@ public final class ViewRootImpl
                     + " android.view.ViewRootImpl.setPreferredFrameRateCategory(int):void");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setFrameRateCategoryForTouchHint(int preferredFrameRateCategory) {
         int frameRateCategory;
         int frameRateReason;
@@ -12071,7 +11873,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setPreferredFrameRate(float preferredFrameRate) {
         if (!shouldSetFrameRate() || preferredFrameRate < 0.0f) {
             return;
@@ -12140,7 +11941,6 @@ public final class ViewRootImpl
                 && !this.mIsFrameRateConflicted;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean shouldTouchBoost(int motionEventAction, int windowType) {
         boolean desiredAction = motionEventAction != 4;
         boolean undesiredType = windowType == 2011 && sToolkitFrameRateTypingReadOnlyFlagValue;
@@ -12150,7 +11950,6 @@ public final class ViewRootImpl
                 && getFrameRateBoostOnTouchEnabled();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean shouldTouchHint(int motionEventAction, int windowType) {
         boolean desiredAction = motionEventAction != 4;
         boolean undesiredType = windowType == 2011;
@@ -12474,7 +12273,6 @@ public final class ViewRootImpl
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void dispatchSmartClipMetaDataExtraction(SmartClipRemoteRequestInfo request) {
             SmartClipDataExtractionEvent requestInfo =
                     (SmartClipDataExtractionEvent) request.mRequestData;
@@ -12615,7 +12413,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isWheelScrollingHandled(MotionEvent event) {
         switch (event.getAction()) {
             case 0:
@@ -12666,7 +12463,6 @@ public final class ViewRootImpl
         scheduleTraversals();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$requestRecomputeViewAttributes$18() {
         this.mAttachInfo.mRecomputeGlobalAttributes = true;
     }
@@ -12677,7 +12473,6 @@ public final class ViewRootImpl
         this.mHandler.sendMessage(msg);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDispatchSPenGestureEvent(InputEvent[] events) {
         if (events == null) {
             Slog.e(TAG, "dispatchSPenGestureEventInjection : Event is null!");
@@ -12704,7 +12499,6 @@ public final class ViewRootImpl
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$handleDispatchSPenGestureEvent$19(InputEvent event) {
         if (event instanceof MotionEvent) {
             translateSPenGestureEventPositionToAppWindow((MotionEvent) event);

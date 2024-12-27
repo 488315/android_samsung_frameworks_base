@@ -32,7 +32,6 @@ public final class LocationTimeZoneAlgorithmStatus implements Parcelable {
     public static final Parcelable.Creator<LocationTimeZoneAlgorithmStatus> CREATOR =
             new Parcelable.Creator<LocationTimeZoneAlgorithmStatus>() { // from class:
                 // android.app.time.LocationTimeZoneAlgorithmStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LocationTimeZoneAlgorithmStatus createFromParcel(Parcel in) {
                     int algorithmStatus = in.readInt();
@@ -56,7 +55,6 @@ public final class LocationTimeZoneAlgorithmStatus implements Parcelable {
                             secondaryProviderReportedStatus);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LocationTimeZoneAlgorithmStatus[] newArray(int size) {
                     return new LocationTimeZoneAlgorithmStatus[size];
@@ -263,7 +261,6 @@ public final class LocationTimeZoneAlgorithmStatus implements Parcelable {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static int providerStatusFromString(String providerStatusString) {
         char c;
         if (TextUtils.isEmpty(providerStatusString)) {

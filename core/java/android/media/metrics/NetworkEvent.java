@@ -12,13 +12,11 @@ public final class NetworkEvent extends Event implements Parcelable {
     public static final Parcelable.Creator<NetworkEvent> CREATOR =
             new Parcelable.Creator<
                     NetworkEvent>() { // from class: android.media.metrics.NetworkEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkEvent[] newArray(int size) {
                     return new NetworkEvent[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkEvent createFromParcel(Parcel in) {
                     return new NetworkEvent(in);

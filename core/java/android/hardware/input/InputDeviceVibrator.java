@@ -35,7 +35,6 @@ final class InputDeviceVibrator extends Vibrator {
                         .build();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class OnVibratorStateChangedListenerDelegate extends IVibratorStateListener.Stub {
         private final Executor mExecutor;
         private final Vibrator.OnVibratorStateChangedListener mListener;
@@ -46,7 +45,6 @@ final class InputDeviceVibrator extends Vibrator {
             this.mListener = listener;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onVibrating$0(boolean isVibrating) {
             this.mListener.onVibratorStateChanged(isVibrating);
         }

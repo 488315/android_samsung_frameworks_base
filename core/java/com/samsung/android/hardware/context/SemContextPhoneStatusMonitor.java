@@ -10,13 +10,11 @@ public class SemContextPhoneStatusMonitor extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextPhoneStatusMonitor>() { // from class:
                                                       // com.samsung.android.hardware.context.SemContextPhoneStatusMonitor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextPhoneStatusMonitor createFromParcel(Parcel in) {
                     return new SemContextPhoneStatusMonitor(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextPhoneStatusMonitor[] newArray(int size) {
                     return new SemContextPhoneStatusMonitor[size];

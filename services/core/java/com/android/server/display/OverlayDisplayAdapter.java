@@ -190,7 +190,6 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
             public SurfaceTexture mSurfaceTexture;
             public final /* synthetic */ OverlayDisplayAdapter this$0;
 
-            /* JADX WARN: Illegal instructions before constructor call */
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
                 To view partially-correct code enable 'Show inconsistent code' option in preferences

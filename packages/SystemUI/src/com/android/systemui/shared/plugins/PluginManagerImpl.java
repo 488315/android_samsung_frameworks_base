@@ -117,7 +117,6 @@ public final class PluginManagerImpl extends BroadcastReceiver implements Plugin
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.shared.plugins.PluginManagerImpl$1] */
     public PluginManagerImpl(Context context, PluginActionManager.Factory factory, boolean z, UncaughtExceptionPreHandlerManager uncaughtExceptionPreHandlerManager, PluginEnabler pluginEnabler, PluginPrefs pluginPrefs, List<String> list, PluginInstance.Factory factory2) {
         ArraySet arraySet = new ArraySet();
         this.mPrivilegedPlugins = arraySet;

@@ -19,7 +19,6 @@ final class HomeControlsComponentInteractor$allAvailableServices$1 extends Suspe
     int label;
     final /* synthetic */ HomeControlsComponentInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HomeControlsComponentInteractor$allAvailableServices$1(HomeControlsComponentInteractor homeControlsComponentInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = homeControlsComponentInteractor;
@@ -37,8 +36,6 @@ final class HomeControlsComponentInteractor$allAvailableServices$1 extends Suspe
         return ((HomeControlsComponentInteractor$allAvailableServices$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.controls.management.ControlsListingController$ControlsListingCallback, com.android.systemui.dreams.homecontrols.domain.interactor.HomeControlsComponentInteractor$allAvailableServices$1$listener$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -57,7 +54,6 @@ final class HomeControlsComponentInteractor$allAvailableServices$1 extends Suspe
             controlsListingControllerImpl.addCallback((ControlsListingController.ControlsListingCallback) r1);
             final HomeControlsComponentInteractor homeControlsComponentInteractor = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.dreams.homecontrols.domain.interactor.HomeControlsComponentInteractor$allAvailableServices$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

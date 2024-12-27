@@ -356,20 +356,6 @@ public final class CarrierTextManager {
     
         if (kotlin.jvm.internal.Intrinsics.areEqual(r1, "<unknown ssid>") == false) goto L59;
      */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x027e  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x02c5  */
-    /* JADX WARN: Removed duplicated region for block: B:141:0x036c  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x0371  */
-    /* JADX WARN: Removed duplicated region for block: B:158:0x03a6  */
-    /* JADX WARN: Removed duplicated region for block: B:161:0x03ae  */
-    /* JADX WARN: Removed duplicated region for block: B:170:0x041e  */
-    /* JADX WARN: Removed duplicated region for block: B:174:0x0420  */
-    /* JADX WARN: Removed duplicated region for block: B:188:0x03fe  */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x0381  */
-    /* JADX WARN: Removed duplicated region for block: B:191:0x0298 A[EDGE_INSN: B:191:0x0298->B:119:0x0298 BREAK  A[LOOP:4: B:103:0x0276->B:109:0x02b5], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x014b  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0151  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0199 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -382,9 +368,6 @@ public final class CarrierTextManager {
         throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.CarrierTextManager.updateCarrierText(android.content.Intent):void");
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.keyguard.CarrierTextManager$1] */
-    /* JADX WARN: Type inference failed for: r4v3, types: [com.android.keyguard.CarrierTextManager$3] */
-    /* JADX WARN: Type inference failed for: r4v4, types: [com.android.keyguard.CarrierTextManager$4] */
     private CarrierTextManager(Context context, CharSequence charSequence, boolean z, boolean z2, WifiRepository wifiRepository, DeviceBasedSatelliteViewModel deviceBasedSatelliteViewModel, JavaAdapter javaAdapter, TelephonyManager telephonyManager, TelephonyListenerManager telephonyListenerManager, CarrierTextUtil carrierTextUtil, WakefulnessLifecycle wakefulnessLifecycle, Executor executor, Executor executor2, KeyguardUpdateMonitor keyguardUpdateMonitor, SubscriptionsOrder subscriptionsOrder, CarrierTextManagerLogger carrierTextManagerLogger, SettingsHelper settingsHelper, WifiTextManager wifiTextManager) {
         this.mNetworkSupported = new AtomicBoolean();
         this.mWakefulnessObserver = new WakefulnessLifecycle.Observer() { // from class: com.android.keyguard.CarrierTextManager.1

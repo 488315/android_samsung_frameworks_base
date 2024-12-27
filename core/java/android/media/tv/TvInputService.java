@@ -239,7 +239,6 @@ public abstract class TvInputService extends Service {
     @SystemApi
     public void onHdmiDeviceUpdated(HdmiDeviceInfo deviceInfo) {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isPassthroughInput(String inputId) {
         if (this.mTvInputManager == null) {
             this.mTvInputManager = (TvInputManager) getSystemService(Context.TV_INPUT_SERVICE);
@@ -632,7 +631,6 @@ public abstract class TvInputService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void notifyTimeShiftStartPositionChanged(final long timeMs) {
             executeOrPostRunnableOnMainThread(
                     new Runnable() { // from class: android.media.tv.TvInputService.Session.19
@@ -653,7 +651,6 @@ public abstract class TvInputService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void notifyTimeShiftCurrentPositionChanged(final long timeMs) {
             executeOrPostRunnableOnMainThread(
                     new Runnable() { // from class: android.media.tv.TvInputService.Session.20
@@ -1155,7 +1152,6 @@ public abstract class TvInputService extends Service {
             return -1;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void initialize(ITvInputSessionCallback callback) {
             synchronized (this.mLock) {
                 this.mSessionCallback = callback;
@@ -1216,7 +1212,6 @@ public abstract class TvInputService extends Service {
     private static final class OverlayViewCleanUpTask extends AsyncTask<View, Void, Void> {
         private OverlayViewCleanUpTask() {}
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public Void doInBackground(View... views) {
             View overlayViewParent = views[0];
@@ -1382,7 +1377,6 @@ public abstract class TvInputService extends Service {
             onAppPrivateCommand(action, data);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void initialize(ITvInputSessionCallback callback) {
             synchronized (this.mLock) {
                 this.mSessionCallback = callback;

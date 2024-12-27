@@ -149,7 +149,6 @@ public final class WifiRepositoryImpl implements RealWifiRepository, LifecycleOw
         }
     }
 
-    /* JADX WARN: Type inference failed for: r6v8, types: [T, com.android.systemui.statusbar.pipeline.wifi.data.repository.prod.WifiRepositoryImpl$WifiPickerTrackerInfo] */
     public WifiRepositoryImpl(FeatureFlags featureFlags, CoroutineScope coroutineScope, Executor executor, CoroutineDispatcher coroutineDispatcher, WifiPickerTrackerFactory wifiPickerTrackerFactory, WifiManager wifiManager, LogBuffer logBuffer, TableLogBuffer tableLogBuffer, SemWifiManager semWifiManager, BroadcastDispatcher broadcastDispatcher) {
         this.mainExecutor = executor;
         this.bgDispatcher = coroutineDispatcher;
@@ -203,8 +202,6 @@ public final class WifiRepositoryImpl implements RealWifiRepository, LifecycleOw
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -302,8 +299,6 @@ public final class WifiRepositoryImpl implements RealWifiRepository, LifecycleOw
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -391,8 +386,6 @@ public final class WifiRepositoryImpl implements RealWifiRepository, LifecycleOw
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -480,8 +473,6 @@ public final class WifiRepositoryImpl implements RealWifiRepository, LifecycleOw
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -584,8 +575,6 @@ public final class WifiRepositoryImpl implements RealWifiRepository, LifecycleOw
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

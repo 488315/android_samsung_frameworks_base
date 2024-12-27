@@ -201,12 +201,10 @@ public final class BidiFormatter {
         return unicodeWrap(str, this.mDefaultTextDirectionHeuristic, true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static BidiFormatter getDefaultInstanceFromContext(boolean isRtlContext) {
         return isRtlContext ? DEFAULT_RTL_INSTANCE : DEFAULT_LTR_INSTANCE;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isRtlLocale(Locale locale) {
         return TextUtils.getLayoutDirectionFromLocale(locale) == 1;
     }

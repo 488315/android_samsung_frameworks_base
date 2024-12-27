@@ -12,13 +12,11 @@ public class SemCertAndroidKeyStore implements Parcelable {
             new Parcelable.Creator<
                     SemCertAndroidKeyStore>() { // from class:
                                                 // com.samsung.android.knox.util.SemCertAndroidKeyStore.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemCertAndroidKeyStore createFromParcel(Parcel source) {
                     return new SemCertAndroidKeyStore(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemCertAndroidKeyStore[] newArray(int size) {
                     return null;
@@ -39,8 +37,6 @@ public class SemCertAndroidKeyStore implements Parcelable {
         return 0;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [java.io.Serializable, java.security.cert.Certificate[]] */
     @Override // android.os.Parcelable
     @Deprecated(forRemoval = true, since = "16.0")
     public void writeToParcel(Parcel parcel, int flags) {

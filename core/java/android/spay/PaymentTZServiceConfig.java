@@ -20,13 +20,11 @@ public class PaymentTZServiceConfig implements Parcelable {
     public static final Parcelable.Creator<PaymentTZServiceConfig> CREATOR =
             new Parcelable.Creator<
                     PaymentTZServiceConfig>() { // from class: android.spay.PaymentTZServiceConfig.2
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PaymentTZServiceConfig createFromParcel(Parcel in) {
                     return new PaymentTZServiceConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PaymentTZServiceConfig[] newArray(int size) {
                     return new PaymentTZServiceConfig[size];

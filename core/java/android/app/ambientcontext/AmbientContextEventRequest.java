@@ -20,13 +20,11 @@ public final class AmbientContextEventRequest implements Parcelable {
     public static final Parcelable.Creator<AmbientContextEventRequest> CREATOR =
             new Parcelable.Creator<AmbientContextEventRequest>() { // from class:
                 // android.app.ambientcontext.AmbientContextEventRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AmbientContextEventRequest[] newArray(int size) {
                     return new AmbientContextEventRequest[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AmbientContextEventRequest createFromParcel(Parcel in) {
                     return new AmbientContextEventRequest(in);

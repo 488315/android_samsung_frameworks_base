@@ -16,13 +16,11 @@ public final class AmbientBrightnessDayStats implements Parcelable {
     public static final Parcelable.Creator<AmbientBrightnessDayStats> CREATOR =
             new Parcelable.Creator<AmbientBrightnessDayStats>() { // from class:
                 // android.hardware.display.AmbientBrightnessDayStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AmbientBrightnessDayStats createFromParcel(Parcel source) {
                     return new AmbientBrightnessDayStats(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AmbientBrightnessDayStats[] newArray(int size) {
                     return new AmbientBrightnessDayStats[size];

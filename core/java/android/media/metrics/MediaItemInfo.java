@@ -14,13 +14,11 @@ public final class MediaItemInfo implements Parcelable {
     public static final Parcelable.Creator<MediaItemInfo> CREATOR =
             new Parcelable.Creator<
                     MediaItemInfo>() { // from class: android.media.metrics.MediaItemInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaItemInfo[] newArray(int size) {
                     return new MediaItemInfo[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaItemInfo createFromParcel(Parcel in) {
                     return new MediaItemInfo(in);

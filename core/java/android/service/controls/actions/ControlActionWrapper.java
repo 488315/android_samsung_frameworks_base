@@ -10,14 +10,12 @@ public final class ControlActionWrapper implements Parcelable {
             new Parcelable.Creator<
                     ControlActionWrapper>() { // from class:
                                               // android.service.controls.actions.ControlActionWrapper.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ControlActionWrapper createFromParcel(Parcel in) {
                     return new ControlActionWrapper(
                             ControlAction.createActionFromBundle(in.readBundle()));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ControlActionWrapper[] newArray(int size) {
                     return new ControlActionWrapper[size];

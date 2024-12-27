@@ -25,13 +25,11 @@ public final class CarrierRestrictionRules implements Parcelable {
             new Parcelable.Creator<
                     CarrierRestrictionRules>() { // from class:
                                                  // android.telephony.CarrierRestrictionRules.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarrierRestrictionRules createFromParcel(Parcel in) {
                     return new CarrierRestrictionRules(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarrierRestrictionRules[] newArray(int size) {
                     return new CarrierRestrictionRules[size];

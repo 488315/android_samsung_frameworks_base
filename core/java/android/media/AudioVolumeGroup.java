@@ -8,7 +8,6 @@ public class AudioVolumeGroup implements Parcelable {
     public static final Parcelable.Creator<AudioVolumeGroup> CREATOR =
             new Parcelable.Creator<
                     AudioVolumeGroup>() { // from class: android.media.AudioVolumeGroup.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioVolumeGroup createFromParcel(Parcel _aidl_source) {
                     AudioVolumeGroup _aidl_out = new AudioVolumeGroup();
@@ -16,7 +15,6 @@ public class AudioVolumeGroup implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioVolumeGroup[] newArray(int _aidl_size) {
                     return new AudioVolumeGroup[_aidl_size];

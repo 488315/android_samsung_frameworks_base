@@ -29,8 +29,6 @@ public final class BrightnessMirrorController implements MirrorController {
     public final int[] mInt2Cache = new int[2];
     public final int mLastBrightnessSliderWidth = -1;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v5, types: [com.android.systemui.statusbar.policy.BrightnessMirrorController$$ExternalSyntheticLambda0] */
     public BrightnessMirrorController(NotificationShadeWindowView notificationShadeWindowView, ShadeViewController shadeViewController, NotificationShadeDepthController notificationShadeDepthController, BrightnessSliderController.Factory factory, Consumer<Boolean> consumer) {
         this.mStatusBarWindow = notificationShadeWindowView;
         this.mToggleSliderFactory = factory;

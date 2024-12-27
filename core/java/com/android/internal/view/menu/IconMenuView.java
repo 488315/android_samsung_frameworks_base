@@ -426,7 +426,6 @@ public final class IconMenuView extends ViewGroup
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
@@ -439,7 +438,6 @@ public final class IconMenuView extends ViewGroup
         return new SavedState(superState, -1);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public void onRestoreInstanceState(Parcelable state) {
         View v;
@@ -455,13 +453,11 @@ public final class IconMenuView extends ViewGroup
                 new Parcelable.Creator<
                         SavedState>() { // from class:
                                         // com.android.internal.view.menu.IconMenuView.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];

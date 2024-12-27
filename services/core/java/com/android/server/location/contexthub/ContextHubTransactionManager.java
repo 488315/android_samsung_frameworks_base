@@ -36,7 +36,6 @@ public final class ContextHubTransactionManager {
         public final /* synthetic */ NanoAppBinary val$nanoAppBinary;
         public final /* synthetic */ IContextHubTransactionCallback val$onCompleteCallback;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(
                 int i,
                 long j,
@@ -165,7 +164,6 @@ public final class ContextHubTransactionManager {
         public final /* synthetic */ long val$nanoAppId;
         public final /* synthetic */ IContextHubTransactionCallback val$onCompleteCallback;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(
                 ContextHubTransactionManager contextHubTransactionManager,
                 int i,
@@ -182,7 +180,6 @@ public final class ContextHubTransactionManager {
             this.val$onCompleteCallback = iContextHubTransactionCallback;
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(
                 ContextHubTransactionManager contextHubTransactionManager,
                 int i,
@@ -376,7 +373,6 @@ public final class ContextHubTransactionManager {
         public final /* synthetic */ int val$contextHubId;
         public final /* synthetic */ IContextHubTransactionCallback val$onCompleteCallback;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass6(
                 int i,
                 String str,

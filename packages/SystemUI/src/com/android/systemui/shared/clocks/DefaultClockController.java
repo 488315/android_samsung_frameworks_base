@@ -116,8 +116,6 @@ public final class DefaultClockController implements ClockController {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r10v0, types: [com.android.systemui.shared.clocks.AnimatableClockView$animateCharge$startAnimPhase2$1] */
         @Override // com.android.systemui.plugins.clocks.ClockAnimations
         public final void charge() {
             final Function0 function0 = new Function0() { // from class: com.android.systemui.shared.clocks.DefaultClockController$DefaultClockAnimations$charge$1

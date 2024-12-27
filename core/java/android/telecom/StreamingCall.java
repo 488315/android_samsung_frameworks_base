@@ -14,13 +14,11 @@ import java.lang.annotation.RetentionPolicy;
 public final class StreamingCall implements Parcelable {
     public static final Parcelable.Creator<StreamingCall> CREATOR =
             new Parcelable.Creator<StreamingCall>() { // from class: android.telecom.StreamingCall.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StreamingCall createFromParcel(Parcel in) {
                     return new StreamingCall(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StreamingCall[] newArray(int size) {
                     return new StreamingCall[size];

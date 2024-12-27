@@ -26,7 +26,6 @@ final class WifiRepositoryImpl$wifiActivity$1 extends SuspendLambda implements F
     int label;
     final /* synthetic */ WifiRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiRepositoryImpl$wifiActivity$1(WifiRepositoryImpl wifiRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = wifiRepositoryImpl;
@@ -75,7 +74,6 @@ final class WifiRepositoryImpl$wifiActivity$1 extends SuspendLambda implements F
             wifiRepositoryImpl2.wifiManager.registerTrafficStateCallback(wifiRepositoryImpl2.mainExecutor, trafficStateCallback);
             final WifiRepositoryImpl wifiRepositoryImpl3 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.wifi.data.repository.prod.WifiRepositoryImpl$wifiActivity$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

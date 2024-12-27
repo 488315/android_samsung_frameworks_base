@@ -109,7 +109,6 @@ public final class DefaultWallpaper {
         Settings.System.putIntForUser(defaultWallpaper.mContext.getContentResolver(), str, i, -2);
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.samsung.server.wallpaper.DefaultWallpaper$1] */
     public DefaultWallpaper(
             Context context,
             WallpaperManagerService.SemCallback semCallback,

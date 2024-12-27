@@ -51,8 +51,6 @@ public class CompatChangeableApps extends ICompatChangeableManager.Stub {
                 new Singleton<
                         IPlatformCompat>() { // from class:
                                              // com.samsung.android.core.CompatChangeableApps.1
-                    /* JADX INFO: Access modifiers changed from: protected */
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.util.Singleton
                     public IPlatformCompat create() {
                         IBinder b = ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE);

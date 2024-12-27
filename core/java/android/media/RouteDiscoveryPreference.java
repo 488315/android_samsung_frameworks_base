@@ -20,13 +20,11 @@ public final class RouteDiscoveryPreference implements Parcelable {
     public static final Parcelable.Creator<RouteDiscoveryPreference> CREATOR =
             new Parcelable.Creator<RouteDiscoveryPreference>() { // from class:
                 // android.media.RouteDiscoveryPreference.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RouteDiscoveryPreference createFromParcel(Parcel in) {
                     return new RouteDiscoveryPreference(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RouteDiscoveryPreference[] newArray(int size) {
                     return new RouteDiscoveryPreference[size];

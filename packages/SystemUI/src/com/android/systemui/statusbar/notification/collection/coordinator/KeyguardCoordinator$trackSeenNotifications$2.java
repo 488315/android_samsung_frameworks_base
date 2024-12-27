@@ -15,7 +15,6 @@ final class KeyguardCoordinator$trackSeenNotifications$2 extends SuspendLambda i
     int label;
     final /* synthetic */ KeyguardCoordinator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardCoordinator$trackSeenNotifications$2(KeyguardCoordinator keyguardCoordinator, Set<NotificationEntry> set, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardCoordinator;

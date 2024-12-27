@@ -115,10 +115,6 @@ public class SummarizeCoordinator implements Coordinator {
         notifPipeline.addCollectionListener(this.mNotifCollectionListener);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x0124  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x011d  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0150  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0154  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

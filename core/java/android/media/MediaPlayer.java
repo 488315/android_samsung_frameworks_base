@@ -919,7 +919,6 @@ public class MediaPlayer extends PlayerBase
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.media.MediaPlayer$1] */
     public void start() throws IllegalStateException {
         if (CoreRune.SYSPERF_ACTIVE_APP_GVS_ENABLE) {
             setGameVideoSpeed();
@@ -952,7 +951,6 @@ public class MediaPlayer extends PlayerBase
         }.start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startImpl() {
         baseStart(0);
         stayAwake(true);
@@ -1044,7 +1042,6 @@ public class MediaPlayer extends PlayerBase
         return AudioManager.getDeviceForPortId(deviceId, 2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void broadcastRoutingChange() {
         AudioManager.resetAudioPortGeneration();
         synchronized (this.mRoutingChangeListeners) {
@@ -1082,7 +1079,6 @@ public class MediaPlayer extends PlayerBase
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void tryToDisableNativeRoutingCallback() {
         synchronized (this.mRoutingChangeListeners) {
             if (this.mEnableSelfRoutingMonitor) {
@@ -1160,7 +1156,6 @@ public class MediaPlayer extends PlayerBase
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void stayAwake(boolean awake) {
         if (this.mWakeLock != null) {
             if (awake && !this.mWakeLock.isHeld()) {
@@ -1434,13 +1429,11 @@ public class MediaPlayer extends PlayerBase
         static final Parcelable.Creator<TrackInfo> CREATOR =
                 new Parcelable.Creator<
                         TrackInfo>() { // from class: android.media.MediaPlayer.TrackInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TrackInfo createFromParcel(Parcel in) {
                         return new TrackInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TrackInfo[] newArray(int size) {
                         return new TrackInfo[size];
@@ -1767,7 +1760,6 @@ public class MediaPlayer extends PlayerBase
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void scanInternalSubtitleTracks() {
         setSubtitleAnchor();
         populateInbandTracks();
@@ -2110,7 +2102,6 @@ public class MediaPlayer extends PlayerBase
         return timeProvider;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class EventHandler extends Handler {
         private MediaPlayer mMediaPlayer;
 
@@ -2119,7 +2110,6 @@ public class MediaPlayer extends PlayerBase
             this.mMediaPlayer = mp;
         }
 
-        /* JADX WARN: Finally extract failed */
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
             OnDrmInfoHandlerDelegate onDrmInfoHandlerDelegate;
@@ -2502,7 +2492,6 @@ public class MediaPlayer extends PlayerBase
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$handleMessage$0(
                 OnRtpRxNoticeListener rtpRxNoticeListener, int noticeType, int[] data) {
             rtpRxNoticeListener.onRtpRxNotice(this.mMediaPlayer, noticeType, data);
@@ -3137,7 +3126,6 @@ public class MediaPlayer extends PlayerBase
                             + supportedDRMsCount);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public DrmInfo makeCopy() {
             return new DrmInfo(this.mapPssh, this.supportedSchemes);
         }
@@ -3420,7 +3408,6 @@ public class MediaPlayer extends PlayerBase
         return result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean resumePrepareDrm(UUID uuid) {
         Log.v(TAG, "resumePrepareDrm: uuid: " + uuid);
         try {
@@ -3462,7 +3449,6 @@ public class MediaPlayer extends PlayerBase
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cleanDrmObj() {
         Log.v(
                 TAG,
@@ -3664,7 +3650,6 @@ public class MediaPlayer extends PlayerBase
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public synchronized void notifySeek() {
             this.mSeeking = false;
             try {
@@ -3687,14 +3672,12 @@ public class MediaPlayer extends PlayerBase
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public synchronized void notifyTrackData(Pair<SubtitleTrack, byte[]> trackData) {
             SubtitleTrack track = trackData.first;
             byte[] data = trackData.second;
             track.onData(data, true, -1L);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public synchronized void notifyStop() {
             for (MediaTimeProvider.OnMediaTimeListener listener : this.mListeners) {
                 if (listener == null) {
@@ -3783,7 +3766,6 @@ public class MediaPlayer extends PlayerBase
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public synchronized void notifyTimedEvent(boolean refreshTime) {
             long nowUs;
             try {
@@ -3846,7 +3828,6 @@ public class MediaPlayer extends PlayerBase
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:20:0x002f A[Catch: IllegalStateException -> 0x0080, all -> 0x00bb, TryCatch #0 {IllegalStateException -> 0x0080, blocks: (B:12:0x000d, B:14:0x0021, B:18:0x0029, B:20:0x002f, B:23:0x003f), top: B:11:0x000d, outer: #1 }] */
         @Override // android.media.MediaTimeProvider
         /*
             Code decompiled incorrectly, please refer to instructions dump.

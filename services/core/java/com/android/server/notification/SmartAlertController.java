@@ -218,7 +218,6 @@ public final class SmartAlertController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.notification.SmartAlertController$4] */
     public SmartAlertController(Context context) {
         this.mContext = context;
         Handler handler = new Handler();

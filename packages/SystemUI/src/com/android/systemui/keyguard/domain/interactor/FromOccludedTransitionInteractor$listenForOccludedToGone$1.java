@@ -38,7 +38,6 @@ final class FromOccludedTransitionInteractor$listenForOccludedToGone$1 extends S
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromOccludedTransitionInteractor$listenForOccludedToGone$1(FromOccludedTransitionInteractor fromOccludedTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromOccludedTransitionInteractor;

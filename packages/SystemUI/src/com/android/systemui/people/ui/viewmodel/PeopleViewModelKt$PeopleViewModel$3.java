@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 final /* synthetic */ class PeopleViewModelKt$PeopleViewModel$3 extends FunctionReferenceImpl implements Function0 {
     final /* synthetic */ MutableStateFlow $result;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PeopleViewModelKt$PeopleViewModel$3(MutableStateFlow mutableStateFlow) {
         super(0, Intrinsics.Kotlin.class, "clearResult", "PeopleViewModel$clearResult(Lkotlinx/coroutines/flow/MutableStateFlow;)V", 0);
         this.$result = mutableStateFlow;

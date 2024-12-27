@@ -26,7 +26,6 @@ public final class TunnelModeChildSessionParamsUtils {
     private static final String SOFT_LIFETIME_SEC_KEY = "SOFT_LIFETIME_SEC_KEY";
     private static final String TAG = TunnelModeChildSessionParamsUtils.class.getSimpleName();
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ConfigRequest {
         private static final String IP6_PREFIX_LEN = "ip6PrefixLen";
         private static final int PREFIX_LEN_UNUSED = -1;

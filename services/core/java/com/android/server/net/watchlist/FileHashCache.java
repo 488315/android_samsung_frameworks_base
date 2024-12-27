@@ -42,7 +42,6 @@ public final class FileHashCache {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.net.watchlist.FileHashCache$$ExternalSyntheticLambda0] */
     public FileHashCache(Handler handler) {
         final int i = 0;
         Runnable runnable = new Runnable(this) { // from class: com.android.server.net.watchlist.FileHashCache$$ExternalSyntheticLambda0
@@ -52,8 +51,6 @@ public final class FileHashCache {
                 this.f$0 = this;
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r1v9, types: [com.android.server.net.watchlist.FileHashCache$$ExternalSyntheticLambda2, java.util.function.Consumer] */
             @Override // java.lang.Runnable
             public final void run() {
                 int i2 = i;
@@ -161,8 +158,6 @@ public final class FileHashCache {
                 this.f$0 = this;
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r1v9, types: [com.android.server.net.watchlist.FileHashCache$$ExternalSyntheticLambda2, java.util.function.Consumer] */
             @Override // java.lang.Runnable
             public final void run() {
                 int i22 = i2;

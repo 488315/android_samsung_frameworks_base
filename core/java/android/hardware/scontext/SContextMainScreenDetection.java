@@ -8,13 +8,11 @@ public class SContextMainScreenDetection extends SContextEventContext {
     public static final Parcelable.Creator<SContextMainScreenDetection> CREATOR =
             new Parcelable.Creator<SContextMainScreenDetection>() { // from class:
                 // android.hardware.scontext.SContextMainScreenDetection.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextMainScreenDetection createFromParcel(Parcel in) {
                     return new SContextMainScreenDetection(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextMainScreenDetection[] newArray(int size) {
                     return new SContextMainScreenDetection[size];

@@ -18,7 +18,6 @@ final class MobileConnectionRepositoryImpl$callbackEvents$1$1 extends SuspendLam
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileConnectionRepositoryImpl$callbackEvents$1$1(MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl, MobileInputLogger mobileInputLogger, Continuation continuation) {
         super(2, continuation);
         this.$this_run = mobileConnectionRepositoryImpl;
@@ -49,7 +48,6 @@ final class MobileConnectionRepositoryImpl$callbackEvents$1$1 extends SuspendLam
             mobileConnectionRepositoryImpl.telephonyManager.registerTelephonyCallback(ExecutorsKt.asExecutor(mobileConnectionRepositoryImpl.bgDispatcher), mobileConnectionRepositoryImpl$callbackEvents$1$1$callback$1);
             final MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl2 = this.$this_run;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$callbackEvents$1$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

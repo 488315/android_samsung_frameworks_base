@@ -435,7 +435,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
         this.mCameraDevice.createCaptureSession(sessionConfiguration);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ParcelCaptureResult initializeParcelable(CaptureResult result) {
         ParcelCaptureResult ret = new ParcelCaptureResult();
         ret.cameraId = result.getCameraId();
@@ -446,7 +445,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
         return ret;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ParcelTotalCaptureResult initializeParcelable(TotalCaptureResult totalResult) {
         ParcelTotalCaptureResult ret = new ParcelTotalCaptureResult();
         ret.logicalCameraId = totalResult.getCameraId();
@@ -758,12 +756,10 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$release$0() {
         this.mCallbacks.onClosed(this);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyConfigurationFailure() {
         synchronized (this.mInterfaceLock) {
             if (this.mInitialized) {
@@ -787,7 +783,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$notifyConfigurationFailure$1() {
         this.mCallbacks.onConfigureFailed(this);
     }
@@ -824,7 +819,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class InitializeSessionHandler extends IInitializeSessionCallback.Stub {
         private InitializeSessionHandler() {}
 
@@ -882,7 +876,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
                 InitializeSessionHandler.this.onFailure();
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$run$0() {
                 CameraAdvancedExtensionSessionImpl.this.mCallbacks.onConfigured(
                         CameraAdvancedExtensionSessionImpl.this);
@@ -913,7 +906,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class RequestCallbackHandler extends ICaptureCallback.Stub {
         private final String mCameraId;
         private final CameraExtensionSession.ExtensionCaptureCallback mClientCallbacks;
@@ -949,7 +941,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureStarted$0(long timestamp) {
             this.mClientCallbacks.onCaptureStarted(
                     CameraAdvancedExtensionSessionImpl.this, this.mClientRequest, timestamp);
@@ -973,7 +964,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureProcessStarted$1() {
             this.mClientCallbacks.onCaptureProcessStarted(
                     CameraAdvancedExtensionSessionImpl.this, this.mClientRequest);
@@ -997,7 +987,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureFailed$2() {
             this.mClientCallbacks.onCaptureFailed(
                     CameraAdvancedExtensionSessionImpl.this, this.mClientRequest);
@@ -1023,7 +1012,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureProcessFailed$3(int captureFailureReason) {
             this.mClientCallbacks.onCaptureFailed(
                     CameraAdvancedExtensionSessionImpl.this,
@@ -1049,7 +1037,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureSequenceCompleted$4(int captureSequenceId) {
             this.mClientCallbacks.onCaptureSequenceCompleted(
                     CameraAdvancedExtensionSessionImpl.this, captureSequenceId);
@@ -1073,7 +1060,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureSequenceAborted$5(int captureSequenceId) {
             this.mClientCallbacks.onCaptureSequenceAborted(
                     CameraAdvancedExtensionSessionImpl.this, captureSequenceId);
@@ -1114,7 +1100,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureCompleted$6(TotalCaptureResult totalResult) {
             this.mClientCallbacks.onCaptureResultAvailable(
                     CameraAdvancedExtensionSessionImpl.this, this.mClientRequest, totalResult);
@@ -1138,7 +1123,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureProcessProgressed$7(int progress) {
             this.mClientCallbacks.onCaptureProcessProgressed(
                     CameraAdvancedExtensionSessionImpl.this, this.mClientRequest, progress);
@@ -1510,7 +1494,6 @@ public final class CameraAdvancedExtensionSessionImpl extends CameraExtensionSes
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static CaptureRequest initializeCaptureRequest(
             CameraDevice cameraDevice,
             Request request,

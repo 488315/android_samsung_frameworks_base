@@ -567,8 +567,6 @@ public final class ContentRecorder implements WindowContainerListener {
                 rect2.width(), this.mLastRecordedBounds.height());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0110  */
-    /* JADX WARN: Removed duplicated region for block: B:65:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

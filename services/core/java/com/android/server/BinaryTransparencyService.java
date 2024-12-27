@@ -337,7 +337,6 @@ public final class BinaryTransparencyService extends SystemService {
             return BinaryTransparencyService.this.mVbmetaDigest;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,
@@ -442,7 +441,6 @@ public final class BinaryTransparencyService extends SystemService {
                     }
                 }
 
-                /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                 public final int onCommand(String str) {
                     char c;
                     String str2;
@@ -1694,7 +1692,6 @@ public final class BinaryTransparencyService extends SystemService {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0027 A[LOOP:0: B:10:0x0021->B:12:0x0027, LOOP_END] */
     /* renamed from: -$$Nest$mlogBiometricProperties, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -17,13 +17,11 @@ public final class VisualQueryDetectedResult implements Parcelable {
             new Parcelable.Creator<
                     VisualQueryDetectedResult>() { // from class:
                                                    // android.service.voice.VisualQueryDetectedResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VisualQueryDetectedResult[] newArray(int size) {
                     return new VisualQueryDetectedResult[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VisualQueryDetectedResult createFromParcel(Parcel in) {
                     return new VisualQueryDetectedResult(in);
@@ -33,12 +31,10 @@ public final class VisualQueryDetectedResult implements Parcelable {
     private final String mPartialQuery;
     private final int mSpeakerId;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String defaultPartialQuery() {
         return "";
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultSpeakerId() {
         return 0;
     }
@@ -47,7 +43,6 @@ public final class VisualQueryDetectedResult implements Parcelable {
         return 15;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static byte[] defaultAccessibilityDetectionData() {
         return null;
     }

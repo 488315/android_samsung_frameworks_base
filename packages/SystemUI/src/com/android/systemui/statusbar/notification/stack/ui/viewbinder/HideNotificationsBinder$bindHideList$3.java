@@ -16,7 +16,6 @@ final class HideNotificationsBinder$bindHideList$3 extends SuspendLambda impleme
     final /* synthetic */ DisplaySwitchNotificationsHiderTracker $hiderTracker;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HideNotificationsBinder$bindHideList$3(DisplaySwitchNotificationsHiderTracker displaySwitchNotificationsHiderTracker, SharedFlow sharedFlow, Continuation continuation) {
         super(2, continuation);
         this.$hiderTracker = displaySwitchNotificationsHiderTracker;

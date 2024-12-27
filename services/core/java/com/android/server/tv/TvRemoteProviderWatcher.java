@@ -37,8 +37,6 @@ public final class TvRemoteProviderWatcher {
     public final Set mUnbundledServicePackages;
     public final int mUserId;
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.tv.TvRemoteProviderWatcher$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.tv.TvRemoteProviderWatcher$2] */
     public TvRemoteProviderWatcher(Context context, Object obj) {
         Handler handler = new Handler(true);
         this.mProviderProxies = new ArrayList();

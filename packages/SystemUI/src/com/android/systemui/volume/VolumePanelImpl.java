@@ -151,8 +151,6 @@ public final class VolumePanelImpl implements VolumeObserver, ExtendableVolumePa
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r2v13, types: [com.android.systemui.volume.VolumePanelImpl$timeOutCallback$1] */
-    /* JADX WARN: Type inference failed for: r2v14, types: [com.android.systemui.volume.VolumePanelImpl$safetyVolumeCallback$1] */
     public VolumePanelImpl(Context context, VolumeDependencyBase volumeDependencyBase) {
         this.volDeps = volumeDependencyBase;
         VolumeDependency volumeDependency = (VolumeDependency) volumeDependencyBase;

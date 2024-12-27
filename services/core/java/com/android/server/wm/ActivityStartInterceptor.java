@@ -148,22 +148,6 @@ public final class ActivityStartInterceptor {
 
        if ("android.intent.action.MAIN".equals(r18.mIntent.getAction()) != false) goto L129;
     */
-    /* JADX WARN: Removed duplicated region for block: B:178:0x05a6  */
-    /* JADX WARN: Removed duplicated region for block: B:180:0x0694 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:181:0x0696  */
-    /* JADX WARN: Removed duplicated region for block: B:197:0x0722 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:198:0x0724  */
-    /* JADX WARN: Removed duplicated region for block: B:228:0x09ab A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:229:0x09ac A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:328:0x0957 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:331:0x0999 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:363:0x05a9  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x01a5  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x01e6 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x01e7  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0245 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0246  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x03fe A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

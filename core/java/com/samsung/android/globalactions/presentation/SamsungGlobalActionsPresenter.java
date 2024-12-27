@@ -390,12 +390,10 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
         hideQuickPanel();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onShowDialog$1() {
         this.mView.dismiss();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onShowDialog$2() {
         this.mView.dismissWithAnimation();
     }

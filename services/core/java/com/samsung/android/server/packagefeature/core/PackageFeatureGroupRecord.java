@@ -33,8 +33,6 @@ public class PackageFeatureGroupRecord {
     public final Map mCallbacks = new ConcurrentHashMap();
     public GroupDataSource mGroupDataSource = GroupDataSource.NULL;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class GroupDataSource {
         public static final /* synthetic */ GroupDataSource[] $VALUES;
         public static final GroupDataSource CACHE_FILE;
@@ -123,7 +121,6 @@ public class PackageFeatureGroupRecord {
         return 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0081 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

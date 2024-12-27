@@ -138,7 +138,6 @@ public final class EdgeLightingDialog extends Dialog implements IEdgeLightingCon
         edgeLightingDialog.mHandler.sendEmptyMessageDelayed(1, 500L);
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.edgelighting.effect.container.EdgeLightingDialog$1] */
     public EdgeLightingDialog(Context context) {
         super(context, R.style.Theme.Translucent.NoTitleBar.Fullscreen);
         this.mUsingBlackBG = false;
@@ -361,7 +360,6 @@ public final class EdgeLightingDialog extends Dialog implements IEdgeLightingCon
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.edgelighting.effect.container.EdgeLightingDialog$1] */
     public EdgeLightingDialog(Context context, int i) {
         super(context, R.style.Theme.Translucent.NoTitleBar.Fullscreen);
         this.mUsingBlackBG = false;

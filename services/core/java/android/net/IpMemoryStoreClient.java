@@ -43,7 +43,6 @@ public abstract class IpMemoryStoreClient {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$delete$18(
             IIpMemoryStore iIpMemoryStore,
             String str,
@@ -53,7 +52,6 @@ public abstract class IpMemoryStoreClient {
         iIpMemoryStore.delete(str, z, OnDeleteStatusListener.toAIDL(onDeleteStatusListener));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$delete$19(
             String str,
             boolean z,
@@ -64,13 +62,11 @@ public abstract class IpMemoryStoreClient {
                         iIpMemoryStore, str, z, onDeleteStatusListener, 0));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$delete$20(
             OnDeleteStatusListener onDeleteStatusListener) throws RemoteException {
         onDeleteStatusListener.onComplete(new Status(-5), 0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$deleteCluster$21(
             IIpMemoryStore iIpMemoryStore,
             String str,
@@ -80,7 +76,6 @@ public abstract class IpMemoryStoreClient {
         iIpMemoryStore.deleteCluster(str, z, OnDeleteStatusListener.toAIDL(onDeleteStatusListener));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$deleteCluster$22(
             String str,
             boolean z,
@@ -91,19 +86,16 @@ public abstract class IpMemoryStoreClient {
                         iIpMemoryStore, str, z, onDeleteStatusListener, 1));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$deleteCluster$23(
             OnDeleteStatusListener onDeleteStatusListener) throws RemoteException {
         onDeleteStatusListener.onComplete(new Status(-5), 0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$factoryReset$25(IIpMemoryStore iIpMemoryStore) {
         ignoringRemoteException(
                 new IpMemoryStoreClient$$ExternalSyntheticLambda5(1, iIpMemoryStore));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$findL2Key$6(
             IIpMemoryStore iIpMemoryStore,
             NetworkAttributes networkAttributes,
@@ -114,7 +106,6 @@ public abstract class IpMemoryStoreClient {
                 OnL2KeyResponseListener.toAIDL(onL2KeyResponseListener));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$findL2Key$7(
             NetworkAttributes networkAttributes,
             OnL2KeyResponseListener onL2KeyResponseListener,
@@ -124,13 +115,11 @@ public abstract class IpMemoryStoreClient {
                         iIpMemoryStore, networkAttributes, onL2KeyResponseListener, 1));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$findL2Key$8(
             OnL2KeyResponseListener onL2KeyResponseListener) throws RemoteException {
         onL2KeyResponseListener.onL2KeyResponse(new Status(-5), null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$isSameNetwork$10(
             String str,
             String str2,
@@ -141,14 +130,12 @@ public abstract class IpMemoryStoreClient {
                         iIpMemoryStore, str, str2, onSameL3NetworkResponseListener, 1));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$isSameNetwork$11(
             OnSameL3NetworkResponseListener onSameL3NetworkResponseListener)
             throws RemoteException {
         onSameL3NetworkResponseListener.onSameL3NetworkResponse(new Status(-5), null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$isSameNetwork$9(
             IIpMemoryStore iIpMemoryStore,
             String str,
@@ -159,7 +146,6 @@ public abstract class IpMemoryStoreClient {
                 str, str2, OnSameL3NetworkResponseListener.toAIDL(onSameL3NetworkResponseListener));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$retrieveBlob$15(
             IIpMemoryStore iIpMemoryStore,
             String str,
@@ -171,7 +157,6 @@ public abstract class IpMemoryStoreClient {
                 str, str2, str3, OnBlobRetrievedListener.toAIDL(onBlobRetrievedListener));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$retrieveBlob$16(
             final String str,
             final String str2,
@@ -189,13 +174,11 @@ public abstract class IpMemoryStoreClient {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$retrieveBlob$17(
             OnBlobRetrievedListener onBlobRetrievedListener) throws RemoteException {
         onBlobRetrievedListener.onBlobRetrieved(new Status(-5), null, null, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$retrieveNetworkAttributes$12(
             IIpMemoryStore iIpMemoryStore,
             String str,
@@ -206,7 +189,6 @@ public abstract class IpMemoryStoreClient {
                 OnNetworkAttributesRetrievedListener.toAIDL(onNetworkAttributesRetrievedListener));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$retrieveNetworkAttributes$13(
             String str,
             OnNetworkAttributesRetrievedListener onNetworkAttributesRetrievedListener,
@@ -216,7 +198,6 @@ public abstract class IpMemoryStoreClient {
                         iIpMemoryStore, str, onNetworkAttributesRetrievedListener, 0));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$retrieveNetworkAttributes$14(
             OnNetworkAttributesRetrievedListener onNetworkAttributesRetrievedListener)
             throws RemoteException {
@@ -224,7 +205,6 @@ public abstract class IpMemoryStoreClient {
                 new Status(-5), null, null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$storeBlob$3(
             IIpMemoryStore iIpMemoryStore,
             String str,
@@ -236,7 +216,6 @@ public abstract class IpMemoryStoreClient {
         iIpMemoryStore.storeBlob(str, str2, str3, blob, OnStatusListener.toAIDL(onStatusListener));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$storeBlob$4(
             final String str,
             final String str2,
@@ -255,13 +234,11 @@ public abstract class IpMemoryStoreClient {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$storeBlob$5(OnStatusListener onStatusListener)
             throws RemoteException {
         onStatusListener.onComplete(new Status(-5));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$storeNetworkAttributes$0(
             IIpMemoryStore iIpMemoryStore,
             String str,
@@ -272,7 +249,6 @@ public abstract class IpMemoryStoreClient {
                 str, networkAttributes.toParcelable(), OnStatusListener.toAIDL(onStatusListener));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$storeNetworkAttributes$1(
             String str,
             NetworkAttributes networkAttributes,
@@ -283,7 +259,6 @@ public abstract class IpMemoryStoreClient {
                         iIpMemoryStore, str, networkAttributes, onStatusListener, 0));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$storeNetworkAttributes$2(
             OnStatusListener onStatusListener) throws RemoteException {
         onStatusListener.onComplete(new Status(-5));

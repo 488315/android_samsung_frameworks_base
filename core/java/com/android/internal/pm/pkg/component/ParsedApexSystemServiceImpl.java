@@ -114,13 +114,11 @@ public class ParsedApexSystemServiceImpl implements ParsedApexSystemService, Par
                 new Parcelable.Creator<
                         ParsedApexSystemServiceImpl>() { // from class:
                                                          // com.android.internal.pm.pkg.component.ParsedApexSystemServiceImpl.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ParsedApexSystemServiceImpl[] newArray(int size) {
                         return new ParsedApexSystemServiceImpl[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ParsedApexSystemServiceImpl createFromParcel(Parcel in) {
                         return new ParsedApexSystemServiceImpl(in);

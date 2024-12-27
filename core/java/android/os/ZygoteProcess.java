@@ -236,7 +236,6 @@ public class ZygoteProcess {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static List<String> getAbiList(BufferedWriter writer, DataInputStream inputStream)
             throws IOException {
         writer.write("1");

@@ -206,7 +206,6 @@ public class RemoteServiceProxy implements ServiceProxy {
         return response;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onReceiveResponse(Response response) {
         Log.d(TAG, "onReceiveResponse: " + response);
         if (response.getResponseListener() != null) {
@@ -254,7 +253,6 @@ public class RemoteServiceProxy implements ServiceProxy {
         it.signal();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onError(final Response response) {
         final Exception exception = response.getException();
         if (this.exceptionHandler != null) {
@@ -280,19 +278,6 @@ public class RemoteServiceProxy implements ServiceProxy {
         it.signal();
     }
 
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0 */
-    /* JADX WARN: Type inference failed for: r0v13, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r0v19 */
-    /* JADX WARN: Type inference failed for: r0v20 */
-    /* JADX WARN: Type inference failed for: r0v21 */
-    /* JADX WARN: Type inference failed for: r1v0 */
-    /* JADX WARN: Type inference failed for: r1v2, types: [android.content.ServiceConnection, android.os.HandlerThread, android.os.Messenger, java.util.concurrent.ExecutorService, java.util.concurrent.Future<java.lang.Void>] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r1v6 */
-    /* JADX WARN: Type inference failed for: r1v7 */
-    /* JADX WARN: Type inference failed for: r1v8 */
     @Override // com.samsung.android.sume.core.service.ServiceProxy
     public synchronized void release() {
         boolean z = 1;

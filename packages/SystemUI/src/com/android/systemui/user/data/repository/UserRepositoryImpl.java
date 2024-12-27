@@ -75,9 +75,6 @@ public final class UserRepositoryImpl implements UserRepository {
         new Companion(null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v11, types: [com.android.systemui.user.data.repository.UserRepositoryImpl$special$$inlined$map$2] */
-    /* JADX WARN: Type inference failed for: r3v7, types: [T, com.android.systemui.user.data.model.SelectionStatus] */
     public UserRepositoryImpl(Context context, UserManager userManager, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, CoroutineDispatcher coroutineDispatcher2, GlobalSettings globalSettings, UserTracker userTracker) {
         this.appContext = context;
         this.manager = userManager;
@@ -117,9 +114,6 @@ public final class UserRepositoryImpl implements UserRepository {
                     this.this$0 = userRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:19:0x0066 A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:20:0x003b  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -251,8 +245,6 @@ public final class UserRepositoryImpl implements UserRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

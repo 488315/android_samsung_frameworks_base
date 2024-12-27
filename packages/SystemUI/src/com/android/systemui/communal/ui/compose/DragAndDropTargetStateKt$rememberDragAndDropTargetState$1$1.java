@@ -14,7 +14,6 @@ final class DragAndDropTargetStateKt$rememberDragAndDropTargetState$1$1 extends 
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DragAndDropTargetStateKt$rememberDragAndDropTargetState$1$1(MutableFloatState mutableFloatState, LazyGridState lazyGridState, Continuation continuation) {
         super(2, continuation);
         this.$autoScrollSpeed = mutableFloatState;
@@ -37,9 +36,6 @@ final class DragAndDropTargetStateKt$rememberDragAndDropTargetState$1$1 extends 
     
         if (((androidx.compose.runtime.SnapshotMutableFloatStateImpl) r6.$autoScrollSpeed).getFloatValue() == 0.0f) goto L23;
      */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0062 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0040  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:15:0x0060 -> B:6:0x0013). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -90,8 +90,6 @@ public final class KeyguardSliceViewController extends ViewController implements
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.keyguard.KeyguardSliceViewController$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.keyguard.KeyguardSliceViewController$1] */
     public KeyguardSliceViewController(Handler handler, Handler handler2, KeyguardSliceView keyguardSliceView, ActivityStarter activityStarter, ConfigurationController configurationController, TunerService tunerService, DumpManager dumpManager, DisplayTracker displayTracker) {
         super(keyguardSliceView);
         this.mTunable = new TunerService.Tunable() { // from class: com.android.keyguard.KeyguardSliceViewController$$ExternalSyntheticLambda0

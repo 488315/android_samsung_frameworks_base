@@ -31,7 +31,6 @@ public final class KeyboardLedController implements InputManager.InputDeviceList
     public final NativeInputManagerService mNative;
     public SensorPrivacyManager mSensorPrivacyManager;
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.input.KeyboardLedController$1] */
     public KeyboardLedController(
             Context context, Looper looper, NativeInputManagerService.NativeImpl nativeImpl) {
         this.mContext = context;

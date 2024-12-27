@@ -42,7 +42,6 @@ public final class SecPanelExpansionStateRepository {
             int label;
             final /* synthetic */ SecPanelExpansionStateRepository this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C01851(SecPanelExpansionStateRepository secPanelExpansionStateRepository, Function1 function1, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = secPanelExpansionStateRepository;
@@ -77,7 +76,6 @@ public final class SecPanelExpansionStateRepository {
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(Function1 function1, Continuation continuation) {
             super(2, continuation);
             this.$notify = function1;

@@ -142,9 +142,6 @@ public final class PermissionManagerService extends IPermissionManager.Stub {
         
             return 2;
          */
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v19, types: [int] */
-        /* JADX WARN: Type inference failed for: r0v21, types: [int] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -503,15 +500,6 @@ public final class PermissionManagerService extends IPermissionManager.Stub {
             return packagesForUid != null ? packagesForUid[0] : AppOpsManager.resolvePackageName(attributionSource.getUid(), attributionSource.getPackageName());
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r16v0 */
-        /* JADX WARN: Type inference failed for: r16v1 */
-        /* JADX WARN: Type inference failed for: r16v2 */
-        /* JADX WARN: Type inference failed for: r17v0 */
-        /* JADX WARN: Type inference failed for: r17v1 */
-        /* JADX WARN: Type inference failed for: r17v2 */
-        /* JADX WARN: Type inference failed for: r1v11, types: [int] */
-        /* JADX WARN: Type inference failed for: r1v9, types: [int] */
         public final int checkOp(int i, AttributionSourceState attributionSourceState, String str, boolean z, boolean z2) {
             int i2;
             int i3;
@@ -700,8 +688,6 @@ public final class PermissionManagerService extends IPermissionManager.Stub {
         public final AtomicBoolean mFinished = new AtomicBoolean(false);
         public final IBinder mToken;
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.IBinder$DeathRecipient, com.android.server.pm.permission.PermissionManagerService$RegisteredAttribution$$ExternalSyntheticLambda0] */
         public RegisteredAttribution(final Context context, final int i, final AttributionSource attributionSource, final boolean z) {
             ?? r0 = new IBinder.DeathRecipient() { // from class: com.android.server.pm.permission.PermissionManagerService$RegisteredAttribution$$ExternalSyntheticLambda0
                 @Override // android.os.IBinder.DeathRecipient

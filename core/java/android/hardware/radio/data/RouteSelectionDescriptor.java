@@ -11,7 +11,6 @@ public class RouteSelectionDescriptor implements Parcelable {
     public static final Parcelable.Creator<RouteSelectionDescriptor> CREATOR =
             new Parcelable.Creator<RouteSelectionDescriptor>() { // from class:
                 // android.hardware.radio.data.RouteSelectionDescriptor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RouteSelectionDescriptor createFromParcel(Parcel _aidl_source) {
                     RouteSelectionDescriptor _aidl_out = new RouteSelectionDescriptor();
@@ -19,7 +18,6 @@ public class RouteSelectionDescriptor implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RouteSelectionDescriptor[] newArray(int _aidl_size) {
                     return new RouteSelectionDescriptor[_aidl_size];

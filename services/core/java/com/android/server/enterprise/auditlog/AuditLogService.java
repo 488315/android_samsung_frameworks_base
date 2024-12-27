@@ -89,8 +89,6 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         this(new Injector(context));
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.enterprise.auditlog.AuditLogService$1] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.enterprise.auditlog.AuditLogService$1] */
     public AuditLogService(Injector injector) {
         final int i = 0;
         this.mRemovableMediaBroadcastReceiver =
@@ -621,9 +619,6 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
 
        if (r3 != null) goto L15;
     */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0096  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -861,7 +856,6 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
                 && i == UserHandle.getUserId(i2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x006f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -988,7 +982,6 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00bf  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1268,18 +1261,6 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         return !this.mLinkedHashMap.isEmpty();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:106:0x0141  */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x00df  */
-    /* JADX WARN: Removed duplicated region for block: B:115:0x00e1  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x010e  */
-    /* JADX WARN: Removed duplicated region for block: B:132:0x0110  */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x00af  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0125  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x014b  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x01b7  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x01ae  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x012b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -10,12 +10,6 @@ public final class IpcSerializer {
     public static final int $stable = 8;
     private final Channel channel = ChannelKt.Channel$default(0, null, null, 7);
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0051 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x005a  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x003e  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:18:0x007b -> B:11:0x0047). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -98,11 +92,6 @@ public final class IpcSerializer {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.util.kotlin.IpcSerializer.process(kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00a4 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0096 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0057  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

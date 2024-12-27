@@ -96,7 +96,6 @@ class ViewRootRectTracker {
         return this.mRootRects;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public List<Rect> getTrackedRectsForView(View v) {
         List<Rect> rects = this.mRectCollector.apply(v);
         return rects == null ? Collections.emptyList() : rects;

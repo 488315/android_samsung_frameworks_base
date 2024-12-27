@@ -17,14 +17,12 @@ public final class DsmccResponse extends BroadcastInfoResponse implements Parcel
     public static final Parcelable.Creator<DsmccResponse> CREATOR =
             new Parcelable.Creator<
                     DsmccResponse>() { // from class: android.media.tv.DsmccResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DsmccResponse createFromParcel(Parcel source) {
                     source.readInt();
                     return DsmccResponse.createFromParcelBody(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DsmccResponse[] newArray(int size) {
                     return new DsmccResponse[size];
@@ -86,7 +84,6 @@ public final class DsmccResponse extends BroadcastInfoResponse implements Parcel
         this.mEventNames = eventNames;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private DsmccResponse(Parcel source) {
         super(6, source);
         char c;
@@ -206,7 +203,6 @@ public final class DsmccResponse extends BroadcastInfoResponse implements Parcel
         return 0;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.media.tv.BroadcastInfoResponse, android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         char c;

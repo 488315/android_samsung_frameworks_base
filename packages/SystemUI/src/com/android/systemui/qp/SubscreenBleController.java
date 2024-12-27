@@ -56,7 +56,6 @@ public final class SubscreenBleController implements SubscreenQSControllerContra
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.qp.SubscreenBleController$1] */
     private SubscreenBleController() {
     }
 

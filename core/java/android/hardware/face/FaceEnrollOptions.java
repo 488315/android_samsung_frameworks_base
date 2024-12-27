@@ -11,13 +11,11 @@ public class FaceEnrollOptions implements Parcelable {
     public static final Parcelable.Creator<FaceEnrollOptions> CREATOR =
             new Parcelable.Creator<
                     FaceEnrollOptions>() { // from class: android.hardware.face.FaceEnrollOptions.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceEnrollOptions[] newArray(int size) {
                     return new FaceEnrollOptions[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceEnrollOptions createFromParcel(Parcel in) {
                     return new FaceEnrollOptions(in);
@@ -32,7 +30,6 @@ public class FaceEnrollOptions implements Parcelable {
     @Retention(RetentionPolicy.SOURCE)
     public @interface EnrollReason {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultEnrollReason() {
         return 0;
     }

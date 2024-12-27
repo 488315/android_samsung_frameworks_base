@@ -8,13 +8,11 @@ public final class WalletServiceEventListenerRequest implements Parcelable {
             new Parcelable.Creator<
                     WalletServiceEventListenerRequest>() { // from class:
                                                            // android.service.quickaccesswallet.WalletServiceEventListenerRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WalletServiceEventListenerRequest createFromParcel(Parcel source) {
                     return WalletServiceEventListenerRequest.readFromParcel(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WalletServiceEventListenerRequest[] newArray(int size) {
                     return new WalletServiceEventListenerRequest[size];
@@ -36,7 +34,6 @@ public final class WalletServiceEventListenerRequest implements Parcelable {
         dest.writeString(this.mListenerId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static WalletServiceEventListenerRequest readFromParcel(Parcel source) {
         String listenerId = source.readString();
         return new WalletServiceEventListenerRequest(listenerId);

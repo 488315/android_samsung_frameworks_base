@@ -79,7 +79,6 @@ public abstract class ForwardingListener
         return true;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private boolean onTouchObserved(MotionEvent motionEvent) {
         View view = this.mSrc;
         if (!view.isEnabled()) {
@@ -128,7 +127,6 @@ public abstract class ForwardingListener
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onLongPress() {
         clearCallbacks();
         View src = this.mSrc;

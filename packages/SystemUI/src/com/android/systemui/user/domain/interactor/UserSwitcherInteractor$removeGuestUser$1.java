@@ -64,7 +64,6 @@ final class UserSwitcherInteractor$removeGuestUser$1 extends SuspendLambda imple
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherInteractor$removeGuestUser$1(UserSwitcherInteractor userSwitcherInteractor, int i, int i2, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userSwitcherInteractor;

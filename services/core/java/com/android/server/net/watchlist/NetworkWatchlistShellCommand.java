@@ -24,8 +24,6 @@ public final class NetworkWatchlistShellCommand extends ShellCommand {
         this.mService = networkWatchlistService;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0036  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0042 A[Catch: Exception -> 0x0026, TRY_LEAVE, TryCatch #0 {Exception -> 0x0026, blocks: (B:7:0x000c, B:15:0x0038, B:17:0x003d, B:19:0x0042, B:21:0x001c, B:24:0x0028), top: B:6:0x000c }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

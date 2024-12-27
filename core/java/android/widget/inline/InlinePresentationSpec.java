@@ -16,13 +16,11 @@ public final class InlinePresentationSpec implements Parcelable {
             new Parcelable.Creator<
                     InlinePresentationSpec>() { // from class:
                                                 // android.widget.inline.InlinePresentationSpec.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InlinePresentationSpec[] newArray(int size) {
                     return new InlinePresentationSpec[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InlinePresentationSpec createFromParcel(Parcel in) {
                     return new InlinePresentationSpec(in);
@@ -32,7 +30,6 @@ public final class InlinePresentationSpec implements Parcelable {
     private final Size mMinSize;
     private final Bundle mStyle;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Bundle defaultStyle() {
         return Bundle.EMPTY;
     }

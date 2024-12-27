@@ -11,13 +11,11 @@ public final class RemoveSpaceGesture extends HandwritingGesture implements Parc
             new Parcelable.Creator<
                     RemoveSpaceGesture>() { // from class:
                                             // android.view.inputmethod.RemoveSpaceGesture.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoveSpaceGesture createFromParcel(Parcel source) {
                     return new RemoveSpaceGesture(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoveSpaceGesture[] newArray(int size) {
                     return new RemoveSpaceGesture[size];

@@ -161,7 +161,6 @@ public final class DeviceEntryIconViewModel {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r7v2, types: [com.android.systemui.keyguard.ui.viewmodel.DeviceEntryIconViewModel$special$$inlined$map$1] */
     public DeviceEntryIconViewModel(Set<DeviceEntryIconTransition> set, BurnInInteractor burnInInteractor, ShadeInteractor shadeInteractor, DeviceEntryUdfpsInteractor deviceEntryUdfpsInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, KeyguardInteractor keyguardInteractor, AodToLockscreenTransitionViewModel aodToLockscreenTransitionViewModel, Lazy lazy, DeviceEntryInteractor deviceEntryInteractor, DeviceEntrySourceInteractor deviceEntrySourceInteractor, AccessibilityInteractor accessibilityInteractor, CoroutineScope coroutineScope) {
         this.keyguardInteractor = keyguardInteractor;
         this.keyguardViewController = lazy;
@@ -202,8 +201,6 @@ public final class DeviceEntryIconViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -322,8 +319,6 @@ public final class DeviceEntryIconViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

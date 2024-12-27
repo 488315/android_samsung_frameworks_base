@@ -15,7 +15,6 @@ final class ReduceBrightColorsControllerExtKt$isEnabled$2 extends SuspendLambda 
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ReduceBrightColorsControllerExtKt$isEnabled$2(ReduceBrightColorsController reduceBrightColorsController, Continuation continuation) {
         super(2, continuation);
         this.$this_isEnabled = reduceBrightColorsController;

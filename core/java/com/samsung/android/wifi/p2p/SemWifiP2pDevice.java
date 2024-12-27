@@ -15,7 +15,6 @@ public class SemWifiP2pDevice implements Parcelable {
             new Parcelable.Creator<
                     SemWifiP2pDevice>() { // from class:
                                           // com.samsung.android.wifi.p2p.SemWifiP2pDevice.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWifiP2pDevice createFromParcel(Parcel in) {
                     SemWifiP2pDevice device = new SemWifiP2pDevice();
@@ -31,7 +30,6 @@ public class SemWifiP2pDevice implements Parcelable {
                     return device;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWifiP2pDevice[] newArray(int size) {
                     return new SemWifiP2pDevice[size];

@@ -121,7 +121,6 @@ public final class SearchUiPerUserService extends AbstractPerUserSystemService
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.searchui.SearchUiPerUserService$$ExternalSyntheticLambda2] */
     public final void onCreateSearchSessionLocked(
             SearchContext searchContext, final SearchSessionId searchSessionId, IBinder iBinder) {
         if (!resolveService(

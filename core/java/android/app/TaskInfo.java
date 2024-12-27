@@ -325,7 +325,6 @@ public class TaskInfo {
         this.hasConfigChanged = source.readBoolean();
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.userId);
         dest.writeInt(this.taskId);

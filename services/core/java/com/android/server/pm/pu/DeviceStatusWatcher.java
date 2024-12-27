@@ -194,8 +194,6 @@ public final class DeviceStatusWatcher {
         public final IntentFilter mStatusFilter;
         public final AnonymousClass1 mStatusReceiver;
 
-        /* JADX WARN: Type inference failed for: r4v2, types: [com.android.server.pm.pu.DeviceStatusWatcher$ReceiverController$1] */
-        /* JADX WARN: Type inference failed for: r4v3, types: [com.android.server.pm.pu.DeviceStatusWatcher$ReceiverController$1] */
         public ReceiverController() {
             final int i = 0;
             this.mShutdownReceiver =
@@ -1377,8 +1375,6 @@ public final class DeviceStatusWatcher {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.pm.pu.DeviceStatusWatcher$1] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.pm.pu.DeviceStatusWatcher$2] */
     public DeviceStatusWatcher(ProfileUtilizationService profileUtilizationService) {
         this.mService = profileUtilizationService;
     }

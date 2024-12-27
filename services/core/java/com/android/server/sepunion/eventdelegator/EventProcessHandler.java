@@ -28,8 +28,6 @@ public final class EventProcessHandler extends Handler {
         TAG = "SemDeviceInfoManagerService";
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.sepunion.eventdelegator.EventProcessHandler$2] */
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.sepunion.eventdelegator.EventProcessHandler$1] */
     public EventProcessHandler(
             Context context,
             SemDeviceInfoManagerService semDeviceInfoManagerService,

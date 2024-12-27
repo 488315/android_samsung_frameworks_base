@@ -437,7 +437,6 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         return originalImageState;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     /* renamed from: notifySharedElementEnd, reason: merged with bridge method [inline-methods] */
     public void lambda$scheduleSetSharedElementEnd$0(ArrayList<View> snapshots) {
         if (this.mListener != null) {
@@ -724,7 +723,6 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     /* renamed from: setGhostVisibility, reason: merged with bridge method [inline-methods] */
     public void lambda$scheduleGhostVisibilityChange$1(int visibility) {
         int numSharedElements = this.mSharedElements.size();

@@ -29,7 +29,6 @@ public class ConnectivitySettingsUtils {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static int getPrivateDnsModeAsInt(String mode) {
         char c;
         if (TextUtils.isEmpty(mode)) {

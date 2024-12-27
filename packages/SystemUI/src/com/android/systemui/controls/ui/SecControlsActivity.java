@@ -273,8 +273,6 @@ public final class SecControlsActivity extends BaseActivity {
     
         if (com.android.systemui.controls.controller.Favorites.getActiveFlag(r5) == false) goto L19;
      */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0116  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0121  */
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, android.app.Activity
     /*
         Code decompiled incorrectly, please refer to instructions dump.

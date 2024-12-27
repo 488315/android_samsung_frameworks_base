@@ -98,13 +98,11 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
     public static final Parcelable.Creator<BatteryUsageStats> CREATOR =
             new Parcelable.Creator<
                     BatteryUsageStats>() { // from class: android.os.BatteryUsageStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BatteryUsageStats createFromParcel(Parcel source) {
                     return new BatteryUsageStats(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BatteryUsageStats[] newArray(int size) {
                     return new BatteryUsageStats[size];
@@ -444,7 +442,6 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public double getUidBatteryConsumerWeight(UidBatteryConsumer uidBatteryConsumer) {
         double consumedPower = uidBatteryConsumer.getConsumedPower();
         long timeInForeground = uidBatteryConsumer.getTimeInStateMs(0);
@@ -706,7 +703,6 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
         serializer.endTag(null, XML_TAG_BATTERY_USAGE_STATS);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static BatteryUsageStats createFromXml(TypedXmlPullParser parser)
             throws XmlPullParserException, IOException {
         boolean z;
@@ -967,7 +963,6 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
             return this;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public long getStatsDuration() {
             if (this.mStatsDurationMs != -1) {
                 return this.mStatsDurationMs;

@@ -8,7 +8,6 @@ public class StorageStats implements Parcelable {
     public static final Parcelable.Creator<StorageStats> CREATOR =
             new Parcelable.Creator<
                     StorageStats>() { // from class: android.security.metrics.StorageStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StorageStats createFromParcel(Parcel _aidl_source) {
                     StorageStats _aidl_out = new StorageStats();
@@ -16,7 +15,6 @@ public class StorageStats implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StorageStats[] newArray(int _aidl_size) {
                     return new StorageStats[_aidl_size];

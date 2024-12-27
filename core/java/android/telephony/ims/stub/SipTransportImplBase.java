@@ -32,7 +32,6 @@ public class SipTransportImplBase {
     class AnonymousClass1 implements IBinder.DeathRecipient {
         AnonymousClass1() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$binderDied$0() {
             SipTransportImplBase.this.binderDiedInternal(null);
         }
@@ -49,7 +48,6 @@ public class SipTransportImplBase {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$binderDied$1(IBinder who) {
             SipTransportImplBase.this.binderDiedInternal(who);
         }
@@ -93,7 +91,6 @@ public class SipTransportImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$createSipDelegate$0(
                 int subId,
                 DelegateRequest request,
@@ -120,7 +117,6 @@ public class SipTransportImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$destroySipDelegate$1(ISipDelegate delegate, int reason) {
             SipTransportImplBase.this.destroySipDelegateInternal(delegate, reason);
         }
@@ -147,7 +143,6 @@ public class SipTransportImplBase {
         throw new UnsupportedOperationException("destroySipDelegate not implemented!");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void createSipDelegateInternal(
             int subId,
             DelegateRequest r,
@@ -159,7 +154,6 @@ public class SipTransportImplBase {
         createSipDelegate(subId, r, wrapper, wrapper);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void destroySipDelegateInternal(ISipDelegate d, int reason) {
         SipDelegateAidlWrapper result = null;
         Iterator<SipDelegateAidlWrapper> it = this.mDelegates.iterator();
@@ -200,7 +194,6 @@ public class SipTransportImplBase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void binderDiedInternal(IBinder who) {
         Iterator<SipDelegateAidlWrapper> it = this.mDelegates.iterator();
         while (it.hasNext()) {

@@ -338,7 +338,6 @@ public class NotificationManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Notification fixNotification(Notification notification) {
         String pkg = this.mContext.getPackageName();
         Notification.addFieldsFromContext(this.mContext, notification);
@@ -1131,13 +1130,11 @@ public class NotificationManager {
         public static final Parcelable.Creator<Policy> CREATOR =
                 new Parcelable.Creator<
                         Policy>() { // from class: android.app.NotificationManager.Policy.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Policy createFromParcel(Parcel in) {
                         return new Policy(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Policy[] newArray(int size) {
                         return new Policy[size];
@@ -1913,7 +1910,6 @@ public class NotificationManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class CallNotificationEventCallbackStub extends ICallNotificationEventCallback.Stub {
         final Executor mExecutor;
         final CallNotificationEventListener mListener;
@@ -1931,7 +1927,6 @@ public class NotificationManager {
             this.mListener = listener;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCallNotificationPosted$0(
                 String packageName, UserHandle userHandle) {
             this.mListener.onCallNotificationPosted(packageName, userHandle);
@@ -1951,7 +1946,6 @@ public class NotificationManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCallNotificationRemoved$1(
                 String packageName, UserHandle userHandle) {
             this.mListener.onCallNotificationRemoved(packageName, userHandle);

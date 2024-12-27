@@ -53,7 +53,6 @@ public final class GestureDescription {
         return this.mDisplayId;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public long getNextKeyPointAtLeast(long offset) {
         long nextKeyPoint = Long.MAX_VALUE;
         for (int i = 0; i < this.mStrokes.size(); i++) {
@@ -72,7 +71,6 @@ public final class GestureDescription {
         return nextKeyPoint;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getPointsForTime(long time, TouchPoint[] touchPoints) {
         int numPointsFound = 0;
         for (int i = 0; i < this.mStrokes.size(); i++) {
@@ -95,7 +93,6 @@ public final class GestureDescription {
         return numPointsFound;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static long getTotalDuration(List<StrokeDescription> paths) {
         long latestEnd = Long.MIN_VALUE;
         for (int i = 0; i < paths.size(); i++) {
@@ -251,13 +248,11 @@ public final class GestureDescription {
         public static final Parcelable.Creator<TouchPoint> CREATOR =
                 new Parcelable.Creator<TouchPoint>() { // from class:
                     // android.accessibilityservice.GestureDescription.TouchPoint.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TouchPoint createFromParcel(Parcel in) {
                         return new TouchPoint(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TouchPoint[] newArray(int size) {
                         return new TouchPoint[size];
@@ -332,13 +327,11 @@ public final class GestureDescription {
         public static final Parcelable.Creator<GestureStep> CREATOR =
                 new Parcelable.Creator<GestureStep>() { // from class:
                     // android.accessibilityservice.GestureDescription.GestureStep.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GestureStep createFromParcel(Parcel in) {
                         return new GestureStep(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GestureStep[] newArray(int size) {
                         return new GestureStep[size];

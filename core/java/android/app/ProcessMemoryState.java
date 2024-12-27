@@ -7,13 +7,11 @@ public final class ProcessMemoryState implements Parcelable {
     public static final Parcelable.Creator<ProcessMemoryState> CREATOR =
             new Parcelable.Creator<
                     ProcessMemoryState>() { // from class: android.app.ProcessMemoryState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ProcessMemoryState createFromParcel(Parcel in) {
                     return new ProcessMemoryState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ProcessMemoryState[] newArray(int size) {
                     return new ProcessMemoryState[size];

@@ -18,13 +18,11 @@ public final class KeyChainSnapshot implements Parcelable {
             new Parcelable.Creator<
                     KeyChainSnapshot>() { // from class:
                                           // android.security.keystore.recovery.KeyChainSnapshot.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyChainSnapshot createFromParcel(Parcel in) {
                     return new KeyChainSnapshot(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyChainSnapshot[] newArray(int length) {
                     return new KeyChainSnapshot[length];

@@ -13,13 +13,11 @@ public final class Text implements Parcelable {
     public static final Parcelable.Creator<Text> CREATOR =
             new Parcelable.Creator<
                     Text>() { // from class: android.app.smartspace.uitemplatedata.Text.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Text createFromParcel(Parcel in) {
                     return new Text(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Text[] newArray(int size) {
                     return new Text[size];

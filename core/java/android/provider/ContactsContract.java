@@ -2009,7 +2009,6 @@ public final class ContactsContract {
                 new Parcelable.Creator<
                         SimAccount>() { // from class:
                                         // android.provider.ContactsContract.SimAccount.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SimAccount createFromParcel(Parcel source) {
                         String accountName = source.readString();
@@ -2021,7 +2020,6 @@ public final class ContactsContract {
                         return simAccount;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SimAccount[] newArray(int size) {
                         return new SimAccount[size];
@@ -2330,7 +2328,6 @@ public final class ContactsContract {
         private MetadataSyncState() {}
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Bundle nullSafeCall(
             ContentResolver resolver, Uri uri, String method, String arg, Bundle extras) {
         try {

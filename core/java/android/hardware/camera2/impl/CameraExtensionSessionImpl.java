@@ -104,7 +104,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         void onImageDropped(long j);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int nativeGetSurfaceFormat(Surface surface) {
         return SurfaceUtils.getSurfaceFormat(surface);
     }
@@ -473,7 +472,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void finishPipelineInitialization() throws RemoteException {
         if (this.mClientRepeatingRequestSurface != null) {
             if (this.mPreviewProcessorType == 0) {
@@ -619,7 +617,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         return repeatingRequest;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ArrayList<CaptureStageImpl> compileInitialRequestList() {
         ArrayList<CaptureStageImpl> captureStageList = new ArrayList<>();
         try {
@@ -881,7 +878,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setInitialCaptureRequest(
             List<CaptureStageImpl> captureStageList, InitialRequestHandler requestHandler)
             throws CameraAccessException {
@@ -891,14 +887,12 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         this.mCaptureSession.capture(initialRequest, requestHandler, this.mHandler);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int setRepeatingRequest(
             CaptureStageImpl captureStage, CameraCaptureSession.CaptureCallback requestHandler)
             throws CameraAccessException {
         return setRepeatingRequest(captureStage, requestHandler, (CaptureRequest) null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int setRepeatingRequest(
             CaptureStageImpl captureStage,
             CameraCaptureSession.CaptureCallback requestHandler,
@@ -1001,12 +995,10 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$release$0() {
         this.mCallbacks.onClosed(this);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyConfigurationFailure() {
         synchronized (this.mInterfaceLock) {
             if (this.mInitialized) {
@@ -1030,12 +1022,10 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$notifyConfigurationFailure$1() {
         this.mCallbacks.onConfigureFailed(this);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyConfigurationSuccess() {
         synchronized (this.mInterfaceLock) {
             if (this.mInitialized) {
@@ -1059,7 +1049,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$notifyConfigurationSuccess$2() {
         this.mCallbacks.onConfigured(this);
     }
@@ -1169,7 +1158,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class BurstRequestHandler extends CameraCaptureSession.CaptureCallback {
         private final CameraOutputImageCallback mBurstImageCallback;
         private final CameraExtensionSession.ExtensionCaptureCallback mCallbacks;
@@ -1196,7 +1184,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             this.mBurstImageCallback = imageCallback;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void notifyCaptureFailed() {
             if (!this.mCaptureFailed) {
                 this.mCaptureFailed = true;
@@ -1226,7 +1213,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyCaptureFailed$0() {
             this.mCallbacks.onCaptureFailed(CameraExtensionSessionImpl.this, this.mClientRequest);
         }
@@ -1269,7 +1255,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureStarted$1(long timestamp) {
             this.mCallbacks.onCaptureStarted(
                     CameraExtensionSessionImpl.this, this.mClientRequest, timestamp);
@@ -1308,7 +1293,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureSequenceAborted$2(int sequenceId) {
             this.mCallbacks.onCaptureSequenceAborted(CameraExtensionSessionImpl.this, sequenceId);
         }
@@ -1332,7 +1316,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureSequenceCompleted$3(int sequenceId) {
             this.mCallbacks.onCaptureSequenceCompleted(CameraExtensionSessionImpl.this, sequenceId);
         }
@@ -1394,13 +1377,11 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             Log.e(CameraExtensionSessionImpl.TAG, "Capture result without valid sensor timestamp!");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureCompleted$4() {
             this.mCallbacks.onCaptureProcessStarted(
                     CameraExtensionSessionImpl.this, this.mClientRequest);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void checkAndFireBurstProcessing() {
             if (this.mCaptureRequestMap.size() == this.mCaptureStageMap.size()) {
                 for (Pair<Image, TotalCaptureResult> captureStage :
@@ -1470,13 +1451,11 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$checkAndFireBurstProcessing$5() {
             this.mCallbacks.onCaptureProcessStarted(
                     CameraExtensionSessionImpl.this, this.mClientRequest);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$checkAndFireBurstProcessing$6() {
             this.mCallbacks.onCaptureFailed(CameraExtensionSessionImpl.this, this.mClientRequest);
         }
@@ -1489,7 +1468,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
                 BurstRequestHandler.this.notifyCaptureFailed();
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // android.hardware.camera2.impl.CameraExtensionSessionImpl.OnImageAvailableListener
             public void onImageAvailable(ImageReader reader, Image img) {
                 if (BurstRequestHandler.this.mCaptureFailed) {
@@ -1746,7 +1724,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class CaptureResultHandler extends IProcessResultImpl.Stub {
         private final CameraExtensionSession.ExtensionCaptureCallback mCallbacks;
         private final CaptureRequest mClientRequest;
@@ -1799,7 +1776,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureCompleted$0(TotalCaptureResult totalResult) {
             this.mCallbacks.onCaptureResultAvailable(
                     CameraExtensionSessionImpl.this, this.mClientRequest, totalResult);
@@ -1823,14 +1799,12 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureProcessProgressed$1(int progress) {
             this.mCallbacks.onCaptureProcessProgressed(
                     CameraExtensionSessionImpl.this, this.mClientRequest, progress);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class PreviewRequestHandler extends CameraCaptureSession.CaptureCallback {
         private final CameraExtensionSession.ExtensionCaptureCallback mCallbacks;
         private CaptureResultHandler mCaptureResultHandler;
@@ -1928,7 +1902,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             this.mRepeatingImageCallback.registerListener(Long.valueOf(j), this.mImageCallback);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureStarted$0(long timestamp) {
             this.mCallbacks.onCaptureStarted(
                     CameraExtensionSessionImpl.this, this.mClientRequest, timestamp);
@@ -1962,7 +1935,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             CameraExtensionSessionImpl.this.notifyConfigurationFailure();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureSequenceAborted$1(int sequenceId) {
             this.mCallbacks.onCaptureSequenceAborted(CameraExtensionSessionImpl.this, sequenceId);
         }
@@ -1997,7 +1969,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureSequenceCompleted$2(int sequenceId) {
             this.mCallbacks.onCaptureSequenceCompleted(CameraExtensionSessionImpl.this, sequenceId);
         }
@@ -2023,14 +1994,10 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureFailed$3() {
             this.mCallbacks.onCaptureFailed(CameraExtensionSessionImpl.this, this.mClientRequest);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:31:0x0187 A[Catch: all -> 0x01bc, TRY_ENTER, TryCatch #6 {all -> 0x01bc, blocks: (B:31:0x0187, B:33:0x0195, B:35:0x019d, B:38:0x01ad), top: B:29:0x0185, outer: #2 }] */
-        /* JADX WARN: Removed duplicated region for block: B:38:0x01ad A[Catch: all -> 0x01bc, TRY_LEAVE, TryCatch #6 {all -> 0x01bc, blocks: (B:31:0x0187, B:33:0x0195, B:35:0x019d, B:38:0x01ad), top: B:29:0x0185, outer: #2 }] */
         @Override // android.hardware.camera2.CameraCaptureSession.CaptureCallback
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -2051,13 +2018,11 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
                         + " android.hardware.camera2.TotalCaptureResult):void");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureCompleted$4() {
             this.mCallbacks.onCaptureProcessStarted(
                     CameraExtensionSessionImpl.this, this.mClientRequest);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCaptureCompleted$5() {
             this.mCallbacks.onCaptureFailed(CameraExtensionSessionImpl.this, this.mClientRequest);
         }
@@ -2095,7 +2060,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Long calculatePruneThreshold(
                 LongSparseArray<Pair<Image, TotalCaptureResult>> previewMap) {
             long oldestTimestamp = Long.MAX_VALUE;
@@ -2109,7 +2073,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             return Long.valueOf(oldestTimestamp == Long.MAX_VALUE ? 0L : oldestTimestamp);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void discardPendingRepeatingResults(
                 int idx,
                 LongSparseArray<Pair<Image, TotalCaptureResult>> previewMap,
@@ -2152,7 +2115,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$discardPendingRepeatingResults$6() {
             this.mCallbacks.onCaptureFailed(CameraExtensionSessionImpl.this, this.mClientRequest);
         }
@@ -2197,7 +2159,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         class ImageProcessCallback implements OnImageAvailableListener {
             private ImageProcessCallback() {}
 
@@ -2210,7 +2171,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
                 PreviewRequestHandler.this.mPendingResultMap.put(timestamp, new Pair(null, null));
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
             @Override // android.hardware.camera2.impl.CameraExtensionSessionImpl.OnImageAvailableListener
             public void onImageAvailable(ImageReader reader, Image img) {
                 if (PreviewRequestHandler.this.mPendingResultMap.size() + 1 >= 10) {
@@ -2309,13 +2269,11 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
                 }
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onImageAvailable$0() {
                 PreviewRequestHandler.this.mCallbacks.onCaptureProcessStarted(
                         CameraExtensionSessionImpl.this, PreviewRequestHandler.this.mClientRequest);
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onImageAvailable$1() {
                 PreviewRequestHandler.this.mCallbacks.onCaptureFailed(
                         CameraExtensionSessionImpl.this, PreviewRequestHandler.this.mClientRequest);
@@ -2323,7 +2281,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public CameraMetadataNative initializeFilteredResults(TotalCaptureResult result) {
         CameraMetadataNative captureResults = new CameraMetadataNative();
         for (CaptureResult.Key key : this.mSupportedResultKeys) {
@@ -2364,7 +2321,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         return ret;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ParcelImage initializeParcelImage(Image img) {
         ParcelImage parcelImage = new ParcelImage();
         parcelImage.buffer = img.getHardwareBuffer();
@@ -2387,7 +2343,6 @@ public final class CameraExtensionSessionImpl extends CameraExtensionSession {
         return parcelImage;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static List<CaptureBundle> initializeParcelable(
             HashMap<Integer, Pair<Image, TotalCaptureResult>> captureMap,
             Integer jpegOrientation,

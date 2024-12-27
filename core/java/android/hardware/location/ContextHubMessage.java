@@ -16,13 +16,11 @@ public class ContextHubMessage implements Parcelable {
     public static final Parcelable.Creator<ContextHubMessage> CREATOR =
             new Parcelable.Creator<ContextHubMessage>() { // from class:
                 // android.hardware.location.ContextHubMessage.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContextHubMessage createFromParcel(Parcel in) {
                     return new ContextHubMessage(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContextHubMessage[] newArray(int size) {
                     return new ContextHubMessage[size];

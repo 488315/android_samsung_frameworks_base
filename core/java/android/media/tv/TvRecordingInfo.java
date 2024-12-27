@@ -14,13 +14,11 @@ public final class TvRecordingInfo implements Parcelable {
     public static final Parcelable.Creator<TvRecordingInfo> CREATOR =
             new Parcelable.Creator<
                     TvRecordingInfo>() { // from class: android.media.tv.TvRecordingInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvRecordingInfo createFromParcel(Parcel in) {
                     return new TvRecordingInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvRecordingInfo[] newArray(int size) {
                     return new TvRecordingInfo[size];
@@ -211,7 +209,6 @@ public final class TvRecordingInfo implements Parcelable {
         this.mRecordingStartTimeMillis = in.readLong();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$1(String rating) {
         this.mContentRatings.add(TvContentRating.unflattenFromString(rating));
     }

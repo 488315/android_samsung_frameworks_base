@@ -12,7 +12,6 @@ public final class DevicePolicyDrawableResource implements Parcelable {
     public static final Parcelable.Creator<DevicePolicyDrawableResource> CREATOR =
             new Parcelable.Creator<DevicePolicyDrawableResource>() { // from class:
                 // android.app.admin.DevicePolicyDrawableResource.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DevicePolicyDrawableResource createFromParcel(Parcel in) {
                     String drawableId = in.readString();
@@ -29,7 +28,6 @@ public final class DevicePolicyDrawableResource implements Parcelable {
                             resource);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DevicePolicyDrawableResource[] newArray(int size) {
                     return new DevicePolicyDrawableResource[size];

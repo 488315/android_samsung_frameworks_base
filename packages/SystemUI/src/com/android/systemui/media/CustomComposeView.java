@@ -85,7 +85,6 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
         Object failure;
         this.viewModelProviderFactory = viewModelFactory;
         this.keyguardManager$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.CustomComposeView$keyguardManager$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -98,7 +97,6 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
             }
         });
         this.contentView$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.CustomComposeView$contentView$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -127,7 +125,6 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
                         super(2);
                     }
 
-                    /* JADX WARN: Type inference failed for: r8v4, types: [com.android.systemui.media.CustomComposeView$contentView$2$1$1$1, kotlin.jvm.internal.Lambda] */
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj, Object obj2) {
                         Composer composer = (Composer) obj;
@@ -145,7 +142,6 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
                                 super(3);
                             }
 
-                            /* JADX WARN: Type inference failed for: r7v9, types: [com.android.systemui.media.CustomComposeView$contentView$2$1$1$1$1, kotlin.jvm.internal.Lambda] */
                             @Override // kotlin.jvm.functions.Function3
                             public final Object invoke(Object obj3, Object obj4, Object obj5) {
                                 float f;

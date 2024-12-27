@@ -18,8 +18,6 @@ public final class MobileSignalTransitionManager {
     public MobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1 updateCallback;
     public final long updatePeriod;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class TransitionSignalState {
         public static final /* synthetic */ TransitionSignalState[] $VALUES;
         public static final TransitionSignalState IN_SERVICE;

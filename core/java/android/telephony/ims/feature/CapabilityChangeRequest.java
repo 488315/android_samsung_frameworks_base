@@ -15,13 +15,11 @@ public final class CapabilityChangeRequest implements Parcelable {
             new Parcelable.Creator<
                     CapabilityChangeRequest>() { // from class:
                                                  // android.telephony.ims.feature.CapabilityChangeRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CapabilityChangeRequest createFromParcel(Parcel in) {
                     return new CapabilityChangeRequest(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CapabilityChangeRequest[] newArray(int size) {
                     return new CapabilityChangeRequest[size];

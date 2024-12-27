@@ -10,7 +10,6 @@ final class DeviceBasedSatelliteRepositoryImpl$pollForAvailabilityBasedOnLocatio
     int label;
     final /* synthetic */ DeviceBasedSatelliteRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteRepositoryImpl$pollForAvailabilityBasedOnLocation$3(DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceBasedSatelliteRepositoryImpl;
@@ -36,9 +35,6 @@ final class DeviceBasedSatelliteRepositoryImpl$pollForAvailabilityBasedOnLocatio
         	at jadx.core.utils.ErrorsCounter.error(ErrorsCounter.java:31)
         	at jadx.core.dex.attributes.nodes.NotificationAttrNode.addError(NotificationAttrNode.java:19)
         */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x004f A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0043 A[RETURN] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:11:0x004d -> B:6:0x0023). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -160,7 +160,6 @@ public class CameraInjectionSessionImpl extends CameraInjectionSession
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyError(int errorCode) {
         if (this.mInjectionSession != null) {
             this.mInjectionStatusCallback.onInjectionError(errorCode);

@@ -43,7 +43,6 @@ public final class RotaryInputValueView extends TextView {
     public final float mScaledVerticalScrollFactor;
     public final RotaryInputValueView$$ExternalSyntheticLambda0 mUpdateActivityStatusCallback;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.input.debug.RotaryInputValueView$$ExternalSyntheticLambda0] */
     public RotaryInputValueView(Context context) {
         super(context);
         this.mUpdateActivityStatusCallback =

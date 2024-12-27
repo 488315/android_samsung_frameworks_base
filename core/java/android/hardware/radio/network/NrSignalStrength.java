@@ -11,7 +11,6 @@ public class NrSignalStrength implements Parcelable {
     public static final Parcelable.Creator<NrSignalStrength> CREATOR =
             new Parcelable.Creator<NrSignalStrength>() { // from class:
                 // android.hardware.radio.network.NrSignalStrength.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NrSignalStrength createFromParcel(Parcel _aidl_source) {
                     NrSignalStrength _aidl_out = new NrSignalStrength();
@@ -19,7 +18,6 @@ public class NrSignalStrength implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NrSignalStrength[] newArray(int _aidl_size) {
                     return new NrSignalStrength[_aidl_size];

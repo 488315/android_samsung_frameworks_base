@@ -120,10 +120,6 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
     public interface OnStateEventListener {
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r13v0, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$statusBarWindowStateListener$1, com.android.systemui.statusbar.window.StatusBarWindowStateListener] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$4] */
-    /* JADX WARN: Type inference failed for: r6v11, types: [android.content.BroadcastReceiver, com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$5] */
     public OngoingCardController(Context context, ActivityStarter activityStarter, View view, OnStateEventListener onStateEventListener, IndicatorGardenPresenter indicatorGardenPresenter, IndicatorScaleGardener indicatorScaleGardener, ConfigurationController configurationController, BroadcastDispatcher broadcastDispatcher, NotifCollection notifCollection, NotificationRemoteInputManager notificationRemoteInputManager, StatusBarWindowStateController statusBarWindowStateController) {
         this.mContext = context;
         this.activityStarter = activityStarter;

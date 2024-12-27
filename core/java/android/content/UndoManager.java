@@ -337,7 +337,6 @@ public class UndoManager {
         return getLastOperation(null, owner, mergeMode);
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [T extends android.content.UndoOperation, android.content.UndoOperation] */
     public <T extends UndoOperation> T getLastOperation(Class<T> cls, UndoOwner undoOwner, int i) {
         UndoState topUndo;
         ?? lastOperation;

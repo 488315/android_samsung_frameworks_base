@@ -10,7 +10,6 @@ public class GsmSignalStrength implements Parcelable {
     public static final Parcelable.Creator<GsmSignalStrength> CREATOR =
             new Parcelable.Creator<GsmSignalStrength>() { // from class:
                 // android.hardware.radio.network.GsmSignalStrength.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GsmSignalStrength createFromParcel(Parcel _aidl_source) {
                     GsmSignalStrength _aidl_out = new GsmSignalStrength();
@@ -18,7 +17,6 @@ public class GsmSignalStrength implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GsmSignalStrength[] newArray(int _aidl_size) {
                     return new GsmSignalStrength[_aidl_size];

@@ -30,7 +30,6 @@ public class ProviderAccessStats {
                         }
                     });
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class PerThreadData {
         public int nestCount;
         public long startUptimeMillis;

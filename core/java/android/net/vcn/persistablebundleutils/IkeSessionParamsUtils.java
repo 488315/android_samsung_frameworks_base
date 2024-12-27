@@ -492,7 +492,6 @@ public final class IkeSessionParamsUtils {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class ConfigRequest {
         private static final String ADDRESS_KEY = "address";
         private static final int IPV4_P_CSCF_ADDRESS = 1;

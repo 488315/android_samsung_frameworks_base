@@ -231,8 +231,6 @@ public final class FreecessController {
                 FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__RESOLVER_SWITCH_TABS;
     }
 
-    /* JADX WARN: Type inference failed for: r4v19, types: [com.android.server.am.FreecessController$1] */
-    /* JADX WARN: Type inference failed for: r4v20, types: [com.android.server.am.FreecessController$2] */
     public FreecessController() {
         MARsListManager mARsListManager = MARsListManager.ListManagerHolder.INSTANCE;
         this.mSsrmAllowPackages = mARsListManager.mSsrmAllowPackages;
@@ -274,8 +272,6 @@ public final class FreecessController {
         this.mProcessObserver =
                 new IProcessObserver
                         .Stub() { // from class: com.android.server.am.FreecessController.2
-                    /* JADX WARN: Removed duplicated region for block: B:19:0x0046 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-                    /* JADX WARN: Removed duplicated region for block: B:67:0x00b3 A[Catch: all -> 0x007c, TryCatch #3 {all -> 0x007c, blocks: (B:72:0x0075, B:68:0x00ba, B:51:0x007e, B:53:0x0086, B:55:0x0088, B:57:0x0094, B:59:0x0096, B:61:0x00a0, B:65:0x00a8, B:67:0x00b3), top: B:71:0x0075 }] */
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
                         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -767,13 +763,6 @@ public final class FreecessController {
                 targetUidNameMap, printWriter);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:316:0x06f1 A[LOOP:4: B:314:0x06e9->B:316:0x06f1, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:321:0x0737 A[LOOP:5: B:319:0x0731->B:321:0x0737, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:326:0x07b8  */
-    /* JADX WARN: Removed duplicated region for block: B:372:0x08bf  */
-    /* JADX WARN: Removed duplicated region for block: B:375:0x08d7  */
-    /* JADX WARN: Removed duplicated region for block: B:412:0x0997 A[ORIG_RETURN, RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

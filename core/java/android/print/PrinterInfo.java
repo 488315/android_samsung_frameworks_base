@@ -19,13 +19,11 @@ import java.lang.annotation.RetentionPolicy;
 public final class PrinterInfo implements Parcelable {
     public static final Parcelable.Creator<PrinterInfo> CREATOR =
             new Parcelable.Creator<PrinterInfo>() { // from class: android.print.PrinterInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrinterInfo createFromParcel(Parcel parcel) {
                     return new PrinterInfo(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrinterInfo[] newArray(int size) {
                     return new PrinterInfo[size];
@@ -127,12 +125,10 @@ public final class PrinterInfo implements Parcelable {
         return this.mCapabilities;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static PrinterId checkPrinterId(PrinterId printerId) {
         return (PrinterId) Preconditions.checkNotNull(printerId, "printerId cannot be null.");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int checkStatus(int status) {
         if (status != 1 && status != 2 && status != 3) {
             throw new IllegalArgumentException("status is invalid.");
@@ -140,7 +136,6 @@ public final class PrinterInfo implements Parcelable {
         return status;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String checkName(String name) {
         return (String) Preconditions.checkStringNotEmpty(name, "name cannot be empty.");
     }

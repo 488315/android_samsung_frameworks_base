@@ -465,7 +465,6 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class FixedSizeRemoteViewsCache {
         private static final float sMaxCountSlackPercent = 0.75f;
         private static final int sMaxMemoryLimitInBytes = 2097152;
@@ -662,7 +661,6 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00ef A[Catch: all -> 0x00f4, TryCatch #0 {, blocks: (B:12:0x009f, B:14:0x00b1, B:17:0x00c0, B:18:0x00d0, B:25:0x00eb, B:27:0x00ef, B:28:0x00f2, B:34:0x00e1, B:35:0x00e2, B:20:0x00d1, B:22:0x00db, B:23:0x00dd), top: B:11:0x009f, inners: #1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -742,7 +740,6 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateTemporaryMetaData(IRemoteViewsFactory factory) {
         RemoteViews firstView;
         try {
@@ -776,7 +773,6 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateRemoteViews(
             IRemoteViewsFactory factory, int position, boolean notifyWhenLoaded) {
         boolean viewTypeInRange;
@@ -940,7 +936,6 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
         return getCount() <= 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int[] getVisibleWindow(int count) {
         int[] window;
         int lower = this.mVisibleWindowLowerBound;
@@ -1015,7 +1010,6 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void requestBindService() {
         this.mServiceHandler.removeMessages(4);
         Message.obtain(this.mServiceHandler, 1, this.mAppWidgetId, 0, this.mIntent).sendToTarget();

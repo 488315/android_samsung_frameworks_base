@@ -9,7 +9,6 @@ public abstract class VibrationEffectSegment implements Parcelable {
             new Parcelable.Creator<
                     VibrationEffectSegment>() { // from class:
                                                 // android.os.vibrator.VibrationEffectSegment.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VibrationEffectSegment createFromParcel(Parcel in) {
                     switch (in.readInt()) {
@@ -29,7 +28,6 @@ public abstract class VibrationEffectSegment implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VibrationEffectSegment[] newArray(int size) {
                     return new VibrationEffectSegment[size];

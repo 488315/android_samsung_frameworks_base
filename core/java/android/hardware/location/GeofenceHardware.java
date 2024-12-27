@@ -123,7 +123,6 @@ public final class GeofenceHardware {
         return result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeCallback(GeofenceHardwareCallback callback) {
         synchronized (this.mCallbacks) {
             this.mCallbacks.remove(callback);

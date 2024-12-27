@@ -33,7 +33,6 @@ public final class KeyguardUnfoldTransition {
         this.keyguardRootView = keyguardRootView;
         this.shadeWindowView = notificationShadeWindowView;
         this.filterKeyguardAndSplitShadeOnly = new Function0() { // from class: com.android.keyguard.KeyguardUnfoldTransition$filterKeyguardAndSplitShadeOnly$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -54,7 +53,6 @@ public final class KeyguardUnfoldTransition {
             }
         };
         this.translateAnimator$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.keyguard.KeyguardUnfoldTransition$translateAnimator$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -79,7 +77,6 @@ public final class KeyguardUnfoldTransition {
             }
         });
         this.shortcutButtonsAnimator$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.keyguard.KeyguardUnfoldTransition$shortcutButtonsAnimator$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

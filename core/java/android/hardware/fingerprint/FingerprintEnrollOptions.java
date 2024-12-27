@@ -11,13 +11,11 @@ public class FingerprintEnrollOptions implements Parcelable {
     public static final Parcelable.Creator<FingerprintEnrollOptions> CREATOR =
             new Parcelable.Creator<FingerprintEnrollOptions>() { // from class:
                 // android.hardware.fingerprint.FingerprintEnrollOptions.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FingerprintEnrollOptions[] newArray(int size) {
                     return new FingerprintEnrollOptions[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FingerprintEnrollOptions createFromParcel(Parcel in) {
                     return new FingerprintEnrollOptions(in);
@@ -32,7 +30,6 @@ public class FingerprintEnrollOptions implements Parcelable {
     @Retention(RetentionPolicy.SOURCE)
     public @interface EnrollReason {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultEnrollReason() {
         return 0;
     }

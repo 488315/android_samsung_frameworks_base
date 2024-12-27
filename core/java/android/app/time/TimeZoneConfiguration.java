@@ -14,13 +14,11 @@ public final class TimeZoneConfiguration implements Parcelable {
     public static final Parcelable.Creator<TimeZoneConfiguration> CREATOR =
             new Parcelable.Creator<TimeZoneConfiguration>() { // from class:
                 // android.app.time.TimeZoneConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneConfiguration createFromParcel(Parcel in) {
                     return TimeZoneConfiguration.createFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneConfiguration[] newArray(int size) {
                     return new TimeZoneConfiguration[size];
@@ -37,7 +35,6 @@ public final class TimeZoneConfiguration implements Parcelable {
         this.mBundle = (Bundle) Objects.requireNonNull(builder.mBundle);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static TimeZoneConfiguration createFromParcel(Parcel in) {
         return new Builder().setPropertyBundleInternal(in.readBundle()).build();
     }

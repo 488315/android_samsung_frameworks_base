@@ -16,7 +16,6 @@ final class FaceHelpMessageDeferralInteractor$startUpdatingFaceHelpMessageDeferr
     int label;
     final /* synthetic */ FaceHelpMessageDeferralInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FaceHelpMessageDeferralInteractor$startUpdatingFaceHelpMessageDeferral$2(FaceHelpMessageDeferralInteractor faceHelpMessageDeferralInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = faceHelpMessageDeferralInteractor;

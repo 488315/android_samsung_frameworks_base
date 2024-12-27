@@ -21,7 +21,6 @@ public final class DeviceEntryIconViewBinder$bind$2$1$invokeSuspend$$inlined$lau
     boolean Z$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceEntryIconViewBinder$bind$2$1$invokeSuspend$$inlined$launch$default$4(String str, Continuation continuation, DeviceEntryIconViewModel deviceEntryIconViewModel, DeviceEntryIconView deviceEntryIconView, VibratorHelper vibratorHelper, CoroutineScope coroutineScope) {
         super(2, continuation);
         this.$spanName = str;
@@ -43,8 +42,6 @@ public final class DeviceEntryIconViewBinder$bind$2$1$invokeSuspend$$inlined$lau
         return ((DeviceEntryIconViewBinder$bind$2$1$invokeSuspend$$inlined$launch$default$4) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0092  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0097  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

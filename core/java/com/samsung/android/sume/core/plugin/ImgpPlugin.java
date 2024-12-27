@@ -93,7 +93,6 @@ public class ImgpPlugin extends PluginFixture<ImgpPlugin> {
         return new ImgpPlugin(new ImgpPluginGroup(plugins));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ImgpPluginGroup implements Plugin<ImgpPlugin> {
         private final Map<Enum<?>, Operator> processorMap;
 

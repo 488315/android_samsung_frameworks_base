@@ -30,7 +30,6 @@ final class CommunalEditModeViewModel$onOpenWidgetPicker$2 extends SuspendLambda
     int label;
     final /* synthetic */ CommunalEditModeViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalEditModeViewModel$onOpenWidgetPicker$2(CommunalEditModeViewModel communalEditModeViewModel, Resources resources, PackageManager packageManager, ActivityResultLauncher activityResultLauncher, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalEditModeViewModel;

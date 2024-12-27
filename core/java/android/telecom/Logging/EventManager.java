@@ -347,7 +347,6 @@ public class EventManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$changeEventCacheSize$1(EventRecord newRecord) {
         EventRecord record;
         Loggable recordEntry = newRecord.getRecordEntry();

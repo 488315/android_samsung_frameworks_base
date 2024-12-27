@@ -11,13 +11,11 @@ public final class PreciseCallState implements Parcelable {
     public static final Parcelable.Creator<PreciseCallState> CREATOR =
             new Parcelable.Creator<
                     PreciseCallState>() { // from class: android.telephony.PreciseCallState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PreciseCallState createFromParcel(Parcel in) {
                     return new PreciseCallState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PreciseCallState[] newArray(int size) {
                     return new PreciseCallState[size];

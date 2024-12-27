@@ -129,13 +129,11 @@ public class SemBlurInfo implements Parcelable {
     };
     public static final Parcelable.Creator<SemBlurInfo> CREATOR =
             new Parcelable.Creator<SemBlurInfo>() { // from class: android.view.SemBlurInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemBlurInfo createFromParcel(Parcel in) {
                     return new SemBlurInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemBlurInfo[] newArray(int size) {
                     return new SemBlurInfo[size];

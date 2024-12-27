@@ -171,7 +171,6 @@ public final class PromptViewModel {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r11v0, types: [com.android.systemui.biometrics.ui.viewmodel.PromptViewModel$special$$inlined$map$2, kotlinx.coroutines.flow.Flow] */
     public PromptViewModel(DisplayStateInteractor displayStateInteractor, PromptSelectorInteractor promptSelectorInteractor, Context context, UdfpsOverlayInteractor udfpsOverlayInteractor, BiometricStatusInteractor biometricStatusInteractor, UdfpsUtils udfpsUtils, IconProvider iconProvider, ActivityTaskManager activityTaskManager) {
         this.promptSelectorInteractor = promptSelectorInteractor;
         this.context = context;
@@ -209,8 +208,6 @@ public final class PromptViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -337,8 +334,6 @@ public final class PromptViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -441,8 +436,6 @@ public final class PromptViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -547,8 +540,6 @@ public final class PromptViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -638,8 +629,6 @@ public final class PromptViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -770,9 +759,6 @@ public final class PromptViewModel {
                     this.this$0 = promptViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:36:0x00c3  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -824,8 +810,6 @@ public final class PromptViewModel {
                     this.this$0 = promptViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -956,8 +940,6 @@ public final class PromptViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -1052,8 +1034,6 @@ public final class PromptViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -1148,8 +1128,6 @@ public final class PromptViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -1245,8 +1223,6 @@ public final class PromptViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -1322,7 +1298,6 @@ public final class PromptViewModel {
                 int label;
                 final /* synthetic */ PromptViewModel this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass3(Continuation continuation, PromptViewModel promptViewModel) {
                     super(3, continuation);
                     this.this$0 = promptViewModel;
@@ -1394,7 +1369,6 @@ public final class PromptViewModel {
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
                 Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.biometrics.ui.viewmodel.PromptViewModel$special$$inlined$combine$1.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -1498,10 +1472,6 @@ public final class PromptViewModel {
         this.messageJob = null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x004d A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1561,9 +1531,6 @@ public final class PromptViewModel {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.ui.viewmodel.PromptViewModel.needsExplicitConfirmation(com.android.systemui.biometrics.shared.model.BiometricModality, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0099  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0043  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1696,12 +1663,6 @@ public final class PromptViewModel {
         promptSelectorInteractorImpl.setPrompt(promptInfo, intValue, longValue, biometricModalities, longValue2, (String) value5, true, false);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00c4  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00d8  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00e4  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00f6  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0050  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0028  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

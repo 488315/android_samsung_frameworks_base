@@ -6,8 +6,6 @@ import kotlin.enums.EnumEntriesKt;
 
 public interface ControlsMetricsLogger {
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class ControlsEvents implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ ControlsEvents[] $VALUES;
         public static final ControlsEvents CONTROL_DRAG;

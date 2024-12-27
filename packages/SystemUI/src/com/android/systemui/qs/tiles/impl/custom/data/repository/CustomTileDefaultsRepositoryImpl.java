@@ -123,9 +123,6 @@ public final class CustomTileDefaultsRepositoryImpl implements CustomTileDefault
                     this.this$0 = customTileDefaultsRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:19:0x007c A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:20:0x003f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

@@ -2540,7 +2540,6 @@ public class TelephonyManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$uploadCallComposerPicture$1(
             Path pictureToUpload,
             final OutcomeReceiver callback,
@@ -2661,7 +2660,6 @@ public class TelephonyManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass3(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -3499,7 +3497,6 @@ public class TelephonyManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ITelephony getITelephony() {
         if (!sServiceHandleCacheEnabled) {
             return ITelephony.Stub.asInterface(
@@ -3981,7 +3978,6 @@ public class TelephonyManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Throwable createThrowableByClassName(String className, String message) {
         if (className == null) {
             return null;
@@ -7020,7 +7016,6 @@ public class TelephonyManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass9(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -8913,7 +8908,6 @@ public class TelephonyManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void resetServiceCache() {
         synchronized (sCacheLock) {
             if (sITelephony != null) {
@@ -9423,7 +9417,6 @@ public class TelephonyManager {
         final /* synthetic */ OutcomeReceiver val$callback;
         final /* synthetic */ Executor val$executor;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass19(Handler handler, Executor executor, OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$executor = executor;
@@ -9475,13 +9468,11 @@ public class TelephonyManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onReceiveResult$0(
                 OutcomeReceiver callback, int resultCode) {
             callback.onError(TelephonyManager.this.new TimeoutException(resultCode));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onReceiveResult$1(
                 OutcomeReceiver callback, int resultCode) {
             callback.onError(TelephonyManager.this.new ModemErrorException(resultCode));

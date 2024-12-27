@@ -11,7 +11,6 @@ public class CellularIdentifierDisclosure implements Parcelable {
     public static final Parcelable.Creator<CellularIdentifierDisclosure> CREATOR =
             new Parcelable.Creator<CellularIdentifierDisclosure>() { // from class:
                 // android.hardware.radio.network.CellularIdentifierDisclosure.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellularIdentifierDisclosure createFromParcel(Parcel _aidl_source) {
                     CellularIdentifierDisclosure _aidl_out = new CellularIdentifierDisclosure();
@@ -19,7 +18,6 @@ public class CellularIdentifierDisclosure implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellularIdentifierDisclosure[] newArray(int _aidl_size) {
                     return new CellularIdentifierDisclosure[_aidl_size];

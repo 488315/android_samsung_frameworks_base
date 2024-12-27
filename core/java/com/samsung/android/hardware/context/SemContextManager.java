@@ -634,7 +634,6 @@ public class SemContextManager {
         return isAvailableService(service);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean checkHistoryMode(SemContextEvent event) {
         boolean z = false;
         Boolean res = false;

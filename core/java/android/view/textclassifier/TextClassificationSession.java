@@ -26,7 +26,6 @@ final class TextClassificationSession implements TextClassifier {
                 Cleaner.create(this, new CleanerRunnable(this.mEventHelper, this.mDelegate));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ TextSelection lambda$suggestSelection$0(TextSelection.Request request) {
         return this.mDelegate.suggestSelection(request);
     }
@@ -55,7 +54,6 @@ final class TextClassificationSession implements TextClassifier {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ TextClassification lambda$classifyText$1(
             TextClassification.Request request) {
         return this.mDelegate.classifyText(request);
@@ -78,7 +76,6 @@ final class TextClassificationSession implements TextClassifier {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ TextLinks lambda$generateLinks$2(TextLinks.Request request) {
         return this.mDelegate.generateLinks(request);
     }
@@ -100,7 +97,6 @@ final class TextClassificationSession implements TextClassifier {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ ConversationActions lambda$suggestConversationActions$3(
             ConversationActions.Request request) {
         return this.mDelegate.suggestConversationActions(request);
@@ -124,7 +120,6 @@ final class TextClassificationSession implements TextClassifier {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ TextLanguage lambda$detectLanguage$4(TextLanguage.Request request) {
         return this.mDelegate.detectLanguage(request);
     }
@@ -179,7 +174,6 @@ final class TextClassificationSession implements TextClassifier {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Object lambda$onSelectionEvent$5(SelectionEvent event) {
         try {
             if (this.mEventHelper.sanitizeEvent(event)) {
@@ -209,7 +203,6 @@ final class TextClassificationSession implements TextClassifier {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Object lambda$onTextClassifierEvent$6(TextClassifierEvent event) {
         try {
             event.mHiddenTempSessionId = this.mSessionId;

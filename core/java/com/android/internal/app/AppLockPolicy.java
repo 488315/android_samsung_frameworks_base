@@ -498,7 +498,6 @@ public class AppLockPolicy {
         this.mContext.registerReceiver(this.mReceiver, filter);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateLockedApps() {
         switch (this.mLockedTypeInt) {
             case 1:

@@ -496,206 +496,172 @@ public class AnimatedFloatExpression {
         return this.mStack[sp];
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$0(int sp) {
         this.mStack[sp - 1] = this.mStack[sp - 1] + this.mStack[sp];
         return sp - 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$1(int sp) {
         this.mStack[sp - 1] = this.mStack[sp - 1] - this.mStack[sp];
         return sp - 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$2(int sp) {
         this.mStack[sp - 1] = this.mStack[sp - 1] * this.mStack[sp];
         return sp - 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$3(int sp) {
         this.mStack[sp - 1] = this.mStack[sp - 1] / this.mStack[sp];
         return sp - 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$4(int sp) {
         this.mStack[sp - 1] = this.mStack[sp - 1] % this.mStack[sp];
         return sp - 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$5(int sp) {
         this.mStack[sp - 1] = Math.min(this.mStack[sp - 1], this.mStack[sp]);
         return sp - 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$6(int sp) {
         this.mStack[sp - 1] = Math.max(this.mStack[sp - 1], this.mStack[sp]);
         return sp - 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$7(int sp) {
         this.mStack[sp - 1] = (float) Math.pow(this.mStack[sp - 1], this.mStack[sp]);
         return sp - 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$8(int sp) {
         this.mStack[sp] = (float) Math.sqrt(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$9(int sp) {
         this.mStack[sp] = Math.abs(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$10(int sp) {
         this.mStack[sp] = Math.signum(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$11(int sp) {
         this.mStack[sp - 1] = Math.copySign(this.mStack[sp - 1], this.mStack[sp]);
         return sp - 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$12(int sp) {
         this.mStack[sp] = (float) Math.exp(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$13(int sp) {
         this.mStack[sp] = (float) Math.floor(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$14(int sp) {
         this.mStack[sp] = (float) Math.log10(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$15(int sp) {
         this.mStack[sp] = (float) Math.log(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$16(int sp) {
         this.mStack[sp] = Math.round(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$17(int sp) {
         this.mStack[sp] = (float) Math.sin(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$18(int sp) {
         this.mStack[sp] = (float) Math.cos(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$19(int sp) {
         this.mStack[sp] = (float) Math.tan(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$20(int sp) {
         this.mStack[sp] = (float) Math.asin(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$21(int sp) {
         this.mStack[sp] = (float) Math.acos(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$22(int sp) {
         this.mStack[sp] = (float) Math.atan(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$23(int sp) {
         this.mStack[sp - 1] = (float) Math.atan2(this.mStack[sp - 1], this.mStack[sp]);
         return sp - 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$24(int sp) {
         this.mStack[sp - 2] = this.mStack[sp] + (this.mStack[sp - 1] * this.mStack[sp - 2]);
         return sp - 2;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$25(int sp) {
         this.mStack[sp - 2] = this.mStack[sp] > 0.0f ? this.mStack[sp - 1] : this.mStack[sp - 2];
         return sp - 2;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$26(int sp) {
         this.mStack[sp - 2] =
                 Math.min(Math.max(this.mStack[sp - 2], this.mStack[sp]), this.mStack[sp - 1]);
         return sp - 2;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$27(int sp) {
         this.mStack[sp] = (float) Math.pow(this.mStack[sp], 0.3333333333333333d);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$28(int sp) {
         this.mStack[sp] = this.mStack[sp] * 57.29578f;
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$29(int sp) {
         this.mStack[sp] = this.mStack[sp] * FP_TO_DEG;
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$30(int sp) {
         this.mStack[sp] = (float) Math.ceil(this.mStack[sp]);
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$31(int sp) {
         this.mStack[sp] = this.mVar[0];
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$32(int sp) {
         this.mStack[sp] = this.mVar[1];
         return sp;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$33(int sp) {
         this.mStack[sp] = this.mVar[2];
         return sp;

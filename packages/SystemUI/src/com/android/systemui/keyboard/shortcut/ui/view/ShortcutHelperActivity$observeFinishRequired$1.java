@@ -17,7 +17,6 @@ final class ShortcutHelperActivity$observeFinishRequired$1 extends SuspendLambda
     int label;
     final /* synthetic */ ShortcutHelperActivity this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ShortcutHelperActivity$observeFinishRequired$1(ShortcutHelperActivity shortcutHelperActivity, Continuation continuation) {
         super(2, continuation);
         this.this$0 = shortcutHelperActivity;

@@ -393,8 +393,6 @@ public final class RecordingActivityMonitor implements AudioSystem.AudioRecordin
     
         throw r10;
      */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x00fb A[Catch: all -> 0x0039, TryCatch #1 {all -> 0x0039, all -> 0x0025, blocks: (B:6:0x0007, B:7:0x0009, B:22:0x0045, B:24:0x005d, B:25:0x0074, B:28:0x0076, B:35:0x008a, B:37:0x009a, B:38:0x009e, B:40:0x0112, B:41:0x0127, B:43:0x00af, B:45:0x00b7, B:46:0x00bc, B:47:0x00c5, B:50:0x00ce, B:51:0x00d3, B:54:0x00df, B:57:0x00e4, B:58:0x00d8, B:61:0x00ec, B:65:0x00fb, B:71:0x0105, B:73:0x00f2, B:83:0x002d, B:85:0x0030, B:10:0x000b, B:12:0x0015, B:16:0x0023, B:14:0x0027, B:77:0x002a), top: B:4:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x010f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -407,10 +405,6 @@ public final class RecordingActivityMonitor implements AudioSystem.AudioRecordin
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.audio.RecordingActivityMonitor.updateSnapshot(int, int, android.media.AudioRecordingConfiguration):java.util.List");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v0 */
-    /* JADX WARN: Type inference failed for: r5v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r5v2 */
     public final void updateSoundAppPolicy(AudioRecordingConfiguration audioRecordingConfiguration, int i) {
         if (audioRecordingConfiguration == null) {
             return;

@@ -10,14 +10,12 @@ import java.lang.annotation.RetentionPolicy;
 public final class RoundedCorner implements Parcelable {
     public static final Parcelable.Creator<RoundedCorner> CREATOR =
             new Parcelable.Creator<RoundedCorner>() { // from class: android.view.RoundedCorner.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RoundedCorner createFromParcel(Parcel in) {
                     return new RoundedCorner(
                             in.readInt(), in.readInt(), in.readInt(), in.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RoundedCorner[] newArray(int size) {
                     return new RoundedCorner[size];

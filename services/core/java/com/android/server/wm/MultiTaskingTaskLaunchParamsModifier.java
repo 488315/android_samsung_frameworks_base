@@ -828,9 +828,6 @@ public final class MultiTaskingTaskLaunchParamsModifier
                 i7 >= 0 ? (int) ((i7 * f) + 0.5f) : -1);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x002d  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0067  */
-    /* JADX WARN: Removed duplicated region for block: B:38:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

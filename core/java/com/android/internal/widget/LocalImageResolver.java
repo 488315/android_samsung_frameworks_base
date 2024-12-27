@@ -189,7 +189,6 @@ public class LocalImageResolver {
         return Math.max(1, k);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void onHeaderDecoded(
             ImageDecoder decoder, ImageDecoder.ImageInfo info, int maxWidth, int maxHeight) {
         double ratio;

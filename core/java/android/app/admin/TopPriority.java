@@ -11,13 +11,11 @@ public final class TopPriority<V> extends ResolutionMechanism<V> {
     public static final Parcelable.Creator<TopPriority<?>> CREATOR =
             new Parcelable.Creator<
                     TopPriority<?>>() { // from class: android.app.admin.TopPriority.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TopPriority<?> createFromParcel(Parcel source) {
                     return new TopPriority<>(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TopPriority<?>[] newArray(int size) {
                     return new TopPriority[size];

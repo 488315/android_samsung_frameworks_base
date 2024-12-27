@@ -42,8 +42,6 @@ public final class SecVendorServices extends VendorServices {
             if (!z) {
                 Log.d("UiThreadMonitor", NetworkAnalyticsConstants.DataPoints.OPEN_TIME);
                 uiThreadMonitor.displayManager.registerDisplayListener(new DisplayManager.DisplayListener() { // from class: com.android.systemui.uithreadmonitor.UiThreadMonitor$start$1
-                    /* JADX WARN: Removed duplicated region for block: B:28:0x007c  */
-                    /* JADX WARN: Removed duplicated region for block: B:30:? A[RETURN, SYNTHETIC] */
                     @Override // android.hardware.display.DisplayManager.DisplayListener
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

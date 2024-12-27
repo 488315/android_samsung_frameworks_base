@@ -24,13 +24,11 @@ public final class TextBoundsInfo implements Parcelable {
     public static final Parcelable.Creator<TextBoundsInfo> CREATOR =
             new Parcelable.Creator<
                     TextBoundsInfo>() { // from class: android.view.inputmethod.TextBoundsInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextBoundsInfo createFromParcel(Parcel source) {
                     return new TextBoundsInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextBoundsInfo[] newArray(int size) {
                     return new TextBoundsInfo[size];
@@ -731,7 +729,6 @@ public final class TextBoundsInfo implements Parcelable {
         return new SegmentFinder.PrescribedSegmentFinder(Arrays.copyOf(breaks, count));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isLineDirectionFlagConsistent(
             int[] characterFlags, SegmentFinder lineSegmentFinder, int start, int end) {
         int segmentEnd = lineSegmentFinder.nextEndBoundary(start);

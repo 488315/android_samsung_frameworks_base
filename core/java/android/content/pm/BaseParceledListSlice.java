@@ -98,7 +98,6 @@ abstract class BaseParceledListSlice<T> implements Parcelable {
         return (T) creator.createFromParcel(parcel);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void verifySameType(Class<?> expected, Class<?> actual) {
         if (!actual.equals(expected)) {
             throw new IllegalArgumentException(

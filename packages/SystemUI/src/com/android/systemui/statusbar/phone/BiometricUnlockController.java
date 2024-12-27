@@ -207,25 +207,15 @@ public class BiometricUnlockController extends KeyguardUpdateMonitorCallback imp
     	at jadx.core.dex.visitors.EnumVisitor.convertToEnum(EnumVisitor.java:180)
     	at jadx.core.dex.visitors.EnumVisitor.visit(EnumVisitor.java:100)
      */
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     public final class BiometricUiEvent implements UiEventLogger.UiEventEnum {
-        /* JADX INFO: Fake field, exist only in values array */
         BIOMETRIC_FINGERPRINT_SUCCESS(396),
-        /* JADX INFO: Fake field, exist only in values array */
         BIOMETRIC_FINGERPRINT_FAILURE(397),
-        /* JADX INFO: Fake field, exist only in values array */
         BIOMETRIC_FINGERPRINT_ERROR(398),
-        /* JADX INFO: Fake field, exist only in values array */
         BIOMETRIC_FACE_SUCCESS(399),
-        /* JADX INFO: Fake field, exist only in values array */
         BIOMETRIC_FACE_FAILURE(400),
-        /* JADX INFO: Fake field, exist only in values array */
         BIOMETRIC_FACE_ERROR(401),
-        /* JADX INFO: Fake field, exist only in values array */
         BIOMETRIC_IRIS_SUCCESS(402),
-        /* JADX INFO: Fake field, exist only in values array */
         BIOMETRIC_IRIS_FAILURE(403),
-        /* JADX INFO: Fake field, exist only in values array */
         BIOMETRIC_IRIS_ERROR(404),
         BIOMETRIC_BOUNCER_SHOWN(916),
         STARTED_WAKING_UP(1378);
@@ -273,7 +263,6 @@ public class BiometricUnlockController extends KeyguardUpdateMonitorCallback imp
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.statusbar.phone.BiometricUnlockController$1] */
     public BiometricUnlockController(Lazy lazy, DozeScrimController dozeScrimController, KeyguardViewMediator keyguardViewMediator, NotificationShadeWindowController notificationShadeWindowController, KeyguardStateController keyguardStateController, Handler handler, KeyguardUpdateMonitor keyguardUpdateMonitor, Resources resources, KeyguardBypassController keyguardBypassController, MetricsLogger metricsLogger, DumpManager dumpManager, PowerManager powerManager, BiometricUnlockLogger biometricUnlockLogger, NotificationMediaManager notificationMediaManager, WakefulnessLifecycle wakefulnessLifecycle, ScreenLifecycle screenLifecycle, AuthController authController, StatusBarStateController statusBarStateController, SessionTracker sessionTracker, LatencyTracker latencyTracker, ScreenOffAnimationController screenOffAnimationController, VibratorHelper vibratorHelper, SystemClock systemClock, Lazy lazy2, BiometricUnlockInteractor biometricUnlockInteractor, JavaAdapter javaAdapter, KeyguardTransitionInteractor keyguardTransitionInteractor, KeyguardFastBioUnlockController keyguardFastBioUnlockController, VibrationUtil vibrationUtil, WindowManager windowManager, Context context) {
         AnonymousClass3 anonymousClass3 = new AnonymousClass3();
         this.mWakefulnessObserver = anonymousClass3;
@@ -759,8 +748,6 @@ public class BiometricUnlockController extends KeyguardUpdateMonitorCallback imp
         SystemUIAnalytics.sendEventLog(str3, str, str2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x011e  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0133  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

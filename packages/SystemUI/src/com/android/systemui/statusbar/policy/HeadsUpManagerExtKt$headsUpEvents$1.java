@@ -18,7 +18,6 @@ final class HeadsUpManagerExtKt$headsUpEvents$1 extends SuspendLambda implements
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HeadsUpManagerExtKt$headsUpEvents$1(HeadsUpManager headsUpManager, Continuation continuation) {
         super(2, continuation);
         this.$this_headsUpEvents = headsUpManager;
@@ -36,8 +35,6 @@ final class HeadsUpManagerExtKt$headsUpEvents$1 extends SuspendLambda implements
         return ((HeadsUpManagerExtKt$headsUpEvents$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.policy.HeadsUpManagerExtKt$headsUpEvents$1$listener$1, com.android.systemui.statusbar.policy.OnHeadsUpChangedListener] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -54,7 +51,6 @@ final class HeadsUpManagerExtKt$headsUpEvents$1 extends SuspendLambda implements
             ((BaseHeadsUpManager) this.$this_headsUpEvents).addListener(r1);
             final HeadsUpManager headsUpManager = this.$this_headsUpEvents;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.policy.HeadsUpManagerExtKt$headsUpEvents$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

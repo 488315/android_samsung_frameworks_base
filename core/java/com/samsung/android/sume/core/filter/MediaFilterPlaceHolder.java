@@ -59,7 +59,6 @@ public class MediaFilterPlaceHolder implements MediaFilter, PlaceHolder<MediaFil
         this.mediaFilter = instance;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.functional.PlaceHolder
     public MediaFilter reset() {
         if (this.mediaFilter == null) {

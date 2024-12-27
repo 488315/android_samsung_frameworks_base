@@ -12,13 +12,11 @@ public final class RollbackInfo implements Parcelable {
     public static final Parcelable.Creator<RollbackInfo> CREATOR =
             new Parcelable.Creator<
                     RollbackInfo>() { // from class: android.content.rollback.RollbackInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RollbackInfo createFromParcel(Parcel in) {
                     return new RollbackInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RollbackInfo[] newArray(int size) {
                     return new RollbackInfo[size];

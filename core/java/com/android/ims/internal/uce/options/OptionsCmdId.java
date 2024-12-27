@@ -8,13 +8,11 @@ public class OptionsCmdId implements Parcelable {
             new Parcelable.Creator<
                     OptionsCmdId>() { // from class:
                                       // com.android.ims.internal.uce.options.OptionsCmdId.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OptionsCmdId createFromParcel(Parcel source) {
                     return new OptionsCmdId(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OptionsCmdId[] newArray(int size) {
                     return new OptionsCmdId[size];

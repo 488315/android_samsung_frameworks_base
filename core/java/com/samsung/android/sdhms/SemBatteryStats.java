@@ -12,13 +12,11 @@ public class SemBatteryStats implements Parcelable {
     public static final Parcelable.Creator<SemBatteryStats> CREATOR =
             new Parcelable.Creator<
                     SemBatteryStats>() { // from class: com.samsung.android.sdhms.SemBatteryStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemBatteryStats createFromParcel(Parcel in) {
                     return new SemBatteryStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemBatteryStats[] newArray(int size) {
                     return new SemBatteryStats[size];
@@ -378,13 +376,11 @@ public class SemBatteryStats implements Parcelable {
                 new Parcelable.Creator<
                         AppDetailUsage>() { // from class:
                                             // com.samsung.android.sdhms.SemBatteryStats.AppDetailUsage.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AppDetailUsage createFromParcel(Parcel in) {
                         return new AppDetailUsage(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AppDetailUsage[] newArray(int size) {
                         return new AppDetailUsage[size];
@@ -695,13 +691,11 @@ public class SemBatteryStats implements Parcelable {
                 new Parcelable.Creator<
                         SysDetailUsage>() { // from class:
                                             // com.samsung.android.sdhms.SemBatteryStats.SysDetailUsage.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SysDetailUsage createFromParcel(Parcel in) {
                         return new SysDetailUsage(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SysDetailUsage[] newArray(int size) {
                         return new SysDetailUsage[size];

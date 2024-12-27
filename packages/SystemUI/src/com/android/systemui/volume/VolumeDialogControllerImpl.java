@@ -743,8 +743,6 @@ public final class VolumeDialogControllerImpl implements VolumeDialogController,
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0017  */
     /* renamed from: -$$Nest$mupdateRemoteFixedVolumeSession, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1153,8 +1151,6 @@ public final class VolumeDialogControllerImpl implements VolumeDialogController,
         return hasUserRestriction;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0039  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0085  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1348,25 +1344,6 @@ public final class VolumeDialogControllerImpl implements VolumeDialogController,
         this.mWorker.obtainMessage(12, z ? 1 : 0, 0).sendToTarget();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:101:0x02e8  */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x02ed  */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x02f4  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x02f9  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x0341  */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x035e  */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x0390 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:148:0x0350  */
-    /* JADX WARN: Removed duplicated region for block: B:150:0x0354  */
-    /* JADX WARN: Removed duplicated region for block: B:154:0x0332  */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x02f6  */
-    /* JADX WARN: Removed duplicated region for block: B:157:0x02e4  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x01fa  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0207  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x0225  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x0237  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x0270  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x02c7  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x02cf  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1924,8 +1901,6 @@ public final class VolumeDialogControllerImpl implements VolumeDialogController,
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0045  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x006e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

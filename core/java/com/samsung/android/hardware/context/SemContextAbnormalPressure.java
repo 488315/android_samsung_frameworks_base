@@ -9,13 +9,11 @@ public class SemContextAbnormalPressure extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextAbnormalPressure>() { // from class:
                                                     // com.samsung.android.hardware.context.SemContextAbnormalPressure.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextAbnormalPressure createFromParcel(Parcel in) {
                     return new SemContextAbnormalPressure(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextAbnormalPressure[] newArray(int size) {
                     return new SemContextAbnormalPressure[size];

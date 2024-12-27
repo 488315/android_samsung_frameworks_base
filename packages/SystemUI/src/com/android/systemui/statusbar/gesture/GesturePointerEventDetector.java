@@ -4,7 +4,6 @@ import android.view.InputEvent;
 import android.view.MotionEvent;
 
 public final class GesturePointerEventDetector extends GenericGestureDetector {
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

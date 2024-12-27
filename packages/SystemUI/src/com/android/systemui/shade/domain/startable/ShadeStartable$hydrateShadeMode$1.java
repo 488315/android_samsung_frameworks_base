@@ -62,7 +62,6 @@ final class ShadeStartable$hydrateShadeMode$1 extends SuspendLambda implements F
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ShadeStartable$hydrateShadeMode$1(ShadeStartable shadeStartable, Continuation continuation) {
         super(2, continuation);
         this.this$0 = shadeStartable;
@@ -116,8 +115,6 @@ final class ShadeStartable$hydrateShadeMode$1 extends SuspendLambda implements F
                         this.this$0 = shadeStartable;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -210,8 +207,6 @@ final class ShadeStartable$hydrateShadeMode$1 extends SuspendLambda implements F
                         this.this$0 = shadeStartable;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

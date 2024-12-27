@@ -115,7 +115,6 @@ public class MmTelFeature extends ImsFeature {
         this.mExecutor = executor;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Executor getExecutor() {
         if (this.mExecutor == null) {
             this.mExecutor = new PendingIntent$$ExternalSyntheticLambda0();
@@ -127,7 +126,6 @@ public class MmTelFeature extends ImsFeature {
     class AnonymousClass1 extends IImsMmTelFeature.Stub {
         AnonymousClass1() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setListener$0(IImsMmTelListener l) {
             MmTelFeature.this.setListener(l);
         }
@@ -145,7 +143,6 @@ public class MmTelFeature extends ImsFeature {
                     "setListener");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$getFeatureState$1() {
             return Integer.valueOf(MmTelFeature.this.getFeatureState());
         }
@@ -169,7 +166,6 @@ public class MmTelFeature extends ImsFeature {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ ImsCallProfile lambda$createCallProfile$2(
                 int callSessionType, int callType) {
             return MmTelFeature.this.createCallProfile(callSessionType, callType);
@@ -195,7 +191,6 @@ public class MmTelFeature extends ImsFeature {
                             "createCallProfile");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$changeOfferedRtpHeaderExtensionTypes$3(List types) {
             MmTelFeature.this.changeOfferedRtpHeaderExtensionTypes(new ArraySet(types));
         }
@@ -241,7 +236,6 @@ public class MmTelFeature extends ImsFeature {
             return result;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ IImsCallSession lambda$createCallSession$4(
                 ImsCallProfile profile, AtomicReference exceptionRef) {
             try {
@@ -275,7 +269,6 @@ public class MmTelFeature extends ImsFeature {
             return 1;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$shouldProcessCall$5(String[] numbers) {
             return Integer.valueOf(MmTelFeature.this.shouldProcessCall(numbers));
         }
@@ -304,7 +297,6 @@ public class MmTelFeature extends ImsFeature {
             return result;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ IImsUt lambda$getUtInterface$6(AtomicReference exceptionRef) {
             try {
                 return MmTelFeature.this.getUtInterface();
@@ -339,7 +331,6 @@ public class MmTelFeature extends ImsFeature {
             return result;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ IImsEcbm lambda$getEcbmInterface$7(AtomicReference exceptionRef) {
             try {
                 return MmTelFeature.this.getEcbmInterface();
@@ -349,7 +340,6 @@ public class MmTelFeature extends ImsFeature {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setUiTtyMode$8(
                 int uiTtyMode, Message onCompleteMessage) {
             MmTelFeature.this.setUiTtyMode(uiTtyMode, onCompleteMessage);
@@ -395,7 +385,6 @@ public class MmTelFeature extends ImsFeature {
             return result;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ IImsMultiEndpoint lambda$getMultiEndpointInterface$9(
                 AtomicReference exceptionRef) {
             try {
@@ -406,7 +395,6 @@ public class MmTelFeature extends ImsFeature {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$queryCapabilityStatus$10() {
             return Integer.valueOf(MmTelFeature.this.queryCapabilityStatus().mCapabilities);
         }
@@ -434,7 +422,6 @@ public class MmTelFeature extends ImsFeature {
             return 0;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$addCapabilityCallback$11(IImsCapabilityCallback c) {
             MmTelFeature.this.addCapabilityCallback(c);
         }
@@ -452,7 +439,6 @@ public class MmTelFeature extends ImsFeature {
                     "addCapabilityCallback");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$removeCapabilityCallback$12(IImsCapabilityCallback c) {
             MmTelFeature.this.removeCapabilityCallback(c);
         }
@@ -470,7 +456,6 @@ public class MmTelFeature extends ImsFeature {
                     "removeCapabilityCallback");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$changeCapabilitiesConfiguration$13(
                 CapabilityChangeRequest request, IImsCapabilityCallback c) {
             MmTelFeature.this.requestChangeEnabledCapabilities(request, c);
@@ -491,7 +476,6 @@ public class MmTelFeature extends ImsFeature {
                     "changeCapabilitiesConfiguration");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$queryCapabilityConfiguration$14(
                 int capability, int radioTech, IImsCapabilityCallback c) {
             MmTelFeature.this.queryCapabilityConfigurationInternal(capability, radioTech, c);
@@ -542,18 +526,15 @@ public class MmTelFeature extends ImsFeature {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setMediaQualityThreshold$15(
                 int sessionType, MediaThreshold mediaThreshold) {
             MmTelFeature.this.setMediaThreshold(sessionType, mediaThreshold);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setMediaQualityThreshold$16(int sessionType) {
             MmTelFeature.this.clearMediaThreshold(sessionType);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ MediaQualityStatus lambda$queryMediaQualityStatus$17(
                 int sessionType) {
             return MmTelFeature.this.queryMediaQualityStatus(sessionType);
@@ -578,7 +559,6 @@ public class MmTelFeature extends ImsFeature {
                             "queryMediaQualityStatus");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setSmsListener$18(IImsSmsListener l) {
             MmTelFeature.this.setSmsListener(l);
         }
@@ -597,7 +577,6 @@ public class MmTelFeature extends ImsFeature {
                     MmTelFeature.this.getImsSmsImpl().getExecutor());
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$sendSms$19(
                 int token, int messageRef, String format, String smsc, boolean retry, byte[] pdu) {
             MmTelFeature.this.sendSms(token, messageRef, format, smsc, retry, pdu);
@@ -624,7 +603,6 @@ public class MmTelFeature extends ImsFeature {
                     MmTelFeature.this.getImsSmsImpl().getExecutor());
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onMemoryAvailable$20(int token) {
             MmTelFeature.this.onMemoryAvailable(token);
         }
@@ -643,7 +621,6 @@ public class MmTelFeature extends ImsFeature {
                     MmTelFeature.this.getImsSmsImpl().getExecutor());
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$acknowledgeSms$21(
                 int token, int messageRef, int result) {
             MmTelFeature.this.acknowledgeSms(token, messageRef, result);
@@ -664,7 +641,6 @@ public class MmTelFeature extends ImsFeature {
                     MmTelFeature.this.getImsSmsImpl().getExecutor());
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$acknowledgeSmsWithPdu$22(
                 int token, int messageRef, int result, byte[] pdu) {
             MmTelFeature.this.acknowledgeSms(token, messageRef, result, pdu);
@@ -686,7 +662,6 @@ public class MmTelFeature extends ImsFeature {
                     MmTelFeature.this.getImsSmsImpl().getExecutor());
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$acknowledgeSmsReport$23(
                 int token, int messageRef, int result) {
             MmTelFeature.this.acknowledgeSmsReport(token, messageRef, result);
@@ -707,7 +682,6 @@ public class MmTelFeature extends ImsFeature {
                     MmTelFeature.this.getImsSmsImpl().getExecutor());
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ String lambda$getSmsFormat$24() {
             return MmTelFeature.this.getSmsFormat();
         }
@@ -731,7 +705,6 @@ public class MmTelFeature extends ImsFeature {
                             MmTelFeature.this.getImsSmsImpl().getExecutor());
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSmsReady$25() {
             MmTelFeature.this.onSmsReady();
         }
@@ -763,7 +736,6 @@ public class MmTelFeature extends ImsFeature {
                     "notifySrvccStarted");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifySrvccStarted$27(final ISrvccStartedCallback cb) {
             MmTelFeature.this.notifySrvccStarted(
                     new Consumer() { // from class:
@@ -798,7 +770,6 @@ public class MmTelFeature extends ImsFeature {
                     "notifySrvccCompleted");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifySrvccCompleted$28() {
             MmTelFeature.this.notifySrvccCompleted();
         }
@@ -816,7 +787,6 @@ public class MmTelFeature extends ImsFeature {
                     "notifySrvccFailed");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifySrvccFailed$29() {
             MmTelFeature.this.notifySrvccFailed();
         }
@@ -834,7 +804,6 @@ public class MmTelFeature extends ImsFeature {
                     "notifySrvccCanceled");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifySrvccCanceled$30() {
             MmTelFeature.this.notifySrvccCanceled();
         }
@@ -1255,7 +1224,6 @@ public class MmTelFeature extends ImsFeature {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class IImsTrafficSessionCallbackStub extends IImsTrafficSessionCallback.Stub {
             private Executor mExecutor;
             private WeakReference<ImsTrafficSessionCallback> mImsTrafficSessionCallbackWeakRef;
@@ -1290,7 +1258,6 @@ public class MmTelFeature extends ImsFeature {
                         });
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onReady$1(final ImsTrafficSessionCallback callback)
                     throws Exception {
                 this.mExecutor.execute(
@@ -1323,7 +1290,6 @@ public class MmTelFeature extends ImsFeature {
                         });
             }
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onError$3(
                     final ImsTrafficSessionCallback callback, final ConnectionFailureInfo info)
                     throws Exception {
@@ -1360,7 +1326,6 @@ public class MmTelFeature extends ImsFeature {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setListener(IImsMmTelListener listener) {
         synchronized (this.mLock) {
             this.mListener = listener;
@@ -1720,48 +1685,39 @@ public class MmTelFeature extends ImsFeature {
     @SystemApi
     public void notifySrvccCanceled() {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setSmsListener(IImsSmsListener listener) {
         getImsSmsImpl().registerSmsListener(listener);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendSms(
             int token, int messageRef, String format, String smsc, boolean isRetry, byte[] pdu) {
         getImsSmsImpl().sendSms(token, messageRef, format, smsc, isRetry, pdu);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onMemoryAvailable(int token) {
         getImsSmsImpl().onMemoryAvailable(token);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void acknowledgeSms(int token, int messageRef, int result) {
         getImsSmsImpl().acknowledgeSms(token, messageRef, result);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void acknowledgeSms(int token, int messageRef, int result, byte[] pdu) {
         getImsSmsImpl().acknowledgeSms(token, messageRef, result, pdu);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void acknowledgeSmsReport(int token, int messageRef, int result) {
         getImsSmsImpl().acknowledgeSmsReport(token, messageRef, result);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onSmsReady() {
         getImsSmsImpl().onReady();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setRetryCount(int token, int retryCount) throws RemoteException {
         getSmsImplementation().setRetryCount(token, retryCount);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setSmsc(String smsc) throws RemoteException {
         getSmsImplementation().setSmsc(smsc);
     }
@@ -1771,7 +1727,6 @@ public class MmTelFeature extends ImsFeature {
         return new ImsSmsImplBase();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String getSmsFormat() {
         return getImsSmsImpl().getSmsFormat();
     }

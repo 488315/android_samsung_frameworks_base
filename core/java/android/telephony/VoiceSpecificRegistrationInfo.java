@@ -10,13 +10,11 @@ public class VoiceSpecificRegistrationInfo implements Parcelable {
             new Parcelable.Creator<
                     VoiceSpecificRegistrationInfo>() { // from class:
                                                        // android.telephony.VoiceSpecificRegistrationInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VoiceSpecificRegistrationInfo createFromParcel(Parcel source) {
                     return new VoiceSpecificRegistrationInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VoiceSpecificRegistrationInfo[] newArray(int size) {
                     return new VoiceSpecificRegistrationInfo[size];

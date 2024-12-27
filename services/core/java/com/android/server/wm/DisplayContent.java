@@ -723,18 +723,6 @@ public final class DisplayContent extends RootDisplayArea {
         return new WmDisplayCutout(rotated, new Size(i4, i2));
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x0747  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x06bf  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x06f0  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x0705  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x071a  */
-    /* JADX WARN: Type inference failed for: r10v4, types: [com.android.server.wm.DisplayContent$$ExternalSyntheticLambda45] */
-    /* JADX WARN: Type inference failed for: r1v79 */
-    /* JADX WARN: Type inference failed for: r1v80, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r1v94 */
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.server.wm.DisplayContent$$ExternalSyntheticLambda48] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -961,8 +949,6 @@ public final class DisplayContent extends RootDisplayArea {
         topVisibleWallpaper.mToken.linkFixedRotationTransform(activityRecord);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:77:0x019c  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x01a4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1656,29 +1642,6 @@ public final class DisplayContent extends RootDisplayArea {
 
        if ((r3 == 1 ? r4 == 0 : r3 == 2 && r4 == 1) != false) goto L97;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x01c4  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x01cc  */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x01d6  */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x01ea  */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x026e  */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x0332  */
-    /* JADX WARN: Removed duplicated region for block: B:155:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x01f3  */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x019d  */
-    /* JADX WARN: Removed duplicated region for block: B:188:0x0147  */
-    /* JADX WARN: Removed duplicated region for block: B:189:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x008f  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0098  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x012b  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x012e A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0145  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x014e  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x0180  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x01a3  */
-    /* JADX WARN: Type inference failed for: r4v14 */
-    /* JADX WARN: Type inference failed for: r4v15, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r4v16 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3196,7 +3159,6 @@ public final class DisplayContent extends RootDisplayArea {
         return this.mDisplayPolicy.mExt.mOneHandOpPolicy;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0061 A[RETURN] */
     @Override // com.android.server.wm.WindowContainer
     /*
         Code decompiled incorrectly, please refer to instructions dump.

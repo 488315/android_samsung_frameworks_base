@@ -640,12 +640,6 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x03cd  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x03d7  */
-    /* JADX WARN: Type inference failed for: r3v0 */
-    /* JADX WARN: Type inference failed for: r3v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r3v27 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -824,8 +818,6 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
 
        if (com.android.server.display.DisplayDeviceRepository.isExternalDisplayDeviceForDexLocked(r8) != false) goto L68;
     */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0112 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0135  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

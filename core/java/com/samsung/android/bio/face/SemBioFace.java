@@ -8,13 +8,11 @@ public class SemBioFace implements Parcelable {
     public static final Parcelable.Creator<SemBioFace> CREATOR =
             new Parcelable.Creator<
                     SemBioFace>() { // from class: com.samsung.android.bio.face.SemBioFace.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemBioFace createFromParcel(Parcel in) {
                     return new SemBioFace(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemBioFace[] newArray(int size) {
                     return new SemBioFace[size];

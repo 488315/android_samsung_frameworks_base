@@ -10,7 +10,6 @@ public class CdmaLineControlInfoRecord implements Parcelable {
     public static final Parcelable.Creator<CdmaLineControlInfoRecord> CREATOR =
             new Parcelable.Creator<CdmaLineControlInfoRecord>() { // from class:
                 // android.hardware.radio.voice.CdmaLineControlInfoRecord.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CdmaLineControlInfoRecord createFromParcel(Parcel _aidl_source) {
                     CdmaLineControlInfoRecord _aidl_out = new CdmaLineControlInfoRecord();
@@ -18,7 +17,6 @@ public class CdmaLineControlInfoRecord implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CdmaLineControlInfoRecord[] newArray(int _aidl_size) {
                     return new CdmaLineControlInfoRecord[_aidl_size];

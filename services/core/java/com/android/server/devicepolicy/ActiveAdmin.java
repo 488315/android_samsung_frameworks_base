@@ -679,10 +679,6 @@ public final class ActiveAdmin {
         return this.isPermissionBased ? UserHandle.of(this.userId) : UserHandle.of(UserHandle.getUserId(this.info.getActivityInfo().applicationInfo.uid));
     }
 
-    /* JADX WARN: Type inference failed for: r11v0 */
-    /* JADX WARN: Type inference failed for: r11v1, types: [android.os.PersistableBundle, java.lang.String] */
-    /* JADX WARN: Type inference failed for: r11v2 */
-    /* JADX WARN: Type inference failed for: r11v3 */
     public final void readFromXml(TypedXmlPullParser typedXmlPullParser, boolean z) {
         int depth = typedXmlPullParser.getDepth();
         while (true) {

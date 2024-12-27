@@ -12,7 +12,6 @@ final class ActivityTaskManagerTasksRepository$getRunningTasks$2 extends Suspend
     int label;
     final /* synthetic */ ActivityTaskManagerTasksRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ActivityTaskManagerTasksRepository$getRunningTasks$2(ActivityTaskManagerTasksRepository activityTaskManagerTasksRepository, Continuation continuation) {
         super(2, continuation);
         this.this$0 = activityTaskManagerTasksRepository;

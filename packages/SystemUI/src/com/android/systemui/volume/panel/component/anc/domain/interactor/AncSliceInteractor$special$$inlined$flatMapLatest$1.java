@@ -16,7 +16,6 @@ public final class AncSliceInteractor$special$$inlined$flatMapLatest$1 extends S
     int label;
     final /* synthetic */ AncSliceInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AncSliceInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, AncSliceInteractor ancSliceInteractor) {
         super(3, continuation);
         this.this$0 = ancSliceInteractor;

@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public final class SecureSettingsRepositoryImpl$intSetting$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ String $name;
     private /* synthetic */ Object L$0;
@@ -21,7 +20,6 @@ public final class SecureSettingsRepositoryImpl$intSetting$1 extends SuspendLamb
     int label;
     final /* synthetic */ SecureSettingsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SecureSettingsRepositoryImpl$intSetting$1(SecureSettingsRepositoryImpl secureSettingsRepositoryImpl, String str, Continuation continuation) {
         super(2, continuation);
         this.this$0 = secureSettingsRepositoryImpl;
@@ -40,7 +38,6 @@ public final class SecureSettingsRepositoryImpl$intSetting$1 extends SuspendLamb
         return ((SecureSettingsRepositoryImpl$intSetting$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         ProducerScope producerScope;
@@ -85,7 +82,6 @@ public final class SecureSettingsRepositoryImpl$intSetting$1 extends SuspendLamb
         }
         final SecureSettingsRepositoryImpl secureSettingsRepositoryImpl = this.this$0;
         Function0 function0 = new Function0() { // from class: com.android.systemui.shared.settings.data.repository.SecureSettingsRepositoryImpl$intSetting$1.1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

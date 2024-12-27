@@ -55,8 +55,6 @@ public final class KeyguardCarrierViewController extends KeyguardInputViewContro
     public final TelephonyManager mTelephonyManager;
     public final Button mUnlockButton;
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.keyguard.KeyguardCarrierViewController$1] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.keyguard.KeyguardCarrierViewController$4] */
     public KeyguardCarrierViewController(KeyguardCarrierView keyguardCarrierView, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, EmergencyButtonController emergencyButtonController, TelephonyManager telephonyManager, KeyguardMessageAreaController.Factory factory, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor) {
         super(keyguardCarrierView, securityMode, keyguardSecurityCallback, emergencyButtonController, factory, featureFlags, selectedUserInteractor);
         this.mPhoneState = 0;
@@ -180,7 +178,6 @@ public final class KeyguardCarrierViewController extends KeyguardInputViewContro
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.keyguard.KeyguardCarrierViewController$3] */
     @Override // com.android.keyguard.KeyguardInputViewController, com.android.systemui.util.ViewController
     public final void onViewAttached() {
         String str;
@@ -317,10 +314,6 @@ public final class KeyguardCarrierViewController extends KeyguardInputViewContro
         ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).removeCallback(this.mKeyguardUpdateMonitorCallback);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x007f A[Catch: IOException -> 0x008d, TryCatch #1 {IOException -> 0x008d, blocks: (B:14:0x0074, B:16:0x007f, B:17:0x009a, B:19:0x00a0, B:21:0x00b6, B:22:0x00bb, B:25:0x00c0, B:27:0x008f), top: B:13:0x0074 }] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00a0 A[Catch: IOException -> 0x008d, TryCatch #1 {IOException -> 0x008d, blocks: (B:14:0x0074, B:16:0x007f, B:17:0x009a, B:19:0x00a0, B:21:0x00b6, B:22:0x00bb, B:25:0x00c0, B:27:0x008f), top: B:13:0x0074 }] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00c0 A[Catch: IOException -> 0x008d, TRY_LEAVE, TryCatch #1 {IOException -> 0x008d, blocks: (B:14:0x0074, B:16:0x007f, B:17:0x009a, B:19:0x00a0, B:21:0x00b6, B:22:0x00bb, B:25:0x00c0, B:27:0x008f), top: B:13:0x0074 }] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x008f A[Catch: IOException -> 0x008d, TryCatch #1 {IOException -> 0x008d, blocks: (B:14:0x0074, B:16:0x007f, B:17:0x009a, B:19:0x00a0, B:21:0x00b6, B:22:0x00bb, B:25:0x00c0, B:27:0x008f), top: B:13:0x0074 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -138,10 +138,6 @@ public final class MediaDevicesBar extends BarItemImpl implements TunerService.T
                 return sb.toString();
             }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r2v3 */
-            /* JADX WARN: Type inference failed for: r2v4, types: [boolean, int] */
-            /* JADX WARN: Type inference failed for: r2v5 */
             @Override // com.android.systemui.qs.QSBackupRestoreManager.Callback
             public final void onRestore(String str) {
                 MediaDevicesBar mediaDevicesBar = MediaDevicesBar.this;

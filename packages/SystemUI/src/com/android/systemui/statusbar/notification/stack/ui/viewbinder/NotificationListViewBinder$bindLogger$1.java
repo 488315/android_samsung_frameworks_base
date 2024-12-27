@@ -8,7 +8,6 @@ final class NotificationListViewBinder$bindLogger$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ NotificationListViewBinder this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationListViewBinder$bindLogger$1(NotificationListViewBinder notificationListViewBinder, Continuation continuation) {
         super(continuation);
         this.this$0 = notificationListViewBinder;

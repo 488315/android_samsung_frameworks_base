@@ -166,7 +166,6 @@ public final class UsbAlsaDevice {
                 + "]";
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00c6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

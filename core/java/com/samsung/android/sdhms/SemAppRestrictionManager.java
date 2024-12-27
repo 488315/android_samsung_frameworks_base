@@ -17,13 +17,11 @@ public class SemAppRestrictionManager implements Parcelable {
             new Parcelable.Creator<
                     SemAppRestrictionManager>() { // from class:
                                                   // com.samsung.android.sdhms.SemAppRestrictionManager.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemAppRestrictionManager createFromParcel(Parcel in) {
                     return new SemAppRestrictionManager(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemAppRestrictionManager[] newArray(int size) {
                     return new SemAppRestrictionManager[size];
@@ -209,13 +207,11 @@ public class SemAppRestrictionManager implements Parcelable {
                 new Parcelable.Creator<
                         RestrictionInfo>() { // from class:
                                              // com.samsung.android.sdhms.SemAppRestrictionManager.RestrictionInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RestrictionInfo createFromParcel(Parcel in) {
                         return new RestrictionInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public RestrictionInfo[] newArray(int size) {
                         return new RestrictionInfo[size];
@@ -295,13 +291,11 @@ public class SemAppRestrictionManager implements Parcelable {
                 new Parcelable.Creator<
                         AppRestrictionInfo>() { // from class:
                                                 // com.samsung.android.sdhms.SemAppRestrictionManager.AppRestrictionInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AppRestrictionInfo createFromParcel(Parcel in) {
                         return new AppRestrictionInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AppRestrictionInfo[] newArray(int size) {
                         return new AppRestrictionInfo[size];

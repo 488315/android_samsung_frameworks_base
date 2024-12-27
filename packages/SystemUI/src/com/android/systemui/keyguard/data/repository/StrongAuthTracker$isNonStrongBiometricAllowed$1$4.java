@@ -14,7 +14,6 @@ final class StrongAuthTracker$isNonStrongBiometricAllowed$1$4 extends SuspendLam
     int label;
     final /* synthetic */ StrongAuthTracker this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public StrongAuthTracker$isNonStrongBiometricAllowed$1$4(StrongAuthTracker strongAuthTracker, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = strongAuthTracker;

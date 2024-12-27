@@ -233,7 +233,6 @@ public class ScrollingTabContainerView extends HorizontalScrollView
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public TabView createTabView(Context context, ActionBar.Tab tab, boolean forAdapter) {
         TabView tabView = new TabView(context, tab, forAdapter);
         if (forAdapter) {

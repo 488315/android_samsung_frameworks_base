@@ -14,7 +14,6 @@ final class DeviceController$devicesFlow$1$1 extends SuspendLambda implements Fu
     final /* synthetic */ MutableSharedFlow $this_apply;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceController$devicesFlow$1$1(MutableSharedFlow mutableSharedFlow, Continuation continuation) {
         super(2, continuation);
         this.$this_apply = mutableSharedFlow;

@@ -20,7 +20,6 @@ public class StandardPlusManager {
         this.mLooper = this.mContext.getMainLooper();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class StandardPlusCallbackProxy extends IStandardPlusCallback.Stub {
         private final Object mCallback;
         private final Handler mHandler;
@@ -45,7 +44,6 @@ public class StandardPlusManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onEvent$0(int event) {
             ((EventListener) this.mCallback).onEvent(event);
         }

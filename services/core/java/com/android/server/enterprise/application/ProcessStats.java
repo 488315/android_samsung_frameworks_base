@@ -546,7 +546,6 @@ public final class ProcessStats {
         return this.mWorkingProcs.size();
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:15|16|17|18|19|(8:21|(1:25)|28|29|30|31|(2:35|(1:40)(1:39))|(1:42))|47|48|49|(4:33|35|(1:37)|40)|(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:53:0x0061, code lost:
 
        if (r3 == null) goto L24;
@@ -555,7 +554,6 @@ public final class ProcessStats {
 
        if (r3 == null) goto L24;
     */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0085  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

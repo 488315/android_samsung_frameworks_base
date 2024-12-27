@@ -19,7 +19,6 @@ final class StickyKeysRepositoryImpl$stickyKeys$1 extends SuspendLambda implemen
     int label;
     final /* synthetic */ StickyKeysRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public StickyKeysRepositoryImpl$stickyKeys$1(StickyKeysRepositoryImpl stickyKeysRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = stickyKeysRepositoryImpl;
@@ -57,7 +56,6 @@ final class StickyKeysRepositoryImpl$stickyKeys$1 extends SuspendLambda implemen
             }, stickyModifierStateListener);
             final StickyKeysRepositoryImpl stickyKeysRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyboard.stickykeys.data.repository.StickyKeysRepositoryImpl$stickyKeys$1.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

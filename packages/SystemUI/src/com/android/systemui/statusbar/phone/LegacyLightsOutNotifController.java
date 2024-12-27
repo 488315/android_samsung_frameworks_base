@@ -27,8 +27,6 @@ public final class LegacyLightsOutNotifController extends ViewController {
     public final LegacyLightsOutNotifController$$ExternalSyntheticLambda0 mObserver;
     public final WindowManager mWindowManager;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.phone.LegacyLightsOutNotifController$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.phone.LegacyLightsOutNotifController$2] */
     public LegacyLightsOutNotifController(View view, WindowManager windowManager, NotifLiveDataStore notifLiveDataStore, CommandQueue commandQueue) {
         super(view);
         this.mObserver = new Observer() { // from class: com.android.systemui.statusbar.phone.LegacyLightsOutNotifController$$ExternalSyntheticLambda0

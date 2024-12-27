@@ -215,8 +215,6 @@ public class SystemUIDialog extends AlertDialog implements ViewRootImpl.ConfigCh
         this.mDelegate.onConfigurationChanged(this, configuration);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.statusbar.phone.SystemUIDialog$$ExternalSyntheticLambda1] */
     @Override // android.app.AlertDialog, android.app.Dialog
     public void onCreate(Bundle bundle) {
         this.mDelegate.beforeCreate(this);

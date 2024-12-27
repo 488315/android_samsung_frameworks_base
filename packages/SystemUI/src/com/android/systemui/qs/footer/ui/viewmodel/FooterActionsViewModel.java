@@ -110,10 +110,6 @@ public final class FooterActionsViewModel {
                         this.$footerActionsInteractor$inlined = footerActionsInteractor;
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
-                    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.qs.footer.ui.viewmodel.FooterActionsSecurityButtonViewModel] */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -224,10 +220,6 @@ public final class FooterActionsViewModel {
                         this.$footerActionsInteractor$inlined = footerActionsInteractor;
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
-                    /* JADX WARN: Type inference failed for: r10v0, types: [com.android.systemui.qs.footer.ui.viewmodel.FooterActionsButtonViewModel] */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

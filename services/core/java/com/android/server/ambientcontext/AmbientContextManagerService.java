@@ -94,7 +94,6 @@ public final class AmbientContextManagerService extends AbstractMasterSystemServ
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,

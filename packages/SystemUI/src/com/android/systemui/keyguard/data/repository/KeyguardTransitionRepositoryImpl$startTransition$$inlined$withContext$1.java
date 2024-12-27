@@ -34,7 +34,6 @@ public final class KeyguardTransitionRepositoryImpl$startTransition$$inlined$wit
     int label;
     final /* synthetic */ KeyguardTransitionRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardTransitionRepositoryImpl$startTransition$$inlined$withContext$1(String str, Continuation continuation, KeyguardTransitionRepositoryImpl keyguardTransitionRepositoryImpl, TransitionInfo transitionInfo) {
         super(2, continuation);
         this.$spanName = str;

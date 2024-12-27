@@ -12,7 +12,6 @@ final class AuthenticationRepositoryImpl$isPinEnhancedPrivacyEnabled$1 extends S
     int label;
     final /* synthetic */ AuthenticationRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AuthenticationRepositoryImpl$isPinEnhancedPrivacyEnabled$1(AuthenticationRepositoryImpl authenticationRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = authenticationRepositoryImpl;

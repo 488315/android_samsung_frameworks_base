@@ -56,8 +56,6 @@ public final class WallpaperData implements Cloneable {
     public FileObserver wallpaperObserver;
     public boolean wallpaperUpdating;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class BindSource {
         public static final /* synthetic */ BindSource[] $VALUES;
         public static final BindSource CONNECTION_TRY_TO_REBIND;

@@ -16,13 +16,11 @@ import java.util.List;
 public final class UsageEvents implements Parcelable {
     public static final Parcelable.Creator<UsageEvents> CREATOR =
             new Parcelable.Creator<UsageEvents>() { // from class: android.app.usage.UsageEvents.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsageEvents createFromParcel(Parcel source) {
                     return new UsageEvents(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsageEvents[] newArray(int size) {
                     return new UsageEvents[size];
@@ -222,7 +220,6 @@ public final class UsageEvents implements Parcelable {
             return this.mLocusId;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void copyFrom(Event orig) {
             this.mPackage = orig.mPackage;
             this.mClass = orig.mClass;

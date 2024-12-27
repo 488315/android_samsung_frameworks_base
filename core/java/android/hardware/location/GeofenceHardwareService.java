@@ -120,7 +120,6 @@ public class GeofenceHardwareService extends Service {
         this.mGeofenceHardwareImpl = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkPermission(int pid, int uid, int monitoringType) {
         if (this.mGeofenceHardwareImpl.getAllowedResolutionLevel(pid, uid)
                 < this.mGeofenceHardwareImpl.getMonitoringResolutionLevel(monitoringType)) {

@@ -65,9 +65,6 @@ public final class TelephonyRepositoryImpl implements TelephonyRepository {
                     this.this$0 = telephonyRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:19:0x0063 A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:20:0x003b  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

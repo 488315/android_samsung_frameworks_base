@@ -32,8 +32,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
 public abstract class ContainerBoxKt {
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0298 A[ADDED_TO_REGION] */
-    /* JADX WARN: Type inference failed for: r11v13, types: [com.android.systemui.media.mediaoutput.compose.material.ContainerBoxKt$ActionButton$1, kotlin.jvm.internal.Lambda] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -62,7 +60,6 @@ public abstract class ContainerBoxKt {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.compose.material.ContainerBoxKt.ContainerBox(boolean, com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel, com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel, com.android.systemui.media.mediaoutput.viewmodel.LabsViewModel, kotlin.jvm.functions.Function2, androidx.compose.runtime.Composer, int, int):void");
     }
 
-    /* JADX WARN: Type inference failed for: r5v5, types: [com.android.systemui.media.mediaoutput.compose.material.ContainerBoxKt$SettingButton$1, kotlin.jvm.internal.Lambda] */
     public static final void SettingButton(final Function1 function1, final boolean z, LabsViewModel labsViewModel, Composer composer, final int i, final int i2) {
         int i3;
         Object failure;
@@ -126,7 +123,6 @@ public abstract class ContainerBoxKt {
                 OpaqueKey opaqueKey = ComposerKt.invocation;
                 final Feature feature = (Feature) composerImpl.consume(CompositionExtKt.LocalFeature);
                 AnimatedVisibilityKt.AnimatedVisibility(feature.isFullScreen && (z || ((Boolean) SnapshotStateKt.collectAsState(labsViewModel2.isSupportMultipleMediaSession, Boolean.FALSE, null, composerImpl, 56, 2).getValue()).booleanValue()), (Modifier) null, EnterExitTransitionKt.fadeIn$default(null, 3), EnterExitTransitionKt.fadeOut$default(null, 3), (String) null, ComposableLambdaKt.rememberComposableLambda(-1314470460, composerImpl, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.material.ContainerBoxKt$SettingButton$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(3);
                     }
@@ -155,7 +151,6 @@ public abstract class ContainerBoxKt {
             OpaqueKey opaqueKey2 = ComposerKt.invocation;
             final Feature feature2 = (Feature) composerImpl.consume(CompositionExtKt.LocalFeature);
             AnimatedVisibilityKt.AnimatedVisibility(feature2.isFullScreen && (z || ((Boolean) SnapshotStateKt.collectAsState(labsViewModel2.isSupportMultipleMediaSession, Boolean.FALSE, null, composerImpl, 56, 2).getValue()).booleanValue()), (Modifier) null, EnterExitTransitionKt.fadeIn$default(null, 3), EnterExitTransitionKt.fadeOut$default(null, 3), (String) null, ComposableLambdaKt.rememberComposableLambda(-1314470460, composerImpl, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.material.ContainerBoxKt$SettingButton$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(3);
                 }
@@ -174,7 +169,6 @@ public abstract class ContainerBoxKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.material.ContainerBoxKt$SettingButton$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

@@ -16,7 +16,6 @@ public class VrManager {
     private Map<VrStateCallback, CallbackEntry> mCallbackMap = new ArrayMap();
     private final IVrManager mService;
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class CallbackEntry {
         final VrStateCallback mCallback;
         final Executor mExecutor;
@@ -27,7 +26,6 @@ public class VrManager {
         class AnonymousClass1 extends IVrStateCallbacks.Stub {
             AnonymousClass1() {}
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onVrStateChanged$0(boolean enabled) {
                 CallbackEntry.this.mCallback.onVrStateChanged(enabled);
             }
@@ -50,7 +48,6 @@ public class VrManager {
         class AnonymousClass2 extends IPersistentVrStateCallbacks.Stub {
             AnonymousClass2() {}
 
-            /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onPersistentVrStateChanged$0(boolean enabled) {
                 CallbackEntry.this.mCallback.onPersistentVrStateChanged(enabled);
             }

@@ -1335,7 +1335,6 @@ public class LockPatternUtils implements LsConstants {
         return (getStrongAuthForUser(userId) & 32) != 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class WrappedCallback extends ICheckCredentialProgressCallback.Stub {
         private CheckCredentialProgressCallback mCallback;
         private Handler mHandler;
@@ -1361,7 +1360,6 @@ public class LockPatternUtils implements LsConstants {
             this.mHandler = null;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCredentialVerified$0() {
             this.mCallback.onEarlyMatched();
             this.mCallback = null;
@@ -2207,7 +2205,6 @@ public class LockPatternUtils implements LsConstants {
         return getLong(SDP_MDFPPMODE_ENABLED_FOR_SYSTEM_KEY, 0L, 0) == 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class WrappedCallbackForDualDar extends IDualDarAuthProgressCallback.Stub {
         private DualDarAuthProgressCallback mCallback;
         private Handler mHandler;
@@ -2234,7 +2231,6 @@ public class LockPatternUtils implements LsConstants {
             this.mHandler = null;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onInnerLayerUnlocked$0() {
             this.mCallback.onInnerLayerUnlocked();
             this.mCallback = null;
@@ -2306,7 +2302,6 @@ public class LockPatternUtils implements LsConstants {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean checkCredentialForDualDarDo(
             LockscreenCredential credential,
             int userId,

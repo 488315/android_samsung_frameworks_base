@@ -10,7 +10,6 @@ public class LegacyVpnInfo implements Parcelable {
     public static final Parcelable.Creator<LegacyVpnInfo> CREATOR =
             new Parcelable.Creator<
                     LegacyVpnInfo>() { // from class: com.android.internal.net.LegacyVpnInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LegacyVpnInfo createFromParcel(Parcel in) {
                     LegacyVpnInfo info = new LegacyVpnInfo();
@@ -20,7 +19,6 @@ public class LegacyVpnInfo implements Parcelable {
                     return info;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LegacyVpnInfo[] newArray(int size) {
                     return new LegacyVpnInfo[size];

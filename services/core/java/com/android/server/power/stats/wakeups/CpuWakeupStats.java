@@ -117,7 +117,6 @@ public final class CpuWakeupStats {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public static Wakeup parseWakeup(String str, long j, long j2, IrqDeviceMap irqDeviceMap) {
             int i;
             char c;
@@ -372,7 +371,6 @@ public final class CpuWakeupStats {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.power.stats.wakeups.CpuWakeupStats$$ExternalSyntheticLambda0] */
     public CpuWakeupStats(Context context, Handler handler) {
         IrqDeviceMap irqDeviceMap;
         Config config = new Config();
@@ -599,12 +597,6 @@ public final class CpuWakeupStats {
             this.mHandler.postDelayed(
                     new Runnable() { // from class:
                         // com.android.server.power.stats.wakeups.CpuWakeupStats$$ExternalSyntheticLambda1
-                        /* JADX WARN: Removed duplicated region for block: B:30:0x00a9  */
-                        /* JADX WARN: Removed duplicated region for block: B:33:0x00b2  */
-                        /* JADX WARN: Removed duplicated region for block: B:43:0x00d4  */
-                        /* JADX WARN: Removed duplicated region for block: B:48:0x0104 A[SYNTHETIC] */
-                        /* JADX WARN: Removed duplicated region for block: B:51:0x00c3  */
-                        /* JADX WARN: Removed duplicated region for block: B:53:0x00af  */
                         @Override // java.lang.Runnable
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.

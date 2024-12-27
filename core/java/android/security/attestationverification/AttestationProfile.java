@@ -16,13 +16,11 @@ public final class AttestationProfile implements Parcelable {
             new Parcelable.Creator<
                     AttestationProfile>() { // from class:
                                             // android.security.attestationverification.AttestationProfile.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AttestationProfile[] newArray(int size) {
                     return new AttestationProfile[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AttestationProfile createFromParcel(Parcel in) {
                     return new AttestationProfile(in);

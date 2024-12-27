@@ -48,9 +48,6 @@ public final class PackageMetrics {
         this.mInstallSteps.put(i, new InstallStep());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0160  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x018e  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0192  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

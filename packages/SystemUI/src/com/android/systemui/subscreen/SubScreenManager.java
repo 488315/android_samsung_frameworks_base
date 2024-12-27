@@ -441,11 +441,6 @@ public final class SubScreenManager implements PluginListener, ScreenLifecycle.O
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.systemui.subscreen.SubScreenManager$7] */
-    /* JADX WARN: Type inference failed for: r1v11, types: [com.android.systemui.subscreen.SubScreenManager$8] */
-    /* JADX WARN: Type inference failed for: r1v31, types: [com.android.systemui.subscreen.SubScreenManager$5] */
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.subscreen.SubScreenManager$2] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.systemui.subscreen.SubScreenManager$3] */
     public SubScreenManager(Context context, ScreenLifecycle screenLifecycle, DisplayLifecycle displayLifecycle, DisplayManager displayManager, KeyguardUpdateMonitor keyguardUpdateMonitor, Lazy lazy, Lazy lazy2, PluginManager pluginManager, DelayableExecutor delayableExecutor, DumpManager dumpManager, WakefulnessLifecycle wakefulnessLifecycle, Lazy lazy3, KeyguardStateController keyguardStateController, ActivityManager activityManager, KeyguardManager keyguardManager, DeviceStateManager deviceStateManager, NotifPipeline notifPipeline, DismissCallbackRegistry dismissCallbackRegistry, TaskStackChangeListeners taskStackChangeListeners) {
         this.mContext = context;
         this.mScreenLifecycle = screenLifecycle;

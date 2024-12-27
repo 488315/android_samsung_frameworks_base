@@ -20,8 +20,6 @@ public final class QSContainerImplController extends ViewController {
     public final SecQSPanelController mQsPanelController;
     public final SecQuickStatusBarHeaderController mQuickStatusBarHeaderController;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.qs.QSContainerImplController$1] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.qs.QSContainerImplController$2] */
     public QSContainerImplController(QSContainerImpl qSContainerImpl, SecQSPanelController secQSPanelController, SecQuickStatusBarHeaderController secQuickStatusBarHeaderController, ConfigurationController configurationController, FalsingManager falsingManager, ShadeHeaderController shadeHeaderController) {
         super(qSContainerImpl);
         this.mConfigurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.qs.QSContainerImplController.1

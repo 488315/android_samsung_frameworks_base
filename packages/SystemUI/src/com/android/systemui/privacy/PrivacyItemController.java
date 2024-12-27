@@ -101,9 +101,6 @@ public final class PrivacyItemController implements Dumpable {
         new Companion(null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.privacy.PrivacyConfig$Callback, com.android.systemui.privacy.PrivacyItemController$optionsCallback$1] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.privacy.PrivacyItemController$notifyChanges$1] */
     public PrivacyItemController(DelayableExecutor delayableExecutor, DelayableExecutor delayableExecutor2, PrivacyConfig privacyConfig, Set<PrivacyItemMonitor> set, PrivacyLogger privacyLogger, SystemClock systemClock, DumpManager dumpManager) {
         this.bgExecutor = delayableExecutor2;
         this.privacyConfig = privacyConfig;

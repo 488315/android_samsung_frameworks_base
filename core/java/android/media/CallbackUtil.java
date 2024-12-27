@@ -161,7 +161,6 @@ class CallbackUtil {
 
         LazyListenerManager() {}
 
-        /* JADX WARN: Multi-variable type inference failed */
         void addListener(Executor executor, T t, String str, Supplier<DispatcherStub> supplier) {
             synchronized (this.mListenerLock) {
                 Pair addListener =
@@ -184,7 +183,6 @@ class CallbackUtil {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         void removeListener(T t, String str) {
             synchronized (this.mListenerLock) {
                 Pair removeListener =

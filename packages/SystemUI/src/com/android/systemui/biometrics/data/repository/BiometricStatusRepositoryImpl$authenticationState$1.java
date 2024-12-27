@@ -29,7 +29,6 @@ final class BiometricStatusRepositoryImpl$authenticationState$1 extends SuspendL
     int label;
     final /* synthetic */ BiometricStatusRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BiometricStatusRepositoryImpl$authenticationState$1(BiometricStatusRepositoryImpl biometricStatusRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = biometricStatusRepositoryImpl;
@@ -106,7 +105,6 @@ final class BiometricStatusRepositoryImpl$authenticationState$1 extends SuspendL
             }
             final BiometricStatusRepositoryImpl biometricStatusRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.biometrics.data.repository.BiometricStatusRepositoryImpl$authenticationState$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

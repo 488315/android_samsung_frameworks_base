@@ -11,7 +11,6 @@ final class DisplaySwitchLatencyTracker$waitForDisplaySwitch$1 extends Continuat
     /* synthetic */ Object result;
     final /* synthetic */ DisplaySwitchLatencyTracker this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisplaySwitchLatencyTracker$waitForDisplaySwitch$1(DisplaySwitchLatencyTracker displaySwitchLatencyTracker, Continuation continuation) {
         super(continuation);
         this.this$0 = displaySwitchLatencyTracker;

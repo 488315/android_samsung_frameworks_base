@@ -160,7 +160,6 @@ public final class AppFunctionManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class CallbackWrapper extends IAppFunctionEnabledCallback.Stub {
         private final OutcomeReceiver<Void, Exception> mCallback;
         private final Executor mExecutor;
@@ -170,7 +169,6 @@ public final class AppFunctionManager {
             this.mExecutor = callbackExecutor;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSuccess$0() {
             this.mCallback.onResult(null);
         }
@@ -199,7 +197,6 @@ public final class AppFunctionManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onError$1(ParcelableException exception) {
             if (IllegalArgumentException.class.isAssignableFrom(exception.getCause().getClass())) {
                 this.mCallback.onError((IllegalArgumentException) exception.getCause());

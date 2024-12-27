@@ -28,8 +28,6 @@ public final class MTDSignature {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0079 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:45:0x001f -> B:8:0x0076). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -124,7 +122,6 @@ public final class MTDSignature {
                     + " com.android.server.enterprise.threatdefense.MTDSignature.getCertificate():java.security.cert.Certificate");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0038 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

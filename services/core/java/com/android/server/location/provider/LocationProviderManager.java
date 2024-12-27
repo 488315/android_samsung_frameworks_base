@@ -220,7 +220,6 @@ public class LocationProviderManager extends ListenerMultiplexer
             this.mExpirationRealtimeMs = Long.MAX_VALUE;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:14:0x0076  */
         @Override // com.android.server.location.provider.LocationProviderManager.Registration
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1596,19 +1595,6 @@ public class LocationProviderManager extends ListenerMultiplexer
         this(context, injector, str, passiveLocationProviderManager, Collections.emptyList());
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda11] */
-    /* JADX WARN: Type inference failed for: r0v12, types: [com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda2] */
-    /* JADX WARN: Type inference failed for: r0v14, types: [com.android.server.location.provider.LocationProviderManager$2] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda4] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda5] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda4] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.location.provider.LocationProviderManager$1] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda7] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda5] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda5] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda5] */
     public LocationProviderManager(
             Context context,
             Injector injector,
@@ -2352,8 +2338,6 @@ public class LocationProviderManager extends ListenerMultiplexer
 
        if ("gps".equals(r9.mName) == false) goto L34;
     */
-    /* JADX WARN: Removed duplicated region for block: B:40:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0089  */
     @Override // com.android.server.location.listeners.ListenerMultiplexer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -3153,7 +3137,6 @@ public class LocationProviderManager extends ListenerMultiplexer
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0068 A[Catch: all -> 0x0041, TryCatch #0 {all -> 0x0041, blocks: (B:19:0x002c, B:21:0x0036, B:22:0x0044, B:24:0x004d, B:27:0x0060, B:30:0x0076, B:31:0x0068, B:34:0x0053, B:37:0x0078, B:40:0x008b, B:43:0x00a1, B:44:0x00a3, B:47:0x0092, B:51:0x007e), top: B:18:0x002c }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

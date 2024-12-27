@@ -192,7 +192,6 @@ public final class SleepChargingManager {
         BattLogBuffer.addLog(2, "[UPDATE]" + sleepChargingTimeController.getInfoForOn());
     }
 
-    /* JADX WARN: Type inference failed for: r8v2, types: [com.android.server.battery.sleepcharging.SleepChargingManager$3] */
     public SleepChargingManager(
             Context context, BatteryService.AnonymousClass1 anonymousClass1, int i) {
         Slog.i("[SS]SleepChargingManager", "SleepChargingManager CreatedVERSION:240902");
@@ -322,15 +321,6 @@ public final class SleepChargingManager {
                         super(looper);
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:38:0x01e0 A[Catch: Exception -> 0x01e4, TRY_ENTER, TRY_LEAVE, TryCatch #6 {Exception -> 0x01e4, blocks: (B:38:0x01e0, B:109:0x01fa, B:108:0x01f7, B:103:0x01f1), top: B:33:0x00ef, inners: #2 }] */
-                    /* JADX WARN: Removed duplicated region for block: B:41:0x0237  */
-                    /* JADX WARN: Removed duplicated region for block: B:50:0x02c3  */
-                    /* JADX WARN: Removed duplicated region for block: B:53:0x02d5  */
-                    /* JADX WARN: Removed duplicated region for block: B:63:0x0300  */
-                    /* JADX WARN: Removed duplicated region for block: B:64:0x02c7  */
-                    /* JADX WARN: Removed duplicated region for block: B:70:0x02b5  */
-                    /* JADX WARN: Removed duplicated region for block: B:96:0x01e6 A[LOOP:0: B:77:0x0122->B:96:0x01e6, LOOP_END] */
-                    /* JADX WARN: Removed duplicated region for block: B:97:0x01de A[SYNTHETIC] */
                     @Override // android.os.Handler
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

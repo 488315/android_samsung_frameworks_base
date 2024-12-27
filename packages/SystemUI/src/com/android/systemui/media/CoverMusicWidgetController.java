@@ -44,8 +44,6 @@ public final class CoverMusicWidgetController {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.media.CoverMusicWidgetController$widgetDisableRunnable$1] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.media.CoverMusicWidgetController$observer$1] */
     public CoverMusicWidgetController(Consumer<SecMediaHost.MediaPanelVisibilityListener> consumer, Consumer<SecMediaHost.MediaPanelVisibilityListener> consumer2, SubScreenManager subScreenManager, WakefulnessLifecycle wakefulnessLifecycle) {
         this.addVisibilityListenerConsumer = consumer;
         this.removeVisibilityListenerConsumer = consumer2;

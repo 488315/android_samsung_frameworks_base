@@ -9,7 +9,6 @@ public final class TimeZoneDetectorStatus implements Parcelable {
     public static final Parcelable.Creator<TimeZoneDetectorStatus> CREATOR =
             new Parcelable.Creator<TimeZoneDetectorStatus>() { // from class:
                 // android.app.time.TimeZoneDetectorStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneDetectorStatus createFromParcel(Parcel in) {
                     int detectorStatus = in.readInt();
@@ -29,7 +28,6 @@ public final class TimeZoneDetectorStatus implements Parcelable {
                             locationTimeZoneAlgorithmStatus);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneDetectorStatus[] newArray(int size) {
                     return new TimeZoneDetectorStatus[size];

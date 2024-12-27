@@ -61,7 +61,6 @@ public class KeyStoreOperation {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Integer lambda$updateAad$0(byte[] input) throws RemoteException {
         this.mOperation.updateAad(input);
         return 0;
@@ -82,7 +81,6 @@ public class KeyStoreOperation {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ byte[] lambda$update$1(byte[] input) throws RemoteException {
         return this.mOperation.update(input);
     }
@@ -103,7 +101,6 @@ public class KeyStoreOperation {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ byte[] lambda$finish$2(byte[] input, byte[] signature)
             throws RemoteException {
         return this.mOperation.finish(input, signature);
@@ -123,7 +120,6 @@ public class KeyStoreOperation {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ Integer lambda$abort$3() throws RemoteException {
         this.mOperation.abort();
         return 0;

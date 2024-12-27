@@ -68,9 +68,6 @@ public final class HeadsUpAppearanceController extends ViewController implements
     public ExpandableNotificationRow mTrackedChild;
     public final NotificationWakeUpCoordinator mWakeUpCoordinator;
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.statusbar.phone.HeadsUpAppearanceController$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.statusbar.phone.HeadsUpAppearanceController$1] */
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.systemui.statusbar.phone.HeadsUpAppearanceController$2] */
     public HeadsUpAppearanceController(NotificationIconAreaController notificationIconAreaController, HeadsUpManager headsUpManager, StatusBarStateController statusBarStateController, PhoneStatusBarTransitions phoneStatusBarTransitions, KeyguardBypassController keyguardBypassController, NotificationWakeUpCoordinator notificationWakeUpCoordinator, DarkIconDispatcher darkIconDispatcher, KeyguardStateController keyguardStateController, CommandQueue commandQueue, NotificationStackScrollLayoutController notificationStackScrollLayoutController, ShadeViewController shadeViewController, NotificationRoundnessManager notificationRoundnessManager, HeadsUpStatusBarView headsUpStatusBarView, View view, Optional<View> optional, FeatureFlagsClassic featureFlagsClassic, HeadsUpNotificationIconInteractor headsUpNotificationIconInteractor, Optional<View> optional2, ConfigurationController configurationController, IndicatorScaleGardener indicatorScaleGardener) {
         super(headsUpStatusBarView);
         this.mSetTrackingHeadsUp = new HeadsUpAppearanceController$$ExternalSyntheticLambda0(this, 0);
@@ -336,7 +333,6 @@ public final class HeadsUpAppearanceController extends ViewController implements
         ViewClippingUtil.setClippingDeactivated(this.mView, !z, this.mParentClippingParams);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0040  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

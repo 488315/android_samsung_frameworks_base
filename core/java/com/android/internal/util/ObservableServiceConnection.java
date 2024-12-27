@@ -71,7 +71,6 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onNotifyCallback$0(
                 Object service,
                 Callback callback,
@@ -133,7 +132,6 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$addCallback$0(Callback callback) {
         synchronized (this.mLock) {
             if (this.mService != null) {

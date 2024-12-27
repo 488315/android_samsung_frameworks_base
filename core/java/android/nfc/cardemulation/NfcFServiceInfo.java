@@ -31,7 +31,6 @@ public final class NfcFServiceInfo implements Parcelable {
     public static final Parcelable.Creator<NfcFServiceInfo> CREATOR =
             new Parcelable.Creator<
                     NfcFServiceInfo>() { // from class: android.nfc.cardemulation.NfcFServiceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NfcFServiceInfo createFromParcel(Parcel source) {
                     String dynamicSystemCode;
@@ -67,7 +66,6 @@ public final class NfcFServiceInfo implements Parcelable {
                     return service;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NfcFServiceInfo[] newArray(int size) {
                     return new NfcFServiceInfo[size];

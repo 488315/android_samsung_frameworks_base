@@ -96,8 +96,6 @@ public final class WiredChargingRippleController {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class WiredChargingRippleEvent implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ WiredChargingRippleEvent[] $VALUES;
         public static final WiredChargingRippleEvent CHARGING_RIPPLE_PLAYED;

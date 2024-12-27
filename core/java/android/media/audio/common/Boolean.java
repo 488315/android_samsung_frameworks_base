@@ -11,7 +11,6 @@ import java.util.StringJoiner;
 public class Boolean implements Parcelable {
     public static final Parcelable.Creator<Boolean> CREATOR =
             new Parcelable.Creator<Boolean>() { // from class: android.media.audio.common.Boolean.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Boolean createFromParcel(Parcel _aidl_source) {
                     Boolean _aidl_out = new Boolean();
@@ -19,7 +18,6 @@ public class Boolean implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Boolean[] newArray(int _aidl_size) {
                     return new Boolean[_aidl_size];

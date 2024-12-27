@@ -25,7 +25,6 @@ final class NotificationViewFlipperBinder$bind$2 extends SuspendLambda implement
         final /* synthetic */ NotificationViewFlipperViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(NotificationViewFlipperViewModel notificationViewFlipperViewModel, ViewFlipper viewFlipper, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = notificationViewFlipperViewModel;
@@ -79,7 +78,6 @@ final class NotificationViewFlipperBinder$bind$2 extends SuspendLambda implement
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationViewFlipperBinder$bind$2(NotificationViewFlipperViewModel notificationViewFlipperViewModel, ViewFlipper viewFlipper, Continuation continuation) {
         super(2, continuation);
         this.$viewModel = notificationViewFlipperViewModel;

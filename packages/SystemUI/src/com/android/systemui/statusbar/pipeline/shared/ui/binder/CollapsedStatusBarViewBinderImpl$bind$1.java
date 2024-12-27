@@ -45,7 +45,6 @@ final class CollapsedStatusBarViewBinderImpl$bind$1 extends SuspendLambda implem
             final /* synthetic */ CollapsedStatusBarViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02421(CollapsedStatusBarViewModel collapsedStatusBarViewModel, StatusBarVisibilityChangeListener statusBarVisibilityChangeListener, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = collapsedStatusBarViewModel;
@@ -101,7 +100,6 @@ final class CollapsedStatusBarViewBinderImpl$bind$1 extends SuspendLambda implem
             final /* synthetic */ CollapsedStatusBarViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(CollapsedStatusBarViewModel collapsedStatusBarViewModel, StatusBarVisibilityChangeListener statusBarVisibilityChangeListener, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = collapsedStatusBarViewModel;
@@ -152,7 +150,6 @@ final class CollapsedStatusBarViewBinderImpl$bind$1 extends SuspendLambda implem
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(View view, CollapsedStatusBarViewModel collapsedStatusBarViewModel, StatusBarVisibilityChangeListener statusBarVisibilityChangeListener, CollapsedStatusBarViewBinderImpl collapsedStatusBarViewBinderImpl, Continuation continuation) {
             super(2, continuation);
             this.$view = view;
@@ -189,7 +186,6 @@ final class CollapsedStatusBarViewBinderImpl$bind$1 extends SuspendLambda implem
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CollapsedStatusBarViewBinderImpl$bind$1(View view, CollapsedStatusBarViewModel collapsedStatusBarViewModel, StatusBarVisibilityChangeListener statusBarVisibilityChangeListener, CollapsedStatusBarViewBinderImpl collapsedStatusBarViewBinderImpl, Continuation continuation) {
         super(3, continuation);
         this.$view = view;

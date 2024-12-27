@@ -321,7 +321,6 @@ public final class KeyguardCoordinator implements Coordinator, Dumpable {
         SEEN_TIMEOUT = DurationKt.toDuration(5, DurationUnit.SECONDS);
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.notification.collection.coordinator.KeyguardCoordinator$collectionListener$1] */
     public KeyguardCoordinator(CoroutineDispatcher coroutineDispatcher, DumpManager dumpManager, HeadsUpManager headsUpManager, KeyguardNotificationVisibilityProvider keyguardNotificationVisibilityProvider, KeyguardRepository keyguardRepository, KeyguardTransitionRepository keyguardTransitionRepository, KeyguardCoordinatorLogger keyguardCoordinatorLogger, CoroutineScope coroutineScope, SectionHeaderVisibilityProvider sectionHeaderVisibilityProvider, SecureSettings secureSettings, SeenNotificationsInteractor seenNotificationsInteractor, StatusBarStateController statusBarStateController, AmbientState ambientState) {
         this.bgDispatcher = coroutineDispatcher;
         this.dumpManager = dumpManager;
@@ -338,7 +337,6 @@ public final class KeyguardCoordinator implements Coordinator, Dumpable {
         this.ambientState = ambientState;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean anyEntry(ListEntry listEntry, Function1 function1) {
         if (((Boolean) function1.invoke(listEntry.getRepresentativeEntry())).booleanValue()) {
             return true;
@@ -365,19 +363,16 @@ public final class KeyguardCoordinator implements Coordinator, Dumpable {
         this.dumpManager.registerDumpable(this);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final Object clearUnseenNotificationsWhenShadeIsExpanded(Continuation continuation) {
         Object collectLatest = FlowKt.collectLatest(StatusBarStateControllerExtKt.getExpansionChanges(this.statusBarStateController), new KeyguardCoordinator$clearUnseenNotificationsWhenShadeIsExpanded$2(this, null), continuation);
         return collectLatest == CoroutineSingletons.COROUTINE_SUSPENDED ? collectLatest : Unit.INSTANCE;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void invalidateListFromFilter(String str) {
         updateSectionHeadersVisibility();
         this.notifFilter.invalidateList(str);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final Object markHeadsUpNotificationsAsSeen(Continuation continuation) {
         ((BaseHeadsUpManager) this.headsUpManager).getHeadsUpEntryList().stream().map(new BaseHeadsUpManager$$ExternalSyntheticLambda0()).filter(new Predicate() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.KeyguardCoordinator$markHeadsUpNotificationsAsSeen$2
             @Override // java.util.function.Predicate
@@ -410,7 +405,6 @@ public final class KeyguardCoordinator implements Coordinator, Dumpable {
         return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void pickOutTopUnseenNotifs(List<? extends ListEntry> list) {
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
         int i = NotificationMinimalismPrototype$V2.$r8$clinit;
@@ -419,13 +413,11 @@ public final class KeyguardCoordinator implements Coordinator, Dumpable {
         RefactorFlagUtils.assertOnEngBuild("New code path expects com.android.systemui.notification_minimalism_prototype to be enabled.");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean shouldIgnoreUnseenCheck(NotificationEntry notificationEntry) {
         ExpandableNotificationRow expandableNotificationRow = notificationEntry.row;
         return (expandableNotificationRow == null ? false : expandableNotificationRow.mEntry.mSbn.getNotification().isMediaNotification()) || notificationEntry.mSbn.isOngoing();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final Object trackSeenNotifications(Continuation continuation) {
         final Flow flow = ((KeyguardTransitionRepositoryImpl) this.keyguardTransitionRepository).transitions;
         Object collectLatest = FlowKt.collectLatest(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.KeyguardCoordinator$trackSeenNotifications$$inlined$map$1
@@ -456,8 +448,6 @@ public final class KeyguardCoordinator implements Coordinator, Dumpable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -528,24 +518,20 @@ public final class KeyguardCoordinator implements Coordinator, Dumpable {
         return collectLatest == CoroutineSingletons.COROUTINE_SUSPENDED ? collectLatest : Unit.INSTANCE;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final Object trackSeenNotificationsWhileLocked(Set<NotificationEntry> set, Continuation continuation) {
         Object coroutineScope = CoroutineScopeKt.coroutineScope(new KeyguardCoordinator$trackSeenNotificationsWhileLocked$2(this, set, null), continuation);
         return coroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? coroutineScope : Unit.INSTANCE;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final Object trackSeenNotificationsWhileLockedAndNotDozing(Set<NotificationEntry> set, Continuation continuation) {
         return CoroutineScopeKt.coroutineScope(new KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2(this, set, null), continuation);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final Object trackSeenNotificationsWhileUnlocked(Continuation continuation) {
         Object coroutineScope = CoroutineScopeKt.coroutineScope(new KeyguardCoordinator$trackSeenNotificationsWhileUnlocked$2(this, null), continuation);
         return coroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? coroutineScope : Unit.INSTANCE;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final Object trackUnseenFilterSettingChanges(Continuation continuation) {
         Object collectLatest = FlowKt.collectLatest(unseenFeatureEnabled(), new KeyguardCoordinator$trackUnseenFilterSettingChanges$2(this, null), continuation);
         return collectLatest == CoroutineSingletons.COROUTINE_SUSPENDED ? collectLatest : Unit.INSTANCE;
@@ -585,8 +571,6 @@ public final class KeyguardCoordinator implements Coordinator, Dumpable {
                     this.this$0 = keyguardCoordinator;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

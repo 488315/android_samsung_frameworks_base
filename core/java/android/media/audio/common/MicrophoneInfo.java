@@ -12,7 +12,6 @@ public class MicrophoneInfo implements Parcelable {
     public static final Parcelable.Creator<MicrophoneInfo> CREATOR =
             new Parcelable.Creator<
                     MicrophoneInfo>() { // from class: android.media.audio.common.MicrophoneInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MicrophoneInfo createFromParcel(Parcel _aidl_source) {
                     MicrophoneInfo _aidl_out = new MicrophoneInfo();
@@ -20,7 +19,6 @@ public class MicrophoneInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MicrophoneInfo[] newArray(int _aidl_size) {
                     return new MicrophoneInfo[_aidl_size];
@@ -271,7 +269,6 @@ public class MicrophoneInfo implements Parcelable {
         public static final Parcelable.Creator<Sensitivity> CREATOR =
                 new Parcelable.Creator<Sensitivity>() { // from class:
                     // android.media.audio.common.MicrophoneInfo.Sensitivity.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Sensitivity createFromParcel(Parcel _aidl_source) {
                         Sensitivity _aidl_out = new Sensitivity();
@@ -279,7 +276,6 @@ public class MicrophoneInfo implements Parcelable {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Sensitivity[] newArray(int _aidl_size) {
                         return new Sensitivity[_aidl_size];
@@ -361,7 +357,6 @@ public class MicrophoneInfo implements Parcelable {
         public static final Parcelable.Creator<FrequencyResponsePoint> CREATOR =
                 new Parcelable.Creator<FrequencyResponsePoint>() { // from class:
                     // android.media.audio.common.MicrophoneInfo.FrequencyResponsePoint.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FrequencyResponsePoint createFromParcel(Parcel _aidl_source) {
                         FrequencyResponsePoint _aidl_out = new FrequencyResponsePoint();
@@ -369,7 +364,6 @@ public class MicrophoneInfo implements Parcelable {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FrequencyResponsePoint[] newArray(int _aidl_size) {
                         return new FrequencyResponsePoint[_aidl_size];
@@ -441,7 +435,6 @@ public class MicrophoneInfo implements Parcelable {
         public static final Parcelable.Creator<Coordinate> CREATOR =
                 new Parcelable.Creator<Coordinate>() { // from class:
                     // android.media.audio.common.MicrophoneInfo.Coordinate.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Coordinate createFromParcel(Parcel _aidl_source) {
                         Coordinate _aidl_out = new Coordinate();
@@ -449,7 +442,6 @@ public class MicrophoneInfo implements Parcelable {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Coordinate[] newArray(int _aidl_size) {
                         return new Coordinate[_aidl_size];

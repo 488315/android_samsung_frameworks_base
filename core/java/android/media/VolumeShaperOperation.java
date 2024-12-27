@@ -8,7 +8,6 @@ public class VolumeShaperOperation implements Parcelable {
     public static final Parcelable.Creator<VolumeShaperOperation> CREATOR =
             new Parcelable.Creator<
                     VolumeShaperOperation>() { // from class: android.media.VolumeShaperOperation.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VolumeShaperOperation createFromParcel(Parcel _aidl_source) {
                     VolumeShaperOperation _aidl_out = new VolumeShaperOperation();
@@ -16,7 +15,6 @@ public class VolumeShaperOperation implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VolumeShaperOperation[] newArray(int _aidl_size) {
                     return new VolumeShaperOperation[_aidl_size];

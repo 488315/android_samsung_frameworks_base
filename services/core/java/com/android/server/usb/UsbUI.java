@@ -1111,8 +1111,6 @@ public final class UsbUI implements ActivityTaskManagerInternal.ScreenObserver {
                         BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "UsbUI:", "  mSystemReady="), this.mSystemReady, printWriter, "  mBootCompleted="), this.mBootCompleted, printWriter, "  mSupportDualRole="), this.mSupportDualRole, printWriter, "  mIsEmergencyMode="), this.mIsEmergencyMode, printWriter, "  mIsHostConnected="), this.mIsHostConnected, printWriter, "  mSourcePower="), this.mSourcePower, printWriter, "  mIsHiccupState="), this.mIsHiccupState, printWriter, "  mIsUsbPortWet="), this.mIsUsbPortWet, printWriter);
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Type inference failed for: r0v10, types: [java.lang.String] */
                     public final void loggingUsbWetDetection(String str) {
                         String str2;
                         String str3;

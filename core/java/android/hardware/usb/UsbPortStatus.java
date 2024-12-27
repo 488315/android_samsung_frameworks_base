@@ -30,7 +30,6 @@ public final class UsbPortStatus implements Parcelable {
     public static final Parcelable.Creator<UsbPortStatus> CREATOR =
             new Parcelable.Creator<
                     UsbPortStatus>() { // from class: android.hardware.usb.UsbPortStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsbPortStatus createFromParcel(Parcel in) {
                     int currentMode = in.readInt();
@@ -64,7 +63,6 @@ public final class UsbPortStatus implements Parcelable {
                             displayPortAltModeInfo);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsbPortStatus[] newArray(int size) {
                     return new UsbPortStatus[size];

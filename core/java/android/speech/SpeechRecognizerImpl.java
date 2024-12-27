@@ -211,7 +211,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleStartListening(Intent recognizerIntent) {
         if (!checkOpenConnection()) {
             return;
@@ -225,7 +224,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleStopMessage() {
         if (!checkOpenConnection()) {
             return;
@@ -238,7 +236,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleCancelMessage() {
         if (!checkOpenConnection()) {
             return;
@@ -251,7 +248,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleSetTemporaryComponent(ComponentName componentName) {
         if (!maybeInitializeManagerService()) {
             return;
@@ -263,7 +259,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleCheckRecognitionSupport(
             Intent recognizerIntent,
             Executor callbackExecutor,
@@ -289,7 +284,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleTriggerModelDownload(
             Intent recognizerIntent,
             Executor callbackExecutor,
@@ -335,7 +329,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleChangeListener(RecognitionListener listener) {
         this.mListener.mInternalListener = listener;
     }
@@ -345,7 +338,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         putMessage(this.mHandler.obtainMessage(8));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDestroy() {
         if (this.mService != null) {
             try {
@@ -600,7 +592,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class InternalSupportCallback extends IRecognitionSupportCallback.Stub {
         private final RecognitionSupportCallback mCallback;
         private final Executor mExecutor;
@@ -610,7 +601,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
             this.mCallback = callback;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSupportResult$0(
                 RecognitionSupport recognitionSupport) {
             this.mCallback.onSupportResult(recognitionSupport);
@@ -630,7 +620,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onError$1(int errorCode) {
             this.mCallback.onError(errorCode);
         }
@@ -649,7 +638,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class InternalModelDownloadListener extends IModelDownloadListener.Stub {
         private final Executor mExecutor;
         private final ModelDownloadListener mModelDownloadListener;
@@ -660,7 +648,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
             this.mModelDownloadListener = modelDownloadListener;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onProgress$0(int completedPercent) {
             this.mModelDownloadListener.onProgress(completedPercent);
         }
@@ -678,7 +665,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSuccess$1() {
             this.mModelDownloadListener.onSuccess();
         }
@@ -696,7 +682,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onScheduled$2() {
             this.mModelDownloadListener.onScheduled();
         }
@@ -714,7 +699,6 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onError$3(int error) {
             this.mModelDownloadListener.onError(error);
         }

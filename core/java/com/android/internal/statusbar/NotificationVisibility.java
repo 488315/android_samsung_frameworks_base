@@ -17,13 +17,11 @@ public class NotificationVisibility implements Parcelable {
             new Parcelable.Creator<
                     NotificationVisibility>() { // from class:
                                                 // com.android.internal.statusbar.NotificationVisibility.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotificationVisibility createFromParcel(Parcel parcel) {
                     return NotificationVisibility.obtain(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotificationVisibility[] newArray(int size) {
                     return new NotificationVisibility[size];
@@ -139,7 +137,6 @@ public class NotificationVisibility implements Parcelable {
         return vo;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static NotificationVisibility obtain(Parcel in) {
         NotificationVisibility vo = obtain();
         vo.readFromParcel(in);

@@ -33,7 +33,6 @@ public class NotifCounterCoordinator implements Coordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onAfterRenderList(List<ListEntry> list, NotifStackController notifStackController) {
         int i;
         refreshMaxCount();

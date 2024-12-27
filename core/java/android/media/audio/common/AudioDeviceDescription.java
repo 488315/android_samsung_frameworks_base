@@ -30,7 +30,6 @@ public class AudioDeviceDescription implements Parcelable {
     public static final Parcelable.Creator<AudioDeviceDescription> CREATOR =
             new Parcelable.Creator<AudioDeviceDescription>() { // from class:
                 // android.media.audio.common.AudioDeviceDescription.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioDeviceDescription createFromParcel(Parcel _aidl_source) {
                     AudioDeviceDescription _aidl_out = new AudioDeviceDescription();
@@ -38,7 +37,6 @@ public class AudioDeviceDescription implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioDeviceDescription[] newArray(int _aidl_size) {
                     return new AudioDeviceDescription[_aidl_size];

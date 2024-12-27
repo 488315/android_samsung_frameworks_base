@@ -439,12 +439,10 @@ public class SparseMappingTable {
         return (key >> 16) & 65535;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void logOrThrow(String message) {
         logOrThrow(message, new RuntimeException("Stack trace"));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void logOrThrow(String message, Throwable th) {
         Slog.e(TAG, message, th);
         if (Build.IS_ENG) {

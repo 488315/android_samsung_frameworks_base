@@ -77,7 +77,6 @@ public final class CursorJoiner implements Iterator<Result>, Iterable<Result> {
         }
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // java.util.Iterator
     public Result next() {
         if (!hasNext()) {

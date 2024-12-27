@@ -10,7 +10,6 @@ import java.util.StringJoiner;
 public class Void implements Parcelable {
     public static final Parcelable.Creator<Void> CREATOR =
             new Parcelable.Creator<Void>() { // from class: android.media.audio.common.Void.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Void createFromParcel(Parcel _aidl_source) {
                     Void _aidl_out = new Void();
@@ -18,7 +17,6 @@ public class Void implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Void[] newArray(int _aidl_size) {
                     return new Void[_aidl_size];

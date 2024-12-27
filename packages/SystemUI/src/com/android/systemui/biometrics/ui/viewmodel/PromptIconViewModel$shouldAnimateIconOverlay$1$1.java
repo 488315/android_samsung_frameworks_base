@@ -29,7 +29,6 @@ final class PromptIconViewModel$shouldAnimateIconOverlay$1$1 extends SuspendLamb
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptIconViewModel$shouldAnimateIconOverlay$1$1(PromptIconViewModel promptIconViewModel, Continuation continuation) {
         super(5, continuation);
         this.this$0 = promptIconViewModel;

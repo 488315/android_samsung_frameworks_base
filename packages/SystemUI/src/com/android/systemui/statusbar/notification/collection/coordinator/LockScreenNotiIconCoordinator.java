@@ -197,12 +197,10 @@ public class LockScreenNotiIconCoordinator implements Coordinator, Configuration
         this.mHasVisibleNotificationOnKeyguard = !list.isEmpty();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean needLockScreenExpandPanel() {
         return this.mAmbientState.isNeedsToExpandLocksNoti();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void notifyLockScreenNotiInfoArrayUpdated(List<ListEntry> list) {
         applyNotificationInfoArray(list);
         LockscreenNotificationManager lockscreenNotificationManager = this.mLockscreenNotificationManager;
@@ -223,13 +221,11 @@ public class LockScreenNotiIconCoordinator implements Coordinator, Configuration
         this.mPluginLockMediator.registerStateCallback(this.mPluginLockListener);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void resetNotificationInfoArray(List<ListEntry> list) {
         this.mLockscreenNotificationManager.getClass();
         this.mNotificationInfoArray = new ArrayList<>();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: restoreVisibility, reason: merged with bridge method [inline-methods] */
     public void lambda$restoreVisibility$0(ListEntry listEntry) {
         ExpandableNotificationRow expandableNotificationRow = listEntry.getRepresentativeEntry().row;

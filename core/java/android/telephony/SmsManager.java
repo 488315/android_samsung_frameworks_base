@@ -275,7 +275,6 @@ public final class SmsManager {
         return this.mContext.getOpPackageName();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String getAttributionTag() {
         if (this.mContext == null) {
             return null;
@@ -1026,7 +1025,6 @@ public final class SmsManager {
         sendResolverResult(resolverResult, subId, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendResolverResult(
             SubscriptionResolverResult resolverResult, int subId, boolean pickActivityShown) {
         if (SubscriptionManager.isValidSubscriptionId(subId)) {
@@ -1051,7 +1049,6 @@ public final class SmsManager {
         return binder;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void notifySmsError(PendingIntent pendingIntent, int error) {
         if (pendingIntent != null) {
             try {
@@ -1061,7 +1058,6 @@ public final class SmsManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void notifySmsError(List<PendingIntent> pendingIntents, int error) {
         if (pendingIntents != null) {
             for (PendingIntent pendingIntent : pendingIntents) {
@@ -1070,7 +1066,6 @@ public final class SmsManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static ISms getISmsServiceOrThrow() {
         ISms iSms = TelephonyManager.getSmsService();
         if (iSms == null) {
@@ -1539,7 +1534,6 @@ public final class SmsManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String formatCrossStackMessageId(long id) {
         return "{x-message-id:" + id + "}";
     }

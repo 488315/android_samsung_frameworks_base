@@ -25,7 +25,6 @@ public final class OneHandedModeTile extends QSTileImpl {
     public final QSTile.Icon mIcon;
     public final AnonymousClass1 mSetting;
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.qs.tiles.OneHandedModeTile$1] */
     public OneHandedModeTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, UserTracker userTracker, SecureSettings secureSettings) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mIcon = QSTileImpl.ResourceIcon.get(R.drawable.ic_storage_48dp);

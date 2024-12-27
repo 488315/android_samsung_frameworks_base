@@ -114,7 +114,6 @@ public class NotificationsQuickSettingsContainer extends ConstraintLayout implem
         this.mKeyguardStatusBar = findViewById(R.id.keyguard_header);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.fragments.FragmentHostManager.FragmentListener
     public final void onFragmentViewCreated(Fragment fragment) {
         QS qs = (QS) fragment;

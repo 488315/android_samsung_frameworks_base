@@ -11,13 +11,11 @@ public final class PrepareGetCredentialResponseInternal implements Parcelable {
     public static final Parcelable.Creator<PrepareGetCredentialResponseInternal> CREATOR =
             new Parcelable.Creator<PrepareGetCredentialResponseInternal>() { // from class:
                 // android.credentials.PrepareGetCredentialResponseInternal.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrepareGetCredentialResponseInternal[] newArray(int size) {
                     return new PrepareGetCredentialResponseInternal[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrepareGetCredentialResponseInternal createFromParcel(Parcel in) {
                     return new PrepareGetCredentialResponseInternal(in);

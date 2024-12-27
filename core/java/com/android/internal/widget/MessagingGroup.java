@@ -348,7 +348,6 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$removeGroupAnimated$1(Runnable endAction) {
         setAlpha(1.0f);
         MessagingPropertyAnimator.setToLaidOutPosition(this);
@@ -375,7 +374,6 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout
         sInstancePool.clear();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.internal.widget.MessagingLinearLayout.MessagingChild
     public int getMeasuredType() {
         if (this.mIsolatedMessage != null) {
@@ -442,7 +440,6 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$hideAnimated$2() {
         setIsHidingAnimated(false);
     }

@@ -25,13 +25,6 @@ final class FromDozingTransitionInteractor$listenForDozingToAny$1 extends Suspen
             this.this$0 = fromDozingTransitionInteractor;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:20:0x009c  */
-        /* JADX WARN: Removed duplicated region for block: B:23:0x00c6 A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:24:0x009f  */
-        /* JADX WARN: Removed duplicated region for block: B:33:0x0049  */
-        /* JADX WARN: Removed duplicated region for block: B:9:0x0024  */
-        /* JADX WARN: Type inference failed for: r4v7, types: [com.android.systemui.keyguard.domain.interactor.TransitionInteractor] */
         @Override // kotlinx.coroutines.flow.FlowCollector
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -46,7 +39,6 @@ final class FromDozingTransitionInteractor$listenForDozingToAny$1 extends Suspen
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromDozingTransitionInteractor$listenForDozingToAny$1(FromDozingTransitionInteractor fromDozingTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromDozingTransitionInteractor;

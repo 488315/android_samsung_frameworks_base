@@ -289,7 +289,6 @@ public final class KeyguardSecSimPukViewController extends KeyguardSimPukViewCon
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.keyguard.KeyguardSecSimPukViewController$1] */
     public KeyguardSecSimPukViewController(KeyguardSecSimPukView keyguardSecSimPukView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, LiftToActivateListener liftToActivateListener, TelephonyManager telephonyManager, FalsingCollector falsingCollector, EmergencyButtonController emergencyButtonController, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, KeyguardKeyboardInteractor keyguardKeyboardInteractor, InputMethodManager inputMethodManager) {
         super(keyguardSecSimPukView, configurationController, vibrationUtil, accessibilityManager, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, liftToActivateListener, telephonyManager, falsingCollector, emergencyButtonController, featureFlags, selectedUserInteractor, keyguardKeyboardInteractor);
         this.mOrientation = 1;
@@ -420,10 +419,6 @@ public final class KeyguardSecSimPukViewController extends KeyguardSimPukViewCon
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x005e  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0142  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00f2  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00fa  */
     @Override // com.android.keyguard.KeyguardSimPukViewController
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -183,13 +183,11 @@ public final class ProcessStats implements Parcelable {
             new Parcelable.Creator<
                     ProcessStats>() { // from class:
                                       // com.android.internal.app.procstats.ProcessStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ProcessStats createFromParcel(Parcel in) {
                     return new ProcessStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ProcessStats[] newArray(int size) {
                     return new ProcessStats[size];
@@ -3237,7 +3235,6 @@ public final class ProcessStats implements Parcelable {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dumpProcessState$1(
             int atomTag, StatsEventOutput statsEventOutput, ProcessState processState) {
         if (processState.isMultiPackage() && processState.getCommonProcess() != processState) {
@@ -3265,7 +3262,6 @@ public final class ProcessStats implements Parcelable {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dumpProcessAssociation$2(
             StatsEventOutput statsEventOutput,
             int atomTag,

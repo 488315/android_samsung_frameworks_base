@@ -25,7 +25,6 @@ final class LockscreenSceneTransitionInteractor$listenForSceneTransitionProgress
     int label;
     final /* synthetic */ LockscreenSceneTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LockscreenSceneTransitionInteractor$listenForSceneTransitionProgress$1(LockscreenSceneTransitionInteractor lockscreenSceneTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = lockscreenSceneTransitionInteractor;

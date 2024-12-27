@@ -14,13 +14,11 @@ public class SemContextAutoRotation extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextAutoRotation>() { // from class:
                                                 // com.samsung.android.hardware.context.SemContextAutoRotation.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextAutoRotation createFromParcel(Parcel in) {
                     return new SemContextAutoRotation(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextAutoRotation[] newArray(int size) {
                     return new SemContextAutoRotation[size];

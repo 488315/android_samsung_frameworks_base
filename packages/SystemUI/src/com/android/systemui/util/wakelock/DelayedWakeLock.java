@@ -21,7 +21,6 @@ public class DelayedWakeLock implements WakeLock {
         this.mHandler = (Handler) lazy.get();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$release$0(String str) {
         this.mInner.release(str);
     }

@@ -2,8 +2,6 @@ package com.android.systemui.volume.panel.component.volume.ui.composable;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 final class VolumeSliderContentComponent {
     public static final /* synthetic */ VolumeSliderContentComponent[] $VALUES;
     public static final VolumeSliderContentComponent DisabledMessage;

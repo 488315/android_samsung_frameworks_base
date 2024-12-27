@@ -165,7 +165,6 @@ public final class TwilightService extends SystemService
     @Override // android.location.LocationListener
     public final void onStatusChanged(String str, int i, Bundle bundle) {}
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.twilight.TwilightService$2] */
     public final void startListening() {
         Slog.d("TwilightService", "startListening");
         this.mLocationManager.requestLocationUpdates(

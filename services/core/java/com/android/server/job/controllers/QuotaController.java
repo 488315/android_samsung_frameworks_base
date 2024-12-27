@@ -309,8 +309,6 @@ public final class QuotaController extends StateController {
         
             throw r0;
          */
-        /* JADX WARN: Removed duplicated region for block: B:133:0x03a7 A[Catch: all -> 0x02f2, Merged into TryCatch #2 {all -> 0x0045, all -> 0x02f2, all -> 0x0205, all -> 0x00d7, blocks: (B:4:0x001b, B:5:0x0021, B:7:0x04ab, B:10:0x0026, B:12:0x002e, B:13:0x0048, B:15:0x004e, B:16:0x0062, B:17:0x007c, B:18:0x0082, B:65:0x0181, B:66:0x0182, B:68:0x0190, B:69:0x01b1, B:86:0x01d3, B:87:0x01dc, B:88:0x01e5, B:89:0x01e9, B:101:0x020e, B:102:0x020f, B:104:0x0217, B:105:0x022d, B:108:0x023f, B:109:0x0255, B:111:0x025b, B:112:0x026f, B:113:0x0289, B:115:0x029a, B:116:0x02b9, B:117:0x02be, B:118:0x02d3, B:163:0x03b2, B:164:0x03b3, B:166:0x03bd, B:167:0x03d2, B:168:0x03e8, B:170:0x03ec, B:171:0x03f3, B:172:0x03ff, B:174:0x0407, B:175:0x041d, B:178:0x042f, B:179:0x0445, B:181:0x044b, B:182:0x045f, B:183:0x0478, B:185:0x0489, B:186:0x04a8, B:122:0x02d7, B:124:0x02ef, B:126:0x02f5, B:127:0x0349, B:129:0x0353, B:131:0x039b, B:133:0x03a7, B:134:0x03ae, B:136:0x035d, B:138:0x0367, B:140:0x036e, B:142:0x0380, B:143:0x0383, B:145:0x0395, B:147:0x0398, B:152:0x0301, B:153:0x031c, B:155:0x0326, B:157:0x0346, B:159:0x0313, B:91:0x01ea, B:93:0x01f6, B:94:0x0207, B:95:0x020a, B:20:0x0083, B:22:0x008d, B:25:0x0099, B:27:0x00ae, B:30:0x00bc, B:32:0x00c0, B:33:0x00da, B:35:0x00ee, B:36:0x0102, B:38:0x010c, B:40:0x0117, B:42:0x0129, B:44:0x012d, B:47:0x0130, B:49:0x013c, B:50:0x0143, B:52:0x0146, B:54:0x014a, B:55:0x0160, B:57:0x0163, B:59:0x0167, B:60:0x017d), top: B:3:0x001b }] */
-        /* JADX WARN: Removed duplicated region for block: B:140:0x036e A[Catch: all -> 0x02f2, Merged into TryCatch #2 {all -> 0x0045, all -> 0x02f2, all -> 0x0205, all -> 0x00d7, blocks: (B:4:0x001b, B:5:0x0021, B:7:0x04ab, B:10:0x0026, B:12:0x002e, B:13:0x0048, B:15:0x004e, B:16:0x0062, B:17:0x007c, B:18:0x0082, B:65:0x0181, B:66:0x0182, B:68:0x0190, B:69:0x01b1, B:86:0x01d3, B:87:0x01dc, B:88:0x01e5, B:89:0x01e9, B:101:0x020e, B:102:0x020f, B:104:0x0217, B:105:0x022d, B:108:0x023f, B:109:0x0255, B:111:0x025b, B:112:0x026f, B:113:0x0289, B:115:0x029a, B:116:0x02b9, B:117:0x02be, B:118:0x02d3, B:163:0x03b2, B:164:0x03b3, B:166:0x03bd, B:167:0x03d2, B:168:0x03e8, B:170:0x03ec, B:171:0x03f3, B:172:0x03ff, B:174:0x0407, B:175:0x041d, B:178:0x042f, B:179:0x0445, B:181:0x044b, B:182:0x045f, B:183:0x0478, B:185:0x0489, B:186:0x04a8, B:122:0x02d7, B:124:0x02ef, B:126:0x02f5, B:127:0x0349, B:129:0x0353, B:131:0x039b, B:133:0x03a7, B:134:0x03ae, B:136:0x035d, B:138:0x0367, B:140:0x036e, B:142:0x0380, B:143:0x0383, B:145:0x0395, B:147:0x0398, B:152:0x0301, B:153:0x031c, B:155:0x0326, B:157:0x0346, B:159:0x0313, B:91:0x01ea, B:93:0x01f6, B:94:0x0207, B:95:0x020a, B:20:0x0083, B:22:0x008d, B:25:0x0099, B:27:0x00ae, B:30:0x00bc, B:32:0x00c0, B:33:0x00da, B:35:0x00ee, B:36:0x0102, B:38:0x010c, B:40:0x0117, B:42:0x0129, B:44:0x012d, B:47:0x0130, B:49:0x013c, B:50:0x0143, B:52:0x0146, B:54:0x014a, B:55:0x0160, B:57:0x0163, B:59:0x0167, B:60:0x017d), top: B:3:0x001b }] */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -916,7 +914,6 @@ public final class QuotaController extends StateController {
         DEBUG = JobSchedulerService.DEBUG || Log.isLoggable("JobScheduler.Quota", 3);
     }
 
-    /* JADX WARN: Type inference failed for: r8v1, types: [com.android.server.job.controllers.QuotaController$1] */
     public QuotaController(JobSchedulerService jobSchedulerService, BackgroundJobsController backgroundJobsController, ConnectivityController connectivityController) {
         super(jobSchedulerService);
         this.mTrackedJobs = new SparseArrayMap();
@@ -1675,9 +1672,6 @@ public final class QuotaController extends StateController {
         return this.mRateLimitingWindowMs;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0064  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x009d A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x009e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2068,13 +2062,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00ac  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00d7  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x011e  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0183  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0147  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x016d  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x00cd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2315,16 +2302,6 @@ public final class QuotaController extends StateController {
         qcConstants.mQuotaBumpConstantsUpdated = false;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Type inference failed for: r0v22 */
-    /* JADX WARN: Type inference failed for: r0v23, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r0v37 */
-    /* JADX WARN: Type inference failed for: r0v38, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r0v46 */
-    /* JADX WARN: Type inference failed for: r0v52 */
-    /* JADX WARN: Type inference failed for: r6v3 */
-    /* JADX WARN: Type inference failed for: r6v4, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r6v5 */
     @Override // com.android.server.job.controllers.StateController
     public final void processConstantLocked(DeviceConfig.Properties properties, String str) {
         String str2;

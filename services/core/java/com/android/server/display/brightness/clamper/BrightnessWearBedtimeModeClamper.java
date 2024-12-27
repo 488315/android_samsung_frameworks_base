@@ -19,8 +19,6 @@ public final class BrightnessWearBedtimeModeClamper extends BrightnessClamper {
     public interface WearBedtimeModeData {
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v3, types: [android.database.ContentObserver, com.android.server.display.brightness.clamper.BrightnessWearBedtimeModeClamper$1] */
     public BrightnessWearBedtimeModeClamper(Injector injector, Handler handler, Context context, BrightnessClamperController.ClamperChangeListener clamperChangeListener, WearBedtimeModeData wearBedtimeModeData) {
         super(handler, clamperChangeListener);
         this.mContext = context;

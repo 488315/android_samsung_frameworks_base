@@ -76,9 +76,6 @@ public final class PmLifecycleImpl {
         this.mCustomInjector = pmCustomInjector;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(24:0|1|(2:3|2e)|13|(3:17|(5:21|22|23|25|26)|29)|31|(1:(2:42|(1:44))(2:36|(1:38)(2:39|(1:41))))|45|(2:49|(3:51|(4:54|(3:56|57|58)(1:60)|59|52)|61))|62|(3:64|(2:67|65)|68)|69|(2:73|(12:77|78|(1:82)|83|84|85|86|(1:88)|89|28f|96|97))|106|78|(2:80|82)|83|84|85|86|(0)|89|28f|(1:(0))) */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x026b  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x0290 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -114,7 +111,6 @@ public final class PmLifecycleImpl {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.samsung.android.server.pm.lifecycle.PmLifecycleImpl$$ExternalSyntheticLambda1] */
     public final void onInstalldStarting() {
         this.mRRFilter.enableAndConfigure(true);
         final ?? r0 = new Supplier() { // from class: com.samsung.android.server.pm.lifecycle.PmLifecycleImpl$$ExternalSyntheticLambda1
@@ -233,7 +229,6 @@ public final class PmLifecycleImpl {
         	at jadx.core.dex.visitors.regions.variables.ProcessVariables.removeUnusedResults(ProcessVariables.java:73)
         	at jadx.core.dex.visitors.regions.variables.ProcessVariables.visit(ProcessVariables.java:48)
         */
-    /* JADX WARN: Type inference failed for: r3v27, types: [com.samsung.android.server.pm.install.UnknownSourceAppManager$$ExternalSyntheticLambda1] */
     public final void onSystemReady() {
         /*
             Method dump skipped, instructions count: 814

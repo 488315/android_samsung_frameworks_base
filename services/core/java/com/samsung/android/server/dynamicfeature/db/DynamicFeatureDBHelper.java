@@ -24,10 +24,6 @@ public final class DynamicFeatureDBHelper extends SQLiteOpenHelper {
 
        if (r12 == null) goto L45;
     */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x02c5  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x02cb  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0290  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x02ad  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -187,8 +183,6 @@ public final class DynamicFeatureDBHelper extends SQLiteOpenHelper {
                     + " com.samsung.android.server.dynamicfeature.db.DynamicFeatureDBHelper.loadFeatures(android.database.sqlite.SQLiteDatabase):java.util.ArrayList");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00dc  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00fc  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

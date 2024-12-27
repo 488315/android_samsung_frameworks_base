@@ -484,13 +484,11 @@ public class Notification implements Parcelable {
                         OngoingActivityStyle.class);
         CREATOR =
                 new Parcelable.Creator<Notification>() { // from class: android.app.Notification.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Notification createFromParcel(Parcel parcel) {
                         return new Notification(parcel);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Notification[] newArray(int size) {
                         return new Notification[size];
@@ -509,13 +507,11 @@ public class Notification implements Parcelable {
     public static class Action implements Parcelable {
         public static final Parcelable.Creator<Action> CREATOR =
                 new Parcelable.Creator<Action>() { // from class: android.app.Notification.Action.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Action createFromParcel(Parcel in) {
                         return new Action(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Action[] newArray(int size) {
                         return new Action[size];
@@ -814,7 +810,6 @@ public class Notification implements Parcelable {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void visitUris(Consumer<Uri> visitor) {
             Notification.visitIconUri(visitor, getIcon());
         }
@@ -1286,7 +1281,6 @@ public class Notification implements Parcelable {
         that.parcelDataSize = this.parcelDataSize;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void visitIconUri(Consumer<Uri> visitor, Icon icon) {
         if (icon == null) {
             return;
@@ -1538,7 +1532,6 @@ public class Notification implements Parcelable {
         return removeTextSizeSpans(cs);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static CharSequence stripStyling(CharSequence cs) {
         if (cs == null) {
             return cs;
@@ -1546,7 +1539,6 @@ public class Notification implements Parcelable {
         return cs.toString();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static CharSequence normalizeBigText(CharSequence charSequence) {
         if (charSequence == null) {
             return charSequence;
@@ -1639,7 +1631,6 @@ public class Notification implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$writeToParcel$0(
             Parcel parcel, PendingIntent intent, Parcel out, int outFlags) {
         if (parcel == out) {
@@ -1853,7 +1844,6 @@ public class Notification implements Parcelable {
                 || areIconsMaybeDifferent(first.getLargeIcon(), second.getLargeIcon());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean areIconsMaybeDifferent(Icon a, Icon b) {
         if (a == b) {
             return false;
@@ -2441,13 +2431,11 @@ public class Notification implements Parcelable {
         private boolean mTintActionButtons;
         private Bundle mUserExtras;
 
-        /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
         public Builder(Context context, String channelId) {
             this(context, (Notification) null);
             this.mN.mChannelId = channelId;
         }
 
-        /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
         @Deprecated
         public Builder(Context context) {
             this(context, (Notification) null);
@@ -3026,7 +3014,6 @@ public class Notification implements Parcelable {
                     : DevicePolicyResources.UNDEFINED;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Drawable getDefaultProfileBadgeDrawable() {
             return this.mContext
                     .getPackageManager()
@@ -3124,7 +3111,6 @@ public class Notification implements Parcelable {
             this.mN.mUsesStandardHeader = false;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public RemoteViews applyStandardTemplate(
                 int resId, StandardTemplateParams p, TemplateBindResult result) {
             boolean rightIcon;
@@ -3207,7 +3193,6 @@ public class Notification implements Parcelable {
                     R.id.notification_headerless_view_column, 3, marginDimen);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void setHeaderlessVerticalMargins(
                 Context context,
                 RemoteViews contentView,
@@ -3246,7 +3231,6 @@ public class Notification implements Parcelable {
             return (int) (dimensionPixelSize * factor);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setTextViewColorPrimary(
                 RemoteViews contentView, int id, StandardTemplateParams p) {
             contentView.setTextColor(id, getPrimaryTextColor(p));
@@ -3260,7 +3244,6 @@ public class Notification implements Parcelable {
             return getColors(p).getSecondaryTextColor();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setTextViewColorSecondary(
                 RemoteViews contentView, int id, StandardTemplateParams p) {
             contentView.setTextColor(id, getSecondaryTextColor(p));
@@ -3275,7 +3258,6 @@ public class Notification implements Parcelable {
             contentView.setTextColor(id, getThirdTextColor(p));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Colors getColors(StandardTemplateParams p) {
             this.mColors.resolvePalette(
                     this.mContext, this.mN.color, isBackgroundColorized(p), this.mInNightMode);
@@ -3598,7 +3580,6 @@ public class Notification implements Parcelable {
             return p.allowColorization && this.mN.isColorized();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isCallActionColorCustomizable() {
             return this.mN.isColorized()
                     && this.mContext
@@ -3690,7 +3671,6 @@ public class Notification implements Parcelable {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public List<Action> getNonContextualActions() {
             if (this.mActions == null) {
                 return Collections.emptyList();
@@ -3706,7 +3686,6 @@ public class Notification implements Parcelable {
             return standardActions;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public RemoteViews applyStandardTemplateWithActions(
                 int layoutId, StandardTemplateParams p, TemplateBindResult result) {
             int i;
@@ -3799,7 +3778,6 @@ public class Notification implements Parcelable {
             return big;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean hasValidRemoteInput(Action action) {
             RemoteInput[] remoteInputs;
             if (TextUtils.isEmpty(action.title)
@@ -4186,7 +4164,6 @@ public class Notification implements Parcelable {
             return summary;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public RemoteViews generateActionButton(
                 Action action, boolean emphasizedMode, StandardTemplateParams p) {
             Integer fullLengthColor;
@@ -4361,7 +4338,6 @@ public class Notification implements Parcelable {
             return this.mIsLegacy;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public CharSequence processLegacyText(CharSequence charSequence) {
             boolean isAlreadyLightText = isLegacy() || textColorsNeedInversion();
             if (isAlreadyLightText) {
@@ -4397,14 +4373,12 @@ public class Notification implements Parcelable {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getStandardActionColor(StandardTemplateParams p) {
             return (this.mTintActionButtons || isBackgroundColorized(p))
                     ? getPrimaryAccentColor(p)
                     : getSecondaryTextColor(p);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getSmallIconColor(StandardTemplateParams p) {
             return getColors(p).getContrastColor();
         }
@@ -4582,12 +4556,10 @@ public class Notification implements Parcelable {
             return clone;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getBaseLayoutResource() {
             return R.layout.notification_template_material_base;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getHeadsUpBaseLayoutResource() {
             return R.layout.notification_template_material_heads_up_base;
         }
@@ -4596,42 +4568,34 @@ public class Notification implements Parcelable {
             return R.layout.notification_template_material_compact_heads_up_base;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getMessagingCompactHeadsUpLayoutResource() {
             return R.layout.notification_template_material_messaging_compact_heads_up;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getBigBaseLayoutResource() {
             return R.layout.notification_template_material_big_base;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getBigPictureLayoutResource() {
             return R.layout.notification_template_material_big_picture;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getBigTextLayoutResource() {
             return R.layout.notification_template_material_big_text;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getInboxLayoutResource() {
             return R.layout.notification_template_material_inbox;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getMessagingLayoutResource() {
             return R.layout.notification_template_material_messaging;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getBigMessagingLayoutResource() {
             return R.layout.notification_template_material_big_messaging;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getConversationLayoutResource() {
             return R.layout.notification_template_material_conversation;
         }
@@ -4652,7 +4616,6 @@ public class Notification implements Parcelable {
             return R.layout.notification_material_action_tombstone;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getBackgroundColor(StandardTemplateParams p) {
             return getColors(p).getBackgroundColor();
         }
@@ -4872,7 +4835,6 @@ public class Notification implements Parcelable {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void buildCustomContentIntoTemplate(
             Context context,
             RemoteViews template,
@@ -6319,9 +6281,6 @@ public class Notification implements Parcelable {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:23:0x00c3  */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x00ff  */
-        /* JADX WARN: Removed duplicated region for block: B:35:0x010d  */
         @Override // android.app.Notification.Style
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -7539,13 +7498,11 @@ public class Notification implements Parcelable {
         public static final Parcelable.Creator<BubbleMetadata> CREATOR =
                 new Parcelable.Creator<
                         BubbleMetadata>() { // from class: android.app.Notification.BubbleMetadata.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BubbleMetadata createFromParcel(Parcel source) {
                         return new BubbleMetadata(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public BubbleMetadata[] newArray(int size) {
                         return new BubbleMetadata[size];
@@ -8257,7 +8214,6 @@ public class Notification implements Parcelable {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void visitUris(Consumer<Uri> visitor) {
             Iterator<Action> it = this.mActions.iterator();
             while (it.hasNext()) {
@@ -8632,7 +8588,6 @@ public class Notification implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static <T extends Parcelable> T[] getParcelableArrayFromBundle(
             Bundle bundle, String str, Class<T> cls) {
         T[] tArr = (T[]) ((Parcelable[]) bundle.getParcelableArray(str, Parcelable.class));
@@ -9144,7 +9099,6 @@ public class Notification implements Parcelable {
             return flattenAlpha(color, backgroundColor);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static int flattenAlpha(int color, int background) {
             return Color.alpha(color) == 255
                     ? color
@@ -9212,7 +9166,6 @@ public class Notification implements Parcelable {
         this.semFlags |= 32;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Bitmap scaleDownIfNecessaryForBigPicture(
             Bitmap bitmap, int maxWidth, int maxHeight) {
         float factor;

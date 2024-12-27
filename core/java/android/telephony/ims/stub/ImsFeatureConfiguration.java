@@ -14,13 +14,11 @@ public final class ImsFeatureConfiguration implements Parcelable {
             new Parcelable.Creator<
                     ImsFeatureConfiguration>() { // from class:
                                                  // android.telephony.ims.stub.ImsFeatureConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsFeatureConfiguration createFromParcel(Parcel in) {
                     return new ImsFeatureConfiguration(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsFeatureConfiguration[] newArray(int size) {
                     return new ImsFeatureConfiguration[size];

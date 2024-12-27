@@ -7,13 +7,11 @@ public class SemDMACdata implements Parcelable {
     public static final Parcelable.Creator<SemDMACdata> CREATOR =
             new Parcelable.Creator<
                     SemDMACdata>() { // from class: com.android.internal.telephony.SemDMACdata.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemDMACdata createFromParcel(Parcel in) {
                     return new SemDMACdata(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemDMACdata[] newArray(int size) {
                     return new SemDMACdata[size];

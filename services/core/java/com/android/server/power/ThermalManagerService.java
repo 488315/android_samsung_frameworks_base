@@ -870,7 +870,6 @@ public final class ThermalManagerService extends SystemService {
                     }
                 };
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.power.ThermalManagerService$ThermalHalAidlWrapper$1] */
         public ThermalHalAidlWrapper(
                 ThermalManagerService$$ExternalSyntheticLambda0
                         thermalManagerService$$ExternalSyntheticLambda0) {
@@ -1171,27 +1170,9 @@ public final class ThermalManagerService extends SystemService {
     public final class ThermalShellCommand extends ShellCommand {
         public ThermalShellCommand() {}
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
         java.lang.NullPointerException
          */
-        /* JADX WARN: Removed duplicated region for block: B:100:0x02bc A[Catch: all -> 0x0112, RuntimeException -> 0x02c1, TRY_LEAVE, TryCatch #4 {RuntimeException -> 0x02c1, blocks: (B:98:0x02b6, B:100:0x02bc), top: B:97:0x02b6, outer: #0 }] */
-        /* JADX WARN: Removed duplicated region for block: B:105:0x02c3  */
-        /* JADX WARN: Removed duplicated region for block: B:108:0x024e A[Catch: all -> 0x0112, TryCatch #0 {all -> 0x0112, blocks: (B:56:0x00d1, B:57:0x0101, B:60:0x01f8, B:61:0x01fb, B:84:0x023e, B:85:0x024a, B:88:0x0298, B:89:0x029b, B:96:0x02b2, B:98:0x02b6, B:100:0x02bc, B:101:0x02c5, B:107:0x02d3, B:108:0x024e, B:111:0x0259, B:114:0x0263, B:117:0x026e, B:120:0x0278, B:123:0x0282, B:126:0x028d, B:129:0x0106, B:132:0x0115, B:135:0x0121, B:138:0x012d, B:141:0x0139, B:144:0x0145, B:147:0x0150, B:150:0x015b, B:153:0x0167, B:156:0x0173, B:159:0x017f, B:162:0x018b, B:165:0x0197, B:168:0x01a2, B:171:0x01ad, B:174:0x01b8, B:177:0x01c2, B:180:0x01cc, B:183:0x01d7, B:186:0x01e2, B:189:0x01ed), top: B:55:0x00d1, inners: #4 }] */
-        /* JADX WARN: Removed duplicated region for block: B:111:0x0259 A[Catch: all -> 0x0112, TryCatch #0 {all -> 0x0112, blocks: (B:56:0x00d1, B:57:0x0101, B:60:0x01f8, B:61:0x01fb, B:84:0x023e, B:85:0x024a, B:88:0x0298, B:89:0x029b, B:96:0x02b2, B:98:0x02b6, B:100:0x02bc, B:101:0x02c5, B:107:0x02d3, B:108:0x024e, B:111:0x0259, B:114:0x0263, B:117:0x026e, B:120:0x0278, B:123:0x0282, B:126:0x028d, B:129:0x0106, B:132:0x0115, B:135:0x0121, B:138:0x012d, B:141:0x0139, B:144:0x0145, B:147:0x0150, B:150:0x015b, B:153:0x0167, B:156:0x0173, B:159:0x017f, B:162:0x018b, B:165:0x0197, B:168:0x01a2, B:171:0x01ad, B:174:0x01b8, B:177:0x01c2, B:180:0x01cc, B:183:0x01d7, B:186:0x01e2, B:189:0x01ed), top: B:55:0x00d1, inners: #4 }] */
-        /* JADX WARN: Removed duplicated region for block: B:114:0x0263 A[Catch: all -> 0x0112, TryCatch #0 {all -> 0x0112, blocks: (B:56:0x00d1, B:57:0x0101, B:60:0x01f8, B:61:0x01fb, B:84:0x023e, B:85:0x024a, B:88:0x0298, B:89:0x029b, B:96:0x02b2, B:98:0x02b6, B:100:0x02bc, B:101:0x02c5, B:107:0x02d3, B:108:0x024e, B:111:0x0259, B:114:0x0263, B:117:0x026e, B:120:0x0278, B:123:0x0282, B:126:0x028d, B:129:0x0106, B:132:0x0115, B:135:0x0121, B:138:0x012d, B:141:0x0139, B:144:0x0145, B:147:0x0150, B:150:0x015b, B:153:0x0167, B:156:0x0173, B:159:0x017f, B:162:0x018b, B:165:0x0197, B:168:0x01a2, B:171:0x01ad, B:174:0x01b8, B:177:0x01c2, B:180:0x01cc, B:183:0x01d7, B:186:0x01e2, B:189:0x01ed), top: B:55:0x00d1, inners: #4 }] */
-        /* JADX WARN: Removed duplicated region for block: B:117:0x026e A[Catch: all -> 0x0112, TryCatch #0 {all -> 0x0112, blocks: (B:56:0x00d1, B:57:0x0101, B:60:0x01f8, B:61:0x01fb, B:84:0x023e, B:85:0x024a, B:88:0x0298, B:89:0x029b, B:96:0x02b2, B:98:0x02b6, B:100:0x02bc, B:101:0x02c5, B:107:0x02d3, B:108:0x024e, B:111:0x0259, B:114:0x0263, B:117:0x026e, B:120:0x0278, B:123:0x0282, B:126:0x028d, B:129:0x0106, B:132:0x0115, B:135:0x0121, B:138:0x012d, B:141:0x0139, B:144:0x0145, B:147:0x0150, B:150:0x015b, B:153:0x0167, B:156:0x0173, B:159:0x017f, B:162:0x018b, B:165:0x0197, B:168:0x01a2, B:171:0x01ad, B:174:0x01b8, B:177:0x01c2, B:180:0x01cc, B:183:0x01d7, B:186:0x01e2, B:189:0x01ed), top: B:55:0x00d1, inners: #4 }] */
-        /* JADX WARN: Removed duplicated region for block: B:120:0x0278 A[Catch: all -> 0x0112, TryCatch #0 {all -> 0x0112, blocks: (B:56:0x00d1, B:57:0x0101, B:60:0x01f8, B:61:0x01fb, B:84:0x023e, B:85:0x024a, B:88:0x0298, B:89:0x029b, B:96:0x02b2, B:98:0x02b6, B:100:0x02bc, B:101:0x02c5, B:107:0x02d3, B:108:0x024e, B:111:0x0259, B:114:0x0263, B:117:0x026e, B:120:0x0278, B:123:0x0282, B:126:0x028d, B:129:0x0106, B:132:0x0115, B:135:0x0121, B:138:0x012d, B:141:0x0139, B:144:0x0145, B:147:0x0150, B:150:0x015b, B:153:0x0167, B:156:0x0173, B:159:0x017f, B:162:0x018b, B:165:0x0197, B:168:0x01a2, B:171:0x01ad, B:174:0x01b8, B:177:0x01c2, B:180:0x01cc, B:183:0x01d7, B:186:0x01e2, B:189:0x01ed), top: B:55:0x00d1, inners: #4 }] */
-        /* JADX WARN: Removed duplicated region for block: B:123:0x0282 A[Catch: all -> 0x0112, TryCatch #0 {all -> 0x0112, blocks: (B:56:0x00d1, B:57:0x0101, B:60:0x01f8, B:61:0x01fb, B:84:0x023e, B:85:0x024a, B:88:0x0298, B:89:0x029b, B:96:0x02b2, B:98:0x02b6, B:100:0x02bc, B:101:0x02c5, B:107:0x02d3, B:108:0x024e, B:111:0x0259, B:114:0x0263, B:117:0x026e, B:120:0x0278, B:123:0x0282, B:126:0x028d, B:129:0x0106, B:132:0x0115, B:135:0x0121, B:138:0x012d, B:141:0x0139, B:144:0x0145, B:147:0x0150, B:150:0x015b, B:153:0x0167, B:156:0x0173, B:159:0x017f, B:162:0x018b, B:165:0x0197, B:168:0x01a2, B:171:0x01ad, B:174:0x01b8, B:177:0x01c2, B:180:0x01cc, B:183:0x01d7, B:186:0x01e2, B:189:0x01ed), top: B:55:0x00d1, inners: #4 }] */
-        /* JADX WARN: Removed duplicated region for block: B:126:0x028d A[Catch: all -> 0x0112, TryCatch #0 {all -> 0x0112, blocks: (B:56:0x00d1, B:57:0x0101, B:60:0x01f8, B:61:0x01fb, B:84:0x023e, B:85:0x024a, B:88:0x0298, B:89:0x029b, B:96:0x02b2, B:98:0x02b6, B:100:0x02bc, B:101:0x02c5, B:107:0x02d3, B:108:0x024e, B:111:0x0259, B:114:0x0263, B:117:0x026e, B:120:0x0278, B:123:0x0282, B:126:0x028d, B:129:0x0106, B:132:0x0115, B:135:0x0121, B:138:0x012d, B:141:0x0139, B:144:0x0145, B:147:0x0150, B:150:0x015b, B:153:0x0167, B:156:0x0173, B:159:0x017f, B:162:0x018b, B:165:0x0197, B:168:0x01a2, B:171:0x01ad, B:174:0x01b8, B:177:0x01c2, B:180:0x01cc, B:183:0x01d7, B:186:0x01e2, B:189:0x01ed), top: B:55:0x00d1, inners: #4 }] */
-        /* JADX WARN: Removed duplicated region for block: B:86:0x024d  */
-        /* JADX WARN: Removed duplicated region for block: B:89:0x029b A[Catch: all -> 0x0112, TryCatch #0 {all -> 0x0112, blocks: (B:56:0x00d1, B:57:0x0101, B:60:0x01f8, B:61:0x01fb, B:84:0x023e, B:85:0x024a, B:88:0x0298, B:89:0x029b, B:96:0x02b2, B:98:0x02b6, B:100:0x02bc, B:101:0x02c5, B:107:0x02d3, B:108:0x024e, B:111:0x0259, B:114:0x0263, B:117:0x026e, B:120:0x0278, B:123:0x0282, B:126:0x028d, B:129:0x0106, B:132:0x0115, B:135:0x0121, B:138:0x012d, B:141:0x0139, B:144:0x0145, B:147:0x0150, B:150:0x015b, B:153:0x0167, B:156:0x0173, B:159:0x017f, B:162:0x018b, B:165:0x0197, B:168:0x01a2, B:171:0x01ad, B:174:0x01b8, B:177:0x01c2, B:180:0x01cc, B:183:0x01d7, B:186:0x01e2, B:189:0x01ed), top: B:55:0x00d1, inners: #4 }] */
-        /* JADX WARN: Removed duplicated region for block: B:90:0x02a4  */
-        /* JADX WARN: Removed duplicated region for block: B:91:0x02a7  */
-        /* JADX WARN: Removed duplicated region for block: B:92:0x02aa  */
-        /* JADX WARN: Removed duplicated region for block: B:93:0x02ad  */
-        /* JADX WARN: Removed duplicated region for block: B:94:0x02af  */
-        /* JADX WARN: Removed duplicated region for block: B:95:0x02b1  */
         /* JADX WARN: Removed duplicated region for block: B:96:0x02b2 A[Catch: all -> 0x0112, PHI: r1
         0x02b2: PHI (r1v5 int) = (r1v0 int), (r1v7 int), (r1v8 int), (r1v9 int), (r1v10 int), (r1v11 int), (r1v12 int) binds: [B:88:0x0298, B:95:0x02b1, B:94:0x02af, B:93:0x02ad, B:92:0x02aa, B:91:0x02a7, B:90:0x02a4] A[DONT_GENERATE, DONT_INLINE], TRY_LEAVE, TryCatch #0 {all -> 0x0112, blocks: (B:56:0x00d1, B:57:0x0101, B:60:0x01f8, B:61:0x01fb, B:84:0x023e, B:85:0x024a, B:88:0x0298, B:89:0x029b, B:96:0x02b2, B:98:0x02b6, B:100:0x02bc, B:101:0x02c5, B:107:0x02d3, B:108:0x024e, B:111:0x0259, B:114:0x0263, B:117:0x026e, B:120:0x0278, B:123:0x0282, B:126:0x028d, B:129:0x0106, B:132:0x0115, B:135:0x0121, B:138:0x012d, B:141:0x0139, B:144:0x0145, B:147:0x0150, B:150:0x015b, B:153:0x0167, B:156:0x0173, B:159:0x017f, B:162:0x018b, B:165:0x0197, B:168:0x01a2, B:171:0x01ad, B:174:0x01b8, B:177:0x01c2, B:180:0x01cc, B:183:0x01d7, B:186:0x01e2, B:189:0x01ed), top: B:55:0x00d1, inners: #4 }] */
         /*
@@ -1464,7 +1445,6 @@ public final class ThermalManagerService extends SystemService {
                         return copyOf;
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
                     public final void onShellCommand(
                             FileDescriptor fileDescriptor,
                             FileDescriptor fileDescriptor2,
@@ -1829,7 +1809,6 @@ public final class ThermalManagerService extends SystemService {
         publishBinderService("thermalservice", this.mService);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0023 A[Catch: all -> 0x001c, TryCatch #0 {all -> 0x001c, blocks: (B:4:0x0003, B:6:0x0011, B:10:0x0023, B:11:0x0026, B:15:0x001e), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

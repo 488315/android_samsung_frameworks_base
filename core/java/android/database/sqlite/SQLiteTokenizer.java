@@ -148,7 +148,6 @@ public class SQLiteTokenizer {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static boolean isKeyword(String token) {
         char c;
         String upperCase = token.toUpperCase(Locale.US);
@@ -1308,7 +1307,6 @@ public class SQLiteTokenizer {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static boolean isFunction(String token) {
         char c;
         String lowerCase = token.toLowerCase(Locale.US);
@@ -1588,7 +1586,6 @@ public class SQLiteTokenizer {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static boolean isType(String token) {
         char c;
         String upperCase = token.toUpperCase(Locale.US);

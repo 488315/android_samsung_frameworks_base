@@ -142,9 +142,6 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
             dualDumpOutputStream.end(start);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:39:0x0141  */
-        /* JADX WARN: Removed duplicated region for block: B:46:0x0158  */
-        /* JADX WARN: Removed duplicated region for block: B:52:0x010a  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -194,7 +191,6 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.usb.UsbPortManager$1] */
     public UsbPortManager(Context context) {
         boolean z;
         UsbPortHal usbPortHal = null;

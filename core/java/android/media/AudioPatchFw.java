@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public class AudioPatchFw implements Parcelable {
     public static final Parcelable.Creator<AudioPatchFw> CREATOR =
             new Parcelable.Creator<AudioPatchFw>() { // from class: android.media.AudioPatchFw.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPatchFw createFromParcel(Parcel _aidl_source) {
                     AudioPatchFw _aidl_out = new AudioPatchFw();
@@ -15,7 +14,6 @@ public class AudioPatchFw implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPatchFw[] newArray(int _aidl_size) {
                     return new AudioPatchFw[_aidl_size];

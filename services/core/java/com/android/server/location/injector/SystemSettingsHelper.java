@@ -43,7 +43,6 @@ public final class SystemSettingsHelper {
         public final Context mContext;
         public final String mSettingName;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public LongGlobalSetting(Context context, Handler handler, int i) {
             super(handler);
             switch (i) {
@@ -311,7 +310,6 @@ public final class SystemSettingsHelper {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.location.injector.SystemSettingsHelper$$ExternalSyntheticLambda0] */
     public SystemSettingsHelper(Context context) {
         this.mContext = context;
         this.mLocationMode = new LongGlobalSetting(context, LocationServiceThread.getHandler(), 2);

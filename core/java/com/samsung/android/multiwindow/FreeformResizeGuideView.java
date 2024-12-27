@@ -272,35 +272,30 @@ public class FreeformResizeGuideView extends FrameLayout {
         this.mDimView.setVisibility(0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$show$0(
             FrameLayout.LayoutParams dimLp, ValueAnimator animation) {
         dimLp.leftMargin = ((Integer) animation.getAnimatedValue()).intValue();
         this.mDimView.setLayoutParams(dimLp);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$show$1(
             FrameLayout.LayoutParams dimLp, ValueAnimator animation) {
         dimLp.topMargin = ((Integer) animation.getAnimatedValue()).intValue();
         this.mDimView.setLayoutParams(dimLp);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$show$2(
             FrameLayout.LayoutParams dimLp, ValueAnimator animation) {
         dimLp.width = ((Integer) animation.getAnimatedValue()).intValue();
         this.mDimView.setLayoutParams(dimLp);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$show$3(
             FrameLayout.LayoutParams dimLp, ValueAnimator animation) {
         dimLp.height = ((Integer) animation.getAnimatedValue()).intValue();
         this.mDimView.setLayoutParams(dimLp);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$show$4(ValueAnimator animation) {
         int value = ((Integer) animation.getAnimatedValue()).intValue();
         float alpha = value > 0 ? value / 100.0f : 0.0f;

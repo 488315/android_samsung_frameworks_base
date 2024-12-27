@@ -165,7 +165,6 @@ public class NotificationContentView extends FrameLayout implements Notification
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.statusbar.notification.row.NotificationContentView$1] */
     public NotificationContentView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mClipBounds = new Rect();
@@ -1405,11 +1404,6 @@ public class NotificationContentView extends FrameLayout implements Notification
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00d1  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00e4  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00ef  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00fa  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0108  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

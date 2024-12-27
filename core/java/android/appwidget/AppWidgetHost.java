@@ -449,7 +449,6 @@ public class AppWidgetHost {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateAppWidgetDeferred(int appWidgetId) {
         AppWidgetHostListener v = getListener(appWidgetId);
         if (v == null) {

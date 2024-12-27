@@ -8,7 +8,6 @@ public class DemuxFilterType implements Parcelable {
     public static final Parcelable.Creator<DemuxFilterType> CREATOR =
             new Parcelable.Creator<
                     DemuxFilterType>() { // from class: android.hardware.tv.tuner.DemuxFilterType.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterType createFromParcel(Parcel _aidl_source) {
                     DemuxFilterType _aidl_out = new DemuxFilterType();
@@ -16,7 +15,6 @@ public class DemuxFilterType implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterType[] newArray(int _aidl_size) {
                     return new DemuxFilterType[_aidl_size];

@@ -105,7 +105,6 @@ public final class MediaCodecInfo {
         return types;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int checkPowerOfTwo(int value, String message) {
         if (((value - 1) & value) != 0) {
             throw new IllegalArgumentException(message);
@@ -145,7 +144,6 @@ public final class MediaCodecInfo {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Range<Integer> getSizeRange() {
         return LazyHolder.SIZE_RANGE;
     }
@@ -248,7 +246,6 @@ public final class MediaCodecInfo {
             return checkFeature(name, this.mFlagsRequired);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class FeatureList {
             private static Feature[] decoderFeatures = getDecoderFeatures();
             private static Feature[] encoderFeatures = getEncoderFeatures();
@@ -434,7 +431,6 @@ public final class MediaCodecInfo {
             return false;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static boolean supportsBitrate(Range<Integer> bitrateRange, MediaFormat format) {
             Map<String, Object> map = format.getMap();
             Integer maxBitrate = (Integer) map.get(MediaFormat.KEY_MAX_BIT_RATE);
@@ -1742,20 +1738,6 @@ public final class MediaCodecInfo {
             return 8192;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:10:0x012e  */
-        /* JADX WARN: Removed duplicated region for block: B:13:0x016f  */
-        /* JADX WARN: Removed duplicated region for block: B:16:0x01de  */
-        /* JADX WARN: Removed duplicated region for block: B:20:0x028f  */
-        /* JADX WARN: Removed duplicated region for block: B:22:0x029b  */
-        /* JADX WARN: Removed duplicated region for block: B:24:0x02a7  */
-        /* JADX WARN: Removed duplicated region for block: B:26:0x02c6  */
-        /* JADX WARN: Removed duplicated region for block: B:28:0x02e6  */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x0304  */
-        /* JADX WARN: Removed duplicated region for block: B:32:0x0310  */
-        /* JADX WARN: Removed duplicated region for block: B:34:0x031c  */
-        /* JADX WARN: Removed duplicated region for block: B:62:0x0283  */
-        /* JADX WARN: Removed duplicated region for block: B:63:0x013d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:69:0x00f9 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

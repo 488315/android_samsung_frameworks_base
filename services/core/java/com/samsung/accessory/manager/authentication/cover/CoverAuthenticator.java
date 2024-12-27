@@ -465,9 +465,6 @@ public final class CoverAuthenticator extends LocalAuthenticator
             super(looper, null, true);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:26:0x009d  */
-        /* JADX WARN: Removed duplicated region for block: B:29:0x00ac  */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -546,7 +543,6 @@ public final class CoverAuthenticator extends LocalAuthenticator
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.accessory.manager.authentication.cover.CoverAuthenticator$8] */
     public CoverAuthenticator(
             Context context,
             InputManagerService inputManagerService,
@@ -819,7 +815,6 @@ public final class CoverAuthenticator extends LocalAuthenticator
         this.mCoverAuthHandler.removeMessages(5);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x005c A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1231,12 +1226,10 @@ public final class CoverAuthenticator extends LocalAuthenticator
                 }
                 new Thread() { // from class:
                                // com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.CoverAuthStateFile.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super("AuthStateUpdater");
                     }
 
-                    /* JADX WARN: Not initialized variable reg: 3, insn: 0x003a: MOVE (r1 I:??[OBJECT, ARRAY]) = (r3 I:??[OBJECT, ARRAY]), block:B:30:0x003a */
                     @Override // java.lang.Thread, java.lang.Runnable
                     public final void run() {
                         FileOutputStream fileOutputStream;

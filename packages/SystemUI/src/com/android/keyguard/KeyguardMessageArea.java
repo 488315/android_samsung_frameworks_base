@@ -19,7 +19,6 @@ public abstract class KeyguardMessageArea extends SystemUITextView {
     public final int mStyleResId;
     public long mTimeout;
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.keyguard.KeyguardMessageArea$$ExternalSyntheticLambda1] */
     public KeyguardMessageArea(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mTimeout = 3000L;

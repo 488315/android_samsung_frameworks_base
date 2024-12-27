@@ -70,9 +70,6 @@ public final class IndicatorTouchHandler {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.phone.IndicatorTouchHandler$callChipLayoutChangeListener$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.phone.IndicatorTouchHandler$ongoingCallListener$1] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.statusbar.phone.IndicatorTouchHandler$doubleTapTimeoutRunnable$1] */
     public IndicatorTouchHandler(Handler handler, OngoingCallController ongoingCallController, KnoxStateMonitor knoxStateMonitor, KeyguardStateController keyguardStateController, PowerManager powerManager) {
         this.mainHandler = handler;
         this.ongoingCallController = ongoingCallController;

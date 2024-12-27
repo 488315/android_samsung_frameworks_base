@@ -9,7 +9,6 @@ final class CameraQuickAffordanceConfig$getPickerScreenState$1 extends Continuat
     /* synthetic */ Object result;
     final /* synthetic */ CameraQuickAffordanceConfig this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CameraQuickAffordanceConfig$getPickerScreenState$1(CameraQuickAffordanceConfig cameraQuickAffordanceConfig, Continuation continuation) {
         super(continuation);
         this.this$0 = cameraQuickAffordanceConfig;

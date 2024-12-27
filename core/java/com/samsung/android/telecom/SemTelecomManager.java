@@ -567,7 +567,6 @@ public class SemTelecomManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void resetServiceCache() {
         synchronized (CACHE_LOCK) {
             if (sSamsungTelecomService != null) {

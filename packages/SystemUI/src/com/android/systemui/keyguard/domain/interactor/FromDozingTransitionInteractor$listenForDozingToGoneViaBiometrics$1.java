@@ -38,7 +38,6 @@ final class FromDozingTransitionInteractor$listenForDozingToGoneViaBiometrics$1 
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromDozingTransitionInteractor$listenForDozingToGoneViaBiometrics$1(FromDozingTransitionInteractor fromDozingTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fromDozingTransitionInteractor;

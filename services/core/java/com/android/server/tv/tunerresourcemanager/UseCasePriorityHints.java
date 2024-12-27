@@ -26,7 +26,6 @@ public final class UseCasePriorityHints {
         this.mPriorityHints.append(i, new int[] {i2, i3});
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public void parseInternal(InputStream inputStream) throws IOException, XmlPullParserException {
         char c;
         int i;

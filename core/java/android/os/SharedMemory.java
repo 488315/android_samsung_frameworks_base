@@ -25,14 +25,12 @@ public final class SharedMemory implements Parcelable, Closeable {
                     | OsConstants.PROT_NONE;
     public static final Parcelable.Creator<SharedMemory> CREATOR =
             new Parcelable.Creator<SharedMemory>() { // from class: android.os.SharedMemory.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SharedMemory createFromParcel(Parcel source) {
                     FileDescriptor descriptor = source.readRawFileDescriptor();
                     return new SharedMemory(descriptor);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SharedMemory[] newArray(int size) {
                     return new SharedMemory[size];

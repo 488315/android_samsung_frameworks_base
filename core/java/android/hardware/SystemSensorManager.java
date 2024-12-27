@@ -575,7 +575,6 @@ public class SystemSensorManager extends SensorManager {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cleanupSensorConnection(Sensor sensor) {
         this.mHandleToSensor.remove(Integer.valueOf(sensor.getHandle()));
         if (sensor.getReportingMode() == 2) {
@@ -605,7 +604,6 @@ public class SystemSensorManager extends SensorManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateDynamicSensorList() {
         synchronized (this.mFullDynamicSensorsList) {
             if (this.mDynamicSensorListDirty) {
@@ -1338,7 +1336,6 @@ public class SystemSensorManager extends SensorManager {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isSensorInCappedSet(int sensorType) {
         return sensorType == 1
                 || sensorType == 35
@@ -1348,7 +1345,6 @@ public class SystemSensorManager extends SensorManager {
                 || sensorType == 14;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean hasHighSamplingRateSensorsPermission() {
         if (!this.mHasHighSamplingRateSensorsPermission.isPresent()) {
             boolean granted =

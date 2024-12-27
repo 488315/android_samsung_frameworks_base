@@ -154,7 +154,6 @@ public final class HdmiRecordSources {
             this.mMinorChannelNumber = minorNumer;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int toByteArray(byte[] data, int index) {
             data[index] =
                     (byte)
@@ -385,7 +384,6 @@ public final class HdmiRecordSources {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int threeFieldsToSixBytes(
             int first, int second, int third, byte[] data, int index) {
         shortToByteArray((short) first, data, index);
@@ -394,7 +392,6 @@ public final class HdmiRecordSources {
         return 6;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int shortToByteArray(short value, byte[] byteArray, int index) {
         byteArray[index] = (byte) ((value >>> 8) & 255);
         byteArray[index + 1] = (byte) (value & 255);

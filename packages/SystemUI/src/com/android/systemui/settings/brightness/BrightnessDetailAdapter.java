@@ -78,7 +78,6 @@ public final class BrightnessDetailAdapter implements DetailAdapter {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.settings.brightness.BrightnessDetailAdapter$autoBrightnessDelegate$1] */
     public BrightnessDetailAdapter(Context context, BrightnessController.Factory factory) {
         this.context = context;
         this.factory = factory;
@@ -129,10 +128,6 @@ public final class BrightnessDetailAdapter implements DetailAdapter {
         return view;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r8v1 */
-    /* JADX WARN: Type inference failed for: r8v2, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r8v6 */
     public static final void access$setBrightness(BrightnessDetailAdapter brightnessDetailAdapter, boolean z, boolean z2) {
         ?? r8;
         KnoxStateMonitor knoxStateMonitor = brightnessDetailAdapter.quickKnox;
@@ -356,11 +351,6 @@ public final class BrightnessDetailAdapter implements DetailAdapter {
                         if (switchCompat6 != null) {
                             switchCompat6.setChecked(Settings.System.getIntForUser(context2.getContentResolver(), "ead_enabled", 0, -2) == 1);
                             switchCompat6.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.settings.brightness.QuickBrightnessSeadView$brightnessSeadSwitch$1$1
-                                /* JADX WARN: Multi-variable type inference failed */
-                                /* JADX WARN: Type inference failed for: r0v1 */
-                                /* JADX WARN: Type inference failed for: r0v2, types: [boolean, int] */
-                                /* JADX WARN: Type inference failed for: r0v3 */
-                                /* JADX WARN: Type inference failed for: r0v4 */
                                 @Override // android.view.View.OnClickListener
                                 public final void onClick(View view3) {
                                     SwitchCompat switchCompat7 = view3 instanceof SwitchCompat ? (SwitchCompat) view3 : null;

@@ -11,7 +11,6 @@ final class SmartMirroringDeviceController$1$1$2$emit$1 extends ContinuationImpl
     /* synthetic */ Object result;
     final /* synthetic */ SmartMirroringDeviceController.AnonymousClass1.C01471.AnonymousClass2 this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SmartMirroringDeviceController$1$1$2$emit$1(SmartMirroringDeviceController.AnonymousClass1.C01471.AnonymousClass2 anonymousClass2, Continuation continuation) {
         super(continuation);
         this.this$0 = anonymousClass2;

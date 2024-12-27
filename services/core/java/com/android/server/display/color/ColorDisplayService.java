@@ -206,7 +206,6 @@ public final class ColorDisplayService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final int getTransformCapabilities() {
             getTransformCapabilities_enforcePermission();
             long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -230,7 +229,6 @@ public final class ColorDisplayService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final int handleShellCommand(
                 ParcelFileDescriptor parcelFileDescriptor,
                 ParcelFileDescriptor parcelFileDescriptor2,
@@ -624,7 +622,6 @@ public final class ColorDisplayService extends SystemService {
                     }
                 };
 
-        /* JADX WARN: Type inference failed for: r2v4, types: [com.android.server.display.color.ColorDisplayService$CustomNightDisplayAutoMode$1] */
         public CustomNightDisplayAutoMode() {
             this.mAlarmManager =
                     (AlarmManager) ColorDisplayService.this.getContext().getSystemService("alarm");
@@ -719,7 +716,6 @@ public final class ColorDisplayService extends SystemService {
                     now);
         }
 
-        /* JADX WARN: Type inference failed for: r8v5, types: [java.time.ZonedDateTime] */
         public final void updateNextAlarm(Boolean bool, LocalDateTime localDateTime) {
             this.mAlarmManager.setExact(
                     1,
@@ -2100,7 +2096,6 @@ public final class ColorDisplayService extends SystemService {
         return updateState;
     }
 
-    /* JADX WARN: Type inference failed for: r7v32, types: [com.android.server.display.color.ColorDisplayService$2] */
     public final void setUp() {
         DisplayTransformManager displayTransformManager;
         SurfaceControl.CieXyz cieXyz;

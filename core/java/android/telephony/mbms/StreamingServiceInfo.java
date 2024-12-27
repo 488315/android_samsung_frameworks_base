@@ -14,13 +14,11 @@ public final class StreamingServiceInfo extends ServiceInfo implements Parcelabl
             new Parcelable.Creator<
                     StreamingServiceInfo>() { // from class:
                                               // android.telephony.mbms.StreamingServiceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StreamingServiceInfo createFromParcel(Parcel source) {
                     return new StreamingServiceInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StreamingServiceInfo[] newArray(int size) {
                     return new StreamingServiceInfo[size];

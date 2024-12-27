@@ -48,7 +48,6 @@ public class PluginLockProvider extends ContentProvider {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.content.ContentProvider
     public Bundle call(String str, String str2, Bundle bundle) {
         char c;

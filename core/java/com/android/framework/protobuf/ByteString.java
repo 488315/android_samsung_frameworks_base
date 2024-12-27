@@ -86,8 +86,6 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
     static {
         byteArrayCopier = Android.isOnAndroidDevice() ? new SystemByteArrayCopier() : new ArraysByteArrayCopier();
         UNSIGNED_LEXICOGRAPHICAL_COMPARATOR = new Comparator<ByteString>() { // from class: com.android.framework.protobuf.ByteString.2
-            /* JADX WARN: Type inference failed for: r0v0, types: [com.android.framework.protobuf.ByteString$ByteIterator] */
-            /* JADX WARN: Type inference failed for: r1v0, types: [com.android.framework.protobuf.ByteString$ByteIterator] */
             @Override // java.util.Comparator
             public int compare(ByteString former, ByteString latter) {
                 ?? iterator2 = former.iterator2();
@@ -160,7 +158,6 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
         AbstractByteIterator() {
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // java.util.Iterator
         public final Byte next() {
             return Byte.valueOf(nextByte());
@@ -180,7 +177,6 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
         return EMPTY;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int toInt(byte value) {
         return value & 255;
     }

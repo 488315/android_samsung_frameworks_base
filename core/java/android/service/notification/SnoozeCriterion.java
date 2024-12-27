@@ -10,13 +10,11 @@ public final class SnoozeCriterion implements Parcelable {
             new Parcelable.Creator<
                     SnoozeCriterion>() { // from class:
                                          // android.service.notification.SnoozeCriterion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SnoozeCriterion createFromParcel(Parcel in) {
                     return new SnoozeCriterion(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SnoozeCriterion[] newArray(int size) {
                     return new SnoozeCriterion[size];

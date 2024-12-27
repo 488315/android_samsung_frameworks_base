@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class ParsedServiceUtils {
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Multi-variable type inference failed */
     public static ParseResult<ParsedService> parseService(
             String[] strArr,
             ParsingPackage parsingPackage,

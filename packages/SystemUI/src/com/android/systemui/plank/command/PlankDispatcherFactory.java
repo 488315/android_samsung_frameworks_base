@@ -7,8 +7,6 @@ import kotlin.enums.EnumEntriesKt;
 public final class PlankDispatcherFactory {
     public Map dependencies;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class DispatcherType {
         public static final /* synthetic */ DispatcherType[] $VALUES;
         public static final DispatcherType global_action;

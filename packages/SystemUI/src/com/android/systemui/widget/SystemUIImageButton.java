@@ -195,9 +195,6 @@ public class SystemUIImageButton extends ImageButton implements SystemUIWidgetCa
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0148  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0155  */
-    /* JADX WARN: Removed duplicated region for block: B:37:? A[RETURN, SYNTHETIC] */
     @Override // com.android.systemui.widget.SystemUIWidgetCallback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -219,7 +216,6 @@ public class SystemUIImageButton extends ImageButton implements SystemUIWidgetCa
         this(context, attributeSet, i, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.widget.SystemUIImageButton$1] */
     public SystemUIImageButton(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mUpdateFlag = 0L;

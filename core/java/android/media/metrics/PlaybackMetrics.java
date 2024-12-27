@@ -22,13 +22,11 @@ public final class PlaybackMetrics implements Parcelable {
     public static final Parcelable.Creator<PlaybackMetrics> CREATOR =
             new Parcelable.Creator<
                     PlaybackMetrics>() { // from class: android.media.metrics.PlaybackMetrics.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PlaybackMetrics[] newArray(int size) {
                     return new PlaybackMetrics[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PlaybackMetrics createFromParcel(Parcel in) {
                     return new PlaybackMetrics(in);

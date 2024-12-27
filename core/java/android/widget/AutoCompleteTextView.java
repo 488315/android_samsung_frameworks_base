@@ -113,7 +113,6 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0() {
         if (isPopupShowing()) {
             dismissDropDown();
@@ -233,7 +232,6 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         this.mPassThroughClickListener.mWrapped = listener;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onClickImpl() {
         if (isPopupShowing()) {
             ensureImeVisible(true);
@@ -400,7 +398,6 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         return this.mAdapter;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <T extends ListAdapter & Filterable> void setAdapter(T t) {
         if (this.mObserver == null) {
             this.mObserver = new PopupDataSetObserver();
@@ -585,7 +582,6 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void performCompletion(View selectedView, int position, long id) {
         Object selectedItem;
         if (isPopupShowing()) {
@@ -642,7 +638,6 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         updateDropDownForFilter(count);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateDropDownForFilter(int count) {
         if (getWindowVisibility() == 8) {
             return;
@@ -830,7 +825,6 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         return AutoCompleteTextView.class.getName();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: unregisterOnBackInvokedCallback, reason: merged with bridge method [inline-methods] */
     public void lambda$new$1() {
         OnBackInvokedDispatcher dispatcher;

@@ -7,13 +7,11 @@ public final class FaceInfo implements Parcelable {
     public static final Parcelable.Creator<FaceInfo> CREATOR =
             new Parcelable.Creator<
                     FaceInfo>() { // from class: com.samsung.android.smartface.FaceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceInfo createFromParcel(Parcel in) {
                     return new FaceInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceInfo[] newArray(int size) {
                     return new FaceInfo[size];

@@ -16,14 +16,12 @@ public final class VcnUnderlyingNetworkSpecifier extends NetworkSpecifier implem
             new Parcelable.Creator<
                     VcnUnderlyingNetworkSpecifier>() { // from class:
                                                        // android.net.vcn.VcnUnderlyingNetworkSpecifier.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VcnUnderlyingNetworkSpecifier createFromParcel(Parcel in) {
                     int[] subIds = in.createIntArray();
                     return new VcnUnderlyingNetworkSpecifier(subIds);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VcnUnderlyingNetworkSpecifier[] newArray(int size) {
                     return new VcnUnderlyingNetworkSpecifier[size];

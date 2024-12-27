@@ -14,7 +14,6 @@ final class CameraSensorPrivacyRepositoryKt$isEnabled$2 extends SuspendLambda im
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CameraSensorPrivacyRepositoryKt$isEnabled$2(SensorPrivacyManager sensorPrivacyManager, Continuation continuation) {
         super(2, continuation);
         this.$this_isEnabled = sensorPrivacyManager;

@@ -127,7 +127,6 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
                 this.mSortingCallback.asConsumer());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$doCompute$0(List targets, List sortedAppTargets) {
         if (sortedAppTargets.isEmpty()) {
             Log.i(TAG, "AppPredictionService disabled. Using resolver.");
@@ -159,7 +158,6 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
         this.mResolverRankerService.compute(targets);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setupFallbackModel$1() {
         this.mHandler.sendEmptyMessage(0);
     }
@@ -280,7 +278,6 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
             };
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ int lambda$getComparator$0(ResolveInfo lhs, ResolveInfo rhs) {
             Integer lhsRank =
                     this.mTargetRanks.get(

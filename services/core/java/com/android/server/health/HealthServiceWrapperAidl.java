@@ -46,8 +46,6 @@ public final class HealthServiceWrapperAidl extends HealthServiceWrapper {
                         .post(
                                 new Runnable() { // from class:
                                     // com.android.server.health.HealthServiceWrapperAidl$ServiceCallback$$ExternalSyntheticLambda0
-                                    /* JADX WARN: Multi-variable type inference failed */
-                                    /* JADX WARN: Type inference failed for: r4v3, types: [android.hardware.health.IHealth] */
                                     @Override // java.lang.Runnable
                                     public final void run() {
                                         IHealth.Stub.Proxy proxy;
@@ -152,9 +150,6 @@ public final class HealthServiceWrapperAidl extends HealthServiceWrapper {
     	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
     	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x00a3  */
-    /* JADX WARN: Type inference failed for: r7v3, types: [android.hardware.health.IHealth] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

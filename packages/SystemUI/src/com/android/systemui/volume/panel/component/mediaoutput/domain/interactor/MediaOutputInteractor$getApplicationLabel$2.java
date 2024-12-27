@@ -13,7 +13,6 @@ final class MediaOutputInteractor$getApplicationLabel$2 extends SuspendLambda im
     int label;
     final /* synthetic */ MediaOutputInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaOutputInteractor$getApplicationLabel$2(MediaOutputInteractor mediaOutputInteractor, String str, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaOutputInteractor;

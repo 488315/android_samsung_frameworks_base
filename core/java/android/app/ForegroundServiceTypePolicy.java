@@ -391,7 +391,6 @@ public abstract class ForegroundServiceTypePolicy {
         return foregroundServiceTypePolicy;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isFgsTypeFgPermissionEnforcementEnabled() {
         return DeviceConfig.getBoolean("activity_manager", FGS_TYPE_FG_PERM_ENFORCEMENT_FLAG, true);
     }
@@ -468,7 +467,6 @@ public abstract class ForegroundServiceTypePolicy {
             return sb;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void updatePermissionEnforcementFlagIfNecessary(String flagName) {
             if (this.mPermissionEnforcementFlag == null
                     || !TextUtils.equals(flagName, this.mPermissionEnforcementFlag)) {

@@ -28,7 +28,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
 public abstract class TvScreenKt {
-    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.systemui.media.mediaoutput.compose.TvScreenKt$TvScreen$1, kotlin.jvm.internal.Lambda] */
     public static final void TvScreen(final Function1 function1, final MediaDeviceViewModel mediaDeviceViewModel, final DeviceAudioPathViewModel deviceAudioPathViewModel, Composer composer, final int i, final int i2) {
         int i3;
         Object failure;
@@ -118,12 +117,10 @@ public abstract class TvScreenKt {
             composerImpl.endDefaults();
             OpaqueKey opaqueKey = ComposerKt.invocation;
             SnackbarScaffoldKt.SnackbarScaffold(ComposableLambdaKt.rememberComposableLambda(1595646477, composerImpl, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.TvScreenKt$TvScreen$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(3);
                 }
 
-                /* JADX WARN: Type inference failed for: r10v4, types: [com.android.systemui.media.mediaoutput.compose.TvScreenKt$TvScreen$1$1, kotlin.jvm.internal.Lambda] */
                 @Override // kotlin.jvm.functions.Function3
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
                     Composer composer2 = (Composer) obj2;
@@ -138,7 +135,6 @@ public abstract class TvScreenKt {
                     final MediaDeviceViewModel mediaDeviceViewModel2 = mediaDeviceViewModel;
                     final DeviceAudioPathViewModel deviceAudioPathViewModel2 = deviceAudioPathViewModel;
                     ContainerBoxKt.ContainerBox(false, null, null, null, ComposableLambdaKt.rememberComposableLambda(-368247854, composer2, new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.TvScreenKt$TvScreen$1.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(2);
                         }
@@ -171,7 +167,6 @@ public abstract class TvScreenKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.TvScreenKt$TvScreen$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

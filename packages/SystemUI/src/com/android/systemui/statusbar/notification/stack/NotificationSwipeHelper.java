@@ -64,7 +64,6 @@ public final class NotificationSwipeHelper extends SwipeHelper implements Notifi
     public interface NotificationCallback extends SwipeHelper.Callback {
     }
 
-    /* JADX WARN: Type inference failed for: r7v1, types: [com.android.systemui.statusbar.notification.stack.NotificationSwipeHelper$$ExternalSyntheticLambda0] */
     public NotificationSwipeHelper(Resources resources, ViewConfiguration viewConfiguration, FalsingManager falsingManager, FeatureFlags featureFlags, NotificationCallback notificationCallback, NotificationMenuRowPlugin.OnMenuEventListener onMenuEventListener, NotificationRoundnessManager notificationRoundnessManager) {
         super(notificationCallback, resources, viewConfiguration, falsingManager, featureFlags);
         this.mNotificationRoundnessManager = notificationRoundnessManager;
@@ -151,7 +150,6 @@ public final class NotificationSwipeHelper extends SwipeHelper implements Notifi
         return measuredWidth2 - ((measuredWidth2 - measuredWidth) / 2.0f);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.SwipeHelper
     public final float getTranslation(View view) {
         if (view instanceof SwipeableView) {
@@ -269,7 +267,6 @@ public final class NotificationSwipeHelper extends SwipeHelper implements Notifi
         InteractionJankMonitor.getInstance().end(4);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.SwipeHelper
     public final void onDownUpdate(ExpandableView expandableView) {
         this.mTranslatingParentView = expandableView;
@@ -328,7 +325,6 @@ public final class NotificationSwipeHelper extends SwipeHelper implements Notifi
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void resetExposedMenuView(boolean z, boolean z2) {
         if (shouldResetMenu(z2)) {
             View view = this.mMenuExposedView;
@@ -354,7 +350,6 @@ public final class NotificationSwipeHelper extends SwipeHelper implements Notifi
         this.mTranslatingParentView = view;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.SwipeHelper
     public final void setTranslation(float f, View view) {
         if (view instanceof SwipeableView) {

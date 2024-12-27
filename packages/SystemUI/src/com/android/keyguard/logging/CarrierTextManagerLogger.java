@@ -128,7 +128,6 @@ public final class CarrierTextManagerLogger {
     public final void logUpdateCarrierTextForReason(final int i) {
         LogLevel logLevel = LogLevel.DEBUG;
         Function1 function1 = new Function1() { // from class: com.android.keyguard.logging.CarrierTextManagerLogger$logUpdateCarrierTextForReason$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

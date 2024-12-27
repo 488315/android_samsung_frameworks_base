@@ -26,13 +26,11 @@ public final class CinematicEffectResponse implements Parcelable {
     public static final Parcelable.Creator<CinematicEffectResponse> CREATOR =
             new Parcelable.Creator<CinematicEffectResponse>() { // from class:
                 // android.app.wallpapereffectsgeneration.CinematicEffectResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CinematicEffectResponse createFromParcel(Parcel in) {
                     return new CinematicEffectResponse(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CinematicEffectResponse[] newArray(int size) {
                     return new CinematicEffectResponse[size];

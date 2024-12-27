@@ -18,7 +18,6 @@ public final class TimeZoneProviderSuggestion implements Parcelable {
             new Parcelable.Creator<
                     TimeZoneProviderSuggestion>() { // from class:
                                                     // android.service.timezone.TimeZoneProviderSuggestion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneProviderSuggestion createFromParcel(Parcel in) {
                     ArrayList<String> timeZoneIds = in.readArrayList(null, String.class);
@@ -26,7 +25,6 @@ public final class TimeZoneProviderSuggestion implements Parcelable {
                     return new TimeZoneProviderSuggestion(timeZoneIds, elapsedRealtimeMillis);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneProviderSuggestion[] newArray(int size) {
                     return new TimeZoneProviderSuggestion[size];

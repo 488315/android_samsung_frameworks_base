@@ -409,8 +409,6 @@ public class VrManagerService extends SystemService
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v10, types: [com.android.server.vr.VrManagerService$4] */
-    /* JADX WARN: Type inference failed for: r2v9, types: [com.android.server.vr.VrManagerService$2] */
     public VrManagerService(Context context) {
         super(context);
         this.mLock = new Object();
@@ -1085,10 +1083,6 @@ public class VrManagerService extends SystemService
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x001f A[Catch: all -> 0x0010, TryCatch #0 {all -> 0x0010, blocks: (B:33:0x0009, B:7:0x0016, B:11:0x001f, B:12:0x0025, B:14:0x0038, B:15:0x003a, B:19:0x003e, B:21:0x0042, B:23:0x0046, B:24:0x004d, B:25:0x004f, B:27:0x0051, B:28:0x0067), top: B:32:0x0009 }] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0038 A[Catch: all -> 0x0010, TryCatch #0 {all -> 0x0010, blocks: (B:33:0x0009, B:7:0x0016, B:11:0x001f, B:12:0x0025, B:14:0x0038, B:15:0x003a, B:19:0x003e, B:21:0x0042, B:23:0x0046, B:24:0x004d, B:25:0x004f, B:27:0x0051, B:28:0x0067), top: B:32:0x0009 }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x003c  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0023  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1217,14 +1211,6 @@ public class VrManagerService extends SystemService
         managedApplicationService2.connect();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00e4 A[Catch: all -> 0x0035, TryCatch #0 {all -> 0x0035, blocks: (B:3:0x0012, B:7:0x0020, B:13:0x002a, B:15:0x002e, B:16:0x0039, B:19:0x0041, B:22:0x004a, B:26:0x0069, B:28:0x006d, B:31:0x00e4, B:33:0x00f0, B:36:0x00f5, B:38:0x0101, B:39:0x0106, B:41:0x010a, B:42:0x0112, B:45:0x011d, B:47:0x0122, B:50:0x012d, B:52:0x0129, B:57:0x00e8, B:60:0x009a, B:62:0x009e, B:64:0x00a6, B:67:0x00ab, B:69:0x00dd), top: B:2:0x0012 }] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0101 A[Catch: all -> 0x0035, TryCatch #0 {all -> 0x0035, blocks: (B:3:0x0012, B:7:0x0020, B:13:0x002a, B:15:0x002e, B:16:0x0039, B:19:0x0041, B:22:0x004a, B:26:0x0069, B:28:0x006d, B:31:0x00e4, B:33:0x00f0, B:36:0x00f5, B:38:0x0101, B:39:0x0106, B:41:0x010a, B:42:0x0112, B:45:0x011d, B:47:0x0122, B:50:0x012d, B:52:0x0129, B:57:0x00e8, B:60:0x009a, B:62:0x009e, B:64:0x00a6, B:67:0x00ab, B:69:0x00dd), top: B:2:0x0012 }] */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x010a A[Catch: all -> 0x0035, TryCatch #0 {all -> 0x0035, blocks: (B:3:0x0012, B:7:0x0020, B:13:0x002a, B:15:0x002e, B:16:0x0039, B:19:0x0041, B:22:0x004a, B:26:0x0069, B:28:0x006d, B:31:0x00e4, B:33:0x00f0, B:36:0x00f5, B:38:0x0101, B:39:0x0106, B:41:0x010a, B:42:0x0112, B:45:0x011d, B:47:0x0122, B:50:0x012d, B:52:0x0129, B:57:0x00e8, B:60:0x009a, B:62:0x009e, B:64:0x00a6, B:67:0x00ab, B:69:0x00dd), top: B:2:0x0012 }] */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x011b A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x0122 A[Catch: all -> 0x0035, TryCatch #0 {all -> 0x0035, blocks: (B:3:0x0012, B:7:0x0020, B:13:0x002a, B:15:0x002e, B:16:0x0039, B:19:0x0041, B:22:0x004a, B:26:0x0069, B:28:0x006d, B:31:0x00e4, B:33:0x00f0, B:36:0x00f5, B:38:0x0101, B:39:0x0106, B:41:0x010a, B:42:0x0112, B:45:0x011d, B:47:0x0122, B:50:0x012d, B:52:0x0129, B:57:0x00e8, B:60:0x009a, B:62:0x009e, B:64:0x00a6, B:67:0x00ab, B:69:0x00dd), top: B:2:0x0012 }] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0111  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0105  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

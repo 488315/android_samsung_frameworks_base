@@ -64,9 +64,6 @@ public final class SectionHeaderNodeControllerImpl implements NodeController, Se
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x003d  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0034  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

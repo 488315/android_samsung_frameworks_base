@@ -52,7 +52,6 @@ public final class ScrollCaptureSearchResults {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$addTarget$0(
             ScrollCaptureCallback callback, Consumer consumer) {
         callback.onScrollCaptureSearch(this.mCancel, consumer);
@@ -81,7 +80,6 @@ public final class ScrollCaptureSearchResults {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void signalComplete() {
         this.mComplete = true;
         this.mTargets.sort(PRIORITY_ORDER);
@@ -103,7 +101,6 @@ public final class ScrollCaptureSearchResults {
         return target;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class SearchRequest implements Consumer<Rect> {
         private ScrollCaptureTarget mTarget;
 
@@ -127,7 +124,6 @@ public final class ScrollCaptureSearchResults {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         /* renamed from: consume, reason: merged with bridge method [inline-methods] */
         public void lambda$accept$0(Rect scrollBounds) {
             if (this.mTarget == null || ScrollCaptureSearchResults.this.mCancel.isCanceled()) {
@@ -183,7 +179,6 @@ public final class ScrollCaptureSearchResults {
         return r.width() * r.height();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean nullOrEmpty(Rect r) {
         return r == null || r.isEmpty();
     }

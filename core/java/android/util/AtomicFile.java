@@ -20,7 +20,6 @@ public class AtomicFile {
     private final File mLegacyBackupName;
     private final File mNewName;
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     public AtomicFile(File baseName) {
         this(baseName, (SystemConfigFileCommitEventLogger) null);
     }

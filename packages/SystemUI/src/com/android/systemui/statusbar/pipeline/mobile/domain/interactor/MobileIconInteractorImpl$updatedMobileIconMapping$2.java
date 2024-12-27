@@ -14,7 +14,6 @@ final class MobileIconInteractorImpl$updatedMobileIconMapping$2 extends SuspendL
     int label;
     final /* synthetic */ MobileIconInteractorImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileIconInteractorImpl$updatedMobileIconMapping$2(MobileIconInteractorImpl mobileIconInteractorImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mobileIconInteractorImpl;

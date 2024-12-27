@@ -12,10 +12,6 @@ class SensorPrivacyService$SensorPrivacyServiceImpl$$ExternalSyntheticLambda15
         this.$r8$classId = i;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x006f  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0078  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0082  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0075  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

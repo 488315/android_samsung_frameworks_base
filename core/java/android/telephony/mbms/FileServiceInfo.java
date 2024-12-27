@@ -14,13 +14,11 @@ public final class FileServiceInfo extends ServiceInfo implements Parcelable {
     public static final Parcelable.Creator<FileServiceInfo> CREATOR =
             new Parcelable.Creator<
                     FileServiceInfo>() { // from class: android.telephony.mbms.FileServiceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FileServiceInfo createFromParcel(Parcel source) {
                     return new FileServiceInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FileServiceInfo[] newArray(int size) {
                     return new FileServiceInfo[size];

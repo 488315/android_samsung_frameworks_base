@@ -18,7 +18,6 @@ public class MarshalQueryableBoolean implements MarshalQueryable<Boolean> {
             byteBuffer.put(bool.booleanValue() ? (byte) 1 : (byte) 0);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public Boolean unmarshal(ByteBuffer buffer) {
             return Boolean.valueOf(buffer.get() != 0);

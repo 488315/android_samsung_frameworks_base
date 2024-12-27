@@ -17,7 +17,6 @@ public final class GoneToDozingTransitionViewModel$special$$inlined$flatMapLates
     int label;
     final /* synthetic */ GoneToDozingTransitionViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GoneToDozingTransitionViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, GoneToDozingTransitionViewModel goneToDozingTransitionViewModel) {
         super(3, continuation);
         this.this$0 = goneToDozingTransitionViewModel;

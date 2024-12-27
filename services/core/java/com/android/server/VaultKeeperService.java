@@ -58,8 +58,6 @@ public final class VaultKeeperService extends IVaultKeeperService.Stub {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.IBinder, com.android.server.VaultKeeperService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             Slog.d("VaultKeeperService$Lifecycle", "onStart()");
@@ -73,7 +71,6 @@ public final class VaultKeeperService extends IVaultKeeperService.Stub {
         System.loadLibrary("vkjni");
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.VaultKeeperService$1] */
     public VaultKeeperService(Context context) {
         this.mContext = context;
         this.mWakeLock = ((PowerManager) context.getSystemService("power")).newWakeLock(1, "VK_WakeLock");

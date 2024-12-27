@@ -118,7 +118,6 @@ public class SendChannelRouter extends ChannelRouterBase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean broadcast(final MediaBuffer mediaBuffer) {
         this.channels.forEach(
                 new Consumer() { // from class:
@@ -131,7 +130,6 @@ public class SendChannelRouter extends ChannelRouterBase {
         return !this.channels.isEmpty();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean evaluate(final MediaBuffer mediaBuffer) {
         return this.evChannelMap.entrySet().stream()
                 .anyMatch(
@@ -194,7 +192,6 @@ public class SendChannelRouter extends ChannelRouterBase {
         return it.getFormat().getMediaType() == MediaType.SCALA;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean sendAny(MediaBuffer mediaBuffer) {
         if (evaluate(mediaBuffer)) {
             return true;
@@ -202,7 +199,6 @@ public class SendChannelRouter extends ChannelRouterBase {
         return broadcast(mediaBuffer);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean sendAll(MediaBuffer mediaBuffer) {
         return evaluate(mediaBuffer) || broadcast(mediaBuffer);
     }
@@ -212,7 +208,6 @@ public class SendChannelRouter extends ChannelRouterBase {
         this.sendOp.accept(data);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.channel.Channel
     public MediaBuffer receive() {
         throw new UnsupportedOperationException();

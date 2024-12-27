@@ -29,7 +29,6 @@ final class GlanceableHubContainerController$initView$3 extends SuspendLambda im
         final /* synthetic */ int $topEdgeSwipeRegionWidth;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(int i, View view, int i2, Continuation continuation) {
             super(2, continuation);
             this.$topEdgeSwipeRegionWidth = i;
@@ -59,7 +58,6 @@ final class GlanceableHubContainerController$initView$3 extends SuspendLambda im
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GlanceableHubContainerController$initView$3(GlanceableHubContainerController glanceableHubContainerController, int i, View view, int i2, Continuation continuation) {
         super(3, continuation);
         this.this$0 = glanceableHubContainerController;

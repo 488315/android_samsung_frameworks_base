@@ -207,7 +207,6 @@ public interface IGnssNavigationMessageCallback extends IInterface {
         public static final Parcelable.Creator<GnssNavigationMessage> CREATOR =
                 new Parcelable.Creator<GnssNavigationMessage>() { // from class:
                     // android.hardware.gnss.IGnssNavigationMessageCallback.GnssNavigationMessage.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GnssNavigationMessage createFromParcel(Parcel _aidl_source) {
                         GnssNavigationMessage _aidl_out = new GnssNavigationMessage();
@@ -215,7 +214,6 @@ public interface IGnssNavigationMessageCallback extends IInterface {
                         return _aidl_out;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GnssNavigationMessage[] newArray(int _aidl_size) {
                         return new GnssNavigationMessage[_aidl_size];

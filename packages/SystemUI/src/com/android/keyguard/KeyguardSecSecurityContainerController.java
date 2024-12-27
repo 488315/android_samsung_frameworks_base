@@ -438,8 +438,6 @@ public final class KeyguardSecSecurityContainerController extends KeyguardSecuri
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.keyguard.KeyguardSecSecurityContainerController$1] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.keyguard.KeyguardSecSecurityContainerController$2] */
     public KeyguardSecSecurityContainerController(KeyguardSecSecurityContainer keyguardSecSecurityContainer, AlarmManager alarmManager, DevicePolicyManager devicePolicyManager, DisplayLifecycle displayLifecycle, DualDarInnerLockScreenController.Factory factory, InputMethodManager inputMethodManager, KeyguardCarrierTextViewController keyguardCarrierTextViewController, KeyguardPunchHoleVIViewController keyguardPunchHoleVIViewController, KeyguardArrowViewController.Factory factory2, KeyguardBiometricViewController keyguardBiometricViewController, KeyguardPluginControllerImpl.Factory factory3, SettingsHelper settingsHelper, AdminSecondaryLockScreenController.Factory factory4, LockPatternUtils lockPatternUtils, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel keyguardSecurityModel, MetricsLogger metricsLogger, UiEventLogger uiEventLogger, KeyguardStateController keyguardStateController, KeyguardSecurityViewFlipperController keyguardSecurityViewFlipperController, ConfigurationController configurationController, FalsingCollector falsingCollector, FalsingManager falsingManager, UserSwitcherController userSwitcherController, FeatureFlags featureFlags, GlobalSettings globalSettings, SessionTracker sessionTracker, FalsingA11yDelegate falsingA11yDelegate, TelephonyManager telephonyManager, ViewMediatorCallback viewMediatorCallback, AudioManager audioManager, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor, BouncerMessageInteractor bouncerMessageInteractor, Provider provider, SelectedUserInteractor selectedUserInteractor, DeviceProvisionedController deviceProvisionedController, FaceAuthAccessibilityDelegate faceAuthAccessibilityDelegate, KeyguardTransitionInteractor keyguardTransitionInteractor, Lazy lazy, Provider provider2) {
         super(keyguardSecSecurityContainer, factory4, lockPatternUtils, keyguardUpdateMonitor, keyguardSecurityModel, metricsLogger, uiEventLogger, keyguardStateController, keyguardSecurityViewFlipperController, configurationController, falsingCollector, falsingManager, userSwitcherController, featureFlags, globalSettings, sessionTracker, falsingA11yDelegate, telephonyManager, viewMediatorCallback, audioManager, deviceEntryFaceAuthInteractor, bouncerMessageInteractor, provider, selectedUserInteractor, deviceProvisionedController, faceAuthAccessibilityDelegate, devicePolicyManager, keyguardTransitionInteractor, lazy, provider2);
         int i = 0;
@@ -666,8 +664,6 @@ public final class KeyguardSecSecurityContainerController extends KeyguardSecuri
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00a9  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00be  */
     @Override // com.android.keyguard.KeyguardSecurityContainerController
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -713,9 +709,6 @@ public final class KeyguardSecSecurityContainerController extends KeyguardSecuri
         ((KeyguardSecSecurityContainer) this.mView).announceForAccessibility(charSequence);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0195  */
     @Override // com.android.keyguard.KeyguardSecurityContainerController
     /*
         Code decompiled incorrectly, please refer to instructions dump.

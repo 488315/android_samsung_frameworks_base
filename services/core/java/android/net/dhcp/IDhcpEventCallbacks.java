@@ -191,7 +191,6 @@ public interface IDhcpEventCallbacks extends IInterface {
     }
 
     public class _Parcel {
-        /* JADX INFO: Access modifiers changed from: private */
         public static void writeTypedList(Parcel parcel, List list, int i) {
             if (list == null) {
                 parcel.writeInt(-1);

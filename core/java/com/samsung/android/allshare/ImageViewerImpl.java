@@ -206,7 +206,6 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
                     ServiceConnector
                             .getMainLooper()) { // from class:
                                                 // com.samsung.android.allshare.ImageViewerImpl.2
-                /* JADX WARN: Multi-variable type inference failed */
                 @Override // com.samsung.android.allshare.AllShareResponseHandler
                 public void handleResponseMessage(CVMessage cvm) {
                     String actionID = cvm.getActionID();
@@ -376,7 +375,6 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
                         + " ] ");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.android.allshare.media.ImageViewer
     public void show(Item item, ContentInfo ci) {
         DLog.i_api(TAG_CLASS, "show() is called");
@@ -466,7 +464,6 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
         DLog.w_api(TAG_CLASS, "show : fail - INVALID ARG ");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String parseUriFilePath(Uri uri) {
         Context scContext;
         ContentResolver cr;
@@ -483,7 +480,6 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
         return str;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void showWebContent(Item item, ContentInfo ci) {
         if (this.mAllShareConnector == null
                 || !this.mAllShareConnector.isAllShareServiceConnected()) {
@@ -519,7 +515,6 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
                         + item.getURI());
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void showLocalContentContentScheme(Item item, ContentInfo ci) {
         DLog.v_api(TAG_CLASS, "showLocalContentContentScheme()");
         if (this.mAllShareConnector == null
@@ -586,7 +581,6 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
                         + uri);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void showMediaContent(Item item, ContentInfo ci) {
         DLog.v_api(TAG_CLASS, "showMediaContent()");
         if (this.mAllShareConnector == null
@@ -611,7 +605,6 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
         DLog.i_api(TAG_CLASS, "showMediaContent : " + item.getTitle() + " to " + getName());
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void showLocalContentFileScheme(Item item, ContentInfo ci) {
         DLog.v_api(TAG_CLASS, "showLocalContentFileScheme()");
         if (this.mAllShareConnector == null

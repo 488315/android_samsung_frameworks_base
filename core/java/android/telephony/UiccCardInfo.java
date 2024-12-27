@@ -15,13 +15,11 @@ import java.util.Objects;
 public final class UiccCardInfo implements Parcelable {
     public static final Parcelable.Creator<UiccCardInfo> CREATOR =
             new Parcelable.Creator<UiccCardInfo>() { // from class: android.telephony.UiccCardInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UiccCardInfo createFromParcel(Parcel in) {
                     return new UiccCardInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UiccCardInfo[] newArray(int size) {
                     return new UiccCardInfo[size];

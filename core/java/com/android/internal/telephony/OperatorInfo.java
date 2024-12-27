@@ -8,7 +8,6 @@ public class OperatorInfo implements Parcelable {
     public static final Parcelable.Creator<OperatorInfo> CREATOR =
             new Parcelable.Creator<
                     OperatorInfo>() { // from class: com.android.internal.telephony.OperatorInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OperatorInfo createFromParcel(Parcel in) {
                     OperatorInfo opInfo =
@@ -23,7 +22,6 @@ public class OperatorInfo implements Parcelable {
                     return opInfo;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OperatorInfo[] newArray(int size) {
                     return new OperatorInfo[size];

@@ -46,7 +46,6 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
             int label;
             final /* synthetic */ ChipAnimationController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02101(ChipAnimationController chipAnimationController, View view, boolean z, CoroutineScope coroutineScope, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = chipAnimationController;
@@ -114,7 +113,6 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
                         }
                     });
                     cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$animateAlpha$2$1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }
@@ -150,7 +148,6 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
             int label;
             final /* synthetic */ ChipAnimationController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(ChipAnimationController chipAnimationController, View view, boolean z, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = chipAnimationController;
@@ -199,7 +196,6 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
             int label;
             final /* synthetic */ ChipAnimationController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass3(ChipAnimationController chipAnimationController, View view, boolean z, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = chipAnimationController;
@@ -241,7 +237,6 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(ChipAnimationController chipAnimationController, View view, boolean z, Continuation continuation) {
             super(2, continuation);
             this.this$0 = chipAnimationController;
@@ -275,7 +270,6 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ChipAnimationController$startAnimation$2(ChipAnimationController chipAnimationController, View view, boolean z, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = chipAnimationController;

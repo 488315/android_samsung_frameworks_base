@@ -38,7 +38,6 @@ public final class ColorAdjustmentTile extends QSTileImpl {
     public final ActivityStarter mActivityStarter;
     public final AnonymousClass1 mSetting;
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.qs.tiles.ColorAdjustmentTile$1] */
     public ColorAdjustmentTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, Resources resources, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, UserTracker userTracker, SystemSettings systemSettings) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mActivityStarter = activityStarter;

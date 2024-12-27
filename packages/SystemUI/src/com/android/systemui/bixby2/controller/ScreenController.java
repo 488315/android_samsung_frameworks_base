@@ -229,7 +229,6 @@ public class ScreenController {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isFolderClosed() {
         return !this.mDisplayLifecycle.mIsFolderOpened;
     }
@@ -259,7 +258,6 @@ public class ScreenController {
         this.mBroadcastDispatcher.registerReceiver(this.mReceiver, new IntentFilter(ACTION_SCREENSHOT_URI), null, null, 2, PERMISSION_RECEIVE_SCREENSHOT_URI);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void scrollTo(Context context, float f, int i, int i2) {
         float f2;
         int i3;
@@ -299,7 +297,6 @@ public class ScreenController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendBackKey(final int i) {
         new Thread(new Runnable() { // from class: com.android.systemui.bixby2.controller.ScreenController.3
             @Override // java.lang.Runnable
@@ -426,17 +423,6 @@ public class ScreenController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x008d  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x009e  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00a2  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00a7  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0047  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x006e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

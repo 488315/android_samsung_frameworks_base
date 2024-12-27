@@ -16,7 +16,6 @@ public final class DateValueSanitizer extends InternalSanitizer implements Sanit
             new Parcelable.Creator<
                     DateValueSanitizer>() { // from class:
                                             // android.service.autofill.DateValueSanitizer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DateValueSanitizer createFromParcel(Parcel parcel) {
                     return new DateValueSanitizer(
@@ -25,7 +24,6 @@ public final class DateValueSanitizer extends InternalSanitizer implements Sanit
                                             DateFormat.class.getClassLoader(), DateFormat.class));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DateValueSanitizer[] newArray(int size) {
                     return new DateValueSanitizer[size];

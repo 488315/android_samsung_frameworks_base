@@ -43,7 +43,6 @@ final class CommunalSceneStartable$start$5 extends SuspendLambda implements Func
         int label;
         final /* synthetic */ CommunalSceneStartable this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(CommunalSceneStartable communalSceneStartable, Continuation continuation) {
             super(2, continuation);
             this.this$0 = communalSceneStartable;
@@ -82,7 +81,6 @@ final class CommunalSceneStartable$start$5 extends SuspendLambda implements Func
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalSceneStartable$start$5(CommunalSceneStartable communalSceneStartable, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalSceneStartable;

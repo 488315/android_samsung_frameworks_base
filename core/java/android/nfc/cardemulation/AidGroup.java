@@ -26,7 +26,6 @@ public final class AidGroup implements Parcelable {
     private final String mDescription;
     public static final Parcelable.Creator<AidGroup> CREATOR =
             new Parcelable.Creator<AidGroup>() { // from class: android.nfc.cardemulation.AidGroup.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AidGroup createFromParcel(Parcel source) {
                     String category = source.readString8();
@@ -38,7 +37,6 @@ public final class AidGroup implements Parcelable {
                     return new AidGroup(aidList, category);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AidGroup[] newArray(int size) {
                     return new AidGroup[size];

@@ -16,7 +16,6 @@ public final class CellularBatteryStats implements Parcelable {
             new Parcelable.Creator<
                     CellularBatteryStats>() { // from class:
                                               // android.os.connectivity.CellularBatteryStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellularBatteryStats createFromParcel(Parcel in) {
                     long loggingDurationMs = in.readLong();
@@ -50,7 +49,6 @@ public final class CellularBatteryStats implements Parcelable {
                             monitoredRailChargeConsumedMaMs);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellularBatteryStats[] newArray(int size) {
                     return new CellularBatteryStats[size];

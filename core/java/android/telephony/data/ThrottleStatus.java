@@ -13,13 +13,11 @@ public final class ThrottleStatus implements Parcelable {
     public static final Parcelable.Creator<ThrottleStatus> CREATOR =
             new Parcelable.Creator<
                     ThrottleStatus>() { // from class: android.telephony.data.ThrottleStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ThrottleStatus createFromParcel(Parcel source) {
                     return new ThrottleStatus(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ThrottleStatus[] newArray(int size) {
                     return new ThrottleStatus[size];

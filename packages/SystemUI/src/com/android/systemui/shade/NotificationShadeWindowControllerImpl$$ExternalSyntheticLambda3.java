@@ -20,8 +20,6 @@ public final /* synthetic */ class NotificationShadeWindowControllerImpl$$Extern
         this.f$0 = obj;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl$initView$1] */
     @Override // java.lang.Runnable
     public final void run() {
         int i = this.$r8$classId;

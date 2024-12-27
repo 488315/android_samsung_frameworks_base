@@ -109,7 +109,6 @@ public final class SecUnlockedScreenOffAnimationHelper {
         }
     });
 
-    /* JADX WARN: Type inference failed for: r1v33, types: [com.android.systemui.statusbar.phone.SecUnlockedScreenOffAnimationHelper$special$$inlined$Runnable$1] */
     public SecUnlockedScreenOffAnimationHelper(AODAmbientWallpaperHelper aODAmbientWallpaperHelper, Lazy lazy, Lazy lazy2, Lazy lazy3, SettingsHelper settingsHelper, StatusBarStateControllerImpl statusBarStateControllerImpl, Context context, KeyguardStateController keyguardStateController, KeyguardVisibilityMonitor keyguardVisibilityMonitor, WakefulnessLifecycle wakefulnessLifecycle, Lazy lazy4, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, CoroutineDispatcher coroutineDispatcher2, Lazy lazy5, Handler handler, WindowManager windowManager, WallpaperManager wallpaperManager, Lazy lazy6, Lazy lazy7, ScreenLifecycle screenLifecycle, Lazy lazy8, AODTouchModeManager aODTouchModeManager, Lazy lazy9) {
         this.aodAmbientWallpaperHelper = aODAmbientWallpaperHelper;
         this.pluginAODManagerLazy = lazy;

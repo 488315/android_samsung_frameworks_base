@@ -161,7 +161,6 @@ public final class ChromeCastDevice implements RouteDevice {
         return toLogText();
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

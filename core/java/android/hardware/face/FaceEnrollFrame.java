@@ -7,13 +7,11 @@ public final class FaceEnrollFrame implements Parcelable {
     public static final Parcelable.Creator<FaceEnrollFrame> CREATOR =
             new Parcelable.Creator<
                     FaceEnrollFrame>() { // from class: android.hardware.face.FaceEnrollFrame.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceEnrollFrame createFromParcel(Parcel source) {
                     return new FaceEnrollFrame(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceEnrollFrame[] newArray(int size) {
                     return new FaceEnrollFrame[size];

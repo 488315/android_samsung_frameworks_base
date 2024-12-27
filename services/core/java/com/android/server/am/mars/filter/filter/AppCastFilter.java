@@ -58,8 +58,6 @@ public final class AppCastFilter implements IFilter {
                 : 0;
     }
 
-    /* JADX WARN: Type inference failed for: r4v3, types: [com.android.server.am.mars.filter.filter.AppCastFilter$1] */
-    /* JADX WARN: Type inference failed for: r4v6, types: [com.android.server.am.mars.filter.filter.AppCastFilter$1] */
     @Override // com.android.server.am.mars.filter.IFilter
     public final void init(Context context) {
         this.mContext = context;

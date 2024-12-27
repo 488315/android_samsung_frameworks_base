@@ -24,7 +24,6 @@ final class AudioStreamSliderViewModel$slider$1 extends SuspendLambda implements
     int label;
     final /* synthetic */ AudioStreamSliderViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AudioStreamSliderViewModel$slider$1(AudioStreamSliderViewModel audioStreamSliderViewModel, Continuation continuation) {
         super(4, continuation);
         this.this$0 = audioStreamSliderViewModel;

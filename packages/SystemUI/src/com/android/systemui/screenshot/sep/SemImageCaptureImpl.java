@@ -25,10 +25,6 @@ public final class SemImageCaptureImpl extends ImageCaptureImpl {
         this.TAG = "Screenshot";
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x004d  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0055  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

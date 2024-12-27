@@ -379,9 +379,6 @@ public final class PackageWatchdog {
             this.mMitigationCount = i;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:16:0x0049 A[Catch: IOException | XmlPullParserException -> 0x003b, IOException | XmlPullParserException -> 0x003b, TRY_LEAVE, TryCatch #1 {IOException | XmlPullParserException -> 0x003b, blocks: (B:10:0x002d, B:35:0x0033, B:14:0x0043, B:14:0x0043, B:16:0x0049, B:16:0x0049, B:19:0x0056, B:19:0x0056, B:24:0x005f, B:24:0x005f, B:37:0x003d, B:37:0x003d), top: B:9:0x002d }] */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x007a A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:31:0x007b  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -606,7 +603,6 @@ public final class PackageWatchdog {
                 new PackageWatchdog$$ExternalSyntheticLambda4());
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.PackageWatchdog$$ExternalSyntheticLambda3] */
     public PackageWatchdog(
             Context context,
             AtomicFile atomicFile,

@@ -97,18 +97,6 @@ public final class CustomTileRepositoryImpl implements CustomTileRepository {
         return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0086 A[Catch: all -> 0x0099, TryCatch #0 {all -> 0x0099, blocks: (B:14:0x00c5, B:30:0x0078, B:32:0x0086, B:33:0x008c, B:35:0x0092, B:36:0x00a0, B:38:0x00a5, B:42:0x009b), top: B:29:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0092 A[Catch: all -> 0x0099, TryCatch #0 {all -> 0x0099, blocks: (B:14:0x00c5, B:30:0x0078, B:32:0x0086, B:33:0x008c, B:35:0x0092, B:36:0x00a0, B:38:0x00a5, B:42:0x009b), top: B:29:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00a5 A[Catch: all -> 0x0099, TryCatch #0 {all -> 0x0099, blocks: (B:14:0x00c5, B:30:0x0078, B:32:0x0086, B:33:0x008c, B:35:0x0092, B:36:0x00a0, B:38:0x00a5, B:42:0x009b), top: B:29:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x009b A[Catch: all -> 0x0099, TryCatch #0 {all -> 0x0099, blocks: (B:14:0x00c5, B:30:0x0078, B:32:0x0086, B:33:0x008c, B:35:0x0092, B:36:0x00a0, B:38:0x00a5, B:42:0x009b), top: B:29:0x0078 }] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x008b  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x0060  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
-    /* JADX WARN: Type inference failed for: r6v11, types: [kotlinx.coroutines.sync.Mutex] */
-    /* JADX WARN: Type inference failed for: r7v13, types: [kotlinx.coroutines.sync.Mutex] */
-    /* JADX WARN: Type inference failed for: r7v3, types: [kotlinx.coroutines.sync.Mutex] */
-    /* JADX WARN: Type inference failed for: r7v4 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -126,12 +114,10 @@ public final class CustomTileRepositoryImpl implements CustomTileRepository {
             return Unit.INSTANCE;
         }
         Object updateTile = updateTile(userHandle, z, new Function1() { // from class: com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl$updateWithDefaults$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:7:0x004b  */
             @Override // kotlin.jvm.functions.Function1
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -203,7 +189,6 @@ public final class CustomTileRepositoryImpl implements CustomTileRepository {
 
     public final Object updateWithTile(UserHandle userHandle, final Tile tile, boolean z, Continuation continuation) {
         Object updateTile = updateTile(userHandle, z, new Function1() { // from class: com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl$updateWithTile$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

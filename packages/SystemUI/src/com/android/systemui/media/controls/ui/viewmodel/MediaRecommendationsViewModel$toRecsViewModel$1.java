@@ -30,7 +30,6 @@ final class MediaRecommendationsViewModel$toRecsViewModel$1 extends Continuation
     /* synthetic */ Object result;
     final /* synthetic */ MediaRecommendationsViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaRecommendationsViewModel$toRecsViewModel$1(MediaRecommendationsViewModel mediaRecommendationsViewModel, Continuation continuation) {
         super(continuation);
         this.this$0 = mediaRecommendationsViewModel;

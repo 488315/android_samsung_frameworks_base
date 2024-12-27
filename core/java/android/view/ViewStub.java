@@ -140,7 +140,6 @@ public final class ViewStub extends View {
         return view;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void replaceSelfWithView(View view, ViewGroup parent) {
         int index = parent.indexOfChild(this);
         parent.removeViewInLayout(this);

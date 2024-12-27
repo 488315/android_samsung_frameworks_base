@@ -9,7 +9,6 @@ public final class Usb10ASFormatI extends UsbASFormat {
     public int[] mSampleRates;
     public byte mSubframeSize;
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.server.usb.descriptors.UsbDescriptor
     public final int parseRawDescriptors(ByteStream byteStream) {
         this.mNumChannels = byteStream.getByte();

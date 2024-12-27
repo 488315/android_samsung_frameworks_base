@@ -70,7 +70,6 @@ public final class SceneLogger {
     public final void logSceneChangeRequested(SceneKey sceneKey, SceneKey sceneKey2, String str, final boolean z) {
         LogLevel logLevel = LogLevel.INFO;
         Function1 function1 = new Function1() { // from class: com.android.systemui.scene.shared.logger.SceneLogger$logSceneChangeRequested$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

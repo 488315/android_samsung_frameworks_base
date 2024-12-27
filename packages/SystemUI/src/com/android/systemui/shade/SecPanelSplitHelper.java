@@ -170,8 +170,6 @@ public final class SecPanelSplitHelper implements ShadeExpansionListener, Settin
     
         if (r3 != 3) goto L49;
      */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x00e3  */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x00e6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -223,13 +221,6 @@ public final class SecPanelSplitHelper implements ShadeExpansionListener, Settin
     
         if (r12 != 3) goto L201;
      */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x00d5  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x00da  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x00ea  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x00fa  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x010f  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x00fc  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x012d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

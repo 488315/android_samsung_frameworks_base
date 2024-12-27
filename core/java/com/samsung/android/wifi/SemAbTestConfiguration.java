@@ -22,7 +22,6 @@ public class SemAbTestConfiguration implements Parcelable {
             new Parcelable.Creator<
                     SemAbTestConfiguration>() { // from class:
                                                 // com.samsung.android.wifi.SemAbTestConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemAbTestConfiguration createFromParcel(Parcel in) {
                     SemAbTestConfiguration config = new SemAbTestConfiguration();
@@ -39,7 +38,6 @@ public class SemAbTestConfiguration implements Parcelable {
                     return config;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemAbTestConfiguration[] newArray(int size) {
                     return new SemAbTestConfiguration[size];
@@ -87,7 +85,6 @@ public class SemAbTestConfiguration implements Parcelable {
                 new Parcelable.Creator<
                         TestParam>() { // from class:
                                        // com.samsung.android.wifi.SemAbTestConfiguration.TestParam.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TestParam createFromParcel(Parcel in) {
                         TestParam testParam = new TestParam();
@@ -98,7 +95,6 @@ public class SemAbTestConfiguration implements Parcelable {
                         return testParam;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TestParam[] newArray(int size) {
                         return new TestParam[size];
@@ -133,7 +129,6 @@ public class SemAbTestConfiguration implements Parcelable {
                 new Parcelable.Creator<
                         TestOutput>() { // from class:
                                         // com.samsung.android.wifi.SemAbTestConfiguration.TestOutput.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TestOutput createFromParcel(Parcel in) {
                         TestOutput testOutput = new TestOutput();
@@ -147,7 +142,6 @@ public class SemAbTestConfiguration implements Parcelable {
                         return testOutput;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TestOutput[] newArray(int size) {
                         return new TestOutput[size];
@@ -267,14 +261,12 @@ public class SemAbTestConfiguration implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void writeGroup(Parcel dest, Group set) {
         dest.writeString(set.groupA);
         dest.writeString(set.groupB);
         dest.writeString(set.groupC);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Group readGroup(Parcel src) {
         Group set = new Group();
         set.groupA = src.readString();

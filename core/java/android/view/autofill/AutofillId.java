@@ -19,7 +19,6 @@ public final class AutofillId implements Parcelable {
     public static final AutofillId NO_AUTOFILL_ID = new AutofillId(0);
     public static final Parcelable.Creator<AutofillId> CREATOR =
             new Parcelable.Creator<AutofillId>() { // from class: android.view.autofill.AutofillId.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AutofillId createFromParcel(Parcel source) {
                     int viewId = source.readInt();
@@ -34,7 +33,6 @@ public final class AutofillId implements Parcelable {
                     return new AutofillId(flags, viewId, -1L, sessionId);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AutofillId[] newArray(int size) {
                     return new AutofillId[size];

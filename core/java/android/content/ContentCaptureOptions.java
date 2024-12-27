@@ -34,7 +34,6 @@ public final class ContentCaptureOptions implements Parcelable {
     public static final Parcelable.Creator<ContentCaptureOptions> CREATOR =
             new Parcelable.Creator<ContentCaptureOptions>() { // from class:
                 // android.content.ContentCaptureOptions.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentCaptureOptions createFromParcel(Parcel parcel) {
                     boolean lite = parcel.readBoolean();
@@ -62,7 +61,6 @@ public final class ContentCaptureOptions implements Parcelable {
                             parcel.readArraySet(null));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentCaptureOptions[] newArray(int size) {
                     return new ContentCaptureOptions[size];
@@ -313,7 +311,6 @@ public final class ContentCaptureOptions implements Parcelable {
             return stringBuilder.append(']').toString();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void dumpShort(PrintWriter pw) {
             pw.print("enableReceiver=");
             pw.print(this.enableReceiver);
@@ -327,7 +324,6 @@ public final class ContentCaptureOptions implements Parcelable {
             pw.print(this.optionalGroupsThreshold);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void writeToParcel(Parcel parcel) {
             parcel.writeBoolean(this.enableReceiver);
             parcel.writeInt(this.bufferSize);
@@ -336,7 +332,6 @@ public final class ContentCaptureOptions implements Parcelable {
             parcel.writeInt(this.optionalGroupsThreshold);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static ContentProtectionOptions createFromParcel(Parcel parcel) {
             boolean enableReceiver = parcel.readBoolean();
             int bufferSize = parcel.readInt();

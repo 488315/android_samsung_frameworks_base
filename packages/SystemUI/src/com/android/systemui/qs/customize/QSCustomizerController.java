@@ -42,8 +42,6 @@ public final class QSCustomizerController extends ViewController {
     public final Toolbar mToolbar;
     public final UiEventLogger mUiEventLogger;
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.qs.customize.QSCustomizerController$1] */
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.systemui.qs.customize.QSCustomizerController$3] */
     public QSCustomizerController(QSCustomizer qSCustomizer, TileQueryHelper tileQueryHelper, QSHost qSHost, TileAdapter tileAdapter, ScreenLifecycle screenLifecycle, KeyguardStateController keyguardStateController, LightBarController lightBarController, ConfigurationController configurationController, UiEventLogger uiEventLogger) {
         super(qSCustomizer);
         this.mOnMenuItemClickListener = new Toolbar.OnMenuItemClickListener() { // from class: com.android.systemui.qs.customize.QSCustomizerController.1

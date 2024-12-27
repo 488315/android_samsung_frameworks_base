@@ -10,7 +10,6 @@ final class UserTileSpecRepository$loadTilesFromSettings$1 extends ContinuationI
     /* synthetic */ Object result;
     final /* synthetic */ UserTileSpecRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserTileSpecRepository$loadTilesFromSettings$1(UserTileSpecRepository userTileSpecRepository, Continuation continuation) {
         super(continuation);
         this.this$0 = userTileSpecRepository;

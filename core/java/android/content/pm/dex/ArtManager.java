@@ -63,7 +63,6 @@ public class ArtManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class SnapshotRuntimeProfileCallbackDelegate
             extends ISnapshotRuntimeProfileCallback.Stub {
         private final SnapshotRuntimeProfileCallback mCallback;
@@ -75,7 +74,6 @@ public class ArtManager {
             this.mExecutor = executor;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSuccess$0(ParcelFileDescriptor profileReadFd) {
             this.mCallback.onSuccess(profileReadFd);
         }
@@ -93,7 +91,6 @@ public class ArtManager {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onError$1(int errCode) {
             this.mCallback.onError(errCode);
         }

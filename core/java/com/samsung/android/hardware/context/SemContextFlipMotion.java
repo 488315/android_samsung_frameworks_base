@@ -9,13 +9,11 @@ public class SemContextFlipMotion extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextFlipMotion>() { // from class:
                                               // com.samsung.android.hardware.context.SemContextFlipMotion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextFlipMotion createFromParcel(Parcel in) {
                     return new SemContextFlipMotion(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextFlipMotion[] newArray(int size) {
                     return new SemContextFlipMotion[size];

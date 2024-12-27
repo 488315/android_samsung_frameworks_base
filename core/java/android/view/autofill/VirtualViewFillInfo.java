@@ -9,7 +9,6 @@ import java.lang.annotation.Annotation;
 public final class VirtualViewFillInfo {
     private String[] mAutofillHints;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String[] defaultAutofillHints() {
         return null;
     }

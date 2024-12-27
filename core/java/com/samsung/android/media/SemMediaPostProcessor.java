@@ -143,7 +143,6 @@ public final class SemMediaPostProcessor {
             this.format = new HashMap(format);
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public int getValueTypeForKey(String key) {
             char c;
             switch (key.hashCode()) {
@@ -315,7 +314,6 @@ public final class SemMediaPostProcessor {
             return (String) this.format.get(key);
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         private Boolean isReserved(String key) {
             char c;
             switch (key.hashCode()) {

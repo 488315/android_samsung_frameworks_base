@@ -54,7 +54,6 @@ public final class SecQuickTileChunkLayoutBarTouchHelper {
     public final IntConsumer trackingPointerConsumer;
     public final IntSupplier trackingPointerSupplier;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.shade.SecQuickTileChunkLayoutBarTouchHelper$scrollIndicatorAccessibilityDelegate$1] */
     public SecQuickTileChunkLayoutBarTouchHelper(Context context, Runnable runnable, DoubleSupplier doubleSupplier, DoubleConsumer doubleConsumer, DoubleSupplier doubleSupplier2, DoubleConsumer doubleConsumer2, DoubleSupplier doubleSupplier3, Runnable runnable2, BooleanSupplier booleanSupplier, Supplier<QS> supplier, Consumer<MotionEvent> consumer, IntConsumer intConsumer, IntSupplier intSupplier) {
         this.clearVelocityTrackerRunnable = runnable;
         this.currentQsVelocitySupplier = doubleSupplier;

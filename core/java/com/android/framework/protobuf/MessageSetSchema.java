@@ -98,10 +98,6 @@ final class MessageSetSchema<T> implements Schema<T> {
         unknownFieldSchema.writeAsMessageSetTo(unknownFieldSchema.getFromMessage(message), writer);
     }
 
-    /* JADX WARN: Failed to find 'out' block for switch in B:12:0x0097. Please report as an issue. */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00ee A[SYNTHETIC] */
     @Override // com.android.framework.protobuf.Schema
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -165,7 +161,6 @@ final class MessageSetSchema<T> implements Schema<T> {
         this.extensionSchema.makeImmutable(message);
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:16:0x0034 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

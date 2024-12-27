@@ -10,21 +10,17 @@ public class PathParser {
     @FastNative
     private static native boolean nCanMorph(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreateEmptyPathData();
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreatePathData(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nCreatePathDataFromString(String str, int i);
 
     @FastNative
     private static native void nCreatePathFromPathData(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nFinalize(long j);
 
@@ -33,7 +29,6 @@ public class PathParser {
 
     private static native void nParseStringForPath(long j, String str, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetPathData(long j, long j2);
 

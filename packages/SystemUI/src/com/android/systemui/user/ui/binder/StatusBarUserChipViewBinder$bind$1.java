@@ -46,7 +46,6 @@ final class StatusBarUserChipViewBinder$bind$1 extends SuspendLambda implements 
             final /* synthetic */ StatusBarUserChipViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C02621(StatusBarUserChipViewModel statusBarUserChipViewModel, StatusBarUserSwitcherContainer statusBarUserSwitcherContainer, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = statusBarUserChipViewModel;
@@ -98,7 +97,6 @@ final class StatusBarUserChipViewBinder$bind$1 extends SuspendLambda implements 
             final /* synthetic */ StatusBarUserChipViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(StatusBarUserChipViewModel statusBarUserChipViewModel, StatusBarUserSwitcherContainer statusBarUserSwitcherContainer, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = statusBarUserChipViewModel;
@@ -157,7 +155,6 @@ final class StatusBarUserChipViewBinder$bind$1 extends SuspendLambda implements 
             final /* synthetic */ StatusBarUserChipViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass3(StatusBarUserChipViewModel statusBarUserChipViewModel, StatusBarUserSwitcherContainer statusBarUserSwitcherContainer, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = statusBarUserChipViewModel;
@@ -208,7 +205,6 @@ final class StatusBarUserChipViewBinder$bind$1 extends SuspendLambda implements 
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(StatusBarUserSwitcherContainer statusBarUserSwitcherContainer, StatusBarUserChipViewModel statusBarUserChipViewModel, Continuation continuation) {
             super(2, continuation);
             this.$view = statusBarUserSwitcherContainer;
@@ -256,7 +252,6 @@ final class StatusBarUserChipViewBinder$bind$1 extends SuspendLambda implements 
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public StatusBarUserChipViewBinder$bind$1(StatusBarUserSwitcherContainer statusBarUserSwitcherContainer, StatusBarUserChipViewModel statusBarUserChipViewModel, Continuation continuation) {
         super(3, continuation);
         this.$view = statusBarUserSwitcherContainer;

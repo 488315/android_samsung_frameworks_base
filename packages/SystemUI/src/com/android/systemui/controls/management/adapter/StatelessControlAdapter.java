@@ -107,8 +107,6 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
         new Companion(null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:8:0x007d  */
-    /* JADX WARN: Type inference failed for: r11v4, types: [com.android.systemui.controls.management.adapter.StatelessControlAdapter$spanSizeLookup$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

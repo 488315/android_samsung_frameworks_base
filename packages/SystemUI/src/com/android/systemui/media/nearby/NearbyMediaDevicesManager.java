@@ -115,8 +115,6 @@ public final class NearbyMediaDevicesManager implements CoreStartable {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.media.nearby.NearbyMediaDevicesManager$commandQueueCallbacks$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.media.nearby.NearbyMediaDevicesManager$deathRecipient$1] */
     public NearbyMediaDevicesManager(CommandQueue commandQueue, NearbyMediaDevicesLogger nearbyMediaDevicesLogger) {
         this.commandQueue = commandQueue;
         this.logger = nearbyMediaDevicesLogger;

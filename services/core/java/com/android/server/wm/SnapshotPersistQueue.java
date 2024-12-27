@@ -166,7 +166,6 @@ public final class SnapshotPersistQueue {
             return AmFmBandRange$$ExternalSyntheticOutline0.m(this.mUserId, sb, "}");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:31:0x0242  */
         @Override // com.android.server.wm.SnapshotPersistQueue.WriteQueueItem
         /*
             Code decompiled incorrectly, please refer to instructions dump.

@@ -9,7 +9,6 @@ public class GetResourceInfoReturn implements Parcelable {
             new Parcelable.Creator<
                     GetResourceInfoReturn>() { // from class:
                                                // com.samsung.android.media.GetResourceInfoReturn.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetResourceInfoReturn createFromParcel(Parcel _aidl_source) {
                     GetResourceInfoReturn _aidl_out = new GetResourceInfoReturn();
@@ -17,7 +16,6 @@ public class GetResourceInfoReturn implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetResourceInfoReturn[] newArray(int _aidl_size) {
                     return new GetResourceInfoReturn[_aidl_size];

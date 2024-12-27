@@ -29,7 +29,6 @@ public final /* synthetic */ class SemFpAidlResponseHandler$$ExternalSyntheticLa
         this.f$2 = i2;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // java.util.function.Consumer
     public final void accept(Object obj) {
         switch (this.$r8$classId) {

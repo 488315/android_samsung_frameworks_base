@@ -25,7 +25,6 @@ public final class WindowRootViewVisibilityRepository {
 
     public final void onLockscreenOrShadeInteractive(final int i, final boolean z) {
         this.uiBgExecutor.execute(new WindowRootViewVisibilityRepository$executeServiceCallOnUiBg$1(new Function0() { // from class: com.android.systemui.scene.data.repository.WindowRootViewVisibilityRepository$onLockscreenOrShadeInteractive$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

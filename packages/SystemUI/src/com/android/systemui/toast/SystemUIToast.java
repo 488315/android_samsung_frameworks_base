@@ -105,9 +105,6 @@ public final class SystemUIToast implements ToastPlugin.Toast {
         this.mDefaultGravity = this.mContext.getResources().getInteger(R.integer.device_idle_max_temp_app_allowlist_duration_ms);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x01f2  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00dd  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00e9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

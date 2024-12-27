@@ -37,7 +37,6 @@ public final class RequestInjectorService extends IRequestInjector.Stub {
     public final class RequestInjectorCallbackProxy extends IRequestInjectorCallback.Stub {
         public RequestInjectorCallbackProxy() {}
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final IBinder asBinder() {
             return this;
         }

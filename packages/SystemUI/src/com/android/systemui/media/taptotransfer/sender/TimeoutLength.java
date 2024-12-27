@@ -2,8 +2,6 @@ package com.android.systemui.media.taptotransfer.sender;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class TimeoutLength {
     public static final /* synthetic */ TimeoutLength[] $VALUES;
     public static final TimeoutLength DEFAULT;

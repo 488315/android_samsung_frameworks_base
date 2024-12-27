@@ -21,13 +21,11 @@ import java.util.Arrays;
 public class Signature implements Parcelable {
     public static final Parcelable.Creator<Signature> CREATOR =
             new Parcelable.Creator<Signature>() { // from class: android.content.pm.Signature.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Signature createFromParcel(Parcel source) {
                     return new Signature(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Signature[] newArray(int size) {
                     return new Signature[size];

@@ -10,7 +10,6 @@ final class InputMethodRepositoryImpl$enabledInputMethods$1 extends Continuation
     /* synthetic */ Object result;
     final /* synthetic */ InputMethodRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InputMethodRepositoryImpl$enabledInputMethods$1(InputMethodRepositoryImpl inputMethodRepositoryImpl, Continuation continuation) {
         super(continuation);
         this.this$0 = inputMethodRepositoryImpl;

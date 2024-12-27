@@ -11,13 +11,11 @@ public final class AudioMixerAttributes implements Parcelable {
     public static final Parcelable.Creator<AudioMixerAttributes> CREATOR =
             new Parcelable.Creator<
                     AudioMixerAttributes>() { // from class: android.media.AudioMixerAttributes.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioMixerAttributes createFromParcel(Parcel p) {
                     return new AudioMixerAttributes(p);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioMixerAttributes[] newArray(int size) {
                     return new AudioMixerAttributes[size];

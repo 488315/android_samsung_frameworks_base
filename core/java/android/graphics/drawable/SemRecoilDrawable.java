@@ -158,7 +158,6 @@ public class SemRecoilDrawable extends LayerDrawable {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$initAnimator$0(ValueAnimator animation) {
         setTint();
         invalidateSelf();

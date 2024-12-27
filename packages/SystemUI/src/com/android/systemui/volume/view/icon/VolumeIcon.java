@@ -143,14 +143,6 @@ public abstract class VolumeIcon extends FrameLayout implements VolumeObserver {
     
         if (com.android.systemui.volume.view.icon.VolumeIcons.isAnimatableMediaIconType(r8) != false) goto L56;
      */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x017c  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0113  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0121  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0131  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x0140  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x014f  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x015e  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x016f  */
     @Override // com.samsung.systemui.splugins.volume.VolumeObserver
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -315,11 +307,6 @@ public abstract class VolumeIcon extends FrameLayout implements VolumeObserver {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:64:0x015f  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0177  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x017e  */
-    /* JADX WARN: Removed duplicated region for block: B:74:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x0179  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

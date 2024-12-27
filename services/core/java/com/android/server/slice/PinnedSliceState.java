@@ -57,7 +57,6 @@ public final class PinnedSliceState {
         public IBinder token;
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.slice.PinnedSliceState$$ExternalSyntheticLambda0] */
     public PinnedSliceState(SliceManagerService sliceManagerService, Uri uri, String str) {
         this.mService = sliceManagerService;
         this.mUri = uri;

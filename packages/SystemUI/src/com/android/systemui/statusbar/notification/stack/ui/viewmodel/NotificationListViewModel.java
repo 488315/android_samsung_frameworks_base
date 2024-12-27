@@ -48,7 +48,6 @@ public final class NotificationListViewModel extends FlowDumperImpl {
         this.hideListViewModel = hideListViewModel;
         this.footer = optional;
         this.isImportantForAccessibility$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationListViewModel$isImportantForAccessibility$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -64,7 +63,6 @@ public final class NotificationListViewModel extends FlowDumperImpl {
             }
         });
         this.shouldShowEmptyShadeView$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationListViewModel$shouldShowEmptyShadeView$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -80,7 +78,6 @@ public final class NotificationListViewModel extends FlowDumperImpl {
             }
         });
         this.shouldHideFooterView$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationListViewModel$shouldHideFooterView$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -96,7 +93,6 @@ public final class NotificationListViewModel extends FlowDumperImpl {
             }
         });
         this.shouldIncludeFooterView$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationListViewModel$shouldIncludeFooterView$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -112,7 +108,6 @@ public final class NotificationListViewModel extends FlowDumperImpl {
             }
         });
         this.areNotificationsHiddenInShade$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationListViewModel$areNotificationsHiddenInShade$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -128,7 +123,6 @@ public final class NotificationListViewModel extends FlowDumperImpl {
             }
         });
         this.hasFilteredOutSeenNotifications$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationListViewModel$hasFilteredOutSeenNotifications$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -144,7 +138,6 @@ public final class NotificationListViewModel extends FlowDumperImpl {
             }
         });
         this.hasClearableAlertingNotifications$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationListViewModel$hasClearableAlertingNotifications$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -160,7 +153,6 @@ public final class NotificationListViewModel extends FlowDumperImpl {
             }
         });
         LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationListViewModel$hasNonClearableSilentNotifications$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -206,7 +198,6 @@ public final class NotificationListViewModel extends FlowDumperImpl {
             }
         });
         LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationListViewModel$headsUpAnimationsEnabled$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

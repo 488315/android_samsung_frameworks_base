@@ -463,10 +463,6 @@ public final class InternetTile extends QSTileImpl {
         });
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x012b  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0134  */
-    /* JADX WARN: Removed duplicated region for block: B:21:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x012e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

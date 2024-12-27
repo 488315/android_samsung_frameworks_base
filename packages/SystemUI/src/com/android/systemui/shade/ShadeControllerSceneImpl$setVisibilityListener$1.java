@@ -19,7 +19,6 @@ final class ShadeControllerSceneImpl$setVisibilityListener$1 extends SuspendLamb
     int label;
     final /* synthetic */ ShadeControllerSceneImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ShadeControllerSceneImpl$setVisibilityListener$1(ShadeControllerSceneImpl shadeControllerSceneImpl, ShadeController.ShadeVisibilityListener shadeVisibilityListener, Continuation continuation) {
         super(2, continuation);
         this.this$0 = shadeControllerSceneImpl;
@@ -53,7 +52,6 @@ final class ShadeControllerSceneImpl$setVisibilityListener$1 extends SuspendLamb
                     final /* synthetic */ ShadeController.ShadeVisibilityListener $listener;
                     int label;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     public C01841(ShadeController.ShadeVisibilityListener shadeVisibilityListener, boolean z, Continuation continuation) {
                         super(2, continuation);
                         this.$listener = shadeVisibilityListener;

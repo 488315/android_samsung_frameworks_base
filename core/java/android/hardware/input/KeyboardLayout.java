@@ -14,13 +14,11 @@ public final class KeyboardLayout implements Parcelable, Comparable<KeyboardLayo
     public static final Parcelable.Creator<KeyboardLayout> CREATOR =
             new Parcelable.Creator<
                     KeyboardLayout>() { // from class: android.hardware.input.KeyboardLayout.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyboardLayout createFromParcel(Parcel source) {
                     return new KeyboardLayout(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyboardLayout[] newArray(int size) {
                     return new KeyboardLayout[size];
@@ -69,7 +67,6 @@ public final class KeyboardLayout implements Parcelable, Comparable<KeyboardLayo
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static LayoutType of(int value) {
             return VALUE_TO_ENUM_MAP.getOrDefault(Integer.valueOf(value), UNDEFINED);
         }
@@ -79,12 +76,10 @@ public final class KeyboardLayout implements Parcelable, Comparable<KeyboardLayo
             this.mName = name;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getValue() {
             return this.mValue;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public String getName() {
             return this.mName;
         }

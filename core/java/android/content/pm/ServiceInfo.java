@@ -12,13 +12,11 @@ import java.lang.annotation.RetentionPolicy;
 public class ServiceInfo extends ComponentInfo implements Parcelable {
     public static final Parcelable.Creator<ServiceInfo> CREATOR =
             new Parcelable.Creator<ServiceInfo>() { // from class: android.content.pm.ServiceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ServiceInfo createFromParcel(Parcel source) {
                     return new ServiceInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ServiceInfo[] newArray(int size) {
                     return new ServiceInfo[size];

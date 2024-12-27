@@ -42,8 +42,6 @@ public class CustomListPreference extends ListPreference {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.tuner.CustomListPreference$CustomListPreferenceDialogFragment$2] */
         @Override // androidx.preference.ListPreferenceDialogFragment, androidx.preference.PreferenceDialogFragment
         public final void onPrepareDialogBuilder(AlertDialog.Builder builder) {
             super.onPrepareDialogBuilder(builder);

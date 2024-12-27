@@ -78,7 +78,6 @@ public abstract class RouteDeviceController extends DeviceController {
             int label;
             final /* synthetic */ RouteDeviceController this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass1(RouteDeviceController routeDeviceController, Continuation continuation) {
                 super(3, continuation);
                 this.this$0 = routeDeviceController;
@@ -143,13 +142,6 @@ public abstract class RouteDeviceController extends DeviceController {
                         this.this$0 = routeDeviceController;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
-                    /* JADX WARN: Type inference failed for: r11v0, types: [T, kotlin.collections.EmptySet] */
-                    /* JADX WARN: Type inference failed for: r1v19, types: [T, java.util.Set] */
-                    /* JADX WARN: Type inference failed for: r1v26, types: [T, java.util.Set] */
-                    /* JADX WARN: Type inference failed for: r1v33, types: [T, java.util.Set] */
-                    /* JADX WARN: Type inference failed for: r1v53, types: [T, java.util.Set] */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
@@ -336,8 +328,6 @@ public abstract class RouteDeviceController extends DeviceController {
                             this.$this_unsafeFlow = flowCollector;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.

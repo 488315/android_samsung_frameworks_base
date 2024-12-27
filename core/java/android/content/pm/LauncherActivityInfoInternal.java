@@ -9,13 +9,11 @@ public class LauncherActivityInfoInternal implements Parcelable {
     public static final Parcelable.Creator<LauncherActivityInfoInternal> CREATOR =
             new Parcelable.Creator<LauncherActivityInfoInternal>() { // from class:
                 // android.content.pm.LauncherActivityInfoInternal.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LauncherActivityInfoInternal createFromParcel(Parcel source) {
                     return new LauncherActivityInfoInternal(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LauncherActivityInfoInternal[] newArray(int size) {
                     return new LauncherActivityInfoInternal[size];

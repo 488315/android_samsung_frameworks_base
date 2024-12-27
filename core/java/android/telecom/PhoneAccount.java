@@ -44,13 +44,11 @@ public final class PhoneAccount implements Parcelable {
     public static final int CAPABILITY_VOICE_CALLING_AVAILABLE = 131072;
     public static final Parcelable.Creator<PhoneAccount> CREATOR =
             new Parcelable.Creator<PhoneAccount>() { // from class: android.telecom.PhoneAccount.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhoneAccount createFromParcel(Parcel in) {
                     return new PhoneAccount(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PhoneAccount[] newArray(int size) {
                     return new PhoneAccount[size];

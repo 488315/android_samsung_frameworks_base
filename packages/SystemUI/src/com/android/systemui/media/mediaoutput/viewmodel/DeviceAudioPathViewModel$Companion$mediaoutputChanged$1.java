@@ -24,7 +24,6 @@ final class DeviceAudioPathViewModel$Companion$mediaoutputChanged$1 extends Susp
     Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceAudioPathViewModel$Companion$mediaoutputChanged$1(SmartThingsMediaSdkManager smartThingsMediaSdkManager, Continuation continuation) {
         super(2, continuation);
         this.$this_mediaoutputChanged = smartThingsMediaSdkManager;
@@ -84,7 +83,6 @@ final class DeviceAudioPathViewModel$Companion$mediaoutputChanged$1 extends Susp
         this.$this_mediaoutputChanged.mediaSdkOperationManager.mediaOutputSelectedOperationImpl.addMediaOutputSelectedCallback(deviceAudioPathViewModel$Companion$mediaoutputChanged$1$mediaOutputSelectedCallback$1);
         final SmartThingsMediaSdkManager smartThingsMediaSdkManager = this.$this_mediaoutputChanged;
         Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.viewmodel.DeviceAudioPathViewModel$Companion$mediaoutputChanged$1.3
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

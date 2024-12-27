@@ -70,7 +70,6 @@ public final class TileLifecycleManager extends BroadcastReceiver implements IQS
         TileLifecycleManager create(Intent intent, UserHandle userHandle);
     }
 
-    /* JADX WARN: Type inference failed for: r6v5, types: [com.android.systemui.qs.external.TileLifecycleManager$$ExternalSyntheticLambda8] */
     public TileLifecycleManager(Handler handler, Context context, IQSService iQSService, PackageManagerAdapter packageManagerAdapter, BroadcastDispatcher broadcastDispatcher, Intent intent, UserHandle userHandle, ActivityManager activityManager, IDeviceIdleController iDeviceIdleController, DelayableExecutor delayableExecutor) {
         Binder binder = new Binder();
         this.mToken = binder;

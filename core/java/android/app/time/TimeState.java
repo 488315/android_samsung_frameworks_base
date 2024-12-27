@@ -12,13 +12,11 @@ import java.util.Objects;
 public final class TimeState implements Parcelable {
     public static final Parcelable.Creator<TimeState> CREATOR =
             new Parcelable.Creator<TimeState>() { // from class: android.app.time.TimeState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeState createFromParcel(Parcel in) {
                     return TimeState.createFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeState[] newArray(int size) {
                     return new TimeState[size];
@@ -32,7 +30,6 @@ public final class TimeState implements Parcelable {
         this.mUserShouldConfirmTime = userShouldConfirmTime;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static TimeState createFromParcel(Parcel in) {
         UnixEpochTime unixEpochTime = (UnixEpochTime) in.readParcelable(null, UnixEpochTime.class);
         boolean userShouldConfirmId = in.readBoolean();
@@ -45,7 +42,6 @@ public final class TimeState implements Parcelable {
         dest.writeBoolean(this.mUserShouldConfirmTime);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static TimeState parseCommandLineArgs(ShellCommand cmd) {
         char c;
         Long elapsedRealtimeMillis = null;

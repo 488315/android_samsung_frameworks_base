@@ -16,7 +16,6 @@ public abstract class AbsSavedState implements Parcelable {
                     return createFromParcel(in, (ClassLoader) null);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.ClassLoaderCreator
                 public AbsSavedState createFromParcel(Parcel in, ClassLoader loader) {
                     Parcelable superState = in.readParcelable(loader);

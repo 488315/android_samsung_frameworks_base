@@ -174,7 +174,6 @@ public abstract class RegisteredServicesCache<V> {
         this.mContext.registerReceiver(this.mUserRemovedReceiver, userFilter, null, handler);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handlePackageEvent(Intent intent, int userId) {
         String action = intent.getAction();
         boolean isRemoval =

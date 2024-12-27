@@ -12,13 +12,11 @@ public class PackageStats implements Parcelable {
     public static final Parcelable.Creator<PackageStats> CREATOR =
             new Parcelable.Creator<
                     PackageStats>() { // from class: android.content.pm.PackageStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackageStats createFromParcel(Parcel in) {
                     return new PackageStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PackageStats[] newArray(int size) {
                     return new PackageStats[size];

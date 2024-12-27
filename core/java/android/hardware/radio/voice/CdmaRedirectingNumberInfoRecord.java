@@ -11,7 +11,6 @@ public class CdmaRedirectingNumberInfoRecord implements Parcelable {
     public static final Parcelable.Creator<CdmaRedirectingNumberInfoRecord> CREATOR =
             new Parcelable.Creator<CdmaRedirectingNumberInfoRecord>() { // from class:
                 // android.hardware.radio.voice.CdmaRedirectingNumberInfoRecord.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CdmaRedirectingNumberInfoRecord createFromParcel(Parcel _aidl_source) {
                     CdmaRedirectingNumberInfoRecord _aidl_out =
@@ -20,7 +19,6 @@ public class CdmaRedirectingNumberInfoRecord implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CdmaRedirectingNumberInfoRecord[] newArray(int _aidl_size) {
                     return new CdmaRedirectingNumberInfoRecord[_aidl_size];

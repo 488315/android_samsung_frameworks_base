@@ -4,8 +4,6 @@ import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class State {
     public static final /* synthetic */ State[] $VALUES;
     public static final State CONNECTED;

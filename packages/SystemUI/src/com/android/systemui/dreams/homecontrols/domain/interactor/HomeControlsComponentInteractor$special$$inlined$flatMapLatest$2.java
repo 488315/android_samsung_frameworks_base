@@ -24,7 +24,6 @@ public final class HomeControlsComponentInteractor$special$$inlined$flatMapLates
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HomeControlsComponentInteractor$special$$inlined$flatMapLatest$2(Continuation continuation, AuthorizedPanelsRepository authorizedPanelsRepository) {
         super(3, continuation);
         this.$authorizedPanelsRepository$inlined = authorizedPanelsRepository;
@@ -81,8 +80,6 @@ public final class HomeControlsComponentInteractor$special$$inlined$flatMapLates
                         this.$prefs$inlined = sharedPreferences;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

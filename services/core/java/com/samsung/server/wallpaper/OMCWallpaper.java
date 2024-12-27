@@ -58,7 +58,6 @@ public final class OMCWallpaper {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.samsung.server.wallpaper.OMCWallpaper$1] */
     public OMCWallpaper(
             Context context,
             WallpaperManagerService.SemCallback semCallback,

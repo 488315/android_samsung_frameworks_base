@@ -18,7 +18,6 @@ final class ScreenRecordRepositoryImpl$screenRecordState$1 extends SuspendLambda
     int label;
     final /* synthetic */ ScreenRecordRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenRecordRepositoryImpl$screenRecordState$1(ScreenRecordRepositoryImpl screenRecordRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = screenRecordRepositoryImpl;
@@ -36,7 +35,6 @@ final class ScreenRecordRepositoryImpl$screenRecordState$1 extends SuspendLambda
         return ((ScreenRecordRepositoryImpl$screenRecordState$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.screenrecord.data.repository.ScreenRecordRepositoryImpl$screenRecordState$1$callback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -73,7 +71,6 @@ final class ScreenRecordRepositoryImpl$screenRecordState$1 extends SuspendLambda
             this.this$0.recordingController.mListeners.add(r1);
             final ScreenRecordRepositoryImpl screenRecordRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.screenrecord.data.repository.ScreenRecordRepositoryImpl$screenRecordState$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

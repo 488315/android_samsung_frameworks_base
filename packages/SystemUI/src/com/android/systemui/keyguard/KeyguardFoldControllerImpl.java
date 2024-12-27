@@ -123,7 +123,6 @@ public final class KeyguardFoldControllerImpl implements KeyguardFoldController 
         return true;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void changeFoldState(boolean z) {
         boolean z2 = !z;
         int i = this.foldState;

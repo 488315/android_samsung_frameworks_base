@@ -10,7 +10,6 @@ class ParcelableMap extends HashMap<AutofillId, AutofillValue> implements Parcel
     public static final Parcelable.Creator<ParcelableMap> CREATOR =
             new Parcelable.Creator<
                     ParcelableMap>() { // from class: android.view.autofill.ParcelableMap.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableMap createFromParcel(Parcel source) {
                     int size = source.readInt();
@@ -24,7 +23,6 @@ class ParcelableMap extends HashMap<AutofillId, AutofillValue> implements Parcel
                     return map;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableMap[] newArray(int size) {
                     return new ParcelableMap[size];

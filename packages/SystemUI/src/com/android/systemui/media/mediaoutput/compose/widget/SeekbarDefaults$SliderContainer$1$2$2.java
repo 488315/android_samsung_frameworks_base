@@ -25,7 +25,6 @@ final class SeekbarDefaults$SliderContainer$1$2$2 extends SuspendLambda implemen
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SeekbarDefaults$SliderContainer$1$2$2(SliderState sliderState, MutableState mutableState, Function1 function1, MutableState mutableState2, Continuation continuation) {
         super(2, continuation);
         this.$state = sliderState;
@@ -61,7 +60,6 @@ final class SeekbarDefaults$SliderContainer$1$2$2 extends SuspendLambda implemen
             final SliderState sliderState = this.$state;
             final MutableState mutableState = this.$dragState;
             Function1 function1 = new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$SliderContainer$1$2$2.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -78,7 +76,6 @@ final class SeekbarDefaults$SliderContainer$1$2$2 extends SuspendLambda implemen
             final SliderState sliderState2 = this.$state;
             final MutableState mutableState2 = this.$dragState;
             Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$SliderContainer$1$2$2.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -96,7 +93,6 @@ final class SeekbarDefaults$SliderContainer$1$2$2 extends SuspendLambda implemen
             final SliderState sliderState3 = this.$state;
             final MutableState mutableState3 = this.$dragState;
             Function0 function02 = new Function0() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$SliderContainer$1$2$2.3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -115,7 +111,6 @@ final class SeekbarDefaults$SliderContainer$1$2$2 extends SuspendLambda implemen
             final Function1 function12 = this.$onValueChange;
             final MutableState mutableState4 = this.$delta$delegate;
             Function2 function2 = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$SliderContainer$1$2$2.4
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

@@ -152,7 +152,6 @@ public class CompactMessagingLayout extends FrameLayout {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setGroupFacePileAsync$0(
             Drawable secondLastIconDrawable, Drawable lastIconDrawable) {
         View conversationFacePile = this.mConversationFacePileViewStub.inflate();

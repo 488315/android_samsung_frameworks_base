@@ -166,10 +166,6 @@ public final class BrowserPolicy extends IBrowserPolicy.Stub implements Enterpri
 
        if (r14 == null) goto L106;
     */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x013d A[Catch: all -> 0x0152, IllegalArgumentException -> 0x015f, TryCatch #9 {IllegalArgumentException -> 0x015f, blocks: (B:18:0x0124, B:20:0x013d, B:94:0x0155), top: B:17:0x0124, outer: #8 }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x016a  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0294 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x0155 A[Catch: all -> 0x0152, IllegalArgumentException -> 0x015f, TRY_LEAVE, TryCatch #9 {IllegalArgumentException -> 0x015f, blocks: (B:18:0x0124, B:20:0x013d, B:94:0x0155), top: B:17:0x0124, outer: #8 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -772,7 +768,6 @@ public final class BrowserPolicy extends IBrowserPolicy.Stub implements Enterpri
         this.mUserCache.put(Integer.valueOf(i), webFilteringCacheArr);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0093  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -789,7 +784,6 @@ public final class BrowserPolicy extends IBrowserPolicy.Stub implements Enterpri
                     + " boolean, int):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00f6 A[Catch: Exception -> 0x0104, TRY_LEAVE, TryCatch #1 {Exception -> 0x0104, blocks: (B:29:0x00bb, B:35:0x00f6, B:39:0x00db, B:41:0x00f0), top: B:28:0x00bb }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -15,7 +15,6 @@ final class MediaCarouselInteractor$hasAnyMediaOrRecommendation$1 extends Suspen
     int label;
     final /* synthetic */ MediaCarouselInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaCarouselInteractor$hasAnyMediaOrRecommendation$1(MediaCarouselInteractor mediaCarouselInteractor, Continuation continuation) {
         super(3, continuation);
         this.this$0 = mediaCarouselInteractor;

@@ -12,7 +12,6 @@ final class NegationValidator extends InternalValidator {
             new Parcelable.Creator<
                     NegationValidator>() { // from class:
                                            // android.service.autofill.NegationValidator.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NegationValidator createFromParcel(Parcel parcel) {
                     return new NegationValidator(
@@ -20,7 +19,6 @@ final class NegationValidator extends InternalValidator {
                                     parcel.readParcelable(null, InternalValidator.class));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NegationValidator[] newArray(int size) {
                     return new NegationValidator[size];

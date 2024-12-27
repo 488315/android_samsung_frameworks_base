@@ -94,7 +94,6 @@ final class SharedPreferencesImpl implements SharedPreferences {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: loadFromDisk, reason: merged with bridge method [inline-methods] */
     public void lambda$startLoadFromDisk$0() {
         StructStat stat;
@@ -327,7 +326,6 @@ final class SharedPreferencesImpl implements SharedPreferences {
         return new EditorImpl();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class MemoryCommitResult {
         final boolean keysCleared;
         final List<String> keysModified;
@@ -459,7 +457,6 @@ final class SharedPreferencesImpl implements SharedPreferences {
             lambda$notifyListeners$0(mcr);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:41:0x00b9 A[Catch: all -> 0x00e5, TryCatch #0 {, blocks: (B:17:0x005f, B:19:0x0063, B:21:0x0069, B:22:0x006d, B:23:0x0070, B:24:0x007a, B:26:0x0080, B:45:0x0095, B:47:0x009b, B:49:0x00a1, B:52:0x00a8, B:41:0x00b9, B:31:0x00ac, B:38:0x00b3, B:60:0x00bd, B:62:0x00c4, B:63:0x00d0, B:64:0x00d7), top: B:16:0x005f, outer: #1 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -487,7 +484,6 @@ final class SharedPreferencesImpl implements SharedPreferences {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         /* renamed from: notifyListeners, reason: merged with bridge method [inline-methods] */
         public void lambda$notifyListeners$0(final MemoryCommitResult mcr) {
             if (mcr.listeners != null) {
@@ -530,7 +526,6 @@ final class SharedPreferencesImpl implements SharedPreferences {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void enqueueDiskWrite(final MemoryCommitResult mcr, final Runnable postWriteRunnable) {
         boolean wasEmpty;
         final boolean isFromSyncCommit = postWriteRunnable == null;
@@ -584,7 +579,6 @@ final class SharedPreferencesImpl implements SharedPreferences {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void writeToFile(MemoryCommitResult mcr, boolean isFromSyncCommit) {
         boolean fileExists = this.mFile.exists();
         if (fileExists) {

@@ -13,13 +13,11 @@ public class WindowContextInfoChangeItem extends ClientTransactionItem {
     public static final Parcelable.Creator<WindowContextInfoChangeItem> CREATOR =
             new Parcelable.Creator<WindowContextInfoChangeItem>() { // from class:
                 // android.app.servertransaction.WindowContextInfoChangeItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowContextInfoChangeItem createFromParcel(Parcel in) {
                     return new WindowContextInfoChangeItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowContextInfoChangeItem[] newArray(int size) {
                     return new WindowContextInfoChangeItem[size];

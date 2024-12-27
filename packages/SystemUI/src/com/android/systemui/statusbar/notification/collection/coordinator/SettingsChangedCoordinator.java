@@ -30,7 +30,6 @@ public final class SettingsChangedCoordinator implements Coordinator {
         this.notifLiveDataStoreImpl = notifLiveDataStoreImpl;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void updateSnoozeButton() {
         Iterator it = ((Iterable) this.notifLiveDataStoreImpl.activeNotifList.atomicValue.get()).iterator();
         while (it.hasNext()) {

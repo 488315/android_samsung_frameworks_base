@@ -28,13 +28,11 @@ public final class SemSatSimAuthResultData implements Parcelable {
             new Parcelable.Creator<
                     SemSatSimAuthResultData>() { // from class:
                                                  // android.telephony.satellite.SemSatSimAuthResultData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSatSimAuthResultData createFromParcel(Parcel source) {
                     return new SemSatSimAuthResultData(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemSatSimAuthResultData[] newArray(int size) {
                     return new SemSatSimAuthResultData[size];

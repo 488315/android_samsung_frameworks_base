@@ -86,8 +86,6 @@ public class MultiWindowManager {
             new Singleton<
                     IMultiTaskingBinder>() { // from class:
                                              // com.samsung.android.multiwindow.MultiWindowManager.1
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.util.Singleton
                 public IMultiTaskingBinder create() {
                     try {

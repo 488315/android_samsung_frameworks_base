@@ -91,12 +91,10 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub
         return cancellation;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startCapture$0(Runnable listener) {
         this.mLocal.onScrollCaptureStart(this.mSession, this.mCancellation, listener);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onStartCaptureCompleted() {
         this.mActive = true;
         try {
@@ -138,7 +136,6 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub
         return cancellation;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$requestImage$1(Rect requestRect, Consumer listener) {
         if (this.mLocal != null) {
             this.mLocal.onScrollCaptureImageRequest(
@@ -189,14 +186,12 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub
         return cancellation;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$endCapture$2(Runnable listener) {
         if (this.mLocal != null) {
             this.mLocal.onScrollCaptureEnd(listener);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onEndCaptureCompleted() {
         this.mActive = false;
         try {
@@ -307,7 +302,6 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class SafeCallback<T> {
         private final Executor mExecutor;
         private final CancellationSignal mSignal;
@@ -354,7 +348,6 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class ConsumerCallback<T> extends SafeCallback<Consumer<T>>
             implements Consumer<T> {
         ConsumerCallback(CancellationSignal signal, Executor executor, Consumer<T> target) {

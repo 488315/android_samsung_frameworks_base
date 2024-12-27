@@ -21,7 +21,6 @@ public final class DeviceBasedSatelliteInteractor$special$$inlined$aggregateOver
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteInteractor$special$$inlined$aggregateOver$2(Continuation continuation, Object obj) {
         super(3, continuation);
         this.$defaultValue$inlined = obj;
@@ -108,7 +107,6 @@ public final class DeviceBasedSatelliteInteractor$special$$inlined$aggregateOver
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
                         final Flow[] flowArr2 = flowArr;
                         Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.pipeline.satellite.domain.interactor.DeviceBasedSatelliteInteractor$special$.inlined.aggregateOver.2.1.2
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(0);
                             }

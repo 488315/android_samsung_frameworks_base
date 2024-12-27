@@ -10,8 +10,6 @@ public final class Column {
     public boolean mIsPrimaryKey;
     public String mProperties;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class DATA_TYPE {
         public static final /* synthetic */ DATA_TYPE[] $VALUES;
         public static final DATA_TYPE BLOB;

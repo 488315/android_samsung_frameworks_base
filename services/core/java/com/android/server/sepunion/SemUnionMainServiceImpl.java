@@ -133,7 +133,6 @@ public final class SemUnionMainServiceImpl extends IUnionManager.Stub {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.sepunion.SemUnionMainServiceImpl$1] */
     public SemUnionMainServiceImpl(Context context) {
         Constructor<?> constructor;
         this.mContext = context;
@@ -174,26 +173,6 @@ public final class SemUnionMainServiceImpl extends IUnionManager.Stub {
         FileUtils.setPermissions(file, 511, -1, -1);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [java.io.File] */
-    /* JADX WARN: Type inference failed for: r0v1 */
-    /* JADX WARN: Type inference failed for: r0v10 */
-    /* JADX WARN: Type inference failed for: r0v11 */
-    /* JADX WARN: Type inference failed for: r0v12, types: [java.io.InputStreamReader, java.io.Reader] */
-    /* JADX WARN: Type inference failed for: r0v2 */
-    /* JADX WARN: Type inference failed for: r0v3 */
-    /* JADX WARN: Type inference failed for: r0v4, types: [java.lang.AutoCloseable] */
-    /* JADX WARN: Type inference failed for: r0v5 */
-    /* JADX WARN: Type inference failed for: r0v7 */
-    /* JADX WARN: Type inference failed for: r0v9 */
-    /* JADX WARN: Type inference failed for: r7v1, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r7v10, types: [java.io.FileInputStream, java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r7v2 */
-    /* JADX WARN: Type inference failed for: r7v3 */
-    /* JADX WARN: Type inference failed for: r7v4 */
-    /* JADX WARN: Type inference failed for: r7v5, types: [java.lang.AutoCloseable] */
-    /* JADX WARN: Type inference failed for: r7v6 */
-    /* JADX WARN: Type inference failed for: r7v8 */
     public static void dumpFromFile(PrintWriter printWriter, String str, String str2) {
         AutoCloseable autoCloseable;
         AutoCloseable autoCloseable2;

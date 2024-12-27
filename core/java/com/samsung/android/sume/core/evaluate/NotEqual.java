@@ -10,13 +10,11 @@ public class NotEqual<T extends Comparable<T>> extends GenericEvaluator<T> {
             new Parcelable.Creator<
                     NotEqual<
                             ?>>() { // from class: com.samsung.android.sume.core.evaluate.NotEqual.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotEqual<?> createFromParcel(Parcel in) {
                     return new NotEqual<>(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotEqual<?>[] newArray(int size) {
                     return new NotEqual[size];

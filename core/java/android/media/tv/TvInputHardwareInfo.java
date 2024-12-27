@@ -16,7 +16,6 @@ public final class TvInputHardwareInfo implements Parcelable {
     public static final Parcelable.Creator<TvInputHardwareInfo> CREATOR =
             new Parcelable.Creator<
                     TvInputHardwareInfo>() { // from class: android.media.tv.TvInputHardwareInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvInputHardwareInfo createFromParcel(Parcel source) {
                     try {
@@ -32,7 +31,6 @@ public final class TvInputHardwareInfo implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvInputHardwareInfo[] newArray(int size) {
                     return new TvInputHardwareInfo[size];

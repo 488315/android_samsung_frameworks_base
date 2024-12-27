@@ -180,9 +180,6 @@ public class NotificationShelf extends ActivatableNotificationView implements St
         return arrayList;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:103:0x00bb  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00b9  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00c7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -349,18 +346,6 @@ public class NotificationShelf extends ActivatableNotificationView implements St
         this.mActualWidth = lerp;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:126:0x024e  */
-    /* JADX WARN: Removed duplicated region for block: B:132:0x01bd  */
-    /* JADX WARN: Removed duplicated region for block: B:180:0x02f4  */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x0312  */
-    /* JADX WARN: Removed duplicated region for block: B:191:0x0340 A[LOOP:2: B:189:0x033a->B:191:0x0340, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:196:0x036c  */
-    /* JADX WARN: Removed duplicated region for block: B:229:0x03f1  */
-    /* JADX WARN: Removed duplicated region for block: B:238:0x040d  */
-    /* JADX WARN: Removed duplicated region for block: B:240:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:243:0x0314  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0159  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x01c5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -406,10 +391,6 @@ public class NotificationShelf extends ActivatableNotificationView implements St
     
         if (r4.mIsHeadsUpEntry != false) goto L16;
      */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x006c A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0041  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x003c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

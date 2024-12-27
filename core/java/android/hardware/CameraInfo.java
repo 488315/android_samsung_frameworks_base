@@ -6,7 +6,6 @@ import android.os.Parcelable;
 public class CameraInfo implements Parcelable {
     public static final Parcelable.Creator<CameraInfo> CREATOR =
             new Parcelable.Creator<CameraInfo>() { // from class: android.hardware.CameraInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraInfo createFromParcel(Parcel in) {
                     CameraInfo info = new CameraInfo();
@@ -14,7 +13,6 @@ public class CameraInfo implements Parcelable {
                     return info;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraInfo[] newArray(int size) {
                     return new CameraInfo[size];

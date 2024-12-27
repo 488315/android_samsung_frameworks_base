@@ -34,7 +34,6 @@ final class KeyguardPreviewSmartspaceViewBinder$bind$1 extends SuspendLambda imp
         private /* synthetic */ Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(KeyguardPreviewSmartspaceViewModel keyguardPreviewSmartspaceViewModel, boolean z, Context context, View view, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = keyguardPreviewSmartspaceViewModel;
@@ -74,7 +73,6 @@ final class KeyguardPreviewSmartspaceViewBinder$bind$1 extends SuspendLambda imp
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardPreviewSmartspaceViewBinder$bind$1(KeyguardPreviewSmartspaceViewModel keyguardPreviewSmartspaceViewModel, boolean z, Context context, View view, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = keyguardPreviewSmartspaceViewModel;

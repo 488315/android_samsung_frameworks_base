@@ -276,7 +276,6 @@ public final class AppsFilterImpl extends AppsFilterBase implements Watchable, S
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v22, types: [com.android.server.pm.AppsFilterImpl$1] */
     public AppsFilterImpl(
             FeatureConfig featureConfig,
             String[] strArr,
@@ -1138,7 +1137,6 @@ public final class AppsFilterImpl extends AppsFilterBase implements Watchable, S
         boolean z3 = PackageManagerService.DEBUG_COMPRESSION;
     }
 
-    /* JADX WARN: Finally extract failed */
     public final void removePackageInternal(
             Computer computer, PackageStateInternal packageStateInternal, boolean z, boolean z2) {
         boolean z3;

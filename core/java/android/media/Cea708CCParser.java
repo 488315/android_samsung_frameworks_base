@@ -375,7 +375,6 @@ class Cea708CCParser {
         return pos;
     }
 
-    /* JADX WARN: Failed to find 'out' block for switch in B:2:0x0002. Please report as an issue. */
     private int parseG2(byte[] data, int pos) {
         switch (this.mCommand) {
         }

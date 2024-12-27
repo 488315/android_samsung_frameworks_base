@@ -32,11 +32,6 @@ public final class PowerStatsExporter {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:120:0x029c  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x02a6  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x01b6  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x01b3  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x01c7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

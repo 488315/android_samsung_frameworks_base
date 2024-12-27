@@ -17,13 +17,11 @@ public class ParcelableCallAnalytics implements Parcelable {
             new Parcelable.Creator<
                     ParcelableCallAnalytics>() { // from class:
                                                  // android.telecom.ParcelableCallAnalytics.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableCallAnalytics createFromParcel(Parcel in) {
                     return new ParcelableCallAnalytics(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableCallAnalytics[] newArray(int size) {
                     return new ParcelableCallAnalytics[size];
@@ -57,13 +55,11 @@ public class ParcelableCallAnalytics implements Parcelable {
                 new Parcelable.Creator<
                         VideoEvent>() { // from class:
                                         // android.telecom.ParcelableCallAnalytics.VideoEvent.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public VideoEvent createFromParcel(Parcel in) {
                         return new VideoEvent(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public VideoEvent[] newArray(int size) {
                         return new VideoEvent[size];
@@ -127,13 +123,11 @@ public class ParcelableCallAnalytics implements Parcelable {
                 new Parcelable.Creator<
                         AnalyticsEvent>() { // from class:
                                             // android.telecom.ParcelableCallAnalytics.AnalyticsEvent.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AnalyticsEvent createFromParcel(Parcel in) {
                         return new AnalyticsEvent(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AnalyticsEvent[] newArray(int size) {
                         return new AnalyticsEvent[size];
@@ -210,13 +204,11 @@ public class ParcelableCallAnalytics implements Parcelable {
                 new Parcelable.Creator<
                         EventTiming>() { // from class:
                                          // android.telecom.ParcelableCallAnalytics.EventTiming.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public EventTiming createFromParcel(Parcel in) {
                         return new EventTiming(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public EventTiming[] newArray(int size) {
                         return new EventTiming[size];

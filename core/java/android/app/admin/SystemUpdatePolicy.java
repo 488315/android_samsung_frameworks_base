@@ -33,7 +33,6 @@ public final class SystemUpdatePolicy implements Parcelable {
     public static final Parcelable.Creator<SystemUpdatePolicy> CREATOR =
             new Parcelable.Creator<
                     SystemUpdatePolicy>() { // from class: android.app.admin.SystemUpdatePolicy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SystemUpdatePolicy createFromParcel(Parcel source) {
                     SystemUpdatePolicy policy = new SystemUpdatePolicy();
@@ -50,7 +49,6 @@ public final class SystemUpdatePolicy implements Parcelable {
                     return policy;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SystemUpdatePolicy[] newArray(int size) {
                     return new SystemUpdatePolicy[size];
@@ -86,13 +84,11 @@ public final class SystemUpdatePolicy implements Parcelable {
         public static final Parcelable.Creator<ValidationFailedException> CREATOR =
                 new Parcelable.Creator<ValidationFailedException>() { // from class:
                     // android.app.admin.SystemUpdatePolicy.ValidationFailedException.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ValidationFailedException createFromParcel(Parcel source) {
                         return new ValidationFailedException(source.readInt(), source.readString());
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ValidationFailedException[] newArray(int size) {
                         return new ValidationFailedException[size];
@@ -386,7 +382,6 @@ public final class SystemUpdatePolicy implements Parcelable {
         return Instant.ofEpochMilli(when).atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [java.time.ZonedDateTime] */
     private static long dateToMillis(LocalDate when) {
         return LocalDateTime.of(when, LocalTime.MIN)
                 .atZone(ZoneId.systemDefault())

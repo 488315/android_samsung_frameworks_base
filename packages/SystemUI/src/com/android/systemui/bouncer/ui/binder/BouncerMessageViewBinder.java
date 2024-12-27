@@ -13,8 +13,6 @@ public final class BouncerMessageViewBinder {
     private BouncerMessageViewBinder() {
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0062  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0065  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

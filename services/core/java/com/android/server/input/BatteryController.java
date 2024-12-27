@@ -129,8 +129,6 @@ public final class BatteryController {
             configureDeviceMonitor(SystemClock.uptimeMillis());
         }
 
-        /* JADX WARN: Type inference failed for: r0v7, types: [com.android.server.input.BatteryController$DeviceMonitor$$ExternalSyntheticLambda2] */
-        /* JADX WARN: Type inference failed for: r4v11, types: [com.android.server.input.BatteryController$DeviceMonitor$1, com.android.server.input.UEventManager$UEventListener] */
         public final void configureDeviceMonitor(long j) {
             State state = this.mState;
             int i = ((IInputDeviceBatteryState) state).deviceId;
@@ -384,7 +382,6 @@ public final class BatteryController {
         public final Set mMonitoredDevices = new ArraySet();
         public final int mPid;
 
-        /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.input.BatteryController$ListenerRecord$$ExternalSyntheticLambda0] */
         public ListenerRecord(final int i, IInputDeviceBatteryListener iInputDeviceBatteryListener) {
             this.mPid = i;
             this.mListener = iInputDeviceBatteryListener;
@@ -442,7 +439,6 @@ public final class BatteryController {
         public final Executor mExecutor;
         public BluetoothBatteryManager.BluetoothBatteryListener mRegisteredListener;
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.input.BatteryController$LocalBluetoothBatteryManager$1] */
         public LocalBluetoothBatteryManager(Context context, Looper looper) {
             this.mContext = context;
             this.mExecutor = new HandlerExecutor(new Handler(looper));
@@ -568,7 +564,6 @@ public final class BatteryController {
             return (State) Objects.requireNonNullElseGet(resolveBluetoothBatteryState(), new BatteryController$DeviceMonitor$$ExternalSyntheticLambda1(this, 1));
         }
 
-        /* JADX WARN: Type inference failed for: r2v0, types: [com.android.server.input.BatteryController$UsiDeviceMonitor$$ExternalSyntheticLambda2] */
         public final void markUsiBatteryValid() {
             BatteryController$UsiDeviceMonitor$$ExternalSyntheticLambda2 batteryController$UsiDeviceMonitor$$ExternalSyntheticLambda2 = this.mValidityTimeoutCallback;
             BatteryController batteryController = BatteryController.this;
@@ -754,8 +749,6 @@ public final class BatteryController {
         updatePollingLocked(false);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.server.input.BatteryController$$ExternalSyntheticLambda4] */
     public final void updateBluetoothBatteryMonitoring() {
         synchronized (this.mLock) {
             try {

@@ -32,13 +32,11 @@ public final class PersistableBundle extends BaseBundle
         CREATOR =
                 new Parcelable.Creator<
                         PersistableBundle>() { // from class: android.os.PersistableBundle.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PersistableBundle createFromParcel(Parcel in) {
                         return in.readPersistableBundle();
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public PersistableBundle[] newArray(int size) {
                         return new PersistableBundle[size];

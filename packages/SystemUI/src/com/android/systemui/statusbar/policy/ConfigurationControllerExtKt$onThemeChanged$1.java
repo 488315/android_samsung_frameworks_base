@@ -18,7 +18,6 @@ final class ConfigurationControllerExtKt$onThemeChanged$1 extends SuspendLambda 
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ConfigurationControllerExtKt$onThemeChanged$1(ConfigurationController configurationController, Continuation continuation) {
         super(2, continuation);
         this.$this_onThemeChanged = configurationController;
@@ -36,8 +35,6 @@ final class ConfigurationControllerExtKt$onThemeChanged$1 extends SuspendLambda 
         return ((ConfigurationControllerExtKt$onThemeChanged$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.policy.ConfigurationControllerExtKt$onThemeChanged$1$listener$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -54,7 +51,6 @@ final class ConfigurationControllerExtKt$onThemeChanged$1 extends SuspendLambda 
             ((ConfigurationControllerImpl) this.$this_onThemeChanged).addCallback(r1);
             final ConfigurationController configurationController = this.$this_onThemeChanged;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.policy.ConfigurationControllerExtKt$onThemeChanged$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

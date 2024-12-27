@@ -13,7 +13,6 @@ public final class DeviceWiphyCapabilities implements Parcelable {
             new Parcelable.Creator<
                     DeviceWiphyCapabilities>() { // from class:
                                                  // android.net.wifi.nl80211.DeviceWiphyCapabilities.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DeviceWiphyCapabilities createFromParcel(Parcel in) {
                     DeviceWiphyCapabilities capabilities = new DeviceWiphyCapabilities();
@@ -30,7 +29,6 @@ public final class DeviceWiphyCapabilities implements Parcelable {
                     return capabilities;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DeviceWiphyCapabilities[] newArray(int size) {
                     return new DeviceWiphyCapabilities[size];

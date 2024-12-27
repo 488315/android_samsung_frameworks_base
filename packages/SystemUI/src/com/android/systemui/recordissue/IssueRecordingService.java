@@ -52,7 +52,6 @@ public final class IssueRecordingService extends RecordingService {
         return "IssueRecordingService";
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0041, code lost:
     
         if (r0.hasNext() == false) goto L37;
@@ -76,7 +75,6 @@ public final class IssueRecordingService extends RecordingService {
         r0.isRecording = false;
         r0 = r0.listeners.iterator();
      */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     @Override // com.android.systemui.screenrecord.RecordingService, android.app.Service
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -282,7 +282,6 @@ public final class AccessibilityManagerService extends IAccessibilityManager.Stu
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ AccessibilityManagerService this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AODStateContentObserver(int i, AccessibilityManagerService accessibilityManagerService) {
             super(new Handler());
             this.$r8$classId = i;
@@ -921,8 +920,6 @@ public final class AccessibilityManagerService extends IAccessibilityManager.Stu
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r1v0, types: [android.os.IBinder, com.android.server.accessibility.AccessibilityManagerService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? r1 = this.mService;
@@ -2187,8 +2184,6 @@ public final class AccessibilityManagerService extends IAccessibilityManager.Stu
         return findWindowIdLocked;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x004e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2538,7 +2533,6 @@ public final class AccessibilityManagerService extends IAccessibilityManager.Stu
         intentFilter.addAction("android.os.action.SETTING_RESTORED");
         Flags.managerAvoidReceiverTimeout();
         this.mContext.registerReceiverAsUser(new BroadcastReceiver() { // from class: com.android.server.accessibility.AccessibilityManagerService.2
-            /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
             /* JADX WARN: Code restructure failed: missing block: B:125:0x0204, code lost:
             
                 if (r13.equals("accessibility_button_targets") == false) goto L68;
@@ -2863,7 +2857,6 @@ public final class AccessibilityManagerService extends IAccessibilityManager.Stu
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0084 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3355,7 +3348,6 @@ public final class AccessibilityManagerService extends IAccessibilityManager.Stu
         scheduleNotifyClientsOfServicesStateChangeLocked(accessibilityUserState);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         new AccessibilityShellCommand(this.mContext, this, this.mSystemActionPerformer).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
     }
@@ -3386,16 +3378,6 @@ public final class AccessibilityManagerService extends IAccessibilityManager.Stu
     
         if (r0.mBoundServices.contains(r1) != false) goto L41;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v2 */
-    /* JADX WARN: Type inference failed for: r10v3, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r10v6 */
-    /* JADX WARN: Type inference failed for: r14v11 */
-    /* JADX WARN: Type inference failed for: r14v16 */
-    /* JADX WARN: Type inference failed for: r14v6, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r9v10 */
-    /* JADX WARN: Type inference failed for: r9v2 */
-    /* JADX WARN: Type inference failed for: r9v3, types: [boolean, int] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4572,11 +4554,6 @@ public final class AccessibilityManagerService extends IAccessibilityManager.Stu
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00f1  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x011f  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0122 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0123  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0111  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5239,8 +5216,6 @@ public final class AccessibilityManagerService extends IAccessibilityManager.Stu
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v0, types: [android.os.IBinder$DeathRecipient, com.android.server.accessibility.FlashNotificationsController$$ExternalSyntheticLambda1] */
     public final boolean startFlashNotificationSequence(final String str, int i, IBinder iBinder) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -5701,7 +5676,6 @@ public final class AccessibilityManagerService extends IAccessibilityManager.Stu
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0075  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

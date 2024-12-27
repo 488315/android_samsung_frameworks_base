@@ -84,8 +84,6 @@ public final class MediaTttChipControllerReceiver extends TemporaryViewDisplayCo
         ICON_ALPHA_ANIM_DURATION = AnimationUtil.Companion.getFrames(5);
     }
 
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.systemui.media.taptotransfer.receiver.MediaTttChipControllerReceiver$commandQueueCallbacks$1] */
-    /* JADX WARN: Type inference failed for: r0v13, types: [com.android.systemui.media.taptotransfer.receiver.MediaTttChipControllerReceiver$displayListener$1] */
     public MediaTttChipControllerReceiver(CommandQueue commandQueue, Context context, MediaTttReceiverLogger mediaTttReceiverLogger, WindowManager windowManager, DelayableExecutor delayableExecutor, AccessibilityManager accessibilityManager, ConfigurationController configurationController, DumpManager dumpManager, PowerManager powerManager, Handler handler, MediaTttFlags mediaTttFlags, MediaTttReceiverUiEventLogger mediaTttReceiverUiEventLogger, ViewUtil viewUtil, WakeLock.Builder builder, SystemClock systemClock, MediaTttReceiverRippleController mediaTttReceiverRippleController, TemporaryViewUiEventLogger temporaryViewUiEventLogger) {
         super(context, mediaTttReceiverLogger, windowManager, delayableExecutor, accessibilityManager, configurationController, dumpManager, powerManager, R.layout.media_ttt_chip_receiver, builder, systemClock, temporaryViewUiEventLogger);
         this.commandQueue = commandQueue;
@@ -202,7 +200,6 @@ public final class MediaTttChipControllerReceiver extends TemporaryViewDisplayCo
         viewGroup.animate().alpha(f2).setDuration(j2).start();
     }
 
-    /* JADX WARN: Type inference failed for: r10v0, types: [com.android.systemui.media.taptotransfer.receiver.MediaTttChipControllerReceiver$animateViewIn$1] */
     @Override // com.android.systemui.temporarydisplay.TemporaryViewDisplayController
     public final void animateViewIn$frameworks__base__packages__SystemUI__android_common__SystemUI_core(ViewGroup viewGroup) {
         final ViewGroup viewGroup2 = (ViewGroup) viewGroup.requireViewById(R.id.icon_container_view);
@@ -427,7 +424,6 @@ public final class MediaTttChipControllerReceiver extends TemporaryViewDisplayCo
         MediaTttUtils.Companion companion = MediaTttUtils.Companion;
         Context context = this.context;
         Function0 function0 = new Function0() { // from class: com.android.systemui.media.taptotransfer.receiver.MediaTttChipControllerReceiver$updateView$iconInfo$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

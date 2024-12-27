@@ -15,13 +15,11 @@ public class CustomControl implements Parcelable {
     public static final Parcelable.Creator<CustomControl> CREATOR =
             new Parcelable.Creator<
                     CustomControl>() { // from class: android.service.controls.CustomControl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CustomControl createFromParcel(Parcel source) {
                     return new CustomControl(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CustomControl[] newArray(int size) {
                     return new CustomControl[size];

@@ -26,7 +26,6 @@ public final class SingleBindableStatusBarIconView extends ModernStatusBarView {
         private Companion() {
         }
 
-        /* JADX WARN: Type inference failed for: r13v1, types: [com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarIconView$Companion$withDefaultBinding$2] */
         public static SingleBindableStatusBarIconView$Companion$withDefaultBinding$2 withDefaultBinding(SingleBindableStatusBarIconView singleBindableStatusBarIconView, final Function0 function0, Function3 function3) {
             final StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(2);
             final StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(-1);

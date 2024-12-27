@@ -9,7 +9,6 @@ final class NotificationShelfViewBinder$registerViewListenersWhileAttached$1 ext
     /* synthetic */ Object result;
     final /* synthetic */ NotificationShelfViewBinder this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationShelfViewBinder$registerViewListenersWhileAttached$1(NotificationShelfViewBinder notificationShelfViewBinder, Continuation continuation) {
         super(continuation);
         this.this$0 = notificationShelfViewBinder;

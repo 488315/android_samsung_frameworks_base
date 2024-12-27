@@ -32,7 +32,6 @@ final class ConditionalRestarter$scheduleRestart$1 extends SuspendLambda impleme
         int label;
         final /* synthetic */ ConditionalRestarter this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(ConditionalRestarter conditionalRestarter, Continuation continuation) {
             super(3, continuation);
             this.this$0 = conditionalRestarter;
@@ -47,7 +46,6 @@ final class ConditionalRestarter$scheduleRestart$1 extends SuspendLambda impleme
             return anonymousClass3.invokeSuspend(Unit.INSTANCE);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:14:0x004e A[RETURN] */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -107,7 +105,6 @@ final class ConditionalRestarter$scheduleRestart$1 extends SuspendLambda impleme
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ConditionalRestarter$scheduleRestart$1(ConditionalRestarter conditionalRestarter, Continuation continuation) {
         super(2, continuation);
         this.this$0 = conditionalRestarter;
@@ -196,7 +193,6 @@ final class ConditionalRestarter$scheduleRestart$1 extends SuspendLambda impleme
                 public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                     final Flow[] flowArr2 = flowArr;
                     Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.flags.ConditionalRestarter$scheduleRestart$1$invokeSuspend$$inlined$combine$1.2
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(0);
                         }

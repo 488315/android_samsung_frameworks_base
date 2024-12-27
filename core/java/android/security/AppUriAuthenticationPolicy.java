@@ -20,7 +20,6 @@ public final class AppUriAuthenticationPolicy implements Parcelable {
             new Parcelable.Creator<
                     AppUriAuthenticationPolicy>() { // from class:
                                                     // android.security.AppUriAuthenticationPolicy.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppUriAuthenticationPolicy createFromParcel(Parcel in) {
                     Map<String, UrisToAliases> appToUris = new HashMap<>();
@@ -28,7 +27,6 @@ public final class AppUriAuthenticationPolicy implements Parcelable {
                     return new AppUriAuthenticationPolicy(appToUris);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppUriAuthenticationPolicy[] newArray(int size) {
                     return new AppUriAuthenticationPolicy[size];

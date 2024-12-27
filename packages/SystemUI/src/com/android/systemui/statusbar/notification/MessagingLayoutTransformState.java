@@ -200,11 +200,6 @@ public final class MessagingLayoutTransformState extends TransformState {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x018d  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x01ac  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x01c0  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x018f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

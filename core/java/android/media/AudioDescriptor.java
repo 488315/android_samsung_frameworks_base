@@ -13,13 +13,11 @@ public class AudioDescriptor implements Parcelable {
     public static final Parcelable.Creator<AudioDescriptor> CREATOR =
             new Parcelable.Creator<
                     AudioDescriptor>() { // from class: android.media.AudioDescriptor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioDescriptor createFromParcel(Parcel p) {
                     return new AudioDescriptor(p);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioDescriptor[] newArray(int size) {
                     return new AudioDescriptor[size];

@@ -141,9 +141,6 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.keyguard.KeyguardEditModeControllerImpl$keyguardUpdateMonitorCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.systemui.keyguard.KeyguardEditModeControllerImpl$wakefulnessLifecycleObserver$1] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.keyguard.KeyguardEditModeControllerImpl$displayLifecycleObserver$1] */
     public KeyguardEditModeControllerImpl(boolean z, Executor executor, Executor executor2, WallpaperImageCreator wallpaperImageCreator, PluginWallpaperManager pluginWallpaperManager, WakefulnessLifecycle wakefulnessLifecycle, SettingsHelper settingsHelper, KeyguardUpdateMonitor keyguardUpdateMonitor, DisplayLifecycle displayLifecycle, ActivityStarter activityStarter, WindowManager windowManager) {
         this.isEditMode = z;
         this.executor = executor;

@@ -17,7 +17,6 @@ public final class CustomEnergyConsumerPowerStatsCollector extends PowerStatsCol
     public List mCollectors;
     public final BatteryStatsImpl.PowerStatsCollectorInjector mInjector;
 
-    /* JADX WARN: Illegal instructions before constructor call */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

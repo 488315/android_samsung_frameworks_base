@@ -25,7 +25,6 @@ public class Gesture implements Parcelable {
     private static final AtomicInteger sGestureCount = new AtomicInteger(0);
     public static final Parcelable.Creator<Gesture> CREATOR =
             new Parcelable.Creator<Gesture>() { // from class: android.gesture.Gesture.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Gesture createFromParcel(Parcel in) {
                     Gesture gesture = null;
@@ -50,7 +49,6 @@ public class Gesture implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Gesture[] newArray(int size) {
                     return new Gesture[size];

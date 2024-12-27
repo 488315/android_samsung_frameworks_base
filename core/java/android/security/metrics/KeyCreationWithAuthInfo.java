@@ -9,7 +9,6 @@ public class KeyCreationWithAuthInfo implements Parcelable {
             new Parcelable.Creator<
                     KeyCreationWithAuthInfo>() { // from class:
                                                  // android.security.metrics.KeyCreationWithAuthInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyCreationWithAuthInfo createFromParcel(Parcel _aidl_source) {
                     KeyCreationWithAuthInfo _aidl_out = new KeyCreationWithAuthInfo();
@@ -17,7 +16,6 @@ public class KeyCreationWithAuthInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyCreationWithAuthInfo[] newArray(int _aidl_size) {
                     return new KeyCreationWithAuthInfo[_aidl_size];

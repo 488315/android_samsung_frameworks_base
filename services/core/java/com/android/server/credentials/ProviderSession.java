@@ -33,8 +33,6 @@ public abstract class ProviderSession implements RemoteCredentialService.Provide
     public Status mStatus = Status.NOT_STARTED;
     public Boolean mProviderResponseSet = Boolean.FALSE;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class CredentialsSource {
         public static final /* synthetic */ CredentialsSource[] $VALUES;
         public static final CredentialsSource AUTH_ENTRY;
@@ -72,8 +70,6 @@ public abstract class ProviderSession implements RemoteCredentialService.Provide
                 Status status, ComponentName componentName, CredentialsSource credentialsSource);
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class Status {
         public static final /* synthetic */ Status[] $VALUES;
         public static final Status CANCELED;
@@ -121,7 +117,6 @@ public abstract class ProviderSession implements RemoteCredentialService.Provide
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public ProviderSession(
             Context context,
             Object obj,

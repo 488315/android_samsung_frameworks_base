@@ -86,9 +86,6 @@ public final class ZenModeControllerImpl implements ZenModeController, Dumpable 
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.statusbar.policy.ZenModeControllerImpl$4] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.policy.ZenModeControllerImpl$3] */
-    /* JADX WARN: Type inference failed for: r7v1, types: [com.android.systemui.statusbar.policy.ZenModeControllerImpl$2] */
     public ZenModeControllerImpl(Context context, Handler handler, Handler handler2, BroadcastDispatcher broadcastDispatcher, DumpManager dumpManager, final GlobalSettings globalSettings, UserTracker userTracker) {
         UserTracker.Callback callback = new UserTracker.Callback() { // from class: com.android.systemui.statusbar.policy.ZenModeControllerImpl.1
             @Override // com.android.systemui.settings.UserTracker.Callback

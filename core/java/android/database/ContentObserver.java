@@ -140,13 +140,11 @@ public abstract class ContentObserver {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dispatchChange$0(
             boolean selfChange, Collection uris, int flags, int userId) {
         onChange(selfChange, (Collection<Uri>) uris, flags, userId);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dispatchChange$1(
             boolean selfChange, Collection uris, int flags, int userId) {
         onChange(selfChange, (Collection<Uri>) uris, flags, userId);

@@ -227,8 +227,6 @@ public final class WearableSensingSecureChannel {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.wearable.WearableSensingSecureChannel$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.wearable.WearableSensingSecureChannel$$ExternalSyntheticLambda1] */
     public WearableSensingSecureChannel(
             CompanionDeviceManager companionDeviceManager,
             ParcelFileDescriptor parcelFileDescriptor,

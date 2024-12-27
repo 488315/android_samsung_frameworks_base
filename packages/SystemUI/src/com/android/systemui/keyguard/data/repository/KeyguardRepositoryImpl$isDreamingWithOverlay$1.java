@@ -17,7 +17,6 @@ final class KeyguardRepositoryImpl$isDreamingWithOverlay$1 extends SuspendLambda
     int label;
     final /* synthetic */ KeyguardRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardRepositoryImpl$isDreamingWithOverlay$1(KeyguardRepositoryImpl keyguardRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardRepositoryImpl;
@@ -50,7 +49,6 @@ final class KeyguardRepositoryImpl$isDreamingWithOverlay$1 extends SuspendLambda
             ChannelExt.trySendWithFailureLogging(producerScope, valueOf, "KeyguardRepositoryImpl", "initial isDreamingWithOverlay");
             final KeyguardRepositoryImpl keyguardRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$isDreamingWithOverlay$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

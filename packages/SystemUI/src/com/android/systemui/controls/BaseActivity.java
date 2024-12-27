@@ -98,9 +98,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.controls.BaseActivity$broadcastReceiver$1] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.controls.BaseActivity$callback$1] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.controls.BaseActivity$userTrackerCallback$1] */
     public BaseActivity(BroadcastDispatcher broadcastDispatcher, ControlsController controlsController, UserTracker userTracker, Executor executor) {
         this.broadcastDispatcher = broadcastDispatcher;
         this.controller = controlsController;

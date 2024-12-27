@@ -77,7 +77,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 
 public abstract class CastSettingScreenKt {
-    /* JADX WARN: Type inference failed for: r3v24, types: [com.android.systemui.media.mediaoutput.compose.CastSettingScreenKt$CastSettingScreen$1, kotlin.jvm.internal.Lambda] */
     public static final void CastSettingScreen(final Function0 function0, SettingViewModel settingViewModel, LabsViewModel labsViewModel, Composer composer, final int i, final int i2) {
         int i3;
         int i4;
@@ -209,7 +208,6 @@ public abstract class CastSettingScreenKt {
             final MutableState mutableState = (MutableState) rememberedValue;
             composerImpl.end(false);
             ActionBarKt.SecTitle(function0, StringResources_androidKt.stringResource(R.string.cast_setting, composerImpl), ComposableLambdaKt.rememberComposableLambda(872240409, composerImpl, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.CastSettingScreenKt$CastSettingScreen$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(3);
                 }
@@ -239,7 +237,6 @@ public abstract class CastSettingScreenKt {
                     final SettingViewModel settingViewModel5 = SettingViewModel.this;
                     final MutableState mutableState2 = mutableState;
                     LazyDslKt.LazyColumn(m106paddingqDBjuR0$default, null, m101PaddingValuesa9UjIt4$default, false, null, null, null, false, new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.CastSettingScreenKt$CastSettingScreen$1.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }
@@ -253,7 +250,6 @@ public abstract class CastSettingScreenKt {
                                     super(3);
                                 }
 
-                                /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.media.mediaoutput.compose.CastSettingScreenKt$CastSettingScreen$1$1$1$1, kotlin.jvm.internal.Lambda] */
                                 @Override // kotlin.jvm.functions.Function3
                                 public final Object invoke(Object obj5, Object obj6, Object obj7) {
                                     Composer composer3 = (Composer) obj6;
@@ -389,7 +385,6 @@ public abstract class CastSettingScreenKt {
                                     super(3);
                                 }
 
-                                /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.media.mediaoutput.compose.CastSettingScreenKt$CastSettingScreen$1$1$2$1, kotlin.jvm.internal.Lambda] */
                                 @Override // kotlin.jvm.functions.Function3
                                 public final Object invoke(Object obj5, Object obj6, Object obj7) {
                                     Composer composer3 = (Composer) obj6;
@@ -471,7 +466,6 @@ public abstract class CastSettingScreenKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.CastSettingScreenKt$CastSettingScreen$3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

@@ -14,13 +14,11 @@ public final class DomainOwner implements Parcelable {
     public static final Parcelable.Creator<DomainOwner> CREATOR =
             new Parcelable.Creator<
                     DomainOwner>() { // from class: android.content.pm.verify.domain.DomainOwner.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DomainOwner[] newArray(int size) {
                     return new DomainOwner[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DomainOwner createFromParcel(Parcel in) {
                     return new DomainOwner(in);

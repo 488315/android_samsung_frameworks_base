@@ -16,13 +16,11 @@ public final class TelephonyTimeSuggestion implements Parcelable {
     public static final Parcelable.Creator<TelephonyTimeSuggestion> CREATOR =
             new Parcelable.Creator<TelephonyTimeSuggestion>() { // from class:
                 // android.app.timedetector.TelephonyTimeSuggestion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TelephonyTimeSuggestion createFromParcel(Parcel in) {
                     return TelephonyTimeSuggestion.createFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TelephonyTimeSuggestion[] newArray(int size) {
                     return new TelephonyTimeSuggestion[size];
@@ -38,7 +36,6 @@ public final class TelephonyTimeSuggestion implements Parcelable {
         this.mDebugInfo = builder.mDebugInfo != null ? new ArrayList<>(builder.mDebugInfo) : null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static TelephonyTimeSuggestion createFromParcel(Parcel in) {
         int slotIndex = in.readInt();
         UnixEpochTime unixEpochTime = (UnixEpochTime) in.readParcelable(null, UnixEpochTime.class);
@@ -51,7 +48,6 @@ public final class TelephonyTimeSuggestion implements Parcelable {
         return suggestion;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static TelephonyTimeSuggestion parseCommandLineArg(ShellCommand cmd)
             throws IllegalArgumentException {
         char c;

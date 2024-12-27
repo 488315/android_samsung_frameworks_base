@@ -24,7 +24,6 @@ import java.util.Objects;
 public final class UserData implements FieldClassificationUserData, Parcelable {
     public static final Parcelable.Creator<UserData> CREATOR =
             new Parcelable.Creator<UserData>() { // from class: android.service.autofill.UserData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UserData createFromParcel(Parcel parcel) {
                     String id = parcel.readString();
@@ -55,7 +54,6 @@ public final class UserData implements FieldClassificationUserData, Parcelable {
                     return builder.build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UserData[] newArray(int size) {
                     return new UserData[size];

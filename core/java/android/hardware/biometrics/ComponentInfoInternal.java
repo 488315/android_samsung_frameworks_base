@@ -7,13 +7,11 @@ public class ComponentInfoInternal implements Parcelable {
     public static final Parcelable.Creator<ComponentInfoInternal> CREATOR =
             new Parcelable.Creator<ComponentInfoInternal>() { // from class:
                 // android.hardware.biometrics.ComponentInfoInternal.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ComponentInfoInternal createFromParcel(Parcel in) {
                     return new ComponentInfoInternal(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ComponentInfoInternal[] newArray(int size) {
                     return new ComponentInfoInternal[size];

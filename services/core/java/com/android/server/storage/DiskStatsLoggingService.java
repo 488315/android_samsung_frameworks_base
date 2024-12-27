@@ -31,10 +31,6 @@ public class DiskStatsLoggingService extends JobService {
         public JobParameters mParams;
         public long mSystemSize;
 
-        /* JADX WARN: Removed duplicated region for block: B:15:0x004e  */
-        /* JADX WARN: Removed duplicated region for block: B:21:0x0088  */
-        /* JADX WARN: Removed duplicated region for block: B:24:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:28:0x007d  */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.

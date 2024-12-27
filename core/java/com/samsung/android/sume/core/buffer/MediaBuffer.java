@@ -207,7 +207,6 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
         return MediaBufferAllocator.of(format).allocateShared();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static <T> MediaBuffer of(MediaFormat format, T t) {
         if (t instanceof Align) {
             return MediaBufferAllocator.of(format).allocate((Align) t);
@@ -246,7 +245,6 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
         return sharedOf(format.toMediaFormat());
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static <T> MediaBuffer of(MutableMediaFormat format, T t) {
         if (t instanceof Align) {
             return of(format.toMediaFormat(), (Align) t);
@@ -403,7 +401,6 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
         return metadataBufferOf(metadataKey, uniExifInterface.toExifByteBuffer());
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static <T> MediaBuffer metadataBufferOf(String metadataKeyStr, T t) {
         MutableMediaFormat format;
         if (t instanceof ByteBuffer) {

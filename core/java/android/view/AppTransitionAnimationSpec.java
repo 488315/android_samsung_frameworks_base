@@ -10,13 +10,11 @@ public class AppTransitionAnimationSpec implements Parcelable {
             new Parcelable.Creator<
                     AppTransitionAnimationSpec>() { // from class:
                                                     // android.view.AppTransitionAnimationSpec.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppTransitionAnimationSpec createFromParcel(Parcel in) {
                     return new AppTransitionAnimationSpec(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppTransitionAnimationSpec[] newArray(int size) {
                     return new AppTransitionAnimationSpec[size];

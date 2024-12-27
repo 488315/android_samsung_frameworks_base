@@ -2,8 +2,6 @@ package com.android.systemui.bluetooth.qsdialog;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class DeviceItemType {
     public static final /* synthetic */ DeviceItemType[] $VALUES;
     public static final DeviceItemType ACTIVE_MEDIA_BLUETOOTH_DEVICE;

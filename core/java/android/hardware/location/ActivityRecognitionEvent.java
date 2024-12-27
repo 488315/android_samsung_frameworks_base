@@ -7,7 +7,6 @@ public class ActivityRecognitionEvent implements Parcelable {
     public static final Parcelable.Creator<ActivityRecognitionEvent> CREATOR =
             new Parcelable.Creator<ActivityRecognitionEvent>() { // from class:
                 // android.hardware.location.ActivityRecognitionEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityRecognitionEvent createFromParcel(Parcel source) {
                     String activity = source.readString();
@@ -16,7 +15,6 @@ public class ActivityRecognitionEvent implements Parcelable {
                     return new ActivityRecognitionEvent(activity, eventType, timestampNs);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityRecognitionEvent[] newArray(int size) {
                     return new ActivityRecognitionEvent[size];

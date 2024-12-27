@@ -864,7 +864,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
             return z;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
             DeviceIdleController.this.new Shell().exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
         }
@@ -1915,16 +1914,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         this(context, new Injector(context));
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.server.DeviceIdleController$$ExternalSyntheticLambda8] */
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.server.DeviceIdleController$$ExternalSyntheticLambda8] */
-    /* JADX WARN: Type inference failed for: r0v12, types: [com.android.server.DeviceIdleController$$ExternalSyntheticLambda8] */
-    /* JADX WARN: Type inference failed for: r0v13, types: [com.android.server.DeviceIdleController$2] */
-    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.server.DeviceIdleController$4] */
-    /* JADX WARN: Type inference failed for: r0v16, types: [com.android.server.DeviceIdleController$1] */
-    /* JADX WARN: Type inference failed for: r0v21, types: [com.android.server.DeviceIdleController$6] */
-    /* JADX WARN: Type inference failed for: r0v22, types: [com.android.server.DeviceIdleController$6] */
-    /* JADX WARN: Type inference failed for: r0v23, types: [com.android.server.DeviceIdleController$8] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.server.DeviceIdleController$1] */
     public DeviceIdleController(Context context, Injector injector) {
         super(context);
         this.mNumBlockingConstraints = 0;
@@ -3377,26 +3366,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
     
         throw r0;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:227:0x03e8 A[Catch: all -> 0x03d1, Merged into TryCatch #7 {all -> 0x0436, all -> 0x03d1, blocks: (B:221:0x03b2, B:245:0x0430, B:246:0x0433, B:243:0x0439, B:244:0x043c, B:255:0x03bc, B:257:0x03c5, B:227:0x03e8, B:229:0x03f1, B:236:0x0414, B:239:0x0421, B:248:0x03fd, B:250:0x0401, B:223:0x03d5, B:225:0x03d9), top: B:220:0x03b2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:234:0x040e  */
-    /* JADX WARN: Removed duplicated region for block: B:239:0x0421 A[Catch: all -> 0x03d1, Merged into TryCatch #7 {all -> 0x0436, all -> 0x03d1, blocks: (B:221:0x03b2, B:245:0x0430, B:246:0x0433, B:243:0x0439, B:244:0x043c, B:255:0x03bc, B:257:0x03c5, B:227:0x03e8, B:229:0x03f1, B:236:0x0414, B:239:0x0421, B:248:0x03fd, B:250:0x0401, B:223:0x03d5, B:225:0x03d9), top: B:220:0x03b2 }, TRY_LEAVE] */
-    /* JADX WARN: Removed duplicated region for block: B:250:0x0401 A[Catch: all -> 0x03d1, Merged into TryCatch #7 {all -> 0x0436, all -> 0x03d1, blocks: (B:221:0x03b2, B:245:0x0430, B:246:0x0433, B:243:0x0439, B:244:0x043c, B:255:0x03bc, B:257:0x03c5, B:227:0x03e8, B:229:0x03f1, B:236:0x0414, B:239:0x0421, B:248:0x03fd, B:250:0x0401, B:223:0x03d5, B:225:0x03d9), top: B:220:0x03b2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:284:0x04b1 A[Catch: all -> 0x0471, Merged into TryCatch #24 {all -> 0x04cb, all -> 0x0471, blocks: (B:270:0x0452, B:292:0x04c5, B:293:0x04c8, B:290:0x04ce, B:291:0x04d1, B:302:0x045c, B:304:0x0465, B:277:0x0487, B:279:0x0490, B:284:0x04b1, B:286:0x04b6, B:295:0x049d, B:297:0x04a1, B:272:0x0474, B:274:0x0478), top: B:269:0x0452 }] */
-    /* JADX WARN: Removed duplicated region for block: B:286:0x04b6 A[Catch: all -> 0x0471, Merged into TryCatch #24 {all -> 0x04cb, all -> 0x0471, blocks: (B:270:0x0452, B:292:0x04c5, B:293:0x04c8, B:290:0x04ce, B:291:0x04d1, B:302:0x045c, B:304:0x0465, B:277:0x0487, B:279:0x0490, B:284:0x04b1, B:286:0x04b6, B:295:0x049d, B:297:0x04a1, B:272:0x0474, B:274:0x0478), top: B:269:0x0452 }, TRY_LEAVE] */
-    /* JADX WARN: Removed duplicated region for block: B:297:0x04a1 A[Catch: all -> 0x0471, Merged into TryCatch #24 {all -> 0x04cb, all -> 0x0471, blocks: (B:270:0x0452, B:292:0x04c5, B:293:0x04c8, B:290:0x04ce, B:291:0x04d1, B:302:0x045c, B:304:0x0465, B:277:0x0487, B:279:0x0490, B:284:0x04b1, B:286:0x04b6, B:295:0x049d, B:297:0x04a1, B:272:0x0474, B:274:0x0478), top: B:269:0x0452 }] */
-    /* JADX WARN: Removed duplicated region for block: B:299:0x04ad  */
-    /* JADX WARN: Type inference failed for: r12v3 */
-    /* JADX WARN: Type inference failed for: r12v4 */
-    /* JADX WARN: Type inference failed for: r12v5 */
-    /* JADX WARN: Type inference failed for: r4v16 */
-    /* JADX WARN: Type inference failed for: r4v28 */
-    /* JADX WARN: Type inference failed for: r4v32 */
-    /* JADX WARN: Type inference failed for: r4v33 */
-    /* JADX WARN: Type inference failed for: r4v35 */
-    /* JADX WARN: Type inference failed for: r4v36 */
-    /* JADX WARN: Type inference failed for: r4v37 */
-    /* JADX WARN: Type inference failed for: r4v40 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3409,8 +3378,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.DeviceIdleController.onShellCommand(com.android.server.DeviceIdleController$Shell, java.lang.String):int");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v9, types: [android.os.IBinder, com.android.server.DeviceIdleController$BinderService] */
     @Override // com.android.server.SystemService
     public final void onStart() {
         PackageManager packageManager = getContext().getPackageManager();
@@ -3854,8 +3821,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00a9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4069,25 +4034,10 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x00a4, code lost:
     
         if (r5 == false) goto L35;
      */
-    /* JADX WARN: Removed duplicated region for block: B:100:0x0271  */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x027b  */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x0285  */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x02ac  */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x02ce  */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x02d5  */
-    /* JADX WARN: Removed duplicated region for block: B:117:0x02fa  */
-    /* JADX WARN: Removed duplicated region for block: B:119:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00b9  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0110  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x01f3  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x01fd  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x0264  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x0266  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

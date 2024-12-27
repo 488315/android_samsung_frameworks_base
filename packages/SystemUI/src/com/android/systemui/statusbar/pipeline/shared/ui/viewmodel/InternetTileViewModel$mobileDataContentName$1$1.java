@@ -16,7 +16,6 @@ final class InternetTileViewModel$mobileDataContentName$1$1 extends SuspendLambd
     int label;
     final /* synthetic */ InternetTileViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InternetTileViewModel$mobileDataContentName$1$1(InternetTileViewModel internetTileViewModel, Continuation continuation) {
         super(3, continuation);
         this.this$0 = internetTileViewModel;

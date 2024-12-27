@@ -216,7 +216,6 @@ public class PdfDocument {
             return this.mCanvas == null;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void finish() {
             if (this.mCanvas != null) {
                 this.mCanvas.release();

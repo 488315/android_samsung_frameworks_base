@@ -10,13 +10,11 @@ public final class UiTranslationSpec implements Parcelable {
             new Parcelable.Creator<
                     UiTranslationSpec>() { // from class:
                                            // android.view.translation.UiTranslationSpec.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UiTranslationSpec[] newArray(int size) {
                     return new UiTranslationSpec[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UiTranslationSpec createFromParcel(Parcel in) {
                     return new UiTranslationSpec(in);

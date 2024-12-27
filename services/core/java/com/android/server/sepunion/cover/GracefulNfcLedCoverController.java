@@ -473,11 +473,6 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                 gracefulNfcLedCoverController.mTouchResponseWakeLock);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0157  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x015f A[Catch: all -> 0x0022, TryCatch #0 {all -> 0x0022, blocks: (B:4:0x000b, B:6:0x0018, B:7:0x001f, B:13:0x002a, B:15:0x002e, B:16:0x003d, B:19:0x0040, B:21:0x0059, B:23:0x005f, B:24:0x009e, B:25:0x00a5, B:28:0x0092, B:29:0x00a8, B:31:0x00aa, B:33:0x00b8, B:34:0x00c2, B:35:0x00d5, B:38:0x00f3, B:40:0x0129, B:43:0x012c, B:44:0x0144, B:50:0x01c5, B:51:0x01d1, B:54:0x01c2, B:55:0x015b, B:57:0x015f, B:58:0x0161, B:66:0x0190, B:68:0x019b, B:69:0x01aa, B:70:0x01a8, B:72:0x01b4, B:74:0x01b7, B:76:0x01bb, B:77:0x01d3, B:78:0x01ee, B:80:0x0171, B:82:0x0174, B:86:0x017d, B:88:0x0180, B:96:0x00de, B:100:0x00e6, B:102:0x00eb, B:104:0x0134, B:107:0x0137, B:110:0x00cd), top: B:3:0x000b, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x016b  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0190 A[Catch: all -> 0x0022, TryCatch #0 {all -> 0x0022, blocks: (B:4:0x000b, B:6:0x0018, B:7:0x001f, B:13:0x002a, B:15:0x002e, B:16:0x003d, B:19:0x0040, B:21:0x0059, B:23:0x005f, B:24:0x009e, B:25:0x00a5, B:28:0x0092, B:29:0x00a8, B:31:0x00aa, B:33:0x00b8, B:34:0x00c2, B:35:0x00d5, B:38:0x00f3, B:40:0x0129, B:43:0x012c, B:44:0x0144, B:50:0x01c5, B:51:0x01d1, B:54:0x01c2, B:55:0x015b, B:57:0x015f, B:58:0x0161, B:66:0x0190, B:68:0x019b, B:69:0x01aa, B:70:0x01a8, B:72:0x01b4, B:74:0x01b7, B:76:0x01bb, B:77:0x01d3, B:78:0x01ee, B:80:0x0171, B:82:0x0174, B:86:0x017d, B:88:0x0180, B:96:0x00de, B:100:0x00e6, B:102:0x00eb, B:104:0x0134, B:107:0x0137, B:110:0x00cd), top: B:3:0x000b, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x01b2  */
     /* renamed from: -$$Nest$mhandleSendDataToNfcLedCover, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.

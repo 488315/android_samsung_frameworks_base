@@ -148,11 +148,6 @@ public final class NSUtLogger extends Handler {
         ((HashMap) this.mFileSizeMap).put(name, Long.valueOf(length));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:177:0x059e  */
-    /* JADX WARN: Removed duplicated region for block: B:180:0x05c4  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0938  */
-    /* JADX WARN: Removed duplicated region for block: B:31:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Unreachable blocks removed: 1, instructions: 1 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

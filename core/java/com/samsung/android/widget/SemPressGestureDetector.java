@@ -443,7 +443,6 @@ public class SemPressGestureDetector {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void parseInfoFromView() {
         try {
             if (this.mView != null) {
@@ -604,7 +603,6 @@ public class SemPressGestureDetector {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isFingerPrintInDisplay() {
         if (!sHasFingerPrintFeature) {
             return false;
@@ -685,7 +683,6 @@ public class SemPressGestureDetector {
         return packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean sendBixbyLongClickedEvent(int flag) {
         if (this.mDetachedFromWindow
                 || this.mActivityName == null
@@ -901,7 +898,6 @@ public class SemPressGestureDetector {
         return (mm / 25.4f) * dpi;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkBlockApp() {
         boolean z;
         try {
@@ -1131,7 +1127,6 @@ public class SemPressGestureDetector {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void initSetting() {
         try {
             long version = getAppVersionCode(this.mContext, TAEGET_PKG_NAME);
@@ -1162,7 +1157,6 @@ public class SemPressGestureDetector {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void initWebSummary() {
         if (!this.mFindViewRestricted && (this.mView instanceof DecorView)) {
             try {
@@ -1302,7 +1296,6 @@ public class SemPressGestureDetector {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startObtainWebViewData(Intent intent) {
         parseWebView(intent);
     }
@@ -1422,7 +1415,6 @@ public class SemPressGestureDetector {
         return "javascript:document.documentElement.innerHTML";
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendHtmlData(final String htmlData, final String requestCode) {
         new Thread(
                         new Runnable() { // from class:
@@ -1446,7 +1438,6 @@ public class SemPressGestureDetector {
                 .start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean saveHtmlDataToFile(String htmlData) {
         if (TextUtils.isEmpty(htmlData)) {
             return false;
@@ -1494,7 +1485,6 @@ public class SemPressGestureDetector {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendParseResult(String htmlData, boolean saveFileResult, String requestCode) {
         Bundle bundle = new Bundle();
         bundle.putString("request_code", requestCode);

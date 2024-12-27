@@ -192,7 +192,6 @@ public class MediaRouteControllerDialog extends AlertDialog {
         return super.onKeyUp(keyCode, event);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean update() {
         if (!this.mRoute.isSelected() || this.mRoute.isDefault()) {
             dismiss();
@@ -247,7 +246,6 @@ public class MediaRouteControllerDialog extends AlertDialog {
         return stateListDrawable2.getCurrent();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateVolume() {
         if (!this.mVolumeSliderTouched) {
             if (isVolumeControlAvailable()) {

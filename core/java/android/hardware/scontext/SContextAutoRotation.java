@@ -9,13 +9,11 @@ public class SContextAutoRotation extends SContextEventContext {
     public static final Parcelable.Creator<SContextAutoRotation> CREATOR =
             new Parcelable.Creator<SContextAutoRotation>() { // from class:
                 // android.hardware.scontext.SContextAutoRotation.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextAutoRotation createFromParcel(Parcel in) {
                     return new SContextAutoRotation(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextAutoRotation[] newArray(int size) {
                     return new SContextAutoRotation[size];

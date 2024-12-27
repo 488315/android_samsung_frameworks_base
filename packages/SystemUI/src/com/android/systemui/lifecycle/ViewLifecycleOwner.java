@@ -22,8 +22,6 @@ public final class ViewLifecycleOwner implements LifecycleOwner {
     };
     public final LifecycleRegistry registry = new LifecycleRegistry(this);
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.lifecycle.ViewLifecycleOwner$windowVisibleListener$1] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.lifecycle.ViewLifecycleOwner$windowFocusListener$1] */
     public ViewLifecycleOwner(View view) {
         this.view = view;
     }

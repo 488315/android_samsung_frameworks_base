@@ -149,13 +149,11 @@ public final class DomainVerificationUserState implements Parcelable {
         CREATOR =
                 new Parcelable.Creator<DomainVerificationUserState>() { // from class:
                     // android.content.pm.verify.domain.DomainVerificationUserState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DomainVerificationUserState[] newArray(int size) {
                         return new DomainVerificationUserState[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DomainVerificationUserState createFromParcel(Parcel in) {
                         return new DomainVerificationUserState(in);

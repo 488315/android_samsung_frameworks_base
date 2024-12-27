@@ -103,7 +103,6 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v3, types: [com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView$$ExternalSyntheticLambda0] */
     public SubDisplayVolumeRowView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mStream = -1;

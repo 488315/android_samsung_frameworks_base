@@ -69,7 +69,6 @@ public class DragAndDropHelper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dismiss() {
         if (this.mServerProxy != null) {
             this.mServerProxy.asBinder().unlinkToDeath(this.mDeathRecipient, 0);

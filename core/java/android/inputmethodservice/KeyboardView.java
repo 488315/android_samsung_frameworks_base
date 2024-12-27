@@ -841,7 +841,6 @@ public class KeyboardView extends View implements View.OnClickListener {
                         + " int, int[]):int");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void detectAndSendKey(int index, int x, int y, long eventTime) {
         if (index != -1 && index < this.mKeys.length) {
             Keyboard.Key key = this.mKeys[index];
@@ -917,7 +916,6 @@ public class KeyboardView extends View implements View.OnClickListener {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void showKey(int keyIndex) {
         PopupWindow previewPopup = this.mPreviewPopup;
         Keyboard.Key[] keys = this.mKeys;
@@ -1053,7 +1051,6 @@ public class KeyboardView extends View implements View.OnClickListener {
                 key.y + key.height + this.mPaddingTop);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean openPopupIfRequired(MotionEvent me) {
         if (this.mPopupLayout == 0
                 || this.mCurrentKey < 0
@@ -1362,7 +1359,6 @@ public class KeyboardView extends View implements View.OnClickListener {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean repeatKey() {
         Keyboard.Key key = this.mKeys[this.mRepeatKeyIndex];
         detectAndSendKey(this.mCurrentKey, key.x, key.y, this.mLastTapTime);
@@ -1410,7 +1406,6 @@ public class KeyboardView extends View implements View.OnClickListener {
         closing();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dismissPopupKeyboard() {
         if (this.mPopupKeyboard.isShowing()) {
             this.mPopupKeyboard.dismiss();

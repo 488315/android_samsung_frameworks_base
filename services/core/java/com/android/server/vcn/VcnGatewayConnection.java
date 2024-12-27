@@ -275,7 +275,6 @@ public final class VcnGatewayConnection extends StateMachine {
     public final class ConnectedState extends ActiveBaseState {
         public final /* synthetic */ VcnGatewayConnection this$0$1;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public ConnectedState() {
             super();
             this.this$0$1 = VcnGatewayConnection.this;
@@ -324,8 +323,6 @@ public final class VcnGatewayConnection extends StateMachine {
             VcnGatewayConnection.this.setSafeModeAlarm();
         }
 
-        /* JADX WARN: Type inference failed for: r5v11, types: [com.android.server.vcn.VcnGatewayConnection$ConnectedStateBase$$ExternalSyntheticLambda0] */
-        /* JADX WARN: Type inference failed for: r6v11, types: [com.android.server.vcn.VcnGatewayConnection$ConnectedStateBase$$ExternalSyntheticLambda0] */
         @Override // com.android.server.vcn.VcnGatewayConnection.BaseState
         public final void processStateMsg(Message message) {
             VcnChildSessionConfiguration vcnChildSessionConfiguration;
@@ -1237,7 +1234,6 @@ public final class VcnGatewayConnection extends StateMachine {
     public class VcnNetworkAgent {
         public final AnonymousClass1 mImpl;
 
-        /* JADX WARN: Type inference failed for: r11v0, types: [com.android.server.vcn.VcnGatewayConnection$VcnNetworkAgent$1] */
         public VcnNetworkAgent(VcnContext vcnContext, NetworkCapabilities networkCapabilities, LinkProperties linkProperties, NetworkScore networkScore, NetworkAgentConfig networkAgentConfig, NetworkProvider networkProvider, final VcnGatewayConnection$ConnectedStateBase$$ExternalSyntheticLambda0 vcnGatewayConnection$ConnectedStateBase$$ExternalSyntheticLambda0, final VcnGatewayConnection$ConnectedStateBase$$ExternalSyntheticLambda0 vcnGatewayConnection$ConnectedStateBase$$ExternalSyntheticLambda02) {
             this.mImpl = new NetworkAgent(vcnContext.mContext, vcnContext.mLooper, networkCapabilities, linkProperties, networkScore, networkAgentConfig, networkProvider) { // from class: com.android.server.vcn.VcnGatewayConnection.VcnNetworkAgent.1
                 public final void onNetworkUnwanted() {
@@ -1353,7 +1349,6 @@ public final class VcnGatewayConnection extends StateMachine {
         vcnGatewayConnection.sendMessageAndAcquireWakeLock(3, i, new EventSessionLostInfo(exc));
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public VcnGatewayConnection(VcnContext vcnContext, ParcelUuid parcelUuid, TelephonySubscriptionTracker.TelephonySubscriptionSnapshot telephonySubscriptionSnapshot, VcnGatewayConnectionConfig vcnGatewayConnectionConfig, Vcn.VcnGatewayStatusCallback vcnGatewayStatusCallback, boolean z, Dependencies dependencies) {
         super("VcnGatewayConnection", vcnContext.mLooper);
         Objects.requireNonNull(vcnContext, "Missing vcnContext");

@@ -38,7 +38,6 @@ public class ReverseLinearLayout extends LinearLayout {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static void reverseParams(ViewGroup.LayoutParams layoutParams, View view, boolean z) {
         if (view instanceof Reversable) {
             ReverseRelativeLayout reverseRelativeLayout = (ReverseRelativeLayout) ((Reversable) view);

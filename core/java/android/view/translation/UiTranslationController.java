@@ -552,7 +552,6 @@ public class UiTranslationController implements Dumpable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onTranslationCompleted$4(
             View view,
             ViewTranslationResponse response,
@@ -601,7 +600,6 @@ public class UiTranslationController implements Dumpable {
         callback.onShowTranslation(view);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void createTranslatorAndStart(
             TranslationSpec sourceSpec, TranslationSpec targetSpec, List<AutofillId> views) {
         Translator translator = createTranslatorIfNeeded(sourceSpec, targetSpec);
@@ -617,7 +615,6 @@ public class UiTranslationController implements Dumpable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendTranslationRequest(
             Translator translator, List<ViewTranslationRequest> requests) {
         if (requests.size() == 0) {
@@ -707,7 +704,6 @@ public class UiTranslationController implements Dumpable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onUiTranslationStarted$6(
             ArrayList roots,
             Map viewIds,

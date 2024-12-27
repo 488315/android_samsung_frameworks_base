@@ -14,13 +14,11 @@ public final class NanoAppState implements Parcelable {
     public static final Parcelable.Creator<NanoAppState> CREATOR =
             new Parcelable.Creator<
                     NanoAppState>() { // from class: android.hardware.location.NanoAppState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoAppState createFromParcel(Parcel in) {
                     return new NanoAppState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoAppState[] newArray(int size) {
                     return new NanoAppState[size];

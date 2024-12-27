@@ -20,8 +20,6 @@ public final class CarrierTextController extends ViewController {
     public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
     public String mLastScaleEvent;
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.keyguard.CarrierTextController$1] */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.keyguard.CarrierTextController$2] */
     public CarrierTextController(CarrierText carrierText, CarrierTextManager.Builder builder, KeyguardUpdateMonitor keyguardUpdateMonitor, ConfigurationController configurationController, IndicatorScaleGardener indicatorScaleGardener) {
         super(carrierText);
         this.mCarrierTextCallback = new CarrierTextManager.CarrierTextCallback() { // from class: com.android.keyguard.CarrierTextController.1

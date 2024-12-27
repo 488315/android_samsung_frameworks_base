@@ -13,13 +13,11 @@ public final class AppPredictionContext implements Parcelable {
     public static final Parcelable.Creator<AppPredictionContext> CREATOR =
             new Parcelable.Creator<AppPredictionContext>() { // from class:
                 // android.app.prediction.AppPredictionContext.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppPredictionContext createFromParcel(Parcel parcel) {
                     return new AppPredictionContext(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AppPredictionContext[] newArray(int size) {
                     return new AppPredictionContext[size];

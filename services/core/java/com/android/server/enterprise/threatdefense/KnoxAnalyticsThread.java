@@ -16,7 +16,6 @@ public final class KnoxAnalyticsThread {
     public static final Hashtable sApiCalledCount = new Hashtable();
     public final Object mLock = new Object();
 
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00c5 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

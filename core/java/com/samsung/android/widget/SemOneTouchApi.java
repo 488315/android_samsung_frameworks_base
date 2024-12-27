@@ -107,7 +107,6 @@ public class SemOneTouchApi {
     private LongPressPhaseOneRunnable mLongPressPhaseOneRunnable = null;
     private LongPressPhaseTwoRunnable mLongPressPhaseTwoRunnable = null;
 
-    /* JADX INFO: Access modifiers changed from: private */
     interface OtchDragAndDropResultCallback {
         void onDragAndDropResult(boolean z);
     }
@@ -254,7 +253,6 @@ public class SemOneTouchApi {
                     + NavigationBarInflaterView.KEY_CODE_END;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
         public OtchLongPressEvent m9294clone() {
             return new OtchLongPressEvent(
@@ -297,7 +295,6 @@ public class SemOneTouchApi {
             this.rootView = view;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         @Override // java.lang.Runnable
         public void run() {
             try {
@@ -393,7 +390,6 @@ public class SemOneTouchApi {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class LongPressPhaseTwoRunnable implements Runnable {
         private Context context;
         private View rootView;
@@ -488,7 +484,6 @@ public class SemOneTouchApi {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$run$0(boolean dragResult) {
             if (dragResult) {
                 SemOneTouchApi.this.onLongPressCompleted();
@@ -555,13 +550,11 @@ public class SemOneTouchApi {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onLongPressError() {
         Log.secD(TAG, "onLongPressError");
         clearEventState();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onLongPressCompleted() {
         Log.secD(TAG, "onLongPressCompleted");
         OtchLongPressEvent eventInfo = this.mCurrentLongPressEvent.get();
@@ -571,7 +564,6 @@ public class SemOneTouchApi {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void clearEventState() {
         this.mCurrentLongPressEvent = new AtomicReference<>();
         try {
@@ -617,7 +609,6 @@ public class SemOneTouchApi {
         sendOnLongPressedEvent(context, eventInfo);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public String isBase64ImageString(View touchedView) {
         if (touchedView == null || (touchedView instanceof TextView)) {
             return null;
@@ -630,7 +621,6 @@ public class SemOneTouchApi {
         return input;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void putTouchedViewInfoToBundle(
             Context context, Bundle bundle, View touchedView, boolean isImageView) {
         if (touchedView == null) {
@@ -670,7 +660,6 @@ public class SemOneTouchApi {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void putVideoViewInfoToBundle(
             Context context, Bundle bundle, String targetVideoClass, View videoView) {
         try {
@@ -707,7 +696,6 @@ public class SemOneTouchApi {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void putRootViewInfoToBundle(
             Context context, Bundle bundle, View rootView, OtchLongPressEvent eventInfo) {
         bundle.putParcelable(BUNDLE_KEY_RAW_TOUCHED_POINT, eventInfo.touchedRawPoint);
@@ -727,7 +715,6 @@ public class SemOneTouchApi {
         return sendOnLongPressedEvent(context, event, event.bundle);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Bundle sendOnLongPressedEvent(Context context, OtchLongPressEvent event, Bundle bundle) {
         if (bundle == null) {
             bundle = new Bundle();
@@ -747,7 +734,6 @@ public class SemOneTouchApi {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Boolean isEventSuccess(Bundle result) {
         if (result == null) {
             Log.secE(TAG, "call One Touch error, bundle null");
@@ -755,7 +741,6 @@ public class SemOneTouchApi {
         return Boolean.valueOf(result != null && result.getBoolean(BUNDLE_KEY_RESULT_BOOLEAN));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void parseCallResultDetail(long requestCode, Bundle bundle) {
         FindVideoViewEventInfo findVideoViewEventInfo =
                 new FindVideoViewEventInfo(
@@ -768,7 +753,6 @@ public class SemOneTouchApi {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isSaveBitmapFileNeeded(View touchedView) {
         if (touchedView == null) {
             return false;
@@ -800,7 +784,6 @@ public class SemOneTouchApi {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Bitmap getBitmapFromView(ImageView view) {
         try {
             Drawable drawable = view.getDrawable();
@@ -822,7 +805,6 @@ public class SemOneTouchApi {
         return bitmap;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean saveBitmapFile(Context context, Bitmap bitmap) {
         CancellationSignal cancellationSignal = new CancellationSignal();
         try {
@@ -865,7 +847,6 @@ public class SemOneTouchApi {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Bitmap base64ToBitmap(String base64String) {
         try {
             byte[] decodedBytes = Base64.decode(base64String, 0);
@@ -895,8 +876,6 @@ public class SemOneTouchApi {
             this.base64Input = base64Input;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:11:0x0026  */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x0020  */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1132,7 +1111,6 @@ public class SemOneTouchApi {
         callback.onDragAndDropResult(res);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void performDragAndDrop(
             Context context,
             final int customDragShadowWidth,
@@ -1193,7 +1171,6 @@ public class SemOneTouchApi {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$performDragAndDrop$1(
             View touchedView,
             ClipData clipData,
@@ -1222,7 +1199,6 @@ public class SemOneTouchApi {
         return isMoved;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public View getTouchedView(View view, PointF touchedPoint) {
         View touchedView = null;
         try {
@@ -1287,7 +1263,6 @@ public class SemOneTouchApi {
         return activity;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public View findVideoView(ViewGroup viewGroup, String videoClassName, boolean topDownFindView) {
         View resultView = null;
         try {
@@ -1333,7 +1308,6 @@ public class SemOneTouchApi {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isFingerPrintInDisplay(Context context) {
         boolean z;
         try {

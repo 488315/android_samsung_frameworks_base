@@ -30,7 +30,6 @@ final class HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1 extends Su
     int label;
     final /* synthetic */ HomeControlsKeyguardQuickAffordanceConfig this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1(ControlsListingController controlsListingController, HomeControlsKeyguardQuickAffordanceConfig homeControlsKeyguardQuickAffordanceConfig, Continuation continuation) {
         super(2, continuation);
         this.$listingController = controlsListingController;
@@ -49,8 +48,6 @@ final class HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1 extends Su
         return ((HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.controls.management.ControlsListingController$ControlsListingCallback, com.android.systemui.keyguard.data.quickaffordance.HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -104,7 +101,6 @@ final class HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1 extends Su
             controlsListingControllerImpl.addCallback((ControlsListingController.ControlsListingCallback) r1);
             final ControlsListingController controlsListingController = this.$listingController;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.quickaffordance.HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

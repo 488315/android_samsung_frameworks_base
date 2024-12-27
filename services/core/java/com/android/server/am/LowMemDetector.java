@@ -49,6 +49,5 @@ public final class LowMemDetector {
 
     private native int init();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native int waitForPressure();
 }

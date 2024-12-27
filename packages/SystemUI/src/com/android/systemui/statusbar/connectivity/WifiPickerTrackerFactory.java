@@ -34,7 +34,6 @@ public final class WifiPickerTrackerFactory {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.statusbar.connectivity.WifiPickerTrackerFactory$clock$1] */
     public WifiPickerTrackerFactory(Context context, WifiManager wifiManager, ConnectivityManager connectivityManager, SystemClock systemClock, Handler handler, ThreadFactory threadFactory) {
         this.context = context;
         this.wifiManager = wifiManager;

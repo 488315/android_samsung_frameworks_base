@@ -149,8 +149,6 @@ public interface MediaOutputState {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class StateInfo {
         public static final /* synthetic */ StateInfo[] $VALUES;
         public static final StateInfo Dismissed;

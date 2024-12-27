@@ -319,13 +319,11 @@ public final class VoiceInteractor {
             public static final Parcelable.Creator<Option> CREATOR =
                     new Parcelable.Creator<Option>() { // from class:
                         // android.app.VoiceInteractor.PickOptionRequest.Option.1
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public Option createFromParcel(Parcel in) {
                             return new Option(in);
                         }
 
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public Option[] newArray(int size) {
                             return new Option[size];
@@ -604,13 +602,11 @@ public final class VoiceInteractor {
         public static final Parcelable.Creator<Prompt> CREATOR =
                 new Parcelable.Creator<
                         Prompt>() { // from class: android.app.VoiceInteractor.Prompt.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Prompt createFromParcel(Parcel in) {
                         return new Prompt(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Prompt[] newArray(int size) {
                         return new Prompt[size];

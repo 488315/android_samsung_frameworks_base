@@ -19,7 +19,6 @@ public final class DateTransformation extends InternalTransformation
             new Parcelable.Creator<
                     DateTransformation>() { // from class:
                                             // android.service.autofill.DateTransformation.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DateTransformation createFromParcel(Parcel parcel) {
                     return new DateTransformation(
@@ -29,7 +28,6 @@ public final class DateTransformation extends InternalTransformation
                                             DateFormat.class.getClassLoader(), DateFormat.class));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DateTransformation[] newArray(int size) {
                     return new DateTransformation[size];

@@ -46,7 +46,6 @@ public class DexListenerWrapper extends ExternalService {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDesktopModeStateChanged$0(int mode) {
             DexListenerWrapper.this.listener.onDesktopModeStateChanged(mode);
         }

@@ -14,13 +14,11 @@ public final class NotificationStats implements Parcelable {
             new Parcelable.Creator<
                     NotificationStats>() { // from class:
                                            // android.service.notification.NotificationStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotificationStats createFromParcel(Parcel in) {
                     return new NotificationStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotificationStats[] newArray(int size) {
                     return new NotificationStats[size];

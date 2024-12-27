@@ -77,7 +77,6 @@ public final class SmRccPolicy {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: registerRccDBObserver, reason: merged with bridge method [inline-methods] */
     public void lambda$new$0() {
         try {
@@ -185,7 +184,6 @@ public final class SmRccPolicy {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void loadRccAppFromSm() {
         Slog.i(TAG, "loadRccAppFromSm: ");
         mRccPkgMap.clear();
@@ -291,7 +289,6 @@ public final class SmRccPolicy {
         this.mHandler.sendMessage(message);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void callResetSmRccOpen(String packageName) {
         if (packageName != null && mRccPkgMap.containsKey(packageName)) {
             Bundle bundle = new Bundle();

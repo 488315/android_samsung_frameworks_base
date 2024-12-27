@@ -253,11 +253,6 @@ public final class DialogFillUi {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r14v2 */
-    /* JADX WARN: Type inference failed for: r14v3 */
-    /* JADX WARN: Type inference failed for: r14v4 */
-    /* JADX WARN: Type inference failed for: r24v1, types: [java.util.regex.Pattern] */
     public DialogFillUi(
             Context context,
             FillResponse fillResponse,

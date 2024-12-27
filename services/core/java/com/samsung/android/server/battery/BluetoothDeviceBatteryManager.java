@@ -37,8 +37,6 @@ public final class BluetoothDeviceBatteryManager {
         public final byte[] mManufacturerRawData;
         public final int mManufacturerType;
 
-        /* JADX WARN: Removed duplicated region for block: B:15:0x0075  */
-        /* JADX WARN: Removed duplicated region for block: B:37:0x00b7 A[Catch: Exception -> 0x008f, TryCatch #0 {Exception -> 0x008f, blocks: (B:12:0x006f, B:24:0x0086, B:27:0x0092, B:32:0x00a4, B:34:0x00ab, B:36:0x00af, B:37:0x00b7, B:39:0x00bc, B:41:0x00c3, B:42:0x00cb, B:19:0x007d, B:21:0x0081), top: B:11:0x006f, inners: #1 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

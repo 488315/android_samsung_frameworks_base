@@ -69,7 +69,6 @@ public abstract class AccessibilityDisplayProxy {
         sendServiceInfos();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendServiceInfos() {
         AccessibilityInteractionClient.getInstance();
         IAccessibilityServiceConnection connection =

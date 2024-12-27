@@ -19,7 +19,6 @@ final class WidgetConfigurationController$configureWidget$2 extends SuspendLambd
     int label;
     final /* synthetic */ WidgetConfigurationController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WidgetConfigurationController$configureWidget$2(WidgetConfigurationController widgetConfigurationController, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = widgetConfigurationController;

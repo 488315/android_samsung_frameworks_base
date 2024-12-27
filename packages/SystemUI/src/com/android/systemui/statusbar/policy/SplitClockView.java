@@ -16,7 +16,6 @@ public class SplitClockView extends LinearLayout {
     public final AnonymousClass1 mIntentReceiver;
     public TextClock mTimeView;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.policy.SplitClockView$1] */
     public SplitClockView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mIntentReceiver = new BroadcastReceiver() { // from class: com.android.systemui.statusbar.policy.SplitClockView.1

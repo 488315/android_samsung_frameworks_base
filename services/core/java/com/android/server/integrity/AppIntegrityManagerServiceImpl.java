@@ -635,7 +635,6 @@ public final class AppIntegrityManagerServiceImpl extends IAppIntegrityManager.S
         this.mHandler.post(
                 new Runnable() { // from class:
                                  // com.android.server.integrity.AppIntegrityManagerServiceImpl$$ExternalSyntheticLambda1
-                    /* JADX WARN: Multi-variable type inference failed */
                     @Override // java.lang.Runnable
                     public final void run() {
                         boolean z;

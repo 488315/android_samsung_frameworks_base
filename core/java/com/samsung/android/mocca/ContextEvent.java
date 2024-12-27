@@ -10,13 +10,11 @@ public final class ContextEvent implements Serializable, Parcelable {
     public static final Parcelable.Creator<ContextEvent> CREATOR =
             new Parcelable.Creator<
                     ContextEvent>() { // from class: com.samsung.android.mocca.ContextEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContextEvent createFromParcel(Parcel in) {
                     return new ContextEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContextEvent[] newArray(int size) {
                     return new ContextEvent[size];

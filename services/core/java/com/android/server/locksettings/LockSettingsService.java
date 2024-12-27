@@ -367,8 +367,6 @@ public final class LockSettingsService extends ILockSettings.Stub {
             return i2;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:23:0x00fc A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:24:0x00fd  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -925,10 +923,6 @@ public final class LockSettingsService extends ILockSettings.Stub {
             super(context);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r12v4, types: [java.util.ArrayList] */
-        /* JADX WARN: Type inference failed for: r12v5, types: [java.util.List] */
-        /* JADX WARN: Type inference failed for: r12v9, types: [java.util.List] */
         @Override // com.android.server.SystemService
         public final void onBootPhase(int i) {
             LockSettingsService lockSettingsService;
@@ -1015,8 +1009,6 @@ public final class LockSettingsService extends ILockSettings.Stub {
                     final int i3 = 1;
                     final List list = arrayList;
                     handler.post(new Runnable() { // from class: com.android.server.locksettings.RebootEscrowManager$$ExternalSyntheticLambda2
-                        /* JADX WARN: Multi-variable type inference failed */
-                        /* JADX WARN: Type inference failed for: r4v1, types: [android.net.ConnectivityManager$NetworkCallback, com.android.server.locksettings.RebootEscrowManager$1] */
                         @Override // java.lang.Runnable
                         public final void run() {
                             switch (i3) {
@@ -1081,8 +1073,6 @@ public final class LockSettingsService extends ILockSettings.Stub {
                     final int i4 = 0;
                     final List list2 = arrayList;
                     handler.post(new Runnable() { // from class: com.android.server.locksettings.RebootEscrowManager$$ExternalSyntheticLambda2
-                        /* JADX WARN: Multi-variable type inference failed */
-                        /* JADX WARN: Type inference failed for: r4v1, types: [android.net.ConnectivityManager$NetworkCallback, com.android.server.locksettings.RebootEscrowManager$1] */
                         @Override // java.lang.Runnable
                         public final void run() {
                             switch (i4) {
@@ -1141,8 +1131,6 @@ public final class LockSettingsService extends ILockSettings.Stub {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.locksettings.LockSettingsService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             AndroidKeyStoreProvider.install();
@@ -1736,8 +1724,6 @@ public final class LockSettingsService extends ILockSettings.Stub {
         mIsSpblobMigrated = false;
     }
 
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.server.locksettings.LockSettingsService$9] */
-    /* JADX WARN: Type inference failed for: r4v4, types: [com.android.server.locksettings.LockSettingsService$9] */
     public LockSettingsService(Injector injector) {
         RecoverableKeyStoreManager recoverableKeyStoreManager;
         final int i = 0;
@@ -3938,10 +3924,6 @@ public final class LockSettingsService extends ILockSettings.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:41:0x01ca  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x020b  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0259  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x01d8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3954,8 +3936,6 @@ public final class LockSettingsService extends ILockSettings.Stub {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.locksettings.LockSettingsService.maybeShowEncryptionNotificationForUser(int, java.lang.String):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0050 A[Catch: Exception -> 0x00ad, TryCatch #0 {Exception -> 0x00ad, blocks: (B:8:0x0013, B:17:0x0050, B:19:0x005f, B:21:0x0067, B:22:0x0075, B:24:0x007d, B:25:0x008b, B:28:0x0092, B:30:0x009a, B:32:0x00a7, B:48:0x004a, B:10:0x001b, B:15:0x0033, B:35:0x003b, B:40:0x0049, B:45:0x0046), top: B:7:0x0013, inners: #3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0092 A[Catch: Exception -> 0x00ad, TryCatch #0 {Exception -> 0x00ad, blocks: (B:8:0x0013, B:17:0x0050, B:19:0x005f, B:21:0x0067, B:22:0x0075, B:24:0x007d, B:25:0x008b, B:28:0x0092, B:30:0x009a, B:32:0x00a7, B:48:0x004a, B:10:0x001b, B:15:0x0033, B:35:0x003b, B:40:0x0049, B:45:0x0046), top: B:7:0x0013, inners: #3 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4374,7 +4354,6 @@ public final class LockSettingsService extends ILockSettings.Stub {
         updateVerifier(lockscreenCredential, i);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         int callingUid = Binder.getCallingUid();
         if (callingUid != 2000 && callingUid != 0) {
@@ -5091,8 +5070,6 @@ public final class LockSettingsService extends ILockSettings.Stub {
         return setLockCredentialWithIgnoreNotifyIfNeeded(lockscreenCredential, lockscreenCredential2, i, false);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:57:0x022e A[Catch: all -> 0x01d3, TryCatch #0 {all -> 0x01d3, blocks: (B:45:0x01c2, B:47:0x01c8, B:50:0x01ce, B:51:0x01f5, B:54:0x01fd, B:55:0x0228, B:57:0x022e, B:59:0x0235, B:62:0x023d, B:64:0x0243, B:65:0x024f, B:67:0x0251, B:68:0x025f, B:69:0x0260, B:70:0x026c, B:72:0x026e, B:76:0x0278, B:77:0x027b, B:79:0x0284, B:82:0x028c, B:84:0x0292, B:98:0x0213, B:103:0x01d8, B:101:0x01e6), top: B:44:0x01c2, inners: #3, #4 }] */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x026e A[Catch: all -> 0x01d3, TryCatch #0 {all -> 0x01d3, blocks: (B:45:0x01c2, B:47:0x01c8, B:50:0x01ce, B:51:0x01f5, B:54:0x01fd, B:55:0x0228, B:57:0x022e, B:59:0x0235, B:62:0x023d, B:64:0x0243, B:65:0x024f, B:67:0x0251, B:68:0x025f, B:69:0x0260, B:70:0x026c, B:72:0x026e, B:76:0x0278, B:77:0x027b, B:79:0x0284, B:82:0x028c, B:84:0x0292, B:98:0x0213, B:103:0x01d8, B:101:0x01e6), top: B:44:0x01c2, inners: #3, #4 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5644,8 +5621,6 @@ public final class LockSettingsService extends ILockSettings.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v3, types: [android.hardware.authsecret.IAuthSecret] */
     public final void systemReady() {
         IAuthSecret$Stub$Proxy iAuthSecret$Stub$Proxy;
         boolean migrateKeyNamespace;

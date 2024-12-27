@@ -16,7 +16,6 @@ public final class TextValueSanitizer extends InternalSanitizer implements Sanit
             new Parcelable.Creator<
                     TextValueSanitizer>() { // from class:
                                             // android.service.autofill.TextValueSanitizer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextValueSanitizer createFromParcel(Parcel parcel) {
                     return new TextValueSanitizer(
@@ -26,7 +25,6 @@ public final class TextValueSanitizer extends InternalSanitizer implements Sanit
                             parcel.readString());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextValueSanitizer[] newArray(int size) {
                     return new TextValueSanitizer[size];

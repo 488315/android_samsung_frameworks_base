@@ -66,7 +66,6 @@ public class SemSelectTaskListAdapter extends RecyclerView.Adapter<ViewHolder> {
         return this.secondDepthList.get(position);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.android.internal.widget.RecyclerView.Adapter
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());

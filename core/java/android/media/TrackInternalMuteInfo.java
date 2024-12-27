@@ -8,7 +8,6 @@ public class TrackInternalMuteInfo implements Parcelable {
     public static final Parcelable.Creator<TrackInternalMuteInfo> CREATOR =
             new Parcelable.Creator<
                     TrackInternalMuteInfo>() { // from class: android.media.TrackInternalMuteInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TrackInternalMuteInfo createFromParcel(Parcel _aidl_source) {
                     TrackInternalMuteInfo _aidl_out = new TrackInternalMuteInfo();
@@ -16,7 +15,6 @@ public class TrackInternalMuteInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TrackInternalMuteInfo[] newArray(int _aidl_size) {
                     return new TrackInternalMuteInfo[_aidl_size];

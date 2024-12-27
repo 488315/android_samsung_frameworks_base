@@ -15,7 +15,6 @@ final class NotificationMemoryLogger$getAllNotificationsOnMainThread$1 extends S
     int label;
     final /* synthetic */ NotificationMemoryLogger this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NotificationMemoryLogger$getAllNotificationsOnMainThread$1(NotificationMemoryLogger notificationMemoryLogger, Continuation continuation) {
         super(2, continuation);
         this.this$0 = notificationMemoryLogger;

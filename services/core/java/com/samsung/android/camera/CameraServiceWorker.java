@@ -113,7 +113,6 @@ public final class CameraServiceWorker extends SystemService
                     "Only system user is allowed to call acquireRequestInjector");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:17:0x0065 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -536,7 +535,6 @@ public final class CameraServiceWorker extends SystemService
                     2);
         }
 
-        /* JADX WARN: Can't wrap try/catch for region: R(10:3|(2:4|5)|(6:31|30|21|22|23|24)|12|(3:14|(2:16|(2:19|20)(1:18))|29)|30|21|22|23|24) */
         /* JADX WARN: Code restructure failed: missing block: B:27:0x009f, code lost:
 
            r10 = move-exception;

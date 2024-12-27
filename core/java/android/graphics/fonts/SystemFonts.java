@@ -72,8 +72,6 @@ public final class SystemFonts {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0032  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0031 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

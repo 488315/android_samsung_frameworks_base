@@ -63,7 +63,6 @@ public class Sensor {
             this.val$provider = faceProvider;
         }
 
-        /* JADX WARN: Type inference failed for: r12v0, types: [com.android.server.biometrics.sensors.face.aidl.Sensor$$ExternalSyntheticLambda3] */
         @Override // com.android.server.biometrics.sensors.UserSwitchProvider
         public final StartUserClient getStartUserClient(final int i) {
             final Sensor sensor = Sensor.this;

@@ -29,7 +29,6 @@ final class SerializedVibrationEffect implements XmlSerializedVibration<Vibratio
         this.mSegments = segments;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.android.internal.vibrator.persistence.XmlSerializedVibration
     public VibrationEffect deserialize() {
         VibrationEffect.Composition composition = VibrationEffect.startComposition();

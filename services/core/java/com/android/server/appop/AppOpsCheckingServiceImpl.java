@@ -62,7 +62,6 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
                 }
             };
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.appop.AppOpsCheckingServiceImpl$1] */
     public AppOpsCheckingServiceImpl(File file, Object obj, Handler handler, Context context) {
         this.mFile = new AtomicFile(file);
         this.mLock = obj;

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public final class Curve implements Parcelable {
     public static final Parcelable.Creator<Curve> CREATOR =
             new Parcelable.Creator<Curve>() { // from class: android.hardware.display.Curve.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Curve createFromParcel(Parcel in) {
                     float[] x = in.createFloatArray();
@@ -15,7 +14,6 @@ public final class Curve implements Parcelable {
                     return new Curve(x, y);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Curve[] newArray(int size) {
                     return new Curve[size];

@@ -108,7 +108,6 @@ public class ImsRegistrationImplBase {
     class AnonymousClass1 extends IImsRegistration.Stub {
         AnonymousClass1() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$getRegistrationTechnology$0() {
             return Integer.valueOf(
                     ImsRegistrationImplBase.this.mRegistrationAttributes == null
@@ -155,7 +154,6 @@ public class ImsRegistrationImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$addRegistrationCallback$1(
                 IImsRegistrationCallback c, AtomicReference exceptionRef) {
             try {
@@ -184,7 +182,6 @@ public class ImsRegistrationImplBase {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$addEmergencyRegistrationCallback$2(
                 IImsRegistrationCallback c, AtomicReference exceptionRef) {
             try {
@@ -209,13 +206,11 @@ public class ImsRegistrationImplBase {
                     "removeEmergencyRegistrationCallback");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$removeEmergencyRegistrationCallback$3(
                 IImsRegistrationCallback c) {
             ImsRegistrationImplBase.this.removeEmergencyRegistrationCallback(c);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$removeRegistrationCallback$4(
                 IImsRegistrationCallback c) {
             ImsRegistrationImplBase.this.removeRegistrationCallback(c);
@@ -236,7 +231,6 @@ public class ImsRegistrationImplBase {
                     "removeRegistrationCallback");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$triggerFullNetworkRegistration$5(
                 int sipCode, String sipReason) {
             ImsRegistrationImplBase.this.triggerFullNetworkRegistration(sipCode, sipReason);
@@ -256,7 +250,6 @@ public class ImsRegistrationImplBase {
                     "triggerFullNetworkRegistration");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$triggerUpdateSipDelegateRegistration$6() {
             ImsRegistrationImplBase.this.updateSipDelegateRegistration();
         }
@@ -275,7 +268,6 @@ public class ImsRegistrationImplBase {
                     "triggerUpdateSipDelegateRegistration");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$triggerSipDelegateDeregistration$7() {
             ImsRegistrationImplBase.this.triggerSipDelegateDeregistration();
         }
@@ -294,7 +286,6 @@ public class ImsRegistrationImplBase {
                     "triggerSipDelegateDeregistration");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$triggerDeregistration$8(int reason) {
             ImsRegistrationImplBase.this.triggerDeregistration(reason);
         }
@@ -393,25 +384,21 @@ public class ImsRegistrationImplBase {
         return this.mBinder;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addRegistrationCallback(IImsRegistrationCallback c) throws RemoteException {
         this.mCallbacks.register(c);
         updateNewCallbackWithState(c, false);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeRegistrationCallback(IImsRegistrationCallback c) {
         this.mCallbacks.unregister(c);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addEmergencyRegistrationCallback(IImsRegistrationCallback c)
             throws RemoteException {
         this.mEmergencyCallbacks.register(c);
         updateNewCallbackWithState(c, true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeEmergencyRegistrationCallback(IImsRegistrationCallback c) {
         this.mEmergencyCallbacks.unregister(c);
     }
@@ -674,7 +661,6 @@ public class ImsRegistrationImplBase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: onSubscriberAssociatedUriChanged, reason: merged with bridge method [inline-methods] */
     public void lambda$onSubscriberAssociatedUriChanged$5(
             IImsRegistrationCallback callback, Uri[] uris) {

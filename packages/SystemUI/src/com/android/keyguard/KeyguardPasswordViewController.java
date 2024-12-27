@@ -61,10 +61,6 @@ public class KeyguardPasswordViewController extends KeyguardSecAbsKeyInputViewCo
         super.onPause();
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.keyguard.KeyguardPasswordViewController$$ExternalSyntheticLambda4] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.keyguard.KeyguardPasswordViewController$$ExternalSyntheticLambda5] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.keyguard.KeyguardPasswordViewController$$ExternalSyntheticLambda6] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.keyguard.KeyguardPasswordViewController$1] */
     public KeyguardPasswordViewController(KeyguardPasswordView keyguardPasswordView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, InputMethodManager inputMethodManager, EmergencyButtonController emergencyButtonController, DelayableExecutor delayableExecutor, Resources resources, FalsingCollector falsingCollector, KeyguardViewController keyguardViewController, DevicePostureController devicePostureController, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, KeyguardKeyboardInteractor keyguardKeyboardInteractor) {
         super(keyguardPasswordView, configurationController, vibrationUtil, accessibilityManager, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, falsingCollector, emergencyButtonController, featureFlags, selectedUserInteractor);
         this.mPostureCallback = new DevicePostureController.Callback() { // from class: com.android.keyguard.KeyguardPasswordViewController$$ExternalSyntheticLambda4

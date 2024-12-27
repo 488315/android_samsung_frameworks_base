@@ -142,9 +142,6 @@ public final class ImageSmartCropper {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.glwallpaper.ImageSmartCropper.needToExtractSmartCropRect(int, int, int):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:20:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -196,12 +193,6 @@ public final class ImageSmartCropper {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.glwallpaper.ImageSmartCropper.needToSmartCrop():boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00c4  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00ff A[Catch: OutOfMemoryError -> 0x0042, LinkageError -> 0x0045, Exception -> 0x0048, TryCatch #2 {Exception -> 0x0048, LinkageError -> 0x0045, OutOfMemoryError -> 0x0042, blocks: (B:11:0x003c, B:13:0x004b, B:15:0x0051, B:17:0x0057, B:20:0x009e, B:25:0x00b8, B:26:0x00ba, B:27:0x00bf, B:30:0x00c5, B:31:0x00f9, B:33:0x00ff, B:37:0x0159, B:40:0x015c, B:42:0x0161, B:44:0x0188, B:45:0x01a6, B:46:0x01af, B:48:0x01d7, B:49:0x01ec, B:51:0x01dc, B:53:0x01e0, B:55:0x01e8, B:56:0x01a1, B:58:0x00bc), top: B:9:0x003a }] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0161 A[Catch: OutOfMemoryError -> 0x0042, LinkageError -> 0x0045, Exception -> 0x0048, TryCatch #2 {Exception -> 0x0048, LinkageError -> 0x0045, OutOfMemoryError -> 0x0042, blocks: (B:11:0x003c, B:13:0x004b, B:15:0x0051, B:17:0x0057, B:20:0x009e, B:25:0x00b8, B:26:0x00ba, B:27:0x00bf, B:30:0x00c5, B:31:0x00f9, B:33:0x00ff, B:37:0x0159, B:40:0x015c, B:42:0x0161, B:44:0x0188, B:45:0x01a6, B:46:0x01af, B:48:0x01d7, B:49:0x01ec, B:51:0x01dc, B:53:0x01e0, B:55:0x01e8, B:56:0x01a1, B:58:0x00bc), top: B:9:0x003a }] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x01d7 A[Catch: OutOfMemoryError -> 0x0042, LinkageError -> 0x0045, Exception -> 0x0048, TryCatch #2 {Exception -> 0x0048, LinkageError -> 0x0045, OutOfMemoryError -> 0x0042, blocks: (B:11:0x003c, B:13:0x004b, B:15:0x0051, B:17:0x0057, B:20:0x009e, B:25:0x00b8, B:26:0x00ba, B:27:0x00bf, B:30:0x00c5, B:31:0x00f9, B:33:0x00ff, B:37:0x0159, B:40:0x015c, B:42:0x0161, B:44:0x0188, B:45:0x01a6, B:46:0x01af, B:48:0x01d7, B:49:0x01ec, B:51:0x01dc, B:53:0x01e0, B:55:0x01e8, B:56:0x01a1, B:58:0x00bc), top: B:9:0x003a }] */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x01dc A[Catch: OutOfMemoryError -> 0x0042, LinkageError -> 0x0045, Exception -> 0x0048, TryCatch #2 {Exception -> 0x0048, LinkageError -> 0x0045, OutOfMemoryError -> 0x0042, blocks: (B:11:0x003c, B:13:0x004b, B:15:0x0051, B:17:0x0057, B:20:0x009e, B:25:0x00b8, B:26:0x00ba, B:27:0x00bf, B:30:0x00c5, B:31:0x00f9, B:33:0x00ff, B:37:0x0159, B:40:0x015c, B:42:0x0161, B:44:0x0188, B:45:0x01a6, B:46:0x01af, B:48:0x01d7, B:49:0x01ec, B:51:0x01dc, B:53:0x01e0, B:55:0x01e8, B:56:0x01a1, B:58:0x00bc), top: B:9:0x003a }] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x01ac  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

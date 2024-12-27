@@ -163,7 +163,6 @@ public abstract class ParseableCommand implements Command {
         indentingPrintWriter.println("└" + StringsKt__StringsJVMKt.repeat(length, "─") + "┘");
         indentingPrintWriter.println();
         ParseableCommandKt.indented(indentingPrintWriter, new Function0() { // from class: com.android.systemui.statusbar.commandline.ParseableCommand$help$3
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -176,7 +175,6 @@ public abstract class ParseableCommand implements Command {
         });
         if (this.description != null) {
             ParseableCommandKt.indented(indentingPrintWriter, new Function0() { // from class: com.android.systemui.statusbar.commandline.ParseableCommand$help$4
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -194,7 +192,6 @@ public abstract class ParseableCommand implements Command {
         if (!arrayList.isEmpty()) {
             indentingPrintWriter.println("FLAGS:");
             ParseableCommandKt.indented(indentingPrintWriter, new Function0() { // from class: com.android.systemui.statusbar.commandline.ParseableCommand$help$5
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -234,8 +231,6 @@ public abstract class ParseableCommand implements Command {
             final List list4 = list2;
             companion.getClass();
             ParseableCommandKt.indented(indentingPrintWriter, new Function0() { // from class: com.android.systemui.statusbar.commandline.ParseableCommand$Companion$describe$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                /* JADX WARN: Multi-variable type inference failed */
                 {
                     super(0);
                 }
@@ -258,8 +253,6 @@ public abstract class ParseableCommand implements Command {
             final List list5 = list3;
             companion.getClass();
             ParseableCommandKt.indented(indentingPrintWriter, new Function0() { // from class: com.android.systemui.statusbar.commandline.ParseableCommand$Companion$describe$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                /* JADX WARN: Multi-variable type inference failed */
                 {
                     super(0);
                 }
@@ -297,8 +290,6 @@ public abstract class ParseableCommand implements Command {
             final List list9 = list7;
             companion.getClass();
             ParseableCommandKt.indented(indentingPrintWriter, new Function0() { // from class: com.android.systemui.statusbar.commandline.ParseableCommand$Companion$describe$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                /* JADX WARN: Multi-variable type inference failed */
                 {
                     super(0);
                 }
@@ -321,8 +312,6 @@ public abstract class ParseableCommand implements Command {
             final List list10 = list8;
             companion.getClass();
             ParseableCommandKt.indented(indentingPrintWriter, new Function0() { // from class: com.android.systemui.statusbar.commandline.ParseableCommand$Companion$describe$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                /* JADX WARN: Multi-variable type inference failed */
                 {
                     super(0);
                 }

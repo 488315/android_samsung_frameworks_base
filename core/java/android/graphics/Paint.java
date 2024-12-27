@@ -176,7 +176,6 @@ public class Paint {
     @CriticalNative
     private static native float nGetLetterSpacing(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nGetNativeFinalizer();
 
     private static native int nGetOffsetForAdvance(

@@ -638,8 +638,6 @@ public final class NSLocationMonitor extends INSLocationCallback.Stub {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class ALGORITHM_TYPE {
         public static final /* synthetic */ ALGORITHM_TYPE[] $VALUES;
         public static final ALGORITHM_TYPE NEW;
@@ -665,8 +663,6 @@ public final class NSLocationMonitor extends INSLocationCallback.Stub {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class DEVICE_ACTIVITY_ERROR_CODE {
         public static final /* synthetic */ DEVICE_ACTIVITY_ERROR_CODE[] $VALUES;
         public static final DEVICE_ACTIVITY_ERROR_CODE NOT_SUPPORT;
@@ -700,8 +696,6 @@ public final class NSLocationMonitor extends INSLocationCallback.Stub {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class HQM_SUPPORT_STATE {
         public static final /* synthetic */ HQM_SUPPORT_STATE[] $VALUES;
         public static final HQM_SUPPORT_STATE NOT_SUPPORT;
@@ -779,12 +773,6 @@ public final class NSLocationMonitor extends INSLocationCallback.Stub {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.location.nsflp.NSLocationMonitor$2] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.location.nsflp.NSLocationMonitor$3] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.location.nsflp.NSLocationMonitor$5] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.server.location.nsflp.NSLocationMonitor$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.server.location.nsflp.NSLocationMonitor$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.server.location.nsflp.NSLocationMonitor$$ExternalSyntheticLambda2] */
     public NSLocationMonitor(
             Context context, LocationManagerService.SystemInjector systemInjector) {
         Handler handler;

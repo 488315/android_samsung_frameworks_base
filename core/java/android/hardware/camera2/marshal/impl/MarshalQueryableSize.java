@@ -21,7 +21,6 @@ public class MarshalQueryableSize implements MarshalQueryable<Size> {
             buffer.putInt(value.getHeight());
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public Size unmarshal(ByteBuffer buffer) {
             int width = buffer.getInt();

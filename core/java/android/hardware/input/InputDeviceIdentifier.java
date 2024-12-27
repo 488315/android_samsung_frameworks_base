@@ -10,13 +10,11 @@ public final class InputDeviceIdentifier implements Parcelable {
     public static final Parcelable.Creator<InputDeviceIdentifier> CREATOR =
             new Parcelable.Creator<InputDeviceIdentifier>() { // from class:
                 // android.hardware.input.InputDeviceIdentifier.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputDeviceIdentifier createFromParcel(Parcel source) {
                     return new InputDeviceIdentifier(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputDeviceIdentifier[] newArray(int size) {
                     return new InputDeviceIdentifier[size];

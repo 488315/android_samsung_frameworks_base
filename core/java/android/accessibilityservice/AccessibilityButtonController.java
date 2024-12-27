@@ -86,7 +86,6 @@ public final class AccessibilityButtonController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dispatchAccessibilityButtonClicked$0(
             AccessibilityButtonCallback callback) {
         callback.onClicked(this);
@@ -118,7 +117,6 @@ public final class AccessibilityButtonController {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dispatchAccessibilityButtonAvailabilityChanged$1(
             AccessibilityButtonCallback callback, boolean available) {
         callback.onAvailabilityChanged(this, available);

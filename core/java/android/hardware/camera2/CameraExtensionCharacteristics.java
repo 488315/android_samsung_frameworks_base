@@ -276,14 +276,12 @@ public final class CameraExtensionCharacteristics {
                 return this.mStatus != null;
             }
 
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // java.util.concurrent.Future
             public Boolean get() {
                 this.mCondVar.block();
                 return this.mStatus;
             }
 
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // java.util.concurrent.Future
             public Boolean get(long timeout, TimeUnit unit) throws TimeoutException {
                 long timeoutMs = unit.convert(timeout, TimeUnit.MILLISECONDS);

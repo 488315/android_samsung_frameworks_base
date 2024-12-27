@@ -14,13 +14,11 @@ public class DeriveBufferGroup extends MediaBufferGroup {
             new Parcelable.Creator<
                     DeriveBufferGroup>() { // from class:
                                            // com.samsung.android.sume.core.buffer.DeriveBufferGroup.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DeriveBufferGroup createFromParcel(Parcel in) {
                     return new DeriveBufferGroup(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DeriveBufferGroup[] newArray(int size) {
                     return new DeriveBufferGroup[size];

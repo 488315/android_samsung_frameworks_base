@@ -41,7 +41,6 @@ public final class ModernStatusBarMobileView extends ModernStatusBarView {
         Flags.newStatusBarIcons();
         modernStatusBarMobileView.subId = locationBasedMobileViewModel.commonImpl.getSubscriptionId();
         modernStatusBarMobileView.initView(str, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.view.ModernStatusBarMobileView$Companion$constructAndBind$1$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

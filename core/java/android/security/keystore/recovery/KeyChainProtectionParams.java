@@ -15,13 +15,11 @@ public final class KeyChainProtectionParams implements Parcelable {
             new Parcelable.Creator<
                     KeyChainProtectionParams>() { // from class:
                                                   // android.security.keystore.recovery.KeyChainProtectionParams.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyChainProtectionParams createFromParcel(Parcel in) {
                     return new KeyChainProtectionParams(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyChainProtectionParams[] newArray(int length) {
                     return new KeyChainProtectionParams[length];

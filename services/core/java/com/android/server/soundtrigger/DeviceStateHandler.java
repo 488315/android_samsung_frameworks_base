@@ -73,8 +73,6 @@ public final class DeviceStateHandler {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class SoundTriggerDeviceState {
         public static final /* synthetic */ SoundTriggerDeviceState[] $VALUES;
         public static final SoundTriggerDeviceState CRITICAL;
@@ -168,7 +166,6 @@ public final class DeviceStateHandler {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.soundtrigger.DeviceStateHandler$1] */
     public final void onPhoneCallStateChanged(boolean z) {
         this.mEventLogger.enqueue(new PhoneCallEvent(z));
         synchronized (this.mLock) {

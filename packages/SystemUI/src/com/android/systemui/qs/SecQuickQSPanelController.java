@@ -39,7 +39,6 @@ public final class SecQuickQSPanelController extends SecQSPanelControllerBase {
         return (secQSPanelResourcePicker.getQuickQSCommonBottomMargin(((SecQuickQSPanel) secQuickQSPanelController.mView).getContext()) * 2) + ((View) secQuickQSPanelController.mTileLayout).getMeasuredHeight() + (barController != null ? Math.max(0, barController.mCollapsedBarItems.parallelStream().filter(new BarController$$ExternalSyntheticLambda9()).mapToInt(new BarController$$ExternalSyntheticLambda10()).sum()) : 0);
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.qs.SecQuickQSPanelController$1] */
     public SecQuickQSPanelController(SecQuickQSPanel secQuickQSPanel, QSHost qSHost, MetricsLogger metricsLogger, UiEventLogger uiEventLogger, QSLogger qSLogger, DumpManager dumpManager, QSPanelHost qSPanelHost, Provider provider, final SecQSPanelResourcePicker secQSPanelResourcePicker, MediaHost mediaHost, SecQSDetailController secQSDetailController, SecPanelSplitHelper secPanelSplitHelper) {
         super(secQuickQSPanel, qSHost, metricsLogger, uiEventLogger, qSLogger, dumpManager, qSPanelHost, (BarController) provider.get(), secQSPanelResourcePicker, mediaHost, secQSDetailController);
         this.mLastConfigurationState = new ConfigurationState(Arrays.asList(ConfigurationState.ConfigurationField.ORIENTATION, ConfigurationState.ConfigurationField.SCREEN_HEIGHT_DP, ConfigurationState.ConfigurationField.SCREEN_LAYOUT, ConfigurationState.ConfigurationField.UI_MODE));

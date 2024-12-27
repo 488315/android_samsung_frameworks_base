@@ -18,7 +18,6 @@ final class CustomTileUserActionInteractor$resolveIntent$2 extends SuspendLambda
     int label;
     final /* synthetic */ CustomTileUserActionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomTileUserActionInteractor$resolveIntent$2(CustomTileUserActionInteractor customTileUserActionInteractor, Intent intent, UserHandle userHandle, Continuation continuation) {
         super(2, continuation);
         this.this$0 = customTileUserActionInteractor;

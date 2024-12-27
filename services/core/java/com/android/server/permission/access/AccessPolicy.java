@@ -139,9 +139,6 @@ public final class AccessPolicy {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x007c  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00c3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

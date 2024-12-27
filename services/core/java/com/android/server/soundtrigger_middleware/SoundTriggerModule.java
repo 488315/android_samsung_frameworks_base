@@ -30,8 +30,6 @@ public final class SoundTriggerModule
     public SoundTriggerHalEnforcer mHalService;
     public Properties mProperties;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class ModelState {
         public static final /* synthetic */ ModelState[] $VALUES;
         public static final ModelState ACTIVE;

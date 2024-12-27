@@ -27,7 +27,6 @@ final class InternetTileBinder$bind$1 extends SuspendLambda implements Function2
         final /* synthetic */ StateFlow $tileModelFlow;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(StateFlow stateFlow, Consumer<InternetTileModel> consumer, Continuation continuation) {
             super(2, continuation);
             this.$tileModelFlow = stateFlow;
@@ -73,7 +72,6 @@ final class InternetTileBinder$bind$1 extends SuspendLambda implements Function2
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InternetTileBinder$bind$1(Lifecycle lifecycle, StateFlow stateFlow, Consumer<InternetTileModel> consumer, Continuation continuation) {
         super(2, continuation);
         this.$lifecycle = lifecycle;

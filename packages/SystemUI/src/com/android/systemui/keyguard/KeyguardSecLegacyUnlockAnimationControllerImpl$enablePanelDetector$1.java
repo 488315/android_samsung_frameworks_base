@@ -23,7 +23,6 @@ final class KeyguardSecLegacyUnlockAnimationControllerImpl$enablePanelDetector$1
         int label;
         final /* synthetic */ KeyguardSecLegacyUnlockAnimationControllerImpl this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl, Continuation continuation) {
             super(2, continuation);
             this.this$0 = keyguardSecLegacyUnlockAnimationControllerImpl;
@@ -71,7 +70,6 @@ final class KeyguardSecLegacyUnlockAnimationControllerImpl$enablePanelDetector$1
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardSecLegacyUnlockAnimationControllerImpl$enablePanelDetector$1(KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyguardSecLegacyUnlockAnimationControllerImpl;

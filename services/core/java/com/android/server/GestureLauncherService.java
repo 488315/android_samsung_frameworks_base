@@ -136,9 +136,7 @@ public final class GestureLauncherService extends SystemService {
     public enum GestureLauncherEvent implements UiEventLogger.UiEventEnum {
         GESTURE_CAMERA_LIFT("GESTURE_CAMERA_LIFT"),
         GESTURE_CAMERA_WIGGLE("GESTURE_CAMERA_WIGGLE"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF31("GESTURE_CAMERA_DOUBLE_TAP_POWER"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF41("GESTURE_EMERGENCY_TAP_POWER");
 
         private final int mId;
@@ -156,8 +154,6 @@ public final class GestureLauncherService extends SystemService {
         this(context, new MetricsLogger(), new UiEventLoggerImpl());
     }
 
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.GestureLauncherService$1] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.GestureLauncherService$2] */
     public GestureLauncherService(
             Context context, MetricsLogger metricsLogger, UiEventLogger uiEventLogger) {
         super(context);

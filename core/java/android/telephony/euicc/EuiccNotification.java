@@ -17,13 +17,11 @@ public final class EuiccNotification implements Parcelable {
             new Parcelable.Creator<
                     EuiccNotification>() { // from class:
                                            // android.telephony.euicc.EuiccNotification.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EuiccNotification createFromParcel(Parcel source) {
                     return new EuiccNotification(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EuiccNotification[] newArray(int size) {
                     return new EuiccNotification[size];

@@ -21,13 +21,11 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
     public static final Parcelable.Creator<TelephonyTimeZoneSuggestion> CREATOR =
             new Parcelable.Creator<TelephonyTimeZoneSuggestion>() { // from class:
                 // android.app.timezonedetector.TelephonyTimeZoneSuggestion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TelephonyTimeZoneSuggestion createFromParcel(Parcel in) {
                     return TelephonyTimeZoneSuggestion.createFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TelephonyTimeZoneSuggestion[] newArray(int size) {
                     return new TelephonyTimeZoneSuggestion[size];
@@ -69,7 +67,6 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
         this.mDebugInfo = builder.mDebugInfo != null ? new ArrayList(builder.mDebugInfo) : null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static TelephonyTimeZoneSuggestion createFromParcel(Parcel in) {
         int slotIndex = in.readInt();
         TelephonyTimeZoneSuggestion suggestion =
@@ -246,7 +243,6 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static TelephonyTimeZoneSuggestion parseCommandLineArg(ShellCommand cmd)
             throws IllegalArgumentException {
         char c;
@@ -331,7 +327,6 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static int parseQualityCommandLineArg(String arg) {
         char c;
         switch (arg.hashCode()) {
@@ -372,7 +367,6 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static int parseMatchTypeCommandLineArg(String arg) {
         char c;
         switch (arg.hashCode()) {

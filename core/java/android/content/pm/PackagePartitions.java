@@ -79,7 +79,6 @@ public class PackagePartitions {
         return out;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static File canonicalize(File path) {
         try {
             return path.getCanonicalFile();
@@ -220,7 +219,6 @@ public class PackagePartitions {
             this.mFile = new File(dir, fileName);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public File getFile() {
             if (!this.mIsCanonical) {
                 this.mFile = PackagePartitions.canonicalize(this.mFile);

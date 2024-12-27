@@ -60,7 +60,6 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
     private boolean mNextFlushForTextChanged = false;
     private final AtomicInteger mWrongThreadCount = new AtomicInteger(0);
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class SessionStateReceiver extends IResultReceiver.Stub {
         private final WeakReference<MainContentCaptureSession> mMainSession;
 
@@ -209,7 +208,6 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onDestroy$0() {
         try {
             flush(4);
@@ -273,7 +271,6 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onSessionStarted$1() {
         Log.w(TAG, "Keeping session " + this.mId + " when service died");
         this.mState = 1024;
@@ -524,7 +521,6 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
                 flushFrequencyMs);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: flushIfNeeded, reason: merged with bridge method [inline-methods] */
     public void lambda$scheduleFlush$2(int reason) {
         checkOnUiThread();
@@ -788,7 +784,6 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$internalNotifyViewTreeEvent$7(ContentCaptureEvent event) {
         sendEvent(event, true);
     }
@@ -806,7 +801,6 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$internalNotifySessionResumed$8(ContentCaptureEvent event) {
         sendEvent(event, true);
     }
@@ -824,7 +818,6 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$internalNotifySessionPaused$9(ContentCaptureEvent event) {
         sendEvent(event, true);
     }
@@ -862,7 +855,6 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$internalNotifyChildSessionStarted$10(
             ContentCaptureEvent event) {
         sendEvent(event, true);
@@ -883,7 +875,6 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$internalNotifyChildSessionFinished$11(
             ContentCaptureEvent event) {
         sendEvent(event, true);
@@ -904,7 +895,6 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$internalNotifyContextUpdated$12(ContentCaptureEvent event) {
         sendEvent(event, true);
     }

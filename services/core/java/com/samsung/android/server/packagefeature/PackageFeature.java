@@ -17,7 +17,6 @@ jadx.core.utils.exceptions.JadxRuntimeException: Init of enum field 'DISPLAY_COM
 	at jadx.core.dex.visitors.EnumVisitor.convertToEnum(EnumVisitor.java:151)
 	at jadx.core.dex.visitors.EnumVisitor.visit(EnumVisitor.java:100)
  */
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 public final class PackageFeature {
     public static final /* synthetic */ PackageFeature[] $VALUES;
     public static final PackageFeature BROADCAST_RECEIVER_ALLOW_LIST;

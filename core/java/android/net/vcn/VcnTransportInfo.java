@@ -11,7 +11,6 @@ public class VcnTransportInfo implements TransportInfo, Parcelable {
     public static final Parcelable.Creator<VcnTransportInfo> CREATOR =
             new Parcelable.Creator<
                     VcnTransportInfo>() { // from class: android.net.vcn.VcnTransportInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VcnTransportInfo createFromParcel(Parcel in) {
                     int subId = in.readInt();
@@ -23,7 +22,6 @@ public class VcnTransportInfo implements TransportInfo, Parcelable {
                     return new VcnTransportInfo(wifiInfo, subId, minUdpPort4500NatTimeoutSeconds);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VcnTransportInfo[] newArray(int size) {
                     return new VcnTransportInfo[size];

@@ -24,7 +24,6 @@ final class NoteTaskBubblesController$showOrHideAppBubble$2 extends SuspendLambd
     int label;
     final /* synthetic */ NoteTaskBubblesController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NoteTaskBubblesController$showOrHideAppBubble$2(NoteTaskBubblesController noteTaskBubblesController, Intent intent, UserHandle userHandle, Icon icon, Continuation continuation) {
         super(2, continuation);
         this.this$0 = noteTaskBubblesController;

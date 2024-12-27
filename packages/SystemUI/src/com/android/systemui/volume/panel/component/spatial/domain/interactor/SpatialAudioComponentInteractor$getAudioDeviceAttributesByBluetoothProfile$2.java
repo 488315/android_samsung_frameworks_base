@@ -12,7 +12,6 @@ final class SpatialAudioComponentInteractor$getAudioDeviceAttributesByBluetoothP
     int label;
     final /* synthetic */ SpatialAudioComponentInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SpatialAudioComponentInteractor$getAudioDeviceAttributesByBluetoothProfile$2(CachedBluetoothDevice cachedBluetoothDevice, SpatialAudioComponentInteractor spatialAudioComponentInteractor, Continuation continuation) {
         super(2, continuation);
         this.$cachedBluetoothDevice = cachedBluetoothDevice;
@@ -29,8 +28,6 @@ final class SpatialAudioComponentInteractor$getAudioDeviceAttributesByBluetoothP
         return ((SpatialAudioComponentInteractor$getAudioDeviceAttributesByBluetoothProfile$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:13:? A[RETURN, SYNTHETIC] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

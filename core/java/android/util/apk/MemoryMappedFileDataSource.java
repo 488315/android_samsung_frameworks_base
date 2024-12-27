@@ -22,8 +22,6 @@ class MemoryMappedFileDataSource implements DataSource {
         return this.mSize;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00b2  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00ac A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // android.util.apk.DataSource
     /*
         Code decompiled incorrectly, please refer to instructions dump.

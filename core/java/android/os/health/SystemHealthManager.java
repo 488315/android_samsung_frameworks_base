@@ -200,7 +200,6 @@ public class SystemHealthManager {
         final /* synthetic */ Executor val$executor;
         final /* synthetic */ Consumer val$onResult;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass1(Handler handler, Executor executor, Consumer consumer) {
             super(handler);
             this.val$executor = executor;
@@ -277,7 +276,6 @@ public class SystemHealthManager {
         final /* synthetic */ OutcomeReceiver val$onResult;
         final /* synthetic */ PowerMonitor[] val$powerMonitorsArray;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         AnonymousClass2(
                 Handler handler,
                 PowerMonitor[] powerMonitorArr,

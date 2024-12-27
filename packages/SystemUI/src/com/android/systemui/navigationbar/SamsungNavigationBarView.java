@@ -723,9 +723,6 @@ public final class SamsungNavigationBarView extends NavigationBarView {
         ((NavBarStoreImpl) this.navBarStore).handleEvent(this, new EventTypeFactory.EventType.OnUpdateRemoteViewContainer(this.mCurrentRotation, linearLayout, linearLayout2, (((NavBarStateManagerImpl) this.navBarStateManager).isGestureMode() || this.mContextualButtonGroup.getVisibleContextButton() == null) ? false : true, f, this.displayId));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0088  */
-    /* JADX WARN: Removed duplicated region for block: B:42:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

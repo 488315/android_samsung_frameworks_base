@@ -758,7 +758,6 @@ public interface IPermissionManager extends IInterface {
             reply.writeTypedObject(v, 1);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements IPermissionManager {
             private IBinder mRemote;
 

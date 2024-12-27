@@ -188,7 +188,6 @@ public class SemBioFaceManager {
             return this.mFidoResultData;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setFidoResultData(byte[] fidoResultData) {
             this.mFidoResultData = fidoResultData;
         }
@@ -266,7 +265,6 @@ public class SemBioFaceManager {
         public void onRemovalSucceeded(SemBioFace face) {}
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void useHandler(Handler handler) {
         if (handler != null) {
             this.mHandler = new MyHandler(handler.getLooper());
@@ -630,28 +628,24 @@ public class SemBioFaceManager {
         private void sendEnrollResult(SemBioFace face, int progress) {}
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendErrorResult(int errMsgId, String errMsg) {
         if (this.mAuthenticationCallback != null) {
             this.mAuthenticationCallback.onAuthenticationError(errMsgId, errMsg);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendAuthenticatedSucceeded(AuthenticationResult result) {
         if (this.mAuthenticationCallback != null) {
             this.mAuthenticationCallback.onAuthenticationSucceeded(result);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendAuthenticatedFailed() {
         if (this.mAuthenticationCallback != null) {
             this.mAuthenticationCallback.onAuthenticationFailed();
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendAcquiredResult(int acquireInfo, String helpMsg) {
         if (this.mAuthenticationCallback != null) {
             this.mAuthenticationCallback.onAuthenticationAcquired(acquireInfo);

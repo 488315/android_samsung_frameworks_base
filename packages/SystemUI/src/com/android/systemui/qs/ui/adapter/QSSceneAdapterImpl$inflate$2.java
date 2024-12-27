@@ -27,7 +27,6 @@ final class QSSceneAdapterImpl$inflate$2 extends SuspendLambda implements Functi
     int label;
     final /* synthetic */ QSSceneAdapterImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public QSSceneAdapterImpl$inflate$2(QSSceneAdapterImpl qSSceneAdapterImpl, Context context, Continuation continuation) {
         super(2, continuation);
         this.this$0 = qSSceneAdapterImpl;

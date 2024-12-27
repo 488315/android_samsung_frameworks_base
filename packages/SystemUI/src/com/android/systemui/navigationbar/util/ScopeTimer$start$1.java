@@ -16,7 +16,6 @@ final class ScopeTimer$start$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ ScopeTimer this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScopeTimer$start$1(long j, Function0 function0, ScopeTimer scopeTimer, Continuation continuation) {
         super(2, continuation);
         this.$delay = j;

@@ -351,8 +351,6 @@ public final class KeyCustomizationInfoManager {
                 8, 1104, 26, behavior.getAction(), behavior.getIntent());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0043 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0044  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -422,7 +420,6 @@ public final class KeyCustomizationInfoManager {
                     + " com.android.server.policy.KeyCustomizationInfoManager.getSideKeyLongInfoFromGlobalSetting():com.samsung.android.view.SemWindowManager$KeyCustomizationInfo");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x0060, code lost:
 
        if (r11.equals("com.sprint.sdcplus") == false) goto L14;
@@ -688,7 +685,6 @@ public final class KeyCustomizationInfoManager {
                     + " int, boolean):void");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x0081, code lost:
 
        if ("VPP".equals(r6) == false) goto L56;
@@ -705,9 +701,6 @@ public final class KeyCustomizationInfoManager {
 
        if ("BMC".equals(r6) != false) goto L52;
     */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00b8 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00e2 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

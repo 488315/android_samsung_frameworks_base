@@ -13,7 +13,6 @@ final class SemImageCaptureImpl$semCaptureTask$snapshot$1 extends SuspendLambda 
     int label;
     final /* synthetic */ SemImageCaptureImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SemImageCaptureImpl$semCaptureTask$snapshot$1(SemImageCaptureImpl semImageCaptureImpl, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = semImageCaptureImpl;

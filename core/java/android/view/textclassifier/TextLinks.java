@@ -31,13 +31,11 @@ public final class TextLinks implements Parcelable {
     public static final Parcelable.Creator<TextLinks> CREATOR =
             new Parcelable.Creator<
                     TextLinks>() { // from class: android.view.textclassifier.TextLinks.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextLinks createFromParcel(Parcel in) {
                     return new TextLinks(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TextLinks[] newArray(int size) {
                     return new TextLinks[size];
@@ -114,13 +112,11 @@ public final class TextLinks implements Parcelable {
                 new Parcelable.Creator<
                         TextLink>() { // from class:
                                       // android.view.textclassifier.TextLinks.TextLink.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TextLink createFromParcel(Parcel in) {
                         return TextLink.readFromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public TextLink[] newArray(int size) {
                         return new TextLink[size];
@@ -196,7 +192,6 @@ public final class TextLinks implements Parcelable {
             dest.writeBundle(this.mExtras);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static TextLink readFromParcel(Parcel in) {
             EntityConfidence entityConfidence = EntityConfidence.CREATOR.createFromParcel(in);
             int start = in.readInt();
@@ -210,13 +205,11 @@ public final class TextLinks implements Parcelable {
         public static final Parcelable.Creator<Request> CREATOR =
                 new Parcelable.Creator<
                         Request>() { // from class: android.view.textclassifier.TextLinks.Request.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Request createFromParcel(Parcel in) {
                         return Request.readFromParcel(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Request[] newArray(int size) {
                         return new Request[size];
@@ -347,7 +340,6 @@ public final class TextLinks implements Parcelable {
             dest.writeParcelable(this.mSystemTcMetadata, flags);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static Request readFromParcel(Parcel in) {
             String text = in.readString();
             LocaleList defaultLocales = (LocaleList) in.readParcelable(null, LocaleList.class);

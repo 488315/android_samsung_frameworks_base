@@ -8,16 +8,12 @@ public abstract class UEventObserver {
     private static final String TAG = "UEventObserver";
     private static UEventThread sThread;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeAddMatch(String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeRemoveMatch(String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSetup();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native String nativeWaitForNextEvent();
 
     public abstract void onUEvent(UEvent uEvent);

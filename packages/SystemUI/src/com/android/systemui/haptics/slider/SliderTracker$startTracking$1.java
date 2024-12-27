@@ -23,8 +23,6 @@ final class SliderTracker$startTracking$1 extends SuspendLambda implements Funct
             this.this$0 = sliderTracker;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:15:0x0033  */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
         @Override // kotlinx.coroutines.flow.FlowCollector
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -82,7 +80,6 @@ final class SliderTracker$startTracking$1 extends SuspendLambda implements Funct
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SliderTracker$startTracking$1(SliderTracker sliderTracker, Continuation continuation) {
         super(2, continuation);
         this.this$0 = sliderTracker;

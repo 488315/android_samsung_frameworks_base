@@ -27,7 +27,6 @@ public final class FillResponse implements Parcelable {
     public static final Parcelable.Creator<FillResponse> CREATOR =
             new Parcelable.Creator<
                     FillResponse>() { // from class: android.service.autofill.FillResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FillResponse createFromParcel(Parcel parcel) {
                     Builder builder = new Builder();
@@ -125,7 +124,6 @@ public final class FillResponse implements Parcelable {
                     return response;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FillResponse[] newArray(int size) {
                     return new FillResponse[size];
@@ -500,7 +498,6 @@ public final class FillResponse implements Parcelable {
                     presentations.getDialogPresentation());
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Builder setAuthentication(
                 AutofillId[] ids,
                 IntentSender authentication,

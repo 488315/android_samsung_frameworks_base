@@ -106,8 +106,6 @@ public class LocalAnimationAdapter implements AnimationAdapter {
         this.mAnimator.onAnimationCancelled(surfaceControl);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.wm.LocalAnimationAdapter$$ExternalSyntheticLambda0] */
     @Override // com.android.server.wm.AnimationAdapter
     public void startAnimation(
             SurfaceControl surfaceControl,

@@ -109,13 +109,11 @@ public final class VpnProfile implements Cloneable, Parcelable {
     public static final Parcelable.Creator<VpnProfile> CREATOR =
             new Parcelable.Creator<
                     VpnProfile>() { // from class: com.android.internal.net.VpnProfile.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VpnProfile createFromParcel(Parcel in) {
                     return new VpnProfile(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VpnProfile[] newArray(int size) {
                     return new VpnProfile[size];

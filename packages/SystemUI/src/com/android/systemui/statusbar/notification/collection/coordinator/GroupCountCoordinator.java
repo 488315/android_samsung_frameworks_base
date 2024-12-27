@@ -32,7 +32,6 @@ public final class GroupCountCoordinator implements Coordinator {
     public static final int $stable = 8;
     private final ArrayMap<GroupEntry, Integer> untruncatedChildCounts = new ArrayMap<>();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onAfterRenderGroup(GroupEntry groupEntry, NotifGroupController notifGroupController) {
         Integer num = this.untruncatedChildCounts.get(groupEntry);
         if (num == null) {
@@ -65,7 +64,6 @@ public final class GroupCountCoordinator implements Coordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void onBeforeFinalizeFilter(List<? extends ListEntry> list) {
         this.untruncatedChildCounts.clear();
         FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GroupCountCoordinator$onBeforeFinalizeFilter$$inlined$filterIsInstance$1

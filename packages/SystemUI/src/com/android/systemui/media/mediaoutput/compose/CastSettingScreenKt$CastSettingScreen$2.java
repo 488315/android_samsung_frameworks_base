@@ -33,7 +33,6 @@ final class CastSettingScreenKt$CastSettingScreen$2 extends SuspendLambda implem
     final /* synthetic */ MutableState $seamlessTransferApps$delegate;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CastSettingScreenKt$CastSettingScreen$2(Context context, State state, MutableState mutableState, Continuation continuation) {
         super(2, continuation);
         this.$context = context;

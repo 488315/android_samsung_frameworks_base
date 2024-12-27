@@ -15,7 +15,6 @@ final class HomeControlsComponentInteractor$allAvailableServices$2 extends Suspe
     int label;
     final /* synthetic */ HomeControlsComponentInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HomeControlsComponentInteractor$allAvailableServices$2(HomeControlsComponentInteractor homeControlsComponentInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = homeControlsComponentInteractor;

@@ -514,8 +514,6 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         hashSet.add(39);
     }
 
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.server.TelephonyRegistry$1] */
-    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.server.TelephonyRegistry$2] */
     public TelephonyRegistry(Context context, ConfigurationProvider configurationProvider) {
         this.mImsReasonInfo = null;
         this.mBarringInfo = null;

@@ -26,7 +26,6 @@ public final class SystemEventCoordinator {
     public SystemStatusAnimationScheduler scheduler;
     public final SystemClock systemClock;
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.events.SystemEventCoordinator$privacyStateListener$1] */
     public SystemEventCoordinator(SystemClock systemClock, BatteryController batteryController, PrivacyItemController privacyItemController, Context context, CoroutineScope coroutineScope, ConnectedDisplayInteractor connectedDisplayInteractor) {
         this.systemClock = systemClock;
         this.privacyController = privacyItemController;

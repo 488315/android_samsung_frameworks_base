@@ -39,13 +39,11 @@ public final class CellSignalStrengthLte extends CellSignalStrength implements P
             new Parcelable.Creator<
                     CellSignalStrengthLte>() { // from class:
                                                // android.telephony.CellSignalStrengthLte.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellSignalStrengthLte createFromParcel(Parcel in) {
                     return new CellSignalStrengthLte(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellSignalStrengthLte[] newArray(int size) {
                     return new CellSignalStrengthLte[size];

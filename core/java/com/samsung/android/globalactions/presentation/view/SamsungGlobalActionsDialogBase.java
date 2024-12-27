@@ -107,7 +107,6 @@ public abstract class SamsungGlobalActionsDialogBase
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$show$0(
             boolean keyguardShowing,
             boolean deviceProvisioned,
@@ -158,7 +157,6 @@ public abstract class SamsungGlobalActionsDialogBase
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ boolean lambda$showDialog$1(
             DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
         return this.mPresenter.createOnKeyListenerActions(keyEvent, i);
@@ -253,7 +251,6 @@ public abstract class SamsungGlobalActionsDialogBase
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dismiss$2() {
         setRotationSuggestionsEnabled(true);
         if (this.mContentView != null

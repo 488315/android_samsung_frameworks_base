@@ -19,7 +19,6 @@ public final class LightRevealScrimRepositoryImpl$special$$inlined$flatMapLatest
     int label;
     final /* synthetic */ LightRevealScrimRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LightRevealScrimRepositoryImpl$special$$inlined$flatMapLatest$2(Continuation continuation, LightRevealScrimRepositoryImpl lightRevealScrimRepositoryImpl) {
         super(3, continuation);
         this.this$0 = lightRevealScrimRepositoryImpl;

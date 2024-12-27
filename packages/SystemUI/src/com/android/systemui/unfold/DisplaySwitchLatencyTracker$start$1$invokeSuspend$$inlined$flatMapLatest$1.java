@@ -17,7 +17,6 @@ public final class DisplaySwitchLatencyTracker$start$1$invokeSuspend$$inlined$fl
     int label;
     final /* synthetic */ DisplaySwitchLatencyTracker this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisplaySwitchLatencyTracker$start$1$invokeSuspend$$inlined$flatMapLatest$1(Continuation continuation, DisplaySwitchLatencyTracker displaySwitchLatencyTracker) {
         super(3, continuation);
         this.this$0 = displaySwitchLatencyTracker;

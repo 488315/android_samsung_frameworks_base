@@ -16,7 +16,6 @@ final class InternetTileDataInteractor$mobileDataContentName$1$1 extends Suspend
     int label;
     final /* synthetic */ InternetTileDataInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public InternetTileDataInteractor$mobileDataContentName$1$1(InternetTileDataInteractor internetTileDataInteractor, Continuation continuation) {
         super(3, continuation);
         this.this$0 = internetTileDataInteractor;

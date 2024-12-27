@@ -15,7 +15,6 @@ final class VolumeSliderContentKt$animateContentHeight$1$anim$2 extends SuspendL
     final /* synthetic */ Placeable $placeable;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public VolumeSliderContentKt$animateContentHeight$1$anim$2(Animatable animatable, Placeable placeable, Continuation continuation) {
         super(2, continuation);
         this.$currentAnimation = animatable;

@@ -110,7 +110,6 @@ public final class AutoAddTracker implements UserAwareController, Dumpable {
         FILTER = new IntentFilter("android.os.action.SETTING_RESTORED");
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.qs.AutoAddTracker$restoreReceiver$1] */
     public AutoAddTracker(SecureSettings secureSettings, BroadcastDispatcher broadcastDispatcher, QSHost qSHost, DumpManager dumpManager, final Handler handler, Executor executor, int i) {
         this.secureSettings = secureSettings;
         this.broadcastDispatcher = broadcastDispatcher;

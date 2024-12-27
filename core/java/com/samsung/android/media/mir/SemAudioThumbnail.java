@@ -27,15 +27,12 @@ public class SemAudioThumbnail {
         void onError(int i);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native int deinit(int i);
 
     private native int extract(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native long getInfo(int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native int getStat(int i);
 
     private native int init(String str, int i);
@@ -71,7 +68,6 @@ public class SemAudioThumbnail {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.samsung.android.media.mir.SemAudioThumbnail$1] */
     public void extract(String path, int duration, ResultListener listener) {
         if (listener == null) {
             throw new RuntimeException("listener is null.");
@@ -222,7 +218,6 @@ public class SemAudioThumbnail {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.samsung.android.media.mir.SemAudioThumbnail$2] */
     public void extract(String path, ResultListener listener) {
         if (listener == null) {
             throw new RuntimeException("listener is null.");
@@ -369,7 +364,6 @@ public class SemAudioThumbnail {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.samsung.android.media.mir.SemAudioThumbnail$3] */
     public void extract(FileDescriptor fd, ResultListener listener) {
         if (listener == null) {
             throw new RuntimeException("listener is null.");
@@ -516,7 +510,6 @@ public class SemAudioThumbnail {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.samsung.android.media.mir.SemAudioThumbnail$4] */
     private void sendErrorMessage(ResultListener listener, int errorType) {
         this.mListener = listener;
         this.lastError = errorType;

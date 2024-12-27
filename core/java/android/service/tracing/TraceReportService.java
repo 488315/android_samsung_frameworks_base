@@ -42,7 +42,6 @@ public class TraceReportService extends Service {
 
     public void onReportTrace(TraceParams args) {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean onMessage(Message msg) {
         if (msg.what != 1) {
             return false;

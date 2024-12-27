@@ -149,7 +149,6 @@ public final class ShortcutHelper {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.notification.ShortcutHelper$1] */
     public ShortcutHelper(
             LauncherApps launcherApps,
             NotificationManagerService.AnonymousClass2 anonymousClass2,

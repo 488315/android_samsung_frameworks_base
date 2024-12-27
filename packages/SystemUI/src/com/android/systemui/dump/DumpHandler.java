@@ -58,7 +58,6 @@ public final class DumpHandler {
             Object next;
             companion.getClass();
             FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(collection), new Function1() { // from class: com.android.systemui.dump.DumpHandler$Companion$findBestTargetMatch$1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -328,7 +327,6 @@ public final class DumpHandler {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
     java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null
     	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.restoreSwitchOverString(SwitchOverStringVisitor.java:109)
@@ -336,10 +334,6 @@ public final class DumpHandler {
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v14, types: [java.util.ArrayList] */
-    /* JADX WARN: Type inference failed for: r0v15 */
-    /* JADX WARN: Type inference failed for: r0v20, types: [java.util.List] */
     public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         ?? arrayList;
         Object next;
@@ -445,7 +439,6 @@ public final class DumpHandler {
                         for (final String str2 : list) {
                             Companion.getClass();
                             FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(dumpables), new Function1() { // from class: com.android.systemui.dump.DumpHandler$Companion$findBestProtoTargetMatch$1
-                                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                                 {
                                     super(1);
                                 }

@@ -112,7 +112,6 @@ public abstract class ControlsProviderService extends Service {
         this.mControlsProviderInfoSupplier = supplier;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class RequestHandler extends Handler {
         private static final int MSG_ACTION = 3;
         private static final int MSG_LOAD = 1;
@@ -215,7 +214,6 @@ public abstract class ControlsProviderService extends Service {
             };
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$consumerFor$0(
                 IControlsActionCallback cb, String controlId, Integer response) {
             Preconditions.checkNotNull(response);
@@ -231,7 +229,6 @@ public abstract class ControlsProviderService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isStatelessControl(Control control) {
         return control.getStatus() == 0
                 && control.getControlTemplate().getTemplateType() == 0

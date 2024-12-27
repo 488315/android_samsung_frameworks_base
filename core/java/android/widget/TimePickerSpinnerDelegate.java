@@ -408,7 +408,6 @@ class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
         return this.mAmPmSpinnerInput;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateInputState() {
         InputMethodManager inputMethodManager =
                 (InputMethodManager) this.mContext.getSystemService(InputMethodManager.class);
@@ -426,7 +425,6 @@ class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateAmPmControl() {
         if (is24Hour()) {
             if (this.mAmPmSpinner != null) {
@@ -447,7 +445,6 @@ class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
         this.mDelegator.sendAccessibilityEvent(4);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onTimeChanged() {
         this.mDelegator.sendAccessibilityEvent(4);
         if (this.mOnTimeChangedListener != null) {

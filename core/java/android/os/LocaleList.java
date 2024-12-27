@@ -20,13 +20,11 @@ public final class LocaleList implements Parcelable {
     private static final LocaleList sEmptyLocaleList = new LocaleList(new Locale[0]);
     public static final Parcelable.Creator<LocaleList> CREATOR =
             new Parcelable.Creator<LocaleList>() { // from class: android.os.LocaleList.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LocaleList createFromParcel(Parcel source) {
                     return LocaleList.forLanguageTags(source.readString8());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LocaleList[] newArray(int size) {
                     return new LocaleList[size];

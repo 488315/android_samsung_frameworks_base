@@ -27,7 +27,6 @@ public class AsyncRunner extends GraphRunner {
 
         private AsyncRunnerTask() {}
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public RunnerResult doInBackground(SyncRunner... runner) {
             RunnerResult result = new RunnerResult();
@@ -76,13 +75,11 @@ public class AsyncRunner extends GraphRunner {
             return result;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onCancelled(RunnerResult result) {
             onPostExecute(result);
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onPostExecute(RunnerResult result) {
             if (AsyncRunner.this.mLogVerbose) {
@@ -197,12 +194,10 @@ public class AsyncRunner extends GraphRunner {
         return this.mException;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void setRunning(boolean running) {
         this.isProcessing = running;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void setException(Exception exception) {
         this.mException = exception;
     }

@@ -92,7 +92,6 @@ public final class AuthRippleController extends ViewController implements CoreSt
             printWriter.println("  custom <x-location: int> <y-location: int>");
         }
 
-        /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
         @Override // com.android.systemui.statusbar.commandline.Command
         public final void execute(PrintWriter printWriter, List list) {
             if (list.isEmpty()) {
@@ -154,11 +153,6 @@ public final class AuthRippleController extends ViewController implements CoreSt
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v17, types: [com.android.systemui.biometrics.AuthRippleController$biometricModeListener$1] */
-    /* JADX WARN: Type inference failed for: r1v18, types: [com.android.systemui.biometrics.AuthRippleController$keyguardUpdateMonitorCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v19, types: [com.android.systemui.biometrics.AuthRippleController$configurationChangedListener$1] */
-    /* JADX WARN: Type inference failed for: r1v20, types: [com.android.systemui.biometrics.AuthRippleController$udfpsControllerCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v21, types: [com.android.systemui.biometrics.AuthRippleController$authControllerCallback$1] */
     public AuthRippleController(Context context, AuthController authController, ConfigurationController configurationController, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, WakefulnessLifecycle wakefulnessLifecycle, CommandRegistry commandRegistry, NotificationShadeWindowController notificationShadeWindowController, Provider provider, StatusBarStateController statusBarStateController, DisplayMetrics displayMetrics, KeyguardLogger keyguardLogger, BiometricUnlockController biometricUnlockController, LightRevealScrim lightRevealScrim, AuthRippleInteractor authRippleInteractor, FacePropertyRepository facePropertyRepository, AuthRippleView authRippleView) {
         super(authRippleView);
         this.sysuiContext = context;

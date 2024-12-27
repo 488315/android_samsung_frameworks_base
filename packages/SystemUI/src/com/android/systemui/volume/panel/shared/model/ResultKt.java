@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
 public abstract class ResultKt {
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.volume.panel.shared.model.ResultKt$filterData$$inlined$map$1] */
     public static final ResultKt$filterData$$inlined$map$1 filterData(final ReadonlyStateFlow readonlyStateFlow) {
         final Flow flow = new Flow() { // from class: com.android.systemui.volume.panel.shared.model.ResultKt$filterData$$inlined$mapNotNull$1
 
@@ -39,8 +38,6 @@ public abstract class ResultKt {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -135,8 +132,6 @@ public abstract class ResultKt {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

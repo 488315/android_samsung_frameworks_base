@@ -24,13 +24,11 @@ public class WorkSource implements Parcelable {
     static final WorkSource sTmpWorkSource = new WorkSource(0);
     public static final Parcelable.Creator<WorkSource> CREATOR =
             new Parcelable.Creator<WorkSource>() { // from class: android.os.WorkSource.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WorkSource createFromParcel(Parcel in) {
                     return new WorkSource(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WorkSource[] newArray(int size) {
                     return new WorkSource[size];
@@ -722,13 +720,11 @@ public class WorkSource implements Parcelable {
         public static final Parcelable.Creator<WorkChain> CREATOR =
                 new Parcelable.Creator<
                         WorkChain>() { // from class: android.os.WorkSource.WorkChain.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public WorkChain createFromParcel(Parcel in) {
                         return new WorkChain(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public WorkChain[] newArray(int size) {
                         return new WorkChain[size];

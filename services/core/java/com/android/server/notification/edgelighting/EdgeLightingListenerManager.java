@@ -28,7 +28,6 @@ public final class EdgeLightingListenerManager {
         public final IBinder token;
         public final int uid;
 
-        /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.notification.edgelighting.EdgeLightingListenerManager$EdgeLightingListener$1] */
         public EdgeLightingListener(IBinder iBinder, ComponentName componentName, int i, int i2) {
             this.mHandler =
                     new Handler(
@@ -179,9 +178,6 @@ public final class EdgeLightingListenerManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x003d A[Catch: all -> 0x000f, TryCatch #0 {all -> 0x000f, blocks: (B:4:0x0006, B:6:0x000a, B:9:0x0030, B:10:0x0037, B:12:0x003d, B:15:0x0045, B:25:0x0051, B:26:0x0059, B:29:0x005b, B:31:0x0063, B:32:0x0071, B:33:0x0075, B:35:0x0011), top: B:3:0x0006 }] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0051 A[Catch: all -> 0x000f, TryCatch #0 {all -> 0x000f, blocks: (B:4:0x0006, B:6:0x000a, B:9:0x0030, B:10:0x0037, B:12:0x003d, B:15:0x0045, B:25:0x0051, B:26:0x0059, B:29:0x005b, B:31:0x0063, B:32:0x0071, B:33:0x0075, B:35:0x0011), top: B:3:0x0006 }] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x005b A[Catch: all -> 0x000f, TryCatch #0 {all -> 0x000f, blocks: (B:4:0x0006, B:6:0x000a, B:9:0x0030, B:10:0x0037, B:12:0x003d, B:15:0x0045, B:25:0x0051, B:26:0x0059, B:29:0x005b, B:31:0x0063, B:32:0x0071, B:33:0x0075, B:35:0x0011), top: B:3:0x0006 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

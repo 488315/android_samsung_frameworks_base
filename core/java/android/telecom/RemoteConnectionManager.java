@@ -38,7 +38,6 @@ public class RemoteConnectionManager {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ RemoteConnectionService lambda$addConnectionService$0(
             IConnectionService outgoingConnectionServiceRpc,
             ComponentName componentName,

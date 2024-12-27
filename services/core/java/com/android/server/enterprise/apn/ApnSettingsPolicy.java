@@ -91,21 +91,6 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub
         return str == null ? str : str.trim();
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x0277 A[Catch: all -> 0x0203, Exception -> 0x0206, TryCatch #3 {Exception -> 0x0206, blocks: (B:119:0x01de, B:121:0x01ef, B:123:0x01f8, B:124:0x020d, B:126:0x0277, B:127:0x027e, B:134:0x02a2, B:135:0x02be, B:138:0x02ca, B:140:0x02d2, B:142:0x02da, B:144:0x0304, B:145:0x0315, B:147:0x0326, B:148:0x0336, B:151:0x034e, B:153:0x035c, B:156:0x0368, B:158:0x037d, B:159:0x0389, B:167:0x02b4), top: B:118:0x01de, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x0295  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x0304 A[Catch: all -> 0x0203, Exception -> 0x0206, TryCatch #3 {Exception -> 0x0206, blocks: (B:119:0x01de, B:121:0x01ef, B:123:0x01f8, B:124:0x020d, B:126:0x0277, B:127:0x027e, B:134:0x02a2, B:135:0x02be, B:138:0x02ca, B:140:0x02d2, B:142:0x02da, B:144:0x0304, B:145:0x0315, B:147:0x0326, B:148:0x0336, B:151:0x034e, B:153:0x035c, B:156:0x0368, B:158:0x037d, B:159:0x0389, B:167:0x02b4), top: B:118:0x01de, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x0326 A[Catch: all -> 0x0203, Exception -> 0x0206, TryCatch #3 {Exception -> 0x0206, blocks: (B:119:0x01de, B:121:0x01ef, B:123:0x01f8, B:124:0x020d, B:126:0x0277, B:127:0x027e, B:134:0x02a2, B:135:0x02be, B:138:0x02ca, B:140:0x02d2, B:142:0x02da, B:144:0x0304, B:145:0x0315, B:147:0x0326, B:148:0x0336, B:151:0x034e, B:153:0x035c, B:156:0x0368, B:158:0x037d, B:159:0x0389, B:167:0x02b4), top: B:118:0x01de, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:150:0x034c  */
-    /* JADX WARN: Removed duplicated region for block: B:159:0x0389 A[Catch: all -> 0x0203, Exception -> 0x0206, TRY_LEAVE, TryCatch #3 {Exception -> 0x0206, blocks: (B:119:0x01de, B:121:0x01ef, B:123:0x01f8, B:124:0x020d, B:126:0x0277, B:127:0x027e, B:134:0x02a2, B:135:0x02be, B:138:0x02ca, B:140:0x02d2, B:142:0x02da, B:144:0x0304, B:145:0x0315, B:147:0x0326, B:148:0x0336, B:151:0x034e, B:153:0x035c, B:156:0x0368, B:158:0x037d, B:159:0x0389, B:167:0x02b4), top: B:118:0x01de, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:161:0x02aa  */
-    /* JADX WARN: Removed duplicated region for block: B:168:0x027c  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x03c2 A[Catch: all -> 0x0077, Exception -> 0x01a0, TryCatch #0 {Exception -> 0x01a0, blocks: (B:56:0x0187, B:58:0x0193, B:60:0x019b, B:70:0x03a9, B:71:0x03bc, B:73:0x03c2, B:74:0x03c9, B:76:0x03cf, B:78:0x03d8, B:81:0x03e7, B:86:0x03fa, B:88:0x0404, B:96:0x0411, B:98:0x03f0, B:99:0x03de, B:101:0x01b4, B:104:0x01bc, B:106:0x01c2, B:108:0x01c8), top: B:55:0x0187, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x03cf A[Catch: all -> 0x0077, Exception -> 0x01a0, TryCatch #0 {Exception -> 0x01a0, blocks: (B:56:0x0187, B:58:0x0193, B:60:0x019b, B:70:0x03a9, B:71:0x03bc, B:73:0x03c2, B:74:0x03c9, B:76:0x03cf, B:78:0x03d8, B:81:0x03e7, B:86:0x03fa, B:88:0x0404, B:96:0x0411, B:98:0x03f0, B:99:0x03de, B:101:0x01b4, B:104:0x01bc, B:106:0x01c2, B:108:0x01c8), top: B:55:0x0187, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x03e7 A[Catch: all -> 0x0077, Exception -> 0x01a0, TryCatch #0 {Exception -> 0x01a0, blocks: (B:56:0x0187, B:58:0x0193, B:60:0x019b, B:70:0x03a9, B:71:0x03bc, B:73:0x03c2, B:74:0x03c9, B:76:0x03cf, B:78:0x03d8, B:81:0x03e7, B:86:0x03fa, B:88:0x0404, B:96:0x0411, B:98:0x03f0, B:99:0x03de, B:101:0x01b4, B:104:0x01bc, B:106:0x01c2, B:108:0x01c8), top: B:55:0x0187, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x03fa A[Catch: all -> 0x0077, Exception -> 0x01a0, TryCatch #0 {Exception -> 0x01a0, blocks: (B:56:0x0187, B:58:0x0193, B:60:0x019b, B:70:0x03a9, B:71:0x03bc, B:73:0x03c2, B:74:0x03c9, B:76:0x03cf, B:78:0x03d8, B:81:0x03e7, B:86:0x03fa, B:88:0x0404, B:96:0x0411, B:98:0x03f0, B:99:0x03de, B:101:0x01b4, B:104:0x01bc, B:106:0x01c2, B:108:0x01c8), top: B:55:0x0187, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0404 A[Catch: all -> 0x0077, Exception -> 0x01a0, TryCatch #0 {Exception -> 0x01a0, blocks: (B:56:0x0187, B:58:0x0193, B:60:0x019b, B:70:0x03a9, B:71:0x03bc, B:73:0x03c2, B:74:0x03c9, B:76:0x03cf, B:78:0x03d8, B:81:0x03e7, B:86:0x03fa, B:88:0x0404, B:96:0x0411, B:98:0x03f0, B:99:0x03de, B:101:0x01b4, B:104:0x01bc, B:106:0x01c2, B:108:0x01c8), top: B:55:0x0187, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x040e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -314,7 +299,6 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub
 
        if (r10 == null) goto L34;
     */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0140  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -349,8 +333,6 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub
         return i;
     }
 
-    /* JADX WARN: Not initialized variable reg: 5, insn: 0x0063: MOVE (r4 I:??[OBJECT, ARRAY]) = (r5 I:??[OBJECT, ARRAY]), block:B:28:0x0063 */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0092 A[Catch: all -> 0x006d, TRY_ENTER, TryCatch #4 {all -> 0x006d, blocks: (B:4:0x0007, B:10:0x0069, B:11:0x006f, B:30:0x0092, B:31:0x0095, B:32:0x0098, B:25:0x008a), top: B:3:0x0007 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

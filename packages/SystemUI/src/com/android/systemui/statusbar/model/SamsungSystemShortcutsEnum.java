@@ -14,12 +14,9 @@ import com.android.systemui.R;
 import com.samsung.android.feature.SemFloatingFeature;
 import java.util.Optional;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public abstract class SamsungSystemShortcutsEnum {
     public static final /* synthetic */ SamsungSystemShortcutsEnum[] $VALUES = {new AnonymousClass1(), new AnonymousClass2(), new AnonymousClass3(), new AnonymousClass4(), new AnonymousClass5(), new AnonymousClass6(), new AnonymousClass7(), new AnonymousClass8(), new AnonymousClass9(), new AnonymousClass10(), new AnonymousClass11(), new AnonymousClass12(), new AnonymousClass13(), new AnonymousClass14(), new AnonymousClass15(), new AnonymousClass16(), new AnonymousClass17(), new AnonymousClass18(), new AnonymousClass19(), new AnonymousClass20(), new AnonymousClass21(), new AnonymousClass22(), new AnonymousClass23()};
 
-    /* JADX INFO: Fake field, exist only in values array */
     SamsungSystemShortcutsEnum EF2;
 
     /* renamed from: com.android.systemui.statusbar.model.SamsungSystemShortcutsEnum$1, reason: invalid class name */

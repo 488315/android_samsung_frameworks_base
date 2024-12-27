@@ -99,7 +99,6 @@ public class LevelListDrawable extends DrawableContainer {
         return this;
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     @Override // android.graphics.drawable.DrawableContainer
     public LevelListState cloneConstantState() {
         return new LevelListState(this.mLevelListState, this, null);
@@ -126,7 +125,6 @@ public class LevelListDrawable extends DrawableContainer {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void mutate() {
             this.mLows = (int[]) this.mLows.clone();
             this.mHighs = (int[]) this.mHighs.clone();

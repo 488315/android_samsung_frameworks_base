@@ -12,13 +12,11 @@ public final class NanoAppRpcService implements Parcelable {
     public static final Parcelable.Creator<NanoAppRpcService> CREATOR =
             new Parcelable.Creator<NanoAppRpcService>() { // from class:
                 // android.hardware.location.NanoAppRpcService.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoAppRpcService createFromParcel(Parcel in) {
                     return new NanoAppRpcService(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NanoAppRpcService[] newArray(int size) {
                     return new NanoAppRpcService[size];

@@ -559,7 +559,6 @@ public final class WifiDisplayAdapter extends DisplayAdapter {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r8v2, types: [com.android.server.display.WifiDisplayAdapter$13] */
     public WifiDisplayAdapter(
             DisplayManagerService.SyncRoot syncRoot,
             Context context,
@@ -795,8 +794,6 @@ public final class WifiDisplayAdapter extends DisplayAdapter {
         requestDisconnectLocked();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x002c  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0035  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

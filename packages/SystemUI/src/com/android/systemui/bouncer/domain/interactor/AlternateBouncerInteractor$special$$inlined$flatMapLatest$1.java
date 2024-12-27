@@ -25,7 +25,6 @@ public final class AlternateBouncerInteractor$special$$inlined$flatMapLatest$1 e
     int label;
     final /* synthetic */ AlternateBouncerInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AlternateBouncerInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, Lazy lazy, Lazy lazy2, AlternateBouncerInteractor alternateBouncerInteractor) {
         super(3, continuation);
         this.$keyguardTransitionInteractor$inlined = lazy;

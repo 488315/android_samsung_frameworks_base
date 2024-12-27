@@ -10,13 +10,11 @@ public final class ClosedSubscriberGroupInfo implements Parcelable {
             new Parcelable.Creator<
                     ClosedSubscriberGroupInfo>() { // from class:
                                                    // android.telephony.ClosedSubscriberGroupInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClosedSubscriberGroupInfo createFromParcel(Parcel in) {
                     return ClosedSubscriberGroupInfo.createFromParcelBody(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClosedSubscriberGroupInfo[] newArray(int size) {
                     return new ClosedSubscriberGroupInfo[size];

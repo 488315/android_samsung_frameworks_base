@@ -17,13 +17,11 @@ public final class TransitionFilter implements Parcelable {
     public static final Parcelable.Creator<TransitionFilter> CREATOR =
             new Parcelable.Creator<
                     TransitionFilter>() { // from class: android.window.TransitionFilter.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TransitionFilter createFromParcel(Parcel in) {
                     return new TransitionFilter(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TransitionFilter[] newArray(int size) {
                     return new TransitionFilter[size];
@@ -131,13 +129,11 @@ public final class TransitionFilter implements Parcelable {
                 new Parcelable.Creator<
                         Requirement>() { // from class:
                                          // android.window.TransitionFilter.Requirement.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Requirement createFromParcel(Parcel in) {
                         return new Requirement(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Requirement[] newArray(int size) {
                         return new Requirement[size];
@@ -308,7 +304,6 @@ public final class TransitionFilter implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String containerOrderToString(int order) {
         switch (order) {
             case 0:

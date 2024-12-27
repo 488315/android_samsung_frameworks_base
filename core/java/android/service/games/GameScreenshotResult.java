@@ -12,13 +12,11 @@ public final class GameScreenshotResult implements Parcelable {
             new Parcelable.Creator<
                     GameScreenshotResult>() { // from class:
                                               // android.service.games.GameScreenshotResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GameScreenshotResult createFromParcel(Parcel source) {
                     return new GameScreenshotResult(source.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GameScreenshotResult[] newArray(int size) {
                     return new GameScreenshotResult[0];

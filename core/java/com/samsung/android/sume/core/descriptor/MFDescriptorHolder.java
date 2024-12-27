@@ -13,7 +13,6 @@ public final class MFDescriptorHolder<T extends MFDescriptor> extends MFDescript
     Function<Object[], MFDescriptor> mfDescriptorProvider;
     Object[] vararg;
 
-    /* JADX WARN: Multi-variable type inference failed */
     public MFDescriptorHolder(MFDescriptor mFDescriptor, Object... args) {
         this.vararg = args;
         this.descriptor = mFDescriptor;
@@ -37,7 +36,6 @@ public final class MFDescriptorHolder<T extends MFDescriptor> extends MFDescript
         return this.vararg;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.android.sume.core.functional.PlaceHolder
     public T reset() {
         T t =

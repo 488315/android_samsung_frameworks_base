@@ -52,7 +52,6 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
     private final Rect mTmpOutRect;
     private final Region mTransparentRegion;
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     AdaptiveIconDrawable() {
         this((LayerState) null, (Resources) null);
     }
@@ -93,7 +92,6 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
         this(backgroundDrawable, foregroundDrawable, null);
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     public AdaptiveIconDrawable(
             Drawable backgroundDrawable, Drawable foregroundDrawable, Drawable monochromeDrawable) {
         this((LayerState) null, (Resources) null);
@@ -309,7 +307,6 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
         return state.mSourceDrawableId;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private void inflateLayers(
             Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
             throws XmlPullParserException, IOException {

@@ -21,13 +21,11 @@ public final class WalletCard implements Parcelable {
     public static final Parcelable.Creator<WalletCard> CREATOR =
             new Parcelable.Creator<
                     WalletCard>() { // from class: android.service.quickaccesswallet.WalletCard.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WalletCard createFromParcel(Parcel source) {
                     return WalletCard.readFromParcel(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WalletCard[] newArray(int size) {
                     return new WalletCard[size];
@@ -85,7 +83,6 @@ public final class WalletCard implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static WalletCard readFromParcel(Parcel source) {
         String cardId = source.readString();
         int cardType = source.readInt();

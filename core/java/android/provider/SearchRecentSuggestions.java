@@ -50,7 +50,6 @@ public class SearchRecentSuggestions {
                 Uri.parse(SecContentProviderURI.CONTENT + this.mAuthority + "/suggestions");
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [android.provider.SearchRecentSuggestions$1] */
     public void saveRecentQuery(final String queryString, final String line2) {
         if (TextUtils.isEmpty(queryString)) {
             return;
@@ -73,7 +72,6 @@ public class SearchRecentSuggestions {
         } while (sWritesInProgress.availablePermits() > 0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void saveRecentQueryBlocking(String queryString, String line2) {
         ContentResolver cr = this.mContext.getContentResolver();
         long now = System.currentTimeMillis();

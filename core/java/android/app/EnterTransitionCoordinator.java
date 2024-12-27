@@ -172,7 +172,6 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$triggerViewsReady$0(ArrayMap sharedElements) {
         this.mViewsReadyListener = null;
         viewsReady(sharedElements);
@@ -244,7 +243,6 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$sendSharedElementDestination$1() {
         if (this.mResultReceiver != null) {
             Bundle state = captureSharedElementState();
@@ -410,7 +408,6 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         return window.getSharedElementEnterTransition();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startSharedElementTransition(Bundle sharedElementState) {
         ViewGroup decorView = getDecor();
         if (decorView == null) {
@@ -522,7 +519,6 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSharedElementsReady$1(
                 final Bundle sharedElementState) {
             EnterTransitionCoordinator.this.startTransition(
@@ -536,7 +532,6 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSharedElementsReady$0(Bundle sharedElementState) {
             EnterTransitionCoordinator.this.startSharedElementTransition(sharedElementState);
         }
@@ -549,7 +544,6 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Transition beginTransition(
             ViewGroup decorView,
             boolean startEnterTransition,
@@ -595,7 +589,6 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
                         new ActivityTransitionCoordinator
                                 .ContinueTransitionListener() { // from class:
                             // android.app.EnterTransitionCoordinator.5
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super();
                             }
@@ -662,7 +655,6 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sharedElementTransitionStarted() {
         this.mSharedElementTransitionStarted = true;
         if (this.mIsExitTransitionComplete) {
@@ -670,7 +662,6 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startEnterTransition(Transition transition) {
         ViewGroup decorView = getDecor();
         if (!this.mIsReturning && decorView != null) {
@@ -763,7 +754,6 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         super.clearState();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void makeOpaque() {
         if (!this.mHasStopped && this.mActivity != null) {
             if (this.mWasOpaque) {

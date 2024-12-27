@@ -137,8 +137,6 @@ public class WirelessChargerDetector {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.power.WirelessChargerDetector$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.power.WirelessChargerDetector$2] */
     public WirelessChargerDetector(
             SensorManager sensorManager,
             PowerManagerService.SuspendBlockerImpl suspendBlockerImpl,

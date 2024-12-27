@@ -13,13 +13,11 @@ public final class TimeZoneState implements Parcelable {
     public static final Parcelable.Creator<TimeZoneState> CREATOR =
             new Parcelable.Creator<
                     TimeZoneState>() { // from class: android.app.time.TimeZoneState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneState createFromParcel(Parcel in) {
                     return TimeZoneState.createFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneState[] newArray(int size) {
                     return new TimeZoneState[size];
@@ -33,7 +31,6 @@ public final class TimeZoneState implements Parcelable {
         this.mUserShouldConfirmId = userShouldConfirmId;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static TimeZoneState createFromParcel(Parcel in) {
         String zoneId = in.readString8();
         boolean userShouldConfirmId = in.readBoolean();
@@ -46,7 +43,6 @@ public final class TimeZoneState implements Parcelable {
         dest.writeBoolean(this.mUserShouldConfirmId);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static TimeZoneState parseCommandLineArgs(ShellCommand cmd) {
         char c;
         String zoneIdString = null;

@@ -16,7 +16,6 @@ public final class WatchedArrayMap extends WatchableImpl implements Map, Snappab
         this(0);
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.utils.WatchedArrayMap$1] */
     public WatchedArrayMap(int i) {
         this.mWatching = false;
         this.mObserver =

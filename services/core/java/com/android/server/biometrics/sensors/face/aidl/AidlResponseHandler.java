@@ -575,9 +575,6 @@ public final class AidlResponseHandler extends ISessionCallback.Stub {
                 FaceEnrollClient.class,
                 new Consumer() { // from class:
                     // com.android.server.biometrics.sensors.face.aidl.AidlResponseHandler$$ExternalSyntheticLambda2
-                    /* JADX WARN: Removed duplicated region for block: B:84:0x00c1 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-                    /* JADX WARN: Removed duplicated region for block: B:97:0x014a  */
-                    /* JADX WARN: Removed duplicated region for block: B:99:? A[RETURN, SYNTHETIC] */
                     @Override // java.util.function.Consumer
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

@@ -88,8 +88,6 @@ public final class QRCodeScannerController implements CallbackController {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v4, types: [android.provider.DeviceConfig$OnPropertiesChangedListener, com.android.systemui.qrcodescanner.controller.QRCodeScannerController$$ExternalSyntheticLambda2] */
     public final void registerQRCodeScannerChangeObservers(int... iArr) {
         if (isCameraAvailable()) {
             for (int i : iArr) {

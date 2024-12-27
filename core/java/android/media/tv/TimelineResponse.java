@@ -8,14 +8,12 @@ public final class TimelineResponse extends BroadcastInfoResponse implements Par
     public static final Parcelable.Creator<TimelineResponse> CREATOR =
             new Parcelable.Creator<
                     TimelineResponse>() { // from class: android.media.tv.TimelineResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimelineResponse createFromParcel(Parcel source) {
                     source.readInt();
                     return TimelineResponse.createFromParcelBody(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimelineResponse[] newArray(int size) {
                     return new TimelineResponse[size];

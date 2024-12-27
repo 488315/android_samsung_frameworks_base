@@ -17,13 +17,11 @@ public final class InputTransferToken implements Parcelable {
     public static final Parcelable.Creator<InputTransferToken> CREATOR =
             new Parcelable.Creator<
                     InputTransferToken>() { // from class: android.window.InputTransferToken.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputTransferToken createFromParcel(Parcel in) {
                     return new InputTransferToken(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputTransferToken[] newArray(int size) {
                     return new InputTransferToken[size];

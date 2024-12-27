@@ -11,13 +11,11 @@ public final class ComponentNamePolicyValue extends PolicyValue<ComponentName> {
     public static final Parcelable.Creator<ComponentNamePolicyValue> CREATOR =
             new Parcelable.Creator<ComponentNamePolicyValue>() { // from class:
                 // android.app.admin.ComponentNamePolicyValue.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ComponentNamePolicyValue createFromParcel(Parcel source) {
                     return new ComponentNamePolicyValue(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ComponentNamePolicyValue[] newArray(int size) {
                     return new ComponentNamePolicyValue[size];

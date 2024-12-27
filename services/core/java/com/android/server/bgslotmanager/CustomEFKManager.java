@@ -37,14 +37,12 @@ public final class CustomEFKManager {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ CustomEFKManager this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(CustomEFKManager customEFKManager) {
             super(180000L, 15000L);
             this.$r8$classId = 0;
             this.this$0 = customEFKManager;
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ AnonymousClass1(
                 CustomEFKManager customEFKManager, long j, long j2, int i) {
             super(j, j2);

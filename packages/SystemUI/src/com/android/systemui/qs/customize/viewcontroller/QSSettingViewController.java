@@ -270,10 +270,6 @@ public final class QSSettingViewController extends ViewControllerBase {
         super.show(runnable);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x004d  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0090  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

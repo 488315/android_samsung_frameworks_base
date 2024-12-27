@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public abstract class NetworkEvent implements Parcelable {
     public static final Parcelable.Creator<NetworkEvent> CREATOR =
             new Parcelable.Creator<NetworkEvent>() { // from class: android.app.admin.NetworkEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkEvent createFromParcel(Parcel in) {
                     int initialPosition = in.dataPosition();
@@ -24,7 +23,6 @@ public abstract class NetworkEvent implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkEvent[] newArray(int size) {
                     return new NetworkEvent[size];

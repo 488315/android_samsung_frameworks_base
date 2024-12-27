@@ -63,7 +63,6 @@ public class MediaFilterController implements MediaController<Response>, Message
         this.messageSubscriber.addMessageConsumer(this);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.controller.MediaController
     public Response run(List<MediaBuffer> inBuffers, List<MediaBuffer> outBuffers) {
         long beginTs = System.currentTimeMillis();
@@ -215,7 +214,6 @@ public class MediaFilterController implements MediaController<Response>, Message
         return buf;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.controller.MediaController
     public Response request(Request request) {
         Response response = Response.of(request);
@@ -385,7 +383,6 @@ public class MediaFilterController implements MediaController<Response>, Message
         return (Event) Event.of(message).put("id", Integer.valueOf(this.id));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class MessageSubscriberImpl extends MessageSubscriberBase {
         private final Thread messageThread;
 
@@ -405,7 +402,6 @@ public class MediaFilterController implements MediaController<Response>, Message
             bmc.setThreadWeakReference(new WeakReference<>(this.messageThread));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void threadEntry() {
             MessageChannel messageChannel = getMessageChannel();
             while (true) {

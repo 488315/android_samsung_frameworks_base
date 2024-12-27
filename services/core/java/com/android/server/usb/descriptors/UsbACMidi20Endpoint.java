@@ -7,7 +7,6 @@ public final class UsbACMidi20Endpoint extends UsbACEndpoint {
     public byte[] mBlockIds;
     public byte mNumGroupTerminals;
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.server.usb.descriptors.UsbDescriptor
     public final int parseRawDescriptors(ByteStream byteStream) {
         int i = byteStream.getByte();

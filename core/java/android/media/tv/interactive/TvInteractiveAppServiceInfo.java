@@ -29,13 +29,11 @@ public final class TvInteractiveAppServiceInfo implements Parcelable {
             new Parcelable.Creator<
                     TvInteractiveAppServiceInfo>() { // from class:
                                                      // android.media.tv.interactive.TvInteractiveAppServiceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvInteractiveAppServiceInfo createFromParcel(Parcel in) {
                     return new TvInteractiveAppServiceInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TvInteractiveAppServiceInfo[] newArray(int size) {
                     return new TvInteractiveAppServiceInfo[size];
@@ -192,7 +190,6 @@ public final class TvInteractiveAppServiceInfo implements Parcelable {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private void toTypesFlag(List<String> types) {
         char c;
         this.mTypes = 0;

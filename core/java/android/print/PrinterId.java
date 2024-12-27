@@ -9,13 +9,11 @@ import com.android.internal.util.Preconditions;
 public final class PrinterId implements Parcelable {
     public static final Parcelable.Creator<PrinterId> CREATOR =
             new Parcelable.Creator<PrinterId>() { // from class: android.print.PrinterId.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrinterId createFromParcel(Parcel parcel) {
                     return new PrinterId(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrinterId[] newArray(int size) {
                     return new PrinterId[size];

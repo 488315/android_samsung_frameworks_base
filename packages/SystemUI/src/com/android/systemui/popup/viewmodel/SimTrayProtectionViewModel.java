@@ -70,7 +70,6 @@ public class SimTrayProtectionViewModel implements PopupUIViewModel, Wakefulness
         return this.mRemoveSimTray;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateRemoveSimTrayStatus(boolean z) {
         this.mRemoveSimTray = z;
     }

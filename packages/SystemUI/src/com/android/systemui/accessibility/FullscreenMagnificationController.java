@@ -70,7 +70,6 @@ public final class FullscreenMagnificationController implements ComponentCallbac
         onConfigurationChanged(diff);
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.accessibility.FullscreenMagnificationController$1] */
     public FullscreenMagnificationController(Context context, Handler handler, Executor executor, AccessibilityManager accessibilityManager, WindowManager windowManager, IWindowManager iWindowManager, Supplier<SurfaceControlViewHost> supplier, SurfaceControl.Transaction transaction, ValueAnimator valueAnimator) {
         this.mSurfaceControlViewHost = null;
         this.mBorderSurfaceControl = null;

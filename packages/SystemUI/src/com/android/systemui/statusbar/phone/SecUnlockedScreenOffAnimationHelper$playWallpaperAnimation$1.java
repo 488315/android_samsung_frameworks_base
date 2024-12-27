@@ -13,7 +13,6 @@ final class SecUnlockedScreenOffAnimationHelper$playWallpaperAnimation$1 extends
     int label;
     final /* synthetic */ SecUnlockedScreenOffAnimationHelper this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SecUnlockedScreenOffAnimationHelper$playWallpaperAnimation$1(SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper, Continuation continuation) {
         super(2, continuation);
         this.this$0 = secUnlockedScreenOffAnimationHelper;

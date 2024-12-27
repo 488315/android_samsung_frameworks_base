@@ -42,9 +42,6 @@ public class DrawEdgeLayout extends FrameLayout {
         initializeScreen();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x04fe  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0514  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0504  */
     @Override // android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.

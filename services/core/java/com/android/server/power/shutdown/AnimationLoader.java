@@ -166,8 +166,6 @@ public final class AnimationLoader extends Animatable2.AnimationCallback impleme
         this.player.getHandler().postAtTime(runnable, j);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.server.power.shutdown.AnimationLoader$$ExternalSyntheticLambda0, java.lang.Runnable] */
     public final void start() {
         Handler handler = this.player.getHandler();
         final int i = 0;

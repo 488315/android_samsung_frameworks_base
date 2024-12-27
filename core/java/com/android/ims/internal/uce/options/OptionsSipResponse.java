@@ -8,13 +8,11 @@ public class OptionsSipResponse implements Parcelable {
             new Parcelable.Creator<
                     OptionsSipResponse>() { // from class:
                                             // com.android.ims.internal.uce.options.OptionsSipResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OptionsSipResponse createFromParcel(Parcel source) {
                     return new OptionsSipResponse(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OptionsSipResponse[] newArray(int size) {
                     return new OptionsSipResponse[size];

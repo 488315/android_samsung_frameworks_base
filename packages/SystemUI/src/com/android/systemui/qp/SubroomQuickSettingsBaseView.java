@@ -27,7 +27,6 @@ public class SubroomQuickSettingsBaseView extends FrameLayout implements ViewPag
     public LinearLayout sliderDotspanel;
     public RTLViewPager viewPager;
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.qp.SubroomQuickSettingsBaseView$1] */
     public SubroomQuickSettingsBaseView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mViewPagerOnPageChangeListener = new ViewPager.OnPageChangeListener() { // from class: com.android.systemui.qp.SubroomQuickSettingsBaseView.1

@@ -16,7 +16,6 @@ public final class MobileIconInteractorImpl$signalLevelIcon$lambda$8$$inlined$fl
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileIconInteractorImpl$signalLevelIcon$lambda$8$$inlined$flatMapLatest$1(Continuation continuation, MobileIconInteractorImpl mobileIconInteractorImpl) {
         super(3, continuation);
         this.$this_run$inlined = mobileIconInteractorImpl;

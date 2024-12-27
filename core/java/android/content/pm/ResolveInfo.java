@@ -18,13 +18,11 @@ import java.util.Objects;
 public class ResolveInfo implements Parcelable {
     public static final Parcelable.Creator<ResolveInfo> CREATOR =
             new Parcelable.Creator<ResolveInfo>() { // from class: android.content.pm.ResolveInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ResolveInfo createFromParcel(Parcel source) {
                     return new ResolveInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ResolveInfo[] newArray(int size) {
                     return new ResolveInfo[size];

@@ -185,8 +185,6 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r2v19, types: [com.android.systemui.volume.SamsungVolumeDialogImpl$callbacks$1] */
-    /* JADX WARN: Type inference failed for: r2v20, types: [com.android.systemui.volume.SamsungVolumeDialogImpl$deviceProvisionedListener$1] */
     public SamsungVolumeDialogImpl(Context context, VolumeDependency volumeDependency) {
         this.volumePanel = new VolumePanelImpl(context, volumeDependency);
         this.handlerWrapper = (HandlerWrapper) volumeDependency.get(HandlerWrapper.class);
@@ -246,9 +244,6 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
         ((DeviceProvisionedControllerImpl) this.deviceProvisionedWrapper.deviceProvisionedController).removeCallback(this.deviceProvisionedListener);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v25, types: [com.android.keyguard.KeyguardUpdateMonitorCallback, com.android.systemui.volume.util.KeyguardUpdateMonitorWrapper$registerCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.volume.VolumeStarInteractor$start$1] */
     @Override // com.android.systemui.plugins.VolumeDialog
     public final void init(int i, VolumeDialog.Callback callback) {
         final DeviceStateManagerWrapper deviceStateManagerWrapper;

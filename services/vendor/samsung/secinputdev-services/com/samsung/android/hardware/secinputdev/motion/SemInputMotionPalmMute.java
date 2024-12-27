@@ -199,7 +199,6 @@ public class SemInputMotionPalmMute extends SemInputMotion {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendActionPalmDown() {
         Log.i(TAG, "sendActionPalmDown");
         Intent intent = new Intent("com.samsung.android.motion.PALM_DOWN");
@@ -208,7 +207,6 @@ public class SemInputMotionPalmMute extends SemInputMotion {
         this.matchedFrameNumber = 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendActionPalmUp() {
         Log.i(TAG, "sendActionPalmUp");
         Intent intent = new Intent("com.samsung.android.motion.PALM_UP");
@@ -285,7 +283,6 @@ public class SemInputMotionPalmMute extends SemInputMotion {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setThreshold(int value) {
         if (value < 5 || value > 10) {
             Log.i(TAG, "setThreshold: out of range " + value);
@@ -295,7 +292,6 @@ public class SemInputMotionPalmMute extends SemInputMotion {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setFrameNumber(int value) {
         if (value < 1 || value >= 10) {
             Log.i(TAG, "setFrameNumber: out of range " + value);
@@ -543,7 +539,6 @@ public class SemInputMotionPalmMute extends SemInputMotion {
             return this.isPalm || (this.sumMajor >= THRESHOLD_MAJOR_TOUCH && move < 50);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void updateScreenInfo() {
             WindowMetrics mainWindowMetrics;
             WindowManager mainWindowManager =

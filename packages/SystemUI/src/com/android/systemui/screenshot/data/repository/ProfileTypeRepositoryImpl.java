@@ -18,18 +18,6 @@ public final class ProfileTypeRepositoryImpl implements ProfileTypeRepository {
         this.background = coroutineDispatcher;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0075 A[Catch: all -> 0x00a2, TRY_LEAVE, TryCatch #0 {all -> 0x00a2, blocks: (B:26:0x0064, B:28:0x0075), top: B:25:0x0064 }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0050  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
-    /* JADX WARN: Type inference failed for: r7v9, types: [kotlinx.coroutines.sync.Mutex] */
-    /* JADX WARN: Type inference failed for: r8v10, types: [kotlinx.coroutines.sync.Mutex] */
-    /* JADX WARN: Type inference failed for: r8v11 */
-    /* JADX WARN: Type inference failed for: r8v2 */
-    /* JADX WARN: Type inference failed for: r8v3 */
-    /* JADX WARN: Type inference failed for: r8v4, types: [kotlinx.coroutines.sync.Mutex] */
-    /* JADX WARN: Type inference failed for: r8v5 */
-    /* JADX WARN: Type inference failed for: r8v6 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

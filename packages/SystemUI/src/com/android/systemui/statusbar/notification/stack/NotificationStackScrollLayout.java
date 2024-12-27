@@ -574,15 +574,6 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v12, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$1] */
-    /* JADX WARN: Type inference failed for: r3v18, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$2] */
-    /* JADX WARN: Type inference failed for: r3v21, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$$ExternalSyntheticLambda2] */
-    /* JADX WARN: Type inference failed for: r3v23, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$3] */
-    /* JADX WARN: Type inference failed for: r3v25, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$5] */
-    /* JADX WARN: Type inference failed for: r3v26, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$6] */
-    /* JADX WARN: Type inference failed for: r4v10, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$16] */
-    /* JADX WARN: Type inference failed for: r4v4, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$7] */
-    /* JADX WARN: Type inference failed for: r4v5, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$8] */
     public NotificationStackScrollLayout(Context context, AttributeSet attributeSet) {
         super(context, attributeSet, 0, 0);
         this.mShadeNeedsToClose = false;
@@ -892,8 +883,6 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     
         if (r4.mEntry.mBucket < 13) goto L33;
      */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0060  */
-    /* JADX WARN: Removed duplicated region for block: B:25:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1187,7 +1176,6 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         clearNotifications$1(i, z);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void clearNotifications$1(final int i, boolean z) {
         int childCount = getChildCount();
         ArrayList arrayList = new ArrayList(childCount);
@@ -1898,10 +1886,6 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         return this.mPanelSplitHelper;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0031  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0033  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2695,7 +2679,6 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         setOverScrollAmount(0.0f, true, false, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:77:0x01d8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2788,10 +2771,6 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         expandableView.requestRoundnessReset(NotificationShelf.SHELF_SCROLL);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00dd  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x017a  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0182  */
-    /* JADX WARN: Removed duplicated region for block: B:42:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2817,7 +2796,6 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     
         if (r5 != 16908346) goto L23;
      */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0050  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3331,18 +3309,6 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     
         if (r1 == 13) goto L252;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:132:0x01fd  */
-    /* JADX WARN: Removed duplicated region for block: B:135:0x0203  */
-    /* JADX WARN: Removed duplicated region for block: B:379:0x0798  */
-    /* JADX WARN: Removed duplicated region for block: B:381:0x07af  */
-    /* JADX WARN: Removed duplicated region for block: B:412:0x0807  */
-    /* JADX WARN: Removed duplicated region for block: B:419:0x084e  */
-    /* JADX WARN: Type inference failed for: r1v80, types: [com.android.systemui.statusbar.notification.stack.StackStateAnimator$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r4v14 */
-    /* JADX WARN: Type inference failed for: r4v15, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r4v35 */
-    /* JADX WARN: Type inference failed for: r6v9, types: [com.android.systemui.statusbar.notification.stack.StackStateAnimator$$ExternalSyntheticLambda1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3634,10 +3600,6 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0032  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x003d  */
-    /* JADX WARN: Removed duplicated region for block: B:20:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x001a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

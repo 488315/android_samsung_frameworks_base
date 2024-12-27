@@ -12,13 +12,11 @@ public class BaseDialogResult implements Parcelable {
     public static final Parcelable.Creator<BaseDialogResult> CREATOR =
             new Parcelable.Creator<BaseDialogResult>() { // from class:
                 // android.credentials.selection.BaseDialogResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BaseDialogResult createFromParcel(Parcel in) {
                     return new BaseDialogResult(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BaseDialogResult[] newArray(int size) {
                     return new BaseDialogResult[size];

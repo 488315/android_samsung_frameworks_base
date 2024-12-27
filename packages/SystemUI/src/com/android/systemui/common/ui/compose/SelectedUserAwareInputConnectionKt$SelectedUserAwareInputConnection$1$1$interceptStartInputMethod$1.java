@@ -8,7 +8,6 @@ final class SelectedUserAwareInputConnectionKt$SelectedUserAwareInputConnection$
     /* synthetic */ Object result;
     final /* synthetic */ SelectedUserAwareInputConnectionKt$SelectedUserAwareInputConnection$1$1 this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SelectedUserAwareInputConnectionKt$SelectedUserAwareInputConnection$1$1$interceptStartInputMethod$1(SelectedUserAwareInputConnectionKt$SelectedUserAwareInputConnection$1$1 selectedUserAwareInputConnectionKt$SelectedUserAwareInputConnection$1$1, Continuation continuation) {
         super(continuation);
         this.this$0 = selectedUserAwareInputConnectionKt$SelectedUserAwareInputConnection$1$1;

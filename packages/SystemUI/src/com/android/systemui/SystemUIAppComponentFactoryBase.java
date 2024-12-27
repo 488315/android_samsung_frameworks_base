@@ -73,7 +73,6 @@ public abstract class SystemUIAppComponentFactoryBase extends AppComponentFactor
         return activity == null ? super.instantiateActivityCompat(classLoader, str, intent) : activity;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // androidx.core.app.AppComponentFactory
     public final Application instantiateApplicationCompat(ClassLoader classLoader, String str) {
         Application instantiateApplicationCompat = super.instantiateApplicationCompat(classLoader, str);
@@ -89,7 +88,6 @@ public abstract class SystemUIAppComponentFactoryBase extends AppComponentFactor
         return instantiateApplicationCompat;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // androidx.core.app.AppComponentFactory
     public final ContentProvider instantiateProviderCompat(ClassLoader classLoader, String str) {
         final ContentProvider instantiateProviderCompat = super.instantiateProviderCompat(classLoader, str);

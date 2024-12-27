@@ -159,8 +159,6 @@ public final class CredentialManagerUi {
     public UiStatus mStatus = UiStatus.IN_PROGRESS;
     public final int mUserId;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class UiStatus {
         public static final /* synthetic */ UiStatus[] $VALUES;
         public static final UiStatus IN_PROGRESS;
@@ -187,7 +185,6 @@ public final class CredentialManagerUi {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.credentials.CredentialManagerUi$1] */
     public CredentialManagerUi(Context context, int i, RequestSession requestSession, Set set) {
         this.mContext = context;
         this.mUserId = i;

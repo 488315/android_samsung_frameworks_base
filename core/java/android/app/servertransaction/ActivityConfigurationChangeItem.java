@@ -16,13 +16,11 @@ public class ActivityConfigurationChangeItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<ActivityConfigurationChangeItem> CREATOR =
             new Parcelable.Creator<ActivityConfigurationChangeItem>() { // from class:
                 // android.app.servertransaction.ActivityConfigurationChangeItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityConfigurationChangeItem createFromParcel(Parcel in) {
                     return new ActivityConfigurationChangeItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityConfigurationChangeItem[] newArray(int size) {
                     return new ActivityConfigurationChangeItem[size];

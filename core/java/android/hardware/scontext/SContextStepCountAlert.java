@@ -9,13 +9,11 @@ public class SContextStepCountAlert extends SContextEventContext {
     public static final Parcelable.Creator<SContextStepCountAlert> CREATOR =
             new Parcelable.Creator<SContextStepCountAlert>() { // from class:
                 // android.hardware.scontext.SContextStepCountAlert.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextStepCountAlert createFromParcel(Parcel in) {
                     return new SContextStepCountAlert(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextStepCountAlert[] newArray(int size) {
                     return new SContextStepCountAlert[size];

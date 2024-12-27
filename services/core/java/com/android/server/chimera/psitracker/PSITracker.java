@@ -35,7 +35,6 @@ public final class PSITracker {
             super(looper);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:64:0x00f7 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -52,7 +51,6 @@ public final class PSITracker {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.chimera.psitracker.PSITracker$1] */
     public PSITracker(Context context, Looper looper, SystemRepository systemRepository) {
         this.mSystemRepository = systemRepository;
         this.mContext = context;

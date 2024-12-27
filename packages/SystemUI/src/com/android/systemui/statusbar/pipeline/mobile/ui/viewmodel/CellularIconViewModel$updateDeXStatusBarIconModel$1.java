@@ -19,7 +19,6 @@ final class CellularIconViewModel$updateDeXStatusBarIconModel$1 extends SuspendL
     int label;
     final /* synthetic */ CellularIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CellularIconViewModel$updateDeXStatusBarIconModel$1(CellularIconViewModel cellularIconViewModel, Continuation continuation) {
         super(6, continuation);
         this.this$0 = cellularIconViewModel;

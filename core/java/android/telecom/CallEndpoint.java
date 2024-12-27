@@ -16,7 +16,6 @@ public final class CallEndpoint implements Parcelable {
             "CallEndpoint name cannot be null.";
     public static final Parcelable.Creator<CallEndpoint> CREATOR =
             new Parcelable.Creator<CallEndpoint>() { // from class: android.telecom.CallEndpoint.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallEndpoint createFromParcel(Parcel source) {
                     CharSequence name = source.readCharSequence();
@@ -25,7 +24,6 @@ public final class CallEndpoint implements Parcelable {
                     return new CallEndpoint(name, type, id);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallEndpoint[] newArray(int size) {
                     return new CallEndpoint[size];

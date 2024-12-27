@@ -21,15 +21,6 @@ public final class RefreshRateData {
         this.lowLightBlockingZoneSupportedModes = Collections.unmodifiableList(list2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x008a  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0082  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0075  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x005e  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0066  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -30,8 +30,6 @@ public final class PolicyState {
         this.mCurrentResolvedPolicy = policyValue;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:80:0x0147 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x000c A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

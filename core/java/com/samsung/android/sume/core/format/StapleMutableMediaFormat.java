@@ -763,7 +763,6 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
                 + Collections.singletonList(this.attributes);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.format.Copyable
     public MutableMediaFormat copy() {
         try {
@@ -774,7 +773,6 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
         }
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.format.Copyable
     /* renamed from: deepCopy */
     public MutableMediaFormat deepCopy2() {

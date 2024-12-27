@@ -113,7 +113,6 @@ public final class EmergencyModeBlocker implements SemDesktopModeManager.Desktop
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.desktopmode.EmergencyModeBlocker$$ExternalSyntheticLambda0] */
     public EmergencyModeBlocker(
             Context context,
             IStateManager iStateManager,

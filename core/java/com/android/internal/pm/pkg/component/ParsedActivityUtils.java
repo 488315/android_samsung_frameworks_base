@@ -31,10 +31,6 @@ public class ParsedActivityUtils {
         SAFE_BROADCASTS.add("android.intent.action.BOOT_COMPLETED");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x02a5  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x02d6 A[Catch: all -> 0x02de, TRY_ENTER, TRY_LEAVE, TryCatch #8 {all -> 0x02de, blocks: (B:59:0x024a, B:61:0x025e, B:63:0x0265, B:64:0x026c, B:66:0x0274, B:68:0x027b, B:69:0x0282, B:71:0x028a, B:74:0x0297, B:30:0x02d6, B:36:0x02f3, B:41:0x0309, B:43:0x030f), top: B:58:0x024a }] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x02e0 A[Catch: all -> 0x035a, TRY_ENTER, TRY_LEAVE, TryCatch #5 {all -> 0x035a, blocks: (B:24:0x00c5, B:28:0x02bf, B:33:0x02e0, B:38:0x0302, B:46:0x031a, B:27:0x02a7), top: B:23:0x00c5 }] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0151 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

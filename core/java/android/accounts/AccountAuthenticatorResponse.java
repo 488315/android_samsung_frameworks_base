@@ -10,13 +10,11 @@ public class AccountAuthenticatorResponse implements Parcelable {
     public static final Parcelable.Creator<AccountAuthenticatorResponse> CREATOR =
             new Parcelable.Creator<AccountAuthenticatorResponse>() { // from class:
                 // android.accounts.AccountAuthenticatorResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccountAuthenticatorResponse createFromParcel(Parcel source) {
                     return new AccountAuthenticatorResponse(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccountAuthenticatorResponse[] newArray(int size) {
                     return new AccountAuthenticatorResponse[size];

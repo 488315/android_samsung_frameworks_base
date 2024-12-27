@@ -69,7 +69,6 @@ public final class CommandQueue extends IStatusBar.Stub implements CallbackContr
             this(looper);
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
             boolean z;
@@ -1041,8 +1040,6 @@ public final class CommandQueue extends IStatusBar.Stub implements CallbackContr
     
         if (r0 != false) goto L28;
      */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x005b  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0062 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

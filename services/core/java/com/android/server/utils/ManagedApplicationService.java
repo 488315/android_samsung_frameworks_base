@@ -241,7 +241,6 @@ public final class ManagedApplicationService {
         String toLogString(SimpleDateFormat simpleDateFormat);
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.utils.ManagedApplicationService$$ExternalSyntheticLambda0] */
     public ManagedApplicationService(
             Context context,
             ComponentName componentName,

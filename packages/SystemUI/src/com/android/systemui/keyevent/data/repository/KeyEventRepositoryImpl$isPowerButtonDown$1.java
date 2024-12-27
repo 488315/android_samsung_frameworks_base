@@ -18,7 +18,6 @@ final class KeyEventRepositoryImpl$isPowerButtonDown$1 extends SuspendLambda imp
     int label;
     final /* synthetic */ KeyEventRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyEventRepositoryImpl$isPowerButtonDown$1(KeyEventRepositoryImpl keyEventRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = keyEventRepositoryImpl;
@@ -36,8 +35,6 @@ final class KeyEventRepositoryImpl$isPowerButtonDown$1 extends SuspendLambda imp
         return ((KeyEventRepositoryImpl$isPowerButtonDown$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.keyevent.data.repository.KeyEventRepositoryImpl$isPowerButtonDown$1$callback$1, com.android.systemui.statusbar.CommandQueue$Callbacks] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -63,7 +60,6 @@ final class KeyEventRepositoryImpl$isPowerButtonDown$1 extends SuspendLambda imp
             this.this$0.commandQueue.addCallback((CommandQueue.Callbacks) r1);
             final KeyEventRepositoryImpl keyEventRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyevent.data.repository.KeyEventRepositoryImpl$isPowerButtonDown$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

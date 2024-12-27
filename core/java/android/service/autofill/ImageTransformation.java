@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 
 public final class ImageTransformation extends InternalTransformation implements Transformation, Parcelable {
     public static final Parcelable.Creator<ImageTransformation> CREATOR = new Parcelable.Creator<ImageTransformation>() { // from class: android.service.autofill.ImageTransformation.1
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ImageTransformation createFromParcel(Parcel parcel) {
             Builder builder;
@@ -41,7 +40,6 @@ public final class ImageTransformation extends InternalTransformation implements
             return builder2.build();
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ImageTransformation[] newArray(int size) {
             return new ImageTransformation[size];
@@ -143,8 +141,6 @@ public final class ImageTransformation extends InternalTransformation implements
         return 0;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [java.io.Serializable, java.util.regex.Pattern[]] */
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeParcelable(this.mId, flags);

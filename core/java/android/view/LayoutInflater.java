@@ -206,14 +206,6 @@ public abstract class LayoutInflater {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v0 */
-    /* JADX WARN: Type inference failed for: r10v1 */
-    /* JADX WARN: Type inference failed for: r10v4 */
-    /* JADX WARN: Type inference failed for: r10v5 */
-    /* JADX WARN: Type inference failed for: r10v6 */
-    /* JADX WARN: Type inference failed for: r10v8 */
-    /* JADX WARN: Type inference failed for: r10v9 */
     public View inflate(XmlPullParser xmlPullParser, ViewGroup viewGroup, boolean z) {
         String name;
         ?? r10;
@@ -616,8 +608,6 @@ public abstract class LayoutInflater {
         consumeChildElements(parser);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v8, types: [android.util.AttributeSet] */
     private void parseInclude(XmlPullParser parser, Context context, View parent, AttributeSet attrs) throws XmlPullParserException, IOException {
         XmlResourceParser childParser;
         int type;
@@ -769,7 +759,6 @@ public abstract class LayoutInflater {
             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void makeBlink() {
             Message message = this.mHandler.obtainMessage(66);
             this.mHandler.sendMessageDelayed(message, 500L);

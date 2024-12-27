@@ -220,7 +220,6 @@ public final class SnapshotStatistics {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [android.os.Handler, com.android.server.pm.SnapshotStatistics$1] */
     public SnapshotStatistics() {
         this.mHandler = null;
         long currentTimeMicro = SystemClock.currentTimeMicro();

@@ -12,7 +12,6 @@ public class AudioHalCapCriterion implements Parcelable {
     public static final Parcelable.Creator<AudioHalCapCriterion> CREATOR =
             new Parcelable.Creator<AudioHalCapCriterion>() { // from class:
                 // android.media.audio.common.AudioHalCapCriterion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioHalCapCriterion createFromParcel(Parcel _aidl_source) {
                     AudioHalCapCriterion _aidl_out = new AudioHalCapCriterion();
@@ -20,7 +19,6 @@ public class AudioHalCapCriterion implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioHalCapCriterion[] newArray(int _aidl_size) {
                     return new AudioHalCapCriterion[_aidl_size];

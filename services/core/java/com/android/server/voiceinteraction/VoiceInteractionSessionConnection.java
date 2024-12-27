@@ -166,8 +166,6 @@ public final class VoiceInteractionSessionConnection
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.voiceinteraction.VoiceInteractionSessionConnection$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.voiceinteraction.VoiceInteractionSessionConnection$1] */
     public VoiceInteractionSessionConnection(
             Object obj,
             ComponentName componentName,

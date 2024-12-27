@@ -24,7 +24,6 @@ public abstract class Filter {
         void onFilterComplete(int i);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public static class FilterResults {
         public int count;
         public Object values;

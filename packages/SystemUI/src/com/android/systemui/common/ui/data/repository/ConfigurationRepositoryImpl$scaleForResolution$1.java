@@ -11,7 +11,6 @@ final class ConfigurationRepositoryImpl$scaleForResolution$1 extends SuspendLamb
     int label;
     final /* synthetic */ ConfigurationRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ConfigurationRepositoryImpl$scaleForResolution$1(ConfigurationRepositoryImpl configurationRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = configurationRepositoryImpl;

@@ -45,13 +45,11 @@ public final class ConnectionFailureInfo implements Parcelable {
                 new Parcelable.Creator<
                         ConnectionFailureInfo>() { // from class:
                                                    // android.telephony.ims.feature.ConnectionFailureInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ConnectionFailureInfo createFromParcel(Parcel in) {
                         return new ConnectionFailureInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ConnectionFailureInfo[] newArray(int size) {
                         return new ConnectionFailureInfo[size];

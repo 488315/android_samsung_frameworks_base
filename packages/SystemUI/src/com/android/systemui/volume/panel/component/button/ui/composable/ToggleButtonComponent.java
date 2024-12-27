@@ -61,7 +61,6 @@ public final class ToggleButtonComponent implements ComposeVolumePanelUiComponen
         this.onCheckedChange = function1;
     }
 
-    /* JADX WARN: Type inference failed for: r6v8, types: [com.android.systemui.volume.panel.component.button.ui.composable.ToggleButtonComponent$Content$1$1, kotlin.jvm.internal.Lambda] */
     @Override // com.android.systemui.volume.panel.ui.composable.ComposeVolumePanelUiComponent
     public final void Content(final VolumePanelComposeScope volumePanelComposeScope, final Modifier modifier, Composer composer, final int i) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -72,7 +71,6 @@ public final class ToggleButtonComponent implements ComposeVolumePanelUiComponen
             RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
             if (endRestartGroup != null) {
                 endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.button.ui.composable.ToggleButtonComponent$Content$viewModel$1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(2);
                     }
@@ -119,12 +117,10 @@ public final class ToggleButtonComponent implements ComposeVolumePanelUiComponen
         Updater.m276setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
         ColumnScopeInstance columnScopeInstance = ColumnScopeInstance.INSTANCE;
         BottomComponentButtonSurfaceKt.BottomComponentButtonSurface(null, ComposableLambdaKt.rememberComposableLambda(14766006, composerImpl, new Function2() { // from class: com.android.systemui.volume.panel.component.button.ui.composable.ToggleButtonComponent$Content$1$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
             }
 
-            /* JADX WARN: Type inference failed for: r14v16, types: [com.android.systemui.volume.panel.component.button.ui.composable.ToggleButtonComponent$Content$1$1$3, kotlin.jvm.internal.Lambda] */
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj2, Object obj3) {
                 ButtonColors m209buttonColorsro_MJ88;
@@ -168,7 +164,6 @@ public final class ToggleButtonComponent implements ComposeVolumePanelUiComponen
                 final ButtonViewModel buttonViewModel2 = ButtonViewModel.this;
                 final String str = obj;
                 Modifier semantics = SemanticsModifierKt.semantics(m102padding3ABfNKs, false, new Function1() { // from class: com.android.systemui.volume.panel.component.button.ui.composable.ToggleButtonComponent$Content$1$1.1
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
                     }
@@ -188,7 +183,6 @@ public final class ToggleButtonComponent implements ComposeVolumePanelUiComponen
                 final ToggleButtonComponent toggleButtonComponent = this;
                 final ButtonViewModel buttonViewModel3 = ButtonViewModel.this;
                 Function0 function02 = new Function0() { // from class: com.android.systemui.volume.panel.component.button.ui.composable.ToggleButtonComponent$Content$1$1.2
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
                     }
@@ -236,7 +230,6 @@ public final class ToggleButtonComponent implements ComposeVolumePanelUiComponen
         RecomposeScopeImpl endRestartGroup2 = composerImpl.endRestartGroup();
         if (endRestartGroup2 != null) {
             endRestartGroup2.block = new Function2() { // from class: com.android.systemui.volume.panel.component.button.ui.composable.ToggleButtonComponent$Content$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

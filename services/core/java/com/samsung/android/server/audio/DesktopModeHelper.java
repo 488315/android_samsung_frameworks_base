@@ -57,7 +57,6 @@ public final class DesktopModeHelper {
     public boolean mIsDesktopMode;
     public final ContentResolver mResolver;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.samsung.android.server.audio.DesktopModeHelper$1] */
     public DesktopModeHelper(Context context) {
         this.mContext = context;
         this.mResolver = context.getContentResolver();

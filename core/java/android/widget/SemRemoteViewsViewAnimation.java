@@ -12,13 +12,11 @@ public class SemRemoteViewsViewAnimation extends SemRemoteViewsAnimation {
             new Parcelable.Creator<
                     SemRemoteViewsViewAnimation>() { // from class:
                                                      // android.widget.SemRemoteViewsViewAnimation.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemRemoteViewsViewAnimation createFromParcel(Parcel in) {
                     return new SemRemoteViewsViewAnimation(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemRemoteViewsViewAnimation[] newArray(int size) {
                     return new SemRemoteViewsViewAnimation[size];
@@ -91,7 +89,6 @@ public class SemRemoteViewsViewAnimation extends SemRemoteViewsAnimation {
         target.startAnimation(anim);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.SemRemoteViewsAnimation
     /* renamed from: endAnimation */
     public void lambda$play$0(View root) {}

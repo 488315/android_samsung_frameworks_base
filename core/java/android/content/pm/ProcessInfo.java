@@ -69,13 +69,11 @@ public class ProcessInfo implements Parcelable {
         CREATOR =
                 new Parcelable.Creator<
                         ProcessInfo>() { // from class: android.content.pm.ProcessInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ProcessInfo[] newArray(int size) {
                         return new ProcessInfo[size];
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ProcessInfo createFromParcel(Parcel in) {
                         return new ProcessInfo(in);

@@ -144,7 +144,6 @@ public final class OverviewProxyService implements CallbackController, Navigatio
             }
         };
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.recents.OverviewProxyService$1$$ExternalSyntheticLambda2] */
         public AnonymousClass1() {
         }
 
@@ -180,10 +179,6 @@ public final class OverviewProxyService implements CallbackController, Navigatio
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v0, types: [android.content.BroadcastReceiver, com.android.systemui.recents.OverviewProxyService$3] */
-    /* JADX WARN: Type inference failed for: r11v0, types: [com.android.systemui.recents.OverviewProxyService$4] */
-    /* JADX WARN: Type inference failed for: r12v0, types: [com.android.systemui.recents.OverviewProxyService$$ExternalSyntheticLambda3] */
     public OverviewProxyService(Context context, Executor executor, CommandQueue commandQueue, ShellInterface shellInterface, Lazy lazy, Lazy lazy2, ScreenPinningRequest screenPinningRequest, NavigationModeController navigationModeController, NotificationShadeWindowController notificationShadeWindowController, final SysUiState sysUiState, Provider provider, UserTracker userTracker, WakefulnessLifecycle wakefulnessLifecycle, UiEventLogger uiEventLogger, DisplayTracker displayTracker, KeyguardUnlockAnimationController keyguardUnlockAnimationController, InWindowLauncherUnlockAnimationManager inWindowLauncherUnlockAnimationManager, AssistUtils assistUtils, DumpManager dumpManager, Optional<UnfoldTransitionProgressForwarder> optional, BroadcastDispatcher broadcastDispatcher, FgsManagerController fgsManagerController, Handler handler, SearcleManager searcleManager, SamsungScreenPinningRequest samsungScreenPinningRequest, ScreenLifecycle screenLifecycle) {
         this.mNavBarMode = 0;
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.systemui.recents.OverviewProxyService.2

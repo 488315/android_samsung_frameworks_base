@@ -14,13 +14,11 @@ public final class HotwordDetectionServiceFailure implements Parcelable {
             new Parcelable.Creator<
                     HotwordDetectionServiceFailure>() { // from class:
                                                         // android.service.voice.HotwordDetectionServiceFailure.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HotwordDetectionServiceFailure[] newArray(int size) {
                     return new HotwordDetectionServiceFailure[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HotwordDetectionServiceFailure createFromParcel(Parcel in) {
                     return new HotwordDetectionServiceFailure(in.readInt(), in.readString8());

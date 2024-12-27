@@ -171,7 +171,6 @@ public abstract class OrientationEventListener {
         return this.mSensor != null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isInAppCastingDisplay() {
         Display display;
         return (this.mContext == null

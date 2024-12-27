@@ -599,9 +599,6 @@ public final class RecentsAnimationController implements IBinder.DeathRecipient 
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.wm.RecentsAnimationController$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.wm.RecentsAnimationController$1] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.server.wm.RecentsAnimationController$2] */
     public RecentsAnimationController(
             WindowManagerService windowManagerService,
             IRecentsAnimationRunner iRecentsAnimationRunner,

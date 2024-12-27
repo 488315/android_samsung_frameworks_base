@@ -94,14 +94,11 @@ public final class SystemStateTracker extends Handler {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class EbpfType {
         public static final /* synthetic */ EbpfType[] $VALUES = {
             new EbpfType("CPU_UID_SYSTEM_TIME", 0), new EbpfType("CPU_UID_ACTIVE_TIME", 1)
         };
 
-        /* JADX INFO: Fake field, exist only in values array */
         EbpfType EF5;
 
         public static EbpfType valueOf(String str) {

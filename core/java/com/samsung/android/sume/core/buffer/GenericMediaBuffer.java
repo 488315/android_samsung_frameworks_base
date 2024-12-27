@@ -34,13 +34,11 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
                     GenericMediaBuffer<
                             ?>>() { // from class:
                                     // com.samsung.android.sume.core.buffer.GenericMediaBuffer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GenericMediaBuffer<?> createFromParcel(Parcel in) {
                     return new GenericMediaBuffer<>(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GenericMediaBuffer<?>[] newArray(int size) {
                     return new GenericMediaBuffer[size];
@@ -155,7 +153,6 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
         return super.getStride();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
               // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ Object getTypedDataOr(Class cls, Object obj) {

@@ -89,7 +89,6 @@ public final class RenderNode {
     @CriticalNative
     private static native int nGetLeft(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nGetNativeFinalizer();
 
     @CriticalNative

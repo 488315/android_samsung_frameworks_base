@@ -31,7 +31,6 @@ import com.android.systemui.util.settings.SecureSettings;
 public final class ColorCorrectionTile extends QSTileImpl {
     public final AnonymousClass1 mSetting;
 
-    /* JADX WARN: Type inference failed for: r7v1, types: [com.android.systemui.qs.tiles.ColorCorrectionTile$1] */
     public ColorCorrectionTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, UserTracker userTracker, SecureSettings secureSettings) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mSetting = new SettingObserver(secureSettings, this.mHandler, SettingsHelper.INDEX_ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, ((UserTrackerImpl) userTracker).getUserId()) { // from class: com.android.systemui.qs.tiles.ColorCorrectionTile.1

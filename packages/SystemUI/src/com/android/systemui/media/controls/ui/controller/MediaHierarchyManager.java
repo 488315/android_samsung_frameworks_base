@@ -152,7 +152,6 @@ public final class MediaHierarchyManager {
         int label;
         final /* synthetic */ MediaHierarchyManager this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass7(ShadeInteractor shadeInteractor, MediaHierarchyManager mediaHierarchyManager, Continuation continuation) {
             super(2, continuation);
             this.$shadeInteractor = shadeInteractor;
@@ -207,7 +206,6 @@ public final class MediaHierarchyManager {
         int label;
         final /* synthetic */ MediaHierarchyManager this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass8(ShadeInteractor shadeInteractor, MediaHierarchyManager mediaHierarchyManager, Continuation continuation) {
             super(2, continuation);
             this.$shadeInteractor = shadeInteractor;
@@ -321,7 +319,6 @@ public final class MediaHierarchyManager {
             int label;
             final /* synthetic */ MediaHierarchyManager this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass4(MediaHierarchyManager mediaHierarchyManager, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = mediaHierarchyManager;
@@ -363,7 +360,6 @@ public final class MediaHierarchyManager {
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass9(CommunalTransitionViewModel communalTransitionViewModel, MediaHierarchyManager mediaHierarchyManager, ShadeInteractor shadeInteractor, Continuation continuation) {
             super(2, continuation);
             this.$communalTransitionViewModel = communalTransitionViewModel;
@@ -416,7 +412,6 @@ public final class MediaHierarchyManager {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r12v5, types: [com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$startAnimation$1] */
     public MediaHierarchyManager(Context context, SysuiStatusBarStateController sysuiStatusBarStateController, KeyguardStateController keyguardStateController, KeyguardBypassController keyguardBypassController, MediaCarouselController mediaCarouselController, MediaDataManager mediaDataManager, KeyguardViewController keyguardViewController, DreamOverlayStateController dreamOverlayStateController, KeyguardInteractor keyguardInteractor, CommunalTransitionViewModel communalTransitionViewModel, ConfigurationController configurationController, WakefulnessLifecycle wakefulnessLifecycle, ShadeInteractor shadeInteractor, SecureSettings secureSettings, final Handler handler, CoroutineScope coroutineScope, SplitShadeStateController splitShadeStateController, MediaViewLogger mediaViewLogger, MediaFlags mediaFlags) {
         this.context = context;
         this.statusBarStateController = sysuiStatusBarStateController;
@@ -1007,11 +1002,6 @@ public final class MediaHierarchyManager {
         return (this.fullShadeTransitionProgress == 0.0f || this.bypassController.getBypassEnabled() || this.statusbarState != 1) ? false : true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x007a  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0083 A[Catch: all -> 0x0033, TryCatch #0 {all -> 0x0033, blocks: (B:5:0x000b, B:9:0x0013, B:13:0x0025, B:15:0x002e, B:16:0x00e7, B:23:0x0038, B:25:0x0047, B:28:0x004d, B:31:0x0054, B:32:0x0073, B:35:0x007d, B:37:0x0083, B:40:0x008b, B:42:0x00a6, B:44:0x00d8, B:46:0x00dc, B:48:0x008f, B:50:0x0095, B:53:0x009c, B:56:0x0065, B:57:0x00e4, B:58:0x00ef, B:63:0x00f8), top: B:4:0x000b }] */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00d8 A[Catch: all -> 0x0033, TryCatch #0 {all -> 0x0033, blocks: (B:5:0x000b, B:9:0x0013, B:13:0x0025, B:15:0x002e, B:16:0x00e7, B:23:0x0038, B:25:0x0047, B:28:0x004d, B:31:0x0054, B:32:0x0073, B:35:0x007d, B:37:0x0083, B:40:0x008b, B:42:0x00a6, B:44:0x00d8, B:46:0x00dc, B:48:0x008f, B:50:0x0095, B:53:0x009c, B:56:0x0065, B:57:0x00e4, B:58:0x00ef, B:63:0x00f8), top: B:4:0x000b }] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x007c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

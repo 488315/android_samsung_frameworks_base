@@ -28,7 +28,6 @@ public final class SubscreenToolTipWindow {
     public final int mToolTipString;
     public final TextView mTooltipText;
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.qp.util.SubscreenToolTipWindow$1] */
     public SubscreenToolTipWindow(Context context, int i) {
         this.mContext = context;
         PopupWindow popupWindow = new PopupWindow(context);

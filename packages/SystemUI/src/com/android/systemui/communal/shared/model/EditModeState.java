@@ -2,8 +2,6 @@ package com.android.systemui.communal.shared.model;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class EditModeState {
     public static final /* synthetic */ EditModeState[] $VALUES;
     public static final EditModeState SHOWING;

@@ -72,13 +72,11 @@ public interface MediaFilter extends MessageConsumer, Operator {
                 new Parcelable.Creator<
                         Option>() { // from class:
                                     // com.samsung.android.sume.core.filter.MediaFilter.Option.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Option createFromParcel(Parcel in) {
                         return new Option(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Option[] newArray(int size) {
                         return new Option[size];

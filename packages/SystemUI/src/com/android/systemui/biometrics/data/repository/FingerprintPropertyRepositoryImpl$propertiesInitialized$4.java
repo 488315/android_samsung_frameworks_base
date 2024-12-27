@@ -14,7 +14,6 @@ final class FingerprintPropertyRepositoryImpl$propertiesInitialized$4 extends Su
     int label;
     final /* synthetic */ FingerprintPropertyRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FingerprintPropertyRepositoryImpl$propertiesInitialized$4(FingerprintPropertyRepositoryImpl fingerprintPropertyRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = fingerprintPropertyRepositoryImpl;

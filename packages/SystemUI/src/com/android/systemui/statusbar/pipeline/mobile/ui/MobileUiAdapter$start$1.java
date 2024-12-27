@@ -33,7 +33,6 @@ final class MobileUiAdapter$start$1 extends SuspendLambda implements Function2 {
         int label;
         final /* synthetic */ MobileUiAdapter this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(MobileUiAdapter mobileUiAdapter, Continuation continuation) {
             super(2, continuation);
             this.this$0 = mobileUiAdapter;
@@ -115,7 +114,6 @@ final class MobileUiAdapter$start$1 extends SuspendLambda implements Function2 {
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileUiAdapter$start$1(MobileUiAdapter mobileUiAdapter, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mobileUiAdapter;

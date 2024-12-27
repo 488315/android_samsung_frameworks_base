@@ -33,7 +33,6 @@ final class FooterViewBinder$bindManageOrHistoryButton$2 extends SuspendLambda i
         final /* synthetic */ FooterViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(FooterViewModel footerViewModel, FooterView footerView, View.OnClickListener onClickListener, View.OnClickListener onClickListener2, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = footerViewModel;
@@ -95,7 +94,6 @@ final class FooterViewBinder$bindManageOrHistoryButton$2 extends SuspendLambda i
         final /* synthetic */ FooterViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(FooterViewModel footerViewModel, FooterView footerView, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = footerViewModel;
@@ -149,7 +147,6 @@ final class FooterViewBinder$bindManageOrHistoryButton$2 extends SuspendLambda i
         final /* synthetic */ FooterViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(FooterViewModel footerViewModel, FooterView footerView, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = footerViewModel;
@@ -203,7 +200,6 @@ final class FooterViewBinder$bindManageOrHistoryButton$2 extends SuspendLambda i
         final /* synthetic */ FooterViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass4(FooterViewModel footerViewModel, FooterView footerView, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = footerViewModel;
@@ -259,7 +255,6 @@ final class FooterViewBinder$bindManageOrHistoryButton$2 extends SuspendLambda i
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FooterViewBinder$bindManageOrHistoryButton$2(FooterViewModel footerViewModel, FooterView footerView, View.OnClickListener onClickListener, View.OnClickListener onClickListener2, Continuation continuation) {
         super(2, continuation);
         this.$viewModel = footerViewModel;

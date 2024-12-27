@@ -8,7 +8,6 @@ public class MessageDeliveryStatus implements Parcelable {
     public static final Parcelable.Creator<MessageDeliveryStatus> CREATOR =
             new Parcelable.Creator<MessageDeliveryStatus>() { // from class:
                 // android.hardware.contexthub.MessageDeliveryStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MessageDeliveryStatus createFromParcel(Parcel _aidl_source) {
                     MessageDeliveryStatus _aidl_out = new MessageDeliveryStatus();
@@ -16,7 +15,6 @@ public class MessageDeliveryStatus implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MessageDeliveryStatus[] newArray(int _aidl_size) {
                     return new MessageDeliveryStatus[_aidl_size];

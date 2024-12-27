@@ -26,7 +26,6 @@ public class PrintServiceRecommendationsLoader extends Loader<List<Recommendatio
         queueNewResult();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void queueNewResult() {
         Message m = this.mHandler.obtainMessage(0);
         m.obj = this.mPrintManager.getPrintServiceRecommendations();

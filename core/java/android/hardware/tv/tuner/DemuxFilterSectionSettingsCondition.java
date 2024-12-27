@@ -7,13 +7,11 @@ public final class DemuxFilterSectionSettingsCondition implements Parcelable {
     public static final Parcelable.Creator<DemuxFilterSectionSettingsCondition> CREATOR =
             new Parcelable.Creator<DemuxFilterSectionSettingsCondition>() { // from class:
                 // android.hardware.tv.tuner.DemuxFilterSectionSettingsCondition.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterSectionSettingsCondition createFromParcel(Parcel _aidl_source) {
                     return new DemuxFilterSectionSettingsCondition(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterSectionSettingsCondition[] newArray(int _aidl_size) {
                     return new DemuxFilterSectionSettingsCondition[_aidl_size];

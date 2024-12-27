@@ -103,7 +103,6 @@ public class MediaCoordinator implements Coordinator {
         this.mIconManager = iconManager;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void inflateOrUpdateIcons(NotificationEntry notificationEntry) {
         int intValue = this.mIconsState.getOrDefault(notificationEntry, 0).intValue();
         if (intValue == 0) {

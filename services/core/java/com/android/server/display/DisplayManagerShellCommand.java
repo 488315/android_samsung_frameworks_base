@@ -59,7 +59,6 @@ public final class DisplayManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Failed to clean up code after switch over string restore
     jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r1v20 android.view.Display$Mode, still in use, count: 4, list:
       (r1v20 android.view.Display$Mode) from 0x05d8: IF  (r1v20 android.view.Display$Mode) == (null android.view.Display$Mode)  -> B:247:0x05da A[HIDDEN]
@@ -79,7 +78,6 @@ public final class DisplayManagerShellCommand extends ShellCommand {
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
      */
-    /* JADX WARN: Multi-variable type inference failed */
     public final int onCommand(String str) {
         char c;
         boolean z;

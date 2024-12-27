@@ -380,10 +380,6 @@ public final class McfManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.desktopmode.McfManager$1] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.desktopmode.McfManager$3] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.desktopmode.McfManager$4] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.desktopmode.McfManager$5] */
     public McfManager(
             Context context,
             ServiceThread serviceThread,

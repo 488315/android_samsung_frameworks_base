@@ -13,7 +13,6 @@ final class UserRepositoryImpl$selectedUser$1$2 extends SuspendLambda implements
     /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserRepositoryImpl$selectedUser$1$2(UserRepositoryImpl userRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.$this_run = userRepositoryImpl;

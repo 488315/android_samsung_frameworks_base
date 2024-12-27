@@ -12,7 +12,6 @@ final class PackageUpdateMonitor$_packageChanged$1$2 extends SuspendLambda imple
     int label;
     final /* synthetic */ PackageUpdateMonitor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PackageUpdateMonitor$_packageChanged$1$2(PackageUpdateMonitor packageUpdateMonitor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = packageUpdateMonitor;

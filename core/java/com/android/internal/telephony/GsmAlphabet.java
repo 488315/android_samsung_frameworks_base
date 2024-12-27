@@ -422,7 +422,6 @@ public class GsmAlphabet {
         return ret;
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:20:0x0045 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

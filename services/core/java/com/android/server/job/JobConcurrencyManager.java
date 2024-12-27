@@ -897,8 +897,6 @@ public final class JobConcurrencyManager {
                                 100, FullScreenMagnificationGestureHandler.MAX_SCALE, 99.0f));
     }
 
-    /* JADX WARN: Type inference failed for: r0v25, types: [com.android.server.job.JobConcurrencyManager$1] */
-    /* JADX WARN: Type inference failed for: r0v26, types: [com.android.server.job.JobConcurrencyManager$$ExternalSyntheticLambda1] */
     public JobConcurrencyManager(JobSchedulerService jobSchedulerService, Injector injector) {
         this.mService = jobSchedulerService;
         this.mLock = jobSchedulerService.mLock;
@@ -1137,12 +1135,6 @@ public final class JobConcurrencyManager {
 
        r2 = true;
     */
-    /* JADX WARN: Removed duplicated region for block: B:117:0x032d  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x0369  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x0361  */
-    /* JADX WARN: Removed duplicated region for block: B:134:0x0275  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0105  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x0204  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

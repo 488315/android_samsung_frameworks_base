@@ -197,7 +197,6 @@ public final class InputManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onInputDevicesChanged(int[] deviceIdAndGeneration) {
         if (DEBUG) {
             Log.d(TAG, "Received input devices changed.");
@@ -524,7 +523,6 @@ public final class InputManagerGlobal {
         return -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onSwitchEventChanged(
             int switchValues, int switchMask, int extraValues, int extraMask) {
         if (DEBUG) {
@@ -610,7 +608,6 @@ public final class InputManagerGlobal {
         return -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onMultiFingerGesture(int behavior, int reserved) {
         if (DEBUG) {
             Log.d(TAG, "multi finger gesture.");
@@ -816,7 +813,6 @@ public final class InputManagerGlobal {
         return -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onLidStateChanged(long whenNanos, boolean lidOpen) {
         if (DEBUG) {
             Log.d(
@@ -872,7 +868,6 @@ public final class InputManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onTabletModeChanged(long whenNanos, boolean inTabletMode) {
         if (DEBUG) {
             Log.d(
@@ -987,7 +982,6 @@ public final class InputManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class InputDeviceBatteryListenerDelegate {
         final Executor mExecutor;
         final InputManager.InputDeviceBatteryListener mListener;
@@ -1010,7 +1004,6 @@ public final class InputManagerGlobal {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyBatteryStateChanged$0(
                 IInputDeviceBatteryState state) {
             this.mListener.onBatteryStateChanged(
@@ -1168,7 +1161,6 @@ public final class InputManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class KeyboardBacklightListenerDelegate {
         final Executor mExecutor;
         final InputManager.KeyboardBacklightListener mListener;
@@ -1195,7 +1187,6 @@ public final class InputManagerGlobal {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyKeyboardBacklightChange$0(
                 int deviceId, IKeyboardBacklightState state, boolean isTriggeredByKeyPress) {
             this.mListener.onKeyboardBacklightChanged(
@@ -1308,7 +1299,6 @@ public final class InputManagerGlobal {
         return delegate.mListener == listener;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class StickyModifierStateListenerDelegate {
         final Executor mExecutor;
         final InputManager.StickyModifierStateListener mListener;
@@ -1333,7 +1323,6 @@ public final class InputManagerGlobal {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyStickyModifierStateChange$0(
                 int modifierState, int lockedModifierState) {
             this.mListener.onStickyModifierStateChanged(
@@ -1966,7 +1955,6 @@ public final class InputManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onPointerIconChanged(int type, PointerIcon icon) {
         if (DEBUG) {
             Log.d(TAG, "Received pointer icon changed.");
@@ -2063,7 +2051,6 @@ public final class InputManagerGlobal {
         return -1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onWirelessKeyboardShareChanged(long whenNanos, int index, String contents) {
         if (DEBUG) {
             Log.d(

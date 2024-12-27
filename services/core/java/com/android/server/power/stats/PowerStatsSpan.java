@@ -183,9 +183,6 @@ public final class PowerStatsSpan {
         this.mMetadata = metadata;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Failed to find 'out' block for switch in B:80:0x0161. Please report as an issue. */
-    /* JADX WARN: Multi-variable type inference failed */
     public static PowerStatsSpan read(
             InputStream inputStream,
             TypedXmlPullParser typedXmlPullParser,

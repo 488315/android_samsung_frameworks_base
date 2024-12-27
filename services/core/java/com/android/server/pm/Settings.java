@@ -289,7 +289,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
             public final /* synthetic */ int $r8$classId;
             public final /* synthetic */ RuntimePermissionPersistence this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public MyHandler(RuntimePermissionPersistence runtimePermissionPersistence, int i) {
                 super(BackgroundThread.getHandler().getLooper());
                 this.$r8$classId = i;
@@ -881,7 +880,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
         PRIVATE_FLAG_DUMP_SPEC = new Object[]{1024, "PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE", 4096, "PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION", 2048, "PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_UNRESIZEABLE", 134217728, "ALLOW_AUDIO_PLAYBACK_CAPTURE", 536870912, "PRIVATE_FLAG_REQUEST_LEGACY_EXTERNAL_STORAGE", 8192, "BACKUP_IN_FOREGROUND", 2, "CANT_SAVE_STATE", 32, "DEFAULT_TO_DEVICE_PROTECTED_STORAGE", 64, "DIRECT_BOOT_AWARE", 16, "HAS_DOMAIN_URLS", 1, "HIDDEN", 128, "EPHEMERAL", 32768, "ISOLATED_SPLIT_LOADING", 131072, "OEM", 256, "PARTIALLY_DIRECT_BOOT_AWARE", 8, "PRIVILEGED", 512, "REQUIRED_FOR_SYSTEM_USER", valueOf, "STATIC_SHARED_LIBRARY", 262144, "VENDOR", 524288, "PRODUCT", 2097152, "SYSTEM_EXT", valueOf2, "VIRTUAL_PRELOAD", 1073741824, "ODM", Integer.MIN_VALUE, "PRIVATE_FLAG_ALLOW_NATIVE_HEAP_POINTER_TAGGING", 16777216, "PRIVATE_FLAG_HAS_FRAGILE_USER_DATA"};
     }
 
-    /* JADX WARN: Type inference failed for: r7v1, types: [com.android.server.pm.Settings$1] */
     public Settings(Settings settings) {
         this.mWatchable = new WatchableImpl();
         this.mPackageRestrictionsLock = new Object();
@@ -961,8 +959,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
         this.mSnapshot = new SnapshotCache.Auto();
     }
 
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.server.pm.Settings$1, com.android.server.utils.Watcher] */
-    /* JADX WARN: Type inference failed for: r13v1, types: [com.android.server.pm.Settings$3] */
     public Settings(File file, RuntimePermissionsPersistence runtimePermissionsPersistence, PermissionManagerService.PermissionManagerServiceInternalImpl permissionManagerServiceInternalImpl, DomainVerificationManagerInternal domainVerificationManagerInternal, Handler handler, PackageManagerTracedLock packageManagerTracedLock) {
         this.mWatchable = new WatchableImpl();
         this.mPackageRestrictionsLock = new Object();
@@ -1038,7 +1034,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
         this.mSnapshot = new AnonymousClass2(this, this, null);
     }
 
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.server.pm.Settings$1, com.android.server.utils.Watcher] */
     public Settings(Map map) {
         this.mWatchable = new WatchableImpl();
         this.mPackageRestrictionsLock = new Object();
@@ -1446,7 +1441,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x0081, code lost:
     
         if (r10 != 4) goto L76;
@@ -2088,7 +2082,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
         return sharedUserSetting2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:60:0x015b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2425,15 +2418,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
     
         if (((android.util.ArraySet) r29).contains(r2.mName) != false) goto L54;
      */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00cb  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x0100  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x011a A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0123 A[Catch: all -> 0x008d, TryCatch #3 {all -> 0x008d, blocks: (B:7:0x0035, B:11:0x0051, B:13:0x0069, B:15:0x0077, B:19:0x0091, B:21:0x00ae, B:24:0x00ba, B:27:0x00c5, B:30:0x00cd, B:32:0x00d3, B:35:0x00dc, B:38:0x00e7, B:45:0x0102, B:48:0x0111, B:51:0x011c, B:52:0x011f, B:54:0x0123, B:56:0x0129, B:58:0x012f, B:62:0x013e, B:65:0x0167, B:69:0x017c, B:71:0x0181, B:74:0x0187, B:40:0x00f1, B:110:0x0048), top: B:6:0x0035 }] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x013e A[Catch: all -> 0x008d, TryCatch #3 {all -> 0x008d, blocks: (B:7:0x0035, B:11:0x0051, B:13:0x0069, B:15:0x0077, B:19:0x0091, B:21:0x00ae, B:24:0x00ba, B:27:0x00c5, B:30:0x00cd, B:32:0x00d3, B:35:0x00dc, B:38:0x00e7, B:45:0x0102, B:48:0x0111, B:51:0x011c, B:52:0x011f, B:54:0x0123, B:56:0x0129, B:58:0x012f, B:62:0x013e, B:65:0x0167, B:69:0x017c, B:71:0x0181, B:74:0x0187, B:40:0x00f1, B:110:0x0048), top: B:6:0x0035 }] */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0177 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x0181 A[Catch: all -> 0x008d, TryCatch #3 {all -> 0x008d, blocks: (B:7:0x0035, B:11:0x0051, B:13:0x0069, B:15:0x0077, B:19:0x0091, B:21:0x00ae, B:24:0x00ba, B:27:0x00c5, B:30:0x00cd, B:32:0x00d3, B:35:0x00dc, B:38:0x00e7, B:45:0x0102, B:48:0x0111, B:51:0x011c, B:52:0x011f, B:54:0x0123, B:56:0x0129, B:58:0x012f, B:62:0x013e, B:65:0x0167, B:69:0x017c, B:71:0x0181, B:74:0x0187, B:40:0x00f1, B:110:0x0048), top: B:6:0x0035 }] */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x01c7 A[Catch: all -> 0x01c5, TryCatch #0 {all -> 0x01c5, blocks: (B:18:0x01d1, B:76:0x01bc, B:113:0x020e, B:77:0x01c7, B:90:0x01e2), top: B:6:0x0035 }] */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x00fa  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3574,11 +3558,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
         this.mDisabledSysPackages.put(attributeValue, packageSetting);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:106:0x019c A[EDGE_INSN: B:106:0x019c->B:76:0x019c BREAK  A[LOOP:4: B:71:0x0193->B:74:0x019b], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x013c A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0199 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x019e A[Catch: IOException -> 0x0182, XmlPullParserException -> 0x0185, TryCatch #5 {IOException -> 0x0182, XmlPullParserException -> 0x0185, blocks: (B:108:0x013c, B:110:0x0144, B:111:0x015a, B:113:0x0160, B:115:0x0188, B:70:0x018f, B:71:0x0193, B:77:0x019e, B:79:0x01ad, B:80:0x01b1, B:84:0x01ba, B:90:0x01c7, B:92:0x01d4, B:94:0x01e7, B:96:0x0205, B:97:0x0228, B:100:0x0214, B:101:0x022c, B:87:0x0249), top: B:107:0x013c }] */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x01ad A[Catch: IOException -> 0x0182, XmlPullParserException -> 0x0185, TryCatch #5 {IOException -> 0x0182, XmlPullParserException -> 0x0185, blocks: (B:108:0x013c, B:110:0x0144, B:111:0x015a, B:113:0x0160, B:115:0x0188, B:70:0x018f, B:71:0x0193, B:77:0x019e, B:79:0x01ad, B:80:0x01b1, B:84:0x01ba, B:90:0x01c7, B:92:0x01d4, B:94:0x01e7, B:96:0x0205, B:97:0x0228, B:100:0x0214, B:101:0x022c, B:87:0x0249), top: B:107:0x013c }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3591,8 +3570,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.Settings.readLPw(com.android.server.pm.ComputerLocked, java.util.List, com.samsung.android.server.pm.rescueparty.PackageManagerBackupController):boolean");
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(14:(6:344|(3:347|348|(1:350))|(1:(8:384|385|386|387|388|389|111|(9:113|(1:115)|116|(10:318|319|320|321|322|323|120|(2:121|(1:1)(2:(2:139|(1:316)(8:141|142|(2:144|(2:145|(2:(5:159|160|(2:162|(1:164)(1:168))(1:169)|165|166)|167)(2:172|150)))(2:173|(2:175|(2:176|(2:(5:185|186|(2:188|(1:190)(1:194))(1:195)|191|192)|193)(2:198|181)))(2:199|(5:201|152|153|154|155)(5:202|(5:204|(2:206|(1:208)(1:213))(1:214)|209|(1:211)|212)(2:215|(3:217|(1:219)(1:221)|220)(2:222|(2:224|(1:226)(2:227|(3:229|(1:231)(1:233)|232)(5:234|(3:236|(1:238)(1:241)|239)(2:242|(3:244|a16|249)(5:254|(3:256|(1:258)(4:268|(2:269|(1:1)(2:(3:281|282|(3:288|289|(3:291|292|293)(1:294))(3:284|285|286))|287))|275|276)|(5:260|(1:262)|263|(1:265)|266))(2:298|(1:300)(2:301|(1:303)(4:304|(4:306|(2:309|(1:311)(2:312|313))|314|313)(1:315)|154|155)))|267|154|155))|240|154|155)))))|153|154|155)))|151|152|153|154|155))(3:135|136|137)|138))|128|(2:130|131)(1:133))(1:118)|119|120|(3:121|(3:123|125|127)(1:317)|138)|128|(0)(0))(2:339|340))(2:382|383))(6:394|395|396|397|398|399)|110|111|(0)(0))(1:405)|351|352|353|355|356|357|358|359|360|(1:362)(1:365)|363|111|(0)(0)) */
-    /* JADX WARN: Can't wrap try/catch for region: R(27:0|1|2|3|5|6|(14:7|8|10|11|12|13|14|15|16|17|19|20|21|22)|(17:23|24|25|26|27|28|29|30|31|32|(1:35)|36|37|39|40|41|42)|(25:43|44|46|47|48|49|51|52|54|55|56|57|58|59|61|62|63|64|66|67|69|70|71|72|(11:73|74|76|77|78|79|81|82|(2:445|446)(1:84)|85|86))|(21:435|436|437|(2:439|440)|93|94|95|96|97|98|(2:411|412)|100|101|103|104|(2:406|407)(1:106)|(1:108)(1:(1:342)(14:(6:344|(3:347|348|(1:350))|(1:(8:384|385|386|387|388|389|111|(9:113|(1:115)|116|(10:318|319|320|321|322|323|120|(2:121|(1:1)(2:(2:139|(1:316)(8:141|142|(2:144|(2:145|(2:(5:159|160|(2:162|(1:164)(1:168))(1:169)|165|166)|167)(2:172|150)))(2:173|(2:175|(2:176|(2:(5:185|186|(2:188|(1:190)(1:194))(1:195)|191|192)|193)(2:198|181)))(2:199|(5:201|152|153|154|155)(5:202|(5:204|(2:206|(1:208)(1:213))(1:214)|209|(1:211)|212)(2:215|(3:217|(1:219)(1:221)|220)(2:222|(2:224|(1:226)(2:227|(3:229|(1:231)(1:233)|232)(5:234|(3:236|(1:238)(1:241)|239)(2:242|(3:244|a16|249)(5:254|(3:256|(1:258)(4:268|(2:269|(1:1)(2:(3:281|282|(3:288|289|(3:291|292|293)(1:294))(3:284|285|286))|287))|275|276)|(5:260|(1:262)|263|(1:265)|266))(2:298|(1:300)(2:301|(1:303)(4:304|(4:306|(2:309|(1:311)(2:312|313))|314|313)(1:315)|154|155)))|267|154|155))|240|154|155)))))|153|154|155)))|151|152|153|154|155))(3:135|136|137)|138))|128|(2:130|131)(1:133))(1:118)|119|120|(3:121|(3:123|125|127)(1:317)|138)|128|(0)(0))(2:339|340))(2:382|383))(6:394|395|396|397|398|399)|110|111|(0)(0))(1:405)|351|352|353|355|356|357|358|359|360|(1:362)(1:365)|363|111|(0)(0)))|109|110|111|(0)(0))(2:88|(9:419|420|421|(1:423)(1:432)|424|(1:426)|427|(1:429)|430)(2:90|(18:92|93|94|95|96|97|98|(0)|100|101|103|104|(0)(0)|(0)(0)|109|110|111|(0)(0))(17:417|94|95|96|97|98|(0)|100|101|103|104|(0)(0)|(0)(0)|109|110|111|(0)(0))))|431|94|95|96|97|98|(0)|100|101|103|104|(0)(0)|(0)(0)|109|110|111|(0)(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:366:0x0383, code lost:
     
         r2 = r6;
@@ -3651,26 +3628,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
         r13 = r23;
         r7 = r27;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x01f7  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x01fb A[Catch: NumberFormatException -> 0x01e8, TryCatch #37 {NumberFormatException -> 0x01e8, blocks: (B:407:0x01e1, B:108:0x01fb, B:342:0x0219), top: B:406:0x01e1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x06ba  */
-    /* JADX WARN: Removed duplicated region for block: B:123:0x07b5  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x0b6a  */
-    /* JADX WARN: Removed duplicated region for block: B:133:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:317:0x0b66 A[ADDED_TO_REGION, EDGE_INSN: B:317:0x0b66->B:128:0x0b66 BREAK  A[LOOP:0: B:121:0x07af->B:138:0x07af], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:339:0x0b76  */
-    /* JADX WARN: Removed duplicated region for block: B:341:0x0217  */
-    /* JADX WARN: Removed duplicated region for block: B:406:0x01e1 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:411:0x01b7 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r1v27, types: [com.android.server.utils.Watchable, com.android.server.utils.WatchableImpl, com.android.server.utils.WatchedArrayList] */
-    /* JADX WARN: Type inference failed for: r7v136 */
-    /* JADX WARN: Type inference failed for: r7v137 */
-    /* JADX WARN: Type inference failed for: r7v155 */
-    /* JADX WARN: Type inference failed for: r7v164, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r7v168 */
-    /* JADX WARN: Unreachable blocks removed: 1, instructions: 3 */
-    /* JADX WARN: Unreachable blocks removed: 1, instructions: 7 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3683,8 +3640,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.Settings.readPackageLPw(com.android.modules.utils.TypedXmlPullParser, java.util.ArrayList, android.util.ArrayMap, java.util.List, android.util.ArrayMap):void");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x0454 A[Catch: all -> 0x046e, TryCatch #2 {all -> 0x046e, blocks: (B:102:0x044c, B:104:0x0454, B:106:0x045c, B:108:0x0467, B:110:0x0464), top: B:101:0x044c }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4026,7 +3981,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
     
         if (r1.equals("last-platform-version") == false) goto L87;
      */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0299 A[Catch: all -> 0x003d, TryCatch #4 {all -> 0x003d, blocks: (B:3:0x0031, B:142:0x0037, B:9:0x004d, B:13:0x0067, B:14:0x006b, B:21:0x0079, B:24:0x008d, B:25:0x0091, B:29:0x009a, B:53:0x00ab, B:55:0x00b8, B:61:0x00ce, B:64:0x00de, B:65:0x00e2, B:67:0x00eb, B:68:0x00ef, B:70:0x00f8, B:71:0x00fc, B:74:0x0106, B:76:0x010f, B:77:0x0113, B:79:0x011c, B:80:0x0120, B:82:0x0128, B:83:0x012c, B:85:0x0134, B:87:0x013a, B:88:0x0140, B:90:0x0149, B:91:0x014e, B:93:0x0157, B:96:0x016a, B:97:0x0171, B:100:0x0181, B:101:0x01aa, B:103:0x01b2, B:104:0x01cb, B:106:0x01d4, B:107:0x01e3, B:110:0x01ee, B:112:0x01f6, B:113:0x01fd, B:115:0x0206, B:116:0x0232, B:124:0x023d, B:127:0x0241, B:41:0x0291, B:43:0x0299, B:45:0x02a1, B:47:0x02ac, B:48:0x02a9, B:119:0x0248, B:121:0x0252, B:122:0x0258, B:34:0x0288), top: B:2:0x0031 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4479,7 +4433,6 @@ public final class Settings implements Watchable, Snappable, ResilientAtomicFile
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0216 A[Catch: all -> 0x01fc, TRY_LEAVE, TryCatch #7 {all -> 0x01fc, blocks: (B:89:0x01c9, B:91:0x01e2, B:93:0x01ec, B:15:0x020d, B:17:0x0216), top: B:88:0x01c9 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -915,9 +915,6 @@ public final class AdaptiveBrightnessLongtermModelBuilder {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.server.display.AdaptiveBrightnessLongtermModelBuilder$3] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.display.AdaptiveBrightnessLongtermModelBuilder$1] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.server.display.AdaptiveBrightnessLongtermModelBuilder$1] */
     public AdaptiveBrightnessLongtermModelBuilder(
             Context context, BrightnessMappingStrategy brightnessMappingStrategy) {
         final int i = 0;

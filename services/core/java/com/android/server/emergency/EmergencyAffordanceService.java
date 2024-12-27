@@ -144,8 +144,6 @@ public final class EmergencyAffordanceService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.emergency.EmergencyAffordanceService$1] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.emergency.EmergencyAffordanceService$2] */
     public EmergencyAffordanceService(Context context) {
         super(context);
         this.mBroadcastReceiver =

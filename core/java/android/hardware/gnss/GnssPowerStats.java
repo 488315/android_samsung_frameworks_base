@@ -9,7 +9,6 @@ public class GnssPowerStats implements Parcelable {
     public static final Parcelable.Creator<GnssPowerStats> CREATOR =
             new Parcelable.Creator<
                     GnssPowerStats>() { // from class: android.hardware.gnss.GnssPowerStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GnssPowerStats createFromParcel(Parcel _aidl_source) {
                     GnssPowerStats _aidl_out = new GnssPowerStats();
@@ -17,7 +16,6 @@ public class GnssPowerStats implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GnssPowerStats[] newArray(int _aidl_size) {
                     return new GnssPowerStats[_aidl_size];

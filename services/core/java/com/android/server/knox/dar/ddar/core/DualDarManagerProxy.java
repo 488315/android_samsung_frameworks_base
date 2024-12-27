@@ -50,7 +50,6 @@ public final class DualDarManagerProxy extends IProxyAgentService {
         return dualDarManagerProxy;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x012b, code lost:
 
        return r0;

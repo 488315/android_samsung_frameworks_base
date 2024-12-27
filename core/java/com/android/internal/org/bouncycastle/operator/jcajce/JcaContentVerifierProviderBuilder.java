@@ -161,7 +161,6 @@ public class JcaContentVerifierProviderBuilder {
         return build(this.helper.convertPublicKey(publicKey));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ContentVerifier createCompositeVerifier(
             AlgorithmIdentifier compAlgId, PublicKey publicKey) throws OperatorCreationException {
         if (publicKey instanceof CompositePublicKey) {
@@ -191,7 +190,6 @@ public class JcaContentVerifierProviderBuilder {
         return new CompositeVerifier(sigs2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Signature createSignature(AlgorithmIdentifier algorithm, PublicKey publicKey)
             throws OperatorCreationException {
         try {
@@ -203,7 +201,6 @@ public class JcaContentVerifierProviderBuilder {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public Signature createRawSig(AlgorithmIdentifier algorithm, PublicKey publicKey) {
         try {
             Signature rawSig = this.helper.createRawSignature(algorithm);

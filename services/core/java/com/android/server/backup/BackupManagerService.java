@@ -410,7 +410,6 @@ public final class BackupManagerService extends IBackupManager.Stub {
         serviceForUserIfCallerHasPermission.backupNow();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0112  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1037,8 +1036,6 @@ public final class BackupManagerService extends IBackupManager.Stub {
         return strArr;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0072 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0077 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1481,8 +1478,6 @@ public final class BackupManagerService extends IBackupManager.Stub {
         restoreAtInstallForUser(binderGetCallingUserId(), str, i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0182  */
-    /* JADX WARN: Removed duplicated region for block: B:38:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2060,7 +2055,6 @@ public final class BackupManagerService extends IBackupManager.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00a4 A[Catch: all -> 0x0065, TRY_LEAVE, TryCatch #0 {all -> 0x0065, blocks: (B:15:0x0059, B:18:0x006b, B:38:0x007e, B:41:0x0083, B:23:0x009a, B:25:0x00a4, B:28:0x00ab, B:31:0x00b0, B:32:0x00b3, B:33:0x00db, B:21:0x008b, B:36:0x0093, B:49:0x00b6, B:52:0x00bb, B:45:0x00d2, B:43:0x00c3, B:47:0x00cb, B:27:0x00a8), top: B:14:0x0059, inners: #1, #3, #4 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

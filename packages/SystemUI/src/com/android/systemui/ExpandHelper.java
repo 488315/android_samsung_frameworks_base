@@ -83,7 +83,6 @@ public final class ExpandHelper implements Gefingerpoken {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [android.view.ScaleGestureDetector$OnScaleGestureListener, com.android.systemui.ExpandHelper$2] */
     public ExpandHelper(Context context, Callback callback, int i, int i2) {
         ?? r1 = new ScaleGestureDetector.SimpleOnScaleGestureListener() { // from class: com.android.systemui.ExpandHelper.2
             @Override // android.view.ScaleGestureDetector.SimpleOnScaleGestureListener, android.view.ScaleGestureDetector.OnScaleGestureListener
@@ -369,10 +368,6 @@ public final class ExpandHelper implements Gefingerpoken {
         this.mLastSpanY = this.mSGD.getCurrentSpan();
     }
 
-    /* JADX WARN: Type inference failed for: r3v1 */
-    /* JADX WARN: Type inference failed for: r3v12 */
-    /* JADX WARN: Type inference failed for: r3v3, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r3v8 */
     public final void finishExpanding(float f, boolean z, boolean z2) {
         final boolean z3;
         ?? r3;

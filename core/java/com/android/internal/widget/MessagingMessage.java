@@ -115,7 +115,6 @@ public interface MessagingMessage extends MessagingLinearLayout.MessagingChild {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* synthetic */ default void lambda$hideAnimated$0() {
         setIsHidingAnimated(false);
     }
@@ -129,7 +128,6 @@ public interface MessagingMessage extends MessagingLinearLayout.MessagingChild {
         getState().recycle();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     default View getView() {
         return (View) this;
     }

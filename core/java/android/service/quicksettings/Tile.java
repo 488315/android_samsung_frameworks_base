@@ -12,13 +12,11 @@ import android.util.Log;
 public final class Tile implements Parcelable {
     public static final Parcelable.Creator<Tile> CREATOR =
             new Parcelable.Creator<Tile>() { // from class: android.service.quicksettings.Tile.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Tile createFromParcel(Parcel source) {
                     return new Tile(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Tile[] newArray(int size) {
                     return new Tile[size];

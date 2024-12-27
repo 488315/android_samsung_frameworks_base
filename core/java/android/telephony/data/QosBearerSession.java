@@ -11,13 +11,11 @@ public final class QosBearerSession implements Parcelable {
     public static final Parcelable.Creator<QosBearerSession> CREATOR =
             new Parcelable.Creator<
                     QosBearerSession>() { // from class: android.telephony.data.QosBearerSession.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public QosBearerSession createFromParcel(Parcel source) {
                     return new QosBearerSession(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public QosBearerSession[] newArray(int size) {
                     return new QosBearerSession[size];

@@ -49,7 +49,6 @@ public final class SliceBroadcastRelayHandler implements CoreStartable {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.SliceBroadcastRelayHandler$1] */
     public SliceBroadcastRelayHandler(Context context, BroadcastDispatcher broadcastDispatcher, Executor executor) {
         this.mContext = context;
         this.mBroadcastDispatcher = broadcastDispatcher;

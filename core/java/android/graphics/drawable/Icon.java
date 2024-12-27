@@ -65,13 +65,11 @@ public final class Icon implements Parcelable {
     static final BlendMode DEFAULT_BLEND_MODE = Drawable.DEFAULT_BLEND_MODE;
     public static final Parcelable.Creator<Icon> CREATOR =
             new Parcelable.Creator<Icon>() { // from class: android.graphics.drawable.Icon.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Icon createFromParcel(Parcel in) {
                     return new Icon(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Icon[] newArray(int size) {
                     return new Icon[size];
@@ -244,7 +242,6 @@ public final class Icon implements Parcelable {
         return drawable;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private Drawable loadDrawableInner(Context context) {
         switch (this.mType) {
             case 1:

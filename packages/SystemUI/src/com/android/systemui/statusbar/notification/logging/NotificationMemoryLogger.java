@@ -73,8 +73,6 @@ public final class NotificationMemoryLogger implements StatsManager.StatsPullAto
         return (List) BuildersKt.runBlocking(this.mainDispatcher, new NotificationMemoryLogger$getAllNotificationsOnMainThread$1(this, null));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00de  */
-    /* JADX WARN: Removed duplicated region for block: B:28:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

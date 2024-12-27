@@ -229,7 +229,6 @@ public class CollectionUtils {
         return cur;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static <T> Set<T> addAll(Set<T> cur, Collection<T> collection) {
         if (isEmpty((Collection<?>) collection)) {
             return cur != null ? cur : Collections.emptySet();

@@ -47,7 +47,6 @@ public final class Log {
     @FastNative
     public static native boolean isLoggable(String str, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int logger_entry_max_payload_native();
 
     public static native int println_native(int i, int i2, String str, String str2);

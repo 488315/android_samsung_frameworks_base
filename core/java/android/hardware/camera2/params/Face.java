@@ -100,21 +100,18 @@ public final class Face {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void checkScore(int score) {
         if (score < 1 || score > 100) {
             throw new IllegalArgumentException("Confidence out of range");
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void checkId(int id) {
         if (id < 0 && id != -1) {
             throw new IllegalArgumentException("Id out of range");
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void checkFace(
             Point leftEyePosition, Point rightEyePosition, Point mouthPosition) {
         if (leftEyePosition != null || rightEyePosition != null || mouthPosition != null) {

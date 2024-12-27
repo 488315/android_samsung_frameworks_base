@@ -173,7 +173,6 @@ public final class ConversationNotificationManager {
                                         return null;
                                     }
                                 }), new Function1() { // from class: com.android.systemui.statusbar.notification.ConversationNotificationManager$updateNotificationRanking$3
-                                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                                     {
                                         super(1);
                                     }

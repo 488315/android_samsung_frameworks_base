@@ -426,7 +426,6 @@ public interface ITuner extends IInterface {
             reply.writeString(v);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements ITuner {
             private IBinder mRemote;
 

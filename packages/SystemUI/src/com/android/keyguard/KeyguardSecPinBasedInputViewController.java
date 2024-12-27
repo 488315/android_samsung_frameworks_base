@@ -87,9 +87,6 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
         ((KeyguardSecPinBasedInputView) keyguardSecPinBasedInputViewController.mView).doHapticKeyClick();
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.keyguard.KeyguardSecPinBasedInputViewController$1] */
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.keyguard.KeyguardSecPinBasedInputViewController$$ExternalSyntheticLambda7] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [com.android.keyguard.KeyguardSecPinBasedInputViewController$2] */
     public KeyguardSecPinBasedInputViewController(KeyguardSecPinBasedInputView keyguardSecPinBasedInputView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, LiftToActivateListener liftToActivateListener, EmergencyButtonController emergencyButtonController, FalsingCollector falsingCollector, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, KeyguardKeyboardInteractor keyguardKeyboardInteractor) {
         super(keyguardSecPinBasedInputView, configurationController, vibrationUtil, accessibilityManager, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, liftToActivateListener, emergencyButtonController, falsingCollector, featureFlags, selectedUserInteractor, keyguardKeyboardInteractor);
         this.mWindowRect = new Rect(0, 0, 0, 0);

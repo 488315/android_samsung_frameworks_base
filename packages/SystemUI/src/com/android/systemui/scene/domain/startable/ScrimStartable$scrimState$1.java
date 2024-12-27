@@ -18,7 +18,6 @@ final class ScrimStartable$scrimState$1 extends SuspendLambda implements Functio
     int label;
     final /* synthetic */ ScrimStartable this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScrimStartable$scrimState$1(ScrimStartable scrimStartable, Continuation continuation) {
         super(2, continuation);
         this.this$0 = scrimStartable;

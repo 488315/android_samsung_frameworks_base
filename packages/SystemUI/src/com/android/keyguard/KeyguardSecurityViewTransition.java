@@ -60,8 +60,6 @@ public final class KeyguardSecurityViewTransition extends Transition {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v2, types: [T, android.animation.ValueAnimator] */
     @Override // android.transition.Transition
     public final Animator createAnimator(ViewGroup viewGroup, TransitionValues transitionValues, TransitionValues transitionValues2) {
         if (transitionValues == null || transitionValues2 == null) {

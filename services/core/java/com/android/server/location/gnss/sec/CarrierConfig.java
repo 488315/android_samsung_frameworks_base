@@ -19,8 +19,6 @@ public final class CarrierConfig {
     public final HashMap mSalesCodeToCarrierMap;
     public String mSimOperator;
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Carrier {
         public static final /* synthetic */ Carrier[] $VALUES;
         public static final Carrier ARG_UFN;

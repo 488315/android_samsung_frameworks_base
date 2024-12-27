@@ -256,7 +256,6 @@ public class UpdateEngine {
             this.mLock = new Object();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getResult() {
             int i;
             synchronized (this.mLock) {

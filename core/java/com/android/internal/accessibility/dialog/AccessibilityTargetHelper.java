@@ -84,7 +84,6 @@ public final class AccessibilityTargetHelper {
         return targets;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean arePackageNameAndLabelTheSame(
             AccessibilityTarget serviceTarget, AccessibilityTarget activityTarget) {
         try {

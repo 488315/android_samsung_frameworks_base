@@ -47,8 +47,6 @@ public final class KeyguardVisibilityHelper {
     };
     public final KeyguardVisibilityHelper$$ExternalSyntheticLambda0 mSetVisibleEndRunnable = new KeyguardVisibilityHelper$$ExternalSyntheticLambda0(this);
 
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.keyguard.KeyguardVisibilityHelper$1] */
-    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.keyguard.KeyguardVisibilityHelper$2] */
     public KeyguardVisibilityHelper(View view, KeyguardStateController keyguardStateController, DozeParameters dozeParameters, ScreenOffAnimationController screenOffAnimationController, boolean z, LogBuffer logBuffer) {
         this.mView = view;
         this.mKeyguardStateController = keyguardStateController;

@@ -17,7 +17,6 @@ final class RotationLockControllerExtKt$isRotationLockEnabled$1 extends SuspendL
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RotationLockControllerExtKt$isRotationLockEnabled$1(RotationLockController rotationLockController, Continuation continuation) {
         super(2, continuation);
         this.$this_isRotationLockEnabled = rotationLockController;
@@ -46,7 +45,6 @@ final class RotationLockControllerExtKt$isRotationLockEnabled$1 extends SuspendL
             this.$this_isRotationLockEnabled.addCallback(rotationLockControllerCallback);
             final RotationLockController rotationLockController = this.$this_isRotationLockEnabled;
             Function0 function0 = new Function0() { // from class: com.android.systemui.util.kotlin.RotationLockControllerExtKt$isRotationLockEnabled$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -2,8 +2,6 @@ package com.android.systemui.keyguard.data.repository;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class BiometricType {
     public static final /* synthetic */ BiometricType[] $VALUES;
     public static final BiometricType FACE;

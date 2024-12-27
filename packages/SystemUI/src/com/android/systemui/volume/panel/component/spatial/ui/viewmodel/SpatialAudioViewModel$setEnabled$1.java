@@ -15,7 +15,6 @@ final class SpatialAudioViewModel$setEnabled$1 extends SuspendLambda implements 
     int label;
     final /* synthetic */ SpatialAudioViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SpatialAudioViewModel$setEnabled$1(SpatialAudioViewModel spatialAudioViewModel, SpatialAudioEnabledModel spatialAudioEnabledModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = spatialAudioViewModel;

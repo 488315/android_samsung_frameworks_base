@@ -12,7 +12,6 @@ public class Request implements Parcelable {
     public static final Parcelable.Creator<Request> CREATOR =
             new Parcelable.Creator<
                     Request>() { // from class: android.hardware.camera2.extension.Request.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Request createFromParcel(Parcel _aidl_source) {
                     Request _aidl_out = new Request();
@@ -20,7 +19,6 @@ public class Request implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Request[] newArray(int _aidl_size) {
                     return new Request[_aidl_size];

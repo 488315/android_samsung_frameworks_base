@@ -399,7 +399,6 @@ public final class OnDeviceIntelligenceManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,
@@ -1173,7 +1172,6 @@ public final class OnDeviceIntelligenceManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.ondeviceintelligence.OnDeviceIntelligenceManagerService$10] */
     public final synchronized Handler getTemporaryHandler() {
         try {
             if (this.mTemporaryHandler == null) {

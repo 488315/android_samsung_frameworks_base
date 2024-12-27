@@ -96,7 +96,6 @@ public class MultiWindowShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$cmdShowAllCommands$0(
             PrintWriter printWriter, String str, Method method) {
         StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("cmd=", str, "    method=");

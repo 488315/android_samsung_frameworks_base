@@ -17,17 +17,14 @@ public abstract class Primes {
         private BigInteger factor;
         private boolean provablyComposite;
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static MROutput probablyPrime() {
             return new MROutput(false, null);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static MROutput provablyCompositeWithFactor(BigInteger factor) {
             return new MROutput(true, factor);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static MROutput provablyCompositeNotPrimePower() {
             return new MROutput(true, null);
         }

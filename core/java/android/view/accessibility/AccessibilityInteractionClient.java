@@ -404,8 +404,6 @@ public final class AccessibilityInteractionClient
                 connectionId, windowId, accessibilityNodeId, bypassCache, prefetchFlags, arguments);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x01f7 A[Catch: RemoteException -> 0x0203, TryCatch #1 {RemoteException -> 0x0203, blocks: (B:35:0x014e, B:40:0x015f, B:42:0x0169, B:43:0x018d, B:45:0x0192, B:47:0x0198, B:52:0x01a1, B:54:0x01ad, B:55:0x01d1, B:58:0x01d7, B:59:0x01da, B:65:0x01ed, B:66:0x01f1, B:15:0x01f7, B:16:0x0202), top: B:13:0x00ae }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00b0 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -601,7 +599,6 @@ public final class AccessibilityInteractionClient
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$takeScreenshotOfWindow$1(
             int interactionId, ScreenCapture.ScreenshotHardwareBuffer screenshot, int status) {
         if (status != 0) {
@@ -611,7 +608,6 @@ public final class AccessibilityInteractionClient
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$takeScreenshotOfWindow$2(int interactionId) {
         synchronized (this.mInstanceLock) {
             if (this.mTakeScreenshotOfWindowCallbacks.contains(interactionId)) {
@@ -1470,7 +1466,6 @@ public final class AccessibilityInteractionClient
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$attachAccessibilityOverlayToWindow$7(int interactionId) {
         synchronized (this.mInstanceLock) {
             if (this.mAttachAccessibilityOverlayCallbacks.contains(interactionId)) {
@@ -1520,7 +1515,6 @@ public final class AccessibilityInteractionClient
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$attachAccessibilityOverlayToDisplay$9(int interactionId) {
         if (this.mAttachAccessibilityOverlayCallbacks.contains(interactionId)) {
             sendAttachOverlayResult(1, interactionId);

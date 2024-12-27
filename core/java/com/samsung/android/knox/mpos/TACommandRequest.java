@@ -12,13 +12,11 @@ public class TACommandRequest implements Parcelable {
             new Parcelable.Creator<
                     TACommandRequest>() { // from class:
                                           // com.samsung.android.knox.mpos.TACommandRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TACommandRequest createFromParcel(Parcel in) {
                     return new TACommandRequest(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TACommandRequest[] newArray(int size) {
                     return new TACommandRequest[size];

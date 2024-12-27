@@ -29,8 +29,6 @@ public final class SearcleTipLayoutHelper {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class DirectionType {
         public static final /* synthetic */ DirectionType[] $VALUES;
         public static final DirectionType XOnLTR;
@@ -67,8 +65,6 @@ public final class SearcleTipLayoutHelper {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class TipsNaviAlign {
         public static final /* synthetic */ TipsNaviAlign[] $VALUES;
         public static final TipsNaviAlign Center;

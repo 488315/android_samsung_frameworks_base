@@ -323,7 +323,6 @@ public interface IAdvancedExtenderImpl extends IInterface {
             _arg1.put(k, v);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements IAdvancedExtenderImpl {
             private IBinder mRemote;
 

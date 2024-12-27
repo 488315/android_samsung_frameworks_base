@@ -101,10 +101,6 @@ public final class ClipboardOverlayController implements ClipboardOverlayView.Cl
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v3, types: [android.content.BroadcastReceiver, com.android.systemui.clipboardoverlay.ClipboardOverlayController$2] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [android.content.BroadcastReceiver, com.android.systemui.clipboardoverlay.ClipboardOverlayController$3] */
-    /* JADX WARN: Type inference failed for: r2v9, types: [com.android.systemui.clipboardoverlay.ClipboardOverlayController$5] */
     public ClipboardOverlayController(Context context, ClipboardOverlayView clipboardOverlayView, final ClipboardOverlayWindow clipboardOverlayWindow, BroadcastDispatcher broadcastDispatcher, BroadcastSender broadcastSender, TimeoutHandler timeoutHandler, FeatureFlags featureFlags, ClipboardOverlayUtils clipboardOverlayUtils, Executor executor, ClipboardImageLoader clipboardImageLoader, ClipboardTransitionExecutor clipboardTransitionExecutor, UiEventLogger uiEventLogger) {
         ClipboardOverlayView.ClipboardOverlayCallbacks clipboardOverlayCallbacks = new ClipboardOverlayView.ClipboardOverlayCallbacks() { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayController.1
             @Override // com.android.systemui.clipboardoverlay.ClipboardOverlayView.ClipboardOverlayCallbacks

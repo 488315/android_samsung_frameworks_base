@@ -11,7 +11,6 @@ import java.util.StringJoiner;
 public class Identity implements Parcelable {
     public static final Parcelable.Creator<Identity> CREATOR =
             new Parcelable.Creator<Identity>() { // from class: android.media.permission.Identity.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Identity createFromParcel(Parcel _aidl_source) {
                     Identity _aidl_out = new Identity();
@@ -19,7 +18,6 @@ public class Identity implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Identity[] newArray(int _aidl_size) {
                     return new Identity[_aidl_size];

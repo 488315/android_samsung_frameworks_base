@@ -410,8 +410,6 @@ public final class MediaSessionRecord extends MediaSessionRecordImpl implements 
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r3v1, types: [android.os.IBinder$DeathRecipient, com.android.server.media.MediaSessionRecord$ControllerStub$$ExternalSyntheticLambda0] */
         public final void registerCallback(String str, final ISessionControllerCallback iSessionControllerCallback) {
             synchronized (MediaSessionRecord.this.mLock) {
                 MediaSessionRecord mediaSessionRecord = MediaSessionRecord.this;
@@ -958,7 +956,6 @@ public final class MediaSessionRecord extends MediaSessionRecordImpl implements 
             MediaSessionRecord.this.mHandler.post(1);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:15:0x0040 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1215,8 +1212,6 @@ public final class MediaSessionRecord extends MediaSessionRecordImpl implements 
         mediaSessionRecord.mService.notifyRemoteVolumeChanged(i4, mediaSessionRecord);
     }
 
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.media.MediaSessionRecord$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.media.MediaSessionRecord$$ExternalSyntheticLambda0] */
     public MediaSessionRecord(int i, int i2, int i3, String str, ISessionCallback iSessionCallback, String str2, Bundle bundle, MediaSessionService mediaSessionService, Looper looper, int i4) {
         final int i5 = 0;
         this.mUserEngagementTimeoutExpirationRunnable = new Runnable() { // from class: com.android.server.media.MediaSessionRecord$$ExternalSyntheticLambda0
@@ -1371,16 +1366,6 @@ public final class MediaSessionRecord extends MediaSessionRecordImpl implements 
         final int i11 = i8;
         final int i12 = i5;
         this.mHandler.post(new Runnable() { // from class: com.android.server.media.MediaSessionRecord$$ExternalSyntheticLambda3
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.media.MediaSessionRecord, java.lang.Object] */
-            /* JADX WARN: Type inference failed for: r1v1 */
-            /* JADX WARN: Type inference failed for: r1v10 */
-            /* JADX WARN: Type inference failed for: r1v2, types: [int] */
-            /* JADX WARN: Type inference failed for: r1v6 */
-            /* JADX WARN: Type inference failed for: r1v7 */
-            /* JADX WARN: Type inference failed for: r1v8 */
-            /* JADX WARN: Type inference failed for: r1v9 */
-            /* JADX WARN: Type inference failed for: r2v1, types: [java.lang.StringBuilder] */
             @Override // java.lang.Runnable
             public final void run() {
                 ?? r1 = MediaSessionRecord.this;
@@ -1715,8 +1700,6 @@ public final class MediaSessionRecord extends MediaSessionRecordImpl implements 
         return AmFmBandRange$$ExternalSyntheticOutline0.m(this.mUserId, sb, ")");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x003c A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x003d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -647,8 +647,6 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:44:? -> B:41:0x00cd). Please report as a decompilation issue!!! */
     public void checkAndFireSequenceComplete() {
         CaptureCallbackHolder holder;
         long completedFrameNumber;
@@ -745,7 +743,6 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removeCompletedCallbackHolderLocked(
             long lastCompletedRegularFrameNumber,
             long lastCompletedReprocessFrameNumber,
@@ -833,7 +830,6 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isClosed() {
         return this.mClosing.get();
     }

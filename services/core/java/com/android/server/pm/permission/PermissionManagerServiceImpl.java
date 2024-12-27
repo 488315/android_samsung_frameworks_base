@@ -1318,12 +1318,6 @@ public final class PermissionManagerServiceImpl implements PermissionManagerServ
         grantRuntimePermissionInternal(str, str2, checkUidPermission(callingUid, "android.permission.ADJUST_RUNTIME_PERMISSIONS_POLICY", "default:0") == 0, callingUid, i, this.mDefaultPermissionCallback);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:119:0x028a  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x02aa  */
-    /* JADX WARN: Removed duplicated region for block: B:129:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:145:0x00bf  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00a4  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00c5 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1521,7 +1515,6 @@ public final class PermissionManagerServiceImpl implements PermissionManagerServ
         }
     }
 
-    /* JADX WARN: Finally extract failed */
     @Override // com.android.server.pm.permission.PermissionManagerServiceInterface
     public final void onPackageAdded(PackageState packageState, boolean z, final AndroidPackage androidPackage) {
         PermissionInfo generatePermissionInfo;
@@ -1939,10 +1932,6 @@ public final class PermissionManagerServiceImpl implements PermissionManagerServ
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00e6  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00f4  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x013f  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x00e8  */
     @Override // com.android.server.pm.permission.PermissionManagerServiceInterface
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2084,10 +2073,6 @@ public final class PermissionManagerServiceImpl implements PermissionManagerServ
     
         r0 = move-exception;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r12v0 */
-    /* JADX WARN: Type inference failed for: r12v1 */
-    /* JADX WARN: Type inference failed for: r12v9 */
     @Override // com.android.server.pm.permission.PermissionManagerServiceInterface
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2333,8 +2318,6 @@ public final class PermissionManagerServiceImpl implements PermissionManagerServ
         resetRuntimePermissionsInternal(null, i);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r11v0, types: [com.android.server.pm.permission.PermissionManagerServiceImpl$2] */
     public final void resetRuntimePermissionsInternal(AndroidPackage androidPackage, final int i) {
         boolean[] zArr = new boolean[1];
         ArraySet arraySet = new ArraySet();
@@ -2527,15 +2510,6 @@ public final class PermissionManagerServiceImpl implements PermissionManagerServ
     
         if (r2 != null) goto L50;
      */
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Removed duplicated region for block: B:207:0x043a A[Catch: all -> 0x0370, TryCatch #0 {all -> 0x0370, blocks: (B:149:0x02df, B:151:0x02e8, B:153:0x0307, B:154:0x030b, B:156:0x0311, B:159:0x0326, B:161:0x0336, B:163:0x033c, B:167:0x0349, B:171:0x0352, B:177:0x0367, B:180:0x0361, B:183:0x0373, B:185:0x0377, B:187:0x0383, B:191:0x038f, B:199:0x039f, B:201:0x03b1, B:203:0x03c0, B:204:0x0423, B:205:0x0434, B:207:0x043a, B:213:0x045f, B:218:0x046d, B:220:0x0475, B:222:0x047f, B:223:0x0482, B:228:0x04a5, B:232:0x04b0, B:234:0x04c0, B:235:0x04ca, B:236:0x04cd, B:240:0x04da, B:242:0x04e0, B:244:0x04e6, B:246:0x04f3, B:249:0x04fc, B:253:0x0509, B:255:0x050f, B:257:0x0521, B:259:0x0527, B:262:0x0532, B:265:0x0539, B:267:0x0543, B:268:0x054b, B:271:0x055c, B:279:0x0575, B:281:0x057b, B:285:0x0588, B:286:0x0598, B:288:0x05a6, B:290:0x05aa, B:291:0x05ae, B:293:0x05b2, B:295:0x05be, B:297:0x05da, B:299:0x05de, B:301:0x05e8, B:303:0x05ed, B:305:0x05f3, B:313:0x0676, B:315:0x067a, B:319:0x0680, B:321:0x068e, B:331:0x05cd, B:333:0x05d3, B:346:0x0608, B:348:0x0614, B:352:0x0621, B:353:0x0627, B:355:0x062b, B:357:0x0637, B:359:0x0643, B:360:0x064e, B:362:0x0658, B:370:0x0669, B:380:0x069b, B:382:0x06cd, B:389:0x0777, B:392:0x0787, B:394:0x078d, B:396:0x0797, B:398:0x06e7, B:400:0x06ed, B:402:0x06f3, B:405:0x0705, B:407:0x070b, B:409:0x0711, B:412:0x071c, B:414:0x0722, B:416:0x073b, B:418:0x0741, B:420:0x0747, B:423:0x0753, B:425:0x0759, B:427:0x075f, B:429:0x0771, B:431:0x0780, B:434:0x0765, B:436:0x076b, B:439:0x0728, B:459:0x07e1, B:461:0x07ea, B:465:0x07f9, B:468:0x0804, B:472:0x07ce, B:474:0x07db, B:476:0x03d0, B:478:0x03e1, B:480:0x03f1, B:482:0x03fd, B:484:0x0407, B:488:0x0412, B:494:0x0419, B:500:0x085d), top: B:148:0x02df }] */
-    /* JADX WARN: Removed duplicated region for block: B:310:0x066e A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:315:0x067a A[Catch: all -> 0x0370, TryCatch #0 {all -> 0x0370, blocks: (B:149:0x02df, B:151:0x02e8, B:153:0x0307, B:154:0x030b, B:156:0x0311, B:159:0x0326, B:161:0x0336, B:163:0x033c, B:167:0x0349, B:171:0x0352, B:177:0x0367, B:180:0x0361, B:183:0x0373, B:185:0x0377, B:187:0x0383, B:191:0x038f, B:199:0x039f, B:201:0x03b1, B:203:0x03c0, B:204:0x0423, B:205:0x0434, B:207:0x043a, B:213:0x045f, B:218:0x046d, B:220:0x0475, B:222:0x047f, B:223:0x0482, B:228:0x04a5, B:232:0x04b0, B:234:0x04c0, B:235:0x04ca, B:236:0x04cd, B:240:0x04da, B:242:0x04e0, B:244:0x04e6, B:246:0x04f3, B:249:0x04fc, B:253:0x0509, B:255:0x050f, B:257:0x0521, B:259:0x0527, B:262:0x0532, B:265:0x0539, B:267:0x0543, B:268:0x054b, B:271:0x055c, B:279:0x0575, B:281:0x057b, B:285:0x0588, B:286:0x0598, B:288:0x05a6, B:290:0x05aa, B:291:0x05ae, B:293:0x05b2, B:295:0x05be, B:297:0x05da, B:299:0x05de, B:301:0x05e8, B:303:0x05ed, B:305:0x05f3, B:313:0x0676, B:315:0x067a, B:319:0x0680, B:321:0x068e, B:331:0x05cd, B:333:0x05d3, B:346:0x0608, B:348:0x0614, B:352:0x0621, B:353:0x0627, B:355:0x062b, B:357:0x0637, B:359:0x0643, B:360:0x064e, B:362:0x0658, B:370:0x0669, B:380:0x069b, B:382:0x06cd, B:389:0x0777, B:392:0x0787, B:394:0x078d, B:396:0x0797, B:398:0x06e7, B:400:0x06ed, B:402:0x06f3, B:405:0x0705, B:407:0x070b, B:409:0x0711, B:412:0x071c, B:414:0x0722, B:416:0x073b, B:418:0x0741, B:420:0x0747, B:423:0x0753, B:425:0x0759, B:427:0x075f, B:429:0x0771, B:431:0x0780, B:434:0x0765, B:436:0x076b, B:439:0x0728, B:459:0x07e1, B:461:0x07ea, B:465:0x07f9, B:468:0x0804, B:472:0x07ce, B:474:0x07db, B:476:0x03d0, B:478:0x03e1, B:480:0x03f1, B:482:0x03fd, B:484:0x0407, B:488:0x0412, B:494:0x0419, B:500:0x085d), top: B:148:0x02df }] */
-    /* JADX WARN: Removed duplicated region for block: B:319:0x0680 A[Catch: all -> 0x0370, TryCatch #0 {all -> 0x0370, blocks: (B:149:0x02df, B:151:0x02e8, B:153:0x0307, B:154:0x030b, B:156:0x0311, B:159:0x0326, B:161:0x0336, B:163:0x033c, B:167:0x0349, B:171:0x0352, B:177:0x0367, B:180:0x0361, B:183:0x0373, B:185:0x0377, B:187:0x0383, B:191:0x038f, B:199:0x039f, B:201:0x03b1, B:203:0x03c0, B:204:0x0423, B:205:0x0434, B:207:0x043a, B:213:0x045f, B:218:0x046d, B:220:0x0475, B:222:0x047f, B:223:0x0482, B:228:0x04a5, B:232:0x04b0, B:234:0x04c0, B:235:0x04ca, B:236:0x04cd, B:240:0x04da, B:242:0x04e0, B:244:0x04e6, B:246:0x04f3, B:249:0x04fc, B:253:0x0509, B:255:0x050f, B:257:0x0521, B:259:0x0527, B:262:0x0532, B:265:0x0539, B:267:0x0543, B:268:0x054b, B:271:0x055c, B:279:0x0575, B:281:0x057b, B:285:0x0588, B:286:0x0598, B:288:0x05a6, B:290:0x05aa, B:291:0x05ae, B:293:0x05b2, B:295:0x05be, B:297:0x05da, B:299:0x05de, B:301:0x05e8, B:303:0x05ed, B:305:0x05f3, B:313:0x0676, B:315:0x067a, B:319:0x0680, B:321:0x068e, B:331:0x05cd, B:333:0x05d3, B:346:0x0608, B:348:0x0614, B:352:0x0621, B:353:0x0627, B:355:0x062b, B:357:0x0637, B:359:0x0643, B:360:0x064e, B:362:0x0658, B:370:0x0669, B:380:0x069b, B:382:0x06cd, B:389:0x0777, B:392:0x0787, B:394:0x078d, B:396:0x0797, B:398:0x06e7, B:400:0x06ed, B:402:0x06f3, B:405:0x0705, B:407:0x070b, B:409:0x0711, B:412:0x071c, B:414:0x0722, B:416:0x073b, B:418:0x0741, B:420:0x0747, B:423:0x0753, B:425:0x0759, B:427:0x075f, B:429:0x0771, B:431:0x0780, B:434:0x0765, B:436:0x076b, B:439:0x0728, B:459:0x07e1, B:461:0x07ea, B:465:0x07f9, B:468:0x0804, B:472:0x07ce, B:474:0x07db, B:476:0x03d0, B:478:0x03e1, B:480:0x03f1, B:482:0x03fd, B:484:0x0407, B:488:0x0412, B:494:0x0419, B:500:0x085d), top: B:148:0x02df }] */
-    /* JADX WARN: Removed duplicated region for block: B:325:0x068a  */
-    /* JADX WARN: Removed duplicated region for block: B:441:0x072e  */
-    /* JADX WARN: Removed duplicated region for block: B:463:0x07f5  */
-    /* JADX WARN: Removed duplicated region for block: B:470:0x0803  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2624,7 +2598,6 @@ public final class PermissionManagerServiceImpl implements PermissionManagerServ
     
         throw new java.lang.SecurityException("Cannot revoke policy fixed permission " + r19 + " for package " + r18);
      */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0090 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2863,9 +2836,6 @@ public final class PermissionManagerServiceImpl implements PermissionManagerServ
         return iArr2;
     }
 
-    /* JADX WARN: Finally extract failed */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x005a A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x005c  */
     @Override // com.android.server.pm.permission.PermissionManagerServiceInterface
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -3246,7 +3216,6 @@ public final class PermissionManagerServiceImpl implements PermissionManagerServ
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:80:0x01f9 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

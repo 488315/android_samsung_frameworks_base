@@ -26,7 +26,6 @@ final class MediaCardKt$showInAppCastingPopup$1 extends SuspendLambda implements
     final /* synthetic */ MediaInteraction $viewModel;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaCardKt$showInAppCastingPopup$1(Context context, SnackbarHostState snackbarHostState, State state, MediaInteraction mediaInteraction, Function0 function0, Continuation continuation) {
         super(2, continuation);
         this.$context = context;

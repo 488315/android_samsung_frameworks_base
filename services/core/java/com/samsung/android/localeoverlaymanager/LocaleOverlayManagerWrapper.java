@@ -35,8 +35,6 @@ public final class LocaleOverlayManagerWrapper {
     public final ScheduledExecutorService mExecutor = Executors.newSingleThreadScheduledExecutor();
     public final Queue mPendingRequestQueue = new ConcurrentLinkedQueue();
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.samsung.android.localeoverlaymanager.LocaleOverlayManagerWrapper$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.samsung.android.localeoverlaymanager.LocaleOverlayManagerWrapper$$ExternalSyntheticLambda0] */
     public LocaleOverlayManagerWrapper(Context context) {
         final int i = 0;
         this.mPendingActionRunnable =
@@ -260,7 +258,6 @@ public final class LocaleOverlayManagerWrapper {
         requestPendingActions();
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.samsung.android.localeoverlaymanager.LocaleOverlayManager$$ExternalSyntheticLambda0] */
     public final void initManager() {
         LocaleOverlayManager localeOverlayManager = this.mManager;
         if (localeOverlayManager != null && localeOverlayManager.isAlive()) {

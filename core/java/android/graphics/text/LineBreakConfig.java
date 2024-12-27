@@ -32,7 +32,6 @@ public final class LineBreakConfig implements Parcelable {
     public static final Parcelable.Creator<LineBreakConfig> CREATOR =
             new Parcelable.Creator<
                     LineBreakConfig>() { // from class: android.graphics.text.LineBreakConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LineBreakConfig createFromParcel(Parcel source) {
                     int lineBreakStyle = source.readInt();
@@ -41,7 +40,6 @@ public final class LineBreakConfig implements Parcelable {
                     return new LineBreakConfig(lineBreakStyle, lineBreakWordStyle, hyphenation);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LineBreakConfig[] newArray(int size) {
                     return new LineBreakConfig[size];

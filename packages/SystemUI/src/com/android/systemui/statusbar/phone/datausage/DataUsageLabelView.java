@@ -26,16 +26,6 @@ public final class DataUsageLabelView extends DataUsageLabelCommonView {
     public Thread mThread;
     public final AnonymousClass3 mUpdateRunnable;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:13:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0052 A[Catch: Exception -> 0x004d, TRY_LEAVE, TryCatch #2 {Exception -> 0x004d, blocks: (B:8:0x0052, B:24:0x004c, B:27:0x0049, B:23:0x0044), top: B:4:0x001f, inners: #3 }] */
-    /* JADX WARN: Type inference failed for: r3v1, types: [android.content.ContentResolver] */
-    /* JADX WARN: Type inference failed for: r4v3, types: [android.net.Uri] */
-    /* JADX WARN: Type inference failed for: r4v4 */
-    /* JADX WARN: Type inference failed for: r4v5 */
-    /* JADX WARN: Type inference failed for: r4v6 */
-    /* JADX WARN: Type inference failed for: r4v7, types: [java.lang.String] */
     /* renamed from: -$$Nest$mgetDataUsageResult, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -113,8 +103,6 @@ public final class DataUsageLabelView extends DataUsageLabelCommonView {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.datausage.DataUsageLabelView.m2236$$Nest$mgetDataUsageResult(com.android.systemui.statusbar.phone.datausage.DataUsageLabelView):java.lang.String");
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.statusbar.phone.datausage.DataUsageLabelView$1] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.statusbar.phone.datausage.DataUsageLabelView$3] */
     public DataUsageLabelView(Context context) {
         super(context);
         this.mHandler = null;
@@ -216,8 +204,6 @@ public final class DataUsageLabelView extends DataUsageLabelCommonView {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.phone.datausage.DataUsageLabelView$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.phone.datausage.DataUsageLabelView$3] */
     public DataUsageLabelView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.mHandler = null;
@@ -262,8 +248,6 @@ public final class DataUsageLabelView extends DataUsageLabelCommonView {
         initView();
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.phone.datausage.DataUsageLabelView$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.phone.datausage.DataUsageLabelView$3] */
     public DataUsageLabelView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mHandler = null;

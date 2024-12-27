@@ -161,7 +161,6 @@ public final class NotifTimeSortCoordnator implements Coordinator {
         return getTime(representativeEntry);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final long getTime(NotificationEntry notificationEntry) {
         if (notificationEntry == null) {
             return 0L;
@@ -170,12 +169,10 @@ public final class NotifTimeSortCoordnator implements Coordinator {
         return j > 0 ? j : notificationEntry.mSbn.getPostTime();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final int getTimeCompare(ListEntry listEntry, ListEntry listEntry2) {
         return Long.compare(calculateRepresentativeNotificationTime(listEntry2), calculateRepresentativeNotificationTime(listEntry));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final boolean isIncludedPriortyList(ListEntry listEntry) {
         NotificationChannel channel;
         NotificationEntry representativeEntry = listEntry.getRepresentativeEntry();
@@ -204,7 +201,6 @@ public final class NotifTimeSortCoordnator implements Coordinator {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void sortChildren(ListEntry listEntry, NotifComparator notifComparator) {
         if (listEntry instanceof GroupEntry) {
             ((ArrayList) ((GroupEntry) listEntry).mChildren).sort(notifComparator);

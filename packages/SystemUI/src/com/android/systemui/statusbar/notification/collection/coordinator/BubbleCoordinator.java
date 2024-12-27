@@ -68,9 +68,6 @@ public class BubbleCoordinator implements Coordinator {
             BubbleCoordinator.this.mOnEndDismissInterception = onEndDismissInterception;
         }
 
-        /* JADX WARN: Type inference failed for: r7v0, types: [com.android.systemui.wmshell.BubblesManager$$ExternalSyntheticLambda3] */
-        /* JADX WARN: Type inference failed for: r7v1, types: [com.android.wm.shell.bubbles.BubbleController$BubblesImpl$$ExternalSyntheticLambda12] */
-        /* JADX WARN: Type inference failed for: r8v0, types: [com.android.wm.shell.bubbles.BubbleController$BubblesImpl$$ExternalSyntheticLambda11] */
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifDismissInterceptor
         public boolean shouldInterceptDismissal(final NotificationEntry notificationEntry) {
             final ArrayList arrayList;
@@ -249,12 +246,10 @@ public class BubbleCoordinator implements Coordinator {
         this.mNotifCollection = notifCollection;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isInterceptingDismissal(NotificationEntry notificationEntry) {
         return this.mInterceptedDismissalEntries.contains(notificationEntry.mKey);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void lambda$attach$0(BubblesManager bubblesManager) {
         ((ArrayList) bubblesManager.mCallbacks).add(this.mNotifCallback);
     }

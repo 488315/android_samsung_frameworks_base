@@ -51,14 +51,6 @@ public final class ScreenshotPolicyImpl implements ScreenshotPolicy {
         this.systemUiContent = new ScreenshotPolicy.DisplayContentInfo(new ComponentName(context, (Class<?>) SystemUIService.class), new Rect(), Process.myUserHandle(), -1);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00a8  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00a0 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x005b  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -173,8 +165,6 @@ public final class ScreenshotPolicyImpl implements ScreenshotPolicy {
         return BuildersKt.withContext(screenshotPolicyImpl.bgDispatcher, new ScreenshotPolicyImpl$getAllRootTaskInfosOnDisplay$2(screenshotPolicyImpl, i, null), continuation);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

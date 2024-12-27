@@ -7,13 +7,11 @@ public final class FaceDataFrame implements Parcelable {
     public static final Parcelable.Creator<FaceDataFrame> CREATOR =
             new Parcelable.Creator<
                     FaceDataFrame>() { // from class: android.hardware.face.FaceDataFrame.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceDataFrame createFromParcel(Parcel source) {
                     return new FaceDataFrame(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FaceDataFrame[] newArray(int size) {
                     return new FaceDataFrame[size];

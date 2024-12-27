@@ -267,7 +267,6 @@ public final class LppeFusedLocationHelper implements GnssNative.LppeHelperCallb
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.location.gnss.sec.LppeFusedLocationHelper$1] */
     public LppeFusedLocationHelper(Context context, GnssNative gnssNative, Looper looper) {
         this.mLocationManager = null;
         Log.d("LppeFusedLocationHelper", "Constructor");

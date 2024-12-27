@@ -508,7 +508,6 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
         this.mEnabled = true;
     }
 
-    /* JADX WARN: Type inference failed for: r4v8, types: [com.android.server.notification.ValidateNotificationPeople$1] */
     @Override // com.android.server.notification.NotificationSignalExtractor
     public final void initialize(
             final Context context, NotificationUsageStats notificationUsageStats) {
@@ -554,8 +553,6 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
                                     .post(
                                             new Runnable() { // from class:
                                                 // com.android.server.notification.ValidateNotificationPeople$$ExternalSyntheticLambda1
-                                                /* JADX WARN: Removed duplicated region for block: B:27:0x00cf A[SYNTHETIC] */
-                                                /* JADX WARN: Removed duplicated region for block: B:31:0x0057 A[SYNTHETIC] */
                                                 @Override // java.lang.Runnable
                                                 /*
                                                     Code decompiled incorrectly, please refer to instructions dump.
@@ -711,7 +708,6 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
         return validatePeople;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0081 A[Catch: all -> 0x007a, TryCatch #0 {all -> 0x007a, blocks: (B:20:0x0054, B:22:0x0066, B:25:0x006d, B:27:0x0071, B:29:0x0081, B:31:0x008d, B:33:0x0093, B:34:0x0096, B:35:0x0097, B:52:0x007c), top: B:19:0x0054 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

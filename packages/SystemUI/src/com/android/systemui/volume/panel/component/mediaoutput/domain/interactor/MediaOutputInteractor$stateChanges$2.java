@@ -14,7 +14,6 @@ final class MediaOutputInteractor$stateChanges$2 extends SuspendLambda implement
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaOutputInteractor$stateChanges$2(MediaController mediaController, Continuation continuation) {
         super(2, continuation);
         this.$this_stateChanges = mediaController;

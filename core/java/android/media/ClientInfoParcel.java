@@ -8,7 +8,6 @@ public class ClientInfoParcel implements Parcelable {
     public static final Parcelable.Creator<ClientInfoParcel> CREATOR =
             new Parcelable.Creator<
                     ClientInfoParcel>() { // from class: android.media.ClientInfoParcel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClientInfoParcel createFromParcel(Parcel _aidl_source) {
                     ClientInfoParcel _aidl_out = new ClientInfoParcel();
@@ -16,7 +15,6 @@ public class ClientInfoParcel implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ClientInfoParcel[] newArray(int _aidl_size) {
                     return new ClientInfoParcel[_aidl_size];

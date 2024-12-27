@@ -183,8 +183,6 @@ public final class MainFragment extends Fragment {
         this.panelView = null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v5, types: [T, android.content.Intent] */
     @Override // androidx.fragment.app.Fragment
     public final boolean onOptionsItemSelected(MenuItem menuItem) {
         Object obj;

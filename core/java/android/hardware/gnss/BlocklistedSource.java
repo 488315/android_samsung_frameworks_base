@@ -8,7 +8,6 @@ public class BlocklistedSource implements Parcelable {
     public static final Parcelable.Creator<BlocklistedSource> CREATOR =
             new Parcelable.Creator<
                     BlocklistedSource>() { // from class: android.hardware.gnss.BlocklistedSource.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BlocklistedSource createFromParcel(Parcel _aidl_source) {
                     BlocklistedSource _aidl_out = new BlocklistedSource();
@@ -16,7 +15,6 @@ public class BlocklistedSource implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BlocklistedSource[] newArray(int _aidl_size) {
                     return new BlocklistedSource[_aidl_size];

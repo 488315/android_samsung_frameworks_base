@@ -257,7 +257,6 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
         showEmptyState(listAdapter, emptyState, clickListener);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showEmptyResolverListEmptyState$1(
             EmptyState emptyState, final ResolverListAdapter listAdapter, View v) {
         emptyState
@@ -274,7 +273,6 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showEmptyResolverListEmptyState$0(
             ResolverListAdapter listAdapter) {
         ProfileDescriptor descriptor = getItem(userHandleToPageIndex(listAdapter.getUserHandle()));
@@ -317,7 +315,6 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
                             });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ boolean lambda$hasCrossProfileIntents$0(
                 int source, int target, IPackageManager packageManager, Intent intent) {
             return IntentForwarderActivity.canForward(

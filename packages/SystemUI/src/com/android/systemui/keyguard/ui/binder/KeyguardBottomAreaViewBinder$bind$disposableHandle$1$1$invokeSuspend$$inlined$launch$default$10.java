@@ -21,7 +21,6 @@ public final class KeyguardBottomAreaViewBinder$bind$disposableHandle$1$1$invoke
     int label;
     final /* synthetic */ KeyguardBottomAreaViewBinder this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardBottomAreaViewBinder$bind$disposableHandle$1$1$invokeSuspend$$inlined$launch$default$10(String str, Continuation continuation, KeyguardBottomAreaViewModel keyguardBottomAreaViewModel, KeyguardBottomAreaViewBinder keyguardBottomAreaViewBinder, LaunchableLinearLayout launchableLinearLayout, VibratorHelper vibratorHelper) {
         super(2, continuation);
         this.$spanName = str;
@@ -43,8 +42,6 @@ public final class KeyguardBottomAreaViewBinder$bind$disposableHandle$1$1$invoke
         return ((KeyguardBottomAreaViewBinder$bind$disposableHandle$1$1$invokeSuspend$$inlined$launch$default$10) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0098  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x009d  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

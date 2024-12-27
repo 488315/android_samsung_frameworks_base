@@ -22,7 +22,6 @@ public final class RenderEffect {
 
     private static native long nativeCreateShaderEffect(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeGetFinalizer();
 
     private static class RenderEffectHolder {

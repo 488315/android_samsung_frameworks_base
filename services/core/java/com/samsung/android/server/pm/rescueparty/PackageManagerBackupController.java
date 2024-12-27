@@ -28,8 +28,6 @@ public final class PackageManagerBackupController extends AbstractBackupControll
         this.mRebootCntByPkgsState = getBackupConfigInt(0, "reboot_cnt_by_packages_state");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x005d A[Catch: all -> 0x005f, DONT_GENERATE, TryCatch #1 {all -> 0x005f, blocks: (B:9:0x0033, B:11:0x003b, B:14:0x0044, B:16:0x005d, B:18:0x0061, B:36:0x0053), top: B:8:0x0033 }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0061 A[Catch: all -> 0x005f, DONT_GENERATE, TRY_LEAVE, TryCatch #1 {all -> 0x005f, blocks: (B:9:0x0033, B:11:0x003b, B:14:0x0044, B:16:0x005d, B:18:0x0061, B:36:0x0053), top: B:8:0x0033 }] */
     @Override // com.samsung.android.server.pm.rescueparty.AbstractBackupController
     /*
         Code decompiled incorrectly, please refer to instructions dump.

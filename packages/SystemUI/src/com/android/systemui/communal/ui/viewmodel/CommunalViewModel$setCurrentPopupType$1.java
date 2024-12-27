@@ -13,7 +13,6 @@ final class CommunalViewModel$setCurrentPopupType$1 extends SuspendLambda implem
     int label;
     final /* synthetic */ CommunalViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalViewModel$setCurrentPopupType$1(CommunalViewModel communalViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalViewModel;

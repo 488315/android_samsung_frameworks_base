@@ -407,12 +407,6 @@ public final class PreferencesHelper implements RankingConfig {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:104:0x0213 A[Catch: all -> 0x0073, TryCatch #0 {all -> 0x0073, blocks: (B:9:0x003e, B:11:0x0048, B:14:0x0055, B:15:0x0072, B:17:0x0076, B:19:0x0083, B:21:0x0094, B:23:0x009a, B:25:0x00ba, B:26:0x00bf, B:28:0x00d8, B:30:0x00ee, B:31:0x00fa, B:33:0x0108, B:34:0x0110, B:36:0x011a, B:37:0x0122, B:39:0x0128, B:41:0x012e, B:42:0x0136, B:44:0x0148, B:46:0x0152, B:47:0x015a, B:50:0x0162, B:53:0x016e, B:55:0x0175, B:60:0x0180, B:62:0x0186, B:64:0x0191, B:67:0x0198, B:68:0x027c, B:73:0x00bd, B:75:0x01a5, B:77:0x01af, B:79:0x01b3, B:81:0x01b8, B:84:0x01c0, B:87:0x01c5, B:88:0x01c8, B:90:0x01cf, B:91:0x01d5, B:93:0x01ed, B:95:0x01fb, B:96:0x01fe, B:98:0x0202, B:102:0x020a, B:104:0x0213, B:105:0x0216, B:107:0x021a, B:108:0x021d, B:110:0x022a, B:111:0x0239, B:114:0x024b, B:116:0x0263, B:117:0x0268, B:118:0x0266, B:121:0x0287, B:122:0x028e, B:123:0x028f, B:124:0x0296), top: B:8:0x003e }] */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x021a A[Catch: all -> 0x0073, TryCatch #0 {all -> 0x0073, blocks: (B:9:0x003e, B:11:0x0048, B:14:0x0055, B:15:0x0072, B:17:0x0076, B:19:0x0083, B:21:0x0094, B:23:0x009a, B:25:0x00ba, B:26:0x00bf, B:28:0x00d8, B:30:0x00ee, B:31:0x00fa, B:33:0x0108, B:34:0x0110, B:36:0x011a, B:37:0x0122, B:39:0x0128, B:41:0x012e, B:42:0x0136, B:44:0x0148, B:46:0x0152, B:47:0x015a, B:50:0x0162, B:53:0x016e, B:55:0x0175, B:60:0x0180, B:62:0x0186, B:64:0x0191, B:67:0x0198, B:68:0x027c, B:73:0x00bd, B:75:0x01a5, B:77:0x01af, B:79:0x01b3, B:81:0x01b8, B:84:0x01c0, B:87:0x01c5, B:88:0x01c8, B:90:0x01cf, B:91:0x01d5, B:93:0x01ed, B:95:0x01fb, B:96:0x01fe, B:98:0x0202, B:102:0x020a, B:104:0x0213, B:105:0x0216, B:107:0x021a, B:108:0x021d, B:110:0x022a, B:111:0x0239, B:114:0x024b, B:116:0x0263, B:117:0x0268, B:118:0x0266, B:121:0x0287, B:122:0x028e, B:123:0x028f, B:124:0x0296), top: B:8:0x003e }] */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x022a A[Catch: all -> 0x0073, TryCatch #0 {all -> 0x0073, blocks: (B:9:0x003e, B:11:0x0048, B:14:0x0055, B:15:0x0072, B:17:0x0076, B:19:0x0083, B:21:0x0094, B:23:0x009a, B:25:0x00ba, B:26:0x00bf, B:28:0x00d8, B:30:0x00ee, B:31:0x00fa, B:33:0x0108, B:34:0x0110, B:36:0x011a, B:37:0x0122, B:39:0x0128, B:41:0x012e, B:42:0x0136, B:44:0x0148, B:46:0x0152, B:47:0x015a, B:50:0x0162, B:53:0x016e, B:55:0x0175, B:60:0x0180, B:62:0x0186, B:64:0x0191, B:67:0x0198, B:68:0x027c, B:73:0x00bd, B:75:0x01a5, B:77:0x01af, B:79:0x01b3, B:81:0x01b8, B:84:0x01c0, B:87:0x01c5, B:88:0x01c8, B:90:0x01cf, B:91:0x01d5, B:93:0x01ed, B:95:0x01fb, B:96:0x01fe, B:98:0x0202, B:102:0x020a, B:104:0x0213, B:105:0x0216, B:107:0x021a, B:108:0x021d, B:110:0x022a, B:111:0x0239, B:114:0x024b, B:116:0x0263, B:117:0x0268, B:118:0x0266, B:121:0x0287, B:122:0x028e, B:123:0x028f, B:124:0x0296), top: B:8:0x003e }] */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x024a  */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x0263 A[Catch: all -> 0x0073, TryCatch #0 {all -> 0x0073, blocks: (B:9:0x003e, B:11:0x0048, B:14:0x0055, B:15:0x0072, B:17:0x0076, B:19:0x0083, B:21:0x0094, B:23:0x009a, B:25:0x00ba, B:26:0x00bf, B:28:0x00d8, B:30:0x00ee, B:31:0x00fa, B:33:0x0108, B:34:0x0110, B:36:0x011a, B:37:0x0122, B:39:0x0128, B:41:0x012e, B:42:0x0136, B:44:0x0148, B:46:0x0152, B:47:0x015a, B:50:0x0162, B:53:0x016e, B:55:0x0175, B:60:0x0180, B:62:0x0186, B:64:0x0191, B:67:0x0198, B:68:0x027c, B:73:0x00bd, B:75:0x01a5, B:77:0x01af, B:79:0x01b3, B:81:0x01b8, B:84:0x01c0, B:87:0x01c5, B:88:0x01c8, B:90:0x01cf, B:91:0x01d5, B:93:0x01ed, B:95:0x01fb, B:96:0x01fe, B:98:0x0202, B:102:0x020a, B:104:0x0213, B:105:0x0216, B:107:0x021a, B:108:0x021d, B:110:0x022a, B:111:0x0239, B:114:0x024b, B:116:0x0263, B:117:0x0268, B:118:0x0266, B:121:0x0287, B:122:0x028e, B:123:0x028f, B:124:0x0296), top: B:8:0x003e }] */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x0266 A[Catch: all -> 0x0073, TryCatch #0 {all -> 0x0073, blocks: (B:9:0x003e, B:11:0x0048, B:14:0x0055, B:15:0x0072, B:17:0x0076, B:19:0x0083, B:21:0x0094, B:23:0x009a, B:25:0x00ba, B:26:0x00bf, B:28:0x00d8, B:30:0x00ee, B:31:0x00fa, B:33:0x0108, B:34:0x0110, B:36:0x011a, B:37:0x0122, B:39:0x0128, B:41:0x012e, B:42:0x0136, B:44:0x0148, B:46:0x0152, B:47:0x015a, B:50:0x0162, B:53:0x016e, B:55:0x0175, B:60:0x0180, B:62:0x0186, B:64:0x0191, B:67:0x0198, B:68:0x027c, B:73:0x00bd, B:75:0x01a5, B:77:0x01af, B:79:0x01b3, B:81:0x01b8, B:84:0x01c0, B:87:0x01c5, B:88:0x01c8, B:90:0x01cf, B:91:0x01d5, B:93:0x01ed, B:95:0x01fb, B:96:0x01fe, B:98:0x0202, B:102:0x020a, B:104:0x0213, B:105:0x0216, B:107:0x021a, B:108:0x021d, B:110:0x022a, B:111:0x0239, B:114:0x024b, B:116:0x0263, B:117:0x0268, B:118:0x0266, B:121:0x0287, B:122:0x028e, B:123:0x028f, B:124:0x0296), top: B:8:0x003e }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -647,26 +641,6 @@ public final class PreferencesHelper implements RankingConfig {
         return jSONObject;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:101:0x0201 A[LOOP:1: B:99:0x01fb->B:101:0x0201, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x0220 A[LOOP:2: B:104:0x021a->B:106:0x0220, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00e9  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0101  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0115  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0127  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0135  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0149  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0157  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x0165  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0173  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0181  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0190  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x019e  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x01ac  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x01ba  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x01c8  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x01d6  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x01e4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1392,10 +1366,6 @@ public final class PreferencesHelper implements RankingConfig {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x005f A[Catch: Exception -> 0x003f, TryCatch #0 {Exception -> 0x003f, blocks: (B:2:0x0000, B:4:0x001c, B:6:0x0022, B:8:0x002b, B:11:0x0034, B:13:0x003b, B:14:0x0045, B:16:0x0049, B:20:0x0051, B:22:0x005f, B:24:0x006d, B:26:0x0072, B:27:0x0075, B:29:0x007b, B:32:0x0088, B:34:0x008c, B:37:0x00a6, B:41:0x0093, B:48:0x0042), top: B:1:0x0000 }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0072 A[Catch: Exception -> 0x003f, TryCatch #0 {Exception -> 0x003f, blocks: (B:2:0x0000, B:4:0x001c, B:6:0x0022, B:8:0x002b, B:11:0x0034, B:13:0x003b, B:14:0x0045, B:16:0x0049, B:20:0x0051, B:22:0x005f, B:24:0x006d, B:26:0x0072, B:27:0x0075, B:29:0x007b, B:32:0x0088, B:34:0x008c, B:37:0x00a6, B:41:0x0093, B:48:0x0042), top: B:1:0x0000 }] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x008c A[Catch: Exception -> 0x003f, TryCatch #0 {Exception -> 0x003f, blocks: (B:2:0x0000, B:4:0x001c, B:6:0x0022, B:8:0x002b, B:11:0x0034, B:13:0x003b, B:14:0x0045, B:16:0x0049, B:20:0x0051, B:22:0x005f, B:24:0x006d, B:26:0x0072, B:27:0x0075, B:29:0x007b, B:32:0x0088, B:34:0x008c, B:37:0x00a6, B:41:0x0093, B:48:0x0042), top: B:1:0x0000 }] */
-    /* JADX WARN: Removed duplicated region for block: B:45:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1515,7 +1485,6 @@ public final class PreferencesHelper implements RankingConfig {
                     + " boolean, boolean):void");
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(29:2|3|(28:142|143|144|145|146|7|(1:141)(6:10|11|12|13|14|(17:16|17|(1:134)(1:21)|22|(1:133)(1:25)|26|(1:132)(1:30)|31|(5:33|34|35|36|(1:38))(1:131)|39|(1:125)(1:47)|48|(7:49|(1:1)|123|99|100|101|97)|57|58|59|(2:61|(4:63|(1:65)(1:70)|66|68)(1:71))(1:72)))|135|17|(1:19)|134|22|(0)|133|26|(1:28)|132|31|(0)(0)|39|(1:41)|125|48|(3:49|(3:51|53|56)(1:124)|97)|57|58|59|(0)(0))|5|6|7|(0)|141|135|17|(0)|134|22|(0)|133|26|(0)|132|31|(0)(0)|39|(0)|125|48|(3:49|(0)(0)|97)|57|58|59|(0)(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:103:0x02d2, code lost:
 
        r8 = "name";
@@ -1623,23 +1592,6 @@ public final class PreferencesHelper implements RankingConfig {
        android.util.Slog.w(r11, "Skipping further channels for " + r7.pkg);
        r14 = r9;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x0246 A[ADDED_TO_REGION, EDGE_INSN: B:124:0x0246->B:57:0x0246 BREAK  A[LOOP:0: B:49:0x0236->B:97:0x0236], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:131:0x01fa  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x009d  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0126 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x017e A[Catch: Exception -> 0x0073, TryCatch #6 {Exception -> 0x0073, blocks: (B:14:0x0069, B:17:0x0090, B:21:0x00a1, B:22:0x00ad, B:25:0x0128, B:26:0x0135, B:28:0x017e, B:31:0x018f, B:33:0x01c4, B:135:0x0087), top: B:13:0x0069 }] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x01c4 A[Catch: Exception -> 0x0073, TRY_LEAVE, TryCatch #6 {Exception -> 0x0073, blocks: (B:14:0x0069, B:17:0x0090, B:21:0x00a1, B:22:0x00ad, B:25:0x0128, B:26:0x0135, B:28:0x017e, B:31:0x018f, B:33:0x01c4, B:135:0x0087), top: B:13:0x0069 }] */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0200 A[Catch: Exception -> 0x01f7, TryCatch #4 {Exception -> 0x01f7, blocks: (B:36:0x01d6, B:38:0x01e1, B:39:0x01fc, B:41:0x0200, B:43:0x0204, B:45:0x020a, B:47:0x0214, B:48:0x0230, B:49:0x0236, B:53:0x023f, B:80:0x0255, B:83:0x0264, B:119:0x0270, B:86:0x0288, B:88:0x0298, B:89:0x02a5, B:91:0x02ad, B:95:0x02b9, B:103:0x02d2, B:104:0x02ed, B:106:0x02f5, B:108:0x030a, B:110:0x0310, B:111:0x0317, B:59:0x031f, B:61:0x033b, B:63:0x0346, B:66:0x0355, B:76:0x0325, B:125:0x022a), top: B:35:0x01d6, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x023c  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x033b A[Catch: Exception -> 0x01f7, TryCatch #4 {Exception -> 0x01f7, blocks: (B:36:0x01d6, B:38:0x01e1, B:39:0x01fc, B:41:0x0200, B:43:0x0204, B:45:0x020a, B:47:0x0214, B:48:0x0230, B:49:0x0236, B:53:0x023f, B:80:0x0255, B:83:0x0264, B:119:0x0270, B:86:0x0288, B:88:0x0298, B:89:0x02a5, B:91:0x02ad, B:95:0x02b9, B:103:0x02d2, B:104:0x02ed, B:106:0x02f5, B:108:0x030a, B:110:0x0310, B:111:0x0317, B:59:0x031f, B:61:0x033b, B:63:0x0346, B:66:0x0355, B:76:0x0325, B:125:0x022a), top: B:35:0x01d6, inners: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:72:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r5v19 */
-    /* JADX WARN: Type inference failed for: r5v8 */
-    /* JADX WARN: Type inference failed for: r5v9, types: [int] */
-    /* JADX WARN: Type inference failed for: r6v13 */
-    /* JADX WARN: Type inference failed for: r6v6 */
-    /* JADX WARN: Type inference failed for: r6v7, types: [com.android.server.notification.PreferencesHelper$Delegate] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

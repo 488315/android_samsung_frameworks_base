@@ -200,7 +200,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
             }
         }
 
-        /* JADX WARN: Can't wrap try/catch for region: R(6:15|(2:16|17)|(2:19|20)|21|22|23) */
         /* JADX WARN: Code restructure failed: missing block: B:24:0x0088, code lost:
 
            if (r8.getServiceInfo(r0, 786436) != null) goto L27;
@@ -727,8 +726,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
 
                if (com.android.server.media.MediaSessionService.m669$$Nest$mneedVolumeKeyLongPressBroadCastLocked(r1) == false) goto L147;
             */
-            /* JADX WARN: Removed duplicated region for block: B:112:0x0120  */
-            /* JADX WARN: Removed duplicated region for block: B:15:0x0110  */
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
                 To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1473,8 +1470,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:40:0x015e A[Catch: all -> 0x013e, TryCatch #4 {all -> 0x013e, blocks: (B:32:0x0133, B:33:0x0139, B:56:0x01a9, B:38:0x0143, B:40:0x015e, B:41:0x01a4, B:44:0x016e, B:48:0x017a, B:49:0x0194), top: B:12:0x00dc }] */
-        /* JADX WARN: Removed duplicated region for block: B:44:0x016e A[Catch: all -> 0x013e, TryCatch #4 {all -> 0x013e, blocks: (B:32:0x0133, B:33:0x0139, B:56:0x01a9, B:38:0x0143, B:40:0x015e, B:41:0x01a4, B:44:0x016e, B:48:0x017a, B:49:0x0194), top: B:12:0x00dc }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1491,17 +1486,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
                         + " boolean, android.view.KeyEvent, boolean):void");
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:120:0x0276  */
-        /* JADX WARN: Removed duplicated region for block: B:121:0x01c1  */
-        /* JADX WARN: Removed duplicated region for block: B:15:0x01ba  */
-        /* JADX WARN: Removed duplicated region for block: B:17:0x01c4  */
-        /* JADX WARN: Removed duplicated region for block: B:51:0x0266  */
-        /* JADX WARN: Removed duplicated region for block: B:53:0x026d  */
-        /* JADX WARN: Removed duplicated region for block: B:56:0x0286  */
-        /* JADX WARN: Removed duplicated region for block: B:59:0x03c1  */
-        /* JADX WARN: Removed duplicated region for block: B:63:0x03dc  */
-        /* JADX WARN: Removed duplicated region for block: B:80:0x03c6  */
-        /* JADX WARN: Removed duplicated region for block: B:81:0x02ea  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2146,7 +2130,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,
@@ -2788,8 +2771,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
         ViewConfiguration.getMultiPressTimeout();
     }
 
-    /* JADX WARN: Type inference failed for: r0v12, types: [com.android.server.media.MediaSessionService$1] */
-    /* JADX WARN: Type inference failed for: r0v13, types: [com.android.server.media.MediaSessionService$2] */
     public MediaSessionService(Context context) {
         super(context);
         MediaSessionDataPlatform mediaSessionDataPlatform;
@@ -3662,11 +3643,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0043  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x005a A[Catch: all -> 0x0022, TryCatch #0 {all -> 0x0022, blocks: (B:3:0x0007, B:5:0x000e, B:7:0x0017, B:11:0x0025, B:15:0x0047, B:18:0x004e, B:20:0x005a, B:22:0x0063), top: B:2:0x0007 }] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0063 A[Catch: all -> 0x0022, TRY_LEAVE, TryCatch #0 {all -> 0x0022, blocks: (B:3:0x0007, B:5:0x000e, B:7:0x0017, B:11:0x0025, B:15:0x0047, B:18:0x004e, B:20:0x005a, B:22:0x0063), top: B:2:0x0007 }] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0046  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

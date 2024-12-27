@@ -103,10 +103,6 @@ public final class EmailAccountPolicy extends IEmailAccountPolicy.Stub
                 true);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r33v6, types: [long] */
-    /* JADX WARN: Type inference failed for: r33v8 */
-    /* JADX WARN: Type inference failed for: r33v9 */
     public final long addNewAccount_ex(
             ContextInfo contextInfo,
             String str,

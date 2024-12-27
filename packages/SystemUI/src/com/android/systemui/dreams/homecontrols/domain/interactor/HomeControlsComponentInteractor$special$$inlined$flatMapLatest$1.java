@@ -26,7 +26,6 @@ public final class HomeControlsComponentInteractor$special$$inlined$flatMapLates
     int label;
     final /* synthetic */ HomeControlsComponentInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HomeControlsComponentInteractor$special$$inlined$flatMapLatest$1(Continuation continuation, HomeControlsComponentInteractor homeControlsComponentInteractor) {
         super(3, continuation);
         this.this$0 = homeControlsComponentInteractor;
@@ -85,8 +84,6 @@ public final class HomeControlsComponentInteractor$special$$inlined$flatMapLates
                         this.$userHandle$inlined = userHandle;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.

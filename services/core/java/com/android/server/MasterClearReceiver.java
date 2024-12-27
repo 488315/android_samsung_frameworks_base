@@ -88,8 +88,6 @@ public class MasterClearReceiver extends BroadcastReceiver {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x008c A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* renamed from: -$$Nest$mremoveFirstUseDate, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -248,7 +246,6 @@ public class MasterClearReceiver extends BroadcastReceiver {
         return file.delete();
     }
 
-    /* JADX WARN: Type inference failed for: r0v34, types: [com.android.server.MasterClearReceiver$1, java.lang.Thread] */
     @Override // android.content.BroadcastReceiver
     public void onReceive(final Context context, final Intent intent) {
         Slog.w("MasterClear", "!@[MasterClearReceiver] onReceive: intent:" + intent);
@@ -361,7 +358,6 @@ public class MasterClearReceiver extends BroadcastReceiver {
         }
         Slog.w("MasterClear", "!@[MasterClearReceiver] onReceive: !!! FACTORY RESET !!!");
         ?? r0 = new Thread() { // from class: com.android.server.MasterClearReceiver.1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super("Reboot");
             }

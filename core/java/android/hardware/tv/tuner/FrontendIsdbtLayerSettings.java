@@ -8,7 +8,6 @@ public class FrontendIsdbtLayerSettings implements Parcelable {
     public static final Parcelable.Creator<FrontendIsdbtLayerSettings> CREATOR =
             new Parcelable.Creator<FrontendIsdbtLayerSettings>() { // from class:
                 // android.hardware.tv.tuner.FrontendIsdbtLayerSettings.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendIsdbtLayerSettings createFromParcel(Parcel _aidl_source) {
                     FrontendIsdbtLayerSettings _aidl_out = new FrontendIsdbtLayerSettings();
@@ -16,7 +15,6 @@ public class FrontendIsdbtLayerSettings implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendIsdbtLayerSettings[] newArray(int _aidl_size) {
                     return new FrontendIsdbtLayerSettings[_aidl_size];

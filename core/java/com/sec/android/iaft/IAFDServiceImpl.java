@@ -137,7 +137,6 @@ class IAFDServiceImpl {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean IAFDstartApp(Bundle bundle, boolean hasGetUpdateResult) {
         boolean hasUpdated = false;
         if (hasGetUpdateResult) {
@@ -241,7 +240,6 @@ class IAFDServiceImpl {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkUpdate(final Bundle bundle) {
         try {
             this.apiSMManager.checkUpdate(

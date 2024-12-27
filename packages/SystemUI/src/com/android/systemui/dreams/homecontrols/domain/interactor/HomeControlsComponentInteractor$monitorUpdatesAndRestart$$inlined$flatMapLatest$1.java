@@ -23,7 +23,6 @@ public final class HomeControlsComponentInteractor$monitorUpdatesAndRestart$$inl
     int label;
     final /* synthetic */ HomeControlsComponentInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HomeControlsComponentInteractor$monitorUpdatesAndRestart$$inlined$flatMapLatest$1(Continuation continuation, HomeControlsComponentInteractor homeControlsComponentInteractor) {
         super(3, continuation);
         this.this$0 = homeControlsComponentInteractor;

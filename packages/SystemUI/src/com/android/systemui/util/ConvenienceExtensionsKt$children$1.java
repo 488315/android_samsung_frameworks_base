@@ -14,7 +14,6 @@ final class ConvenienceExtensionsKt$children$1 extends RestrictedSuspendLambda i
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ConvenienceExtensionsKt$children$1(ViewGroup viewGroup, Continuation continuation) {
         super(2, continuation);
         this.$this_children = viewGroup;
@@ -27,9 +26,6 @@ final class ConvenienceExtensionsKt$children$1 extends RestrictedSuspendLambda i
         return convenienceExtensionsKt$children$1;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0045  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x002e  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:8:0x0040 -> B:5:0x0043). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

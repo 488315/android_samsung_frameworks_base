@@ -84,9 +84,6 @@ public final class SpatialAudioComponentInteractor {
                     this.this$0 = spatialAudioComponentInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:20:0x0063 A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:21:0x003a  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -179,12 +176,6 @@ public final class SpatialAudioComponentInteractor {
         this.isEnabled = FlowKt.stateIn(FlowKt.combine(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new SpatialAudioComponentInteractor$isEnabled$1(null), MutableSharedFlow$default), stateIn, stateIn2, new SpatialAudioComponentInteractor$isEnabled$2(this, null)), coroutineScope, startedEagerly, SpatialAudioEnabledModel.Unknown.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0073  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
-    /* JADX WARN: Type inference failed for: r7v4, types: [java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r7v5 */
-    /* JADX WARN: Type inference failed for: r7v7, types: [java.lang.Object] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -286,11 +277,6 @@ public final class SpatialAudioComponentInteractor {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.panel.component.spatial.domain.interactor.SpatialAudioComponentInteractor.access$getAudioDeviceAttributes(com.android.systemui.volume.panel.component.spatial.domain.interactor.SpatialAudioComponentInteractor, com.android.systemui.volume.domain.model.AudioOutputDevice, kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00b8 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00a9 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

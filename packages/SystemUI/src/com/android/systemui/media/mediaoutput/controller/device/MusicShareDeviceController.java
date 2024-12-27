@@ -295,14 +295,6 @@ public final class MusicShareDeviceController extends DeviceController {
         BuildersKt.launch$default(getControllerScope(), null, null, new AnonymousClass4(null), 3);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0162  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0165  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0028  */
-    /* JADX WARN: Type inference failed for: r9v0, types: [kotlin.collections.EmptyList] */
-    /* JADX WARN: Type inference failed for: r9v1 */
-    /* JADX WARN: Type inference failed for: r9v7, types: [java.util.ArrayList] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

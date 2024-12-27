@@ -753,7 +753,6 @@ public class FullBackup {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         private int getRequiredFlagsFromString(String requiredFlags) {
             char c;
             int flags = 0;
@@ -943,7 +942,6 @@ public class FullBackup {
             return null;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         private void validateInnerTagContents(XmlPullParser parser) throws XmlPullParserException {
             char c;
             if (parser == null) {

@@ -11,7 +11,6 @@ import java.util.Locale;
 public class AudioState implements Parcelable {
     public static final Parcelable.Creator<AudioState> CREATOR =
             new Parcelable.Creator<AudioState>() { // from class: android.telecom.AudioState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioState createFromParcel(Parcel source) {
                     boolean isMuted = source.readByte() != 0;
@@ -20,7 +19,6 @@ public class AudioState implements Parcelable {
                     return new AudioState(isMuted, route, supportedRouteMask);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioState[] newArray(int size) {
                     return new AudioState[size];

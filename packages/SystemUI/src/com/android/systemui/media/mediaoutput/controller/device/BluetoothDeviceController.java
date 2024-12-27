@@ -286,18 +286,6 @@ public final class BluetoothDeviceController extends DeviceController {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x01c9  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x0293  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:263:0x0591  */
-    /* JADX WARN: Removed duplicated region for block: B:293:0x05ee A[LOOP:12: B:291:0x05e8->B:293:0x05ee, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:297:0x060d A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
-    /* JADX WARN: Type inference failed for: r13v11 */
-    /* JADX WARN: Type inference failed for: r13v13, types: [java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r13v17, types: [com.android.systemui.media.mediaoutput.entity.MusicShareDevice] */
-    /* JADX WARN: Type inference failed for: r5v26, types: [com.android.systemui.media.mediaoutput.entity.BluetoothDevice] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -46,10 +46,6 @@ public final class CameraQuickAffordanceConfig implements KeyguardQuickAffordanc
         return R.drawable.ic_camera;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
     @Override // com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig
     /*
         Code decompiled incorrectly, please refer to instructions dump.

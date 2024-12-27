@@ -2,8 +2,6 @@ package com.android.systemui.animation.back;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class ScalePivotPosition {
     public static final /* synthetic */ ScalePivotPosition[] $VALUES;
     public static final ScalePivotPosition BOTTOM_CENTER;

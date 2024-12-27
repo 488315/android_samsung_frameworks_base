@@ -5,12 +5,10 @@ import java.util.Map;
 import kotlin.jvm.functions.Function1;
 
 public final class HeadsUpCoordinatorKt {
-    /* JADX INFO: Access modifiers changed from: private */
     public static final GroupLocation getLocation(Map<String, ? extends GroupLocation> map, String str) {
         return map.getOrDefault(str, GroupLocation.Detached);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final <R> R modifyHuns(HeadsUpManager headsUpManager, Function1 function1) {
         HunMutatorImpl hunMutatorImpl = new HunMutatorImpl(headsUpManager);
         R r = (R) function1.invoke(hunMutatorImpl);

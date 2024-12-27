@@ -130,7 +130,6 @@ public class ContextHubTransaction<T> {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setOnCompleteListener$0() {
         this.mListener.onComplete(this, this.mResponse);
     }
@@ -162,7 +161,6 @@ public class ContextHubTransaction<T> {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setResponse$1() {
         this.mListener.onComplete(this, this.mResponse);
     }

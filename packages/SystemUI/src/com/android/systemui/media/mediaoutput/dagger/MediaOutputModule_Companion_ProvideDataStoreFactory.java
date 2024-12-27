@@ -38,7 +38,6 @@ public final class MediaOutputModule_Companion_ProvideDataStoreFactory implement
         SupervisorJobImpl SupervisorJob$default = SupervisorKt.SupervisorJob$default();
         defaultIoScheduler.getClass();
         return PreferenceDataStoreFactory.create$default(preferenceDataStoreFactory, replaceFileCorruptionHandler, CoroutineScopeKt.CoroutineScope(CoroutineContext.DefaultImpls.plus(defaultIoScheduler, SupervisorJob$default)), new Function0() { // from class: com.android.systemui.media.mediaoutput.dagger.MediaOutputModule$Companion$provideDataStore$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

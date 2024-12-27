@@ -96,7 +96,6 @@ public final class UsbOperationInternal extends IUsbOperationInternal.Stub {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onOperationComplete$0() {
         this.mConsumer.accept(Integer.valueOf(this.mResult));
     }

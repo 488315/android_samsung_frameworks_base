@@ -309,7 +309,6 @@ public final class ControlViewHolder {
         final Control control = controlWithState2.control;
         boolean z3 = Intrinsics.areEqual(charSequence, this.status.getText()) ? false : z2;
         animateStatusChange(z3, new Function0() { // from class: com.android.systemui.controls.ui.ControlViewHolder$applyRenderInfo$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -322,11 +321,6 @@ public final class ControlViewHolder {
             
                 if (r0 == null) goto L96;
              */
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Removed duplicated region for block: B:86:0x01c0  */
-            /* JADX WARN: Type inference failed for: r0v22 */
-            /* JADX WARN: Type inference failed for: r0v23, types: [com.airbnb.lottie.LottieAnimationView] */
-            /* JADX WARN: Type inference failed for: r0v54 */
             @Override // kotlin.jvm.functions.Function0
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -462,7 +456,6 @@ public final class ControlViewHolder {
     public final void setErrorStatus() {
         final String string = this.context.getResources().getString(com.android.systemui.R.string.controls_error_failed);
         animateStatusChange(true, new Function0() { // from class: com.android.systemui.controls.ui.ControlViewHolder$setErrorStatus$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

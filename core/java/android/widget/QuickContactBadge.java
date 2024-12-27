@@ -187,7 +187,6 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
         this.mOverlay = overlay;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onContactUriChanged() {
         setEnabled(isAssigned());
     }
@@ -244,7 +243,6 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
             super(cr);
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         @Override // android.content.AsyncQueryHandler
         protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
             Uri lookupUri = null;

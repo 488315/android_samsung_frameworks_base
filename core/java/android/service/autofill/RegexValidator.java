@@ -14,7 +14,6 @@ public final class RegexValidator extends InternalValidator implements Validator
     public static final Parcelable.Creator<RegexValidator> CREATOR =
             new Parcelable.Creator<
                     RegexValidator>() { // from class: android.service.autofill.RegexValidator.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RegexValidator createFromParcel(Parcel parcel) {
                     return new RegexValidator(
@@ -24,7 +23,6 @@ public final class RegexValidator extends InternalValidator implements Validator
                                             Pattern.class.getClassLoader(), Pattern.class));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RegexValidator[] newArray(int size) {
                     return new RegexValidator[size];

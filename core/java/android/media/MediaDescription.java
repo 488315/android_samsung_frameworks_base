@@ -20,13 +20,11 @@ public class MediaDescription implements Parcelable {
     public static final Parcelable.Creator<MediaDescription> CREATOR =
             new Parcelable.Creator<
                     MediaDescription>() { // from class: android.media.MediaDescription.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaDescription createFromParcel(Parcel in) {
                     return new MediaDescription(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaDescription[] newArray(int size) {
                     return new MediaDescription[size];

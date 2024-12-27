@@ -1530,7 +1530,6 @@ public final class Parcel {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private <T> void writeFixedArrayInternal(
             T t, int parcelableFlags, int index, int[] dimensions) {
         if (index >= dimensions.length) {
@@ -1955,7 +1954,6 @@ public final class Parcel {
         sParcelExceptionStackTrace = enabled;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void writeException(Exception exc) {
         AppOpsManager.prefixParcelWithAppOpsIfNeeded(this);
         int code = getExceptionCode(exc);
@@ -2433,7 +2431,6 @@ public final class Parcel {
         return anonymousClass1;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final <T> void readTypedList(List<T> list, Parcelable.Creator<T> c) {
         int M = list.size();
         int N = readInt();
@@ -2466,7 +2463,6 @@ public final class Parcel {
         return anonymousClass1;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final <T extends Parcelable> ArrayMap<String, T> createTypedArrayMap(
             Parcelable.Creator<T> creator) {
         int readInt = readInt();
@@ -2590,7 +2586,6 @@ public final class Parcel {
         return readParcelableListInternal(list, cl, clazz);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private <T> List<T> readParcelableListInternal(
             List<T> list, ClassLoader cl, Class<? extends T> clazz) {
         int n = readInt();
@@ -2615,7 +2610,6 @@ public final class Parcel {
         return list;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final <T> T[] createTypedArray(Parcelable.Creator<T> creator) {
         int readInt = readInt();
         if (readInt < 0) {
@@ -2652,7 +2646,6 @@ public final class Parcel {
         return null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <T> void readFixedArray(T t) {
         Class<?> componentType = t.getClass().getComponentType();
         if (componentType == Boolean.TYPE) {
@@ -2701,7 +2694,6 @@ public final class Parcel {
         throw new BadParcelableException("Unknown type for fixed-size array: " + componentType);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <T, S extends IInterface> void readFixedArray(T t, Function<IBinder, S> asInterface) {
         Class<?> componentType = t.getClass().getComponentType();
         if (IInterface.class.isAssignableFrom(componentType)) {
@@ -2722,7 +2714,6 @@ public final class Parcel {
         throw new BadParcelableException("Unknown type for fixed-size array: " + componentType);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <T, S extends Parcelable> void readFixedArray(T t, Parcelable.Creator<S> c) {
         Class<?> componentType = t.getClass().getComponentType();
         if (Parcelable.class.isAssignableFrom(componentType)) {
@@ -2760,7 +2751,6 @@ public final class Parcel {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <T> T createFixedArray(Class<T> cls, int... iArr) {
         T t;
         ensureClassHasExpectedDimensions(cls, iArr.length);
@@ -2811,7 +2801,6 @@ public final class Parcel {
                 "Bad length: expected " + iArr[0] + ", but got " + Array.getLength(t));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <T, S extends IInterface> T createFixedArray(
             Class<T> cls, Function<IBinder, S> function, int... iArr) {
         ensureClassHasExpectedDimensions(cls, iArr.length);
@@ -2862,7 +2851,6 @@ public final class Parcel {
         return (IInterface[]) Array.newInstance((Class<?>) componentType, n);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <T, S extends Parcelable> T createFixedArray(
             Class<T> cls, Parcelable.Creator<S> creator, int... iArr) {
         ensureClassHasExpectedDimensions(cls, iArr.length);
@@ -2914,7 +2902,6 @@ public final class Parcel {
         return readValue(loader, (Class) null, new Class[0]);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public <T> T readValue(ClassLoader classLoader, Class<T> cls, Class<?>... clsArr) {
         int readInt = readInt();
         if (isLengthPrefixed(readInt)) {
@@ -3397,7 +3384,6 @@ public final class Parcel {
         return (T[]) readParcelableArrayInternal(classLoader, (Class) Objects.requireNonNull(cls));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private <T> T[] readParcelableArrayInternal(ClassLoader classLoader, Class<T> cls) {
         int readInt = readInt();
         if (readInt < 0) {
@@ -3666,7 +3652,6 @@ public final class Parcel {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private <T> T[] readArrayInternal(ClassLoader classLoader, Class<T> cls) {
         int readInt = readInt();
         if (readInt < 0) {
@@ -3733,7 +3718,6 @@ public final class Parcel {
         return nativeGetOpenAshmemSize(this.mNativePtr);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String valueTypeToString(int type) {
         switch (type) {
             case -1:

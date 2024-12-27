@@ -12,13 +12,11 @@ public final class CompatibilityOverrideConfig implements Parcelable {
             new Parcelable.Creator<
                     CompatibilityOverrideConfig>() { // from class:
                                                      // com.android.internal.compat.CompatibilityOverrideConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompatibilityOverrideConfig createFromParcel(Parcel in) {
                     return new CompatibilityOverrideConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompatibilityOverrideConfig[] newArray(int size) {
                     return new CompatibilityOverrideConfig[size];

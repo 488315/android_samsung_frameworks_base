@@ -57,7 +57,6 @@ public final class CertBlocklister extends Binder {
             public final /* synthetic */ int $r8$classId;
             public final /* synthetic */ BlocklistObserver this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass1(BlocklistObserver blocklistObserver, int i) {
                 super("BlocklistReader");
                 this.$r8$classId = i;
@@ -72,7 +71,6 @@ public final class CertBlocklister extends Binder {
                 }
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:33:0x0099 A[Catch: all -> 0x002c, TryCatch #5 {all -> 0x002c, blocks: (B:6:0x000a, B:8:0x0016, B:10:0x0020, B:12:0x0024, B:13:0x002f, B:18:0x0034, B:20:0x003c, B:30:0x0084, B:31:0x0095, B:33:0x0099, B:41:0x00aa, B:42:0x00ad, B:37:0x0092, B:45:0x00ae), top: B:5:0x000a }] */
             @Override // java.lang.Thread, java.lang.Runnable
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -89,7 +87,6 @@ public final class CertBlocklister extends Binder {
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public BlocklistObserver(ContentResolver contentResolver) {
             super(null);
             String str = CertBlocklister.PUBKEY_PATH;

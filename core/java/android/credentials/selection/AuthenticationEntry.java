@@ -17,13 +17,11 @@ public final class AuthenticationEntry implements Parcelable {
     public static final Parcelable.Creator<AuthenticationEntry> CREATOR =
             new Parcelable.Creator<AuthenticationEntry>() { // from class:
                 // android.credentials.selection.AuthenticationEntry.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AuthenticationEntry createFromParcel(Parcel in) {
                     return new AuthenticationEntry(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AuthenticationEntry[] newArray(int size) {
                     return new AuthenticationEntry[size];

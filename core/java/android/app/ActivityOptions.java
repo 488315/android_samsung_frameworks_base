@@ -1413,13 +1413,11 @@ public class ActivityOptions extends ComponentOptions {
         public static final Parcelable.Creator<LaunchCookie> CREATOR =
                 new Parcelable.Creator<
                         LaunchCookie>() { // from class: android.app.ActivityOptions.LaunchCookie.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public LaunchCookie createFromParcel(Parcel source) {
                         return LaunchCookie.readFromParcel(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public LaunchCookie[] newArray(int size) {
                         return new LaunchCookie[size];
@@ -2000,13 +1998,11 @@ public class ActivityOptions extends ComponentOptions {
         public static final Parcelable.Creator<SourceInfo> CREATOR =
                 new Parcelable.Creator<
                         SourceInfo>() { // from class: android.app.ActivityOptions.SourceInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SourceInfo createFromParcel(Parcel in) {
                         return new SourceInfo(in.readInt(), in.readLong());
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SourceInfo[] newArray(int size) {
                         return new SourceInfo[size];
@@ -2044,13 +2040,11 @@ public class ActivityOptions extends ComponentOptions {
         public static final Parcelable.Creator<SceneTransitionInfo> CREATOR =
                 new Parcelable.Creator<SceneTransitionInfo>() { // from class:
                     // android.app.ActivityOptions.SceneTransitionInfo.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SceneTransitionInfo createFromParcel(Parcel in) {
                         return new SceneTransitionInfo(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SceneTransitionInfo[] newArray(int size) {
                         return new SceneTransitionInfo[size];

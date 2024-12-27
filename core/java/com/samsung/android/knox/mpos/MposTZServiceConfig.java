@@ -20,13 +20,11 @@ public class MposTZServiceConfig implements Parcelable {
             new Parcelable.Creator<
                     MposTZServiceConfig>() { // from class:
                                              // com.samsung.android.knox.mpos.MposTZServiceConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MposTZServiceConfig createFromParcel(Parcel in) {
                     return new MposTZServiceConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MposTZServiceConfig[] newArray(int size) {
                     return new MposTZServiceConfig[size];

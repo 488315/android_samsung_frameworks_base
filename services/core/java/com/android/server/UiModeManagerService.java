@@ -234,7 +234,6 @@ public final class UiModeManagerService extends SystemService {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ UiModeManagerService this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ AnonymousClass9(
                 UiModeManagerService uiModeManagerService, Handler handler, int i) {
             super(handler);
@@ -549,9 +548,6 @@ public final class UiModeManagerService extends SystemService {
             return 0;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Removed duplicated region for block: B:16:0x004d  */
-        /* JADX WARN: Removed duplicated region for block: B:24:0x0060 A[Catch: RemoteException -> 0x0031, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x0031, blocks: (B:7:0x0012, B:18:0x0051, B:20:0x0056, B:22:0x005b, B:24:0x0060, B:27:0x006c, B:44:0x00e2, B:46:0x00ec, B:47:0x00f1, B:49:0x010d, B:67:0x0026, B:70:0x0034, B:73:0x003f), top: B:6:0x0012 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1770,17 +1766,6 @@ public final class UiModeManagerService extends SystemService {
         this(context, false, null, new Injector());
     }
 
-    /* JADX WARN: Type inference failed for: r6v10, types: [com.android.server.UiModeManagerService$8] */
-    /* JADX WARN: Type inference failed for: r6v14, types: [com.android.server.UiModeManagerService$2] */
-    /* JADX WARN: Type inference failed for: r6v15, types: [com.android.server.UiModeManagerService$2] */
-    /* JADX WARN: Type inference failed for: r6v16, types: [com.android.server.UiModeManagerService$2] */
-    /* JADX WARN: Type inference failed for: r6v3, types: [com.android.server.UiModeManagerService$2] */
-    /* JADX WARN: Type inference failed for: r6v4, types: [com.android.server.UiModeManagerService$2] */
-    /* JADX WARN: Type inference failed for: r6v5, types: [com.android.server.UiModeManagerService$2] */
-    /* JADX WARN: Type inference failed for: r6v6, types: [com.android.server.UiModeManagerService$5] */
-    /* JADX WARN: Type inference failed for: r6v7, types: [com.android.server.UiModeManagerService$2] */
-    /* JADX WARN: Type inference failed for: r6v8, types: [com.android.server.UiModeManagerService$2] */
-    /* JADX WARN: Type inference failed for: r6v9, types: [com.android.server.UiModeManagerService$$ExternalSyntheticLambda2] */
     public UiModeManagerService(
             Context context, boolean z, TwilightManager twilightManager, Injector injector) {
         super(context);
@@ -3841,7 +3826,6 @@ public final class UiModeManagerService extends SystemService {
         return true;
     }
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [java.time.ZonedDateTime] */
     public final void scheduleNextCustomTimeListener() {
         LocalDateTime of;
         this.mAlarmManager.cancel(this.mCustomTimeListener);
@@ -3868,9 +3852,6 @@ public final class UiModeManagerService extends SystemService {
                 null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00a4 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:32:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

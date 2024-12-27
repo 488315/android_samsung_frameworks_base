@@ -13,7 +13,6 @@ final class PreviewLifecycleObserver$onDestroy$2$1 extends SuspendLambda impleme
     final /* synthetic */ KeyguardPreviewRenderer $rendererToDestroy;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PreviewLifecycleObserver$onDestroy$2$1(KeyguardPreviewRenderer keyguardPreviewRenderer, Continuation continuation) {
         super(2, continuation);
         this.$rendererToDestroy = keyguardPreviewRenderer;

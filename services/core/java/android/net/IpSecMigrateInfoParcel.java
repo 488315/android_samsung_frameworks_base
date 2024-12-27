@@ -104,7 +104,6 @@ public class IpSecMigrateInfoParcel implements Parcelable {
         this.interfaceId = i4;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static IpSecMigrateInfoParcel internalCreateFromParcel(Parcel parcel) {
         Builder builder = new Builder();
         int dataPosition = parcel.dataPosition();

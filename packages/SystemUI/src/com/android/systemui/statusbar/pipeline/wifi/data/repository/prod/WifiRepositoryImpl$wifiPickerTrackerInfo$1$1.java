@@ -30,7 +30,6 @@ final class WifiRepositoryImpl$wifiPickerTrackerInfo$1$1 extends SuspendLambda i
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WifiRepositoryImpl$wifiPickerTrackerInfo$1$1(WifiRepositoryImpl wifiRepositoryImpl, FeatureFlags featureFlags, Ref$ObjectRef<WifiRepositoryImpl.WifiPickerTrackerInfo> ref$ObjectRef, Continuation continuation) {
         super(2, continuation);
         this.$this_run = wifiRepositoryImpl;
@@ -61,8 +60,6 @@ final class WifiRepositoryImpl$wifiPickerTrackerInfo$1$1 extends SuspendLambda i
             final FeatureFlags featureFlags = this.$featureFlags;
             final Ref$ObjectRef<WifiRepositoryImpl.WifiPickerTrackerInfo> ref$ObjectRef = this.$current;
             WifiPickerTracker.WifiPickerTrackerCallback wifiPickerTrackerCallback = new WifiPickerTracker.WifiPickerTrackerCallback() { // from class: com.android.systemui.statusbar.pipeline.wifi.data.repository.prod.WifiRepositoryImpl$wifiPickerTrackerInfo$1$1$callback$1
-                /* JADX WARN: Multi-variable type inference failed */
-                /* JADX WARN: Type inference failed for: r6v2, types: [T, com.android.systemui.statusbar.pipeline.wifi.data.repository.prod.WifiRepositoryImpl$WifiPickerTrackerInfo, java.lang.Object] */
                 public static void send$default(WifiRepositoryImpl$wifiPickerTrackerInfo$1$1$callback$1 wifiRepositoryImpl$wifiPickerTrackerInfo$1$1$callback$1, int i2, boolean z, WifiNetworkModel wifiNetworkModel, List list, int i3) {
                     if ((i3 & 1) != 0) {
                         i2 = ((WifiRepositoryImpl.WifiPickerTrackerInfo) ref$ObjectRef.element).state;
@@ -86,10 +83,6 @@ final class WifiRepositoryImpl$wifiPickerTrackerInfo$1$1 extends SuspendLambda i
                 
                     if (r0 != null) goto L43;
                  */
-                /* JADX WARN: Multi-variable type inference failed */
-                /* JADX WARN: Type inference failed for: r4v12, types: [java.util.ArrayList] */
-                /* JADX WARN: Type inference failed for: r4v4, types: [kotlin.collections.EmptyList] */
-                /* JADX WARN: Type inference failed for: r4v5 */
                 @Override // com.android.wifitrackerlib.WifiPickerTracker.WifiPickerTrackerCallback
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

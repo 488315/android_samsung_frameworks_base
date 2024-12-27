@@ -12,13 +12,11 @@ public final class NetworkSlicingConfig implements Parcelable {
             new Parcelable.Creator<
                     NetworkSlicingConfig>() { // from class:
                                               // android.telephony.data.NetworkSlicingConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkSlicingConfig createFromParcel(Parcel source) {
                     return new NetworkSlicingConfig(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NetworkSlicingConfig[] newArray(int size) {
                     return new NetworkSlicingConfig[size];

@@ -6,14 +6,12 @@ import android.os.Parcelable;
 public final class CellInfoGsm extends CellInfo implements Parcelable {
     public static final Parcelable.Creator<CellInfoGsm> CREATOR =
             new Parcelable.Creator<CellInfoGsm>() { // from class: android.telephony.CellInfoGsm.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellInfoGsm createFromParcel(Parcel in) {
                     in.readInt();
                     return CellInfoGsm.createFromParcelBody(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellInfoGsm[] newArray(int size) {
                     return new CellInfoGsm[size];

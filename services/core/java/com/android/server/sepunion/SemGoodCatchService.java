@@ -73,9 +73,6 @@ public final class SemGoodCatchService extends IGoodCatchManager.Stub
         public final AnonymousClass2 mReceiver;
         public SemGoodCatchManager mSemGoodCatchManager;
 
-        /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.sepunion.SemGoodCatchService$FeatureDetectAds$1] */
-        /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.sepunion.SemGoodCatchService$FeatureDetectAds$2] */
-        /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.sepunion.SemGoodCatchService$FeatureDetectAds$3] */
         public FeatureDetectAds() {
             super("FeatureDetectAds");
             IntentFilter intentFilter = new IntentFilter();
@@ -372,7 +369,6 @@ public final class SemGoodCatchService extends IGoodCatchManager.Stub
     public final class FeatureWakeUp extends SecFeature {
         public final AnonymousClass1 mOnStateListener;
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.sepunion.SemGoodCatchService$FeatureWakeUp$1] */
         public FeatureWakeUp() {
             super("FeatureWakeUp");
             this.mOnStateListener =
@@ -690,7 +686,6 @@ public final class SemGoodCatchService extends IGoodCatchManager.Stub
     }
 
     public final class GoodCatchThread extends Thread {
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public GoodCatchThread() {
             super("SemGoodCatchService");
             int i = SemGoodCatchService.$r8$clinit;

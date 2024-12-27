@@ -148,7 +148,6 @@ public final class MediaBrowser {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void forceCloseConnection() {
         if (this.mServiceConnection != null) {
             try {
@@ -349,7 +348,6 @@ public final class MediaBrowser {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String getStateLabel(int state) {
         switch (state) {
             case 0:
@@ -367,7 +365,6 @@ public final class MediaBrowser {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onServiceConnected(
             final IMediaBrowserServiceCallbacks callback,
             final String root,
@@ -418,7 +415,6 @@ public final class MediaBrowser {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onConnectionFailed(final IMediaBrowserServiceCallbacks callback) {
         this.mHandler.post(
                 new Runnable() { // from class: android.media.browse.MediaBrowser.7
@@ -444,7 +440,6 @@ public final class MediaBrowser {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onLoadChildren(
             final IMediaBrowserServiceCallbacks callback,
             final String parentId,
@@ -486,7 +481,6 @@ public final class MediaBrowser {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onDisconnectRequested(final ServiceCallbacks callback) {
         this.mHandler.post(
                 new Runnable() { // from class:
@@ -498,7 +492,6 @@ public final class MediaBrowser {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onDisconnectRequested$0(ServiceCallbacks callback) {
         Log.i(TAG, "onDisconnectRequest for " + this.mServiceComponent);
         if (!isCurrent(callback, "onDisconnectRequest")) {
@@ -508,7 +501,6 @@ public final class MediaBrowser {
         this.mCallback.onDisconnected();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isCurrent(IMediaBrowserServiceCallbacks callback, String funcName) {
         if (this.mServiceCallbacks == callback && this.mState != 0 && this.mState != 1) {
             return true;
@@ -528,7 +520,6 @@ public final class MediaBrowser {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ServiceCallbacks getNewServiceCallbacks() {
         return new ServiceCallbacks(this);
     }
@@ -550,13 +541,11 @@ public final class MediaBrowser {
         public static final Parcelable.Creator<MediaItem> CREATOR =
                 new Parcelable.Creator<
                         MediaItem>() { // from class: android.media.browse.MediaBrowser.MediaItem.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public MediaItem createFromParcel(Parcel in) {
                         return new MediaItem(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public MediaItem[] newArray(int size) {
                         return new MediaItem[size];
@@ -715,7 +704,6 @@ public final class MediaBrowser {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isCurrent(String funcName) {
             if (MediaBrowser.this.mServiceConnection == this
                     && MediaBrowser.this.mState != 0
@@ -738,7 +726,6 @@ public final class MediaBrowser {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ServiceCallbacks extends IMediaBrowserServiceCallbacks.Stub {
         private WeakReference<MediaBrowser> mMediaBrowser;
 

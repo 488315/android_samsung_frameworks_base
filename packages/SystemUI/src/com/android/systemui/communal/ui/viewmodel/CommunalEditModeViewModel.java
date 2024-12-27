@@ -57,7 +57,6 @@ public final class CommunalEditModeViewModel extends BaseCommunalViewModel {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.systemui.communal.ui.viewmodel.CommunalEditModeViewModel$special$$inlined$map$1] */
     public CommunalEditModeViewModel(CommunalSceneInteractor communalSceneInteractor, CommunalInteractor communalInteractor, CommunalSettingsInteractor communalSettingsInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, MediaHost mediaHost, UiEventLogger uiEventLogger, LogBuffer logBuffer, CoroutineDispatcher coroutineDispatcher) {
         super(communalSceneInteractor, communalInteractor, mediaHost);
         this.communalInteractor = communalInteractor;
@@ -95,8 +94,6 @@ public final class CommunalEditModeViewModel extends BaseCommunalViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

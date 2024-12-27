@@ -12,7 +12,6 @@ final class MobileRepositorySwitcher$activeRepo$1 extends SuspendLambda implemen
     int label;
     final /* synthetic */ MobileRepositorySwitcher this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileRepositorySwitcher$activeRepo$1(MobileRepositorySwitcher mobileRepositorySwitcher, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mobileRepositorySwitcher;

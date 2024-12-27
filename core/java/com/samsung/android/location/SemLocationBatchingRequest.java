@@ -11,13 +11,11 @@ public class SemLocationBatchingRequest implements Parcelable {
             new Parcelable.Creator<
                     SemLocationBatchingRequest>() { // from class:
                                                     // com.samsung.android.location.SemLocationBatchingRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemLocationBatchingRequest createFromParcel(Parcel in) {
                     return new SemLocationBatchingRequest(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemLocationBatchingRequest[] newArray(int size) {
                     return new SemLocationBatchingRequest[size];

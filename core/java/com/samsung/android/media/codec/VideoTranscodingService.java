@@ -275,7 +275,6 @@ public class VideoTranscodingService extends IVideoTranscodingService.Stub {
         this.mHandler.sendMessage(message);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void printTasks() {
         String tasks = "";
         int i = 1;

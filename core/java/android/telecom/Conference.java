@@ -321,7 +321,6 @@ public abstract class Conference extends Conferenceable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void fireOnConferenceableConnectionsChanged() {
         for (Listener l : this.mListeners) {
             l.onConferenceableConnectionsChanged(this, getConferenceableConnections());

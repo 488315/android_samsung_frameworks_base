@@ -30,7 +30,6 @@ public class PageIndicator extends ViewGroup {
     public final ArrayList mQueuedPositions;
     public ColorStateList mTint;
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.qs.PageIndicator$1] */
     public PageIndicator(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mQueuedPositions = new ArrayList();

@@ -12,7 +12,6 @@ final class MobileIconViewModel$vmProvider$1 extends SuspendLambda implements Fu
     int label;
     final /* synthetic */ MobileIconViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileIconViewModel$vmProvider$1(MobileIconViewModel mobileIconViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mobileIconViewModel;

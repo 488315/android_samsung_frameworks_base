@@ -121,9 +121,7 @@ public final class MultiSIMController {
     }
 
     enum KoreanSimCarrier {
-        /* JADX INFO: Fake field, exist only in values array */
         KT("45008"),
-        /* JADX INFO: Fake field, exist only in values array */
         LG_U_PLUS("45006");
 
         private final String mNumeric;
@@ -149,11 +147,8 @@ public final class MultiSIMController {
     }
 
     enum PhoneNumberSource {
-        /* JADX INFO: Fake field, exist only in values array */
         CARRIER(2),
-        /* JADX INFO: Fake field, exist only in values array */
         UICC(1),
-        /* JADX INFO: Fake field, exist only in values array */
         IMS(3);
 
         private final int value;
@@ -167,8 +162,6 @@ public final class MultiSIMController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r15v0, types: [com.android.systemui.settings.multisim.MultiSIMController$12] */
-    /* JADX WARN: Type inference failed for: r15v1, types: [android.os.Handler, com.android.systemui.settings.multisim.MultiSIMController$13] */
     public MultiSIMController(Context context, NetworkController networkController, UserTracker userTracker, MultiSIMPreferredSlotView.SIMInfoIconManager.Factory factory) {
         char c;
         char c2;
@@ -888,8 +881,6 @@ public final class MultiSIMController {
         this.mData.isMultiSimReady = this.mIsLoadedMultiSim && !this.mHasOpportunisticESim;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00a4 A[EDGE_INSN: B:21:0x00a4->B:22:0x00a4 BREAK  A[LOOP:2: B:12:0x004f->B:50:0x00a2], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00a2 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

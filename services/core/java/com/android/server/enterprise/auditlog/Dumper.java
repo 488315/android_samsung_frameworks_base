@@ -47,13 +47,6 @@ public final class Dumper extends Thread {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v0, types: [com.android.server.enterprise.auditlog.Dumper] */
-    /* JADX WARN: Type inference failed for: r5v10, types: [java.io.FileOutputStream] */
-    /* JADX WARN: Type inference failed for: r5v2 */
-    /* JADX WARN: Type inference failed for: r5v3 */
-    /* JADX WARN: Type inference failed for: r5v4, types: [java.io.FileOutputStream] */
-    /* JADX WARN: Type inference failed for: r5v5, types: [java.io.FileOutputStream] */
     public final boolean appendFileNodeToTemporaryFile(File file) {
         File file2 = this.mTemporaryDirectory;
         if (file2 == null || !file2.exists()) {
@@ -232,22 +225,6 @@ public final class Dumper extends Thread {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:103:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x028c A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x0283 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x027a A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x0271 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x0254 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x01f4  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x023a A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:63:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0231 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0228 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x021f A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0216 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x01f9 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x024f  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x0295 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -260,35 +237,6 @@ public final class Dumper extends Thread {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.auditlog.Dumper.fullDump():void");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r14v14 */
-    /* JADX WARN: Type inference failed for: r14v16 */
-    /* JADX WARN: Type inference failed for: r14v18, types: [java.io.Closeable, java.io.InputStream, java.util.zip.GZIPInputStream] */
-    /* JADX WARN: Type inference failed for: r14v23 */
-    /* JADX WARN: Type inference failed for: r14v4 */
-    /* JADX WARN: Type inference failed for: r14v5, types: [java.io.Closeable] */
-    /* JADX WARN: Type inference failed for: r14v7 */
-    /* JADX WARN: Type inference failed for: r4v0 */
-    /* JADX WARN: Type inference failed for: r4v1 */
-    /* JADX WARN: Type inference failed for: r4v11, types: [java.io.Closeable, java.io.FileInputStream, java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r4v12 */
-    /* JADX WARN: Type inference failed for: r4v13 */
-    /* JADX WARN: Type inference failed for: r4v14 */
-    /* JADX WARN: Type inference failed for: r4v2 */
-    /* JADX WARN: Type inference failed for: r4v3, types: [java.io.Closeable] */
-    /* JADX WARN: Type inference failed for: r4v4, types: [java.io.Closeable] */
-    /* JADX WARN: Type inference failed for: r4v9 */
-    /* JADX WARN: Type inference failed for: r5v0 */
-    /* JADX WARN: Type inference failed for: r5v1 */
-    /* JADX WARN: Type inference failed for: r5v10 */
-    /* JADX WARN: Type inference failed for: r5v11, types: [java.io.Closeable, java.io.InputStreamReader, java.io.Reader] */
-    /* JADX WARN: Type inference failed for: r5v2, types: [java.io.Closeable] */
-    /* JADX WARN: Type inference failed for: r5v3, types: [java.io.Closeable] */
-    /* JADX WARN: Type inference failed for: r5v4 */
-    /* JADX WARN: Type inference failed for: r5v5 */
-    /* JADX WARN: Type inference failed for: r5v6 */
-    /* JADX WARN: Type inference failed for: r5v7 */
-    /* JADX WARN: Type inference failed for: r5v8 */
     public final File readFileLineByLine(File file) {
         Object obj;
         FileOutputStream fileOutputStream;
@@ -529,7 +477,6 @@ public final class Dumper extends Thread {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0030 A[Catch: IOException -> 0x0034, TRY_LEAVE, TryCatch #1 {IOException -> 0x0034, blocks: (B:10:0x002c, B:12:0x0030, B:22:0x0060, B:24:0x0064, B:4:0x0008, B:6:0x0013, B:9:0x001a, B:16:0x0022, B:18:0x0029), top: B:2:0x0008, inners: #0 }] */
     @Override // java.lang.Thread, java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -613,22 +560,6 @@ public final class Dumper extends Thread {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.auditlog.Dumper.run():void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x0176 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:109:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x016d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x012a  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x012f  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0134  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0139  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x013e  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x014c A[Catch: Exception -> 0x0109, TRY_ENTER, TRY_LEAVE, TryCatch #2 {Exception -> 0x0109, blocks: (B:42:0x0105, B:81:0x014c), top: B:26:0x009f }] */
-    /* JADX WARN: Removed duplicated region for block: B:82:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x0143 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x0154  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0159  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x015e  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x0163  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x0168  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

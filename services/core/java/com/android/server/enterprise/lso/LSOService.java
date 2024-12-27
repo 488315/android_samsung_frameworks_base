@@ -75,10 +75,6 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
 
        if (r8 != null) goto L24;
     */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0105 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00ee  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0105 A[SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.enterprise.lso.LSOService$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -93,9 +89,6 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
                     + " com.android.server.enterprise.lso.LSOService.<init>(android.content.Context):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0096 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:55:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x008d A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -229,7 +222,6 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(14:0|1|(2:2|3)|(2:26|(5:29|(3:18|19|(1:22))|(1:13)|14|15))|7|(0)|18|19|(0)|22|(1:13)(1:13)|14|15|(1:(0))) */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x002b, code lost:
 
        r6 = e;
@@ -238,8 +230,6 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
 
        com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(r6, "canConfigure() Unhandled exception.", "LSOService");
     */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0037 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x003c A[ADDED_TO_REGION] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

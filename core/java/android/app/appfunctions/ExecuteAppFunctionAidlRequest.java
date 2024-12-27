@@ -10,7 +10,6 @@ public final class ExecuteAppFunctionAidlRequest implements Parcelable {
     public static final Parcelable.Creator<ExecuteAppFunctionAidlRequest> CREATOR =
             new Parcelable.Creator<ExecuteAppFunctionAidlRequest>() { // from class:
                 // android.app.appfunctions.ExecuteAppFunctionAidlRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExecuteAppFunctionAidlRequest createFromParcel(Parcel in) {
                     ExecuteAppFunctionRequest clientRequest =
@@ -21,7 +20,6 @@ public final class ExecuteAppFunctionAidlRequest implements Parcelable {
                             clientRequest, userHandle, callingPackage);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExecuteAppFunctionAidlRequest[] newArray(int size) {
                     return new ExecuteAppFunctionAidlRequest[size];

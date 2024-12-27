@@ -22,7 +22,6 @@ public class IntentSender implements Parcelable {
             ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(-1).toBundle();
     public static final Parcelable.Creator<IntentSender> CREATOR =
             new Parcelable.Creator<IntentSender>() { // from class: android.content.IntentSender.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IntentSender createFromParcel(Parcel in) {
                     IBinder target = in.readStrongBinder();
@@ -32,7 +31,6 @@ public class IntentSender implements Parcelable {
                     return null;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IntentSender[] newArray(int size) {
                     return new IntentSender[size];

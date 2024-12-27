@@ -21,13 +21,11 @@ import java.util.List;
 public final class SliceItem implements Parcelable {
     public static final Parcelable.Creator<SliceItem> CREATOR =
             new Parcelable.Creator<SliceItem>() { // from class: android.app.slice.SliceItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SliceItem createFromParcel(Parcel in) {
                     return new SliceItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SliceItem[] newArray(int size) {
                     return new SliceItem[size];
@@ -90,7 +88,6 @@ public final class SliceItem implements Parcelable {
         return (Icon) this.mObj;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public PendingIntent getAction() {
         return (PendingIntent) ((Pair) this.mObj).first;
     }
@@ -107,7 +104,6 @@ public final class SliceItem implements Parcelable {
         return ((Integer) this.mObj).intValue();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public Slice getSlice() {
         if ("action".equals(getFormat())) {
             return (Slice) ((Pair) this.mObj).second;
@@ -175,8 +171,6 @@ public final class SliceItem implements Parcelable {
         return type;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Multi-variable type inference failed */
     private static void writeObj(Parcel dest, int flags, Object obj, String type) {
         char c;
         String baseType = getBaseType(type);
@@ -264,7 +258,6 @@ public final class SliceItem implements Parcelable {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static Object readObj(String type, Parcel in) {
         char c;
         String baseType = getBaseType(type);

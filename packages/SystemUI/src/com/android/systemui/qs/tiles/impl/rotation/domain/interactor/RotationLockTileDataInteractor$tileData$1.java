@@ -17,7 +17,6 @@ final class RotationLockTileDataInteractor$tileData$1 extends SuspendLambda impl
     int label;
     final /* synthetic */ RotationLockTileDataInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public RotationLockTileDataInteractor$tileData$1(RotationLockTileDataInteractor rotationLockTileDataInteractor, Continuation continuation) {
         super(5, continuation);
         this.this$0 = rotationLockTileDataInteractor;

@@ -383,7 +383,6 @@ public class RemoteControlClient {
         return this.mRcMediaIntent;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onSeekTo(int generationId, long timeMs) {
         synchronized (this.mCacheLock) {
             if (this.mCurrentClientGenId == generationId && this.mPositionUpdateListener != null) {
@@ -392,7 +391,6 @@ public class RemoteControlClient {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onUpdateMetadata(int generationId, int key, Object value) {
         synchronized (this.mCacheLock) {
             if (this.mCurrentClientGenId == generationId && this.mMetadataUpdateListener != null) {

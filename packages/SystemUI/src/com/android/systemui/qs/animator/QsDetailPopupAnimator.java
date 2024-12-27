@@ -133,8 +133,6 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.systemui.qs.animator.QsDetailPopupAnimator$anchorLayoutChangedListener$1] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.qs.animator.QsDetailPopupAnimator$targetLayoutChangedListener$1] */
     public QsDetailPopupAnimator(Context context, SecQSDetailController secQSDetailController, BarController barController, ColoredBGHelper coloredBGHelper, ShadeHeaderController shadeHeaderController, QsTransitionAnimator qsTransitionAnimator) {
         this.context = context;
         this.detailcontroller = secQSDetailController;

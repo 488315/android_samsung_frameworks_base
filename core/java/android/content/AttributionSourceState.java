@@ -9,7 +9,6 @@ public class AttributionSourceState implements Parcelable {
     public static final Parcelable.Creator<AttributionSourceState> CREATOR =
             new Parcelable.Creator<AttributionSourceState>() { // from class:
                 // android.content.AttributionSourceState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AttributionSourceState createFromParcel(Parcel _aidl_source) {
                     AttributionSourceState _aidl_out = new AttributionSourceState();
@@ -17,7 +16,6 @@ public class AttributionSourceState implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AttributionSourceState[] newArray(int _aidl_size) {
                     return new AttributionSourceState[_aidl_size];

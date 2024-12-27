@@ -12,13 +12,11 @@ public final class TelephonyHistogram implements Parcelable {
     public static final Parcelable.Creator<TelephonyHistogram> CREATOR =
             new Parcelable.Creator<
                     TelephonyHistogram>() { // from class: android.telephony.TelephonyHistogram.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TelephonyHistogram createFromParcel(Parcel in) {
                     return new TelephonyHistogram(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TelephonyHistogram[] newArray(int size) {
                     return new TelephonyHistogram[size];

@@ -118,7 +118,6 @@ public final class DisplayCutout {
             this.mRects = rects;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isEmpty() {
             for (Rect rect : this.mRects) {
                 if (!rect.isEmpty()) {
@@ -128,12 +127,10 @@ public final class DisplayCutout {
             return true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Rect getRect(int pos) {
             return new Rect(this.mRects[pos]);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Rect[] getRects() {
             Rect[] rects = new Rect[4];
             for (int i = 0; i < 4; i++) {
@@ -142,7 +139,6 @@ public final class DisplayCutout {
             return rects;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void scale(float scale) {
             for (int i = 0; i < 4; i++) {
                 this.mRects[i].scale(scale);
@@ -254,7 +250,6 @@ public final class DisplayCutout {
             return this.mPhysicalPixelDisplaySizeRatio;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean hasCutout() {
             return !this.mCutoutSpec.isEmpty();
         }
@@ -446,7 +441,6 @@ public final class DisplayCutout {
         this.mSideOverrides = sideOverrides;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Rect getCopyOrRef(Rect r, boolean copyArguments) {
         if (r == null) {
             return ZERO_RECT;
@@ -1162,13 +1156,11 @@ public final class DisplayCutout {
                 new Parcelable.Creator<
                         ParcelableWrapper>() { // from class:
                                                // android.view.DisplayCutout.ParcelableWrapper.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ParcelableWrapper createFromParcel(Parcel in) {
                         return new ParcelableWrapper(ParcelableWrapper.readCutoutFromParcel(in));
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public ParcelableWrapper[] newArray(int size) {
                         return new ParcelableWrapper[size];

@@ -18,7 +18,6 @@ final class SystemUIDialogManagerExtKt$hideAffordancesRequest$1 extends SuspendL
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SystemUIDialogManagerExtKt$hideAffordancesRequest$1(SystemUIDialogManager systemUIDialogManager, Continuation continuation) {
         super(2, continuation);
         this.$this_hideAffordancesRequest = systemUIDialogManager;
@@ -53,7 +52,6 @@ final class SystemUIDialogManagerExtKt$hideAffordancesRequest$1 extends SuspendL
             ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, producerScope, Boolean.valueOf(this.$this_hideAffordancesRequest.shouldHideAffordance()), "dialogHideAffordancesRequestInitial");
             final SystemUIDialogManager systemUIDialogManager = this.$this_hideAffordancesRequest;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.phone.SystemUIDialogManagerExtKt$hideAffordancesRequest$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

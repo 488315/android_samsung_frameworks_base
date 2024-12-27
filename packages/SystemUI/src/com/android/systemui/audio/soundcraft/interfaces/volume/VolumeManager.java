@@ -66,7 +66,6 @@ public final class VolumeManager {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v12, types: [com.android.systemui.audio.soundcraft.interfaces.volume.VolumeManager$callback$1] */
     public VolumeManager(Context context, BluetoothAdapterWrapper bluetoothAdapterWrapper, DisplayManagerWrapper displayManagerWrapper) {
         this.context = context;
         this.bluetoothAdapterWrapper = bluetoothAdapterWrapper;

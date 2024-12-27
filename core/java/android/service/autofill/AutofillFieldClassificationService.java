@@ -38,7 +38,6 @@ public abstract class AutofillFieldClassificationService extends Service {
     private final Handler mHandler = new Handler(Looper.getMainLooper(), null, true);
     private AutofillFieldClassificationServiceWrapper mWrapper;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void calculateScores(
             RemoteCallback callback,
             List<AutofillValue> actualValues,
@@ -104,7 +103,6 @@ public abstract class AutofillFieldClassificationService extends Service {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class AutofillFieldClassificationServiceWrapper
             extends IAutofillFieldClassificationService.Stub {
         private AutofillFieldClassificationServiceWrapper() {}
@@ -164,13 +162,11 @@ public abstract class AutofillFieldClassificationService extends Service {
                 new Parcelable.Creator<
                         Scores>() { // from class:
                                     // android.service.autofill.AutofillFieldClassificationService.Scores.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Scores createFromParcel(Parcel parcel) {
                         return new Scores(parcel);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Scores[] newArray(int size) {
                         return new Scores[size];

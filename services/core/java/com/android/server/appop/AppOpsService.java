@@ -1069,8 +1069,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r1v8, types: [java.util.List] */
         public final int onCommand(String str) {
             int i;
             char c;
@@ -1895,7 +1893,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         return new SyncNotedAppOp(checkOperation2, i, str2, str);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:87:0x02ad A[Catch: all -> 0x017d, TryCatch #0 {all -> 0x017d, blocks: (B:54:0x0127, B:56:0x0149, B:58:0x014d, B:59:0x0180, B:60:0x0187, B:73:0x018c, B:75:0x01ce, B:77:0x01e4, B:79:0x01e8, B:80:0x0227, B:81:0x022e, B:85:0x02a9, B:87:0x02ad, B:88:0x02e4, B:92:0x023b, B:93:0x0240, B:98:0x025f, B:100:0x0263, B:101:0x02a2, B:102:0x02a7), top: B:53:0x0127 }] */
     /* renamed from: -$$Nest$mstartProxyOperationImpl, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2245,8 +2242,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         return new AppOpsManager.OpEntry(i2, appOpsCheckingServiceInterface.getPackageMode(i2, userId, op.packageName), arrayMap2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x0012  */
-    /* JADX WARN: Removed duplicated region for block: B:8:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2319,7 +2314,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         Slog.e("AppOps", "Cannot " + str + ": non-application UID " + i);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static int resolveUid(String str) {
         char c;
         if (str == null) {
@@ -2634,12 +2628,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
     
         r7 = 0;
      */
-    /* JADX WARN: Removed duplicated region for block: B:347:0x06d6 A[Catch: all -> 0x019e, TryCatch #2 {all -> 0x019e, blocks: (B:111:0x018f, B:114:0x0198, B:115:0x01a1, B:118:0x01b3, B:122:0x01bb, B:123:0x01c1, B:125:0x01c9, B:127:0x01eb, B:128:0x01ee, B:132:0x01fb, B:135:0x0205, B:139:0x0272, B:140:0x020e, B:141:0x0219, B:143:0x021f, B:145:0x0227, B:149:0x026d, B:151:0x0239, B:153:0x0242, B:154:0x025b, B:160:0x0277, B:165:0x0285, B:168:0x028f, B:172:0x02e2, B:174:0x029e, B:175:0x02a5, B:176:0x02c3, B:178:0x02c9, B:183:0x02e5, B:188:0x02f3, B:190:0x02fb, B:192:0x0305, B:196:0x033a, B:198:0x0313, B:199:0x031a, B:203:0x033d, B:207:0x0349, B:209:0x0351, B:213:0x03e5, B:214:0x0361, B:216:0x036c, B:221:0x0376, B:226:0x0381, B:227:0x0388, B:230:0x03b1, B:231:0x03bb, B:233:0x03ca, B:235:0x03cf, B:239:0x03d4, B:243:0x03eb, B:246:0x03f5, B:248:0x03ff, B:253:0x0493, B:254:0x040e, B:256:0x0417, B:260:0x0420, B:263:0x042d, B:264:0x0434, B:267:0x045f, B:268:0x0469, B:270:0x0478, B:272:0x047d, B:276:0x0482, B:280:0x049b, B:284:0x04a7, B:286:0x04af, B:291:0x0548, B:292:0x04bf, B:294:0x04c8, B:298:0x04d1, B:301:0x04e0, B:302:0x04e7, B:305:0x050f, B:306:0x051b, B:308:0x052a, B:310:0x0532, B:315:0x0537, B:319:0x0550, B:325:0x0560, B:333:0x0572, B:335:0x0576, B:337:0x057e, B:345:0x06c2, B:347:0x06d6, B:349:0x06dd, B:354:0x0709, B:359:0x06f1, B:367:0x0828, B:369:0x071b, B:371:0x0721, B:373:0x072c, B:376:0x0819, B:378:0x0740, B:380:0x0746, B:386:0x080f, B:388:0x0758, B:391:0x0778, B:392:0x078c, B:394:0x07ba, B:396:0x07ce, B:397:0x07e3, B:398:0x07d3, B:399:0x07ef, B:407:0x05c0, B:412:0x05cd, B:422:0x05ee, B:424:0x05f6, B:428:0x05fe, B:446:0x0627, B:448:0x062d, B:451:0x0637, B:458:0x0646, B:460:0x064e, B:464:0x066e, B:470:0x0688, B:474:0x0692, B:492:0x0844, B:493:0x0847, B:496:0x0857, B:498:0x0860, B:500:0x0868, B:501:0x0872, B:504:0x088c, B:513:0x087b), top: B:110:0x018f }] */
-    /* JADX WARN: Removed duplicated region for block: B:368:0x071a  */
-    /* JADX WARN: Removed duplicated region for block: B:417:0x05e0  */
-    /* JADX WARN: Removed duplicated region for block: B:432:0x060b  */
-    /* JADX WARN: Removed duplicated region for block: B:480:0x06a2  */
-    /* JADX WARN: Removed duplicated region for block: B:484:0x05e3  */
     @dalvik.annotation.optimization.NeverCompile
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2961,7 +2949,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         return uidState2;
     }
 
-    /* JADX WARN: Type inference failed for: r3v0, types: [com.android.server.appop.AppOpsService$$ExternalSyntheticLambda11] */
     public final AppOpsUidStateTracker getUidStateTracker() {
         if (this.mUidStateTracker == null) {
             ActivityManagerInternal activityManagerInternal = (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
@@ -2996,7 +2983,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         return this.mUidStateTracker;
     }
 
-    /* JADX WARN: Finally extract failed */
     public void initializeUidStates() {
         if (this.mUserManagerInternal == null) {
             this.mUserManagerInternal = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
@@ -3273,9 +3259,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         return this.mCheckOpsDelegateDispatcher.noteOperation(i, i2, str, str2, i3, z, str3, z2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00de A[Catch: all -> 0x00a7, TryCatch #0 {all -> 0x00a7, blocks: (B:14:0x0069, B:16:0x008a, B:18:0x00a2, B:21:0x00da, B:23:0x00de, B:26:0x0112, B:27:0x016f, B:28:0x0175, B:32:0x00aa, B:33:0x0177, B:35:0x0190, B:36:0x01cf, B:38:0x01f8, B:40:0x0215, B:42:0x023c, B:43:0x0244, B:45:0x0219, B:46:0x0246, B:49:0x038c, B:51:0x0390, B:53:0x03d1, B:55:0x03ff, B:56:0x0411, B:57:0x0417, B:59:0x0394, B:62:0x03bb, B:63:0x03b5, B:64:0x0250, B:66:0x0264, B:68:0x0276, B:70:0x027a, B:72:0x02bd, B:76:0x02de, B:77:0x02e6, B:78:0x02eb, B:80:0x027e, B:83:0x02f3, B:84:0x02fd, B:86:0x0315, B:88:0x0319, B:90:0x035c, B:93:0x037c, B:94:0x0384, B:95:0x0389, B:97:0x031d), top: B:13:0x0069 }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0112 A[Catch: all -> 0x00a7, TryCatch #0 {all -> 0x00a7, blocks: (B:14:0x0069, B:16:0x008a, B:18:0x00a2, B:21:0x00da, B:23:0x00de, B:26:0x0112, B:27:0x016f, B:28:0x0175, B:32:0x00aa, B:33:0x0177, B:35:0x0190, B:36:0x01cf, B:38:0x01f8, B:40:0x0215, B:42:0x023c, B:43:0x0244, B:45:0x0219, B:46:0x0246, B:49:0x038c, B:51:0x0390, B:53:0x03d1, B:55:0x03ff, B:56:0x0411, B:57:0x0417, B:59:0x0394, B:62:0x03bb, B:63:0x03b5, B:64:0x0250, B:66:0x0264, B:68:0x0276, B:70:0x027a, B:72:0x02bd, B:76:0x02de, B:77:0x02e6, B:78:0x02eb, B:80:0x027e, B:83:0x02f3, B:84:0x02fd, B:86:0x0315, B:88:0x0319, B:90:0x035c, B:93:0x037c, B:94:0x0384, B:95:0x0389, B:97:0x031d), top: B:13:0x0069 }] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x016d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3417,7 +3400,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         new Shell(this, this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
     }
@@ -4143,7 +4125,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0032 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4317,7 +4298,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         setMode(i, i2, str, i3, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x004b A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5221,9 +5201,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0047 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x01f3  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x0221  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

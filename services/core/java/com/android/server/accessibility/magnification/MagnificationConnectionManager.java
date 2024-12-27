@@ -924,7 +924,6 @@ public final class MagnificationConnectionManager
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void setConnection(IMagnificationConnection iMagnificationConnection) {
         if (SEC_DEBUG) {
             Slog.d(

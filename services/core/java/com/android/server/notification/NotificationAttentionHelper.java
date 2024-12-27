@@ -161,9 +161,6 @@ public final class NotificationAttentionHelper {
                         new Pair("android.intent.extra.QUIET_MODE", bool));
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.notification.NotificationAttentionHelper$1] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.notification.NotificationAttentionHelper$1] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.notification.NotificationAttentionHelper$5] */
     public NotificationAttentionHelper(
             Context context,
             LightsManager lightsManager,
@@ -406,35 +403,6 @@ public final class NotificationAttentionHelper {
 
        if ((r3.sbn.getNotification().flags & 4) != 0) goto L128;
     */
-    /* JADX WARN: Removed duplicated region for block: B:115:0x062c  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x0632  */
-    /* JADX WARN: Removed duplicated region for block: B:137:0x0682  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x0684  */
-    /* JADX WARN: Removed duplicated region for block: B:151:0x06b7  */
-    /* JADX WARN: Removed duplicated region for block: B:158:0x06cc  */
-    /* JADX WARN: Removed duplicated region for block: B:172:0x07d9  */
-    /* JADX WARN: Removed duplicated region for block: B:175:0x07e0  */
-    /* JADX WARN: Removed duplicated region for block: B:195:0x08c4  */
-    /* JADX WARN: Removed duplicated region for block: B:201:0x08c7  */
-    /* JADX WARN: Removed duplicated region for block: B:210:0x0881  */
-    /* JADX WARN: Removed duplicated region for block: B:212:0x0887  */
-    /* JADX WARN: Removed duplicated region for block: B:214:0x0889  */
-    /* JADX WARN: Removed duplicated region for block: B:215:0x0883  */
-    /* JADX WARN: Removed duplicated region for block: B:218:0x0824  */
-    /* JADX WARN: Removed duplicated region for block: B:220:0x0841  */
-    /* JADX WARN: Removed duplicated region for block: B:224:0x07e3  */
-    /* JADX WARN: Removed duplicated region for block: B:225:0x07db  */
-    /* JADX WARN: Removed duplicated region for block: B:230:0x07bb  */
-    /* JADX WARN: Removed duplicated region for block: B:231:0x07be  */
-    /* JADX WARN: Removed duplicated region for block: B:240:0x0782  */
-    /* JADX WARN: Removed duplicated region for block: B:241:0x0786  */
-    /* JADX WARN: Removed duplicated region for block: B:291:0x07cf  */
-    /* JADX WARN: Removed duplicated region for block: B:295:0x06b9  */
-    /* JADX WARN: Removed duplicated region for block: B:299:0x0634  */
-    /* JADX WARN: Removed duplicated region for block: B:300:0x062e  */
-    /* JADX WARN: Removed duplicated region for block: B:313:0x0290  */
-    /* JADX WARN: Removed duplicated region for block: B:339:0x0180 A[Catch: all -> 0x0537, TRY_LEAVE, TryCatch #4 {, blocks: (B:332:0x0156, B:337:0x0179, B:339:0x0180), top: B:331:0x0156 }] */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x028b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

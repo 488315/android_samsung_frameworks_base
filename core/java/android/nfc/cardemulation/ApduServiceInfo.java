@@ -49,7 +49,6 @@ public final class ApduServiceInfo implements Parcelable {
     public static final Parcelable.Creator<ApduServiceInfo> CREATOR =
             new Parcelable.Creator<
                     ApduServiceInfo>() { // from class: android.nfc.cardemulation.ApduServiceInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApduServiceInfo createFromParcel(Parcel source) {
                     ResolveInfo info = ResolveInfo.CREATOR.createFromParcel(source);
@@ -103,7 +102,6 @@ public final class ApduServiceInfo implements Parcelable {
                             autoTransactPatterns);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApduServiceInfo[] newArray(int size) {
                     return new ApduServiceInfo[size];
@@ -250,13 +248,6 @@ public final class ApduServiceInfo implements Parcelable {
 
        throw new org.xmlpull.v1.XmlPullParserException("Meta-data does not start with <offhost-apdu-service> tag");
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:243:0x0581  */
-    /* JADX WARN: Removed duplicated region for block: B:245:? A[SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r13v14 */
-    /* JADX WARN: Type inference failed for: r13v20 */
-    /* JADX WARN: Type inference failed for: r13v6 */
-    /* JADX WARN: Type inference failed for: r13v7, types: [android.content.res.XmlResourceParser] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -32,7 +32,6 @@ final class AlternateBouncerViewBinder$optionallyAddUdfpsViews$1 extends Suspend
         private /* synthetic */ Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(AlternateBouncerUdfpsIconViewModel alternateBouncerUdfpsIconViewModel, ConstraintLayout constraintLayout, Lazy lazy, Continuation continuation) {
             super(2, continuation);
             this.$udfpsIconViewModel = alternateBouncerUdfpsIconViewModel;
@@ -64,7 +63,6 @@ final class AlternateBouncerViewBinder$optionallyAddUdfpsViews$1 extends Suspend
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AlternateBouncerViewBinder$optionallyAddUdfpsViews$1(AlternateBouncerUdfpsIconViewModel alternateBouncerUdfpsIconViewModel, ConstraintLayout constraintLayout, Lazy lazy, Continuation continuation) {
         super(3, continuation);
         this.$udfpsIconViewModel = alternateBouncerUdfpsIconViewModel;

@@ -13,13 +13,11 @@ import java.util.Objects;
 public class RssiCurve implements Parcelable {
     public static final Parcelable.Creator<RssiCurve> CREATOR =
             new Parcelable.Creator<RssiCurve>() { // from class: android.net.RssiCurve.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RssiCurve createFromParcel(Parcel in) {
                     return new RssiCurve(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RssiCurve[] newArray(int size) {
                     return new RssiCurve[size];

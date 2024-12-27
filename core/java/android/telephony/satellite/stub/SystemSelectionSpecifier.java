@@ -9,7 +9,6 @@ public class SystemSelectionSpecifier implements Parcelable {
             new Parcelable.Creator<
                     SystemSelectionSpecifier>() { // from class:
                                                   // android.telephony.satellite.stub.SystemSelectionSpecifier.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SystemSelectionSpecifier createFromParcel(Parcel _aidl_source) {
                     SystemSelectionSpecifier _aidl_out = new SystemSelectionSpecifier();
@@ -17,7 +16,6 @@ public class SystemSelectionSpecifier implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SystemSelectionSpecifier[] newArray(int _aidl_size) {
                     return new SystemSelectionSpecifier[_aidl_size];

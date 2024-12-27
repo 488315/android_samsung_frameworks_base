@@ -15,7 +15,6 @@ final class OptionalValidators extends InternalValidator {
             new Parcelable.Creator<
                     OptionalValidators>() { // from class:
                                             // android.service.autofill.OptionalValidators.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OptionalValidators createFromParcel(Parcel parcel) {
                     return new OptionalValidators(
@@ -23,7 +22,6 @@ final class OptionalValidators extends InternalValidator {
                                     parcel.readParcelableArray(null, InternalValidator.class));
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OptionalValidators[] newArray(int size) {
                     return new OptionalValidators[size];

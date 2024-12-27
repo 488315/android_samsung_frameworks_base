@@ -416,10 +416,6 @@ public final class LowPowerStandbyController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.power.LowPowerStandbyController$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.server.power.LowPowerStandbyController$1] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.power.LowPowerStandbyController$1] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.server.power.LowPowerStandbyController$1] */
     public LowPowerStandbyController(
             Context context,
             Looper looper,
@@ -693,9 +689,6 @@ public final class LowPowerStandbyController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00a5 A[Catch: all -> 0x0060, TryCatch #0 {all -> 0x0060, blocks: (B:4:0x0015, B:6:0x005b, B:9:0x008f, B:11:0x00a5, B:12:0x00f6, B:13:0x0102, B:15:0x010a, B:17:0x0112, B:19:0x012d, B:22:0x0130, B:24:0x013f, B:25:0x014e, B:27:0x0154, B:29:0x0162, B:30:0x0165, B:35:0x0063), top: B:3:0x0015 }] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x010a A[Catch: all -> 0x0060, TryCatch #0 {all -> 0x0060, blocks: (B:4:0x0015, B:6:0x005b, B:9:0x008f, B:11:0x00a5, B:12:0x00f6, B:13:0x0102, B:15:0x010a, B:17:0x0112, B:19:0x012d, B:22:0x0130, B:24:0x013f, B:25:0x014e, B:27:0x0154, B:29:0x0162, B:30:0x0165, B:35:0x0063), top: B:3:0x0015 }] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x013f A[Catch: all -> 0x0060, TryCatch #0 {all -> 0x0060, blocks: (B:4:0x0015, B:6:0x005b, B:9:0x008f, B:11:0x00a5, B:12:0x00f6, B:13:0x0102, B:15:0x010a, B:17:0x0112, B:19:0x012d, B:22:0x0130, B:24:0x013f, B:25:0x014e, B:27:0x0154, B:29:0x0162, B:30:0x0165, B:35:0x0063), top: B:3:0x0015 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

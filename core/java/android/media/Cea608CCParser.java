@@ -558,7 +558,6 @@ class Cea608CCParser {
             this.mCol = clamp(this.mCol + col, 1, 32);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void moveBaselineTo(int baseRow, int windowSize) {
             if (this.mRow == baseRow) {
                 return;
@@ -740,7 +739,6 @@ class Cea608CCParser {
                     && this.mData2 <= 63;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isExtendedChar() {
             return (this.mData1 == 18
                             || this.mData1 == 26

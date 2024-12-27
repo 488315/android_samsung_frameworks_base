@@ -290,10 +290,6 @@ public final class BrightnessController implements ToggleSlider.Listener {
         brightnessController.mSliderAnimator.start();
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.settings.brightness.BrightnessController$1] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.settings.brightness.BrightnessController$2] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.settings.brightness.BrightnessController$3] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.systemui.settings.brightness.BrightnessController$6] */
     public BrightnessController(Context context, ToggleSlider toggleSlider, UserTracker userTracker, DisplayTracker displayTracker, DisplayManager displayManager, SecureSettings secureSettings, IVrManager iVrManager, Executor executor, Looper looper, Handler handler) {
         Handler.Callback callback = new Handler.Callback() { // from class: com.android.systemui.settings.brightness.BrightnessController.7
             @Override // android.os.Handler.Callback

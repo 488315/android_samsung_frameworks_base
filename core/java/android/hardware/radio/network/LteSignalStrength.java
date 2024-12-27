@@ -10,7 +10,6 @@ public class LteSignalStrength implements Parcelable {
     public static final Parcelable.Creator<LteSignalStrength> CREATOR =
             new Parcelable.Creator<LteSignalStrength>() { // from class:
                 // android.hardware.radio.network.LteSignalStrength.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LteSignalStrength createFromParcel(Parcel _aidl_source) {
                     LteSignalStrength _aidl_out = new LteSignalStrength();
@@ -18,7 +17,6 @@ public class LteSignalStrength implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LteSignalStrength[] newArray(int _aidl_size) {
                     return new LteSignalStrength[_aidl_size];

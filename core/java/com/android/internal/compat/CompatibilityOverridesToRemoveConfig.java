@@ -11,13 +11,11 @@ public final class CompatibilityOverridesToRemoveConfig implements Parcelable {
             new Parcelable.Creator<
                     CompatibilityOverridesToRemoveConfig>() { // from class:
                                                               // com.android.internal.compat.CompatibilityOverridesToRemoveConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompatibilityOverridesToRemoveConfig createFromParcel(Parcel in) {
                     return new CompatibilityOverridesToRemoveConfig(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompatibilityOverridesToRemoveConfig[] newArray(int size) {
                     return new CompatibilityOverridesToRemoveConfig[size];

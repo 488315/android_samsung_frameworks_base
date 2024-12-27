@@ -29,7 +29,6 @@ public final class StrongAuthTracker extends LockPatternUtils.StrongAuthTracker 
     public final StrongAuthTracker$special$$inlined$map$2 isStrongBiometricAllowed;
     public final UserRepository userRepository;
 
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.keyguard.data.repository.StrongAuthTracker$special$$inlined$map$2, kotlinx.coroutines.flow.Flow] */
     public StrongAuthTracker(UserRepository userRepository, Context context) {
         super(context);
         final UserRepositoryImpl$special$$inlined$map$2 userRepositoryImpl$special$$inlined$map$2 = ((UserRepositoryImpl) userRepository).selectedUserInfo;
@@ -61,8 +60,6 @@ public final class StrongAuthTracker extends LockPatternUtils.StrongAuthTracker 
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -158,8 +155,6 @@ public final class StrongAuthTracker extends LockPatternUtils.StrongAuthTracker 
                     this.this$0 = strongAuthTracker;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

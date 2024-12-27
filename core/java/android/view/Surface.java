@@ -30,7 +30,6 @@ public class Surface implements Parcelable {
     public static final int CHANGE_FRAME_RATE_ONLY_IF_SEAMLESS = 0;
     public static final Parcelable.Creator<Surface> CREATOR =
             new Parcelable.Creator<Surface>() { // from class: android.view.Surface.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Surface createFromParcel(Parcel source) {
                     try {
@@ -43,7 +42,6 @@ public class Surface implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Surface[] newArray(int size) {
                     return new Surface[size];

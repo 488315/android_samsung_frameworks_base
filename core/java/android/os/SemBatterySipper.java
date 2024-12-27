@@ -9,13 +9,11 @@ public class SemBatterySipper implements Parcelable {
     public static final Parcelable.Creator<SemBatterySipper> CREATOR =
             new Parcelable.Creator<
                     SemBatterySipper>() { // from class: android.os.SemBatterySipper.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemBatterySipper createFromParcel(Parcel in) {
                     return new SemBatterySipper(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemBatterySipper[] newArray(int size) {
                     return new SemBatterySipper[size];

@@ -26,7 +26,6 @@ public final class KeyguardOcclusionInteractor {
     public final ReadonlyStateFlow showWhenLockedActivityLaunchedFromPowerGesture;
     public final KeyguardTransitionInteractor transitionInteractor;
 
-    /* JADX WARN: Type inference failed for: r6v1, types: [com.android.systemui.keyguard.domain.interactor.KeyguardOcclusionInteractor$special$$inlined$map$1, kotlinx.coroutines.flow.Flow] */
     public KeyguardOcclusionInteractor(CoroutineScope coroutineScope, KeyguardOcclusionRepository keyguardOcclusionRepository, PowerInteractor powerInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, KeyguardInteractor keyguardInteractor, Lazy lazy) {
         this.repository = keyguardOcclusionRepository;
         this.powerInteractor = powerInteractor;
@@ -61,8 +60,6 @@ public final class KeyguardOcclusionInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -153,8 +150,6 @@ public final class KeyguardOcclusionInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -256,8 +251,6 @@ public final class KeyguardOcclusionInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -348,8 +341,6 @@ public final class KeyguardOcclusionInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

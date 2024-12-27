@@ -72,7 +72,6 @@ public final class MediaOutputView extends CustomComposeView {
         this(context, attributeSet, viewModelFactory, coloredBGHelper, audioManager, (i & 32) != 0 ? null : mediaSdkSupportServiceClient);
     }
 
-    /* JADX WARN: Type inference failed for: r1v15, types: [com.android.systemui.media.MediaOutputView$ContentView$1, kotlin.jvm.internal.Lambda] */
     @Override // com.android.systemui.media.CustomComposeView
     public final void ContentView(final int i, Composer composer) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -145,7 +144,6 @@ public final class MediaOutputView extends CustomComposeView {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.MediaOutputView$ContentView$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
@@ -285,7 +283,6 @@ public final class MediaOutputView extends CustomComposeView {
         this.coloredBGHelper = coloredBGHelper;
         this.serviceClient = mediaSdkSupportServiceClient;
         this.onUnhandledKeyEventListener$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.MediaOutputView$onUnhandledKeyEventListener$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

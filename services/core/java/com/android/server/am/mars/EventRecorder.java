@@ -121,7 +121,6 @@ public final class EventRecorder {
         public static final EventRecorder INSTANCE = new EventRecorder();
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public enum EventType {
         UID_RUN("UID_RUN"),
         UID_STOP("UID_STOP"),
@@ -164,7 +163,6 @@ public final class EventRecorder {
                     .post(
                             new Runnable() { // from class:
                                 // com.android.server.am.mars.EventRecorder$RemoveOutdatedJobService$$ExternalSyntheticLambda0
-                                /* JADX WARN: Removed duplicated region for block: B:135:0x01d3  */
                                 @Override // java.lang.Runnable
                                 /*
                                     Code decompiled incorrectly, please refer to instructions dump.

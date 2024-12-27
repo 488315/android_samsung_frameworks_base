@@ -26,13 +26,11 @@ public class RecurrenceRule implements Parcelable {
     public static Clock sClock = Clock.systemDefaultZone();
     public static final Parcelable.Creator<RecurrenceRule> CREATOR =
             new Parcelable.Creator<RecurrenceRule>() { // from class: android.util.RecurrenceRule.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecurrenceRule createFromParcel(Parcel source) {
                     return new RecurrenceRule(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecurrenceRule[] newArray(int size) {
                     return new RecurrenceRule[size];
@@ -50,7 +48,6 @@ public class RecurrenceRule implements Parcelable {
         return new RecurrenceRule(null, null, null);
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [java.time.ZonedDateTime] */
     @Deprecated
     public static RecurrenceRule buildRecurringMonthly(int dayOfMonth, ZoneId zone) {
         ZonedDateTime start =
@@ -163,7 +160,6 @@ public class RecurrenceRule implements Parcelable {
             return this.hasNext;
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // java.util.Iterator
         public Range<ZonedDateTime> next() {
             this.hasNext = false;
@@ -176,7 +172,6 @@ public class RecurrenceRule implements Parcelable {
         ZonedDateTime cycleStart;
         int i;
 
-        /* JADX WARN: Multi-variable type inference failed */
         public RecurringIterator() {
             ZonedDateTime withZoneSameInstant =
                     RecurrenceRule.this.end != null
@@ -224,7 +219,6 @@ public class RecurrenceRule implements Parcelable {
             return this.cycleStart.toEpochSecond() >= RecurrenceRule.this.start.toEpochSecond();
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // java.util.Iterator
         public Range<ZonedDateTime> next() {
             if (RecurrenceRule.LOGD) {

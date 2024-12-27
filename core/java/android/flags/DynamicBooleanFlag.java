@@ -38,7 +38,6 @@ public class DynamicBooleanFlag extends BooleanFlagBase implements DynamicFlag<B
         this.mDefault = defaultValue;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.flags.BooleanFlagBase, android.flags.Flag
     public Boolean getDefault() {
         return Boolean.valueOf(this.mDefault);

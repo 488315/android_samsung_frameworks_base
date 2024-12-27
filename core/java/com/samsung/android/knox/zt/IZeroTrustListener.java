@@ -133,7 +133,6 @@ public interface IZeroTrustListener extends IInterface {
             _arg1.put(k, v);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements IZeroTrustListener {
             private IBinder mRemote;
 

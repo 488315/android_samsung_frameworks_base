@@ -110,8 +110,6 @@ public final class LightBarController implements BatteryController.BatteryStateC
         NAV_BAR_INVERSION_SCRIM_ALPHA_THRESHOLD = BasicRune.NAVBAR_LIGHTBAR ? 0.4f : 0.1f;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.navigationbar.NavigationModeController$ModeChangedListener, com.android.systemui.statusbar.phone.LightBarController$$ExternalSyntheticLambda2] */
     public LightBarController(Context context, JavaAdapter javaAdapter, DarkIconDispatcher darkIconDispatcher, BatteryController batteryController, NavigationModeController navigationModeController, StatusBarModeRepositoryStore statusBarModeRepositoryStore, DumpManager dumpManager, DisplayTracker displayTracker, SamsungLightBarControlHelper samsungLightBarControlHelper, SamsungStatusBarGrayIconHelper samsungStatusBarGrayIconHelper) {
         int i = 0;
         final int i2 = 0;
@@ -278,8 +276,6 @@ public final class LightBarController implements BatteryController.BatteryStateC
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:64:0x00bd  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x00c1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

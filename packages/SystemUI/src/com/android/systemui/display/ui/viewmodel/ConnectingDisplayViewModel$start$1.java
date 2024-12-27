@@ -23,7 +23,6 @@ final class ConnectingDisplayViewModel$start$1 extends SuspendLambda implements 
     int label;
     final /* synthetic */ ConnectingDisplayViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ConnectingDisplayViewModel$start$1(ConnectingDisplayViewModel connectingDisplayViewModel, Continuation continuation) {
         super(3, continuation);
         this.this$0 = connectingDisplayViewModel;

@@ -279,7 +279,6 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
         return -2;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0047, code lost:
     
         if (r4.equals("image") == false) goto L15;

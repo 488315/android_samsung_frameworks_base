@@ -114,7 +114,6 @@ public final class MaintenanceModeManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.samsung.android.server.pm.mm.MaintenanceModeManager$1] */
     public MaintenanceModeManager(
             Context context, Handler handler, UserManagerService userManagerService) {
         this.mContext = context;
@@ -181,7 +180,6 @@ public final class MaintenanceModeManager {
         this.mHandler.post(new MaintenanceModeManager$$ExternalSyntheticLambda3(4, str));
     }
 
-    /* JADX WARN: Type inference failed for: r3v7, types: [com.samsung.android.server.pm.mm.MaintenanceModeManager$2] */
     public final void notifyOtherPackages(String str, final String str2) {
         if (TextUtils.isEmpty(str) || TextUtils.isEmpty(str2)) {
             return;

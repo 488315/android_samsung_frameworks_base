@@ -1629,7 +1629,6 @@ public final class UsbProfileGroupSettingsManager {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void upgradeSingleUserLocked() {
         int eventType;
         File file = sSingleUserSettingsFile;

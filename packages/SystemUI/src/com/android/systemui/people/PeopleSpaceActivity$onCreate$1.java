@@ -21,7 +21,6 @@ final class PeopleSpaceActivity$onCreate$1 extends SuspendLambda implements Func
         final /* synthetic */ PeopleViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(PeopleViewModel peopleViewModel, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = peopleViewModel;
@@ -49,7 +48,6 @@ final class PeopleSpaceActivity$onCreate$1 extends SuspendLambda implements Func
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PeopleSpaceActivity$onCreate$1(PeopleSpaceActivity peopleSpaceActivity, PeopleViewModel peopleViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = peopleSpaceActivity;

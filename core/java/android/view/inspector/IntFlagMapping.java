@@ -35,7 +35,6 @@ public final class IntFlagMapping {
             this.mName = (String) Objects.requireNonNull(name);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isEnabledFor(int value) {
             return (this.mMask & value) == this.mTarget;
         }

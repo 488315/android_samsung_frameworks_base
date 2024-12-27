@@ -16,7 +16,6 @@ final class MediaSessionController$update$2$2 extends SuspendLambda implements F
     int label;
     final /* synthetic */ MediaSessionController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaSessionController$update$2$2(MediaSessionController mediaSessionController, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaSessionController;

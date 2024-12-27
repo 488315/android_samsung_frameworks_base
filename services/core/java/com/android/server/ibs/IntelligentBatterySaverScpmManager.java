@@ -43,7 +43,6 @@ public final class IntelligentBatterySaverScpmManager {
         return intelligentBatterySaverScpmManager;
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:60:0x0087 -> B:20:0x00bb). Please report as a decompilation issue!!! */
     public final void parseData(ParcelFileDescriptor parcelFileDescriptor) {
         FileReader fileReader;
         Log.d("IntelligentBatterySaverScpmManager", "parseData");

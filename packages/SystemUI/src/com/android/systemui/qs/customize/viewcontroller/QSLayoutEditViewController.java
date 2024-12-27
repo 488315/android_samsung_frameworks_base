@@ -78,9 +78,6 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r5v7, types: [com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$collapsedBarRowConsumer$1] */
-    /* JADX WARN: Type inference failed for: r5v8, types: [com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$tileEditClickListener$1] */
-    /* JADX WARN: Type inference failed for: r7v4, types: [com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$simpleCallback$1] */
     public QSLayoutEditViewController(final Context context, BarOrderInteractor barOrderInteractor, ArrayList<BarItemImpl> arrayList, SecQSSettingEditResources secQSSettingEditResources, View.OnClickListener onClickListener, View.OnClickListener onClickListener2) {
         super(LayoutInflater.from(context).inflate(R.layout.qs_customize_layout_edit, (ViewGroup) null, false));
         this.barOrderInteractor = barOrderInteractor;
@@ -89,7 +86,6 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
         this.fullTileCustomizerClickListener = onClickListener;
         this.recyclerView = (RecyclerView) this.mView.requireViewById(R.id.bar_list);
         this.simpleCallback = new ItemTouchHelper.SimpleCallback() { // from class: com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$simpleCallback$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(51, 0);
             }

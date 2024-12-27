@@ -144,9 +144,6 @@ public abstract class Feature {
         sinceVersionMap = Collections.unmodifiableMap(hashMap);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0140  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x01a4  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x01aa  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

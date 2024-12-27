@@ -8,7 +8,6 @@ final class CarrierConfigRepository$startObservingCarrierConfigUpdates$1 extends
     /* synthetic */ Object result;
     final /* synthetic */ CarrierConfigRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CarrierConfigRepository$startObservingCarrierConfigUpdates$1(CarrierConfigRepository carrierConfigRepository, Continuation continuation) {
         super(continuation);
         this.this$0 = carrierConfigRepository;

@@ -913,7 +913,6 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
                 this.mIsPenPressed);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void updateOnScreenCheckedViews() {
         int firstPos = this.mFirstPosition;
         int count = getChildCount();
@@ -993,7 +992,6 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
         this.mSemCustomMultiChoiceMode = enable;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean contentFits() {
         int childCount = getChildCount();
         if (childCount == 0) {
@@ -1062,7 +1060,6 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setFastScrollerAlwaysVisibleUiThread(boolean alwaysShow) {
         if (this.mFastScroll != null) {
             this.mFastScroll.setAlwaysShow(alwaysShow);
@@ -1287,13 +1284,11 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
                 new Parcelable.Creator<
                         SavedState>() { // from class:
                                         // android.widget.SemHorizontalAbsListView.SavedState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SavedState[] newArray(int size) {
                         return new SavedState[size];
@@ -1760,7 +1755,6 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public boolean setFrame(int left, int top, int right, int bottom) {
         boolean changed = super.setFrame(left, top, right, bottom);
@@ -3334,16 +3328,6 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
                                 + 0.5f);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x0377  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x039b  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x03b7  */
-    /* JADX WARN: Type inference failed for: r4v10, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r4v14 */
-    /* JADX WARN: Type inference failed for: r4v30 */
-    /* JADX WARN: Type inference failed for: r4v31, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r4v34 */
-    /* JADX WARN: Type inference failed for: r4v9 */
     @Override // android.view.ViewGroup, android.view.View
     @java.lang.Deprecated
     /*
@@ -4263,7 +4247,6 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
         triggerDoubleFling(1);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postOnJumpScrollToFinished() {
         postOnAnimation(
                 new Runnable() { // from class: android.widget.SemHorizontalAbsListView.3
@@ -4506,8 +4489,6 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
         return super.onInterceptHoverEvent(event);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00c4 A[FALL_THROUGH, RETURN] */
     @Override // android.view.ViewGroup
     @java.lang.Deprecated
     /*
@@ -5183,7 +5164,6 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void clearScrollingCache() {
         if (!isHardwareAccelerated()) {
             if (this.mClearScrollingCache == null) {
@@ -5731,7 +5711,6 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // android.widget.AdapterView
     @Deprecated
     protected void handleDataChanged() {
@@ -6224,7 +6203,6 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public EditText getTextFilterInput() {
         if (this.mTextFilter == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
@@ -7518,7 +7496,6 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleMessage(Message msg) {
         switch (msg.what) {
             case 1:
@@ -7670,7 +7647,6 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter>
         this.mSemIsOnClickEnabled = enable;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void addToPressItemListArray(int firstpoint, int secondpoint) {
         if (!this.mIsMultiFocusEnabled) {
             return;

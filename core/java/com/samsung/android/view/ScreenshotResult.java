@@ -8,13 +8,11 @@ public class ScreenshotResult implements Parcelable {
     public static final Parcelable.Creator<ScreenshotResult> CREATOR =
             new Parcelable.Creator<
                     ScreenshotResult>() { // from class: com.samsung.android.view.ScreenshotResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ScreenshotResult createFromParcel(Parcel in) {
                     return new ScreenshotResult(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ScreenshotResult[] newArray(int size) {
                     return new ScreenshotResult[size];

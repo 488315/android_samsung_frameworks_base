@@ -14,13 +14,11 @@ public class InsetsFrameProvider implements Parcelable {
     public static final Parcelable.Creator<InsetsFrameProvider> CREATOR =
             new Parcelable.Creator<
                     InsetsFrameProvider>() { // from class: android.view.InsetsFrameProvider.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InsetsFrameProvider createFromParcel(Parcel in) {
                     return new InsetsFrameProvider(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InsetsFrameProvider[] newArray(int size) {
                     return new InsetsFrameProvider[size];
@@ -255,13 +253,11 @@ public class InsetsFrameProvider implements Parcelable {
                 new Parcelable.Creator<
                         InsetsSizeOverride>() { // from class:
                                                 // android.view.InsetsFrameProvider.InsetsSizeOverride.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public InsetsSizeOverride createFromParcel(Parcel in) {
                         return new InsetsSizeOverride(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public InsetsSizeOverride[] newArray(int size) {
                         return new InsetsSizeOverride[size];

@@ -1,7 +1,5 @@
 package com.android.server.backup.restore;
 
-/* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* JADX WARN: Unknown enum class pattern. Please report as an issue! */
 public final class RestorePolicy {
     public static final /* synthetic */ RestorePolicy[] $VALUES;
     public static final RestorePolicy ACCEPT;

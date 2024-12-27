@@ -17,13 +17,11 @@ public final class IpManagerEvent implements IpConnectivityLog.Event {
     public static final Parcelable.Creator<IpManagerEvent> CREATOR =
             new Parcelable.Creator<
                     IpManagerEvent>() { // from class: android.net.metrics.IpManagerEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IpManagerEvent createFromParcel(Parcel in) {
                     return new IpManagerEvent(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public IpManagerEvent[] newArray(int size) {
                     return new IpManagerEvent[size];

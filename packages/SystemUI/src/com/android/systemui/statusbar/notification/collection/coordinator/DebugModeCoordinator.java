@@ -26,7 +26,6 @@ public final class DebugModeCoordinator implements Coordinator {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.notification.collection.coordinator.DebugModeCoordinator$filter$1] */
     public DebugModeCoordinator(DebugModeFilterProvider debugModeFilterProvider) {
         this.debugModeFilterProvider = debugModeFilterProvider;
     }

@@ -131,7 +131,6 @@ public final class CloudConfigurationManagerService extends CloudConfigurationMa
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     /* renamed from: -$$Nest$mupdateConfiguration, reason: not valid java name */
     public static void m523$$Nest$mupdateConfiguration(
             CloudConfigurationManagerService cloudConfigurationManagerService,

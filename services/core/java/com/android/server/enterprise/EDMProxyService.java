@@ -696,8 +696,6 @@ public final class EDMProxyService extends IEDMProxy.Stub {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x004e A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x004f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1489,9 +1487,6 @@ public final class EDMProxyService extends IEDMProxy.Stub {
         return credentialManagerService.sign(str, bArr, str2).mData;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x004c A[LOOP:0: B:16:0x0046->B:18:0x004c, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0062  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x006e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

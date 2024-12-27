@@ -165,9 +165,6 @@ public final class AudioDeviceBroker {
     public final class BrokerHandler extends Handler {
         public BrokerHandler() {}
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Removed duplicated region for block: B:258:0x0394  */
-        /* JADX WARN: Removed duplicated region for block: B:351:0x04c5  */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1093,7 +1090,6 @@ public final class AudioDeviceBroker {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00f8 A[Catch: all -> 0x0090, TryCatch #0 {all -> 0x0090, blocks: (B:14:0x003f, B:18:0x0077, B:20:0x007f, B:21:0x00bb, B:25:0x0093, B:26:0x00de, B:29:0x00e4, B:35:0x00f8, B:36:0x00ee, B:37:0x010a, B:39:0x0122, B:41:0x012a, B:42:0x0161, B:43:0x0164, B:54:0x0157), top: B:13:0x003f }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

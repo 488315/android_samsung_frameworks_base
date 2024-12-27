@@ -32,8 +32,6 @@ public final class PersonaServiceProxy {
     public AnonymousClass2 mUserBroadcastReceiver;
     public UserManager mUserManager;
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00cb  */
-    /* JADX WARN: Removed duplicated region for block: B:23:? A[RETURN, SYNTHETIC] */
     /* renamed from: -$$Nest$mfindAndConnectToContainerService, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.

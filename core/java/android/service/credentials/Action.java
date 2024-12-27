@@ -9,13 +9,11 @@ import java.util.Objects;
 public final class Action implements Parcelable {
     public static final Parcelable.Creator<Action> CREATOR =
             new Parcelable.Creator<Action>() { // from class: android.service.credentials.Action.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Action createFromParcel(Parcel in) {
                     return new Action(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Action[] newArray(int size) {
                     return new Action[size];

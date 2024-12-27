@@ -10,7 +10,6 @@ import java.util.StringJoiner;
 public class Plmn implements Parcelable {
     public static final Parcelable.Creator<Plmn> CREATOR =
             new Parcelable.Creator<Plmn>() { // from class: android.hardware.radio.sim.Plmn.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Plmn createFromParcel(Parcel _aidl_source) {
                     Plmn _aidl_out = new Plmn();
@@ -18,7 +17,6 @@ public class Plmn implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Plmn[] newArray(int _aidl_size) {
                     return new Plmn[_aidl_size];

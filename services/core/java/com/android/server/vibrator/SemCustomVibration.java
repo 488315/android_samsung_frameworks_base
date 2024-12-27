@@ -33,8 +33,6 @@ public final class SemCustomVibration extends SemVibration {
         return iArr;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0093 A[Catch: all -> 0x0053, Exception -> 0x0056, TRY_ENTER, TRY_LEAVE, TryCatch #3 {Exception -> 0x0056, blocks: (B:7:0x0016, B:26:0x004c, B:12:0x0093, B:42:0x00a4, B:47:0x00a1), top: B:6:0x0016, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00ab  */
     @Override // com.android.server.vibrator.SemVibration
     /*
         Code decompiled incorrectly, please refer to instructions dump.

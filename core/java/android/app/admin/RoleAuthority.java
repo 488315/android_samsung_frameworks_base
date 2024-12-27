@@ -14,13 +14,11 @@ public final class RoleAuthority extends Authority {
     public static final Parcelable.Creator<RoleAuthority> CREATOR =
             new Parcelable.Creator<
                     RoleAuthority>() { // from class: android.app.admin.RoleAuthority.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RoleAuthority createFromParcel(Parcel source) {
                     return new RoleAuthority(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RoleAuthority[] newArray(int size) {
                     return new RoleAuthority[size];

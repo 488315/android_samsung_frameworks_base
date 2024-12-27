@@ -34,7 +34,6 @@ public class SurfaceControlViewHost {
     private ViewRootImpl mViewRoot;
     private final WindowlessWindowManager mWm;
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class ISurfaceControlViewHostImpl extends ISurfaceControlViewHost.Stub {
         private ISurfaceControlViewHostImpl() {}
 
@@ -54,7 +53,6 @@ public class SurfaceControlViewHost {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onConfigurationChanged$0(Configuration configuration) {
             SurfaceControlViewHost.this.mWm.setConfiguration(configuration);
             if (SurfaceControlViewHost.this.mViewRoot != null) {
@@ -78,7 +76,6 @@ public class SurfaceControlViewHost {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDispatchDetachedFromWindow$1() {
             SurfaceControlViewHost.this.release();
         }
@@ -99,7 +96,6 @@ public class SurfaceControlViewHost {
             SurfaceControlViewHost.this.mWm.setInsetsState(state);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onInsetsChanged$2(Rect frame) {
             SurfaceControlViewHost.this.mViewRoot.setOverrideInsetsFrame(frame);
         }
@@ -128,7 +124,6 @@ public class SurfaceControlViewHost {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$getSurfaceSyncGroup$3(
                 CompletableFuture surfaceSyncGroup) {
             surfaceSyncGroup.complete(
@@ -155,7 +150,6 @@ public class SurfaceControlViewHost {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$attachParentInterface$4(
                 ISurfaceControlViewHostParent parentInterface) {
             SurfaceControlViewHost.this.mWm.setParentInterface(parentInterface);
@@ -167,13 +161,11 @@ public class SurfaceControlViewHost {
                 new Parcelable.Creator<
                         SurfacePackage>() { // from class:
                                             // android.view.SurfaceControlViewHost.SurfacePackage.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SurfacePackage createFromParcel(Parcel in) {
                         return new SurfacePackage(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SurfacePackage[] newArray(int size) {
                         return new SurfacePackage[size];

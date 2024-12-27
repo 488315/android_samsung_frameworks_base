@@ -446,7 +446,6 @@ public class SemHoverPopupWindow {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void showPopup() {
         try {
             if (this.mHashCodeForViewState != getStateHashCode()) {
@@ -949,7 +948,6 @@ public class SemHoverPopupWindow {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public boolean onHoverEvent(MotionEvent event) {
         int action = event.getAction();
         float x = event.getX();

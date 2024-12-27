@@ -12,7 +12,6 @@ final class ScreenRecordTileUserActionInteractor$handleInput$2$1 extends Suspend
     int label;
     final /* synthetic */ ScreenRecordTileUserActionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenRecordTileUserActionInteractor$handleInput$2$1(ScreenRecordTileUserActionInteractor screenRecordTileUserActionInteractor, Continuation continuation) {
         super(2, continuation);
         this.this$0 = screenRecordTileUserActionInteractor;

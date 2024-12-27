@@ -5,7 +5,6 @@ public class ServiceDebugInfo implements Parcelable {
     public static final Parcelable.Creator<ServiceDebugInfo> CREATOR =
             new Parcelable.Creator<
                     ServiceDebugInfo>() { // from class: android.os.ServiceDebugInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ServiceDebugInfo createFromParcel(Parcel _aidl_source) {
                     ServiceDebugInfo _aidl_out = new ServiceDebugInfo();
@@ -13,7 +12,6 @@ public class ServiceDebugInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ServiceDebugInfo[] newArray(int _aidl_size) {
                     return new ServiceDebugInfo[_aidl_size];

@@ -17,7 +17,6 @@ public final class OccludedToAodTransitionViewModel$special$$inlined$flatMapLate
     int label;
     final /* synthetic */ OccludedToAodTransitionViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public OccludedToAodTransitionViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, OccludedToAodTransitionViewModel occludedToAodTransitionViewModel) {
         super(3, continuation);
         this.this$0 = occludedToAodTransitionViewModel;

@@ -9,13 +9,11 @@ public class SContextActiveTimeMonitor extends SContextEventContext {
     public static final Parcelable.Creator<SContextActiveTimeMonitor> CREATOR =
             new Parcelable.Creator<SContextActiveTimeMonitor>() { // from class:
                 // android.hardware.scontext.SContextActiveTimeMonitor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextActiveTimeMonitor createFromParcel(Parcel in) {
                     return new SContextActiveTimeMonitor(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextActiveTimeMonitor[] newArray(int size) {
                     return new SContextActiveTimeMonitor[size];

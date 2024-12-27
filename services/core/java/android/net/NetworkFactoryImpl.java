@@ -35,8 +35,6 @@ public final class NetworkFactoryImpl extends NetworkFactoryLegacyImpl {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [android.net.NetworkFactoryImpl$1] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [android.net.NetworkFactoryImpl$$ExternalSyntheticLambda0] */
     public NetworkFactoryImpl(
             NetworkFactory networkFactory,
             Looper looper,

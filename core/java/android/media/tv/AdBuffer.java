@@ -12,13 +12,11 @@ import java.io.IOException;
 public final class AdBuffer implements Parcelable {
     public static final Parcelable.Creator<AdBuffer> CREATOR =
             new Parcelable.Creator<AdBuffer>() { // from class: android.media.tv.AdBuffer.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AdBuffer[] newArray(int size) {
                     return new AdBuffer[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AdBuffer createFromParcel(Parcel in) {
                     return new AdBuffer(in);

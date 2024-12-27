@@ -15,13 +15,11 @@ public class SContextStepLevelMonitor extends SContextEventContext {
     public static final Parcelable.Creator<SContextStepLevelMonitor> CREATOR =
             new Parcelable.Creator<SContextStepLevelMonitor>() { // from class:
                 // android.hardware.scontext.SContextStepLevelMonitor.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextStepLevelMonitor createFromParcel(Parcel in) {
                     return new SContextStepLevelMonitor(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextStepLevelMonitor[] newArray(int size) {
                     return new SContextStepLevelMonitor[size];

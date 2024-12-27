@@ -46,7 +46,6 @@ public final class CustomizationProviderClientImpl implements CustomizationProvi
         return withContext == CoroutineSingletons.COROUTINE_SUSPENDED ? withContext : Unit.INSTANCE;
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.shared.customization.data.content.CustomizationProviderClientImpl$observeSelections$$inlined$map$1] */
     public final CustomizationProviderClientImpl$observeSelections$$inlined$map$1 observeSelections() {
         CustomizationProviderContract.LockScreenQuickAffordances.SelectionTable.INSTANCE.getClass();
         final Flow flowOn = FlowKt.flowOn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new CustomizationProviderClientImpl$observeUri$2(null), FlowKt.callbackFlow(new CustomizationProviderClientImpl$observeUri$1(this, CustomizationProviderContract.LockScreenQuickAffordances.SelectionTable.URI, null))), this.backgroundDispatcher);
@@ -80,9 +79,6 @@ public final class CustomizationProviderClientImpl implements CustomizationProvi
                     this.this$0 = customizationProviderClientImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:19:0x005a A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:20:0x003a  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -161,10 +157,6 @@ public final class CustomizationProviderClientImpl implements CustomizationProvi
         };
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0047  */
-    /* JADX WARN: Removed duplicated region for block: B:15:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

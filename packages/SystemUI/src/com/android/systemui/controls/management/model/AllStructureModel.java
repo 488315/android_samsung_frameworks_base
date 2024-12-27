@@ -29,8 +29,6 @@ public final class AllStructureModel implements StructureModel {
     public final String removedString;
     public final Resources resources;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.controls.management.model.AllStructureModel$favoriteControlChangeCallback$1] */
     public AllStructureModel(Resources resources, List<ControlStatus> list, List<String> list2, StructureModel.StructureModelCallback structureModelCallback, boolean z) {
         ArrayList arrayList;
         this.resources = resources;

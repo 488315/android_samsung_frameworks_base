@@ -435,9 +435,6 @@ public final class HotwordDetectionConnection {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v0, types: [com.android.server.voiceinteraction.HotwordDetectionConnection$$ExternalSyntheticLambda4] */
-    /* JADX WARN: Type inference failed for: r4v1, types: [android.app.AppOpsManager$OnOpChangedListener, com.android.server.voiceinteraction.HotwordDetectionConnection$1] */
     public HotwordDetectionConnection(Object obj, Context context, int i, Identity identity, ComponentName componentName, ComponentName componentName2, int i2, int i3, VoiceInteractionManagerServiceImpl$$ExternalSyntheticLambda1 voiceInteractionManagerServiceImpl$$ExternalSyntheticLambda1) {
         ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
         this.mScheduledExecutorService = scheduledThreadPoolExecutor;
@@ -559,8 +556,6 @@ public final class HotwordDetectionConnection {
         ((AppOpsManager) this.mContext.getSystemService(AppOpsManager.class)).stopWatchingMode(this.mOnOpChangedListener);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0024 A[Catch: all -> 0x005e, TryCatch #1 {, blocks: (B:4:0x0003, B:6:0x000f, B:9:0x0016, B:11:0x0024, B:12:0x0026, B:19:0x0041, B:20:0x005c, B:29:0x0061, B:30:0x0062, B:31:0x0069, B:33:0x001a, B:16:0x002a, B:24:0x002f, B:25:0x003d), top: B:3:0x0003, inners: #0 }] */
-    /* JADX WARN: Type inference failed for: r9v0, types: [com.android.server.voiceinteraction.DspTrustedHotwordDetectorSession$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

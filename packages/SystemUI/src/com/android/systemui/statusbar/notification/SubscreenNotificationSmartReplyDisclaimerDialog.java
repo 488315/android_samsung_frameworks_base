@@ -52,9 +52,6 @@ public final class SubscreenNotificationSmartReplyDisclaimerDialog {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r7v12 */
-    /* JADX WARN: Type inference failed for: r7v6 */
-    /* JADX WARN: Type inference failed for: r7v7, types: [boolean, int] */
     public SubscreenNotificationSmartReplyDisclaimerDialog(final Context context, final DialogInterface.OnClickListener onClickListener, DialogInterface.OnClickListener onClickListener2, DialogInterface.OnDismissListener onDismissListener) {
         this.mContext = context;
         View inflate = LayoutInflater.from(context).inflate(R.layout.subscreen_notification_smart_reply_main_disclaimer_dialog, (ViewGroup) null);
@@ -210,7 +207,6 @@ public final class SubscreenNotificationSmartReplyDisclaimerDialog {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0033 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

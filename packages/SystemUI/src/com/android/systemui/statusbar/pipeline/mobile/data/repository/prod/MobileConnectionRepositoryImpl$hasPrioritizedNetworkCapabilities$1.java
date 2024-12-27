@@ -21,7 +21,6 @@ final class MobileConnectionRepositoryImpl$hasPrioritizedNetworkCapabilities$1 e
     int label;
     final /* synthetic */ MobileConnectionRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MobileConnectionRepositoryImpl$hasPrioritizedNetworkCapabilities$1(ConnectivityManager connectivityManager, MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl, MobileInputLogger mobileInputLogger, Continuation continuation) {
         super(2, continuation);
         this.$connectivityManager = connectivityManager;
@@ -41,8 +40,6 @@ final class MobileConnectionRepositoryImpl$hasPrioritizedNetworkCapabilities$1 e
         return ((MobileConnectionRepositoryImpl$hasPrioritizedNetworkCapabilities$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [android.net.ConnectivityManager$NetworkCallback, com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$hasPrioritizedNetworkCapabilities$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -67,7 +64,6 @@ final class MobileConnectionRepositoryImpl$hasPrioritizedNetworkCapabilities$1 e
             this.$connectivityManager.registerNetworkCallback(this.this$0.networkSliceRequest, (ConnectivityManager.NetworkCallback) r1);
             final ConnectivityManager connectivityManager = this.$connectivityManager;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$hasPrioritizedNetworkCapabilities$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

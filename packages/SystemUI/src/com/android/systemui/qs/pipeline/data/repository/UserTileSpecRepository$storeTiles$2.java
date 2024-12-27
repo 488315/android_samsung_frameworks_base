@@ -14,7 +14,6 @@ final class UserTileSpecRepository$storeTiles$2 extends SuspendLambda implements
     int label;
     final /* synthetic */ UserTileSpecRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserTileSpecRepository$storeTiles$2(UserTileSpecRepository userTileSpecRepository, String str, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userTileSpecRepository;

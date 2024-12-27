@@ -225,7 +225,6 @@ public final class MmsServiceBroker extends SystemService {
                             .importTextMessage(str, str2, i, str3, j, z, z2);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:12:0x004a  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -405,9 +404,6 @@ public final class MmsServiceBroker extends SystemService {
         return iMms != null ? iMms : mmsServiceBroker.mServiceStubForFailure;
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.MmsServiceBroker$1] */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.MmsServiceBroker$2] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.MmsServiceBroker$3] */
     public MmsServiceBroker(Context context) {
         super(context);
         this.mAppOpsManager = null;

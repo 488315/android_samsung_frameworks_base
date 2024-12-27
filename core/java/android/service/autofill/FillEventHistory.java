@@ -26,7 +26,6 @@ public final class FillEventHistory implements Parcelable {
     public static final Parcelable.Creator<FillEventHistory> CREATOR =
             new Parcelable.Creator<
                     FillEventHistory>() { // from class: android.service.autofill.FillEventHistory.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FillEventHistory createFromParcel(Parcel parcel) {
                     ArrayList<ArrayList<String>> manuallyFilledDatasetIds;
@@ -87,7 +86,6 @@ public final class FillEventHistory implements Parcelable {
                     return selection;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FillEventHistory[] newArray(int size) {
                     return new FillEventHistory[size];

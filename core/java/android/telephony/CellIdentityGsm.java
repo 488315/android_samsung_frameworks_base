@@ -28,14 +28,12 @@ public final class CellIdentityGsm extends CellIdentity {
     public static final Parcelable.Creator<CellIdentityGsm> CREATOR =
             new Parcelable.Creator<
                     CellIdentityGsm>() { // from class: android.telephony.CellIdentityGsm.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentityGsm createFromParcel(Parcel in) {
                     in.readInt();
                     return CellIdentityGsm.createFromParcelBody(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CellIdentityGsm[] newArray(int size) {
                     return new CellIdentityGsm[size];

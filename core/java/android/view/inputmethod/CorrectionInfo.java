@@ -8,13 +8,11 @@ public final class CorrectionInfo implements Parcelable {
     public static final Parcelable.Creator<CorrectionInfo> CREATOR =
             new Parcelable.Creator<
                     CorrectionInfo>() { // from class: android.view.inputmethod.CorrectionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CorrectionInfo createFromParcel(Parcel source) {
                     return new CorrectionInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CorrectionInfo[] newArray(int size) {
                     return new CorrectionInfo[size];

@@ -71,7 +71,6 @@ public class DisplayListenerWrapper extends ExternalService {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDisplayChanged$0(int displayRotation) {
             DisplayListenerWrapper.this.listener.onDisplayChanged(displayRotation);
         }

@@ -27,7 +27,6 @@ public final class AudioManagerShellCommand extends ShellCommand {
         this.mService = audioService;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int onCommand(String str) {
         char c;
         char c2;
@@ -519,7 +518,6 @@ public final class AudioManagerShellCommand extends ShellCommand {
                 "  clearScpm");
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int readDirectionArg() {
         char c;
         String nextArg = getNextArg();

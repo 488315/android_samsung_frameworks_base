@@ -10,7 +10,6 @@ final class EngineeringModeManagerWrapper$getEmmStatus$2 extends SuspendLambda i
     int label;
     final /* synthetic */ EngineeringModeManagerWrapper this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public EngineeringModeManagerWrapper$getEmmStatus$2(EngineeringModeManagerWrapper engineeringModeManagerWrapper, Continuation continuation) {
         super(2, continuation);
         this.this$0 = engineeringModeManagerWrapper;

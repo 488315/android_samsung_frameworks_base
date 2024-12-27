@@ -32,9 +32,6 @@ public final class SubscreenNotificationListCoordinator implements Coordinator {
     private final SysuiStatusBarStateController statusBarStateController;
     private final SubscreenNotificationController subscreenController;
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.pluginlock.listener.PluginLockListener$State, com.android.systemui.statusbar.notification.collection.coordinator.SubscreenNotificationListCoordinator$pluginLockListener$1] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.notification.collection.coordinator.SubscreenNotificationListCoordinator$bubbleFilter$1] */
     public SubscreenNotificationListCoordinator(SubscreenNotificationController subscreenNotificationController, SysuiStatusBarStateController sysuiStatusBarStateController, NotificationLockscreenUserManager notificationLockscreenUserManager, PluginLockMediator pluginLockMediator, Optional<Bubbles> optional) {
         this.subscreenController = subscreenNotificationController;
         this.statusBarStateController = sysuiStatusBarStateController;
@@ -94,16 +91,10 @@ public final class SubscreenNotificationListCoordinator implements Coordinator {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Code restructure failed: missing block: B:246:0x037e, code lost:
     
         if (r3 != false) goto L199;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:339:0x04d9  */
-    /* JADX WARN: Removed duplicated region for block: B:364:0x051e A[LOOP:13: B:362:0x0518->B:364:0x051e, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:368:0x052e  */
-    /* JADX WARN: Removed duplicated region for block: B:406:0x05b2 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

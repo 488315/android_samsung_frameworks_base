@@ -331,7 +331,6 @@ public class LsLogSummary {
             return this.mCache.get(this.mCacheKey.set(type, key, userId));
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public synchronized int getVersion() {
             return this.mVersion;
         }

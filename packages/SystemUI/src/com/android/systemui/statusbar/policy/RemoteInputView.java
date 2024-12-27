@@ -157,7 +157,6 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         public final ArraySet mSupportedMimes;
         public UserHandle mUser;
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.policy.RemoteInputView$RemoteEditText$$ExternalSyntheticLambda0] */
         public RemoteEditText(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
             this.mOnReceiveContentListener = new OnReceiveContentListener() { // from class: com.android.systemui.statusbar.policy.RemoteInputView$RemoteEditText$$ExternalSyntheticLambda0

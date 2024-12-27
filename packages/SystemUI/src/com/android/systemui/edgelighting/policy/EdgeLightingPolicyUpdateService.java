@@ -17,9 +17,6 @@ public class EdgeLightingPolicyUpdateService extends IntentService {
         context.startService(intent);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0070  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:71:? A[RETURN, SYNTHETIC] */
     @Override // android.app.IntentService
     /*
         Code decompiled incorrectly, please refer to instructions dump.

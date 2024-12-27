@@ -36,7 +36,6 @@ public final class ParcelableResource implements Parcelable {
     public static final Parcelable.Creator<ParcelableResource> CREATOR =
             new Parcelable.Creator<
                     ParcelableResource>() { // from class: android.app.admin.ParcelableResource.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableResource createFromParcel(Parcel in) {
                     int resourceId = in.readInt();
@@ -47,7 +46,6 @@ public final class ParcelableResource implements Parcelable {
                             resourceId, packageName, resourceName, resourceType);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelableResource[] newArray(int size) {
                     return new ParcelableResource[size];

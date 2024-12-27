@@ -44,15 +44,6 @@ public final class QSClockIndicatorView extends QSClock implements DarkIconDispa
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0037  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0075  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0090  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00c9  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00a2  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x005f  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x003a  */
     @Override // com.android.systemui.statusbar.policy.QSClock, com.android.systemui.statusbar.policy.QSClockBellTower.TimeAudience
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -12,7 +12,6 @@ public final class LogWrapper {
     public final ModuleType module;
     public final SamsungServiceLogger serviceLogger;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.basic.util.LogWrapper$logger$1] */
     public LogWrapper(ModuleType moduleType, SamsungServiceLogger samsungServiceLogger) {
         this.module = moduleType;
         this.serviceLogger = samsungServiceLogger;

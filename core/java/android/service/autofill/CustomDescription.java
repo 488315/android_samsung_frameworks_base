@@ -18,7 +18,6 @@ public final class CustomDescription implements Parcelable {
             new Parcelable.Creator<
                     CustomDescription>() { // from class:
                                            // android.service.autofill.CustomDescription.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CustomDescription createFromParcel(Parcel parcel) {
                     RemoteViews parentPresentation =
@@ -64,7 +63,6 @@ public final class CustomDescription implements Parcelable {
                     return builder.build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CustomDescription[] newArray(int size) {
                     return new CustomDescription[size];

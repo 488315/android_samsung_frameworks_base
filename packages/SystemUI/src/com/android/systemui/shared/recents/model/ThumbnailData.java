@@ -37,11 +37,6 @@ public final class ThumbnailData {
         this(null, 0, 0, null, null, false, false, false, 0, 0, 0.0f, 0L, 4095, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0075  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0087  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0090  */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0045  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

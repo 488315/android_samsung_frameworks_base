@@ -9,13 +9,11 @@ public class SContextDevicePosition extends SContextEventContext {
     public static final Parcelable.Creator<SContextDevicePosition> CREATOR =
             new Parcelable.Creator<SContextDevicePosition>() { // from class:
                 // android.hardware.scontext.SContextDevicePosition.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextDevicePosition createFromParcel(Parcel in) {
                     return new SContextDevicePosition(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextDevicePosition[] newArray(int size) {
                     return new SContextDevicePosition[size];

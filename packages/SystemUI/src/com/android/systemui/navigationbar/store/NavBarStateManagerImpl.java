@@ -443,14 +443,6 @@ public final class NavBarStateManagerImpl implements NavBarStateManager {
         return isNavigationBarUseThemeDefault;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0142  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0105  */
-    /* JADX WARN: Type inference failed for: r2v0 */
-    /* JADX WARN: Type inference failed for: r2v1 */
-    /* JADX WARN: Type inference failed for: r2v2, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r2v3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

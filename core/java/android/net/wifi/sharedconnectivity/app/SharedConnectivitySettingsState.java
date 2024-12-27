@@ -15,13 +15,11 @@ public final class SharedConnectivitySettingsState implements Parcelable {
             new Parcelable.Creator<
                     SharedConnectivitySettingsState>() { // from class:
                                                          // android.net.wifi.sharedconnectivity.app.SharedConnectivitySettingsState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SharedConnectivitySettingsState createFromParcel(Parcel in) {
                     return SharedConnectivitySettingsState.readFromParcel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SharedConnectivitySettingsState[] newArray(int size) {
                     return new SharedConnectivitySettingsState[size];

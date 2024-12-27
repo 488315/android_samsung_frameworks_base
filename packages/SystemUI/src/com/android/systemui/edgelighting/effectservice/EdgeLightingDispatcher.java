@@ -85,8 +85,6 @@ public final class EdgeLightingDispatcher implements IEdgeLightingController {
         absEdgeLightingEffectReflection.invokeNormalMethod(absEdgeLightingEffectReflection.mInstance, "update", new Class[]{cls}, null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.edgelighting.effectservice.EdgeLightingDispatcher$1] */
     @Override // com.android.systemui.edgelighting.effect.interfaces.IEdgeLightingController
     public final void registerEdgeWindowCallback(IEdgeLightingWindowCallback iEdgeLightingWindowCallback) {
         Class<?> cls;
@@ -150,7 +148,6 @@ public final class EdgeLightingDispatcher implements IEdgeLightingController {
         });
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.edgelighting.effectservice.EdgeLightingDispatcher$2] */
     public final void registerSettingChangeListener() {
         Uri uriFor = Settings.System.getUriFor("edge_lighting_style_type_str");
         this.mSettingObserver = new ContentObserver(new Handler()) { // from class: com.android.systemui.edgelighting.effectservice.EdgeLightingDispatcher.2

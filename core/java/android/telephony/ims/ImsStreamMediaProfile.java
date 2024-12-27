@@ -31,13 +31,11 @@ public final class ImsStreamMediaProfile implements Parcelable {
             new Parcelable.Creator<
                     ImsStreamMediaProfile>() { // from class:
                                                // android.telephony.ims.ImsStreamMediaProfile.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsStreamMediaProfile createFromParcel(Parcel in) {
                     return new ImsStreamMediaProfile(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsStreamMediaProfile[] newArray(int size) {
                     return new ImsStreamMediaProfile[size];

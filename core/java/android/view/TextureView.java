@@ -313,7 +313,6 @@ public class TextureView extends View {
         return this.mLayer;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getTextureLayer$0(
             SurfaceTexture surfaceTexture, float frameRate, int compatibility, int strategy) {
         if (Trace.isTagEnabled(8L)) {
@@ -508,7 +507,6 @@ public class TextureView extends View {
         this.mLastFrameTimeMillis = now;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$1(SurfaceTexture surfaceTexture) {
         updateLayer();
         invalidate();

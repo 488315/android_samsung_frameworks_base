@@ -8,7 +8,6 @@ public class CompositeEffect implements Parcelable {
     public static final Parcelable.Creator<CompositeEffect> CREATOR =
             new Parcelable.Creator<
                     CompositeEffect>() { // from class: android.hardware.vibrator.CompositeEffect.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompositeEffect createFromParcel(Parcel _aidl_source) {
                     CompositeEffect _aidl_out = new CompositeEffect();
@@ -16,7 +15,6 @@ public class CompositeEffect implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CompositeEffect[] newArray(int _aidl_size) {
                     return new CompositeEffect[_aidl_size];

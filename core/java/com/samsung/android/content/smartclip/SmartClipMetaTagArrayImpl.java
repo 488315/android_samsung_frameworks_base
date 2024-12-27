@@ -12,7 +12,6 @@ public class SmartClipMetaTagArrayImpl extends SemSmartClipMetaTagArray implemen
             new Parcelable.Creator<
                     SmartClipMetaTagArrayImpl>() { // from class:
                                                    // com.samsung.android.content.smartclip.SmartClipMetaTagArrayImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmartClipMetaTagArrayImpl createFromParcel(Parcel in) {
                     Log.d(
@@ -23,7 +22,6 @@ public class SmartClipMetaTagArrayImpl extends SemSmartClipMetaTagArray implemen
                     return data;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SmartClipMetaTagArrayImpl[] newArray(int size) {
                     return new SmartClipMetaTagArrayImpl[size];

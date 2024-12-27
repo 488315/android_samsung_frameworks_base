@@ -10,13 +10,11 @@ public final class DeviceAdminAuthority extends Authority {
     public static final Parcelable.Creator<DeviceAdminAuthority> CREATOR =
             new Parcelable.Creator<DeviceAdminAuthority>() { // from class:
                 // android.app.admin.DeviceAdminAuthority.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DeviceAdminAuthority createFromParcel(Parcel source) {
                     return DeviceAdminAuthority.DEVICE_ADMIN_AUTHORITY;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DeviceAdminAuthority[] newArray(int size) {
                     return new DeviceAdminAuthority[size];

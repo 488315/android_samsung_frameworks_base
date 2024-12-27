@@ -18,13 +18,11 @@ import java.util.function.Predicate;
 
 public class FingerprintSensorConfigurations implements Parcelable {
     public static final Parcelable.Creator<FingerprintSensorConfigurations> CREATOR = new Parcelable.Creator<FingerprintSensorConfigurations>() { // from class: android.hardware.fingerprint.FingerprintSensorConfigurations.1
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public FingerprintSensorConfigurations createFromParcel(Parcel in) {
             return new FingerprintSensorConfigurations(in);
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public FingerprintSensorConfigurations[] newArray(int size) {
             return new FingerprintSensorConfigurations[size];
@@ -112,8 +110,6 @@ public class FingerprintSensorConfigurations implements Parcelable {
         parcel.writeMap(this.mSensorPropsMap);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v3, types: [android.hardware.biometrics.fingerprint.SensorProps[]] */
     public SensorProps[] getSensorPropForInstance(String str) {
         String str2 = TAG;
         SensorProps[] sensorPropsArr = this.mSensorPropsMap.get(str);

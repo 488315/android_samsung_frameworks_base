@@ -26,17 +26,6 @@ public final class FullBackupObbConnection implements ServiceConnection {
         this.mAgentTimeoutParameters = backupAgentTimeoutParameters;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r4v0 */
-    /* JADX WARN: Type inference failed for: r4v1 */
-    /* JADX WARN: Type inference failed for: r4v2, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r4v3 */
-    /* JADX WARN: Type inference failed for: r4v4 */
-    /* JADX WARN: Type inference failed for: r4v5 */
-    /* JADX WARN: Type inference failed for: r4v6 */
-    /* JADX WARN: Type inference failed for: r4v7 */
-    /* JADX WARN: Type inference failed for: r4v8 */
-    /* JADX WARN: Type inference failed for: r4v9 */
     public final boolean backupObbs(PackageInfo packageInfo, OutputStream outputStream) {
         synchronized (this) {
             while (this.mService == null) {

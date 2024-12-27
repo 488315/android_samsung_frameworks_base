@@ -9,13 +9,11 @@ import java.util.Objects;
 public class MediaSyncEvent implements Parcelable {
     public static final Parcelable.Creator<MediaSyncEvent> CREATOR =
             new Parcelable.Creator<MediaSyncEvent>() { // from class: android.media.MediaSyncEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaSyncEvent createFromParcel(Parcel p) {
                     return new MediaSyncEvent(p);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MediaSyncEvent[] newArray(int size) {
                     return new MediaSyncEvent[size];

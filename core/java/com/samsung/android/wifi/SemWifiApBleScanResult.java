@@ -35,13 +35,11 @@ public class SemWifiApBleScanResult implements Parcelable {
             new Parcelable.Creator<
                     SemWifiApBleScanResult>() { // from class:
                                                 // com.samsung.android.wifi.SemWifiApBleScanResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWifiApBleScanResult createFromParcel(Parcel source) {
                     return new SemWifiApBleScanResult(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemWifiApBleScanResult[] newArray(int size) {
                     return new SemWifiApBleScanResult[size];

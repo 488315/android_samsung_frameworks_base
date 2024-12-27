@@ -163,15 +163,6 @@ class ReflectionUtils {
         Log.e(TAG, "-------- Field list dump finished ----------");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x0335  */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x02ee  */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x02e0  */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x035b A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0165  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x019f  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x02de  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x02ec  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x02f8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

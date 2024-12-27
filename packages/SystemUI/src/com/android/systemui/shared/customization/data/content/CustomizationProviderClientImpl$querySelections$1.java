@@ -8,7 +8,6 @@ final class CustomizationProviderClientImpl$querySelections$1 extends Continuati
     /* synthetic */ Object result;
     final /* synthetic */ CustomizationProviderClientImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CustomizationProviderClientImpl$querySelections$1(CustomizationProviderClientImpl customizationProviderClientImpl, Continuation continuation) {
         super(continuation);
         this.this$0 = customizationProviderClientImpl;

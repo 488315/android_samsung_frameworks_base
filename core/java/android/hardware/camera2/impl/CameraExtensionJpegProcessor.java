@@ -43,7 +43,6 @@ public class CameraExtensionJpegProcessor implements ICaptureProcessorImpl {
     private ConcurrentLinkedQueue<JpegParameters> mJpegParameters = new ConcurrentLinkedQueue<>();
     private final HandlerThread mHandlerThread = new HandlerThread(TAG);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native int compressJpegFromYUV420pNative(
             int i,
             int i2,

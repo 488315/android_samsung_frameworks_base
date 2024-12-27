@@ -206,7 +206,6 @@ public final class DeviceStateManagerGlobal {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDeviceStateInfoChanged(DeviceStateInfo info) {
         DeviceStateInfo oldInfo;
         ArrayList<DeviceStateCallbackWrapper> callbacks;
@@ -231,7 +230,6 @@ public final class DeviceStateManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleRequestActive(IBinder token) {
         DeviceStateRequestWrapper request;
         synchronized (this.mLock) {
@@ -242,7 +240,6 @@ public final class DeviceStateManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleRequestCanceled(IBinder token) {
         DeviceStateRequestWrapper request;
         synchronized (this.mLock) {
@@ -272,7 +269,6 @@ public final class DeviceStateManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class DeviceStateCallbackWrapper {
         private final DeviceStateManager.DeviceStateCallback mDeviceStateCallback;
         private final Executor mExecutor;
@@ -296,7 +292,6 @@ public final class DeviceStateManagerGlobal {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifySupportedDeviceStatesChanged$0(
                 List newSupportedDeviceStates) {
             this.mDeviceStateCallback.onSupportedStatesChanged(newSupportedDeviceStates);
@@ -315,7 +310,6 @@ public final class DeviceStateManagerGlobal {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyDeviceStateChanged$1(DeviceState newDeviceState) {
             this.mDeviceStateCallback.onDeviceStateChanged(newDeviceState);
         }
@@ -332,7 +326,6 @@ public final class DeviceStateManagerGlobal {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$execute$2(String traceName, Runnable r) {
             if (DeviceStateManagerGlobal.DEBUG) {
                 Trace.beginSection(
@@ -348,7 +341,6 @@ public final class DeviceStateManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class DeviceStateRequestWrapper {
         private final DeviceStateRequest.Callback mCallback;
         private final Executor mExecutor;
@@ -379,7 +371,6 @@ public final class DeviceStateManagerGlobal {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyRequestActive$0() {
             this.mCallback.onRequestActivated(this.mRequest);
         }
@@ -399,7 +390,6 @@ public final class DeviceStateManagerGlobal {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyRequestCanceled$1() {
             this.mCallback.onRequestCanceled(this.mRequest);
         }

@@ -13,8 +13,6 @@ public final class DreamShellCommand extends ShellCommand {
         this.mService = dreamManagerService;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0037  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0053 A[Catch: SecurityException -> 0x0025, TryCatch #0 {SecurityException -> 0x0025, blocks: (B:3:0x0009, B:12:0x0039, B:15:0x003e, B:17:0x0044, B:19:0x004d, B:20:0x0052, B:21:0x0053, B:23:0x0059, B:25:0x005f, B:26:0x0064, B:27:0x001a, B:30:0x0027), top: B:2:0x0009 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

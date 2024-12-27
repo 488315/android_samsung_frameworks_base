@@ -395,7 +395,6 @@ public final class InputMethodManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean canStartInput(View servedView) {
         return servedView.hasWindowFocus() || isAutofillUIShowing(servedView);
     }
@@ -404,7 +403,6 @@ public final class InputMethodManager {
         IInputMethodManagerGlobalInvoker.reportPerceptibleAsync(windowToken, perceptible);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final class DelegateImpl implements ImeFocusController.InputMethodManagerDelegate {
         private DelegateImpl() {}
 
@@ -610,7 +608,6 @@ public final class InputMethodManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setCurrentRootViewLocked(ViewRootImpl rootView) {
             InputMethodManager.this.mImeDispatcher.switchRootView(
                     InputMethodManager.this.mCurRootView, rootView);
@@ -636,7 +633,6 @@ public final class InputMethodManager {
         return z;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean hasActiveInputConnectionInternal(View view) {
         synchronized (this.mH) {
             boolean z = false;
@@ -651,7 +647,6 @@ public final class InputMethodManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean startInputOnWindowFocusGainInternal(
             int startInputReason,
             View focusedView,
@@ -671,7 +666,6 @@ public final class InputMethodManager {
                 windowFlags);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public View getServedViewLocked() {
         if (this.mCurRootView != null) {
             return this.mServedView;
@@ -1084,7 +1078,6 @@ public final class InputMethodManager {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$handleMessage$0(ViewRootImpl currentViewRootImpl) {
             synchronized (InputMethodManager.this.mH) {
                 if (InputMethodManager.this.mCurRootView != currentViewRootImpl) {
@@ -1433,7 +1426,6 @@ public final class InputMethodManager {
         return z;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void clearBindingLocked() {
         if (DEBUG) {
             Log.v(TAG, "Clearing binding!");
@@ -1445,7 +1437,6 @@ public final class InputMethodManager {
         this.mCurBindState = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void clearAccessibilityBindingLocked(int id) {
         if (DEBUG) {
             Log.v(TAG, "Clearing accessibility binding " + id);
@@ -1453,7 +1444,6 @@ public final class InputMethodManager {
         this.mAccessibilityInputMethodSession.remove(id);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void clearAllAccessibilityBindingLocked() {
         if (DEBUG) {
             Log.v(TAG, "Clearing all accessibility bindings");
@@ -1461,7 +1451,6 @@ public final class InputMethodManager {
         this.mAccessibilityInputMethodSession.clear();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateInputChannelLocked(InputChannel channel) {
         if (areSameInputChannel(this.mCurChannel, channel)) {
             return;
@@ -1525,7 +1514,6 @@ public final class InputMethodManager {
         this.mImeDispatcher.clear();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean clearCurRootViewIfNeeded() {
         if (!this.mActive && !this.mCurRootViewWindowFocused) {
             finishInputLocked();
@@ -2174,9 +2162,6 @@ public final class InputMethodManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x0209 A[Catch: all -> 0x0127, TRY_ENTER, TryCatch #8 {all -> 0x0127, blocks: (B:229:0x011d, B:66:0x0138, B:69:0x0155, B:72:0x015d, B:74:0x0163, B:75:0x016c, B:79:0x017d, B:82:0x018e, B:88:0x01d5, B:94:0x0209, B:96:0x020d, B:97:0x0214, B:102:0x021c, B:223:0x0168), top: B:228:0x011d }] */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x0217  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2193,7 +2178,6 @@ public final class InputMethodManager {
                     + " android.os.IBinder, int, int, int):boolean");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startInputInner$3(int startInputReason) {
         startInputOnWindowFocusGainInternal(startInputReason, null, 0, 0, 0);
     }
@@ -2215,7 +2199,6 @@ public final class InputMethodManager {
                         windowFlags);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void reportInputConnectionOpened(
             InputConnection ic, EditorInfo editorInfo, Handler icHandler, View view) {
         view.onInputConnectionOpenedInternal(ic, editorInfo, icHandler);
@@ -2241,7 +2224,6 @@ public final class InputMethodManager {
     @Deprecated
     public void windowDismissed(IBinder appWindowToken) {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getStartInputFlags(View focusedView, int startInputFlags) {
         int startInputFlags2 = startInputFlags | 1;
         if (focusedView.onCheckIsTextEditor()) {
@@ -2261,7 +2243,6 @@ public final class InputMethodManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean checkFocusInternalLocked(boolean forceNewFocus, ViewRootImpl viewRootImpl) {
         if (this.mCurRootView != viewRootImpl) {
             return false;
@@ -2299,7 +2280,6 @@ public final class InputMethodManager {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onViewFocusChangedInternal(View view, boolean hasFocus) {
         if (SemInputMethodManagerUtils.DEBUG_CALL_STACK) {
             Log.d(
@@ -2540,7 +2520,6 @@ public final class InputMethodManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updateSelection$4(
             int selStart,
             int selEnd,
@@ -2840,7 +2819,6 @@ public final class InputMethodManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendInputEventAndReportResultOnMainLooper(PendingEvent p) {
         synchronized (this.mH) {
             int result = sendInputEventOnMainLooperLocked(p);
@@ -2885,7 +2863,6 @@ public final class InputMethodManager {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void finishedInputEvent(int seq, boolean handled, boolean timeout) {
         synchronized (this.mH) {
             int index = this.mPendingEvents.indexOfKey(seq);
@@ -2947,7 +2924,6 @@ public final class InputMethodManager {
         return p;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void recyclePendingEventLocked(PendingEvent p) {
         p.recycle();
         this.mPendingEventPool.release(p);
@@ -3138,7 +3114,6 @@ public final class InputMethodManager {
         return this.mDisplayId;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doDump(FileDescriptor fd, PrintWriter fout, String[] args) {
         if (processDump(fd, args)) {
             return;
@@ -3193,7 +3168,6 @@ public final class InputMethodManager {
                         + this.mCursorCandEnd);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ConnectionlessHandwritingCallbackProxy
             extends IConnectionlessHandwritingCallback.Stub {
         private ConnectionlessHandwritingCallback mCallback;
@@ -3322,7 +3296,6 @@ public final class InputMethodManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isImeSessionAvailableLocked() {
         return (this.mCurBindState == null || this.mCurBindState.mImeSession == null)
                 ? false
@@ -3336,7 +3309,6 @@ public final class InputMethodManager {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getBindSequenceLocked() {
         if (this.mCurBindState != null) {
             return this.mCurBindState.mBindSequence;
@@ -3390,7 +3362,6 @@ public final class InputMethodManager {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void forAccessibilitySessionsLocked(
             Consumer<IAccessibilityInputMethodSessionInvoker> consumer) {
         for (int i = 0; i < this.mAccessibilityInputMethodSession.size(); i++) {

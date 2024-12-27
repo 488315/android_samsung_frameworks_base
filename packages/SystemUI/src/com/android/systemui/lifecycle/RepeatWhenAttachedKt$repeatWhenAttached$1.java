@@ -16,7 +16,6 @@ public final class RepeatWhenAttachedKt$repeatWhenAttached$1 implements Disposab
         this.$onAttachListener = repeatWhenAttachedKt$repeatWhenAttached$onAttachListener$1;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlinx.coroutines.DisposableHandle
     public final void dispose() {
         Assert.isMainThread();

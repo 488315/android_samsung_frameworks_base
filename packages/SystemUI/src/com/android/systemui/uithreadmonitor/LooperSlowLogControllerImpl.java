@@ -145,7 +145,6 @@ public final class LooperSlowLogControllerImpl implements Dumpable, LooperSlowLo
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.uithreadmonitor.LooperSlowLogControllerImpl$debugCallback$1] */
     public LooperSlowLogControllerImpl(Looper looper, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, Lazy lazy, DumpManager dumpManager) {
         this.mainLooper = looper;
         this.scope = coroutineScope;

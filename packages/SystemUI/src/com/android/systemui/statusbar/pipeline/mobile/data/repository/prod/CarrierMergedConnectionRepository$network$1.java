@@ -17,7 +17,6 @@ final class CarrierMergedConnectionRepository$network$1 extends SuspendLambda im
     int label;
     final /* synthetic */ CarrierMergedConnectionRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CarrierMergedConnectionRepository$network$1(CarrierMergedConnectionRepository carrierMergedConnectionRepository, Continuation continuation) {
         super(4, continuation);
         this.this$0 = carrierMergedConnectionRepository;

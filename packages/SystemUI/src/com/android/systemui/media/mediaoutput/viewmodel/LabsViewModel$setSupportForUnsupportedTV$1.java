@@ -23,7 +23,6 @@ final class LabsViewModel$setSupportForUnsupportedTV$1 extends SuspendLambda imp
         /* synthetic */ Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(boolean z, Continuation continuation) {
             super(2, continuation);
             this.$enabled = z;
@@ -55,7 +54,6 @@ final class LabsViewModel$setSupportForUnsupportedTV$1 extends SuspendLambda imp
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LabsViewModel$setSupportForUnsupportedTV$1(LabsViewModel labsViewModel, boolean z, Continuation continuation) {
         super(2, continuation);
         this.this$0 = labsViewModel;

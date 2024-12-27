@@ -128,7 +128,6 @@ public class TypefaceFinder {
         }
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:3:0x0044 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

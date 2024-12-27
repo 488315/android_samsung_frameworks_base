@@ -411,7 +411,6 @@ public class CallerInfoAsyncQuery {
         this.mHandler.mQueryUri = contactRef;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void release() {
         this.mHandler.mContext = null;
         this.mHandler.mQueryUri = null;
@@ -419,7 +418,6 @@ public class CallerInfoAsyncQuery {
         this.mHandler = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String sanitizeUriToString(Uri uri) {
         if (uri != null) {
             String uriString = uri.toString();

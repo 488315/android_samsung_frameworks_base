@@ -132,7 +132,6 @@ public final class KeyguardInteractor {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r6v3, types: [com.android.systemui.keyguard.domain.interactor.KeyguardInteractor$special$$inlined$map$1] */
     public KeyguardInteractor(KeyguardRepository keyguardRepository, CommandQueue commandQueue, PowerInteractor powerInteractor, KeyguardBouncerRepository keyguardBouncerRepository, ConfigurationInteractor configurationInteractor, ShadeRepository shadeRepository, KeyguardTransitionInteractor keyguardTransitionInteractor, final Provider provider, Provider provider2, Provider provider3, final Provider provider4, final CoroutineScope coroutineScope) {
         this.repository = keyguardRepository;
         this.commandQueue = commandQueue;
@@ -177,7 +176,6 @@ public final class KeyguardInteractor {
                 }
             }
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -226,8 +224,6 @@ public final class KeyguardInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -518,8 +514,6 @@ public final class KeyguardInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -588,7 +582,6 @@ public final class KeyguardInteractor {
         this.keyguardTranslationY = FlowKt.stateIn(FlowKt.transformLatest(configurationInteractor.dimensionPixelSize(R.dimen.keyguard_translate_distance_on_swipe_up), new KeyguardInteractor$special$$inlined$flatMapLatest$2(null, shadeRepository, this)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Float.valueOf(0.0f));
         this.clockShouldBeCentered = keyguardRepositoryImpl.clockShouldBeCentered;
         this.animateDozingTransitions$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardInteractor$animateDozingTransitions$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

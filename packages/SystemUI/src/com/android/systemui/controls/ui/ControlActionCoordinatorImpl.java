@@ -168,7 +168,6 @@ public final class ControlActionCoordinatorImpl implements ControlActionCoordina
         }
         ControlWithState controlWithState3 = controlViewHolder.cws;
         bouncerOrRun(createAction((controlWithState3 != null ? controlWithState3 : null).ci.controlId, new Function0() { // from class: com.android.systemui.controls.ui.ControlActionCoordinatorImpl$toggleActionButton$action$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -208,8 +207,6 @@ public final class ControlActionCoordinatorImpl implements ControlActionCoordina
         }, true, z2));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x005b  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0087  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -318,8 +315,6 @@ public final class ControlActionCoordinatorImpl implements ControlActionCoordina
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.controls.ui.ControlActionCoordinatorImpl.touchActionButton(com.android.systemui.controls.ui.ControlViewHolder, java.lang.String, android.service.controls.Control):void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00a3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

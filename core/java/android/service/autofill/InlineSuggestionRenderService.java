@@ -78,7 +78,6 @@ public abstract class InlineSuggestionRenderService extends Service {
         return new Size(width, height);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleRenderSuggestion(
             final IInlineSuggestionUiCallback callback,
             InlinePresentation presentation,
@@ -214,13 +213,11 @@ public abstract class InlineSuggestionRenderService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleGetInlineSuggestionsRendererInfo(RemoteCallback callback) {
         Bundle rendererInfo = onGetInlineSuggestionsRendererInfo();
         callback.sendResult(rendererInfo);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleDestroySuggestionViews(int userId, int sessionId) {
         Log.v(TAG, "handleDestroySuggestionViews called for " + userId + ":" + sessionId);
         for (InlineSuggestionUiImpl inlineSuggestionUi :
@@ -233,7 +230,6 @@ public abstract class InlineSuggestionRenderService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class InlineSuggestionUiWrapper extends IInlineSuggestionUi.Stub {
         private final WeakReference<InlineSuggestionUiImpl> mUiImpl;
 
@@ -258,7 +254,6 @@ public abstract class InlineSuggestionRenderService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class InlineSuggestionUiImpl {
         private final Handler mHandler;
         private final int mSessionId;
@@ -285,7 +280,6 @@ public abstract class InlineSuggestionRenderService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$releaseSurfaceControlViewHost$0() {
             if (this.mViewHost == null) {
                 return;
@@ -313,7 +307,6 @@ public abstract class InlineSuggestionRenderService extends Service {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$getSurfacePackage$1(
                 ISurfacePackageResultCallback callback) {
             try {
@@ -327,7 +320,6 @@ public abstract class InlineSuggestionRenderService extends Service {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.app.Service
     public final void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
         pw.println("mActiveInlineSuggestions: " + this.mActiveInlineSuggestions.size());

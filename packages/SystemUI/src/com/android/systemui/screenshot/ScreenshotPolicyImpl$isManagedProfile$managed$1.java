@@ -13,7 +13,6 @@ final class ScreenshotPolicyImpl$isManagedProfile$managed$1 extends SuspendLambd
     int label;
     final /* synthetic */ ScreenshotPolicyImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenshotPolicyImpl$isManagedProfile$managed$1(ScreenshotPolicyImpl screenshotPolicyImpl, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = screenshotPolicyImpl;

@@ -11,7 +11,6 @@ public abstract class SemRemoteViewsAnimation implements Parcelable {
     protected boolean mIsExpired;
     protected int mViewId;
 
-    /* JADX INFO: Access modifiers changed from: protected */
     /* renamed from: endAnimation, reason: merged with bridge method [inline-methods] */
     public abstract void lambda$play$0(View view);
 

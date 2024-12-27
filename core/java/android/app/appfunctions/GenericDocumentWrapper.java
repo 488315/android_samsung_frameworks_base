@@ -11,7 +11,6 @@ public final class GenericDocumentWrapper implements Parcelable {
     public static final Parcelable.Creator<GenericDocumentWrapper> CREATOR =
             new Parcelable.Creator<GenericDocumentWrapper>() { // from class:
                 // android.app.appfunctions.GenericDocumentWrapper.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GenericDocumentWrapper createFromParcel(Parcel in) {
                     int length = in.readInt();
@@ -23,7 +22,6 @@ public final class GenericDocumentWrapper implements Parcelable {
                     return new GenericDocumentWrapper(p);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GenericDocumentWrapper[] newArray(int size) {
                     return new GenericDocumentWrapper[size];

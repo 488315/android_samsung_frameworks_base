@@ -16,7 +16,6 @@ final class BiometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$2 extend
     int label;
     final /* synthetic */ BiometricSettingsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BiometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$2(DevicePolicyManager devicePolicyManager, BiometricSettingsRepositoryImpl biometricSettingsRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.$devicePolicyManager = devicePolicyManager;

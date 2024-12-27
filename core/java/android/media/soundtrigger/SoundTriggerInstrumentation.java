@@ -154,7 +154,6 @@ public final class SoundTriggerInstrumentation {
             this.mInjectModelEvent = injection;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void wrap(final Consumer<ModelCallback> consumer) {
             synchronized (SoundTriggerInstrumentation.this.mLock) {
                 if (this.mModelCallback != null) {
@@ -266,7 +265,6 @@ public final class SoundTriggerInstrumentation {
             this.mInjectRecognitionEvent = injectRecognitionEvent;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void wrap(final Consumer<RecognitionCallback> consumer) {
             synchronized (SoundTriggerInstrumentation.this.mLock) {
                 if (this.mRecognitionCallback != null) {
@@ -286,7 +284,6 @@ public final class SoundTriggerInstrumentation {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class Injection extends ISoundTriggerInjection.Stub {
         private Injection() {}
 
@@ -323,7 +320,6 @@ public final class SoundTriggerInstrumentation {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSoundModelLoaded$0(ModelSession modelSession) {
             SoundTriggerInstrumentation.this.mClientCallback.onModelLoaded(modelSession);
         }
@@ -446,7 +442,6 @@ public final class SoundTriggerInstrumentation {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRestarted$5() {
             SoundTriggerInstrumentation.this.mClientCallback.onRestarted();
         }
@@ -470,7 +465,6 @@ public final class SoundTriggerInstrumentation {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFrameworkDetached$6() {
             SoundTriggerInstrumentation.this.mClientCallback.onFrameworkDetached();
         }
@@ -495,7 +489,6 @@ public final class SoundTriggerInstrumentation {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onClientAttached$7() {
             SoundTriggerInstrumentation.this.mClientCallback.onClientAttached();
         }
@@ -519,12 +512,10 @@ public final class SoundTriggerInstrumentation {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onClientDetached$8() {
             SoundTriggerInstrumentation.this.mClientCallback.onClientDetached();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onPreempted$9() {
             SoundTriggerInstrumentation.this.mClientCallback.onPreempted();
         }

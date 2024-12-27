@@ -270,8 +270,6 @@ public final class BigPictureIconManager implements NotificationIconManager, Dum
         return new Pair(bitmapDrawable, new DrawableState.FullImage(icon, new Size(bitmapDrawable.getIntrinsicWidth(), bitmapDrawable.getIntrinsicHeight())));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00f2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

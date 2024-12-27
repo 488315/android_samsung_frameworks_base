@@ -94,7 +94,6 @@ final class PromptIconViewBinder$bind$1 extends SuspendLambda implements Functio
                 }
             }
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass2(PromptIconViewModel promptIconViewModel, LottieAnimationView lottieAnimationView, Ref$ObjectRef<AnimatedVectorDrawable> ref$ObjectRef, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = promptIconViewModel;
@@ -241,7 +240,6 @@ final class PromptIconViewBinder$bind$1 extends SuspendLambda implements Functio
                 }
             }
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass3(PromptIconViewModel promptIconViewModel, LottieAnimationView lottieAnimationView, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = promptIconViewModel;
@@ -318,7 +316,6 @@ final class PromptIconViewBinder$bind$1 extends SuspendLambda implements Functio
             final /* synthetic */ PromptIconViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass4(PromptIconViewModel promptIconViewModel, LottieAnimationView lottieAnimationView, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = promptIconViewModel;
@@ -372,7 +369,6 @@ final class PromptIconViewBinder$bind$1 extends SuspendLambda implements Functio
             final /* synthetic */ PromptIconViewModel $viewModel;
             int label;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public AnonymousClass5(PromptIconViewModel promptIconViewModel, LottieAnimationView lottieAnimationView, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = promptIconViewModel;
@@ -422,7 +418,6 @@ final class PromptIconViewBinder$bind$1 extends SuspendLambda implements Functio
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(PromptIconViewModel promptIconViewModel, LottieAnimationView lottieAnimationView, Pair<Integer, Integer> pair, LottieAnimationView lottieAnimationView2, PromptViewModel promptViewModel, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = promptIconViewModel;
@@ -432,8 +427,6 @@ final class PromptIconViewBinder$bind$1 extends SuspendLambda implements Functio
             this.$promptViewModel = promptViewModel;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v4, types: [T, android.graphics.drawable.AnimatedVectorDrawable, android.graphics.drawable.Drawable] */
         public static final void access$invokeSuspend$updateXmlIconAsset(Ref$ObjectRef ref$ObjectRef, LottieAnimationView lottieAnimationView, int i, boolean z, PromptIconViewModel.AuthType authType) {
             AnimatedVectorDrawable animatedVectorDrawable = (AnimatedVectorDrawable) ref$ObjectRef.element;
             if (animatedVectorDrawable != null) {
@@ -488,7 +481,6 @@ final class PromptIconViewBinder$bind$1 extends SuspendLambda implements Functio
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptIconViewBinder$bind$1(PromptIconViewModel promptIconViewModel, LottieAnimationView lottieAnimationView, Pair<Integer, Integer> pair, LottieAnimationView lottieAnimationView2, PromptViewModel promptViewModel, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = promptIconViewModel;

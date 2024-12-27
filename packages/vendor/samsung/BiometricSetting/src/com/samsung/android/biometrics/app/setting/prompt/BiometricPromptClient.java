@@ -111,7 +111,6 @@ public class BiometricPromptClient extends SysUiClient
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00b1  */
     @Override // com.samsung.android.biometrics.app.setting.AuthenticationConsumer
     /*
         Code decompiled incorrectly, please refer to instructions dump.

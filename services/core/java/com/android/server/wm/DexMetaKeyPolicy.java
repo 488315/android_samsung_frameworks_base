@@ -96,7 +96,6 @@ public final class DexMetaKeyPolicy {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ DexMetaKeyPolicy this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ UpMetaKeyBoundsProvider(DexMetaKeyPolicy dexMetaKeyPolicy, int i) {
             super();
             this.$r8$classId = i;
@@ -339,7 +338,6 @@ public final class DexMetaKeyPolicy {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:34:0x006b  */
         @Override // com.android.server.wm.DexMetaKeyPolicy.MetaKeyBoundsProvider
         /*
             Code decompiled incorrectly, please refer to instructions dump.

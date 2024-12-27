@@ -30,7 +30,6 @@ public final class FlowKt {
         return new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new FlowKt$emitOnStart$1(null), flow);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static final <T> Flow onSubscriberAdded(MutableSharedFlow mutableSharedFlow) {
         final Flow pairwise = pairwise(((AbstractSharedFlow) mutableSharedFlow).getSubscriptionCount(), 0);
         final Flow flow = new Flow() { // from class: com.android.systemui.util.kotlin.FlowKt$onSubscriberAdded$$inlined$filter$1
@@ -62,8 +61,6 @@ public final class FlowKt {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -158,8 +155,6 @@ public final class FlowKt {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -225,12 +220,10 @@ public final class FlowKt {
         return pairwiseBy(flow, FlowKt$pairwise$2.INSTANCE);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final /* synthetic */ Object pairwise$lambda$0(Object obj, Object obj2, Continuation continuation) {
         return new WithPrev(obj, obj2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final /* synthetic */ Object pairwise$lambda$1(Object obj, Object obj2, Continuation continuation) {
         return new WithPrev(obj, obj2);
     }
@@ -254,7 +247,6 @@ public final class FlowKt {
         return setChanges(flow, z);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final /* synthetic */ Object setChanges$lambda$4(Set set, Set set2, Continuation continuation) {
         return new SetChanges(set, set2);
     }

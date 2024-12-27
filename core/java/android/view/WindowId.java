@@ -12,7 +12,6 @@ import java.util.HashMap;
 public class WindowId implements Parcelable {
     public static final Parcelable.Creator<WindowId> CREATOR =
             new Parcelable.Creator<WindowId>() { // from class: android.view.WindowId.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowId createFromParcel(Parcel in) {
                     IBinder target = in.readStrongBinder();
@@ -22,7 +21,6 @@ public class WindowId implements Parcelable {
                     return null;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowId[] newArray(int size) {
                     return new WindowId[size];

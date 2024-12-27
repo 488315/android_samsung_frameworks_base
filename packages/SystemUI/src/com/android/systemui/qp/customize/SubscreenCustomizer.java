@@ -53,7 +53,6 @@ public class SubscreenCustomizer extends QSPanel {
         public int touchedPos;
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.qp.customize.SubscreenCustomizer$1] */
     public SubscreenCustomizer(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mIsDroppedOnView = false;

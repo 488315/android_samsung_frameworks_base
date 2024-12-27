@@ -55,7 +55,6 @@ public final class GestureHintDrawable extends LayerDrawable {
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GestureHintDrawable(Drawable[] drawableArr) {
         super(drawableArr);
         Intrinsics.checkNotNull(drawableArr);

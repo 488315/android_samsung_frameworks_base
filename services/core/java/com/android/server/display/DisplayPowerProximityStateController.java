@@ -147,7 +147,6 @@ public final class DisplayPowerProximityStateController {
 
     class Injector {}
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.display.DisplayPowerProximityStateController$1] */
     public DisplayPowerProximityStateController(
             WakelockController wakelockController,
             DisplayDeviceConfig displayDeviceConfig,

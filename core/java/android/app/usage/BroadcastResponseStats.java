@@ -11,13 +11,11 @@ public final class BroadcastResponseStats implements Parcelable {
     public static final Parcelable.Creator<BroadcastResponseStats> CREATOR =
             new Parcelable.Creator<BroadcastResponseStats>() { // from class:
                 // android.app.usage.BroadcastResponseStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BroadcastResponseStats createFromParcel(Parcel source) {
                     return new BroadcastResponseStats(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BroadcastResponseStats[] newArray(int size) {
                     return new BroadcastResponseStats[size];

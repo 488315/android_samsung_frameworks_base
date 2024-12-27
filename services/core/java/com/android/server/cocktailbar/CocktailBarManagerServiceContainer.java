@@ -531,9 +531,6 @@ public final class CocktailBarManagerServiceContainer extends ICocktailBarServic
         SUPPORT_EDGE_MUM = Build.VERSION.SEM_PLATFORM_INT >= 140500;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.cocktailbar.CocktailBarManagerServiceContainer$2] */
-    /* JADX WARN: Type inference failed for: r2v0, types: [android.content.BroadcastReceiver, com.android.server.cocktailbar.CocktailBarManagerServiceContainer$1] */
     public CocktailBarManagerServiceContainer(Context context) {
         SystemUiVisibilityPolicyController systemUiVisibilityPolicyController;
         this.mContext = null;
@@ -898,8 +895,6 @@ public final class CocktailBarManagerServiceContainer extends ICocktailBarServic
         cocktailBarStatePolicyController.mPolicy.updateActivate(true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:113:0x02e1 A[Catch: all -> 0x0080, TryCatch #0 {all -> 0x0080, blocks: (B:13:0x005e, B:15:0x0064, B:16:0x0083, B:20:0x0094, B:22:0x0098, B:24:0x009e, B:26:0x00b0, B:28:0x00bc, B:29:0x00d7, B:75:0x0110, B:76:0x0112, B:86:0x0133, B:88:0x0144, B:90:0x014c, B:91:0x0153, B:93:0x0156, B:95:0x0160, B:99:0x0163, B:100:0x0175, B:105:0x019e, B:106:0x019f, B:107:0x01a2, B:38:0x01ab, B:39:0x01ad, B:49:0x01ce, B:51:0x01df, B:53:0x01e7, B:54:0x01ee, B:56:0x01f1, B:58:0x01fb, B:62:0x01fe, B:63:0x0210, B:68:0x0239, B:69:0x023a, B:70:0x0377, B:150:0x024c, B:151:0x024e, B:161:0x026f, B:163:0x0280, B:165:0x0288, B:166:0x028f, B:168:0x0292, B:170:0x029a, B:174:0x029f, B:175:0x02b1, B:180:0x02da, B:181:0x02db, B:182:0x02de, B:113:0x02e1, B:114:0x02e3, B:124:0x0305, B:126:0x0316, B:128:0x031e, B:129:0x0325, B:131:0x0328, B:137:0x0337, B:133:0x0331, B:141:0x034c, B:146:0x0376, B:192:0x037a, B:193:0x038b, B:194:0x038c, B:195:0x0393, B:196:0x0394, B:197:0x03a5, B:198:0x03a6, B:199:0x03ae, B:41:0x01ae, B:43:0x01b8, B:45:0x01be, B:47:0x01cb, B:153:0x024f, B:155:0x0259, B:157:0x025f, B:159:0x026c, B:78:0x0113, B:80:0x011d, B:82:0x0123, B:84:0x0130, B:116:0x02e4, B:118:0x02ee, B:120:0x02f4, B:122:0x0302), top: B:12:0x005e, inners: #5, #7, #8, #9, #10 }] */
-    /* JADX WARN: Removed duplicated region for block: B:150:0x024c A[Catch: all -> 0x0080, TryCatch #0 {all -> 0x0080, blocks: (B:13:0x005e, B:15:0x0064, B:16:0x0083, B:20:0x0094, B:22:0x0098, B:24:0x009e, B:26:0x00b0, B:28:0x00bc, B:29:0x00d7, B:75:0x0110, B:76:0x0112, B:86:0x0133, B:88:0x0144, B:90:0x014c, B:91:0x0153, B:93:0x0156, B:95:0x0160, B:99:0x0163, B:100:0x0175, B:105:0x019e, B:106:0x019f, B:107:0x01a2, B:38:0x01ab, B:39:0x01ad, B:49:0x01ce, B:51:0x01df, B:53:0x01e7, B:54:0x01ee, B:56:0x01f1, B:58:0x01fb, B:62:0x01fe, B:63:0x0210, B:68:0x0239, B:69:0x023a, B:70:0x0377, B:150:0x024c, B:151:0x024e, B:161:0x026f, B:163:0x0280, B:165:0x0288, B:166:0x028f, B:168:0x0292, B:170:0x029a, B:174:0x029f, B:175:0x02b1, B:180:0x02da, B:181:0x02db, B:182:0x02de, B:113:0x02e1, B:114:0x02e3, B:124:0x0305, B:126:0x0316, B:128:0x031e, B:129:0x0325, B:131:0x0328, B:137:0x0337, B:133:0x0331, B:141:0x034c, B:146:0x0376, B:192:0x037a, B:193:0x038b, B:194:0x038c, B:195:0x0393, B:196:0x0394, B:197:0x03a5, B:198:0x03a6, B:199:0x03ae, B:41:0x01ae, B:43:0x01b8, B:45:0x01be, B:47:0x01cb, B:153:0x024f, B:155:0x0259, B:157:0x025f, B:159:0x026c, B:78:0x0113, B:80:0x011d, B:82:0x0123, B:84:0x0130, B:116:0x02e4, B:118:0x02ee, B:120:0x02f4, B:122:0x0302), top: B:12:0x005e, inners: #5, #7, #8, #9, #10 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -912,7 +907,6 @@ public final class CocktailBarManagerServiceContainer extends ICocktailBarServic
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.cocktailbar.CocktailBarManagerServiceContainer.bindRemoteViewsService(java.lang.String, int, android.content.Intent, android.app.IApplicationThread, android.os.IBinder, android.app.IServiceConnection, int):boolean");
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.server.cocktailbar.CocktailBarManagerServiceContainer$3] */
     public final void bootCompleted() {
         CocktailBarHistory.getInstance().recordServiceProcess("bootCompleted");
         int userId = SUPPORT_EDGE_MUM ? this.mContext.getUserId() : 0;

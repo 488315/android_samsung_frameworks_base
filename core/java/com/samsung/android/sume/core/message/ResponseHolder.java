@@ -40,7 +40,6 @@ public class ResponseHolder implements PlaceHolder<Response> {
         }
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.functional.PlaceHolder
     public Response reset() {
         Response ret = this.response;

@@ -16,7 +16,6 @@ public final class BrightnessDetail extends FrameLayout {
         super(context);
         this.qsDetailController = secQSDetailController;
         this.adapter$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.settings.brightness.BrightnessDetail$adapter$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

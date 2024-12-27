@@ -34,7 +34,6 @@ public class SimgpPlugin implements Plugin<ImgpPlugin> {
         System.loadLibrary("sume_mediabuffer_jni.media.samsung");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: resize, reason: merged with bridge method [inline-methods] */
     public MutableMediaBuffer m9203xd2768214(MediaBuffer ibuf, MutableMediaBuffer obuf)
             throws UnsupportedOperationException {
@@ -69,7 +68,6 @@ public class SimgpPlugin implements Plugin<ImgpPlugin> {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: cvtColor, reason: merged with bridge method [inline-methods] */
     public MutableMediaBuffer m9205xb5c9ce52(MediaBuffer ibuf, MutableMediaBuffer obuf)
             throws UnsupportedOperationException {
@@ -96,7 +94,6 @@ public class SimgpPlugin implements Plugin<ImgpPlugin> {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: rotate, reason: merged with bridge method [inline-methods] */
     public MutableMediaBuffer m9204xc4202833(MediaBuffer ibuf, MutableMediaBuffer obuf)
             throws UnsupportedOperationException {

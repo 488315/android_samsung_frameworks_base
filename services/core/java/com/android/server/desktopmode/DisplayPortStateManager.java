@@ -232,7 +232,6 @@ public final class DisplayPortStateManager {
                     public final /* synthetic */ int $r8$classId;
                     public final /* synthetic */ DisplayPortStateManager this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super("hdmi_auto_enter");
                         this.$r8$classId = r2;
@@ -319,7 +318,6 @@ public final class DisplayPortStateManager {
                     public final /* synthetic */ int $r8$classId;
                     public final /* synthetic */ DisplayPortStateManager this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super("hdmi_auto_enter");
                         this.$r8$classId = r2;
@@ -406,7 +404,6 @@ public final class DisplayPortStateManager {
                     public final /* synthetic */ int $r8$classId;
                     public final /* synthetic */ DisplayPortStateManager this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super("hdmi_auto_enter");
                         this.$r8$classId = r2;

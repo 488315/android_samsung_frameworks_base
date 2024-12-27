@@ -63,8 +63,6 @@ public final class MediaDataFilterImpl implements MediaDataManager.Listener {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.media.controls.domain.pipeline.MediaDataFilterImpl$userTrackerCallback$1, com.android.systemui.settings.UserTracker$Callback] */
     public MediaDataFilterImpl(Context context, UserTracker userTracker, BroadcastSender broadcastSender, NotificationLockscreenUserManager notificationLockscreenUserManager, Executor executor, SystemClock systemClock, MediaUiEventLogger mediaUiEventLogger, MediaFlags mediaFlags, MediaFilterRepository mediaFilterRepository, MediaLoadingLogger mediaLoadingLogger) {
         this.context = context;
         this.broadcastSender = broadcastSender;
@@ -228,11 +226,6 @@ public final class MediaDataFilterImpl implements MediaDataManager.Listener {
     
         if (r3 != false) goto L56;
      */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00a6  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00e2  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x018b  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0191  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0181  */
     @Override // com.android.systemui.media.controls.domain.pipeline.MediaDataManager.Listener
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -40,7 +40,6 @@ public final class AnimationBindHandler extends Animatable2.AnimationCallback {
         ((ArrayList) this.onAnimationsComplete).clear();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void tryRegister(Drawable drawable) {
         if (drawable instanceof Animatable2) {
             Animatable2 animatable2 = (Animatable2) drawable;

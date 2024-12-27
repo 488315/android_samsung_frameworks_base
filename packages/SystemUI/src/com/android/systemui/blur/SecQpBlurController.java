@@ -81,7 +81,6 @@ public final class SecQpBlurController implements ShadeExpansionListener, Status
         return (Integer.toHexString(secQpBlurController.mContext.getColor(secQpBlurController.backgroundColorId)).equals("ff5d5d5d") ^ true) && !(secQpBlurController.mSettingsHelper.isUltraPowerSavingMode() || ((secQpBlurController.mContext.getResources().getBoolean(R.bool.theme_designer_quick_panel_turned_on) ^ true) && (secQpBlurController.mContext.getResources().getConfiguration().uiMode & 32) != 0));
     }
 
-    /* JADX WARN: Type inference failed for: r8v3, types: [com.android.systemui.blur.SecQpBlurController$$ExternalSyntheticLambda0] */
     public SecQpBlurController(Context context, SecPanelBackgroundController secPanelBackgroundController, CapturedBlurContainerController capturedBlurContainerController, ShadeExpansionStateManager shadeExpansionStateManager, StatusBarStateController statusBarStateController, Choreographer choreographer, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardWallpaper keyguardWallpaper, SettingsHelper settingsHelper, KeyguardStateController keyguardStateController, ConfigurationController configurationController, ShadeControllerImpl shadeControllerImpl, Lazy lazy, WakefulnessLifecycle wakefulnessLifecycle, LockscreenShadeTransitionController lockscreenShadeTransitionController) {
         ConfigurationState.ConfigurationField configurationField = ConfigurationState.ConfigurationField.THEME_SEQ;
         ConfigurationState.ConfigurationField configurationField2 = ConfigurationState.ConfigurationField.ASSET_SEQ;

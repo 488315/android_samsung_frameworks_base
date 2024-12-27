@@ -8,13 +8,11 @@ public final class ActivityWindowInfo implements Parcelable {
     public static final Parcelable.Creator<ActivityWindowInfo> CREATOR =
             new Parcelable.Creator<
                     ActivityWindowInfo>() { // from class: android.window.ActivityWindowInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityWindowInfo createFromParcel(Parcel in) {
                     return new ActivityWindowInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ActivityWindowInfo[] newArray(int size) {
                     return new ActivityWindowInfo[size];

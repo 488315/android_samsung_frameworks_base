@@ -62,7 +62,6 @@ public final class PanningScalingHandler extends GestureDetector.SimpleOnGesture
 
        if (r7 < r2) goto L21;
     */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x005c  */
     @Override // android.view.ScaleGestureDetector.OnScaleGestureListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.

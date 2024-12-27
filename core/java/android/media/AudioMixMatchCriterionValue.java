@@ -11,13 +11,11 @@ public final class AudioMixMatchCriterionValue implements Parcelable {
     public static final Parcelable.Creator<AudioMixMatchCriterionValue> CREATOR =
             new Parcelable.Creator<AudioMixMatchCriterionValue>() { // from class:
                 // android.media.AudioMixMatchCriterionValue.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioMixMatchCriterionValue createFromParcel(Parcel _aidl_source) {
                     return new AudioMixMatchCriterionValue(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioMixMatchCriterionValue[] newArray(int _aidl_size) {
                     return new AudioMixMatchCriterionValue[_aidl_size];

@@ -11,13 +11,11 @@ public final class AudioIoFlags implements Parcelable {
     public static final Parcelable.Creator<AudioIoFlags> CREATOR =
             new Parcelable.Creator<
                     AudioIoFlags>() { // from class: android.media.audio.common.AudioIoFlags.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioIoFlags createFromParcel(Parcel _aidl_source) {
                     return new AudioIoFlags(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioIoFlags[] newArray(int _aidl_size) {
                     return new AudioIoFlags[_aidl_size];

@@ -18,7 +18,6 @@ final class ScreenshotPolicyImpl$getAllRootTaskInfosOnDisplay$2 extends SuspendL
     int label;
     final /* synthetic */ ScreenshotPolicyImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenshotPolicyImpl$getAllRootTaskInfosOnDisplay$2(ScreenshotPolicyImpl screenshotPolicyImpl, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = screenshotPolicyImpl;

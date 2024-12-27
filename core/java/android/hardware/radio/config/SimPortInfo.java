@@ -11,7 +11,6 @@ public class SimPortInfo implements Parcelable {
     public static final Parcelable.Creator<SimPortInfo> CREATOR =
             new Parcelable.Creator<
                     SimPortInfo>() { // from class: android.hardware.radio.config.SimPortInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SimPortInfo createFromParcel(Parcel _aidl_source) {
                     SimPortInfo _aidl_out = new SimPortInfo();
@@ -19,7 +18,6 @@ public class SimPortInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SimPortInfo[] newArray(int _aidl_size) {
                     return new SimPortInfo[_aidl_size];

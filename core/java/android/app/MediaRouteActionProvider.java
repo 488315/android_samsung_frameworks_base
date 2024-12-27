@@ -89,7 +89,6 @@ public class MediaRouteActionProvider extends ActionProvider {
         return this.mRouter.isRouteAvailable(this.mRouteTypes, 1);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void refreshRoute() {
         refreshVisibility();
     }

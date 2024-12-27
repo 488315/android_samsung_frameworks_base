@@ -16,7 +16,6 @@ final class SecNotificationShadeWindowControllerHelperImpl$initView$2 extends Su
     int label;
     final /* synthetic */ SecNotificationShadeWindowControllerHelperImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SecNotificationShadeWindowControllerHelperImpl$initView$2(SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = secNotificationShadeWindowControllerHelperImpl;

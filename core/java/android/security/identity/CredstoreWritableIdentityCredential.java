@@ -57,7 +57,6 @@ class CredstoreWritableIdentityCredential extends WritableIdentityCredential {
         return personalize(this.mBinder, personalizationData);
     }
 
-    /* JADX WARN: Incorrect condition in loop: B:3:0x0018 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

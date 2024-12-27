@@ -25,14 +25,12 @@ public abstract class SemClipData implements Parcelable, Serializable {
             new Parcelable.Creator<
                     SemClipData>() { // from class:
                                      // com.samsung.android.content.clipboard.data.SemClipData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemClipData createFromParcel(Parcel source) {
                     SemClipData concreteData = ClipboardDataFactory.createClipBoardData(source);
                     return concreteData;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemClipData[] newArray(int size) {
                     return new SemClipData[size];

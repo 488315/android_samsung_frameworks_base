@@ -60,9 +60,7 @@ public class KeyguardBiometricToastView extends FrameLayout {
 
     public enum ToastType {
         Authenticating,
-        /* JADX INFO: Fake field, exist only in values array */
         AuthenticationSuccess,
-        /* JADX INFO: Fake field, exist only in values array */
         AuthenticationFail,
         FingerprintAuthenticationSuccess,
         FingerprintAuthenticationFail,
@@ -70,7 +68,6 @@ public class KeyguardBiometricToastView extends FrameLayout {
         FingerprintAuthenticationHelp,
         FaceAuthenticationFail,
         FaceAuthenticationError,
-        /* JADX INFO: Fake field, exist only in values array */
         FaceAuthenticationHelp
     }
 
@@ -371,7 +368,6 @@ public class KeyguardBiometricToastView extends FrameLayout {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.keyguard.biometrics.KeyguardBiometricToastView$1] */
     public KeyguardBiometricToastView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mToastLockIconWidth = 0;

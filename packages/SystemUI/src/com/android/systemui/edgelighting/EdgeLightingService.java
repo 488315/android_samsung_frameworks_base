@@ -303,14 +303,6 @@ public class EdgeLightingService extends Service {
                         edgeLightingScheduler.mRequester.sendClickEvent(lightingScheduleInfo.getNotificationKey());
                     }
 
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Type inference failed for: r6v1, types: [android.content.pm.PackageManager] */
-                    /* JADX WARN: Type inference failed for: r6v13 */
-                    /* JADX WARN: Type inference failed for: r6v15 */
-                    /* JADX WARN: Type inference failed for: r6v16 */
-                    /* JADX WARN: Type inference failed for: r6v2, types: [android.content.pm.PackageManager] */
-                    /* JADX WARN: Type inference failed for: r6v3, types: [android.graphics.drawable.Drawable] */
-                    /* JADX WARN: Type inference failed for: r6v4, types: [android.graphics.drawable.Drawable] */
                     @Override // com.android.systemui.edgelighting.effect.interfaces.IEdgeLightingWindowCallback
                     public final void onFlingDownInWindow(boolean z3) {
                         boolean z4 = EdgeLightingService.sConfigured;
@@ -665,8 +657,6 @@ public class EdgeLightingService extends Service {
         sConfigured = false;
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.edgelighting.EdgeLightingService$2] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.edgelighting.EdgeLightingService$8] */
     public EdgeLightingService() {
         MainHandler mainHandler = new MainHandler(this, 0);
         this.mHandler = mainHandler;
@@ -864,9 +854,6 @@ public class EdgeLightingService extends Service {
         super.onDestroy();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r12v52, types: [com.android.systemui.edgelighting.EdgeLightingService$6] */
-    /* JADX WARN: Type inference failed for: r4v19, types: [com.android.systemui.edgelighting.device.EdgeLightingCoverManager$1] */
     @Override // android.app.Service
     public final int onStartCommand(Intent intent, int i, int i2) {
         boolean z;
@@ -1143,16 +1130,6 @@ public class EdgeLightingService extends Service {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x0249  */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x0279  */
-    /* JADX WARN: Removed duplicated region for block: B:142:0x032c  */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x038d  */
-    /* JADX WARN: Removed duplicated region for block: B:153:0x03ca  */
-    /* JADX WARN: Removed duplicated region for block: B:160:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:162:0x039f  */
-    /* JADX WARN: Removed duplicated region for block: B:177:0x0316  */
-    /* JADX WARN: Removed duplicated region for block: B:178:0x0250  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

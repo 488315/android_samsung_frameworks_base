@@ -42,7 +42,6 @@ import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.CoroutineScope;
 
 public abstract class PhoneScreenKt {
-    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.systemui.media.mediaoutput.compose.PhoneScreenKt$PhoneScreen$1, kotlin.jvm.internal.Lambda] */
     public static final void PhoneScreen(final Function1 function1, final MediaSessionViewModel mediaSessionViewModel, final SessionAudioPathViewModel sessionAudioPathViewModel, Composer composer, final int i, final int i2) {
         int i3;
         Object failure;
@@ -138,7 +137,6 @@ public abstract class PhoneScreenKt {
                     final /* synthetic */ MediaOutputState $mediaOutputState;
                     int label;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     public AnonymousClass2(MediaOutputState mediaOutputState, Continuation continuation) {
                         super(2, continuation);
                         this.$mediaOutputState = mediaOutputState;
@@ -166,13 +164,10 @@ public abstract class PhoneScreenKt {
                     }
                 }
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(3);
                 }
 
-                /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.media.mediaoutput.compose.PhoneScreenKt$PhoneScreen$1$1, kotlin.jvm.internal.Lambda] */
-                /* JADX WARN: Type inference failed for: r10v11, types: [com.android.systemui.media.mediaoutput.compose.PhoneScreenKt$PhoneScreen$1$3, kotlin.jvm.internal.Lambda] */
                 @Override // kotlin.jvm.functions.Function3
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
                     Composer composer2 = (Composer) obj2;
@@ -191,7 +186,6 @@ public abstract class PhoneScreenKt {
                     final MediaSessionViewModel mediaSessionViewModel2 = MediaSessionViewModel.this;
                     final SessionAudioPathViewModel sessionAudioPathViewModel2 = sessionAudioPathViewModel;
                     ContainerBoxKt.ContainerBox(true, null, null, null, ComposableLambdaKt.rememberComposableLambda(-1788909848, composerImpl3, new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.PhoneScreenKt$PhoneScreen$1.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(2);
                         }
@@ -242,7 +236,6 @@ public abstract class PhoneScreenKt {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.PhoneScreenKt$PhoneScreen$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

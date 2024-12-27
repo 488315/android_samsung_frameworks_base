@@ -438,7 +438,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ DesktopModeService this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public /* synthetic */ AnonymousClass2(DesktopModeService desktopModeService, int i) {
             super(null);
             this.$r8$classId = i;
@@ -691,7 +690,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
             return modeToModeChangeInfo.mModeToMode;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:12:0x0035  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1123,13 +1121,10 @@ public final class DesktopModeService extends IDesktopMode.Stub {
     public final class Receiver extends BroadcastReceiver {
         public Receiver() {}
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:126:0x0247, code lost:
 
            if (r6.equals("PAP") == false) goto L100;
         */
-        /* JADX WARN: Removed duplicated region for block: B:58:0x0148  */
-        /* JADX WARN: Removed duplicated region for block: B:60:0x0155  */
         @Override // android.content.BroadcastReceiver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1437,7 +1432,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
         return z2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0023  */
     /* renamed from: -$$Nest$mrequestTileUpdate, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1518,8 +1512,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
                 desktopModeService.mCurrentUserId);
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.desktopmode.DesktopModeService$3] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.desktopmode.DesktopModeService$3] */
     public DesktopModeService(
             Injector injector,
             Context context,
@@ -1536,7 +1528,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
                     public final /* synthetic */ int $r8$classId;
                     public final /* synthetic */ DesktopModeService this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super("welcome_completed");
                         this.$r8$classId = i;
@@ -1581,7 +1572,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
                     public final /* synthetic */ int $r8$classId;
                     public final /* synthetic */ DesktopModeService this$0;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super("welcome_completed");
                         this.$r8$classId = i;
@@ -2365,7 +2355,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
         onSecuredAppLaunched(this.mActivityManagerService.getTaskForActivity(iBinder, false), str);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(
             FileDescriptor fileDescriptor,
             FileDescriptor fileDescriptor2,

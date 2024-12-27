@@ -201,8 +201,6 @@ public final class PersonaLegacyStateMonitor {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0159  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x017d  */
     /* renamed from: -$$Nest$mnotifyStateChange, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -253,7 +251,6 @@ public final class PersonaLegacyStateMonitor {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.pm.PersonaLegacyStateMonitor$1] */
     public PersonaLegacyStateMonitor(Context context) {
         this.mEdmStorageProvider = null;
         this.mEdm = null;

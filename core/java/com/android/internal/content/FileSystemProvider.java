@@ -423,7 +423,6 @@ public abstract class FileSystemProvider extends DocumentsProvider {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$openDocument$0(
             String documentId, File visibleFile, IOException e) {
         onDocIdChanged(documentId);
@@ -560,7 +559,6 @@ public abstract class FileSystemProvider extends DocumentsProvider {
         return projection == null ? this.mDefaultProjection : projection;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void startObserving(File file, Uri notifyUri, DirectoryCursor cursor) {
         synchronized (this.mObservers) {
             DirectoryObserver observer = this.mObservers.get(file);
@@ -574,7 +572,6 @@ public abstract class FileSystemProvider extends DocumentsProvider {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void stopObserving(File file, DirectoryCursor cursor) {
         synchronized (this.mObservers) {
             DirectoryObserver observer = this.mObservers.get(file);

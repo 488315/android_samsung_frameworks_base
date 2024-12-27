@@ -286,7 +286,6 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void scrollIntoSlots() {
         if (getChildCount() == 0 || this.mSelectedChild == null) {
             return;
@@ -695,7 +694,6 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         setPressed(true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchUnpress() {
         int i = getChildCount();
         while (true) {
@@ -1000,7 +998,6 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
             endFling(scrollIntoSlots);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void endFling(boolean scrollIntoSlots) {
             this.mScroller.forceFinished(true);
             if (scrollIntoSlots) {

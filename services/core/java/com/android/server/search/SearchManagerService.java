@@ -72,7 +72,6 @@ public final class SearchManagerService extends ISearchManager.Stub {
         public final AnonymousClass1 mBootCompleteReceiver;
         public SearchManagerService mService;
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.search.SearchManagerService$Lifecycle$1] */
         public Lifecycle(Context context) {
             super(context);
             this.mBootCompleteReceiver = new BroadcastReceiver() { // from class: com.android.server.search.SearchManagerService.Lifecycle.1
@@ -115,8 +114,6 @@ public final class SearchManagerService extends ISearchManager.Stub {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.search.SearchManagerService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? searchManagerService = new SearchManagerService(getContext());

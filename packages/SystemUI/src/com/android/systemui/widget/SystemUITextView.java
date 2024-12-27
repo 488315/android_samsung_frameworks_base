@@ -372,8 +372,6 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
     
         if (r6 > 0) goto L28;
      */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0146  */
-    /* JADX WARN: Removed duplicated region for block: B:38:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -394,7 +392,6 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
         this(context, attributeSet, i, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.widget.SystemUITextView$1] */
     public SystemUITextView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mOriginalFontSizeDp = 0.0f;

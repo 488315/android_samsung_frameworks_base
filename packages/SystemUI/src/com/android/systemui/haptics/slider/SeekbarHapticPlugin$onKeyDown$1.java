@@ -13,7 +13,6 @@ final class SeekbarHapticPlugin$onKeyDown$1 extends SuspendLambda implements Fun
     int label;
     final /* synthetic */ SeekbarHapticPlugin this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SeekbarHapticPlugin$onKeyDown$1(SeekbarHapticPlugin seekbarHapticPlugin, Continuation continuation) {
         super(2, continuation);
         this.this$0 = seekbarHapticPlugin;

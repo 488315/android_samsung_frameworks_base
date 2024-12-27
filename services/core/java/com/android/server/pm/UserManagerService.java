@@ -346,8 +346,6 @@ public final class UserManagerService extends IUserManager.Stub {
             super(context);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:20:0x0068 A[Catch: all -> 0x003b, TryCatch #2 {all -> 0x003b, Exception -> 0x003e, blocks: (B:6:0x0014, B:8:0x001e, B:10:0x0028, B:12:0x002e, B:14:0x0034, B:17:0x0040, B:18:0x0064, B:20:0x0068, B:22:0x0075, B:23:0x007a, B:25:0x007c, B:27:0x005c, B:29:0x0060, B:35:0x0059, B:37:0x007e), top: B:5:0x0014 }] */
-        /* JADX WARN: Removed duplicated region for block: B:26:0x007c A[SYNTHETIC] */
         @Override // com.android.server.SystemService
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -361,8 +359,6 @@ public final class UserManagerService extends IUserManager.Stub {
             throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.UserManagerService.LifeCycle.onBootPhase(int):void");
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.pm.UserManagerService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? userManagerService = UserManagerService.getInstance();
@@ -522,9 +518,6 @@ public final class UserManagerService extends IUserManager.Stub {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:48:0x0127  */
-        /* JADX WARN: Removed duplicated region for block: B:55:0x0168  */
-        /* JADX WARN: Removed duplicated region for block: B:60:0x0144  */
         @Override // com.android.server.pm.UserManagerInternal
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1335,10 +1328,6 @@ public final class UserManagerService extends IUserManager.Stub {
         this(context, null, null, new Object(), context.getCacheDir(), null, null);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v18, types: [com.android.server.pm.UserManagerService$1] */
-    /* JADX WARN: Type inference failed for: r3v19, types: [com.android.server.pm.UserManagerService$1] */
-    /* JADX WARN: Type inference failed for: r3v23, types: [com.android.server.pm.UserManagerService$1] */
     public UserManagerService(Context context, PackageManagerService packageManagerService, UserDataPreparer userDataPreparer, Object obj, File file, SparseArray sparseArray, PersonaManagerService personaManagerService) {
         String str;
         int i;
@@ -2389,34 +2378,6 @@ public final class UserManagerService extends IUserManager.Stub {
     
         if (com.samsung.android.core.pm.mm.MaintenanceModeUtils.hasSystemFeature() != false) goto L24;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:282:0x0612  */
-    /* JADX WARN: Removed duplicated region for block: B:308:0x03fb  */
-    /* JADX WARN: Removed duplicated region for block: B:320:0x0441 A[Catch: all -> 0x0451, TRY_LEAVE, TryCatch #24 {all -> 0x0451, blocks: (B:162:0x060a, B:311:0x0400, B:313:0x0408, B:315:0x0414, B:326:0x041c, B:320:0x0441, B:317:0x0439, B:329:0x0426, B:224:0x045f, B:225:0x0467, B:229:0x0496, B:231:0x04b8, B:236:0x04c8, B:237:0x04d4, B:239:0x04ff, B:240:0x0501, B:245:0x051f, B:246:0x0521, B:250:0x0528, B:251:0x052c, B:255:0x0531, B:290:0x05e3, B:294:0x05e6, B:298:0x050b, B:299:0x050c, B:301:0x0513, B:253:0x052d, B:254:0x0530, B:248:0x0522, B:249:0x0527, B:242:0x0502, B:243:0x0507), top: B:89:0x018d, inners: #0, #1, #6, #22 }] */
-    /* JADX WARN: Removed duplicated region for block: B:331:0x03e5 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r0v11, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r0v128, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r0v130, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r0v133, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r12v0, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r12v12 */
-    /* JADX WARN: Type inference failed for: r12v13 */
-    /* JADX WARN: Type inference failed for: r12v14, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r12v15 */
-    /* JADX WARN: Type inference failed for: r12v16 */
-    /* JADX WARN: Type inference failed for: r12v17 */
-    /* JADX WARN: Type inference failed for: r12v18 */
-    /* JADX WARN: Type inference failed for: r12v3 */
-    /* JADX WARN: Type inference failed for: r12v4 */
-    /* JADX WARN: Type inference failed for: r13v1, types: [java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r15v0, types: [boolean] */
-    /* JADX WARN: Type inference failed for: r15v11, types: [com.android.server.pm.UserManagerService$UserData, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r15v3 */
-    /* JADX WARN: Type inference failed for: r15v4 */
-    /* JADX WARN: Type inference failed for: r1v2, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r34v0, types: [com.android.server.pm.UserManagerService] */
-    /* JADX WARN: Type inference failed for: r8v13, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r9v26, types: [com.android.server.pm.PackageManagerService] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3674,9 +3635,6 @@ public final class UserManagerService extends IUserManager.Stub {
         return getRemainingCreatableProfileCount(i, str, false);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0040 A[Catch: all -> 0x0035, TryCatch #0 {all -> 0x0035, blocks: (B:8:0x001b, B:10:0x0028, B:13:0x002f, B:14:0x0038, B:16:0x0040, B:18:0x004e, B:26:0x005b, B:32:0x0061, B:34:0x0063, B:37:0x006f, B:38:0x0077, B:40:0x0069), top: B:7:0x001b }] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0061 A[Catch: all -> 0x0035, DONT_GENERATE, TryCatch #0 {all -> 0x0035, blocks: (B:8:0x001b, B:10:0x0028, B:13:0x002f, B:14:0x0038, B:16:0x0040, B:18:0x004e, B:26:0x005b, B:32:0x0061, B:34:0x0063, B:37:0x006f, B:38:0x0077, B:40:0x0069), top: B:7:0x001b }] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0063 A[Catch: all -> 0x0035, TryCatch #0 {all -> 0x0035, blocks: (B:8:0x001b, B:10:0x0028, B:13:0x002f, B:14:0x0038, B:16:0x0040, B:18:0x004e, B:26:0x005b, B:32:0x0061, B:34:0x0063, B:37:0x006f, B:38:0x0077, B:40:0x0069), top: B:7:0x001b }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4192,7 +4150,6 @@ public final class UserManagerService extends IUserManager.Stub {
         return 0;
     }
 
-    /* JADX WARN: Finally extract failed */
     public final int getUserSwitchability(int i) {
         checkManageOrInteractPermissionIfCallerInOtherProfileGroup(i, "getUserSwitchability");
         TimingsTraceAndSlog timingsTraceAndSlog = new TimingsTraceAndSlog();
@@ -4781,7 +4738,6 @@ public final class UserManagerService extends IUserManager.Stub {
         return this.mLocalService.isUserRunning(i);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public boolean isUserSwitcherEnabled(int i) {
         return UserManager.supportsMultipleUsers() && !hasUserRestriction("no_user_switch", i) && !UserManager.isDeviceInDemoMode(this.mContext) && (Settings.Global.getInt(this.mContext.getContentResolver(), "user_switcher_enabled", MultiUserSupportsHelper.IS_TABLET ? 1 : 0) != 0) == true;
     }
@@ -4988,7 +4944,6 @@ public final class UserManagerService extends IUserManager.Stub {
         timingsTraceAndSlog.traceEnd();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         new UserManagerServiceShellCommand(this, this.mSystemPackageInstaller, this.mLockPatternUtils, this.mContext).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
     }
@@ -5140,7 +5095,6 @@ public final class UserManagerService extends IUserManager.Stub {
     
         monitor-exit(r7);
      */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x00bd A[Catch: all -> 0x00ac, TryCatch #5 {all -> 0x00ac, blocks: (B:67:0x0098, B:69:0x00a5, B:72:0x00b5, B:74:0x00bd, B:76:0x00c3, B:78:0x00c7, B:79:0x00d4, B:83:0x00de, B:84:0x00e2, B:87:0x00ae), top: B:66:0x0098 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5807,7 +5761,6 @@ public final class UserManagerService extends IUserManager.Stub {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r8v5, types: [com.android.server.pm.UserManagerService$$ExternalSyntheticLambda3] */
     public void setOrUpdateAutoLockPreferenceForPrivateProfile(int i) {
         if (getPrivateProfileUserId() == -10000) {
             Slog.e("UserManagerService", "Auto-lock preference updated but private space user not found");
@@ -6449,7 +6402,6 @@ public final class UserManagerService extends IUserManager.Stub {
             final Bundle bundle2 = new Bundle(computeEffectiveUserRestrictionsLR);
             final Bundle bundle3 = new Bundle(restrictions);
             this.mHandler.post(new Runnable() { // from class: com.android.server.pm.UserManagerService.4
-                /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                 @Override // java.lang.Runnable
                 public final void run() {
                     int size;

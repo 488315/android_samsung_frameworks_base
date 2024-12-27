@@ -47,7 +47,6 @@ public final class RequestQueue {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.incident.RequestQueue$1] */
     public RequestQueue(Handler handler) {
         this.mHandler = handler;
     }

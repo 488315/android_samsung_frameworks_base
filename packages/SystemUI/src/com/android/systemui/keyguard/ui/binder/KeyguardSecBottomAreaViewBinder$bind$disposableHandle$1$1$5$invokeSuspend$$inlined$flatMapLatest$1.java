@@ -18,7 +18,6 @@ public final class KeyguardSecBottomAreaViewBinder$bind$disposableHandle$1$1$5$i
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardSecBottomAreaViewBinder$bind$disposableHandle$1$1$5$invokeSuspend$$inlined$flatMapLatest$1(Continuation continuation, KeyguardBottomAreaViewModel keyguardBottomAreaViewModel) {
         super(3, continuation);
         this.$viewModel$inlined = keyguardBottomAreaViewModel;

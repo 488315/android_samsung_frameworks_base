@@ -753,7 +753,6 @@ public final class WindowManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class ProposedRotationListenerDelegate extends IRotationWatcher.Stub {
         int mLastRotation;
         private volatile ListenerWrapper[] mListenerArray;
@@ -970,7 +969,6 @@ public final class WindowManagerGlobal {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     final class TrustedPresentationListener extends ITrustedPresentationListener.Stub {
         private static int sId = 0;
         private final ArrayMap<Consumer<Boolean>, Pair<Integer, Executor>> mListeners;
@@ -981,7 +979,6 @@ public final class WindowManagerGlobal {
             this.mTplLock = new Object();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void addListener(
                 IBinder window,
                 TrustedPresentationThresholds thresholds,
@@ -1006,7 +1003,6 @@ public final class WindowManagerGlobal {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void removeListener(Consumer<Boolean> listener) {
             synchronized (this.mTplLock) {
                 Pair<Integer, Executor> removedListener = this.mListeners.remove(listener);
@@ -1049,7 +1045,6 @@ public final class WindowManagerGlobal {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         static /* synthetic */ void lambda$onTrustedPresentationChanged$4(
                 int[] inTrustedStateListenerIds,
                 ArrayList firedListeners,

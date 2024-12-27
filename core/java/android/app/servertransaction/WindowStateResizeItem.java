@@ -18,13 +18,11 @@ public class WindowStateResizeItem extends WindowStateTransactionItem {
     public static final Parcelable.Creator<WindowStateResizeItem> CREATOR =
             new Parcelable.Creator<WindowStateResizeItem>() { // from class:
                 // android.app.servertransaction.WindowStateResizeItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowStateResizeItem createFromParcel(Parcel in) {
                     return new WindowStateResizeItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WindowStateResizeItem[] newArray(int size) {
                     return new WindowStateResizeItem[size];

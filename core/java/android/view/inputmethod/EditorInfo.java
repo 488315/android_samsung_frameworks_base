@@ -28,7 +28,6 @@ public class EditorInfo implements InputType, Parcelable {
     public static final Parcelable.Creator<EditorInfo> CREATOR =
             new Parcelable.Creator<
                     EditorInfo>() { // from class: android.view.inputmethod.EditorInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EditorInfo createFromParcel(Parcel source) {
                     EditorInfo res = new EditorInfo();
@@ -69,7 +68,6 @@ public class EditorInfo implements InputType, Parcelable {
                     return res;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EditorInfo[] newArray(int size) {
                     return new EditorInfo[size];

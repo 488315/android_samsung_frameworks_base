@@ -15,13 +15,11 @@ final class ImageItemImpl extends Item implements IBundleHolder {
     public static final Parcelable.Creator<ImageItemImpl> CREATOR =
             new Parcelable.Creator<
                     ImageItemImpl>() { // from class: com.samsung.android.allshare.ImageItemImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImageItemImpl createFromParcel(Parcel src) {
                     return new ImageItemImpl(src);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImageItemImpl[] newArray(int size) {
                     return new ImageItemImpl[size];

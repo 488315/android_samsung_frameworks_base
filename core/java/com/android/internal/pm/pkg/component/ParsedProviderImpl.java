@@ -22,13 +22,11 @@ public class ParsedProviderImpl extends ParsedMainComponentImpl
             new Parcelable.Creator<
                     ParsedProviderImpl>() { // from class:
                                             // com.android.internal.pm.pkg.component.ParsedProviderImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParsedProviderImpl createFromParcel(Parcel source) {
                     return new ParsedProviderImpl(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParsedProviderImpl[] newArray(int size) {
                     return new ParsedProviderImpl[size];

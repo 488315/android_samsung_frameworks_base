@@ -502,7 +502,6 @@ public final class DumpUtils {
                         || str.startsWith("com.android."));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isSecMediaPackage(ComponentName.WithComponentName withComponentName) {
         return withComponentName != null && isSecMediaPackage(withComponentName.getComponentName());
     }
@@ -520,26 +519,22 @@ public final class DumpUtils {
                         || "com.sec.android.gallery3d".equals(str));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ void lambda$dumpSparseArrayValues$3(
             PrintWriter printWriter, String str, int i, int i2) {
         printWriter.printf("%s%s", str, str);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$filterRecord$0(
             ComponentName.WithComponentName withComponentName) {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$filterRecord$1(
             ComponentName componentName, ComponentName.WithComponentName withComponentName) {
         return withComponentName != null
                 && componentName.equals(withComponentName.getComponentName());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$filterRecord$2(
             int i, String str, ComponentName.WithComponentName withComponentName) {
         return (i != -1 && System.identityHashCode(withComponentName) == i)

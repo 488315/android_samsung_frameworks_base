@@ -8,7 +8,6 @@ public class FilterDelayHint implements Parcelable {
     public static final Parcelable.Creator<FilterDelayHint> CREATOR =
             new Parcelable.Creator<
                     FilterDelayHint>() { // from class: android.hardware.tv.tuner.FilterDelayHint.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FilterDelayHint createFromParcel(Parcel _aidl_source) {
                     FilterDelayHint _aidl_out = new FilterDelayHint();
@@ -16,7 +15,6 @@ public class FilterDelayHint implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FilterDelayHint[] newArray(int _aidl_size) {
                     return new FilterDelayHint[_aidl_size];

@@ -8,7 +8,6 @@ final class TransitionInteractor$maybeHandleInsecurePowerGesture$1 extends Conti
     /* synthetic */ Object result;
     final /* synthetic */ TransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TransitionInteractor$maybeHandleInsecurePowerGesture$1(TransitionInteractor transitionInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = transitionInteractor;

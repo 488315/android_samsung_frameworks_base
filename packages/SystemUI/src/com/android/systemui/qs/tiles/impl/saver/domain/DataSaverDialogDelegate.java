@@ -46,7 +46,6 @@ public final class DataSaverDialogDelegate implements SystemUIDialog.Delegate {
                 int label;
                 final /* synthetic */ DataSaverDialogDelegate this$0;
 
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 public AnonymousClass1(DataSaverDialogDelegate dataSaverDialogDelegate, Continuation continuation) {
                     super(2, continuation);
                     this.this$0 = dataSaverDialogDelegate;

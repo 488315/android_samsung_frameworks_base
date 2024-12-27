@@ -10,7 +10,6 @@ final class TilesAvailabilityInteractor$getUnavailableTiles$1 extends Continuati
     /* synthetic */ Object result;
     final /* synthetic */ TilesAvailabilityInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TilesAvailabilityInteractor$getUnavailableTiles$1(TilesAvailabilityInteractor tilesAvailabilityInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = tilesAvailabilityInteractor;

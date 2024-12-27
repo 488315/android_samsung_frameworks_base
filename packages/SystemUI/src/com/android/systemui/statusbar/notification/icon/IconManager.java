@@ -59,8 +59,6 @@ public final class IconManager implements ConversationIconManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.notification.icon.IconManager$entryListener$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.notification.icon.IconManager$sensitivityListener$1] */
     public IconManager(CommonNotifCollection commonNotifCollection, LauncherApps launcherApps, IconBuilder iconBuilder, CoroutineScope coroutineScope, CoroutineContext coroutineContext, CoroutineContext coroutineContext2) {
         this.notifCollection = commonNotifCollection;
         this.launcherApps = launcherApps;

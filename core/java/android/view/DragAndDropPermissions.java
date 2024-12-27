@@ -12,13 +12,11 @@ public final class DragAndDropPermissions implements Parcelable {
     public static final Parcelable.Creator<DragAndDropPermissions> CREATOR =
             new Parcelable.Creator<
                     DragAndDropPermissions>() { // from class: android.view.DragAndDropPermissions.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DragAndDropPermissions createFromParcel(Parcel source) {
                     return new DragAndDropPermissions(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DragAndDropPermissions[] newArray(int size) {
                     return new DragAndDropPermissions[size];

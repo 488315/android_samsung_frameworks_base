@@ -21,7 +21,6 @@ public final class SceneTransitionLayoutDataSource implements SceneDataSource {
     public final ReadonlyStateFlow currentScene;
     public final MutableSceneTransitionLayoutState state;
 
-    /* JADX WARN: Multi-variable type inference failed */
     public SceneTransitionLayoutDataSource(MutableSceneTransitionLayoutState mutableSceneTransitionLayoutState, CoroutineScope coroutineScope) {
         this.state = mutableSceneTransitionLayoutState;
         this.coroutineScope = coroutineScope;

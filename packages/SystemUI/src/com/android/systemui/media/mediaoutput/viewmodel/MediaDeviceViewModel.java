@@ -249,9 +249,6 @@ public final class MediaDeviceViewModel extends ViewModel implements MediaIntera
         return (MediaDeviceInfo) mediaDeviceViewModel.empty$delegate.getValue();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0028  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

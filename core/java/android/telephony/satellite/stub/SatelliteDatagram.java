@@ -9,7 +9,6 @@ public class SatelliteDatagram implements Parcelable {
             new Parcelable.Creator<
                     SatelliteDatagram>() { // from class:
                                            // android.telephony.satellite.stub.SatelliteDatagram.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteDatagram createFromParcel(Parcel _aidl_source) {
                     SatelliteDatagram _aidl_out = new SatelliteDatagram();
@@ -17,7 +16,6 @@ public class SatelliteDatagram implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SatelliteDatagram[] newArray(int _aidl_size) {
                     return new SatelliteDatagram[_aidl_size];

@@ -200,7 +200,6 @@ public class StateListAnimator implements Cloneable {
             return this.mChangingConf;
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.content.res.ConstantState
         /* renamed from: newInstance */
         public StateListAnimator newInstance2() {

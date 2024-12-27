@@ -17,7 +17,6 @@ final class TileViewModel$state$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ TileViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TileViewModel$state$1(TileViewModel tileViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = tileViewModel;
@@ -51,7 +50,6 @@ final class TileViewModel$state$1 extends SuspendLambda implements Function2 {
             this.this$0.tile.addCallback(callback);
             final TileViewModel tileViewModel = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.panels.ui.viewmodel.TileViewModel$state$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

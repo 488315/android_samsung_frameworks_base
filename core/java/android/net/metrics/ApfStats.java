@@ -9,13 +9,11 @@ import android.os.Parcelable;
 public final class ApfStats implements IpConnectivityLog.Event {
     public static final Parcelable.Creator<ApfStats> CREATOR =
             new Parcelable.Creator<ApfStats>() { // from class: android.net.metrics.ApfStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApfStats createFromParcel(Parcel in) {
                     return new ApfStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ApfStats[] newArray(int size) {
                     return new ApfStats[size];

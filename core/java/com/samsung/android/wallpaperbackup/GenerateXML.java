@@ -61,8 +61,6 @@ public class GenerateXML {
         generate(file, wallpaperUser);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0252 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:75:? A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

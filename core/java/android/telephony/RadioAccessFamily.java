@@ -15,7 +15,6 @@ public class RadioAccessFamily implements Parcelable {
     public static final Parcelable.Creator<RadioAccessFamily> CREATOR =
             new Parcelable.Creator<
                     RadioAccessFamily>() { // from class: android.telephony.RadioAccessFamily.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RadioAccessFamily createFromParcel(Parcel in) {
                     int phoneId = in.readInt();
@@ -23,7 +22,6 @@ public class RadioAccessFamily implements Parcelable {
                     return new RadioAccessFamily(phoneId, radioAccessFamily);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RadioAccessFamily[] newArray(int size) {
                     return new RadioAccessFamily[size];
@@ -180,7 +178,6 @@ public class RadioAccessFamily implements Parcelable {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static int singleRafTypeFromString(String rafString) {
         char c;
         switch (rafString.hashCode()) {

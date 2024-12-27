@@ -75,8 +75,6 @@ public final class Choreographer {
     private static volatile long sFrameDelay = 10;
     private static final ThreadLocal<Choreographer> sThreadInstance =
             new ThreadLocal<Choreographer>() { // from class: android.view.Choreographer.1
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // java.lang.ThreadLocal
                 public Choreographer initialValue() {
                     Looper looper = Looper.myLooper();
@@ -92,8 +90,6 @@ public final class Choreographer {
             };
     private static final ThreadLocal<Choreographer> sSfThreadInstance =
             new ThreadLocal<Choreographer>() { // from class: android.view.Choreographer.2
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // java.lang.ThreadLocal
                 public Choreographer initialValue() {
                     Looper looper = Looper.myLooper();
@@ -521,9 +517,6 @@ public final class Choreographer {
         this.mSyncAndDrawFrameDuration = syncAndDrawFrameDuration;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:47:0x01f0 A[Catch: all -> 0x0222, TryCatch #0 {all -> 0x0222, blocks: (B:74:0x01c9, B:45:0x01d3, B:47:0x01f0, B:48:0x01f3, B:50:0x01f7, B:52:0x01fb, B:53:0x0204), top: B:73:0x01c9 }] */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x021a  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0279  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -658,7 +651,6 @@ public final class Choreographer {
         return Looper.myLooper() == this.mLooper;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public CallbackRecord obtainCallbackLocked(
             long dueTime, Object action, Object token, String log) {
         CallbackRecord callback = this.mCallbackPool;
@@ -675,7 +667,6 @@ public final class Choreographer {
         return callback;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void recycleCallbackLocked(CallbackRecord callback) {
         callback.action = null;
         callback.token = null;

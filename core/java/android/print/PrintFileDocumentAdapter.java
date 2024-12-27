@@ -82,7 +82,6 @@ public class PrintFileDocumentAdapter extends PrintDocumentAdapter {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public Void doInBackground(Void... params) {
             InputStream in;
@@ -113,13 +112,11 @@ public class PrintFileDocumentAdapter extends PrintDocumentAdapter {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onPostExecute(Void result) {
             this.mResultCallback.onWriteFinished(new PageRange[] {PageRange.ALL_PAGES});
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public void onCancelled(Void result) {
             this.mResultCallback.onWriteFailed(

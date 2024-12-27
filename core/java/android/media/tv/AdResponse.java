@@ -9,13 +9,11 @@ import java.lang.annotation.RetentionPolicy;
 public final class AdResponse implements Parcelable {
     public static final Parcelable.Creator<AdResponse> CREATOR =
             new Parcelable.Creator<AdResponse>() { // from class: android.media.tv.AdResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AdResponse createFromParcel(Parcel source) {
                     return new AdResponse(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AdResponse[] newArray(int size) {
                     return new AdResponse[size];

@@ -13,7 +13,6 @@ final class UserRepositoryImpl$_userSwitcherSettings$3 extends SuspendLambda imp
     int label;
     final /* synthetic */ UserRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserRepositoryImpl$_userSwitcherSettings$3(UserRepositoryImpl userRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = userRepositoryImpl;

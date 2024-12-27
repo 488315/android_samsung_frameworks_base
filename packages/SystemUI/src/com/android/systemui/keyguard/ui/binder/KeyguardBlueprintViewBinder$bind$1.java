@@ -35,7 +35,6 @@ final class KeyguardBlueprintViewBinder$bind$1 extends SuspendLambda implements 
         private /* synthetic */ Object L$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(KeyguardBlueprintViewModel keyguardBlueprintViewModel, KeyguardClockViewModel keyguardClockViewModel, KeyguardSmartspaceViewModel keyguardSmartspaceViewModel, ConstraintLayout constraintLayout, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = keyguardBlueprintViewModel;
@@ -75,7 +74,6 @@ final class KeyguardBlueprintViewBinder$bind$1 extends SuspendLambda implements 
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardBlueprintViewBinder$bind$1(KeyguardBlueprintViewModel keyguardBlueprintViewModel, KeyguardClockViewModel keyguardClockViewModel, KeyguardSmartspaceViewModel keyguardSmartspaceViewModel, ConstraintLayout constraintLayout, Continuation continuation) {
         super(3, continuation);
         this.$viewModel = keyguardBlueprintViewModel;

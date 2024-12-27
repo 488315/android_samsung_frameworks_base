@@ -9,13 +9,11 @@ public class SContextFlatMotionForTableMode extends SContextEventContext {
     public static final Parcelable.Creator<SContextFlatMotionForTableMode> CREATOR =
             new Parcelable.Creator<SContextFlatMotionForTableMode>() { // from class:
                 // android.hardware.scontext.SContextFlatMotionForTableMode.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextFlatMotionForTableMode createFromParcel(Parcel in) {
                     return new SContextFlatMotionForTableMode(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextFlatMotionForTableMode[] newArray(int size) {
                     return new SContextFlatMotionForTableMode[size];

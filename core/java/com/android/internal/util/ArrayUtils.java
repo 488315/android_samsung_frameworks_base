@@ -323,7 +323,6 @@ public class ArrayUtils {
         return tArr3;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private static <T> T[] createEmptyArray(Class<T> cls) {
         if (cls == String.class) {
             return (T[]) EmptyArray.STRING;
@@ -544,7 +543,6 @@ public class ArrayUtils {
         return cur;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public static <T> ArraySet<T> addAll(ArraySet<T> cur, Collection<T> collection) {
         if (cur == null) {
             cur = new ArraySet<>();

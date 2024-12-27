@@ -49,13 +49,11 @@ public class CoverState implements Parcelable {
     public static final Parcelable.Creator<CoverState> CREATOR =
             new Parcelable.Creator<
                     CoverState>() { // from class: com.samsung.android.cover.CoverState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CoverState createFromParcel(Parcel parcel) {
                     return new CoverState(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CoverState[] newArray(int size) {
                     return new CoverState[size];

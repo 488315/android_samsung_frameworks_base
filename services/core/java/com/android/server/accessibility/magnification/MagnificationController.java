@@ -308,7 +308,6 @@ public final class MagnificationController
         return this.mTempPoint;
     }
 
-    /* JADX WARN: Type inference failed for: r9v0, types: [com.android.server.accessibility.magnification.MagnificationController$$ExternalSyntheticLambda0] */
     public final FullScreenMagnificationController getFullScreenMagnificationController() {
         synchronized (this.mLock) {
             try {

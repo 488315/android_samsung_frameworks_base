@@ -92,7 +92,6 @@ public abstract class AppFunctionService extends Service {
         };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static CancellationSignal buildCancellationSignal(
             ICancellationCallback cancellationCallback) {
         ICancellationSignal cancellationSignalTransport = CancellationSignal.createTransport();
@@ -111,7 +110,6 @@ public abstract class AppFunctionService extends Service {
         return this.mBinder;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int toErrorCode(Throwable t) {
         if (t instanceof IllegalArgumentException) {
             return 1001;

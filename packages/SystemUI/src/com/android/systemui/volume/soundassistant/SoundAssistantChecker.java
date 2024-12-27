@@ -35,11 +35,6 @@ public final class SoundAssistantChecker {
         this.context = context;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v9, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r4v10, types: [java.util.ArrayList] */
-    /* JADX WARN: Type inference failed for: r4v6, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r4v7, types: [java.lang.Object, java.util.List] */
     public final void updateState(boolean z) {
         Object failure;
         ?? singletonList;

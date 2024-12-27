@@ -17,7 +17,6 @@ final class ScreenBrightnessInteractor$gammaBrightness$1$1 extends SuspendLambda
     int label;
     final /* synthetic */ ScreenBrightnessInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ScreenBrightnessInteractor$gammaBrightness$1$1(ScreenBrightnessInteractor screenBrightnessInteractor, Continuation continuation) {
         super(4, continuation);
         this.this$0 = screenBrightnessInteractor;

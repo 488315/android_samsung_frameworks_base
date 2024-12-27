@@ -18,7 +18,6 @@ public final class DeviceEntrySourceInteractor {
     public final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 deviceEntryFromBiometricSource;
     public final DeviceEntrySourceInteractor$special$$inlined$map$2 deviceEntryFromDeviceEntryIcon;
 
-    /* JADX WARN: Type inference failed for: r4v3, types: [com.android.systemui.deviceentry.domain.interactor.DeviceEntrySourceInteractor$special$$inlined$map$2] */
     public DeviceEntrySourceInteractor(KeyguardInteractor keyguardInteractor) {
         final StateFlow stateFlow = keyguardInteractor.biometricUnlockState;
         final Flow flow = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.DeviceEntrySourceInteractor$special$$inlined$filter$1
@@ -50,8 +49,6 @@ public final class DeviceEntrySourceInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -145,8 +142,6 @@ public final class DeviceEntrySourceInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -238,8 +233,6 @@ public final class DeviceEntrySourceInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
@@ -329,8 +322,6 @@ public final class DeviceEntrySourceInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

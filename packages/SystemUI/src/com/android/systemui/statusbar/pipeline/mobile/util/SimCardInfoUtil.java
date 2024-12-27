@@ -41,7 +41,6 @@ public final class SimCardInfoUtil {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x005e, code lost:
     
         if (r1.equals("311270") == false) goto L69;
@@ -86,7 +85,6 @@ public final class SimCardInfoUtil {
     
         if ("BAE0000000000000".equals(r5) == false) goto L68;
      */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

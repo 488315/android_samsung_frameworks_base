@@ -16,7 +16,6 @@ final class SearcleManager$invokeSearcle$3 extends SuspendLambda implements Func
     int label;
     final /* synthetic */ SearcleManager this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SearcleManager$invokeSearcle$3(SearcleManager searcleManager, Continuation continuation) {
         super(2, continuation);
         this.this$0 = searcleManager;

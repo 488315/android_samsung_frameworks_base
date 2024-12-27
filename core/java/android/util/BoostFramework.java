@@ -652,7 +652,6 @@ public class BoostFramework {
         private static Method sGetFrameDelay = null;
         private static Method sGetAdjustedAnimationClock = null;
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static void initQXPerfFuncs() {
             if (sQXIsLoaded) {
                 return;

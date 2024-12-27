@@ -15,7 +15,6 @@ public final class TimeZoneProviderEvent implements Parcelable {
             new Parcelable.Creator<
                     TimeZoneProviderEvent>() { // from class:
                                                // android.service.timezone.TimeZoneProviderEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneProviderEvent createFromParcel(Parcel in) {
                     int type = in.readInt();
@@ -35,7 +34,6 @@ public final class TimeZoneProviderEvent implements Parcelable {
                             type, creationElapsedMillis, suggestion, failureCause, status);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TimeZoneProviderEvent[] newArray(int size) {
                     return new TimeZoneProviderEvent[size];

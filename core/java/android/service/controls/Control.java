@@ -17,13 +17,11 @@ import java.lang.annotation.RetentionPolicy;
 public final class Control implements Parcelable {
     public static final Parcelable.Creator<Control> CREATOR =
             new Parcelable.Creator<Control>() { // from class: android.service.controls.Control.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Control createFromParcel(Parcel source) {
                     return new Control(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public Control[] newArray(int size) {
                     return new Control[size];

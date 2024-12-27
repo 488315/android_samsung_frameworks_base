@@ -13,7 +13,6 @@ final class MediaSessionViewModel$packageName$2 extends SuspendLambda implements
     int label;
     final /* synthetic */ MediaSessionViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaSessionViewModel$packageName$2(MediaSessionViewModel mediaSessionViewModel, Continuation continuation) {
         super(2, continuation);
         this.this$0 = mediaSessionViewModel;

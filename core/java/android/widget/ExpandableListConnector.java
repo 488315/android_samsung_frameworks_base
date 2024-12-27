@@ -263,7 +263,6 @@ class ExpandableListConnector extends BaseAdapter implements Filterable {
         return this.mExpandableListAdapter.hasStableIds();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void refreshExpGroupMetadataList(
             boolean forceChildrenCountRefresh, boolean syncGroupPositions) {
         int gChildrenCount;
@@ -480,7 +479,6 @@ class ExpandableListConnector extends BaseAdapter implements Filterable {
                 new Parcelable.Creator<
                         GroupMetadata>() { // from class:
                                            // android.widget.ExpandableListConnector.GroupMetadata.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GroupMetadata createFromParcel(Parcel in) {
                         GroupMetadata gm =
@@ -489,7 +487,6 @@ class ExpandableListConnector extends BaseAdapter implements Filterable {
                         return gm;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public GroupMetadata[] newArray(int size) {
                         return new GroupMetadata[size];

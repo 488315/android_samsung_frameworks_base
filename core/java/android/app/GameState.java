@@ -9,13 +9,11 @@ import java.lang.annotation.RetentionPolicy;
 public final class GameState implements Parcelable {
     public static final Parcelable.Creator<GameState> CREATOR =
             new Parcelable.Creator<GameState>() { // from class: android.app.GameState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GameState createFromParcel(Parcel in) {
                     return new GameState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GameState[] newArray(int size) {
                     return new GameState[size];

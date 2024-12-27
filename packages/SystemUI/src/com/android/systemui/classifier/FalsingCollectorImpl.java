@@ -130,10 +130,6 @@ public final class FalsingCollectorImpl implements FalsingCollector {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.classifier.FalsingCollectorImpl$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.classifier.FalsingCollectorImpl$1] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.classifier.FalsingCollectorImpl$2] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.classifier.FalsingCollectorImpl$4] */
     public FalsingCollectorImpl(FalsingDataProvider falsingDataProvider, FalsingManager falsingManager, KeyguardUpdateMonitor keyguardUpdateMonitor, HistoryTracker historyTracker, ProximitySensor proximitySensor, StatusBarStateController statusBarStateController, KeyguardStateController keyguardStateController, Lazy lazy, BatteryController batteryController, DockManager dockManager, DelayableExecutor delayableExecutor, JavaAdapter javaAdapter, SystemClock systemClock, Lazy lazy2, Lazy lazy3, Lazy lazy4, Lazy lazy5) {
         new DockManager.DockEventListener(this) { // from class: com.android.systemui.classifier.FalsingCollectorImpl.5
         };

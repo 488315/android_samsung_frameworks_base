@@ -327,7 +327,6 @@ public final class ProxyLocationProvider extends AbstractLocationProvider
         this.mServiceWatcher.unregister();
     }
 
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.location.provider.proxy.ProxyLocationProvider$1] */
     @Override // com.android.server.servicewatcher.ServiceWatcher$ServiceListener
     public final void onUnbind() {
         int i;

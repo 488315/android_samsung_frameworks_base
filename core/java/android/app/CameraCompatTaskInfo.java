@@ -13,13 +13,11 @@ public class CameraCompatTaskInfo implements Parcelable {
     public static final Parcelable.Creator<CameraCompatTaskInfo> CREATOR =
             new Parcelable.Creator<
                     CameraCompatTaskInfo>() { // from class: android.app.CameraCompatTaskInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraCompatTaskInfo createFromParcel(Parcel in) {
                     return new CameraCompatTaskInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CameraCompatTaskInfo[] newArray(int size) {
                     return new CameraCompatTaskInfo[size];

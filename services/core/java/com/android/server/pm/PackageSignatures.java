@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public final class PackageSignatures {
     public SigningDetails mSigningDetails = SigningDetails.UNKNOWN;
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0100  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -952,9 +952,6 @@ public final class PermissionService implements PermissionManagerServiceInterfac
         return appId == 0 || appId == 1000;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00e6  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00f0 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x00e8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -993,11 +990,6 @@ public final class PermissionService implements PermissionManagerServiceInterfac
         return arrayList;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v3 */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:27:0x0052 -> B:31:0x0069). Please report as a decompilation issue!!! */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:30:0x0049 -> B:31:0x0069). Please report as a decompilation issue!!! */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:36:0x0057 -> B:31:0x0069). Please report as a decompilation issue!!! */
     public static void updateAdminPermissionsInternal(String str) {
         String str2;
         IEnterpriseLicense asInterface;
@@ -2752,8 +2744,6 @@ public final class PermissionService implements PermissionManagerServiceInterfac
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x0047 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0048  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2872,7 +2862,6 @@ public final class PermissionService implements PermissionManagerServiceInterfac
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x009a A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // com.android.server.pm.permission.PermissionManagerServiceInterface
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -3511,9 +3500,6 @@ public final class PermissionService implements PermissionManagerServiceInterfac
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:184:0x0367  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x018c  */
     @Override // com.android.server.pm.permission.PermissionManagerServiceInterface
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -3677,7 +3663,6 @@ public final class PermissionService implements PermissionManagerServiceInterfac
         return arrayList2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00db A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // com.android.server.pm.permission.PermissionManagerServiceInterface
     /*
         Code decompiled incorrectly, please refer to instructions dump.

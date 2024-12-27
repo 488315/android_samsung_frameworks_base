@@ -41,8 +41,6 @@ public final class SoundTriggerMiddlewareValidation
         public Activity activityState = Activity.LOADED;
         public final Map parameterSupport = new HashMap();
 
-        /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-        /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
         final class Activity {
             public static final /* synthetic */ Activity[] $VALUES;
             public static final Activity ACTIVE;
@@ -107,8 +105,6 @@ public final class SoundTriggerMiddlewareValidation
         public Set sessions;
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class ModuleStatus {
         public static final /* synthetic */ ModuleStatus[] $VALUES;
         public static final ModuleStatus ALIVE;

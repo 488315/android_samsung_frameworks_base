@@ -229,8 +229,6 @@ public final class TelephonySubscriptionTracker extends BroadcastReceiver {
 
     public interface TelephonySubscriptionTrackerCallback {}
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.vcn.TelephonySubscriptionTracker$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.server.vcn.TelephonySubscriptionTracker$1] */
     public TelephonySubscriptionTracker(
             Context context,
             Handler handler,

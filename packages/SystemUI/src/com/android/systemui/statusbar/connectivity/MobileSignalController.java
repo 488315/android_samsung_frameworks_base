@@ -131,7 +131,6 @@ public final class MobileSignalController extends SignalController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v10, types: [com.android.systemui.statusbar.connectivity.MobileSignalController$2] */
     public MobileSignalController(Context context, MobileMappings.Config config, boolean z, TelephonyManager telephonyManager, CallbackHandler callbackHandler, NetworkControllerImpl networkControllerImpl, MobileMappingsProxy mobileMappingsProxy, SubscriptionInfo subscriptionInfo, MobileStatusTracker.SubscriptionDefaults subscriptionDefaults, Looper looper, CarrierConfigTracker carrierConfigTracker, MobileStatusTrackerFactory mobileStatusTrackerFactory) {
         super("MobileSignalController(" + subscriptionInfo.getSubscriptionId() + ")", context, 0, callbackHandler, networkControllerImpl);
         this.mInflateSignalStrengths = false;
@@ -317,9 +316,6 @@ public final class MobileSignalController extends SignalController {
         notifyListenersIfNecessary();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x00c4  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x00c9  */
     @Override // com.android.systemui.statusbar.connectivity.SignalController
     /*
         Code decompiled incorrectly, please refer to instructions dump.

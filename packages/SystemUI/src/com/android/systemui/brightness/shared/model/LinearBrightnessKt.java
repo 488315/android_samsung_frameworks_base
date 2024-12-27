@@ -18,7 +18,6 @@ public abstract class LinearBrightnessKt {
         final String str2 = "linear";
         final LinearBrightness linearBrightness = null;
         return FlowKt.pairwiseBy(flow, (Function1) new LinearBrightnessKt$logDiffForTable$1(new Function0() { // from class: com.android.systemui.brightness.shared.model.LinearBrightnessKt$logDiffForTable$initialValueFun$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

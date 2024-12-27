@@ -797,8 +797,6 @@ public class FingerprintEnrollActivity extends Activity implements View.OnClickL
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public static final class EnrollState {
         public static final /* synthetic */ EnrollState[] $VALUES;
         public static final EnrollState ENROLL;
@@ -972,9 +970,6 @@ public class FingerprintEnrollActivity extends Activity implements View.OnClickL
         TIME_ENROLL_DELAY = i;
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.android.biometrics.app.setting.fingerprint.enroll.FingerprintEnrollActivity$1] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.samsung.android.biometrics.app.setting.fingerprint.enroll.FingerprintEnrollActivity$4] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.samsung.android.biometrics.app.setting.fingerprint.enroll.FingerprintEnrollActivity$21] */
     public FingerprintEnrollActivity() {
         new AnonymousClass15();
         this.mTouchGuideViewListener = new View.OnTouchListener() { // from class: com.samsung.android.biometrics.app.setting.fingerprint.enroll.FingerprintEnrollActivity.21
@@ -1974,8 +1969,6 @@ public class FingerprintEnrollActivity extends Activity implements View.OnClickL
         bundle.putLong("gk_pw_handle", this.mGkPwHandle);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0046 A[Catch: IOException -> 0x00a0, IllegalStateException -> 0x00a9, SecurityException -> 0x00b2, IllegalArgumentException -> 0x00bb, TryCatch #2 {IOException -> 0x00a0, IllegalArgumentException -> 0x00bb, IllegalStateException -> 0x00a9, SecurityException -> 0x00b2, blocks: (B:3:0x0009, B:5:0x000f, B:8:0x0046, B:10:0x004a, B:11:0x0068, B:13:0x007b, B:14:0x008b, B:18:0x0086, B:19:0x0064, B:21:0x0017, B:23:0x001b, B:26:0x0020, B:28:0x0024, B:30:0x002c, B:32:0x0030, B:34:0x0039), top: B:2:0x0009 }] */
     @Override // android.view.TextureView.SurfaceTextureListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2241,8 +2234,6 @@ public class FingerprintEnrollActivity extends Activity implements View.OnClickL
         runTextToSpeech(1, getString(R.string.fingerprint_tts_register_add_another_fingerprint));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00af  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00cc  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2264,8 +2255,6 @@ public class FingerprintEnrollActivity extends Activity implements View.OnClickL
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.samsung.android.biometrics.app.setting.fingerprint.enroll.FingerprintEnrollActivity$11, java.lang.Runnable] */
     public final void showErrorMessage(int i, final String str) {
         int intDb;
         if (this.mIsTalkbackEnabled && this.mIsTouchedOutside) {

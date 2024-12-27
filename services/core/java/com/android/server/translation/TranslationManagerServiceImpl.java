@@ -456,16 +456,6 @@ public final class TranslationManagerServiceImpl extends AbstractPerUserSystemSe
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00ca  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00e8  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0148  */
-    /* JADX WARN: Removed duplicated region for block: B:32:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0105  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00da  */
-    /* JADX WARN: Type inference failed for: r0v14 */
-    /* JADX WARN: Type inference failed for: r0v15, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r0v23 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -105,7 +105,6 @@ public final class ContextHubClientBroker extends IContextHubClient.Stub
         public boolean mValid;
     }
 
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.server.location.contexthub.ContextHubClientBroker$1] */
     public ContextHubClientBroker(
             Context context,
             IContextHubWrapper iContextHubWrapper,
@@ -470,8 +469,6 @@ public final class ContextHubClientBroker extends IContextHubClient.Stub
 
        if (r17.isReliable() != false) goto L34;
     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.location.contexthub.ContextHubClientBroker$$ExternalSyntheticLambda7] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -700,9 +697,6 @@ public final class ContextHubClientBroker extends IContextHubClient.Stub
 
        if (r2 == 1) goto L22;
     */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0087 A[Catch: all -> 0x0051, TryCatch #2 {all -> 0x0051, blocks: (B:4:0x0005, B:5:0x0009, B:7:0x0011, B:11:0x0026, B:13:0x0040, B:15:0x0056, B:22:0x0087, B:24:0x0097, B:27:0x009f, B:31:0x00a2, B:32:0x00a3, B:35:0x00d6, B:36:0x00e5, B:50:0x00a6, B:51:0x00ba, B:54:0x00cf, B:58:0x00d2, B:59:0x00d3, B:67:0x0079, B:53:0x00bb, B:26:0x0098), top: B:3:0x0005, inners: #0, #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00d6 A[Catch: all -> 0x0051, TryCatch #2 {all -> 0x0051, blocks: (B:4:0x0005, B:5:0x0009, B:7:0x0011, B:11:0x0026, B:13:0x0040, B:15:0x0056, B:22:0x0087, B:24:0x0097, B:27:0x009f, B:31:0x00a2, B:32:0x00a3, B:35:0x00d6, B:36:0x00e5, B:50:0x00a6, B:51:0x00ba, B:54:0x00cf, B:58:0x00d2, B:59:0x00d3, B:67:0x0079, B:53:0x00bb, B:26:0x0098), top: B:3:0x0005, inners: #0, #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00a4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

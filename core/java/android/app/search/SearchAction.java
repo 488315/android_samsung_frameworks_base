@@ -17,13 +17,11 @@ public final class SearchAction implements Parcelable {
     public static final Parcelable.Creator<SearchAction> CREATOR =
             new Parcelable.Creator<
                     SearchAction>() { // from class: android.app.search.SearchAction.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SearchAction createFromParcel(Parcel in) {
                     return new SearchAction(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SearchAction[] newArray(int size) {
                     return new SearchAction[size];

@@ -85,12 +85,10 @@ public class MemoryMonitor implements Dumpable {
         handler.postDelayed(new MemoryMonitor$$ExternalSyntheticLambda0(this, 1), 3600000L);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0() {
         lambda$printMemoryInfo$3(true, 3600000);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$printMemoryInfo$1() {
         String str = TAG;
         Slog.d(str, "check again after GC");
@@ -103,12 +101,10 @@ public class MemoryMonitor implements Dumpable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$printMemoryInfo$2() {
         new Thread(new MemoryMonitor$$ExternalSyntheticLambda0(this, 0), "printMemoryInfo").start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startMonitoring$4(boolean z) {
         printMemoryInfo(z);
         this.mIsInCalcMemInfo = false;
@@ -116,12 +112,10 @@ public class MemoryMonitor implements Dumpable {
         this.mLastMemoryInfoCalcTime = Long.valueOf(SystemClock.elapsedRealtime());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startMonitoring$5(boolean z) {
         new Thread(new MemoryMonitor$$ExternalSyntheticLambda2(this, z, 0), TAG).start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void printMemoryInfo(final boolean z) {
         String str = TAG;
         Slog.d(str, " - Memory Information -");
@@ -161,7 +155,6 @@ public class MemoryMonitor implements Dumpable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: startMonitoring, reason: merged with bridge method [inline-methods] */
     public void lambda$printMemoryInfo$3(boolean z, int i) {
         if (this.mIsInCalcMemInfo) {
@@ -174,7 +167,6 @@ public class MemoryMonitor implements Dumpable {
         this.mMainHandler.postDelayed(new MemoryMonitor$$ExternalSyntheticLambda2(this, z, 1), MEMINFO_PRINT_DELAY);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void takeNotificationCount() {
         this.mCurrentNotiCount = ((NotifPipeline) this.mNotifCollection).getAllNotifs().size();
     }

@@ -12,13 +12,11 @@ public final class PolicyState<V> implements Parcelable {
     public static final Parcelable.Creator<PolicyState<?>> CREATOR =
             new Parcelable.Creator<
                     PolicyState<?>>() { // from class: android.app.admin.PolicyState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PolicyState<?> createFromParcel(Parcel source) {
                     return new PolicyState<>(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PolicyState<?>[] newArray(int size) {
                     return new PolicyState[size];

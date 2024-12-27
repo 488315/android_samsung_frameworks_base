@@ -75,10 +75,6 @@ public final class DndTile extends SQSTileImpl {
         mZenOneHourSession = 60;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v2, types: [android.database.ContentObserver, com.android.systemui.qs.tiles.DndTile$2] */
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.qs.tiles.DndTile$3] */
-    /* JADX WARN: Type inference failed for: r4v4, types: [com.android.systemui.qs.tiles.DndTile$1] */
     public DndTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, ZenModeController zenModeController, SharedPreferences sharedPreferences, SecureSettings secureSettings, DialogTransitionAnimator dialogTransitionAnimator, PanelInteractor panelInteractor, GlobalSettings globalSettings) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mDndMenuSelectedItem = 0;

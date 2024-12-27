@@ -100,13 +100,11 @@ public class IQIManager {
             this.reference = new WeakReference(iQIManager);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static /* synthetic */ void lambda$handleMessage$0(
                 MetricQueryCallback metricQueryCallback, int i, ByteBuffer byteBuffer) {
             metricQueryCallback.onMetricQueried(new Metric.ID(i), byteBuffer);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public static /* synthetic */ void lambda$handleMessage$1(
                 MetricSourcingListener metricSourcingListener, int i, ByteBuffer byteBuffer) {
             metricSourcingListener.onMetricSourcing(new Metric.ID(i), byteBuffer);

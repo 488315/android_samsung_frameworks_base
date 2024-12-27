@@ -29,8 +29,6 @@ public final class SmartMirroringClient {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class REASON {
         public static final /* synthetic */ EnumEntries $ENTRIES;
         public static final /* synthetic */ REASON[] $VALUES;
@@ -62,8 +60,6 @@ public final class SmartMirroringClient {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class RESULT {
         public static final /* synthetic */ EnumEntries $ENTRIES;
         public static final /* synthetic */ RESULT[] $VALUES;

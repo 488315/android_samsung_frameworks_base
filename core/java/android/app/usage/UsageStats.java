@@ -11,7 +11,6 @@ import android.util.SparseIntArray;
 public final class UsageStats implements Parcelable {
     public static final Parcelable.Creator<UsageStats> CREATOR =
             new Parcelable.Creator<UsageStats>() { // from class: android.app.usage.UsageStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsageStats createFromParcel(Parcel in) {
                     UsageStats stats = new UsageStats();
@@ -73,7 +72,6 @@ public final class UsageStats implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsageStats[] newArray(int size) {
                     return new UsageStats[size];

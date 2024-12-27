@@ -15,7 +15,6 @@ final /* synthetic */ class PeopleViewModelKt$PeopleViewModel$1 extends Function
     final /* synthetic */ MutableStateFlow $recentTiles;
     final /* synthetic */ PeopleTileRepository $tileRepository;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PeopleViewModelKt$PeopleViewModel$1(MutableStateFlow mutableStateFlow, MutableStateFlow mutableStateFlow2, PeopleTileRepository peopleTileRepository, Context context) {
         super(0, Intrinsics.Kotlin.class, "onTileRefreshRequested", "PeopleViewModel$onTileRefreshRequested(Lkotlinx/coroutines/flow/MutableStateFlow;Lkotlinx/coroutines/flow/MutableStateFlow;Lcom/android/systemui/people/data/repository/PeopleTileRepository;Landroid/content/Context;)V", 0);
         this.$priorityTiles = mutableStateFlow;

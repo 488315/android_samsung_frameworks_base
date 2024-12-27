@@ -17,13 +17,11 @@ public final class EuiccRulesAuthTable implements Parcelable {
             new Parcelable.Creator<
                     EuiccRulesAuthTable>() { // from class:
                                              // android.telephony.euicc.EuiccRulesAuthTable.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EuiccRulesAuthTable createFromParcel(Parcel source) {
                     return new EuiccRulesAuthTable(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public EuiccRulesAuthTable[] newArray(int size) {
                     return new EuiccRulesAuthTable[size];

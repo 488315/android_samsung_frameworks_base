@@ -169,7 +169,6 @@ public final class LocationAccessPolicy {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static String getAppOpsString(String manifestPermission) {
         char c;
         switch (manifestPermission.hashCode()) {

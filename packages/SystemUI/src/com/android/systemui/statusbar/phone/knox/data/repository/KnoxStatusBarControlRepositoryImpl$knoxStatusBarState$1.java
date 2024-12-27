@@ -23,7 +23,6 @@ final class KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1 extends Susp
     int label;
     final /* synthetic */ KnoxStatusBarControlRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1(KnoxStatusBarControlRepositoryImpl knoxStatusBarControlRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = knoxStatusBarControlRepositoryImpl;
@@ -41,8 +40,6 @@ final class KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1 extends Susp
         return ((KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.knox.KnoxStateMonitorCallback, com.android.systemui.statusbar.phone.knox.data.repository.KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -102,7 +99,6 @@ final class KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1 extends Susp
             ((ChannelCoroutine) producerScope).mo2552trySendJP2dKIU(KnoxStatusBarControlModel.copy$default(knoxStatusBarControlModel, ((KnoxStateMonitorImpl) knoxStateMonitor).isStatusBarHidden(), customSdkMonitor != null && customSdkMonitor.mStatusBarIconsState, null, 0, 0, 0, 60));
             final KnoxStatusBarControlRepositoryImpl knoxStatusBarControlRepositoryImpl3 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.phone.knox.data.repository.KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

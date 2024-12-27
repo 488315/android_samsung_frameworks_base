@@ -13,7 +13,6 @@ final class KeyguardQuickAffordanceInteractor$getPickerFlags$1 extends Continuat
     /* synthetic */ Object result;
     final /* synthetic */ KeyguardQuickAffordanceInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardQuickAffordanceInteractor$getPickerFlags$1(KeyguardQuickAffordanceInteractor keyguardQuickAffordanceInteractor, Continuation continuation) {
         super(continuation);
         this.this$0 = keyguardQuickAffordanceInteractor;

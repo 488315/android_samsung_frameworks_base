@@ -183,7 +183,6 @@ public final class SmsApplication {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int getIncomingUserId() {
         int contextUserId = UserHandle.myUserId();
         int callingUid = Binder.getCallingUid();
@@ -449,7 +448,6 @@ public final class SmsApplication {
         return applicationData;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String getDefaultSmsPackage(Context context, int userId) {
         RoleManager roleManager = (RoleManager) context.getSystemService(RoleManager.class);
         if (roleManager == null) {
@@ -658,7 +656,6 @@ public final class SmsApplication {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void broadcastSmsAppChange(
             Context context, UserHandle userHandle, String oldPackage, String newPackage) {
         Collection<SmsApplicationData> apps = getApplicationCollection(context);
@@ -844,7 +841,6 @@ public final class SmsApplication {
         sSmsRoleListener = new SmsRoleListener(context);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void configurePreferredActivity(
             PackageManager packageManager, ComponentName componentName) {
         replacePreferredActivity(packageManager, componentName, "sms");
@@ -1543,7 +1539,6 @@ public final class SmsApplication {
                     SmsApplication.sDMACdata);
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:34:0x0050, code lost:
 
            if (r0.equals("DCM") != false) goto L22;
@@ -1713,7 +1708,6 @@ public final class SmsApplication {
             return false;
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:64:0x02c8, code lost:
 
            if (r5.equals("111111") != false) goto L99;

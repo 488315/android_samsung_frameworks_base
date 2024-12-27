@@ -9,14 +9,12 @@ public final class TableResponse extends BroadcastInfoResponse implements Parcel
     public static final Parcelable.Creator<TableResponse> CREATOR =
             new Parcelable.Creator<
                     TableResponse>() { // from class: android.media.tv.TableResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TableResponse createFromParcel(Parcel source) {
                     source.readInt();
                     return TableResponse.createFromParcelBody(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TableResponse[] newArray(int size) {
                     return new TableResponse[size];

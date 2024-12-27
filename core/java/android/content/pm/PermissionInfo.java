@@ -91,13 +91,11 @@ public class PermissionInfo extends PackageItemInfo implements Parcelable {
     public static final Parcelable.Creator<PermissionInfo> CREATOR =
             new Parcelable.Creator<
                     PermissionInfo>() { // from class: android.content.pm.PermissionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PermissionInfo createFromParcel(Parcel source) {
                     return new PermissionInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PermissionInfo[] newArray(int size) {
                     return new PermissionInfo[size];
@@ -254,7 +252,6 @@ public class PermissionInfo extends PackageItemInfo implements Parcelable {
         this.backgroundPermission = backgroundPermission;
     }
 
-    /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     @Deprecated
     public PermissionInfo() {
         this((String) null);

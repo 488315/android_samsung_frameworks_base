@@ -162,7 +162,6 @@ public class AnimationHandler {
         this.mPausedAnimators.clear();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(long frameTimeNanos) {
         if (this.mAnimatorRequestors.size() > 0) {
             return;
@@ -187,7 +186,6 @@ public class AnimationHandler {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public AnimationFrameCallbackProvider getProvider() {
         if (this.mProvider == null) {
             this.mProvider = new MyFrameCallbackProvider();
@@ -224,7 +222,6 @@ public class AnimationHandler {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void doAnimationFrame(long frameTime) {
         long currentTime = SystemClock.uptimeMillis();
         int size = this.mAnimationCallbacks.size();
@@ -252,7 +249,6 @@ public class AnimationHandler {
         cleanUpList();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void commitAnimationFrame(AnimationFrameCallback callback, long frameTime) {
         if (!this.mDelayedCallbackStartTime.containsKey(callback)
                 && this.mCommitCallbacks.contains(callback)) {

@@ -15,7 +15,6 @@ public abstract class FocusableWindow extends SysUiWindow
     BroadcastReceiver mCloseSystemDialogBR;
     public final FocusableWindow$$ExternalSyntheticLambda1 mRunnableHandleWindowFocus;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.samsung.android.biometrics.app.setting.FocusableWindow$$ExternalSyntheticLambda1] */
     public FocusableWindow(Context context) {
         super(context);
         this.mRunnableHandleWindowFocus =

@@ -452,8 +452,6 @@ public class Vpn {
         public NetworkCapabilities mUnderlyingNetworkCapabilities;
         int mValidationFailRetryCount;
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r3v0, types: [android.telephony.CarrierConfigManager$CarrierConfigChangeListener, com.android.server.connectivity.Vpn$IkeV2VpnRunner$1] */
         public IkeV2VpnRunner(Ikev2VpnProfile ikev2VpnProfile, ScheduledThreadPoolExecutor scheduledThreadPoolExecutor) {
             super("IkeV2VpnRunner");
             this.mIsRunning = true;
@@ -556,8 +554,6 @@ public class Vpn {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:6:0x0022  */
-        /* JADX WARN: Removed duplicated region for block: B:9:0x002a  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1211,8 +1207,6 @@ public class Vpn {
         public final LocalSocket mSockets;
         public final AnonymousClass2 mTetheringChangedReceiver;
 
-        /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.connectivity.Vpn$LegacyVpnRunner$2] */
-        /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.connectivity.Vpn$LegacyVpnRunner$2] */
         public LegacyVpnRunner(VpnConfig vpnConfig, String[] strArr, VpnProfile vpnProfile) {
             super("LegacyVpnRunner");
             NetworkInfo networkInfo;
@@ -1592,14 +1586,6 @@ public class Vpn {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:45:0x021d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:52:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:60:0x0184 A[Catch: all -> 0x004f, TryCatch #7 {all -> 0x004f, blocks: (B:4:0x000d, B:13:0x0043, B:15:0x0049, B:17:0x0054, B:18:0x0063, B:20:0x0067, B:21:0x006b, B:23:0x0071, B:25:0x0097, B:26:0x0099, B:28:0x00bc, B:31:0x00c2, B:34:0x00cb, B:40:0x00d0, B:41:0x00da, B:42:0x0213, B:43:0x021a, B:91:0x00e7, B:93:0x00ed, B:95:0x00f5, B:96:0x0104, B:98:0x0108, B:99:0x010c, B:101:0x0112, B:103:0x0137, B:104:0x0139, B:106:0x015c, B:109:0x0162, B:112:0x016b, B:118:0x0170, B:119:0x017d, B:58:0x017e, B:60:0x0184, B:62:0x018c, B:63:0x019b, B:65:0x019f, B:66:0x01a3, B:68:0x01a9, B:70:0x01ce, B:71:0x01d0, B:73:0x01f3, B:76:0x01f9, B:79:0x0202, B:85:0x0207), top: B:3:0x000d }] */
-        /* JADX WARN: Removed duplicated region for block: B:62:0x018c A[Catch: all -> 0x004f, TryCatch #7 {all -> 0x004f, blocks: (B:4:0x000d, B:13:0x0043, B:15:0x0049, B:17:0x0054, B:18:0x0063, B:20:0x0067, B:21:0x006b, B:23:0x0071, B:25:0x0097, B:26:0x0099, B:28:0x00bc, B:31:0x00c2, B:34:0x00cb, B:40:0x00d0, B:41:0x00da, B:42:0x0213, B:43:0x021a, B:91:0x00e7, B:93:0x00ed, B:95:0x00f5, B:96:0x0104, B:98:0x0108, B:99:0x010c, B:101:0x0112, B:103:0x0137, B:104:0x0139, B:106:0x015c, B:109:0x0162, B:112:0x016b, B:118:0x0170, B:119:0x017d, B:58:0x017e, B:60:0x0184, B:62:0x018c, B:63:0x019b, B:65:0x019f, B:66:0x01a3, B:68:0x01a9, B:70:0x01ce, B:71:0x01d0, B:73:0x01f3, B:76:0x01f9, B:79:0x0202, B:85:0x0207), top: B:3:0x000d }] */
-        /* JADX WARN: Removed duplicated region for block: B:65:0x019f A[Catch: all -> 0x004f, TryCatch #7 {all -> 0x004f, blocks: (B:4:0x000d, B:13:0x0043, B:15:0x0049, B:17:0x0054, B:18:0x0063, B:20:0x0067, B:21:0x006b, B:23:0x0071, B:25:0x0097, B:26:0x0099, B:28:0x00bc, B:31:0x00c2, B:34:0x00cb, B:40:0x00d0, B:41:0x00da, B:42:0x0213, B:43:0x021a, B:91:0x00e7, B:93:0x00ed, B:95:0x00f5, B:96:0x0104, B:98:0x0108, B:99:0x010c, B:101:0x0112, B:103:0x0137, B:104:0x0139, B:106:0x015c, B:109:0x0162, B:112:0x016b, B:118:0x0170, B:119:0x017d, B:58:0x017e, B:60:0x0184, B:62:0x018c, B:63:0x019b, B:65:0x019f, B:66:0x01a3, B:68:0x01a9, B:70:0x01ce, B:71:0x01d0, B:73:0x01f3, B:76:0x01f9, B:79:0x0202, B:85:0x0207), top: B:3:0x000d }] */
-        /* JADX WARN: Removed duplicated region for block: B:93:0x00ed A[Catch: all -> 0x004f, TryCatch #7 {all -> 0x004f, blocks: (B:4:0x000d, B:13:0x0043, B:15:0x0049, B:17:0x0054, B:18:0x0063, B:20:0x0067, B:21:0x006b, B:23:0x0071, B:25:0x0097, B:26:0x0099, B:28:0x00bc, B:31:0x00c2, B:34:0x00cb, B:40:0x00d0, B:41:0x00da, B:42:0x0213, B:43:0x021a, B:91:0x00e7, B:93:0x00ed, B:95:0x00f5, B:96:0x0104, B:98:0x0108, B:99:0x010c, B:101:0x0112, B:103:0x0137, B:104:0x0139, B:106:0x015c, B:109:0x0162, B:112:0x016b, B:118:0x0170, B:119:0x017d, B:58:0x017e, B:60:0x0184, B:62:0x018c, B:63:0x019b, B:65:0x019f, B:66:0x01a3, B:68:0x01a9, B:70:0x01ce, B:71:0x01d0, B:73:0x01f3, B:76:0x01f9, B:79:0x0202, B:85:0x0207), top: B:3:0x000d }] */
-        /* JADX WARN: Removed duplicated region for block: B:95:0x00f5 A[Catch: all -> 0x004f, TryCatch #7 {all -> 0x004f, blocks: (B:4:0x000d, B:13:0x0043, B:15:0x0049, B:17:0x0054, B:18:0x0063, B:20:0x0067, B:21:0x006b, B:23:0x0071, B:25:0x0097, B:26:0x0099, B:28:0x00bc, B:31:0x00c2, B:34:0x00cb, B:40:0x00d0, B:41:0x00da, B:42:0x0213, B:43:0x021a, B:91:0x00e7, B:93:0x00ed, B:95:0x00f5, B:96:0x0104, B:98:0x0108, B:99:0x010c, B:101:0x0112, B:103:0x0137, B:104:0x0139, B:106:0x015c, B:109:0x0162, B:112:0x016b, B:118:0x0170, B:119:0x017d, B:58:0x017e, B:60:0x0184, B:62:0x018c, B:63:0x019b, B:65:0x019f, B:66:0x01a3, B:68:0x01a9, B:70:0x01ce, B:71:0x01d0, B:73:0x01f3, B:76:0x01f9, B:79:0x0202, B:85:0x0207), top: B:3:0x000d }] */
-        /* JADX WARN: Removed duplicated region for block: B:98:0x0108 A[Catch: all -> 0x004f, TryCatch #7 {all -> 0x004f, blocks: (B:4:0x000d, B:13:0x0043, B:15:0x0049, B:17:0x0054, B:18:0x0063, B:20:0x0067, B:21:0x006b, B:23:0x0071, B:25:0x0097, B:26:0x0099, B:28:0x00bc, B:31:0x00c2, B:34:0x00cb, B:40:0x00d0, B:41:0x00da, B:42:0x0213, B:43:0x021a, B:91:0x00e7, B:93:0x00ed, B:95:0x00f5, B:96:0x0104, B:98:0x0108, B:99:0x010c, B:101:0x0112, B:103:0x0137, B:104:0x0139, B:106:0x015c, B:109:0x0162, B:112:0x016b, B:118:0x0170, B:119:0x017d, B:58:0x017e, B:60:0x0184, B:62:0x018c, B:63:0x019b, B:65:0x019f, B:66:0x01a3, B:68:0x01a9, B:70:0x01ce, B:71:0x01d0, B:73:0x01f3, B:76:0x01f9, B:79:0x0202, B:85:0x0207), top: B:3:0x000d }] */
         @Override // java.lang.Thread, java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -2140,7 +2126,6 @@ public class Vpn {
         return IKnoxVpnPolicy.Stub.asInterface(ServiceManager.getService("knox_vpn_policy"));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0047 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2218,7 +2203,6 @@ public class Vpn {
 
     private native boolean jniAddAddress(String str, String str2, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native int jniCheck(String str);
 
     private native int jniCreate(int i);
@@ -2646,7 +2630,6 @@ public class Vpn {
         return this.mAlwaysOn ? this.mPackage : null;
     }
 
-    /* JADX WARN: Not initialized variable reg: 0, insn: 0x0078: INVOKE (r0 I:long) STATIC call: android.os.Binder.restoreCallingIdentity(long):void A[Catch: all -> 0x0056, MD:(long):void (c), TRY_ENTER], block:B:30:0x0078 */
     public final synchronized List getAppExclusionList(String str) {
         long restoreCallingIdentity;
         try {
@@ -3214,7 +3197,6 @@ public class Vpn {
         updateAppExclusionList(getAppExclusionList(this.mPackage));
     }
 
-    /* JADX WARN: Type inference failed for: r2v16, types: [com.android.server.connectivity.Vpn$1] */
     public final void registerMockNetworkAgent() {
         NetworkCapabilities build = new NetworkCapabilities.Builder().addTransportType(9).addCapability(11).addCapability(28).setUnderlyingNetworks((List) null).build();
         NetworkAgentConfig build2 = new NetworkAgentConfig.Builder().setLegacyType(17).setLegacyTypeName("VPN").setBypassableVpn(true).setVpnRequiresValidation(false).setLocalRoutesExcludedForVpn(true).build();
@@ -4039,8 +4021,6 @@ public class Vpn {
     
         r4[2] = r6.getHostAddress().toUpperCase();
      */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00a5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4151,8 +4131,6 @@ public class Vpn {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.connectivity.Vpn.updatePortBypassConfigs():void");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0197  */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x015f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

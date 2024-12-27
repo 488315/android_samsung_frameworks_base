@@ -63,13 +63,11 @@ public class SemInputConstants {
                 new Parcelable.Creator<
                         Command>() { // from class:
                                      // com.samsung.android.hardware.secinputdev.SemInputConstants.Command.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Command createFromParcel(Parcel in) {
                         return Command.getFromInt(in.readInt());
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Command[] newArray(int size) {
                         return new Command[size];
@@ -131,13 +129,11 @@ public class SemInputConstants {
                 new Parcelable.Creator<
                         Device>() { // from class:
                                     // com.samsung.android.hardware.secinputdev.SemInputConstants.Device.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Device createFromParcel(Parcel in) {
                         return Device.getFromInt(in.readInt());
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Device[] newArray(int size) {
                         return new Device[size];
@@ -201,13 +197,11 @@ public class SemInputConstants {
                 new Parcelable.Creator<
                         DisplayState>() { // from class:
                                           // com.samsung.android.hardware.secinputdev.SemInputConstants.DisplayState.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DisplayState createFromParcel(Parcel in) {
                         return DisplayState.getFromInt(in.readInt());
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public DisplayState[] newArray(int size) {
                         return new DisplayState[size];
@@ -282,13 +276,11 @@ public class SemInputConstants {
                 new Parcelable.Creator<
                         Property>() { // from class:
                                       // com.samsung.android.hardware.secinputdev.SemInputConstants.Property.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Property createFromParcel(Parcel in) {
                         return Property.getFromInt(in.readInt());
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Property[] newArray(int size) {
                         return new Property[size];
@@ -358,13 +350,11 @@ public class SemInputConstants {
                 new Parcelable.Creator<
                         MotionType>() { // from class:
                                         // com.samsung.android.hardware.secinputdev.SemInputConstants.MotionType.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public MotionType createFromParcel(Parcel in) {
                         return MotionType.getFromInt(in.readInt());
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public MotionType[] newArray(int size) {
                         return new MotionType[size];

@@ -22,7 +22,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
 public abstract class GridVolumeSlidersKt {
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.systemui.volume.panel.component.volume.ui.composable.GridVolumeSlidersKt$GridVolumeSliders$1, kotlin.jvm.internal.Lambda] */
     public static final void GridVolumeSliders(final List list, final PlatformSliderColors platformSliderColors, Modifier modifier, Composer composer, final int i, final int i2) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(1558765346);
@@ -35,8 +34,6 @@ public abstract class GridVolumeSlidersKt {
         }
         Dp.Companion companion = Dp.Companion;
         GridsKt.m819VerticalGridvz2T9sI(2, modifier, 16, 24, ComposableLambdaKt.rememberComposableLambda(-826494507, composerImpl, new Function2() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.GridVolumeSlidersKt$GridVolumeSliders$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            /* JADX WARN: Multi-variable type inference failed */
             {
                 super(2);
             }
@@ -55,7 +52,6 @@ public abstract class GridVolumeSlidersKt {
                 for (final SliderViewModel sliderViewModel : list) {
                     final SliderState sliderState = (SliderState) FlowExtKt.collectAsStateWithLifecycle(sliderViewModel.getSlider(), composer2).getValue();
                     VolumeSliderKt.VolumeSlider(sliderState, new Function1() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.GridVolumeSlidersKt$GridVolumeSliders$1.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }
@@ -76,7 +72,6 @@ public abstract class GridVolumeSlidersKt {
                             return Unit.INSTANCE;
                         }
                     }, new Function0() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.GridVolumeSlidersKt$GridVolumeSliders$1.3
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(0);
                         }
@@ -96,8 +91,6 @@ public abstract class GridVolumeSlidersKt {
         if (endRestartGroup != null) {
             final Modifier modifier2 = modifier;
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.GridVolumeSlidersKt$GridVolumeSliders$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                /* JADX WARN: Multi-variable type inference failed */
                 {
                     super(2);
                 }

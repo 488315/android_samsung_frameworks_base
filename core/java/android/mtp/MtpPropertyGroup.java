@@ -137,20 +137,6 @@ class MtpPropertyGroup {
         return new Property(code, type, -1);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x006e  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x008e  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00c2  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00e2  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0105  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0122  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0145  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0154  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x015f  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x016e  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x017b  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x018b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

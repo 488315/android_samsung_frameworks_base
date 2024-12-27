@@ -85,8 +85,6 @@ public final class HeadsUpNotificationInteractor$special$$inlined$flatMapLatest$
                                 this.$repo$inlined = headsUpRowRepository;
                             }
 
-                            /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                            /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             /*
                                 Code decompiled incorrectly, please refer to instructions dump.
@@ -210,7 +208,6 @@ public final class HeadsUpNotificationInteractor$special$$inlined$flatMapLatest$
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
                         final Flow[] flowArr2 = flowArr;
                         Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.notification.domain.interactor.HeadsUpNotificationInteractor$pinnedHeadsUpRows$lambda$5$$inlined$combine$1.2
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(0);
                             }

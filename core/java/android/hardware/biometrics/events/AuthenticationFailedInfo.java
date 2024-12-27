@@ -15,13 +15,11 @@ public final class AuthenticationFailedInfo implements Parcelable {
     public static final Parcelable.Creator<AuthenticationFailedInfo> CREATOR =
             new Parcelable.Creator<AuthenticationFailedInfo>() { // from class:
                 // android.hardware.biometrics.events.AuthenticationFailedInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AuthenticationFailedInfo[] newArray(int size) {
                     return new AuthenticationFailedInfo[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AuthenticationFailedInfo createFromParcel(Parcel in) {
                     return new AuthenticationFailedInfo(in);

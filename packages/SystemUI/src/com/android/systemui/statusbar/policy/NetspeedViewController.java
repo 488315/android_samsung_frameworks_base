@@ -117,7 +117,6 @@ public final class NetspeedViewController extends ViewController implements Conf
             }
         };
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.policy.NetspeedViewController$NetworkSpeedManager$1] */
         private NetworkSpeedManager(Context context) {
         }
 
@@ -227,8 +226,6 @@ public final class NetspeedViewController extends ViewController implements Conf
         new NetworkStatsThread(netspeedViewController, i).start();
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.statusbar.policy.NetspeedViewController$1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.statusbar.policy.NetspeedViewController$2] */
     public NetspeedViewController(NetspeedView netspeedView, IndicatorScaleGardener indicatorScaleGardener, IndicatorCutoutUtil indicatorCutoutUtil, UserTracker userTracker, WakefulnessLifecycle wakefulnessLifecycle) {
         super(netspeedView);
         this.mSettingObserver = new SettingObserver(this, 0);

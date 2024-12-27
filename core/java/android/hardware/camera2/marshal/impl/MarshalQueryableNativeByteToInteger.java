@@ -20,7 +20,6 @@ public class MarshalQueryableNativeByteToInteger implements MarshalQueryable<Int
             buffer.put((byte) value.intValue());
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public Integer unmarshal(ByteBuffer buffer) {
             return Integer.valueOf(buffer.get() & 255);

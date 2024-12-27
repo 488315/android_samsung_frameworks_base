@@ -36,7 +36,6 @@ public class NightDisplayListener {
         this.mContentObserver =
                 new ContentObserver(this.mHandler) { // from class:
                     // android.hardware.display.NightDisplayListener.1
-                    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
                     @Override // android.database.ContentObserver
                     public void onChange(boolean selfChange, Uri uri) {
                         char c;
@@ -132,7 +131,6 @@ public class NightDisplayListener {
         lambda$setCallback$0(callback);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: setCallbackInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$setCallback$0(Callback newCallback) {
         Callback oldCallback = this.mCallback;

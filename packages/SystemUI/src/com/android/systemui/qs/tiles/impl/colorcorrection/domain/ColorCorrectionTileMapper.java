@@ -27,7 +27,6 @@ public final class ColorCorrectionTileMapper implements QSTileDataToStateMapper 
         Resources resources = this.resources;
         Resources.Theme theme = this.theme;
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.colorcorrection.domain.ColorCorrectionTileMapper$map$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }

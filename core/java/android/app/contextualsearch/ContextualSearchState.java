@@ -12,13 +12,11 @@ public final class ContextualSearchState implements Parcelable {
     public static final Parcelable.Creator<ContextualSearchState> CREATOR =
             new Parcelable.Creator<ContextualSearchState>() { // from class:
                 // android.app.contextualsearch.ContextualSearchState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContextualSearchState createFromParcel(Parcel source) {
                     return new ContextualSearchState(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContextualSearchState[] newArray(int size) {
                     return new ContextualSearchState[size];

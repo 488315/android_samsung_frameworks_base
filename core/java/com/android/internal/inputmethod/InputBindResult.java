@@ -21,13 +21,11 @@ public final class InputBindResult implements Parcelable {
             new Parcelable.Creator<
                     InputBindResult>() { // from class:
                                          // com.android.internal.inputmethod.InputBindResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputBindResult createFromParcel(Parcel source) {
                     return new InputBindResult(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputBindResult[] newArray(int size) {
                     return new InputBindResult[size];

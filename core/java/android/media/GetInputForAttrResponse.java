@@ -9,7 +9,6 @@ public class GetInputForAttrResponse implements Parcelable {
     public static final Parcelable.Creator<GetInputForAttrResponse> CREATOR =
             new Parcelable.Creator<GetInputForAttrResponse>() { // from class:
                 // android.media.GetInputForAttrResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetInputForAttrResponse createFromParcel(Parcel _aidl_source) {
                     GetInputForAttrResponse _aidl_out = new GetInputForAttrResponse();
@@ -17,7 +16,6 @@ public class GetInputForAttrResponse implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GetInputForAttrResponse[] newArray(int _aidl_size) {
                     return new GetInputForAttrResponse[_aidl_size];

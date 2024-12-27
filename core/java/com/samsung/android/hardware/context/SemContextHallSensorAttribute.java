@@ -10,13 +10,11 @@ public class SemContextHallSensorAttribute extends SemContextAttribute {
             new Parcelable.Creator<
                     SemContextHallSensorAttribute>() { // from class:
                                                        // com.samsung.android.hardware.context.SemContextHallSensorAttribute.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextHallSensorAttribute createFromParcel(Parcel in) {
                     return new SemContextHallSensorAttribute(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextHallSensorAttribute[] newArray(int size) {
                     return new SemContextHallSensorAttribute[size];

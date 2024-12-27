@@ -254,7 +254,6 @@ public class KeyguardPunchHoleVIView extends FrameLayout {
         this(context, attributeSet, 0);
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.keyguard.punchhole.KeyguardPunchHoleVIView$$ExternalSyntheticLambda0] */
     public KeyguardPunchHoleVIView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.TAG = "KeyguardPunchHoleVIView";

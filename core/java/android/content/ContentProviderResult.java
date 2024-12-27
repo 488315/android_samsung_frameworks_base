@@ -13,13 +13,11 @@ public class ContentProviderResult implements Parcelable {
     public static final Parcelable.Creator<ContentProviderResult> CREATOR =
             new Parcelable.Creator<ContentProviderResult>() { // from class:
                 // android.content.ContentProviderResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentProviderResult createFromParcel(Parcel source) {
                     return new ContentProviderResult(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ContentProviderResult[] newArray(int size) {
                     return new ContentProviderResult[size];

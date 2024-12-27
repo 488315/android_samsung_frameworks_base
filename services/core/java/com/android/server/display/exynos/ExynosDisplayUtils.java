@@ -52,16 +52,6 @@ public abstract class ExynosDisplayUtils {
         return null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00b4 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:41:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00be A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r1v2 */
-    /* JADX WARN: Type inference failed for: r1v3, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r1v4 */
-    /* JADX WARN: Type inference failed for: r1v6, types: [java.lang.String] */
-    /* JADX WARN: Type inference failed for: r5v3, types: [java.lang.StringBuilder] */
-    /* JADX WARN: Type inference failed for: r6v5, types: [java.lang.String] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -210,7 +200,6 @@ public abstract class ExynosDisplayUtils {
         return fArr3;
     }
 
-    /* JADX WARN: Type inference failed for: r4v1, types: [boolean] */
     public static String[] parserFactoryXMLALText(int i, int i2, String str, String str2) {
         FileInputStream fileInputStream;
         FileInputStream fileInputStream2;
@@ -349,7 +338,6 @@ public abstract class ExynosDisplayUtils {
     
         if (r1 == null) goto L70;
      */
-    /* JADX WARN: Type inference failed for: r1v1, types: [boolean] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -362,7 +350,6 @@ public abstract class ExynosDisplayUtils {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.exynos.ExynosDisplayUtils.parserFactoryXMLAttribute(java.lang.String, java.lang.String, java.lang.String, java.lang.String):java.lang.String[]");
     }
 
-    /* JADX WARN: Type inference failed for: r6v1, types: [boolean] */
     public static String[] parserFactoryXMLText(int i, int i2, String str, String str2, String str3) {
         FileInputStream fileInputStream;
         FileInputStream fileInputStream2;
@@ -526,7 +513,6 @@ public abstract class ExynosDisplayUtils {
     
         if (r3 == null) goto L110;
      */
-    /* JADX WARN: Type inference failed for: r3v1, types: [boolean] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -555,7 +541,6 @@ public abstract class ExynosDisplayUtils {
     
         if (r1 == null) goto L74;
      */
-    /* JADX WARN: Type inference failed for: r1v1, types: [boolean] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -584,7 +569,6 @@ public abstract class ExynosDisplayUtils {
     
         if (r1 == null) goto L58;
      */
-    /* JADX WARN: Type inference failed for: r1v1, types: [boolean] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -734,7 +718,6 @@ public abstract class ExynosDisplayUtils {
     
         if (r1 == null) goto L65;
      */
-    /* JADX WARN: Type inference failed for: r1v1, types: [boolean] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -5,13 +5,6 @@ public abstract class GridDragDropStateKt {
     
         if (kotlin.jvm.internal.Intrinsics.areEqual(r0.rememberedValue(), java.lang.Integer.valueOf(r12)) == false) goto L39;
      */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00cb  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x01c3  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x009f  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x0080  */
-    /* JADX WARN: Type inference failed for: r1v16, types: [com.android.systemui.communal.ui.compose.GridDragDropStateKt$DraggableItem$2$4, kotlin.jvm.internal.Lambda] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

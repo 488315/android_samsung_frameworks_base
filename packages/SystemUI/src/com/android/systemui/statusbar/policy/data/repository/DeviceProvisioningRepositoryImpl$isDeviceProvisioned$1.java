@@ -18,7 +18,6 @@ final class DeviceProvisioningRepositoryImpl$isDeviceProvisioned$1 extends Suspe
     int label;
     final /* synthetic */ DeviceProvisioningRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceProvisioningRepositoryImpl$isDeviceProvisioned$1(DeviceProvisioningRepositoryImpl deviceProvisioningRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceProvisioningRepositoryImpl;
@@ -36,8 +35,6 @@ final class DeviceProvisioningRepositoryImpl$isDeviceProvisioned$1 extends Suspe
         return ((DeviceProvisioningRepositoryImpl$isDeviceProvisioned$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.policy.data.repository.DeviceProvisioningRepositoryImpl$isDeviceProvisioned$1$listener$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -56,7 +53,6 @@ final class DeviceProvisioningRepositoryImpl$isDeviceProvisioned$1 extends Suspe
             ((ChannelCoroutine) producerScope).mo2552trySendJP2dKIU(Boolean.valueOf(((DeviceProvisionedControllerImpl) this.this$0.deviceProvisionedController).deviceProvisioned.get()));
             final DeviceProvisioningRepositoryImpl deviceProvisioningRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.policy.data.repository.DeviceProvisioningRepositoryImpl$isDeviceProvisioned$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

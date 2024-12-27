@@ -330,7 +330,6 @@ public class NotificationTopLineView extends ViewGroup {
             return this.mTrackGesture;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean onTouchUp(float upX, float upY, float downX, float downY) {
             if (NotificationTopLineView.this.mFeedbackIcon.isVisibleToUser()) {
                 if (this.mFeedbackRect.contains((int) upX, (int) upY)
@@ -343,13 +342,11 @@ public class NotificationTopLineView extends ViewGroup {
             return false;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean isInside(float x, float y) {
             return this.mFeedbackRect.contains((int) x, (int) y);
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public View getFirstChildNotGone() {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);

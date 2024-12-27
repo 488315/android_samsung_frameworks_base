@@ -8,7 +8,6 @@ public class KeyMetadata implements Parcelable {
     public static final Parcelable.Creator<KeyMetadata> CREATOR =
             new Parcelable.Creator<
                     KeyMetadata>() { // from class: android.system.keystore2.KeyMetadata.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyMetadata createFromParcel(Parcel _aidl_source) {
                     KeyMetadata _aidl_out = new KeyMetadata();
@@ -16,7 +15,6 @@ public class KeyMetadata implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeyMetadata[] newArray(int _aidl_size) {
                     return new KeyMetadata[_aidl_size];

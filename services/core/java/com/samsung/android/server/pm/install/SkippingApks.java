@@ -13,7 +13,6 @@ import java.util.List;
 public final class SkippingApks {
     public ArrayList mSkippingApkList;
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:49:0x0060 -> B:21:0x007b). Please report as a decompilation issue!!! */
     public static List getApkNamesFromFile(String str) {
         int length;
         ArrayList arrayList = new ArrayList();

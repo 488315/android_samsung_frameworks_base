@@ -10,7 +10,6 @@ public class UsbInterface implements Parcelable {
     public static final Parcelable.Creator<UsbInterface> CREATOR =
             new Parcelable.Creator<
                     UsbInterface>() { // from class: android.hardware.usb.UsbInterface.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsbInterface createFromParcel(Parcel in) {
                     int id = in.readInt();
@@ -27,7 +26,6 @@ public class UsbInterface implements Parcelable {
                     return intf;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsbInterface[] newArray(int size) {
                     return new UsbInterface[size];

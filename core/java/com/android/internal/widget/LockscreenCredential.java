@@ -21,14 +21,12 @@ public class LockscreenCredential implements Parcelable, AutoCloseable {
             new Parcelable.Creator<
                     LockscreenCredential>() { // from class:
                                               // com.android.internal.widget.LockscreenCredential.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LockscreenCredential createFromParcel(Parcel source) {
                     return new LockscreenCredential(
                             source.readInt(), source.createByteArray(), source.readBoolean());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public LockscreenCredential[] newArray(int size) {
                     return new LockscreenCredential[size];

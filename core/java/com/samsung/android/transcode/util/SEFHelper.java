@@ -178,8 +178,6 @@ public class SEFHelper {
         return ret;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0097 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0098 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

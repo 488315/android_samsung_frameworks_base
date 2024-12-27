@@ -330,7 +330,6 @@ final class UnsafeUtil {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Field bufferAddressField() {
         Field field;
         if (Android.isOnAndroidDevice()
@@ -904,17 +903,14 @@ final class UnsafeUtil {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static byte getByteBigEndian(Object target, long offset) {
         return (byte) ((getInt(target, (-4) & offset) >>> ((int) (((~offset) & 3) << 3))) & 255);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static byte getByteLittleEndian(Object target, long offset) {
         return (byte) ((getInt(target, (-4) & offset) >>> ((int) ((3 & offset) << 3))) & 255);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void putByteBigEndian(Object target, long offset, byte value) {
         int intValue = getInt(target, offset & (-4));
         int shift = ((~((int) offset)) & 3) << 3;
@@ -922,7 +918,6 @@ final class UnsafeUtil {
         putInt(target, (-4) & offset, output);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void putByteLittleEndian(Object target, long offset, byte value) {
         int intValue = getInt(target, offset & (-4));
         int shift = (((int) offset) & 3) << 3;
@@ -930,27 +925,22 @@ final class UnsafeUtil {
         putInt(target, (-4) & offset, output);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean getBooleanBigEndian(Object target, long offset) {
         return getByteBigEndian(target, offset) != 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean getBooleanLittleEndian(Object target, long offset) {
         return getByteLittleEndian(target, offset) != 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void putBooleanBigEndian(Object obj, long j, boolean z) {
         putByteBigEndian(obj, j, z ? (byte) 1 : (byte) 0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void putBooleanLittleEndian(Object obj, long j, boolean z) {
         putByteLittleEndian(obj, j, z ? (byte) 1 : (byte) 0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void logMissingMethod(Throwable e) {
         Logger.getLogger(UnsafeUtil.class.getName())
                 .log(

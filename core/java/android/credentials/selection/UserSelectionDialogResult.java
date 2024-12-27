@@ -12,13 +12,11 @@ public final class UserSelectionDialogResult extends BaseDialogResult implements
     public static final Parcelable.Creator<UserSelectionDialogResult> CREATOR =
             new Parcelable.Creator<UserSelectionDialogResult>() { // from class:
                 // android.credentials.selection.UserSelectionDialogResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UserSelectionDialogResult createFromParcel(Parcel in) {
                     return new UserSelectionDialogResult(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UserSelectionDialogResult[] newArray(int size) {
                     return new UserSelectionDialogResult[size];

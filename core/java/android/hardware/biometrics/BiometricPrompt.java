@@ -378,7 +378,6 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAuthenticationSucceeded$0(int authenticationType) {
             AuthenticationResult result =
                     new AuthenticationResult(
@@ -400,7 +399,6 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAuthenticationFailed$1() {
             BiometricPrompt.this.mAuthenticationCallback.onAuthenticationFailed();
         }
@@ -470,7 +468,6 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onError$2(int error, String stringToSend) {
             BiometricPrompt.this.mAuthenticationCallback.onAuthenticationError(error, stringToSend);
             BiometricPrompt.this.mIsPromptShowing = false;
@@ -489,7 +486,6 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAcquired$3(int acquireInfo, String message) {
             BiometricPrompt.this.mAuthenticationCallback.onAuthenticationHelp(acquireInfo, message);
         }
@@ -532,13 +528,11 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDialogDismissed$4() {
             BiometricPrompt.this.mNegativeButtonInfo.listener.onClick(null, -2);
             BiometricPrompt.this.mIsPromptShowing = false;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onDialogDismissed$5() {
             BiometricPrompt.this.mContentViewMoreOptionsButtonInfo.listener.onClick(null, -2);
         }
@@ -556,7 +550,6 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSystemEvent$6(int event) {
             BiometricPrompt.this.mAuthenticationCallback.onSystemEvent(event);
         }
@@ -577,7 +570,6 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSemAuthenticationSucceeded$7(
                 int authenticationType, byte[] challengeToken, int id) {
             AuthenticationResult result =
@@ -884,7 +876,6 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
                 (CryptoObject) null, cancel, executor, callback, this.mContext.getUserId());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelAuthentication(long requestId) {
         if (this.mService != null) {
             try {
@@ -988,23 +979,19 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$authenticateInternal$0(String stringToSend) {
         this.mAuthenticationCallback.onAuthenticationError(5, stringToSend);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$authenticateInternal$1(AuthenticationCallback callback) {
         callback.onAuthenticationError(
                 1, this.mContext.getString(R.string.biometric_error_hw_unavailable));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean isCredentialAllowed(int allowedAuthenticators) {
         return (32768 & allowedAuthenticators) != 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static Bitmap convertDrawableToBitmap(Drawable drawable) {
         Bitmap bitmap;
         if (drawable == null) {

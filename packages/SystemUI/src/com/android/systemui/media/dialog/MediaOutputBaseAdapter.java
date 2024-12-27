@@ -131,12 +131,6 @@ public abstract class MediaOutputBaseAdapter extends RecyclerView.Adapter {
             this.mIconAreaLayout.setOnClickListener(null);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:10:0x0048  */
-        /* JADX WARN: Removed duplicated region for block: B:13:0x0065  */
-        /* JADX WARN: Removed duplicated region for block: B:43:0x00d9  */
-        /* JADX WARN: Removed duplicated region for block: B:47:0x004f  */
-        /* JADX WARN: Removed duplicated region for block: B:48:0x0025  */
-        /* JADX WARN: Removed duplicated region for block: B:7:0x0021  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences

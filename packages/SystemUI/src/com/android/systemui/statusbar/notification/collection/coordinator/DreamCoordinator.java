@@ -26,16 +26,12 @@ public final class DreamCoordinator implements Coordinator {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.notification.collection.coordinator.DreamCoordinator$statusBarStateListener$1] */
     public DreamCoordinator(SysuiStatusBarStateController sysuiStatusBarStateController, CoroutineScope coroutineScope, KeyguardRepository keyguardRepository) {
         this.statusBarStateController = sysuiStatusBarStateController;
         this.scope = coroutineScope;
         this.keyguardRepository = keyguardRepository;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -91,7 +87,6 @@ public final class DreamCoordinator implements Coordinator {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.coordinator.DreamCoordinator.attachFilterOnDreamingStateChange(kotlin.coroutines.Continuation):java.lang.Object");
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void recordDreamingState(boolean z) {
         this.isLockscreenHostedDream = z;
         DreamCoordinator$filter$1 dreamCoordinator$filter$1 = this.filter;
@@ -102,7 +97,6 @@ public final class DreamCoordinator implements Coordinator {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void recordStatusBarState(int i) {
         boolean z = false;
         this.isOnKeyguard = i == 1;

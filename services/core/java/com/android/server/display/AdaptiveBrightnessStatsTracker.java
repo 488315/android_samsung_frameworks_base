@@ -351,7 +351,6 @@ public final class AdaptiveBrightnessStatsTracker {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r5v1, types: [com.android.server.display.AdaptiveBrightnessStatsTracker$$ExternalSyntheticLambda0] */
     public AdaptiveBrightnessStatsTracker(
             UserManager userManager, BrightnessMappingStrategy brightnessMappingStrategy) {
         int i;

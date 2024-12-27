@@ -668,7 +668,6 @@ public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.St
             super(looper);
         }
 
-        /* JADX WARN: Can't wrap try/catch for region: R(34:107|108|109|110|111|(2:112|113)|114|(1:116)|117|(1:119)|120|(3:122|(2:125|123)|126)|127|128|129|130|(2:131|132)|133|(2:134|135)|136|(2:137|138)|139|(2:140|141)|142|(2:143|144)|145|(2:146|147)|(2:148|149)|150|151|152|153|(1:155)|156) */
         /* JADX WARN: Code restructure failed: missing block: B:158:0x0486, code lost:
 
            android.util.Log.e("knoxNwFilter-KnoxNetworkFilterService", "handleUnregisterOperation:setConfig:error occured while communicating to remote service");
@@ -677,7 +676,6 @@ public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.St
 
            android.util.Log.e("knoxNwFilter-KnoxNetworkFilterService", "handleUnregisterOperation:setConfig:error occured remote service null");
         */
-        /* JADX WARN: Removed duplicated region for block: B:155:0x04b9 A[Catch: all -> 0x02da, TryCatch #29 {all -> 0x02da, blocks: (B:105:0x0288, B:107:0x02b6, B:110:0x02d6, B:111:0x02e2, B:113:0x02e5, B:114:0x0305, B:116:0x0314, B:117:0x0317, B:119:0x031c, B:120:0x0321, B:122:0x0327, B:123:0x032d, B:125:0x0333, B:127:0x0341, B:129:0x0375, B:130:0x038c, B:132:0x0394, B:133:0x03ab, B:135:0x03b3, B:136:0x03ca, B:138:0x03da, B:139:0x03f1, B:141:0x03f9, B:142:0x0410, B:144:0x0418, B:145:0x042f, B:147:0x043f, B:149:0x0446, B:150:0x0465, B:152:0x0472, B:153:0x048f, B:155:0x04b9, B:156:0x04bc, B:159:0x047c, B:158:0x0486, B:164:0x0452, B:162:0x045c, B:170:0x041c, B:169:0x0426, B:173:0x03fd, B:172:0x0407, B:176:0x03de, B:175:0x03e8, B:179:0x03b7, B:178:0x03c1, B:182:0x0398, B:181:0x03a2, B:185:0x0379, B:184:0x0383, B:191:0x02de, B:192:0x02e1, B:193:0x04c1, B:109:0x02ba), top: B:104:0x0288, inners: #31, #35, #34, #33, #29, #28, #27, #26, #25 }] */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1689,12 +1687,6 @@ public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.St
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x015a A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x023c A[Catch: all -> 0x0070, TryCatch #8 {, blocks: (B:4:0x000b, B:9:0x0058, B:11:0x0061, B:15:0x0073, B:17:0x0083, B:19:0x0091, B:21:0x0098, B:23:0x00a8, B:24:0x00ab, B:26:0x00b0, B:27:0x00b5, B:128:0x00e6, B:129:0x00ea, B:29:0x0115, B:111:0x011a, B:112:0x011e, B:114:0x0126, B:117:0x012e, B:33:0x0156, B:103:0x015a, B:104:0x015e, B:35:0x0192, B:91:0x0196, B:92:0x019a, B:94:0x01a2, B:37:0x01cf, B:79:0x01d3, B:80:0x01d7, B:82:0x01e9, B:40:0x0216, B:41:0x0225, B:43:0x023c, B:44:0x0240, B:46:0x0246, B:48:0x0259, B:50:0x025d, B:52:0x026a, B:54:0x027c, B:56:0x02a7, B:57:0x02b0, B:59:0x02b6, B:63:0x02bb, B:65:0x02de, B:66:0x02e1, B:68:0x0301, B:76:0x030c, B:73:0x0329, B:88:0x01f4, B:86:0x0205, B:100:0x01ad, B:98:0x01be, B:108:0x0170, B:106:0x0181, B:125:0x0132, B:123:0x0143, B:133:0x00f3, B:131:0x0104, B:135:0x0348), top: B:3:0x000b, inners: #3, #18, #17, #16, #15, #14, #13 }] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x02de A[Catch: all -> 0x0070, TryCatch #8 {, blocks: (B:4:0x000b, B:9:0x0058, B:11:0x0061, B:15:0x0073, B:17:0x0083, B:19:0x0091, B:21:0x0098, B:23:0x00a8, B:24:0x00ab, B:26:0x00b0, B:27:0x00b5, B:128:0x00e6, B:129:0x00ea, B:29:0x0115, B:111:0x011a, B:112:0x011e, B:114:0x0126, B:117:0x012e, B:33:0x0156, B:103:0x015a, B:104:0x015e, B:35:0x0192, B:91:0x0196, B:92:0x019a, B:94:0x01a2, B:37:0x01cf, B:79:0x01d3, B:80:0x01d7, B:82:0x01e9, B:40:0x0216, B:41:0x0225, B:43:0x023c, B:44:0x0240, B:46:0x0246, B:48:0x0259, B:50:0x025d, B:52:0x026a, B:54:0x027c, B:56:0x02a7, B:57:0x02b0, B:59:0x02b6, B:63:0x02bb, B:65:0x02de, B:66:0x02e1, B:68:0x0301, B:76:0x030c, B:73:0x0329, B:88:0x01f4, B:86:0x0205, B:100:0x01ad, B:98:0x01be, B:108:0x0170, B:106:0x0181, B:125:0x0132, B:123:0x0143, B:133:0x00f3, B:131:0x0104, B:135:0x0348), top: B:3:0x000b, inners: #3, #18, #17, #16, #15, #14, #13 }] */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0301 A[Catch: all -> 0x0070, TRY_LEAVE, TryCatch #8 {, blocks: (B:4:0x000b, B:9:0x0058, B:11:0x0061, B:15:0x0073, B:17:0x0083, B:19:0x0091, B:21:0x0098, B:23:0x00a8, B:24:0x00ab, B:26:0x00b0, B:27:0x00b5, B:128:0x00e6, B:129:0x00ea, B:29:0x0115, B:111:0x011a, B:112:0x011e, B:114:0x0126, B:117:0x012e, B:33:0x0156, B:103:0x015a, B:104:0x015e, B:35:0x0192, B:91:0x0196, B:92:0x019a, B:94:0x01a2, B:37:0x01cf, B:79:0x01d3, B:80:0x01d7, B:82:0x01e9, B:40:0x0216, B:41:0x0225, B:43:0x023c, B:44:0x0240, B:46:0x0246, B:48:0x0259, B:50:0x025d, B:52:0x026a, B:54:0x027c, B:56:0x02a7, B:57:0x02b0, B:59:0x02b6, B:63:0x02bb, B:65:0x02de, B:66:0x02e1, B:68:0x0301, B:76:0x030c, B:73:0x0329, B:88:0x01f4, B:86:0x0205, B:100:0x01ad, B:98:0x01be, B:108:0x0170, B:106:0x0181, B:125:0x0132, B:123:0x0143, B:133:0x00f3, B:131:0x0104, B:135:0x0348), top: B:3:0x000b, inners: #3, #18, #17, #16, #15, #14, #13 }] */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x01d3 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x0196 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* renamed from: -$$Nest$mhandleStartFilteringOperation, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2586,8 +2578,6 @@ public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.St
         return KnoxNetworkFilterHelper.getProfileListByVendor(callingUid);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0037 A[Catch: all -> 0x004c, TRY_LEAVE, TryCatch #0 {, blocks: (B:4:0x0004, B:7:0x0018, B:10:0x001f, B:12:0x002b, B:16:0x0037, B:20:0x004e, B:24:0x0059, B:25:0x005e), top: B:3:0x0004 }] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x004e A[Catch: all -> 0x004c, TRY_ENTER, TRY_LEAVE, TryCatch #0 {, blocks: (B:4:0x0004, B:7:0x0018, B:10:0x001f, B:12:0x002b, B:16:0x0037, B:20:0x004e, B:24:0x0059, B:25:0x005e), top: B:3:0x0004 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2862,8 +2852,6 @@ public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.St
         return profilebyUserId;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0037 A[Catch: all -> 0x004b, TRY_LEAVE, TryCatch #0 {, blocks: (B:4:0x0004, B:7:0x0018, B:10:0x001f, B:12:0x002b, B:16:0x0037, B:21:0x004d, B:27:0x005c, B:28:0x0061), top: B:3:0x0004 }] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x004d A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2932,8 +2920,6 @@ public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.St
                     + " com.android.server.enterprise.filter.KnoxNetworkFilterService.getProfileStatus(java.lang.String):int");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0037 A[Catch: all -> 0x004c, TRY_LEAVE, TryCatch #0 {, blocks: (B:4:0x0004, B:7:0x0018, B:10:0x001f, B:12:0x002b, B:16:0x0037, B:20:0x004e, B:24:0x0059, B:25:0x005e), top: B:3:0x0004 }] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x004e A[Catch: all -> 0x004c, TRY_ENTER, TRY_LEAVE, TryCatch #0 {, blocks: (B:4:0x0004, B:7:0x0018, B:10:0x001f, B:12:0x002b, B:16:0x0037, B:20:0x004e, B:24:0x0059, B:25:0x005e), top: B:3:0x0004 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3387,8 +3373,6 @@ public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.St
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0058 A[Catch: all -> 0x0064, TRY_LEAVE, TryCatch #0 {, blocks: (B:4:0x0003, B:6:0x000e, B:9:0x0015, B:17:0x004e, B:19:0x0058, B:22:0x0066, B:25:0x0026, B:28:0x002e, B:30:0x0034, B:32:0x003a), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0066 A[Catch: all -> 0x0064, TRY_ENTER, TRY_LEAVE, TryCatch #0 {, blocks: (B:4:0x0003, B:6:0x000e, B:9:0x0015, B:17:0x004e, B:19:0x0058, B:22:0x0066, B:25:0x0026, B:28:0x002e, B:30:0x0034, B:32:0x003a), top: B:3:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3543,7 +3527,6 @@ public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.St
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(14:14|(2:15|16)|17|18|(3:19|20|(1:22))|24|(1:26)|(2:27|28)|(2:29|30)|32|33|34|35|36) */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0127, code lost:
 
        android.util.Log.e("knoxNwFilter-KnoxNetworkFilterService", "registerListeners:udp:error occurred since the remote service is null");

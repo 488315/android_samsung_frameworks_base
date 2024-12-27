@@ -16,7 +16,6 @@ final class JavaAdapter$alwaysCollectFlow$1 extends SuspendLambda implements Fun
     final /* synthetic */ Flow $flow;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public JavaAdapter$alwaysCollectFlow$1(Flow flow, Consumer<Object> consumer, Continuation continuation) {
         super(2, continuation);
         this.$flow = flow;

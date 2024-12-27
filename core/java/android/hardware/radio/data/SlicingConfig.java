@@ -11,7 +11,6 @@ public class SlicingConfig implements Parcelable {
     public static final Parcelable.Creator<SlicingConfig> CREATOR =
             new Parcelable.Creator<
                     SlicingConfig>() { // from class: android.hardware.radio.data.SlicingConfig.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SlicingConfig createFromParcel(Parcel _aidl_source) {
                     SlicingConfig _aidl_out = new SlicingConfig();
@@ -19,7 +18,6 @@ public class SlicingConfig implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SlicingConfig[] newArray(int _aidl_size) {
                     return new SlicingConfig[_aidl_size];

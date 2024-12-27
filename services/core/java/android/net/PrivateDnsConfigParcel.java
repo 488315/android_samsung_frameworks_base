@@ -63,7 +63,6 @@ public class PrivateDnsConfigParcel implements Parcelable {
                         Integer.valueOf(privateDnsConfigParcel.dohPort));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
         return Arrays.deepHashCode(
                 Arrays.asList(

@@ -47,7 +47,6 @@ public class IpMemoryStore extends IpMemoryStoreClient {
         return new IpMemoryStore(context);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ IIpMemoryStore lambda$runWhenServiceReady$0(
             Consumer consumer, IIpMemoryStore iIpMemoryStore, Throwable th) {
         if (th != null) {
@@ -62,7 +61,6 @@ public class IpMemoryStore extends IpMemoryStoreClient {
         return iIpMemoryStore;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ CompletableFuture lambda$runWhenServiceReady$1(
             final Consumer consumer, CompletableFuture completableFuture) {
         return completableFuture.handle(

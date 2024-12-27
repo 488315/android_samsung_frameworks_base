@@ -158,8 +158,6 @@ public final class WallpaperCropper {
         return adjustedCrop;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(42:(2:50|(16:54|55|(8:57|(4:60|(1:65)(2:62|63)|64|58)|66|67|(2:70|68)|71|72|(1:74)(1:75))|76|(2:80|(1:82))|83|(1:85)|86|(1:88)|89|(23:104|105|(2:106|(1:108)(1:109))|110|(1:112)(1:190)|113|(1:117)|118|(1:120)(1:189)|121|122|(1:124)(1:188)|125|126|127|(2:182|183)(1:129)|130|(1:132)|133|(1:135)(1:181)|136|(13:141|(1:143)(1:180)|144|(1:146)|147|148|149|150|151|(3:162|159|160)|158|159|160)(1:139)|140)(3:92|(1:94)|95)|(1:97)|98|(1:100)|101|102))|104|105|(3:106|(0)(0)|108)|110|(0)(0)|113|(2:115|117)|118|(0)(0)|121|122|(0)(0)|125|126|127|(0)(0)|130|(0)|133|(0)(0)|136|(0)|141|(0)(0)|144|(0)|147|148|149|150|151|(2:153|155)|162|159|160|140|(0)|98|(0)|101|102) */
-    /* JADX WARN: Can't wrap try/catch for region: R(64:5|(3:7|(3:10|(1:16)(1:14)|8)|18)(0)|19|(1:22)|23|(2:213|(5:215|(1:217)|218|(1:220)|221)(1:222))(4:27|(4:30|(2:32|33)(1:35)|34|28)|36|37)|38|(2:197|(8:199|(1:201)(1:212)|202|(1:204)(1:211)|205|(1:207)|208|(1:210)))(1:42)|43|(1:196)(1:47)|48|(2:50|(16:54|55|(8:57|(4:60|(1:65)(2:62|63)|64|58)|66|67|(2:70|68)|71|72|(1:74)(1:75))|76|(2:80|(1:82))|83|(1:85)|86|(1:88)|89|(23:104|105|(2:106|(1:108)(1:109))|110|(1:112)(1:190)|113|(1:117)|118|(1:120)(1:189)|121|122|(1:124)(1:188)|125|126|127|(2:182|183)(1:129)|130|(1:132)|133|(1:135)(1:181)|136|(13:141|(1:143)(1:180)|144|(1:146)|147|148|149|150|151|(3:162|159|160)|158|159|160)(1:139)|140)(3:92|(1:94)|95)|(1:97)|98|(1:100)|101|102))|195|55|(0)|76|(3:78|80|(0))|83|(0)|86|(0)|89|(0)|104|105|(3:106|(0)(0)|108)|110|(0)(0)|113|(2:115|117)|118|(0)(0)|121|122|(0)(0)|125|126|127|(0)(0)|130|(0)|133|(0)(0)|136|(0)|141|(0)(0)|144|(0)|147|148|149|150|151|(2:153|155)|162|159|160|140|(0)|98|(0)|101|102) */
     /* JADX WARN: Code restructure failed: missing block: B:163:0x05b8, code lost:
 
        r0 = e;
@@ -204,28 +202,6 @@ public final class WallpaperCropper {
 
        r17 = r2;
     */
-    /* JADX WARN: Removed duplicated region for block: B:100:0x0621  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x0369 A[LOOP:4: B:106:0x0365->B:108:0x0369, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x036b A[EDGE_INSN: B:109:0x036b->B:110:0x036b BREAK  A[LOOP:4: B:106:0x0365->B:108:0x0369], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x037b A[Catch: all -> 0x0386, Exception -> 0x038c, TryCatch #2 {Exception -> 0x038c, blocks: (B:105:0x035d, B:106:0x0365, B:110:0x036b, B:112:0x037b, B:113:0x039b, B:115:0x03b8, B:117:0x03bc, B:118:0x03f6, B:120:0x03fe, B:121:0x0404, B:122:0x040e, B:124:0x0414, B:125:0x041a, B:126:0x0424, B:188:0x041d, B:189:0x0407, B:190:0x0394), top: B:104:0x035d }] */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x03fe A[Catch: all -> 0x0386, Exception -> 0x038c, TryCatch #2 {Exception -> 0x038c, blocks: (B:105:0x035d, B:106:0x0365, B:110:0x036b, B:112:0x037b, B:113:0x039b, B:115:0x03b8, B:117:0x03bc, B:118:0x03f6, B:120:0x03fe, B:121:0x0404, B:122:0x040e, B:124:0x0414, B:125:0x041a, B:126:0x0424, B:188:0x041d, B:189:0x0407, B:190:0x0394), top: B:104:0x035d }] */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x0414 A[Catch: all -> 0x0386, Exception -> 0x038c, TryCatch #2 {Exception -> 0x038c, blocks: (B:105:0x035d, B:106:0x0365, B:110:0x036b, B:112:0x037b, B:113:0x039b, B:115:0x03b8, B:117:0x03bc, B:118:0x03f6, B:120:0x03fe, B:121:0x0404, B:122:0x040e, B:124:0x0414, B:125:0x041a, B:126:0x0424, B:188:0x041d, B:189:0x0407, B:190:0x0394), top: B:104:0x035d }] */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x048e  */
-    /* JADX WARN: Removed duplicated region for block: B:132:0x0496 A[Catch: all -> 0x0386, Exception -> 0x048b, TryCatch #3 {Exception -> 0x048b, blocks: (B:183:0x0436, B:130:0x0490, B:132:0x0496, B:133:0x04bc, B:136:0x0503, B:139:0x0563, B:141:0x056d, B:144:0x057a, B:146:0x0580, B:147:0x0582, B:180:0x0575), top: B:182:0x0436 }] */
-    /* JADX WARN: Removed duplicated region for block: B:135:0x04fe  */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x0573  */
-    /* JADX WARN: Removed duplicated region for block: B:146:0x0580 A[Catch: all -> 0x0386, Exception -> 0x048b, TryCatch #3 {Exception -> 0x048b, blocks: (B:183:0x0436, B:130:0x0490, B:132:0x0496, B:133:0x04bc, B:136:0x0503, B:139:0x0563, B:141:0x056d, B:144:0x057a, B:146:0x0580, B:147:0x0582, B:180:0x0575), top: B:182:0x0436 }] */
-    /* JADX WARN: Removed duplicated region for block: B:180:0x0575 A[Catch: all -> 0x0386, Exception -> 0x048b, TryCatch #3 {Exception -> 0x048b, blocks: (B:183:0x0436, B:130:0x0490, B:132:0x0496, B:133:0x04bc, B:136:0x0503, B:139:0x0563, B:141:0x056d, B:144:0x057a, B:146:0x0580, B:147:0x0582, B:180:0x0575), top: B:182:0x0436 }] */
-    /* JADX WARN: Removed duplicated region for block: B:181:0x0501  */
-    /* JADX WARN: Removed duplicated region for block: B:182:0x0436 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:188:0x041d A[Catch: all -> 0x0386, Exception -> 0x038c, TryCatch #2 {Exception -> 0x038c, blocks: (B:105:0x035d, B:106:0x0365, B:110:0x036b, B:112:0x037b, B:113:0x039b, B:115:0x03b8, B:117:0x03bc, B:118:0x03f6, B:120:0x03fe, B:121:0x0404, B:122:0x040e, B:124:0x0414, B:125:0x041a, B:126:0x0424, B:188:0x041d, B:189:0x0407, B:190:0x0394), top: B:104:0x035d }] */
-    /* JADX WARN: Removed duplicated region for block: B:189:0x0407 A[Catch: all -> 0x0386, Exception -> 0x038c, TryCatch #2 {Exception -> 0x038c, blocks: (B:105:0x035d, B:106:0x0365, B:110:0x036b, B:112:0x037b, B:113:0x039b, B:115:0x03b8, B:117:0x03bc, B:118:0x03f6, B:120:0x03fe, B:121:0x0404, B:122:0x040e, B:124:0x0414, B:125:0x041a, B:126:0x0424, B:188:0x041d, B:189:0x0407, B:190:0x0394), top: B:104:0x035d }] */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x0394 A[Catch: all -> 0x0386, Exception -> 0x038c, TryCatch #2 {Exception -> 0x038c, blocks: (B:105:0x035d, B:106:0x0365, B:110:0x036b, B:112:0x037b, B:113:0x039b, B:115:0x03b8, B:117:0x03bc, B:118:0x03f6, B:120:0x03fe, B:121:0x0404, B:122:0x040e, B:124:0x0414, B:125:0x041a, B:126:0x0424, B:188:0x041d, B:189:0x0407, B:190:0x0394), top: B:104:0x035d }] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x01ff  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x02a8  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x02de  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x02f5  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x05fc  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

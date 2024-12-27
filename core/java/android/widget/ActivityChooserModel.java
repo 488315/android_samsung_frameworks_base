@@ -578,8 +578,6 @@ public class ActivityChooserModel extends DataSetObservable {
     private final class PersistHistoryAsyncTask extends AsyncTask<Object, Void, Void> {
         private PersistHistoryAsyncTask() {}
 
-        /* JADX WARN: Removed duplicated region for block: B:43:0x0129 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:49:? A[SYNTHETIC] */
         @Override // android.os.AsyncTask
         /*
             Code decompiled incorrectly, please refer to instructions dump.

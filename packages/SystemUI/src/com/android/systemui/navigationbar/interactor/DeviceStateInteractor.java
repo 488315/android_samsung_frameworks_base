@@ -119,8 +119,6 @@ public final class DeviceStateInteractor {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.navigationbar.interactor.DeviceStateInteractor$componentCallbacks$1] */
-    /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.navigationbar.interactor.DeviceStateInteractor$displayListener$1] */
     public DeviceStateInteractor(Context context, SettingsHelper settingsHelper, Handler handler) {
         this.context = context;
         this.settingsHelper = settingsHelper;

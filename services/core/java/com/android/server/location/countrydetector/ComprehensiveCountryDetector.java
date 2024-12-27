@@ -29,7 +29,6 @@ public final class ComprehensiveCountryDetector extends CountryDetectorBase {
     public int mTotalCountServiceStateChanges;
     public long mTotalTime;
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.location.countrydetector.ComprehensiveCountryDetector$1] */
     public ComprehensiveCountryDetector(Context context) {
         super(context);
         this.mStopped = false;
@@ -59,12 +58,6 @@ public final class ComprehensiveCountryDetector extends CountryDetectorBase {
         return detectCountry(false, !this.mStopped);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0024  */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0028  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0054  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0050  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -172,8 +165,6 @@ public final class ComprehensiveCountryDetector extends CountryDetectorBase {
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.location.countrydetector.ComprehensiveCountryDetector.detectCountry(boolean, boolean):android.location.Country");
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r5v3, types: [android.telephony.PhoneStateListener, com.android.server.location.countrydetector.ComprehensiveCountryDetector$4] */
     @Override // com.android.server.location.countrydetector.CountryDetectorBase
     public final void setCountryListener(CountryListener countryListener) {
         CountryListener countryListener2 = this.mListener;

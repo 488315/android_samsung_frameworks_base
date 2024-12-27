@@ -13,13 +13,11 @@ public final class QueryLocationException extends RuntimeException implements Pa
             new Parcelable.Creator<
                     QueryLocationException>() { // from class:
                                                 // android.telecom.QueryLocationException.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public QueryLocationException createFromParcel(Parcel source) {
                     return new QueryLocationException(source.readString8(), source.readInt());
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public QueryLocationException[] newArray(int size) {
                     return new QueryLocationException[size];

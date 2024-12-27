@@ -558,7 +558,6 @@ public class ResolverActivity extends Activity
         finish();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onCreate$0(View v) {
         if (this.mTipsDescriptionPopup != null && this.mTipsDescriptionPopup.isShowing()) {
             this.mTipsDescriptionPopup.dismiss(false);
@@ -704,7 +703,6 @@ public class ResolverActivity extends Activity
                 noAppsEmptyStateProvider);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createEmptyStateProvider$1() {
         if (this.mOnSwitchOnWorkSelectedListener != null) {
             this.mOnSwitchOnWorkSelectedListener.onSwitchOnWorkSelected();
@@ -1151,7 +1149,6 @@ public class ResolverActivity extends Activity
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getForwardToPersonalMsg$2() {
         return getString(R.string.forward_intent_to_owner);
     }
@@ -1173,7 +1170,6 @@ public class ResolverActivity extends Activity
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getForwardToWorkMsg$3() {
         return getString(R.string.forward_intent_to_work);
     }
@@ -1239,7 +1235,6 @@ public class ResolverActivity extends Activity
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isWorkProfileEnabled() {
         UserHandle workUserHandle = getWorkProfileUserHandle();
         UserManager userManager = (UserManager) getSystemService(UserManager.class);
@@ -1361,7 +1356,6 @@ public class ResolverActivity extends Activity
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setAlwaysButtonEnabled(
             boolean hasValidSelection, int checkedPos, boolean filtered) {
         if (!this.mMultiProfilePagerAdapter.getCurrentUserHandle().equals(getUser())) {
@@ -1530,7 +1524,6 @@ public class ResolverActivity extends Activity
                         launcherName);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getWorkProfileNotSupportedMsg$4(String launcherName) {
         return getString(R.string.activity_resolver_work_profiles_support, launcherName);
     }
@@ -2068,7 +2061,6 @@ public class ResolverActivity extends Activity
             final /* synthetic */ ImageView val$icon;
             final /* synthetic */ DisplayResolveInfo val$otherProfileResolveInfo;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(otherProfileResolveInfo);
                 this.val$otherProfileResolveInfo = otherProfileResolveInfo;
@@ -2076,8 +2068,6 @@ public class ResolverActivity extends Activity
                 Objects.requireNonNull(inactiveAdapter);
             }
 
-            /* JADX INFO: Access modifiers changed from: protected */
-            /* JADX WARN: Can't rename method to resolve collision */
             @Override // com.android.internal.app.ResolverListAdapter.LoadIconTask,
                       // android.os.AsyncTask
             public void onPostExecute(Drawable drawable) {
@@ -2182,36 +2172,30 @@ public class ResolverActivity extends Activity
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$configureMiniResolverContent$5(
             CharSequence targetDisplayLabel) {
         return getString(R.string.miniresolver_open_in_personal, targetDisplayLabel);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$configureMiniResolverContent$6() {
         return getString(R.string.miniresolver_use_work_browser);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$configureMiniResolverContent$7(
             CharSequence targetDisplayLabel) {
         return getString(R.string.miniresolver_open_in_work, targetDisplayLabel);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$configureMiniResolverContent$8() {
         return getString(R.string.miniresolver_use_personal_browser);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$configureMiniResolverContent$9(
             DisplayResolveInfo sameProfileResolveInfo, View v) {
         safelyStartActivity(sameProfileResolveInfo);
         finish();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$configureMiniResolverContent$10(
             DisplayResolveInfo otherProfileResolveInfo,
             ResolverListAdapter inactiveAdapter,
@@ -2470,7 +2454,6 @@ public class ResolverActivity extends Activity
                 };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setupProfileTabs$11(
             TabHost tabHost, ViewPager viewPager, String tabId) {
         updateActiveTabStyle(tabHost);
@@ -2512,7 +2495,6 @@ public class ResolverActivity extends Activity
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getPersonalTabLabel$13() {
         return getString(R.string.resolver_personal_tab);
     }
@@ -2534,7 +2516,6 @@ public class ResolverActivity extends Activity
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getWorkTabLabel$14() {
         return getString(R.string.resolver_work_tab);
     }
@@ -2551,7 +2532,6 @@ public class ResolverActivity extends Activity
 
     protected void onProfileTabSelected() {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void resetCheckedItem() {
         if (!this.mIsIntentPicker) {
             return;
@@ -2582,7 +2562,6 @@ public class ResolverActivity extends Activity
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getPersonalTabAccessibilityLabel$15() {
         return getString(R.string.resolver_personal_tab_accessibility);
     }
@@ -2605,7 +2584,6 @@ public class ResolverActivity extends Activity
                         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ String lambda$getWorkTabAccessibilityLabel$16() {
         return getString(R.string.resolver_work_tab_accessibility);
     }
@@ -3341,7 +3319,6 @@ public class ResolverActivity extends Activity
         return aniY;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void semFinishAfterAnimation() {
         View v = findViewById(R.id.contentPanel);
         if (this.mMultiParent == null || this.mGalleryRecyclerView == null) {

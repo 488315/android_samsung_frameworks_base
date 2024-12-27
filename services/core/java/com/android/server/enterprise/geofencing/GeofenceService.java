@@ -195,7 +195,6 @@ public final class GeofenceService extends IGeofencing.Stub implements Enterpris
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.enterprise.geofencing.GeofenceService$1] */
     public GeofenceService(Context context) {
         this.mEDM = null;
         this.mHandlerThread = null;
@@ -830,11 +829,6 @@ public final class GeofenceService extends IGeofencing.Stub implements Enterpris
     
         if (r9 != null) goto L47;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00c5 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r5v0 */
-    /* JADX WARN: Type inference failed for: r5v1, types: [android.database.Cursor] */
-    /* JADX WARN: Type inference failed for: r5v2 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

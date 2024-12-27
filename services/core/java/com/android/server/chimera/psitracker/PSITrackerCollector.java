@@ -14,9 +14,6 @@ public final class PSITrackerCollector {
         this.mAvailableMemRecords = new ArrayList();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0053  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x005b A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -170,7 +170,6 @@ public final class AccountManagerService extends IAccountManager.Stub implements
             this.val$account = account;
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass12(AccountManagerService accountManagerService, UserAccounts userAccounts, IAccountManagerResponse iAccountManagerResponse, String str, boolean z, String str2, Account account, Bundle bundle) {
             super(userAccounts, iAccountManagerResponse, str, z, true, str2, true, true);
             this.val$account = account;
@@ -254,7 +253,6 @@ public final class AccountManagerService extends IAccountManager.Stub implements
         public final /* synthetic */ Account val$account;
         public final /* synthetic */ String val$statusToken;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass15(AccountManagerService accountManagerService, UserAccounts userAccounts, IAccountManagerResponse iAccountManagerResponse, String str, String str2, Account account, String str3) {
             super(userAccounts, iAccountManagerResponse, str, false, false, str2, false, false);
             this.this$0 = accountManagerService;
@@ -262,7 +260,6 @@ public final class AccountManagerService extends IAccountManager.Stub implements
             this.val$statusToken = str3;
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass15(AccountManagerService accountManagerService, UserAccounts userAccounts, IAccountManagerResponse iAccountManagerResponse, String str, boolean z, String str2, Account account, String str3, Bundle bundle) {
             super(userAccounts, iAccountManagerResponse, str, z, true, str2, false, true);
             this.val$account = account;
@@ -391,21 +388,18 @@ public final class AccountManagerService extends IAccountManager.Stub implements
         public final Object val$accountType;
         public final /* synthetic */ Object val$authTokenType;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass7(AccountManagerService accountManagerService, UserAccounts userAccounts, IAccountManagerResponse iAccountManagerResponse, Account account, boolean z) {
             super(userAccounts, iAccountManagerResponse, account.type, z, true, account.name, false, false);
             this.val$authTokenType = accountManagerService;
             this.val$accountType = account;
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass7(AccountManagerService accountManagerService, UserAccounts userAccounts, IAccountManagerResponse iAccountManagerResponse, String str, String str2, String str3) {
             super(userAccounts, iAccountManagerResponse, str, false, false, null, false, false);
             this.val$accountType = str2;
             this.val$authTokenType = str3;
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass7(AccountManagerService accountManagerService, UserAccounts userAccounts, IAccountManagerResponse iAccountManagerResponse, String str, boolean z, Bundle bundle, String str2) {
             super(userAccounts, iAccountManagerResponse, str, z, true, null, false, true);
             this.val$authTokenType = bundle;
@@ -709,8 +703,6 @@ public final class AccountManagerService extends IAccountManager.Stub implements
             super(context);
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r0v0, types: [android.os.IBinder, com.android.server.accounts.AccountManagerService] */
         @Override // com.android.server.SystemService
         public final void onStart() {
             ?? accountManagerService = new AccountManagerService(new Injector(getContext()));
@@ -2286,8 +2278,6 @@ public final class AccountManagerService extends IAccountManager.Stub implements
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0039  */
-    /* JADX WARN: Removed duplicated region for block: B:13:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2479,7 +2469,6 @@ public final class AccountManagerService extends IAccountManager.Stub implements
                             public final /* synthetic */ Bundle val$accountCredentials;
                             public final /* synthetic */ int val$parentUserId;
 
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(userAccounts3, iAccountManagerResponse2, r14, false, false, r15, false, false);
                                 this.val$account = account2;
@@ -4072,7 +4061,6 @@ public final class AccountManagerService extends IAccountManager.Stub implements
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         new AccountManagerServiceShellCommand(this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
     }
@@ -4144,7 +4132,6 @@ public final class AccountManagerService extends IAccountManager.Stub implements
         return null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x018a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4341,7 +4328,6 @@ public final class AccountManagerService extends IAccountManager.Stub implements
     
         throw r0;
      */
-    /* JADX WARN: Finally extract failed */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4553,7 +4539,6 @@ public final class AccountManagerService extends IAccountManager.Stub implements
     
         r4 = 4;
      */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0141  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -4661,8 +4646,6 @@ public final class AccountManagerService extends IAccountManager.Stub implements
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x010c A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00db A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

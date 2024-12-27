@@ -245,7 +245,6 @@ public class PersistentDataBlockService extends SystemService {
             return PersistentDataBlockService.this.isFrpActive();
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(
                 FileDescriptor fileDescriptor,
                 FileDescriptor fileDescriptor2,
@@ -853,7 +852,6 @@ public class PersistentDataBlockService extends SystemService {
 
     private native long nativeGetBlockDeviceSize(String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native int nativeWipe(String str);
 
     public void activateFrp() {
@@ -924,8 +922,6 @@ public class PersistentDataBlockService extends SystemService {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x003b A[Catch: all -> 0x0025, IOException -> 0x0027, LOOP:0: B:11:0x0034->B:13:0x003b, LOOP_END, TRY_LEAVE, TryCatch #0 {IOException -> 0x0027, blocks: (B:30:0x001e, B:32:0x0021, B:10:0x002c, B:11:0x0034, B:13:0x003b, B:9:0x0029), top: B:29:0x001e, outer: #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x003f A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

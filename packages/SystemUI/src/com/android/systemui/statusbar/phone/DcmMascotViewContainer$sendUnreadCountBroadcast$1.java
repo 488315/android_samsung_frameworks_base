@@ -7,8 +7,6 @@ public final class DcmMascotViewContainer$sendUnreadCountBroadcast$1 implements 
         this.this$0 = dcmMascotViewContainer;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x00e5  */
     @Override // java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.

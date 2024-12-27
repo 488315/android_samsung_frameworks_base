@@ -10,7 +10,6 @@ final class DisconnectedDeviceController$updateDevices$1 extends ContinuationImp
     /* synthetic */ Object result;
     final /* synthetic */ DisconnectedDeviceController this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisconnectedDeviceController$updateDevices$1(DisconnectedDeviceController disconnectedDeviceController, Continuation continuation) {
         super(continuation);
         this.this$0 = disconnectedDeviceController;

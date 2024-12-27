@@ -8,7 +8,6 @@ public class MultiResolutionChangeRequestInfo implements Parcelable {
             new Parcelable.Creator<
                     MultiResolutionChangeRequestInfo>() { // from class:
                                                           // com.samsung.android.view.MultiResolutionChangeRequestInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MultiResolutionChangeRequestInfo createFromParcel(Parcel in) {
                     MultiResolutionChangeRequestInfo data = new MultiResolutionChangeRequestInfo();
@@ -16,7 +15,6 @@ public class MultiResolutionChangeRequestInfo implements Parcelable {
                     return data;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public MultiResolutionChangeRequestInfo[] newArray(int size) {
                     return new MultiResolutionChangeRequestInfo[size];

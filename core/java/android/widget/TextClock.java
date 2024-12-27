@@ -250,7 +250,6 @@ public class TextClock extends TextView {
         chooseFormat();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void createTime(String timeZone) {
         if (timeZone != null) {
             this.mTime = Calendar.getInstance(TimeZone.getTimeZone(timeZone));
@@ -335,7 +334,6 @@ public class TextClock extends TextView {
         return this.mFormat;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void chooseFormat() {
         boolean format24Requested = is24HourModeEnabled();
         if (format24Requested) {
@@ -423,7 +421,6 @@ public class TextClock extends TextView {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onTimeChanged() {
         this.mTime.setTimeInMillis(System.currentTimeMillis());
         if (!TextUtils.isEmpty(this.mFormat) && this.mFormat.toString().contains("per")) {

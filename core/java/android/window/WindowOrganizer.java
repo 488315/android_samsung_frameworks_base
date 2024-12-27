@@ -15,8 +15,6 @@ public class WindowOrganizer {
     private static final Singleton<IWindowOrganizerController> IWindowOrganizerControllerSingleton =
             new Singleton<
                     IWindowOrganizerController>() { // from class: android.window.WindowOrganizer.1
-                /* JADX INFO: Access modifiers changed from: protected */
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.util.Singleton
                 public IWindowOrganizerController create() {
                     try {

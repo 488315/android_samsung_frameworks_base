@@ -271,7 +271,6 @@ public class ProcessCpuTracker {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private int[] collectStats(
             String str, int i, boolean z, int[] iArr, ArrayList<Stats> arrayList) {
         int[] iArr2;

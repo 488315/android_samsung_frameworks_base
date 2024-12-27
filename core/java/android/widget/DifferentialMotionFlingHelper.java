@@ -126,7 +126,6 @@ public class DifferentialMotionFlingHelper {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void calculateFlingVelocityThresholds(
             Context context, int[] buffer, MotionEvent event, int axis) {
         int source = event.getSource();
@@ -150,7 +149,6 @@ public class DifferentialMotionFlingHelper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float getCurrentVelocity(VelocityTracker vt, MotionEvent event, int axis) {
         vt.addMovement(event);
         vt.computeCurrentVelocity(1000);

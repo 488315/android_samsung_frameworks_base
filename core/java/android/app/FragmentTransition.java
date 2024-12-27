@@ -1016,7 +1016,6 @@ class FragmentTransition {
         return viewList;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void setViewVisibility(ArrayList<View> views, int visibility) {
         if (views == null) {
             return;

@@ -311,13 +311,10 @@ public final class OverlayManagerService extends SystemService {
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:73:0x00f4, code lost:
         
             if (r5.equals("priority") == false) goto L38;
          */
-        /* JADX WARN: Removed duplicated region for block: B:101:0x0294 A[Catch: Exception -> 0x02bf, TRY_ENTER, TryCatch #1 {Exception -> 0x02bf, blocks: (B:101:0x0294, B:103:0x02bb, B:107:0x02c1), top: B:99:0x0292 }] */
-        /* JADX WARN: Removed duplicated region for block: B:107:0x02c1 A[Catch: Exception -> 0x02bf, TRY_LEAVE, TryCatch #1 {Exception -> 0x02bf, blocks: (B:101:0x0294, B:103:0x02bb, B:107:0x02c1), top: B:99:0x0292 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -377,8 +374,6 @@ public final class OverlayManagerService extends SystemService {
             throw new SecurityException(sb);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:20:0x0059 A[Catch: all -> 0x006e, TryCatch #1 {all -> 0x006e, blocks: (B:6:0x001a, B:8:0x002a, B:10:0x0034, B:12:0x0040, B:14:0x0044, B:16:0x004c, B:20:0x0059, B:22:0x0067, B:25:0x0070, B:26:0x0073, B:27:0x0077, B:29:0x007d, B:31:0x008c, B:34:0x0095, B:35:0x0098, B:40:0x009b, B:41:0x009e, B:33:0x0090), top: B:5:0x001a, inners: #0 }] */
-        /* JADX WARN: Removed duplicated region for block: B:29:0x007d A[Catch: all -> 0x006e, LOOP:0: B:27:0x0077->B:29:0x007d, LOOP_END, TryCatch #1 {all -> 0x006e, blocks: (B:6:0x001a, B:8:0x002a, B:10:0x0034, B:12:0x0040, B:14:0x0044, B:16:0x004c, B:20:0x0059, B:22:0x0067, B:25:0x0070, B:26:0x0073, B:27:0x0077, B:29:0x007d, B:31:0x008c, B:34:0x0095, B:35:0x0098, B:40:0x009b, B:41:0x009e, B:33:0x0090), top: B:5:0x001a, inners: #0 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -735,7 +730,6 @@ public final class OverlayManagerService extends SystemService {
             return OverlayManagerService.this.mImpl.mOverlayConfig.isDefaultPartitionOrder();
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
             new OverlayManagerShellCommand(OverlayManagerService.this.getContext(), this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
         }
@@ -1330,8 +1324,6 @@ public final class OverlayManagerService extends SystemService {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v0, types: [android.content.om.IOverlayManager$Stub, android.os.IBinder, com.android.server.om.OverlayManagerService$1] */
     public OverlayManagerService(Context context) {
         super(context);
         this.mLock = new Object();

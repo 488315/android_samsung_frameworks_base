@@ -19,7 +19,6 @@ final class UserSwitcherInteractor$userRecords$1 extends SuspendLambda implement
     int label;
     final /* synthetic */ UserSwitcherInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UserSwitcherInteractor$userRecords$1(UserSwitcherInteractor userSwitcherInteractor, Continuation continuation) {
         super(5, continuation);
         this.this$0 = userSwitcherInteractor;
@@ -35,12 +34,6 @@ final class UserSwitcherInteractor$userRecords$1 extends SuspendLambda implement
         return userSwitcherInteractor$userRecords$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0104  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x00ce  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:20:0x00fc -> B:6:0x00fd). Please report as a decompilation issue!!! */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:33:0x00a5 -> B:27:0x00a6). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.

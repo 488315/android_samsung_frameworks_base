@@ -182,14 +182,6 @@ public final class NotificationRecord {
         Log.isLoggable("NotificationRecord", 3);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0144  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0156  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0158  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x01bb  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x01cb  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0222 A[Catch: all -> 0x024b, TRY_ENTER, TryCatch #1 {all -> 0x024b, blocks: (B:47:0x0216, B:54:0x0222, B:56:0x0234, B:58:0x0238, B:61:0x0247), top: B:46:0x0216 }] */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x01d1  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x01c2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

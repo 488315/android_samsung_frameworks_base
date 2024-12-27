@@ -263,7 +263,6 @@ public interface ITunerCallback extends IInterface {
             _arg0.put(k, v);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements ITunerCallback {
             private IBinder mRemote;
 

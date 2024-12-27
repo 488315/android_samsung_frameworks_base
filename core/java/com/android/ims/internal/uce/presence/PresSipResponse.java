@@ -8,13 +8,11 @@ public class PresSipResponse implements Parcelable {
             new Parcelable.Creator<
                     PresSipResponse>() { // from class:
                                          // com.android.ims.internal.uce.presence.PresSipResponse.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PresSipResponse createFromParcel(Parcel source) {
                     return new PresSipResponse(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PresSipResponse[] newArray(int size) {
                     return new PresSipResponse[size];

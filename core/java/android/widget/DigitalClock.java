@@ -75,7 +75,6 @@ public class DigitalClock extends TextView {
         getContext().getContentResolver().unregisterContentObserver(this.mFormatChangeObserver);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setFormat() {
         this.mFormat = DateFormat.getTimeFormatString(getContext());
     }

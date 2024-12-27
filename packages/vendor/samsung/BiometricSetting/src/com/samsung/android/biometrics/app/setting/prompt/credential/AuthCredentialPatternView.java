@@ -28,7 +28,6 @@ public class AuthCredentialPatternView extends AuthCredentialView
     public FrameLayout mLockPatternLayout;
     public LockPatternView mLockPatternView;
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.samsung.android.biometrics.app.setting.prompt.credential.AuthCredentialPatternView$1] */
     public AuthCredentialPatternView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mClearPatternRunnable =

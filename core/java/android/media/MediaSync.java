@@ -46,7 +46,6 @@ public final class MediaSync {
 
     private final native void native_flush();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final native long native_getPlayTimeForPendingAudioFrames();
 
     private final native boolean native_getTimestamp(MediaTimestamp mediaTimestamp);
@@ -65,7 +64,6 @@ public final class MediaSync {
 
     private final native void native_setup();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final native void native_updateQueuedAudioData(int i, long j);
 
     public final native Surface createInputSurface();
@@ -212,7 +210,6 @@ public final class MediaSync {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postRenderAudio(long delayMillis) {
         this.mAudioHandler.postDelayed(
                 new Runnable() { // from class: android.media.MediaSync.1
@@ -265,7 +262,6 @@ public final class MediaSync {
                 delayMillis);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void postReturnByteBuffer(final AudioBuffer audioBuffer) {
         synchronized (this.mCallbackLock) {
             if (this.mCallbackHandler != null) {

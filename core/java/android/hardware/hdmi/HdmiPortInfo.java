@@ -13,7 +13,6 @@ public final class HdmiPortInfo implements Parcelable {
     public static final Parcelable.Creator<HdmiPortInfo> CREATOR =
             new Parcelable.Creator<
                     HdmiPortInfo>() { // from class: android.hardware.hdmi.HdmiPortInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HdmiPortInfo createFromParcel(Parcel source) {
                     int id = source.readInt();
@@ -31,7 +30,6 @@ public final class HdmiPortInfo implements Parcelable {
                             .build();
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HdmiPortInfo[] newArray(int size) {
                     return new HdmiPortInfo[size];

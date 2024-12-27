@@ -12,14 +12,12 @@ import java.util.Objects;
 public final class RampSegment extends VibrationEffectSegment {
     public static final Parcelable.Creator<RampSegment> CREATOR =
             new Parcelable.Creator<RampSegment>() { // from class: android.os.vibrator.RampSegment.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RampSegment createFromParcel(Parcel in) {
                     in.readInt();
                     return new RampSegment(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RampSegment[] newArray(int size) {
                     return new RampSegment[size];

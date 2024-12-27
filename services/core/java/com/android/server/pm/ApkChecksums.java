@@ -523,8 +523,6 @@ public abstract class ApkChecksums {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v6 */
     public static void processRequiredChecksums(
             final List list,
             final List list2,

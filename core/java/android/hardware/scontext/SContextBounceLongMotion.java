@@ -9,13 +9,11 @@ public class SContextBounceLongMotion extends SContextEventContext {
     public static final Parcelable.Creator<SContextBounceLongMotion> CREATOR =
             new Parcelable.Creator<SContextBounceLongMotion>() { // from class:
                 // android.hardware.scontext.SContextBounceLongMotion.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextBounceLongMotion createFromParcel(Parcel in) {
                     return new SContextBounceLongMotion(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SContextBounceLongMotion[] newArray(int size) {
                     return new SContextBounceLongMotion[size];

@@ -895,7 +895,6 @@ class GLLogWrapper extends GLWrapperBase {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public ByteBuffer toByteBuffer(int byteCount, Buffer input) {
         ByteBuffer result;
         boolean convertWholeBuffer = byteCount < 0;
@@ -990,7 +989,6 @@ class GLLogWrapper extends GLWrapperBase {
         return result;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0044, code lost:
 
        return r0;

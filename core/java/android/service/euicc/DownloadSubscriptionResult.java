@@ -10,13 +10,11 @@ public final class DownloadSubscriptionResult implements Parcelable {
             new Parcelable.Creator<
                     DownloadSubscriptionResult>() { // from class:
                                                     // android.service.euicc.DownloadSubscriptionResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DownloadSubscriptionResult createFromParcel(Parcel in) {
                     return new DownloadSubscriptionResult(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DownloadSubscriptionResult[] newArray(int size) {
                     return new DownloadSubscriptionResult[size];

@@ -11,7 +11,6 @@ public class CallForwardInfo implements Parcelable {
     public static final Parcelable.Creator<CallForwardInfo> CREATOR =
             new Parcelable.Creator<CallForwardInfo>() { // from class:
                 // android.hardware.radio.voice.CallForwardInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallForwardInfo createFromParcel(Parcel _aidl_source) {
                     CallForwardInfo _aidl_out = new CallForwardInfo();
@@ -19,7 +18,6 @@ public class CallForwardInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CallForwardInfo[] newArray(int _aidl_size) {
                     return new CallForwardInfo[_aidl_size];

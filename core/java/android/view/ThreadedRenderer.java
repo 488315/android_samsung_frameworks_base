@@ -372,7 +372,6 @@ public final class ThreadedRenderer extends HardwareRenderer {
         return this.mHeight;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static int dumpArgsToFlags(String[] args) {
         char c;
         if (args == null || args.length == 0) {

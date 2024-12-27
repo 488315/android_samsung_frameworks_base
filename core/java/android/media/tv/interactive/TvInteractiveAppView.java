@@ -252,7 +252,6 @@ public class TvInteractiveAppView extends ViewGroup {
         resetInternal();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void createSessionMediaView() {
         if (this.mSession == null || !isAttachedToWindow() || this.mMediaViewCreated) {
             return;
@@ -271,7 +270,6 @@ public class TvInteractiveAppView extends ViewGroup {
         this.mMediaViewFrame = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void relayoutSessionMediaView() {
         if (this.mSession == null || !isAttachedToWindow() || !this.mMediaViewCreated) {
             return;
@@ -293,7 +291,6 @@ public class TvInteractiveAppView extends ViewGroup {
         return frame;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setSessionSurface(Surface surface) {
         if (this.mSession == null) {
             return;
@@ -301,7 +298,6 @@ public class TvInteractiveAppView extends ViewGroup {
         this.mSession.setSurface(surface);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchSurfaceChanged(int format, int width, int height) {
         if (this.mSession == null) {
             return;
@@ -676,7 +672,6 @@ public class TvInteractiveAppView extends ViewGroup {
         public void onRequestTvRecordingInfoList(String iAppServiceId, int type) {}
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     class MySessionCallback extends TvInteractiveAppManager.SessionCallback {
         final String mIAppServiceId;
         int mType;
@@ -764,7 +759,6 @@ public class TvInteractiveAppView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCommandRequest$0(String cmdType, Bundle parameters) {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
@@ -799,7 +793,6 @@ public class TvInteractiveAppView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onTimeShiftCommandRequest$1(
                 String cmdType, Bundle parameters) {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
@@ -832,7 +825,6 @@ public class TvInteractiveAppView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSessionStateChanged$2(int state, int err) {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
@@ -867,7 +859,6 @@ public class TvInteractiveAppView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onBiInteractiveAppCreated$3(
                 Uri biIAppUri, String biIAppId) {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
@@ -909,7 +900,6 @@ public class TvInteractiveAppView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSetVideoBounds$4(Rect rect) {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
@@ -941,7 +931,6 @@ public class TvInteractiveAppView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRequestCurrentVideoBounds$5() {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
@@ -972,7 +961,6 @@ public class TvInteractiveAppView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRequestCurrentChannelUri$6() {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
@@ -1003,7 +991,6 @@ public class TvInteractiveAppView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRequestCurrentChannelLcn$7() {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
@@ -1034,7 +1021,6 @@ public class TvInteractiveAppView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRequestStreamVolume$8() {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
@@ -1064,7 +1050,6 @@ public class TvInteractiveAppView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRequestTrackInfoList$9() {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
@@ -1094,7 +1079,6 @@ public class TvInteractiveAppView extends ViewGroup {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onRequestSelectedTrackInfo$10() {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {

@@ -41,7 +41,6 @@ public class RcsFeature extends ImsFeature {
     private Executor mExecutor;
     private final RcsFeatureBinder mImsRcsBinder;
 
-    /* JADX INFO: Access modifiers changed from: private */
     static final class RcsFeatureBinder extends IImsRcsFeature.Stub {
         private Executor mExecutor;
         private final RcsFeature mReference;
@@ -70,12 +69,10 @@ public class RcsFeature extends ImsFeature {
                     .intValue();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$queryCapabilityStatus$0() {
             return Integer.valueOf(this.mReference.queryCapabilityStatus().mCapabilities);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$addCapabilityCallback$1(IImsCapabilityCallback c) {
             this.mReference.addCapabilityCallback(c);
         }
@@ -93,7 +90,6 @@ public class RcsFeature extends ImsFeature {
                     "addCapabilityCallback");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$removeCapabilityCallback$2(IImsCapabilityCallback c) {
             this.mReference.removeCapabilityCallback(c);
         }
@@ -112,7 +108,6 @@ public class RcsFeature extends ImsFeature {
                     "removeCapabilityCallback");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$changeCapabilitiesConfiguration$3(
                 CapabilityChangeRequest r, IImsCapabilityCallback c) {
             this.mReference.requestChangeEnabledCapabilities(r, c);
@@ -134,7 +129,6 @@ public class RcsFeature extends ImsFeature {
                     "changeCapabilitiesConfiguration");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$queryCapabilityConfiguration$4(
                 int capability, int radioTech, IImsCapabilityCallback c) {
             this.mReference.queryCapabilityConfigurationInternal(capability, radioTech, c);
@@ -191,7 +185,6 @@ public class RcsFeature extends ImsFeature {
                     "setCapabilityExchangeEventListener");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setCapabilityExchangeEventListener$5(
                 CapabilityExchangeEventListener listenerWrapper) {
             this.mReference.setCapabilityExchangeEventListener(listenerWrapper);
@@ -214,7 +207,6 @@ public class RcsFeature extends ImsFeature {
                     "publishCapabilities");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$publishCapabilities$6(
                 String pidfXml,
                 RcsCapabilityExchangeImplBase.PublishResponseCallback callbackWrapper) {
@@ -240,7 +232,6 @@ public class RcsFeature extends ImsFeature {
                     "subscribeForCapabilities");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$subscribeForCapabilities$7(
                 List uris, RcsCapabilityExchangeImplBase.SubscribeResponseCallback wrapper) {
             this.mReference
@@ -268,7 +259,6 @@ public class RcsFeature extends ImsFeature {
                     "sendOptionsCapabilityRequest");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$sendOptionsCapabilityRequest$8(
                 Uri contactUri,
                 List myCapabilities,
@@ -433,7 +423,6 @@ public class RcsFeature extends ImsFeature {
         return this.mImsRcsBinder;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setCapabilityExchangeEventListener(CapabilityExchangeEventListener listener) {
         synchronized (this.mLock) {
             this.mCapExchangeEventListener = listener;
@@ -457,7 +446,6 @@ public class RcsFeature extends ImsFeature {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public RcsCapabilityExchangeImplBase getCapabilityExchangeImplBaseInternal() {
         RcsCapabilityExchangeImplBase rcsCapabilityExchangeImplBase;
         synchronized (this.mLock) {

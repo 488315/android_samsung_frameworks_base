@@ -8,7 +8,6 @@ public class BrakingPwle implements Parcelable {
     public static final Parcelable.Creator<BrakingPwle> CREATOR =
             new Parcelable.Creator<
                     BrakingPwle>() { // from class: android.hardware.vibrator.BrakingPwle.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BrakingPwle createFromParcel(Parcel _aidl_source) {
                     BrakingPwle _aidl_out = new BrakingPwle();
@@ -16,7 +15,6 @@ public class BrakingPwle implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BrakingPwle[] newArray(int _aidl_size) {
                     return new BrakingPwle[_aidl_size];

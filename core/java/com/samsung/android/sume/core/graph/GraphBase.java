@@ -42,7 +42,6 @@ public abstract class GraphBase<T> implements Graph<T> {
         this.option = option;
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:16:0x0094 -> B:12:0x00a3). Please report as a decompilation issue!!! */
     private MediaBuffer onReceiveOutputBuffer(MediaBuffer mediaBuffer) {
         MediaType outMediaType = mediaBuffer.getFormat().getMediaType();
         MediaBuffer storedOutput =

@@ -28,7 +28,6 @@ final class LogContextInteractorImpl$addBiometricContextListener$1 extends Suspe
         /* synthetic */ int I$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(IBiometricContextListener iBiometricContextListener, Continuation continuation) {
             super(2, continuation);
             this.$listener = iBiometricContextListener;
@@ -92,7 +91,6 @@ final class LogContextInteractorImpl$addBiometricContextListener$1 extends Suspe
         /* synthetic */ int I$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(IBiometricContextListener iBiometricContextListener, Continuation continuation) {
             super(2, continuation);
             this.$listener = iBiometricContextListener;
@@ -156,7 +154,6 @@ final class LogContextInteractorImpl$addBiometricContextListener$1 extends Suspe
         /* synthetic */ boolean Z$0;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass5(IBiometricContextListener iBiometricContextListener, Continuation continuation) {
             super(2, continuation);
             this.$listener = iBiometricContextListener;
@@ -216,7 +213,6 @@ final class LogContextInteractorImpl$addBiometricContextListener$1 extends Suspe
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LogContextInteractorImpl$addBiometricContextListener$1(LogContextInteractorImpl logContextInteractorImpl, IBiometricContextListener iBiometricContextListener, Continuation continuation) {
         super(2, continuation);
         this.this$0 = logContextInteractorImpl;

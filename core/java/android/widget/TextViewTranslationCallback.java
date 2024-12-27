@@ -102,7 +102,6 @@ public class TextViewTranslationCallback implements ViewTranslationCallback {
         return true;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onShowTranslation$0(
             WeakReference textViewRef, TransformationMethod transformation) {
         this.mIsShowingTranslation = true;
@@ -157,7 +156,6 @@ public class TextViewTranslationCallback implements ViewTranslationCallback {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onHideTranslation$1(
             WeakReference textViewRef, TransformationMethod transformation) {
         this.mIsShowingTranslation = false;

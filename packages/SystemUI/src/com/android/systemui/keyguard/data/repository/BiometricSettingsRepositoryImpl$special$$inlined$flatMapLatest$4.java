@@ -17,7 +17,6 @@ public final class BiometricSettingsRepositoryImpl$special$$inlined$flatMapLates
     int label;
     final /* synthetic */ BiometricSettingsRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$4(Continuation continuation, BiometricSettingsRepositoryImpl biometricSettingsRepositoryImpl) {
         super(3, continuation);
         this.this$0 = biometricSettingsRepositoryImpl;

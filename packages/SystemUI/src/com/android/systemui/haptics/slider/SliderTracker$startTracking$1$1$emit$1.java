@@ -10,7 +10,6 @@ final class SliderTracker$startTracking$1$1$emit$1 extends ContinuationImpl {
     /* synthetic */ Object result;
     final /* synthetic */ SliderTracker$startTracking$1.AnonymousClass1 this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SliderTracker$startTracking$1$1$emit$1(SliderTracker$startTracking$1.AnonymousClass1 anonymousClass1, Continuation continuation) {
         super(continuation);
         this.this$0 = anonymousClass1;

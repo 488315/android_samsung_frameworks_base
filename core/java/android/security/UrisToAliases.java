@@ -18,7 +18,6 @@ public final class UrisToAliases implements Parcelable {
     public static final Parcelable.Creator<UrisToAliases> CREATOR =
             new Parcelable.Creator<
                     UrisToAliases>() { // from class: android.security.UrisToAliases.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UrisToAliases createFromParcel(Parcel in) {
                     Map<Uri, String> urisToAliases = new HashMap<>();
@@ -26,7 +25,6 @@ public final class UrisToAliases implements Parcelable {
                     return new UrisToAliases(urisToAliases);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UrisToAliases[] newArray(int size) {
                     return new UrisToAliases[size];

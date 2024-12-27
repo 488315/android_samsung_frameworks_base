@@ -419,7 +419,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ InputMethodManagerService this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public DexOnPCStateChangeObserver(int i, InputMethodManagerService inputMethodManagerService) {
             super(new Handler());
             this.$r8$classId = i;
@@ -917,7 +916,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
     public final class Lifecycle extends SystemService {
         public final InputMethodManagerService mService;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public Lifecycle(Context context) {
             super(context);
             InputMethodManagerService inputMethodManagerService = new InputMethodManagerService(context, context.getPackageManager().hasSystemFeature("android.hardware.type.automotive") && UserManager.isVisibleBackgroundUsersEnabled() && context.getResources().getBoolean(R.bool.config_perDisplayFocusEnabled) && Flags.concurrentInputMethods(), null, null, null);
@@ -1319,12 +1317,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
             this.mDataClearedPackages.clear();
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:35:0x00f9 A[Catch: all -> 0x005c, TryCatch #3 {all -> 0x005c, blocks: (B:4:0x0016, B:7:0x001f, B:9:0x003a, B:12:0x004c, B:14:0x0058, B:15:0x005f, B:17:0x006a, B:19:0x0086, B:23:0x00cb, B:24:0x0094, B:27:0x00a8, B:31:0x00d1, B:35:0x00f9, B:36:0x00fe, B:39:0x0204, B:43:0x0108, B:46:0x0152, B:48:0x015c, B:50:0x015f, B:52:0x0167, B:56:0x0175, B:58:0x017d, B:60:0x018f, B:62:0x01b5, B:64:0x01ca, B:66:0x01e0, B:67:0x01e6, B:70:0x01d3, B:78:0x011a, B:80:0x012d, B:86:0x013b, B:92:0x0149, B:94:0x01e8, B:100:0x01f5, B:101:0x01f8, B:108:0x0200, B:109:0x0203, B:116:0x00db, B:118:0x00e8, B:120:0x00ee, B:121:0x00f1), top: B:3:0x0016 }] */
-        /* JADX WARN: Removed duplicated region for block: B:38:0x0106  */
-        /* JADX WARN: Removed duplicated region for block: B:43:0x0108 A[Catch: all -> 0x005c, TryCatch #3 {all -> 0x005c, blocks: (B:4:0x0016, B:7:0x001f, B:9:0x003a, B:12:0x004c, B:14:0x0058, B:15:0x005f, B:17:0x006a, B:19:0x0086, B:23:0x00cb, B:24:0x0094, B:27:0x00a8, B:31:0x00d1, B:35:0x00f9, B:36:0x00fe, B:39:0x0204, B:43:0x0108, B:46:0x0152, B:48:0x015c, B:50:0x015f, B:52:0x0167, B:56:0x0175, B:58:0x017d, B:60:0x018f, B:62:0x01b5, B:64:0x01ca, B:66:0x01e0, B:67:0x01e6, B:70:0x01d3, B:78:0x011a, B:80:0x012d, B:86:0x013b, B:92:0x0149, B:94:0x01e8, B:100:0x01f5, B:101:0x01f8, B:108:0x0200, B:109:0x0203, B:116:0x00db, B:118:0x00e8, B:120:0x00ee, B:121:0x00f1), top: B:3:0x0016 }] */
-        /* JADX WARN: Removed duplicated region for block: B:64:0x01ca A[Catch: all -> 0x005c, TryCatch #3 {all -> 0x005c, blocks: (B:4:0x0016, B:7:0x001f, B:9:0x003a, B:12:0x004c, B:14:0x0058, B:15:0x005f, B:17:0x006a, B:19:0x0086, B:23:0x00cb, B:24:0x0094, B:27:0x00a8, B:31:0x00d1, B:35:0x00f9, B:36:0x00fe, B:39:0x0204, B:43:0x0108, B:46:0x0152, B:48:0x015c, B:50:0x015f, B:52:0x0167, B:56:0x0175, B:58:0x017d, B:60:0x018f, B:62:0x01b5, B:64:0x01ca, B:66:0x01e0, B:67:0x01e6, B:70:0x01d3, B:78:0x011a, B:80:0x012d, B:86:0x013b, B:92:0x0149, B:94:0x01e8, B:100:0x01f5, B:101:0x01f8, B:108:0x0200, B:109:0x0203, B:116:0x00db, B:118:0x00e8, B:120:0x00ee, B:121:0x00f1), top: B:3:0x0016 }] */
-        /* JADX WARN: Removed duplicated region for block: B:66:0x01e0 A[Catch: all -> 0x005c, TryCatch #3 {all -> 0x005c, blocks: (B:4:0x0016, B:7:0x001f, B:9:0x003a, B:12:0x004c, B:14:0x0058, B:15:0x005f, B:17:0x006a, B:19:0x0086, B:23:0x00cb, B:24:0x0094, B:27:0x00a8, B:31:0x00d1, B:35:0x00f9, B:36:0x00fe, B:39:0x0204, B:43:0x0108, B:46:0x0152, B:48:0x015c, B:50:0x015f, B:52:0x0167, B:56:0x0175, B:58:0x017d, B:60:0x018f, B:62:0x01b5, B:64:0x01ca, B:66:0x01e0, B:67:0x01e6, B:70:0x01d3, B:78:0x011a, B:80:0x012d, B:86:0x013b, B:92:0x0149, B:94:0x01e8, B:100:0x01f5, B:101:0x01f8, B:108:0x0200, B:109:0x0203, B:116:0x00db, B:118:0x00e8, B:120:0x00ee, B:121:0x00f1), top: B:3:0x0016 }] */
-        /* JADX WARN: Removed duplicated region for block: B:69:0x01d1  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1521,10 +1513,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
             }
         }
 
-        /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Finally extract failed */
-        /* JADX WARN: Removed duplicated region for block: B:196:0x0351 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:27:0x00e6 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1805,10 +1793,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0097 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0080 A[Catch: all -> 0x0030, TRY_LEAVE, TryCatch #0 {all -> 0x0030, blocks: (B:3:0x000d, B:14:0x0050, B:18:0x006a, B:23:0x0078, B:36:0x0080, B:37:0x0025, B:40:0x0033, B:43:0x003e), top: B:2:0x000d }] */
     /* renamed from: -$$Nest$mhandleShellCommandTraceInputMethod, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2122,9 +2106,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
         return z2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0066  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x00ea A[Catch: all -> 0x0010, TryCatch #0 {all -> 0x0010, blocks: (B:4:0x0006, B:6:0x000d, B:10:0x0013, B:12:0x0024, B:13:0x0030, B:16:0x0037, B:21:0x0055, B:22:0x005f, B:27:0x0071, B:29:0x007b, B:31:0x0085, B:34:0x0099, B:36:0x00a5, B:38:0x00ab, B:40:0x00b7, B:42:0x00c1, B:44:0x00ca, B:49:0x00e1, B:54:0x008a, B:55:0x006a, B:56:0x00e4, B:58:0x00ea, B:59:0x00ed, B:62:0x00f0, B:64:0x004d), top: B:3:0x0006 }] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x00f0 A[Catch: all -> 0x0010, DONT_GENERATE, TryCatch #0 {all -> 0x0010, blocks: (B:4:0x0006, B:6:0x000d, B:10:0x0013, B:12:0x0024, B:13:0x0030, B:16:0x0037, B:21:0x0055, B:22:0x005f, B:27:0x0071, B:29:0x007b, B:31:0x0085, B:34:0x0099, B:36:0x00a5, B:38:0x00ab, B:40:0x00b7, B:42:0x00c1, B:44:0x00ca, B:49:0x00e1, B:54:0x008a, B:55:0x006a, B:56:0x00e4, B:58:0x00ea, B:59:0x00ed, B:62:0x00f0, B:64:0x004d), top: B:3:0x0006 }] */
     /* renamed from: -$$Nest$mswitchToPreviousInputMethod, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -2180,11 +2161,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
         inputMethodManagerService.mAccessControlKeyboardBlockEnable = Settings.System.getIntForUser(inputMethodManagerService.mContext.getContentResolver(), "access_control_keyboard_block", 1, i2) != 0;
     }
 
-    /* JADX WARN: Type inference failed for: r10v28, types: [com.android.server.inputmethod.InputMethodManagerService$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.inputmethod.InputMethodManagerService$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.inputmethod.InputMethodManagerService$1] */
-    /* JADX WARN: Type inference failed for: r3v12, types: [com.android.server.inputmethod.InputMethodManagerService$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.server.inputmethod.InputMethodManagerService$5] */
     public InputMethodManagerService(final Context context, boolean z, ServiceThread serviceThread, ServiceThread serviceThread2, IntFunction intFunction) {
         Pair lastSubtypeForInputMethodInternal;
         final int i = 0;
@@ -2985,8 +2961,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x009b A[LOOP:0: B:5:0x001a->B:10:0x009b, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x009a A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3533,16 +3507,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
         return this.mContext.getContentResolver().call(DICTATION, "handle_dictation_for_hw_voice_key", (String) null, m).getBoolean("dictation_executed", false);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v103 */
-    /* JADX WARN: Type inference failed for: r0v104 */
-    /* JADX WARN: Type inference failed for: r0v107 */
-    /* JADX WARN: Type inference failed for: r0v48 */
-    /* JADX WARN: Type inference failed for: r0v49 */
-    /* JADX WARN: Type inference failed for: r0v54 */
-    /* JADX WARN: Type inference failed for: r0v62 */
-    /* JADX WARN: Type inference failed for: r0v63 */
-    /* JADX WARN: Type inference failed for: r0v67 */
     @Override // android.os.Handler.Callback
     public final boolean handleMessage(Message message) {
         boolean z;
@@ -3947,9 +3911,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
     
         if ((r6.mImeWindowVis & 1) == 0) goto L22;
      */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0059  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0101  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00cf  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3962,8 +3923,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.inputmethod.InputMethodManagerService.hideCurrentInputLocked(android.os.IBinder, android.view.inputmethod.ImeTracker$Token, int, android.os.ResultReceiver, int):boolean");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0082 A[Catch: all -> 0x003d, TryCatch #1 {all -> 0x003d, blocks: (B:4:0x0023, B:7:0x002b, B:11:0x0077, B:13:0x0082, B:15:0x0088, B:16:0x0097, B:17:0x00ac, B:20:0x0090, B:21:0x00ae, B:37:0x00de, B:38:0x00e4, B:40:0x00e6, B:41:0x00ec, B:44:0x0103, B:45:0x0109, B:48:0x010b, B:49:0x0111, B:52:0x0046, B:55:0x0067, B:56:0x006d, B:60:0x0070, B:61:0x0076, B:23:0x00b2, B:25:0x00bd, B:27:0x00c1, B:29:0x00c5, B:31:0x00c9, B:35:0x00d7, B:43:0x00ee, B:54:0x004a), top: B:3:0x0023, inners: #0, #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00ae A[Catch: all -> 0x003d, TRY_LEAVE, TryCatch #1 {all -> 0x003d, blocks: (B:4:0x0023, B:7:0x002b, B:11:0x0077, B:13:0x0082, B:15:0x0088, B:16:0x0097, B:17:0x00ac, B:20:0x0090, B:21:0x00ae, B:37:0x00de, B:38:0x00e4, B:40:0x00e6, B:41:0x00ec, B:44:0x0103, B:45:0x0109, B:48:0x010b, B:49:0x0111, B:52:0x0046, B:55:0x0067, B:56:0x006d, B:60:0x0070, B:61:0x0076, B:23:0x00b2, B:25:0x00bd, B:27:0x00c1, B:29:0x00c5, B:31:0x00c9, B:35:0x00d7, B:43:0x00ee, B:54:0x004a), top: B:3:0x0023, inners: #0, #2 }] */
     @Override // com.android.server.inputmethod.IInputMethodManagerImpl.Callback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -4427,16 +4386,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0081 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00d1  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x010c  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x016d  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0196  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x01ba  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x01be  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x01a9  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0177  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0092  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5476,8 +5425,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x008c A[Catch: all -> 0x007c, TryCatch #7 {all -> 0x007c, blocks: (B:26:0x006d, B:28:0x0075, B:31:0x0084, B:33:0x008c, B:34:0x00ad, B:37:0x00b2, B:39:0x00be, B:48:0x00d5, B:49:0x00d8, B:59:0x00f8, B:60:0x00fb, B:65:0x0105, B:66:0x0108, B:166:0x0081), top: B:25:0x006d }] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00b2 A[Catch: all -> 0x007c, TRY_ENTER, TryCatch #7 {all -> 0x007c, blocks: (B:26:0x006d, B:28:0x0075, B:31:0x0084, B:33:0x008c, B:34:0x00ad, B:37:0x00b2, B:39:0x00be, B:48:0x00d5, B:49:0x00d8, B:59:0x00f8, B:60:0x00fb, B:65:0x0105, B:66:0x0108, B:166:0x0081), top: B:25:0x006d }] */
     @Override // com.android.server.inputmethod.IInputMethodManagerImpl.Callback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -5499,11 +5446,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
     
         r4 = false;
      */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x02a2  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0317  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0320  */
-    /* JADX WARN: Removed duplicated region for block: B:84:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x031d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5516,16 +5458,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
         throw new UnsupportedOperationException("Method not decompiled: com.android.server.inputmethod.InputMethodManagerService.startInputOrWindowGainedFocusInternalLocked(int, android.os.IBinder, int, int, int, android.view.inputmethod.EditorInfo, com.android.internal.inputmethod.IRemoteInputConnection, com.android.internal.inputmethod.IRemoteAccessibilityInputConnection, int, com.android.server.inputmethod.InputMethodBindingController, android.window.ImeOnBackInvokedDispatcher, com.android.server.inputmethod.ClientState):com.android.internal.inputmethod.InputBindResult");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:105:0x02dd A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:135:0x00fd  */
-    /* JADX WARN: Removed duplicated region for block: B:138:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x0047  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0045  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0056  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x008a  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00e6  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0112  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x011e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -5791,7 +5723,6 @@ public final class InputMethodManagerService implements IInputMethodManagerImpl.
         sendOnNavButtonFlagsChangedLocked();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0072 A[Catch: all -> 0x0035, TRY_LEAVE, TryCatch #0 {all -> 0x0035, blocks: (B:37:0x0028, B:39:0x0030, B:42:0x0037, B:11:0x0042, B:13:0x0048, B:15:0x004c, B:17:0x0055, B:19:0x005d, B:23:0x006a, B:25:0x0072, B:35:0x0052), top: B:36:0x0028 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

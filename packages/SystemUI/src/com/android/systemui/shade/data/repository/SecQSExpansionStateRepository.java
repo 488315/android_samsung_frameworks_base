@@ -46,7 +46,6 @@ public final class SecQSExpansionStateRepository {
         /* synthetic */ boolean Z$4;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(Function1 function1, Continuation continuation) {
             super(6, continuation);
             this.$notify = function1;

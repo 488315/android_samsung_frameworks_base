@@ -27,7 +27,6 @@ public final class SystemRequestObserver {
     public final Object mLock = new Object();
     public final Map mDisplaysRestrictions = new HashMap();
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.display.mode.SystemRequestObserver$1] */
     public SystemRequestObserver(VotesStorage votesStorage) {
         this.mVotesStorage = votesStorage;
     }

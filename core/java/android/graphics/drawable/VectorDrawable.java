@@ -64,111 +64,84 @@ public class VectorDrawable extends Drawable {
     private final Rect mTmpBounds;
     private VectorDrawableState mVectorState;
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nAddChild(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreateClipPath();
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreateClipPath(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreateFullPath();
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreateFullPath(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreateGroup();
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreateGroup(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreateTree(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreateTreeFromCopy(long j, long j2);
 
     private static native int nDraw(long j, long j2, long j3, Rect rect, boolean z, boolean z2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetFillAlpha(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native int nGetFillColor(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native boolean nGetFullPathProperties(long j, byte[] bArr, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native boolean nGetGroupProperties(long j, float[] fArr, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetPivotX(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetPivotY(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetRootAlpha(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetRotation(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetScaleX(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetScaleY(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetStrokeAlpha(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native int nGetStrokeColor(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetStrokeWidth(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetTranslateX(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetTranslateY(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetTrimPathEnd(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetTrimPathOffset(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native float nGetTrimPathStart(long j);
 
@@ -178,89 +151,67 @@ public class VectorDrawable extends Drawable {
     @FastNative
     private static native void nSetAntiAlias(long j, boolean z);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetFillAlpha(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetFillColor(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nSetName(long j, String str);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetPathData(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nSetPathString(long j, String str, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetPivotX(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetPivotY(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetRendererViewportSize(long j, float f, float f2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native boolean nSetRootAlpha(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetRotation(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetScaleX(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetScaleY(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetStrokeAlpha(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetStrokeColor(long j, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetStrokeWidth(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetTranslateX(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetTranslateY(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetTrimPathEnd(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetTrimPathOffset(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nSetTrimPathStart(long j, float f);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nUpdateFullPathFillGradient(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nUpdateFullPathProperties(
             long j,
@@ -277,11 +228,9 @@ public class VectorDrawable extends Drawable {
             int i4,
             int i5);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nUpdateFullPathStrokeGradient(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nUpdateGroupProperties(
             long j, float f, float f2, float f3, float f4, float f5, float f6, float f7);
@@ -621,7 +570,6 @@ public class VectorDrawable extends Drawable {
         this.mVectorState.mRootGroup.updatePathColorTraversal(pathName, color, 2);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void updatePathColor(VFullPath path, int color, int updateMode) {
         switch (updateMode) {
             case 0:
@@ -921,7 +869,6 @@ public class VectorDrawable extends Drawable {
             onTreeConstructionFinished();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void createNativeTree(VGroup rootGroup) {
             this.mNativeTree =
                     new VirtualRefBasePtr(VectorDrawable.nCreateTree(rootGroup.mNativePtr));

@@ -15,7 +15,6 @@ public interface AnimatedValue<T> {
             this.onStopAnimating = function0;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public static /* synthetic */ Animating copy$default(Animating animating, Object obj, Function0 function0, int i, Object obj2) {
             if ((i & 1) != 0) {
                 obj = animating.value;
@@ -75,7 +74,6 @@ public interface AnimatedValue<T> {
             this.value = t;
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
         public static /* synthetic */ NotAnimating copy$default(NotAnimating notAnimating, Object obj, int i, Object obj2) {
             if ((i & 1) != 0) {
                 obj = notAnimating.value;

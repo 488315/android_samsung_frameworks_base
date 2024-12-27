@@ -8,13 +8,11 @@ public class PresSubscriptionState implements Parcelable {
             new Parcelable.Creator<
                     PresSubscriptionState>() { // from class:
                                                // com.android.ims.internal.uce.presence.PresSubscriptionState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PresSubscriptionState createFromParcel(Parcel source) {
                     return new PresSubscriptionState(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PresSubscriptionState[] newArray(int size) {
                     return new PresSubscriptionState[size];

@@ -215,7 +215,6 @@ public class ChooserActivity extends ResolverActivity
     @Retention(RetentionPolicy.SOURCE)
     public @interface ShareTargetType {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     class ContentPreviewCoordinator {
         private static final int IMAGE_FADE_IN_MILLIS = 150;
         private static final int IMAGE_LOAD_INTO_VIEW = 2;
@@ -282,7 +281,6 @@ public class ChooserActivity extends ResolverActivity
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void setupPreDrawForSharedElementTransition(final View v) {
             v.getViewTreeObserver()
                     .addOnPreDrawListener(
@@ -309,7 +307,6 @@ public class ChooserActivity extends ResolverActivity
             this.mHideParentOnFail = hideParentOnFail;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void loadUriIntoView(
                 final int imageResourceId, final Uri uri, final int extraImages) {
             this.mHandler.sendEmptyMessageDelayed(1, this.mImageLoadTimeoutMillis);
@@ -324,7 +321,6 @@ public class ChooserActivity extends ResolverActivity
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$loadUriIntoView$0(
                 Uri uri, int imageResourceId, int extraImages) {
             int size =
@@ -338,13 +334,11 @@ public class ChooserActivity extends ResolverActivity
             this.mHandler.sendMessage(msg);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void cancelLoads() {
             this.mHandler.removeMessages(2);
             this.mHandler.removeMessages(1);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void maybeHideContentPreview() {
             if (!this.mAtLeastOneLoaded) {
                 if (this.mHideParentOnFail) {
@@ -389,7 +383,6 @@ public class ChooserActivity extends ResolverActivity
 
         private ChooserHandler() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void removeAllMessages() {
             removeMessages(6);
             removeMessages(7);
@@ -448,22 +441,6 @@ public class ChooserActivity extends ResolverActivity
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x0307  */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x0314  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x030a  */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x02df  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x0298  */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x01df  */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x014a  */
-    /* JADX WARN: Removed duplicated region for block: B:117:0x00f6  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x0102  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0196  */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x01f3  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0295  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x02b8  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x005c  */
     @Override // com.android.internal.app.ResolverActivity, android.app.Activity
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -508,7 +485,6 @@ public class ChooserActivity extends ResolverActivity
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createAppPredictorCallback$0(
             ChooserListAdapter chooserListAdapter, List resultList) {
         if (isFinishing() || isDestroyed() || chooserListAdapter.getCount() == 0) {
@@ -699,7 +675,6 @@ public class ChooserActivity extends ResolverActivity
         handlePackagesChanged(null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handlePackagesChanged(ResolverListAdapter listAdapter) {
         this.mPinnedSharedPrefs = getPinnedSharedPrefs(this);
         if (listAdapter == null) {
@@ -715,7 +690,6 @@ public class ChooserActivity extends ResolverActivity
         updateProfileViewButton();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onCopyButtonClicked(View v) {
         ClipData clipData;
         Intent targetIntent = getTargetIntent();
@@ -976,7 +950,6 @@ public class ChooserActivity extends ResolverActivity
         return b;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createNearbyButton$1(TargetInfo ti, View unused) {
         getChooserActivityLogger().logShareTargetSelected(5, "", -1, false);
         safelyStartActivityAsUser(ti, getPersonalProfileUserHandle());
@@ -1004,7 +977,6 @@ public class ChooserActivity extends ResolverActivity
         return b;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$createEditButton$2(TargetInfo ti, View unused) {
         getChooserActivityLogger().logShareTargetSelected(6, "", -1, false);
         View firstImgView = getFirstVisibleImgPreviewView();
@@ -1329,7 +1301,6 @@ public class ChooserActivity extends ResolverActivity
         fileIconView.setImageResource(R.drawable.chooser_file_generic);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean validForContentPreview(Uri uri) throws SecurityException {
         if (uri == null) {
             return false;
@@ -1375,12 +1346,10 @@ public class ChooserActivity extends ResolverActivity
         return 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getNumSheetExpansions() {
         return getPreferences(0).getInt(PREF_NUM_SHEET_EXPANSIONS, 0);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void incrementNumSheetExpansions() {
         getPreferences(0)
                 .edit()
@@ -1724,7 +1693,6 @@ public class ChooserActivity extends ResolverActivity
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$queryDirectShareTargets$3(
             UserHandle userHandle, IntentFilter filter, ChooserListAdapter adapter) {
         Context selectedProfileContext = createContextAsUser(userHandle, 0);
@@ -1879,7 +1847,6 @@ public class ChooserActivity extends ResolverActivity
         return -Float.compare(a.getScore(), b.getScore());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void logDirectShareTargetReceived(int logCategory) {
         int apiLatency = (int) (System.currentTimeMillis() - this.mQueriedSharingShortcutsTimeMs);
         getMetricsLogger().write(new LogMaker(logCategory).setSubtype(apiLatency));
@@ -2272,7 +2239,6 @@ public class ChooserActivity extends ResolverActivity
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleScroll(View view, int x, int y, int oldx, int oldy) {
         if (this.mChooserMultiProfilePagerAdapter.getCurrentRootAdapter() != null) {
             this.mChooserMultiProfilePagerAdapter
@@ -2281,7 +2247,6 @@ public class ChooserActivity extends ResolverActivity
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void handleLayoutChange(
             View v,
             int left,
@@ -2344,7 +2309,6 @@ public class ChooserActivity extends ResolverActivity
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$handleLayoutChange$5(
             ChooserGridAdapter gridAdapter, int top, int bottom, RecyclerView recyclerView) {
         if (this.mResolverDrawerLayout == null || gridAdapter == null) {
@@ -2658,7 +2622,6 @@ public class ChooserActivity extends ResolverActivity
         return contentPreviewContainer.getVisibility() == 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void hideStickyContentPreview() {
         if (!isStickyContentPreviewShowing()) {
             return;
@@ -2737,7 +2700,6 @@ public class ChooserActivity extends ResolverActivity
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$new$0(View v) {
             ChooserActivity.this.startSelected(this.mListPosition, false, true);
         }
@@ -2786,7 +2748,6 @@ public class ChooserActivity extends ResolverActivity
         return result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setHorizontalScrollingEnabled(boolean enabled) {
         ResolverViewPager viewPager = (ResolverViewPager) findViewById(R.id.profile_pager);
         viewPager.setSwipingEnabled(enabled);
@@ -3820,7 +3781,6 @@ public class ChooserActivity extends ResolverActivity
         getChooserActivityLogger().logShareheetProfileChanged();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean shouldNearbyShareBeFirstInRankedRow() {
         return ActivityManager.isLowRamDeviceStatic() && this.mIsNearbyShareFirstTargetInRankedApp;
     }

@@ -583,9 +583,6 @@ public final class SpatializerHelper {
     
         monitor-exit(r14);
      */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00b7  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00f4 A[EDGE_INSN: B:34:0x00f4->B:35:0x00f4 BREAK  A[LOOP:1: B:13:0x0037->B:67:?], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:67:? A[LOOP:1: B:13:0x0037->B:67:?, LOOP_END, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -847,10 +844,6 @@ public final class SpatializerHelper {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v0 */
-    /* JADX WARN: Type inference failed for: r6v1 */
-    /* JADX WARN: Type inference failed for: r6v2, types: [boolean, byte, int] */
     public final synchronized void onRoutingUpdated() {
         boolean z;
         int i = this.mState;

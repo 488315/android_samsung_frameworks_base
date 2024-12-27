@@ -13,7 +13,6 @@ final class Spaghetti$startTransitionToCredentialUI$1 extends SuspendLambda impl
     int label;
     final /* synthetic */ Spaghetti this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public Spaghetti$startTransitionToCredentialUI$1(Spaghetti spaghetti, Continuation continuation) {
         super(2, continuation);
         this.this$0 = spaghetti;

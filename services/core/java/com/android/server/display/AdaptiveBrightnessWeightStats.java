@@ -726,7 +726,6 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:73:0x01c6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

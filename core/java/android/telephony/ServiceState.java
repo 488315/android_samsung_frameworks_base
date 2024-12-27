@@ -25,13 +25,11 @@ import java.util.stream.Collectors;
 public class ServiceState implements Parcelable {
     public static final Parcelable.Creator<ServiceState> CREATOR =
             new Parcelable.Creator<ServiceState>() { // from class: android.telephony.ServiceState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ServiceState createFromParcel(Parcel in) {
                     return new ServiceState(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ServiceState[] newArray(int size) {
                     return new ServiceState[size];

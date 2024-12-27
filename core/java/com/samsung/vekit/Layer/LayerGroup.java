@@ -179,7 +179,6 @@ public class LayerGroup extends Element implements HierarchyInterface<Layer> {
         return this.layerList.indexOf(element);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.vekit.Interface.HierarchyInterface
     public Layer getChild(int index) {
         return this.layerList.get(index);

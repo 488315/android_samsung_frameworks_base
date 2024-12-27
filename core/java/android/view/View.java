@@ -2007,7 +2007,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             this.mSemIsTooltipNull = false;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean updateAnchorPos(MotionEvent event) {
             int newAnchorX = (int) event.getX();
             int newAnchorY = (int) event.getY();
@@ -2020,7 +2019,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             return true;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void clearAnchorPos() {
             this.mAnchorX = Integer.MAX_VALUE;
             this.mAnchorY = Integer.MAX_VALUE;
@@ -3975,7 +3973,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return size;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public int getHorizontalScrollbarHeight() {
         ScrollBarDrawable scrollBar;
         ScrollabilityCache cache = this.mScrollCache;
@@ -4488,7 +4485,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean performClickInternal() {
         notifyAutofillManagerOnClick();
         return performClick();
@@ -4947,7 +4943,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$sendAccessibilityEventUncheckedInternal$0(
             AccessibilityEvent event) {
         if (AccessibilityManager.getInstance(this.mContext).isEnabled() && isShown()) {
@@ -4955,7 +4950,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void requestParentSendAccessibilityEvent(AccessibilityEvent event) {
         ViewParent parent = getParent();
         if (parent != null) {
@@ -5178,7 +5172,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         onProvideStructure(structure, 2, flags);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     protected void onProvideStructure(ViewStructure structure, int viewFor, int flags) {
         String pkg;
         String type;
@@ -6716,14 +6709,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updatePositionUpdateListener$2() {
         updateSystemGestureExclusionRects();
         updateKeepClearRects();
         updateHandwritingArea();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postUpdate(Runnable r) {
         Handler h = getHandler();
         if (h != null) {
@@ -6806,7 +6797,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public List<Rect> collectPreferKeepClearRects() {
         ListenerInfo info = this.mListenerInfo;
         boolean keepClearForFocus =
@@ -6838,7 +6828,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     public List<Rect> collectUnrestrictedPreferKeepClearRects() {
         ListenerInfo info = this.mListenerInfo;
         if (info != null && info.mUnrestrictedKeepClearRects != null) {
@@ -7319,7 +7308,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         setFlags(contextClickable ? 8388608 : 0, 8388608);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setPressed(boolean pressed, float x, float y) {
         if (pressed) {
             drawableHotspotChanged(x, y);
@@ -7477,10 +7465,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         setFocusedInCluster(findKeyboardNavigationCluster());
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v2, types: [android.view.ViewParent] */
-    /* JADX WARN: Type inference failed for: r0v6 */
-    /* JADX WARN: Type inference failed for: r0v7 */
     private void setFocusedInCluster(View view) {
         if (this instanceof ViewGroup) {
             ((ViewGroup) this).mFocusedInCluster = null;
@@ -7612,7 +7596,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ boolean lambda$findUserSetNextFocus$3(
             View rootView, View startView, View t) {
         return findViewInsideOutShouldExist(rootView, t, t.mNextFocusForwardId) == startView;
@@ -8144,7 +8127,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return performAccessibilityActionInternal(action, arguments);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public boolean performAccessibilityActionInternal(int action, Bundle arguments) {
         int start;
         if (isNestedScrollingEnabled()
@@ -9372,7 +9354,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public void createContextMenu(ContextMenu contextMenu) {
         ContextMenu.ContextMenuInfo menuInfo = getContextMenuInfo();
         ((MenuBuilder) contextMenu).setCurrentMenuInfo(menuInfo);
@@ -9573,8 +9554,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public void onHoverChanged(boolean hovered) {}
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0139  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -9617,7 +9596,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         this.mIsSetFingerHoveredInAppWidget = fingerHovered;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public boolean onTouchEvent(MotionEvent motionEvent) {
         String str;
         int i;
@@ -11122,7 +11100,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         scrollTo(this.mScrollX + x, this.mScrollY + y);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public boolean awakenScrollBars() {
         return this.mScrollCache != null
                 && awakenScrollBars(this.mScrollCache.scrollBarDefaultDelayBeforeFade, true);
@@ -11132,12 +11109,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public boolean awakenScrollBars(int startDelay) {
         return awakenScrollBars(startDelay, true);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public boolean awakenScrollBars(int startDelay, boolean invalidate) {
         ScrollabilityCache scrollCache = this.mScrollCache;
         if (scrollCache == null || !scrollCache.fadeScrollBars) {
@@ -11956,7 +11931,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         scrollBar.draw(canvas);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public void onDrawVerticalScrollBar(
             Canvas canvas, Drawable scrollBar, int l, int t, int r, int b) {
         scrollBar.setBounds(l, t, r, b);
@@ -12248,7 +12222,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     void invalidateInheritedLayoutMode(int layoutModeOfRoot) {}
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public int getWindowAttachCount() {
         return this.mWindowAttachCount;
     }
@@ -12458,7 +12431,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public Parcelable onSaveInstanceState() {
         this.mPrivateFlags |= 131072;
         if (this.mStartActivityRequestWho != null
@@ -12499,7 +12471,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public void onRestoreInstanceState(Parcelable state) {
         this.mPrivateFlags |= 131072;
         if (state != null && !(state instanceof AbsSavedState)) {
@@ -13209,22 +13180,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 && canvas.isHardwareAccelerated();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x033c  */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x03aa  */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x03b1 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x03c5 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x035e  */
-    /* JADX WARN: Removed duplicated region for block: B:142:0x0256  */
-    /* JADX WARN: Removed duplicated region for block: B:145:0x026b  */
-    /* JADX WARN: Removed duplicated region for block: B:153:0x02e6  */
-    /* JADX WARN: Removed duplicated region for block: B:154:0x025d  */
-    /* JADX WARN: Removed duplicated region for block: B:157:0x01d9  */
-    /* JADX WARN: Removed duplicated region for block: B:159:0x01e2  */
-    /* JADX WARN: Removed duplicated region for block: B:172:0x021e  */
-    /* JADX WARN: Removed duplicated region for block: B:173:0x01dc  */
-    /* JADX WARN: Removed duplicated region for block: B:181:0x0182  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x017f  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x02f7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -13816,7 +13771,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {}
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public boolean setFrame(int left, int top, int right, int bottom) {
         boolean changed = false;
         if (this.mLeft != left
@@ -15019,7 +14973,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         inOutLocation[1] = Math.round(position[1]);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     protected <T extends View> T findViewTraversal(int id) {
         if (id == this.mID) {
             return this;
@@ -15027,7 +14980,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     protected <T extends View> T findViewWithTagTraversal(Object tag) {
         if (tag != null && tag.equals(this.mTag)) {
             return this;
@@ -15035,7 +14987,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     protected <T extends View> T findViewByPredicateTraversal(
             Predicate<View> predicate, View childToSkip) {
         if (predicate.test(this)) {
@@ -15059,7 +15010,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return t;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <T extends View> T findViewByAccessibilityIdTraversal(int accessibilityId) {
         if (getAccessibilityViewId() == accessibilityId) {
             return this;
@@ -15067,7 +15017,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return null;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public <T extends View> T findViewByAutofillIdTraversal(int autofillId) {
         if (getAutofillViewId() == autofillId) {
             return this;
@@ -15462,7 +15411,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public final void setMeasuredDimension(int measuredWidth, int measuredHeight) {
         boolean optical = isLayoutModeOptical(this);
         if (optical != isLayoutModeOptical(this.mParent)) {
@@ -15850,13 +15798,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return startDragAndDrop(data, shadowBuilder, myLocalState, flags, selectedArea, location);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x046b  */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x0475  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x047e  */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x0543  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x0550  */
-    /* JADX WARN: Removed duplicated region for block: B:127:0x0477  */
-    /* JADX WARN: Removed duplicated region for block: B:128:0x0403 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -16021,7 +15962,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return callDragEventHandler(event);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x006b, code lost:
 
        return r1;
@@ -16148,7 +16088,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         region.op(db, Region.Op.DIFFERENCE);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void checkForLongClick(long delay, float x, float y, int classification) {
         boolean isTooltipAvailable =
                 (this.mViewFlags & 1073741824) == 1073741824 && (this.mSemViewFlags & 2) != 2;
@@ -16184,7 +16123,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return factory.inflate(resource, root);
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public boolean overScrollBy(
             int deltaX,
             int deltaY,
@@ -16393,7 +16331,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public float getVerticalScrollFactor() {
         if (this.mVerticalScrollFactor == 0.0f) {
             TypedValue outValue = new TypedValue();
@@ -16411,7 +16348,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return getVerticalScrollFactor();
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public float getHorizontalScrollFactor() {
         return getVerticalScrollFactor();
     }
@@ -16993,7 +16929,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void recordGestureClassification(int classification) {
         if (classification == 0) {
             return;
@@ -17061,7 +16996,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                         return new BaseSavedState(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.ClassLoaderCreator
                     public BaseSavedState createFromParcel(Parcel in, ClassLoader loader) {
                         return new BaseSavedState(in, loader);
@@ -17283,7 +17217,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             events.add(insets);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void delayNotifyContentCaptureEvent(
                 ContentCaptureSession session, View view, boolean appeared) {
             ArrayList<Object> events = ensureEvents(session);
@@ -17304,7 +17237,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             return events;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public boolean canPerformHapticFeedback() {
             return this.mSession != null && (this.mDisplay.getFlags() & 1024) == 0;
         }
@@ -17892,7 +17824,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return this.mHoverPopup;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:8:0x001d, code lost:
 
        return true;
@@ -18102,12 +18033,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return showTooltip(x, y, true);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean showHoverTooltip() {
         return showTooltip(this.mTooltipInfo.mAnchorX, this.mTooltipInfo.mAnchorY, false);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     boolean dispatchTooltipHoverEvent(MotionEvent event) {
         int timeout;
         if (this.mTooltipInfo == null) {
@@ -19145,7 +19074,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$postRequestSendStickyDragStartedEvent$8() {
         if (this.mParent != null) {
             this.mParent.requestSendStickyDragStartedEvent(this);

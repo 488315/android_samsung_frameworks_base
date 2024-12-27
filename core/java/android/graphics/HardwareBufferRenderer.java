@@ -24,7 +24,6 @@ public class HardwareBufferRenderer implements AutoCloseable {
 
     private static native void nDestroyRootRenderNode(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nGetFinalizer();
 
     static native int nRender(
@@ -168,7 +167,6 @@ public class HardwareBufferRenderer implements AutoCloseable {
                             + " closed");
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void reset() {
             this.mColorSpace = HardwareBufferRenderer.DEFAULT_COLORSPACE;
             this.mTransform = 0;

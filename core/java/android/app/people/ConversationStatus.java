@@ -26,13 +26,11 @@ public final class ConversationStatus implements Parcelable {
     public static final Parcelable.Creator<ConversationStatus> CREATOR =
             new Parcelable.Creator<
                     ConversationStatus>() { // from class: android.app.people.ConversationStatus.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConversationStatus createFromParcel(Parcel source) {
                     return new ConversationStatus(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ConversationStatus[] newArray(int size) {
                     return new ConversationStatus[size];

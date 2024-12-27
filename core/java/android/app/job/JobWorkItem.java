@@ -9,13 +9,11 @@ import android.os.PersistableBundle;
 public final class JobWorkItem implements Parcelable {
     public static final Parcelable.Creator<JobWorkItem> CREATOR =
             new Parcelable.Creator<JobWorkItem>() { // from class: android.app.job.JobWorkItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public JobWorkItem createFromParcel(Parcel in) {
                     return new JobWorkItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public JobWorkItem[] newArray(int size) {
                     return new JobWorkItem[size];

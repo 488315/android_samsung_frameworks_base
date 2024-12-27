@@ -155,7 +155,6 @@ public final class VolumePanelView extends FrameLayout implements ViewContext, V
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.volume.view.standard.VolumePanelView$keyUpRunnable$1] */
     public VolumePanelView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.storeInteractor = new StoreInteractor(this, null);
@@ -247,7 +246,6 @@ public final class VolumePanelView extends FrameLayout implements ViewContext, V
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.view.ViewGroup, android.view.View
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
         this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_TOUCH_PANEL).isFromOutside(true).build(), false);
@@ -789,9 +787,6 @@ public final class VolumePanelView extends FrameLayout implements ViewContext, V
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v1, types: [android.widget.ImageView] */
-    /* JADX WARN: Type inference failed for: r3v2, types: [android.widget.ImageView] */
     public final void updateVolumeTitleView(VolumePanelState volumePanelState, boolean z) {
         if (volumePanelState.isLockscreen()) {
             if (!z) {

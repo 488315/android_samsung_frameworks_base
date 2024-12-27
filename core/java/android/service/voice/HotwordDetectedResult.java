@@ -61,13 +61,11 @@ public final class HotwordDetectedResult implements Parcelable {
             new Parcelable.Creator<
                     HotwordDetectedResult>() { // from class:
                                                // android.service.voice.HotwordDetectedResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HotwordDetectedResult[] newArray(int size) {
                     return new HotwordDetectedResult[size];
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public HotwordDetectedResult createFromParcel(Parcel in) {
                     return new HotwordDetectedResult(in);
@@ -89,7 +87,6 @@ public final class HotwordDetectedResult implements Parcelable {
     @Retention(RetentionPolicy.SOURCE)
     public @interface ProximityValue {}
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultSpeakerId() {
         return 0;
     }
@@ -98,17 +95,14 @@ public final class HotwordDetectedResult implements Parcelable {
         return 15;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultConfidenceLevel() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultScore() {
         return 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultPersonalizedScore() {
         return 0;
     }
@@ -117,7 +111,6 @@ public final class HotwordDetectedResult implements Parcelable {
         return 255;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultHotwordPhraseId() {
         return 0;
     }
@@ -126,12 +119,10 @@ public final class HotwordDetectedResult implements Parcelable {
         return 63;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static List<HotwordAudioStream> defaultAudioStreams() {
         return Collections.emptyList();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static PersistableBundle defaultExtras() {
         return new PersistableBundle();
     }
@@ -149,7 +140,6 @@ public final class HotwordDetectedResult implements Parcelable {
         return this.mMediaSyncEvent;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static int defaultBackgroundAudioPower() {
         return -1;
     }

@@ -49,7 +49,6 @@ public final class BroadcastSender {
 
     public final void sendBroadcast(final Intent intent) {
         sendInBackground(String.valueOf(intent), new Function0() { // from class: com.android.systemui.broadcast.BroadcastSender$sendBroadcast$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -65,7 +64,6 @@ public final class BroadcastSender {
     public final void sendBroadcast$1(final Intent intent) {
         final String str = "com.android.systemui.permission.SELF";
         sendInBackground(String.valueOf(intent), new Function0() { // from class: com.android.systemui.broadcast.BroadcastSender$sendBroadcast$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -80,7 +78,6 @@ public final class BroadcastSender {
 
     public final void sendBroadcastAsUser(final Intent intent, final UserHandle userHandle) {
         sendInBackground(String.valueOf(intent), new Function0() { // from class: com.android.systemui.broadcast.BroadcastSender$sendBroadcastAsUser$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

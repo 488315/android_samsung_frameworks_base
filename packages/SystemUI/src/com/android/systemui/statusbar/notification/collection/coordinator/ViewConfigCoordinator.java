@@ -215,8 +215,6 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.notification.collection.coordinator.ViewConfigCoordinator$mKeyguardUpdateCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.notification.collection.coordinator.ViewConfigCoordinator$mUserChangedListener$1] */
     public ViewConfigCoordinator(ConfigurationController configurationController, NotificationLockscreenUserManager notificationLockscreenUserManager, NotificationGutsManager notificationGutsManager, KeyguardUpdateMonitor keyguardUpdateMonitor, ColorUpdateLogger colorUpdateLogger) {
         this.mConfigurationController = configurationController;
         this.mLockscreenUserManager = notificationLockscreenUserManager;
@@ -225,7 +223,6 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
         this.colorUpdateLogger = colorUpdateLogger;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public final void applyChangesOnUserSwitched() {
         ColorUpdateLogger colorUpdateLogger = this.colorUpdateLogger;
         ColorUpdateLogger.Companion companion = ColorUpdateLogger.Companion;

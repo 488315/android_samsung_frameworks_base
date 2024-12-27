@@ -187,7 +187,6 @@ public final class SubscreenSubRoomNotification implements SubRoom {
         subscreenSubRoomNotification.mNotificationDetailAdapter.cleanAdapter();
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.notification.SubscreenSubRoomNotification$2] */
     private SubscreenSubRoomNotification() {
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.systemui.statusbar.notification.SubscreenSubRoomNotification.3
             @Override // android.content.BroadcastReceiver

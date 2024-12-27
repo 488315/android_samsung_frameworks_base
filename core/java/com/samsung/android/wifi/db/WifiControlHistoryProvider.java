@@ -273,9 +273,6 @@ public final class WifiControlHistoryProvider extends ContentProvider {
         return Uri.parse("content://com.samsung.server.wifi/control/" + index);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x00a4 A[Catch: SQLiteException -> 0x00b3, TRY_ENTER, TRY_LEAVE, TryCatch #1 {SQLiteException -> 0x00b3, blocks: (B:8:0x004c, B:12:0x00a4, B:24:0x00b2, B:29:0x00af, B:31:0x0060, B:33:0x0066, B:10:0x0082, B:26:0x00aa), top: B:7:0x004c, inners: #0, #2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x00cc  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00e1 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

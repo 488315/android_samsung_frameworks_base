@@ -68,7 +68,6 @@ public class UriMatcher {
         node.mCode = code;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static UriMatcher createChild(String token) {
         char c;
         switch (token.hashCode()) {
@@ -100,8 +99,6 @@ public class UriMatcher {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:37:0x006b A[LOOP:0: B:9:0x0015->B:37:0x006b, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0069 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

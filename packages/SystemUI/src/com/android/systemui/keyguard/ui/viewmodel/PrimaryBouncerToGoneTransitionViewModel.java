@@ -88,7 +88,6 @@ public final class PrimaryBouncerToGoneTransitionViewModel {
                 return Float.valueOf(PrimaryBouncerToGoneTransitionViewModel.this.willRunDismissFromKeyguard ? 0.0f : 1.0f - ((Number) obj).floatValue());
             }
         }, 0L, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$createBouncerAlphaFlow$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -114,7 +113,6 @@ public final class PrimaryBouncerToGoneTransitionViewModel {
                 return Float.valueOf((primaryBouncerToGoneTransitionViewModel.willRunDismissFromKeyguard || primaryBouncerToGoneTransitionViewModel.leaveShadeOpen) ? 1.0f : 0.0f);
             }
         }, 0L, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$createLockscreenAlpha$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

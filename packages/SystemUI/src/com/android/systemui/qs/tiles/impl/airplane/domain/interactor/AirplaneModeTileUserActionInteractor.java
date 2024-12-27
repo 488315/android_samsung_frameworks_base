@@ -30,8 +30,6 @@ public final class AirplaneModeTileUserActionInteractor implements QSTileUserAct
         this.qsTileIntentUserActionHandler = qSTileIntentUserInputHandler;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
     @Override // com.android.systemui.qs.tiles.base.interactor.QSTileUserActionInteractor
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -14,13 +14,11 @@ public final class PictureInPictureParams implements Parcelable {
     public static final Parcelable.Creator<PictureInPictureParams> CREATOR =
             new Parcelable.Creator<
                     PictureInPictureParams>() { // from class: android.app.PictureInPictureParams.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PictureInPictureParams createFromParcel(Parcel in) {
                     return new PictureInPictureParams(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PictureInPictureParams[] newArray(int size) {
                     return new PictureInPictureParams[size];

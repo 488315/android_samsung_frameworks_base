@@ -21,7 +21,6 @@ public final class HomeControlsKeyguardQuickAffordanceConfig$special$$inlined$fl
     int label;
     final /* synthetic */ HomeControlsKeyguardQuickAffordanceConfig this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public HomeControlsKeyguardQuickAffordanceConfig$special$$inlined$flatMapLatest$1(Continuation continuation, HomeControlsKeyguardQuickAffordanceConfig homeControlsKeyguardQuickAffordanceConfig) {
         super(3, continuation);
         this.this$0 = homeControlsKeyguardQuickAffordanceConfig;

@@ -314,7 +314,6 @@ public class ListView extends AbsListView {
         return false;
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.widget.AdapterView
     public ListAdapter getAdapter() {
         return this.mAdapter;
@@ -326,7 +325,6 @@ public class ListView extends AbsListView {
         super.setRemoteViewsAdapter(intent);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.widget.AbsListView, android.widget.AdapterView
     public void setAdapter(ListAdapter adapter) {
         int position;
@@ -1057,8 +1055,6 @@ public class ListView extends AbsListView {
                 : super.getChildDrawingOrder(childCount, i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:183:0x0328 A[Catch: all -> 0x04a6, TryCatch #0 {all -> 0x04a6, blocks: (B:7:0x000b, B:9:0x0015, B:17:0x0029, B:18:0x0045, B:19:0x0048, B:20:0x0072, B:23:0x007a, B:24:0x007f, B:26:0x0088, B:27:0x008e, B:28:0x009c, B:30:0x00a2, B:31:0x00a5, B:33:0x00a9, B:41:0x00bd, B:43:0x00c7, B:45:0x00d8, B:47:0x00de, B:52:0x00e9, B:54:0x00ef, B:56:0x00f5, B:58:0x0100, B:59:0x0119, B:62:0x0125, B:64:0x012b, B:66:0x0131, B:68:0x0145, B:70:0x014b, B:72:0x0159, B:76:0x0164, B:79:0x017d, B:80:0x0185, B:83:0x0196, B:85:0x0266, B:86:0x02c0, B:88:0x02d0, B:90:0x02d4, B:92:0x02da, B:97:0x02e6, B:101:0x02f7, B:103:0x02fd, B:104:0x0300, B:106:0x0311, B:109:0x0374, B:112:0x037c, B:114:0x0383, B:117:0x038c, B:119:0x039b, B:122:0x03a2, B:124:0x03b7, B:128:0x03bf, B:130:0x03d0, B:131:0x03e1, B:134:0x03e9, B:136:0x03ee, B:137:0x03dd, B:138:0x03f1, B:140:0x03f5, B:143:0x0422, B:145:0x0428, B:146:0x042b, B:148:0x0436, B:149:0x043d, B:151:0x044c, B:152:0x044f, B:160:0x03f9, B:162:0x03fd, B:165:0x0409, B:168:0x041a, B:169:0x0416, B:170:0x041d, B:171:0x0304, B:172:0x02ec, B:175:0x030e, B:176:0x0318, B:178:0x031d, B:183:0x0328, B:185:0x0333, B:187:0x0366, B:190:0x036e, B:191:0x0339, B:193:0x033d, B:195:0x0343, B:197:0x0347, B:199:0x0352, B:200:0x0358, B:202:0x035c, B:204:0x0276, B:205:0x028c, B:207:0x0290, B:209:0x0296, B:212:0x02a0, B:213:0x029c, B:214:0x02a5, B:216:0x02ab, B:219:0x02b5, B:220:0x02b1, B:221:0x02ba, B:222:0x019a, B:223:0x01b4, B:225:0x01c4, B:226:0x01d3, B:227:0x01dd, B:229:0x01f5, B:231:0x01f9, B:233:0x0201, B:234:0x0204, B:236:0x0208, B:238:0x020c, B:240:0x0210, B:242:0x0216, B:245:0x023d, B:246:0x0247, B:247:0x024d, B:248:0x0178, B:249:0x0135, B:251:0x013d, B:255:0x00f9, B:259:0x0465, B:260:0x04a5, B:261:0x004b, B:264:0x0055), top: B:6:0x000b }] */
-    /* JADX WARN: Removed duplicated region for block: B:191:0x0339 A[Catch: all -> 0x04a6, TryCatch #0 {all -> 0x04a6, blocks: (B:7:0x000b, B:9:0x0015, B:17:0x0029, B:18:0x0045, B:19:0x0048, B:20:0x0072, B:23:0x007a, B:24:0x007f, B:26:0x0088, B:27:0x008e, B:28:0x009c, B:30:0x00a2, B:31:0x00a5, B:33:0x00a9, B:41:0x00bd, B:43:0x00c7, B:45:0x00d8, B:47:0x00de, B:52:0x00e9, B:54:0x00ef, B:56:0x00f5, B:58:0x0100, B:59:0x0119, B:62:0x0125, B:64:0x012b, B:66:0x0131, B:68:0x0145, B:70:0x014b, B:72:0x0159, B:76:0x0164, B:79:0x017d, B:80:0x0185, B:83:0x0196, B:85:0x0266, B:86:0x02c0, B:88:0x02d0, B:90:0x02d4, B:92:0x02da, B:97:0x02e6, B:101:0x02f7, B:103:0x02fd, B:104:0x0300, B:106:0x0311, B:109:0x0374, B:112:0x037c, B:114:0x0383, B:117:0x038c, B:119:0x039b, B:122:0x03a2, B:124:0x03b7, B:128:0x03bf, B:130:0x03d0, B:131:0x03e1, B:134:0x03e9, B:136:0x03ee, B:137:0x03dd, B:138:0x03f1, B:140:0x03f5, B:143:0x0422, B:145:0x0428, B:146:0x042b, B:148:0x0436, B:149:0x043d, B:151:0x044c, B:152:0x044f, B:160:0x03f9, B:162:0x03fd, B:165:0x0409, B:168:0x041a, B:169:0x0416, B:170:0x041d, B:171:0x0304, B:172:0x02ec, B:175:0x030e, B:176:0x0318, B:178:0x031d, B:183:0x0328, B:185:0x0333, B:187:0x0366, B:190:0x036e, B:191:0x0339, B:193:0x033d, B:195:0x0343, B:197:0x0347, B:199:0x0352, B:200:0x0358, B:202:0x035c, B:204:0x0276, B:205:0x028c, B:207:0x0290, B:209:0x0296, B:212:0x02a0, B:213:0x029c, B:214:0x02a5, B:216:0x02ab, B:219:0x02b5, B:220:0x02b1, B:221:0x02ba, B:222:0x019a, B:223:0x01b4, B:225:0x01c4, B:226:0x01d3, B:227:0x01dd, B:229:0x01f5, B:231:0x01f9, B:233:0x0201, B:234:0x0204, B:236:0x0208, B:238:0x020c, B:240:0x0210, B:242:0x0216, B:245:0x023d, B:246:0x0247, B:247:0x024d, B:248:0x0178, B:249:0x0135, B:251:0x013d, B:255:0x00f9, B:259:0x0465, B:260:0x04a5, B:261:0x004b, B:264:0x0055), top: B:6:0x000b }] */
     @Override // android.widget.AbsListView
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1128,7 +1124,6 @@ public class ListView extends AbsListView {
         return child;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     private void setupChild(
             View view,
             int position,
@@ -1343,9 +1338,6 @@ public class ListView extends AbsListView {
         return commonKey(keyCode, 1, event);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x02ef  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0303  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

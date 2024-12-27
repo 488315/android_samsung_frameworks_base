@@ -12,13 +12,11 @@ public final class SaveRequest implements Parcelable {
     public static final Parcelable.Creator<SaveRequest> CREATOR =
             new Parcelable.Creator<
                     SaveRequest>() { // from class: android.service.autofill.SaveRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SaveRequest createFromParcel(Parcel parcel) {
                     return new SaveRequest(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SaveRequest[] newArray(int size) {
                     return new SaveRequest[size];

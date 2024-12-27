@@ -322,10 +322,6 @@ public final class GeofenceManager extends ListenerMultiplexer implements Locati
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.location.geofence.GeofenceManager$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.location.geofence.GeofenceManager$$ExternalSyntheticLambda2] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.location.geofence.GeofenceManager$$ExternalSyntheticLambda2] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.location.geofence.GeofenceManager$1] */
     public GeofenceManager(Context context, LocationManagerService.SystemInjector systemInjector) {
         final int i = 0;
         this.mLocationEnabledChangedListener =

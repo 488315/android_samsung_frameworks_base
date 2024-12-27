@@ -14,7 +14,6 @@ public final class SubscreenQuickReplyCoordinatorKt {
     });
     private static final String TAG = "SubscreenQuickReplyCoordinator";
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static final boolean getDEBUG() {
         return ((Boolean) DEBUG$delegate.getValue()).booleanValue();
     }

@@ -143,7 +143,6 @@ public final class MidiDeviceServer implements Closeable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static FileDescriptor[] createSeqPacketSocketPair() throws IOException {
         try {
             FileDescriptor fd0 = new FileDescriptor();
@@ -445,7 +444,6 @@ public final class MidiDeviceServer implements Closeable {
         return this.mServer.asBinder();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateDeviceStatus() {
         long identityToken = Binder.clearCallingIdentity();
         try {
@@ -514,7 +512,6 @@ public final class MidiDeviceServer implements Closeable {
         return receivers;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateTotalBytes() {
         try {
             this.mMidiManager.updateTotalBytes(
@@ -524,7 +521,6 @@ public final class MidiDeviceServer implements Closeable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isUmpDevice() {
         return this.mDeviceInfo.getDefaultProtocol() != -1;
     }

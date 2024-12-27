@@ -42,7 +42,6 @@ public final class AppErrorDialog extends BaseErrorDialog implements View.OnClic
         public int taskId;
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [android.os.Handler, com.android.server.am.AppErrorDialog$1] */
     public AppErrorDialog(Context context, ActivityManagerService activityManagerService, Data data) {
         super(context);
         CharSequence applicationLabel;

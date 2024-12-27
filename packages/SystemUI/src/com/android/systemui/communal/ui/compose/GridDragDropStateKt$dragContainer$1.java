@@ -29,7 +29,6 @@ final class GridDragDropStateKt$dragContainer$1 extends SuspendLambda implements
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public GridDragDropStateKt$dragContainer$1(GridDragDropState gridDragDropState, long j, BaseCommunalViewModel baseCommunalViewModel, Continuation continuation) {
         super(2, continuation);
         this.$dragDropState = gridDragDropState;
@@ -60,7 +59,6 @@ final class GridDragDropStateKt$dragContainer$1 extends SuspendLambda implements
             final long j = this.$contentOffset;
             final BaseCommunalViewModel baseCommunalViewModel = this.$viewModel;
             Function1 function1 = new Function1() { // from class: com.android.systemui.communal.ui.compose.GridDragDropStateKt$dragContainer$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
                 }
@@ -109,7 +107,6 @@ final class GridDragDropStateKt$dragContainer$1 extends SuspendLambda implements
             final GridDragDropState gridDragDropState2 = this.$dragDropState;
             final BaseCommunalViewModel baseCommunalViewModel2 = this.$viewModel;
             Function0 function0 = new Function0() { // from class: com.android.systemui.communal.ui.compose.GridDragDropStateKt$dragContainer$1.2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -124,7 +121,6 @@ final class GridDragDropStateKt$dragContainer$1 extends SuspendLambda implements
             final GridDragDropState gridDragDropState3 = this.$dragDropState;
             final BaseCommunalViewModel baseCommunalViewModel3 = this.$viewModel;
             Function0 function02 = new Function0() { // from class: com.android.systemui.communal.ui.compose.GridDragDropStateKt$dragContainer$1.3
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }
@@ -142,8 +138,6 @@ final class GridDragDropStateKt$dragContainer$1 extends SuspendLambda implements
                     super(2);
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:16:0x00df  */
-                /* JADX WARN: Removed duplicated region for block: B:18:0x00ee  */
                 @Override // kotlin.jvm.functions.Function2
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

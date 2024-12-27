@@ -422,7 +422,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
             this.mAnimator.start();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onReady$0(
                 Interpolator insetsInterpolator,
                 WindowInsetsAnimationController controller,
@@ -510,7 +509,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
             };
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ float lambda$getInsetsInterpolator$1(float input) {
             return this.mShow ? 1.0f : 0.0f;
         }
@@ -610,7 +608,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
                     : InsetsController.ENABLE_SEP_FLAGSHIP_IME_ANIMATION ? 300 : 280;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public int getAnimationType() {
             return !this.mShow ? 1 : 0;
         }
@@ -627,7 +624,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     static class PendingControlRequest {
         final int animationType;
         final CancellationSignal cancellationSignal;
@@ -864,7 +860,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
         this.mImeSourceConsumer = getSourceConsumer(InsetsSource.ID_IME, WindowInsets.Type.ime());
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$3() {
         int i;
         this.mAnimCallbackScheduled = false;
@@ -1031,7 +1026,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updateState$4(int[] cancelledUserAnimationTypes) {
         show(cancelledUserAnimationTypes[0]);
     }
@@ -1187,10 +1181,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
         show(types, false, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00a4  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x012c  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0062  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0049  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1228,11 +1218,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
         hide(types, false, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0068  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0070  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x006a  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0046  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1650,7 +1635,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$controlAnimationUncheckedInner$5(
             PendingControlRequest request) {
         if (this.mPendingImeControlRequest == request) {
@@ -1661,7 +1645,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$controlAnimationUncheckedInner$6(
             PendingControlRequest request) {
         if (this.mPendingImeControlRequest == request) {
@@ -1672,7 +1655,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$controlAnimationUncheckedInner$7(
             InsetsAnimationControlRunner runner) {
         cancelAnimation(runner, true);
@@ -1792,7 +1774,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
         return 1;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void cancelExistingControllers(int types) {
         int originalmTypesBeingCancelled = this.mTypesBeingCancelled;
         this.mTypesBeingCancelled |= types;
@@ -1812,7 +1793,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void abortPendingImeControlRequest() {
         if (this.mPendingImeControlRequest != null) {
             this.mPendingImeControlRequest.listener.onCancelled(null);
@@ -2177,7 +2157,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startAnimation$8(
             InsetsAnimationControlRunner runner,
             int types,
@@ -2322,7 +2301,6 @@ public class InsetsController implements WindowInsetsController, InsetsAnimation
         return (~this.mState.calculateUncontrollableInsetsFromFrame(this.mFrame)) & result;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int invokeControllableInsetsChangedListeners() {
         this.mHandler.removeCallbacks(this.mInvokeControllableInsetsChangedListeners);
         this.mLastStartedAnimTypes = 0;

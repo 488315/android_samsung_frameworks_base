@@ -56,8 +56,6 @@ public final class DemoModeController implements CallbackController, Dumpable {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.systemui.demomode.DemoModeController$broadcastReceiver$1] */
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.demomode.DemoModeController$tracker$1] */
     public DemoModeController(Context context, DumpManager dumpManager, GlobalSettings globalSettings, BroadcastDispatcher broadcastDispatcher) {
         this.context = context;
         this.dumpManager = dumpManager;

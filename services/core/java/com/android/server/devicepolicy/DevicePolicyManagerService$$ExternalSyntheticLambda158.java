@@ -21,9 +21,6 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
         this.f$2 = z2;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r6v6, types: [java.lang.InterruptedException, java.lang.Throwable] */
-    /* JADX WARN: Type inference failed for: r6v9, types: [java.util.concurrent.locks.ReentrantLock] */
     public final void runOrThrow() {
         NetworkLogger networkLogger;
         NetworkLoggingHandler networkLoggingHandler;

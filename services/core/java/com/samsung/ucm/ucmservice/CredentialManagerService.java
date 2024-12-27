@@ -236,8 +236,6 @@ public final class CredentialManagerService extends IUcmService.Stub {
                 credentialManagerService.mHandler);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0064  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x006b  */
     /* renamed from: -$$Nest$mupdateMDMPolicies, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -305,9 +303,6 @@ public final class CredentialManagerService extends IUcmService.Stub {
         this(new Injector(context));
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.samsung.ucm.ucmservice.CredentialManagerService$2] */
-    /* JADX WARN: Type inference failed for: r5v4, types: [com.samsung.ucm.ucmservice.CredentialManagerService$1] */
-    /* JADX WARN: Type inference failed for: r6v1, types: [com.samsung.ucm.ucmservice.CredentialManagerService$2] */
     public CredentialManagerService(Injector injector) {
         UcmSignHelperFactory ucmSignHelperFactory;
         this.mSystemUICallback = null;
@@ -1785,12 +1780,6 @@ public final class CredentialManagerService extends IUcmService.Stub {
         return bundle;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x0173 A[Catch: IOException -> 0x016f, TryCatch #6 {IOException -> 0x016f, blocks: (B:99:0x016b, B:90:0x0173, B:92:0x0178), top: B:98:0x016b }] */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0178 A[Catch: IOException -> 0x016f, TRY_LEAVE, TryCatch #6 {IOException -> 0x016f, blocks: (B:99:0x016b, B:90:0x0173, B:92:0x0178), top: B:98:0x016b }] */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x016b A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Type inference failed for: r8v28, types: [java.io.InputStream, java.security.DigestInputStream] */
-    /* JADX WARN: Type inference failed for: r8v7 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2383,7 +2372,6 @@ public final class CredentialManagerService extends IUcmService.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final Bundle changePin(String str, String str2, String str3) {
         Bundle changePin;
         int i;
@@ -2550,12 +2538,6 @@ public final class CredentialManagerService extends IUcmService.Stub {
         return changePin;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x012d A[Catch: UnsupportedEncodingException -> 0x0125, TryCatch #3 {UnsupportedEncodingException -> 0x0125, blocks: (B:38:0x010b, B:40:0x011f, B:43:0x0127, B:45:0x012d, B:48:0x0142, B:50:0x014c, B:52:0x0161), top: B:37:0x010b }] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0142 A[Catch: UnsupportedEncodingException -> 0x0125, TryCatch #3 {UnsupportedEncodingException -> 0x0125, blocks: (B:38:0x010b, B:40:0x011f, B:43:0x0127, B:45:0x012d, B:48:0x0142, B:50:0x014c, B:52:0x0161), top: B:37:0x010b }] */
-    /* JADX WARN: Type inference failed for: r12v0 */
-    /* JADX WARN: Type inference failed for: r12v4, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r12v5 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6010,13 +5992,6 @@ public final class CredentialManagerService extends IUcmService.Stub {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:215:0x05a8  */
-    /* JADX WARN: Removed duplicated region for block: B:225:0x05ce A[LOOP:9: B:223:0x05c8->B:225:0x05ce, LOOP_END] */
-    /* JADX WARN: Type inference failed for: r1v24, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r4v10 */
-    /* JADX WARN: Type inference failed for: r4v11, types: [java.util.List] */
-    /* JADX WARN: Type inference failed for: r4v9, types: [java.util.ArrayList] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6132,12 +6107,6 @@ public final class CredentialManagerService extends IUcmService.Stub {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x028e  */
-    /* JADX WARN: Removed duplicated region for block: B:111:0x029c  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0202 A[Catch: Exception -> 0x0225, TryCatch #1 {Exception -> 0x0225, blocks: (B:44:0x015c, B:51:0x01e7, B:53:0x0202, B:55:0x0208, B:57:0x0210, B:58:0x0257, B:65:0x0229, B:67:0x0231, B:68:0x0236, B:70:0x0243), top: B:43:0x015c }] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x027f  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x025e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

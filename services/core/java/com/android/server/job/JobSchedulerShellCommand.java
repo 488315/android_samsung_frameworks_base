@@ -74,7 +74,6 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
     	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeMthRegion(RegionMaker.java:49)
     	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:25)
     */
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int cancelJob(java.io.PrintWriter r14) {
         /*
             r13 = this;
@@ -199,7 +198,6 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int enableFlexPolicy(PrintWriter printWriter) {
         char c;
         checkPermission("enable flex policy");
@@ -336,7 +334,6 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int getEstimatedNetworkBytes(int i, PrintWriter printWriter) {
         char c;
         checkPermission("get estimated bytes");
@@ -409,7 +406,6 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int getJobState(PrintWriter printWriter) {
         char c;
         checkPermission("get job state");
@@ -482,7 +478,6 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int getTransferredNetworkBytes(int i, PrintWriter printWriter) {
         char c;
         checkPermission("get transferred bytes");
@@ -1142,7 +1137,6 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runJob(PrintWriter printWriter) {
         char c;
         checkPermission("force scheduled jobs");
@@ -1268,7 +1262,6 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int stop(PrintWriter printWriter) {
         char c;
         checkPermission("stop jobs");
@@ -1381,7 +1374,6 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int timeout(PrintWriter printWriter) {
         char c;
         checkPermission("force timeout jobs");

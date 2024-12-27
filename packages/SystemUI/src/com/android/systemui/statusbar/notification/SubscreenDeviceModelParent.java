@@ -300,11 +300,6 @@ public class SubscreenDeviceModelParent {
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v21, types: [com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$marqueeStartRunnable$1] */
-    /* JADX WARN: Type inference failed for: r1v22, types: [com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$topPopupAnimationListener$1] */
-    /* JADX WARN: Type inference failed for: r1v24, types: [com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$mWakefulnessObserver$1] */
-    /* JADX WARN: Type inference failed for: r1v25, types: [com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$mUpdateMonitorCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v26, types: [com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$drawWalkLockReleaseRunnable$1] */
     public SubscreenDeviceModelParent(Context context, KeyguardUpdateMonitor keyguardUpdateMonitor, SettingsHelper settingsHelper, UserContextProvider userContextProvider, SubscreenNotificationController subscreenNotificationController, Lazy lazy, CommonNotifCollection commonNotifCollection, LogBuffer logBuffer, NotificationInterruptStateProvider notificationInterruptStateProvider, Lazy lazy2, Lazy lazy3, NotificationVisibilityProvider notificationVisibilityProvider, BindEventManager bindEventManager, NotificationController notificationController, UserManager userManager, ConversationNotificationManager conversationNotificationManager) {
         this.mContext = context;
         this.mKeyguardUpdateMonitor = keyguardUpdateMonitor;
@@ -846,8 +841,6 @@ public class SubscreenDeviceModelParent {
         headerViewHolder.mSecureIcon = (ImageView) view.findViewById(R.id.secure_icon);
     }
 
-    /* JADX WARN: Type inference failed for: r0v17, types: [com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$initTimeoutRunnable$1] */
-    /* JADX WARN: Type inference failed for: r0v18, types: [com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$initTimeoutRunnable$2] */
     public void initialize() {
         this.mEdgeManager = (SemEdgeManager) this.mContext.getSystemService("edge");
         this.activityManager = (ActivityManager) this.mContext.getSystemService("activity");
@@ -978,15 +971,6 @@ public class SubscreenDeviceModelParent {
     
         if ((r13.flags & 8) != 0) goto L41;
      */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00c6  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00d5  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00dd  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00fe  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0168 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:76:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x00ed  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x00d7  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x00c8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1209,10 +1193,6 @@ public class SubscreenDeviceModelParent {
         this.mMainListArrayHashMap.remove(notificationEntry.mKey);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r11v0 */
-    /* JADX WARN: Type inference failed for: r11v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r11v2 */
     public void setContentViewItem(Context context, SubscreenNotificationDetailAdapter.ItemViewHolder itemViewHolder) {
         int detailAdapterContentViewResource = getDetailAdapterContentViewResource();
         SubscreenNotificationInfo subscreenNotificationInfo = itemViewHolder.mInfo;

@@ -86,17 +86,12 @@ public final class NoteTaskController {
         this.bgCoroutineContext = coroutineContext;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(9:0|1|(2:3|(6:5|6|7|(1:(1:(6:11|12|13|14|15|16)(2:19|20))(1:21))(2:64|(2:66|67)(2:68|(1:71)(1:70)))|22|(2:24|25)(2:26|(2:28|29)(2:30|(2:36|(2:38|39)(3:40|41|(7:43|(1:45)(1:49)|(2:47|48)|13|14|15|16)(5:50|(4:52|53|(2:55|(4:57|(1:59)|60|(1:62)))|63)|14|15|16)))(2:34|35)))))|73|6|7|(0)(0)|22|(0)(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:72:0x01af, code lost:
     
         r1 = com.android.systemui.log.DebugLogger.$r8$clinit;
         r1 = android.os.Build.IS_DEBUGGABLE;
         kotlin.jvm.internal.Reflection.getOrCreateKotlinClass(r0.getClass()).getSimpleName();
      */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0088  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0054  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x002b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

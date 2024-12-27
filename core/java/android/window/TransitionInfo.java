@@ -36,13 +36,11 @@ public final class TransitionInfo implements Parcelable {
     public static final Parcelable.Creator<TransitionInfo> CREATOR =
             new Parcelable.Creator<
                     TransitionInfo>() { // from class: android.window.TransitionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TransitionInfo createFromParcel(Parcel in) {
                     return new TransitionInfo(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TransitionInfo[] newArray(int size) {
                     return new TransitionInfo[size];
@@ -613,13 +611,11 @@ public final class TransitionInfo implements Parcelable {
         public static final Parcelable.Creator<Change> CREATOR =
                 new Parcelable.Creator<
                         Change>() { // from class: android.window.TransitionInfo.Change.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Change createFromParcel(Parcel in) {
                         return new Change(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Change[] newArray(int size) {
                         return new Change[size];
@@ -814,7 +810,6 @@ public final class TransitionInfo implements Parcelable {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Change localRemoteCopy() {
             Change out =
                     new Change(this.mContainer, new SurfaceControl(this.mLeash, "localRemote"));
@@ -1395,13 +1390,11 @@ public final class TransitionInfo implements Parcelable {
                 new Parcelable.Creator<
                         AnimationOptions>() { // from class:
                                               // android.window.TransitionInfo.AnimationOptions.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AnimationOptions createFromParcel(Parcel in) {
                         return new AnimationOptions(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AnimationOptions[] newArray(int size) {
                         return new AnimationOptions[size];
@@ -1678,13 +1671,11 @@ public final class TransitionInfo implements Parcelable {
                     new Parcelable.Creator<
                             CustomActivityTransition>() { // from class:
                                                           // android.window.TransitionInfo.AnimationOptions.CustomActivityTransition.1
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public CustomActivityTransition createFromParcel(Parcel in) {
                             return new CustomActivityTransition(in);
                         }
 
-                        /* JADX WARN: Can't rename method to resolve collision */
                         @Override // android.os.Parcelable.Creator
                         public CustomActivityTransition[] newArray(int size) {
                             return new CustomActivityTransition[size];
@@ -1738,13 +1729,11 @@ public final class TransitionInfo implements Parcelable {
     public static final class Root implements Parcelable {
         public static final Parcelable.Creator<Root> CREATOR =
                 new Parcelable.Creator<Root>() { // from class: android.window.TransitionInfo.Root.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Root createFromParcel(Parcel in) {
                         return new Root(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public Root[] newArray(int size) {
                         return new Root[size];
@@ -1794,7 +1783,6 @@ public final class TransitionInfo implements Parcelable {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public Root localRemoteCopy() {
             if (CoreRune.MW_SHELL_TRANSITION) {
                 return new Root(

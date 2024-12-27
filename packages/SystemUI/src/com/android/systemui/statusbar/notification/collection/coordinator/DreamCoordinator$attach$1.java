@@ -12,7 +12,6 @@ final class DreamCoordinator$attach$1 extends SuspendLambda implements Function2
     int label;
     final /* synthetic */ DreamCoordinator this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DreamCoordinator$attach$1(DreamCoordinator dreamCoordinator, Continuation continuation) {
         super(2, continuation);
         this.this$0 = dreamCoordinator;

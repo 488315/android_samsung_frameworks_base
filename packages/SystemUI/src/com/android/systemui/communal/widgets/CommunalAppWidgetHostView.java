@@ -21,7 +21,6 @@ public final class CommunalAppWidgetHostView extends AppWidgetHostView implement
     public final Rect enforcedRectangle;
     public final LaunchableViewDelegate launchableViewDelegate;
 
-    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.systemui.communal.widgets.CommunalAppWidgetHostView$cornerRadiusEnforcementOutline$1] */
     public CommunalAppWidgetHostView(Context context) {
         super(context);
         this.launchableViewDelegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.communal.widgets.CommunalAppWidgetHostView$launchableViewDelegate$1

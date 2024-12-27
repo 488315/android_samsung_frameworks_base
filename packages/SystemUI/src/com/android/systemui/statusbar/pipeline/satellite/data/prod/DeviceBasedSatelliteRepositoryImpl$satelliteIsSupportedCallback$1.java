@@ -21,7 +21,6 @@ final class DeviceBasedSatelliteRepositoryImpl$satelliteIsSupportedCallback$1 ex
     int label;
     final /* synthetic */ DeviceBasedSatelliteRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DeviceBasedSatelliteRepositoryImpl$satelliteIsSupportedCallback$1(DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = deviceBasedSatelliteRepositoryImpl;
@@ -50,7 +49,6 @@ final class DeviceBasedSatelliteRepositoryImpl$satelliteIsSupportedCallback$1 ex
             final SatelliteSupportedStateCallback satelliteSupportedStateCallback = new SatelliteSupportedStateCallback() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$satelliteIsSupportedCallback$1$callback$1
                 public final void onSatelliteSupportedStateChanged(final boolean z) {
                     DeviceBasedSatelliteRepositoryImpl.Companion.i$default(DeviceBasedSatelliteRepositoryImpl.Companion, DeviceBasedSatelliteRepositoryImpl.this.logBuffer, new Function1() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$satelliteIsSupportedCallback$1$callback$1.1
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
                         }
@@ -73,7 +71,6 @@ final class DeviceBasedSatelliteRepositoryImpl$satelliteIsSupportedCallback$1 ex
             }
             final DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl3 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$satelliteIsSupportedCallback$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

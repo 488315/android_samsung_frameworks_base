@@ -16,7 +16,6 @@ final class PromptSelectorInteractorImpl$credentialKind$1 extends SuspendLambda 
     int label;
     final /* synthetic */ PromptSelectorInteractorImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PromptSelectorInteractorImpl$credentialKind$1(PromptSelectorInteractorImpl promptSelectorInteractorImpl, Continuation continuation) {
         super(3, continuation);
         this.this$0 = promptSelectorInteractorImpl;

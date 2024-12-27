@@ -15,7 +15,6 @@ public final class InputChannel implements Parcelable {
                     InputChannel.class.getClassLoader(), nativeGetFinalizer());
     public static final Parcelable.Creator<InputChannel> CREATOR =
             new Parcelable.Creator<InputChannel>() { // from class: android.view.InputChannel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputChannel createFromParcel(Parcel source) {
                     InputChannel result = new InputChannel();
@@ -23,7 +22,6 @@ public final class InputChannel implements Parcelable {
                     return result;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public InputChannel[] newArray(int size) {
                     return new InputChannel[size];

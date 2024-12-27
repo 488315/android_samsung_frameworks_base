@@ -15,8 +15,6 @@ public final class NoteTaskInitializer$callbacks$1 extends KeyguardUpdateMonitor
         this.this$0 = noteTaskInitializer;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:25:? A[RETURN, SYNTHETIC] */
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
     /*
         Code decompiled incorrectly, please refer to instructions dump.

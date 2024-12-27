@@ -191,7 +191,6 @@ public final class RefreshRateConfig {
             }
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ boolean lambda$new$0(Integer r) {
             return this.maxRefreshRate % r.intValue() == 0;
         }

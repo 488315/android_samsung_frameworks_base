@@ -255,7 +255,6 @@ public final class SplashScreenView extends FrameLayout {
             return view;
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$build$0(SplashScreenView view) {
             view.mIconView = createSurfaceView(view);
         }
@@ -398,7 +397,6 @@ public final class SplashScreenView extends FrameLayout {
         this.mSurfaceView.setChildSurfacePackage(this.mSurfacePackage);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     void initIconAnimation(Drawable drawable) {
         if (!(drawable instanceof IconAnimateListener)) {
             return;
@@ -434,7 +432,6 @@ public final class SplashScreenView extends FrameLayout {
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void animationStartCallback(long animDuration) {
         this.mIconAnimationStart = Instant.now();
         if (animDuration >= 0) {
@@ -587,13 +584,11 @@ public final class SplashScreenView extends FrameLayout {
                 new Parcelable.Creator<
                         SplashScreenViewParcelable>() { // from class:
                                                         // android.window.SplashScreenView.SplashScreenViewParcelable.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SplashScreenViewParcelable createFromParcel(Parcel source) {
                         return new SplashScreenViewParcelable(source);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public SplashScreenViewParcelable[] newArray(int size) {
                         return new SplashScreenViewParcelable[size];

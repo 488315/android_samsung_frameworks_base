@@ -12,13 +12,11 @@ public final class AntennaPosition implements Parcelable {
             new Parcelable.Creator<
                     AntennaPosition>() { // from class:
                                          // android.telephony.satellite.AntennaPosition.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AntennaPosition createFromParcel(Parcel in) {
                     return new AntennaPosition(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AntennaPosition[] newArray(int size) {
                     return new AntennaPosition[size];

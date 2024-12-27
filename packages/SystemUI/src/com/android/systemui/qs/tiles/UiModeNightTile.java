@@ -75,7 +75,6 @@ public final class UiModeNightTile extends QSTileImpl implements ConfigurationCo
             return inflate;
         }
 
-        /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.qs.tiles.UiModeNightTile$$ExternalSyntheticLambda1] */
         public final String getDetailSummary$1() {
             String string;
             int i = UiModeNightTile.$r8$clinit;

@@ -21,7 +21,6 @@ public final class GbaAuthRequest implements Parcelable {
     public static final Parcelable.Creator<GbaAuthRequest> CREATOR =
             new Parcelable.Creator<
                     GbaAuthRequest>() { // from class: android.telephony.gba.GbaAuthRequest.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GbaAuthRequest createFromParcel(Parcel in) {
                     int token = in.readInt();
@@ -42,7 +41,6 @@ public final class GbaAuthRequest implements Parcelable {
                             token, subId, appType, nafUrl, protocol, forceBootStrapping, callback);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GbaAuthRequest[] newArray(int size) {
                     return new GbaAuthRequest[size];

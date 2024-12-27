@@ -5,7 +5,6 @@ public final class TypeClassifier extends FalsingClassifier {
         super(falsingDataProvider);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0029, code lost:
     
         if (r5 != false) goto L14;

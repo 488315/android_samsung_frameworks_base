@@ -30,13 +30,10 @@ public final class ContentCaptureManagerServiceShellCommand extends ShellCommand
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x00de, code lost:
 
        if (r8.equals("temporary-service") == false) goto L46;
     */
-    /* JADX WARN: Type inference failed for: r0v20, types: [com.android.server.contentcapture.ContentCaptureManagerServiceShellCommand$2] */
-    /* JADX WARN: Type inference failed for: r0v23, types: [com.android.server.contentcapture.ContentCaptureManagerServiceShellCommand$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

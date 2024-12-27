@@ -129,11 +129,6 @@ public final class KeyguardPunchHoleVIViewController extends ViewController impl
         keyguardPunchHoleVIViewController.mPluginLockStarManager.registerCallback(((KeyguardPunchHoleVIView) keyguardPunchHoleVIViewController.mView).TAG, keyguardPunchHoleVIViewController.mLockStarCallback);
     }
 
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.keyguard.punchhole.KeyguardPunchHoleVIViewController$3] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.keyguard.punchhole.KeyguardPunchHoleVIViewController$4] */
-    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.keyguard.punchhole.KeyguardPunchHoleVIViewController$5] */
-    /* JADX WARN: Type inference failed for: r1v8, types: [com.android.keyguard.punchhole.KeyguardPunchHoleVIViewController$6] */
-    /* JADX WARN: Type inference failed for: r1v9, types: [com.android.keyguard.punchhole.KeyguardPunchHoleVIViewController$7] */
     public KeyguardPunchHoleVIViewController(KeyguardPunchHoleVIView keyguardPunchHoleVIView, Handler handler, KeyguardUpdateMonitor keyguardUpdateMonitor, WakefulnessLifecycle wakefulnessLifecycle, SettingsHelper settingsHelper, DisplayLifecycle displayLifecycle, ConfigurationController configurationController, KeyguardEditModeController keyguardEditModeController, PluginLockStarManager pluginLockStarManager) {
         super(keyguardPunchHoleVIView);
         this.mIsBouncerVI = false;

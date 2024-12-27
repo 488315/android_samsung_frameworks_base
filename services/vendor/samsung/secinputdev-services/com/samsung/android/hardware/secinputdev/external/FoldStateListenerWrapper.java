@@ -55,7 +55,6 @@ public class FoldStateListenerWrapper extends ExternalService {
         return "";
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(Boolean folded) {
         this.listener.onFoldStateChanged(folded.booleanValue());
     }

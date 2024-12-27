@@ -413,7 +413,6 @@ public class TvView extends ViewGroup {
         ensurePositionTracking();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void ensurePositionTracking() {
         if (this.mSession == null) {
             return;
@@ -641,7 +640,6 @@ public class TvView extends ViewGroup {
         addView(this.mSurfaceView);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void setSessionSurface(Surface surface) {
         if (this.mSession == null) {
             return;
@@ -649,7 +647,6 @@ public class TvView extends ViewGroup {
         this.mSession.setSurface(surface);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchSurfaceChanged(int format, int width, int height) {
         if (this.mSession == null) {
             return;
@@ -657,7 +654,6 @@ public class TvView extends ViewGroup {
         this.mSession.dispatchSurfaceChanged(format, width, height);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void createSessionOverlayView() {
         if (this.mSession == null
                 || !isAttachedToWindow()
@@ -679,7 +675,6 @@ public class TvView extends ViewGroup {
         this.mOverlayViewFrame = null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void relayoutSessionOverlayView() {
         if (this.mSession == null
                 || !isAttachedToWindow()
@@ -704,7 +699,6 @@ public class TvView extends ViewGroup {
         return frame;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean checkChangeHdmiCecActiveSourcePermission() {
         return getContext().checkSelfPermission(Manifest.permission.CHANGE_HDMI_CEC_ACTIVE_SOURCE)
                 == 0;

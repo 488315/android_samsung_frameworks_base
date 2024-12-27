@@ -25,7 +25,6 @@ public final class DeviceBasedSatelliteBindableIcon$initializer$1 implements Mod
         String str = this.this$0.slot;
         final DeviceBasedSatelliteViewModel deviceBasedSatelliteViewModel = this.$viewModel;
         singleBindableStatusBarIconView.initView(str, new Function0() { // from class: com.android.systemui.statusbar.pipeline.satellite.ui.DeviceBasedSatelliteBindableIcon$initializer$1$1$1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

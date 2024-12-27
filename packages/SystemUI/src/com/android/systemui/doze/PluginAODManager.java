@@ -405,15 +405,6 @@ public final class PluginAODManager implements Dumpable, ConfigurationController
         }
     };
     public final AnonymousClass4 mLockscreenNotiCallback = new LockscreenNotificationManager.Callback() { // from class: com.android.systemui.doze.PluginAODManager.4
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r14v1 */
-        /* JADX WARN: Type inference failed for: r14v2 */
-        /* JADX WARN: Type inference failed for: r14v3 */
-        /* JADX WARN: Type inference failed for: r14v4, types: [int] */
-        /* JADX WARN: Type inference failed for: r14v5 */
-        /* JADX WARN: Type inference failed for: r14v6 */
-        /* JADX WARN: Type inference failed for: r14v7 */
-        /* JADX WARN: Type inference failed for: r5v14, types: [java.lang.StringBuilder] */
         @Override // com.android.systemui.statusbar.LockscreenNotificationManager.Callback
         public final void onNotificationInfoUpdated(ArrayList arrayList) {
             NotificationLockscreenUserManager notificationLockscreenUserManager;
@@ -1040,14 +1031,6 @@ public final class PluginAODManager implements Dumpable, ConfigurationController
         boolean z = DozeService.DEBUG;
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.doze.PluginAODManager$9] */
-    /* JADX WARN: Type inference failed for: r6v10, types: [com.android.systemui.doze.PluginAODManager$5] */
-    /* JADX WARN: Type inference failed for: r6v11, types: [com.android.systemui.doze.PluginAODManager$6] */
-    /* JADX WARN: Type inference failed for: r6v12, types: [com.android.systemui.doze.PluginAODManager$7] */
-    /* JADX WARN: Type inference failed for: r6v13, types: [com.android.systemui.doze.PluginAODManager$8] */
-    /* JADX WARN: Type inference failed for: r6v4, types: [com.android.systemui.doze.PluginAODManager$2] */
-    /* JADX WARN: Type inference failed for: r6v5, types: [com.android.systemui.doze.PluginAODManager$3] */
-    /* JADX WARN: Type inference failed for: r6v6, types: [com.android.systemui.doze.PluginAODManager$4] */
     public PluginAODManager(Context context, SelectedUserInteractor selectedUserInteractor, LockscreenNotificationManager lockscreenNotificationManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardViewController keyguardViewController, PluginFaceWidgetManager pluginFaceWidgetManager, SettingsHelper settingsHelper, DozeParameters dozeParameters, PluginLockMediator pluginLockMediator, NotificationShadeWindowController notificationShadeWindowController, KeyguardWallpaper keyguardWallpaper, DozeServiceHost dozeServiceHost, SubScreenManager subScreenManager, Lazy lazy, FaceWidgetWallpaperUtilsWrapper faceWidgetWallpaperUtilsWrapper, DisplayLifecycle displayLifecycle, WakefulnessLifecycle wakefulnessLifecycle, Lazy lazy2, NotificationLockscreenUserManager notificationLockscreenUserManager, SamsungServiceLogger samsungServiceLogger, KeyguardFoldController keyguardFoldController, DumpManager dumpManager, PluginLockStarManager pluginLockStarManager, NotificationsController notificationsController, KeyguardNotificationVisibilityProvider keyguardNotificationVisibilityProvider, LockscreenNotificationIconsOnlyController lockscreenNotificationIconsOnlyController, final SubScreenQuickPanelWindowController subScreenQuickPanelWindowController, KeyguardViewMediatorHelper keyguardViewMediatorHelper, AODAmbientWallpaperHelper aODAmbientWallpaperHelper, ConfigurationController configurationController, AODTouchModeManager aODTouchModeManager, KeyguardWallpaperController keyguardWallpaperController) {
         int i = 0;
         this.mContext = context;

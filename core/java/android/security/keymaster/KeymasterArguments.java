@@ -18,13 +18,11 @@ public class KeymasterArguments implements Parcelable {
             new Parcelable.Creator<
                     KeymasterArguments>() { // from class:
                                             // android.security.keymaster.KeymasterArguments.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeymasterArguments createFromParcel(Parcel in) {
                     return new KeymasterArguments(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeymasterArguments[] newArray(int size) {
                     return new KeymasterArguments[size];

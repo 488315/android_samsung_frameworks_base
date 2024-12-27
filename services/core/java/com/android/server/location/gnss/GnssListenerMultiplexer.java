@@ -170,7 +170,6 @@ public abstract class GnssListenerMultiplexer extends ListenerMultiplexer {
         public final Object mRequest;
         public final /* synthetic */ GnssListenerMultiplexer this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public GnssListenerRegistration(
                 CallerIdentity callerIdentity,
                 IInterface iInterface,
@@ -280,13 +279,6 @@ public abstract class GnssListenerMultiplexer extends ListenerMultiplexer {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.location.gnss.GnssListenerMultiplexer$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.location.gnss.GnssListenerMultiplexer$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.location.gnss.GnssListenerMultiplexer$$ExternalSyntheticLambda2] */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.location.gnss.GnssListenerMultiplexer$$ExternalSyntheticLambda3] */
-    /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.location.gnss.GnssListenerMultiplexer$1] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.location.gnss.GnssListenerMultiplexer$$ExternalSyntheticLambda4] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.location.gnss.GnssListenerMultiplexer$2] */
     public GnssListenerMultiplexer(Injector injector) {
         LocationManagerService.SystemInjector systemInjector =
                 (LocationManagerService.SystemInjector) injector;
@@ -356,7 +348,6 @@ public abstract class GnssListenerMultiplexer extends ListenerMultiplexer {
         return !isSupported() ? "unsupported" : super.getServiceState();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:? A[RETURN, SYNTHETIC] */
     @Override // com.android.server.location.listeners.ListenerMultiplexer
     /*
         Code decompiled incorrectly, please refer to instructions dump.

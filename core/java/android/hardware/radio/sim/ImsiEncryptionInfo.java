@@ -12,7 +12,6 @@ public class ImsiEncryptionInfo implements Parcelable {
     public static final Parcelable.Creator<ImsiEncryptionInfo> CREATOR =
             new Parcelable.Creator<ImsiEncryptionInfo>() { // from class:
                 // android.hardware.radio.sim.ImsiEncryptionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsiEncryptionInfo createFromParcel(Parcel _aidl_source) {
                     ImsiEncryptionInfo _aidl_out = new ImsiEncryptionInfo();
@@ -20,7 +19,6 @@ public class ImsiEncryptionInfo implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsiEncryptionInfo[] newArray(int _aidl_size) {
                     return new ImsiEncryptionInfo[_aidl_size];

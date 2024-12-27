@@ -17,7 +17,6 @@ final class KeyguardClockViewModel$smallClockTopMargin$1 extends SuspendLambda i
     int label;
     final /* synthetic */ KeyguardClockViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardClockViewModel$smallClockTopMargin$1(KeyguardClockViewModel keyguardClockViewModel, Continuation continuation) {
         super(3, continuation);
         this.this$0 = keyguardClockViewModel;

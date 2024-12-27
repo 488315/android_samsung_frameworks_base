@@ -16,7 +16,6 @@ final class MediaDeviceSessionInteractor$stateChanges$1$1 extends SuspendLambda 
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public MediaDeviceSessionInteractor$stateChanges$1$1(Function3 function3, MediaController mediaController, Continuation continuation) {
         super(2, continuation);
         this.$onStart = function3;

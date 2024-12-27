@@ -40,8 +40,6 @@ public abstract class Convert {
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     final class MetadataType {
         public static final /* synthetic */ MetadataType[] $VALUES;
         public static final MetadataType INT;
@@ -292,8 +290,6 @@ public abstract class Convert {
         return programSelector2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00ec A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00d0 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

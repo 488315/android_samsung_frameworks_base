@@ -8,7 +8,6 @@ public class NextEnrollment implements Parcelable {
     public static final Parcelable.Creator<NextEnrollment> CREATOR =
             new Parcelable.Creator<NextEnrollment>() { // from class:
                 // android.hardware.biometrics.fingerprint.NextEnrollment.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NextEnrollment createFromParcel(Parcel _aidl_source) {
                     NextEnrollment _aidl_out = new NextEnrollment();
@@ -16,7 +15,6 @@ public class NextEnrollment implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NextEnrollment[] newArray(int _aidl_size) {
                     return new NextEnrollment[_aidl_size];

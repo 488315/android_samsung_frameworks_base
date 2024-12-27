@@ -15,7 +15,6 @@ final class WallpaperRepositoryImpl$wallpaperInfo$3 extends SuspendLambda implem
     int label;
     final /* synthetic */ WallpaperRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public WallpaperRepositoryImpl$wallpaperInfo$3(WallpaperRepositoryImpl wallpaperRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = wallpaperRepositoryImpl;

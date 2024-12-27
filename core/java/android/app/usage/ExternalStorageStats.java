@@ -7,13 +7,11 @@ public final class ExternalStorageStats implements Parcelable {
     public static final Parcelable.Creator<ExternalStorageStats> CREATOR =
             new Parcelable.Creator<ExternalStorageStats>() { // from class:
                 // android.app.usage.ExternalStorageStats.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExternalStorageStats createFromParcel(Parcel in) {
                     return new ExternalStorageStats(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ExternalStorageStats[] newArray(int size) {
                     return new ExternalStorageStats[size];

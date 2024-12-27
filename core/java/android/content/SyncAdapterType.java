@@ -8,13 +8,11 @@ public class SyncAdapterType implements Parcelable {
     public static final Parcelable.Creator<SyncAdapterType> CREATOR =
             new Parcelable.Creator<
                     SyncAdapterType>() { // from class: android.content.SyncAdapterType.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncAdapterType createFromParcel(Parcel source) {
                     return new SyncAdapterType(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SyncAdapterType[] newArray(int size) {
                     return new SyncAdapterType[size];

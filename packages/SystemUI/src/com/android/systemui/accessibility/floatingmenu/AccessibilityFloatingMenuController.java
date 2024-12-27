@@ -130,8 +130,6 @@ public final class AccessibilityFloatingMenuController implements AccessibilityB
         }
     }
 
-    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuController$3] */
-    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuController$4] */
     public AccessibilityFloatingMenuController(Context context, WindowManager windowManager, DisplayManager displayManager, AccessibilityManager accessibilityManager, AccessibilityButtonTargetsObserver accessibilityButtonTargetsObserver, AccessibilityButtonModeObserver accessibilityButtonModeObserver, KeyguardUpdateMonitor keyguardUpdateMonitor, SecureSettings secureSettings, DisplayTracker displayTracker) {
         this.mContext = context;
         this.mDisplayManager = displayManager;

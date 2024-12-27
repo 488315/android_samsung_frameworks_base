@@ -30,13 +30,11 @@ public final class NrQosSessionAttributes implements Parcelable, QosSessionAttri
             new Parcelable.Creator<
                     NrQosSessionAttributes>() { // from class:
                                                 // android.telephony.data.NrQosSessionAttributes.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NrQosSessionAttributes createFromParcel(Parcel in) {
                     return new NrQosSessionAttributes(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NrQosSessionAttributes[] newArray(int size) {
                     return new NrQosSessionAttributes[size];

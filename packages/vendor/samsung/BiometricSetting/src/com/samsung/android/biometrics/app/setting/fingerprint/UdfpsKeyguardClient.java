@@ -421,8 +421,6 @@ public final class UdfpsKeyguardClient extends UdfpsPrivilegedAuthClient
         }
     }
 
-    /* JADX WARN: Type inference failed for: r5v0, types: [com.samsung.android.biometrics.app.setting.fingerprint.UdfpsKeyguardClient$$ExternalSyntheticLambda1] */
-    /* JADX WARN: Type inference failed for: r6v0, types: [com.samsung.android.biometrics.app.setting.fingerprint.UdfpsKeyguardClient$$ExternalSyntheticLambda2] */
     @Override // com.samsung.android.biometrics.app.setting.fingerprint.UdfpsPrivilegedAuthClient,
               // com.samsung.android.biometrics.app.setting.SysUiClient
     public final void prepareWindows() {

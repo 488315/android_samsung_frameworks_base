@@ -161,7 +161,6 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
         return AudioManager.getAudioProductStrategies().size() > 0;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public int getVolumeGroupIdForLegacyStreamType(int streamType) {
         for (AudioProductStrategy productStrategy : AudioManager.getAudioProductStrategies()) {
             int volumeGroupId = productStrategy.getVolumeGroupIdForLegacyStreamType(streamType);
@@ -239,7 +238,6 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
         this.mSeekBar.setOnSeekBarChangeListener(this);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isZenMuted() {
         if ((this.mNotificationOrRing && this.mZenMode == 3) || this.mZenMode == 2) {
             return true;
@@ -353,7 +351,6 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void postUpdateSliderMaybeLater() {
         if (this.mHandler == null) {
             return;
@@ -362,7 +359,6 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
         this.mHandler.sendMessageDelayed(this.mHandler.obtainMessage(4), 500L);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isDelay() {
         long durationTime = System.currentTimeMillis() - sStopVolumeTime;
         return durationTime >= 0 && durationTime < DURATION_TO_START_DELAYING;
@@ -579,7 +575,6 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void updateSlider() {
         if (this.mSeekBar != null && this.mAudioManager != null) {
             int volume = this.mAudioManager.getStreamVolume(this.mStreamType);

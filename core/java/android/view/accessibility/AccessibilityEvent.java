@@ -109,7 +109,6 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
                 new Parcelable.Creator<
                         AccessibilityEvent>() { // from class:
                                                 // android.view.accessibility.AccessibilityEvent.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AccessibilityEvent createFromParcel(Parcel parcel) {
                         AccessibilityEvent event = new AccessibilityEvent();
@@ -117,7 +116,6 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
                         return event;
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public AccessibilityEvent[] newArray(int size) {
                         return new AccessibilityEvent[size];
@@ -212,7 +210,6 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String singleContentChangeTypeToString(int type) {
         switch (type) {
             case 0:
@@ -282,7 +279,6 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String singleSpeechStateChangeTypeToString(int type) {
         switch (type) {
             case 1:
@@ -326,7 +322,6 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
                 });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String singleWindowChangeTypeToString(int type) {
         switch (type) {
             case 1:

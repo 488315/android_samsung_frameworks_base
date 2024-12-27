@@ -28,8 +28,6 @@ public final class BarOrderRepository {
     public int collapsedBarRow = loadCollapsedBarRow();
     public List barOrder = CollectionsKt___CollectionsKt.toList(StringsKt__StringsKt.split$default(loadBarOrder(), new String[]{","}, 0, 6));
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class BarClsName {
         public static final /* synthetic */ BarClsName[] $VALUES;
         public static final BarClsName SECURITY_FOOTER_BAR;

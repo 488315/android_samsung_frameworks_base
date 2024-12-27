@@ -24,7 +24,6 @@ public final class LockscreenToAodTransitionViewModel$special$$inlined$flatMapLa
     int label;
     final /* synthetic */ LockscreenToAodTransitionViewModel this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LockscreenToAodTransitionViewModel$special$$inlined$flatMapLatest$1(Continuation continuation, ShadeDependentFlows shadeDependentFlows, LockscreenToAodTransitionViewModel lockscreenToAodTransitionViewModel) {
         super(3, continuation);
         this.$shadeDependentFlows$inlined = shadeDependentFlows;

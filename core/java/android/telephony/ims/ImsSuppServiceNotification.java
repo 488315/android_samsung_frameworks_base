@@ -12,13 +12,11 @@ public final class ImsSuppServiceNotification implements Parcelable {
             new Parcelable.Creator<
                     ImsSuppServiceNotification>() { // from class:
                                                     // android.telephony.ims.ImsSuppServiceNotification.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsSuppServiceNotification createFromParcel(Parcel in) {
                     return new ImsSuppServiceNotification(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ImsSuppServiceNotification[] newArray(int size) {
                     return new ImsSuppServiceNotification[size];

@@ -52,7 +52,6 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
         URI_VSET_APP_STATUS_DATA = Uri.parse("content://com.samsung.android.vtcamerasettings.VsetInfoProvider/VsetAppInfo/StatusInfo");
     }
 
-    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.qs.bar.VideoCallEffect$contentObserver$1] */
     public VideoCallEffect(VideoCallMicModeUtil videoCallMicModeUtil, Context context, PanelInteractor panelInteractor, Runnable runnable) {
         this.util = videoCallMicModeUtil;
         this.context = context;

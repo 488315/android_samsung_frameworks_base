@@ -18,7 +18,6 @@ final class ReduceBrightColorsControllerExtKt$isEnabled$1 extends SuspendLambda 
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ReduceBrightColorsControllerExtKt$isEnabled$1(ReduceBrightColorsController reduceBrightColorsController, Continuation continuation) {
         super(2, continuation);
         this.$this_isEnabled = reduceBrightColorsController;
@@ -31,8 +30,6 @@ final class ReduceBrightColorsControllerExtKt$isEnabled$1 extends SuspendLambda 
         return reduceBrightColorsControllerExtKt$isEnabled$1;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.util.kotlin.ReduceBrightColorsControllerExtKt$isEnabled$1$callback$1, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -49,7 +46,6 @@ final class ReduceBrightColorsControllerExtKt$isEnabled$1 extends SuspendLambda 
             ((ReduceBrightColorsControllerImpl) this.$this_isEnabled).addCallback(r1);
             final ReduceBrightColorsController reduceBrightColorsController = this.$this_isEnabled;
             Function0 function0 = new Function0() { // from class: com.android.systemui.util.kotlin.ReduceBrightColorsControllerExtKt$isEnabled$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

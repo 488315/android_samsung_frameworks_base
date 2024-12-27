@@ -192,12 +192,10 @@ class DrmMediaResourceHelper {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean addPIDToBoostedList(int pid) {
         return this.BoostedPIDs.add(Integer.valueOf(pid));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isResourcePresent(int pid) {
         Iterator i = this.BoostedPIDs.iterator();
         while (i.hasNext()) {
@@ -209,7 +207,6 @@ class DrmMediaResourceHelper {
         return false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void removePID(int pid) {
         Iterator i = this.BoostedPIDs.iterator();
         while (i.hasNext()) {

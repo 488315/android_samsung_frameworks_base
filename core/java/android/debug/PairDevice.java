@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public class PairDevice implements Parcelable {
     public static final Parcelable.Creator<PairDevice> CREATOR =
             new Parcelable.Creator<PairDevice>() { // from class: android.debug.PairDevice.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PairDevice createFromParcel(Parcel _aidl_source) {
                     PairDevice _aidl_out = new PairDevice();
@@ -15,7 +14,6 @@ public class PairDevice implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PairDevice[] newArray(int _aidl_size) {
                     return new PairDevice[_aidl_size];

@@ -19,7 +19,6 @@ public final class BrightnessCorrection implements Parcelable {
     public static final Parcelable.Creator<BrightnessCorrection> CREATOR =
             new Parcelable.Creator<BrightnessCorrection>() { // from class:
                 // android.hardware.display.BrightnessCorrection.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BrightnessCorrection createFromParcel(Parcel in) {
                     int type = in.readInt();
@@ -31,7 +30,6 @@ public final class BrightnessCorrection implements Parcelable {
                     }
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public BrightnessCorrection[] newArray(int size) {
                     return new BrightnessCorrection[size];
@@ -109,7 +107,6 @@ public final class BrightnessCorrection implements Parcelable {
         return null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static float loadFloatFromXml(TypedXmlPullParser parser, String attribute) {
         return parser.getAttributeFloat(null, attribute, Float.NaN);
     }

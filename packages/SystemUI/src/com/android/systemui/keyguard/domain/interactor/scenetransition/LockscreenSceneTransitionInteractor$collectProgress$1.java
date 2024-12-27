@@ -20,7 +20,6 @@ final class LockscreenSceneTransitionInteractor$collectProgress$1 extends Suspen
     int label;
     final /* synthetic */ LockscreenSceneTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public LockscreenSceneTransitionInteractor$collectProgress$1(ObservableTransitionState.Transition transition, LockscreenSceneTransitionInteractor lockscreenSceneTransitionInteractor, Continuation continuation) {
         super(2, continuation);
         this.$transition = transition;

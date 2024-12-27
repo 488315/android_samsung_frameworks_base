@@ -412,7 +412,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
             return -1;
         }
 
-        /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.am.ActivityManagerShellCommand$MyActivityController$1, java.lang.Thread] */
         public final int waitControllerLocked(int i, int i2) {
             if (this.mGdbPort != null) {
                 killGdbLocked();
@@ -879,18 +878,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v0 */
-    /* JADX WARN: Type inference failed for: r2v1 */
-    /* JADX WARN: Type inference failed for: r2v11, types: [com.android.server.am.ProcessRecord] */
-    /* JADX WARN: Type inference failed for: r2v12, types: [int] */
-    /* JADX WARN: Type inference failed for: r2v13 */
-    /* JADX WARN: Type inference failed for: r2v14 */
-    /* JADX WARN: Type inference failed for: r2v15 */
-    /* JADX WARN: Type inference failed for: r2v16, types: [com.android.server.am.ProcessRecord] */
-    /* JADX WARN: Type inference failed for: r2v17 */
-    /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.am.ProcessRecord] */
-    /* JADX WARN: Type inference failed for: r4v5, types: [com.android.server.am.ActivityManagerService$PidMap] */
     @NeverCompile
     public final ProcessRecord getProcessFromShell() throws RemoteException {
         ?? r2;
@@ -2390,8 +2377,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00fd  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01f9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2911,7 +2896,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runMemoryFactor(PrintWriter printWriter) {
         boolean z;
         boolean z2;
@@ -3149,8 +3133,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         printWriter.println(ActivityManager.RunningAppProcessInfo.procStateToImportance(this.mInterface.getPackageProcessState(getNextArgRequired(), "com.android.shell")));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00cc  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00d2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3228,7 +3210,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runSendTrimMemory() {
         char c;
         int i = 5;
@@ -3336,7 +3317,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         return -1;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runServiceRestartBackoff(PrintWriter printWriter) {
         char c;
         boolean z;
@@ -3483,7 +3463,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         return 0;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runSetBgRestrictionLevel(PrintWriter printWriter) {
         char c;
         int i;
@@ -3835,7 +3814,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         this.mInterface.setDumpHeapDebugLimit(getNextArgRequired(), 0, Long.parseLong(getNextArgRequired()), null);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int runStack(PrintWriter printWriter) {
         char c;
         boolean z = true;
@@ -3916,10 +3894,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
     
         return r13;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r13v0 */
-    /* JADX WARN: Type inference failed for: r13v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r13v5 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3940,46 +3914,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
     
         return r13;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x021c  */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x0229  */
-    /* JADX WARN: Removed duplicated region for block: B:111:0x0236  */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x0243  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x02b2  */
-    /* JADX WARN: Removed duplicated region for block: B:133:0x03fa  */
-    /* JADX WARN: Removed duplicated region for block: B:136:0x0404 A[LOOP:0: B:19:0x006e->B:136:0x0404, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:137:0x0403 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:141:0x02e9  */
-    /* JADX WARN: Removed duplicated region for block: B:188:0x041d A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:193:0x02b4  */
-    /* JADX WARN: Removed duplicated region for block: B:194:0x027f  */
-    /* JADX WARN: Removed duplicated region for block: B:199:0x01a5  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x019b  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x01ab  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x01ba  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x01c9  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x01d9  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x01e6  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x01f7  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x0206  */
-    /* JADX WARN: Type inference failed for: r13v0 */
-    /* JADX WARN: Type inference failed for: r13v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r13v5 */
-    /* JADX WARN: Type inference failed for: r23v1 */
-    /* JADX WARN: Type inference failed for: r23v2, types: [int] */
-    /* JADX WARN: Type inference failed for: r23v4 */
-    /* JADX WARN: Type inference failed for: r2v109 */
-    /* JADX WARN: Type inference failed for: r2v110 */
-    /* JADX WARN: Type inference failed for: r2v122 */
-    /* JADX WARN: Type inference failed for: r2v123 */
-    /* JADX WARN: Type inference failed for: r2v127 */
-    /* JADX WARN: Type inference failed for: r2v128 */
-    /* JADX WARN: Type inference failed for: r2v131 */
-    /* JADX WARN: Type inference failed for: r2v132 */
-    /* JADX WARN: Type inference failed for: r2v48, types: [android.app.ActivityOptions] */
-    /* JADX WARN: Type inference failed for: r2v50, types: [android.app.ActivityOptions] */
-    /* JADX WARN: Type inference failed for: r2v52, types: [android.app.ActivityOptions] */
-    /* JADX WARN: Type inference failed for: r2v58, types: [android.app.ActivityOptions] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

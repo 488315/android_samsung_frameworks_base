@@ -90,7 +90,6 @@ public final class BottomBarComponent implements ComposeVolumePanelUiComponent {
         RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
         if (endRestartGroup != null) {
             endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.bottombar.ui.BottomBarComponent$Content$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }

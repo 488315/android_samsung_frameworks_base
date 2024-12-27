@@ -19,7 +19,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* JADX INFO: Access modifiers changed from: package-private */
 public final class FooterViewBinder$bindClearAllButton$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ View.OnClickListener $clearAllNotifications;
     final /* synthetic */ FooterView $footer;
@@ -33,7 +32,6 @@ public final class FooterViewBinder$bindClearAllButton$2 extends SuspendLambda i
         final /* synthetic */ FooterViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(FooterViewModel footerViewModel, FooterView footerView, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = footerViewModel;
@@ -87,7 +85,6 @@ public final class FooterViewBinder$bindClearAllButton$2 extends SuspendLambda i
         final /* synthetic */ FooterViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(FooterViewModel footerViewModel, FooterView footerView, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = footerViewModel;
@@ -135,14 +132,12 @@ public final class FooterViewBinder$bindClearAllButton$2 extends SuspendLambda i
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: package-private */
     /* renamed from: com.android.systemui.statusbar.notification.footer.ui.viewbinder.FooterViewBinder$bindClearAllButton$2$3, reason: invalid class name */
     public final class AnonymousClass3 extends SuspendLambda implements Function2 {
         final /* synthetic */ FooterView $footer;
         final /* synthetic */ FooterViewModel $viewModel;
         int label;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass3(FooterViewModel footerViewModel, FooterView footerView, Continuation continuation) {
             super(2, continuation);
             this.$viewModel = footerViewModel;
@@ -168,8 +163,6 @@ public final class FooterViewBinder$bindClearAllButton$2 extends SuspendLambda i
                 Flow flow = this.$viewModel.clearAllButton.isVisible;
                 final FooterView footerView = this.$footer;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.footer.ui.viewbinder.FooterViewBinder.bindClearAllButton.2.3.1
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.statusbar.notification.footer.ui.viewbinder.FooterViewBinder$bindClearAllButton$2$3$1$1] */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
                         Object value;
@@ -223,7 +216,6 @@ public final class FooterViewBinder$bindClearAllButton$2 extends SuspendLambda i
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FooterViewBinder$bindClearAllButton$2(FooterView footerView, View.OnClickListener onClickListener, FooterViewModel footerViewModel, Continuation continuation) {
         super(2, continuation);
         this.$footer = footerView;

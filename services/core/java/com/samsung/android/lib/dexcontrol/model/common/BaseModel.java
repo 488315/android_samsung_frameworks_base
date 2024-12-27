@@ -100,8 +100,6 @@ public abstract class BaseModel {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r0v3, types: [android.content.BroadcastReceiver, com.samsung.android.lib.dexcontrol.model.common.BaseModel$3] */
     public BaseModel(Context context) {
         this.mContext = null;
         ?? r0 = new BroadcastReceiver() { // from class: com.samsung.android.lib.dexcontrol.model.common.BaseModel.3

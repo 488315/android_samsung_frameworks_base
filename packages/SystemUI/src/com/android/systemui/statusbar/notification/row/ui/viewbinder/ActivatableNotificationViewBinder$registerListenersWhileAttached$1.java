@@ -9,7 +9,6 @@ final class ActivatableNotificationViewBinder$registerListenersWhileAttached$1 e
     /* synthetic */ Object result;
     final /* synthetic */ ActivatableNotificationViewBinder this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ActivatableNotificationViewBinder$registerListenersWhileAttached$1(ActivatableNotificationViewBinder activatableNotificationViewBinder, Continuation continuation) {
         super(continuation);
         this.this$0 = activatableNotificationViewBinder;

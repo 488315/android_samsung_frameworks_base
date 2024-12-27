@@ -17,7 +17,6 @@ public final class FromAlternateBouncerTransitionInteractor$listenForAlternateBo
     int label;
     final /* synthetic */ FromAlternateBouncerTransitionInteractor this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public FromAlternateBouncerTransitionInteractor$listenForAlternateBouncerToGone$1$invokeSuspend$$inlined$flatMapLatest$1(Continuation continuation, FromAlternateBouncerTransitionInteractor fromAlternateBouncerTransitionInteractor) {
         super(3, continuation);
         this.this$0 = fromAlternateBouncerTransitionInteractor;

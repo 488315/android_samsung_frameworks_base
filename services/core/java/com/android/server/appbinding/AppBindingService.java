@@ -91,7 +91,6 @@ public final class AppBindingService extends Binder {
     public final class Lifecycle extends SystemService {
         public final AppBindingService mService;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public Lifecycle(Context context) {
             super(context);
             Injector injector = new Injector();
@@ -209,8 +208,6 @@ public final class AppBindingService extends Binder {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.appbinding.AppBindingService$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.appbinding.AppBindingService$$ExternalSyntheticLambda0] */
     public AppBindingService(Injector injector, Context context) {
         ArrayList arrayList = new ArrayList();
         this.mApps = arrayList;
@@ -315,8 +312,6 @@ public final class AppBindingService extends Binder {
         this.mConstants = new AppBindingConstants("");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:58:0x00db A[Catch: all -> 0x00a1, TryCatch #0 {all -> 0x00a1, blocks: (B:28:0x004e, B:30:0x0061, B:32:0x0070, B:34:0x0084, B:35:0x009f, B:46:0x00a4, B:48:0x00bd, B:49:0x00c6, B:51:0x00c8, B:53:0x00ce, B:58:0x00db, B:59:0x00e5, B:61:0x00e7, B:62:0x00f3, B:65:0x00f6, B:66:0x0105), top: B:27:0x004e }] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00e7 A[Catch: all -> 0x00a1, TryCatch #0 {all -> 0x00a1, blocks: (B:28:0x004e, B:30:0x0061, B:32:0x0070, B:34:0x0084, B:35:0x009f, B:46:0x00a4, B:48:0x00bd, B:49:0x00c6, B:51:0x00c8, B:53:0x00ce, B:58:0x00db, B:59:0x00e5, B:61:0x00e7, B:62:0x00f3, B:65:0x00f6, B:66:0x0105), top: B:27:0x004e }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

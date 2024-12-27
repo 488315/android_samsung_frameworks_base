@@ -193,12 +193,6 @@ public final class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInpu
         new Handler().postDelayed(new KeyguardKnoxGuardViewController$$ExternalSyntheticLambda8(keyguardKnoxGuardViewController, 0), 3000L);
     }
 
-    /* JADX WARN: Type inference failed for: r1v16, types: [com.android.keyguard.KeyguardKnoxGuardViewController$6] */
-    /* JADX WARN: Type inference failed for: r1v18, types: [com.android.keyguard.KeyguardKnoxGuardViewController$7] */
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.keyguard.KeyguardKnoxGuardViewController$1] */
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.keyguard.KeyguardKnoxGuardViewController$2] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.keyguard.KeyguardKnoxGuardViewController$4] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.keyguard.KeyguardKnoxGuardViewController$5] */
     public KeyguardKnoxGuardViewController(KeyguardKnoxGuardView keyguardKnoxGuardView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, FalsingCollector falsingCollector, EmergencyButtonController emergencyButtonController, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, InputMethodManager inputMethodManager, TelephonyManager telephonyManager, WifiManager wifiManager, NetworkController networkController, ScreenLifecycle screenLifecycle) {
         super(keyguardKnoxGuardView, configurationController, vibrationUtil, accessibilityManager, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, falsingCollector, emergencyButtonController, featureFlags, selectedUserInteractor);
         this.mRemoteLockInfo = null;

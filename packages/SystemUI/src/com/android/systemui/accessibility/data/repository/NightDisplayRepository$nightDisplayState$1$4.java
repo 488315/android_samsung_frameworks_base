@@ -16,7 +16,6 @@ final class NightDisplayRepository$nightDisplayState$1$4 extends SuspendLambda i
     int label;
     final /* synthetic */ NightDisplayRepository this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public NightDisplayRepository$nightDisplayState$1$4(NightDisplayRepository nightDisplayRepository, UserHandle userHandle, Continuation continuation) {
         super(2, continuation);
         this.this$0 = nightDisplayRepository;

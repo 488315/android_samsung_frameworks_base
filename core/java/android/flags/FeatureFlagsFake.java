@@ -38,7 +38,6 @@ public class FeatureFlagsFake extends FeatureFlags {
     @Override // android.flags.FeatureFlags
     protected void syncInternal(Set<Flag<?>> dirtyFlags) {}
 
-    /* JADX WARN: Multi-variable type inference failed */
     public void setFlagValue(BooleanFlagBase booleanFlagBase, boolean value) {
         if (!(booleanFlagBase instanceof DynamicBooleanFlag)
                 && this.mReadFlags.contains(booleanFlagBase)) {

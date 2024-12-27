@@ -7,7 +7,6 @@ public final class WifiDisplaySessionInfo implements Parcelable {
     public static final Parcelable.Creator<WifiDisplaySessionInfo> CREATOR =
             new Parcelable.Creator<WifiDisplaySessionInfo>() { // from class:
                 // android.hardware.display.WifiDisplaySessionInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiDisplaySessionInfo createFromParcel(Parcel in) {
                     boolean client = in.readInt() != 0;
@@ -18,7 +17,6 @@ public final class WifiDisplaySessionInfo implements Parcelable {
                     return new WifiDisplaySessionInfo(client, session, group, pp, ip);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public WifiDisplaySessionInfo[] newArray(int size) {
                     return new WifiDisplaySessionInfo[size];

@@ -24,13 +24,11 @@ public final class AudioPresentation implements Parcelable {
     public static final Parcelable.Creator<AudioPresentation> CREATOR =
             new Parcelable.Creator<
                     AudioPresentation>() { // from class: android.media.AudioPresentation.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPresentation createFromParcel(Parcel in) {
                     return new AudioPresentation(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AudioPresentation[] newArray(int size) {
                     return new AudioPresentation[size];

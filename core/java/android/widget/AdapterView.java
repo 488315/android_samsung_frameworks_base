@@ -668,7 +668,6 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
         performAccessibilityActionsOnSelected();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void dispatchOnItemSelected() {
         fireOnSelected();
         performAccessibilityActionsOnSelected();
@@ -705,7 +704,6 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$performAccessibilityActionsOnSelected$0() {
         sendAccessibilityEvent(4);
     }

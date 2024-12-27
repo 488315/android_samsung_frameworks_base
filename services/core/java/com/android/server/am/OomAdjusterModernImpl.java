@@ -869,9 +869,6 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
         postUpdateOomAdjInnerLSP(i, activeUids3, uptimeMillis, j3, j, false);
     }
 
-    /* JADX WARN: Type inference failed for: r7v0 */
-    /* JADX WARN: Type inference failed for: r7v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r7v4 */
     @Override // com.android.server.am.OomAdjuster
     public final void performUpdateOomAdjLSP(int i) {
         this.mService.getTopApp();

@@ -134,7 +134,6 @@ public final class MediaOutputController implements LocalMediaManager.DeviceCall
     };
 
     public enum BroadcastNotifyDialog {
-        /* JADX INFO: Fake field, exist only in values array */
         ACTION_FIRST_LAUNCH,
         ACTION_BROADCAST_INFO_ICON
     }

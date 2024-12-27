@@ -32,8 +32,6 @@ public final class GesturesObserver implements GestureMatcher.StateChangeListene
         this.mObserveStarted = false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0115  */
-    /* JADX WARN: Removed duplicated region for block: B:25:? A[RETURN, SYNTHETIC] */
     @Override // com.android.server.accessibility.gestures.GestureMatcher.StateChangeListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -201,8 +201,6 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider
             this.this$0 = gnssLocationProvider;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:32:0x0109  */
-        /* JADX WARN: Removed duplicated region for block: B:37:0x011a  */
         @Override // android.content.BroadcastReceiver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -809,7 +807,6 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider
         this.mHandler.post(new GnssLocationProvider$$ExternalSyntheticLambda0(this, 0));
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.server.location.provider.AbstractLocationProvider
     public void onExtraCommand(int i, String str, Bundle bundle, int i2) {
         if (!isExtraCommandAllowed(i)) {
@@ -972,10 +969,6 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider
 
                            if (com.android.server.location.gnss.sec.GnssVendorConfig.isIzatServiceEnabled() == false) goto L48;
                         */
-                        /* JADX WARN: Removed duplicated region for block: B:51:0x017f  */
-                        /* JADX WARN: Removed duplicated region for block: B:58:0x019b  */
-                        /* JADX WARN: Removed duplicated region for block: B:63:? A[RETURN, SYNTHETIC] */
-                        /* JADX WARN: Removed duplicated region for block: B:69:0x014d  */
                         @Override // java.lang.Runnable
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
@@ -1301,8 +1294,6 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider
 
        if (r8 != (r10.getType() != 6 ? Long.MAX_VALUE : 2147483647L)) goto L47;
     */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00b3  */
     @Override // com.android.server.location.gnss.hal.GnssNative.LocationRequestCallbacks
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1818,7 +1809,6 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider
         handleEnableSec();
     }
 
-    /* JADX WARN: Type inference failed for: r0v40, types: [com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda10] */
     public final void updateRequirements() {
         ProviderRequest providerRequest = this.mProviderRequest;
         if (providerRequest == null || providerRequest.getWorkSource() == null) {

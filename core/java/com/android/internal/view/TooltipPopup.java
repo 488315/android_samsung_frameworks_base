@@ -48,7 +48,6 @@ public class TooltipPopup {
     private boolean mIsCaptionMenuButton = false;
     private boolean mIsCaptionPopupButton = false;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(
             View v,
             int left,
@@ -304,18 +303,6 @@ public class TooltipPopup {
         this.mMessageView.setMaxWidth(mMessageViewMaxWidth);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:102:0x02b3  */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x0296  */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x025e  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x024c  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0279  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x029c  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x02ad  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x02bc  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x0304  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x033b  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x0347  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x032a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

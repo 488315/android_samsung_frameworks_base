@@ -373,7 +373,6 @@ public class AudioRecord
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void unregisterAudioPolicyOnRelease(AudioPolicy audioPolicy) {
         this.mAudioCapturePolicy = audioPolicy;
     }
@@ -1457,7 +1456,6 @@ public class AudioRecord
         Log.d(TAG, msg);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void loge(String msg) {
         Log.e(TAG, msg);
     }

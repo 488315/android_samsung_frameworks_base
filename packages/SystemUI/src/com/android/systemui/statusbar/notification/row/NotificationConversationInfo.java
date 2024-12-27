@@ -97,7 +97,6 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
             this.mAction = i2;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:20:0x0031 A[Catch: RemoteException -> 0x0021, TryCatch #0 {RemoteException -> 0x0021, blocks: (B:2:0x0000, B:9:0x00a0, B:13:0x000e, B:15:0x0018, B:18:0x0029, B:20:0x0031, B:21:0x0024, B:22:0x003c, B:24:0x004a, B:26:0x0055, B:27:0x005e, B:29:0x0068, B:30:0x0073, B:31:0x0081, B:33:0x0096), top: B:1:0x0000 }] */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -201,10 +200,6 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.notification.row.NotificationConversationInfo$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.notification.row.NotificationConversationInfo$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.statusbar.notification.row.NotificationConversationInfo$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.statusbar.notification.row.NotificationConversationInfo$$ExternalSyntheticLambda0] */
     public NotificationConversationInfo(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mSelectedAction = -1;
@@ -469,15 +464,6 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
         findViewById(R.id.conversation_icon_badge_ring).setVisibility(z ? 0 : 8);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00c1  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0173  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x01fe  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0207  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x0177  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x014f  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0158  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00df A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x00c8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

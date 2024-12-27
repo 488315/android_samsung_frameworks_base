@@ -19,7 +19,6 @@ final class DisconnectedDeviceController$Companion$connectedDeviceChanges$1$upda
     final /* synthetic */ LocalBluetoothManager $this_connectedDeviceChanges;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DisconnectedDeviceController$Companion$connectedDeviceChanges$1$updateDevices$1(ProducerScope producerScope, LocalBluetoothManager localBluetoothManager, Continuation continuation) {
         super(2, continuation);
         this.$$this$callbackFlow = producerScope;

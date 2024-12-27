@@ -31,7 +31,6 @@ final class CommunalSceneStartable$start$6 extends SuspendLambda implements Func
             int label;
             final /* synthetic */ CommunalSceneStartable this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             public C00711(CommunalSceneStartable communalSceneStartable, boolean z, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = communalSceneStartable;
@@ -65,7 +64,6 @@ final class CommunalSceneStartable$start$6 extends SuspendLambda implements Func
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass1(CommunalSceneStartable communalSceneStartable, Continuation continuation) {
             super(2, continuation);
             this.this$0 = communalSceneStartable;
@@ -109,7 +107,6 @@ final class CommunalSceneStartable$start$6 extends SuspendLambda implements Func
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public CommunalSceneStartable$start$6(CommunalSceneStartable communalSceneStartable, Continuation continuation) {
         super(2, continuation);
         this.this$0 = communalSceneStartable;

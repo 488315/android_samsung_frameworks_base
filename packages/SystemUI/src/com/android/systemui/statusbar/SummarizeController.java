@@ -60,7 +60,6 @@ public final class SummarizeController {
         }
     };
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.statusbar.SummarizeController$1] */
     public SummarizeController(Context context, Lazy lazy, ShadeExpansionStateManager shadeExpansionStateManager) {
         new Handler() { // from class: com.android.systemui.statusbar.SummarizeController.2
             @Override // android.os.Handler

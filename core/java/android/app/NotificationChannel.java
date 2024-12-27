@@ -139,13 +139,11 @@ public final class NotificationChannel implements Parcelable {
     public static final Parcelable.Creator<NotificationChannel> CREATOR =
             new Parcelable.Creator<
                     NotificationChannel>() { // from class: android.app.NotificationChannel.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotificationChannel createFromParcel(Parcel in) {
                     return new NotificationChannel(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public NotificationChannel[] newArray(int size) {
                     return new NotificationChannel[size];

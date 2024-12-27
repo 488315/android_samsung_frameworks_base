@@ -57,7 +57,6 @@ public class PluginLockShortcut extends AbstractPluginLockItem {
         return recoverData.getShortcutState().intValue();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(Uri uri) {
         if (uri != null) {
             Log.d(TAG, "onChange() uri: " + uri);

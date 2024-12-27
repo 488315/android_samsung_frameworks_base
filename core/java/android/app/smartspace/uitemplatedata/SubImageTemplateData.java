@@ -12,13 +12,11 @@ public final class SubImageTemplateData extends BaseTemplateData {
     public static final Parcelable.Creator<SubImageTemplateData> CREATOR =
             new Parcelable.Creator<SubImageTemplateData>() { // from class:
                 // android.app.smartspace.uitemplatedata.SubImageTemplateData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SubImageTemplateData createFromParcel(Parcel in) {
                     return new SubImageTemplateData(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SubImageTemplateData[] newArray(int size) {
                     return new SubImageTemplateData[size];

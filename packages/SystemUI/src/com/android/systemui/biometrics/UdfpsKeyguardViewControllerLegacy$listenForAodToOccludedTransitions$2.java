@@ -18,7 +18,6 @@ final class UdfpsKeyguardViewControllerLegacy$listenForAodToOccludedTransitions$
     int label;
     final /* synthetic */ UdfpsKeyguardViewControllerLegacy this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public UdfpsKeyguardViewControllerLegacy$listenForAodToOccludedTransitions$2(UdfpsKeyguardViewControllerLegacy udfpsKeyguardViewControllerLegacy, Continuation continuation) {
         super(2, continuation);
         this.this$0 = udfpsKeyguardViewControllerLegacy;

@@ -16,7 +16,6 @@ final class SeekbarDefaults$Track$1$1 extends SuspendLambda implements Function2
     final /* synthetic */ MutableState $trackRound$delegate;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SeekbarDefaults$Track$1$1(State state, MutableState mutableState, MutableState mutableState2, Continuation continuation) {
         super(2, continuation);
         this.$isDragging$delegate = state;

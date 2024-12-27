@@ -93,55 +93,41 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         void start();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nAddAnimator(
             long j, long j2, long j3, long j4, long j5, int i, int i2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native long nCreateAnimatorSet();
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreateGroupPropertyHolder(long j, int i, float f, float f2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreatePathColorPropertyHolder(long j, int i, int i2, int i3);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreatePathDataPropertyHolder(long j, long j2, long j3);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreatePathPropertyHolder(long j, int i, float f, float f2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native long nCreateRootAlphaPropertyHolder(long j, float f, float f2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nEnd(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     @FastNative
     public static native void nReset(long j);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nReverse(
             long j, VectorDrawableAnimatorRT vectorDrawableAnimatorRT, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nSetPropertyHolderData(long j, float[] fArr, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nSetPropertyHolderData(long j, int[] iArr, int i);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nSetVectorDrawableTarget(long j, long j2);
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static native void nStart(
             long j, VectorDrawableAnimatorRT vectorDrawableAnimatorRT, int i);
 
@@ -196,7 +182,6 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         this.mMutated = false;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean shouldIgnoreInvalidAnimation() {
         return Compatibility.getTargetSdkVersion() < 24;
     }
@@ -388,7 +373,6 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         this.mRes = state.mPendingAnims != null ? res : null;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void updateAnimatorProperty(
             Animator animator,
             String targetName,
@@ -1450,7 +1434,6 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         @Override // android.graphics.drawable.AnimatedVectorDrawable.VectorDrawableAnimator
         public void resume() {}
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void onAnimationEnd(int listenerId) {
             if (listenerId != this.mLastListenerId) {
                 return;
@@ -1476,7 +1459,6 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
                     });
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void transferPendingActions(VectorDrawableAnimator animatorSet) {
             for (int i = 0; i < this.mPendingAnimationActions.size(); i++) {
                 int pendingAction = this.mPendingAnimationActions.get(i);

@@ -86,8 +86,6 @@ public final class PanelSlideEventHandler implements SettingsHelper.OnChangedCal
         }
     }
 
-    /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     public final class Direction {
         public static final /* synthetic */ Direction[] $VALUES;
         public static final Direction DOWN;
@@ -255,21 +253,6 @@ public final class PanelSlideEventHandler implements SettingsHelper.OnChangedCal
         Log.d("SecPanelSplitHelper", "createSlideAnimatorAndRun change = " + z2 + " draggedDistance = " + f2 + " duration = " + ofFloat.getDuration() + " direction = " + this.direction + " target = " + f3 + " vel = " + f + " isForward = " + z);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:106:0x0282 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x0157  */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x0124  */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x011e  */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x0112  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x010f  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0115  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x011b  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0121  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0155  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x0162  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0203  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x022e  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x0259  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

@@ -10,13 +10,11 @@ public final class SemPhoneAccount implements Parcelable {
             new Parcelable.Creator<
                     SemPhoneAccount>() { // from class:
                                          // com.samsung.android.telecom.SemPhoneAccount.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemPhoneAccount createFromParcel(Parcel in) {
                     return new SemPhoneAccount(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemPhoneAccount[] newArray(int size) {
                     return new SemPhoneAccount[size];

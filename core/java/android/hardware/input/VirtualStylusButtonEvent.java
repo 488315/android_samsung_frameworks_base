@@ -18,13 +18,11 @@ public final class VirtualStylusButtonEvent implements Parcelable {
     public static final Parcelable.Creator<VirtualStylusButtonEvent> CREATOR =
             new Parcelable.Creator<VirtualStylusButtonEvent>() { // from class:
                 // android.hardware.input.VirtualStylusButtonEvent.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualStylusButtonEvent createFromParcel(Parcel source) {
                     return new VirtualStylusButtonEvent(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public VirtualStylusButtonEvent[] newArray(int size) {
                     return new VirtualStylusButtonEvent[size];

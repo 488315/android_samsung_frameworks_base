@@ -24,7 +24,6 @@ final class SliceViewManagerExtKt$sliceForUri$1 extends SuspendLambda implements
     Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public SliceViewManagerExtKt$sliceForUri$1(SliceViewManager sliceViewManager, Uri uri, Continuation continuation) {
         super(2, continuation);
         this.$this_sliceForUri = sliceViewManager;
@@ -43,7 +42,6 @@ final class SliceViewManagerExtKt$sliceForUri$1 extends SuspendLambda implements
         return ((SliceViewManagerExtKt$sliceForUri$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         final SliceViewManager.SliceCallback sliceCallback;
@@ -61,7 +59,6 @@ final class SliceViewManagerExtKt$sliceForUri$1 extends SuspendLambda implements
                     final /* synthetic */ Slice $it;
                     int label;
 
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     public AnonymousClass1(ProducerScope producerScope, Slice slice, Continuation continuation) {
                         super(2, continuation);
                         this.$$this$conflatedCallbackFlow = producerScope;
@@ -130,7 +127,6 @@ final class SliceViewManagerExtKt$sliceForUri$1 extends SuspendLambda implements
         final SliceViewManager sliceViewManager = this.$this_sliceForUri;
         final Uri uri = this.$sliceUri;
         Function0 function0 = new Function0() { // from class: com.android.systemui.slice.SliceViewManagerExtKt$sliceForUri$1.1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }

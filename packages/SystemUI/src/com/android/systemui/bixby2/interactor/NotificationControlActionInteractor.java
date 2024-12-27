@@ -266,7 +266,6 @@ public class NotificationControlActionInteractor implements ActionInteractor {
         return Action.delete_notification.toString().equals(str) || Action.reply_notification.toString().equals(str) || Action.set_notification_permission.toString().equals(str) || Action.set_notification_sound.toString().equals(str) || Action.setoff_notification_permission.toString().equals(str);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ boolean lambda$matchAction$0(String str, String str2) {
         return str2.equals(str);
     }

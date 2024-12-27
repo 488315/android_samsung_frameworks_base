@@ -9,13 +9,11 @@ import java.util.List;
 public final class CarrierInfo implements Parcelable {
     public static final Parcelable.Creator<CarrierInfo> CREATOR =
             new Parcelable.Creator<CarrierInfo>() { // from class: android.telephony.CarrierInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarrierInfo createFromParcel(Parcel source) {
                     return new CarrierInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CarrierInfo[] newArray(int size) {
                     return new CarrierInfo[size];

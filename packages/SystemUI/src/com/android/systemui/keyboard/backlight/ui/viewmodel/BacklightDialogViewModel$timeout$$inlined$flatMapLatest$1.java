@@ -17,7 +17,6 @@ public final class BacklightDialogViewModel$timeout$$inlined$flatMapLatest$1 ext
     /* synthetic */ Object L$1;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public BacklightDialogViewModel$timeout$$inlined$flatMapLatest$1(Continuation continuation, long j, Object obj) {
         super(3, continuation);
         this.$timeoutMillis$inlined = j;

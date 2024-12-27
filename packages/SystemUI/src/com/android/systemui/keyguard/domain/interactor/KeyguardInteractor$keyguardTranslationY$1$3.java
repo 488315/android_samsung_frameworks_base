@@ -18,7 +18,6 @@ final class KeyguardInteractor$keyguardTranslationY$1$3 extends SuspendLambda im
     private /* synthetic */ Object L$0;
     int label;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public KeyguardInteractor$keyguardTranslationY$1$3(int i, Continuation continuation) {
         super(4, continuation);
         this.$translationDistance = i;

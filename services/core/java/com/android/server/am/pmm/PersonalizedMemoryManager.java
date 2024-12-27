@@ -16,9 +16,7 @@ public final class PersonalizedMemoryManager {
 
     public enum MemoryEventType {
         LMKD_KILL("LMKD_KILL"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF1("PREV_PROC_DIED"),
-        /* JADX INFO: Fake field, exist only in values array */
         EF2("DEVICE_IDLE"),
         APP_LAUNCHED("APP_LAUNCHED");
 

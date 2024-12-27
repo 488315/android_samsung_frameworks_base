@@ -131,7 +131,6 @@ public final class CustomTile extends SQSTileImpl implements CustomTileInterface
         };
         public final IQSTileService mService;
 
-        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.qs.external.CustomTile$CustomDetailAdapter$1] */
         public CustomDetailAdapter(IQSTileService iQSTileService) {
             this.mService = iQSTileService;
         }
@@ -302,9 +301,7 @@ public final class CustomTile extends SQSTileImpl implements CustomTileInterface
     }
 
     enum SubscreenSALog {
-        /* JADX INFO: Fake field, exist only in values array */
         SUBSCREEN_SCREENRECORDER_TILE("com.samsung.android.app.smartcapture", SystemUIAnalytics.EID_QP_SCREENRECORDER_COVER),
-        /* JADX INFO: Fake field, exist only in values array */
         SUBSCREEN_MODES_TILE("com.samsung.android.app.routines", SystemUIAnalytics.EID_QP_MODES_COVER);
 
         private final String mLogId;
@@ -324,19 +321,10 @@ public final class CustomTile extends SQSTileImpl implements CustomTileInterface
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(19:0|1|2|3|(14:5|6|7|8|9|(1:11)|12|(1:14)(1:32)|15|(1:17)|18|(1:20)|21|(2:23|(1:29)(2:26|27))(1:31))|36|6|7|8|9|(0)|12|(0)(0)|15|(0)|18|(0)|21|(0)(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x00d0, code lost:
     
         r2 = null;
      */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00dd  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0105  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0117  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0123  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x012f  */
-    /* JADX WARN: Removed duplicated region for block: B:31:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x010d  */
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.qs.external.CustomTile$2] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -680,9 +668,6 @@ public final class CustomTile extends SQSTileImpl implements CustomTileInterface
         this.mSubscreenCustomTileReceiver = null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x008a  */
-    /* JADX WARN: Removed duplicated region for block: B:21:? A[RETURN, SYNTHETIC] */
     @Override // com.android.systemui.qs.tileimpl.SQSTileImpl, com.android.systemui.qs.tileimpl.QSTileImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1064,14 +1049,6 @@ public final class CustomTile extends SQSTileImpl implements CustomTileInterface
     
         if (java.util.Objects.equals(r4.getResPackage(), r5.getResPackage()) == false) goto L32;
      */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0020  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x002d A[Catch: NameNotFoundException -> 0x009a, TryCatch #0 {NameNotFoundException -> 0x009a, blocks: (B:3:0x0001, B:5:0x000b, B:9:0x0016, B:12:0x0025, B:14:0x002d, B:20:0x003d, B:22:0x0044, B:25:0x004b, B:28:0x0056, B:32:0x0069, B:33:0x0075, B:35:0x0079, B:36:0x007e, B:38:0x0091, B:45:0x0021), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0069 A[Catch: NameNotFoundException -> 0x009a, TryCatch #0 {NameNotFoundException -> 0x009a, blocks: (B:3:0x0001, B:5:0x000b, B:9:0x0016, B:12:0x0025, B:14:0x002d, B:20:0x003d, B:22:0x0044, B:25:0x004b, B:28:0x0056, B:32:0x0069, B:33:0x0075, B:35:0x0079, B:36:0x007e, B:38:0x0091, B:45:0x0021), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0079 A[Catch: NameNotFoundException -> 0x009a, TryCatch #0 {NameNotFoundException -> 0x009a, blocks: (B:3:0x0001, B:5:0x000b, B:9:0x0016, B:12:0x0025, B:14:0x002d, B:20:0x003d, B:22:0x0044, B:25:0x004b, B:28:0x0056, B:32:0x0069, B:33:0x0075, B:35:0x0079, B:36:0x007e, B:38:0x0091, B:45:0x0021), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0091 A[Catch: NameNotFoundException -> 0x009a, TRY_LEAVE, TryCatch #0 {NameNotFoundException -> 0x009a, blocks: (B:3:0x0001, B:5:0x000b, B:9:0x0016, B:12:0x0025, B:14:0x002d, B:20:0x003d, B:22:0x0044, B:25:0x004b, B:28:0x0056, B:32:0x0069, B:33:0x0075, B:35:0x0079, B:36:0x007e, B:38:0x0091, B:45:0x0021), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:42:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0021 A[Catch: NameNotFoundException -> 0x009a, TryCatch #0 {NameNotFoundException -> 0x009a, blocks: (B:3:0x0001, B:5:0x000b, B:9:0x0016, B:12:0x0025, B:14:0x002d, B:20:0x003d, B:22:0x0044, B:25:0x004b, B:28:0x0056, B:32:0x0069, B:33:0x0075, B:35:0x0079, B:36:0x007e, B:38:0x0091, B:45:0x0021), top: B:2:0x0001 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

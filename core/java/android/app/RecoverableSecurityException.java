@@ -14,13 +14,11 @@ public final class RecoverableSecurityException extends SecurityException implem
     public static final Parcelable.Creator<RecoverableSecurityException> CREATOR =
             new Parcelable.Creator<RecoverableSecurityException>() { // from class:
                 // android.app.RecoverableSecurityException.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecoverableSecurityException createFromParcel(Parcel source) {
                     return new RecoverableSecurityException(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RecoverableSecurityException[] newArray(int size) {
                     return new RecoverableSecurityException[size];

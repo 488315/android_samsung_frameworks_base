@@ -172,8 +172,6 @@ public class VisualEffectContainer extends FrameLayout {
         updateLayout();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00e8  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00fc  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

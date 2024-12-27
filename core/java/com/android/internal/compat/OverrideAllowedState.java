@@ -13,14 +13,12 @@ public final class OverrideAllowedState implements Parcelable {
             new Parcelable.Creator<
                     OverrideAllowedState>() { // from class:
                                               // com.android.internal.compat.OverrideAllowedState.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OverrideAllowedState createFromParcel(Parcel parcel) {
                     OverrideAllowedState info = new OverrideAllowedState(parcel);
                     return info;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OverrideAllowedState[] newArray(int size) {
                     return new OverrideAllowedState[size];

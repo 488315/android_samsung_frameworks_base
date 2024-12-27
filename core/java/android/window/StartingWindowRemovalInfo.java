@@ -13,13 +13,11 @@ public final class StartingWindowRemovalInfo implements Parcelable {
             new Parcelable.Creator<
                     StartingWindowRemovalInfo>() { // from class:
                                                    // android.window.StartingWindowRemovalInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StartingWindowRemovalInfo createFromParcel(Parcel source) {
                     return new StartingWindowRemovalInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public StartingWindowRemovalInfo[] newArray(int size) {
                     return new StartingWindowRemovalInfo[size];

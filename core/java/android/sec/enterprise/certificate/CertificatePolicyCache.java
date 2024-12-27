@@ -74,7 +74,6 @@ public class CertificatePolicyCache {
         readVariables(null);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public synchronized void readVariables(String type) {
         int userId = UserHandle.myUserId();
         Log.d(TAG, "readVariables type: " + type + " userId: " + userId);

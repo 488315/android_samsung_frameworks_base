@@ -133,7 +133,6 @@ public final class SlicePermissionManager implements DirtyTracker {
         this.mDirty.add(persistable);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0065 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -239,7 +238,6 @@ public final class SlicePermissionManager implements DirtyTracker {
         return parserHolder;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0066 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

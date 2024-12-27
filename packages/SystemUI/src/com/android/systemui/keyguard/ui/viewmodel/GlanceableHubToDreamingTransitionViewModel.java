@@ -47,7 +47,6 @@ public final class GlanceableHubToDreamingTransitionViewModel implements DeviceE
         FROM_GLANCEABLE_HUB_DURATION = DurationKt.toDuration(1, DurationUnit.SECONDS);
     }
 
-    /* JADX WARN: Type inference failed for: r5v1, types: [com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$special$$inlined$map$1] */
     public GlanceableHubToDreamingTransitionViewModel(KeyguardTransitionAnimationFlow keyguardTransitionAnimationFlow, ConfigurationInteractor configurationInteractor) {
         Edge.Companion companion = Edge.Companion;
         SceneKey sceneKey = Scenes.Communal;
@@ -110,8 +109,6 @@ public final class GlanceableHubToDreamingTransitionViewModel implements DeviceE
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

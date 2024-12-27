@@ -109,7 +109,6 @@ public class FabricatedOverlay {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static FabricatedOverlayInternal generateFabricatedOverlayInternal(
             String owningPackage,
             String overlayName,
@@ -155,7 +154,6 @@ public class FabricatedOverlay {
         return this.mOverlay.targetOverlayable;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static String ensureValidResourceName(String name) {
         Objects.requireNonNull(name);
         int slashIndex = name.indexOf(47);
@@ -167,7 +165,6 @@ public class FabricatedOverlay {
         return name;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static FabricatedOverlayInternalEntry generateFabricatedOverlayInternalEntry(
             String resourceName, int dataType, int value, String configuration) {
         FabricatedOverlayInternalEntry entry = new FabricatedOverlayInternalEntry();
@@ -178,7 +175,6 @@ public class FabricatedOverlay {
         return entry;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static FabricatedOverlayInternalEntry generateFabricatedOverlayInternalEntry(
             String resourceName, int dataType, String value, String configuration) {
         FabricatedOverlayInternalEntry entry = new FabricatedOverlayInternalEntry();
@@ -189,7 +185,6 @@ public class FabricatedOverlay {
         return entry;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static FabricatedOverlayInternalEntry generateFabricatedOverlayInternalEntry(
             String resourceName,
             ParcelFileDescriptor parcelFileDescriptor,
@@ -205,7 +200,6 @@ public class FabricatedOverlay {
         return entry;
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static FabricatedOverlayInternalEntry generateFabricatedOverlayInternalEntry(
             String resourceName, AssetFileDescriptor assetFileDescriptor, String configuration) {
         FabricatedOverlayInternalEntry entry = new FabricatedOverlayInternalEntry();

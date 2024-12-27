@@ -256,16 +256,6 @@ public final class HotwordAudioStreamCopier {
 
            if (r3 != null) goto L17;
         */
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:41:0x00c9  */
-        /* JADX WARN: Removed duplicated region for block: B:43:0x00ce  */
-        /* JADX WARN: Type inference failed for: r1v0, types: [java.lang.Thread] */
-        /* JADX WARN: Type inference failed for: r2v1, types: [java.lang.String] */
-        /* JADX WARN: Type inference failed for: r2v3 */
-        /* JADX WARN: Type inference failed for: r2v5, types: [android.os.ParcelFileDescriptor$AutoCloseInputStream, java.io.InputStream] */
-        /* JADX WARN: Type inference failed for: r3v12 */
-        /* JADX WARN: Type inference failed for: r3v2 */
-        /* JADX WARN: Type inference failed for: r3v4, types: [java.io.OutputStream] */
         @Override // java.util.concurrent.Callable
         /*
             Code decompiled incorrectly, please refer to instructions dump.

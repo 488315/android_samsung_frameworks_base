@@ -40,12 +40,10 @@ public class PluginLockDelegateSysUi implements PluginLockBasicManager.Callback 
         return sb.toString();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$updateDynamicLockData$1(String str) {
         this.mMediator.updateDynamicLockData(str);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: setDynamicLockDataInternal, reason: merged with bridge method [inline-methods] */
     public void lambda$setDynamicLockData$0(String str) {
         this.mMediator.setDynamicLockData(str);

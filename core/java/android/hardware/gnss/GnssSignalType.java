@@ -25,7 +25,6 @@ public class GnssSignalType implements Parcelable {
     public static final Parcelable.Creator<GnssSignalType> CREATOR =
             new Parcelable.Creator<
                     GnssSignalType>() { // from class: android.hardware.gnss.GnssSignalType.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GnssSignalType createFromParcel(Parcel _aidl_source) {
                     GnssSignalType _aidl_out = new GnssSignalType();
@@ -33,7 +32,6 @@ public class GnssSignalType implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public GnssSignalType[] newArray(int _aidl_size) {
                     return new GnssSignalType[_aidl_size];

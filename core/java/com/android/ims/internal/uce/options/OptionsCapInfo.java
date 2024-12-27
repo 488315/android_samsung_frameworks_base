@@ -10,13 +10,11 @@ public class OptionsCapInfo implements Parcelable {
             new Parcelable.Creator<
                     OptionsCapInfo>() { // from class:
                                         // com.android.ims.internal.uce.options.OptionsCapInfo.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OptionsCapInfo createFromParcel(Parcel source) {
                     return new OptionsCapInfo(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public OptionsCapInfo[] newArray(int size) {
                     return new OptionsCapInfo[size];

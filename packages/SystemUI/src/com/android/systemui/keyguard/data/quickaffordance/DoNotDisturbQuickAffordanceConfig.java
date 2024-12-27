@@ -98,7 +98,6 @@ public final class DoNotDisturbQuickAffordanceConfig implements KeyguardQuickAff
         new Companion(null);
     }
 
-    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.keyguard.data.quickaffordance.DoNotDisturbQuickAffordanceConfig$callback$1] */
     public DoNotDisturbQuickAffordanceConfig(Context context, ZenModeController zenModeController, SecureSettings secureSettings, UserTracker userTracker, CoroutineDispatcher coroutineDispatcher, Uri uri, final EnableZenModeDialog enableZenModeDialog) {
         this.context = context;
         this.controller = zenModeController;
@@ -106,7 +105,6 @@ public final class DoNotDisturbQuickAffordanceConfig implements KeyguardQuickAff
         this.userTracker = userTracker;
         this.testConditionId = uri;
         this.dialog$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.keyguard.data.quickaffordance.DoNotDisturbQuickAffordanceConfig$dialog$2
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
             }
@@ -170,8 +168,6 @@ public final class DoNotDisturbQuickAffordanceConfig implements KeyguardQuickAff
                     this.this$0 = doNotDisturbQuickAffordanceConfig;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.

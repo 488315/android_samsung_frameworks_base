@@ -69,7 +69,6 @@ final class PasswordBouncerViewModel$imeSwitcherRefreshingFlow$1 extends Suspend
         int label;
         final /* synthetic */ PasswordBouncerViewModel this$0;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public AnonymousClass2(PasswordBouncerViewModel passwordBouncerViewModel, Continuation continuation) {
             super(3, continuation);
             this.this$0 = passwordBouncerViewModel;
@@ -106,7 +105,6 @@ final class PasswordBouncerViewModel$imeSwitcherRefreshingFlow$1 extends Suspend
         }
     }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public PasswordBouncerViewModel$imeSwitcherRefreshingFlow$1(PasswordBouncerViewModel passwordBouncerViewModel, MutableStateFlow mutableStateFlow, Continuation continuation) {
         super(2, continuation);
         this.this$0 = passwordBouncerViewModel;

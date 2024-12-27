@@ -103,7 +103,6 @@ public class AudioPolicy {
         return getAttributionSource(this.mContext);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static AttributionSource getAttributionSource(Context context) {
         return context == null
                 ? AttributionSource.myAttributionSource()
@@ -413,7 +412,6 @@ public class AudioPolicy {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ AudioMix lambda$updateMixingRules$0(Pair p) {
         return (AudioMix) p.first;
     }
@@ -422,7 +420,6 @@ public class AudioPolicy {
         return new AudioMix[x$0];
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ AudioMixingRule lambda$updateMixingRules$2(Pair p) {
         return (AudioMixingRule) p.second;
     }
@@ -947,7 +944,6 @@ public class AudioPolicy {
         public void onVolumeAdjustment(int adjustment) {}
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void onPolicyStatusChange() {
         if (this.mStatusListener != null) {
             this.mStatusListener.onStatusChange();
@@ -1036,7 +1032,6 @@ public class AudioPolicy {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public void sendMsg(int msg, Object obj, int i) {
         if (this.mEventHandler != null) {
             this.mEventHandler.sendMessage(this.mEventHandler.obtainMessage(msg, i, 0, obj));

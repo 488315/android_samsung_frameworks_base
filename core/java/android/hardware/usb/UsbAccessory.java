@@ -14,7 +14,6 @@ public class UsbAccessory implements Parcelable {
     public static final Parcelable.Creator<UsbAccessory> CREATOR =
             new Parcelable.Creator<
                     UsbAccessory>() { // from class: android.hardware.usb.UsbAccessory.2
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsbAccessory createFromParcel(Parcel in) {
                     String manufacturer = in.readString();
@@ -28,7 +27,6 @@ public class UsbAccessory implements Parcelable {
                             manufacturer, model, description, version, uri, serialNumberReader);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public UsbAccessory[] newArray(int size) {
                     return new UsbAccessory[size];

@@ -12,13 +12,11 @@ public class TopResumedActivityChangeItem extends ActivityTransactionItem {
     public static final Parcelable.Creator<TopResumedActivityChangeItem> CREATOR =
             new Parcelable.Creator<TopResumedActivityChangeItem>() { // from class:
                 // android.app.servertransaction.TopResumedActivityChangeItem.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TopResumedActivityChangeItem createFromParcel(Parcel in) {
                     return new TopResumedActivityChangeItem(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public TopResumedActivityChangeItem[] newArray(int size) {
                     return new TopResumedActivityChangeItem[size];

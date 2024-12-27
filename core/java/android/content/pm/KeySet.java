@@ -7,13 +7,11 @@ import android.os.Parcelable;
 public class KeySet implements Parcelable {
     public static final Parcelable.Creator<KeySet> CREATOR =
             new Parcelable.Creator<KeySet>() { // from class: android.content.pm.KeySet.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeySet createFromParcel(Parcel source) {
                     return KeySet.readFromParcel(source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public KeySet[] newArray(int size) {
                     return new KeySet[size];
@@ -44,7 +42,6 @@ public class KeySet implements Parcelable {
         return this.token.hashCode();
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static KeySet readFromParcel(Parcel in) {
         IBinder token = in.readStrongBinder();
         return new KeySet(token);

@@ -14,7 +14,6 @@ public class ParcelTotalCaptureResult implements Parcelable {
     public static final Parcelable.Creator<ParcelTotalCaptureResult> CREATOR =
             new Parcelable.Creator<ParcelTotalCaptureResult>() { // from class:
                 // android.hardware.camera2.extension.ParcelTotalCaptureResult.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelTotalCaptureResult createFromParcel(Parcel _aidl_source) {
                     ParcelTotalCaptureResult _aidl_out = new ParcelTotalCaptureResult();
@@ -22,7 +21,6 @@ public class ParcelTotalCaptureResult implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public ParcelTotalCaptureResult[] newArray(int _aidl_size) {
                     return new ParcelTotalCaptureResult[_aidl_size];

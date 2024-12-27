@@ -62,7 +62,6 @@ public final class DrawableInflater {
         return drawable;
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private Drawable inflateFromTag(String name) {
         char c;
         switch (name.hashCode()) {

@@ -78,7 +78,6 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
     private int mUserId;
     private UsageStatsManager mUsm;
 
-    /* JADX INFO: Access modifiers changed from: private */
     public boolean isPackageSuspended(String packageName) {
         try {
             return this.mPm.isPackageSuspended(packageName);

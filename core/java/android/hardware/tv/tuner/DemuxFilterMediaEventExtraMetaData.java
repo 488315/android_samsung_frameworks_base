@@ -7,13 +7,11 @@ public final class DemuxFilterMediaEventExtraMetaData implements Parcelable {
     public static final Parcelable.Creator<DemuxFilterMediaEventExtraMetaData> CREATOR =
             new Parcelable.Creator<DemuxFilterMediaEventExtraMetaData>() { // from class:
                 // android.hardware.tv.tuner.DemuxFilterMediaEventExtraMetaData.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterMediaEventExtraMetaData createFromParcel(Parcel _aidl_source) {
                     return new DemuxFilterMediaEventExtraMetaData(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public DemuxFilterMediaEventExtraMetaData[] newArray(int _aidl_size) {
                     return new DemuxFilterMediaEventExtraMetaData[_aidl_size];

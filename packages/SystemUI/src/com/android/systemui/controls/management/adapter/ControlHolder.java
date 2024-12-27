@@ -18,10 +18,6 @@ public final class ControlHolder extends Holder {
     
         if ((r3 instanceof android.service.controls.templates.StatelessTemplate) == false) goto L40;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v11 */
-    /* JADX WARN: Type inference failed for: r3v12, types: [com.android.systemui.controls.ui.SecBehavior] */
-    /* JADX WARN: Type inference failed for: r3v33 */
     @Override // com.android.systemui.controls.management.adapter.Holder
     /*
         Code decompiled incorrectly, please refer to instructions dump.

@@ -101,7 +101,6 @@ public class SemServiceAccessControl {
             this.allowMap.put(name, uidList);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         public void remove(String name) {
             this.allowMap.remove(name);
         }
@@ -673,8 +672,6 @@ public class SemServiceAccessControl {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:48:0x019b  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x02d6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

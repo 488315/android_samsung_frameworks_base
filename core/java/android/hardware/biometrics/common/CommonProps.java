@@ -8,7 +8,6 @@ public class CommonProps implements Parcelable {
     public static final Parcelable.Creator<CommonProps> CREATOR =
             new Parcelable.Creator<
                     CommonProps>() { // from class: android.hardware.biometrics.common.CommonProps.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CommonProps createFromParcel(Parcel _aidl_source) {
                     CommonProps _aidl_out = new CommonProps();
@@ -16,7 +15,6 @@ public class CommonProps implements Parcelable {
                     return _aidl_out;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public CommonProps[] newArray(int _aidl_size) {
                     return new CommonProps[_aidl_size];

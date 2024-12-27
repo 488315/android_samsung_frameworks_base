@@ -20,7 +20,6 @@ final class DevicePostureRepositoryImpl$currentDevicePosture$1 extends SuspendLa
     int label;
     final /* synthetic */ DevicePostureRepositoryImpl this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public DevicePostureRepositoryImpl$currentDevicePosture$1(DevicePostureRepositoryImpl devicePostureRepositoryImpl, Continuation continuation) {
         super(2, continuation);
         this.this$0 = devicePostureRepositoryImpl;
@@ -71,7 +70,6 @@ final class DevicePostureRepositoryImpl$currentDevicePosture$1 extends SuspendLa
             function1.invoke(new Integer(((DevicePostureControllerImpl) this.this$0.postureController).getDevicePosture()));
             final DevicePostureRepositoryImpl devicePostureRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.DevicePostureRepositoryImpl$currentDevicePosture$1.1
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
                 }

@@ -12,13 +12,11 @@ public class SemContextSensorStatusCheck extends SemContextEventContext {
             new Parcelable.Creator<
                     SemContextSensorStatusCheck>() { // from class:
                                                      // com.samsung.android.hardware.context.SemContextSensorStatusCheck.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextSensorStatusCheck createFromParcel(Parcel in) {
                     return new SemContextSensorStatusCheck(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public SemContextSensorStatusCheck[] newArray(int size) {
                     return new SemContextSensorStatusCheck[size];

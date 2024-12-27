@@ -72,8 +72,6 @@ public final class RotationWatcherController {
         return false;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v12, types: [com.android.server.wm.WindowContainer] */
     public final void dispatchProposedRotation(int i, DisplayContent displayContent) {
         for (int size = this.mProposedRotationListeners.size() - 1; size >= 0; size--) {
             ProposedRotationListener proposedRotationListener =

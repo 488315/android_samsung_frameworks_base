@@ -18,7 +18,6 @@ final class ActivityTaskManagerLabelLoader$loadLabel$2 extends SuspendLambda imp
     int label;
     final /* synthetic */ ActivityTaskManagerLabelLoader this$0;
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public ActivityTaskManagerLabelLoader$loadLabel$2(ActivityTaskManagerLabelLoader activityTaskManagerLabelLoader, ComponentName componentName, int i, Continuation continuation) {
         super(2, continuation);
         this.this$0 = activityTaskManagerLabelLoader;

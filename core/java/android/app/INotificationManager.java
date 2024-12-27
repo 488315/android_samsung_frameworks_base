@@ -4281,7 +4281,6 @@ public interface INotificationManager extends IInterface {
             reply.writeTypedObject(v, 1);
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
         static class Proxy implements INotificationManager {
             private IBinder mRemote;
 

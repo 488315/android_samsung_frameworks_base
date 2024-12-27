@@ -30,7 +30,6 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
 
     private static native void nativeClassInit();
 
-    /* JADX INFO: Access modifiers changed from: private */
     public native int nativeDisableActivityEvent(int i, int i2);
 
     private native int nativeEnableActivityEvent(int i, int i2, long j);

@@ -506,8 +506,6 @@ public class KeyguardIndicationController {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v10, types: [android.os.Handler, com.android.systemui.statusbar.KeyguardIndicationController$2] */
-    /* JADX WARN: Type inference failed for: r4v6, types: [com.android.systemui.statusbar.KeyguardIndicationController$5] */
     public KeyguardIndicationController(Context context, Looper looper, WakeLock.Builder builder, KeyguardStateController keyguardStateController, StatusBarStateController statusBarStateController, KeyguardUpdateMonitor keyguardUpdateMonitor, DockManager dockManager, BroadcastDispatcher broadcastDispatcher, DevicePolicyManager devicePolicyManager, IBatteryStats iBatteryStats, UserManager userManager, DelayableExecutor delayableExecutor, DelayableExecutor delayableExecutor2, FalsingManager falsingManager, AuthController authController, LockPatternUtils lockPatternUtils, ScreenLifecycle screenLifecycle, KeyguardBypassController keyguardBypassController, AccessibilityManager accessibilityManager, FaceHelpMessageDeferralFactory faceHelpMessageDeferralFactory, KeyguardLogger keyguardLogger, AlternateBouncerInteractor alternateBouncerInteractor, AlarmManager alarmManager, UserTracker userTracker, BouncerMessageInteractor bouncerMessageInteractor, FeatureFlags featureFlags, IndicationHelper indicationHelper, KeyguardInteractor keyguardInteractor, BiometricMessageInteractor biometricMessageInteractor, DeviceEntryFingerprintAuthInteractor deviceEntryFingerprintAuthInteractor, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor) {
         final int i = 0;
         this.mIsActiveDreamLockscreenHostedCallback = new Consumer(this) { // from class: com.android.systemui.statusbar.KeyguardIndicationController$$ExternalSyntheticLambda0
@@ -771,8 +769,6 @@ public class KeyguardIndicationController {
     
         if (r1 != false) goto L28;
      */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x018e  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x01a5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -838,7 +834,6 @@ public class KeyguardIndicationController {
         anonymousClass4.onDozingChanged(statusBarStateController.isDozing());
     }
 
-    /* JADX WARN: Type inference failed for: r7v18, types: [com.android.systemui.statusbar.KeyguardIndicationController$3] */
     public void setIndicationArea(ViewGroup viewGroup) {
         this.mIndicationArea = viewGroup;
         this.mTopIndicationView = (KeyguardIndicationTextView) viewGroup.findViewById(R.id.keyguard_indication_text);

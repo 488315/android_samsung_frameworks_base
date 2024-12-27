@@ -7,13 +7,11 @@ public final class FrontendBandwidth implements Parcelable {
     public static final Parcelable.Creator<FrontendBandwidth> CREATOR =
             new Parcelable.Creator<FrontendBandwidth>() { // from class:
                 // android.hardware.tv.tuner.FrontendBandwidth.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendBandwidth createFromParcel(Parcel _aidl_source) {
                     return new FrontendBandwidth(_aidl_source);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FrontendBandwidth[] newArray(int _aidl_size) {
                     return new FrontendBandwidth[_aidl_size];

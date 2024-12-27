@@ -20,13 +20,11 @@ public class RemoteAnimationTarget implements Parcelable {
     public static final Parcelable.Creator<RemoteAnimationTarget> CREATOR =
             new Parcelable.Creator<
                     RemoteAnimationTarget>() { // from class: android.view.RemoteAnimationTarget.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteAnimationTarget createFromParcel(Parcel in) {
                     return new RemoteAnimationTarget(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public RemoteAnimationTarget[] newArray(int size) {
                     return new RemoteAnimationTarget[size];

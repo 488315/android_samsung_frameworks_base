@@ -18,9 +18,6 @@ public class InlineSuggestionRoot extends FrameLayout {
         setFocusable(false);
     }
 
-    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002e  */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x002c  */
     @Override // android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.

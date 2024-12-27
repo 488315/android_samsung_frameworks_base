@@ -11,13 +11,11 @@ public class AccessibilityReplacementSpan extends ReplacementSpan implements Par
             new Parcelable.Creator<
                     AccessibilityReplacementSpan>() { // from class:
                                                       // android.text.style.AccessibilityReplacementSpan.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessibilityReplacementSpan createFromParcel(Parcel parcel) {
                     return new AccessibilityReplacementSpan(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public AccessibilityReplacementSpan[] newArray(int size) {
                     return new AccessibilityReplacementSpan[size];

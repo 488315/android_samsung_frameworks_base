@@ -400,7 +400,6 @@ public final class WebViewUpdateServiceImpl implements WebViewUpdateServiceInter
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:9|10|11|(1:13)(1:46)|(2:14|15)|(2:19|(5:21|22|23|(1:25)|27))|42|22|23|(0)|27) */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0052, code lost:
 
        r0 = e;
@@ -411,9 +410,6 @@ public final class WebViewUpdateServiceImpl implements WebViewUpdateServiceInter
        r3 = r2;
        r2 = r7;
     */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x004e A[Catch: all -> 0x0022, WebViewPackageMissingException -> 0x0052, TRY_LEAVE, TryCatch #1 {WebViewPackageMissingException -> 0x0052, blocks: (B:23:0x0046, B:25:0x004e), top: B:22:0x0046 }] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0074 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:36:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
     @Override // com.android.server.webkit.WebViewUpdateServiceInterface
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -589,7 +585,6 @@ public final class WebViewUpdateServiceImpl implements WebViewUpdateServiceInter
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x002b A[Catch: all -> 0x0011, TRY_ENTER, TryCatch #0 {, blocks: (B:4:0x0005, B:6:0x0009, B:8:0x0013, B:10:0x0019, B:14:0x002b, B:15:0x002e, B:25:0x003c, B:26:0x004f), top: B:3:0x0005, inners: #1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -716,9 +711,6 @@ public final class WebViewUpdateServiceImpl implements WebViewUpdateServiceInter
 
        if (r11.mAnyWebViewInstalled != false) goto L10;
     */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0023 A[Catch: all -> 0x0035, TRY_LEAVE, TryCatch #0 {, blocks: (B:4:0x000e, B:6:0x0014, B:8:0x001a, B:12:0x0023, B:16:0x002d, B:17:0x0037, B:19:0x003b, B:21:0x0041, B:26:0x0046, B:29:0x0083, B:36:0x004b, B:39:0x0051), top: B:3:0x000e }] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:23:0x0045 -> B:10:0x001e). Please report as a decompilation issue!!! */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:40:0x0020 -> B:11:0x0021). Please report as a decompilation issue!!! */
     @Override // com.android.server.webkit.WebViewUpdateServiceInterface
     /*
         Code decompiled incorrectly, please refer to instructions dump.

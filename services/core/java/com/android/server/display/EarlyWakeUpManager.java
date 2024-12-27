@@ -54,7 +54,6 @@ public final class EarlyWakeUpManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.display.EarlyWakeUpManager$1] */
     public EarlyWakeUpManager(
             String str,
             int i,
@@ -171,7 +170,6 @@ public final class EarlyWakeUpManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x002d A[Catch: all -> 0x0042, TryCatch #0 {all -> 0x0042, blocks: (B:4:0x0005, B:6:0x000e, B:8:0x0012, B:10:0x0018, B:19:0x002d, B:20:0x0045, B:22:0x0049, B:24:0x005c, B:26:0x006b, B:27:0x0077, B:28:0x0063, B:29:0x0079, B:30:0x007e), top: B:3:0x0005 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences

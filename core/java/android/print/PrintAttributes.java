@@ -34,13 +34,11 @@ public final class PrintAttributes implements Parcelable {
     public static final Parcelable.Creator<PrintAttributes> CREATOR =
             new Parcelable.Creator<
                     PrintAttributes>() { // from class: android.print.PrintAttributes.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrintAttributes createFromParcel(Parcel parcel) {
                     return new PrintAttributes(parcel);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PrintAttributes[] newArray(int size) {
                     return new PrintAttributes[size];

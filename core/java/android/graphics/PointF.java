@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public class PointF implements Parcelable {
     public static final Parcelable.Creator<PointF> CREATOR =
             new Parcelable.Creator<PointF>() { // from class: android.graphics.PointF.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PointF createFromParcel(Parcel in) {
                     PointF r = new PointF();
@@ -15,7 +14,6 @@ public class PointF implements Parcelable {
                     return r;
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public PointF[] newArray(int size) {
                     return new PointF[size];

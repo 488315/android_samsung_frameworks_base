@@ -379,7 +379,6 @@ public final class WiredAccessoryManager implements InputManagerService.WiredAcc
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.WiredAccessoryManager$2] */
     public WiredAccessoryManager(Context context, InputManagerService inputManagerService) {
         PowerManager.WakeLock newWakeLock =
                 ((PowerManager) context.getSystemService("power"))

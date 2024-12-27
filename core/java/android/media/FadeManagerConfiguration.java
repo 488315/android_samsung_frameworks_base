@@ -21,13 +21,11 @@ public final class FadeManagerConfiguration implements Parcelable {
     public static final Parcelable.Creator<FadeManagerConfiguration> CREATOR =
             new Parcelable.Creator<FadeManagerConfiguration>() { // from class:
                 // android.media.FadeManagerConfiguration.1
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FadeManagerConfiguration createFromParcel(Parcel in) {
                     return new FadeManagerConfiguration(in);
                 }
 
-                /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.os.Parcelable.Creator
                 public FadeManagerConfiguration[] newArray(int size) {
                     return new FadeManagerConfiguration[size];
@@ -411,13 +409,11 @@ public final class FadeManagerConfiguration implements Parcelable {
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static void validateUsage(int usage) {
         Preconditions.checkArgument(
                 isUsageValid(usage), "Invalid usage: %s", Integer.valueOf(usage));
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static IntArray convertIntegerListToIntArray(List<Integer> integerList) {
         if (integerList == null) {
             return new IntArray();
@@ -879,13 +875,11 @@ public final class FadeManagerConfiguration implements Parcelable {
         public static final Parcelable.Creator<FadeVolumeShaperConfigsWrapper> CREATOR =
                 new Parcelable.Creator<FadeVolumeShaperConfigsWrapper>() { // from class:
                     // android.media.FadeManagerConfiguration.FadeVolumeShaperConfigsWrapper.1
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FadeVolumeShaperConfigsWrapper createFromParcel(Parcel in) {
                         return new FadeVolumeShaperConfigsWrapper(in);
                     }
 
-                    /* JADX WARN: Can't rename method to resolve collision */
                     @Override // android.os.Parcelable.Creator
                     public FadeVolumeShaperConfigsWrapper[] newArray(int size) {
                         return new FadeVolumeShaperConfigsWrapper[size];
