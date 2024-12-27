@@ -18,7 +18,6 @@ import com.samsung.android.knox.ContainerProxy;
 import com.samsung.android.knox.SemPersonaManager;
 
 /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
-/* loaded from: classes.dex */
 public final class WorkProfileClient extends KnoxPromptClient {
     public final WorkProfileSysUiClientHelper mClientHelper;
 

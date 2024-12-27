@@ -16,7 +16,6 @@ import android.view.SurfaceView;
 import com.samsung.android.biometrics.app.setting.Utils;
 
 /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
-/* loaded from: classes.dex */
 public class LightSourceView extends SurfaceView implements SurfaceHolder.Callback {
     public Canvas mCanvas;
     public final Context mContext;

@@ -54,7 +54,6 @@ import com.samsung.android.view.SemWindowManager;
 import java.io.ByteArrayOutputStream;
 
 /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
-/* loaded from: classes.dex */
 public class FaceEnrollActivity extends FragmentActivity {
     public static final /* synthetic */ int $r8$clinit = 0;
     public AnonymousClass2 mAttachStateChangeListener;

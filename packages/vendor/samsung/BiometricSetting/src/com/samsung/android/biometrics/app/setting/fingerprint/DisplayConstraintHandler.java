@@ -23,7 +23,6 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
-/* loaded from: classes.dex */
 public final class DisplayConstraintHandler implements Handler.Callback {
     static final long COLOR_INVERSION_RESTORE_DELAY = 50;
     static final int ECS_SCHEDULE_AUTO = 2;

@@ -31,7 +31,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
-/* loaded from: classes.dex */
 public final class DisplayStateManager implements DisplayManager.DisplayListener, Handler.Callback {
     static final int AOD_DEFAULT_HIGH_BRIGHTNESS_NIT = 60;
     static final int AOD_DEFAULT_LOW_BRIGHTNESS_NIT = 2;

@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
-/* loaded from: classes.dex */
 public class VisualEffectContainer extends FrameLayout {
     static final String ASSET_NAME_OPTICAL_GREEN =
             "indisplay_fingerprint_touch_effect_green_circle.json";

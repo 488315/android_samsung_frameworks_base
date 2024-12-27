@@ -53,7 +53,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
-/* loaded from: classes.dex */
 public abstract class AuthCredentialView extends LinearLayout implements View.OnKeyListener, View.OnClickListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AccessibilityManager mAccessibilityManager;

@@ -22,7 +22,6 @@ import com.samsung.android.knox.ucm.core.IUcmService;
 import com.samsung.android.knox.ucm.core.UniversalCredentialUtil;
 
 /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
-/* loaded from: classes.dex */
 public class UCMAuthCredentialPasswordView extends UCMAuthCredentialView
         implements TextView.OnEditorActionListener, TextWatcher {
     public static String mAgentTitle;

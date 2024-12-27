@@ -21,7 +21,6 @@ import com.samsung.android.biometrics.app.setting.AnimationHelper;
 import com.samsung.android.biometrics.app.setting.Utils;
 
 /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
-/* loaded from: classes.dex */
 public class FingerprintEnrollSideGuideFrame extends View {
     public static final PathInterpolator INTPL_READY = new PathInterpolator(0.1f, 0.5f, 0.5f, 0.9f);
     public static final PathInterpolator INTPL_SCAN = new PathInterpolator(0.1f, 0.5f, 0.5f, 0.9f);

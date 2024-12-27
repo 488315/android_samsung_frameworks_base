@@ -38,7 +38,6 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
-/* loaded from: classes.dex */
 public class SysUiUdfpsManager extends SysUiManager implements AodStatusMonitor.Callback {
     public final AodStatusMonitor mAodStatusMonitor;
     public UdfpsFodHandler mFodHandler;
