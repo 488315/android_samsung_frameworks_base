@@ -204,7 +204,7 @@ public class SemInputDeviceMotionHelper {
             if (useHandler) {
                 this.mainHandler.post(
                         new Runnable() { // from class:
-                                         // com.samsung.android.hardware.secinputdev.SemInputDeviceMotionHelper$$ExternalSyntheticLambda0
+                            // com.samsung.android.hardware.secinputdev.SemInputDeviceMotionHelper$$ExternalSyntheticLambda0
                             @Override // java.lang.Runnable
                             public final void run() {
                                 SemInputDeviceRawdataService.this.pauseService();
@@ -222,7 +222,7 @@ public class SemInputDeviceMotionHelper {
             if (useHandler) {
                 this.mainHandler.post(
                         new Runnable() { // from class:
-                                         // com.samsung.android.hardware.secinputdev.SemInputDeviceMotionHelper$$ExternalSyntheticLambda1
+                            // com.samsung.android.hardware.secinputdev.SemInputDeviceMotionHelper$$ExternalSyntheticLambda1
                             @Override // java.lang.Runnable
                             public final void run() {
                                 SemInputDeviceRawdataService.this.restartService();

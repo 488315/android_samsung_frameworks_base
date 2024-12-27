@@ -6,12 +6,13 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
-import java.io.BufferedReader;
-import java.io.FileReader;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import vendor.samsung.frameworks.codecsolution.Utils;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 /* loaded from: classes.dex */
 public class SCPMV2Helper {
@@ -39,7 +40,8 @@ public class SCPMV2Helper {
     private static final String SCPMV2_METHOD_UNREGISTER = "unregister";
     private static final String SCPMV2_PACKAGE_NAME = "com.samsung.android.scpm";
     private static final String SCPMV2_PROVIDER_AUTHORITY = "com.samsung.android.scpm.policy";
-    private static final Uri SCPMV2_PROVIDER_URI = Uri.parse("content://com.samsung.android.scpm.policy/");
+    private static final Uri SCPMV2_PROVIDER_URI =
+            Uri.parse("content://com.samsung.android.scpm.policy/");
     private static final String TAG = "CodecSolution_SCPMV2Helper";
     private Context mContext;
     private String mToken = null;
@@ -61,10 +63,15 @@ public class SCPMV2Helper {
             Log.i(TAG, "Not registered yet");
             return false;
         }
-        Uri parse = Uri.parse("content://com.samsung.android.scpm.policy/" + this.mToken + "/HDR2SDR_CONVERTER");
+        Uri parse =
+                Uri.parse(
+                        "content://com.samsung.android.scpm.policy/"
+                                + this.mToken
+                                + "/HDR2SDR_CONVERTER");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            ParcelFileDescriptor openFileDescriptor = this.mContext.getContentResolver().openFileDescriptor(parse, "r");
+            ParcelFileDescriptor openFileDescriptor =
+                    this.mContext.getContentResolver().openFileDescriptor(parse, "r");
             Binder.restoreCallingIdentity(clearCallingIdentity);
             BufferedReader bufferedReader = null;
             Bundle bundle = null;
@@ -79,7 +86,14 @@ public class SCPMV2Helper {
                     long clearCallingIdentity2 = Binder.clearCallingIdentity();
                     try {
                         try {
-                            bundle = this.mContext.getContentResolver().call(parse, SCPMV2_METHOD_GET_LAST_ERROR, CODEC_SOLUTION_PACKAGE_NAME, bundle2);
+                            bundle =
+                                    this.mContext
+                                            .getContentResolver()
+                                            .call(
+                                                    parse,
+                                                    SCPMV2_METHOD_GET_LAST_ERROR,
+                                                    CODEC_SOLUTION_PACKAGE_NAME,
+                                                    bundle2);
                         } finally {
                         }
                     } catch (Exception e) {
@@ -89,7 +103,13 @@ public class SCPMV2Helper {
                     if (bundle == null) {
                         Log.w(TAG, "Bundle is null");
                     } else {
-                        Log.w(TAG, "Failed to get new policy : rcode[" + bundle.getInt(SCPMV2_KEY_RCODE, -1) + "], rmsg[" + bundle.getString(SCPMV2_KEY_RMSG, "null") + "]");
+                        Log.w(
+                                TAG,
+                                "Failed to get new policy : rcode["
+                                        + bundle.getInt(SCPMV2_KEY_RCODE, -1)
+                                        + "], rmsg["
+                                        + bundle.getString(SCPMV2_KEY_RMSG, "null")
+                                        + "]");
                     }
                     return false;
                 }
@@ -106,7 +126,9 @@ public class SCPMV2Helper {
                                 }
                                 sb.append(readLine);
                             }
-                            JSONArray jSONArray = new JSONObject(new JSONTokener(sb.toString())).getJSONArray("hdr2sdr_converter_allowlist");
+                            JSONArray jSONArray =
+                                    new JSONObject(new JSONTokener(sb.toString()))
+                                            .getJSONArray("hdr2sdr_converter_allowlist");
                             this.mHDR2SDRAllowlist = jSONArray;
                             if (jSONArray == null) {
                                 Log.w(TAG, "Failed to get allowlist array");
@@ -194,10 +216,15 @@ public class SCPMV2Helper {
             Log.i(TAG, "Not registered yet");
             return false;
         }
-        Uri parse = Uri.parse("content://com.samsung.android.scpm.policy/" + this.mToken + "/opus-offload-enable-list");
+        Uri parse =
+                Uri.parse(
+                        "content://com.samsung.android.scpm.policy/"
+                                + this.mToken
+                                + "/opus-offload-enable-list");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            ParcelFileDescriptor openFileDescriptor = this.mContext.getContentResolver().openFileDescriptor(parse, "r");
+            ParcelFileDescriptor openFileDescriptor =
+                    this.mContext.getContentResolver().openFileDescriptor(parse, "r");
             Binder.restoreCallingIdentity(clearCallingIdentity);
             BufferedReader bufferedReader = null;
             Bundle bundle = null;
@@ -212,7 +239,14 @@ public class SCPMV2Helper {
                     long clearCallingIdentity2 = Binder.clearCallingIdentity();
                     try {
                         try {
-                            bundle = this.mContext.getContentResolver().call(parse, SCPMV2_METHOD_GET_LAST_ERROR, CODEC_SOLUTION_PACKAGE_NAME, bundle2);
+                            bundle =
+                                    this.mContext
+                                            .getContentResolver()
+                                            .call(
+                                                    parse,
+                                                    SCPMV2_METHOD_GET_LAST_ERROR,
+                                                    CODEC_SOLUTION_PACKAGE_NAME,
+                                                    bundle2);
                         } finally {
                         }
                     } catch (Exception e) {
@@ -222,7 +256,13 @@ public class SCPMV2Helper {
                     if (bundle == null) {
                         Log.w(TAG, "Bundle is null");
                     } else {
-                        Log.w(TAG, "Failed to get new policy : rcode[" + bundle.getInt(SCPMV2_KEY_RCODE, -1) + "], rmsg[" + bundle.getString(SCPMV2_KEY_RMSG, "null") + "]");
+                        Log.w(
+                                TAG,
+                                "Failed to get new policy : rcode["
+                                        + bundle.getInt(SCPMV2_KEY_RCODE, -1)
+                                        + "], rmsg["
+                                        + bundle.getString(SCPMV2_KEY_RMSG, "null")
+                                        + "]");
                     }
                     return false;
                 }
@@ -239,7 +279,9 @@ public class SCPMV2Helper {
                                 }
                                 sb.append(readLine);
                             }
-                            JSONArray jSONArray = new JSONObject(new JSONTokener(sb.toString())).getJSONArray("opus_offload_allowlist");
+                            JSONArray jSONArray =
+                                    new JSONObject(new JSONTokener(sb.toString()))
+                                            .getJSONArray("opus_offload_allowlist");
                             this.mOpusOffloadEnabledList = jSONArray;
                             if (jSONArray == null) {
                                 Log.w(TAG, " Failed to get enabledlist array");
@@ -353,7 +395,10 @@ public class SCPMV2Helper {
     }
 
     public boolean isAvailable() {
-        return this.mContext.getPackageManager().resolveContentProvider(SCPMV2_PROVIDER_AUTHORITY, 0) != null;
+        return this.mContext
+                        .getPackageManager()
+                        .resolveContentProvider(SCPMV2_PROVIDER_AUTHORITY, 0)
+                != null;
     }
 
     public Utils.QueryResult isInH2SCAllowlist(String str, String str2) {
@@ -453,7 +498,14 @@ public class SCPMV2Helper {
         bundle.putString(SCPMV2_KEY_RECEIVER_PACKAGE_NAME, CODEC_SOLUTION_PACKAGE_NAME);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            Bundle call = this.mContext.getContentResolver().call(SCPMV2_PROVIDER_URI, SCPMV2_METHOD_REGISTER, CODEC_SOLUTION_PACKAGE_NAME, bundle);
+            Bundle call =
+                    this.mContext
+                            .getContentResolver()
+                            .call(
+                                    SCPMV2_PROVIDER_URI,
+                                    SCPMV2_METHOD_REGISTER,
+                                    CODEC_SOLUTION_PACKAGE_NAME,
+                                    bundle);
             if (call == null) {
                 Log.w(TAG, "Bundle is null");
                 return false;

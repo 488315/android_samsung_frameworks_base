@@ -15,7 +15,7 @@ public class SensorProxLpScanListenerWrapper extends ExternalService {
         super(context, listener, handler);
         this.sensorEventListener =
                 new SensorEventListener() { // from class:
-                                            // com.samsung.android.hardware.secinputdev.external.SensorProxLpScanListenerWrapper.1
+                    // com.samsung.android.hardware.secinputdev.external.SensorProxLpScanListenerWrapper.1
                     @Override // android.hardware.SensorEventListener
                     public void onAccuracyChanged(Sensor sensor, int event) {}
 

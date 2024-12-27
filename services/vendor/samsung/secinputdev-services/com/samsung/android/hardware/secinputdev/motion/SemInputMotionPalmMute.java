@@ -61,9 +61,8 @@ public class SemInputMotionPalmMute extends SemInputMotion {
         this.outputTensorBuffer = null;
         this.outputTensorIndex = 0;
         this.broadcastListener =
-                new SemInputExternal
-                        .IBroadcastReceiver() { // from class:
-                                                // com.samsung.android.hardware.secinputdev.motion.SemInputMotionPalmMute.1
+                new SemInputExternal.IBroadcastReceiver() { // from class:
+                    // com.samsung.android.hardware.secinputdev.motion.SemInputMotionPalmMute.1
                     @Override // com.samsung.android.hardware.secinputdev.external.SemInputExternal.IBroadcastReceiver
                     public void onGameMode(String gameMode, String scanRate, String fastResponse) {
                         Log.d(SemInputMotionPalmMute.TAG, "onGameMode: " + gameMode);
@@ -77,9 +76,8 @@ public class SemInputMotionPalmMute extends SemInputMotion {
                     }
                 };
         this.motionEventListener =
-                new SemInputMotionEventDispatcher
-                        .SemInputMotionEventListener() { // from class:
-                                                         // com.samsung.android.hardware.secinputdev.motion.SemInputMotionPalmMute.2
+                new SemInputMotionEventDispatcher.SemInputMotionEventListener() { // from class:
+                    // com.samsung.android.hardware.secinputdev.motion.SemInputMotionPalmMute.2
                     @Override // com.samsung.android.hardware.secinputdev.SemInputMotionEventDispatcher.SemInputMotionEventListener
                     public void onMotionEvent(MotionEvent event) {
                         if (SemInputMotionPalmMute.this.isGameMode

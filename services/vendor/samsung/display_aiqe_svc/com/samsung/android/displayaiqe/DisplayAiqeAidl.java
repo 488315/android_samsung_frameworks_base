@@ -76,9 +76,8 @@ public final class DisplayAiqeAidl implements DisplayAiqeHal {
                         Slog.d(TAG, "connectToProxy: get mBinder successfully");
                         this.mProxy = IDisplayAiqe.Stub.asInterface(this.mBinder);
                         this.mBinder.linkToDeath(
-                                new IBinder
-                                        .DeathRecipient() { // from class:
-                                                            // com.samsung.android.displayaiqe.DisplayAiqeAidl$$ExternalSyntheticLambda0
+                                new IBinder.DeathRecipient() { // from class:
+                                    // com.samsung.android.displayaiqe.DisplayAiqeAidl$$ExternalSyntheticLambda0
                                     @Override // android.os.IBinder.DeathRecipient
                                     public final void binderDied() {
                                         DisplayAiqeAidl.this.serviceDied();
@@ -90,7 +89,7 @@ public final class DisplayAiqeAidl implements DisplayAiqeHal {
                     Slog.e(
                             TAG,
                             "connectToProxy: Display AIQE AIDL hal service not found. Did the"
-                                + " service fail to start?",
+                                    + " service fail to start?",
                             e);
                 }
             } catch (RemoteException e2) {
@@ -498,7 +497,7 @@ public final class DisplayAiqeAidl implements DisplayAiqeHal {
             Slog.d(
                     TAG,
                     "sendMdnieModeToSurfaceFlinger: send mdnie mode to SurfaceFlinger"
-                        + " successfully.");
+                            + " successfully.");
             return true;
         } catch (Exception e) {
             Slog.e(TAG, "sendMdnieModeToSurfaceFlinger: Exception occured.", e);

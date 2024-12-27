@@ -3,6 +3,7 @@ package vendor.samsung.frameworks.codecsolution;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.util.Log;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -19,7 +20,9 @@ public class Utils {
         Log.d(TAG, "getNavigationBarHeight()");
         int i = 0;
         try {
-            int identifier = context.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+            int identifier =
+                    context.getResources()
+                            .getIdentifier("navigation_bar_height", "dimen", "android");
             if (identifier > 0) {
                 i = context.getResources().getDimensionPixelSize(identifier);
             }
@@ -32,9 +35,11 @@ public class Utils {
 
     public static String getPkgName(Context context, int i) {
         String str;
-        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = ((ActivityManager) context.getSystemService("activity")).getRunningAppProcesses();
+        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses =
+                ((ActivityManager) context.getSystemService("activity")).getRunningAppProcesses();
         if (runningAppProcesses != null) {
-            for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : runningAppProcesses) {
+            for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo :
+                    runningAppProcesses) {
                 if (runningAppProcessInfo.pid == i) {
                     str = runningAppProcessInfo.processName;
                     break;
@@ -50,7 +55,8 @@ public class Utils {
     }
 
     public static String getTopPackage(Context context) {
-        List<ActivityManager.RunningTaskInfo> runningTasks = ((ActivityManager) context.getSystemService("activity")).getRunningTasks(1);
+        List<ActivityManager.RunningTaskInfo> runningTasks =
+                ((ActivityManager) context.getSystemService("activity")).getRunningTasks(1);
         if (runningTasks == null || runningTasks.size() == 0) {
             return "";
         }
@@ -69,6 +75,8 @@ public class Utils {
         while (i < split.length && i < split2.length && split[i].equals(split2[i])) {
             i++;
         }
-        return (i >= split.length || i >= split2.length) ? Integer.signum(split.length - split2.length) : Integer.signum(Integer.valueOf(split[i]).compareTo(Integer.valueOf(split2[i])));
+        return (i >= split.length || i >= split2.length)
+                ? Integer.signum(split.length - split2.length)
+                : Integer.signum(Integer.valueOf(split[i]).compareTo(Integer.valueOf(split2[i])));
     }
 }

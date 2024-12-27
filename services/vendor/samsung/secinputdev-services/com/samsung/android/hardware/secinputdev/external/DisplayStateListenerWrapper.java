@@ -13,9 +13,8 @@ public class DisplayStateListenerWrapper extends ExternalService {
             Context context, SemInputExternal.IServiceListener listener, Handler handler) {
         super(context, listener, handler);
         this.displayStateListener =
-                new DisplayManagerInternal
-                        .DisplayStateListener() { // from class:
-                                                  // com.samsung.android.hardware.secinputdev.external.DisplayStateListenerWrapper.1
+                new DisplayManagerInternal.DisplayStateListener() { // from class:
+                    // com.samsung.android.hardware.secinputdev.external.DisplayStateListenerWrapper.1
                     public void onStart(int stateLogical, int statePhysical, int displayType) {
                         DisplayStateListenerWrapper.this.listener.onDisplayStateChanged(
                                 true, stateLogical, statePhysical, displayType);

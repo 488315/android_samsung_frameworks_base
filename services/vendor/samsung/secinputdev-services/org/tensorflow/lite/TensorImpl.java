@@ -403,7 +403,7 @@ final class TensorImpl implements Tensor {
                 throw new IllegalArgumentException(
                         String.format(
                                 "Cannot copy to a TensorFlowLite tensor (%s) with %d bytes from a"
-                                    + " Java Buffer with %d bytes.",
+                                        + " Java Buffer with %d bytes.",
                                 name(), Integer.valueOf(bytes), Integer.valueOf(srcBytes)));
             }
             return;
@@ -413,7 +413,7 @@ final class TensorImpl implements Tensor {
             throw new IllegalArgumentException(
                     String.format(
                             "Cannot copy to a TensorFlowLite tensor (%s) with shape %s from a Java"
-                                + " object with shape %s.",
+                                    + " object with shape %s.",
                             name(), Arrays.toString(this.shapeCopy), Arrays.toString(srcShape)));
         }
     }
@@ -430,7 +430,7 @@ final class TensorImpl implements Tensor {
                 throw new IllegalArgumentException(
                         String.format(
                                 "Cannot copy from a TensorFlowLite tensor (%s) with %d bytes to a"
-                                    + " Java Buffer with %d bytes.",
+                                        + " Java Buffer with %d bytes.",
                                 name(), Integer.valueOf(bytes), Integer.valueOf(dstBytes)));
             }
             return;
@@ -440,7 +440,7 @@ final class TensorImpl implements Tensor {
             throw new IllegalArgumentException(
                     String.format(
                             "Cannot copy from a TensorFlowLite tensor (%s) with shape %s to a Java"
-                                + " object with shape %s.",
+                                    + " object with shape %s.",
                             name(), Arrays.toString(this.shapeCopy), Arrays.toString(dstShape)));
         }
     }

@@ -23,7 +23,7 @@ public class FoldStateListenerWrapper extends ExternalService {
                 new DeviceStateManager.FoldStateListener(
                         this.context,
                         new Consumer() { // from class:
-                                         // com.samsung.android.hardware.secinputdev.external.FoldStateListenerWrapper$$ExternalSyntheticLambda0
+                            // com.samsung.android.hardware.secinputdev.external.FoldStateListenerWrapper$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 FoldStateListenerWrapper.this.lambda$new$0((Boolean) obj);

@@ -6,19 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class SehVideoRecordingParameter implements Parcelable {
-    public static final Parcelable.Creator<SehVideoRecordingParameter> CREATOR = new Parcelable.Creator<SehVideoRecordingParameter>() { // from class: vendor.samsung.frameworks.codecsolution.SehVideoRecordingParameter.1
-        @Override // android.os.Parcelable.Creator
-        public SehVideoRecordingParameter createFromParcel(Parcel parcel) {
-            SehVideoRecordingParameter sehVideoRecordingParameter = new SehVideoRecordingParameter();
-            sehVideoRecordingParameter.readFromParcel(parcel);
-            return sehVideoRecordingParameter;
-        }
+    public static final Parcelable.Creator<SehVideoRecordingParameter> CREATOR =
+            new Parcelable.Creator<
+                    SehVideoRecordingParameter>() { // from class:
+                                                    // vendor.samsung.frameworks.codecsolution.SehVideoRecordingParameter.1
+                @Override // android.os.Parcelable.Creator
+                public SehVideoRecordingParameter createFromParcel(Parcel parcel) {
+                    SehVideoRecordingParameter sehVideoRecordingParameter =
+                            new SehVideoRecordingParameter();
+                    sehVideoRecordingParameter.readFromParcel(parcel);
+                    return sehVideoRecordingParameter;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehVideoRecordingParameter[] newArray(int i) {
-            return new SehVideoRecordingParameter[i];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehVideoRecordingParameter[] newArray(int i) {
+                    return new SehVideoRecordingParameter[i];
+                }
+            };
     public int author;
     public int width = 0;
     public int height = 0;
@@ -64,25 +68,31 @@ public class SehVideoRecordingParameter implements Parcelable {
                                             if (parcel.dataPosition() - dataPosition < readInt) {
                                                 this.author = parcel.readInt();
                                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                    throw new BadParcelableException(
+                                                            "Overflow in the size of parcelable");
                                                 }
                                                 parcel.setDataPosition(dataPosition + readInt);
                                                 return;
                                             }
                                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                throw new BadParcelableException(
+                                                        "Overflow in the size of parcelable");
                                             }
                                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");

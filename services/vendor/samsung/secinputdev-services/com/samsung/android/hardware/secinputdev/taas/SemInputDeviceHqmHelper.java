@@ -32,14 +32,14 @@ public class SemInputDeviceHqmHelper {
                                 .collect(
                                         Collectors.toMap(
                                                 new Function() { // from class:
-                                                                 // com.samsung.android.hardware.secinputdev.taas.SemInputDeviceHqmHelper$$ExternalSyntheticLambda0
+                                                    // com.samsung.android.hardware.secinputdev.taas.SemInputDeviceHqmHelper$$ExternalSyntheticLambda0
                                                     @Override // java.util.function.Function
                                                     public final Object apply(Object obj) {
                                                         return (String) ((Map.Entry) obj).getKey();
                                                     }
                                                 },
                                                 new Function() { // from class:
-                                                                 // com.samsung.android.hardware.secinputdev.taas.SemInputDeviceHqmHelper$$ExternalSyntheticLambda1
+                                                    // com.samsung.android.hardware.secinputdev.taas.SemInputDeviceHqmHelper$$ExternalSyntheticLambda1
                                                     @Override // java.util.function.Function
                                                     public final Object apply(Object obj) {
                                                         return (Integer)
@@ -47,7 +47,7 @@ public class SemInputDeviceHqmHelper {
                                                     }
                                                 },
                                                 new BinaryOperator() { // from class:
-                                                                       // com.samsung.android.hardware.secinputdev.taas.SemInputDeviceHqmHelper$$ExternalSyntheticLambda2
+                                                    // com.samsung.android.hardware.secinputdev.taas.SemInputDeviceHqmHelper$$ExternalSyntheticLambda2
                                                     @Override // java.util.function.BiFunction
                                                     public final Object apply(
                                                             Object obj, Object obj2) {
@@ -58,7 +58,7 @@ public class SemInputDeviceHqmHelper {
                                                     }
                                                 },
                                                 new Supplier() { // from class:
-                                                                 // com.samsung.android.hardware.secinputdev.taas.SemInputDeviceHqmHelper$$ExternalSyntheticLambda3
+                                                    // com.samsung.android.hardware.secinputdev.taas.SemInputDeviceHqmHelper$$ExternalSyntheticLambda3
                                                     @Override // java.util.function.Supplier
                                                     public final Object get() {
                                                         return new LinkedHashMap();

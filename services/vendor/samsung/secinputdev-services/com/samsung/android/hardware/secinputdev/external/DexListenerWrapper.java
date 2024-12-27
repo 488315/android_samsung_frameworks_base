@@ -36,7 +36,7 @@ public class DexListenerWrapper extends ExternalService {
                 final int mode = state.enabled != 4 ? 0 : 1;
                 DexListenerWrapper.this.handler.post(
                         new Runnable() { // from class:
-                                         // com.samsung.android.hardware.secinputdev.external.DexListenerWrapper$1$$ExternalSyntheticLambda0
+                            // com.samsung.android.hardware.secinputdev.external.DexListenerWrapper$1$$ExternalSyntheticLambda0
                             @Override // java.lang.Runnable
                             public final void run() {
                                 DexListenerWrapper.AnonymousClass1.this

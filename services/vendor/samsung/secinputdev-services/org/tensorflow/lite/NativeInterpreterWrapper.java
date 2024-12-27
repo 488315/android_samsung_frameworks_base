@@ -343,7 +343,7 @@ class NativeInterpreterWrapper implements AutoCloseable {
         throw new IllegalArgumentException(
                 String.format(
                         "Input error: '%s' is not a valid name for any input. Names of inputs and"
-                            + " their indexes are %s",
+                                + " their indexes are %s",
                         name, this.inputsIndexes));
     }
 
@@ -381,7 +381,7 @@ class NativeInterpreterWrapper implements AutoCloseable {
         throw new IllegalArgumentException(
                 String.format(
                         "Input error: '%s' is not a valid name for any output. Names of outputs and"
-                            + " their indexes are %s",
+                                + " their indexes are %s",
                         name, this.outputsIndexes));
     }
 
@@ -482,7 +482,7 @@ class NativeInterpreterWrapper implements AutoCloseable {
         if (this.cancellationFlagHandle == 0) {
             throw new IllegalStateException(
                     "Cannot cancel the inference. Have you called"
-                        + " InterpreterApi.Options.setCancellable?");
+                            + " InterpreterApi.Options.setCancellable?");
         }
         setCancelled(this.interpreterHandle, this.cancellationFlagHandle, value);
     }

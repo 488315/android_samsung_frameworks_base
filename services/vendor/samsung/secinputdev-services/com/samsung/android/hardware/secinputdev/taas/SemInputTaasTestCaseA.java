@@ -46,7 +46,7 @@ public class SemInputTaasTestCaseA implements SemInputTaasTestCase {
         this.threadPool = Executors.newSingleThreadExecutor();
         this.mExternalApi.registerMotionEventListener(
                 new Consumer() { // from class:
-                                 // com.samsung.android.hardware.secinputdev.taas.SemInputTaasTestCaseA$$ExternalSyntheticLambda0
+                    // com.samsung.android.hardware.secinputdev.taas.SemInputTaasTestCaseA$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
                         SemInputTaasTestCaseA.this.runEvent((MotionEvent) obj);
@@ -58,7 +58,7 @@ public class SemInputTaasTestCaseA implements SemInputTaasTestCase {
         final int action = mEvent.getAction();
         this.mExternalApi.post(
                 new Runnable() { // from class:
-                                 // com.samsung.android.hardware.secinputdev.taas.SemInputTaasTestCaseA$$ExternalSyntheticLambda1
+                    // com.samsung.android.hardware.secinputdev.taas.SemInputTaasTestCaseA$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
                         SemInputTaasTestCaseA.this.lambda$runEvent$0(action);
@@ -210,7 +210,7 @@ public class SemInputTaasTestCaseA implements SemInputTaasTestCase {
         FutureTask task =
                 new FutureTask(
                         new Callable() { // from class:
-                                         // com.samsung.android.hardware.secinputdev.taas.SemInputTaasTestCaseA.1
+                            // com.samsung.android.hardware.secinputdev.taas.SemInputTaasTestCaseA.1
                             @Override // java.util.concurrent.Callable
                             public Boolean call() throws Exception {
                                 return Boolean.valueOf(

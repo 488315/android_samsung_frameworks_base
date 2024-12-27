@@ -27,9 +27,8 @@ public class SemInputExternalListener implements SemInputExternal.IExternalEvent
     private static final String TAG = "SemInputExternalListener";
     private Context context;
     private Handler mainHandler;
-    private final Map<SemInputExternal.Event, String> supportList =
-            new HashMap() { // from class:
-                            // com.samsung.android.hardware.secinputdev.external.SemInputExternalListener.1
+    private final Map<SemInputExternal.Event, String> supportList = new HashMap() { // from class:
+                // com.samsung.android.hardware.secinputdev.external.SemInputExternalListener.1
                 {
                     put(
                             SemInputExternal.Event.LISTENER_DISPLAY_STATE,
@@ -39,9 +38,8 @@ public class SemInputExternalListener implements SemInputExternal.IExternalEvent
     private final HashMap<SemInputExternal.Event, ArrayList> registeredList = new HashMap<>();
     private StringBuilder dumpLog = new StringBuilder();
     private final SemInputExternal.IServiceListener serviceListener =
-            new SemInputExternal
-                    .IServiceListener() { // from class:
-                                          // com.samsung.android.hardware.secinputdev.external.SemInputExternalListener.2
+            new SemInputExternal.IServiceListener() { // from class:
+                // com.samsung.android.hardware.secinputdev.external.SemInputExternalListener.2
                 @Override // com.samsung.android.hardware.secinputdev.external.SemInputExternal.IServiceListener
                 public void onSemUEvent(String result) {
                     ArrayList<SemInputExternal.IServiceListener> list =

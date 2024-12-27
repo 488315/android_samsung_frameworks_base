@@ -70,10 +70,8 @@ public class SemInputDeviceManagerService extends ISemInputDeviceManager.Stub
     private final StringBuilder bootingDump = new StringBuilder();
     private final InitialOperation initialOperation = new InitialOperation();
     private final HashMap<SemInputConstants.Device, DeviceDisplayState> deviceDisplayStates =
-            new HashMap<
-                    SemInputConstants.Device,
-                    DeviceDisplayState>() { // from class:
-                                            // com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService.1
+            new HashMap<SemInputConstants.Device, DeviceDisplayState>() { // from class:
+                // com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService.1
                 {
                     put(SemInputConstants.Device.DEFAULT_TSP, new DeviceDisplayState());
                     put(SemInputConstants.Device.EXTRA_TSP, new DeviceDisplayState());
@@ -97,9 +95,8 @@ public class SemInputDeviceManagerService extends ISemInputDeviceManager.Stub
     private int wristDetectionDisabled = -1;
     private SemInputCommandInterface commandOperator = new CommandOperator();
     private final SemInputExternal.IBroadcastReceiver broadcastReceiver =
-            new SemInputExternal
-                    .IBroadcastReceiver() { // from class:
-                                            // com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService.2
+            new SemInputExternal.IBroadcastReceiver() { // from class:
+                // com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService.2
                 private String nfcRFSettingRunner = "rf";
                 private boolean nfcRFDetected = false;
 
@@ -263,7 +260,7 @@ public class SemInputDeviceManagerService extends ISemInputDeviceManager.Stub
                     }
                     SemInputDeviceManagerService.mainHandler.postDelayed(
                             new Runnable() { // from class:
-                                             // com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService.2.1
+                                // com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService.2.1
                                 @Override // java.lang.Runnable
                                 public void run() {
                                     AnonymousClass2.this.nfcRFDetected = false;
@@ -279,9 +276,8 @@ public class SemInputDeviceManagerService extends ISemInputDeviceManager.Stub
                 }
             };
     private final SemInputExternal.IServiceListener serviceListener =
-            new SemInputExternal
-                    .IServiceListener() { // from class:
-                                          // com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService.3
+            new SemInputExternal.IServiceListener() { // from class:
+                // com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService.3
                 @Override // com.samsung.android.hardware.secinputdev.external.SemInputExternal.IServiceListener
                 public void onSemUEvent(String result) {
                     if ("PROBE_DONE".equals(result)) {
@@ -779,7 +775,7 @@ public class SemInputDeviceManagerService extends ISemInputDeviceManager.Stub
                         this.initialOperation.put(element.getKey(), true);
                         this.bootingDump.append(
                                 "- SensorProxLpScanListenerWrapper NOT registered: not"
-                                    + " supported\n");
+                                        + " supported\n");
                     }
                 }
                 boolean ret =

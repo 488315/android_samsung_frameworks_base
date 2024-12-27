@@ -113,7 +113,7 @@ public interface ISehSysInputCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -123,7 +123,7 @@ public interface ISehSysInputCallback extends IBase {
                 return interfaceDescriptor() + "@Proxy";
             } catch (RemoteException e) {
                 return "[class or subclass of"
-                           + " vendor.samsung.hardware.sysinput@1.3::ISehSysInputCallback]@Proxy";
+                        + " vendor.samsung.hardware.sysinput@1.3::ISehSysInputCallback]@Proxy";
             }
         }
 
@@ -170,7 +170,7 @@ public interface ISehSysInputCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -187,7 +187,7 @@ public interface ISehSysInputCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -204,7 +204,7 @@ public interface ISehSysInputCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -221,7 +221,7 @@ public interface ISehSysInputCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -250,7 +250,7 @@ public interface ISehSysInputCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -264,14 +264,14 @@ public interface ISehSysInputCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
                 throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -286,7 +286,7 @@ public interface ISehSysInputCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -304,7 +304,7 @@ public interface ISehSysInputCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -318,7 +318,7 @@ public interface ISehSysInputCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
@@ -326,30 +326,30 @@ public interface ISehSysInputCallback extends IBase {
 
     public abstract static class Stub extends HwBinder implements ISehSysInputCallback {
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public IHwBinder asBinder() {
             return this;
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
             return new ArrayList<>(
                     Arrays.asList(ISehSysInputCallback.kInterfaceName, IBase.kInterfaceName));
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) {}
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return ISehSysInputCallback.kInterfaceName;
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
             return new ArrayList<>(
                     Arrays.asList(
@@ -395,21 +395,21 @@ public interface ISehSysInputCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public final void setHALInstrumentation() {}
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public final void ping() {}
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -419,13 +419,13 @@ public interface ISehSysInputCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback,
-                  // android.hidl.base.V1_0.IBase
+        // android.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }

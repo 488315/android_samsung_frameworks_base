@@ -88,7 +88,7 @@ public class SemInputDeviceHqmData {
                     pkgName,
                     1,
                     new BiFunction() { // from class:
-                                       // com.samsung.android.hardware.secinputdev.taas.SemInputDeviceHqmData$$ExternalSyntheticLambda0
+                        // com.samsung.android.hardware.secinputdev.taas.SemInputDeviceHqmData$$ExternalSyntheticLambda0
                         @Override // java.util.function.BiFunction
                         public final Object apply(Object obj, Object obj2) {
                             return Integer.valueOf(

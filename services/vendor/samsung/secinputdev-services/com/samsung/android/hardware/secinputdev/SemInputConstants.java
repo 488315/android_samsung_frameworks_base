@@ -57,9 +57,8 @@ public class SemInputConstants {
         FAST_RESPONSE(48, false, true);
 
         public static final Parcelable.Creator<Command> CREATOR =
-                new Parcelable.Creator<
-                        Command>() { // from class:
-                                     // com.samsung.android.hardware.secinputdev.SemInputConstants.Command.1
+                new Parcelable.Creator<Command>() { // from class:
+                    // com.samsung.android.hardware.secinputdev.SemInputConstants.Command.1
                     @Override // android.os.Parcelable.Creator
                     public Command createFromParcel(Parcel in) {
                         return Command.getFromInt(in.readInt());
@@ -123,9 +122,8 @@ public class SemInputConstants {
         NOT_SPECIFIED(100, "");
 
         public static final Parcelable.Creator<Device> CREATOR =
-                new Parcelable.Creator<
-                        Device>() { // from class:
-                                    // com.samsung.android.hardware.secinputdev.SemInputConstants.Device.1
+                new Parcelable.Creator<Device>() { // from class:
+                    // com.samsung.android.hardware.secinputdev.SemInputConstants.Device.1
                     @Override // android.os.Parcelable.Creator
                     public Device createFromParcel(Parcel in) {
                         return Device.getFromInt(in.readInt());
@@ -188,9 +186,8 @@ public class SemInputConstants {
         FORCE_ON(22, true);
 
         public static final Parcelable.Creator<DisplayState> CREATOR =
-                new Parcelable.Creator<
-                        DisplayState>() { // from class:
-                                          // com.samsung.android.hardware.secinputdev.SemInputConstants.DisplayState.1
+                new Parcelable.Creator<DisplayState>() { // from class:
+                    // com.samsung.android.hardware.secinputdev.SemInputConstants.DisplayState.1
                     @Override // android.os.Parcelable.Creator
                     public DisplayState createFromParcel(Parcel in) {
                         return DisplayState.getFromInt(in.readInt());
@@ -264,9 +261,8 @@ public class SemInputConstants {
         CMD(18, "cmd", false, false);
 
         public static final Parcelable.Creator<Property> CREATOR =
-                new Parcelable.Creator<
-                        Property>() { // from class:
-                                      // com.samsung.android.hardware.secinputdev.SemInputConstants.Property.1
+                new Parcelable.Creator<Property>() { // from class:
+                    // com.samsung.android.hardware.secinputdev.SemInputConstants.Property.1
                     @Override // android.os.Parcelable.Creator
                     public Property createFromParcel(Parcel in) {
                         return Property.getFromInt(in.readInt());
@@ -353,9 +349,8 @@ public class SemInputConstants {
                 SemInputDeviceManager.SUPPORT_RAWDATA_MOTION_POCKET_DETECT);
 
         public static final Parcelable.Creator<MotionType> CREATOR =
-                new Parcelable.Creator<
-                        MotionType>() { // from class:
-                                        // com.samsung.android.hardware.secinputdev.SemInputConstants.MotionType.1
+                new Parcelable.Creator<MotionType>() { // from class:
+                    // com.samsung.android.hardware.secinputdev.SemInputConstants.MotionType.1
                     @Override // android.os.Parcelable.Creator
                     public MotionType createFromParcel(Parcel in) {
                         return MotionType.getFromInt(in.readInt());

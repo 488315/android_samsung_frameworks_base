@@ -33,7 +33,7 @@ public class SemInputExternalReceiver implements SemInputExternal.IExternalEvent
     private final Map<SemInputExternal.Event, BroadcastSet> supportList = new HashMap();
     private final BroadcastReceiver chargerBroadcastReceiver =
             new BroadcastReceiver() { // from class:
-                                      // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.1
+                // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.1
                 @Override // android.content.BroadcastReceiver
                 public void onReceive(Context context, Intent intent) {
                     ArrayList<SemInputExternal.IBroadcastReceiver> list;
@@ -61,7 +61,7 @@ public class SemInputExternalReceiver implements SemInputExternal.IExternalEvent
             };
     private final BroadcastReceiver extraChargerBroadcastReceiver =
             new BroadcastReceiver() { // from class:
-                                      // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.2
+                // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.2
                 @Override // android.content.BroadcastReceiver
                 public void onReceive(Context context, Intent intent) {
                     ArrayList<SemInputExternal.IBroadcastReceiver> list;
@@ -95,7 +95,7 @@ public class SemInputExternalReceiver implements SemInputExternal.IExternalEvent
             };
     private final BroadcastReceiver shutdownBroadcastReceiver =
             new BroadcastReceiver() { // from class:
-                                      // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.3
+                // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.3
                 @Override // android.content.BroadcastReceiver
                 public void onReceive(Context context, Intent intent) {
                     if (!"android.intent.action.ACTION_SHUTDOWN".equals(intent.getAction())) {
@@ -118,7 +118,7 @@ public class SemInputExternalReceiver implements SemInputExternal.IExternalEvent
             };
     private final BroadcastReceiver lazyBootCompleteBroadcastReceiver =
             new BroadcastReceiver() { // from class:
-                                      // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.4
+                // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.4
                 @Override // android.content.BroadcastReceiver
                 public void onReceive(Context context, Intent intent) {
                     if (!"com.samsung.intent.action.LAZY_BOOT_COMPLETE"
@@ -142,7 +142,7 @@ public class SemInputExternalReceiver implements SemInputExternal.IExternalEvent
             };
     private final BroadcastReceiver gameServiceBroadcastReceiver =
             new BroadcastReceiver() { // from class:
-                                      // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.5
+                // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.5
                 @Override // android.content.BroadcastReceiver
                 public void onReceive(Context context, Intent intent) {
                     ArrayList<SemInputExternal.IBroadcastReceiver> list;
@@ -178,7 +178,7 @@ public class SemInputExternalReceiver implements SemInputExternal.IExternalEvent
             };
     private final BroadcastReceiver coverBroadcastReceiver =
             new BroadcastReceiver() { // from class:
-                                      // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.6
+                // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.6
                 @Override // android.content.BroadcastReceiver
                 public void onReceive(Context context, Intent intent) {
                     ArrayList<SemInputExternal.IBroadcastReceiver> list;
@@ -213,7 +213,7 @@ public class SemInputExternalReceiver implements SemInputExternal.IExternalEvent
             };
     private final BroadcastReceiver userSwitchedBroadcastReceiver =
             new BroadcastReceiver() { // from class:
-                                      // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.7
+                // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.7
                 @Override // android.content.BroadcastReceiver
                 public void onReceive(Context context, Intent intent) {
                     if (!"android.intent.action.USER_SWITCHED".equals(intent.getAction())) {
@@ -236,7 +236,7 @@ public class SemInputExternalReceiver implements SemInputExternal.IExternalEvent
             };
     private final BroadcastReceiver nfcRFBroadcastReceiver =
             new BroadcastReceiver() { // from class:
-                                      // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.8
+                // com.samsung.android.hardware.secinputdev.external.SemInputExternalReceiver.8
                 @Override // android.content.BroadcastReceiver
                 public void onReceive(Context context, Intent intent) {
                     if (SemInputExternalReceiver.RF_FIELD_ON.equals(intent.getAction())) {

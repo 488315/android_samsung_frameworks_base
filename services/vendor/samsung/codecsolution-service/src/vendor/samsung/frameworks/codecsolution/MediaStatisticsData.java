@@ -2,6 +2,7 @@ package vendor.samsung.frameworks.codecsolution;
 
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -136,7 +137,9 @@ public class MediaStatisticsData {
         }
 
         static Label valueOf(int i) {
-            Log.d(MediaStatisticsData.TAG, String.format("Label.valueOf: 0x%x", Integer.valueOf(i)));
+            Log.d(
+                    MediaStatisticsData.TAG,
+                    String.format("Label.valueOf: 0x%x", Integer.valueOf(i)));
             for (Label label : values()) {
                 if (i == label.val) {
                     return label;
@@ -279,7 +282,8 @@ public class MediaStatisticsData {
 
     public void unflatten(String str) {
         this.mMap.clear();
-        TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(';');
+        TextUtils.SimpleStringSplitter simpleStringSplitter =
+                new TextUtils.SimpleStringSplitter(';');
         simpleStringSplitter.setString(str);
         Iterator<String> it = simpleStringSplitter.iterator();
         while (it.hasNext()) {
@@ -289,7 +293,23 @@ public class MediaStatisticsData {
                 String substring = next.substring(0, indexOf);
                 int indexOf2 = next.indexOf("@");
                 Type valueOf = Type.valueOf(Integer.parseInt(next.substring(indexOf2 + 1)));
-                this.mMap.put(substring, valueOf == Type.INT ? Integer.valueOf(Integer.parseInt(next.substring(indexOf + 1, indexOf2))) : valueOf == Type.LONG ? Long.valueOf(Long.parseLong(next.substring(indexOf + 1, indexOf2))) : valueOf == Type.FLOAT ? Float.valueOf(Float.parseFloat(next.substring(indexOf + 1, indexOf2))) : valueOf == Type.STRING ? next.substring(indexOf + 1, indexOf2) : null);
+                this.mMap.put(
+                        substring,
+                        valueOf == Type.INT
+                                ? Integer.valueOf(
+                                        Integer.parseInt(next.substring(indexOf + 1, indexOf2)))
+                                : valueOf == Type.LONG
+                                        ? Long.valueOf(
+                                                Long.parseLong(
+                                                        next.substring(indexOf + 1, indexOf2)))
+                                        : valueOf == Type.FLOAT
+                                                ? Float.valueOf(
+                                                        Float.parseFloat(
+                                                                next.substring(
+                                                                        indexOf + 1, indexOf2)))
+                                                : valueOf == Type.STRING
+                                                        ? next.substring(indexOf + 1, indexOf2)
+                                                        : null);
             }
         }
     }

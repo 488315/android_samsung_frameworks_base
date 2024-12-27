@@ -62,7 +62,7 @@ public class ExternalApi {
     private long currentTime = 0;
     private final BroadcastReceiver bigDataBroadcastReceiver =
             new BroadcastReceiver() { // from class:
-                                      // com.samsung.android.hardware.secinputdev.taas.ExternalApi.1
+                // com.samsung.android.hardware.secinputdev.taas.ExternalApi.1
                 @Override // android.content.BroadcastReceiver
                 public void onReceive(Context context, Intent intent) {
                     if (!ExternalApi.HQM_UPDATE_REQ.equals(intent.getAction())) {
@@ -80,7 +80,7 @@ public class ExternalApi {
             };
     private final BroadcastReceiver issueTrackerOnOffReceiver =
             new BroadcastReceiver() { // from class:
-                                      // com.samsung.android.hardware.secinputdev.taas.ExternalApi.2
+                // com.samsung.android.hardware.secinputdev.taas.ExternalApi.2
                 @Override // android.content.BroadcastReceiver
                 public void onReceive(Context context, Intent intent) {
                     Bundle extras = intent.getExtras();
@@ -94,9 +94,8 @@ public class ExternalApi {
             };
     private final SemInputExternal.IServiceListener displayStateListener = new AnonymousClass3();
     private SemInputMotionEventDispatcher.SemInputMotionEventListener motionEventListener =
-            new SemInputMotionEventDispatcher
-                    .SemInputMotionEventListener() { // from class:
-                                                     // com.samsung.android.hardware.secinputdev.taas.ExternalApi.4
+            new SemInputMotionEventDispatcher.SemInputMotionEventListener() { // from class:
+                // com.samsung.android.hardware.secinputdev.taas.ExternalApi.4
                 @Override // com.samsung.android.hardware.secinputdev.SemInputMotionEventDispatcher.SemInputMotionEventListener
                 public void onMotionEvent(MotionEvent event) {
                     ExternalApi.this.runEvent(event);
@@ -171,7 +170,7 @@ public class ExternalApi {
                     }
                     ExternalApi.this.motionEventRunnable =
                             new Runnable() { // from class:
-                                             // com.samsung.android.hardware.secinputdev.taas.ExternalApi$3$$ExternalSyntheticLambda0
+                                // com.samsung.android.hardware.secinputdev.taas.ExternalApi$3$$ExternalSyntheticLambda0
                                 @Override // java.lang.Runnable
                                 public final void run() {
                                     ExternalApi.AnonymousClass3.this
@@ -189,7 +188,7 @@ public class ExternalApi {
                     }
                     ExternalApi.this.handler.post(
                             new Runnable() { // from class:
-                                             // com.samsung.android.hardware.secinputdev.taas.ExternalApi$3$$ExternalSyntheticLambda1
+                                // com.samsung.android.hardware.secinputdev.taas.ExternalApi$3$$ExternalSyntheticLambda1
                                 @Override // java.lang.Runnable
                                 public final void run() {
                                     ExternalApi.AnonymousClass3.this

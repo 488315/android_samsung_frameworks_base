@@ -15,7 +15,7 @@ public final class Interpreter extends InterpreterImpl implements InterpreterApi
     }
 
     @Override // org.tensorflow.lite.InterpreterImpl, org.tensorflow.lite.InterpreterApi,
-              // java.lang.AutoCloseable
+    // java.lang.AutoCloseable
     public /* bridge */ /* synthetic */ void close() {
         super.close();
     }
@@ -159,7 +159,7 @@ public final class Interpreter extends InterpreterImpl implements InterpreterApi
         if (signatureKey == null) {
             throw new IllegalArgumentException(
                     "Input error: SignatureDef signatureKey should not be null. null is only"
-                        + " allowed if the model has a single Signature. Available Signatures: "
+                            + " allowed if the model has a single Signature. Available Signatures: "
                             + Arrays.toString(this.signatureKeyList));
         }
         this.wrapper.runSignature(inputs, outputs, signatureKey);
@@ -178,7 +178,7 @@ public final class Interpreter extends InterpreterImpl implements InterpreterApi
         if (signatureKey == null) {
             throw new IllegalArgumentException(
                     "Input error: SignatureDef signatureKey should not be null. null is only"
-                        + " allowed if the model has a single Signature. Available Signatures: "
+                            + " allowed if the model has a single Signature. Available Signatures: "
                             + Arrays.toString(this.signatureKeyList));
         }
         return this.wrapper.getInputTensor(inputName, signatureKey);
@@ -207,7 +207,7 @@ public final class Interpreter extends InterpreterImpl implements InterpreterApi
         if (signatureKey == null) {
             throw new IllegalArgumentException(
                     "Input error: SignatureDef signatureKey should not be null. null is only"
-                        + " allowed if the model has a single Signature. Available Signatures: "
+                            + " allowed if the model has a single Signature. Available Signatures: "
                             + Arrays.toString(this.signatureKeyList));
         }
         return this.wrapper.getOutputTensor(outputName, signatureKey);

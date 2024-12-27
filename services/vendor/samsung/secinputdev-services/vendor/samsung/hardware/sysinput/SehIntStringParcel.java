@@ -6,9 +6,8 @@ import android.os.Parcelable;
 
 public class SehIntStringParcel implements Parcelable {
     public static final Parcelable.Creator<SehIntStringParcel> CREATOR =
-            new Parcelable.Creator<
-                    SehIntStringParcel>() { // from class:
-                                            // vendor.samsung.hardware.sysinput.SehIntStringParcel.1
+            new Parcelable.Creator<SehIntStringParcel>() { // from class:
+                // vendor.samsung.hardware.sysinput.SehIntStringParcel.1
                 @Override // android.os.Parcelable.Creator
                 public SehIntStringParcel createFromParcel(Parcel _aidl_source) {
                     SehIntStringParcel _aidl_out = new SehIntStringParcel();

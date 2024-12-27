@@ -40,10 +40,8 @@ public class SysinputHAL_AIDL implements SysinputHALInterface {
     private ISehSysInputDev halService = null;
     private int halVersion = 0;
     private SysinputHALCallback callback = null;
-    private IBinder aidlCallback =
-            new ISehSysInputCallback
-                    .Stub() { // from class:
-                              // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_AIDL.1
+    private IBinder aidlCallback = new ISehSysInputCallback.Stub() { // from class:
+                // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_AIDL.1
                 @Override // vendor.samsung.hardware.sysinput.ISehSysInputCallback
                 public void onReportInformation(int inputType, String data) throws RemoteException {
                     int type =

@@ -27,9 +27,8 @@ public class SysinputHAL_V1_3 extends SysinputHAL_V1_2 implements SysinputHALInt
         this.halService = null;
         this.callback = null;
         this.hidlCallback =
-                new ISehSysInputCallback
-                        .Stub() { // from class:
-                                  // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_3.1
+                new ISehSysInputCallback.Stub() { // from class:
+                    // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_3.1
                     @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback
                     public void onReportInformation(int inputType, String data)
                             throws RemoteException {
@@ -59,9 +58,8 @@ public class SysinputHAL_V1_3 extends SysinputHAL_V1_2 implements SysinputHALInt
         this.halService = null;
         this.callback = null;
         this.hidlCallback =
-                new ISehSysInputCallback
-                        .Stub() { // from class:
-                                  // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_3.1
+                new ISehSysInputCallback.Stub() { // from class:
+                    // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_3.1
                     @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputCallback
                     public void onReportInformation(int inputType, String data)
                             throws RemoteException {
@@ -225,13 +223,13 @@ public class SysinputHAL_V1_3 extends SysinputHAL_V1_2 implements SysinputHALInt
     }
 
     @Override // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2,
-              // com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface
+    // com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface
     public float getVersion() {
         return 1.3f;
     }
 
     @Override // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2,
-              // com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface
+    // com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface
     public ArrayList<Integer> getDeviceList(boolean forceParse) {
         ISehSysInputDev hal;
         ArrayList<Integer> integerList = null;
@@ -267,7 +265,7 @@ public class SysinputHAL_V1_3 extends SysinputHAL_V1_2 implements SysinputHALInt
     }
 
     @Override // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2,
-              // com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface
+    // com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface
     public int setProperty(int devid, SemInputConstants.Property property, String mode) {
         ISehSysInputDev hal;
         int type = convertDevidToInputDeviceType(devid);
@@ -309,7 +307,7 @@ public class SysinputHAL_V1_3 extends SysinputHAL_V1_2 implements SysinputHALInt
     }
 
     @Override // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2,
-              // com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface
+    // com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface
     public String getProperty(int devid, SemInputConstants.Property property) {
         ISehSysInputDev hal;
         int type = convertDevidToInputDeviceType(devid);
@@ -402,14 +400,14 @@ public class SysinputHAL_V1_3 extends SysinputHAL_V1_2 implements SysinputHALInt
     }
 
     @Override // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2,
-              // com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface
+    // com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface
     public int streamRawdata(int devid, int mode) {
         getService();
         return super.streamRawdata(devid, mode);
     }
 
     @Override // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2,
-              // com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface
+    // com.samsung.android.hardware.secinputdev.hal.SysinputHALInterface
     public int activate(int devid, int enable, boolean isEarly) {
         if (SemInputDeviceManagerService.isDevidTsp(devid)) {
             return setTspEnable(devid, enable, isEarly);

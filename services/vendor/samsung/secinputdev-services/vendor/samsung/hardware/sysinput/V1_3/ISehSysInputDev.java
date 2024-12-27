@@ -27,52 +27,52 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
             "vendor.samsung.hardware.sysinput@1.3::ISehSysInputDev";
 
     @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
+    // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+    // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
     IHwBinder asBinder();
 
     @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
+    // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+    // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
     void debug(NativeHandle nativeHandle, ArrayList<String> arrayList) throws RemoteException;
 
     @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
+    // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+    // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
     DebugInfo getDebugInfo() throws RemoteException;
 
     ArrayList<Integer> getDeviceList(boolean z) throws RemoteException;
 
     @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
+    // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+    // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
     ArrayList<byte[]> getHashChain() throws RemoteException;
 
     String getProperty(int i, int i2) throws RemoteException;
 
     @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
+    // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+    // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
     ArrayList<String> interfaceChain() throws RemoteException;
 
     @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
+    // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+    // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
     String interfaceDescriptor() throws RemoteException;
 
     @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
+    // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+    // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
     boolean linkToDeath(IHwBinder.DeathRecipient deathRecipient, long j) throws RemoteException;
 
     @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
+    // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+    // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
     void notifySyspropsChanged() throws RemoteException;
 
     @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
+    // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+    // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
     void ping() throws RemoteException;
 
     int registerCallback(ISehSysInputCallback iSehSysInputCallback) throws RemoteException;
@@ -80,8 +80,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
     int sendRawdataTsp(int i, ArrayList<Short> arrayList, int i2) throws RemoteException;
 
     @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
+    // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+    // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
     void setHALInstrumentation() throws RemoteException;
 
     int setKeyboardEnable(int i, boolean z) throws RemoteException;
@@ -89,8 +89,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
     int setProperty(int i, int i2, String str) throws RemoteException;
 
     @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-              // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
+    // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+    // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev, android.hidl.base.V1_0.IBase
     boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient) throws RemoteException;
 
     static ISehSysInputDev asInterface(IHwBinder binder) {
@@ -148,10 +148,10 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -161,7 +161,7 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                 return interfaceDescriptor() + "@Proxy";
             } catch (RemoteException e) {
                 return "[class or subclass of"
-                           + " vendor.samsung.hardware.sysinput@1.3::ISehSysInputDev]@Proxy";
+                        + " vendor.samsung.hardware.sysinput@1.3::ISehSysInputDev]@Proxy";
             }
         }
 
@@ -715,10 +715,10 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -735,10 +735,10 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -755,10 +755,10 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -775,10 +775,10 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -807,10 +807,10 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -824,20 +824,20 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
                 throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -852,10 +852,10 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -873,10 +873,10 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -890,10 +890,10 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
@@ -901,19 +901,19 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
 
     public abstract static class Stub extends HwBinder implements ISehSysInputDev {
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public IHwBinder asBinder() {
             return this;
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
             return new ArrayList<>(
                     Arrays.asList(
@@ -925,26 +925,26 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) {}
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return ISehSysInputDev.kInterfaceName;
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
             return new ArrayList<>(
                     Arrays.asList(
@@ -1005,33 +1005,33 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public final void setHALInstrumentation() {}
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public final void ping() {}
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -1041,19 +1041,19 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
         @Override // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
-                  // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
-                  // android.hidl.base.V1_0.IBase
+        // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_1.ISehSysInputDev,
+        // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev,
+        // android.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -1083,9 +1083,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     int keycode = _hidl_request.readInt32();
                     getKeyCodePressed(
                             keycode,
-                            new ISehSysInputDev
-                                    .getKeyCodePressedCallback() { // from class:
-                                                                   // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.1
+                            new ISehSysInputDev.getKeyCodePressedCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.1
                                 @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getKeyCodePressedCallback
                                 public void onValues(int retval, String outbuf) {
                                     _hidl_reply.writeStatus(0);
@@ -1103,9 +1102,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     runTspCmd(
                             devid,
                             cmdname,
-                            new ISehSysInputDev
-                                    .runTspCmdCallback() { // from class:
-                                                           // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.2
+                            new ISehSysInputDev.runTspCmdCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.2
                                 @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.runTspCmdCallback
                                 public void onValues(int retval, String outbuf) {
                                     _hidl_reply.writeStatus(0);
@@ -1121,9 +1119,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     int devid2 = _hidl_request.readInt32();
                     getTspScrubPosition(
                             devid2,
-                            new ISehSysInputDev
-                                    .getTspScrubPositionCallback() { // from class:
-                                                                     // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.3
+                            new ISehSysInputDev.getTspScrubPositionCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.3
                                 @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getTspScrubPositionCallback
                                 public void onValues(int retval, String outbuf) {
                                     _hidl_reply.writeStatus(0);
@@ -1139,9 +1136,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     int devid3 = _hidl_request.readInt32();
                     getTspSupportFeature(
                             devid3,
-                            new ISehSysInputDev
-                                    .getTspSupportFeatureCallback() { // from class:
-                                                                      // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.4
+                            new ISehSysInputDev.getTspSupportFeatureCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.4
                                 @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getTspSupportFeatureCallback
                                 public void onValues(int retval, String outbuf) {
                                     _hidl_reply.writeStatus(0);
@@ -1157,9 +1153,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     int devid4 = _hidl_request.readInt32();
                     getTspCommandList(
                             devid4,
-                            new ISehSysInputDev
-                                    .getTspCommandListCallback() { // from class:
-                                                                   // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.5
+                            new ISehSysInputDev.getTspCommandListCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.5
                                 @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getTspCommandListCallback
                                 public void onValues(int retval, String outbuf) {
                                     _hidl_reply.writeStatus(0);
@@ -1175,9 +1170,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     int devid5 = _hidl_request.readInt32();
                     getTspAodActiveArea(
                             devid5,
-                            new ISehSysInputDev
-                                    .getTspAodActiveAreaCallback() { // from class:
-                                                                     // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.6
+                            new ISehSysInputDev.getTspAodActiveAreaCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.6
                                 @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getTspAodActiveAreaCallback
                                 public void onValues(int retval, String outbuf) {
                                     _hidl_reply.writeStatus(0);
@@ -1193,9 +1187,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     int devid6 = _hidl_request.readInt32();
                     getTspFodInformation(
                             devid6,
-                            new ISehSysInputDev
-                                    .getTspFodInformationCallback() { // from class:
-                                                                      // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.7
+                            new ISehSysInputDev.getTspFodInformationCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.7
                                 @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getTspFodInformationCallback
                                 public void onValues(int retval, String outbuf) {
                                     _hidl_reply.writeStatus(0);
@@ -1211,9 +1204,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     int devid7 = _hidl_request.readInt32();
                     getTspFodPosition(
                             devid7,
-                            new ISehSysInputDev
-                                    .getTspFodPositionCallback() { // from class:
-                                                                   // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.8
+                            new ISehSysInputDev.getTspFodPositionCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.8
                                 @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getTspFodPositionCallback
                                 public void onValues(int retval, String outbuf) {
                                     _hidl_reply.writeStatus(0);
@@ -1229,9 +1221,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     String cmdname2 = _hidl_request.readString();
                     runSpenCmd(
                             cmdname2,
-                            new ISehSysInputDev
-                                    .runSpenCmdCallback() { // from class:
-                                                            // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.9
+                            new ISehSysInputDev.runSpenCmdCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.9
                                 @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.runSpenCmdCallback
                                 public void onValues(int retval, String outbuf) {
                                     _hidl_reply.writeStatus(0);
@@ -1245,9 +1236,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     _hidl_request.enforceInterface(
                             vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.kInterfaceName);
                     getSpenPosition(
-                            new ISehSysInputDev
-                                    .getSpenPositionCallback() { // from class:
-                                                                 // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.10
+                            new ISehSysInputDev.getSpenPositionCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.10
                                 @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getSpenPositionCallback
                                 public void onValues(int retval, String outbuf) {
                                     _hidl_reply.writeStatus(0);
@@ -1261,9 +1251,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     _hidl_request.enforceInterface(
                             vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.kInterfaceName);
                     getSpenCommandList(
-                            new ISehSysInputDev
-                                    .getSpenCommandListCallback() { // from class:
-                                                                    // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.11
+                            new ISehSysInputDev.getSpenCommandListCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.11
                                 @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getSpenCommandListCallback
                                 public void onValues(int retval, String outbuf) {
                                     _hidl_reply.writeStatus(0);
@@ -1321,9 +1310,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     initTspRawData(
                             devid10,
                             mode,
-                            new ISehSysInputDev
-                                    .initTspRawDataCallback() { // from class:
-                                                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.12
+                            new ISehSysInputDev.initTspRawDataCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.12
                                 @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev.initTspRawDataCallback
                                 public void onValues(int retval, ArrayList<Short> mmap_max_num) {
                                     _hidl_reply.writeStatus(0);
@@ -1339,9 +1327,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     int devid11 = _hidl_request.readInt32();
                     pollTspIrq(
                             devid11,
-                            new ISehSysInputDev
-                                    .pollTspIrqCallback() { // from class:
-                                                            // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.13
+                            new ISehSysInputDev.pollTspIrqCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.13
                                 @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev.pollTspIrqCallback
                                 public void onValues(int retval, ArrayList<Short> count) {
                                     _hidl_reply.writeStatus(0);
@@ -1357,9 +1344,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     int devid12 = _hidl_request.readInt32();
                     getTspRawdata(
                             devid12,
-                            new ISehSysInputDev
-                                    .getTspRawdataCallback() { // from class:
-                                                               // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.14
+                            new ISehSysInputDev.getTspRawdataCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.14
                                 @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev.getTspRawdataCallback
                                 public void onValues(int retval, ArrayList<Short> data) {
                                     _hidl_reply.writeStatus(0);
@@ -1389,9 +1375,8 @@ public interface ISehSysInputDev extends vendor.samsung.hardware.sysinput.V1_2.I
                     _hidl_request.enforceInterface(
                             vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev.kInterfaceName);
                     readTaas(
-                            new ISehSysInputDev
-                                    .readTaasCallback() { // from class:
-                                                          // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.15
+                            new ISehSysInputDev.readTaasCallback() { // from class:
+                                // vendor.samsung.hardware.sysinput.V1_3.ISehSysInputDev.Stub.15
                                 @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev.readTaasCallback
                                 public void onValues(int retval, String outbuf) {
                                     _hidl_reply.writeStatus(0);

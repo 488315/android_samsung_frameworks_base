@@ -168,7 +168,7 @@ public abstract class SemInputMotion {
         } else if (!this.deliveryPause && this.deliveryHandler != null) {
             this.deliveryHandler.post(
                     new Runnable() { // from class:
-                                     // com.samsung.android.hardware.secinputdev.motion.SemInputMotion.1
+                        // com.samsung.android.hardware.secinputdev.motion.SemInputMotion.1
                         @Override // java.lang.Runnable
                         public void run() {
                             SemInputMotion.this.delivery(rawdata);
@@ -262,7 +262,7 @@ public abstract class SemInputMotion {
     public final void printListeners(final PrintWriter pw) {
         this.clientCallback.forEach(
                 new BiConsumer() { // from class:
-                                   // com.samsung.android.hardware.secinputdev.motion.SemInputMotion$$ExternalSyntheticLambda1
+                    // com.samsung.android.hardware.secinputdev.motion.SemInputMotion$$ExternalSyntheticLambda1
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj, Object obj2) {
                         pw.println("  " + ((String) obj));
@@ -284,7 +284,7 @@ public abstract class SemInputMotion {
         if (this.deliveryHandler != null) {
             this.deliveryHandler.post(
                     new Runnable() { // from class:
-                                     // com.samsung.android.hardware.secinputdev.motion.SemInputMotion$$ExternalSyntheticLambda2
+                        // com.samsung.android.hardware.secinputdev.motion.SemInputMotion$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
                             SemInputMotion.this.lambda$registerInputReceiver$1(context, listener);
@@ -311,7 +311,7 @@ public abstract class SemInputMotion {
         if (this.deliveryHandler != null) {
             this.deliveryHandler.post(
                     new Runnable() { // from class:
-                                     // com.samsung.android.hardware.secinputdev.motion.SemInputMotion$$ExternalSyntheticLambda0
+                        // com.samsung.android.hardware.secinputdev.motion.SemInputMotion$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
                             SemInputMotion.this.lambda$unregisterInputReceiver$2(listener);

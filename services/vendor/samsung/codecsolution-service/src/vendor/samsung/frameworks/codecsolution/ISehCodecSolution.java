@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface ISehCodecSolution extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$frameworks$codecsolution$ISehCodecSolution".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$frameworks$codecsolution$ISehCodecSolution".replace('$', '.');
     public static final String HASH = "051b4eeec63a9059be5d446da356f2abf92c3874";
     public static final int VERSION = 2;
 
@@ -38,7 +39,8 @@ public interface ISehCodecSolution extends IInterface {
 
     void setSmartFittingPid(int i) throws RemoteException;
 
-    void setVideoRecordingParameter(long j, SehVideoRecordingParameter sehVideoRecordingParameter) throws RemoteException;
+    void setVideoRecordingParameter(long j, SehVideoRecordingParameter sehVideoRecordingParameter)
+            throws RemoteException;
 
     void showSmartFittingButton() throws RemoteException;
 
@@ -87,7 +89,8 @@ public interface ISehCodecSolution extends IInterface {
         }
 
         @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-        public SehVideoRecordingParameter getVideoRecordingParameter(long j) throws RemoteException {
+        public SehVideoRecordingParameter getVideoRecordingParameter(long j)
+                throws RemoteException {
             return null;
         }
 
@@ -97,51 +100,42 @@ public interface ISehCodecSolution extends IInterface {
         }
 
         @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-        public void updateStreamStatus(int i, boolean z, int i2) throws RemoteException {
-        }
+        public void updateStreamStatus(int i, boolean z, int i2) throws RemoteException {}
 
         @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-        public void setVideoRecordingParameter(long j, SehVideoRecordingParameter sehVideoRecordingParameter) throws RemoteException {
-        }
+        public void setVideoRecordingParameter(
+                long j, SehVideoRecordingParameter sehVideoRecordingParameter)
+                throws RemoteException {}
 
         @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-        public void setAutoFitMode(boolean z) throws RemoteException {
-        }
+        public void setAutoFitMode(boolean z) throws RemoteException {}
 
         @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-        public void setBlackbarState(boolean z) throws RemoteException {
-        }
+        public void setBlackbarState(boolean z) throws RemoteException {}
 
         @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-        public void setSmartFittingMode(int i) throws RemoteException {
-        }
+        public void setSmartFittingMode(int i) throws RemoteException {}
 
         @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-        public void setSmartFittingPid(int i) throws RemoteException {
-        }
+        public void setSmartFittingPid(int i) throws RemoteException {}
 
         @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-        public void updateMediaStatisticsData(String str) throws RemoteException {
-        }
+        public void updateMediaStatisticsData(String str) throws RemoteException {}
 
         @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-        public void hideSmartFittingButton() throws RemoteException {
-        }
+        public void hideSmartFittingButton() throws RemoteException {}
 
         @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-        public void showSmartFittingButton() throws RemoteException {
-        }
+        public void showSmartFittingButton() throws RemoteException {}
 
         @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-        public void startSmartFittingService() throws RemoteException {
-        }
+        public void startSmartFittingService() throws RemoteException {}
 
         @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-        public void stopSmartFittingService() throws RemoteException {
-        }
+        public void stopSmartFittingService() throws RemoteException {}
     }
 
-    public static abstract class Stub extends Binder implements ISehCodecSolution {
+    public abstract static class Stub extends Binder implements ISehCodecSolution {
         static final int TRANSACTION_getDisplaySize = 2;
         static final int TRANSACTION_getH2SCAllowlistStatus = 13;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -202,7 +196,8 @@ public interface ISehCodecSolution extends IInterface {
                     obtain.writeString(str);
                     obtain.writeString(str2);
                     if (!this.mRemote.transact(13, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method getH2SCAllowlistStatus is unimplemented.");
+                        throw new RemoteException(
+                                "Method getH2SCAllowlistStatus is unimplemented.");
                     }
                     obtain2.readException();
                     return obtain2.readInt();
@@ -224,7 +219,8 @@ public interface ISehCodecSolution extends IInterface {
                         Parcel obtain2 = Parcel.obtain();
                         try {
                             obtain.writeInterfaceToken(ISehCodecSolution.DESCRIPTOR);
-                            this.mRemote.transact(Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
+                            this.mRemote.transact(
+                                    Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
                             obtain2.readException();
                             this.mCachedHash = obtain2.readString();
                             obtain2.recycle();
@@ -248,7 +244,8 @@ public interface ISehCodecSolution extends IInterface {
                     Parcel obtain2 = Parcel.obtain();
                     try {
                         obtain.writeInterfaceToken(ISehCodecSolution.DESCRIPTOR);
-                        this.mRemote.transact(Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
+                        this.mRemote.transact(
+                                Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
                         obtain2.readException();
                         this.mCachedVersion = obtain2.readInt();
                     } finally {
@@ -266,7 +263,8 @@ public interface ISehCodecSolution extends IInterface {
                 try {
                     obtain.writeInterfaceToken(ISehCodecSolution.DESCRIPTOR);
                     if (!this.mRemote.transact(12, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method getSmartFittingAllowlistStatus is unimplemented.");
+                        throw new RemoteException(
+                                "Method getSmartFittingAllowlistStatus is unimplemented.");
                     }
                     obtain2.readException();
                     return obtain2.readInt();
@@ -294,17 +292,20 @@ public interface ISehCodecSolution extends IInterface {
             }
 
             @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-            public SehVideoRecordingParameter getVideoRecordingParameter(long j) throws RemoteException {
+            public SehVideoRecordingParameter getVideoRecordingParameter(long j)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(ISehCodecSolution.DESCRIPTOR);
                     obtain.writeLong(j);
                     if (!this.mRemote.transact(16, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method getVideoRecordingParameter is unimplemented.");
+                        throw new RemoteException(
+                                "Method getVideoRecordingParameter is unimplemented.");
                     }
                     obtain2.readException();
-                    return (SehVideoRecordingParameter) obtain2.readTypedObject(SehVideoRecordingParameter.CREATOR);
+                    return (SehVideoRecordingParameter)
+                            obtain2.readTypedObject(SehVideoRecordingParameter.CREATOR);
                 } finally {
                     obtain2.recycle();
                     obtain.recycle();
@@ -318,7 +319,8 @@ public interface ISehCodecSolution extends IInterface {
                 try {
                     obtain.writeInterfaceToken(ISehCodecSolution.DESCRIPTOR);
                     if (!this.mRemote.transact(6, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method hideSmartFittingButton is unimplemented.");
+                        throw new RemoteException(
+                                "Method hideSmartFittingButton is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {
@@ -413,7 +415,9 @@ public interface ISehCodecSolution extends IInterface {
             }
 
             @Override // vendor.samsung.frameworks.codecsolution.ISehCodecSolution
-            public void setVideoRecordingParameter(long j, SehVideoRecordingParameter sehVideoRecordingParameter) throws RemoteException {
+            public void setVideoRecordingParameter(
+                    long j, SehVideoRecordingParameter sehVideoRecordingParameter)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -421,7 +425,8 @@ public interface ISehCodecSolution extends IInterface {
                     obtain.writeLong(j);
                     obtain.writeTypedObject(sehVideoRecordingParameter, 0);
                     if (!this.mRemote.transact(15, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method setVideoRecordingParameter is unimplemented.");
+                        throw new RemoteException(
+                                "Method setVideoRecordingParameter is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {
@@ -437,7 +442,8 @@ public interface ISehCodecSolution extends IInterface {
                 try {
                     obtain.writeInterfaceToken(ISehCodecSolution.DESCRIPTOR);
                     if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method showSmartFittingButton is unimplemented.");
+                        throw new RemoteException(
+                                "Method showSmartFittingButton is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {
@@ -453,7 +459,8 @@ public interface ISehCodecSolution extends IInterface {
                 try {
                     obtain.writeInterfaceToken(ISehCodecSolution.DESCRIPTOR);
                     if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method startSmartFittingService is unimplemented.");
+                        throw new RemoteException(
+                                "Method startSmartFittingService is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {
@@ -469,7 +476,8 @@ public interface ISehCodecSolution extends IInterface {
                 try {
                     obtain.writeInterfaceToken(ISehCodecSolution.DESCRIPTOR);
                     if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method stopSmartFittingService is unimplemented.");
+                        throw new RemoteException(
+                                "Method stopSmartFittingService is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {
@@ -486,7 +494,8 @@ public interface ISehCodecSolution extends IInterface {
                     obtain.writeInterfaceToken(ISehCodecSolution.DESCRIPTOR);
                     obtain.writeString(str);
                     if (!this.mRemote.transact(14, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method updateMediaStatisticsData is unimplemented.");
+                        throw new RemoteException(
+                                "Method updateMediaStatisticsData is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {
@@ -504,7 +513,8 @@ public interface ISehCodecSolution extends IInterface {
                     obtain.writeInt(i);
                     obtain.writeBoolean(z);
                     obtain.writeInt(i2);
-                    if (!this.mRemote.transact(Stub.TRANSACTION_updateStreamStatus, obtain, obtain2, 0)) {
+                    if (!this.mRemote.transact(
+                            Stub.TRANSACTION_updateStreamStatus, obtain, obtain2, 0)) {
                         throw new RemoteException("Method updateStreamStatus is unimplemented.");
                     }
                     obtain2.readException();
@@ -524,8 +534,12 @@ public interface ISehCodecSolution extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISehCodecSolution.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ISehCodecSolution)) ? new Proxy(iBinder) : (ISehCodecSolution) queryLocalInterface;
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(ISehCodecSolution.DESCRIPTOR);
+            return (queryLocalInterface == null
+                            || !(queryLocalInterface instanceof ISehCodecSolution))
+                    ? new Proxy(iBinder)
+                    : (ISehCodecSolution) queryLocalInterface;
         }
 
         public static String getDefaultTransactionName(int i) {
@@ -585,7 +599,8 @@ public interface ISehCodecSolution extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             String str = ISehCodecSolution.DESCRIPTOR;
             if (i >= 1 && i <= TRANSACTION_getInterfaceVersion) {
                 parcel.enforceInterface(str);
@@ -681,7 +696,9 @@ public interface ISehCodecSolution extends IInterface {
                     return true;
                 case 15:
                     long readLong = parcel.readLong();
-                    SehVideoRecordingParameter sehVideoRecordingParameter = (SehVideoRecordingParameter) parcel.readTypedObject(SehVideoRecordingParameter.CREATOR);
+                    SehVideoRecordingParameter sehVideoRecordingParameter =
+                            (SehVideoRecordingParameter)
+                                    parcel.readTypedObject(SehVideoRecordingParameter.CREATOR);
                     parcel.enforceNoDataAvail();
                     setVideoRecordingParameter(readLong, sehVideoRecordingParameter);
                     parcel2.writeNoException();
@@ -689,7 +706,8 @@ public interface ISehCodecSolution extends IInterface {
                 case 16:
                     long readLong2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    SehVideoRecordingParameter videoRecordingParameter = getVideoRecordingParameter(readLong2);
+                    SehVideoRecordingParameter videoRecordingParameter =
+                            getVideoRecordingParameter(readLong2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(videoRecordingParameter, 1);
                     return true;

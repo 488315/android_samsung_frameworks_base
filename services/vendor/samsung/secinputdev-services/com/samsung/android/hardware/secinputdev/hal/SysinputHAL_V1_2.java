@@ -196,9 +196,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
             synchronized (hal) {
                 hal.getKeyCodePressed(
                         keycode,
-                        new ISehSysInputDev
-                                .getKeyCodePressedCallback() { // from class:
-                                                               // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda8
+                        new ISehSysInputDev.getKeyCodePressedCallback() { // from class:
+                            // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda8
                             @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getKeyCodePressedCallback
                             public final void onValues(int i, String str) {
                                 SysinputHAL_V1_2.this.lambda$getKeyState$0(keycode, list, i, str);
@@ -244,9 +243,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
                 hal.runTspCmd(
                         devid,
                         cmdname,
-                        new ISehSysInputDev
-                                .runTspCmdCallback() { // from class:
-                                                       // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda5
+                        new ISehSysInputDev.runTspCmdCallback() { // from class:
+                            // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda5
                             @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.runTspCmdCallback
                             public final void onValues(int i, String str) {
                                 SysinputHAL_V1_2.this.lambda$runTspCmd$1(devid, list, i, str);
@@ -402,9 +400,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
             synchronized (hal) {
                 hal.getTspScrubPosition(
                         devid,
-                        new ISehSysInputDev
-                                .getTspScrubPositionCallback() { // from class:
-                                                                 // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda4
+                        new ISehSysInputDev.getTspScrubPositionCallback() { // from class:
+                            // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda4
                             @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getTspScrubPositionCallback
                             public final void onValues(int i, String str) {
                                 SysinputHAL_V1_2.this.lambda$getTspScrubPosition$2(
@@ -446,9 +443,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
             synchronized (hal) {
                 hal.getTspSupportFeature(
                         devid,
-                        new ISehSysInputDev
-                                .getTspSupportFeatureCallback() { // from class:
-                                                                  // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda11
+                        new ISehSysInputDev.getTspSupportFeatureCallback() { // from class:
+                            // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda11
                             @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getTspSupportFeatureCallback
                             public final void onValues(int i, String str) {
                                 SysinputHAL_V1_2.this.lambda$getTspSupportFeature$3(
@@ -494,9 +490,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
             synchronized (hal) {
                 hal.getTspCommandList(
                         devid,
-                        new ISehSysInputDev
-                                .getTspCommandListCallback() { // from class:
-                                                               // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda6
+                        new ISehSysInputDev.getTspCommandListCallback() { // from class:
+                            // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda6
                             @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getTspCommandListCallback
                             public final void onValues(int i, String str) {
                                 SysinputHAL_V1_2.this.lambda$getTspCommandList$4(
@@ -535,9 +530,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
             synchronized (hal) {
                 hal.getTspAodActiveArea(
                         devid,
-                        new ISehSysInputDev
-                                .getTspAodActiveAreaCallback() { // from class:
-                                                                 // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda7
+                        new ISehSysInputDev.getTspAodActiveAreaCallback() { // from class:
+                            // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda7
                             @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getTspAodActiveAreaCallback
                             public final void onValues(int i, String str) {
                                 SysinputHAL_V1_2.this.lambda$getTspAodActiveArea$5(
@@ -579,9 +573,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
             synchronized (hal) {
                 hal.getTspFodInformation(
                         devid,
-                        new ISehSysInputDev
-                                .getTspFodInformationCallback() { // from class:
-                                                                  // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda3
+                        new ISehSysInputDev.getTspFodInformationCallback() { // from class:
+                            // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda3
                             @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getTspFodInformationCallback
                             public final void onValues(int i, String str) {
                                 SysinputHAL_V1_2.this.lambda$getTspFodInformation$6(
@@ -623,9 +616,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
             synchronized (hal) {
                 hal.getTspFodPosition(
                         devid,
-                        new ISehSysInputDev
-                                .getTspFodPositionCallback() { // from class:
-                                                               // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda1
+                        new ISehSysInputDev.getTspFodPositionCallback() { // from class:
+                            // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda1
                             @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getTspFodPositionCallback
                             public final void onValues(int i, String str) {
                                 SysinputHAL_V1_2.this.lambda$getTspFodPosition$7(
@@ -705,9 +697,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
             synchronized (hal) {
                 hal.runSpenCmd(
                         cmdname,
-                        new ISehSysInputDev
-                                .runSpenCmdCallback() { // from class:
-                                                        // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda2
+                        new ISehSysInputDev.runSpenCmdCallback() { // from class:
+                            // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda2
                             @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.runSpenCmdCallback
                             public final void onValues(int i, String str) {
                                 SysinputHAL_V1_2.this.lambda$runSpenCmd$8(list, i, str);
@@ -767,9 +758,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
             }
             synchronized (hal) {
                 hal.getSpenPosition(
-                        new ISehSysInputDev
-                                .getSpenPositionCallback() { // from class:
-                                                             // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda12
+                        new ISehSysInputDev.getSpenPositionCallback() { // from class:
+                            // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda12
                             @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getSpenPositionCallback
                             public final void onValues(int i, String str) {
                                 SysinputHAL_V1_2.this.lambda$getSpenPosition$9(list, i, str);
@@ -801,9 +791,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
             }
             synchronized (hal) {
                 hal.getSpenCommandList(
-                        new ISehSysInputDev
-                                .getSpenCommandListCallback() { // from class:
-                                                                // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda0
+                        new ISehSysInputDev.getSpenCommandListCallback() { // from class:
+                            // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda0
                             @Override // vendor.samsung.hardware.sysinput.V1_0.ISehSysInputDev.getSpenCommandListCallback
                             public final void onValues(int i, String str) {
                                 SysinputHAL_V1_2.this.lambda$getSpenCommandList$10(list, i, str);
@@ -859,9 +848,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
             hal.initTspRawData(
                     devid,
                     mode,
-                    new ISehSysInputDev
-                            .initTspRawDataCallback() { // from class:
-                                                        // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda10
+                    new ISehSysInputDev.initTspRawDataCallback() { // from class:
+                        // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda10
                         @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev.initTspRawDataCallback
                         public final void onValues(int i, ArrayList arrayList) {
                             SysinputHAL_V1_2.this.lambda$streamRawdata$11(
@@ -903,9 +891,8 @@ public class SysinputHAL_V1_2 implements SysinputHALInterface {
         }
         synchronized (hal) {
             hal.readTaas(
-                    new ISehSysInputDev
-                            .readTaasCallback() { // from class:
-                                                  // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda9
+                    new ISehSysInputDev.readTaasCallback() { // from class:
+                        // com.samsung.android.hardware.secinputdev.hal.SysinputHAL_V1_2$$ExternalSyntheticLambda9
                         @Override // vendor.samsung.hardware.sysinput.V1_2.ISehSysInputDev.readTaasCallback
                         public final void onValues(int i, String str) {
                             SysinputHAL_V1_2.this.lambda$readTaas$12(list, i, str);

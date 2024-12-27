@@ -78,7 +78,7 @@ public class SemUEventObserverWrapper extends ExternalService {
                     && !result.isBlank()) {
                 SemUEventObserverWrapper.this.handler.post(
                         new Runnable() { // from class:
-                                         // com.samsung.android.hardware.secinputdev.external.SemUEventObserverWrapper$1$$ExternalSyntheticLambda0
+                            // com.samsung.android.hardware.secinputdev.external.SemUEventObserverWrapper$1$$ExternalSyntheticLambda0
                             @Override // java.lang.Runnable
                             public final void run() {
                                 SemUEventObserverWrapper.AnonymousClass1.this.lambda$onSemUEvent$0(

@@ -7,23 +7,33 @@ import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.samsung.android.feature.SemFloatingFeature;
 
 /* loaded from: classes.dex */
 public class Logging {
-    private static final String ACTION_DMA_LOGGING = "com.sec.android.diagmonagent.intent.USE_APP_FEATURE_SURVEY";
-    private static final String ACTION_GENERAL_MULTI_LOGGING = "com.samsung.android.providers.context.log.action.USE_MULTI_APP_FEATURE_SURVEY";
-    private static final String ACTION_GENERAL_SINGLE_LOGGING = "com.samsung.android.providers.context.log.action.USE_APP_FEATURE_SURVEY";
-    private static final String ACTION_STATUS_MULTI_LOGGING = "com.samsung.android.providers.context.log.action.REPORT_MULTI_APP_STATUS_SURVEY";
-    private static final String ACTION_STATUS_SINGLE_LOGGING = "com.samsung.android.providers.context.log.action.REPORT_APP_STATUS_SURVEY";
+    private static final String ACTION_DMA_LOGGING =
+            "com.sec.android.diagmonagent.intent.USE_APP_FEATURE_SURVEY";
+    private static final String ACTION_GENERAL_MULTI_LOGGING =
+            "com.samsung.android.providers.context.log.action.USE_MULTI_APP_FEATURE_SURVEY";
+    private static final String ACTION_GENERAL_SINGLE_LOGGING =
+            "com.samsung.android.providers.context.log.action.USE_APP_FEATURE_SURVEY";
+    private static final String ACTION_STATUS_MULTI_LOGGING =
+            "com.samsung.android.providers.context.log.action.REPORT_MULTI_APP_STATUS_SURVEY";
+    private static final String ACTION_STATUS_SINGLE_LOGGING =
+            "com.samsung.android.providers.context.log.action.REPORT_APP_STATUS_SURVEY";
     private static final String APP_ID = "com.samsung.android.codecsolution";
     private static final String CONTEXT_PACKAGE_NAME = "com.samsung.android.providers.context";
     private static final String DMA_PACKAGE_NAME = "com.sec.android.diagmonagent";
     private static final int DMA_SUPPORT_VERSION = 540000000;
-    private static final String PERMISSION_SURVEY = "com.samsung.android.providrs.context.permission.WRITE_USE_APP_FEATURE_SURVEY";
+    private static final String PERMISSION_SURVEY =
+            "com.samsung.android.providrs.context.permission.WRITE_USE_APP_FEATURE_SURVEY";
     private static final String SA_TRACKING_ID = "4I1-399-549798";
     private static final String TAG = "CodecSolution_Logging";
-    static final Boolean sEnableSurveyFeature = Boolean.valueOf(SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_CONTEXTSERVICE_ENABLE_SURVEY_MODE"));
+    static final Boolean sEnableSurveyFeature =
+            Boolean.valueOf(
+                    SemFloatingFeature.getInstance()
+                            .getBoolean("SEC_FLOATING_FEATURE_CONTEXTSERVICE_ENABLE_SURVEY_MODE"));
     private Context mContext;
     private Boolean mIsSupportDMA;
 
@@ -35,7 +45,8 @@ public class Logging {
 
     public static boolean checkVersionOfDMA(Context context) {
         try {
-            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(DMA_PACKAGE_NAME, 0);
+            PackageInfo packageInfo =
+                    context.getPackageManager().getPackageInfo(DMA_PACKAGE_NAME, 0);
             Log.d(TAG, "dma pkg: " + packageInfo.versionCode);
             return packageInfo.versionCode >= DMA_SUPPORT_VERSION;
         } catch (Exception unused) {
@@ -97,7 +108,16 @@ public class Logging {
     }
 
     public void insertLog(String str, String str2, long j) {
-        Log.d(TAG, "dma : " + this.mIsSupportDMA + ", feature: " + str + ", extra: " + str2 + ", value: " + j);
+        Log.d(
+                TAG,
+                "dma : "
+                        + this.mIsSupportDMA
+                        + ", feature: "
+                        + str
+                        + ", extra: "
+                        + str2
+                        + ", value: "
+                        + j);
         if (sEnableSurveyFeature.booleanValue()) {
             if (this.mIsSupportDMA.booleanValue()) {
                 Log.d(TAG, "insert diagmon log");

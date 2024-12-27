@@ -61,7 +61,7 @@ public class DisplayListenerWrapper extends ExternalService {
                 DisplayListenerWrapper.this.currentRotation = displayRotation;
                 DisplayListenerWrapper.this.handler.post(
                         new Runnable() { // from class:
-                                         // com.samsung.android.hardware.secinputdev.external.DisplayListenerWrapper$1$$ExternalSyntheticLambda0
+                            // com.samsung.android.hardware.secinputdev.external.DisplayListenerWrapper$1$$ExternalSyntheticLambda0
                             @Override // java.lang.Runnable
                             public final void run() {
                                 DisplayListenerWrapper.AnonymousClass1.this

@@ -24,7 +24,7 @@ public class SemInputTaasTestCaseB implements SemInputTaasTestCase {
         this.mExternalApi = externalApi;
         this.mExternalApi.registerMotionEventListener(
                 new Consumer() { // from class:
-                                 // com.samsung.android.hardware.secinputdev.taas.SemInputTaasTestCaseB$$ExternalSyntheticLambda1
+                    // com.samsung.android.hardware.secinputdev.taas.SemInputTaasTestCaseB$$ExternalSyntheticLambda1
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
                         SemInputTaasTestCaseB.this.runEvent((MotionEvent) obj);
@@ -38,7 +38,7 @@ public class SemInputTaasTestCaseB implements SemInputTaasTestCase {
             final String deviceName = mEvent.getDevice().getName();
             this.mExternalApi.post(
                     new Runnable() { // from class:
-                                     // com.samsung.android.hardware.secinputdev.taas.SemInputTaasTestCaseB$$ExternalSyntheticLambda0
+                        // com.samsung.android.hardware.secinputdev.taas.SemInputTaasTestCaseB$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
                             SemInputTaasTestCaseB.this.lambda$runEvent$0(toolType, deviceName);

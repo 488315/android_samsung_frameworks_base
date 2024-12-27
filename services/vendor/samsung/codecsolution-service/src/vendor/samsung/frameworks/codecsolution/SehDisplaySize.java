@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class SehDisplaySize implements Parcelable {
-    public static final Parcelable.Creator<SehDisplaySize> CREATOR = new Parcelable.Creator<SehDisplaySize>() { // from class: vendor.samsung.frameworks.codecsolution.SehDisplaySize.1
-        @Override // android.os.Parcelable.Creator
-        public SehDisplaySize createFromParcel(Parcel parcel) {
-            SehDisplaySize sehDisplaySize = new SehDisplaySize();
-            sehDisplaySize.readFromParcel(parcel);
-            return sehDisplaySize;
-        }
+    public static final Parcelable.Creator<SehDisplaySize> CREATOR =
+            new Parcelable.Creator<
+                    SehDisplaySize>() { // from class:
+                                        // vendor.samsung.frameworks.codecsolution.SehDisplaySize.1
+                @Override // android.os.Parcelable.Creator
+                public SehDisplaySize createFromParcel(Parcel parcel) {
+                    SehDisplaySize sehDisplaySize = new SehDisplaySize();
+                    sehDisplaySize.readFromParcel(parcel);
+                    return sehDisplaySize;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehDisplaySize[] newArray(int i) {
-            return new SehDisplaySize[i];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehDisplaySize[] newArray(int i) {
+                    return new SehDisplaySize[i];
+                }
+            };
     public int width = 0;
     public int height = 0;
 
